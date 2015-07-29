@@ -1,9 +1,0 @@
-package com.magiology.handelers.shaders;
-
-import net.minecraft.client.shader.ShaderGroup;
-
-public class ShaderUniformEditor{
-	public static void setUniform(ShaderGroup sg,String uniformName,float... values){
-		
-	}
-}

@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
-<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1437996738340_1" label="src" name="src">
-<item elementID="=Minecraft/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-</workingSet>
-<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1437758481361_0" label="Window Working Set" name="Aggregate for window 1437758481361"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1438209565283_0" label="Window Working Set" name="Aggregate for window 1438209565282"/>
 </workingSetManager>
