@@ -1,0 +1,37 @@
+1437995256935	Rename package 'com.magiology.handelers.shaders'
+1437995278335	Rename type 'BlurHandeler'
+1437995289188	Rename type 'ColorCutHandeler'
+1437995295228	Rename type 'ColorHandeler'
+1437995304219	Rename type 'ShaderAspectHandeler'
+1437995310515	Rename type 'ShaderHandeler'
+1437995332207	Rename type 'ShaderRenderer'
+1438092973134	Move compilation unit
+1438093027315	Move compilation units
+1438093045019	Move compilation units
+1438093091745	Move compilation units
+1438093099046	Delete element
+1438093564655	Move compilation unit
+1438093582759	Move compilation unit
+1438093594204	Move compilation unit
+1438120041491	Copy compilation unit
+1438168636318	Move compilation unit
+1438170853354	Copy compilation unit
+1438171457132	Rename field 'HologramProjectorObjectCustomGui'
+1438171487496	Rename field 'HologramProjectorGui'
+1438178667508	Rename package 'com.magiology.forgepowered.skeleton'
+1438178679165	Move compilation units
+1438178752814	Delete element
+1438178822804	Move compilation unit
+1438178987424	Delete element
+1438179035058	Move compilation unit
+1438179043871	Move compilation unit
+1438179065378	Move compilation unit
+1438179092143	Move compilation unit
+1438179102260	Move compilation unit
+1438179113235	Move compilation unit
+1438179134240	Move compilation unit
+1438179145287	Move compilation unit
+1438179152990	Copy package
+1438179219658	Delete element
+1438179248620	Rename package 'com.magiology.forgepowered.packets.generic'
+1438180576444	Copy compilation unit

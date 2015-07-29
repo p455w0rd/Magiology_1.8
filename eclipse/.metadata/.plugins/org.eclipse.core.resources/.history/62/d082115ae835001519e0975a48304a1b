@@ -1,0 +1,72 @@
+package com.magiology.gui.gui;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
+import com.magiology.api.power.skeleton.TileEntityPow;
+import com.magiology.core.MReference;
+import com.magiology.gui.guiContainer.GuiUpgradeContainer;
+import com.magiology.gui.guiparticels.GuiStandardFX;
+import com.magiology.mcobjects.effect.GuiParticle;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+
+public class GuiHologramProjector extends GuiContainer{
+	
+	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/UpgradeGui.png");
+	ResourceLocation texture1=new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
+	private final TileEntityPow tileCB;
+	
+	public GuiHologramProjector(InventoryPlayer pInventory,TileEntityPow tileCB){
+		super(new GuiUpgradeContainer(pInventory,tileCB));
+		this.tileCB=tileCB;
+		this.xSize=176;
+		this.ySize=132;
+	}
+	@Override
+	public void drawGuiContainerForegroundLayer(int x,int y){
+	}
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
+		
+	}
+	
+	@Override
+	public void initGui(){
+		super.initGui();
+	}
+	
+	int mouseStartX,mouseStartY;
+	
+	@Override
+	protected void mouseClicked(int x, int y, int var1){
+		super.mouseClicked(x,y,var1);
+    }
+	
+	@Override
+	protected void mouseClickMove(int x1, int y1, int lastButtonClicked, long totalMoved){
+		super.mouseClickMove(x1, y1, lastButtonClicked, totalMoved);
+    }
+	
+	@Override
+	public void onGuiClosed(){
+		super.onGuiClosed();
+	}
+	@Override
+	protected void actionPerformed(GuiButton b){
+		switch (b.id){
+		case 1:{
+		}break;
+		case 2:{
+			 
+		}break;
+		}
+	}
+}

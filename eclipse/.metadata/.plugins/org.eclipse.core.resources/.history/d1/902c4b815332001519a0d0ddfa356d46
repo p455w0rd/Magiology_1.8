@@ -1,0 +1,18 @@
+package com.magiology.handelers.shaders;
+
+import java.util.List;
+
+import com.magiology.objhelper.DataStalker;
+import com.magiology.objhelper.helpers.Helper;
+
+import net.minecraft.client.shader.Shader;
+import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.client.shader.ShaderUniform;
+
+public class ShaderUniformEditor{
+	public static void setUniform(ShaderGroup sg,String uniformName,float... values){
+		List listShaders=DataStalker.getVariable(ShaderGroup.class, "listShaders", sg);
+		if(listShaders.isEmpty())return;
+		((Shader)listShaders.get(0)).getShaderManager().func_147991_a(uniformName).func_148097_a(values);
+	}
+}

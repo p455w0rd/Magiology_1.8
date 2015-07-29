@@ -1,0 +1,59 @@
+package com.magiology.mcobjects.tileentityes.corecomponents;
+
+import static net.minecraftforge.common.util.ForgeDirection.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.SideHelper;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
+public interface UpdateablePipe{
+	public void updateConnections();
+	
+	public void getValidTileEntitys(List<Class> included,List<Class> excluded);
+	public <T extends TileEntity> boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array,int side);
+	
+	public class UpdateablePipeHandeler{
+		private UpdateablePipeHandeler(){}
+		
+		public static<T extends TileEntity&UpdateablePipe> void setConnections(ForgeDirection[] array,T tile){
+			setConnections(array, UNKNOWN, null, tile);
+			for(int i=0;i<6;i++){
+				if(array[i]!=null)switch(i){
+				case 0:array[i]=UP;break;
+				case 1:array[i]=DOWN;break;
+				case 2:array[i]=NORTH;break;
+				case 3:array[i]=EAST;break;
+				case 4:array[i]=SOUTH;break;
+				case 5:array[i]=WEST;break;
+				}
+			}
+		}
+		public static<T extends TileEntity&UpdateablePipe,arrayType> void setConnections(arrayType[] array,arrayType trueValue,arrayType falseValue,T tile){
+			List<Class> excluded=new ArrayList<Class>(),included=new ArrayList<Class>();
+			tile.getValidTileEntitys(included, excluded);
+			TileEntity[] tiles=SideHelper.getTilesOnSides(tile);
+			for(int i=0;i<6;i++){
+				if(tiles[i]!=null){
+					TileEntity possibleConector=tiles[i];
+					boolean pass=false;
+					
+					for(int j=0;j<excluded.size();j++){
+						if(Helper.Instanceof(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
+						if(pass)j=excluded.size();
+					}
+					for(int j=0;j<included.size();j++){
+						if(Helper.Instanceof(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
+						if(pass)j=included.size();
+					}
+					if(pass)array[i]=trueValue;
+					else    array[i]=falseValue;
+				}else       array[i]=falseValue;
+			}
+		}
+	}
+}

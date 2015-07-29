@@ -1,0 +1,5 @@
+package com.magiology.handelers.shaders.core;
+
+public class ShaderAspectManager{
+
+}

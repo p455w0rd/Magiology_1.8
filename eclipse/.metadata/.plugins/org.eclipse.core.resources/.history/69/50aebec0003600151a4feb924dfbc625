@@ -1,0 +1,61 @@
+package com.magiology.gui.gui;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+
+import com.magiology.gui.guiContainer.GuiHologramProjectorContainer;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+
+public class GuiHologramProjector extends GuiContainer{
+	
+	private final TileEntityHologramProjector tile;
+	
+	public GuiHologramProjector(EntityPlayer player,TileEntityHologramProjector tile){
+		super(new GuiHologramProjectorContainer(player,tile));
+		this.tile=tile;
+		this.xSize=176;
+		this.ySize=132;
+	}
+	@Override
+	public void drawGuiContainerForegroundLayer(int x,int y){
+	}
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
+		
+	}
+	
+	@Override
+	public void initGui(){
+		super.initGui();
+		buttonList.add(new GuiButton(0, guiLeft, guiTop,   80,20, "New button"));
+		buttonList.add(new GuiButton(1, guiLeft, guiTop+21,80,20, "New txt box"));
+	}
+	
+	@Override
+	protected void mouseClicked(int x, int y, int var1){
+		super.mouseClicked(x,y,var1);
+    }
+	
+	@Override
+	protected void mouseClickMove(int x1, int y1, int lastButtonClicked, long totalMoved){
+		super.mouseClickMove(x1, y1, lastButtonClicked, totalMoved);
+    }
+	
+	@Override
+	public void onGuiClosed(){
+		super.onGuiClosed();
+	}
+	@Override
+	protected void actionPerformed(GuiButton b){
+		switch (b.id){
+		case 0:{
+			
+		}break;
+		case 1:{
+			 
+		}break;
+		}
+	}
+}

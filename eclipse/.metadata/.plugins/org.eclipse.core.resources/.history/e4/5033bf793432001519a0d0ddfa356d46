@@ -1,0 +1,5 @@
+package com.magiology.handelers;
+
+public class ShaderUniformEditor {
+
+}

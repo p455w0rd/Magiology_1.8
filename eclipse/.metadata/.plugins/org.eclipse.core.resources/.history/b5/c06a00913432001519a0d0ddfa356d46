@@ -1,0 +1,10 @@
+package com.magiology.handelers.shader;
+
+public class Snippet {
+	public static void main(String[] args) {
+		
+		GL20.glUseProgram(3);
+		GL20.glUniform3f(5, 1, 1, 1);
+	}
+}
+

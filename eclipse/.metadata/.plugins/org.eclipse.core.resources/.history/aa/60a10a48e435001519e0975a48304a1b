@@ -1,0 +1,47 @@
+package com.magiology.gui;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.magiology.Annotations.GUINeedsWorldUpdates;
+import com.magiology.Annotations.GUIWorldUpdater;
+import com.magiology.objhelper.helpers.Helper;
+
+public class GuiUpdater{
+	static Minecraft mc=Minecraft.getMinecraft();
+	//START~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Used all the time--------------------------------------------------------------------------------------------------
+	private static GuiUpdater instance;
+	public static GuiUpdater GetInstace(){return instance;}
+	public GuiUpdater(){instance=this;}
+	//Used in regular game functions-------------------------------------------------------------------------------------
+	/**It is recommended to use this if you already have GuiClassScanReturn(a return of guiClassScan||guiObjScan)*/
+	public static boolean guiNeedsUpdates(Container container){return container instanceof boolean;}
+	public static void tryToUpdateOpenContainer(EntityPlayer player){
+		if(player==null)return;
+		Container container=player.openContainer;
+		
+		if(container!=null){
+			GuiClassScanReturn guiState=guiObjScan(container);
+			if(GuiUpdater.guiNeedsUpdates(guiState)){
+				for(Method a:guiState.methods){
+					Helper.callMethod(a, container);
+					if(player.worldObj.isRemote)try{
+						mc.currentScreen.getClass().getMethod(a.getName()).invoke(mc.currentScreen);
+					}catch(Exception e){}
+				}
+			}
+		}
+	}
+	public static interface UpdateableGui{
+		public void update();
+	}
+	//END~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}

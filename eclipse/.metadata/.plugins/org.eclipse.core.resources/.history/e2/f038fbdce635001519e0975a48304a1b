@@ -1,0 +1,31 @@
+package com.magiology.gui;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+
+import com.magiology.objhelper.helpers.Helper.H;
+
+public class GuiUpdater{
+	static Minecraft mc=Minecraft.getMinecraft();
+	//START~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	//Used all the time--------------------------------------------------------------------------------------------------
+	private static GuiUpdater instance;
+	public static GuiUpdater GetInstace(){return instance;}
+	public GuiUpdater(){instance=this;}
+	//Used in regular game functions-------------------------------------------------------------------------------------
+	/**It is recommended to use this if you already have GuiClassScanReturn(a return of guiClassScan||guiObjScan)*/
+	public static boolean guiNeedsUpdates(Container container){return container instanceof UpdateableGui;}
+	public static void tryToUpdateOpenContainer(EntityPlayer player){
+		if(player==null)return;
+		Container container=player.openContainer;
+		if(container instanceof UpdateableGui){
+			((UpdateableGui)container).update();
+			if(H.isRemote(player)&&mc.currentScreen instanceof UpdateableGui)((UpdateableGui)mc.currentScreen).update();
+		}
+	}
+	public static interface UpdateableGui{
+		public void update();
+	}
+	//END~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}

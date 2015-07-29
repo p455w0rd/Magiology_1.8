@@ -1,0 +1,55 @@
+package com.magiology.render.shaders.core;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.magiology.core.init.MEvents;
+import com.magiology.objhelper.DataStalker;
+import com.magiology.objhelper.helpers.Helper;
+
+import scala.math.Ordering.StringOrdering;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.shader.Shader;
+import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.client.shader.ShaderUniform;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+
+public abstract class ShaderAspectHandeler{
+	
+	protected Minecraft mc=Helper.getMC();
+	protected World world=Helper.getTheWorld();
+	protected EntityPlayer player=Helper.getThePlayer();
+	protected List<ShaderUniform> uniforms=new ArrayList<ShaderUniform>();
+	private final ResourceLocation shaderLocation;
+	private final String[] uniformNames;
+	private final int shaderId;
+	
+	public ShaderAspectHandeler(String shaderName,int shaderId,String... uniformNames){
+		shaderLocation=new ResourceLocation("shaders/post/"+shaderName+".json");
+		this.uniformNames=uniformNames;
+		this.shaderId=shaderId;
+	}
+	public void init(ShaderHandeler handeler){
+		List listShaders=DataStalker.getVariable(ShaderGroup.class, "listShaders", handeler.shaders[shaderId]);
+		if(listShaders!=null&&!listShaders.isEmpty())for(String i:uniformNames){
+			ShaderUniform uniform=((Shader)listShaders.get(0)).getShaderManager().func_147991_a(i);
+			if(uniform!=null)uniforms.add(uniform);
+		}
+	}
+
+	public abstract void update();
+	public abstract void redner();
+	public abstract boolean getConditionForActivation();
+	
+	public final String[] getUniformNames(){
+		return uniformNames;
+	}
+	public final ResourceLocation getShaderLocation(){
+		return shaderLocation;
+	}
+	public final int getShaderId(){
+		return shaderId;
+	}
+}

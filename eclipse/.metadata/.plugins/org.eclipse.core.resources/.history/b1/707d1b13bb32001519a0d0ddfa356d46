@@ -1,0 +1,24 @@
+package com.magiology.handelers.shaders;
+
+import net.minecraft.util.ResourceLocation;
+
+import com.magiology.handelers.shaders.core.ShaderAspectManager;
+
+public class ColorManager extends ShaderAspectManager{
+
+	@Override
+	public ResourceLocation getShaderLocation(){
+		return null;
+	}
+
+	@Override
+	public void update(){
+		
+	}
+
+	@Override
+	public void redner(){
+		
+	}
+
+}

@@ -1,0 +1,46 @@
+package com.magiology.mcobjects.blocks.network;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+
+import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
+import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.objhelper.helpers.Helper;
+
+public class NetworkController extends BlockContainerMultiColision{
+	
+	public NetworkController(){
+		super(Material.iron);
+		this.setHardness(10F).setHarvestLevel("pickaxe", 1);
+		this.setBlockBounds(p*6, p*6, p*6, p*10, p*10, p*10);
+		this.useNeighborBrightness=true;
+	}
+
+	@Override
+	public AxisAlignedBB getResetBoundsOptional(World world, int x, int y, int z){
+		TileEntityNetworkController tile=(TileEntityNetworkController) world.getTileEntity(x, y, z);
+    	float minX=p*6  -(tile.connections[5]!=null?(p*6):0);
+    	float minY=p*6  -(tile.connections[1]!=null?(p*6):0);
+    	float minZ=p*6  -(tile.connections[2]!=null?(p*6):0);
+    	float maxX=p*10 +(tile.connections[3]!=null?(p*6):0);
+    	float maxY=p*10 +(tile.connections[0]!=null?(p*6):0);
+    	float maxZ=p*10 +(tile.connections[4]!=null?(p*6):0);
+		return Helper.AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
+	}
+	
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player){
+		if(!player.isSneaking())return;
+		TileEntityNetworkController tile=(TileEntityNetworkController)world.getTileEntity(x, y, z);
+		tile.restartNetwork();
+	}
+	
+	@Override
+	public TileEntity createNewTileEntity(World world, int metadata){
+		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkController());
+	}
+}

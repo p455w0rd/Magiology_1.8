@@ -1,0 +1,20 @@
+public class ShaderUniformEditor{
+		public static void setUniform(ShaderGroup sg,String uniformName,float... values){
+			List listShaders=DataStalker.getVariable(ShaderGroup.class, "listShaders", sg);
+			if(listShaders.isEmpty())return;
+			((Shader)listShaders.get(0)).getShaderManager().func_147991_a(uniformName).func_148097_a(values);
+		}
+		public static float[] getUniform(ShaderGroup sg,String uniformName){
+			List listShaders=DataStalker.getVariable(ShaderGroup.class, "listShaders", sg);
+			if(listShaders.isEmpty())return null;
+			ShaderUniform uniform=((Shader)listShaders.get(0)).getShaderManager().func_147991_a(uniformName);
+			if(uniform==null)return null;
+			FloatBuffer values=DataStalker.getVariable(ShaderUniform.class, "field_148098_f", uniform);
+			if(values==null)return null;
+			int size=DataStalker.getVariable(ShaderUniform.class, "field_148103_c", uniform);
+			values.position(0);
+			float[] result=new float[size];
+			for(int i=0;i<size;i++)result[i]=values.get();
+			return result;
+		}
+	}

@@ -1,0 +1,78 @@
+package com.magiology.handelers;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+
+import com.magiology.api.power.skeleton.TileEntityPow;
+import com.magiology.core.init.MGui;
+import com.magiology.gui.gui.*;
+import com.magiology.gui.guiContainer.*;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.render.tilerender.hologram.GuiObjectCustomize;
+import com.magiology.render.tilerender.hologram.GuiObjectCustomizeContainer;
+
+import cpw.mods.fml.common.network.IGuiHandler;
+
+public class GuiHandeler implements IGuiHandler{
+	
+	public Container GetServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
+		TileEntity tile=world.getTileEntity(x, y, z);
+		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
+		int side=hit!=null?hit.sideHit:-1;
+		
+		switch (ID){
+		case MGui.GuiUpgrade:              if(tile instanceof TileEntityPow)         
+			return new GuiUpgradeContainer(player.inventory, (TileEntityPow)tile);
+		case MGui.GuiControlBock:          if(tile instanceof TileEntityControlBlock)
+			return new GuiControlBockContainer(player.inventory, (TileEntityControlBlock)tile);
+		case MGui.GuiArmor:                                                          
+			return new GuiArmorContainer(player, player.inventory.armorInventory);
+		case MGui.GuiSC:                   if(tile instanceof TileEntitySmartCrafter)
+			return new GuiSCContainer(player, (TileEntitySmartCrafter)tile,side);
+		case MGui.GuiISidedPowerInstructor:
+			return new GuiISidedPowerInstructorContainer(player, tile);
+		case MGui.GuiHologramProjectorObjectCustom:
+			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)
+			return new GuiObjectCustomizeContainer(player, (TileEntityHologramProjector) tile);
+		case MGui.GuiHologramProjector:
+			return new GuiHologramProjectorContainer(player, (TileEntityHologramProjector)tile);
+		}
+		Helper.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		return null;
+	}
+
+	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
+		TileEntity tile=world.getTileEntity(x, y, z);
+		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
+		int side=hit!=null?hit.sideHit:-1;
+		
+		switch (ID){
+		case MGui.GuiUpgrade:              if(tile instanceof TileEntityPow)         
+			return new GuiUpgrade(player.inventory, (TileEntityPow)tile);
+		case MGui.GuiControlBock:          if(tile instanceof TileEntityControlBlock)
+			return new GuiControlBock(player.inventory, (TileEntityControlBlock)tile);
+		case MGui.GuiArmor:                                                          
+			return new GuiArmor(player, player.inventory.armorInventory);
+		case MGui.GuiSC:                   if(tile instanceof TileEntitySmartCrafter)
+			return new GuiSC(player, (TileEntitySmartCrafter)tile,side);
+		case MGui.GuiISidedPowerInstructor:                                          
+			return new GuiISidedPowerInstructor(player, tile);
+		case MGui.GuiHologramProjectorObjectCustom:
+			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)
+			return new GuiObjectCustomize(player, (TileEntityHologramProjector)tile,((TileEntityHologramProjector)tile).lastPartClicked);
+		case MGui.GuiHologramProjector:                                          
+			return new GuiHologramProjector(player, tile);
+		}
+		Helper.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		return null;
+	}
+	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetServerGuiElement(ID, player, world, x, y, z);}
+	@Override public Object getClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetClientGuiElement(ID, player, world, x, y, z);}
+}

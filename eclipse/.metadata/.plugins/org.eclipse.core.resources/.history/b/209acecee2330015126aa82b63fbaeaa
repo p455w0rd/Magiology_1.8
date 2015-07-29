@@ -1,0 +1,52 @@
+package com.magiology.handelers.shaders;
+
+import org.lwjgl.util.vector.Vector2f;
+
+import com.magiology.core.init.MEvents;
+import com.magiology.handelers.shaders.core.ShaderAspectHandeler;
+import com.magiology.handelers.shaders.core.ShaderUniformEditor;
+import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
+import com.magiology.modedmcstuff.ColorF;
+import com.magiology.objhelper.helpers.Cricle;
+import com.magiology.objhelper.helpers.Helper;
+
+public class ColorCutHandeler extends ShaderAspectHandeler{
+	public static ColorCutHandeler instance;
+	
+	public float r=1,g=1,b=1,rPrev=1,gPrev=1,bPrev=1,tolerance=0.3F,intensity=0.9F,prevTolerance=0.3F,prevIntensity=0.9F;
+	
+	public ColorCutHandeler(){
+		super("colorCutM",1,"color","tolerance","intensity");
+		instance=this;
+	}
+	
+	@Override
+	public void update(){
+		rPrev=r;
+		gPrev=g;
+		bPrev=b;
+		prevTolerance=tolerance;
+		prevIntensity=intensity;
+		r=1;
+		g=1;
+		b=1;
+		tolerance=0.5F;
+		intensity=0.4F;
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void redner(){
+		ShaderUniformEditor.setUniform(uniforms.get(0), Helper.calculateRenderPos(rPrev, r),Helper.calculateRenderPos(gPrev, g),Helper.calculateRenderPos(bPrev, b));
+		ShaderUniformEditor.setUniform(uniforms.get(1), Helper.calculateRenderPos(prevTolerance, tolerance));
+		ShaderUniformEditor.setUniform(uniforms.get(2), Helper.calculateRenderPos(prevIntensity, intensity));
+	}
+	
+	@Override
+	public boolean getConditionForActivation(){
+		return player.isSneaking();
+	}
+}

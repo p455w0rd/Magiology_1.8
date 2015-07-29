@@ -1,0 +1,39 @@
+package com.magiology.core.init;
+
+import com.magiology.forgepowered.packets.RightClickBlockPacket;
+import com.magiology.forgepowered.packets.SavableDataWithKeyPacket;
+import com.magiology.forgepowered.packets.SendPlayerDataPacket;
+import com.magiology.forgepowered.packets.TileRedstone;
+import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
+import com.magiology.forgepowered.packets.generic.GenericServerStringPacket;
+import com.magiology.forgepowered.packets.generic.GenericServerVoidPacket;
+import com.magiology.forgepowered.packets.skeleton.AbstractToClientMessage;
+import com.magiology.forgepowered.packets.skeleton.AbstractToServerMessage;
+import com.magiology.forgepowered.packets.toserver.ClickHologramPacket;
+import com.magiology.forgepowered.packets.toserver.NotifyPointedBoxChangePacket;
+import com.magiology.forgepowered.packets.toserver.OpenGuiPacket;
+import com.magiology.forgepowered.packets.toserver.RenderObjectUploadPacket;
+import com.magiology.forgepowered.packets.toserver.UploadPlayerDataPacket;
+
+public class MPackets{
+
+	public static void preInit(){
+		AbstractToServerMessage.registerNewMessage(RightClickBlockPacket.class);
+		AbstractToServerMessage.registerNewMessage(TileRedstone.class);
+		AbstractToServerMessage.registerNewMessage(OpenGuiPacket.class);
+		AbstractToServerMessage.registerNewMessage(GenericServerIntPacket.class);
+		AbstractToServerMessage.registerNewMessage(GenericServerVoidPacket.class);
+		AbstractToServerMessage.registerNewMessage(GenericServerStringPacket.class);
+		AbstractToServerMessage.registerNewMessage(UploadPlayerDataPacket.class);
+		AbstractToServerMessage.registerNewMessage(ClickHologramPacket.class);
+		AbstractToServerMessage.registerNewMessage(RenderObjectUploadPacket.class);
+		AbstractToServerMessage.registerNewMessage(NotifyPointedBoxChangePacket.class);
+		AbstractToServerMessage.registerNewMessage(NotifyPointedBoxChangePacket.class);
+		
+		AbstractToClientMessage.registerNewMessage(SendPlayerDataPacket.class);
+		AbstractToClientMessage.registerNewMessage(SavableDataWithKeyPacket.class);
+		
+		
+	}
+
+}
