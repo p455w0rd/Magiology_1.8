@@ -9,8 +9,6 @@ import net.minecraft.network.PacketBuffer;
 import com.magiology.forgepowered.packets.AbstractToServerMessage;
 import com.magiology.handelers.GenericPacketEventHandeler;
 
-import cpw.mods.fml.relauncher.Side;
-
 public class GenericServerIntPacket extends AbstractToServerMessage{
 	
 	private int data,eventId;

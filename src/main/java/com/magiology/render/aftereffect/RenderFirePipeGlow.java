@@ -1,11 +1,11 @@
 package com.magiology.render.aftereffect;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
@@ -77,11 +77,11 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		buf.importComplexCube(c5,c6,c7,c8);
 		strateCoreModel=buf.exportToNoramlisedVertixBufferModel();
 	}
-	private void drawStrateCoreGlow(ForgeDirection dir){
+	private void drawStrateCoreGlow(EnumFacing dir){
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if (dir.equals(ForgeDirection.UP))GL11.glRotatef(-90, 0, 0, 1);
-		else if (dir.equals(ForgeDirection.SOUTH))GL11.glRotatef(90, 0, 1, 0);
+		if (dir.equals(EnumFacing.UP))GL11.glRotatef(-90, 0, 0, 1);
+		else if (dir.equals(EnumFacing.SOUTH))GL11.glRotatef(90, 0, 1, 0);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		if(strateCoreModel==null)generateModelStrateCoreGlow();
 		else strateCoreModel.draw();
@@ -116,16 +116,16 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		buf.importComplexCube(c1,c2,c3,c4,c5,c6,c7,c8);
 		connectorGlowModel=buf.exportToNoramlisedVertixBufferModel();
 	}
-	private void drawConnectorGlow(ForgeDirection dir){
+	private void drawConnectorGlow(EnumFacing dir){
 		if(connectorGlowModel==null)generateModelConnectorGlow();
 		else{
 			float rX=0,rY=0,rZ=0;
-			if(dir.equals(ForgeDirection.WEST)){}
-			else if (dir.equals(ForgeDirection.UP)){rZ=-90;}
-			else if (dir.equals(ForgeDirection.DOWN)){rZ=90;}
-			else if (dir.equals(ForgeDirection.SOUTH)){rY=90;}
-			else if (dir.equals(ForgeDirection.EAST)){rY=-180;}
-			else if (dir.equals(ForgeDirection.NORTH)){rY=-90;}
+			if(dir.equals(EnumFacing.WEST)){}
+			else if (dir.equals(EnumFacing.UP)){rZ=-90;}
+			else if (dir.equals(EnumFacing.DOWN)){rZ=90;}
+			else if (dir.equals(EnumFacing.SOUTH)){rY=90;}
+			else if (dir.equals(EnumFacing.EAST)){rY=-180;}
+			else if (dir.equals(EnumFacing.NORTH)){rY=-90;}
 			
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);

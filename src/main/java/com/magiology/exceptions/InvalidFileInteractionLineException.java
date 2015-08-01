@@ -1,6 +1,6 @@
 package com.magiology.exceptions;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class InvalidFileInteractionLineException extends Exception{
 	

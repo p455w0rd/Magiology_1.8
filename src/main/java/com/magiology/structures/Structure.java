@@ -3,7 +3,10 @@ package com.magiology.structures;
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.magiology.objhelper.helpers.Helper;
 
 public class Structure{
 	
@@ -32,18 +35,18 @@ public class Structure{
 	 * @param y : y of the core block
 	 * @param z : z of the core block
 	 */
-	public void checkForNextBlock(World world,int x,int y,int z){
+	public void checkForNextBlock(World world,BlockPos pos){
 		if(!isStructureInitialized())throw new IllegalStateException("STRUCTURE NOT INITIALIZED!");
 		if(firstCheck){
 			firstCheck=false;
-			for(int a=0;a<BlocksAt.length;a++)checkForNextBlock(world, x, y, z);
+			for(int a=0;a<BlocksAt.length;a++)checkForNextBlock(world, pos);
 			return;
 		}
 		BlockAt BA=BlocksAt[nextBlock];
 		x+=BA.x;
 		y+=BA.y;
 		z+=BA.z;
-		Block block=world.getBlock(x, y, z);
+		Block block=Helper.getBlock(world, pos);
 		isBlockInPlace[nextBlock]=(block==BA.bl);
 //		if(!isBlockInPlace[nextBlock]){
 //			Helper.spawnEntityFX(new EntityFlameFX(world, x+0.5, y+0.5, z+0.5, 0, 0.05, 0));

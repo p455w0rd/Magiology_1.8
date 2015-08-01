@@ -1,13 +1,7 @@
 package com.magiology.mcobjects.items.armor;
 
-import com.magiology.core.MReference;
-import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
-import com.magiology.modedmcstuff.items.UpgradeableArmor;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.render.models.ModelHelmet42;
-import com.magiology.upgrades.RegisterUpgrades.Container;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.creativetab.CreativeTabs;
@@ -17,8 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.List;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
+import com.magiology.modedmcstuff.items.UpgradeableArmor;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.render.models.ModelHelmet42;
+import com.magiology.upgrades.RegisterUpgrades.Container;
 
 public class Helmet_42 extends UpgradeableArmor{
 	

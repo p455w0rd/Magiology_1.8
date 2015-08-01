@@ -1,14 +1,15 @@
 package com.magiology.render.tilerender;
 
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
-
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.render.Textures;
 
 public class RenderBateryL2 extends TileEntitySpecialRenderer {
 
@@ -18,21 +19,21 @@ public class RenderBateryL2 extends TileEntitySpecialRenderer {
 	private final float tWC=1F/112F;
 	private final float tHC=1F/16F;
 	
-	public ForgeDirection[] connections = new ForgeDirection[6];
+	public EnumFacing[] connections = new EnumFacing[6];
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
 		this.renderSides();
-		renderConections(ForgeDirection.DOWN);
-		renderConections(ForgeDirection.EAST);
-		renderConections(ForgeDirection.NORTH);
-		renderConections(ForgeDirection.SOUTH);
-		renderConections(ForgeDirection.UP);
-		renderConections(ForgeDirection.WEST);
+		renderConections(EnumFacing.DOWN);
+		renderConections(EnumFacing.EAST);
+		renderConections(EnumFacing.NORTH);
+		renderConections(EnumFacing.SOUTH);
+		renderConections(EnumFacing.UP);
+		renderConections(EnumFacing.WEST);
 		
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -41,7 +42,7 @@ public class RenderBateryL2 extends TileEntitySpecialRenderer {
 	
 	public void renderSides() {
 
-		Tessellator tess = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(Textures.BateryL1Core);
 			ShadedQuad.addVertexWithUVWRender(p*4,  p*12,   p*4,  tW*48, tH*1);
 			ShadedQuad.addVertexWithUVWRender(p*4,  p*4,    p*4,  tW*48, tH*4);
@@ -74,26 +75,26 @@ public class RenderBateryL2 extends TileEntitySpecialRenderer {
 			ShadedQuad.addVertexWithUVWRender(p*4,  p*4,    p*4,  tW*17, tH*4);	
 			
 	}
-	public void renderConections(ForgeDirection dir)
+	public void renderConections(EnumFacing dir)
 	{
-		Tessellator tess = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(Textures.BateryL2Core);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			if(dir.equals(ForgeDirection.WEST)){
+			if(dir.equals(EnumFacing.WEST)){
 			}
-			else if (dir.equals(ForgeDirection.UP)){
+			else if (dir.equals(EnumFacing.UP)){
 				GL11.glRotatef(-90, 0, 0, 1);
 			}
-			else if (dir.equals(ForgeDirection.DOWN)){
+			else if (dir.equals(EnumFacing.DOWN)){
 				GL11.glRotatef(90, 0, 0, 1);
 			}
-			else if (dir.equals(ForgeDirection.SOUTH)){
+			else if (dir.equals(EnumFacing.SOUTH)){
 				GL11.glRotatef(90, 0, 1, 0);
 			}
-			else if (dir.equals(ForgeDirection.EAST)){
+			else if (dir.equals(EnumFacing.EAST)){
 				GL11.glRotatef(-180, 0, 1, 0);
 			}
-			else if (dir.equals(ForgeDirection.NORTH)){
+			else if (dir.equals(EnumFacing.NORTH)){
 				GL11.glRotatef(-90, 0, 1, 0);
 			}
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -201,20 +202,20 @@ public class RenderBateryL2 extends TileEntitySpecialRenderer {
 		
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST)){
+		if(dir.equals(EnumFacing.WEST)){
 			GL11.glRotatef(0, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.SOUTH)){
+		else if (dir.equals(EnumFacing.SOUTH)){
 			GL11.glRotatef(-90, 0, 1, 0);
-		}else if (dir.equals(ForgeDirection.EAST)){
+		}else if (dir.equals(EnumFacing.EAST)){
 			GL11.glRotatef(180, 0, 1, 0);
-		}else if (dir.equals(ForgeDirection.UP)){
+		}else if (dir.equals(EnumFacing.UP)){
 			GL11.glRotatef(90, 0, 0, 1);
 		}
-		else if (dir.equals(ForgeDirection.DOWN)){
+		else if (dir.equals(EnumFacing.DOWN)){
 			GL11.glRotatef(-90, 0, 0, 1);
 		}
-		else if (dir.equals(ForgeDirection.NORTH)){
+		else if (dir.equals(EnumFacing.NORTH)){
 			GL11.glRotatef(90, 0, 1, 0);
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);

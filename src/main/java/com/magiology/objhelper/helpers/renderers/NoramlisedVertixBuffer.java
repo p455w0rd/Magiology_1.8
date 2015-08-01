@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Vec3;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
@@ -14,6 +13,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class NoramlisedVertixBuffer{
 	
@@ -43,12 +43,12 @@ public class NoramlisedVertixBuffer{
 		addVertexWithUV((float)x, (float)y, (float)z, (float)u, (float)v);
 	}
 	private void addVertexWithUV(float x,float y,float z,float u,float v){
-		unfinishedTriangle.add(new PositionTextureVertex(x, y, z, u, v));
+		unfinishedTriangle.add(new PositionTextureVertex(pos, u, v));
 		if(unfinishedTriangle.size()==4)process();
 	}
 	private final static float NULL_UV_ID=123456789;
 	public void addVertex(double x,double y,double z){
-		addVertexWithUV(x, y, z, NULL_UV_ID, NULL_UV_ID);
+		addVertexWithUV(pos, NULL_UV_ID, NULL_UV_ID);
 	}
 	
 	private void process(){
@@ -57,12 +57,12 @@ public class NoramlisedVertixBuffer{
 		unfinishedTriangle.clear();
 	}
 	private ShadedTriangle generateShadedTriangle(PositionTextureVertex pos0,PositionTextureVertex pos1,PositionTextureVertex pos2,boolean hasNormal){
-		Vec3 normal;
+		Vec3M normal;
 		if(instantNormalCalculation){
-			Vec3 angle1=pos1.vector3D.subtract(pos0.vector3D);
-			Vec3 angle2=pos1.vector3D.subtract(pos2.vector3D);
+			Vec3M angle1=pos1.vector3D.subtract(pos0.vector3D);
+			Vec3M angle2=pos1.vector3D.subtract(pos2.vector3D);
 			normal=angle2.crossProduct(angle1).normalize();
-		}else normal=Helper.Vec3(0, 1, 0);
+		}else normal=Helper.Vec3M(0, 1, 0);
 		return new ShadedTriangle(pos0,pos1,pos2, normal);
 	}
 	
@@ -91,11 +91,11 @@ public class NoramlisedVertixBuffer{
 		for(ShadedTriangle a:shadedTriangles){
 			if(type){
 				for(int b=0;b<a.pos3.length;b++){
-					Vec3 finalNormal=GL11H.transformVector(Helper.Vec3(a.normal.xCoord, a.normal.yCoord, a.normal.zCoord), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
+					Vec3M finalNormal=GL11H.transformVector(Helper.Vec3M(a.normal.xCoord, a.normal.yCoord, a.normal.zCoord), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
 					tessellator.setNormal((float)finalNormal.xCoord, (float)finalNormal.yCoord, (float)finalNormal.zCoord);
 					
 					
-					Vec3 finalVec=GL11H.transformVector(Helper.Vec3(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
+					Vec3M finalVec=GL11H.transformVector(Helper.Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
 					if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY){
 						tessellator.addVertex(finalVec.xCoord, finalVec.yCoord, finalVec.zCoord);
 					}
@@ -141,14 +141,14 @@ public class NoramlisedVertixBuffer{
 	
 	public static class ShadedTriangle{
 		public PositionTextureVertex[] pos3=null;
-		public Vec3 normal=null;
-		public ShadedTriangle(PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3, Vec3 normal) {
+		public Vec3M normal=null;
+		public ShadedTriangle(PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3, Vec3M normal) {
 			this.pos3=new PositionTextureVertex[]{pos1,pos2,pos3};
 			this.normal=normal;
 		}
 		public void recalculateNormal(){
-			Vec3 angle1=pos3[1].vector3D.subtract(pos3[0].vector3D);
-			Vec3 angle2=pos3[1].vector3D.subtract(pos3[2].vector3D);
+			Vec3M angle1=pos3[1].vector3D.subtract(pos3[0].vector3D);
+			Vec3M angle2=pos3[1].vector3D.subtract(pos3[2].vector3D);
 			normal=angle2.crossProduct(angle1).normalize();
 		}
 	}
@@ -170,7 +170,7 @@ public class NoramlisedVertixBuffer{
 	}
 	public void rotateAt(double x,double y,double z,double rotX,double rotY,double rotZ){
 		if(rotX==0&&rotY==0&&rotZ==0)return;
-		translate( x, y, z);
+		translate( pos);
 		rotate(rotX, rotY, rotZ);
 		translate(-x,-y,-z);
 	}

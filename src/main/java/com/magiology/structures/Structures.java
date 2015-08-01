@@ -1,9 +1,10 @@
 package com.magiology.structures;
 
-import com.magiology.core.init.MBlocks;
-
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.magiology.core.init.MBlocks;
 
 public class Structures{
 	
@@ -205,7 +206,7 @@ public class Structures{
 		}
 		throw new IllegalStateException("WRONG ID INPUT");
 	}
-	public static void updateArray(Structure[] array,World world,int x,int y,int z){
-		if(array!=null)for(Structure s:array)if(s!=null)s.checkForNextBlock(world, x, y, z);
+	public static void updateArray(Structure[] array,World world,BlockPos pos){
+		if(array!=null)for(Structure s:array)if(s!=null)s.checkForNextBlock(world, pos);
 	}
 }

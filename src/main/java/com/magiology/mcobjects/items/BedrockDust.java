@@ -5,10 +5,11 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 public class BedrockDust extends ItemFlintAndSteel{
 	@Override
-	public boolean onItemUse (ItemStack is, EntityPlayer player, World w, int x, int y, int z, int l, float f, float f1, float f2){
+	public boolean onItemUse (ItemStack is, EntityPlayer player, World w, BlockPos pos, int l, float f, float f1, float f2){
 		boolean return1=false;
 		if(!w.isRemote){
 			

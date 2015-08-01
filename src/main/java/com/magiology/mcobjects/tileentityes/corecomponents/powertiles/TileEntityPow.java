@@ -3,7 +3,9 @@ package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
@@ -15,9 +17,7 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.LogHelper;
 import com.magiology.upgrades.RegisterUpgrades.Container;
 
-public class TileEntityPow extends TileEntityM implements PowerCore,ISidedPower,PowerUpgrades{
-	
-	public float p=1F/16F;
+public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0,ModedMaxEnergyBuffer=0,ModedMaxTSpeed=0;
 	//0-6 receivers, 6-12 senders
 	public boolean[]
@@ -87,8 +87,8 @@ public class TileEntityPow extends TileEntityM implements PowerCore,ISidedPower,
     	if(NumberOfContainerSlots>0)containerItems=new ItemStack[NumberOfContainerSlots];
     }
     
-	public boolean isTPipe(int x1, int y1, int z1){
-		return worldObj.getTileEntity(x1, y1, z1)instanceof TileEntityFirePipe;
+	public boolean isTPipe(BlockPos pos){
+		return worldObj.getTileEntity(pos)instanceof TileEntityFirePipe;
 	}
 	
 
@@ -96,9 +96,9 @@ public class TileEntityPow extends TileEntityM implements PowerCore,ISidedPower,
 		return (maxEnergyBuffer-amout>=currentEnergy?true:false);
 	}
 	
-	public boolean isAnyBatery(int x1, int y1, int z1){
+	public boolean isAnyBatery(BlockPos pos){
 		boolean return1=false;
-		TileEntity tile=worldObj.getTileEntity(x1, y1, z1);
+		TileEntity tile=worldObj.getTileEntity(pos);
 		
 		if(tile instanceof TileEntityBateryGeneric){
 			return1=true;

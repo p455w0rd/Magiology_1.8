@@ -5,12 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandeler;
 import com.magiology.api.network.NetworkBaseInterface;
+import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.RedstoneData;
-import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.packets.SavableDataWithKeyPacket;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
@@ -20,10 +24,6 @@ import com.magiology.objhelper.DoubleObject;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.SideHelper;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkBaseInterface{
 	
@@ -61,7 +61,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	@Override
 	public NetworkInterfaceProvider getInterfaceProvider(){
 		int orientation=SideHelper.convert(getOrientation());
-		return InterfaceBinder.get(worldObj, SideHelper.X(orientation, xCoord), SideHelper.Y(orientation, yCoord), SideHelper.Z(orientation, zCoord));
+		return InterfaceBinder.get(worldObj, SideHelper.offset(orientation, xCoord), SideHelper.Y(orientation, yCoord), SideHelper.Z(orientation, zCoord));
 	}
 	private List<InteractType> interactTypes=new ArrayList<InteractType>();
 	@Override
@@ -105,9 +105,9 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		
 		if(hasWorldObj()){
 			if(object instanceof RedstoneData){
-				worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, blockType);
-				int side=SideHelper.convert(getOrientation()),x=SideHelper.X(side, xCoord), y=SideHelper.Y(side, yCoord), z=SideHelper.Z(side, zCoord);
-				if(worldObj.getBlock(x, y, z).isOpaqueCube())worldObj.notifyBlocksOfNeighborChange(x, y, z, worldObj.getBlock(x, y, z));
+				worldObj.notifyBlocksOfNeighborChange(pos, blockType);
+				int side=SideHelper.convert(getOrientation()),x=SideHelper.offset(side, xCoord), y=SideHelper.Y(side, yCoord), z=SideHelper.Z(side, zCoord);
+				if(worldObj.getBlock(pos).isOpaqueCube())worldObj.notifyBlocksOfNeighborChange(pos, worldObj.getBlock(pos));
 			}
 		}
 	}

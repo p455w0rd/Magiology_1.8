@@ -2,10 +2,10 @@ package com.magiology.gui.fpgui;
 
 import java.awt.Color;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;

@@ -3,6 +3,13 @@ package com.magiology.mcobjects.tileentityes.hologram;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
@@ -17,15 +24,7 @@ import com.magiology.mcobjects.tileentityes.network.interfaces.registration.Inte
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.objhelper.vectors.Vec3F;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class TileEntityHologramProjector extends TileEntityM{
 	
@@ -36,7 +35,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 	public ComplexCubeModel main;
 	public ArrayList<RenderObject> renderObjects=new ArrayList<RenderObject>();
 	public Vector2f size,offset;
-	public Vec3 mainColor=Vec3.createVectorHelper(0.05,0.5,0.8);
+	public Vec3M mainColor=new Vec3M(0.05,0.5,0.8);
 	public RenderObject lastPartClicked;
 	public TileEntityHologramProjector(){
 		size=new Vector2f(11,6);
@@ -92,7 +91,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 	@Override
 	public AxisAlignedBB getRenderBoundingBox(){
 		AxisAlignedBB result=super.getRenderBoundingBox();
-		Vec3F
+		Vec3M
 			p1=main.getPoint("min x,min y,min z"),
 			p2=main.getPoint("max x,max y,max z");
 		result.minX+=p1.x+offset.x;
@@ -145,13 +144,13 @@ public class TileEntityHologramProjector extends TileEntityM{
 				float distance=0;
 				int id=0;
 				for(int i=0;i<rayTraceResult[0].length;i++){
-					float distanceTo=(float)player.getLook(1).distanceTo((Vec3)rayTraceResult[0][i]);
+					float distanceTo=(float)player.getLook(1).distanceTo((Vec3M)rayTraceResult[0][i]);
 					if(distance<distanceTo){
 						id=i;
 						distance=distanceTo;
 					}
 				}
-				Vec3 hit=(Vec3)rayTraceResult[0][id];
+				Vec3M hit=(Vec3M)rayTraceResult[0][id];
 				TileEntityHologramProjector tile=(TileEntityHologramProjector)rayTraceResult[1][id];
 				MovingObjectPosition target=player.rayTrace(4, 0);
 				

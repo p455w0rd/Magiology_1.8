@@ -2,8 +2,10 @@ package com.magiology.objhelper.helpers.renderers.tessellatorscripts;
 
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Vec3;
+
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class TexturedTriangle{
     public PositionTextureVertex[] vertexPositions;
@@ -24,9 +26,9 @@ public class TexturedTriangle{
     }
 
     public void draw(){
-        Vec3 vec3=vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
-        Vec3 vec31=vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
-        Vec3 vec32=vec31.crossProduct(vec3).normalize();
+        Vec3M Vec3M=vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
+        Vec3M vec31=vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
+        Vec3M vec32=vec31.crossProduct(Vec3M).normalize();
         tess.startDrawing(GL11.GL_TRIANGLES);
         if(invertNormal)tess.setNormal(-((float)vec32.xCoord),-((float)vec32.yCoord),-((float)vec32.zCoord));
         else tess.setNormal((float)vec32.xCoord,(float)vec32.yCoord,(float)vec32.zCoord);
@@ -34,6 +36,6 @@ public class TexturedTriangle{
             PositionTextureVertex PTV=vertexPositions[i];
             tess.addVertexWithUV(((float)PTV.vector3D.xCoord), ((float)PTV.vector3D.yCoord), ((float)PTV.vector3D.zCoord), PTV.texturePositionX, PTV.texturePositionY);
         }
-        tess.draw();
+        tess.finishDrawing();
     }
 }

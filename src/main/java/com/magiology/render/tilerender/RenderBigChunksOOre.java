@@ -1,15 +1,17 @@
 package com.magiology.render.tilerender;
 
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.tileentityes.TileEntityBigChunksOOre;
 import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
-import org.lwjgl.opengl.GL11;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public class RenderBigChunksOOre extends TileEntitySpecialRenderer {
 	ResourceLocation BateryL1Core = new ResourceLocation(MReference.MODID+":"+"/textures/blocks/BateryL1Core.png");
@@ -21,13 +23,13 @@ public class RenderBigChunksOOre extends TileEntitySpecialRenderer {
 	private final float tWC=1F/112F;
 	private final float tHC=1F/16F;
 	
-	public ForgeDirection[] connections = new ForgeDirection[6];
+	public EnumFacing[] connections = new EnumFacing[6];
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-	Tessellator tess = Tessellator.instance;
+	WorldRenderer tess=TessHelper.getWR();
 		TileEntityBigChunksOOre tile=(TileEntityBigChunksOOre) tileentity;
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
@@ -140,7 +142,7 @@ public class RenderBigChunksOOre extends TileEntitySpecialRenderer {
 	}
 	
 	public void renderArmour1(){
-		Tessellator tess = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(FirePipeConection);
 			ShadedQuad.addVertexWithUVWRender(0,  p*16, 0,  tW*48, tH*1);
 			ShadedQuad.addVertexWithUVWRender(0,  p*14, 0,  tW*48, tH*4);
@@ -184,7 +186,7 @@ public class RenderBigChunksOOre extends TileEntitySpecialRenderer {
 		
 	}
 	public void renderStand1(){
-		Tessellator tess = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(FirePipeConection);
 		for(int a=0;a<2;a++){
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
@@ -226,7 +228,7 @@ public class RenderBigChunksOOre extends TileEntitySpecialRenderer {
 		}
 	}
 	public void renderTurbine1(){
-		Tessellator tess = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(FirePipeConection);
 		
 		

@@ -20,3 +20,770 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.ui 4 4 2015-07-30 01:02:36.387
+!MESSAGE Conflicting handlers for org.eclipse.ui.navigate.backwardHistory: {ActionHandler(org.eclipse.ui.internal.dialogs.PreferencePageHistory$1@cb4999d)} vs {ActionHandler(org.eclipse.ui.internal.NavigationHistoryAction@1a4083f6)}
+
+!ENTRY org.eclipse.core.resources 4 566 2015-07-30 01:06:07.699
+!MESSAGE Workspace was not properly initialized or has already shutdown.
+
+!ENTRY org.eclipse.core.jobs 4 1 2015-07-30 01:06:07.715
+!MESSAGE Worker thread ended job: Refreshing workspace(10), but still holds rule: ThreadJob(Refreshing workspace(10),[F/Minecraft/eclipse/saves/World])
+!SESSION 2015-07-30 13:31:20.179 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_51
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-07-30 13:32:37.335
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-07-30 13:32:37.345
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Toni.THE_RAIN'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.528
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:20.544
+!MESSAGE class org.freejava.tools.handlers.MavenRepoSourceCodeFinder C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.526
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.542
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.542
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.589
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.620
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.636
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.714
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:21.792
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:22.744
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:22.791
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.apache.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:23.914
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:23.914
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:23.930
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:23.945
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:23.977
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:23.992
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:24.008
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:24.179
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:24.195
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:24.273
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://repository.jboss.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.537
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.552
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.615
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.630
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.724
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.818
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.927
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:25.942
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.504
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.520
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.535
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.551
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.582
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.629
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.722
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.832
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:26.878
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:27.440
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://oss.sonatype.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:27.658
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 15:36:28.485
+!MESSAGE class org.freejava.tools.handlers.WebBasedArtifactorySourceCodeFinder; serviceUrl=http://repo.springsource.org/webapp/home.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.200
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.730
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.730
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.730
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.730
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.730
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.949
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:32.964
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.167
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.214
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=http://repository.ow2.org/nexus/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.666
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.698
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.713
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.729
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.744
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.776
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.807
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.885
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:33.963
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:34.072
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://nexus.codehaus.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.148
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.164
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.180
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.195
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.226
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.242
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.289
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.304
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.351
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:35.414
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven.java.net/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:37.754
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunmscapi.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:37.754
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\sunpkcs11.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:37.769
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:37.785
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\dnsns.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:37.785
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:38.097
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\jce.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:38.175
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:38.268
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\nashorn.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:38.284
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+
+!ENTRY org.eclipse.jdt.ui 4 10001 2015-07-30 20:07:38.378
+!MESSAGE class org.freejava.tools.handlers.NexusSourceCodeFinder; serviceUrl=https://maven2.exoplatform.org/index.html C:\Program Files\Java\jre1.8.0_51\lib\ext\cldrdata.jar
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2015-07-30 20:07:38.814
+!MESSAGE Error disposing widget for : org.eclipse.e4.ui.model.application.ui.menu.impl.MenuImpl null
+!STACK 0
+org.eclipse.swt.SWTException: Graphic is disposed
+	at org.eclipse.swt.SWT.error(SWT.java:4441)
+	at org.eclipse.swt.SWT.error(SWT.java:4356)
+	at org.eclipse.swt.SWT.error(SWT.java:4327)
+	at org.eclipse.swt.graphics.Font.getFontData(Font.java:184)
+	at org.eclipse.swt.custom.CTabFolderRenderer.drawChevron(CTabFolderRenderer.java:910)
+	at org.eclipse.swt.custom.CTabFolderRenderer.draw(CTabFolderRenderer.java:606)
+	at org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering.draw(CTabRendering.java:244)
+	at org.eclipse.swt.custom.CTabFolder.createButtonImage(CTabFolder.java:668)
+	at org.eclipse.swt.custom.CTabFolder.setButtonBounds(CTabFolder.java:2485)
+	at org.eclipse.swt.custom.CTabFolder.updateItems(CTabFolder.java:3705)
+	at org.eclipse.swt.custom.CTabFolder.updateItems(CTabFolder.java:3640)
+	at org.eclipse.swt.custom.CTabFolder.onResize(CTabFolder.java:2034)
+	at org.eclipse.swt.custom.CTabFolder$1.handleEvent(CTabFolder.java:290)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1085)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Control.sendResize(Control.java:2950)
+	at org.eclipse.swt.widgets.Composite.sendResize(Composite.java:977)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1026)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.layout.FillLayout.layout(FillLayout.java:204)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.sendResize(Composite.java:981)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1026)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.layout.FillLayout.layout(FillLayout.java:204)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.sendResize(Composite.java:981)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1026)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3167)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.setRectangle(SashLayout.java:318)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.tileSubNodes(SashLayout.java:263)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.tileSubNodes(SashLayout.java:306)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.tileSubNodes(SashLayout.java:306)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.tileSubNodes(SashLayout.java:306)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.layout(SashLayout.java:180)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.sendResize(Composite.java:981)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1026)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.layout.FillLayout.layout(FillLayout.java:204)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.WM_SIZE(Composite.java:1701)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4685)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:79)
+	at org.eclipse.swt.widgets.Control.WM_WINDOWPOSCHANGED(Control.java:5492)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4698)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.SetWindowPos(Native Method)
+	at org.eclipse.swt.widgets.Widget.SetWindowPos(Widget.java:1465)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3143)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1020)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3167)
+	at org.eclipse.swt.custom.StackLayout.layout(StackLayout.java:123)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.WM_SIZE(Composite.java:1701)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4685)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:79)
+	at org.eclipse.swt.widgets.Control.WM_WINDOWPOSCHANGED(Control.java:5492)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4698)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.SetWindowPos(Native Method)
+	at org.eclipse.swt.widgets.Widget.SetWindowPos(Widget.java:1465)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3143)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1020)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3167)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.setRectangle(SashLayout.java:318)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.tileSubNodes(SashLayout.java:263)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.tileSubNodes(SashLayout.java:306)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SashLayout.layout(SashLayout.java:180)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.WM_SIZE(Composite.java:1701)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4685)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:79)
+	at org.eclipse.swt.widgets.Control.WM_WINDOWPOSCHANGED(Control.java:5492)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4698)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.SetWindowPos(Native Method)
+	at org.eclipse.swt.widgets.Widget.SetWindowPos(Widget.java:1465)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3143)
+	at org.eclipse.swt.widgets.Composite.setBounds(Composite.java:1020)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3104)
+	at org.eclipse.swt.widgets.Control.setBounds(Control.java:3100)
+	at org.eclipse.swt.layout.FillLayout.layout(FillLayout.java:204)
+	at org.eclipse.swt.widgets.Composite.updateLayout(Composite.java:1290)
+	at org.eclipse.swt.widgets.Composite.WM_SIZE(Composite.java:1701)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4685)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Scrollable.callWindowProc(Scrollable.java:79)
+	at org.eclipse.swt.widgets.Control.WM_WINDOWPOSCHANGED(Control.java:5492)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4698)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5036)
+	at org.eclipse.swt.internal.win32.OS.EndDeferWindowPos(Native Method)
+	at org.eclipse.swt.widgets.Composite.resizeChildren(Composite.java:950)
+	at org.eclipse.swt.widgets.Composite.resizeChildren(Composite.java:916)
+	at org.eclipse.swt.widgets.Composite.setResizeChildren(Composite.java:1127)
+	at org.eclipse.swt.widgets.Composite.WM_SIZE(Composite.java:1705)
+	at org.eclipse.swt.widgets.Canvas.WM_SIZE(Canvas.java:462)
+	at org.eclipse.swt.widgets.Decorations.WM_SIZE(Decorations.java:1810)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4685)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:339)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1626)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5036)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:498)
+	at org.eclipse.swt.widgets.Control.WM_WINDOWPOSCHANGED(Control.java:5492)
+	at org.eclipse.swt.widgets.Canvas.WM_WINDOWPOSCHANGED(Canvas.java:468)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4698)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:339)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1626)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5023)
+	at org.eclipse.swt.internal.win32.OS.SetMenu(Native Method)
+	at org.eclipse.swt.widgets.Decorations.setMenuBar(Decorations.java:1174)
+	at org.eclipse.swt.widgets.Menu.releaseParent(Menu.java:1186)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:824)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:454)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.disposeWidget(SWTPartRenderer.java:175)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:933)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$3(PartRenderingEngine.java:862)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$8.run(PartRenderingEngine.java:857)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:841)
+	at org.eclipse.ui.internal.WorkbenchWindow$1.handleEvent(WorkbenchWindow.java:319)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:187)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:156)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4734)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:218)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:36)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:81)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:59)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setWidget(UIElementImpl.java:261)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.unbindWidget(SWTPartRenderer.java:150)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer$1.widgetDisposed(SWTPartRenderer.java:138)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:123)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1085)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:816)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:454)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:447)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:715)
+	at org.eclipse.swt.widgets.Display.release(Display.java:3811)
+	at org.eclipse.swt.graphics.Device.dispose(Device.java:295)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3292)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:498)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4705)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:339)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1626)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5036)
+	at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:3141)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3756)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:832)
+	at org.eclipse.jface.window.Window.open(Window.java:808)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAll(WorkbenchPage.java:3735)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAllEditors(WorkbenchPage.java:3572)
+	at org.eclipse.ui.internal.Workbench.saveAllEditors(Workbench.java:1367)
+	at org.eclipse.ui.internal.Workbench.busyClose(Workbench.java:1097)
+	at org.eclipse.ui.internal.Workbench.access$21(Workbench.java:1079)
+	at org.eclipse.ui.internal.Workbench$19.run(Workbench.java:1410)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1407)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1380)
+	at org.eclipse.ui.internal.Workbench$58.handleEvent(Workbench.java:2849)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4346)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3305)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:498)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4705)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:339)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1626)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5036)
+	at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:3141)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3756)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+
+!ENTRY org.eclipse.equinox.event 4 0 2015-07-30 20:07:39.126
+!MESSAGE Exception while dispatching event org.osgi.service.event.Event [topic=org/eclipse/e4/ui/model/ui/UIElement/widget/SET] to handler org.eclipse.e4.ui.services.internal.events.UIEventHandler@1e6ed37f
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.ui.internal.NavigationHistory.getDisplay(NavigationHistory.java:176)
+	at org.eclipse.ui.internal.NavigationHistory.markEditor(NavigationHistory.java:193)
+	at org.eclipse.ui.internal.WorkbenchPage.updateActiveEditorSources(WorkbenchPage.java:407)
+	at org.eclipse.ui.internal.WorkbenchPage.firePartClosed(WorkbenchPage.java:4995)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart$1.handleEvent(CompatibilityPart.java:98)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler$1.run(UIEventHandler.java:40)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:187)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:156)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4734)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application$1.syncExec(E4Application.java:218)
+	at org.eclipse.e4.ui.services.internal.events.UIEventHandler.handleEvent(UIEventHandler.java:36)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:81)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:59)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setWidget(UIElementImpl.java:261)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer.unbindWidget(SWTPartRenderer.java:150)
+	at org.eclipse.e4.ui.workbench.renderers.swt.SWTPartRenderer$1.widgetDisposed(SWTPartRenderer.java:138)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:123)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1061)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1085)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:816)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:874)
+	at org.eclipse.swt.widgets.Canvas.releaseChildren(Canvas.java:165)
+	at org.eclipse.swt.widgets.Decorations.releaseChildren(Decorations.java:789)
+	at org.eclipse.swt.widgets.Shell.releaseChildren(Shell.java:1290)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:819)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:454)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:447)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:715)
+	at org.eclipse.swt.widgets.Display.release(Display.java:3811)
+	at org.eclipse.swt.graphics.Device.dispose(Device.java:295)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3292)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:498)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4705)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:339)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1626)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5036)
+	at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:3141)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3756)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:832)
+	at org.eclipse.jface.window.Window.open(Window.java:808)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAll(WorkbenchPage.java:3735)
+	at org.eclipse.ui.internal.WorkbenchPage.saveAllEditors(WorkbenchPage.java:3572)
+	at org.eclipse.ui.internal.Workbench.saveAllEditors(Workbench.java:1367)
+	at org.eclipse.ui.internal.Workbench.busyClose(Workbench.java:1097)
+	at org.eclipse.ui.internal.Workbench.access$21(Workbench.java:1079)
+	at org.eclipse.ui.internal.Workbench$19.run(Workbench.java:1410)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1407)
+	at org.eclipse.ui.internal.Workbench.close(Workbench.java:1380)
+	at org.eclipse.ui.internal.Workbench$58.handleEvent(Workbench.java:2849)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4353)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4346)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3305)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProcW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(OS.java:2544)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:498)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4705)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:339)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1626)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2075)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5036)
+	at org.eclipse.swt.internal.win32.OS.PeekMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.PeekMessage(OS.java:3141)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3756)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SESSION 2015-07-31 13:54:59.149 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_51
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-07-31 13:55:09.086
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-07-31 14:30:20.296
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-07-31 14:30:20.312
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Toni.THE_RAIN'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.recommenders.calls.rcp 4 2 2015-07-31 22:51:19.360
+!MESSAGE Proposal matching failed for [METHOD_REF]{completion:clone(), declSign:[F, sign:()[F, declKey:, key:, name:clone, replace:[6478,6478], token:[6478,6478], relevance:35}.
+!STACK 0
+org.eclipse.recommenders.utils.Logs$LogTraceException
+	at org.eclipse.recommenders.utils.Logs$LogTraceException.newTrace(Logs.java:377)
+	at org.eclipse.recommenders.utils.Logs.log(Logs.java:130)
+	at org.eclipse.recommenders.internal.calls.rcp.CallCompletionSessionProcessor.process(CallCompletionSessionProcessor.java:203)
+	at org.eclipse.recommenders.completion.rcp.processable.IntelligentCompletionProposalComputer.fireProcessProposal(IntelligentCompletionProposalComputer.java:243)
+	at org.eclipse.recommenders.completion.rcp.processable.IntelligentCompletionProposalComputer.computeCompletionProposals(IntelligentCompletionProposalComputer.java:143)
+	at org.eclipse.jdt.internal.ui.text.java.CompletionProposalComputerDescriptor.computeCompletionProposals(CompletionProposalComputerDescriptor.java:333)
+	at org.eclipse.jdt.internal.ui.text.java.CompletionProposalCategory.computeCompletionProposals(CompletionProposalCategory.java:337)
+	at org.eclipse.jdt.internal.ui.text.java.ContentAssistProcessor.collectProposals(ContentAssistProcessor.java:325)
+	at org.eclipse.jdt.internal.ui.text.java.ContentAssistProcessor.computeCompletionProposals(ContentAssistProcessor.java:282)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$5.run(ContentAssistant.java:1904)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.computeCompletionProposals(ContentAssistant.java:1902)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.computeProposals(CompletionProposalPopup.java:573)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.access$16(CompletionProposalPopup.java:570)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup$2.run(CompletionProposalPopup.java:505)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:70)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.showProposals(CompletionProposalPopup.java:499)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$2.run(ContentAssistant.java:384)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:136)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4147)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3764)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1032)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:148)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:636)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:579)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:135)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:648)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:603)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1465)
+!SESSION 2015-08-01 11:57:00.887 -----------------------------------------------
+eclipse.buildId=4.4.2.M20150204-1700
+java.version=1.8.0_51
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-08-01 11:57:10.035
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-08-01 11:58:07.841
+!MESSAGE Warning: EGit couldn't detect the installation path "gitPrefix" of native Git. Hence EGit can't respect system level
+Git settings which might be configured in ${gitPrefix}/etc/gitconfig under the native Git installation directory.
+The most important of these settings is core.autocrlf. Git for Windows by default sets this parameter to true in
+this system level configuration. The Git installation location can be configured on the
+Team > Git > Configuration preference page's 'System Settings' tab.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-08-01 11:58:07.841
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Toni.THE_RAIN'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

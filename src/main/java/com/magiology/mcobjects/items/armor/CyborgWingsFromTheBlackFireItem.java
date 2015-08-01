@@ -12,18 +12,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.MReference;
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.modedmcstuff.items.UpgradeableArmor;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.render.models.ModelWingsFromTheBlackFire;
 import com.magiology.upgrades.RegisterUpgrades.Container;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 
@@ -66,17 +64,17 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 					double[] a=Helper.cricleXZ(rotation+90-10+l*10),b=Helper.cricleXZ(rotation-90-10+l*10);
 					a[0]*=2.7;b[0]*=2.7;
 					a[1]*=2.7;b[1]*=2.7;
-					Vec3 pp=Vec3.createVectorHelper(player.posX,player.posY,player.posZ);
+					Vec3M pp=new Vec3M(player.posX,player.posY,player.posZ);
 					MovingObjectPosition 
-					aObj=world.func_147447_a(pp, Vec3.createVectorHelper(player.posX+a[0]+c[0],player.posY,player.posZ+a[1]+c[1]), false, false, true),
-					bObj=world.func_147447_a(pp, Vec3.createVectorHelper(player.posX+b[0]+c[0],player.posY,player.posZ+b[1]+a[1]), false, false, true);
+					aObj=world.func_147447_a(pp, new Vec3M(player.posX+a[0]+c[0],player.posY,player.posZ+a[1]+c[1]), false, false, true),
+					bObj=world.func_147447_a(pp, new Vec3M(player.posX+b[0]+c[0],player.posY,player.posZ+b[1]+a[1]), false, false, true);
 					boolean bul=aObj!=null&&bObj!=null?aObj.typeOfHit!=MovingObjectType.BLOCK&&bObj.typeOfHit!=MovingObjectType.BLOCK:false;
 					if(!bul){
 						bol=false;
 						continue;
 					}
 				}
-				boolean isUnderWater=world.getBlock(x, y, z).getMaterial()==Material.water;
+				boolean isUnderWater=Helper.getBlock(world, pos).getMaterial()==Material.water;
 				if((bol&&!isUnderWater)!=prevState||world.getTotalWorldTime()%20==0)Helper.sendMessage(new GenericServerIntPacket(5, Helper.booleanToInt(bol&&!isUnderWater)));
 			}
 		}else TheDFWings.stackTagCompound=new NBTTagCompound();

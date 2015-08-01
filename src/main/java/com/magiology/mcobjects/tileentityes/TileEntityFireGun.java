@@ -1,15 +1,17 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.objhelper.helpers.Helper.H;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public class TileEntityFireGun extends TileEntityM{
+public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListBox{
 	int optimizer=0;
 	
 	public double animation,prevAnimation,speed;
@@ -18,13 +20,13 @@ public class TileEntityFireGun extends TileEntityM{
 	private float p= 1F/16F;
 	
 	
-	public ForgeDirection[] rotation = new ForgeDirection[4];
+	public EnumFacing[] rotation = new EnumFacing[4];
 	public boolean TimeForAnimation = false;
 	
 	public TileEntityFireGun(){}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		detectIfTimeForAnimation();
 		animationF();
 		optimizer++;
@@ -34,41 +36,39 @@ public class TileEntityFireGun extends TileEntityM{
 			
 			if(rotation[0]==null&&rotation[1]==null&&rotation[2]==null&&rotation[3]==null)
 			{
-				if(worldObj.isRemote)Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 0);
-				worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+//				if(worldObj.isRemote)Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, H.getBlock(worldObj, pos), 0);
+				worldObj.setBlockToAir(pos);
 			}
 		}
 	}
 	public void updateConnections(){
-		if(this.detectCore(xCoord, yCoord-1, zCoord-3))rotation[0] = ForgeDirection.NORTH;
+		if(this.detectCore(pos.add(0,-1,-3)))rotation[0] = EnumFacing.NORTH;
 		else rotation[0] = null;
-		if(this.detectCore(xCoord+3, yCoord-1, zCoord))rotation[1] = ForgeDirection.EAST;
+		if(this.detectCore(pos.add(3,-1,0)))rotation[1] = EnumFacing.EAST;
 		else rotation[1] = null;
-		if(this.detectCore(xCoord, yCoord-1, zCoord+3))rotation[2] = ForgeDirection.SOUTH;
+		if(this.detectCore(pos.add(0,-1,3)))rotation[2] = EnumFacing.SOUTH;
 		else rotation[2] = null;
-		if(this.detectCore(xCoord-3, yCoord-1, zCoord))rotation[3] = ForgeDirection.WEST;
+		if(this.detectCore(pos.add(-3,-1,0)))rotation[3] = EnumFacing.WEST;
 		else rotation[3] = null;
 	}
 	
 	public void detectIfTimeForAnimation(){
-		int x=0;
-		int y=0;
-		int z=0;
-		if(rotation[0]!=null)     {x=xCoord;   y=yCoord-1; z=zCoord-3;}
-		else if(rotation[1]!=null){x=xCoord+3; y=yCoord-1; z=zCoord;}
-		else if(rotation[2]!=null){x=xCoord;   y=yCoord-1; z=zCoord+3;}
-		else if(rotation[3]!=null){x=xCoord-3; y=yCoord-1; z=zCoord;}
+		BlockPos pos1;
+		if(rotation[0]!=null)     {pos1=pos.add(0,-1,-3);}
+		else if(rotation[1]!=null){pos1=pos.add(3,-1,0);}
+		else if(rotation[2]!=null){pos1=pos.add(0,-1,3);}
+		else if(rotation[3]!=null){pos1=pos.add(-3,-1,0);}
 		
-		if(worldObj.getTileEntity(x, y, z)instanceof TileEntityOreStructureCore){
-			TileEntityOreStructureCore tile=(TileEntityOreStructureCore) worldObj.getTileEntity(x, y, z);
+		if(worldObj.getTileEntity(pos)instanceof TileEntityOreStructureCore){
+			TileEntityOreStructureCore tile=(TileEntityOreStructureCore) worldObj.getTileEntity(pos);
 			if(tile.processing==16)TimeForAnimation=true;
 			else TimeForAnimation=false;
 		}
 	}
-	public boolean detectCore(int x,int y,int z){
+	public boolean detectCore(BlockPos pos){
 		boolean isit;
-		if(worldObj.getTileEntity(x, y, z)instanceof TileEntityOreStructureCore){
-			TileEntityOreStructureCore tile=(TileEntityOreStructureCore) worldObj.getTileEntity(x, y, z);
+		if(worldObj.getTileEntity(pos)instanceof TileEntityOreStructureCore){
+			TileEntityOreStructureCore tile=(TileEntityOreStructureCore) worldObj.getTileEntity(pos);
 			if(tile.updateStructureHelper==true){
 				isit=true;
 			}else isit=false;
@@ -97,9 +97,7 @@ public class TileEntityFireGun extends TileEntityM{
 	@Override
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox(){
-		
-		
-        return AxisAlignedBB.getBoundingBox(xCoord-0.5, yCoord-0.5, zCoord-0.5, xCoord+1.5, yCoord+1.5, zCoord+1.5);
+        return new AxisAlignedBB(pos.add(-0.5,-0.5,-0.5), pos.add(1.5,1.5,1.5));
     }
 	
 }

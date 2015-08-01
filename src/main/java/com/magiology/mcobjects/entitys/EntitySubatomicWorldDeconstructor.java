@@ -7,20 +7,21 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class EntitySubatomicWorldDeconstructor extends Entity implements IProjectile{
-    public int xTile = -1,yTile = -1,zTile = -1,age;
+    public BlockPos pos;
     public Block block;
+    public int age=0;
     
     public Entity shootingEntity;
     public double detonationTime=200;
@@ -36,8 +37,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
 
     public EntitySubatomicWorldDeconstructor(World world, double x, double y, double z){
         this(world);
-        this.setPosition(x, y, z);
-        this.yOffset = 0.0F;
+        this.setPosition(x,y,z);
     }
     
     public EntitySubatomicWorldDeconstructor(World world, EntityLivingBase entity, float speed){
@@ -58,9 +58,8 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         this.posZ-=Cricle.sin((int)rotationYaw)*0.1F-(Cricle.cos(-(int) this.rotationYaw)*Cricle.cos((int)(this.rotationPitch)))/multiplayer*Z;
         
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.yOffset=0.0F;
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);
-        this.dataWatcher.addObject(17, entity.getCommandSenderName());
+        this.dataWatcher.addObject(17, entity.getCommandSenderEntity());
     }
 
     @Override
@@ -75,13 +74,6 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
     }
     @Override
 	@SideOnly(Side.CLIENT)
-    public void setPositionAndRotation2(double p_70056_1_, double p_70056_3_, double p_70056_5_, float p_70056_7_, float p_70056_8_, int p_70056_9_){
-        this.setPosition(p_70056_1_, p_70056_3_, p_70056_5_);
-        this.setRotation(p_70056_7_, p_70056_8_);
-    }
-    
-    @Override
-	@SideOnly(Side.CLIENT)
     public void setVelocity(double p_70016_1_, double p_70016_3_, double p_70016_5_){
         this.motionX = p_70016_1_;
         this.motionY = p_70016_3_;
@@ -90,6 +82,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
     @Override
 	public void onUpdate(){
     	isDead=true;
+    	age++;
     	super.onUpdate();
     	if(this.shootingEntity==null){
     		try {
@@ -98,14 +91,13 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
 //				e.printStackTrace();
 			}
     	}
-        age++;
         lastTickPosX=posX;
         lastTickPosY=posY;
         lastTickPosZ=posZ;
-        Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-        Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY-0.05, this.posZ + this.motionZ);
-        MovingObjectPosition MOP=worldObj.func_147447_a(vec31, vec3, true,true,false);
-        block=worldObj.getBlock(xTile, yTile, zTile);
+        Vec3M vec31 = new Vec3M(this.posX, this.posY, this.posZ);
+        Vec3M Vec3M = new Vec3M(this.posX + this.motionX, this.posY + this.motionY-0.05, this.posZ + this.motionZ);
+        MovingObjectPosition MOP=worldObj.rayTraceBlocks(vec31.conv(), Vec3M.conv(), true,true,false);
+        block=Helper.getBlock(worldObj, pos);
         if(MOP!=null&&MOP.typeOfHit!=MovingObjectType.MISS){
         	
             if(MOP.hitVec!=null){
@@ -122,9 +114,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
             	
             }
         }else if(MOP!=null){
-         	xTile=MOP.blockX;
-         	yTile=MOP.blockY;
-         	zTile=MOP.blockZ;
+         	pos=MOP.getBlockPos();
         }
 //        targetHit=true;
         if(targetHit){
@@ -149,16 +139,10 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
     
     @Override
 	public void writeEntityToNBT(NBTTagCompound NBT){
-        NBT.setShort("xTile",(short)this.xTile);
-        NBT.setShort("yTile",(short)this.yTile);
-        NBT.setFloat("zTile",(short)this.zTile);
         NBT.setByte("inTile",(byte)Block.getIdFromBlock(this.block));
     }
     @Override
 	public void readEntityFromNBT(NBTTagCompound NBT){
-        this.xTile=NBT.getShort("xTile");
-        this.yTile=NBT.getShort("yTile");
-        this.zTile=NBT.getShort("zTile");
         this.block=Block.getBlockById(NBT.getByte("inTile") & 255);
     }
     @Override
@@ -208,9 +192,6 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
     
     @Override
 	protected boolean canTriggerWalking(){return false;}
-    @Override
-	@SideOnly(Side.CLIENT)
-    public float getShadowSize(){return 0.0F;}
     @Override
 	public boolean canAttackWithItem(){return false;}
 }

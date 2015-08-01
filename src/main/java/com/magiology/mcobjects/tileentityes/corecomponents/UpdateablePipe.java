@@ -1,15 +1,13 @@
 package com.magiology.mcobjects.tileentityes.corecomponents;
 
-import static net.minecraftforge.common.util.ForgeDirection.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.SideHelper;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public interface UpdateablePipe{
 	public void updateConnections();
@@ -20,7 +18,7 @@ public interface UpdateablePipe{
 	public class UpdateablePipeHandeler{
 		private UpdateablePipeHandeler(){}
 		
-		public static<T extends TileEntity&UpdateablePipe> void setConnections(ForgeDirection[] array,T tile){
+		public static<T extends TileEntity&UpdateablePipe> void setConnections(EnumFacing[] array,T tile){
 			setConnections(array, UNKNOWN, null, tile);
 			for(int i=0;i<6;i++){
 				if(array[i]!=null)switch(i){

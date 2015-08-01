@@ -1,12 +1,13 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
 
 public class BedrockBreaker extends BlockContainer {
 
@@ -26,7 +27,7 @@ public class BedrockBreaker extends BlockContainer {
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int x, int y, int z){
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, BlockPos pos){
 		setBlockBounds(p*3, 0F, p*3, p*13, p*16, p*13);}
 	
 	@Override

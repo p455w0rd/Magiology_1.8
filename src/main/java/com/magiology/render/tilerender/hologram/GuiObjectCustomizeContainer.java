@@ -1,11 +1,11 @@
 package com.magiology.render.tilerender.hologram;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+
 import com.magiology.Annotations.GUINeedsWorldUpdates;
 import com.magiology.Annotations.GUIWorldUpdater;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 
 @GUINeedsWorldUpdates
 public class GuiObjectCustomizeContainer extends Container{

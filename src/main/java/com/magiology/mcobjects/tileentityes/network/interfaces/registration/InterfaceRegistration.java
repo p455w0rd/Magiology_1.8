@@ -36,12 +36,12 @@ public class InterfaceRegistration{
 	}
 	
 	public static BasicNetworkInterfaceProvider getBasicInterface(World world, int x, int y,int z){
-		TileEntity tile=world.getTileEntity(x, y, z);
+		TileEntity tile=world.getTileEntity(pos);
 		if(tile!=null){
 			BasicNetworkInterfaceProvider interf=tileFinder.get(tile.getClass());
 			if(interf!=null)return interf;
 		}
-		Block block=world.getBlock(x, y, z);
+		Block block=Helper.getBlock(world, pos);
 		if(block!=null){
 			BasicNetworkInterfaceProvider interf=blockFinder.get(block.getClass());
 			if(interf!=null)return interf;
@@ -57,10 +57,10 @@ public class InterfaceRegistration{
 		return null;
 	}
 	public static NetworkInterfaceProvider getInterface(World world, int x, int y,int z){
-		TileEntity tile=world.getTileEntity(x, y, z);
+		TileEntity tile=world.getTileEntity(pos);
 		NetworkInterfaceProvider inter=getInterface(tile);
 		if(inter!=null)return inter;
-		Block block=world.getBlock(x, y, z);
+		Block block=Helper.getBlock(world, pos);
 		if(block!=null){
 			BasicNetworkInterfaceProvider test=blockFinder.get(block.getClass());
 			NetworkInterfaceProvider interf=test instanceof NetworkInterfaceProvider?(NetworkInterfaceProvider)test:null;

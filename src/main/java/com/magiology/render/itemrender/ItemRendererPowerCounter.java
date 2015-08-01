@@ -1,8 +1,6 @@
 package com.magiology.render.itemrender;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
+import java.text.DecimalFormat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -13,7 +11,9 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import java.text.DecimalFormat;
+import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.render.Textures;
 
 public class ItemRendererPowerCounter implements IItemRenderer {
 	Tessellator tess=Tessellator.instance;
@@ -91,7 +91,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-	    GL11.glTranslatef(x, y, z);
+	    GL11.glTranslatef(pos);
 	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glScalef(scale, scale, scale);
 	    
@@ -110,7 +110,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		float zr=90;
 		float scale=0.0049F;
 		
-		GL11.glTranslatef(x, y, z);
+		GL11.glTranslatef(pos);
 	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glScalef(scale, scale, scale);
 		

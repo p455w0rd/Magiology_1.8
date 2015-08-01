@@ -1,9 +1,8 @@
 package com.magiology.forgepowered.packets;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public abstract class AbstractToClientMessage extends AbstractPacket{
 	public final SendingTarget target;

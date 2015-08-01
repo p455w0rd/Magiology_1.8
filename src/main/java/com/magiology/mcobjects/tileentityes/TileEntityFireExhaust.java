@@ -18,9 +18,9 @@ public class TileEntityFireExhaust extends TileEntityM{
 	public void updateEntity(){
 		if(optimizer.isTimeWithAddProgress()){
 			if(worldObj.getBlock(xCoord, yCoord-4, zCoord)!=MBlocks.OreStructureCore){
-				Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 0);
-				worldObj.setBlock(xCoord, yCoord, zCoord, Blocks.air);
-				worldObj.setTileEntity(xCoord, yCoord, zCoord, null);
+				Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, worldObj.getBlock(pos), 0);
+				worldObj.setBlock(pos, Blocks.air);
+				worldObj.setTileEntity(pos, null);
 			}
 		}
 	}

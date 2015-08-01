@@ -4,11 +4,6 @@ import static com.magiology.objhelper.helpers.FontEH.*;
 
 import java.util.List;
 
-import com.magiology.mcobjects.items.GenericItemUpgrade;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.upgrades.RegisterUpgrades;
-import com.magiology.upgrades.RegisterUpgrades.Container;
-
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +12,11 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
+import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.upgrades.RegisterUpgrades;
+import com.magiology.upgrades.RegisterUpgrades.Container;
 
 public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	public static String slotNBT="someSlot";

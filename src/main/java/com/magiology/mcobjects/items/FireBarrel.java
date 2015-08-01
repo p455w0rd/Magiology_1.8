@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.modedmcstuff.items.UpgradeableItem;
@@ -17,7 +18,7 @@ public class FireBarrel extends UpgradeableItem{
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, int x, int y, int z, int l, float f, float f1, float f2){
+	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, int l, float f, float f1, float f2){
 		boolean return1=false;
 		if(player.isOnLadder()||player.isInWater())return1=true;
 		

@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.RenderLoopEvents;
@@ -60,7 +60,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 			}
 			if(var2)RenderLoopEvents.spawnLARR(new RenderFirePipeGlow(pipe));
 		}
-		Tessellator.instance.setTranslation(x, y, z);
+		Tessellator.instance.setTranslation(pos);
 		
 		
 		if(pipe.DCFFL!=null)drawConectorFFL();
@@ -74,8 +74,8 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		if(pipe.strateConnection[0]==null&&pipe.strateConnection[1]==null&&pipe.strateConnection[2]==null){
 			drawCore(pipe.texAnim);
 			for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i]!=null&&pipe.shouldConnectionsBeRendered[i])drawConector(pipe.connections[i]);
-			if(pipe.isSolidDown==true)drawStand(ForgeDirection.DOWN);
-			else if(pipe.isSolidUp==true)drawStand(ForgeDirection.UP);
+			if(pipe.isSolidDown==true)drawStand(EnumFacing.DOWN);
+			else if(pipe.isSolidUp==true)drawStand(EnumFacing.UP);
 		}
 		else for(int a=0;a<pipe.strateConnection.length;a++)if(pipe.strateConnection[a]!=null)drawStrateCore(pipe.strateConnection[a]);
 		
@@ -190,10 +190,10 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.addVertexWithUV(p*7.5,  p*3, p*7.5,  tWS*16, tHS*0);
 		modelStand=buf.exportToNoramlisedVertixBufferModel();
 	}
-	private void drawStand(ForgeDirection dir){
+	private void drawStand(EnumFacing dir){
 		if(modelStand==null)generateModelStand();
 		modelStand.push();
-		if(dir.equals(ForgeDirection.UP))modelStand.rotateAt(0.5, 0.5, 0.5, 0, 0, 180);
+		if(dir.equals(EnumFacing.UP))modelStand.rotateAt(0.5, 0.5, 0.5, 0, 0, 180);
 		bindTexture(Textures.FirePipeConectionFF);
 		modelStand.draw();
 		modelStand.pop();
@@ -231,15 +231,15 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.addVertexWithUV(p*1.5, p*10, p*6,  0, 1);
 		conectionToObjModel[1]=buf.exportToNoramlisedVertixBufferModel();
 	}
-	private void drawConectionToObj(ForgeDirection dir, String type){
+	private void drawConectionToObj(EnumFacing dir, String type){
 		if(conectionToObjModel[0]==null)generateModelConectionToObj();
 		for(int i=0;i<2;i++){
 			conectionToObjModel[i].push();
-			     if(dir.equals(ForgeDirection.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
-			else if(dir.equals(ForgeDirection.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
-			else if(dir.equals(ForgeDirection.SOUTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
-			else if(dir.equals(ForgeDirection.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -180, 0);
-			else if(dir.equals(ForgeDirection.NORTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -90, 0);
+			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
+			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
+			else if(dir.equals(EnumFacing.SOUTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
+			else if(dir.equals(EnumFacing.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -180, 0);
+			else if(dir.equals(EnumFacing.NORTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -90, 0);
 		}
 		
 		if(type=="inMe")bindTexture(Textures.FirePipeConecterInMe);
@@ -275,11 +275,11 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.addVertexWithUV(0, p*6.5, p*6.5,tW*103, tH*0);
 		strateCoreModel=buf.exportToNoramlisedVertixBufferModel();
 	}
-	private void drawStrateCore(ForgeDirection dir){
+	private void drawStrateCore(EnumFacing dir){
 		if(strateCoreModel==null)generateModelStrateCore();
 		strateCoreModel.push();
-		if(dir.equals(ForgeDirection.UP))strateCoreModel.rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
-		else if(dir.equals(ForgeDirection.SOUTH))strateCoreModel.rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
+		if(dir.equals(EnumFacing.UP))strateCoreModel.rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
+		else if(dir.equals(EnumFacing.SOUTH))strateCoreModel.rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
 		bindTexture(Textures.FirePipeConection);
 		strateCoreModel.draw();
 		strateCoreModel.pop();
@@ -322,7 +322,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.draw();
 		buf.pop();
 	}
-	public void drawConector(ForgeDirection dir){
+	public void drawConector(EnumFacing dir){
 		buf.push();
 		bindTexture(Textures.FirePipeConection);
 		float rX=0,rY=0,rZ=0;
@@ -330,12 +330,12 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		double tw1=-1,tw2=-1,th1=-1,th2=-1;
 		boolean[] flipTH=new boolean[5];
 		
-		if(dir.equals(ForgeDirection.WEST)){t=1;}
-		else if (dir.equals(ForgeDirection.UP)){rZ=-90;t=1;}
-		else if (dir.equals(ForgeDirection.DOWN)){rZ=90;t=2;}//texture2
-		else if (dir.equals(ForgeDirection.SOUTH)){rY=90;t=1;}
-		else if (dir.equals(ForgeDirection.EAST)){rY=-180;t=3;}//texture2
-		else if (dir.equals(ForgeDirection.NORTH)){rY=-90;t=3;}//texture2
+		if(dir.equals(EnumFacing.WEST)){t=1;}
+		else if (dir.equals(EnumFacing.UP)){rZ=-90;t=1;}
+		else if (dir.equals(EnumFacing.DOWN)){rZ=90;t=2;}//texture2
+		else if (dir.equals(EnumFacing.SOUTH)){rY=90;t=1;}
+		else if (dir.equals(EnumFacing.EAST)){rY=-180;t=3;}//texture2
+		else if (dir.equals(EnumFacing.NORTH)){rY=-90;t=3;}//texture2
 		
 		switch(t){
 		case(1):{th1=tH*16;th2=0;tw1=0;tw2=tW*28;}break;

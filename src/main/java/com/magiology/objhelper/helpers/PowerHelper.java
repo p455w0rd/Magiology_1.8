@@ -1,12 +1,12 @@
 package com.magiology.objhelper.helpers;
 
+import net.minecraft.tileentity.TileEntity;
+
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerProducer;
 import com.magiology.api.power.PowerUpgrades;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-
-import net.minecraft.tileentity.TileEntity;
 
 
 public class PowerHelper{

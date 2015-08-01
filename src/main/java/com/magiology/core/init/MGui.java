@@ -5,8 +5,13 @@ import com.magiology.gui.fpgui.HandModeChangerGui;
 import com.magiology.gui.fpgui.SoulFlameDisplayGui;
 import com.magiology.gui.fpgui.StatsDisplayGui;
 import com.magiology.gui.fpgui.WingModeChangerGui;
-import com.magiology.gui.guiContainer.*;
+import com.magiology.gui.guiContainer.GuiArmorContainer;
+import com.magiology.gui.guiContainer.GuiControlBockContainer;
+import com.magiology.gui.guiContainer.GuiISidedPowerInstructorContainer;
+import com.magiology.gui.guiContainer.GuiSCContainer;
+import com.magiology.gui.guiContainer.GuiUpdater;
 import com.magiology.gui.guiContainer.GuiUpdater.GuiProp;
+import com.magiology.gui.guiContainer.GuiUpgradeContainer;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomizeContainer;
 
 public class MGui{

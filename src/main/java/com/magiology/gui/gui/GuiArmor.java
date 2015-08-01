@@ -1,30 +1,32 @@
 package com.magiology.gui.gui;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraftforge.client.*;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.MinecraftForgeClient;
 
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL11;
 
-import com.magiology.*;
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.*;
-import com.magiology.gui.guiContainer.*;
-import com.magiology.gui.guiparticels.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.modedmcstuff.gui.*;
-import com.magiology.modedmcstuff.items.*;
-import com.magiology.objhelper.helpers.*;
-import com.magiology.objhelper.helpers.renderers.*;
-import com.magiology.render.itemrender.*;
+import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.gui.guiContainer.GuiArmorContainer;
+import com.magiology.gui.guiparticels.GuiStandardFX;
+import com.magiology.mcobjects.effect.GuiParticle;
+import com.magiology.modedmcstuff.gui.InvisivleGuiButton;
+import com.magiology.modedmcstuff.items.UpgItem;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.render.itemrender.ItemRendererHelmet42;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	

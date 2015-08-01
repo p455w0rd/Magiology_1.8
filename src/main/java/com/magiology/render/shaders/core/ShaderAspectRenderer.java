@@ -3,11 +3,6 @@ package com.magiology.render.shaders.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magiology.core.init.MEvents;
-import com.magiology.objhelper.DataStalker;
-import com.magiology.objhelper.helpers.Helper;
-
-import scala.math.Ordering.StringOrdering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.shader.Shader;
 import net.minecraft.client.shader.ShaderGroup;
@@ -15,6 +10,9 @@ import net.minecraft.client.shader.ShaderUniform;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import com.magiology.objhelper.DataStalker;
+import com.magiology.objhelper.helpers.Helper;
 
 public abstract class ShaderAspectRenderer{
 	

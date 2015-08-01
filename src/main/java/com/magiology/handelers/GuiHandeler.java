@@ -6,10 +6,19 @@ import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import com.magiology.core.init.MGui;
-import com.magiology.gui.gui.*;
-import com.magiology.gui.guiContainer.*;
+import com.magiology.gui.gui.GuiArmor;
+import com.magiology.gui.gui.GuiControlBock;
+import com.magiology.gui.gui.GuiISidedPowerInstructor;
+import com.magiology.gui.gui.GuiSC;
+import com.magiology.gui.gui.GuiUpgrade;
+import com.magiology.gui.guiContainer.GuiArmorContainer;
+import com.magiology.gui.guiContainer.GuiControlBockContainer;
+import com.magiology.gui.guiContainer.GuiISidedPowerInstructorContainer;
+import com.magiology.gui.guiContainer.GuiSCContainer;
+import com.magiology.gui.guiContainer.GuiUpgradeContainer;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
@@ -18,12 +27,10 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomize;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomizeContainer;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-
 public class GuiHandeler implements IGuiHandler{
 	
 	public Container GetServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
-		TileEntity tile=world.getTileEntity(x, y, z);
+		TileEntity tile=world.getTileEntity(pos);
 		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
 		int side=hit!=null?hit.sideHit:-1;
 		
@@ -47,7 +54,7 @@ public class GuiHandeler implements IGuiHandler{
 	}
 
 	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
-		TileEntity tile=world.getTileEntity(x, y, z);
+		TileEntity tile=world.getTileEntity(pos);
 		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
 		int side=hit!=null?hit.sideHit:-1;
 		
@@ -69,6 +76,6 @@ public class GuiHandeler implements IGuiHandler{
 		Helper.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
-	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetServerGuiElement(ID, player, world, x, y, z);}
-	@Override public Object getClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetClientGuiElement(ID, player, world, x, y, z);}
+	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetServerGuiElement(ID, player, world, pos);}
+	@Override public Object getClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetClientGuiElement(ID, player, world, pos);}
 }

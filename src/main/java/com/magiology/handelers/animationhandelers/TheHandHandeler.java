@@ -4,19 +4,17 @@ import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
-import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
-import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
+import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
+import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.itemrender.ItemRendererTheHand;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TheHandHandeler{
 	static float p=1F/16F;

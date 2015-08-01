@@ -1,18 +1,17 @@
 package com.magiology.render.tilerender.isbhrrender;
 
-import org.lwjgl.opengl.GL11;
-
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+
+import org.lwjgl.opengl.GL11;
+
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
 
 public abstract class ISBRH implements ISimpleBlockRenderingHandler,IItemRenderer{
 	@Override public boolean handleRenderType(ItemStack item, ItemRenderType type){return true;}
@@ -29,10 +28,10 @@ public abstract class ISBRH implements ISimpleBlockRenderingHandler,IItemRendere
 		GL11.glPopMatrix();
 	}
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,Block block, int modelId, RenderBlocks renderer){
+	public boolean renderWorldBlock(IBlockAccess world, BlockPos pos,Block block, int modelId, RenderBlocks renderer){
 		ShadedQuad.isInISBRHMode=true;
 		GL11.glPushMatrix();
-		boolean result=renderBlockInW(world, x, y, z, block, modelId, renderer);
+		boolean result=renderBlockInW(world, pos, block, modelId, renderer);
 		GL11.glPopMatrix();
 		ShadedQuad.isInISBRHMode=false;
 		return result;
@@ -44,6 +43,6 @@ public abstract class ISBRH implements ISimpleBlockRenderingHandler,IItemRendere
 	
 	@Override
 	public abstract int getRenderId();
-	public abstract boolean renderBlockInW(IBlockAccess world, int x, int y, int z,Block block, int modelId, RenderBlocks renderer);
+	public abstract boolean renderBlockInW(IBlockAccess world, BlockPos pos,Block block, int modelId, RenderBlocks renderer);
 	public abstract void renderItemInW(ItemRenderType type, ItemStack item, Object... data);
 }

@@ -9,8 +9,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 
-import cpw.mods.fml.relauncher.Side;
-
 public class UploadPlayerDataPacket extends AbstractToServerMessage{
 	private boolean isFlap;
 	private boolean[] keys;

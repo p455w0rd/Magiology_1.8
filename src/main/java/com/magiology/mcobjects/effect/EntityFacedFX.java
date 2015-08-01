@@ -2,13 +2,13 @@ package com.magiology.mcobjects.effect;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.render.Textures;
 
 public class EntityFacedFX extends EntityMagiologyBaseFX{
@@ -21,7 +21,7 @@ public class EntityFacedFX extends EntityMagiologyBaseFX{
 	double[] sideOpacity=new double[8],sideOpacityMultiplayer=new double[8];
 	int[] sideOpacityChange=new int[8];
 	String texture;
-	public Vec3 rotation=Helper.Vec3();
+	public Vec3M rotation=Helper.Vec3M();
 	
 	public EntityFacedFX(World w,double xp, double yp, double zp, double xs, double ys, double zs, int siz, double lengt,double gravit, boolean activ,int typ,String textur ,double Ra,double Ga,double Ba,double opacita,double frictio){
         super(w, xp, yp, zp, xs, ys, zs);
@@ -84,7 +84,7 @@ public class EntityFacedFX extends EntityMagiologyBaseFX{
     	else if(texture=="tx2")Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble2);
     	else if(texture=="tx3")Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble3);
     	GL11.glPushMatrix();
-    	GL11.glTranslated(x, y, z);
+    	GL11.glTranslated(pos);
     	GL11.glTranslated(0, -0.095, 0);
     	GL11H.rotateXYZ(rotation.xCoord, rotation.yCoord, rotation.zCoord);
 //    	GL11.glScaled(1, 1.3, 1);
@@ -96,7 +96,7 @@ public class EntityFacedFX extends EntityMagiologyBaseFX{
     	tess.addVertexWithUV(-PScale, PScale,0, 1, 0);
     	tess.addVertexWithUV(-PScale,-PScale,0, 1, 1);
     	tess.addVertexWithUV( PScale,-PScale,0, 0, 1);
-    	tess.draw();
+    	tess.finishDrawing();
     	GL11H.culFace(true);
     	
 		

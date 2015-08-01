@@ -2,11 +2,10 @@ package com.magiology.forgepowered.packets;
 
 import java.io.IOException;
 
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
-import cpw.mods.fml.relauncher.Side;
+
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 
 public class SendPlayerDataPacket extends AbstractToClientMessage{
 	private int now,max,count;

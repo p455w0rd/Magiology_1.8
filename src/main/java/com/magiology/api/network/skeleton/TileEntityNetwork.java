@@ -2,6 +2,13 @@ package com.magiology.api.network.skeleton;
 
 import java.util.List;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.network.ISidedNetworkComponent;
@@ -15,37 +22,32 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.SideHelper;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
-
 public abstract class TileEntityNetwork extends TileEntityM implements MultiColisionProvider,ISidedNetworkComponent,UpdateablePipe{
-	public ForgeDirection[] connections = new ForgeDirection[6];
-	public ForgeDirection[] strateConnection = new ForgeDirection[3];
+	public EnumFacing[] connections = new EnumFacing[6];
+	public EnumFacing[] strateConnection = new EnumFacing[3];
 	public boolean[] bannedConnections = new boolean[6],accessibleSides={true,true,true,true,true,true};
 	public boolean canPathFindTheBrain,didCheckSides=false;
 
 	public AxisAlignedBB pointId,prevPointId;
 	public AxisAlignedBB[] collisionBoxes=null;
 
-	protected int[] brainLoadup={0,0,0,1};
+	protected BlockPos brainLoadup=new BlockPos(new Vec3(0,0,0));
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-		brainLoadup=ArrayUtils.add(read3I(NBT, "brainP"),-1);
+		brainLoadup=readPos(NBT, "brainP");
 		canPathFindTheBrain=NBT.getBoolean("brainPath");
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
 		super.writeToNBT(NBT);
-		write3I(NBT, brainLoadup[0], brainLoadup[1], brainLoadup[2], "brainP");
+		writePos(NBT, brainLoadup, "brainP");
 		NBT.setBoolean("brainPath", canPathFindTheBrain);
 	}
 	public void checkBrainConnection(){
 		if(getBrain()!=null)canPathFindTheBrain=getBrain().isInNetwork(this);
 		if(!canPathFindTheBrain)for(int i=0;i<6;i++)if(getAccessibleOnSide(i)){
-			TileEntity test=worldObj.getTileEntity(SideHelper.X(i, xCoord), SideHelper.Y(i, yCoord), SideHelper.Z(i, zCoord));
+			TileEntity test=worldObj.getTileEntity(SideHelper.offset(i, pos));
 			if(test instanceof ISidedNetworkComponent){
 				ISidedNetworkComponent t=(ISidedNetworkComponent)test;
 				if(t.getBrain()!=null){
@@ -60,11 +62,11 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	public void findBrain(){
 		int side=-1;TileEntity test=null;
 		for(int i=0;i<this.connections.length;i++)if(this.connections[i]!=null&&
-				(test=worldObj.getTileEntity(SideHelper.X(i, xCoord), SideHelper.Y(i, yCoord), SideHelper.Z(i, zCoord)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
+				(test=worldObj.getTileEntity(SideHelper.offset(i, getPos())))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
 			side=i;i=this.connections.length;
 		}
 		if(side!=-1){
-			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.X(side, xCoord), SideHelper.Y(side, yCoord), SideHelper.Z(side, zCoord));
+			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offset(side, pos));
 			if(component!=null)NetworkBaseComponentHandeler.setBrain(component.getBrain(), this);
 		}
 	}
@@ -102,7 +104,7 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	}
 	@Override
 	public int getOrientation(){
-		return hasWorldObj()?worldObj.getBlockMetadata(xCoord, yCoord, zCoord):-1;
+		return hasWorldObj()?Helper.getBlockMetadata(worldObj,pos):-1;
 	}
 	@Override
 	public void initTheComponent(){
@@ -114,20 +116,16 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	}
 	@Override
 	public void setOrientation(int orientation){
-		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, orientation, 0);
+		Helper.setMetadata(worldObj, pos, orientation);
 	}
 	@Override
 	public void setBrain(TileEntityNetworkController brain){
-		if(brain!=null){
-			brainLoadup[0]=brain.xCoord;
-			brainLoadup[1]=brain.yCoord;
-			brainLoadup[2]=brain.zCoord;
-		}
+		if(brain!=null)brainLoadup=brain.getPos().add(0, 0, 0);
 	}
 	@Override
 	public TileEntityNetworkController getBrain(){
 		if(!canPathFindTheBrain)return null;
-		TileEntity tile=worldObj.getTileEntity(brainLoadup[0], brainLoadup[1], brainLoadup[2]);
+		TileEntity tile=worldObj.getTileEntity(brainLoadup);
 		if(!(tile instanceof TileEntityNetworkController))return null;
 		return (TileEntityNetworkController)tile;
 	}
@@ -145,8 +143,8 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	@Override
 	public AxisAlignedBB getRenderBoundingBox(){
 		if(blockType instanceof BlockContainerMultiColision){
-			AxisAlignedBB bb=((BlockContainerMultiColision)blockType).getResetBoundsOptional(worldObj, xCoord, yCoord, zCoord);
-			if(bb!=null)return bb.addCoord(xCoord, yCoord, zCoord);
+			AxisAlignedBB bb=((BlockContainerMultiColision)blockType).getResetBoundsOptional(worldObj, pos);
+			if(bb!=null)return bb.addCoord(pos.getX(),pos.getY(),pos.getZ());
 		}
 		return super.getRenderBoundingBox();
 	}
@@ -164,13 +162,13 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 		};
 	}
 	protected AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-			Helper.AxisAlignedBB(0,   p*6, p*6, p*6,  p*10, p*10),
-			Helper.AxisAlignedBB(p*6, 0,   p*6, p*10, p*6,  p*10),
-			Helper.AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*6 ),
-			Helper.AxisAlignedBB(p*10,p*6, p*6, 1,    p*10, p*10),
-			Helper.AxisAlignedBB(p*6, p*10,p*6, p*10, 1,    p*10),
-			Helper.AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, 1   ),
-			Helper.AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10)
+			new AxisAlignedBB(0,   p*6, p*6, p*6,  p*10, p*10),
+			new AxisAlignedBB(p*6, 0,   p*6, p*10, p*6,  p*10),
+			new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*6 ),
+			new AxisAlignedBB(p*10,p*6, p*6, 1,    p*10, p*10),
+			new AxisAlignedBB(p*6, p*10,p*6, p*10, 1,    p*10),
+			new AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, 1   ),
+			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10)
 	};
 	@Override
 	public AxisAlignedBB[] getExpectedColisionBoxes(){

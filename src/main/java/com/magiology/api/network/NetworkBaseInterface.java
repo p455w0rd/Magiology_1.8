@@ -3,13 +3,13 @@ package com.magiology.api.network;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
 import com.magiology.objhelper.DoubleObject;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 
 public interface NetworkBaseInterface{
 	

@@ -1,15 +1,15 @@
 package com.magiology.render.entityrender;
 
-import com.magiology.mcobjects.entitys.ModedEntityFallingBlock;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.mcobjects.entitys.ModedEntityFallingBlock;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public class RenderModedFallingBlock extends Render{
 	

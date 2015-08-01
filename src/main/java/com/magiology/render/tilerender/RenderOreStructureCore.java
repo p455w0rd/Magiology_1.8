@@ -1,13 +1,13 @@
 package com.magiology.render.tilerender;
 
-import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.render.Textures;
 
 public class RenderOreStructureCore extends TileEntitySpecialRenderer{
 	private final float p= 1F/16F;
@@ -17,7 +17,7 @@ public class RenderOreStructureCore extends TileEntitySpecialRenderer{
 @Override
 public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 	TileEntityOreStructureCore core= (TileEntityOreStructureCore) tileentity;
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glTranslated(0.5, 1, 0.5);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);

@@ -1,13 +1,11 @@
 package com.magiology.objhelper.vectors;
 
-import net.minecraft.util.Vec3;
-
 import com.magiology.objhelper.helpers.Helper;
 
 public class Plane{
-	public Vec3 q,r,s,normal;
+	public Vec3M q,r,s,normal;
 	
-	public Plane(Vec3 q,Vec3 r,Vec3 s){
+	public Plane(Vec3M q,Vec3M r,Vec3M s){
 		this.q=q;
 		this.r=r;
 		this.s=s;

@@ -1,7 +1,8 @@
 package com.magiology.objhelper.helpers.renderers.tessellatorscripts;
 
-import com.magiology.objhelper.vectors.Vec8F;
 import net.minecraft.util.ResourceLocation;
+
+import com.magiology.objhelper.vectors.Vec8F;
 
 public class NormalCubeModel{
 	PlateModel[] sides;

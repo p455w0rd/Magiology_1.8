@@ -1,9 +1,10 @@
 package com.magiology.modedmcstuff.guiContainer;
 
-import com.magiology.upgrades.RegisterUpgrades;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+
+import com.magiology.upgrades.RegisterUpgrades;
 
 public class FakeContainer implements IInventory{
 	

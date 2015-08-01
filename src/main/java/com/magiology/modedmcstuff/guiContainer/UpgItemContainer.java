@@ -1,12 +1,13 @@
 package com.magiology.modedmcstuff.guiContainer;
 
-import com.magiology.modedmcstuff.items.UpgItem;
-import com.magiology.upgrades.RegisterUpgrades;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.magiology.modedmcstuff.items.UpgItem;
+import com.magiology.upgrades.RegisterUpgrades;
 
 public class UpgItemContainer implements IInventory{
 	

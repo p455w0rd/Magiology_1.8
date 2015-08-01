@@ -3,18 +3,16 @@ package com.magiology.handelers.animationhandelers;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.Sounds;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.objhelper.SimpleCounter;
 import com.magiology.objhelper.helpers.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class WingsFromTheBlackFireHandeler{
 	public static WingsFromTheBlackFireHandeler instaince=new WingsFromTheBlackFireHandeler();

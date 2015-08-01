@@ -1,15 +1,16 @@
 package com.magiology.mcobjects.blocks;
 
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL3;
-
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 public class BateryGeneric extends BlockContainer{
 
@@ -31,7 +32,7 @@ public class BateryGeneric extends BlockContainer{
 	}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int x, int y, int z){
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, BlockPos pos){
 		switch(level) {
 		case 1: setBlockBounds(p*3, p*3, p*3, p*13, p*13, p*13);break;
 		case 2: setBlockBounds(p*4.5F, p*4.5F, p*4.5F, p*12.5F, p*12.5F, p*12.5F);break;

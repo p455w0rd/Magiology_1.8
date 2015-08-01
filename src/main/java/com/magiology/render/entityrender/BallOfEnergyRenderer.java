@@ -1,16 +1,17 @@
 package com.magiology.render.entityrender;
 
-import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
+import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public class BallOfEnergyRenderer extends Render{
 
@@ -38,7 +39,7 @@ public class BallOfEnergyRenderer extends Render{
 				(float)(entity.lastTickPosY+(entity.posY-entity.lastTickPosY)*partialTicks), 
 				(float)(entity.lastTickPosZ+(entity.posZ-entity.lastTickPosZ)*partialTicks));
 		float smoothRotation=(time360-4)+4*partialTicks,size=-(float)(0.1-entity.time/100F);
-		AxisAlignedBB cube=AxisAlignedBB.getBoundingBox(-size,-size,-size,size,size,size);
+		AxisAlignedBB cube=new AxisAlignedBB(-size,-size,-size,size,size,size);
 		GL11H.SetUpOpaqueRendering(1);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4d(1, 0.1, 0.1, 0.2);

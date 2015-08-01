@@ -17,7 +17,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRenderer{
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		new ColorF(0.6,0.6,0.6,0.5).bind();
 		GL11H.texture(false);
 		AxisAlignedBB[] cubes=((MultiColisionProvider)tile).getActiveBoxes();

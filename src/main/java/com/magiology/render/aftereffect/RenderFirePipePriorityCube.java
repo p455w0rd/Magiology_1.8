@@ -1,16 +1,17 @@
 package com.magiology.render.aftereffect;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+
+import org.lwjgl.opengl.GL11;
+
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	
@@ -23,7 +24,7 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	public final TileEntityFirePipe pipe;
 	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
 	
-	public RenderFirePipePriorityCube(TileEntityFirePipe pipe,int x,int y,int z, AxisAlignedBB b){
+	public RenderFirePipePriorityCube(TileEntityFirePipe pipe,BlockPos pos, AxisAlignedBB b){
 		this.x=x;
 		this.y=y;
 		this.z=z;
@@ -41,7 +42,7 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 //		GL11.glDisable(GL11.GL_CULL_FACE);
 //		GL11.glDisable(GL11.GL_FOG);
-		GL11.glTranslatef(x, y, z);
+		GL11.glTranslatef(pos);
 		GL11.glDepthMask(false);
 		GL11.glColor4d(1, 0.1, 0.1, alpha/5);
 		if(box!=null)for(int a=0;a<5;a++)drawCube(box.minX-a*0.01+Helper.CRandF(0.005), box.minY-a*0.01+Helper.CRandF(0.005), box.minZ-a*0.01+Helper.CRandF(0.005), box.maxX+a*0.01+Helper.CRandF(0.005), box.maxY+a*0.01+Helper.CRandF(0.005), box.maxZ+a*0.01+Helper.CRandF(0.005));
@@ -76,41 +77,41 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 		tess.addVertex(minx, miny, minz);
 		tess.addVertex(maxx, miny, minz);
 		tess.addVertex(maxx, miny, maxz);
-		tess.draw();
+		tess.finishDrawing();
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 1.0F, 0.0F);
 		tess.addVertex(maxx, maxy, maxz);
 		tess.addVertex(maxx, maxy, minz);
 		tess.addVertex(minx, maxy, minz);
 		tess.addVertex(minx, maxy, maxz);
-		tess.draw();
+		tess.finishDrawing();
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, -1F);
 		tess.addVertex(maxx, maxy, minz);
 		tess.addVertex(maxx, miny, minz);
 		tess.addVertex(minx, miny , minz);
 		tess.addVertex(minx, maxy, minz);
-		tess.draw();
+		tess.finishDrawing();
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, 1.0F);
 		tess.addVertex(minx, maxy, maxz);
 		tess.addVertex(minx, miny , maxz);
 		tess.addVertex(maxx, miny, maxz);
 		tess.addVertex(maxx, maxy, maxz);
-		tess.draw();
+		tess.finishDrawing();
 		tess.startDrawingQuads();
 		tess.setNormal(-1F, 0.0F, 0.0F);
 		tess.addVertex(minx, maxy, minz);
 		tess.addVertex(minx, miny, minz);
 		tess.addVertex(minx, miny, maxz);
 		tess.addVertex(minx, maxy, maxz);
-		tess.draw();
+		tess.finishDrawing();
 		tess.startDrawingQuads();
 		tess.setNormal(1.0F, 0.0F, 0.0F);
 		tess.addVertex(maxx, maxy, maxz);
 		tess.addVertex(maxx, miny,  maxz);
 		tess.addVertex(maxx, miny,  minz);
 		tess.addVertex(maxx, maxy, minz);
-		tess.draw();
+		tess.finishDrawing();
 	}
 }

@@ -1,5 +1,15 @@
 package com.magiology.mcobjects.tileentityes;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumParticleTypes;
+
 import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntityCustomfireFX;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
@@ -12,15 +22,6 @@ import com.magiology.objhelper.helpers.SideHelper;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
 import com.magiology.upgrades.RegisterUpgrades.Container;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityOreStructureCore extends TileEntityPow{
 
@@ -89,17 +90,17 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 				pipeStructure[2]=Structures.generateNewStructure(8);
 			}
 			
-			mainMultiBlock.checkForNextBlock(worldObj, xCoord, yCoord, zCoord);
-			if((worldObj.getTotalWorldTime()  )%2==0)beaconAddon.checkForNextBlock(worldObj, xCoord, yCoord, zCoord);
+			mainMultiBlock.checkForNextBlock(worldObj, pos);
+			if((worldObj.getTotalWorldTime()  )%2==0)beaconAddon.checkForNextBlock(worldObj, pos);
 			if((worldObj.getTotalWorldTime()+1)%2==0){
-				diamondAddon.checkForNextBlock(worldObj, xCoord, yCoord, zCoord);
-				bedrockAddon.checkForNextBlock(worldObj, xCoord, yCoord, zCoord);
+				diamondAddon.checkForNextBlock(worldObj, pos);
+				bedrockAddon.checkForNextBlock(worldObj, pos);
 			}
 			if(worldObj.getTotalWorldTime()%3==0){
 				structureUpg[1]=beaconAddon.isStructureCompleate();
 				structureUpg[2]=diamondAddon.isStructureCompleate();
 				structureUpg[3]=bedrockAddon.isStructureCompleate();
-				Structures.updateArray(pipeStructure, worldObj, xCoord, yCoord, zCoord);
+				Structures.updateArray(pipeStructure, worldObj, pos);
 				level=0;
 				for(boolean bol:structureUpg)if(bol)level++;
 			}
@@ -168,7 +169,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		if(go==6){
 	        if(mainMultiBlock.isStructureCompleate()){
 				set=yes;
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 2);
+				worldObj.setBlockMetadataWithNotify(pos, 1, 2);
 				updateStructureHelper=true;
 				findLevelOfStructure();
 				
@@ -187,7 +188,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			}
 			else{
 				set=no;
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 2, 2);
+				worldObj.setBlockMetadataWithNotify(pos, 2, 2);
 				worldObj.createExplosion((Entity)null, xCoord+0.5, yCoord+2, zCoord+0.5, 1, false);
 				updateStructureHelper=false;
 			}
@@ -230,7 +231,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 				if(worldObj.isRemote){
 					Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(xCoord, yCoord+1, zCoord, worldObj.getBlock(xCoord, yCoord+1, zCoord), 0);
 					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+0.5, yCoord+1.5, zCoord+0.5,  0, 0.06, 0,600,99,0.1,true,2,"tx3", 0, 0, 1, 1, 0.99));
-					Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+100, zCoord+0.5, 0.5F, 4F, 1, 4, 130, Helper.Vec3(0, -2F, 0)));
+					Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+100, zCoord+0.5, 0.5F, 4F, 1, 4, 130, Helper.Vec3M(0, -2F, 0)));
 				}
 				else worldObj.setBlock(xCoord, yCoord+1, zCoord, Blocks.air);
 				processing=0;
@@ -241,8 +242,8 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	
 	public void processingParticels(){
 		if(worldObj.getTotalWorldTime()%4!=0){
-			worldObj.spawnParticle("flame", xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle("flame", xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
 			worldObj.spawnParticle("smoke", xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
 			worldObj.spawnParticle("smoke", xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  -0.05+0.1*Helper.RF(2), -0.05-0.1*Helper.RF(2), 0);
 			worldObj.spawnParticle("smoke", xCoord+Helper.RF(p*7)+p*5, yCoord+5-p*12, zCoord+Helper.RF(p*7)+p*5,  -0.05+0.1*Helper.RF(2), -0.05-0.1*Helper.RF(2), 0);
@@ -258,29 +259,29 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		for(int k=0; k<10; k++){
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+2.55, yCoord+1.3, zCoord+0.5, -0.4, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(),250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
 		worldObj.spawnParticle("smoke", xCoord+2.7, yCoord+1.35, zCoord+0.5, -0.05, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF());
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+2.55, yCoord+1.3, zCoord+0.5, 0.5F/16F, 0.1F,1,6,50,Helper.Vec3(-0.05F,0,0)));
+		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+2.55, yCoord+1.3, zCoord+0.5, 0.5F/16F, 0.1F,1,6,50,Helper.Vec3M(-0.05F,0,0)));
 		
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord-1.7, yCoord+1.35, zCoord+0.5, 0.3, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(),250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
 		worldObj.spawnParticle("smoke", xCoord-1.7, yCoord+1.35, zCoord+0.5, 0.05, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF());
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord-1.7, yCoord+1.35, zCoord+0.5, 0.5F/16F, 0.1F,1,6,50, Helper.Vec3(0.05F,0,0)));
+		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord-1.7, yCoord+1.35, zCoord+0.5, 0.5F/16F, 0.1F,1,6,50, Helper.Vec3M(0.05F,0,0)));
 		
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+0.5, yCoord+1.35, zCoord+2.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), -0.3,250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
 		worldObj.spawnParticle("smoke", xCoord+0.5, yCoord+1.35, zCoord+2.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), -0.05);
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+1.35, zCoord+2.7, 0.5F/16F, 0.1F,1,6,50, Helper.Vec3(0,0,-0.05F)));
+		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+1.35, zCoord+2.7, 0.5F/16F, 0.1F,1,6,50, Helper.Vec3M(0,0,-0.05F)));
 		
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+0.5, yCoord+1.35, zCoord-1.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), 0.3,250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
 		worldObj.spawnParticle("smoke", xCoord+0.5, yCoord+1.35, zCoord-1.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), 0.05);
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+1.35, zCoord-1.7, 0.5F/16F, 0.1F,1,6,50,Helper.Vec3( 0,0, 0.05F)));
+		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+1.35, zCoord-1.7, 0.5F/16F, 0.1F,1,6,50,Helper.Vec3M( 0,0, 0.05F)));
 		}
 	}
 	public void processingParticelsEnding(){
 		for(int r=0; r<2;r++){
-		worldObj.spawnParticle("flame", xCoord+1.08, yCoord+2, zCoord+Helper.RF(), 0, -0.1*Helper.RF(2), 0);
-		worldObj.spawnParticle("flame", xCoord+Helper.RF(), yCoord+2, zCoord+1.08, 0, -0.1*Helper.RF(2), 0);
-		worldObj.spawnParticle("flame", xCoord+Helper.RF(), yCoord+2, zCoord-0.08, 0, -0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle("flame", xCoord-0.08, yCoord+2, zCoord+Helper.RF(), 0, -0.1*Helper.RF(2), 0);
+		worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+1.08, yCoord+2, zCoord+Helper.RF(), 0, -0.1*Helper.RF(2), 0);
+		worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+Helper.RF(), yCoord+2, zCoord+1.08, 0, -0.1*Helper.RF(2), 0);
+		worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+Helper.RF(), yCoord+2, zCoord-0.08, 0, -0.1*Helper.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord-0.08, yCoord+2, zCoord+Helper.RF(), 0, -0.1*Helper.RF(2), 0);
 		}
-		worldObj.spawnParticle("lava", xCoord+Helper.RF(), yCoord+2, zCoord+Helper.RF(), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+Helper.RF(), yCoord+2, zCoord+Helper.RF(), 0, 0, 0);
 		
 		for(int f=0; f<10;f++)worldObj.spawnParticle("smoke", xCoord-2.5+Helper.RF(5), yCoord+1.01, zCoord-2.5+Helper.RF(5), 0, 0.1*Helper.RF(2), 0);
 		
@@ -294,14 +295,14 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			worldObj.spawnParticle("cloud", xCoord+Helper.RF(), yCoord+2,                               zCoord+Helper.RF(), 0, 0, 0);
 		}
 		
-		for(int l=0; l<4;l++)worldObj.spawnParticle("lava", xCoord-2.5+Helper.RF(5), yCoord+1.21, zCoord-2.5+Helper.RF(5), 0, 0.1*Helper.RF(2), 0);
+		for(int l=0; l<4;l++)worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord-2.5+Helper.RF(5), yCoord+1.21, zCoord-2.5+Helper.RF(5), 0, 0.1*Helper.RF(2), 0);
 	
 		worldObj.spawnParticle("largesmoke", xCoord+1.58,                          yCoord+1+Helper.RF(), zCoord+Helper.RF(2), 0, 0, 0);
 		worldObj.spawnParticle("largesmoke", xCoord+Helper.RF(2), yCoord+1+Helper.RF(), zCoord+1.58,                          0, 0, 0);
 		worldObj.spawnParticle("largesmoke", xCoord+Helper.RF(2), yCoord+1+Helper.RF(), zCoord-0.58,                          0, 0, 0);
 		worldObj.spawnParticle("largesmoke", xCoord-0.58,                          yCoord+1+Helper.RF(), zCoord+Helper.RF(2), 0, 0, 0);
 		worldObj.spawnParticle("largesmoke", xCoord+Helper.RF(2), yCoord+2.5,                             zCoord+Helper.RF(2), 0, 0, 0);
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+Helper.RF()*5-2, yCoord+1, zCoord+Helper.RF()*5-2, 0.5F/16F, 0.1F,1,4,40, Helper.Vec3(0,0.03F,0)));
+		Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+Helper.RF()*5-2, yCoord+1, zCoord+Helper.RF()*5-2, 0.5F/16F, 0.1F,1,4,40, Helper.Vec3M(0,0.03F,0)));
 	}
 	public void spawnCustomFire(){
 		if(updateStructureHelper==true){
@@ -366,18 +367,18 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	        else Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5F+v0, yCoord + 1.1F, zCoord+0.5F+v2, -v0/18, v1/2, -v2/18));
 	        }
 		 	if(this.optimizer2.progress==1){
-	        worldObj.spawnParticle("lava", xCoord-7+Helper.RF(), yCoord+1, zCoord-3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord-7+Helper.RF(), yCoord+1, zCoord+3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord+7+Helper.RF(), yCoord+1, zCoord-3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord+7+Helper.RF(), yCoord+1, zCoord+3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord-3+Helper.RF(), yCoord+1, zCoord-7+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord+ 3F + Helper.RF(), yCoord + 1, zCoord- 7 + Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord-3+Helper.RF(), yCoord+1, zCoord+7 + Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle("lava", xCoord+3+Helper.RF(), yCoord+1, zCoord+7+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord-7+Helper.RF(), yCoord+1, zCoord-3+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord-7+Helper.RF(), yCoord+1, zCoord+3+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+7+Helper.RF(), yCoord+1, zCoord-3+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+7+Helper.RF(), yCoord+1, zCoord+3+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord-3+Helper.RF(), yCoord+1, zCoord-7+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+ 3F + Helper.RF(), yCoord + 1, zCoord- 7 + Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord-3+Helper.RF(), yCoord+1, zCoord+7 + Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+3+Helper.RF(), yCoord+1, zCoord+7+Helper.RF(), 0, 0, 0);
 			}
 		}
 	public void spawnParticleNe(){
-		for (int la = 0; la < 1; ++la)worldObj.spawnParticle("lava", xCoord+Helper.RF(), yCoord+1,zCoord+Helper.RF(), 0,0,0);
+		for (int la = 0; la < 1; ++la)worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+Helper.RF(), yCoord+1,zCoord+Helper.RF(), 0,0,0);
 	}
 
 

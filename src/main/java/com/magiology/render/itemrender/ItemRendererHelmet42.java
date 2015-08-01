@@ -1,10 +1,12 @@
 package com.magiology.render.itemrender;
 
-import com.magiology.render.models.ModelHelmet42;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.render.models.ModelHelmet42;
 
 public class ItemRendererHelmet42 implements IItemRenderer{
 	public ModelHelmet42 model=new ModelHelmet42();

@@ -5,7 +5,8 @@ import java.util.Queue;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
 public class EntityMagiologyBaseFX extends EntityFX{
@@ -26,18 +27,18 @@ public class EntityMagiologyBaseFX extends EntityFX{
 		super(w, xp, yp, zp);
 	}
 	@Override
-	public void renderParticle(Tessellator tess, float pa2, float pa3, float pa4, float pa5, float pa6, float pa7){
+	public void func_180434_a(WorldRenderer world, Entity ent, float pa2, float pa3, float pa4, float pa5, float pa6, float pa7){
 		par2=pa2;par3=pa3;par4=pa4;par5=pa5;par6=pa6;par7=pa7;
 		queuedRenders.add(this);
 	}
-	public static void renderBufferedParticle(Tessellator tess){
+	public static void renderBufferedParticle(WorldRenderer tess){
 		for(EntityMagiologyBaseFX particle:queuedRenders)particle.render(tess);
 		queuedRenders.clear();
 	}
-	public void render(Tessellator tess){
+	public void render(WorldRenderer tess){
 		renderStandardParticle(tess,par2,par3,par4,par5,par6,par7,0.01F*this.particleScale,true);
 	}
-	public void renderStandardParticle(Tessellator tess, float par2, float par3, float par4, float par5, float par6, float par7, float Scale,boolean draw){
+	public void renderStandardParticle(WorldRenderer tess, float par2, float par3, float par4, float par5, float par6, float par7, float Scale,boolean draw){
 		
     	float PScale = 0.01F*this.particleScale;
     	float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
@@ -48,7 +49,7 @@ public class EntityMagiologyBaseFX extends EntityFX{
     	tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
     	tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
     	tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-    	if(draw)tess.draw();
+    	if(draw)tess.finishDrawing();
 	}
 	@Override
 	public int getFXLayer(){return 3;}

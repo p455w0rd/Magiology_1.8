@@ -2,13 +2,13 @@ package com.magiology.gui.fpgui;
 
 import java.awt.Color;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
@@ -115,7 +115,7 @@ public class WingModeChangerGui extends FirstPersonGui{
 						tess.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 						tess.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 				}
-				tess.draw();
+				tess.finishDrawing();
 				GL11.glColor4d(0.8,0.8,0.8,calcAlpha*((color.getAlpha())/255F));
 				GL11.glLineWidth(1.5F);
 				tess.startDrawing(GL11.GL_LINES);
@@ -123,7 +123,7 @@ public class WingModeChangerGui extends FirstPersonGui{
 					tess.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 					tess.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 				}
-				tess.draw();
+				tess.finishDrawing();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				
 				String waring=player.motionY<-0.2&&(poz==Positions.NormalPos||poz==Positions.ProtectivePos)?"!! ":"";

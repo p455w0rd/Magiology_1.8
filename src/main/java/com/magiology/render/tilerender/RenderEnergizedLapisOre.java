@@ -1,13 +1,13 @@
 package com.magiology.render.tilerender;
 
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.render.Textures;
 
 public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
 
@@ -21,7 +21,7 @@ public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
 		this.bindTexture(Textures.EnergizedLapisOre);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11H.SetUpOpaqueRendering(2);
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		for(int a=0;a<6;a++){
 			int b=0;int c=0;
 			

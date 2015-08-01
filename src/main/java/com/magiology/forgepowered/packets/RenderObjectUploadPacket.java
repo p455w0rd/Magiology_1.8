@@ -13,8 +13,6 @@ import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.modedmcstuff.ColorF;
 
-import cpw.mods.fml.relauncher.Side;
-
 public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	
 	private int pos[],id;

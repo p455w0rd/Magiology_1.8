@@ -1,15 +1,14 @@
 package com.magiology.objhelper.helpers.renderers;
 
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.tessellatorscripts.TexturedTriangle;
-import com.magiology.objhelper.vectors.Vec3F;
-
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.model.TexturedQuad;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Vec3;
 
 import org.apache.commons.lang3.ArrayUtils;
+
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.tessellatorscripts.TexturedTriangle;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class ShadedQuad{
 	static Tessellator tess=Tessellator.instance;
@@ -20,9 +19,9 @@ public class ShadedQuad{
 		if(list.length<4)return;
 		if(isInISBRHMode){
 			PositionTextureVertex[] vertexPositions={list[0],list[1],list[2],list[3]};
-			Vec3 vec3=vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
-	        Vec3 vec31=vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
-	        Vec3 vec32=vec31.crossProduct(vec3).normalize();
+			Vec3M Vec3M=vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D);
+	        Vec3M vec31=vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D);
+	        Vec3M vec32=vec31.crossProduct(Vec3M).normalize();
 			tess.setNormal((float)vec32.xCoord,(float)vec32.yCoord,(float)vec32.zCoord);
 			for(PositionTextureVertex point:list){
 				tess.addVertexWithUV(point.vector3D.xCoord, point.vector3D.yCoord, point.vector3D.zCoord, point.texturePositionX, point.texturePositionY);
@@ -37,7 +36,7 @@ public class ShadedQuad{
 		}
 		list=null;
 	}
-	public static void addVertexWithUV(Vec3F point3D,double txX, double txY){
+	public static void addVertexWithUV(Vec3M point3D,double txX, double txY){
 		list=ArrayUtils.add(list,new PositionTextureVertex(point3D.x,point3D.y,point3D.z,(float)txX,(float)txY));
 		if(isInISBRHMode)drawQuad();
 	}
@@ -49,23 +48,23 @@ public class ShadedQuad{
 		list=ArrayUtils.add(list,new PositionTextureVertex((float)x, (float)y, (float)z, 0, 0));
 		if(isInISBRHMode)drawQuad();
 	}
-	public static void addVertex(Vec3F point3D){
+	public static void addVertex(Vec3M point3D){
 		list=ArrayUtils.add(list,new PositionTextureVertex(point3D.x,point3D.y,point3D.z, 0, 0));
 		if(isInISBRHMode)drawQuad();
 	}
 	public static void addVertexWithUVWRender(double x, double y, double z, double txX, double txY){
-		addVertexWithUV(x, y, z, txX, txY);
+		addVertexWithUV(pos, txX, txY);
 		drawQuad();
 	}
-	public static void addVertexWithUVWRender(Vec3F point3D,double txX, double txY){
+	public static void addVertexWithUVWRender(Vec3M point3D,double txX, double txY){
 		addVertexWithUV(point3D.x,point3D.y,point3D.z, txX, txY);
 		drawQuad();
 	}
 	public static void addVertexWRender(double x, double y, double z){
-		addVertex(x, y, z);
+		addVertex(pos);
 		drawQuad();
 	}
-	public static void addVertexWRender(Vec3F point3D){
+	public static void addVertexWRender(Vec3M point3D){
 		addVertex(point3D.x,point3D.y,point3D.z);
 		drawQuad();
 	}

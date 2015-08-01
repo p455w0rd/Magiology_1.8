@@ -6,7 +6,7 @@ import net.minecraft.network.PacketBuffer;
 
 
 public abstract class PacketTileEntity extends AbstractPacket{
-	protected int xCoord, yCoord, zCoord;
+	protected int pos;
 	
 	public PacketTileEntity(){}
 	

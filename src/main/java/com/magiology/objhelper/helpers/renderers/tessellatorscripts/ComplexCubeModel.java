@@ -1,18 +1,18 @@
 package com.magiology.objhelper.helpers.renderers.tessellatorscripts;
 
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.vectors.Vec3F;
-import com.magiology.objhelper.vectors.Vec8F;
-
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.objhelper.vectors.Vec8F;
+
 public class ComplexCubeModel{
 	private final float minX,minY,minZ,maxX,maxY,maxZ;
-	public Vec3F[] points=new Vec3F[8];
+	public Vec3M[] points=new Vec3M[8];
 	public Vec8F[] UVs=new Vec8F[6];
 	ResourceLocation[] st=new ResourceLocation[6];
 	public boolean[] willSideRender={true,true,true,true,true,true};
@@ -59,17 +59,17 @@ public class ComplexCubeModel{
 		UVs[5]=new Vec8F(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
 
 	}
-	private Vec3F[] genPoints(){
+	private Vec3M[] genPoints(){
 		//2=all max, 4=all min
-		Vec3F[] result=new Vec3F[8];
-		result[0]=new Vec3F(maxX, minY, minZ);
-		result[1]=new Vec3F(maxX, maxY, minZ);
-		result[2]=new Vec3F(maxX, maxY, maxZ);
-		result[3]=new Vec3F(maxX, minY, maxZ);
-		result[4]=new Vec3F(minX, minY, minZ);
-		result[5]=new Vec3F(minX, maxY, minZ);
-		result[6]=new Vec3F(minX, maxY, maxZ);
-		result[7]=new Vec3F(minX, minY, maxZ);
+		Vec3M[] result=new Vec3M[8];
+		result[0]=new Vec3M(maxX, minY, minZ);
+		result[1]=new Vec3M(maxX, maxY, minZ);
+		result[2]=new Vec3M(maxX, maxY, maxZ);
+		result[3]=new Vec3M(maxX, minY, maxZ);
+		result[4]=new Vec3M(minX, minY, minZ);
+		result[5]=new Vec3M(minX, maxY, minZ);
+		result[6]=new Vec3M(minX, maxY, maxZ);
+		result[7]=new Vec3M(minX, minY, maxZ);
 		return result;
 	}
 	public void draw(){
@@ -166,7 +166,7 @@ public class ComplexCubeModel{
 		}
 	}
 	
-	public Vec3F getPoint(String string){
+	public Vec3M getPoint(String string){
 		String[] xyz=string.split(",");
 		boolean x=false,y=false,z=false;
 		for(int i=0;i<xyz.length;i++){

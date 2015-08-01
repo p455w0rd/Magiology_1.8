@@ -1,11 +1,5 @@
 package com.magiology.render.shaders;
 
-import org.lwjgl.util.vector.Vector2f;
-
-import com.magiology.core.init.MEvents;
-import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
-import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.render.shaders.core.ShaderUniformEditor;

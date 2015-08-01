@@ -6,7 +6,10 @@ import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -25,20 +28,17 @@ import com.magiology.upgrades.RegisterUpgrades;
 import com.magiology.upgrades.RegisterUpgrades.Container;
 import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class TileEntityFirePipe extends TileEntityPow implements MultiColisionProvider,UpdateablePipe{
 	PowerHelper PH=new PowerHelper();
 	SlowdownHelper optimizer=new SlowdownHelper(40);
 	SlowdownHelper optimizer2=new SlowdownHelper(6);
 	
-	public ForgeDirection[] connections = new ForgeDirection[6];
+	public EnumFacing[] connections = new EnumFacing[6];
 	public boolean[] shouldConnectionsBeRendered=new boolean[6];
-	public ForgeDirection[] connectionsToObjInMe = new ForgeDirection[6];
-	public ForgeDirection[] connectionsToObjOut = new ForgeDirection[6];
-	public ForgeDirection[] strateConnection = new ForgeDirection[3];
-	public ForgeDirection DCFFL=ForgeDirection.UP;
+	public EnumFacing[] connectionsToObjInMe = new EnumFacing[6];
+	public EnumFacing[] connectionsToObjOut = new EnumFacing[6];
+	public EnumFacing[] strateConnection = new EnumFacing[3];
+	public EnumFacing DCFFL=EnumFacing.UP;
 	public boolean isSolidDown;
 	public boolean isSolidUp;
 	public int texAnim=0;
@@ -57,8 +57,9 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	public void addToReadFromNBT(NBTTagCompound NBTTC){
     	for(int i=0;i<6;i++){
     		bannedConnections[i]=NBTTC.getBoolean("bannedConnections"+i);
-    		connections[i]=ForgeDirection.getOrientation(NBTTC.getInteger("connections"+i));
-    		if(connections[i]==ForgeDirection.UNKNOWN)connections[i]=null;
+    		int con=NBTTC.getInteger("connections"+i);
+    		if(con<6&&con>-1)connections[i]=EnumFacing.getFront(con);
+    		else connections[i]=null;
     	}
     }
 	
@@ -71,8 +72,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
     }
 	
 	@Override
-	public void updateEntity(){
-		super.updateEntity();
+	public void update(){
 		power(true);
 		
 		//Get if/what side is first
@@ -81,7 +81,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			UpgradeType type=RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(containerItems[i].getItem()));
 			if(type==UpgradeType.Priority){
 				hasPriorityUpg=true;
-				FirstSide=containerItems[i].stackTagCompound.getInteger("side");
+				FirstSide=containerItems[i].getTagCompound().getInteger("side");
 				continue;
 			}
 		}
@@ -95,7 +95,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			spawnParticles();
 		}
 //		if(worldObj.isRemote)for(int i=0;i<containerItems.length;i++)if(containerItems[i]!=null){
-//			Helper.spawnEnitiyFX(new EntitySmokeFX(worldObj, xCoord+0.5, yCoord+0.5, zCoord+0.5, 0, 0.2, 0));
+//			Helper.spawnEnitiyFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0.2, 0));
 //		}
 		PowerHelper.sortSides(this);
 	}
@@ -112,36 +112,36 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		if(Helper.RB(0.2)&&currentEnergy+100>maxEnergyBuffer)
 		{
 			if(strateConnection[0]==null&&strateConnection[1]==null&&strateConnection[2]==null){
-				if(Helper.RB(0.33)&&isSolidDown==false&&connections[1]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5, yCoord+0.5-p*2, zCoord+0.5, 0, -0.1, 0));
-				if(Helper.RB(0.33)&&isSolidUp==false&&connections[0]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5, yCoord+0.5+p*2, zCoord+0.5, 0, 0.05, 0));
-				if(Helper.RB(0.33)&&connections[2]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5, yCoord+0.5, zCoord+0.5-p*2, 0, 0, -0.1));
-				if(Helper.RB(0.33)&&connections[4]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5, yCoord+0.5, zCoord+0.5+p*2, 0, 0, 0.1));
-				if(Helper.RB(0.33)&&connections[3]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5+p*2, yCoord+0.5, zCoord+0.5, 0.1, 0, 0));
-				if(Helper.RB(0.33)&&connections[5]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+0.5-p*2, yCoord+0.5, zCoord+0.5, -0.1, 0, 0));
+				if(Helper.RB(0.33)&&isSolidDown==false&&connections[1]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5-p*2, pos.getZ()+0.5, 0, -0.1, 0));
+				if(Helper.RB(0.33)&&isSolidUp==false&&connections[0]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5+p*2, pos.getZ()+0.5, 0, 0.05, 0));
+				if(Helper.RB(0.33)&&connections[2]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5-p*2, 0, 0, -0.1));
+				if(Helper.RB(0.33)&&connections[4]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5+p*2, 0, 0, 0.1));
+				if(Helper.RB(0.33)&&connections[3]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5+p*2, pos.getY()+0.5, pos.getZ()+0.5, 0.1, 0, 0));
+				if(Helper.RB(0.33)&&connections[5]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5-p*2, pos.getY()+0.5, pos.getZ()+0.5, -0.1, 0, 0));
 			}
 		}
 	}
 
 	public void updatestand(){
-		if(worldObj.isSideSolid(xCoord, yCoord-1, zCoord, ForgeDirection.DOWN)==true&&connections[1]==null)isSolidDown=true;
+		if(worldObj.isSideSolid(pos.getX(), pos.getY()-1, pos.getZ(), EnumFacing.DOWN)==true&&connections[1]==null)isSolidDown=true;
 		else isSolidDown=false;
 		
-		if(worldObj.isSideSolid(xCoord, yCoord+1, zCoord, ForgeDirection.UP)==true&&connections[0]==null)isSolidUp=true;
+		if(worldObj.isSideSolid(pos.getX(), pos.getY()+1, pos.getZ(), EnumFacing.UP)==true&&connections[0]==null)isSolidUp=true;
 		else isSolidUp=false;
 	}
 	@Override
 	public void updateConnections(){
 		if(H.isRemote(worldObj))updatestand();
-		if(isTPipe(0)||isTRand(SideHelper.X(0, xCoord), SideHelper.Y(0, yCoord), SideHelper.Z(0, zCoord))) connections[0] = ForgeDirection.UP;else connections[0] = null;
-		if(isTPipe(1)||isTRand(SideHelper.X(1, xCoord), SideHelper.Y(1, yCoord), SideHelper.Z(1, zCoord))||(worldObj.getTileEntity(SideHelper.X(1, xCoord), SideHelper.Y(1, yCoord), SideHelper.Z(1, zCoord))instanceof TileEntityFireExhaust)) connections[1] = ForgeDirection.DOWN;else connections[1] = null;
-		if(isTPipe(2)||isTRand(SideHelper.X(2, xCoord), SideHelper.Y(2, yCoord), SideHelper.Z(2, zCoord))) connections[2] = ForgeDirection.NORTH;else connections[2] = null;
-		if(isTPipe(3)||isTRand(SideHelper.X(3, xCoord), SideHelper.Y(3, yCoord), SideHelper.Z(3, zCoord))) connections[3] = ForgeDirection.EAST;else connections[3] = null;
-		if(isTPipe(4)||isTRand(SideHelper.X(4, xCoord), SideHelper.Y(4, yCoord), SideHelper.Z(4, zCoord))) connections[4] = ForgeDirection.SOUTH;else connections[4] = null;
-		if(isTPipe(5)||isTRand(SideHelper.X(5, xCoord), SideHelper.Y(5, yCoord), SideHelper.Z(5, zCoord))) connections[5] = ForgeDirection.WEST;else connections[5] = null;
+		if(isTPipe(0)||isTRand(SideHelper.offset(0, pos.getX()), SideHelper.Y(0, pos.getY()), SideHelper.Z(0, pos.getZ()))) connections[0] = EnumFacing.UP;else connections[0] = null;
+		if(isTPipe(1)||isTRand(SideHelper.offset(1, pos.getX()), SideHelper.Y(1, pos.getY()), SideHelper.Z(1, pos.getZ()))||(worldObj.getTileEntity(SideHelper.offset(1, pos.getX()), SideHelper.Y(1, pos.getY()), SideHelper.Z(1, pos.getZ()))instanceof TileEntityFireExhaust)) connections[1] = EnumFacing.DOWN;else connections[1] = null;
+		if(isTPipe(2)||isTRand(SideHelper.offset(2, pos.getX()), SideHelper.Y(2, pos.getY()), SideHelper.Z(2, pos.getZ()))) connections[2] = EnumFacing.NORTH;else connections[2] = null;
+		if(isTPipe(3)||isTRand(SideHelper.offset(3, pos.getX()), SideHelper.Y(3, pos.getY()), SideHelper.Z(3, pos.getZ()))) connections[3] = EnumFacing.EAST;else connections[3] = null;
+		if(isTPipe(4)||isTRand(SideHelper.offset(4, pos.getX()), SideHelper.Y(4, pos.getY()), SideHelper.Z(4, pos.getZ()))) connections[4] = EnumFacing.SOUTH;else connections[4] = null;
+		if(isTPipe(5)||isTRand(SideHelper.offset(5, pos.getX()), SideHelper.Y(5, pos.getY()), SideHelper.Z(5, pos.getZ()))) connections[5] = EnumFacing.WEST;else connections[5] = null;
 		boolean[] in1={},out1={};
 		TileEntity[] tiles=new TileEntity[6];
 		for(int a=0;a<6;a++){
-			tiles[a]=worldObj.getTileEntity(SideHelper.X(a, xCoord), SideHelper.Y(a, yCoord), SideHelper.Z(a, zCoord));
+			tiles[a]=worldObj.getTileEntity(SideHelper.offset(a, pos.getX()), SideHelper.Y(a, pos.getY()), SideHelper.Z(a, pos.getZ()));
 			if(tiles[a]==null){
 				in1 =ArrayUtils.add( in1, false);
 				out1=ArrayUtils.add(out1, false);
@@ -153,21 +153,21 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				out1=ArrayUtils.add(out1, false);
 			}
 		}
-		if(in1[0]&&!isTPipe(0))connectionsToObjInMe[0]=ForgeDirection.UP;   else connectionsToObjInMe[0]=null;
-		if(in1[1]&&!isTPipe(1))connectionsToObjInMe[1]=ForgeDirection.DOWN; else connectionsToObjInMe[1]=null;
-		if(in1[2]&&!isTPipe(2))connectionsToObjInMe[2]=ForgeDirection.NORTH;else connectionsToObjInMe[2]=null;
-		if(in1[3]&&!isTPipe(3))connectionsToObjInMe[3]=ForgeDirection.EAST; else connectionsToObjInMe[3]=null;
-		if(in1[4]&&!isTPipe(4))connectionsToObjInMe[4]=ForgeDirection.SOUTH;else connectionsToObjInMe[4]=null;
-		if(in1[5]&&!isTPipe(5))connectionsToObjInMe[5]=ForgeDirection.WEST; else connectionsToObjInMe[5]=null;
+		if(in1[0]&&!isTPipe(0))connectionsToObjInMe[0]=EnumFacing.UP;   else connectionsToObjInMe[0]=null;
+		if(in1[1]&&!isTPipe(1))connectionsToObjInMe[1]=EnumFacing.DOWN; else connectionsToObjInMe[1]=null;
+		if(in1[2]&&!isTPipe(2))connectionsToObjInMe[2]=EnumFacing.NORTH;else connectionsToObjInMe[2]=null;
+		if(in1[3]&&!isTPipe(3))connectionsToObjInMe[3]=EnumFacing.EAST; else connectionsToObjInMe[3]=null;
+		if(in1[4]&&!isTPipe(4))connectionsToObjInMe[4]=EnumFacing.SOUTH;else connectionsToObjInMe[4]=null;
+		if(in1[5]&&!isTPipe(5))connectionsToObjInMe[5]=EnumFacing.WEST; else connectionsToObjInMe[5]=null;
 			
-		if(out1[0]&&!isTPipe(0))connectionsToObjOut[0]=ForgeDirection.UP;   else connectionsToObjOut[0]=null;
-		if(out1[1]&&!isTPipe(1))connectionsToObjOut[1]=ForgeDirection.DOWN; else connectionsToObjOut[1]=null;
-		if(out1[2]&&!isTPipe(2))connectionsToObjOut[2]=ForgeDirection.NORTH;else connectionsToObjOut[2]=null;
-		if(out1[3]&&!isTPipe(3))connectionsToObjOut[3]=ForgeDirection.EAST; else connectionsToObjOut[3]=null;
-		if(out1[4]&&!isTPipe(4))connectionsToObjOut[4]=ForgeDirection.SOUTH;else connectionsToObjOut[4]=null;
-		if(out1[5]&&!isTPipe(5))connectionsToObjOut[5]=ForgeDirection.WEST; else connectionsToObjOut[5]=null;
+		if(out1[0]&&!isTPipe(0))connectionsToObjOut[0]=EnumFacing.UP;   else connectionsToObjOut[0]=null;
+		if(out1[1]&&!isTPipe(1))connectionsToObjOut[1]=EnumFacing.DOWN; else connectionsToObjOut[1]=null;
+		if(out1[2]&&!isTPipe(2))connectionsToObjOut[2]=EnumFacing.NORTH;else connectionsToObjOut[2]=null;
+		if(out1[3]&&!isTPipe(3))connectionsToObjOut[3]=EnumFacing.EAST; else connectionsToObjOut[3]=null;
+		if(out1[4]&&!isTPipe(4))connectionsToObjOut[4]=EnumFacing.SOUTH;else connectionsToObjOut[4]=null;
+		if(out1[5]&&!isTPipe(5))connectionsToObjOut[5]=EnumFacing.WEST; else connectionsToObjOut[5]=null;
 		
-//		Helper.printInln(worldObj.getTileEntity(SideHelper.X(SideHelper.WEST(), xCoord), SideHelper.Y(SideHelper.WEST(), yCoord), SideHelper.Z(SideHelper.WEST(), zCoord)));
+//		Helper.printInln(worldObj.getTileEntity(SideHelper.X(SideHelper.WEST(), pos.getX()), SideHelper.Y(SideHelper.WEST(), pos.getY()), SideHelper.Z(SideHelper.WEST(), pos.getZ())));
 		
 		for(int a=0;a<6;a++){
 			shouldConnectionsBeRendered[a]=true;
@@ -175,8 +175,8 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			else if(connectionsToObjOut[a]!=null)connections[a]=connectionsToObjOut[a];
 		}
 		
-		if(isTLamp(xCoord, yCoord-1, zCoord)&&connections[1]!=null){
-			DCFFL=ForgeDirection.UP;
+		if(isTLamp(pos.add(0,-1,0))&&connections[1]!=null){
+			DCFFL=EnumFacing.UP;
 		}else DCFFL = null;
 		
 		for(int a=0;a<6;a++){
@@ -186,12 +186,12 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				connectionsToObjOut[a]=null;
 			}
 		}
-		if(((connections[0]!=null&&DCFFL==null)&&connections[1]!=null)&&(connections[2]==null&&connections[3]==null&&connections[4]==null&&connections[5]==null))strateConnection[0] = ForgeDirection.UP;else strateConnection[0] = null;
-		if((connections[3]!=null&&connections[5]!= null)&&(connections[0]==null&&(connections[1]==null&&DCFFL==null)&&connections[2]==null&&connections[4]==null))strateConnection[1] = ForgeDirection.WEST;else strateConnection[1] = null;
-		if((connections[2]!=null&&connections[4]!= null)&&(connections[0]==null&&(connections[1]==null&&DCFFL==null)&&connections[3]==null&&connections[5]==null))strateConnection[2] = ForgeDirection.SOUTH;else strateConnection[2] = null;
+		if(((connections[0]!=null&&DCFFL==null)&&connections[1]!=null)&&(connections[2]==null&&connections[3]==null&&connections[4]==null&&connections[5]==null))strateConnection[0] = EnumFacing.UP;else strateConnection[0] = null;
+		if((connections[3]!=null&&connections[5]!= null)&&(connections[0]==null&&(connections[1]==null&&DCFFL==null)&&connections[2]==null&&connections[4]==null))strateConnection[1] = EnumFacing.WEST;else strateConnection[1] = null;
+		if((connections[2]!=null&&connections[4]!= null)&&(connections[0]==null&&(connections[1]==null&&DCFFL==null)&&connections[3]==null&&connections[5]==null))strateConnection[2] = EnumFacing.SOUTH;else strateConnection[2] = null;
 		
 		if(DCFFL!=null){
-			connectionsToObjInMe[1] = ForgeDirection.DOWN;
+			connectionsToObjInMe[1] = EnumFacing.DOWN;
 			shouldConnectionsBeRendered[1]=false;
 		}
 		setColisionBoxes();
@@ -217,12 +217,13 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		return false;
 	}
 	
-	public boolean isTOSO(int x1, int y1, int z1){
-		return worldObj.getTileEntity(x1, y1, z1)instanceof TileEntityOreStructureCore;
+	public boolean isTOSO(BlockPos pos){
+		return worldObj.getTileEntity(pos)instanceof TileEntityOreStructureCore;
 	}
 	
 	public boolean isTPipe(int side){
-		int x=SideHelper.X(side,xCoord),y=SideHelper.Y(side,yCoord),z=SideHelper.Z(side,zCoord),dir=0;
+		BlockPos pos1=SideHelper.offset(side,pos);
+		int dir=0;
 		switch(side){
 		case 0:{dir=1;}break;
 		case 1:{dir=0;}break;
@@ -232,7 +233,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		case 5:{dir=3;}break;
 		}
 		boolean return1=false;
-		TileEntity tile=worldObj.getTileEntity(x, y, z);
+		TileEntity tile=worldObj.getTileEntity(pos1);
 		if(tile instanceof TileEntityFirePipe){
 			if(((TileEntityFirePipe)tile).bannedConnections[dir]==false){
 				return1=true;
@@ -241,12 +242,12 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		
 		return return1;
 	}
-	public boolean isTLamp(int x1, int y1, int z1){
-		return worldObj.getTileEntity(x1, y1, z1)instanceof TileEntityFireLamp;
+	public boolean isTLamp(BlockPos pos){
+		return worldObj.getTileEntity(pos)instanceof TileEntityFireLamp;
 	}
-	public boolean isTRand(int x1, int y1, int z1){
+	public boolean isTRand(BlockPos pos){
 		boolean is=false;
-		TileEntity tile1=worldObj.getTileEntity(x1, y1, z1);
+		TileEntity tile1=worldObj.getTileEntity(pos);
 		if(tile1 instanceof TileEntityBFCPowerOut)is=true;
 		
 		return is;
@@ -255,7 +256,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		doSidedPowerTransferBasedOnConections(isRepeatable);
 		if(Helper.RInt(5)==0){
 			int side=Helper.RInt(6);
-			TileEntity tile=worldObj.getTileEntity(SideHelper.X(side, xCoord),SideHelper.Y(side, yCoord),SideHelper.Z(side, zCoord));
+			TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side, pos));
 			
 			if(connections[side]!=null&&connectionsToObjInMe[side]==null&&connectionsToObjOut[side]==null&&tile instanceof TileEntityFirePipe&&getCurrentEnergy()>0&&((TileEntityFirePipe)tile).getCurrentEnergy()<((TileEntityFirePipe)tile).getMaxEnergyBuffer()-1){
 				PowerHelper.tryToDrainFromTo(this, tile, 1,side);
@@ -265,7 +266,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 //		if(isRepeatable){
 //
 //		}
-//		else worldObj.spawnParticle("flame", xCoord+0.5, yCoord+0.5, zCoord+0.5, 0.1, 0.1, 0.1);
+//		else worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0.1, 0.1, 0.1);
 	}
 	/**
 	 * Based on variable: connections[]
@@ -290,7 +291,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		//try to send/receive power from all sides
 		for (int i=0;i<randSides.length;i++){
 			int side=randSides[i];
-			TileEntity ab=worldObj.getTileEntity(SideHelper.X(side,xCoord), SideHelper.Y(side,yCoord), SideHelper.Z(side,zCoord));
+			TileEntity ab=worldObj.getTileEntity(SideHelper.offset(side,pos));
 			//if there is nothing to interact with than skip the process (only for optimization)
 			boolean var1=ab!=null&&ab instanceof PowerCore&&ab instanceof ISidedPower;
 			//Is next to a special pipe
@@ -298,7 +299,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			if(var1){
 				//special interaction for pipes that contains Priority upgrade
 				if(hasPriorityUpg){
-					TileEntity a=worldObj.getTileEntity(SideHelper.X(randSides[0],xCoord), SideHelper.Y(randSides[0],yCoord), SideHelper.Z(randSides[0],zCoord));
+					TileEntity a=worldObj.getTileEntity(SideHelper.offset(randSides[0],pos));
 					TileEntityPow tile=a instanceof TileEntityPow?(TileEntityPow)a:null;
 					if(tile!=null){
 						if(i!=0)var1=false;
@@ -309,9 +310,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				else{
 					TileEntityFirePipe tile=ab instanceof TileEntityFirePipe?(TileEntityFirePipe)ab:null;
 					if(tile!=null&&tile.hasPriorityUpg){
-						if(SideHelper.X(tile.FirstSide,tile.xCoord)==xCoord&&
-						   SideHelper.Y(tile.FirstSide,tile.yCoord)==yCoord&&
-						   SideHelper.Z(tile.FirstSide,tile.zCoord)==zCoord){
+						if(SideHelper.offset(tile.FirstSide,tile.pos).equals(pos)){
 							var1=false;
 							var2=true;
 						}
@@ -324,7 +323,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				if(connections[side]!=null&&connectionsToObjInMe[side]==null&&connectionsToObjOut[side]==null){
 					doCustomSidedPowerTransfer(side,ab instanceof TileEntityFirePipe?(var2?-1:(hasPriorityUpg&&FirstSide==side?1:-1)):0);
 					if(isRepeatable){
-						TileEntity tile=worldObj.getTileEntity(SideHelper.X(side,xCoord), SideHelper.Y(side,yCoord), SideHelper.Z(side,zCoord));
+						TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side,pos));
 						if(tile instanceof TileEntityFirePipe)((TileEntityFirePipe)tile).power(false);
 					}
 				}else{
@@ -339,8 +338,8 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	 * @param type : send to something is 1 and send out itself is 0
 	 */
 	public void doCustomSidedPowerTransfer(int side,int type){
-		TileEntity tile=worldObj.getTileEntity(SideHelper.X(side,xCoord), SideHelper.Y(side,yCoord), SideHelper.Z(side,zCoord));
-		TransferEnergyToPosition(SideHelper.X(side,xCoord), SideHelper.Y(side,yCoord), SideHelper.Z(side,zCoord), type,side);
+		TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side,pos));
+		TransferEnergyToPosition(SideHelper.offset(side,pos), type,side);
 	}
 	/**
 	 * This gets coordinates from given side and if there is a pipe it searches for pipes that are connected to that found pipe and returns a random one if there is more than 1 pipe
@@ -349,13 +348,13 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	 */
 	public TileEntityFirePipe getPipeNextToAnotherPipe(int side){
 		TileEntityFirePipe result=null;
-		int x1=SideHelper.X(side,xCoord), y1=SideHelper.Y(side,yCoord), z1=SideHelper.Z(side,zCoord);
-		TileEntity firstPipe=worldObj.getTileEntity(x1,y1,z1);
+		BlockPos pos1=SideHelper.offset(side,pos);
+		TileEntity firstPipe=worldObj.getTileEntity(pos1);
 		int[] randSides=SideHelper.randomizeSides();
 		if(firstPipe instanceof TileEntityFirePipe)
 		for(int a=0;a<6;a++){int rSide=randSides[a];if(rSide!=SideHelper.getOppositeSide(side)&&connections[side]!=null){
-			int x2=SideHelper.X(rSide,x1), y2=SideHelper.Y(rSide,y1), z2=SideHelper.Z(rSide,z1);
-			TileEntity tile=worldObj.getTileEntity(x2,y2,z2);
+			BlockPos pos2=SideHelper.offset(rSide,pos1);
+			TileEntity tile=worldObj.getTileEntity(pos);
 			if(tile instanceof TileEntityFirePipe&&((TileEntityFirePipe) firstPipe).connections[rSide]!=null){
 				result=(TileEntityFirePipe)tile;
 				a=6;
@@ -371,10 +370,10 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	 * @param type : send to something is 1 and send out itself is 0
 	 * @param side
 	 */
-	public void TransferEnergyToPosition(int x,int y,int z,int type, int side){
-		TileEntity tileEn=worldObj.getTileEntity(x, y, z);
+	public void TransferEnergyToPosition(BlockPos pos,int type, int side){
+		TileEntity tileEn=worldObj.getTileEntity(pos);
 		/**Power visual debug (shows path-finding in particles)*/
-//		if(Helper.RInt(25)==0)Helper.spawnEntityFX(new EntityMovingParticleFX(getWorldObj(), xCoord+0.5, yCoord+0.5, zCoord+0.5,tileEn.xCoord+0.5, tileEn.yCoord+0.5, tileEn.zCoord+0.5, 300, type==1?1:0.2, type==0?1:0.2, type==-1?1:0.2,0.4));
+//		if(Helper.RInt(25)==0)Helper.spawnEntityFX(new EntityMovingParticleFX(getWorldObj(), pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5,tileEn.pos.getX()+0.5, tileEn.pos.getY()+0.5, tileEn.pos.getZ()+0.5, 300, type==1?1:0.2, type==0?1:0.2, type==-1?1:0.2,0.4));
 		if(type==-1&&tileEn instanceof TileEntityFirePipe){
 			for(int l=0;l<20;l++){
 				PowerHelper.tryToEquateEnergy(this, tileEn, PowerHelper.getMaxSpeed(tileEn, this),side);
@@ -414,7 +413,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()
     {
-        AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord, yCoord-(DCFFL!=null?0.5:0), zCoord, xCoord+1, yCoord+1, zCoord+1);
+        AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY()-(DCFFL!=null?0.5:0), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
         return bb;
     }
 	
@@ -433,15 +432,15 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		};
 	}
 	private AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-			Helper.AxisAlignedBB(0      ,p*6,p*6,p*6,p*10,p*10),
-			Helper.AxisAlignedBB(p*6,0      ,p*6,p*10,p*6,p*10),
-			Helper.AxisAlignedBB(p*6,p*6,0      ,p*10,p*10,p*6),
-			Helper.AxisAlignedBB(p*10,p*6,p*6,1      ,p*10,p*10),
-			Helper.AxisAlignedBB(p*6,p*10,p*6,p*10,1      ,p*10),
-			Helper.AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1      ),
-			Helper.AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),
-			Helper.AxisAlignedBB(p*4.5F,-p*4.7F,p*4.5F,p*11.5F,p*0.1F,p*11.5F),
-			Helper.AxisAlignedBB(p*6,0 ,p*6,p*10,p*6F,p*10),
+			new AxisAlignedBB(0      ,p*6,p*6,p*6,p*10,p*10),
+			new AxisAlignedBB(p*6,0      ,p*6,p*10,p*6,p*10),
+			new AxisAlignedBB(p*6,p*6,0      ,p*10,p*10,p*6),
+			new AxisAlignedBB(p*10,p*6,p*6,1      ,p*10,p*10),
+			new AxisAlignedBB(p*6,p*10,p*6,p*10,1      ,p*10),
+			new AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1      ),
+			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),
+			new AxisAlignedBB(p*4.5F,-p*4.7F,p*4.5F,p*11.5F,p*0.1F,p*11.5F),
+			new AxisAlignedBB(p*6,0 ,p*6,p*10,p*6F,p*10),
 	};
 	@Override
 	public AxisAlignedBB[] getExpectedColisionBoxes(){

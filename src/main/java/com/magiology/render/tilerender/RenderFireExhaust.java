@@ -1,12 +1,12 @@
 package com.magiology.render.tilerender;
 
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.render.Textures;
 
 public class RenderFireExhaust extends TileEntitySpecialRenderer {
 	
@@ -17,7 +17,7 @@ public class RenderFireExhaust extends TileEntitySpecialRenderer {
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 

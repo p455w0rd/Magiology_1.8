@@ -7,8 +7,7 @@ import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
 import com.magiology.objhelper.helpers.Helper;
-
-import net.minecraft.util.Vec3;
+import com.magiology.objhelper.vectors.Vec3M;
 
 
 /**
@@ -84,7 +83,7 @@ public class GL11H{
 		if(arrayOf3F.length!=3)return;
 		glTranslated(arrayOf3F[0],arrayOf3F[1],arrayOf3F[2]);
 	}
-	public static void translate(Vec3 vec){
+	public static void translate(Vec3M vec){
 		glTranslated(vec.xCoord,vec.yCoord,vec.zCoord);
 	}
 	public static void texture(boolean enabled){
@@ -99,7 +98,7 @@ public class GL11H{
 		if(enabled)glEnable(GL_CULL_FACE);
 		else glDisable(GL_CULL_FACE);
 	}
-	public static Matrix4f createMatrix(Vec3 translation,float rotationX,float rotationY,float rotationZ, float scale){
+	public static Matrix4f createMatrix(Vec3M translation,float rotationX,float rotationY,float rotationZ, float scale){
 		return createMatrix(new Vector3f((float)translation.xCoord, (float)translation.yCoord, (float)translation.zCoord), rotationX, rotationY, rotationZ, scale);
 	}
 	public static Matrix4f createMatrix(Vector3f translation,float rotationX,float rotationY,float rotationZ, float scale){
@@ -111,8 +110,8 @@ public class GL11H{
 		Matrix4f.scale(new Vector3f(scale, scale, scale), result, result);
 		return result;
 	}
-	public static Vec3 transformVector(Vec3 vectorForTransformation,Vector3f translation,double rotationX,double rotationY,double rotationZ, double scale){
-		if(vectorForTransformation==null)vectorForTransformation=Helper.Vec3();
+	public static Vec3M transformVector(Vec3M vectorForTransformation,Vector3f translation,double rotationX,double rotationY,double rotationZ, double scale){
+		if(vectorForTransformation==null)vectorForTransformation=Helper.Vec3M();
 		Vector3f vec=transformVector(new Vector3f((float)vectorForTransformation.xCoord, (float)vectorForTransformation.yCoord, (float)vectorForTransformation.zCoord), translation, rotationX, rotationY, rotationZ, scale);
 		vectorForTransformation.xCoord=vec.x;
 		vectorForTransformation.yCoord=vec.y;
@@ -124,9 +123,9 @@ public class GL11H{
 		Matrix4f transform=GL11H.createMatrix(translation,(float)rotationX,(float)rotationY,(float)rotationZ,(float)scale);
 		return transformVector(vectorForTransformation, transform);
 	}
-	public static Vec3 transformVector(Vec3 vectorForTransformation,Matrix4f transformation){
+	public static Vec3M transformVector(Vec3M vectorForTransformation,Matrix4f transformation){
 		Vector3f result=transformVector(new Vector3f((float)vectorForTransformation.xCoord, (float)vectorForTransformation.yCoord, (float)vectorForTransformation.zCoord), transformation);
-		return Helper.Vec3(result.x, result.y, result.z);
+		return Helper.Vec3M(result.x, result.y, result.z);
 	}
 	public static Vector3f transformVector(Vector3f vectorForTransformation,Matrix4f transformation){
 		if(vectorForTransformation==null)vectorForTransformation=new Vector3f();

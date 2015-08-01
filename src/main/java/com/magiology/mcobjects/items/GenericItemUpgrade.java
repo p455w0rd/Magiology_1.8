@@ -9,8 +9,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.magiology.core.MReference;
 import com.magiology.core.init.MCreativeTabs;
@@ -20,8 +22,6 @@ import com.magiology.objhelper.helpers.FontEH;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.upgrades.RegisterUpgrades;
 import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class GenericItemUpgrade extends Item{
 	int Level;
@@ -63,12 +63,12 @@ public class GenericItemUpgrade extends Item{
     }
 	
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int side, float hitX, float hitY, float hitZ){
 		boolean result=false;
 		if(stack.stackTagCompound==null)stack.stackTagCompound=new NBTTagCompound();
 		else{
 			UpgradeType type=RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(stack.getItem()));
-			Block block=world.getBlock(x, y, z);
+			Block block=Helper.getBlock(world, pos);
 			if(!player.isSneaking()&&type==UpgradeType.Priority){
 				double MaxX=block.getBlockBoundsMaxX(),MinX=block.getBlockBoundsMinX();
 				double MaxY=block.getBlockBoundsMaxY(),MinY=block.getBlockBoundsMinY();
@@ -165,7 +165,7 @@ public class GenericItemUpgrade extends Item{
 				case 4:id=3;break;
 				case 5:id=4;break;
 				}
-				list.add("Current side: "+ForgeDirection.getOrientation(id).toString().toLowerCase());
+				list.add("Current side: "+EnumFacing.getOrientation(id).toString().toLowerCase());
 			}
 			else list.add(FontEH.RED+""+FontEH.UNDERLINE+"No NBT on stack!");
 			if(i==2){

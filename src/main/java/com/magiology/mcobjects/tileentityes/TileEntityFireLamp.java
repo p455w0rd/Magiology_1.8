@@ -8,8 +8,11 @@ import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
@@ -19,10 +22,8 @@ import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.upgrades.RegisterUpgrades.Container;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityFireLamp extends TileEntityPowGen{
 	EffectRenderer efr=Minecraft.getMinecraft().effectRenderer;
@@ -33,14 +34,13 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	
 	TileEntity tileE;
-	int xc,yc,zc;
 	
-	public int controlX,controlY,controlZ;
+	public BlockPos control,c;
 	public TileEntityControlBlock controlBlock=null;
 	
-	public ForgeDirection[] canAcceptEnergyOnSide=new ForgeDirection[6];
-	public ForgeDirection[] canSendEnergyOnSide=new ForgeDirection[6];
-	public ForgeDirection connection=null;
+	public EnumFacing[] canAcceptEnergyOnSide=new EnumFacing[6];
+	public EnumFacing[] canSendEnergyOnSide=new EnumFacing[6];
+	public EnumFacing connection=null;
 	public TileEntityFireLamp(){
 		super(SixSidedBoolean.create(First6True,Include,UP(),Last6True,Include,DOWN()).sides,SixSidedBoolean.lastGen.sides.clone(), 1, 2, 5, 115, 100);
 		initUpgrades(Container.FireGen);
@@ -51,29 +51,24 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		fuel=NBTTC.getInteger("FT");
 		maxFuel=NBTTC.getInteger("MFT");
 		IsControlledByOSC=NBTTC.getBoolean("ICBOSC");
-		controlX=NBTTC.getInteger("XC");
-		controlY=NBTTC.getInteger("YC");
-		controlZ=NBTTC.getInteger("ZC");
+		control=readPos(NBTTC, "C");
 	}
 	@Override
 	public void addToWriteToNBT(NBTTagCompound NBTTC){
 		NBTTC.setInteger("FT", fuel);
 		NBTTC.setInteger("MFT", maxFuel);
 		NBTTC.setBoolean("ICBOSC", IsControlledByOSC);
-		NBTTC.setInteger("XC", controlX);
-		NBTTC.setInteger("YC", controlY);
-		NBTTC.setInteger("ZC", controlZ);
+		writePos(NBTTC, control, "C");
 	}
 	
 	@Override
-	public void updateEntity(){
-		super.updateEntity();
+	public void update(){
 		if(connection!=null)mode=1;
 		else mode=0;
 		
-		if(controlX==xCoord&&controlY==yCoord&&controlZ==zCoord)active=false;
+		if(control.equals(pos))active=false;
 		else active=true;
-		TileEntity TileEn=worldObj.getTileEntity(controlX, controlY, controlZ);
+		TileEntity TileEn=worldObj.getTileEntity(control);
 		if(TileEn instanceof TileEntityControlBlock){
 			controlBlock=(TileEntityControlBlock)TileEn;
 		}else controlBlock=null;
@@ -97,13 +92,13 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 				first=false;
 				getExistingControlBlockinR(XZr,Yr);
 			}else{
-				if(controlX>xCoord)if(controlX-XZr>xCoord){controlX=xCoord;controlZ=zCoord;controlY=yCoord;}
-				if(controlZ>zCoord)if(controlZ-XZr>zCoord){controlX=xCoord;controlZ=zCoord;controlY=yCoord;}
-				if(controlY>yCoord)if(controlY-Yr>yCoord) {controlX=xCoord;controlZ=zCoord;controlY=yCoord;}
+				if(control.getX()>pos.getX()&&control.getX()-XZr>pos.getX()){control=pos.add(0, 0, 0);}
+				if(control.getZ()>pos.getZ()&&control.getZ()-XZr>pos.getZ()){control=pos.add(0, 0, 0);}
+				if(control.getY()>pos.getY()&&control.getY()-Yr>pos.getY()) {control=pos.add(0, 0, 0);}
 				
-				if(controlX<xCoord)if(controlX+XZr<xCoord){controlX=xCoord;controlZ=zCoord;controlY=yCoord;}
-				if(controlZ<zCoord)if(controlZ+XZr<zCoord){controlX=xCoord;controlZ=zCoord;controlY=yCoord;}
-				if(controlY<yCoord)if(controlY+Yr<yCoord) {controlX=xCoord;controlZ=zCoord;controlY=yCoord;}
+				if(control.getX()<pos.getX()&&control.getX()+XZr<pos.getX()){control=pos.add(0, 0, 0);}
+				if(control.getZ()<pos.getZ()&&control.getZ()+XZr<pos.getZ()){control=pos.add(0, 0, 0);}
+				if(control.getY()<pos.getY()&&control.getY()+Yr<pos.getY()) {control=pos.add(0, 0, 0);}
 			}
 		}
 		
@@ -111,34 +106,34 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		PowerHelper.sortSides(this);
 	}
 	public void updateConnections(){
-		TileEntity tile=worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-		if(tile instanceof TileEntityFirePipe)connection=((TileEntityFirePipe)tile).connections[0]!=null?ForgeDirection.UP:null;
+		TileEntity tile=worldObj.getTileEntity(pos.add(0, -1, 0));
+		if(tile instanceof TileEntityFirePipe)connection=((TileEntityFirePipe)tile).connections[0]!=null?EnumFacing.UP:null;
 		else connection=null;
 	}
 	@SideOnly(Side.CLIENT)
 	public void spawnPaticle(boolean isforced){
 		if(!worldObj.isRemote)return;
 		if(connection!=null){
-			worldObj.spawnParticle("lava", xCoord+p*4+(Helper.RF()*p*8), yCoord+p*11, zCoord+p*4+(Helper.RF()*p*8), 0, 0, 0);
-			worldObj.spawnParticle("flame", xCoord+p*4+(Helper.RF()*p*8), yCoord+p*11, zCoord+p*4+(Helper.RF()*p*8), 0.025-(Helper.RF()*0.05), (Helper.RF()*0.2), 0.025-(Helper.RF()*0.05));
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+p*4+(Helper.RF()*p*8), pos.getY()+p*11, pos.getZ()+p*4+(Helper.RF()*p*8), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+p*4+(Helper.RF()*p*8), pos.getY()+p*11, pos.getZ()+p*4+(Helper.RF()*p*8), 0.025-(Helper.RF()*0.05), (Helper.RF()*0.2), 0.025-(Helper.RF()*0.05));
 		}
 		if(optimizer3.isTimeWithAddProgress())return;
 		
 		if(canGeneratePower(3)||isforced){
 			if(optimizer2.isTimeWithAddProgress()){
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*4, yCoord+p*11, zCoord+p*4, -0.02, -0.005, -0.02));
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*12, yCoord+p*11, zCoord+p*4, 0.02, -0.005, -0.02));
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*12, yCoord+p*11, zCoord+p*12, 0.02, -0.005, 0.02));
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*4, yCoord+p*11, zCoord+p*12, -0.02, -0.005, 0.02));
-				Helper.spawnEntityFX(new EntitySparkFX(worldObj, xCoord+0.5, yCoord+p*5.5, zCoord+0.5, 0.5F/16F, 0.1F,1,5,100,Vec3.createVectorHelper(0,0,0)));
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
+				Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+p*5.5, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,5,100,new Vec3M(0,0,0)));
 			}else{
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*4, yCoord+p*11, zCoord+p*4, -0.02, -0.005, -0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*12, yCoord+p*11, zCoord+p*4, 0.02, -0.005, -0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*12, yCoord+p*11, zCoord+p*12, 0.02, -0.005, 0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, xCoord+p*4, yCoord+p*11, zCoord+p*12, -0.02, -0.005, 0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
 			}
-			if(Helper.RB())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, xCoord+p*6+(Helper.RF()*p*4), yCoord+p*11-Helper.RF()*p*5, zCoord+p*6+(Helper.RF()*p*4), Helper.CRandF(0.005), -0.01, Helper.CRandF(0.005), 300, 2, -1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
-			else Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, xCoord+0.35+(Helper.RF()*0.35), yCoord+Helper.RF()*p*5, zCoord+0.35+(Helper.RF()*0.35), Helper.CRandF(0.005), 0.01, Helper.CRandF(0.005), 300, 2, 1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
+			if(Helper.RB())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+p*6+(Helper.RF()*p*4), pos.getY()+p*11-Helper.RF()*p*5, pos.getZ()+p*6+(Helper.RF()*p*4), Helper.CRandF(0.005), -0.01, Helper.CRandF(0.005), 300, 2, -1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
+			else Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+0.35+(Helper.RF()*0.35), pos.getY()+Helper.RF()*p*5, pos.getZ()+0.35+(Helper.RF()*0.35), Helper.CRandF(0.005), 0.01, Helper.CRandF(0.005), 300, 2, 1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
 		}
 		
 		
@@ -167,11 +162,11 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	
 	public void tryToSendEnergyToObj(){
-		TileEntity aa=worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
+		TileEntity aa=worldObj.getTileEntity(pos.add(0,1,0));
 		if(aa instanceof TileEntityFirePipe){
 			TileEntityFirePipe pipe= (TileEntityFirePipe)aa;
-			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),SideHelper.ForgeDirgetOrientationInverted(ForgeDirection.UP)))if(worldObj.isRemote&&optimizer3.progress==0){
-				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, xCoord+0.5, yCoord+p*15, zCoord+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
+			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),SideHelper.ForgeDirgetOrientationInverted(EnumFacing.UP)))if(worldObj.isRemote&&optimizer3.progress==0){
+				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
 				if(Helper.RInt(3)==0)Helper.spawnEntityFX(particle);
 				else Helper.spawnEntityFX(particle,20);
 			}
@@ -181,34 +176,30 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	public void isInMultiblockStructureBFC(){
 		for(int x1=-1;x1<=1;x1++){for(int y1=-2;y1<=-1;y1++){for(int z1=-1;z1<=1;z1++){
 			
-			tileE=worldObj.getTileEntity(xCoord+x1, yCoord+y1, zCoord+z1);
+			tileE=worldObj.getTileEntity(pos.add(x1,y1,z1));
 			if(tileE instanceof TileEntityBigFurnaceCore){
-				TileEntityBigFurnaceCore BFC=(TileEntityBigFurnaceCore) worldObj.getTileEntity(xCoord+x1, yCoord+y1, zCoord+z1);
-				xc=xCoord+x1;
-				yc=yCoord+y1;
-				zc=zCoord+z1;
+				TileEntityBigFurnaceCore BFC=(TileEntityBigFurnaceCore)tileE;
+				c=pos.add(x1,y1,z1);
 				
-				controlX=xc;
-				controlY=yc;
-				controlZ=zc;
+				control=c.add(0, 0, 0);
 				
-				if(BFC.isMultiblockHelper)yc=yCoord+y1;
-				else yc=10000;
+				if(BFC.isMultiblockHelper)c=new BlockPos(c.getX(),pos.getY()+y1,c.getZ());
+				else c=new BlockPos(c.getX(),10000,c.getZ());
 				x1=2;
 				y1=2;
 				z1=2;
 			}
 			else{
-			yc=10000;
+				c=new BlockPos(c.getX(),10000,c.getZ());
 		}}}
 			
 		}
-			if(yc==10000)isInMultiblockStructureBFCHelper=false;
-			else isInMultiblockStructureBFCHelper=true;
+		if(c.getY()==10000)isInMultiblockStructureBFCHelper=false;
+		else isInMultiblockStructureBFCHelper=true;
 	}
 	
 	public void updateControlBlock(){
-		TileEntity tileTest=worldObj.getTileEntity(controlX,controlY,controlZ);
+		TileEntity tileTest=worldObj.getTileEntity(control);
 		if(IsControlledByOSC&&tileTest instanceof TileEntityOreStructureCore){
 			return;
 		}
@@ -218,9 +209,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 			return;
 		}
 		else{
-			controlX=xCoord;
-			controlY=yCoord;
-			controlZ=zCoord;
+			control=pos.add(0,0,0);
 		}
 	}
 	
@@ -230,7 +219,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		for(int x=-xz2;x<xz2+1;x++){
 			for(int y=-y2;y<y2+1;y++){
 				for(int z=-xz2;z<xz2+1;z++){
-					if(worldObj.getTileEntity(x+xCoord, y+yCoord, z+zCoord)instanceof TileEntityControlBlock){
+					if(worldObj.getTileEntity(pos.add(x,y,z))instanceof TileEntityControlBlock){
 						x1=x;y1=y;z1=z;
 						x=xz2;y=y2;z=xz2;
 					}
@@ -238,9 +227,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 			}
 		}
 		
-		controlX=x1+xCoord;
-		controlY=y1+yCoord;
-		controlZ=z1+zCoord;
+		control=pos.add(pos);
 	}
 
 	@Override
@@ -256,12 +243,13 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	@Override
 	public AxisAlignedBB getRenderBoundingBox(){
 		AxisAlignedBB dc=super.getRenderBoundingBox();
-		dc.maxX+=controlX-xCoord>0?controlX-xCoord:0;
-		dc.maxY+=controlY-yCoord>0?controlY-yCoord:0;
-		dc.maxZ+=controlZ-zCoord>0?controlZ-zCoord:0;
-		dc.minX+=controlX-xCoord<0?controlX-xCoord:0;
-		dc.minY+=controlY-yCoord<0?controlY-yCoord:0;
-		dc.minZ+=controlZ-zCoord<0?controlZ-zCoord:0;
+		dc=new AxisAlignedBB(
+			dc.maxX+(control.getX()-pos.getX()>0?control.getX()-pos.getX():0),
+			dc.maxY+(control.getY()-pos.getY()>0?control.getY()-pos.getY():0),
+			dc.maxZ+(control.getZ()-pos.getZ()>0?control.getZ()-pos.getZ():0),
+			dc.minX+(control.getX()-pos.getX()<0?control.getX()-pos.getX():0),
+			dc.minY+(control.getY()-pos.getY()<0?control.getY()-pos.getY():0),
+			dc.minZ+(control.getZ()-pos.getZ()<0?control.getZ()-pos.getZ():0));
 		return dc;
 	}
 }

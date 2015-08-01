@@ -3,6 +3,7 @@ package com.magiology.forgepowered.event;
 import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.core.init.MItems;
@@ -69,7 +70,7 @@ public class SpecialMovmentEvents{
 			playerData.sendData();
 		}
 	}
-	public void handleWingPhysics(EntityPlayer player,int x,int y,int z){
+	public void handleWingPhysics(EntityPlayer player,BlockPos pos){
 		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
 		World world=player.worldObj;
 		boolean isRemote=world.isRemote;
@@ -94,7 +95,7 @@ public class SpecialMovmentEvents{
 			}
 		}
 	}
-	public void onFlap(EntityPlayer player,int x,int y,int z){
+	public void onFlap(EntityPlayer player,BlockPos pos){
 		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
 		World world=player.worldObj;
 		boolean isRemote=world.isRemote;

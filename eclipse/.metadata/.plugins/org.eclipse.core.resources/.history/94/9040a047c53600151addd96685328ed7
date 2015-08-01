@@ -1,0 +1,28 @@
+package com.magiology.objhelper.vectors;
+
+import net.minecraft.util.Vec3;
+
+public class Vec3M{
+	public float x,y,z;
+	public Vec3M(float x1, float y1, float z1){
+		x=x1;
+		y=y1;
+		z=z1;
+	}
+	public Vec3M(){}
+	public Vec3M set(float x1, float y1, float z1){
+		x=x1;
+		y=y1;
+		z=z1;
+		return this;
+	}
+	public Vec3M add(float x1, float y1, float z1){
+		x+=x1;
+		y+=y1;
+		z+=z1;
+		return this;
+	}
+	public Vec3 toVec3(){
+		return Vec3.createVectorHelper(x, y, z);
+	}
+}

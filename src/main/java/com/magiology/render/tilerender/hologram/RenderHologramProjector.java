@@ -20,7 +20,7 @@ public class RenderHologramProjector extends TileEntitySpecialRenderer{
 	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float partialTicks){
 		tile=(TileEntityHologramProjector)t;
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11H.texture(false);
 		GL11H.lighting(true);
 		TessHelper.drawCube(t.blockType.getBlockBoundsMinX(),t.blockType.getBlockBoundsMinY(),t.blockType.getBlockBoundsMinZ(),t.blockType.getBlockBoundsMaxX(),t.blockType.getBlockBoundsMaxY(),t.blockType.getBlockBoundsMaxZ());

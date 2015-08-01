@@ -4,8 +4,6 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import com.magiology.forgepowered.event.GenericPacketEvents;
 
-import cpw.mods.fml.relauncher.Side;
-
 public class GenericPacketEventHandeler{
 	public static GenericPacketEventHandeler instance=new GenericPacketEventHandeler();
 	public static GenericPacketEvents handelerInstance=new GenericPacketEvents();

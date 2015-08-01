@@ -1,12 +1,13 @@
 package com.magiology.render.tilerender.isbhrrender;
 
-import com.magiology.mcobjects.blocks.FireLamp;
-import com.magiology.objhelper.helpers.Helper;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
+
+import com.magiology.mcobjects.blocks.FireLamp;
+import com.magiology.objhelper.helpers.Helper;
 
 public class RenderFireLampISBRH extends ISBRH{
 	public static int renderId;
@@ -15,7 +16,7 @@ public class RenderFireLampISBRH extends ISBRH{
 	public RenderFireLampISBRH(int renderId){RenderFireLampISBRH.renderId=renderId;}
 	
 	@Override
-	public boolean renderBlockInW(IBlockAccess world, int x, int y, int z,Block bleck, int modelId, RenderBlocks renderer){
+	public boolean renderBlockInW(IBlockAccess world, BlockPos pos,Block bleck, int modelId, RenderBlocks renderer){
 		FireLamp block=(FireLamp)bleck;
         Tessellator tessellator=Tessellator.instance;
         
@@ -24,13 +25,13 @@ public class RenderFireLampISBRH extends ISBRH{
         setBrightness(
         		block.
         		getMixedBrightnessForBlock(
-        				world, x, y, z));
+        				world, pos));
         
         renderer.renderFromInside=true;
-        renderer.renderStandardBlock(block, x, y, z);
+        renderer.renderStandardBlock(block, pos);
         
         renderer.renderFromInside=false;
-        renderer.renderStandardBlock(block, x, y, z);
+        renderer.renderStandardBlock(block, pos);
         return false;
 	}
 	@Override

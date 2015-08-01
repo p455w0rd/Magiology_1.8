@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
-import cpw.mods.fml.relauncher.Side;
 
 public class RightClickBlockPacket extends AbstractToServerMessage{
 	
@@ -34,7 +33,7 @@ public class RightClickBlockPacket extends AbstractToServerMessage{
 	}
 	@Override
 	public void process(EntityPlayer player, Side side){
-		player.worldObj.getBlock(x, y, z).onBlockActivated(player.worldObj, x, y, z, player, this.side, 0.5F, 0.5F, 0.5F);
+		player.worldObj.getBlock(pos).onBlockActivated(player.worldObj, pos, player, this.side, 0.5F, 0.5F, 0.5F);
 	}
 
 }

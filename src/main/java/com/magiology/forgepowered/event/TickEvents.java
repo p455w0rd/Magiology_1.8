@@ -2,6 +2,14 @@ package com.magiology.forgepowered.event;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+
 import org.lwjgl.input.Keyboard;
 
 import com.magiology.core.Magiology;
@@ -13,15 +21,6 @@ import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.world.World;
 
 public class TickEvents{
 	Minecraft mc=Minecraft.getMinecraft();

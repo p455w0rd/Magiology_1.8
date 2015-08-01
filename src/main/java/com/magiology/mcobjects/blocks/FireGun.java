@@ -1,13 +1,14 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
 
 public class FireGun extends BlockContainer {
 	private float p= 1F/16F;
@@ -31,8 +32,8 @@ public class FireGun extends BlockContainer {
 	
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		TileEntityFireGun rotation= (TileEntityFireGun) world.getTileEntity(x, y, z);
+	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos) {
+		TileEntityFireGun rotation= (TileEntityFireGun) world.getTileEntity(pos);
     	float p= 1F/16F;
     	if(rotation !=null){
     		float minX=p*6.6F  -(rotation.rotation[3]!=null?(p*6.6F):0)  -(rotation.rotation[1]!=null?(float)(p*1.6F+rotation.animation):0);
@@ -46,8 +47,8 @@ public class FireGun extends BlockContainer {
     }
 	
     @Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z){
-	TileEntityFireGun rotation= (TileEntityFireGun) world.getTileEntity(x, y, z);
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos){
+	TileEntityFireGun rotation= (TileEntityFireGun) world.getTileEntity(pos);
 	float p= 1F/16F;
 	if(rotation !=null){
 		float minX=p*6.6F  -(rotation.rotation[3]!=null?(p*6.6F):0)  -(rotation.rotation[1]!=null?(p*1.6F):0);
@@ -58,7 +59,7 @@ public class FireGun extends BlockContainer {
 		float maxZ=p*9.5F  +(rotation.rotation[0]!=null?(p*1.5F):0)  +(rotation.rotation[2]!=null?(p*6.5F):0);
 	this.setBlockBounds(minX,minY,minZ,maxX,maxY,maxZ);
 	}
-    return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+    return new AxisAlignedBB(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
 }
 	
 	@Override

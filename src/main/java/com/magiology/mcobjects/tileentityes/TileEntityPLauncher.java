@@ -1,6 +1,7 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumParticleTypes;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
@@ -28,7 +29,7 @@ public class TileEntityPLauncher extends TileEntityM{
 	public void updateEntity(){
 		if(MultiBlock==null)MultiBlock=Structures.generateNewStructure(1);
 //		if(worldObj.getTotalWorldTime()%30==0)MultiBlock=Structures.generateNewStructure(1);
-		MultiBlock.checkForNextBlock(worldObj, xCoord, yCoord, zCoord);
+		MultiBlock.checkForNextBlock(worldObj, pos);
 		MultiBlock.isStructureCompleate();
 		if(worldObj.isRemote){
 //				BlockAt blat=MultiBlock.BlocksAt[MultiBlock.nextBlock];
@@ -39,11 +40,11 @@ public class TileEntityPLauncher extends TileEntityM{
 //				+"\n");
 			
 			
-			if(MultiBlock.isStructureCompleate()&&worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord)){
+			if(MultiBlock.isStructureCompleate()&&worldObj.canBlockSeeTheSky(pos)){
 				if(optimizer.isTimeWithAddProgress()){
 					blocks();
 					if(worldObj.rand.nextInt(2)==0){
-						if(!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
+						if(!worldObj.isBlockIndirectlyGettingPowered(pos)){
 							spawnP();
 						}
 						else {
@@ -53,7 +54,7 @@ public class TileEntityPLauncher extends TileEntityM{
 					}
 				}
 				
-				if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)==false&&buffer>0){
+				if(worldObj.isBlockIndirectlyGettingPowered(pos)==false&&buffer>0){
 					spawnP();
 					buffer--;
 				}
@@ -97,7 +98,7 @@ public class TileEntityPLauncher extends TileEntityM{
 				}
 				
 			}
-			else worldObj.spawnParticle("flame", xCoord+worldObj.rand.nextFloat(), yCoord+1.1, zCoord+worldObj.rand.nextFloat(),0,0.01,0);
+			else worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+worldObj.rand.nextFloat(), yCoord+1.1, zCoord+worldObj.rand.nextFloat(),0,0.01,0);
 		}
 	}
 	

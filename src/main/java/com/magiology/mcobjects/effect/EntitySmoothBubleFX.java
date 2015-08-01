@@ -88,7 +88,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
     		tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
     		tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
     		tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-    		tess.draw();
+    		tess.finishDrawing();
     	}
 		
 		if(texture=="tx1"){
@@ -100,7 +100,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			tess.draw();
+			tess.finishDrawing();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[1]);
 			tess.setBrightness(240);
@@ -108,7 +108,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 			tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
 			tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 1);
 			tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			tess.draw();
+			tess.finishDrawing();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[2]);
         	tess.setBrightness(240);
@@ -116,7 +116,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			tess.draw();
+			tess.finishDrawing();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[3]);
 			tess.setBrightness(240);
@@ -124,7 +124,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 			tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
 			tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
 			tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			tess.draw();
+			tess.finishDrawing();
 			
 			
 			Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble1Add2);
@@ -135,7 +135,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			tess.draw();
+			tess.finishDrawing();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[5]);
         	tess.setBrightness(240);
@@ -143,7 +143,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 1);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 0);
-			tess.draw();
+			tess.finishDrawing();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[6]);
         	tess.setBrightness(240);
@@ -151,7 +151,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 1);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 0);
-			tess.draw();
+			tess.finishDrawing();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[7]);
         	tess.setBrightness(240);
@@ -159,7 +159,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			tess.draw();
+			tess.finishDrawing();
 		}
 
 		GL11H.EndOpaqueRendering();

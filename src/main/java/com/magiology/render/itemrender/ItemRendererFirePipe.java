@@ -1,15 +1,15 @@
 package com.magiology.render.itemrender;
 
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
+
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.render.Textures;
 
 public class ItemRendererFirePipe implements IItemRenderer {
 	
@@ -76,12 +76,12 @@ public class ItemRendererFirePipe implements IItemRenderer {
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-	    GL11.glTranslatef(x, y, z);
+	    GL11.glTranslatef(pos);
 	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glScalef(scale, scale, scale);
 	    
-		drawConector(ForgeDirection.DOWN);
-		drawConector(ForgeDirection.UP);
+		drawConector(EnumFacing.DOWN);
+		drawConector(EnumFacing.UP);
 		drawCore();
 		
 		GL11.glPopMatrix();
@@ -121,18 +121,18 @@ public class ItemRendererFirePipe implements IItemRenderer {
 		ShadedQuad.addVertexWithUVWRender(p*10, p*6, p*10, tWC*4, tHC*4);
 	}
 	
-	public void drawConector(ForgeDirection dir){
+	public void drawConector(EnumFacing dir){
 		GL11.glPushMatrix();
 		Tessellator tessellator = Tessellator.instance;
 		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.FirePipeConection);
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST)){}
-		else if (dir.equals(ForgeDirection.UP)){GL11.glRotatef(-90, 0, 0, 1);}
-		else if (dir.equals(ForgeDirection.DOWN)){GL11.glRotatef(90, 0, 0, 1);}
-		else if (dir.equals(ForgeDirection.SOUTH)){GL11.glRotatef(90, 0, 1, 0);}
-		else if (dir.equals(ForgeDirection.EAST)){GL11.glRotatef(-180, 0, 1, 0);}
-		else if (dir.equals(ForgeDirection.NORTH)){GL11.glRotatef(-90, 0, 1, 0);}
+		if(dir.equals(EnumFacing.WEST)){}
+		else if (dir.equals(EnumFacing.UP)){GL11.glRotatef(-90, 0, 0, 1);}
+		else if (dir.equals(EnumFacing.DOWN)){GL11.glRotatef(90, 0, 0, 1);}
+		else if (dir.equals(EnumFacing.SOUTH)){GL11.glRotatef(90, 0, 1, 0);}
+		else if (dir.equals(EnumFacing.EAST)){GL11.glRotatef(-180, 0, 1, 0);}
+		else if (dir.equals(EnumFacing.NORTH)){GL11.glRotatef(-90, 0, 1, 0);}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
 		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5,  p*9.5,tW*24.5, tH*16);

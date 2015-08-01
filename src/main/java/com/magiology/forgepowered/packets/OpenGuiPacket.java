@@ -2,12 +2,11 @@ package com.magiology.forgepowered.packets;
 
 import java.io.IOException;
 
-import com.magiology.core.Magiology;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
-import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+
+import com.magiology.core.Magiology;
 
 public class OpenGuiPacket extends AbstractToServerMessage{
 	protected int id;

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
@@ -70,13 +71,13 @@ public class TheHand extends Item{
 	}
 	
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ){
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int side, float hitX, float hitY, float hitZ){
 		TheHandHandeler.handUseAnimation(player);
 		if(TheHandHandeler.getActivePosition(player)==HandComonPositions.ReadyForAction){
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}else if(TheHandHandeler.getActivePosition(player)==HandComonPositions.NaturalPosition){
-			Helper.spawnEntity(new ModedEntityFallingBlock(world, x+0.5, y+0.501, z+0.5, world.getBlock(x, y, z), world.getBlockMetadata(x, y, z),player));
-			world.setBlockToAir(x, y, z);
+			Helper.spawnEntity(new ModedEntityFallingBlock(world, x+0.5, y+0.501, z+0.5, Helper.getBlock(world, pos), world.getBlockMetadata(pos),player));
+			world.setBlockToAir(pos);
 			
 		}
         return false;

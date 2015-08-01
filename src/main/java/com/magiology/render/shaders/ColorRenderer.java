@@ -1,7 +1,5 @@
 package com.magiology.render.shaders;
 
-import net.minecraft.util.ResourceLocation;
-
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.render.shaders.core.ShaderUniformEditor;

@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.exceptions.FileNotValidException;
 import com.magiology.objhelper.helpers.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class InfoFile extends Magiology{

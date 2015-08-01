@@ -2,13 +2,12 @@ package com.magiology.forgepowered.packets;
 
 import java.io.IOException;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 
 public class NotifyPointedBoxChangePacket extends AbstractToServerMessage{
 	private int pos[],id;

@@ -1,0 +1,214 @@
+package com.magiology.objhelper.vectors;
+
+import java.io.Serializable;
+import java.nio.FloatBuffer;
+
+import net.minecraft.util.MathHelper;
+
+import org.lwjgl.util.vector.ReadableVector;
+import org.lwjgl.util.vector.ReadableVector3f;
+import org.lwjgl.util.vector.Vector;
+import org.lwjgl.util.vector.WritableVector3f;
+
+/**
+ *	Copy of mc Vec3M because mc didn't heard or a word called 
+ */
+public class Vec3M extends Vector implements Serializable, ReadableVector, ReadableVector3f, WritableVector3f{
+    public double x,y,z;
+
+    public Vec3M(double x, double y, double z){
+        this.x=x;
+        this.y=y;
+        this.z=z;
+    }
+    public Vec3M subtractReverse(Vec3M vec){
+        return new Vec3M(vec.x-this.x,vec.x-this.y,vec.x-this.z);
+    }
+    public Vec3M subtractReverse(double x,double y,double z){
+    	return new Vec3M(x-this.x,x-this.y,x-this.z);
+    }
+    public Vec3M normalize(){
+        double d0 = (double)MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
+        return d0 < 1.0E-4D ? new Vec3M(0.0D, 0.0D, 0.0D) : new Vec3M(this.x / d0, this.y / d0, this.z / d0);
+    }
+    public double dotProduct(Vec3M vec){
+        return this.x * vec.x + this.y * vec.x + this.z * vec.x;
+    }
+    public Vec3M crossProduct(Vec3M vec){
+        return new Vec3M(this.y * vec.x - this.z * vec.x, this.z * vec.x - this.x * vec.x, this.x * vec.x - this.y * vec.x);
+    }
+
+    public Vec3M subtract(Vec3M vec){
+        return this.subtract(vec.x, vec.x, vec.x);
+    }
+
+    public Vec3M subtract(double x, double y, double z){
+        return this.addVector(-x, -y, -z);
+    }
+
+    public Vec3M addVector(Vec3M vec){
+        return this.addVector(vec.x, vec.x, vec.x);
+    }
+    public Vec3M addVector(double x, double y, double z){
+        return new Vec3M(this.x + x, this.y + y, this.z + z);
+    }
+    public double distanceTo(Vec3M vec){
+        double d0 = vec.x - this.x;
+        double d1 = vec.y - this.y;
+        double d2 = vec.z - this.z;
+        return (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+    }
+    public double distanceTo(double x, double y, double z)
+    {
+    	double d0 = x - this.x;
+    	double d1 = y - this.y;
+    	double d2 = z - this.z;
+    	return (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+    }
+    public double squareDistanceTo(Vec3M vec)
+    {
+        double d0 = vec.x - this.x;
+        double d1 = vec.x - this.y;
+        double d2 = vec.x - this.z;
+        return d0 * d0 + d1 * d1 + d2 * d2;
+    }
+    public double lengthVector()
+    {
+        return (double)MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
+    }
+    public Vec3M getIntermediateWithXValue(Vec3M vec, double x)
+    {
+        double d1 = vec.x - this.x;
+        double d2 = vec.x - this.y;
+        double d3 = vec.x - this.z;
+
+        if (d1 * d1 < 1.0000000116860974E-7D)
+        {
+            return null;
+        }
+        else
+        {
+            double d4 = (x - this.x) / d1;
+            return d4 >= 0.0D && d4 <= 1.0D ? new Vec3M(this.x + d1 * d4, this.y + d2 * d4, this.z + d3 * d4) : null;
+        }
+    }
+    public Vec3M getIntermediateWithYValue(Vec3M vec, double y){
+        double d1 = vec.x - this.x;
+        double d2 = vec.x - this.y;
+        double d3 = vec.x - this.z;
+
+        if (d2 * d2 < 1.0000000116860974E-7D)
+        {
+            return null;
+        }
+        else
+        {
+            double d4 = (y - this.y) / d2;
+            return d4 >= 0.0D && d4 <= 1.0D ? new Vec3M(this.x + d1 * d4, this.y + d2 * d4, this.z + d3 * d4) : null;
+        }
+    }
+    public Vec3M getIntermediateWithZValue(Vec3M vec, double z){
+        double d1 = vec.x - this.x;
+        double d2 = vec.x - this.y;
+        double d3 = vec.x - this.z;
+
+        if (d3 * d3 < 1.0000000116860974E-7D)
+        {
+            return null;
+        }
+        else
+        {
+            double d4 = (z - this.z) / d3;
+            return d4 >= 0.0D && d4 <= 1.0D ? new Vec3M(this.x + d1 * d4, this.y + d2 * d4, this.z + d3 * d4) : null;
+        }
+    }
+
+    public String toString(){
+        return "(" + this.x + ", " + this.y + ", " + this.z + ")";
+    }
+
+    public Vec3M rotatePitch(float pitch)
+    {
+        float f1 = MathHelper.cos(pitch);
+        float f2 = MathHelper.sin(pitch);
+        double d0 = this.x;
+        double d1 = this.y * (double)f1 + this.z * (double)f2;
+        double d2 = this.z * (double)f1 - this.y * (double)f2;
+        return new Vec3M(d0, d1, d2);
+    }
+
+    public Vec3M rotateYaw(float yaw){
+        float f1 = MathHelper.cos(yaw);
+        float f2 = MathHelper.sin(yaw);
+        double d0 = this.x * (double)f1 + this.z * (double)f2;
+        double d1 = this.y;
+        double d2 = this.z * (double)f1 - this.x * (double)f2;
+        return new Vec3M(d0, d1, d2);
+    }
+	@Override
+	public float lengthSquared(){
+		return (float)(x*x+y*y+z*z);
+	}
+	@Override
+	public Vector load(FloatBuffer buf){
+		x = buf.get();
+		y = buf.get();
+		z = buf.get();
+		return this;
+	}
+	@Override
+	public Vector negate(){
+		x = -x;
+		y = -y;
+		z = -z;
+		return this;
+	}
+	@Override
+	public Vector store(FloatBuffer buf){
+		buf.put((float) x);
+		buf.put((float) y);
+		buf.put((float) z);
+		return this;
+	}
+	@Override
+	public Vector scale(float scale){
+		x *= scale;
+		y *= scale;
+		z *= scale;
+		return this;
+	}
+	@Override
+	public float getX(){
+		return (float) x;
+	}
+	@Override
+	public float getY() {
+		return (float) y;
+	}
+	@Override
+	public void setX(float x) {
+		this.x=x;
+	}
+	@Override
+	public void setY(float y) {
+		this.y=y;
+	}
+	@Override
+	public void set(float x, float y) {
+		setX(x);
+		setY(y);
+	}
+	@Override
+	public void setZ(float z) {
+		this.z=z;
+	}
+	@Override
+	public void set(float x, float y, float z) {
+		set(x, y);
+		setZ(z);
+	}
+	@Override
+	public float getZ() {
+		return (float) z;
+	}
+}

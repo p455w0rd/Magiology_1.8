@@ -5,13 +5,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class ControlBlock extends BlockContainer {
 	private float p= 1F/16F;
@@ -41,9 +41,9 @@ public class ControlBlock extends BlockContainer {
 	public boolean hasComparatorInputOverride(){return true;}
 	
     @Override
-	public int getComparatorInputOverride(World w, int x, int y, int z, int arg0){
+	public int getComparatorInputOverride(World w, BlockPos pos, int arg0){
     	int result=0;
-    	TileEntityControlBlock tile=(TileEntityControlBlock)w.getTileEntity(x, y, z);
+    	TileEntityControlBlock tile=(TileEntityControlBlock)w.getTileEntity(pos);
     	ItemStack[] slots=tile.slots;
     	
     	if(slots[3]!=null&&slots[3].stackSize>0)result=1;
@@ -52,10 +52,10 @@ public class ControlBlock extends BlockContainer {
     }
 	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
         
 		if(!world.isRemote){
-			FMLNetworkHandler.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, world, x, y, z);
+			FMLNetworkHandler.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, world, pos);
 		}else{
 			
 		}

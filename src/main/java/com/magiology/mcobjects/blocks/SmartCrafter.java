@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -15,8 +16,8 @@ import com.magiology.objhelper.helpers.Helper;
 public class SmartCrafter extends BlockContainer {
 //	implements ISimpleBlockRenderingHandler
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z){
-		TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(x, y, z);
+	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos){
+		TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(pos);
 		if(tile==null)return;
 		float p=1F/16F;
 		switch(tile.rotation){
@@ -28,10 +29,10 @@ public class SmartCrafter extends BlockContainer {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
         
 		if(!world.isRemote){
-			Helper.openGui(player, MGui.GuiSC, x, y, z);
+			Helper.openGui(player, MGui.GuiSC, pos);
 		}else{
 			
 		}
@@ -40,9 +41,9 @@ public class SmartCrafter extends BlockContainer {
     }
 	
 	 @Override
-	 public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z){
-		 TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(x, y, z);
-		 if(tile==null)return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+	 public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos){
+		 TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(pos);
+		 if(tile==null)return new AxisAlignedBB(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
 			float p=1F/16F;
 			switch(tile.rotation){
 			case 0:{
@@ -58,7 +59,7 @@ public class SmartCrafter extends BlockContainer {
 				setBlockBounds(p*3,p*3,p*3,p*13,p*13,p*13);
 			}break;
 			}
-		 return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+		 return new AxisAlignedBB(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
 	 }
 	
 	@Override
@@ -75,14 +76,14 @@ public class SmartCrafter extends BlockContainer {
 	}
 	
 	@Override
-	public void onPostBlockPlaced(World world, int x, int y, int z, int metadata){
-		TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(x, y, z);
+	public void onPostBlockPlaced(World world, BlockPos pos, int metadata){
+		TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(pos);
 		if(metadata==3||metadata==2)tile.rotation=0;
 		if(metadata==5||metadata==4)tile.rotation=1;
 		if(metadata==0||metadata==1)tile.rotation=2;
 	}
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int v1){
+	public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int v1){
 		
 		
 		

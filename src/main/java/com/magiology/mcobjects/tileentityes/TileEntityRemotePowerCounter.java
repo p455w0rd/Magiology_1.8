@@ -1,22 +1,22 @@
 package com.magiology.mcobjects.tileentityes;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
+
+import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 
 public class TileEntityRemotePowerCounter extends TileEntityM{
 	
 	public Block block;
 	public TileEntity tile1;
 	public double powerBar;
-	public int maxPB,currentP,x, y, z;
+	public int maxPB,currentP,pos;
 	
 	@Override
 	public void updateEntity(){
 		boolean okBlock=true;
-		int metadata=worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		int metadata=worldObj.getBlockMetadata(pos);
 		x=xCoord; y=yCoord; z=zCoord;
 		
 		switch (metadata) {
@@ -42,8 +42,8 @@ public class TileEntityRemotePowerCounter extends TileEntityM{
 			break;
 		}
 
-		block=worldObj.getBlock(x, y, z);
-		tile1=worldObj.getTileEntity(x, y, z);
+		block=worldObj.getBlock(pos);
+		tile1=worldObj.getTileEntity(pos);
 		
 		
 		{
@@ -66,7 +66,7 @@ public class TileEntityRemotePowerCounter extends TileEntityM{
 				
 				if(y1!=1000){
 					x=x1;y=y1;z=z1;
-					tile1= worldObj.getTileEntity(x1, y1, z1);
+					tile1= worldObj.getTileEntity(pos);
 					powerBar=(float)((TileEntityBigFurnaceCore)tile1).currentEnergy/(float)((TileEntityBigFurnaceCore)tile1).maxEnergyBuffer;
 					currentP=((TileEntityBigFurnaceCore)tile1).currentEnergy;
 					maxPB=((TileEntityBigFurnaceCore)tile1).maxEnergyBuffer;

@@ -2,13 +2,14 @@ package com.magiology.mcobjects.items;
 
 import java.util.List;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+
+import com.magiology.forgepowered.event.RenderLoopEvents;
 public class PowerCounter extends Item{
 	public PowerCounter(){
 		   super();
@@ -16,7 +17,7 @@ public class PowerCounter extends Item{
 	
 	
 	@Override
-	public boolean onItemUse (ItemStack is, EntityPlayer player, World world, int x, int y, int z, int l, float f, float f1, float f3)
+	public boolean onItemUse (ItemStack is, EntityPlayer player, World world, BlockPos pos, int l, float f, float f1, float f3)
 	{
 		
 		

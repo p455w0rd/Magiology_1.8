@@ -92,7 +92,7 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	
 	
 	public void detectAndReplace(int x, int y, int z,Block block, Block replace){
-		if(worldObj.getBlock(x, y, z)==block)worldObj.setBlock(x, y, z, replace);
+		if(worldObj.getBlock(pos)==block)worldObj.setBlock(pos, replace);
 	}
 	
 	public void isMultiblock(){

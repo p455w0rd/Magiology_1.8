@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="net.minecraft.client.renderer.entity.RenderManager"/>
+<fullyQualifiedTypeName name="org.lwjgl.util.vector.Vector3f"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="org.lwjgl.util.vector.Vector"/>
+<fullyQualifiedTypeName name="net.minecraft.world.World"/>
+<fullyQualifiedTypeName name="net.minecraft.util.Vec3i"/>
+<fullyQualifiedTypeName name="net.minecraft.util.Vec3"/>
+<fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntity"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockPackedIce"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockRedstoneWire"/>
+<fullyQualifiedTypeName name="net.minecraft.item.Item"/>
+<fullyQualifiedTypeName name="net.minecraft.item.ItemReed"/>
+<fullyQualifiedTypeName name="net.minecraft.block.state.BlockState"/>
+<fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
+<fullyQualifiedTypeName name="net.minecraft.client.particle.EntityFlameFX.Factory"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockTripWire"/>
+<fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntityBrewingStand"/>
+<fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntityFurnace"/>
+<fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.TileEntityFirePipe"/>
+<fullyQualifiedTypeName name="net.minecraft.util.AxisAlignedBB"/>
+<fullyQualifiedTypeName name="net.minecraft.client.renderer.WorldRenderer"/>
+<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.renderers.TessHelper"/>
+<fullyQualifiedTypeName name="com.magiology.objhelper.vectors.Vec3M"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.relauncher.Side"/>
+<fullyQualifiedTypeName name="net.minecraft.util.BlockPos"/>
+<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.Helper"/>
+</qualifiedTypeNameHistroy>

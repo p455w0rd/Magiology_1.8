@@ -1,5 +1,9 @@
 package com.magiology.render.tilerender.network;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.network.ISidedNetworkComponent;
@@ -8,16 +12,12 @@ import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-
 public class RenderNetworkPointerContainer extends TileEntitySpecialRenderer{
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		new ColorF(0,0.3,0.4,0.5).bind();
 		GL11H.texture(false);
 		AxisAlignedBB[] cubes=((MultiColisionProvider)tile).getActiveBoxes();

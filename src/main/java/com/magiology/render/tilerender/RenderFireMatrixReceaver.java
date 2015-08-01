@@ -1,5 +1,11 @@
 package com.magiology.render.tilerender;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
+import org.lwjgl.opengl.GL11;
+
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.objhelper.helpers.Helper;
@@ -11,12 +17,6 @@ import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.TwoDotsLineRender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
-
 public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 
 	private final float p=1F/16F;
@@ -24,7 +24,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 	private final float tH=1F/64F;
 	
 	
-	public ForgeDirection[] connections = new ForgeDirection[6];
+	public EnumFacing[] connections = new EnumFacing[6];
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
@@ -45,7 +45,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 		
 		float rotation=Helper.calculateRenderPos(tile.prevRotation,tile.rotation);
 		
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
 		this.bindTexture(Textures.FireMatrixReceaverBase);

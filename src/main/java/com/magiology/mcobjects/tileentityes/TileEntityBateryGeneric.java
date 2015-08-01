@@ -16,7 +16,7 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 		int[] s=SideHelper.randomizeSides();
 		for(int a=0;a<6;a++){
 			int side=s[a];
-			int x=SideHelper.X(side,xCoord), y=SideHelper.Y(side,yCoord), z=SideHelper.Z(side,zCoord);
+			int x=SideHelper.offset(side,xCoord), y=SideHelper.Y(side,yCoord), z=SideHelper.Z(side,zCoord);
 			if(this.isAnyBatery(x,y,z)){
 				TileEntityBateryGeneric tile= (TileEntityBateryGeneric) worldObj.getTileEntity(x,y,z);
 				

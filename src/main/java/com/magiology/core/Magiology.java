@@ -7,8 +7,30 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.Scanner;
 
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import com.magiology.clientdata.InfoFile;
-import com.magiology.core.init.*;
+import com.magiology.core.init.Init;
+import com.magiology.core.init.MBlocks;
+import com.magiology.core.init.MCreativeTabs;
+import com.magiology.core.init.MEntitys;
+import com.magiology.core.init.MEvents;
+import com.magiology.core.init.MGui;
+import com.magiology.core.init.MInterfaces;
+import com.magiology.core.init.MItems;
+import com.magiology.core.init.MPackets;
+import com.magiology.core.init.MRecepies;
+import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handelers.EnhancedRobot;
 import com.magiology.handelers.GuiHandeler;
@@ -17,18 +39,6 @@ import com.magiology.render.Textures;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 import com.magiology.windowsgui.ZipManager;
-
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid=MODID,version=VERSION,name=NAME)
 public class Magiology{

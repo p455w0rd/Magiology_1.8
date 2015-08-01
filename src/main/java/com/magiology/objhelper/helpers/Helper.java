@@ -9,12 +9,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -26,18 +26,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ForgeHooksClient;
-import net.minecraftforge.client.event.RenderWorldEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.core.Config;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.core.init.MEvents;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.forgepowered.packets.AbstractPacket;
 import com.magiology.forgepowered.packets.AbstractToClientMessage;
@@ -48,12 +48,7 @@ import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.vectors.Plane;
 import com.magiology.objhelper.vectors.Ray;
-import com.magiology.objhelper.vectors.Vec3F;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class Helper{
 	public class H extends Helper{}
@@ -75,9 +70,10 @@ public class Helper{
 	public static void spawnEntityFX(EntityFX particleFX){
 		if(particleFX.worldObj.isRemote){
 			Minecraft mc=Minecraft.getMinecraft();
-			if(mc!=null&&mc.renderViewEntity!=null&&mc.effectRenderer!=null){
+			Entity ent=mc.getRenderViewEntity();
+			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
 				int i = mc.gameSettings.particleSetting;
-	            double d6=mc.renderViewEntity.posX-particleFX.posX,d7=mc.renderViewEntity.posY-particleFX.posY,d8=mc.renderViewEntity.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
+	            double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
 	            if(i>1);else{
 	            	if (d6*d6+d7*d7+d8*d8>d9*d9);else if(RB(Config.getParticleAmount()))Minecraft.getMinecraft().effectRenderer.addEffect(particleFX);
 	            }
@@ -87,9 +83,10 @@ public class Helper{
 	public static void spawnEntityFX(EntityFX particleFX,int distance){
 		if(particleFX.worldObj.isRemote){
 			Minecraft mc=Minecraft.getMinecraft();
-			if(mc!=null&&mc.renderViewEntity!=null&&mc.effectRenderer!=null){
+			Entity ent=mc.getRenderViewEntity();
+			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
 				int i = mc.gameSettings.particleSetting;
-				double d6=mc.renderViewEntity.posX-particleFX.posX,d7=mc.renderViewEntity.posY-particleFX.posY,d8=mc.renderViewEntity.posZ-particleFX.posZ;
+				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ;
 				if(i>1);else{
 					if (d6*d6+d7*d7+d8*d8>distance*distance);else if(RB(Config.getParticleAmount()))Minecraft.getMinecraft().effectRenderer.addEffect(particleFX);
 				}
@@ -141,10 +138,6 @@ public class Helper{
 		precentage=Math.max(precentage, 1);
 		if(precentage==1)return true;
 		return RInt(precentage)==0;
-	}
-    public static Vec3 Vec3(){return Vec3(0,0,0);}
-	public static Vec3 Vec3(double x, double y, double z){
-		return Vec3.createVectorHelper(x, y, z);
 	}
 	public static double[] cricleXZ(double angle){
 		double[] result={0,0};
@@ -326,10 +319,10 @@ public class Helper{
 	public static MovingObjectPosition rayTrace(EntityLivingBase entity,float lenght, float var1){
 		if(entity.worldObj.isRemote)return entity.rayTrace(lenght, var1);
 		
-		Vec3 vec3 =Vec3.createVectorHelper(entity.posX, entity.posY, entity.posZ);
-		Vec3 vec31=entity.getLook(var1);
-		Vec3 vec32=vec3.addVector(vec31.xCoord*var1, vec31.yCoord*var1, vec31.zCoord*var1);
-		return entity.worldObj.func_147447_a(vec3, vec32, false, false, true);
+		Vec3M vec3 =new Vec3M(entity.posX, entity.posY, entity.posZ);
+		Vec3M vec31=vec3.conv(entity.getLook(var1));
+		Vec3M vec32=vec3.addVector(vec31.x*var1, vec31.y*var1, vec31.z*var1);
+		return entity.worldObj.rayTraceBlocks(vec3.conv(), vec32.conv(), false, false, true);
 	}
 	public static void sendMessage(AbstractPacket message){
 		if(isNull(message))return;
@@ -340,7 +333,7 @@ public class Helper{
 				     if(msg.target.typeOfSending==TypeOfSending.ToPlayer)Magiology.NETWORK_CHANNEL.sendTo(message,(EntityPlayerMP)msg.target.player);
 				else if(msg.target.typeOfSending==TypeOfSending.ToAll)Magiology.NETWORK_CHANNEL.sendToAll(message);
 				else if(msg.target.typeOfSending==TypeOfSending.AroundPoint)Magiology.NETWORK_CHANNEL.sendToAllAround(msg, msg.target.point);
-				else if(msg.target.typeOfSending==TypeOfSending.ToDimension)Magiology.NETWORK_CHANNEL.sendToDimension(msg, msg.target.world.provider.dimensionId);
+				else if(msg.target.typeOfSending==TypeOfSending.ToDimension)Magiology.NETWORK_CHANNEL.sendToDimension(msg, msg.target.world.provider.getDimensionId());
 			}
 		}
 	}
@@ -404,7 +397,7 @@ public class Helper{
 	public static boolean isRemote(Object object){
 		if(object instanceof Entity)return((Entity)object).worldObj.isRemote;
 		if(object instanceof World)return((World)object).isRemote;
-		if(object instanceof TileEntity)return((TileEntity)object).getWorldObj().isRemote;
+		if(object instanceof TileEntity)return((TileEntity)object).getWorld().isRemote;
 		println("Given object has no data reference to world!");
 		return false;
 	}
@@ -469,18 +462,24 @@ public class Helper{
 		float[] data=codeToRGBABPrecentage(code);
 		return new ColorF(data[0],data[1],data[2],data[3]);
 	}
-	public static void openGui(EntityPlayer player, int modGuiId, int x, int y, int z){
-		openGui(player, Magiology.getMagiology(), modGuiId, x, y, z);
+	public static void openGui(EntityPlayer player, int modGuiId, BlockPos pos){
+		openGui(player, Magiology.getMagiology(), modGuiId, pos);
 	}
-	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, int x, int y, int z){
+	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, BlockPos pos){
 		if(isRemote(player))return;
-		FMLNetworkHandler.openGui(player, mainModClassInstance, modGuiId, player.getEntityWorld(), x, y, z);
+		FMLNetworkHandler.openGui(player, mainModClassInstance, modGuiId, player.getEntityWorld(), pos.getX(),pos.getY(),pos.getZ());
 	}
 	public static float[] calculateRenderPos(Entity entity){
 		return new float[]{
 				calculateRenderPos(entity,'x'),
 				calculateRenderPos(entity,'y'),
 				calculateRenderPos(entity,'z')};
+	}
+	public static Vec3M calculateRenderPosV(Entity entity){
+		return new Vec3M(
+				calculateRenderPos(entity,'x'),
+				calculateRenderPos(entity,'y'),
+				calculateRenderPos(entity,'z'));
 	}
 	public static float calculateRenderPos(Entity entity, char xyz){
 		if((""+xyz).toLowerCase().equals("x")){
@@ -510,10 +509,10 @@ public class Helper{
 		return Return;
 	}
 	public static FontRenderer getFontRenderer(){
-		return Minecraft.getMinecraft().fontRenderer;
+		return Minecraft.getMinecraft().fontRendererObj;
 	}
 	
-	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3 result){
+	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3M result){
 		if(result==null){
 			println("Result is null!\nResult can't be set if it is null!\nInitialize it!\n------------");
 			return false;
@@ -523,69 +522,69 @@ public class Helper{
 		
 		
 		boolean xz=
-				plane.q.xCoord==plane.r.xCoord&&
-				plane.r.xCoord==plane.s.xCoord&&
-				plane.r.xCoord==plane.s.xCoord;
+				plane.q.x==plane.r.x&&
+				plane.r.x==plane.s.x&&
+				plane.r.x==plane.s.x;
 		if(xz){
 			
 		}else{
 			
-			if(ray.from.zCoord>ray.to.zCoord){
-				Vec3 helper=ray.from;
+			if(ray.from.z>ray.to.z){
+				Vec3M helper=ray.from;
 				ray.from=ray.to;
 				ray.to=helper;
 			}
-			double z=plane.q.zCoord;
-			if(ray.from.zCoord>z){if(printProcess)printInln("target behind");return false;}
-			if(ray.to.zCoord<z){if(printProcess)printInln("target to far");return false;}
+			double z=plane.q.z;
+			if(ray.from.z>z){if(printProcess)printInln("target behind");return false;}
+			if(ray.to.z<z){if(printProcess)printInln("target to far");return false;}
 			double
-				distance=z-ray.from.zCoord,
+				distance=z-ray.from.z,
 				rayLenght=ray.from.distanceTo(ray.to),
 				pecentage=distance/rayLenght;
 			
-			result.xCoord=ray.from.xCoord+(ray.to.xCoord-ray.from.xCoord)*pecentage;
-			result.yCoord=ray.from.yCoord+(ray.to.yCoord-ray.from.yCoord)*pecentage;
-			result.zCoord=ray.from.zCoord+(ray.to.zCoord-ray.from.zCoord)*pecentage;
-			Vec3 norm=ray.from.subtract(ray.to).normalize();
-			norm.xCoord*=0.5;
-			norm.yCoord*=0.5;
-			norm.zCoord*=0.5;
+			result.x=ray.from.x+(ray.to.x-ray.from.x)*pecentage;
+			result.y=ray.from.y+(ray.to.y-ray.from.y)*pecentage;
+			result.z=ray.from.z+(ray.to.z-ray.from.z)*pecentage;
+			Vec3M norm=ray.from.subtract(ray.to).normalize();
+			norm.x*=0.5;
+			norm.y*=0.5;
+			norm.z*=0.5;
 			
 			
-			while(result.zCoord-z>0.5){
-				result.xCoord-=norm.xCoord;
-				result.yCoord-=norm.yCoord;
-				result.zCoord-=norm.zCoord;
+			while(result.z-z>0.5){
+				result.x-=norm.x;
+				result.y-=norm.y;
+				result.z-=norm.z;
 			}
-			while(result.zCoord-z<0.5){
-				result.xCoord+=norm.xCoord;
-				result.yCoord+=norm.yCoord;
-				result.zCoord+=norm.zCoord;
+			while(result.z-z<0.5){
+				result.x+=norm.x;
+				result.y+=norm.y;
+				result.z+=norm.z;
 			}
-			norm.xCoord/=50;
-			norm.yCoord/=50;
-			norm.zCoord/=50;
-			while(result.zCoord-z>0.01){
-				result.xCoord-=norm.xCoord;
-				result.yCoord-=norm.yCoord;
-				result.zCoord-=norm.zCoord;
+			norm.x/=50;
+			norm.y/=50;
+			norm.z/=50;
+			while(result.z-z>0.01){
+				result.x-=norm.x;
+				result.y-=norm.y;
+				result.z-=norm.z;
 			}
-			while(result.zCoord-z<0.01){
-				result.xCoord+=norm.xCoord;
-				result.yCoord+=norm.yCoord;
-				result.zCoord+=norm.zCoord;
+			while(result.z-z<0.01){
+				result.x+=norm.x;
+				result.y+=norm.y;
+				result.z+=norm.z;
 			}
-//			result.zCoord=z;
-			result.yCoord-=0.03;
+//			result.z=z;
+			result.y-=0.03;
 			double
-				minX=Math.min(plane.q.xCoord, Math.min(plane.r.xCoord, plane.s.xCoord)),
-				maxX=Math.max(plane.q.xCoord, Math.max(plane.r.xCoord, plane.s.xCoord)),
-				minY=Math.min(plane.q.yCoord, Math.min(plane.r.yCoord, plane.s.yCoord)),
-				maxY=Math.max(plane.q.yCoord, Math.max(plane.r.yCoord, plane.s.yCoord));
-			if(result.xCoord<minX){if(printProcess)printInln("target clipped out on min x");return false;}
-			if(result.xCoord>maxX){if(printProcess)printInln("target clipped out on max x");return false;}
-			if(result.yCoord<minY){if(printProcess)printInln("target clipped out on min y");return false;}
-			if(result.yCoord>maxY){if(printProcess)printInln("target clipped out on max y");return false;}
+				minX=Math.min(plane.q.x, Math.min(plane.r.x, plane.s.x)),
+				maxX=Math.max(plane.q.x, Math.max(plane.r.x, plane.s.x)),
+				minY=Math.min(plane.q.y, Math.min(plane.r.y, plane.s.y)),
+				maxY=Math.max(plane.q.y, Math.max(plane.r.y, plane.s.y));
+			if(result.x<minX){if(printProcess)printInln("target clipped out on min x");return false;}
+			if(result.x>maxX){if(printProcess)printInln("target clipped out on max x");return false;}
+			if(result.y<minY){if(printProcess)printInln("target clipped out on min y");return false;}
+			if(result.y>maxY){if(printProcess)printInln("target clipped out on max y");return false;}
 			if(printProcess)printInln("Ray trace has resolwed a valid intersection point!");
 			return true;
 		}
@@ -596,34 +595,34 @@ public class Helper{
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float lenght){
 		Object[][] result={{},{}};
 		try{
-	        Vec3 vec3=getPosition(player,RenderLoopEvents.partialTicks);
-	        Vec3 vec31=player.getLook(RenderLoopEvents.partialTicks);
-	        Vec3 vec32=vec3.addVector(vec31.xCoord * lenght, vec31.yCoord * lenght, vec31.zCoord * lenght);
+	        Vec3M Vec3M=getPosition(player,RenderLoopEvents.partialTicks);
+	        Vec3M vec31=Vec3M.conv(player.getLook(RenderLoopEvents.partialTicks));
+	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
 			
-			Ray ray=new Ray(vec3, vec32);
+			Ray ray=new Ray(Vec3M, vec32);
 			for(int a=0;a<TileEntityHologramProjector.hologramProjectors.size();a++){
 				TileEntityHologramProjector tile=null;
-				TileEntity test=player.worldObj.getTileEntity(TileEntityHologramProjector.hologramProjectors.get(a).xCoord, TileEntityHologramProjector.hologramProjectors.get(a).yCoord, TileEntityHologramProjector.hologramProjectors.get(a).zCoord);
+				TileEntity test=player.worldObj.getTileEntity(TileEntityHologramProjector.hologramProjectors.get(a).getPos());
 				if(test instanceof TileEntityHologramProjector)tile=(TileEntityHologramProjector)test;
 				if(tile!=null){
-					Vec3 hit=Vec3.createVectorHelper(0, 0, 0);
-					Vec3F
+					Vec3M hit=new Vec3M(0, 0, 0);
+					Vec3M
 						min=tile.main.getPoint("min x,min y,min z"),
 						max=tile.main.getPoint("max x,max y,max z");
 					
 					if(Helper.intersectLinePlane(ray, new Plane(
-							Vec3.createVectorHelper(
-									tile.xCoord+min.x+tile.offset.x,
-									tile.yCoord+min.y+tile.offset.y,
-									tile.zCoord+min.z+0.5),
-							Vec3.createVectorHelper(
-									tile.xCoord+max.x+tile.offset.x,
-									tile.yCoord+min.y+tile.offset.y,
-									tile.zCoord+min.z+0.5),
-							Vec3.createVectorHelper(
-									tile.xCoord+max.x+tile.offset.x,
-									tile.yCoord+max.y+tile.offset.y,
-									tile.zCoord+min.z+0.5)
+							new Vec3M(
+									tile.x()+min.x+tile.offset.x,
+									tile.y()+min.y+tile.offset.y,
+									tile.z()+min.z+0.5),
+							new Vec3M(
+									tile.x()+max.x+tile.offset.x,
+									tile.y()+min.y+tile.offset.y,
+									tile.z()+min.z+0.5),
+							new Vec3M(
+									tile.x()+max.x+tile.offset.x,
+									tile.y()+max.y+tile.offset.y,
+									tile.z()+min.z+0.5)
 							), hit)){
 						result[0]=ArrayUtils.add(result[0], hit);
 						result[1]=ArrayUtils.add(result[1], tile);
@@ -636,9 +635,9 @@ public class Helper{
 		return result;
 	}
 	
-    public static Vec3 getNormal(Vec3 point1,Vec3 point2,Vec3 point3){
-    	Vec3 angle1=point2.subtract(point1);
-		Vec3 angle2=point2.subtract(point3);
+    public static Vec3M getNormal(Vec3M point1,Vec3M point2,Vec3M point3){
+    	Vec3M angle1=point2.subtract(point1);
+		Vec3M angle2=point2.subtract(point3);
 		return angle2.crossProduct(angle1).normalize();
     }
 	public static ColorF calculateRenderColor(ColorF prevColor, ColorF color){
@@ -653,18 +652,18 @@ public class Helper{
 						  slowlyEqalize(variable.b, goal.b, speed),
 						  slowlyEqalize(variable.a, goal.a, speed));
 	}
-    public static Vec3 getPosition(EntityPlayer entity,float par1)
+    public static Vec3M getPosition(EntityPlayer entity,float par1)
     {
         if (par1 == 1.0F)
         {
-            return Vec3.createVectorHelper(entity.posX, entity.posY + (entity.getEyeHeight()), entity.posZ);
+            return new Vec3M(entity.posX, entity.posY + (entity.getEyeHeight()), entity.posZ);
         }
         else
         {
             double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
             double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * par1 + (entity.getEyeHeight());
             double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
-            return Vec3.createVectorHelper(d0, d1, d2);
+            return new Vec3M(d0, d1, d2);
         }
     }
 	public static String getStringForSize(String text, float allowedWidth){
@@ -698,21 +697,18 @@ public class Helper{
 		
 		return Return;
 	}
-	public static AxisAlignedBB AxisAlignedBB(double minX, double minY, double minZ, double maxX, double maxY, double maxZ){
-		return AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
-	}
 	public static void spawnEntityFXAt(TileEntity tileEntity, EntityFX entityFX){
-		entityFX.posX+=tileEntity.xCoord;
-		entityFX.posY+=tileEntity.yCoord;
-		entityFX.posZ+=tileEntity.zCoord;
+		entityFX.posX+=x(tileEntity);
+		entityFX.posY+=y(tileEntity);
+		entityFX.posZ+=z(tileEntity);
 		spawnEntityFX(entityFX);
 	}
 	public static EntityFlameFX marker(double x,double y,double z,double xSpeed,double ySpeed,double zSpeed){
 		if(getTheWorld()==null)return null;
-		return new EntityFlameFX(getTheWorld(), x+0.5, y+0.5, z+0.5, xSpeed, ySpeed, zSpeed);
+		return (EntityFlameFX)new EntityFlameFX.Factory().getEntityFX(0,getTheWorld(), x+0.5, y+0.5, z+0.5, xSpeed, ySpeed, zSpeed);
 	}
 	public static TargetPoint TargetPoint(TileEntity tile, int range){
-		return new TargetPoint(tile.getWorldObj().provider.dimensionId, tile.xCoord, tile.yCoord, tile.zCoord, range);
+		return new TargetPoint(tile.getWorld().provider.getDimensionId(), x(tile), y(tile), z(tile), range);
 	}
 	public static boolean Instanceof(Object tester,Object instace){
 		return Instanceof(tester.getClass(), instace.getClass());
@@ -728,14 +724,14 @@ public class Helper{
 		return false;
 	}
 	@Deprecated
-	public static void breakBlock(World world,int x,int y,int z){
-//		world.playSoundEffect(x+0.5,y+0.5,z+0.5, world.getBlock(x, y, z).sound, 1.0F, RF() * 0.4F + 0.8F);
+	public static void breakBlock(World world,BlockPos pos){
+//		world.playSoundEffect(x+0.5,y+0.5,z+0.5, Helper.getBlock(world, pos).sound, 1.0F, RF() * 0.4F + 0.8F);
 		//TODO
 	}
 	public static EntityItem dropBlockAsItem(World world, double x, double y, double z, ItemStack stack){
 	    if(!world.isRemote&&world.getGameRules().getGameRuleBooleanValue("doTileDrops")&&!world.restoringBlockSnapshots){
 	        EntityItem entity=new EntityItem(world,x,y,z,stack);
-	        entity.delayBeforeCanPickup=0;
+	        entity.setPickupDelay(0);
 	        world.spawnEntityInWorld(entity);
 	        return entity;
 	    }
@@ -746,8 +742,49 @@ public class Helper{
 		if(isNull(box1,box2))return false;
 		return box1.minX==box2.minX&&box1.minY==box2.minY&&box1.minZ==box2.minZ&&box1.maxX==box2.maxX&&box1.maxY==box2.maxY&&box1.maxZ==box2.maxZ;
 	}
-	private static RenderBlocks renderBlocks=new RenderBlocks();
-	public static RenderBlocks getRenderBlocks(){
-		return renderBlocks;
+//	private static RenderBlocks renderBlocks=new RenderBlocks();
+//	public static RenderBlocks getRenderBlocks(){
+//		return renderBlocks;
+//	}
+	//yay for 1.8 code changes
+	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
+	public static final PropertyInteger MetadataMarker = PropertyInteger.create("bites", 0, 15);
+	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
+	public static int getBlockMetadata(World world, BlockPos pos){
+		return ((Integer)world.getBlockState(pos).getValue(MetadataMarker)).intValue();
+	}
+	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
+	public static void setMetadata(World world, BlockPos pos,int meta){
+		world.setBlockState(pos, getBlock(world, pos).getDefaultState().withProperty(MetadataMarker, meta), 2);
+	}
+	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
+	public static Block getBlock(World world, BlockPos pos){
+		return world.getBlockState(pos).getBlock();
+	}
+	public static BlockPos BlockPos(int[] array3i){
+		return new BlockPos(array3i[0], array3i[1], array3i[2]);
+	}
+	public static int x(TileEntity tile){
+		return tile.getPos().getX();
+	}
+	public static int y(TileEntity tile){
+		return tile.getPos().getZ();
+	}
+	public static int z(TileEntity tile){
+		return tile.getPos().getY();
+	}
+	public static AxisAlignedBB setAABB(AxisAlignedBB box,String varName, double value){
+		if(varName.length()!=4)throw new IllegalStateException("use minY, minZ, maxX, maxY, maxZ");
+		if(varName.startsWith("min")){
+			if(varName.endsWith("X"))return new AxisAlignedBB(value, box.minY, box.minZ, box.maxX, box.maxY, box.maxZ);
+			if(varName.endsWith("Y"))return new AxisAlignedBB(box.minX, value, box.minZ, box.maxX, box.maxY, box.maxZ);
+			if(varName.endsWith("Z"))return new AxisAlignedBB(box.minX, box.minY, value, box.maxX, box.maxY, box.maxZ);
+		}else if(varName.startsWith("max")){
+			if(varName.endsWith("X"))return new AxisAlignedBB(box.minX, box.minY, box.minZ, value, box.maxY, box.maxZ);
+			if(varName.endsWith("Y"))return new AxisAlignedBB(box.minX, box.minY, box.minZ, box.maxX, value, box.maxZ);
+			if(varName.endsWith("z"))return new AxisAlignedBB(box.minX, box.minY, box.minZ, box.maxX, box.maxY, value);
+
+		}
+		return null;
 	}
 }

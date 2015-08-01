@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityEnergizedLapisOre;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.magiology.mcobjects.tileentityes.TileEntityEnergizedLapisOre;
 
 public class energizedLapisOre extends BlockContainer {
 

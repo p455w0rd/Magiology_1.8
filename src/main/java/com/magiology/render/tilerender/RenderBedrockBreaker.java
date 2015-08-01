@@ -1,16 +1,17 @@
 package com.magiology.render.tilerender;
 
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
+import org.lwjgl.opengl.GL11;
+
 import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 //	ResourceLocation BBB = new ResourceLocation(Magiology.MODID+":"+"/textures/models/BedrockBreakerBase.png");
@@ -43,23 +44,23 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		TileEntityBedrockBreaker entity= (TileEntityBedrockBreaker) tileentity;
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
 		drawBase();
 		drawLaser(entity.positionForLaser);
 		if(entity.IRFA==true)drawLaserBeam();
-		drawLeg(ForgeDirection.EAST, entity.animation);
-		drawLeg(ForgeDirection.NORTH, entity.animation);
-		drawLeg(ForgeDirection.SOUTH, entity.animation);
-		drawLeg(ForgeDirection.WEST, entity.animation);
+		drawLeg(EnumFacing.EAST, entity.animation);
+		drawLeg(EnumFacing.NORTH, entity.animation);
+		drawLeg(EnumFacing.SOUTH, entity.animation);
+		drawLeg(EnumFacing.WEST, entity.animation);
 		GL11.glPopMatrix();
 	}
 	
 	
 	public void drawBase(){
-		Tessellator tess = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(Textures.BedrockBreakerBase);
 		
 		{
@@ -97,16 +98,16 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		
 	}
 
-	public void drawLeg(ForgeDirection dir,double animation){
-		Tessellator tess = Tessellator.instance;
+	public void drawLeg(EnumFacing dir,double animation){
+		WorldRenderer tess=TessHelper.getWR();
 		//sides-----------------------------------------------------
 		//----------------------------------------------------------
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST)){}
-		else if (dir.equals(ForgeDirection.SOUTH))GL11.glRotatef(90, 0, 1, 0);
-		else if (dir.equals(ForgeDirection.EAST))GL11.glRotatef(-180, 0, 1, 0);
-		else if (dir.equals(ForgeDirection.NORTH))GL11.glRotatef(-90, 0, 1, 0);
+		if(dir.equals(EnumFacing.WEST)){}
+		else if (dir.equals(EnumFacing.SOUTH))GL11.glRotatef(90, 0, 1, 0);
+		else if (dir.equals(EnumFacing.EAST))GL11.glRotatef(-180, 0, 1, 0);
+		else if (dir.equals(EnumFacing.NORTH))GL11.glRotatef(-90, 0, 1, 0);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		GL11.glTranslated(p*3.8, p*6.5, p*3.8);
 		GL11.glRotated(-45, 0, 1, 0);
@@ -237,10 +238,10 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		GL11.glTranslated(-p*3.8, -p*6.5, -p*3.8);
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST))GL11.glRotatef(0, 0, 1, 0);
-		else if (dir.equals(ForgeDirection.SOUTH))GL11.glRotatef(-90, 0, 1, 0);
-		else if (dir.equals(ForgeDirection.EAST))GL11.glRotatef(180, 0, 1, 0);
-		else if (dir.equals(ForgeDirection.NORTH))GL11.glRotatef(90, 0, 1, 0);
+		if(dir.equals(EnumFacing.WEST))GL11.glRotatef(0, 0, 1, 0);
+		else if (dir.equals(EnumFacing.SOUTH))GL11.glRotatef(-90, 0, 1, 0);
+		else if (dir.equals(EnumFacing.EAST))GL11.glRotatef(180, 0, 1, 0);
+		else if (dir.equals(EnumFacing.NORTH))GL11.glRotatef(90, 0, 1, 0);
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		//----------------------------------------------------------
 		//----------------------------------------------------------

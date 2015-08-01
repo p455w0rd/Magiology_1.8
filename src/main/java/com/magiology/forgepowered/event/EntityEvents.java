@@ -18,6 +18,8 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
@@ -34,9 +36,6 @@ import com.magiology.objhelper.EntityPosAndBB;
 import com.magiology.objhelper.GetSpecialPlayer;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
 public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
@@ -153,10 +152,10 @@ public class EntityEvents{
 		ItemStack equippedItemStack=player.getCurrentEquippedItem();
 		if(TileEntityHologramProjector.invokeRayTrace(event, player))return;
 		if((equippedItemStack==null?true:equippedItemStack.getItem()!=MItems.FireHammer)&&event.action==Action.RIGHT_CLICK_BLOCK&&player.isSneaking()){
-			TileEntity tile=world.getTileEntity(x, y, z);
+			TileEntity tile=world.getTileEntity(pos);
 			if(tile instanceof TileEntityPow){
 				if(!world.isRemote){
-					FMLNetworkHandler.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, world, x, y, z);
+					FMLNetworkHandler.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, world, pos);
 					event.setCanceled(true);
 				}
 			}
@@ -212,7 +211,7 @@ public class EntityEvents{
 			
 			if(GetSpecialPlayer.getPlayerRank(player)!=-1){
 				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
-				if(isFP)spph.onJump(world, player, x, y, z, xv, yv, zv, 0);
+				if(isFP)spph.onJump(world, player, pos, xv, yv, zv, 0);
 			}
 			//---------------------
 			{
@@ -229,7 +228,7 @@ public class EntityEvents{
 			EntityPlayer player=(EntityPlayer)event.entity;
 			if(GetSpecialPlayer.getPlayerRank(player)!=-1){
 				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
-				if(isFP)spph.onHitTheGround(world, x, y, z, (EntityPlayer)event.entity,event.distance);
+				if(isFP)spph.onHitTheGround(world, pos, (EntityPlayer)event.entity,event.distance);
 			}
 			ExtendedPlayerData.get(player).onLand(true);
 			//---------------------
@@ -247,7 +246,7 @@ public class EntityEvents{
 			ExtendedPlayerData.get((EntityPlayer)event.entity).onLand(false);
 			if(GetSpecialPlayer.getPlayerRank((EntityPlayer) event.entity)!=-1){
 				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
-				if(isFP)spph.onHitTheGround(world, x, y, z, (EntityPlayer)event.entity,event.distance);
+				if(isFP)spph.onHitTheGround(world, pos, (EntityPlayer)event.entity,event.distance);
 			}
 			//---------------------
 			{

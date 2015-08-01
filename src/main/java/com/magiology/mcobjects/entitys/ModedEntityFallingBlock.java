@@ -22,10 +22,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModedEntityFallingBlock extends Entity implements IEntityAdditionalSpawnData{
 	public Block block;
@@ -50,7 +49,7 @@ public class ModedEntityFallingBlock extends Entity implements IEntityAdditional
         this.field_145816_i = 2.0F;
     }
 
-    public ModedEntityFallingBlock(World world, double x, double y, double z, Block block){this(world, x, y, z, block, 0,null);}
+    public ModedEntityFallingBlock(World world, double x, double y, double z, Block block){this(world, pos, block, 0,null);}
 
     public ModedEntityFallingBlock(World world, double x, double y, double z, Block block, int metadata,EntityPlayer entityPlayer){
     	this(world);
@@ -59,7 +58,7 @@ public class ModedEntityFallingBlock extends Entity implements IEntityAdditional
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.98F);
         this.yOffset = this.height / 2.0F;
-        this.setPosition(x, y, z);
+        this.setPosition(pos);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
         this.motionZ = 0.0D;

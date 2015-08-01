@@ -1,10 +1,10 @@
 package com.magiology.objhelper.helpers;
 
+import net.minecraftforge.fml.common.FMLLog;
+
 import org.apache.logging.log4j.Level;
 
 import com.magiology.core.MReference;
-
-import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper {
 	 public static void log(Level logLevel, Object object){

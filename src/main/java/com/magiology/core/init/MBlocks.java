@@ -1,19 +1,38 @@
 package com.magiology.core.init;
 
-import static com.magiology.core.Magiology.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.magiology.core.MReference;
-import com.magiology.mcobjects.blocks.*;
+import com.magiology.mcobjects.blocks.BFCPowerOut;
+import com.magiology.mcobjects.blocks.BateryGeneric;
+import com.magiology.mcobjects.blocks.BedrockBreaker;
+import com.magiology.mcobjects.blocks.BigChunksOOre;
+import com.magiology.mcobjects.blocks.BigFurnaceCore;
+import com.magiology.mcobjects.blocks.ControlBlock;
+import com.magiology.mcobjects.blocks.DontLookAtMe;
+import com.magiology.mcobjects.blocks.FakeAir;
+import com.magiology.mcobjects.blocks.FireExhaust;
+import com.magiology.mcobjects.blocks.FireGun;
+import com.magiology.mcobjects.blocks.FireLamp;
+import com.magiology.mcobjects.blocks.FireMatrixReceaver;
+import com.magiology.mcobjects.blocks.FireMatrixTransferer;
+import com.magiology.mcobjects.blocks.FirePipe;
+import com.magiology.mcobjects.blocks.HologramProjector;
+import com.magiology.mcobjects.blocks.OreLevelX;
+import com.magiology.mcobjects.blocks.OreStructureCore;
+import com.magiology.mcobjects.blocks.ParticleLauncher;
+import com.magiology.mcobjects.blocks.PileODust;
+import com.magiology.mcobjects.blocks.RemotePowerCounter;
+import com.magiology.mcobjects.blocks.SmartCrafter;
+import com.magiology.mcobjects.blocks.energizedLapisOre;
 import com.magiology.mcobjects.blocks.disco.DiscoFlor;
 import com.magiology.mcobjects.blocks.disco.DiscoFlorPlatform;
 import com.magiology.mcobjects.blocks.network.NetworkConductor;
 import com.magiology.mcobjects.blocks.network.NetworkController;
 import com.magiology.mcobjects.blocks.network.NetworkInterface;
 import com.magiology.mcobjects.blocks.network.NetworkPointerContainer;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 
 public class MBlocks{
 
@@ -74,7 +93,7 @@ public class MBlocks{
 		GameRegistry.registerBlock(block,block.getUnlocalizedName().substring("tile.".length(), block.getUnlocalizedName().length()));
 		return block;
 	}
-
+	
 	public static void oresInit(){
 		IronLevel2=init(new OreLevelX(Material.ground, 0.1, 2, "pickaxe", 1).setBlockName("IronLevel2").setCreativeTab(MCreativeTabs.Whwmmt_ores).setBlockTextureName(MReference.MODID + ":" + "IronLevel2"));
 		IronLevel3=init(new OreLevelX(Material.ground, 0.2, 4, "pickaxe", 1).setBlockName("IronLevel3").setCreativeTab(MCreativeTabs.Whwmmt_ores).setBlockTextureName(MReference.MODID + ":" + "IronLevel3"));

@@ -1,8 +1,6 @@
 package com.magiology.render.tilerender;
 
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
-import com.magiology.render.Textures;
+import java.text.DecimalFormat;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -14,7 +12,9 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import java.text.DecimalFormat;
+import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
+import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.render.Textures;
 
 public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
 	
@@ -71,8 +71,8 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
 		maxPB=tileentity.maxPB;
 		currentP=tileentity.currentP;
 		
-        GL11.glTranslated(x1, y1, z1);
-		GL11.glTranslatef(x, y, z);
+        GL11.glTranslated(pos);
+		GL11.glTranslatef(pos);
         GL11.glTranslated(0.5, 0.5, 0.5);
 	    GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glRotatef(-yr, 0, 1, 0);
@@ -110,7 +110,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
 		float zr=90;
 		float scale=0.0049F;
 		
-		GL11.glTranslatef(x, y, z);
+		GL11.glTranslatef(pos);
 	    GL11.glRotatef(-zr, 0, 0, 1);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-xr, 1, 0, 0);
 	    GL11.glScalef(scale, scale, scale);
 		

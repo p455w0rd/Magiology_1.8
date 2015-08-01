@@ -1,11 +1,10 @@
 package com.magiology.objhelper.vectors;
 
-import net.minecraft.util.Vec3;
 
 
 public class Ray{
-	public Vec3 from,to;
-	public Ray(Vec3 from, Vec3 dir){
+	public Vec3M from,to;
+	public Ray(Vec3M from, Vec3M dir){
 		this.from=from;
 		this.to=dir;
 	}

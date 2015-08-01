@@ -1,20 +1,21 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 
 public class FireMatrixReceaver extends BlockContainer {
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z){
-		int BM=world.getBlockMetadata(x, y, z);
+	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos){
+		int BM=world.getBlockMetadata(pos);
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 //		float p=1F/16F;
 //		if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
@@ -26,8 +27,8 @@ public class FireMatrixReceaver extends BlockContainer {
 	}
 	
 	 @Override
-   public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z){
-			int BM=world.getBlockMetadata(x, y, z);
+   public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos){
+			int BM=world.getBlockMetadata(pos);
 //			float p=1F/16F;
 //			if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
 //			else if(BM==1)setBlockBounds(p*5, 0F,  p*2, p*11, p*2, p*14);
@@ -36,7 +37,7 @@ public class FireMatrixReceaver extends BlockContainer {
 //			else if(BM==4)setBlockBounds(p*14  , p*5, p*2, 1, p*11,   p*14);
 //			else if(BM==5)setBlockBounds(0  , p*5, p*2, p*2, p*11,   p*14);
 		 
-		 return AxisAlignedBB.getBoundingBox(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+		 return new AxisAlignedBB(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
 	 }
 	
 	@Override
@@ -58,7 +59,7 @@ public class FireMatrixReceaver extends BlockContainer {
 		}
 	}
 	@Override
-	public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int v1){
+	public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int v1){
 		
 		
 		

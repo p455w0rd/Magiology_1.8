@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -13,7 +12,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 import org.lwjgl.opengl.GL11;
 
@@ -171,7 +170,7 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 		super.initGui();
 		SimpleCounter sc=new SimpleCounter();
 		for(int a=0;a<6;a++){
-			buttonList.add(new TexturedColoredButton(a,100+guiLeft,10+guiTop+a*22, 40, 20, ForgeDirection.getOrientation(a).toString()));
+			buttonList.add(new TexturedColoredButton(a,100+guiLeft,10+guiTop+a*22, 40, 20, EnumFacing.getOrientation(a).toString()));
 			sc.add();
 		}
 		buttonList.add(new TexturedColoredButton(sc.getAndAdd(),15+guiLeft, 80+guiTop, 72, 20, "Cricle"));

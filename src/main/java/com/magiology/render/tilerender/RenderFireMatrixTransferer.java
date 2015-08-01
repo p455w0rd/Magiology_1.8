@@ -1,20 +1,14 @@
 package com.magiology.render.tilerender;
 
-import com.magiology.core.MReference;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+
+import org.lwjgl.opengl.GL11;
+
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.ShadedQuad;
 import com.magiology.render.Textures;
-
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.IModelCustom;
-import net.minecraftforge.client.model.ModelFormatException;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 
@@ -22,45 +16,28 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 	private final float tW=1F/64F;
 	private final float tH=1F/64F;
 
-	private final IModelCustom endertank;
 	
 	public RenderFireMatrixTransferer(){
 		
-		endertank=ModelInstrument(new ResourceLocation(MReference.MODID,"/models/stick.obj"));
 		
 	}
 	
 	float pos=0,ballRotation=0;
 	
-	public ForgeDirection[] connections = new ForgeDirection[6];
-	
-	
-	private IModelCustom ModelInstrument( ResourceLocation wfObjname) {
-		  IModelCustom model = null;
-		  try{
-		    model = AdvancedModelLoader.loadModel( wfObjname );
-		  }
-		  catch( IllegalArgumentException e) { System.out.print("\nModel Load ArgFail AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA HULK RAGE!!"); }
-		  catch( ModelFormatException e ) { System.out.print("\nModel Load FormatFail AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA HULK RAGE!!");}
-		  return model;
-		}
-	
-	
-	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int i1) {
 //		endertank=ModelInstrument(new ResourceLocation(Magiology.MODID,"/models/stick.obj"));
 		
 		if(ballRotation>360)ballRotation-=360;
 		ballRotation++;
 		
 		if(tileentity instanceof TileEntityFireMatrixTransferer){
-			pos=((TileEntityFireMatrixTransferer)tileentity).pos;
+			pos=((TileEntityFireMatrixTransferer)tileentity).Pos;
 			this.ballRotation=((TileEntityFireMatrixTransferer)tileentity).ballRotation;
 		}
 
 		this.bindTexture(Textures.FireMatrixTransfererBase);
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 //		GL11.glTranslatef(0, 0, 1);
 //		GL11.glRotated(-90, 1, 0, 0);

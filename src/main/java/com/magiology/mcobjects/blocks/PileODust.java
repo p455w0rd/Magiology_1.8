@@ -3,11 +3,11 @@ package com.magiology.mcobjects.blocks;
 
 import java.util.Random;
 
-import com.magiology.core.init.MItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+
+import com.magiology.core.init.MItems;
 
 public class PileODust extends Block {
 	

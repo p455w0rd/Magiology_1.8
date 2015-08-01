@@ -24,8 +24,8 @@ public class SymmetryBoot{
 					blocksat[0]=blockat;
 				}else{
 					blocksat=new BlockAt[2];
-					blocksat[0]=new BlockAt(block,  x, y, z);
-					blocksat[1]=new BlockAt(block, -x, y, z);
+					blocksat[0]=new BlockAt(block,  pos);
+					blocksat[1]=new BlockAt(block, -pos);
 				}
 			break;
 			case 2://----------------------------
@@ -34,7 +34,7 @@ public class SymmetryBoot{
 					blocksat[0]=blockat;
 				}else{
 					blocksat=new BlockAt[2];
-					blocksat[0]=new BlockAt(block,  x, y, z);
+					blocksat[0]=new BlockAt(block,  pos);
 					blocksat[1]=new BlockAt(block,  x, y,-z);
 				}
 			break;
@@ -51,8 +51,8 @@ public class SymmetryBoot{
 					blocksat[3]=new BlockAt(block, 0, y, -size);
 				}else{
 					blocksat=new BlockAt[4];
-					blocksat[0]=new BlockAt(block,  x, y, z);
-					blocksat[1]=new BlockAt(block, -x, y, z);
+					blocksat[0]=new BlockAt(block,  pos);
+					blocksat[1]=new BlockAt(block, -pos);
 					blocksat[2]=new BlockAt(block,  x, y,-z);
 					blocksat[3]=new BlockAt(block, -x, y,-z);
 				}

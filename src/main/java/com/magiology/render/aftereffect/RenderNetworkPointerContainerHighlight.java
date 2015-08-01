@@ -1,8 +1,11 @@
 package com.magiology.render.aftereffect;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
@@ -14,14 +17,6 @@ import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRendererBase{
 	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
@@ -61,7 +56,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			y-=p*2*idY;
 		}break;
 		}
-		GL11.glTranslatef(x, y, z);
+		GL11.glTranslatef(pos);
 		//set up openGl opaque
 		GL11H.SetUpOpaqueRendering(3);
 		GL11H.scaled(-H.p/4);

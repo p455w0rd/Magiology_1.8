@@ -3,13 +3,13 @@ package com.magiology.objhelper.helpers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseComponent;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateablePipe;
 import com.magiology.objhelper.helpers.Helper.H;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 
 
 public class NetworkHelper{
@@ -29,7 +29,7 @@ public class NetworkHelper{
 			side=i;
 			continue;
 		}
-		if(ForgeDirection.getOrientation(side)==ForgeDirection.UNKNOWN)return false;
+		if(EnumFacing.getOrientation(side)==EnumFacing.UNKNOWN)return false;
 		try{
 			if(Tile2 instanceof UpdateablePipe){
 				List<Class> excluded=new ArrayList<Class>(),included=new ArrayList<Class>();

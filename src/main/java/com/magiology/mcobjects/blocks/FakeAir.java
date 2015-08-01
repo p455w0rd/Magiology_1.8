@@ -4,13 +4,14 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class FakeAir extends Block {
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int x, int y, int z){
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, BlockPos pos){
 		setBlockBounds(0, 0, 0, 0, 0, 0);}
 	
 	@Override
@@ -23,7 +24,7 @@ public class FakeAir extends Block {
 	}
 
 	@Override
-	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+	public void randomDisplayTick(World world, BlockPos pos, Random random) {
 		world.spawnParticle("portal", x+(world.rand.nextFloat()*1), y+(world.rand.nextFloat()*1), z+(world.rand.nextFloat()*1), 0, 0, 0);
     }
 }

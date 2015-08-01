@@ -5,7 +5,10 @@ import java.util.List;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -31,28 +34,29 @@ public abstract class BlockContainerM extends BlockContainer{
 		return null;
 	}
 	@Override
-	public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int md){
+	public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
 		RedstoneData data=new RedstoneData();
-		getProvidingPower((World)world, world.getTileEntity(x, y, z), x, y, z, md, data);
+		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, Helper.getBlockMetadata((World)worldIn, pos), data,side);
 		if(!data.isStrong)return 0;
         return data.strenght;
     }
 	@Override
-	public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int md){
+	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
 		RedstoneData data=new RedstoneData();
-		getProvidingPower((World)world, world.getTileEntity(x, y, z), x, y, z, md, data);
+		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, Helper.getBlockMetadata((World)worldIn, pos), data,side);
         return data.strenght;
 	}
 	/**
 	 * Used instead of isProvidingStrongPower and isProvidingWeakPower. Note: do not use Return=smth; use Return.smth=smth_else;
+	 * @param side 
 	 */
-	public void getProvidingPower(World world, TileEntity tile, int x, int y, int z, int metadata,RedstoneData Return){}
+	public void getProvidingPower(World world, TileEntity tile, BlockPos pos, int metadata,RedstoneData Return, EnumFacing side){}
 	
 	@Override
-	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int dir){
+	public boolean canConnectRedstone(IBlockAccess world, BlockPos pos, EnumFacing side){
 		List<Integer> sides=new ArrayList<Integer>();
-		getRedstoneConnectableSides(world, world.getTileEntity(x, y, z), x, y, z,sides);
-		return sides.contains(dir);
+		getRedstoneConnectableSides(world, world.getTileEntity(pos), pos,sides);
+		return sides.contains(side.getIndex());
 	}
-	public void getRedstoneConnectableSides(IBlockAccess world, TileEntity tile, int x, int y, int z, List<Integer> sides){}
+	public void getRedstoneConnectableSides(IBlockAccess world, TileEntity tile, BlockPos pos, List<Integer> sides){}
 }

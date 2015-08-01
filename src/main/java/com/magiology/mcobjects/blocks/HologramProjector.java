@@ -4,6 +4,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -29,13 +30,13 @@ public class HologramProjector extends BlockContainer{
 	public boolean renderAsNormalBlock() {return false;}
 	
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int x, int y, int z){
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, BlockPos pos){
 		setBlockBounds(p, 0, p, 1-p, p*10, 1-p);
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player,int metadata, float xHit, float yHit, float zHit){
-		Helper.openGui(player, MGui.HologramProjectorGui, x, y, z);
+	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player,int metadata, float xHit, float yHit, float zHit){
+		Helper.openGui(player, MGui.HologramProjectorGui, pos);
 		return true;
 	}
 	

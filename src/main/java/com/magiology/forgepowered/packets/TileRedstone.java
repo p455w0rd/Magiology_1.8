@@ -1,13 +1,12 @@
 package com.magiology.forgepowered.packets;
 import java.io.IOException;
 
-import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
+
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 
 
 public class TileRedstone extends AbstractToServerMessage{
@@ -36,7 +35,7 @@ public class TileRedstone extends AbstractToServerMessage{
 	@Override
 	public void process(EntityPlayer player, Side side){
 		 World world=player.worldObj;
-		 TileEntity tile=world.getTileEntity(x, y, z);
+		 TileEntity tile=world.getTileEntity(pos);
 		 if(tile!=null&&tile instanceof TileEntityControlBlock){
 			 ((TileEntityControlBlock)tile).redstoneC=id;
 			 return;

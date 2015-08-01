@@ -10,8 +10,6 @@ import net.minecraft.world.World;
 import com.magiology.api.SavableData;
 import com.magiology.api.network.NetworkBaseInterface;
 
-import cpw.mods.fml.relauncher.Side;
-
 public class SavableDataWithKeyPacket extends AbstractToClientMessage{
 	private int id,x,y,z;
 	private String key;
@@ -44,7 +42,7 @@ public class SavableDataWithKeyPacket extends AbstractToClientMessage{
 	@Override
 	public void process(EntityPlayer player, Side side){
 		World world=player.worldObj;
-		TileEntity tile=world.getTileEntity(x, y, z);
+		TileEntity tile=world.getTileEntity(pos);
 		if(tile instanceof NetworkBaseInterface){
 			((NetworkBaseInterface)tile).setInteractData(key, data);
 			return;

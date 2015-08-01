@@ -3,7 +3,8 @@ package com.magiology.objhelper.helpers;
 import java.util.Random;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
 public class SideHelper{
 	
@@ -12,7 +13,7 @@ public class SideHelper{
 	static int[] z={0,0,-1,0,1,0};
 	static Random rand = new Random();
 	
-//	switch(side){
+//	switch(EnumFacing){
 //	case 0:{y+=1;}break;
 //	case 1:{y-=1;}break;
 //	case 2:{z-=1;}break;
@@ -35,33 +36,9 @@ public class SideHelper{
 	}
 	
 	
-	public static int X(int side,int xCoord){
-		if(side>5)return 1234;
-		int s=0;
-		
-		s=x[side];
-		
-		return s+xCoord;
+	public static BlockPos offset(int side,BlockPos pos){
+		return pos.add(x[side],y[side],z[side]);
 	}
-	
-	public static int Y(int side,int yCoord){
-		if(side>5)return 1234;
-		int s=0;
-		
-		s=y[side];
-		
-		return s+yCoord;
-	}
-	
-	public static int Z(int side,int zCoord){
-		if(side>5)return 1234;
-		int s=0;
-		
-		s=z[side];
-		
-		return s+zCoord;
-	}
-	
 	public static int[] randomizeSides(){
 		int[] side=new int[6];
 		side[0]=rand.nextInt(6);
@@ -84,37 +61,37 @@ public class SideHelper{
 	}
 
 
-	public static int ForgeDirgetOrientationInverted(ForgeDirection fDir){
+	public static int ForgeDirgetOrientationInverted(EnumFacing fDir){
 		if(fDir==null)return -1;
-		else if(fDir==ForgeDirection.DOWN) return 0;
-		else if(fDir==ForgeDirection.UP)   return 1;
-		else if(fDir==ForgeDirection.NORTH)return 2;
-		else if(fDir==ForgeDirection.SOUTH)return 3;
-		else if(fDir==ForgeDirection.WEST) return 4;
-		else if(fDir==ForgeDirection.EAST) return 5;
+		else if(fDir==EnumFacing.DOWN) return 0;
+		else if(fDir==EnumFacing.UP)   return 1;
+		else if(fDir==EnumFacing.NORTH)return 2;
+		else if(fDir==EnumFacing.SOUTH)return 3;
+		else if(fDir==EnumFacing.WEST) return 4;
+		else if(fDir==EnumFacing.EAST) return 5;
 		return -1;
 	}
 	public static int DOWN(){
-		return ForgeDirgetOrientationInverted(ForgeDirection.DOWN);
+		return ForgeDirgetOrientationInverted(EnumFacing.DOWN);
 	}
 	public static int UP(){
-		return ForgeDirgetOrientationInverted(ForgeDirection.UP);
+		return ForgeDirgetOrientationInverted(EnumFacing.UP);
 	}
 	public static int NORTH(){
-		return ForgeDirgetOrientationInverted(ForgeDirection.NORTH);
+		return ForgeDirgetOrientationInverted(EnumFacing.NORTH);
 	}
 	public static int SOUTH(){
-		return ForgeDirgetOrientationInverted(ForgeDirection.SOUTH);
+		return ForgeDirgetOrientationInverted(EnumFacing.SOUTH);
 	}
 	public static int WEST(){
-		return ForgeDirgetOrientationInverted(ForgeDirection.WEST);
+		return ForgeDirgetOrientationInverted(EnumFacing.WEST);
 	}
 	public static int EAST(){
-		return ForgeDirgetOrientationInverted(ForgeDirection.EAST);
+		return ForgeDirgetOrientationInverted(EnumFacing.EAST);
 	}
 	public static TileEntity[] getTilesOnSides(TileEntity tileEntity){
 		TileEntity[] result=new TileEntity[6];
-		if(tileEntity!=null)for(int i=0;i<6;i++)result[i]=tileEntity.getWorldObj().getTileEntity(X(i, tileEntity.xCoord), Y(i, tileEntity.yCoord), Z(i, tileEntity.zCoord));
+		if(tileEntity!=null)for(int i=0;i<6;i++)result[i]=tileEntity.getWorld().getTileEntity(offset(i, tileEntity.getPos()));
 		return result;
 	}
 

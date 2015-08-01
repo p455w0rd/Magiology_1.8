@@ -1,18 +1,19 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityFireExhaust;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.magiology.mcobjects.tileentityes.TileEntityFireExhaust;
 
 public class FireExhaust extends BlockContainer {
 	private float p= 1F/16F;
 
 	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int x, int y, int z){
+	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, BlockPos pos){
 		setBlockBounds(p*4.5F, p*5, p*4.5F, p*11.5F, 1, p*11.5F);}
 	@Override
 	public int getRenderType(){

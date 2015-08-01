@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.Vec3;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -12,6 +11,7 @@ import com.magiology.api.SavableData;
 import com.magiology.core.init.MGui;
 import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public abstract class RenderObject implements SavableData{
 	public TileEntityHologramProjector host;
@@ -45,7 +45,7 @@ public abstract class RenderObject implements SavableData{
 	}
 	public void checkHighlight(){
 		if(host.point.isPointing){
-			Vec3 hit=host.point.pointedPos;
+			Vec3M hit=host.point.pointedPos;
 			isHighlighted=
 					hit.xCoord<offset.x&&
 					hit.xCoord>offset.x-size.x&&

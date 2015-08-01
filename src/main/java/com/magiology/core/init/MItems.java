@@ -1,22 +1,34 @@
 package com.magiology.core.init;
 
-import com.magiology.core.MReference;
-import com.magiology.handelers.animationhandelers.TheHandHandeler;
-import com.magiology.mcobjects.blocks.disco.DiscoFlorPlacer;
-import com.magiology.mcobjects.items.*;
-import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
-import com.magiology.mcobjects.items.armor.Helmet_42;
-import com.magiology.mcobjects.items.armor.Pants_42;
-import com.magiology.render.itemrender.*;
-import com.magiology.upgrades.RegisterUpgrades.Container;
-import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.magiology.core.MReference;
+import com.magiology.handelers.animationhandelers.TheHandHandeler;
+import com.magiology.mcobjects.blocks.disco.DiscoFlorPlacer;
+import com.magiology.mcobjects.items.BedrockDust;
+import com.magiology.mcobjects.items.EquivalentRightClickWandOfMagic;
+import com.magiology.mcobjects.items.FireBarrel;
+import com.magiology.mcobjects.items.FireHammer;
+import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.mcobjects.items.IPowerSidenessInstructor;
+import com.magiology.mcobjects.items.NetworkPointer;
+import com.magiology.mcobjects.items.PowerCounter;
+import com.magiology.mcobjects.items.TheHand;
+import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
+import com.magiology.mcobjects.items.armor.Helmet_42;
+import com.magiology.mcobjects.items.armor.Pants_42;
+import com.magiology.render.itemrender.ItemRendererFirePipe;
+import com.magiology.render.itemrender.ItemRendererGenericUpgrade;
+import com.magiology.render.itemrender.ItemRendererHelmet42;
+import com.magiology.render.itemrender.ItemRendererPants42;
+import com.magiology.render.itemrender.ItemRendererPowerCounter;
+import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
 
 public class MItems{
 

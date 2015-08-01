@@ -2,14 +2,15 @@ package com.magiology.mcobjects.tileentityes.network.interfaces.registration;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.api.network.InterfaceTileEntitySaver;
 import com.magiology.api.network.NetworkBaseInterface;
-import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput;
-import com.magiology.api.network.NetworkBaseInterface.InteractType;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
+import com.magiology.api.network.NetworkBaseInterface.InteractType;
+import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.objhelper.DoubleObject;
 import com.magiology.objhelper.helpers.Helper;
@@ -97,7 +98,7 @@ public class InterfaceBinder{
 			return Interface.getDataOutput(desc);
 		}
 	}
-	public static NetworkInterfaceProvider get(World world,int x,int y,int z){
+	public static NetworkInterfaceProvider get(World world,BlockPos pos){
 		return InterfaceRegistration.getInterface(world,x,y,z);
 	}
 	public static NetworkInterfaceProvider get(TileEntity tile){

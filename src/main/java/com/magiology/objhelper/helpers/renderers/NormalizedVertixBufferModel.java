@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Vec3;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
@@ -12,6 +11,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer.ShadedTriangle;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class NormalizedVertixBufferModel{
 	private List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
@@ -56,11 +56,11 @@ public class NormalizedVertixBufferModel{
 		for(ShadedTriangle a:shadedTriangles){
 			if(type){
 				for(int b=0;b<a.pos3.length;b++){
-					Vec3 finalNormal=GL11H.transformVector(Helper.Vec3(a.normal.xCoord, a.normal.yCoord, a.normal.zCoord), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
+					Vec3M finalNormal=GL11H.transformVector(Helper.Vec3M(a.normal.xCoord, a.normal.yCoord, a.normal.zCoord), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
 					tessellator.setNormal((float)finalNormal.xCoord, (float)finalNormal.yCoord, (float)finalNormal.zCoord);
 					
 					
-					Vec3 finalVec=GL11H.transformVector(Helper.Vec3(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
+					Vec3M finalVec=GL11H.transformVector(Helper.Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
 					if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY){
 						tessellator.addVertex(finalVec.xCoord, finalVec.yCoord, finalVec.zCoord);
 					}
@@ -101,7 +101,7 @@ public class NormalizedVertixBufferModel{
 	}
 	public void rotateAt(double x,double y,double z,double rotX,double rotY,double rotZ){
 		if(rotX==0&&rotY==0&&rotZ==0)return;
-		translate( x, y, z);
+		translate( pos);
 		rotate(rotX, rotY, rotZ);
 		translate(-x,-y,-z);
 	}

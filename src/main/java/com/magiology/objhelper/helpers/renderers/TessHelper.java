@@ -1,15 +1,7 @@
 package com.magiology.objhelper.helpers.renderers;
 
-import static java.lang.Math.max;
-import static org.lwjgl.opengl.GL11.GL_COLOR_MATERIAL;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glScalef;
-import static org.lwjgl.opengl.GL11.glTranslatef;
+import static java.lang.Math.*;
+import static org.lwjgl.opengl.GL11.*;
 
 import java.lang.reflect.Field;
 
@@ -19,22 +11,20 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.client.model.AdvancedModelLoader;
-import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.magiology.core.MReference;
 import com.magiology.mcobjects.effect.EntityMagiologyBaseFX;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.Vec3M;
 
 
 /**
@@ -43,8 +33,12 @@ import com.magiology.objhelper.helpers.Helper;
  */
 public class TessHelper{
 	
-	private static NoramlisedVertixBuffer noramlisedVertixBuffer=new NoramlisedVertixBuffer(Tessellator.instance);
+	private static NoramlisedVertixBuffer noramlisedVertixBuffer=new NoramlisedVertixBuffer(Tessellator.getInstance());
 	public static NoramlisedVertixBuffer getNVB(){return noramlisedVertixBuffer;}
+	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
+	public static RenderManager getRM(){return Helper.getMC().getRenderManager();}
+	
+	
 	public static void bindTexture(ResourceLocation texture){Minecraft.getMinecraft().getTextureManager().bindTexture(texture);}
 	public static void drawTri(double[] X, double[] Y,double[] Z, double[] U, double[] V){
 		int hi=max(max(max(max(X.length,Y.length),Z.length),U.length),V.length);
@@ -62,7 +56,7 @@ public class TessHelper{
 		for (int i = 0; i < X.length; i++)ShadedQuad.addVertexWithUVWRender(X[i], Y[i], Z[i], U[i], V[i]);
 	}
 	public static void drawBlurredCube(int x,int y,int z,double minX,double minY,double minZ,double maxX,double maxy,double maxZ,int blurQuality,double resolution,double r,double g,double b,double alpha){
-		drawBlurredCube(x, y, z, AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxy, maxZ), blurQuality, resolution,r,g,b, alpha);
+		drawBlurredCube(pos, new AxisAlignedBB(minX, minY, minZ, maxX, maxy, maxZ), blurQuality, resolution,r,g,b, alpha);
 	}
 	public static void drawBlurredCube(int x,int y,int z,AxisAlignedBB cube,int blurQuality,double resolution,double r,double g,double b,double alpha){
 		if(blurQuality<1||cube==null)return;
@@ -187,7 +181,7 @@ public class TessHelper{
 		}
 		GL11.glColor4d(r, g, b, alpha);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		Tessellator tess=Tessellator.instance;
+		WorldRenderer tess=getWR();
 		GL11.glPushMatrix();
 		tess.startDrawing(GL11.GL_TRIANGLES);
 		{
@@ -199,29 +193,29 @@ public class TessHelper{
 				tess.addVertex(xy[0][i], xy[1][i], 0);
 			}
 		}
-		tess.draw();
+		tess.finishDrawing();
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-	private static IModelCustom arrowModel;
-	public static void drawArrow(){
-		if(arrowModel==null)arrowModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/arrow.obj"));
-		else{
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
-			GL11H.rotateXYZ(0, 45, 0);
-			arrowModel.renderAll();
-			GL11.glPopMatrix();
-		}
-	}
-	private static IModelCustom ballModel;
-	public static void drawBall(){
-		if(ballModel==null)ballModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/ball.obj"));
-		else{
-			ballModel.renderAll();
-		}
-	}
+//	private static IModelCustom arrowModel;
+//	public static void drawArrow(){
+//		if(arrowModel==null)arrowModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/arrow.obj"));
+//		else{
+//			GL11.glPushMatrix();
+//			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
+//			GL11H.rotateXYZ(0, 45, 0);
+//			arrowModel.renderAll();
+//			GL11.glPopMatrix();
+//		}
+//	}
+//	private static IModelCustom ballModel;
+//	public static void drawBall(){
+//		if(ballModel==null)ballModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/ball.obj"));
+//		else{
+//			ballModel.renderAll();
+//		}
+//	}
 	public static void drawPlayerIntoGUI(int x, int y, int scale, float mouseX, float mouseY, EntityLivingBase player,boolean... WillRotate){
 		boolean willRotate=false;
 		if(WillRotate.length!=0){
@@ -249,9 +243,9 @@ public class TessHelper{
             player.rotationYawHead = player.rotationYaw;
             player.prevRotationYawHead = player.rotationYaw;
         }
-        glTranslatef(0.0F, player.yOffset, 0.0F);
-        RenderManager.instance.playerViewY = 180.0F;
-        RenderManager.instance.renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+        glTranslatef(0.0F, (float)player.getYOffset(), 0.0F);
+        getRM().playerViewY = 180.0F;
+        getRM().renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
         player.renderYawOffset = f2;
         player.rotationYaw = f3;
         player.rotationPitch = f4;
@@ -333,17 +327,17 @@ public class TessHelper{
 		}
 	}
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NoramlisedVertixBuffer nvb,double textueOffset,double textueScale){
-		double lenght=Vec3.createVectorHelper(x1-x2, y1-y2, z1-z2).lengthVector();
+		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
 		EntityPlayer player=Helper.getThePlayer();
-		Tessellator tess=Tessellator.instance;
-		Vec3[] points=new Vec3[4];
+		WorldRenderer tess=getWR();
+		Vec3M[] points=new Vec3M[4];
 		
 //		RenderGlobal.drawOutlinedBoundingBox(p_147590_0_, p_147590_1_);
 		
-		points[0]=Vec3.createVectorHelper(0, -width/2, 0);
-		points[1]=Vec3.createVectorHelper(0, -width/2, 0);
-		points[2]=Vec3.createVectorHelper(0,  width/2, 0);
-		points[3]=Vec3.createVectorHelper(0,  width/2, 0);
+		points[0]=new Vec3M(0, -width/2, 0);
+		points[1]=new Vec3M(0, -width/2, 0);
+		points[2]=new Vec3M(0,  width/2, 0);
+		points[3]=new Vec3M(0,  width/2, 0);
 		float rotationX=-(float) Math.atan2(x1-x2, -z1+z2);
 		for(int a=0;a<4;a++){
 			points[a].rotateAroundZ((float) Math.toRadians(90));
@@ -351,38 +345,38 @@ public class TessHelper{
 		}
 		if(nvb==null){
 			tess.startDrawingQuads();
-			tess.addVertexWithUV(points[0].xCoord+x2,points[0].yCoord+y2,points[0].zCoord+z2,                   textueOffset,0);
-			tess.addVertexWithUV(points[1].xCoord+x1,points[1].yCoord+y1,points[1].zCoord+z1,lenght*textueScale+textueOffset,0);
-			tess.addVertexWithUV(points[2].xCoord+x1,points[2].yCoord+y1,points[2].zCoord+z1,lenght*textueScale+textueOffset,1);
-			tess.addVertexWithUV(points[3].xCoord+x2,points[3].yCoord+y2,points[3].zCoord+z2,                   textueOffset,1);
+			tess.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
+			tess.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
+			tess.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
+			tess.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
 			for(int a=0;a<4;a++){
 				points[a].rotateAroundY((-rotationX));
 				points[a].rotateAroundZ((float) Math.toRadians(90));
 				points[a].rotateAroundY((rotationX));
 			}
-			tess.addVertexWithUV(points[0].xCoord+x2,points[0].yCoord+y2,points[0].zCoord+z2,                   textueOffset,0);
-			tess.addVertexWithUV(points[1].xCoord+x1,points[1].yCoord+y1,points[1].zCoord+z1,lenght*textueScale+textueOffset,0);
-			tess.addVertexWithUV(points[2].xCoord+x1,points[2].yCoord+y1,points[2].zCoord+z1,lenght*textueScale+textueOffset,1);
-			tess.addVertexWithUV(points[3].xCoord+x2,points[3].yCoord+y2,points[3].zCoord+z2,                   textueOffset,1);
-			tess.draw();
+			tess.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
+			tess.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
+			tess.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
+			tess.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
+			tess.finishDrawing();
 		}else{
-			nvb.addVertexWithUV(points[0].xCoord+x2,points[0].yCoord+y2,points[0].zCoord+z2,                   textueOffset,0);
-			nvb.addVertexWithUV(points[1].xCoord+x1,points[1].yCoord+y1,points[1].zCoord+z1,lenght*textueScale+textueOffset,0);
-			nvb.addVertexWithUV(points[2].xCoord+x1,points[2].yCoord+y1,points[2].zCoord+z1,lenght*textueScale+textueOffset,1);
-			nvb.addVertexWithUV(points[3].xCoord+x2,points[3].yCoord+y2,points[3].zCoord+z2,                   textueOffset,1);
+			nvb.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
+			nvb.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
+			nvb.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
+			nvb.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
 			for(int a=0;a<4;a++){
 				points[a].rotateAroundY((-rotationX));
 				points[a].rotateAroundZ((float) Math.toRadians(90));
 				points[a].rotateAroundY((rotationX));
 			}
-			nvb.addVertexWithUV(points[0].xCoord+x2,points[0].yCoord+y2,points[0].zCoord+z2,                   textueOffset,0);
-			nvb.addVertexWithUV(points[1].xCoord+x1,points[1].yCoord+y1,points[1].zCoord+z1,lenght*textueScale+textueOffset,0);
-			nvb.addVertexWithUV(points[2].xCoord+x1,points[2].yCoord+y1,points[2].zCoord+z1,lenght*textueScale+textueOffset,1);
-			nvb.addVertexWithUV(points[3].xCoord+x2,points[3].yCoord+y2,points[3].zCoord+z2,                   textueOffset,1);
+			nvb.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
+			nvb.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
+			nvb.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
+			nvb.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
 		}
 	}
 	public static void renderParticle(){
-		Tessellator tessellator = Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		boolean isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView==2;
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -390,7 +384,7 @@ public class TessHelper{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 		
-		EntityMagiologyBaseFX.renderBufferedParticle(tessellator);
+		EntityMagiologyBaseFX.renderBufferedParticle(tess);
 		
 		
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);

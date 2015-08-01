@@ -1,15 +1,15 @@
 package com.magiology.render.tilerender;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
+import org.lwjgl.opengl.GL11;
+
 import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.ShadedQuad;
 import com.magiology.render.Textures;
-
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
-
-import org.lwjgl.opengl.GL11;
 
 public class RenderFireGun extends TileEntitySpecialRenderer {
 	
@@ -20,7 +20,7 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		TileEntityFireGun dir= (TileEntityFireGun) tileentity;
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
@@ -32,26 +32,26 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 		}
 		
 		if(dir.rotation[0]==null)if(dir.rotation[1]==null&&dir.rotation[2]==null&&dir.rotation[3]==null){
-			drawGunStand(ForgeDirection.SOUTH, tileentity,x,y,z,f);
+			drawGunStand(EnumFacing.SOUTH, tileentity,x,y,z,f);
 		}
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glTranslated(-x, -y, -z);
 	}
 	
-	public void drawGunStand(ForgeDirection dir, TileEntity tileentity, double x, double y, double z, float f){
+	public void drawGunStand(EnumFacing dir, TileEntity tileentity, double x, double y, double z, float f){
 		this.bindTexture(Textures.FireGunGun);
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST)){
+		if(dir.equals(EnumFacing.WEST)){
 			GL11.glRotatef(180, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.SOUTH)){
+		else if (dir.equals(EnumFacing.SOUTH)){
 			GL11.glRotatef(-90, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.EAST)){
+		else if (dir.equals(EnumFacing.EAST)){
 		}
-		else if (dir.equals(ForgeDirection.NORTH)){
+		else if (dir.equals(EnumFacing.NORTH)){
 			GL11.glRotatef(90, 0, 1, 0);
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -77,34 +77,34 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 		ShadedQuad.addVertexWithUVWRender(p*10, p*4, p*7, tW*16,tH*0);
 		}
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST)){
+		if(dir.equals(EnumFacing.WEST)){
 			GL11.glRotatef(-180, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.SOUTH)){
+		else if (dir.equals(EnumFacing.SOUTH)){
 			GL11.glRotatef(90, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.EAST)){
+		else if (dir.equals(EnumFacing.EAST)){
 		}
-		else if (dir.equals(ForgeDirection.NORTH)){
+		else if (dir.equals(EnumFacing.NORTH)){
 			GL11.glRotatef(-90, 0, 1, 0);
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 	}
-	public void drawGun(ForgeDirection dir, TileEntity tileentity, double x, double y, double z, float f){
+	public void drawGun(EnumFacing dir, TileEntity tileentity, double x, double y, double z, float f){
 		TileEntityFireGun isit= (TileEntityFireGun) tileentity;
 		GL11.glPushMatrix();
 		this.bindTexture(Textures.FireGunGun);
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if(dir.equals(ForgeDirection.WEST)){
+		if(dir.equals(EnumFacing.WEST)){
 			GL11.glRotatef(180, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.SOUTH)){
+		else if (dir.equals(EnumFacing.SOUTH)){
 			GL11.glRotatef(-90, 0, 1, 0);
 		}
-		else if (dir.equals(ForgeDirection.EAST)){
+		else if (dir.equals(EnumFacing.EAST)){
 		}
-		else if (dir.equals(ForgeDirection.NORTH)){
+		else if (dir.equals(EnumFacing.NORTH)){
 			GL11.glRotatef(90, 0, 1, 0);
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);

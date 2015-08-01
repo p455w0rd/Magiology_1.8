@@ -2,11 +2,11 @@ package com.magiology.upgrades;
 
 import java.util.ArrayList;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 
 public class RegisterUpgrades{
 	

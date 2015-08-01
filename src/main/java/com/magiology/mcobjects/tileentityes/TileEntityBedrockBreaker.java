@@ -4,14 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityBedrockBreaker extends TileEntityM{
 	EffectRenderer efrenderer = Minecraft.getMinecraft().effectRenderer;
@@ -36,8 +35,8 @@ public class TileEntityBedrockBreaker extends TileEntityM{
 		this.update();
 		if(IRFA==true)
 		{
-			worldObj.spawnParticle("lava", xCoord+0.5, yCoord, zCoord+0.5, 0, 0, 0);
-			worldObj.spawnParticle("flame", xCoord+0.5, yCoord+p*0.5, zCoord+0.5, (worldObj.rand.nextFloat()/50)-0.01, 0.005, (worldObj.rand.nextFloat()/59)-0.01);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, xCoord+0.5, yCoord, zCoord+0.5, 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+0.5, yCoord+p*0.5, zCoord+0.5, (worldObj.rand.nextFloat()/50)-0.01, 0.005, (worldObj.rand.nextFloat()/59)-0.01);
 			if(efrenderer!=null)efrenderer.addBlockHitEffects(xCoord, yCoord-1, zCoord, 1);
 		}
 		
@@ -124,7 +123,7 @@ public class TileEntityBedrockBreaker extends TileEntityM{
     }
 	
 	@Override
-	@SideOnly(Side.CLIENT)public AxisAlignedBB getRenderBoundingBox(){return AxisAlignedBB.getBoundingBox(xCoord-0.1, yCoord, zCoord-0.1, xCoord+1.1, yCoord+1, zCoord+1.1);}
+	@SideOnly(Side.CLIENT)public AxisAlignedBB getRenderBoundingBox(){return new AxisAlignedBB(xCoord-0.1, yCoord, zCoord-0.1, xCoord+1.1, yCoord+1, zCoord+1.1);}
 	
 	
 }

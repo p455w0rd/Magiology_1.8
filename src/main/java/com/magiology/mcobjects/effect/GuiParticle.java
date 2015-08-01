@@ -100,7 +100,7 @@ public class GuiParticle{
 		tess.addVertexWithUV(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1);
 		tess.addVertexWithUV( boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 1, 1);
 		tess.addVertexWithUV( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0);
-		tess.draw();
+		tess.finishDrawing();
 		GL11H.EndOpaqueRendering();
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glPopMatrix();

@@ -5,6 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.input.Keyboard;
 
@@ -19,11 +22,6 @@ import com.magiology.gui.fpgui.StatsDisplayGui;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.objhelper.SimpleCounter;
 import com.magiology.objhelper.helpers.Helper;
-
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent;
 
 public class KeyHandler{
 	Minecraft mc=Minecraft.getMinecraft();

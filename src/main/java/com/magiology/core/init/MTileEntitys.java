@@ -1,6 +1,30 @@
 package com.magiology.core.init;
 
-import com.magiology.mcobjects.tileentityes.*;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
+import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
+import com.magiology.mcobjects.tileentityes.TileEntityBigChunksOOre;
+import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.mcobjects.tileentityes.TileEntityDontLookAtMe;
+import com.magiology.mcobjects.tileentityes.TileEntityEnergizedLapisOre;
+import com.magiology.mcobjects.tileentityes.TileEntityFireExhaust;
+import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
+import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
+import com.magiology.mcobjects.tileentityes.TileEntityPLauncher;
+import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
@@ -11,7 +35,23 @@ import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.render.tilerender.*;
+import com.magiology.render.tilerender.RenderBFCPowerOut;
+import com.magiology.render.tilerender.RenderBateryL1;
+import com.magiology.render.tilerender.RenderBateryL100;
+import com.magiology.render.tilerender.RenderBateryL2;
+import com.magiology.render.tilerender.RenderBateryL3;
+import com.magiology.render.tilerender.RenderBedrockBreaker;
+import com.magiology.render.tilerender.RenderBigChunksOOre;
+import com.magiology.render.tilerender.RenderDontLookAtMe;
+import com.magiology.render.tilerender.RenderEnergizedLapisOre;
+import com.magiology.render.tilerender.RenderFireExhaust;
+import com.magiology.render.tilerender.RenderFireGun;
+import com.magiology.render.tilerender.RenderFireLamp;
+import com.magiology.render.tilerender.RenderFireMatrixReceaver;
+import com.magiology.render.tilerender.RenderFireMatrixTransferer;
+import com.magiology.render.tilerender.RenderFirePipe;
+import com.magiology.render.tilerender.RenderOreStructureCore;
+import com.magiology.render.tilerender.RenderRemotePowerCounter;
 import com.magiology.render.tilerender.hologram.RenderHologramProjector;
 import com.magiology.render.tilerender.isbhrrender.ISBRH;
 import com.magiology.render.tilerender.isbhrrender.RenderFireLampISBRH;
@@ -19,14 +59,6 @@ import com.magiology.render.tilerender.network.RenderNetworkConductor;
 import com.magiology.render.tilerender.network.RenderNetworkController;
 import com.magiology.render.tilerender.network.RenderNetworkInterface;
 import com.magiology.render.tilerender.network.RenderNetworkPointerContainer;
-
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 public class MTileEntitys{
 

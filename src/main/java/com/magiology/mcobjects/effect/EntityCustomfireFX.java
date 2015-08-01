@@ -1,5 +1,13 @@
 package com.magiology.mcobjects.effect;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.helpers.Helper;
@@ -8,14 +16,6 @@ import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityCloudFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.client.particle.EntitySmokeFX;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.world.World;
 
 public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 	public boolean active=false;
@@ -60,7 +60,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 		tess.addVertexWithUV((x-par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z-par5*ps/1.5+par7*ps/1.5), 1, 0);
 		tess.addVertexWithUV((x+par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z+par5*ps/1.5+par7*ps/1.5), 1, 1);
 		tess.addVertexWithUV((x+par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z+par5*ps/1.5-par7*ps/1.5), 0, 1);
-		tess.draw();
+		tess.finishDrawing();
 		
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
@@ -70,7 +70,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 		
 //		GL11.glPushMatrix();
 //		GL11.glEnable(GL11.GL_LIGHTING);
-//		GL11.glTranslated(x, y, z);
+//		GL11.glTranslated(pos);
 //		GL11.glRotated(roration[0], 1, 0, 0);
 //		GL11.glRotated(roration[1], 0, 1, 0);
 //		GL11.glRotated(roration[2], 0, 0, 1);
@@ -83,12 +83,12 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
         RenderHelper.enableStandardItemLighting();
 		
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		GL11H.rotateXYZ(Helper.calculateRenderPosArray(prevRoration, roration));
 		GL11.glTranslated(-x, -y, -z);
 		
 		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(pos);
 		double lol=2.3;
 		
 		

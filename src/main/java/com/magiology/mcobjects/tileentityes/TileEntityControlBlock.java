@@ -1,13 +1,13 @@
 package com.magiology.mcobjects.tileentityes;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.objhelper.helpers.Helper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
+
+import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.objhelper.helpers.Helper;
 
 public class TileEntityControlBlock extends TileEntityM implements ISidedInventory{
 	
@@ -48,7 +48,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 	public void updateEntity(){
 		prevThingyPos=thingyPos;
 		prevAngle=angle;
-		boolean rc=worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+		boolean rc=worldObj.isBlockIndirectlyGettingPowered(pos);
 		int wantedAngle=0;
 		
 		switch (redstoneC){

@@ -1,16 +1,16 @@
 package com.magiology.mcobjects.tileentityes;
 
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.objhelper.CraftingGridWOutput;
-import com.magiology.objhelper.helpers.Helper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.objhelper.CraftingGridWOutput;
+import com.magiology.objhelper.helpers.Helper;
 
 public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory{
 	
@@ -66,8 +66,8 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	public boolean isActive(){
 		switch(rotation){
 		case 0:{
-			tile1=worldObj.getTileEntity(xCoord, yCoord, zCoord-1);
-			tile2=worldObj.getTileEntity(xCoord, yCoord, zCoord+1);
+			tile1=worldObj.getTileEntity(pos-1);
+			tile2=worldObj.getTileEntity(pos+1);
 		}break;
 		case 1:{
 			tile1=worldObj.getTileEntity(xCoord-1, yCoord, zCoord);

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -15,6 +14,7 @@ import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class EntitySparkFX extends EntityMagiologyBaseFX{
 	
@@ -31,7 +31,7 @@ public class EntitySparkFX extends EntityMagiologyBaseFX{
 		this.fragmentWidth=fragmentWidth;
 		New(null);
 	}
-	public EntitySparkFX(World w, double xp, double yp, double zp,float fragmentWidth,float fragmentSize,int fragmetingSpeed,int numberOfSplitsPerUpdate,int size,Vec3 dir){
+	public EntitySparkFX(World w, double xp, double yp, double zp,float fragmentWidth,float fragmentSize,int fragmetingSpeed,int numberOfSplitsPerUpdate,int size,Vec3M dir){
 		this(w, xp, yp, zp, fragmentWidth, fragmentSize);
 		slowdown.lenght=fragmetingSpeed;
 		this.numberOfSplitsPerUpdate=Math.max(numberOfSplitsPerUpdate, 1);
@@ -50,7 +50,7 @@ public class EntitySparkFX extends EntityMagiologyBaseFX{
 		float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-    	GL11.glTranslatef(x, y, z);
+    	GL11.glTranslatef(pos);
 		
 		for(Fragment fragment:fragments)fragment.render();
 		

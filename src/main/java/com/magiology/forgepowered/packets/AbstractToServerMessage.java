@@ -1,6 +1,5 @@
 package com.magiology.forgepowered.packets;
 
-import cpw.mods.fml.relauncher.Side;
 
 public abstract class AbstractToServerMessage extends AbstractPacket{
 	
