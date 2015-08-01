@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Entity" key="selection"/>
+		<item value="xC" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
-		<item value="false" key="wholeword"/>
+		<item value="true" key="wholeword"/>
 		<list key="findhistory">
-			<item value="getShadowSize"/>
-			<item value="getOffsetBoundingBox"/>
-			<item value="zPos"/>
-			<item value="yPos"/>
-			<item value="xPos"/>
-			<item value="Coord"/>
-			<item value="xCoord"/>
-			<item value=")if("/>
+			<item value="public void update(){"/>
+			<item value="update()"/>
+			<item value="xC"/>
+			<item value="z"/>
+			<item value="y"/>
+			<item value="x"/>
+			<item value="onItemUse"/>
+			<item value="stackTagCompound"/>
 		</list>
 		<list key="replacehistory">
+			<item value="CX"/>
+			<item value="pos.getZ()"/>
+			<item value="pos.getY()"/>
+			<item value="pos.getX()"/>
+			<item value="getTagCompound()"/>
 			<item value="offset"/>
 			<item value="xPos.getZ()"/>
 			<item value="xPos.getY()"/>
-			<item value="xPos.getX()"/>
-			<item value="()"/>
-			<item value="x()"/>
-			<item value="&amp;&amp;"/>
-			<item value="pos.getZ()"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

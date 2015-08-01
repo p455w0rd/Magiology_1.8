@@ -122,9 +122,9 @@ public class MTileEntitys{
 		ClientRegistry.bindTileEntitySpecialRenderer(tileEntityClass,specialRenderer);
 	}
 	public static void setCustomRenderers(){
-		RenderFireLampISBRH a=new RenderFireLampISBRH(RenderingRegistry.getNextAvailableRenderId());
-		ISBRH.registerBlockRender(MBlocks.FireLamp, a);
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MBlocks.FireLamp),a);
+//		RenderFireLampISBRH a=new RenderFireLampISBRH(RenderingRegistry.getNextAvailableRenderId());
+//		ISBRH.registerBlockRender(MBlocks.FireLamp, a);
+//		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MBlocks.FireLamp),a);
 		
 	}
 
