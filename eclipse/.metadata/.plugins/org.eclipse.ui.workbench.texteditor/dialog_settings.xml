@@ -2,37 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="xC" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
-		<item value="true" key="wholeword"/>
+		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="public void update(){"/>
-			<item value="update()"/>
-			<item value="xC"/>
-			<item value="z"/>
-			<item value="y"/>
-			<item value="x"/>
+			<item value="Coord"/>
+			<item value="draw"/>
+			<item value="Tessellator.instance"/>
+			<item value="getWorldObj"/>
+			<item value="getItemDropped"/>
 			<item value="onItemUse"/>
-			<item value="stackTagCompound"/>
+			<item value="addVertex"/>
+			<item value="]);"/>
 		</list>
 		<list key="replacehistory">
-			<item value="CX"/>
-			<item value="pos.getZ()"/>
-			<item value="pos.getY()"/>
-			<item value="pos.getX()"/>
-			<item value="getTagCompound()"/>
-			<item value="offset"/>
-			<item value="xPos.getZ()"/>
-			<item value="xPos.getY()"/>
+			<item value=""/>
+			<item value="finishDrawing"/>
+			<item value="Tessellator.getInstance().getWorldRenderer()"/>
+			<item value="getWorld"/>
+			<item value="addVertexWithUV"/>
+			<item value="],0,0);"/>
+			<item value="buf"/>
+			<item value="buf.draw();"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="872" key="DIALOG_X_ORIGIN"/>
-		<item value="144" key="DIALOG_Y_ORIGIN"/>
+		<item value="920" key="DIALOG_X_ORIGIN"/>
+		<item value="197" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

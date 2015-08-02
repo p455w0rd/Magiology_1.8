@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.entitys;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
@@ -14,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.vectors.Vec3M;
@@ -45,7 +45,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
         this.renderDistanceWeight = 10.0D;
         this.shootingEntity = entity;
         this.setSize(0.5F, 0.5F);
-        for(int a=0;a<2*(time+1);a++)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, posX+Helper.CRandF(0.1), posY+Helper.CRandF(0.1), posZ+Helper.CRandF(0.1), motionX+Helper.CRandF(0.5), motionY+Helper.CRandF(0.5), motionZ+Helper.CRandF(0.5)));
+        for(int a=0;a<2*(time+1);a++)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, posX+Helper.CRandF(0.1), posY+Helper.CRandF(0.1), posZ+Helper.CRandF(0.1), motionX+Helper.CRandF(0.5), motionY+Helper.CRandF(0.5), motionZ+Helper.CRandF(0.5)));
         this.time=time;
         this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
         
@@ -108,7 +108,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
         }else if(MOP!=null){
          	pos=MOP.getBlockPos();
         }
-        Helper.spawnEntityFX(new EntitySmokeFX(worldObj, posX, posY, posZ, 0, 0, 0));
+        Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, posX, posY, posZ, 0, 0, 0));
         motionX*=0.99;
         motionY*=0.99;
         motionZ*=0.99;

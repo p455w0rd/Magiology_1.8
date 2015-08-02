@@ -9,10 +9,13 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -21,10 +24,13 @@ import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.Vec3M;
 
 /* Inspired by Integrated-Circuits, thanks! o/ */
 public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMessage, IMessageHandler<T, IMessage>{
 	public static int registrationId=0;
+	
+	
 	@Override
 	public IMessage onMessage(T message, MessageContext ctx){
 		message.process(ctx.side.isServer()?ctx.getServerHandler().playerEntity:Minecraft.getMinecraft().thePlayer,ctx.side);
@@ -64,12 +70,12 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 		else if(side==Side.SERVER)Magiology.NETWORK_CHANNEL.registerMessage(clazz, clazz, registrationId, Side.SERVER);
 		registrationId++;
 	}
-	public void writePos(PacketBuffer buffer,int[] pos){
+	public void write3i(PacketBuffer buffer,int[] pos){
 		buffer.writeInt(pos[0]);
 		buffer.writeInt(pos[1]);
 		buffer.writeInt(pos[2]);
 	}
-	public int[] readPos(PacketBuffer buffer){
+	public int[] read3i(PacketBuffer buffer){
 		return new int[]{
 				buffer.readInt(),
 				buffer.readInt(),
@@ -161,6 +167,22 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	}
 	public String readString(PacketBuffer buffer){
 		return ByteBufUtils.readUTF8String(buffer);
+	}
+	public void writePos(PacketBuffer buffer, BlockPos pos){
+		buffer.writeInt(pos.getX());
+		buffer.writeInt(pos.getY());
+		buffer.writeInt(pos.getZ());
+	}
+	public BlockPos readPos(PacketBuffer buffer){
+		return new BlockPos(buffer.readInt(),buffer.readInt(),buffer.readInt());
+	}
+	public void writeVec3M(PacketBuffer buffer, Vec3M vec){
+		buffer.writeFloat((float)vec.x);
+		buffer.writeFloat((float)vec.y);
+		buffer.writeFloat((float)vec.z);
+	}
+	public Vec3M readVec3M(PacketBuffer buffer){
+		return new Vec3M(buffer.readFloat(),buffer.readFloat(),buffer.readFloat());
 	}
 }
 //public class DummyPacket extends AbstractPacket{

@@ -2,7 +2,7 @@ package com.magiology.gui.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -47,7 +47,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
 		mouseX=x;
 		mouseY=y;
-		Tessellator tess=Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		this.renderParticles(v1);
 		
 		double GL11alpha=1;

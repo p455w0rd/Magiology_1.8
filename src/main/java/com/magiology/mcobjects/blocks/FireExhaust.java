@@ -22,8 +22,6 @@ public class FireExhaust extends BlockContainer {
 	}
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	public FireExhaust() {
 		super(Material.gourd);
 		this.setHardness(0.2F).setHarvestLevel("pickaxe", 1);

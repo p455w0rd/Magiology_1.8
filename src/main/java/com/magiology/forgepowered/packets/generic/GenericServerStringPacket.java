@@ -5,6 +5,7 @@ import java.io.IOException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.forgepowered.packets.AbstractToServerMessage;
 import com.magiology.handelers.GenericPacketEventHandeler;

@@ -2,6 +2,7 @@ package com.magiology.mcobjects.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -20,8 +21,6 @@ public class FireGun extends BlockContainer {
 	}
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	public FireGun() {
 		super(Material.gourd);
 		this.setHardness(0.2F).setHarvestLevel("pickaxe", 1);
@@ -47,7 +46,7 @@ public class FireGun extends BlockContainer {
     }
 	
     @Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, BlockPos pos){
+	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state){
 	TileEntityFireGun rotation= (TileEntityFireGun) world.getTileEntity(pos);
 	float p= 1F/16F;
 	if(rotation !=null){
@@ -59,7 +58,7 @@ public class FireGun extends BlockContainer {
 		float maxZ=p*9.5F  +(rotation.rotation[0]!=null?(p*1.5F):0)  +(rotation.rotation[2]!=null?(p*6.5F):0);
 	this.setBlockBounds(minX,minY,minZ,maxX,maxY,maxZ);
 	}
-    return new AxisAlignedBB(x+this.minX, y+this.minY, z+this.minZ, x+this.maxX, y+this.maxY, z+this.maxZ);
+    return new AxisAlignedBB(this.minX, this.minY,this.minZ, this.maxX, this.maxY, this.maxZ).addCoord(pos.getX(), pos.getY(), pos.getZ());
 }
 	
 	@Override

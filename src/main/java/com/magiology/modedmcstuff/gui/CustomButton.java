@@ -1,18 +1,19 @@
 package com.magiology.modedmcstuff.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 @SideOnly(Side.CLIENT)
 public class CustomButton extends GuiButton{
@@ -21,7 +22,7 @@ public class CustomButton extends GuiButton{
 	public double r=1,g=1,b=1,rGoal=0.9,gGoal=0.9,bGoal=0.9;
 	public double[] one2={1,0},one2Goal={1,0};
 	public int state=0;
-	Tessellator tess=Tessellator.instance;
+	WorldRenderer tess=TessHelper.getWR();
 	
     
     public CustomButton(int id, int x, int y,int width, int height, String text,String resouce){
@@ -38,7 +39,7 @@ public class CustomButton extends GuiButton{
     }
     
     public void update(int x, int y){
-    	state=this.getHoverState(this.field_146123_n);
+    	state=this.getHoverState(this.hovered);
     	if(state==1){
     		one2Goal[0]=1;
     		one2Goal[1]=0;
@@ -64,11 +65,11 @@ public class CustomButton extends GuiButton{
 	@Override
 	public void drawButton(Minecraft p_146112_1_, int p_146112_2_, int p_146112_3_){
         if (this.visible){
-            FontRenderer fontrenderer = p_146112_1_.fontRenderer;
+            FontRenderer fontrenderer = H.getFontRenderer();
             p_146112_1_.getTextureManager().bindTexture(buttonTexture);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            this.field_146123_n = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition && p_146112_2_ < this.xPosition + this.width && p_146112_3_ < this.yPosition + this.height;
-            int k = this.getHoverState(this.field_146123_n);
+            this.hovered = p_146112_2_ >= this.xPosition && p_146112_3_ >= this.yPosition && p_146112_2_ < this.xPosition + this.width && p_146112_3_ < this.yPosition + this.height;
+            int k = this.getHoverState(this.hovered);
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -110,12 +111,8 @@ public class CustomButton extends GuiButton{
             int l = 14737632;
             if (packedFGColour != 0)l = packedFGColour;
             else if (!this.enabled)l = 10526880;
-            else if (this.field_146123_n)l = 16777120;
+            else if (this.hovered)l = 16777120;
             this.drawCenteredString(fontrenderer,this.displayString,this.xPosition+this.width/2,this.yPosition+(this.height-8)/2,l);
         }
-    }
-	@Override
-    public void func_146113_a(SoundHandler sh){
-		sh.playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0F));
     }
 }

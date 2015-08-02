@@ -8,10 +8,11 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.vectors.TwoDots;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -25,9 +26,10 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 	
 	
 	public EnumFacing[] connections = new EnumFacing[6];
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
 		TileEntityFireMatrixReceaver tile=(TileEntityFireMatrixReceaver) tileentity;
 		
 		boolean var1=true;
@@ -41,11 +43,11 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 				}
 			}
 		}
-		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.xCoord+0.5, tile.yCoord+0.5, tile.zCoord+0.5, tile.transferp[0]+0.5, tile.transferp[1]+0.5, tile.transferp[2]+0.5),tile));
+		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
 		float rotation=Helper.calculateRenderPos(tile.prevRotation,tile.rotation);
 		
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
 		this.bindTexture(Textures.FireMatrixReceaverBase);
@@ -115,69 +117,71 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 
 		this.bindTexture(Textures.FireMatrixReceaverBase);
 		
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 1, 0);
+		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+		buf.addVertexWithUV(minx, miny, minz, 0, 1);
+		buf.addVertexWithUV(minx, miny, maxz, 1, 1);
+		buf.addVertexWithUV(minx, maxy, maxz, 1, 0);
 		
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz,  1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny,  maxz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny,  minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz,  0, 1);
+		buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
+		buf.addVertexWithUV(maxx, miny,  maxz, 1, 0);
+		buf.addVertexWithUV(maxx, miny,  minz, 0, 0);
+		buf.addVertexWithUV(maxx, maxy, minz,  0, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz,  0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny , maxz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz,  1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz,  1, 1);
+		buf.addVertexWithUV(minx, maxy, maxz,  0, 1);
+		buf.addVertexWithUV(minx, miny , maxz, 0, 0);
+		buf.addVertexWithUV(maxx, miny, maxz,  1, 0);
+		buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz,  1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, minz,  1, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, miny , minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz,  0, 1);
+		buf.addVertexWithUV(maxx, maxy, minz,  1, 1);
+		buf.addVertexWithUV(maxx, miny, minz,  1, 0);
+		buf.addVertexWithUV(minx, miny , minz, 0, 0);
+		buf.addVertexWithUV(minx, maxy, minz,  0, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 0, 1);
+		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
+		buf.addVertexWithUV(maxx, maxy, minz, 1, 0);
+		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+		buf.addVertexWithUV(minx, maxy, maxz, 0, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz, 1, 1);
+		buf.addVertexWithUV(minx, miny, maxz, 0, 1);
+		buf.addVertexWithUV(minx, miny, minz, 0, 0);
+		buf.addVertexWithUV(maxx, miny, minz, 1, 0);
+		buf.addVertexWithUV(maxx, miny, maxz, 1, 1);
+		buf.draw();
 		
 	}
 	
 	public void drawCube(double minx,double miny,double minz,double maxx,double maxy,double maxz){
 			
-			ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-			ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 1);
-			ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 1, 1);
-			ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 1, 0);
+			buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+			buf.addVertexWithUV(minx, miny, minz, 0, 1);
+			buf.addVertexWithUV(minx, miny, maxz, 1, 1);
+			buf.addVertexWithUV(minx, maxy, maxz, 1, 0);
 			
-			ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz,  1, 1);
-			ShadedQuad.addVertexWithUVWRender(maxx, miny,  maxz, 1, 0);
-			ShadedQuad.addVertexWithUVWRender(maxx, miny,  minz, 0, 0);
-			ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz,  0, 1);
+			buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
+			buf.addVertexWithUV(maxx, miny,  maxz, 1, 0);
+			buf.addVertexWithUV(maxx, miny,  minz, 0, 0);
+			buf.addVertexWithUV(maxx, maxy, minz,  0, 1);
 			
-			ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz,  0, 1);
-			ShadedQuad.addVertexWithUVWRender(minx, miny , maxz, 0, 0);
-			ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz,  1, 0);
-			ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz,  1, 1);
+			buf.addVertexWithUV(minx, maxy, maxz,  0, 1);
+			buf.addVertexWithUV(minx, miny , maxz, 0, 0);
+			buf.addVertexWithUV(maxx, miny, maxz,  1, 0);
+			buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
 			
-			ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz,  1, 1);
-			ShadedQuad.addVertexWithUVWRender(maxx, miny, minz,  1, 0);
-			ShadedQuad.addVertexWithUVWRender(minx, miny , minz, 0, 0);
-			ShadedQuad.addVertexWithUVWRender(minx, maxy, minz,  0, 1);
+			buf.addVertexWithUV(maxx, maxy, minz,  1, 1);
+			buf.addVertexWithUV(maxx, miny, minz,  1, 0);
+			buf.addVertexWithUV(minx, miny , minz, 0, 0);
+			buf.addVertexWithUV(minx, maxy, minz,  0, 1);
 			
-			ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz, 1, 1);
-			ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz, 1, 0);
-			ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-			ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 0, 1);
+			buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
+			buf.addVertexWithUV(maxx, maxy, minz, 1, 0);
+			buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+			buf.addVertexWithUV(minx, maxy, maxz, 0, 1);
 			
-			ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 0, 1);
-			ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 0);
-			ShadedQuad.addVertexWithUVWRender(maxx, miny, minz, 1, 0);
-			ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz, 1, 1);
+			buf.addVertexWithUV(minx, miny, maxz, 0, 1);
+			buf.addVertexWithUV(minx, miny, minz, 0, 0);
+			buf.addVertexWithUV(maxx, miny, minz, 1, 0);
+			buf.addVertexWithUV(maxx, miny, maxz, 1, 1);
+			buf.draw();
 	}
 	
 }

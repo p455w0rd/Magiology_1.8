@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -9,9 +8,10 @@ import net.minecraft.util.EnumFacing;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBufferModel;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBufferModel;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -30,7 +30,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	private final float tHS=1F/32F;
 	NoramlisedVertixBuffer buf=TessHelper.getNVB();
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
 		TileEntityFirePipe pipe= (TileEntityFirePipe) tileentity;
 		if(Helper.isItemInStack(MItems.FireHammer, Helper.getThePlayer().getCurrentEquippedItem())){
 			if(pipe.hasPriorityUpg){
@@ -50,7 +50,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 					case 5:a=0;break;
 					}
 					AxisAlignedBB b=pipe.collisionBoxes[a];
-					RenderLoopEvents.spawnLARR(new RenderFirePipePriorityCube(pipe, pipe.xCoord, pipe.yCoord, pipe.zCoord, b));
+					RenderLoopEvents.spawnLARR(new RenderFirePipePriorityCube(pipe, pipe.getPos(), b));
 				}
 			}
 			boolean var2=true;
@@ -60,7 +60,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 			}
 			if(var2)RenderLoopEvents.spawnLARR(new RenderFirePipeGlow(pipe));
 		}
-		Tessellator.instance.setTranslation(pos);
+		RenderGet.WR().setTranslation(pipe.getPos().getX(), pipe.getPos().getY(), pipe.getPos().getZ());
 		
 		
 		if(pipe.DCFFL!=null)drawConectorFFL();
@@ -79,11 +79,11 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		}
 		else for(int a=0;a<pipe.strateConnection.length;a++)if(pipe.strateConnection[a]!=null)drawStrateCore(pipe.strateConnection[a]);
 		
-		Tessellator.instance.setTranslation(0,0,0);
+		RenderGet.WR().setTranslation(0,0,0);
 	}
 	
 	
-	private NormalizedVertixBufferModel modelStand;
+	private NoramlisedVertixBufferModel modelStand;
 	private void generateModelStand(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*7.5,  p*6, p*8.5,  tWS*0, tHS*0);
@@ -201,7 +201,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	
 	
 	
-	private NormalizedVertixBufferModel[] conectionToObjModel=new NormalizedVertixBufferModel[2];
+	private NoramlisedVertixBufferModel[] conectionToObjModel=new NoramlisedVertixBufferModel[2];
 	private void generateModelConectionToObj(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*0,   p*10, p*10,1, 0);
@@ -251,7 +251,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		conectionToObjModel[0].pop();
 		conectionToObjModel[1].pop();
 	}
-	private NormalizedVertixBufferModel strateCoreModel;
+	private NoramlisedVertixBufferModel strateCoreModel;
 	private void generateModelStrateCore(){
 		buf.cleanUp();
 		buf.addVertexWithUV(0, p*9.5, p*9.5,tW*103, tH*0);
@@ -367,7 +367,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.draw();
 		buf.pop();
 	}
-	private NormalizedVertixBufferModel conectorFFLModel;
+	private NoramlisedVertixBufferModel conectorFFLModel;
 	private void generateModelConectorFFL(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*0, 0);

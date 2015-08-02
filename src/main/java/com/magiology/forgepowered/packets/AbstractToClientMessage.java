@@ -3,6 +3,7 @@ package com.magiology.forgepowered.packets;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.relauncher.Side;
 
 public abstract class AbstractToClientMessage extends AbstractPacket{
 	public final SendingTarget target;

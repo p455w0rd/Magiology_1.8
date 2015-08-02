@@ -20,7 +20,7 @@ public class GameLoopEvents{
 	
 	@SubscribeEvent
 	public void onBlockBreak(BlockEvent.BreakEvent e){
-		int x=e.x,y=e.y,z=e.z;
+		BlockPos pos=e.pos;
 		EntityPlayer player=e.getPlayer();
 		World world=e.world;
 		TileEntity tile=world.getTileEntity(pos);
@@ -37,7 +37,7 @@ public class GameLoopEvents{
 		TileEntity tile=world.getTileEntity(pos);
 		if(tile instanceof PowerUpgrades){
 			PowerUpgrades Tile=(PowerUpgrades)tile;
-			if(Tile.getcontainerItems()!=null)for(ItemStack a:Tile.getcontainerItems())if(a!=null)Helper.dropBlockAsItem(world,x+0.5,y+0.5,z+0.5,a);
+			if(Tile.getcontainerItems()!=null)for(ItemStack a:Tile.getcontainerItems())if(a!=null)Helper.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,a);
 			return;
 		}
 	}

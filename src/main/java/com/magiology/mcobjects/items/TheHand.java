@@ -6,28 +6,27 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.TheHandHandeler.HandComonPositions;
-import com.magiology.mcobjects.entitys.ModedEntityFallingBlock;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 
 public class TheHand extends Item{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-	    itemStack.stackTagCompound = new NBTTagCompound();
+	    H.createNBT(itemStack);
 	}
 	
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){
-//		if(itemStack.stackTagCompound != null){
-//				list.add(EnumChatFormatting.BLUE+" X="+EnumChatFormatting.AQUA+Integer.toString(itemStack.stackTagCompound.getInteger("xC"))+
-//					 EnumChatFormatting.BLUE+" Y="+EnumChatFormatting.AQUA+Integer.toString(itemStack.stackTagCompound.getInteger("yC"))+
-//					 EnumChatFormatting.BLUE+" Z="+EnumChatFormatting.AQUA+Integer.toString(itemStack.stackTagCompound.getInteger("zC"))
+//		if(itemStack.getTagCompound() != null){
+//				list.add(EnumChatFormatting.BLUE+" X="+EnumChatFormatting.AQUA+Integer.toString(itemStack.getTagCompound().getInteger("xC"))+
+//					 EnumChatFormatting.BLUE+" Y="+EnumChatFormatting.AQUA+Integer.toString(itemStack.getTagCompound().getInteger("yC"))+
+//					 EnumChatFormatting.BLUE+" Z="+EnumChatFormatting.AQUA+Integer.toString(itemStack.getTagCompound().getInteger("zC"))
 //					 );
 //		}
 //		list.add("hold ");
@@ -71,12 +70,12 @@ public class TheHand extends Item{
 	}
 	
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int side, float hitX, float hitY, float hitZ){
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		TheHandHandeler.handUseAnimation(player);
 		if(TheHandHandeler.getActivePosition(player)==HandComonPositions.ReadyForAction){
 			player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		}else if(TheHandHandeler.getActivePosition(player)==HandComonPositions.NaturalPosition){
-			Helper.spawnEntity(new ModedEntityFallingBlock(world, x+0.5, y+0.501, z+0.5, Helper.getBlock(world, pos), world.getBlockMetadata(pos),player));
+//			Helper.spawnEntity(new ModedEntityFallingBlock(world, x+0.5, y+0.501, z+0.5, Helper.getBlock(world, pos), world.getBlockMetadata(pos),player));
 			world.setBlockToAir(pos);
 			
 		}
@@ -85,7 +84,7 @@ public class TheHand extends Item{
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5){
-		if(itemstack.stackTagCompound==null)itemstack.stackTagCompound=new NBTTagCompound();
+		H.createNBT(itemstack);
 		if(entity instanceof EntityPlayer){
 //			((EntityPlayer)entity).setItemInUse(itemstack, 100);
 		}

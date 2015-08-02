@@ -1,11 +1,8 @@
 package com.magiology.core.init;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
@@ -53,8 +50,6 @@ import com.magiology.render.tilerender.RenderFirePipe;
 import com.magiology.render.tilerender.RenderOreStructureCore;
 import com.magiology.render.tilerender.RenderRemotePowerCounter;
 import com.magiology.render.tilerender.hologram.RenderHologramProjector;
-import com.magiology.render.tilerender.isbhrrender.ISBRH;
-import com.magiology.render.tilerender.isbhrrender.RenderFireLampISBRH;
 import com.magiology.render.tilerender.network.RenderNetworkConductor;
 import com.magiology.render.tilerender.network.RenderNetworkController;
 import com.magiology.render.tilerender.network.RenderNetworkInterface;

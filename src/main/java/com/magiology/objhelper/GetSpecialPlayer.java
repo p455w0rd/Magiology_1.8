@@ -9,7 +9,7 @@ public final class GetSpecialPlayer{
 								  friend={"WolfBurnsMC","OnajPederTamo","MartinKitten"};
 	
 	public static int getPlayerRank(EntityPlayer player){
-		String plName=player.getDisplayName();
+		String plName=player.getName();
 		
 		if(plName.equals(owner))return 1;
 		

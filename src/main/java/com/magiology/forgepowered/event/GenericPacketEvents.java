@@ -51,19 +51,19 @@ public class GenericPacketEvents{
 		case 7:{
 			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
 			PowerHelper.cricleSideInteraction((ISidedPower)tileEn, integer);
-			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.xCoord, tileEn.yCoord, tileEn.zCoord);
+			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 8:{
 			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
 			tile.setSendOnSide(integer, !tile.getSendOnSide(integer));
-			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.xCoord, tileEn.yCoord, tileEn.zCoord);
+			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 9:{
 			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
 			tile.setReceaveOnSide(integer, !tile.getReceiveOnSide(integer));
-			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.xCoord, tileEn.yCoord, tileEn.zCoord);
+			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		default:{Helper.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
 		}}catch(Exception e){e.printStackTrace();}

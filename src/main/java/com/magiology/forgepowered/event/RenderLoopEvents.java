@@ -10,6 +10,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -154,7 +155,7 @@ public class RenderLoopEvents{
 		Minecraft.getMinecraft();
 		if(!Minecraft.isGuiEnabled())return;
 		if(e.type!=ElementType.CHAT)return;
-		FontRenderer fr=Minecraft.getMinecraft().fontRenderer;
+		FontRenderer fr=Helper.getFontRenderer();
 		ScaledResolution res=e.resolution;
 		EntityPlayer player=Helper.getThePlayer();
 		World world=player.worldObj;
@@ -175,7 +176,8 @@ public class RenderLoopEvents{
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event){
 		GL11.glPushMatrix();
 		EntityPlayer player=event.entityPlayer;
-		if(Helper.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.modelArmorChestplate.aimedBow=event.renderer.modelArmor.aimedBow=event.renderer.modelBipedMain.aimedBow=true;
+		if(Helper.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getPlayerModel().aimedBow=true;
+		
 		if(Helper.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 			float rotation=0;
@@ -215,6 +217,7 @@ public class RenderLoopEvents{
 //		new render
 		
 	}
+	protected void preRenderCallback(EntityLivingBase p_77041_1_, float p_77041_2_) {}
 	
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderPlayerEvent(RenderPlayerEvent.Post event){

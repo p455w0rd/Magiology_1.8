@@ -27,8 +27,6 @@ import com.magiology.mcobjects.blocks.PileODust;
 import com.magiology.mcobjects.blocks.RemotePowerCounter;
 import com.magiology.mcobjects.blocks.SmartCrafter;
 import com.magiology.mcobjects.blocks.energizedLapisOre;
-import com.magiology.mcobjects.blocks.disco.DiscoFlor;
-import com.magiology.mcobjects.blocks.disco.DiscoFlorPlatform;
 import com.magiology.mcobjects.blocks.network.NetworkConductor;
 import com.magiology.mcobjects.blocks.network.NetworkController;
 import com.magiology.mcobjects.blocks.network.NetworkInterface;
@@ -78,8 +76,6 @@ public class MBlocks{
 		BFCPowerOut=init(new BFCPowerOut().setBlockName("BFCPowerOut").setStepSound(Block.soundTypeMetal));
 		bedrockBreaker=init(new BedrockBreaker().setBlockName("bedrockBreaker").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
 		PileODust=init(new PileODust().setBlockName("PileODust").setCreativeTab(MCreativeTabs.Whwmmt_core).setStepSound(Block.soundTypeMetal).setBlockTextureName(MReference.MODID + ":" + "IronLevel2"));
-		DiscoFlor=init(new DiscoFlor().setBlockName("DiscoFlor").setBlockTextureName(MReference.MODID + ":" + "DiscoFlor"));
-		DiscoFlorPlatform=init(new DiscoFlorPlatform().setBlockName("DiscoFlorPlatform").setBlockTextureName(MReference.MODID + ":" + "DiscoFlor"));
 		DontLookAtMe=init(new DontLookAtMe().setCreativeTab(MCreativeTabs.Whwmmt_core).setBlockName("DontLookAtMe").setBlockTextureName(MReference.MODID + ":" + "nista16x16"));
 		energizedLapisOre=init(new energizedLapisOre().setCreativeTab(MCreativeTabs.Whwmmt_core).setBlockName("energizedLapisOre").setBlockTextureName("stone"));
 		hologramProjector=init(new HologramProjector().setCreativeTab(MCreativeTabs.Whwmmt_core).setBlockName("hologramProjector"));

@@ -2,7 +2,6 @@ package com.magiology.render.itemrender;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
@@ -12,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.MReference;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.render.Textures;
 
 
@@ -56,7 +56,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 			GL11.glRotated(xr, 1, 0, 0);
 			GL11.glRotated(yr, 0, 1, 0);
 			GL11.glRotated(zr, 0, 0, 1);
-			GL11.glTranslated(pos);
+			GL11.glTranslated(x,y,z);
 			double time=Minecraft.getMinecraft().theWorld.getTotalWorldTime()%180,angle=((time)*2-2)+(2)*RenderLoopEvents.partialTicks;
 			GL11.glTranslated(0.5, 0, 0);
 			GL11.glRotated(angle, 0, 1, 0);
@@ -88,7 +88,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 			width*=0.5;
 			GL11.glTranslated(0, 0, -width/2);
 		}
-		ItemRenderer.renderItemIn2D(Tessellator.instance, 0.0F, 0.0F, 1.0F, 1.0F, 255, 255, width);
+		RenderGet.RI().renderItemModel(is);
 		GL11.glPopMatrix();
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -97,7 +97,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glColor4d(1, 1, 1, 0.2);
-		ItemRenderer.renderItemIn2D(Tessellator.instance, 0.0F, 0.0F, 1.0F, 1.0F, 255, 255, 0.0625F);
+		RenderGet.RI().renderItemModel(is);
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);

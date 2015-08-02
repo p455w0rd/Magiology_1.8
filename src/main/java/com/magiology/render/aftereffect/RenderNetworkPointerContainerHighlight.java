@@ -43,7 +43,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		GL11.glPushMatrix();
 		GL11H.lighting(false);
 		//move to block
-		GL11.glTranslated(tile.xCoord+0.5, tile.yCoord+0.5, tile.zCoord+0.5);
+		GL11.glTranslated(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5);
 		//move to side
 		float x=0,y=0,z=0;
 		int id=highlightedBoxId-7,idX=id/3,idY=id%3;
@@ -56,7 +56,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			y-=p*2*idY;
 		}break;
 		}
-		GL11.glTranslatef(pos);
+		GL11.glTranslatef(x,y,z);
 		//set up openGl opaque
 		GL11H.SetUpOpaqueRendering(3);
 		GL11H.scaled(-H.p/4);
@@ -68,15 +68,15 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			playerX=Helper.calculateRenderPos(player, 'x'),
 			playerY=Helper.calculateRenderPos(player, 'y'),
 			playerZ=Helper.calculateRenderPos(player, 'z'),
-			txtX=tile.xCoord+0.5F+x,
-			txtY=tile.yCoord+0.5F+y,
-			txtZ=tile.zCoord+0.5F+z,
+			txtX=tile.x()+0.5F+x,
+			txtY=tile.y()+0.5F+y,
+			txtZ=tile.z()+0.5F+z,
 			difX=playerX-txtX,
 			difY=playerY-txtY,
 			difZ=playerZ-txtZ,
 			camPich=(float)Math.toDegrees(Math.atan2(difY,Math.sqrt(difX*difX+difZ*difZ))),
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90;
-		int time360=(int)((tile.getWorldObj().getTotalWorldTime()+highlightedBoxId*20)%360);
+		int time360=(int)((tile.getWorld().getTotalWorldTime()+highlightedBoxId*20)%360);
 		double time=Helper.calculateRenderPos(time360, time360+1);
 		
 		//rotation
@@ -136,7 +136,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			kill();
 			return;
 		}
-		if(tile.getWorldObj().getTileEntity(tile.xCoord, tile.yCoord, tile.zCoord)!=tile){
+		if(tile.getWorld().getTileEntity(tile.getPos())!=tile){
 			kill();
 			return;
 		}
@@ -166,8 +166,8 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			point=progress.getPoint(),
 			playerX=(float)player.posX,
 			playerZ=(float)player.posZ,
-			txtX=tile.xCoord+0.5F+x,
-			txtZ=tile.zCoord+0.5F+z,
+			txtX=tile.x()+0.5F+x,
+			txtZ=tile.z()+0.5F+z,
 			difX=playerX-txtX,
 			difZ=playerZ-txtZ,
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
@@ -180,7 +180,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		
 		float r=0.8F,g=Helper.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
-				tile.xCoord+0.5+x+leftX*rand+Helper.CRandF(0.1), tile.yCoord+0.5+y+Helper.CRandF(0.1), tile.zCoord+0.5+z+leftZ*rand+Helper.CRandF(0.1),
+				tile.x()+0.5+x+leftX*rand+Helper.CRandF(0.1), tile.y()+0.5+y+Helper.CRandF(0.1), tile.z()+0.5+z+leftZ*rand+Helper.CRandF(0.1),
 				Helper.CRandF(0.01), 0.005+Helper.CRandF(0.01), Helper.CRandF(0.01), 200, 5, H.RB()?-0.5:0.1, r,g,b,0.1*point));
 	}
 }

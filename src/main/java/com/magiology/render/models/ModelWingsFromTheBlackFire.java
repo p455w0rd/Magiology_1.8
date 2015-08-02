@@ -89,12 +89,12 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				b=b>1?1:b;
 				GL11.glColor4d(r,g,b,1);
 				part.draw(); 
-				GL11.glTranslatef((part.points[3].x-part.points[4].x)*(side?-1:1), 0, -p/2*(l*0.6F));
+				GL11.glTranslatef((float)(part.points[3].x-part.points[4].x)*(side?-1:1), 0, -p/2*(l*0.6F));
 				GL11H.rotateXYZ(3, 2, 0);
 			}
 			GL11.glColor4d(1,1,1,1);
 			GL11.glPopMatrix();
-			GL11.glTranslatef(0, 0, a.points[3].z);
+			GL11.glTranslatef(0, 0, a.points[3].getZ());
 		}
 		GL11.glPopMatrix();
 	}

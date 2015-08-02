@@ -19,20 +19,18 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	public  double alpha=0;
 	private final double speed;
 	private final AxisAlignedBB box;
-	private final int x,y,z;
+	private final BlockPos pos;
 	private final World world;
 	public final TileEntityFirePipe pipe;
 	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
 	
 	public RenderFirePipePriorityCube(TileEntityFirePipe pipe,BlockPos pos, AxisAlignedBB b){
-		this.x=x;
-		this.y=y;
-		this.z=z;
 		this.box=b;
 		this.pipe=pipe;
 		this.speed=0.06;
 		alpha=speed;
-		world=pipe.getWorldObj();
+		world=pipe.getWorld();
+		this.pos=pos;
 	}
 	
 	@Override
@@ -42,7 +40,7 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 //		GL11.glDisable(GL11.GL_CULL_FACE);
 //		GL11.glDisable(GL11.GL_FOG);
-		GL11.glTranslatef(pos);
+		GL11H.translate(pos);
 		GL11.glDepthMask(false);
 		GL11.glColor4d(1, 0.1, 0.1, alpha/5);
 		if(box!=null)for(int a=0;a<5;a++)drawCube(box.minX-a*0.01+Helper.CRandF(0.005), box.minY-a*0.01+Helper.CRandF(0.005), box.minZ-a*0.01+Helper.CRandF(0.005), box.maxX+a*0.01+Helper.CRandF(0.005), box.maxY+a*0.01+Helper.CRandF(0.005), box.maxZ+a*0.01+Helper.CRandF(0.005));

@@ -3,6 +3,7 @@ package com.magiology.modedmcstuff.guiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IChatComponent;
 
 import com.magiology.upgrades.RegisterUpgrades;
 
@@ -74,12 +75,12 @@ public class FakeContainer implements IInventory{
 	}
 
 	@Override
-	public String getInventoryName(){
+	public String getName(){
 		return "UniversalInventory";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName(){
+	public boolean hasCustomName(){
 		return true;
 	}
 
@@ -96,16 +97,6 @@ public class FakeContainer implements IInventory{
 	public boolean isUseableByPlayer(EntityPlayer player){
 		return true;
 	}
-
-	@Override
-	public void openInventory(){
-		
-	}
-
-	@Override
-	public void closeInventory(){
-		
-	}
 	@Override
 	public boolean isItemValidForSlot(int v1, ItemStack stack) {
 		boolean reurn1=false;
@@ -115,6 +106,47 @@ public class FakeContainer implements IInventory{
 	
 	@Override
 	public void markDirty(){
+		
+	}
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void openInventory(EntityPlayer player){
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getField(int id){
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value){
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
 		
 	}
 	

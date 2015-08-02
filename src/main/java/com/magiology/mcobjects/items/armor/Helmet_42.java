@@ -9,14 +9,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.core.MReference;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.modedmcstuff.items.UpgradeableArmor;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.render.models.ModelHelmet42;
 import com.magiology.upgrades.RegisterUpgrades.Container;
 
@@ -29,7 +29,7 @@ public class Helmet_42 extends UpgradeableArmor{
 	    super(material, 0, type);
 	    this.textureName = textureName;
 	    this.setUnlocalizedName(unlocalizedName);
-	    this.setTextureName(MReference.MODID + ":" + unlocalizedName);
+//	    this.setTextureName(MReference.MODID + ":" + unlocalizedName);
 	    this.setCreativeTab(creativeTab);
 	    this.setMaxDamage(25);
 	    initUpgrade(Container.Helmet42);
@@ -56,7 +56,7 @@ public class Helmet_42 extends UpgradeableArmor{
 	            part.isChangingPos=false;
 	            Helper.spawnEntityFX(part);
 			}
-		}else helmet42.stackTagCompound = new NBTTagCompound();
+		}else H.createNBT(helmet42);
 	}
 	
 	@Override

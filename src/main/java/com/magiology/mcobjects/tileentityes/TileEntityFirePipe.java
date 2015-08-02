@@ -72,7 +72,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
     }
 	
 	@Override
-	public void update(){
+	public void updateEntity(){
 		power(true);
 		
 		//Get if/what side is first

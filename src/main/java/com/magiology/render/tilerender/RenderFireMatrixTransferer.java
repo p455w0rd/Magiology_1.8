@@ -6,8 +6,9 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
 
 public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
@@ -15,7 +16,7 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 	private final float p=1F/16F;
 	private final float tW=1F/64F;
 	private final float tH=1F/64F;
-
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	
 	public RenderFireMatrixTransferer(){
 		
@@ -37,7 +38,7 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 		}
 
 		this.bindTexture(Textures.FireMatrixTransfererBase);
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 //		GL11.glTranslatef(0, 0, 1);
 //		GL11.glRotated(-90, 1, 0, 0);
@@ -196,30 +197,32 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 		}
 	}
 	public void drawCube(double minx,double miny,double minz,double maxx,double maxy,double maxz){
-		ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz,  1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, minz,  1, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, miny , minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz,  0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz,  0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny , maxz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz,  1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz,  1, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, minz, miny);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, minz, minz, maxy);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, maxz, maxy);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, maxz, miny);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz,  1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny,  maxz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny,  minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz,  0, 1);
+		buf.cleanUp();
+		buf.addVertexWithUV(minx, miny, maxz, 0, 1);
+		buf.addVertexWithUV(minx, miny, minz, 0, 0);
+		buf.addVertexWithUV(maxx, miny, minz, 1, 0);
+		buf.addVertexWithUV(maxx, miny, maxz, 1, 1);
+		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
+		buf.addVertexWithUV(maxx, maxy, minz, 1, 0);
+		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+		buf.addVertexWithUV(minx, maxy, maxz, 0, 1);
+		buf.addVertexWithUV(maxx, maxy, minz,  1, 1);
+		buf.addVertexWithUV(maxx, miny, minz,  1, 0);
+		buf.addVertexWithUV(minx, miny , minz, 0, 0);
+		buf.addVertexWithUV(minx, maxy, minz,  0, 1);
+		buf.addVertexWithUV(minx, maxy, maxz,  0, 1);
+		buf.addVertexWithUV(minx, miny , maxz, 0, 0);
+		buf.addVertexWithUV(maxx, miny, maxz,  1, 0);
+		buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
+		buf.addVertexWithUV(minx, maxy, minz, minz, miny);
+		buf.addVertexWithUV(minx, miny, minz, minz, maxy);
+		buf.addVertexWithUV(minx, miny, maxz, maxz, maxy);
+		buf.addVertexWithUV(minx, maxy, maxz, maxz, miny);
+		buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
+		buf.addVertexWithUV(maxx, miny,  maxz, 1, 0);
+		buf.addVertexWithUV(maxx, miny,  minz, 0, 0);
+		buf.addVertexWithUV(maxx, maxy, minz,  0, 1);
+		buf.draw();
 	}
 	
 	

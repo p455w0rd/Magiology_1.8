@@ -2,47 +2,28 @@ package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.objhelper.helpers.SideHelper;
 
 public class TileEntityRemotePowerCounter extends TileEntityM{
 	
 	public Block block;
 	public TileEntity tile1;
 	public double powerBar;
-	public int maxPB,currentP,pos;
+	public int maxPB,currentP;
+	BlockPos pos1;
 	
 	@Override
 	public void updateEntity(){
 		boolean okBlock=true;
-		int metadata=worldObj.getBlockMetadata(pos);
-		x=xCoord; y=yCoord; z=zCoord;
+		int metadata=H.getBlockMetadata(worldObj, pos);
+		pos1=SideHelper.offset(metadata, pos);
 		
-		switch (metadata) {
-		case 0:{
-			y++;
-		}break;
-		case 1:{
-			y--;
-		}break;
-		case 2:{
-			z++;
-		}break;
-		case 3:{
-			z--;
-		}break;
-		case 4:{
-			x++;
-		}break;
-		case 5:{
-			x--;
-		}break;
-		default:
-			break;
-		}
-
-		block=worldObj.getBlock(pos);
+		block=H.getBlock(worldObj, pos);
 		tile1=worldObj.getTileEntity(pos);
 		
 		
@@ -57,16 +38,15 @@ public class TileEntityRemotePowerCounter extends TileEntityM{
 				currentP=((TileEntityBigFurnaceCore)tile1).currentEnergy;
 				maxPB=((TileEntityBigFurnaceCore)tile1).maxEnergyBuffer;
 			}else if(tile1 instanceof TileEntityBFCPowerOut){
-				int x1=0;int y1=1000;int z1=0;
+				BlockPos pos1=pos.add(0, 10000, 0);
 					
-				     if(((TileEntityBFCPowerOut)tile1).CallDir[0]!=null){x1=x-2;y1=y-1;z1=z;}
-				else if(((TileEntityBFCPowerOut)tile1).CallDir[1]!=null){x1=x+2;y1=y-1;z1=z;}
-				else if(((TileEntityBFCPowerOut)tile1).CallDir[2]!=null){x1=x;y1=y-1;z1=z-2;}
-				else if(((TileEntityBFCPowerOut)tile1).CallDir[3]!=null){x1=x;y1=y-1;z1=z+2;}
+				     if(((TileEntityBFCPowerOut)tile1).CallDir[0]!=null)pos1.add(-2,-1, 0);
+				else if(((TileEntityBFCPowerOut)tile1).CallDir[1]!=null)pos1.add( 2,-1, 0);
+				else if(((TileEntityBFCPowerOut)tile1).CallDir[2]!=null)pos1.add( 0,-1,-2);
+				else if(((TileEntityBFCPowerOut)tile1).CallDir[3]!=null)pos1.add( 0,-1, 2);
 				
-				if(y1!=1000){
-					x=x1;y=y1;z=z1;
-					tile1= worldObj.getTileEntity(pos);
+				if(pos1.getY()>1000){
+					tile1= worldObj.getTileEntity(pos1);
 					powerBar=(float)((TileEntityBigFurnaceCore)tile1).currentEnergy/(float)((TileEntityBigFurnaceCore)tile1).maxEnergyBuffer;
 					currentP=((TileEntityBigFurnaceCore)tile1).currentEnergy;
 					maxPB=((TileEntityBigFurnaceCore)tile1).maxEnergyBuffer;

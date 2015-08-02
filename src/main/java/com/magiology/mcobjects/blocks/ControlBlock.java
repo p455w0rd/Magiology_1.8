@@ -2,16 +2,18 @@ package com.magiology.mcobjects.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.objhelper.helpers.Helper;
 
 public class ControlBlock extends BlockContainer {
 	private float p= 1F/16F;
@@ -23,8 +25,6 @@ public class ControlBlock extends BlockContainer {
 	}
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	public ControlBlock(){
 		super(Material.iron);
 		this.setHardness(0.2F).setHarvestLevel("pickaxe", 1);
@@ -41,7 +41,7 @@ public class ControlBlock extends BlockContainer {
 	public boolean hasComparatorInputOverride(){return true;}
 	
     @Override
-	public int getComparatorInputOverride(World w, BlockPos pos, int arg0){
+	public int getComparatorInputOverride(World w, BlockPos pos){
     	int result=0;
     	TileEntityControlBlock tile=(TileEntityControlBlock)w.getTileEntity(pos);
     	ItemStack[] slots=tile.slots;
@@ -52,10 +52,10 @@ public class ControlBlock extends BlockContainer {
     }
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int side, float hitX, float hitY, float hitZ){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
         
 		if(!world.isRemote){
-			FMLNetworkHandler.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, world, pos);
+			Helper.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, pos);
 		}else{
 			
 		}

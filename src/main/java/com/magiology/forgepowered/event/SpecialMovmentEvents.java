@@ -1,15 +1,14 @@
 package com.magiology.forgepowered.event;
 
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.core.init.MItems;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler.Positions;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.items.armor.Pants_42;
 import com.magiology.objhelper.helpers.Helper;
@@ -54,8 +53,8 @@ public class SpecialMovmentEvents{
 					EntitySmoothBubleFX particle=new EntitySmoothBubleFX(world, xPos, yPos, zPos, Helper.CRandF(0.1)-xChange/10, Helper.CRandF(0.1)-yChange/10, Helper.CRandF(0.1)-zChange/10,300, 1, rb?50:0, rb?1:2, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.8);
 					particle.noClip=false;
 					Helper.spawnEntityFX(particle);
-					Helper.spawnEntityFX(new EntitySmokeFX(world, xPos, yPos, zPos, Helper.CRandF(0.1)-xChange, Helper.CRandF(0.1)-yChange, Helper.CRandF(0.1)-zChange));
-					Helper.spawnEntityFX(new EntitySmokeFX(world, xPos, yPos, zPos, Helper.CRandF(0.1)-xChange, Helper.CRandF(0.1)-yChange, Helper.CRandF(0.1)-zChange));
+					Helper.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, Helper.CRandF(0.1)-xChange, Helper.CRandF(0.1)-yChange, Helper.CRandF(0.1)-zChange));
+					Helper.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, Helper.CRandF(0.1)-xChange, Helper.CRandF(0.1)-yChange, Helper.CRandF(0.1)-zChange));
 				}
 			}
 			player.motionX+=xChange;
@@ -70,7 +69,7 @@ public class SpecialMovmentEvents{
 			playerData.sendData();
 		}
 	}
-	public void handleWingPhysics(EntityPlayer player,BlockPos pos){
+	public void handleWingPhysics(EntityPlayer player){
 		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
 		World world=player.worldObj;
 		boolean isRemote=world.isRemote;
@@ -95,7 +94,7 @@ public class SpecialMovmentEvents{
 			}
 		}
 	}
-	public void onFlap(EntityPlayer player,BlockPos pos){
+	public void onFlap(EntityPlayer player,int x,int y,int z){
 		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
 		World world=player.worldObj;
 		boolean isRemote=world.isRemote;

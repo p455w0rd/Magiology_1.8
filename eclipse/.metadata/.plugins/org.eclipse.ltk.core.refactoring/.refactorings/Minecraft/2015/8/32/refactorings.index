@@ -1,0 +1,17 @@
+1438513139302	Delete element
+1438513622722	Rename type 'RenderGet'
+1438514049592	Rename method 'RI'
+1438514513521	Rename type 'Render'
+1438514613917	Delete element
+1438519610540	Delete element
+1438519811383	Rename field 'tess'
+1438519884557	Rename type 'NormalizedVertixBufferModel'
+1438520257992	Rename field 'buff'
+1438524380063	Rename field 'tessellator'
+1438524599911	Rename field 'tessellator'
+1438524865254	Rename field 'noramlisedVertixBuffer'
+1438527488579	Rename local variable 'pos'
+1438539009867	Rename package 'com.magiology.render.forgeobjmodelported'
+1438539578732	Rename package 'com.magiology.render.forgeobjmodel'
+1438539649227	Rename package 'com.magiology.handelers.objhandeler'
+1438539714247	Rename package 'com.magiology.handelers.objhandeler.revivedyayfor1_8'

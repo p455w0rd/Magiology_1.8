@@ -1,16 +1,17 @@
 package com.magiology.mcobjects.effect;
 
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.world.World;
 
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public abstract class EntityFXM extends EntityFX{
 	public static final float p=1F/16F;
-	protected static Tessellator tess=Tessellator.instance;
+	protected static WorldRenderer tess=TessHelper.getWR();
 	public EntityFXM(World world, double x, double y, double z, double xSpeed, double ySpeed,double zSpeed){
-		super(world, pos, xSpeed, ySpeed, zSpeed);
+		super(world, x,y,z, xSpeed, ySpeed, zSpeed);
 	}
 	
 	public void renderParticle(NoramlisedVertixBuffer buf, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)

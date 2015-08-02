@@ -5,8 +5,9 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
 
 public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
@@ -14,14 +15,15 @@ public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
 	private final float p= 1F/16F;
 	private final float tW=1F/64F;
 	private final float tH=1F/64F;
-	
+
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
 		GL11.glPushMatrix();
 		this.bindTexture(Textures.EnergizedLapisOre);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11H.SetUpOpaqueRendering(2);
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		for(int a=0;a<6;a++){
 			int b=0;int c=0;
 			
@@ -36,10 +38,11 @@ public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
 			GL11.glRotatef(b, 1,0,0);GL11.glRotatef(c, 0,0,1);
 			GL11.glTranslated(-0.5, -0.5, -0.5);
 			
-				ShadedQuad.addVertexWithUVWRender(0,     1.001, 0,     0,1);
-				ShadedQuad.addVertexWithUVWRender(0,     1.001, 1.001, 0,0);
-				ShadedQuad.addVertexWithUVWRender(1.001, 1.001, 1.001, 1,0);
-				ShadedQuad.addVertexWithUVWRender(1.001, 1.001, 0,     1,1);
+				buf.addVertexWithUV(0,     1.001, 0,     0,1);
+				buf.addVertexWithUV(0,     1.001, 1.001, 0,0);
+				buf.addVertexWithUV(1.001, 1.001, 1.001, 1,0);
+				buf.addVertexWithUV(1.001, 1.001, 0,     1,1);
+				buf.draw();
 				
 			GL11.glTranslated(0.5, 0.5, 0.5);
 			GL11.glRotatef(-b, 1,0,0);GL11.glRotatef(-c, 0,0,1);

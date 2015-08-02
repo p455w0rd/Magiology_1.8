@@ -11,7 +11,6 @@ import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
-import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.SideHelper;
 
 public class NetworkConductor extends BlockContainerMultiColision{

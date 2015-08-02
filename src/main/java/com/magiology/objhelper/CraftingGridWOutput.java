@@ -1,6 +1,6 @@
 package com.magiology.objhelper;
 
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -25,13 +25,13 @@ public class CraftingGridWOutput{
 	protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 1F/102F;
 	     float f1 = 1F/56F;
-	     Tessellator tessellator = Tessellator.instance;
-	     tessellator.startDrawingQuads();
-	     tessellator.addVertexWithUV((x+0),(y+yp),0,((tx+0)*f),((yt+yp)*f1));
-	     tessellator.addVertexWithUV((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1));
-	     tessellator.addVertexWithUV((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1));
-	     tessellator.addVertexWithUV((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1));
-	     tessellator.draw();
+	     WorldRenderer renderer = TessHelper.getWR();
+	     renderer.startDrawingQuads();
+	     renderer.addVertexWithUV((x+0),(y+yp),0,((tx+0)*f),((yt+yp)*f1));
+	     renderer.addVertexWithUV((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1));
+	     renderer.addVertexWithUV((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1));
+	     renderer.addVertexWithUV((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1));
+	     renderer.finishDrawing();
 	}
 	public void clear(){
 		product[0]=null;

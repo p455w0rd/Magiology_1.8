@@ -14,8 +14,6 @@ public class BigChunksOOre extends BlockContainer {
 	@Override
 	public boolean isOpaqueCube() {return false;}
     @Override
-	public boolean renderAsNormalBlock() {return false;}
-    @Override
 	public int getRenderType(){
 		return -1;
 	}

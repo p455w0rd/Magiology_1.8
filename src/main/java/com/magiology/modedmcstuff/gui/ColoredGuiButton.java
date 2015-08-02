@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
@@ -51,11 +52,11 @@ public class ColoredGuiButton extends GuiButton{
 		if (this.visible)
         {
 			float r=Helper.calculateRenderPos(prevR, this.r),g=Helper.calculateRenderPos(prevG, this.g),b=Helper.calculateRenderPos(prevB, this.b),alpha=Helper.calculateRenderPos(prevAlpha, this.alpha);
-            FontRenderer fontrenderer = v1.fontRenderer;
+            FontRenderer fontrenderer = v1.fontRendererObj;
             v1.getTextureManager().bindTexture(buttonTextures);
             GL11.glColor4f(r,g,b,alpha);
-            this.field_146123_n = v2 >= this.xPosition && v3 >= this.yPosition && v2 < this.xPosition + this.width && v3 < this.yPosition + this.height;
-            int k = this.getHoverState(this.field_146123_n);
+            this.hovered = v2 >= this.xPosition && v3 >= this.yPosition && v2 < this.xPosition + this.width && v3 < this.yPosition + this.height;
+            int k = this.getHoverState(this.hovered);
             GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -72,7 +73,7 @@ public class ColoredGuiButton extends GuiButton{
             {
                 l = 10526880;
             }
-            else if (this.field_146123_n)
+            else if (this.hovered)
             {
                 l = 16777120;
             }

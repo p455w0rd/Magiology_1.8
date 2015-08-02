@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.Constants;
 
 import com.magiology.upgrades.RegisterUpgrades;
@@ -60,13 +61,13 @@ public class ItemContainer extends Item implements IInventory{
 		}
 
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		
 		return "InventoryPants_42";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName(){
 		
 		return true;
 	}
@@ -90,10 +91,10 @@ public class ItemContainer extends Item implements IInventory{
 	public boolean isUseableByPlayer(EntityPlayer player){return player.inventory.armorInventory[1]==invItem;}
 
 	@Override
-	public void openInventory(){}
+	public void openInventory(EntityPlayer player){}
 
 	@Override
-	public void closeInventory(){}
+	public void closeInventory(EntityPlayer player){}
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack){
@@ -123,6 +124,32 @@ public class ItemContainer extends Item implements IInventory{
 			}
 		}
 		tagcompound.setTag("ItemInventory", items);
+	}
+
+	@Override
+	public IChatComponent getDisplayName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getField(int id){
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value){
+		
+	}
+
+	@Override
+	public int getFieldCount(){
+		return 0;
+	}
+
+	@Override
+	public void clear(){
+		
 	}
 	
 	

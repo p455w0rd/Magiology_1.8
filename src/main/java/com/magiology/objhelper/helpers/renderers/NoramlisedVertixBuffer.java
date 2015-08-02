@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.model.PositionTextureVertex;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.objhelper.vectors.Vec3M;
 
@@ -19,19 +19,19 @@ public class NoramlisedVertixBuffer{
 	
 	private List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
 	private List<PositionTextureVertex> unfinishedTriangle=new ArrayList<PositionTextureVertex>();
-	private Tessellator tessellator;
+	private WorldRenderer renderer;
 	private boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClearAfterDraw=true;
 	private List<NoramlisedVertixBuffer> subBuffers=new ArrayList<NoramlisedVertixBuffer>();
 	
 	private Matrix4f transformation=new Matrix4f(),backupTransformation=new Matrix4f();
 	private Vector3f rotation=new Vector3f(),backupRotation=new Vector3f();
 	
-	public NoramlisedVertixBuffer(Tessellator tessellator){
-		this.tessellator=tessellator;
+	public NoramlisedVertixBuffer(){
+		this.renderer=RenderGet.WR();
 	}
 	
 	public NoramlisedVertixBuffer createNewSubBuffer(){
-		NoramlisedVertixBuffer result=new NoramlisedVertixBuffer(tessellator);
+		NoramlisedVertixBuffer result=new NoramlisedVertixBuffer();
 		subBuffers.add(result);
 		result.instantNormalCalculation=instantNormalCalculation;
 		result.willDrawAsAWireFrame=willDrawAsAWireFrame;
@@ -43,12 +43,15 @@ public class NoramlisedVertixBuffer{
 		addVertexWithUV((float)x, (float)y, (float)z, (float)u, (float)v);
 	}
 	private void addVertexWithUV(float x,float y,float z,float u,float v){
-		unfinishedTriangle.add(new PositionTextureVertex(pos, u, v));
+		unfinishedTriangle.add(new PositionTextureVertex(x,y,z, u, v));
 		if(unfinishedTriangle.size()==4)process();
+	}
+	public void addVertexWithUV(Vec3M vec3m, double u, double v){
+		addVertexWithUV((float)vec3m.x, (float)vec3m.y, (float)vec3m.z, (float)u, (float)v);
 	}
 	private final static float NULL_UV_ID=123456789;
 	public void addVertex(double x,double y,double z){
-		addVertexWithUV(pos, NULL_UV_ID, NULL_UV_ID);
+		addVertexWithUV(x,y,z, NULL_UV_ID, NULL_UV_ID);
 	}
 	
 	private void process(){
@@ -59,10 +62,10 @@ public class NoramlisedVertixBuffer{
 	private ShadedTriangle generateShadedTriangle(PositionTextureVertex pos0,PositionTextureVertex pos1,PositionTextureVertex pos2,boolean hasNormal){
 		Vec3M normal;
 		if(instantNormalCalculation){
-			Vec3M angle1=pos1.vector3D.subtract(pos0.vector3D);
-			Vec3M angle2=pos1.vector3D.subtract(pos2.vector3D);
+			Vec3M angle1=Vec3M.conv(pos1.vector3D.subtract(pos0.vector3D));
+			Vec3M angle2=Vec3M.conv(pos1.vector3D.subtract(pos2.vector3D));
 			normal=angle2.crossProduct(angle1).normalize();
-		}else normal=Helper.Vec3M(0, 1, 0);
+		}else normal=new Vec3M(0, 1, 0);
 		return new ShadedTriangle(pos0,pos1,pos2, normal);
 	}
 	
@@ -72,7 +75,7 @@ public class NoramlisedVertixBuffer{
 	}
 	
 	private void startRecordingTesselator(int type){
-		tessellator.startDrawing(type);
+		renderer.startDrawing(type);
 	}
 	
 	public void pasteToTesselator(boolean type){
@@ -91,22 +94,22 @@ public class NoramlisedVertixBuffer{
 		for(ShadedTriangle a:shadedTriangles){
 			if(type){
 				for(int b=0;b<a.pos3.length;b++){
-					Vec3M finalNormal=GL11H.transformVector(Helper.Vec3M(a.normal.xCoord, a.normal.yCoord, a.normal.zCoord), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
-					tessellator.setNormal((float)finalNormal.xCoord, (float)finalNormal.yCoord, (float)finalNormal.zCoord);
+					Vec3M finalNormal=GL11H.transformVector(new Vec3M(a.normal.x, a.normal.y, a.normal.z), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
+					renderer.setNormal((float)finalNormal.x, (float)finalNormal.y, (float)finalNormal.z);
 					
 					
-					Vec3M finalVec=GL11H.transformVector(Helper.Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
+					Vec3M finalVec=GL11H.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
 					if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY){
-						tessellator.addVertex(finalVec.xCoord, finalVec.yCoord, finalVec.zCoord);
+						renderer.addVertex(finalVec.x, finalVec.y, finalVec.z);
 					}
-					tessellator.addVertexWithUV(finalVec.xCoord, finalVec.yCoord, finalVec.zCoord, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY);
+					renderer.addVertexWithUV(finalVec.x, finalVec.y, finalVec.z, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY);
 				}
 			}else{
-				tessellator.addVertexWithUV(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
-				tessellator.addVertexWithUV(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
+				renderer.addVertexWithUV(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
+				renderer.addVertexWithUV(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
 				
-				tessellator.addVertexWithUV(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
-				tessellator.addVertexWithUV(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
+				renderer.addVertexWithUV(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
+				renderer.addVertexWithUV(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
 				
 //				tessellator.addVertexWithUV(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
 //				tessellator.addVertexWithUV(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
@@ -114,14 +117,14 @@ public class NoramlisedVertixBuffer{
 			
 		}
 	}
-	public NormalizedVertixBufferModel exportToNoramlisedVertixBufferModel(){
-		NormalizedVertixBufferModel model=NormalizedVertixBufferModel.create(tessellator);
+	public NoramlisedVertixBufferModel exportToNoramlisedVertixBufferModel(){
+		NoramlisedVertixBufferModel model=NoramlisedVertixBufferModel.create();
 		model.init(shadedTriangles);
 		cleanUp();
 		return model;
 	}
 	public void renderToScreen(){
-		tessellator.draw();
+		renderer.finishDrawing();
 		if(willClearAfterDraw)cleanUp();
 	}
 	
@@ -147,8 +150,8 @@ public class NoramlisedVertixBuffer{
 			this.normal=normal;
 		}
 		public void recalculateNormal(){
-			Vec3M angle1=pos3[1].vector3D.subtract(pos3[0].vector3D);
-			Vec3M angle2=pos3[1].vector3D.subtract(pos3[2].vector3D);
+			Vec3M angle1=Vec3M.conv(pos3[1].vector3D.subtract(pos3[0].vector3D));
+			Vec3M angle2=Vec3M.conv(pos3[1].vector3D.subtract(pos3[2].vector3D));
 			normal=angle2.crossProduct(angle1).normalize();
 		}
 	}
@@ -170,7 +173,7 @@ public class NoramlisedVertixBuffer{
 	}
 	public void rotateAt(double x,double y,double z,double rotX,double rotY,double rotZ){
 		if(rotX==0&&rotY==0&&rotZ==0)return;
-		translate( pos);
+		translate(x,y,z);
 		rotate(rotX, rotY, rotZ);
 		translate(-x,-y,-z);
 	}

@@ -3,7 +3,7 @@ package com.magiology.mcobjects.effect;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -36,13 +36,13 @@ public class EntitySparkFX extends EntityMagiologyBaseFX{
 		slowdown.lenght=fragmetingSpeed;
 		this.numberOfSplitsPerUpdate=Math.max(numberOfSplitsPerUpdate, 1);
 		this.size=size;
-		xDirection=(float)dir.xCoord;
-		yDirection=(float)dir.yCoord;
-		zDirection=(float)dir.zCoord;
+		xDirection=(float)dir.x;
+		yDirection=(float)dir.y;
+		zDirection=(float)dir.z;
 	}
 	
 	@Override
-	public void render(Tessellator tess){
+	public void render(WorldRenderer tess){
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -50,7 +50,7 @@ public class EntitySparkFX extends EntityMagiologyBaseFX{
 		float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-    	GL11.glTranslatef(pos);
+    	GL11.glTranslatef(x,y,z);
 		
 		for(Fragment fragment:fragments)fragment.render();
 		

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.magiology.modedmcstuff.items.UpgradeableItem;
@@ -18,7 +19,7 @@ public class FireBarrel extends UpgradeableItem{
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack is, EntityPlayer player, World w, BlockPos pos, int l, float f, float f1, float f2){
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		boolean return1=false;
 		if(player.isOnLadder()||player.isInWater())return1=true;
 		
@@ -55,7 +56,7 @@ public class FireBarrel extends UpgradeableItem{
 					if(player.worldObj.rand.nextBoolean())Soaryn.rotationPitch+=180;
 					if(player.worldObj.rand.nextBoolean()){
 						Soaryn.cameraPitch+=10;
-						PotionEffect potion=new PotionEffect(1, 2, 1000, false);
+						PotionEffect potion=new PotionEffect(1, 2, 1000);
 						Soaryn.addPotionEffect(potion);
 					}
 				}

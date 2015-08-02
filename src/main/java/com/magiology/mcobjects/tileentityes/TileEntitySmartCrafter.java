@@ -7,6 +7,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.CraftingGridWOutput;
@@ -66,16 +68,16 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	public boolean isActive(){
 		switch(rotation){
 		case 0:{
-			tile1=worldObj.getTileEntity(pos-1);
-			tile2=worldObj.getTileEntity(pos+1);
+			tile1=worldObj.getTileEntity(pos.add(0,0,-1));
+			tile2=worldObj.getTileEntity(pos.add(0,0,1));
 		}break;
 		case 1:{
-			tile1=worldObj.getTileEntity(xCoord-1, yCoord, zCoord);
-			tile2=worldObj.getTileEntity(xCoord+1, yCoord, zCoord);
+			tile1=worldObj.getTileEntity(pos.add(-1,0,0));
+			tile2=worldObj.getTileEntity(pos.add(1,0,0));
 		}break;
 		case 2:{
-			tile1=worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-			tile2=worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
+			tile1=worldObj.getTileEntity(pos.add(0,-1,0));
+			tile2=worldObj.getTileEntity(pos.add(0,1,0));
 		}break;
 		}
 		if(Helper.isNull(tile1,tile2))return false;
@@ -111,13 +113,13 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public String getInventoryName(){
+	public String getName(){
 		
 		return "SmartCrafterInventory";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName(){
+	public boolean hasCustomName(){
 		
 		return true;
 	}
@@ -138,12 +140,12 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public void openInventory() {
+	public void openInventory(EntityPlayer player) {
 		
 	}
 
 	@Override
-	public void closeInventory() {
+	public void closeInventory(EntityPlayer player) {
 		
 	}
 
@@ -156,19 +158,42 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int v1){
+	public int getField(int id){
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value){
+		
+	}
+
+	@Override
+	public int getFieldCount(){
+		return 0;
+	}
+
+	@Override
+	public void clear(){
+		
+	}
+
+	@Override
+	public IChatComponent getDisplayName(){
 		return null;
 	}
 
 	@Override
-	public boolean canInsertItem(int v1, ItemStack stack,int v2){
-		return true;
+	public int[] getSlotsForFace(EnumFacing side){
+		return null;
 	}
 
 	@Override
-	public boolean canExtractItem(int v1, ItemStack stack,int v2){
-		
-		return true;
+	public boolean canInsertItem(int index, ItemStack itemStackIn,EnumFacing direction){
+		return false;
 	}
-	
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack,EnumFacing direction) {
+		return false;
+	}
 }

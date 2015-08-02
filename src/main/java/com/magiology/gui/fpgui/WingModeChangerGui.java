@@ -2,10 +2,9 @@ package com.magiology.gui.fpgui;
 
 import java.awt.Color;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
@@ -17,6 +16,7 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public class WingModeChangerGui extends FirstPersonGui{
 	public static WingModeChangerGui instance=new WingModeChangerGui();
@@ -38,7 +38,7 @@ public class WingModeChangerGui extends FirstPersonGui{
 		if(Helper.isNull(extendedData,data,fr,validPoss,Helper.getTheWorld(),backgroundColor)){
 			if(extendedData==null)extendedData=ExtendedPlayerData.get(player);
 			if(data==null)data=ComplexPlayerRenderingData.get(player);
-			fr=Minecraft.getMinecraft().fontRenderer;
+			fr=Helper.getFontRenderer();
 			if(validPoss==null)for(int a=0;a<poss.length;a++)if(poss[a].wanted&&poss[a]!=Positions.FlyBackvardPos&&poss[a]!=Positions.FlyForvardPos)validPoss=ArrayUtils.add(validPoss, poss[a]);
 			backgroundColor=new float[validPoss.length][3];
 			prevBackgroundColor=backgroundColor.clone();
@@ -90,7 +90,7 @@ public class WingModeChangerGui extends FirstPersonGui{
 		if(calcAlpha<=0.01)return;
 		int id=0;
 		int nextLineOffset=width/2+fr.FONT_HEIGHT/2;
-		Tessellator tess=Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		float[][] calcBackgroundColor=backgroundColor.clone();
 		if(player.fallDistance>4)for(int a=0;a<criclePoss.length;a++)for(int b=0;b<2;b++){
 			criclePoss[a][b]+=Helper.CRandF(0.01);

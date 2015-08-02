@@ -2,7 +2,8 @@ package com.magiology.mcobjects.effect;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -51,9 +52,11 @@ public class EntityBaseFX extends EntityFX{
 	public EntityBaseFX(World w, double xp, double yp, double zp){
 		super(w, xp, yp, zp);
 	}
-	
 	@Override
-	public void renderParticle(Tessellator tess, float par2, float par3, float par4, float par5, float par6, float par7){
+	public void func_180434_a(WorldRenderer renderer, Entity entitiy, float par2, float par3, float par4, float par5, float par6, float par7){
+		
+	}
+	public void renderParticle(WorldRenderer renderer, float par2, float par3, float par4, float par5, float par6, float par7){
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -64,14 +67,14 @@ public class EntityBaseFX extends EntityFX{
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
         Minecraft.getMinecraft().renderEngine.bindTexture(texture1);
-        tess.startDrawingQuads();
-		tess.setColorRGBA_F((float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
-    	tess.setBrightness(240);
-        tess.addVertexWithUV(x-par3*PScale-par6*PScale, y-par4*PScale, z-par5*PScale-par7*PScale, 0, 0);
-        tess.addVertexWithUV(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0);
-        tess.addVertexWithUV(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1);
-        tess.addVertexWithUV(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1);
-		tess.finishDrawing();
+        renderer.startDrawingQuads();
+		renderer.setColorRGBA_F((float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
+    	renderer.setBrightness(240);
+        renderer.addVertexWithUV(x-par3*PScale-par6*PScale, y-par4*PScale, z-par5*PScale-par7*PScale, 0, 0);
+        renderer.addVertexWithUV(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0);
+        renderer.addVertexWithUV(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1);
+        renderer.addVertexWithUV(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1);
+		renderer.finishDrawing();
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);

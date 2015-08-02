@@ -2,9 +2,8 @@ package com.magiology.render.itemrender;
 
 import java.text.DecimalFormat;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.IItemRenderer;
@@ -12,12 +11,14 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
 public class ItemRendererPowerCounter implements IItemRenderer {
-	Tessellator tess=Tessellator.instance;
-	FontRenderer fr=Minecraft.getMinecraft().fontRenderer;
+	WorldRenderer tess=TessHelper.getWR();
+	FontRenderer fr=Helper.getFontRenderer();
 	private final float p= 1F/16F;
 	private final float tWC=1F/64F;
 	private final float tHC=1F/64F;
@@ -34,14 +35,13 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		if(item.stackTagCompound!=null){
-			NBTTagCompound PC= item.stackTagCompound;
+		if(item.getTagCompound()!=null){
+			NBTTagCompound PC= item.getTagCompound();
 			anim=PC.getDouble("pAnim")+(PC.getDouble("pAnim")-PC.getDouble("anim"))*RenderLoopEvents.partialTicks;
 			powerBar=PC.getDouble("powerBar");
 			maxPB=PC.getInteger("maxEn");
 			currentP=PC.getInteger("currentEn");
 			block=PC.getString("block");
-//			System.out.println((PC.getDouble("pAnim")-PC.getDouble("anim")));
 		}
 		
 		
@@ -91,7 +91,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-	    GL11.glTranslatef(pos);
+	    GL11.glTranslatef(x,y,z);
 	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glScalef(scale, scale, scale);
 	    
@@ -110,7 +110,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		float zr=90;
 		float scale=0.0049F;
 		
-		GL11.glTranslatef(pos);
+		GL11.glTranslatef(x,y,z);
 	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glScalef(scale, scale, scale);
 		
@@ -129,50 +129,53 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 	}
 
 	public void drawCore(){
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.PowerCounterEnergyBar);
+		TessHelper.bindTexture(Textures.PowerCounterEnergyBar);
 		double var1=powerBar;
 		double var2=p*5+p*4*var1;
 		double var3=1-var1;
-		ShadedQuad.addVertexWithUVWRender(p*4-0.0001, var2, p*11, 0, var3);
-		ShadedQuad.addVertexWithUVWRender(p*4-0.0001, p*5,  p*11, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(p*4-0.0001, p*5,  p*13, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(p*4-0.0001, var2, p*13, 1, var3);
-		
+		NoramlisedVertixBuffer buf=TessHelper.getNVB();
+		buf.cleanUp();
+		buf.addVertexWithUV(p*4-0.0001, var2, p*11, 0, var3);
+		buf.addVertexWithUV(p*4-0.0001, p*5,  p*11, 0, 1);
+		buf.addVertexWithUV(p*4-0.0001, p*5,  p*13, 1, 1);
+		buf.addVertexWithUV(p*4-0.0001, var2, p*13, 1, var3);
+		buf.draw();
 		double minx=p*4;double miny=p*4;double minz=p*2;
 		double maxx=p*10;double maxy=p*10;double maxz=p*14;
 		
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.PowerCounterFront);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 1, 0);
+		TessHelper.bindTexture(Textures.PowerCounterFront);
+		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+		buf.addVertexWithUV(minx, miny, minz, 0, 1);
+		buf.addVertexWithUV(minx, miny, maxz, 1, 1);
+		buf.addVertexWithUV(minx, maxy, maxz, 1, 0);
+		buf.draw();
+		TessHelper.bindTexture(Textures.PowerCounterSide1);
+		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
+		buf.addVertexWithUV(maxx, miny,  maxz, 1, 0);
+		buf.addVertexWithUV(maxx, miny,  minz, 0, 0);
+		buf.addVertexWithUV(maxx, maxy, minz, 0, 1);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.PowerCounterSide1);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny,  maxz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny,  minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz, 0, 1);
+		buf.addVertexWithUV(minx, maxy, maxz, 0, 1);
+		buf.addVertexWithUV(minx, miny , maxz, 0, 0);
+		buf.addVertexWithUV(maxx, miny, maxz, 1, 0);
+		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny , maxz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz, 1, 1);
+		buf.addVertexWithUV(maxx, maxy, minz, 1, 1);
+		buf.addVertexWithUV(maxx, miny, minz, 1, 0);
+		buf.addVertexWithUV(minx, miny , minz, 0, 0);
+		buf.addVertexWithUV(minx, maxy, minz, 0, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, miny , minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 1);
+		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
+		buf.addVertexWithUV(maxx, maxy, minz, 1, 0);
+		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
+		buf.addVertexWithUV(minx, maxy, maxz, 0, 1);
 		
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, maxz, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(maxx, maxy, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(minx, maxy, maxz, 0, 1);
-		
-		ShadedQuad.addVertexWithUVWRender(minx, miny, maxz, 0, 1);
-		ShadedQuad.addVertexWithUVWRender(minx, miny, minz, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, minz, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(maxx, miny, maxz, 1, 1);
+		buf.addVertexWithUV(minx, miny, maxz, 0, 1);
+		buf.addVertexWithUV(minx, miny, minz, 0, 0);
+		buf.addVertexWithUV(maxx, miny, minz, 1, 0);
+		buf.addVertexWithUV(maxx, miny, maxz, 1, 1);
+		buf.draw();
 	}
 	
 }

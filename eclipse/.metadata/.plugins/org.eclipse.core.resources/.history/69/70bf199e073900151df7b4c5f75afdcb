@@ -1,0 +1,10 @@
+package com.magiology.objhelper.getters;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemRenderer;
+
+public class Render{
+	public static ItemRenderer RI(){
+		return Minecraft.getMinecraft().getItemRenderer();
+	}
+}

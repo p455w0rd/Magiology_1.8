@@ -6,20 +6,21 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MGui;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 
 public class IPowerSidenessInstructor extends Item{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-	    itemStack.stackTagCompound = new NBTTagCompound();
+		H.createNBT(itemStack);
 	}
 	
 	@Override
@@ -32,8 +33,8 @@ public class IPowerSidenessInstructor extends Item{
 	
 	
 	@Override
-	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, int side, float x2, float y2, float z2){
-		if(itemstack.stackTagCompound == null)itemstack.stackTagCompound = new NBTTagCompound();
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+		H.createNBT(itemstack);
 		boolean isIt=false;
 		if(world.getTileEntity(pos) instanceof ISidedPower){
 			isIt=true;
@@ -46,7 +47,7 @@ public class IPowerSidenessInstructor extends Item{
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5){
-		if(itemstack.stackTagCompound==null)itemstack.stackTagCompound=new NBTTagCompound();
+		H.createNBT(itemstack);
 	}
 
 	

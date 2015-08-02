@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -159,11 +161,11 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 		
 	}
 	@Override
-	public String getInventoryName(){
+	public String getName(){
 		return "NetworkPointerContainer";
 	}
 	@Override
-	public boolean hasCustomInventoryName(){
+	public boolean hasCustomName(){
 		return true;
 	}
 	@Override
@@ -175,34 +177,62 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 		return Helper.isItemInStack(MItems.NetworkPointer, player.getCurrentEquippedItem());
 	}
 	@Override
-	public void openInventory(){
+	public void openInventory(EntityPlayer player){
 		
 	}
 	@Override
-	public void closeInventory(){
+	public void closeInventory(EntityPlayer player){
 		
 	}
 	@Override
 	public boolean isItemValidForSlot(int id, ItemStack stack){
 		return Helper.isItemInStack(MItems.NetworkPointer, stack);
 	}
-	@Override
-	public int[] getAccessibleSlotsFromSide(int side){
-		if(side==SideHelper.convert(getOrientation()))return new int[]{0,1,2,3,4,5,6,7,8};
-		return null;
-	}
-	@Override
-	public boolean canInsertItem(int id, ItemStack stack, int side){
-		return side==SideHelper.convert(getOrientation());
-	}
-	@Override
-	public boolean canExtractItem(int id, ItemStack stack, int side){
-		return side==SideHelper.convert(getOrientation());
-	}
 	public NetworkBaseInterface getBoundedBaseInterface(){
 		int side=SideHelper.convert(getOrientation());
-		TileEntity test=worldObj.getTileEntity(SideHelper.offset(side, xCoord), SideHelper.Y(side, yCoord), SideHelper.Z(side, zCoord));
+		TileEntity test=worldObj.getTileEntity(SideHelper.offset(side, pos));
 		if(test instanceof NetworkBaseInterface)return (NetworkBaseInterface)test;
 		return null;
+	}
+
+	@Override
+	public int getField(int id){
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value){
+		
+	}
+
+	@Override
+	public int getFieldCount(){
+		return 0;
+	}
+
+	@Override
+	public void clear(){
+		
+	}
+
+	@Override
+	public IChatComponent getDisplayName(){
+		return null;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing side){
+		if(side.getIndex()==SideHelper.convert(getOrientation()))return new int[]{0,1,2,3,4,5,6,7,8};
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack itemStackIn,EnumFacing side){
+		return side.getIndex()==SideHelper.convert(getOrientation());
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack,EnumFacing direction){
+		return canInsertItem(index, stack,direction);
 	}
 }

@@ -64,7 +64,7 @@ public class SpecialPlayerParicleHandeler_SubEvent{
 					xP=(int)(25-world.rand.nextInt(50)+x);
 					yP=(int)(25-world.rand.nextInt(50)+y);
 					zP=(int)(25-world.rand.nextInt(50)+z);
-					block=world.getBlock(xP, yP, zP);
+					block=Helper.getBlock(world, xP, yP, zP);
 				}while(block!=Blocks.air&&count<100);
 				Helper.spawnEntityFX(new EntitySmoothBubleFX(world,xP+0.5, yP+1.5, zP+0.5,0.04*(world.rand.nextBoolean()?1:-1), 0.04*(world.rand.nextBoolean()?1:-1), 0.04*(world.rand.nextBoolean()?1:-1),600,0,0,true,2,"tx1",world.rand.nextFloat(),world.rand.nextFloat(),world.rand.nextFloat(),1, 0.99));
 				

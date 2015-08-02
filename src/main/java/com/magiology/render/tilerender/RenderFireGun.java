@@ -7,8 +7,9 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
 
 public class RenderFireGun extends TileEntitySpecialRenderer {
@@ -16,11 +17,12 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 	private final float p= 1F/16F;
 	private final float tW=1F/72F;
 	private final float tH=1F/64F;
-	
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
 		TileEntityFireGun dir= (TileEntityFireGun) tileentity;
-		GL11.glTranslated(pos);
+		buf.cleanUp();
+		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
@@ -56,25 +58,26 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		{
-		ShadedQuad.addVertexWithUVWRender(p*8, p*4, p*9, tW*0, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*8, p*0, p*9, tW*0, tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*10,p*0, p*9, tW*16,tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*10,p*4, p*9, tW*16,tH*0);
+		buf.addVertexWithUV(p*8, p*4, p*9, tW*0, tH*0);
+		buf.addVertexWithUV(p*8, p*0, p*9, tW*0, tH*32);
+		buf.addVertexWithUV(p*10,p*0, p*9, tW*16,tH*32);
+		buf.addVertexWithUV(p*10,p*4, p*9, tW*16,tH*0);
 
-		ShadedQuad.addVertexWithUVWRender(p*10,p*4, p*7, tW*16,tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*10,p*0, p*7, tW*16,tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*8, p*0, p*7, tW*0, tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*8, p*4, p*7, tW*0, tH*0);
+		buf.addVertexWithUV(p*10,p*4, p*7, tW*16,tH*0);
+		buf.addVertexWithUV(p*10,p*0, p*7, tW*16,tH*32);
+		buf.addVertexWithUV(p*8, p*0, p*7, tW*0, tH*32);
+		buf.addVertexWithUV(p*8, p*4, p*7, tW*0, tH*0);
 		
-		ShadedQuad.addVertexWithUVWRender(p*8, p*4, p*7, tW*16,tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*8, p*0, p*7, tW*16,tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*8, p*0, p*9, tW*0, tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*8, p*4, p*9, tW*0, tH*0);
+		buf.addVertexWithUV(p*8, p*4, p*7, tW*16,tH*0);
+		buf.addVertexWithUV(p*8, p*0, p*7, tW*16,tH*32);
+		buf.addVertexWithUV(p*8, p*0, p*9, tW*0, tH*32);
+		buf.addVertexWithUV(p*8, p*4, p*9, tW*0, tH*0);
 
-		ShadedQuad.addVertexWithUVWRender(p*10, p*4, p*9, tW*0, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*0, p*9, tW*0, tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*0, p*7, tW*16,tH*32);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*4, p*7, tW*16,tH*0);
+		buf.addVertexWithUV(p*10, p*4, p*9, tW*0, tH*0);
+		buf.addVertexWithUV(p*10, p*0, p*9, tW*0, tH*32);
+		buf.addVertexWithUV(p*10, p*0, p*7, tW*16,tH*32);
+		buf.addVertexWithUV(p*10, p*4, p*7, tW*16,tH*0);
+		buf.draw();
 		}
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		if(dir.equals(EnumFacing.WEST)){
@@ -111,75 +114,76 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 		{
 			{
 			GL11.glTranslated(-Helper.calculateRenderPos(isit.prevAnimation, isit.animation),0,0);
-			ShadedQuad.addVertexWithUVWRender(p*5,  p*7, p*9.5,  tW*16, tH*0);
-			ShadedQuad.addVertexWithUVWRender(p*5,  p*4, p*9.5,  tW*16, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*4, p*9.5,  tW*72, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*7, p*9.5,  tW*72, tH*0);
+			buf.addVertexWithUV(p*5,  p*7, p*9.5,  tW*16, tH*0);
+			buf.addVertexWithUV(p*5,  p*4, p*9.5,  tW*16, tH*24);
+			buf.addVertexWithUV(p*12, p*4, p*9.5,  tW*72, tH*24);
+			buf.addVertexWithUV(p*12, p*7, p*9.5,  tW*72, tH*0);
 
-			ShadedQuad.addVertexWithUVWRender(p*12, p*7, p*6.5,  tW*72, tH*0);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*4, p*6.5,  tW*72, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*5,  p*4, p*6.5,  tW*16, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*5,  p*7, p*6.5,  tW*16, tH*0);
+			buf.addVertexWithUV(p*12, p*7, p*6.5,  tW*72, tH*0);
+			buf.addVertexWithUV(p*12, p*4, p*6.5,  tW*72, tH*24);
+			buf.addVertexWithUV(p*5,  p*4, p*6.5,  tW*16, tH*24);
+			buf.addVertexWithUV(p*5,  p*7, p*6.5,  tW*16, tH*0);
 			
-			ShadedQuad.addVertexWithUVWRender(p*12, p*7, p*9.5,  tW*72, tH*0);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*7, p*6.5,  tW*72, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*5,  p*7, p*6.5,  tW*16, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*5,  p*7, p*9.5,  tW*16, tH*0);
+			buf.addVertexWithUV(p*12, p*7, p*9.5,  tW*72, tH*0);
+			buf.addVertexWithUV(p*12, p*7, p*6.5,  tW*72, tH*24);
+			buf.addVertexWithUV(p*5,  p*7, p*6.5,  tW*16, tH*24);
+			buf.addVertexWithUV(p*5,  p*7, p*9.5,  tW*16, tH*0);
 
-			ShadedQuad.addVertexWithUVWRender(p*12, p*7, p*9.5,  tW*24, tH*64);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*4, p*9.5,  tW*24, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*4, p*6.5,  tW*0, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*7, p*6.5,  tW*0, tH*64);
+			buf.addVertexWithUV(p*12, p*7, p*9.5,  tW*24, tH*64);
+			buf.addVertexWithUV(p*12, p*4, p*9.5,  tW*24, tH*40);
+			buf.addVertexWithUV(p*12, p*4, p*6.5,  tW*0, tH*40);
+			buf.addVertexWithUV(p*12, p*7, p*6.5,  tW*0, tH*64);
 			
-			ShadedQuad.addVertexWithUVWRender(p*5, p*7, p*6.5,  tW*0, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*5, p*4, p*6.5,  tW*0, tH*64);
-			ShadedQuad.addVertexWithUVWRender(p*5, p*4, p*9.5,  tW*24, tH*64);
-			ShadedQuad.addVertexWithUVWRender(p*5, p*7, p*9.5,  tW*24, tH*40);
+			buf.addVertexWithUV(p*5, p*7, p*6.5,  tW*0, tH*40);
+			buf.addVertexWithUV(p*5, p*4, p*6.5,  tW*0, tH*64);
+			buf.addVertexWithUV(p*5, p*4, p*9.5,  tW*24, tH*64);
+			buf.addVertexWithUV(p*5, p*7, p*9.5,  tW*24, tH*40);
 			}
 			
 			{
-			ShadedQuad.addVertexWithUVWRender(p*12, p*6.5, p*9,  tW*16, tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*4.5, p*9,  tW*16, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*4.5, p*9,  tW*72,tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*6.5, p*9,  tW*72,tH*24);
+			buf.addVertexWithUV(p*12, p*6.5, p*9,  tW*16, tH*24);
+			buf.addVertexWithUV(p*12, p*4.5, p*9,  tW*16, tH*40);
+			buf.addVertexWithUV(p*19, p*4.5, p*9,  tW*72,tH*40);
+			buf.addVertexWithUV(p*19, p*6.5, p*9,  tW*72,tH*24);
 
-			ShadedQuad.addVertexWithUVWRender(p*19, p*6.5, p*7,  tW*72,tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*4.5, p*7,  tW*72,tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*4.5, p*7,  tW*16, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*6.5, p*7,  tW*16, tH*24);
+			buf.addVertexWithUV(p*19, p*6.5, p*7,  tW*72,tH*24);
+			buf.addVertexWithUV(p*19, p*4.5, p*7,  tW*72,tH*40);
+			buf.addVertexWithUV(p*12, p*4.5, p*7,  tW*16, tH*40);
+			buf.addVertexWithUV(p*12, p*6.5, p*7,  tW*16, tH*24);
 			
-			ShadedQuad.addVertexWithUVWRender(p*19, p*6.5, p*9,  tW*72,tH*24);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*6.5, p*7,  tW*72,tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*6.5, p*7,  tW*16, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*12, p*6.5, p*9,  tW*16, tH*24);
+			buf.addVertexWithUV(p*19, p*6.5, p*9,  tW*72,tH*24);
+			buf.addVertexWithUV(p*19, p*6.5, p*7,  tW*72,tH*40);
+			buf.addVertexWithUV(p*12, p*6.5, p*7,  tW*16, tH*40);
+			buf.addVertexWithUV(p*12, p*6.5, p*9,  tW*16, tH*24);
 
-			ShadedQuad.addVertexWithUVWRender(p*19, p*6.5, p*9,  tW*24, tH*56);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*4.5, p*9,  tW*24, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*4.5, p*7,  tW*40,  tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*6.5, p*7,  tW*40,  tH*56);
+			buf.addVertexWithUV(p*19, p*6.5, p*9,  tW*24, tH*56);
+			buf.addVertexWithUV(p*19, p*4.5, p*9,  tW*24, tH*40);
+			buf.addVertexWithUV(p*19, p*4.5, p*7,  tW*40,  tH*40);
+			buf.addVertexWithUV(p*19, p*6.5, p*7,  tW*40,  tH*56);
 			}
 			
 			{
-			ShadedQuad.addVertexWithUVWRender(p*19, p*5.5, p*8.5,  tW*0, tH*32);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*4.5, p*8.5,  tW*0, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*4.5, p*8.5,  tW*16,tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*5.5, p*8.5,  tW*16,tH*32);
+			buf.addVertexWithUV(p*19, p*5.5, p*8.5,  tW*0, tH*32);
+			buf.addVertexWithUV(p*19, p*4.5, p*8.5,  tW*0, tH*40);
+			buf.addVertexWithUV(p*22, p*4.5, p*8.5,  tW*16,tH*40);
+			buf.addVertexWithUV(p*22, p*5.5, p*8.5,  tW*16,tH*32);
 				
-			ShadedQuad.addVertexWithUVWRender(p*22, p*5.5, p*7.5,  tW*16,tH*32);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*4.5, p*7.5,  tW*16,tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*4.5, p*7.5,  tW*0, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*5.5, p*7.5,  tW*0, tH*32);
+			buf.addVertexWithUV(p*22, p*5.5, p*7.5,  tW*16,tH*32);
+			buf.addVertexWithUV(p*22, p*4.5, p*7.5,  tW*16,tH*40);
+			buf.addVertexWithUV(p*19, p*4.5, p*7.5,  tW*0, tH*40);
+			buf.addVertexWithUV(p*19, p*5.5, p*7.5,  tW*0, tH*32);
 				
-			ShadedQuad.addVertexWithUVWRender(p*22, p*5.5, p*8.5,  tW*16,tH*32);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*5.5, p*7.5,  tW*16,tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*5.5, p*7.5,  tW*0, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*5.5, p*8.5,  tW*0, tH*32);
+			buf.addVertexWithUV(p*22, p*5.5, p*8.5,  tW*16,tH*32);
+			buf.addVertexWithUV(p*22, p*5.5, p*7.5,  tW*16,tH*40);
+			buf.addVertexWithUV(p*19, p*5.5, p*7.5,  tW*0, tH*40);
+			buf.addVertexWithUV(p*19, p*5.5, p*8.5,  tW*0, tH*32);
 				
-			ShadedQuad.addVertexWithUVWRender(p*22, p*5.5, p*8.5,  tW*40, tH*40);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*4.5, p*8.5,  tW*40, tH*48);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*4.5, p*7.5,  tW*48, tH*48);
-			ShadedQuad.addVertexWithUVWRender(p*22, p*5.5, p*7.5,  tW*48, tH*40);
+			buf.addVertexWithUV(p*22, p*5.5, p*8.5,  tW*40, tH*40);
+			buf.addVertexWithUV(p*22, p*4.5, p*8.5,  tW*40, tH*48);
+			buf.addVertexWithUV(p*22, p*4.5, p*7.5,  tW*48, tH*48);
+			buf.addVertexWithUV(p*22, p*5.5, p*7.5,  tW*48, tH*40);
 			}
+			buf.draw();
 		}
 		GL11.glPopMatrix();
 	}

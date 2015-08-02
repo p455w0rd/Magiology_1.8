@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -197,7 +197,7 @@ public class GuiControlBock extends GuiContainer{
 		 
 		 }
 		 Helper.sendMessage(new TileRedstone(tileCB));
-		 tileCB.getWorldObj().markBlockForUpdate(tileCB.xCoord, tileCB.yCoord, tileCB.zCoord);
+		 tileCB.getWorld().markBlockForUpdate(tileCB.getPos());
 		 
 	 }
 	 
@@ -225,12 +225,12 @@ public class GuiControlBock extends GuiContainer{
 	 protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 0.00390625F;
 	     float f1 = 0.00390625F;
-	     Tessellator tessellator = Tessellator.instance;
-	     tessellator.startDrawingQuads();
-	     tessellator.addVertexWithUV(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
-	     tessellator.addVertexWithUV(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
-	     tessellator.addVertexWithUV(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
-	     tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
-	     tessellator.draw();
+	     WorldRenderer renderer = TessHelper.getWR();
+	     renderer.startDrawingQuads();
+	     renderer.addVertexWithUV(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
+	     renderer.addVertexWithUV(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
+	     renderer.addVertexWithUV(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
+	     renderer.addVertexWithUV(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
+	     renderer.finishDrawing();
 	}
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandeler;
@@ -61,7 +62,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	@Override
 	public NetworkInterfaceProvider getInterfaceProvider(){
 		int orientation=SideHelper.convert(getOrientation());
-		return InterfaceBinder.get(worldObj, SideHelper.offset(orientation, xCoord), SideHelper.Y(orientation, yCoord), SideHelper.Z(orientation, zCoord));
+		return InterfaceBinder.get(worldObj, SideHelper.offset(orientation, pos));
 	}
 	private List<InteractType> interactTypes=new ArrayList<InteractType>();
 	@Override
@@ -105,9 +106,10 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		
 		if(hasWorldObj()){
 			if(object instanceof RedstoneData){
-				worldObj.notifyBlocksOfNeighborChange(pos, blockType);
-				int side=SideHelper.convert(getOrientation()),x=SideHelper.offset(side, xCoord), y=SideHelper.Y(side, yCoord), z=SideHelper.Z(side, zCoord);
-				if(worldObj.getBlock(pos).isOpaqueCube())worldObj.notifyBlocksOfNeighborChange(pos, worldObj.getBlock(pos));
+				worldObj.notifyBlockOfStateChange(pos, blockType);
+				int side=SideHelper.convert(getOrientation());
+				BlockPos pos1=SideHelper.offset(side, pos);
+				if(H.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos, H.getBlock(worldObj, pos1));
 			}
 		}
 	}

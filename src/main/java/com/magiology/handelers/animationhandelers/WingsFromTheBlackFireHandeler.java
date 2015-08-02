@@ -3,6 +3,8 @@ package com.magiology.handelers.animationhandelers;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.Sounds;
@@ -133,7 +135,7 @@ public class WingsFromTheBlackFireHandeler{
 	}
 	public static Positions[] getFlap(EntityPlayer player){
 		int random=0,speed=8;
-		char[] playerName=player.getCommandSenderName().toCharArray();
+		char[] playerName=player.getName().toCharArray();
 		for(int a=0;a<playerName.length;a++)random+=a*playerName[a];
 		random=(int)(random*1.6743546);
 		long time=player.worldObj.getTotalWorldTime()+random;
@@ -180,7 +182,7 @@ public class WingsFromTheBlackFireHandeler{
 			int x=(int) player.posX,y=(int) player.posY,z=(int) player.posZ;
 			if(x<0)x--;if(y<0)y--;if(z<0)z--;
 			for(int a=0;a<6;a++){
-				Material mat=player.worldObj.getBlock(x, y-a, z).getMaterial();
+				Material mat=Helper.getBlock(player.worldObj, new BlockPos(x, y-a, z)).getMaterial();
 				if(mat!=Material.air){
 					if(player.fallDistance>3){
 						if(player.worldObj.isRemote){

@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.entitys;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
@@ -14,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.vectors.Vec3M;
@@ -105,7 +105,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
                 posY=MOP.hitVec.yCoord;
                 posZ=MOP.hitVec.zCoord;
                 targetHit=true;
-                Helper.spawnEntityFX(new EntityFlameFX(worldObj, MOP.hitVec.xCoord, MOP.hitVec.yCoord, MOP.hitVec.zCoord, 0, 0+(targetHit?0.1:0), 0));
+                Helper.spawnEntityFX(new EntityFlameFXM(worldObj, MOP.hitVec.xCoord, MOP.hitVec.yCoord, MOP.hitVec.zCoord, 0, 0+(targetHit?0.1:0), 0));
             }
              
             if(MOP.typeOfHit==MovingObjectType.ENTITY){
@@ -125,7 +125,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         	detonationTime--;
         	if(detonationTime<=0)setDead();
         }
-        Helper.spawnEntityFX(new EntityFlameFX(worldObj, posX, posY, posZ, 0, 0+(targetHit?0.1:0), 0));
+        Helper.spawnEntityFX(new EntityFlameFXM(worldObj, posX, posY, posZ, 0, 0+(targetHit?0.1:0), 0));
         motionX*=0.99;
         motionY*=0.99;
         motionZ*=0.99;

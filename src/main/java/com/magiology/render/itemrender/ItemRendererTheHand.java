@@ -58,7 +58,7 @@ public class ItemRendererTheHand implements IItemRenderer{
 		float[] handRotationRender=Helper.calculateRenderPosArray(data.prevHandRotationCalc,data.handRotationCalc);
 		float x1=p*6F,y1=p*10,z1=p*2;
 		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11.glTranslated(handRotationRender[3]/30,handRotationRender[4]/30,handRotationRender[5]/30);
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x1,y1,z1);
 		GL11.glRotated(-20, 0, 1, 0);
 		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11H.rotateXYZ(handRotationRender[0],handRotationRender[1],handRotationRender[2]);
 		GL11.glTranslated(-x1, -y1, -z1);

@@ -8,8 +8,9 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
@@ -39,12 +40,13 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 	private final float tH5=1F/32F;
 	int state=0;
 	int StartStop=0;
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
 		TileEntityBedrockBreaker entity= (TileEntityBedrockBreaker) tileentity;
 		GL11.glPushMatrix();
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
@@ -64,35 +66,36 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		this.bindTexture(Textures.BedrockBreakerBase);
 		
 		{
-		ShadedQuad.addVertexWithUVWRender(p*3, p*16, p*13, tW*0, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*6,  p*13, tW*0, tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*6,  p*13, tW*80,tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*16, p*13, tW*80,tH*0);
+		buf.addVertexWithUV(p*3, p*16, p*13, tW*0, tH*0);
+		buf.addVertexWithUV(p*3, p*6,  p*13, tW*0, tH*80);
+		buf.addVertexWithUV(p*13,p*6,  p*13, tW*80,tH*80);
+		buf.addVertexWithUV(p*13,p*16, p*13, tW*80,tH*0);
 
-		ShadedQuad.addVertexWithUVWRender(p*13,p*16, p*3,  tW*0, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*6,  p*3,  tW*0, tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*6,  p*3,  tW*80,tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*16, p*3,  tW*80,tH*0);
+		buf.addVertexWithUV(p*13,p*16, p*3,  tW*0, tH*0);
+		buf.addVertexWithUV(p*13,p*6,  p*3,  tW*0, tH*80);
+		buf.addVertexWithUV(p*3, p*6,  p*3,  tW*80,tH*80);
+		buf.addVertexWithUV(p*3, p*16, p*3,  tW*80,tH*0);
 
-		ShadedQuad.addVertexWithUVWRender(p*13,p*16, p*13, tW*0, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*6,  p*13, tW*0, tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*13, p*6, p*3,  tW*80,tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*13, p*16,p*3,  tW*80,tH*0);
+		buf.addVertexWithUV(p*13,p*16, p*13, tW*0, tH*0);
+		buf.addVertexWithUV(p*13,p*6,  p*13, tW*0, tH*80);
+		buf.addVertexWithUV(p*13, p*6, p*3,  tW*80,tH*80);
+		buf.addVertexWithUV(p*13, p*16,p*3,  tW*80,tH*0);
 
-		ShadedQuad.addVertexWithUVWRender(p*3, p*16,p*3,   tW*0,  tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*6, p*3,   tW*0,  tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*3,p*6,  p*13,  tW*80, tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*3,p*16, p*13,  tW*80, tH*0);
+		buf.addVertexWithUV(p*3, p*16,p*3,   tW*0,  tH*0);
+		buf.addVertexWithUV(p*3, p*6, p*3,   tW*0,  tH*80);
+		buf.addVertexWithUV(p*3,p*6,  p*13,  tW*80, tH*80);
+		buf.addVertexWithUV(p*3,p*16, p*13,  tW*80, tH*0);
 
-		ShadedQuad.addVertexWithUVWRender(p*3, p*16,p*3,   tW*80, tH*80);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*16, p*13, tW*80, tH*160);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*16, p*13, tW*0,  tH*160);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*16,p*3,   tW*0,  tH*80);
+		buf.addVertexWithUV(p*3, p*16,p*3,   tW*80, tH*80);
+		buf.addVertexWithUV(p*3, p*16, p*13, tW*80, tH*160);
+		buf.addVertexWithUV(p*13,p*16, p*13, tW*0,  tH*160);
+		buf.addVertexWithUV(p*13,p*16,p*3,   tW*0,  tH*80);
 
-		ShadedQuad.addVertexWithUVWRender(p*13,p*6,p*3,   tW*80,  tH*160);
-		ShadedQuad.addVertexWithUVWRender(p*13,p*6, p*13, tW*80,  tH*240);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*6, p*13, tW*0,   tH*240);
-		ShadedQuad.addVertexWithUVWRender(p*3, p*6,p*3,   tW*0,   tH*160);
+		buf.addVertexWithUV(p*13,p*6,p*3,   tW*80,  tH*160);
+		buf.addVertexWithUV(p*13,p*6, p*13, tW*80,  tH*240);
+		buf.addVertexWithUV(p*3, p*6, p*13, tW*0,   tH*240);
+		buf.addVertexWithUV(p*3, p*6,p*3,   tW*0,   tH*160);
+		buf.draw();
 
 		}
 		
@@ -115,39 +118,40 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		{
 			{
 				this.bindTexture(Textures.BedrockBreakerLegSide);
-				ShadedQuad.addVertexWithUVWRender(p*-2, p*0,  p*1,   tW2*25, tH2*0);
-				ShadedQuad.addVertexWithUVWRender(p*-2, p*-4, p*1,   tW2*7, tH2*15);
-				ShadedQuad.addVertexWithUVWRender(p*0,  p*-4, p*1,   tW2*14,tH2*23);
-				ShadedQuad.addVertexWithUVWRender(p*0,  p*0,  p*1,   tW2*32,tH2*9);
+				buf.addVertexWithUV(p*-2, p*0,  p*1,   tW2*25, tH2*0);
+				buf.addVertexWithUV(p*-2, p*-4, p*1,   tW2*7, tH2*15);
+				buf.addVertexWithUV(p*0,  p*-4, p*1,   tW2*14,tH2*23);
+				buf.addVertexWithUV(p*0,  p*0,  p*1,   tW2*32,tH2*9);
 
-				ShadedQuad.addVertexWithUVWRender(p*0,  p*0,  -p*1,  tW2*25,tH2*0);
-				ShadedQuad.addVertexWithUVWRender(p*0,  p*-4, -p*1,  tW2*7,tH2*15);
-				ShadedQuad.addVertexWithUVWRender(p*-2, p*-4, -p*1,  tW2*14, tH2*23);
-				ShadedQuad.addVertexWithUVWRender(p*-2, p*0,  -p*1,  tW2*32, tH2*9);
+				buf.addVertexWithUV(p*0,  p*0,  -p*1,  tW2*25,tH2*0);
+				buf.addVertexWithUV(p*0,  p*-4, -p*1,  tW2*7,tH2*15);
+				buf.addVertexWithUV(p*-2, p*-4, -p*1,  tW2*14, tH2*23);
+				buf.addVertexWithUV(p*-2, p*0,  -p*1,  tW2*32, tH2*9);
 				
 				
 				
-				ShadedQuad.addVertexWithUVWRender(p*-2, p*-4,   p*1,   tW2*7, tH2*15);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*-6,   p*1,   tW2*2, tH2*26);
-				ShadedQuad.addVertexWithUVWRender(p*0.7,p*-5.3, p*1,   tW2*11,tH2*31);
-				ShadedQuad.addVertexWithUVWRender(p*0,  p*-4,   p*1,   tW2*14,tH2*23);
+				buf.addVertexWithUV(p*-2, p*-4,   p*1,   tW2*7, tH2*15);
+				buf.addVertexWithUV(p*-1, p*-6,   p*1,   tW2*2, tH2*26);
+				buf.addVertexWithUV(p*0.7,p*-5.3, p*1,   tW2*11,tH2*31);
+				buf.addVertexWithUV(p*0,  p*-4,   p*1,   tW2*14,tH2*23);
 	 
-				ShadedQuad.addVertexWithUVWRender(p*0,   p*-4,  -p*1,  tW2*7, tH2*15);
-				ShadedQuad.addVertexWithUVWRender(p*0.7, p*-5.3,-p*1,  tW2*2, tH2*26);
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*-6,  -p*1,  tW2*11,tH2*31);
-				ShadedQuad.addVertexWithUVWRender(p*-2,  p*-4,  -p*1,  tW2*14,tH2*23);
+				buf.addVertexWithUV(p*0,   p*-4,  -p*1,  tW2*7, tH2*15);
+				buf.addVertexWithUV(p*0.7, p*-5.3,-p*1,  tW2*2, tH2*26);
+				buf.addVertexWithUV(p*-1,  p*-6,  -p*1,  tW2*11,tH2*31);
+				buf.addVertexWithUV(p*-2,  p*-4,  -p*1,  tW2*14,tH2*23);
 				
 				
 				
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*-6,   p*1,  tW2*2, tH2*26);
-				ShadedQuad.addVertexWithUVWRender(p*1.6, p*-8.5, p*1,  tW2*1, tH2*47);
-				ShadedQuad.addVertexWithUVWRender(p*2.8, p*-7.2, p*1,  tW2*10,tH2*48);
-				ShadedQuad.addVertexWithUVWRender(p*0.7, p*-5.3, p*1,  tW2*11,tH2*31);
+				buf.addVertexWithUV(p*-1,  p*-6,   p*1,  tW2*2, tH2*26);
+				buf.addVertexWithUV(p*1.6, p*-8.5, p*1,  tW2*1, tH2*47);
+				buf.addVertexWithUV(p*2.8, p*-7.2, p*1,  tW2*10,tH2*48);
+				buf.addVertexWithUV(p*0.7, p*-5.3, p*1,  tW2*11,tH2*31);
 
-				ShadedQuad.addVertexWithUVWRender(p*0.7, p*-5.3, -p*1, tW2*2, tH2*26);
-				ShadedQuad.addVertexWithUVWRender(p*2.8, p*-7.2, -p*1, tW2*1, tH2*47);
-				ShadedQuad.addVertexWithUVWRender(p*1.6, p*-8.5, -p*1, tW2*10,tH2*48);
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*-6,   -p*1, tW2*11,tH2*31);
+				buf.addVertexWithUV(p*0.7, p*-5.3, -p*1, tW2*2, tH2*26);
+				buf.addVertexWithUV(p*2.8, p*-7.2, -p*1, tW2*1, tH2*47);
+				buf.addVertexWithUV(p*1.6, p*-8.5, -p*1, tW2*10,tH2*48);
+				buf.addVertexWithUV(p*-1,  p*-6,   -p*1, tW2*11,tH2*31);
+				buf.draw();
 			}
 		}
 		
@@ -162,22 +166,23 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		{
 			{
 				this.bindTexture(Textures.BedrockBreakerLegFront);
-				ShadedQuad.addVertexWithUVWRender(-p*2, p*0,  -p*1,  tW3*0,  tH3*0);
-				ShadedQuad.addVertexWithUVWRender(-p*2, p*-4, -p*1,  tW3*0,  tH3*32);
-				ShadedQuad.addVertexWithUVWRender(-p*2, p*-4,  p*1,  tW3*16, tH3*32);
-				ShadedQuad.addVertexWithUVWRender(-p*2, p*0,   p*1,  tW3*16, tH3*0);
+				buf.addVertexWithUV(-p*2, p*0,  -p*1,  tW3*0,  tH3*0);
+				buf.addVertexWithUV(-p*2, p*-4, -p*1,  tW3*0,  tH3*32);
+				buf.addVertexWithUV(-p*2, p*-4,  p*1,  tW3*16, tH3*32);
+				buf.addVertexWithUV(-p*2, p*0,   p*1,  tW3*16, tH3*0);
 				
 				
-				ShadedQuad.addVertexWithUVWRender(-p*2, p*-4,  -p*1,   tW3*0,  tH3*32);
-				ShadedQuad.addVertexWithUVWRender(-p*1, p*-6,  -p*1,   tW3*0,  tH3*50);
-				ShadedQuad.addVertexWithUVWRender(-p*1, p*-6,   p*1,   tW3*16, tH3*50);
-				ShadedQuad.addVertexWithUVWRender(-p*2, p*-4,   p*1,   tW3*16, tH3*32);
+				buf.addVertexWithUV(-p*2, p*-4,  -p*1,   tW3*0,  tH3*32);
+				buf.addVertexWithUV(-p*1, p*-6,  -p*1,   tW3*0,  tH3*50);
+				buf.addVertexWithUV(-p*1, p*-6,   p*1,   tW3*16, tH3*50);
+				buf.addVertexWithUV(-p*2, p*-4,   p*1,   tW3*16, tH3*32);
 				
 				
-				ShadedQuad.addVertexWithUVWRender(-p*1,  p*-6,  -p*1,  tW3*0,  tH3*50);
-				ShadedQuad.addVertexWithUVWRender(p*1.6, p*-8.5,-p*1,  tW3*0,  tH3*71);
-				ShadedQuad.addVertexWithUVWRender(p*1.6, p*-8.5, p*1,  tW3*16, tH3*71);
-				ShadedQuad.addVertexWithUVWRender(-p*1,  p*-6,   p*1,  tW3*16, tH3*50);
+				buf.addVertexWithUV(-p*1,  p*-6,  -p*1,  tW3*0,  tH3*50);
+				buf.addVertexWithUV(p*1.6, p*-8.5,-p*1,  tW3*0,  tH3*71);
+				buf.addVertexWithUV(p*1.6, p*-8.5, p*1,  tW3*16, tH3*71);
+				buf.addVertexWithUV(-p*1,  p*-6,   p*1,  tW3*16, tH3*50);
+				buf.draw();
 			}
 		}
 		
@@ -191,22 +196,23 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		{
 			{
 				this.bindTexture(Textures.BedrockBreakerLegBack);
-				ShadedQuad.addVertexWithUVWRender(0, p*0,   p*1,     tW4*0, tH4*0);
-				ShadedQuad.addVertexWithUVWRender(0, p*-4,  p*1,     tW4*0, tH4*32);
-				ShadedQuad.addVertexWithUVWRender(0, p*-4, -p*1,     tW4*16,tH4*32);
-				ShadedQuad.addVertexWithUVWRender(0, p*0,  -p*1,     tW4*16,tH4*0);
+				buf.addVertexWithUV(0, p*0,   p*1,     tW4*0, tH4*0);
+				buf.addVertexWithUV(0, p*-4,  p*1,     tW4*0, tH4*32);
+				buf.addVertexWithUV(0, p*-4, -p*1,     tW4*16,tH4*32);
+				buf.addVertexWithUV(0, p*0,  -p*1,     tW4*16,tH4*0);
 				
 				
-				ShadedQuad.addVertexWithUVWRender(p*0,   p*-4,   p*1,  tW4*0, tH4*32);
-				ShadedQuad.addVertexWithUVWRender(p*0.7, p*-5.3, p*1,  tW4*0, tH4*44);
-				ShadedQuad.addVertexWithUVWRender(p*0.7, p*-5.3,-p*1,  tW4*16,tH4*44);
-				ShadedQuad.addVertexWithUVWRender(p*0,   p*-4,  -p*1,  tW4*16,tH4*32);
+				buf.addVertexWithUV(p*0,   p*-4,   p*1,  tW4*0, tH4*32);
+				buf.addVertexWithUV(p*0.7, p*-5.3, p*1,  tW4*0, tH4*44);
+				buf.addVertexWithUV(p*0.7, p*-5.3,-p*1,  tW4*16,tH4*44);
+				buf.addVertexWithUV(p*0,   p*-4,  -p*1,  tW4*16,tH4*32);
 				
 				
-				ShadedQuad.addVertexWithUVWRender(p*0.7,  p*-5.3, p*1, tW4*0, tH4*44);
-				ShadedQuad.addVertexWithUVWRender(p*2.8,  p*-7.2, p*1, tW4*0, tH4*66);
-				ShadedQuad.addVertexWithUVWRender(p*2.8,  p*-7.2,-p*1, tW4*16,tH4*66);
-				ShadedQuad.addVertexWithUVWRender(p*0.7,  p*-5.3,-p*1, tW4*16,tH4*44);
+				buf.addVertexWithUV(p*0.7,  p*-5.3, p*1, tW4*0, tH4*44);
+				buf.addVertexWithUV(p*2.8,  p*-7.2, p*1, tW4*0, tH4*66);
+				buf.addVertexWithUV(p*2.8,  p*-7.2,-p*1, tW4*16,tH4*66);
+				buf.addVertexWithUV(p*0.7,  p*-5.3,-p*1, tW4*16,tH4*44);
+				buf.draw();
 			}
 		}
 		
@@ -220,16 +226,17 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		{
 			{
 				this.bindTexture(Textures.BedrockBreakerLegTopBottom);
-				ShadedQuad.addVertexWithUVWRender(p*0,  0,  p*1,     tW5*0,  tH5*0);
-				ShadedQuad.addVertexWithUVWRender(p*0,  0, -p*1,     tW5*0,  tH5*16);
-				ShadedQuad.addVertexWithUVWRender(p*-2, 0, -p*1,     tW5*16, tH5*16);
-				ShadedQuad.addVertexWithUVWRender(p*-2, 0,  p*1,     tW5*16, tH5*0);
+				buf.addVertexWithUV(p*0,  0,  p*1,     tW5*0,  tH5*0);
+				buf.addVertexWithUV(p*0,  0, -p*1,     tW5*0,  tH5*16);
+				buf.addVertexWithUV(p*-2, 0, -p*1,     tW5*16, tH5*16);
+				buf.addVertexWithUV(p*-2, 0,  p*1,     tW5*16, tH5*0);
 				
 				
-				ShadedQuad.addVertexWithUVWRender(p*2.8,  p*-7.2,-p*1, tW5*0,  tH5*16);
-				ShadedQuad.addVertexWithUVWRender(p*2.8,  p*-7.2, p*1, tW5*0,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*1.6, p*-8.5,  p*1, tW5*16, tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*1.6, p*-8.5, -p*1, tW5*16, tH5*16);
+				buf.addVertexWithUV(p*2.8,  p*-7.2,-p*1, tW5*0,  tH5*16);
+				buf.addVertexWithUV(p*2.8,  p*-7.2, p*1, tW5*0,  tH5*32);
+				buf.addVertexWithUV(p*1.6, p*-8.5,  p*1, tW5*16, tH5*32);
+				buf.addVertexWithUV(p*1.6, p*-8.5, -p*1, tW5*16, tH5*16);
+				buf.draw();
 			}
 		}
 		
@@ -254,55 +261,56 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		GL11.glRotated(positionForLaser*1000, 0,1,0);
 		{
 				bindTexture(Textures.BedrockBreakerLegLaser);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*-1.5,  p*1,  tW5*0,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*-1.5, -p*1,  tW5*16, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*0,    -p*1,  tW5*16, tH5*0);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*0,     p*1,  tW5*0,  tH5*0);
+				buf.addVertexWithUV(p*1,  p*-1.5,  p*1,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*1,  p*-1.5, -p*1,  tW5*16, tH5*12);
+				buf.addVertexWithUV(p*1,  p*0,    -p*1,  tW5*16, tH5*0);
+				buf.addVertexWithUV(p*1,  p*0,     p*1,  tW5*0,  tH5*0);
 
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*0,    p*1,  tW5*0, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*0,   -p*1,  tW5*16, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*-1.5,-p*1,  tW5*16,  tH5*0);
-				ShadedQuad.addVertexWithUVWRender(p*-1,  p*-1.5, p*1,  tW5*0,  tH5*0);
+				buf.addVertexWithUV(p*-1,  p*0,    p*1,  tW5*0, tH5*12);
+				buf.addVertexWithUV(p*-1,  p*0,   -p*1,  tW5*16, tH5*12);
+				buf.addVertexWithUV(p*-1,  p*-1.5,-p*1,  tW5*16,  tH5*0);
+				buf.addVertexWithUV(p*-1,  p*-1.5, p*1,  tW5*0,  tH5*0);
 				
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*-1.5, -p*1,  tW5*0,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*-1.5, -p*1,  tW5*16,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*0,    -p*1,  tW5*16, tH5*0);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*0,    -p*1,  tW5*0, tH5*0);
+				buf.addVertexWithUV(p*1,  p*-1.5, -p*1,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*-1, p*-1.5, -p*1,  tW5*16,  tH5*12);
+				buf.addVertexWithUV(p*-1, p*0,    -p*1,  tW5*16, tH5*0);
+				buf.addVertexWithUV(p*1,  p*0,    -p*1,  tW5*0, tH5*0);
 
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*0,     p*1,  tW5*0, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*0,     p*1,  tW5*16, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*-1.5,  p*1,  tW5*16,  tH5*0);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*-1.5,  p*1,  tW5*0,  tH5*0);
+				buf.addVertexWithUV(p*1,  p*0,     p*1,  tW5*0, tH5*12);
+				buf.addVertexWithUV(p*-1, p*0,     p*1,  tW5*16, tH5*12);
+				buf.addVertexWithUV(p*-1, p*-1.5,  p*1,  tW5*16,  tH5*0);
+				buf.addVertexWithUV(p*1,  p*-1.5,  p*1,  tW5*0,  tH5*0);
 				
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*-1.5,  p*1,  tW5*0, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*-1.5,  p*1,  tW5*16, tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-1, p*-1.5, -p*1,  tW5*16,  tH5*0);
-				ShadedQuad.addVertexWithUVWRender(p*1,  p*-1.5, -p*1,  tW5*0,  tH5*0);
+				buf.addVertexWithUV(p*1,  p*-1.5,  p*1,  tW5*0, tH5*12);
+				buf.addVertexWithUV(p*-1, p*-1.5,  p*1,  tW5*16, tH5*12);
+				buf.addVertexWithUV(p*-1, p*-1.5, -p*1,  tW5*16,  tH5*0);
+				buf.addVertexWithUV(p*1,  p*-1.5, -p*1,  tW5*0,  tH5*0);
 				
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-4,    p*0.5,  tW5*0,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-4,   -p*0.5,  tW5*8,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-1.5, -p*0.5,  tW5*8,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-1.5,  p*0.5,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-4,    p*0.5,  tW5*0,  tH5*32);
+				buf.addVertexWithUV(p*0.5,  p*-4,   -p*0.5,  tW5*8,  tH5*32);
+				buf.addVertexWithUV(p*0.5,  p*-1.5, -p*0.5,  tW5*8,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-1.5,  p*0.5,  tW5*0,  tH5*12);
 
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-1.5,  p*0.5,  tW5*0,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-1.5, -p*0.5,  tW5*8,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-4,   -p*0.5,  tW5*8,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-4,    p*0.5,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*-0.5, p*-1.5,  p*0.5,  tW5*0,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-1.5, -p*0.5,  tW5*8,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-4,   -p*0.5,  tW5*8,  tH5*12);
+				buf.addVertexWithUV(p*-0.5, p*-4,    p*0.5,  tW5*0,  tH5*12);
 				
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-4,   -p*0.5,  tW5*0,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-4,   -p*0.5,  tW5*8,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-1.5, -p*0.5,  tW5*8,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-1.5, -p*0.5,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-4,   -p*0.5,  tW5*0,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-4,   -p*0.5,  tW5*8,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-1.5, -p*0.5,  tW5*8,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-1.5, -p*0.5,  tW5*0,  tH5*12);
 
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-1.5, p*0.5,  tW5*0,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-1.5, p*0.5,  tW5*8,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-4,   p*0.5,  tW5*8,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-4,   p*0.5,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-1.5, p*0.5,  tW5*0,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-1.5, p*0.5,  tW5*8,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-4,   p*0.5,  tW5*8,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-4,   p*0.5,  tW5*0,  tH5*12);
 				
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-4,   p*0.5,  tW5*0,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-4,   p*0.5,  tW5*8,  tH5*32);
-				ShadedQuad.addVertexWithUVWRender(p*-0.5, p*-4,  -p*0.5,  tW5*8,  tH5*12);
-				ShadedQuad.addVertexWithUVWRender(p*0.5,  p*-4, - p*0.5,  tW5*0,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-4,   p*0.5,  tW5*0,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-4,   p*0.5,  tW5*8,  tH5*32);
+				buf.addVertexWithUV(p*-0.5, p*-4,  -p*0.5,  tW5*8,  tH5*12);
+				buf.addVertexWithUV(p*0.5,  p*-4, - p*0.5,  tW5*0,  tH5*12);
+				buf.draw();
 		}
 		
 		GL11.glRotated(-positionForLaser*1000, 0,1,0);
@@ -314,25 +322,26 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 		GL11.glTranslated(p*8, p*6, p*8);
 		GL11H.SetUpOpaqueRendering(1);
 			this.bindTexture(Textures.BedrockBreakerLegLaser);
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-6,   p*0.25,   tW5*12, tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-6,  -p*0.25,   tW5*8,  tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-4,  -p*0.25,   tW5*8,  tH5*28);
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-4,   p*0.25,   tW5*12, tH5*28);
+			buf.addVertexWithUV(p*0.25,  p*-6,   p*0.25,   tW5*12, tH5*12);
+			buf.addVertexWithUV(p*0.25,  p*-6,  -p*0.25,   tW5*8,  tH5*12);
+			buf.addVertexWithUV(p*0.25,  p*-4,  -p*0.25,   tW5*8,  tH5*28);
+			buf.addVertexWithUV(p*0.25,  p*-4,   p*0.25,   tW5*12, tH5*28);
 			
-			ShadedQuad.addVertexWithUVWRender(p*-0.25,  p*-4,  p*0.25,   tW5*12, tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25,  p*-4, -p*0.25,   tW5*8,  tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25,  p*-6, -p*0.25,   tW5*8,  tH5*28);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25,  p*-6,  p*0.25,   tW5*12, tH5*28);
+			buf.addVertexWithUV(p*-0.25,  p*-4,  p*0.25,   tW5*12, tH5*12);
+			buf.addVertexWithUV(p*-0.25,  p*-4, -p*0.25,   tW5*8,  tH5*12);
+			buf.addVertexWithUV(p*-0.25,  p*-6, -p*0.25,   tW5*8,  tH5*28);
+			buf.addVertexWithUV(p*-0.25,  p*-6,  p*0.25,   tW5*12, tH5*28);
 			
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-6,  -p*0.25,   tW5*12, tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25, p*-6,  -p*0.25,   tW5*8,  tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25, p*-4,  -p*0.25,   tW5*8,  tH5*28);
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-4,  -p*0.25,   tW5*12, tH5*28);
+			buf.addVertexWithUV(p*0.25,  p*-6,  -p*0.25,   tW5*12, tH5*12);
+			buf.addVertexWithUV(p*-0.25, p*-6,  -p*0.25,   tW5*8,  tH5*12);
+			buf.addVertexWithUV(p*-0.25, p*-4,  -p*0.25,   tW5*8,  tH5*28);
+			buf.addVertexWithUV(p*0.25,  p*-4,  -p*0.25,   tW5*12, tH5*28);
 			
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-4,  p*0.25,   tW5*12, tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25, p*-4,  p*0.25,   tW5*8,  tH5*12);
-			ShadedQuad.addVertexWithUVWRender(p*-0.25, p*-6,  p*0.25,   tW5*8,  tH5*28);
-			ShadedQuad.addVertexWithUVWRender(p*0.25,  p*-6,  p*0.25,   tW5*12, tH5*28);
+			buf.addVertexWithUV(p*0.25,  p*-4,  p*0.25,   tW5*12, tH5*12);
+			buf.addVertexWithUV(p*-0.25, p*-4,  p*0.25,   tW5*8,  tH5*12);
+			buf.addVertexWithUV(p*-0.25, p*-6,  p*0.25,   tW5*8,  tH5*28);
+			buf.addVertexWithUV(p*0.25,  p*-6,  p*0.25,   tW5*12, tH5*28);
+			buf.draw();
 			GL11H.EndOpaqueRendering();
 			GL11.glColor4f(1, 1, 1, 1);
 		GL11.glTranslated(-p*8, -p*6, -p*8);

@@ -15,9 +15,9 @@ import com.magiology.objhelper.helpers.renderers.TessHelper;
 public class RenderNetworkController extends TileEntitySpecialRenderer{
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt,int pass){
 		GL11.glPushMatrix();
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		new ColorF(0.6,0,0,0.5).bind();
 		GL11H.texture(false);
 		AxisAlignedBB[] cubes=((MultiColisionProvider)tile).getActiveBoxes();

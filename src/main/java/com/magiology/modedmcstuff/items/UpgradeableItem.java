@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.upgrades.RegisterUpgrades;
 import com.magiology.upgrades.RegisterUpgrades.Container;
 
@@ -25,15 +26,15 @@ public class UpgradeableItem extends Item implements UpgItem{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-	    itemStack.stackTagCompound=new NBTTagCompound();
+	    H.createNBT(itemStack);
 	}
 	
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){
-		if(itemStack.stackTagCompound!=null){
+		if(itemStack.getTagCompound()!=null){
 			if(GuiScreen.isShiftKeyDown()){
 //				list.add("power= "+this.geten);
-				NBTTagCompound nbt=itemStack.stackTagCompound;
+				NBTTagCompound nbt=itemStack.getTagCompound();
 				ItemStack[] stacks=this.getStacks(itemStack);
 				for(int b=0;b<stacks.length;b++){
 					ItemStack a=stacks[b];
@@ -45,7 +46,7 @@ public class UpgradeableItem extends Item implements UpgItem{
 	
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5){
-		if(itemStack.stackTagCompound==null)itemStack.stackTagCompound=new NBTTagCompound();
+		H.createNBT(itemStack);
 	}
 	@Override
 	public void initUpgrade(Container containe){
@@ -61,13 +62,13 @@ public class UpgradeableItem extends Item implements UpgItem{
 	public ItemStack[] getStacks(ItemStack itemStack){
 		if(!(itemStack.getItem()instanceof UpgItem)||!itemStack.hasTagCompound())return null;
 		ItemStack[] result=new ItemStack[getInventorySize()];
-		NBTTagCompound nbt=itemStack.stackTagCompound;
+		NBTTagCompound nbt=itemStack.getTagCompound();
 		result=Helper.loadItemsFromNBT(nbt, slotNBT, result);
 		return result;
 	}
 	@Override
 	public void setStacks(ItemStack itemStack,ItemStack[] itemStacks){
-		Helper.saveItemsToNBT(itemStack.stackTagCompound, slotNBT, itemStacks);
+		Helper.saveItemsToNBT(itemStack.getTagCompound(), slotNBT, itemStacks);
 	}
 	@Override
 	public int getInventorySize(){
@@ -77,7 +78,7 @@ public class UpgradeableItem extends Item implements UpgItem{
 	@Deprecated
 	@Override
 	public ItemStack getStack(ItemStack itemStack,int id){
-//		return Helper.loadItemsFromNBT(itemStack.stackTagCompound, slotNBT, new ItemStack[1])[0];
+//		return Helper.loadItemsFromNBT(itemStack.getTagCompound(), slotNBT, new ItemStack[1])[0];
 		return null;
 	}
 	@Deprecated

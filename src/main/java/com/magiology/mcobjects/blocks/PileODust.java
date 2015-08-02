@@ -5,6 +5,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 import com.magiology.core.init.MItems;
@@ -15,8 +16,6 @@ public class PileODust extends Block {
 	
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	
     @Override
 	public int getRenderType(){
@@ -30,7 +29,7 @@ public class PileODust extends Block {
 		this.setBlockBounds(p*5.5F, p*0F, p*5.5F, p*10.5F, p*1F, p*10.5F);
 	}
 	@Override
-	public Item getItemDropped(int p1, Random rand, int p2){
+	public Item getItemDropped(IBlockState state, Random rand, int fortune){
 		return MItems.BedrockDust;
 	}
 }

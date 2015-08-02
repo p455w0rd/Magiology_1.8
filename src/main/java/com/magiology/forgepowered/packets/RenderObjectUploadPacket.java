@@ -5,6 +5,8 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
 
 import org.lwjgl.util.vector.Vector2f;
 
@@ -15,16 +17,17 @@ import com.magiology.modedmcstuff.ColorF;
 
 public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	
-	private int pos[],id;
+	private int id;
 	private boolean moveMode,suportsText;
 	private float scale;
 	private Vector2f offset,size;
 	private ColorF color;
 	private String text;
+	BlockPos pos;
 	
 	public RenderObjectUploadPacket(){}
 	public RenderObjectUploadPacket(TileEntityHologramProjector hp, RenderObject ro){
-		pos=new int[]{hp.xCoord,hp.yCoord,hp.zCoord};
+		pos=hp.getPos();
 		id=ro.id;
 		
 		moveMode=ro.moveMode;
@@ -48,7 +51,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		buffer.writeBoolean(suportsText);
 		if(suportsText){
 			buffer.writeInt(text.length());
-			if(text.length()>0)buffer.writeStringToBuffer(text);
+			if(text.length()>0)buffer.writeString(text);
 		}
 	}
 	@Override
@@ -69,7 +72,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	}
 	@Override
 	public void process(EntityPlayer player, Side side){
-		TileEntity test=player.worldObj.getTileEntity(pos[0], pos[1], pos[2]);
+		TileEntity test=player.worldObj.getTileEntity(pos);
 		if(test instanceof TileEntityHologramProjector){
 			TileEntityHologramProjector tile=(TileEntityHologramProjector)test;
 			boolean found=false;

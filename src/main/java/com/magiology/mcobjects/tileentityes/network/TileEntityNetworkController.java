@@ -146,7 +146,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		Object[] keys=networkIdMap.keySet().toArray();
 		for(int i=0;i<keys.length;i++){
 			TileEntity test=(TileEntity)keys[i];
-			if(test.getWorldObj().getTileEntity(test.xCoord, test.yCoord, test.zCoord)!=test)networkIdMap.remove(test);
+			if(test.getWorld().getTileEntity(test.xCoord, test.yCoord, test.zCoord)!=test)networkIdMap.remove(test);
 		}
 		
 		//generate && save
@@ -215,7 +215,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					if(isDone)done++;
 					else notDone++;
 					if(!isDone)for(int i=0;i<6;i++)if(workTile.getAccessibleOnSide(i)){
-						TileEntity test=workTile.getHost().getWorldObj().getTileEntity(SideHelper.offset(i, workTile.getHost().xCoord), SideHelper.Y(i, workTile.getHost().yCoord), SideHelper.Z(i, workTile.getHost().zCoord));
+						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideHelper.offset(i, workTile.getHost().xCoord), SideHelper.Y(i, workTile.getHost().yCoord), SideHelper.Z(i, workTile.getHost().zCoord));
 						if(test instanceof ISidedNetworkComponent){
 							ISidedNetworkComponent t=(ISidedNetworkComponent)test;
 							if(t instanceof ISidedNetworkComponent&&!network.contains(t)&&t.getBrain()!=null&&t.getNetworkId()==getNetworkId()){

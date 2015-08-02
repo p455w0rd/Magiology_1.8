@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -29,7 +30,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	public AxisAlignedBB pointId,prevPointId;
 	public AxisAlignedBB[] collisionBoxes=null;
 
-	protected int[] brainLoadup={0,0,0,1};
+	protected BlockPos brainPos;
 	
 	public TileEntityNetworkPow(boolean[] allowedSidedPower,boolean[] sidedPower,int minTSpeed, int middleTSpeed, int maxTSpeed, int maxEnergyBuffer){
 		super(allowedSidedPower, sidedPower, minTSpeed, middleTSpeed, maxTSpeed, maxEnergyBuffer);
@@ -38,13 +39,13 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-		brainLoadup=ArrayUtils.add(read3I(NBT, "brainP"),-1);
+		brainPos=readPos(NBT, "brainP");
 		canPathFindTheBrain=NBT.getBoolean("brainPath");
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
 		super.writeToNBT(NBT);
-		write3I(NBT, brainLoadup[0], brainLoadup[1], brainLoadup[2], "brainP");
+		writePos(NBT, brainPos, "brainP");
 		NBT.setBoolean("brainPath", canPathFindTheBrain);
 	}
 	public void checkBrainConnection(){
@@ -53,11 +54,11 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	public void findBrain(){
 		int side=-1;TileEntity test=null;
 		for(int i=0;i<this.connections.length;i++)if(this.connections[i]!=null&&
-				(test=worldObj.getTileEntity(SideHelper.offset(i, xCoord), SideHelper.Y(i, yCoord), SideHelper.Z(i, zCoord)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
+				(test=worldObj.getTileEntity(SideHelper.offset(i, pos)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
 			side=i;i=this.connections.length;
 		}
 		if(side!=-1){
-			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offset(side, xCoord), SideHelper.Y(side, yCoord), SideHelper.Z(side, zCoord));
+			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offset(side, pos));
 			if(component!=null)NetworkBaseComponentHandeler.setBrain(component.getBrain(), this);
 		}
 	}
@@ -96,7 +97,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	}
 	@Override
 	public int getOrientation(){
-		return worldObj.getBlockMetadata(pos);
+		return H.getBlockMetadata(worldObj, pos);
 	}
 	@Override
 	public void initTheComponent(){
@@ -109,20 +110,16 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 		accessibleSides[side]=accessible;}
 	@Override
 	public void setOrientation(int orientation){
-		worldObj.setBlockMetadataWithNotify(pos, orientation, 0);
+		Helper.setMetadata(worldObj,pos, orientation);
 	}
 	@Override
 	public void setBrain(TileEntityNetworkController brain){
-		if(brain!=null){
-			brainLoadup[0]=brain.xCoord;
-			brainLoadup[1]=brain.yCoord;
-			brainLoadup[2]=brain.zCoord;
-		}
+		if(brain!=null)brainPos=brain.getPos().add(0,0,0);
 	}
 	@Override
 	public TileEntityNetworkController getBrain(){
 		if(!canPathFindTheBrain)return null;
-		TileEntity tile=worldObj.getTileEntity(brainLoadup[0], brainLoadup[1], brainLoadup[2]);
+		TileEntity tile=worldObj.getTileEntity(brainPos);
 		if(!(tile instanceof TileEntityNetworkController))return null;
 		return (TileEntityNetworkController)tile;
 	}
@@ -142,7 +139,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	public AxisAlignedBB getRenderBoundingBox(){
 		if(blockType instanceof BlockContainerMultiColision){
 			AxisAlignedBB bb=((BlockContainerMultiColision)blockType).getResetBoundsOptional(worldObj, pos);
-			if(bb!=null)return bb.addCoord(pos);
+			if(bb!=null)return bb.addCoord(pos.getX(),pos.getY(),pos.getZ());
 		}
 		return super.getRenderBoundingBox();
 	}

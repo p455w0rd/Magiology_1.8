@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.magiology.core.MReference;
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
-import com.magiology.mcobjects.blocks.disco.DiscoFlorPlacer;
 import com.magiology.mcobjects.items.BedrockDust;
 import com.magiology.mcobjects.items.EquivalentRightClickWandOfMagic;
 import com.magiology.mcobjects.items.FireBarrel;
@@ -59,7 +58,6 @@ public class MItems{
 		PowerCounter=init(new PowerCounter().setUnlocalizedName("PowerCounter").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "PowerCounter").setMaxStackSize(1));
 		IPowerSidenessInstructor=init(new IPowerSidenessInstructor().setUnlocalizedName("IPowerSidenessInstructor").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "PowerCounter").setMaxStackSize(1));
 		BedrockDust=init(new BedrockDust().setUnlocalizedName("BedrockDust").setCreativeTab(MCreativeTabs.Whwmmt_core).setTextureName(MReference.MODID + ":" + "BedrockDust").setMaxStackSize(17));
-		DiscoFlorPlacer=init(new DiscoFlorPlacer().setUnlocalizedName("DiscoFlorPlacer").setCreativeTab(MCreativeTabs.Whwmmt_core).setTextureName(MReference.MODID + ":" + "DiscoFlorPlacer"));
 		FireHammer=init(new FireHammer().setUnlocalizedName("FireHammer").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "FireHammer").setMaxStackSize(1));
 		FireBarrel=init(new FireBarrel(Container.FireBarrel).setUnlocalizedName("FireBarrel").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "FireBarrel").setMaxStackSize(1));
 		TheHand=init(new TheHand().setUnlocalizedName("TheHand").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
@@ -77,13 +75,15 @@ public class MItems{
 	}
 
 	public static void armorRegister(){
-		pants_42A=EnumHelper.addArmorMaterial("pants42", 1, new int[]{2, 6, 5, 2}, 30);
-		helmet_42A=EnumHelper.addArmorMaterial("helmet42", 1, new int[]{2, 6, 5, 2}, 30);
-		WingsFTBFA=EnumHelper.addArmorMaterial("DFTheWings", 1, new int[]{2, 6, 5, 2}, 30);
+		pants_42A=add("pants42", 1, new int[]{2, 6, 5, 2}, 30);
+		helmet_42A=add("helmet42", 1, new int[]{2, 6, 5, 2}, 30);
+		WingsFTBFA=add("DFTheWings", 1, new int[]{2, 6, 5, 2}, 30);
 		
 		pants_42I =init(new Pants_42("pants_42", pants_42A, "pants_42", 2,MCreativeTabs.Whwmmt_core));
 		helmet_42I=init(new Helmet_42("helmet42", helmet_42A, "helmet42", 0,MCreativeTabs.Whwmmt_core));
 		WingsFTBFI=init(new CyborgWingsFromTheBlackFireItem("WingsFTBF", WingsFTBFA, "WingsFTBF", 1,MCreativeTabs.Whwmmt_core));
+	}private static ArmorMaterial add(String name, int durability, int[] reductionAmounts, int enchantability){
+		return EnumHelper.addArmorMaterial(name, name, durability, reductionAmounts, enchantability);
 	}
 	
 	public static void initRenders(){

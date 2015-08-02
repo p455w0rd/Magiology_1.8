@@ -4,10 +4,9 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import com.magiology.api.network.ISidedNetworkComponent;
@@ -59,12 +58,13 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract{
 	@Override
 	public void setColisionBoxes(){
 		if(!hasWorldObj())return;
-		int side=SideHelper.convert(getOrientation()),x=SideHelper.offset(side, xCoord),y=SideHelper.Y(side, yCoord),z=SideHelper.Z(side, zCoord);
-		Block block=worldObj.getBlock(x,y,z);
+		int side=SideHelper.convert(getOrientation());
+		BlockPos pos1=SideHelper.offset(side, pos);
+		Block block=H.getBlock(worldObj, pos1);
 		
 		float minX,minY,minZ,maxX,maxY,maxZ;
 		if(block instanceof BlockContainerMultiColision){
-			AxisAlignedBB box=((BlockContainerMultiColision)block).getResetBoundsOptional(worldObj,x,y,z);
+			AxisAlignedBB box=((BlockContainerMultiColision)block).getResetBoundsOptional(worldObj,pos);
 			minX=(float)box.minX;minY=(float)box.minY;minZ=(float)box.minZ;
 			maxX=(float)box.maxX;maxY=(float)box.maxY;maxZ=(float)box.maxZ;
 		}else{
@@ -197,7 +197,8 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract{
 	public void onNetworkActionInvoked(String action, int dataSize, Object... data){
 		if(H.isRemote(this))return;
 		if(getInterfaceProvider()!=null)return;
-		int side=SideHelper.convert(getOrientation()),x=SideHelper.offset(side, xCoord), y=SideHelper.Y(side, yCoord), z=SideHelper.Z(side, zCoord);
+		int side=SideHelper.convert(getOrientation());
+		BlockPos pos1=SideHelper.offset(side, pos);
 		try{
 			String[] actionWords=action.split(" ");
 			int acitonSize=actionWords.length;
@@ -208,17 +209,17 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract{
 							Block block=Block.getBlockById(Integer.parseInt(actionWords[2]));
 							int meta=0;
 							if(acitonSize>4&&H.isInteger(actionWords[3]))meta=Integer.parseInt(actionWords[3]);
-							worldObj.setBlock(pos, block, meta, 2);
-						}
+							Helper.setBlock(worldObj, pos1, block, meta);
+						} 
 					}
 					else if(actionWords[1].equals("destroy")){
-						int meta=worldObj.getBlockMetadata(pos);
-						Block block=worldObj.getBlock(pos);
+						int meta=H.getBlockMetadata(worldObj, pos1);
+						Block block=H.getBlock(worldObj, pos1);
 						if(H.isRemote(this)){
-							Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, block, 0);
+//							Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, block, 0);
 						}else{
-							block.dropBlockAsItem(worldObj, pos, meta, 2);
-							worldObj.setBlock(pos, Blocks.air, 0, 2);
+							block.dropBlockAsItem(worldObj, pos1, worldObj.getBlockState(pos1), 1);
+							worldObj.setBlockToAir(pos1);
 						}
 					}
 					else if(actionWords[1].equals("get")){
@@ -251,8 +252,8 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract{
 							redstoneData.isStrong=isStrong;
 							
 							setInteractData("redstone", redstoneData);
-							worldObj.notifyBlocksOfNeighborChange(pos, blockType);
-							if(worldObj.getBlock(pos).isOpaqueCube())worldObj.notifyBlocksOfNeighborChange(pos, worldObj.getBlock(pos));
+							worldObj.notifyBlockOfStateChange(pos, blockType);
+							if(H.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos1, H.getBlock(worldObj, pos1));
 						}
 					}
 				}

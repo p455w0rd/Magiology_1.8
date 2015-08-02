@@ -10,7 +10,6 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
-import com.magiology.render.tilerender.isbhrrender.RenderFireLampISBRH;
 
 public class FireLamp extends BlockContainer {
 	

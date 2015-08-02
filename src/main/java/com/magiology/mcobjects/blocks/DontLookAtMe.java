@@ -14,8 +14,6 @@ public class DontLookAtMe extends BlockContainer {
 	public int getRenderType(){return -1;}
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	public DontLookAtMe() {
 		super(Material.iron);
 		this.setHardness(100F).setHarvestLevel("pickaxe", 1);

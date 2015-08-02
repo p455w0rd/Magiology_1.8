@@ -21,6 +21,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.magiology.core.MReference;
+import com.magiology.handelers.obj.handeler.revived.yayformc1_8.AdvancedModelLoader;
+import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
 import com.magiology.mcobjects.effect.EntityMagiologyBaseFX;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
@@ -33,8 +36,8 @@ import com.magiology.objhelper.vectors.Vec3M;
  */
 public class TessHelper{
 	
-	private static NoramlisedVertixBuffer noramlisedVertixBuffer=new NoramlisedVertixBuffer(Tessellator.getInstance());
-	public static NoramlisedVertixBuffer getNVB(){return noramlisedVertixBuffer;}
+	private static NoramlisedVertixBuffer buf=new NoramlisedVertixBuffer();
+	public static NoramlisedVertixBuffer getNVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
 	public static RenderManager getRM(){return Helper.getMC().getRenderManager();}
 	
@@ -43,20 +46,26 @@ public class TessHelper{
 	public static void drawTri(double[] X, double[] Y,double[] Z, double[] U, double[] V){
 		int hi=max(max(max(max(X.length,Y.length),Z.length),U.length),V.length);
 		if(hi%3!=0||X.length<hi||Y.length<hi||Z.length<hi||U.length<hi||V.length<hi)return;
-		for (int i = 0; i < X.length; i++)ShadedQuad.addVertexWithUVWRender(X[i], Y[i], Z[i], U[i], V[i]);
+		buf.cleanUp();
+		for (int i = 0; i < X.length; i++)buf.addVertexWithUV(X[i], Y[i], Z[i], U[i], V[i]);
+		buf.draw();
 	}
 	public static void drawQuad(double[] X, double[] Y,double[] Z, double[] U, double[] V){
 		int hi=max(max(max(max(X.length,Y.length),Z.length),U.length),V.length);
 		if(hi%4!=0||X.length<hi||Y.length<hi||Z.length<hi||U.length<hi||V.length<hi)return;
-		for (int i = 0; i < X.length; i++)ShadedQuad.addVertexWithUVWRender(X[i], Y[i], Z[i], U[i], V[i]);
+		buf.cleanUp();
+		for (int i = 0; i < X.length; i++)buf.addVertexWithUV(X[i], Y[i], Z[i], U[i], V[i]);
+		buf.draw();
 	}
 	public static void drawPolygon(double[] X, double[] Y,double[] Z, double[] U, double[] V){
 		int hi=max(max(max(max(X.length,Y.length),Z.length),U.length),V.length);
 		if(X.length<hi||Y.length<hi||Z.length<hi||U.length<hi||V.length<hi)return;
-		for (int i = 0; i < X.length; i++)ShadedQuad.addVertexWithUVWRender(X[i], Y[i], Z[i], U[i], V[i]);
+		buf.cleanUp();
+		for (int i = 0; i < X.length; i++)buf.addVertexWithUV(X[i], Y[i], Z[i], U[i], V[i]);
+		buf.draw();
 	}
 	public static void drawBlurredCube(int x,int y,int z,double minX,double minY,double minZ,double maxX,double maxy,double maxZ,int blurQuality,double resolution,double r,double g,double b,double alpha){
-		drawBlurredCube(pos, new AxisAlignedBB(minX, minY, minZ, maxX, maxy, maxZ), blurQuality, resolution,r,g,b, alpha);
+		drawBlurredCube(x,y,z, new AxisAlignedBB(minX, minY, minZ, maxX, maxy, maxZ), blurQuality, resolution,r,g,b, alpha);
 	}
 	public static void drawBlurredCube(int x,int y,int z,AxisAlignedBB cube,int blurQuality,double resolution,double r,double g,double b,double alpha){
 		if(blurQuality<1||cube==null)return;
@@ -75,32 +84,32 @@ public class TessHelper{
 	}
 	public static void drawCube(AxisAlignedBB a){drawCube(a.minX,a.minY,a.minZ,a.maxX,a.maxY,a.maxZ);}
 	public static void drawCube(double minX,double minY,double minZ,double maxX,double maxy,double maxZ){
-		noramlisedVertixBuffer.cleanUp();
-		noramlisedVertixBuffer.addVertexWithUV(minX, minY, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, minY, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, minY, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, minY, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, maxy, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, maxy, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, maxy, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, maxy, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, maxy, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, minY, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, minY, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, maxy, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, maxy, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, minY, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, minY, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, maxy, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, maxy, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, minY, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, minY, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(minX, maxy, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, maxy, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, minY, maxZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, minY, minZ,0,0);
-		noramlisedVertixBuffer.addVertexWithUV(maxX, maxy, minZ,0,0);
-		noramlisedVertixBuffer.draw();
+		buf.cleanUp();
+		buf.addVertexWithUV(minX, minY, maxZ,0,0);
+		buf.addVertexWithUV(minX, minY, minZ,0,0);
+		buf.addVertexWithUV(maxX, minY, minZ,0,0);
+		buf.addVertexWithUV(maxX, minY, maxZ,0,0);
+		buf.addVertexWithUV(maxX, maxy, maxZ,0,0);
+		buf.addVertexWithUV(maxX, maxy, minZ,0,0);
+		buf.addVertexWithUV(minX, maxy, minZ,0,0);
+		buf.addVertexWithUV(minX, maxy, maxZ,0,0);
+		buf.addVertexWithUV(maxX, maxy, minZ,0,0);
+		buf.addVertexWithUV(maxX, minY, minZ,0,0);
+		buf.addVertexWithUV(minX, minY, minZ,0,0);
+		buf.addVertexWithUV(minX, maxy, minZ,0,0);
+		buf.addVertexWithUV(minX, maxy, maxZ,0,0);
+		buf.addVertexWithUV(minX, minY, maxZ,0,0);
+		buf.addVertexWithUV(maxX, minY, maxZ,0,0);
+		buf.addVertexWithUV(maxX, maxy, maxZ,0,0);
+		buf.addVertexWithUV(minX, maxy, minZ,0,0);
+		buf.addVertexWithUV(minX, minY, minZ,0,0);
+		buf.addVertexWithUV(minX, minY, maxZ,0,0);
+		buf.addVertexWithUV(minX, maxy, maxZ,0,0);
+		buf.addVertexWithUV(maxX, maxy, maxZ,0,0);
+		buf.addVertexWithUV(maxX, minY, maxZ,0,0);
+		buf.addVertexWithUV(maxX, minY, minZ,0,0);
+		buf.addVertexWithUV(maxX, maxy, minZ,0,0);
+		buf.draw();
 	}
 	public static void drawFullCircleRes45(double r,double g,double b,double alpha,double scale){drawCircleRes45(r, g, b, alpha, scale, 0, 359);}
 	public static void drawFullCircleRes90(double r,double g,double b,double alpha,double scale){drawCircleRes90(r, g, b, alpha, scale, 0, 360);}
@@ -198,24 +207,24 @@ public class TessHelper{
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 
-//	private static IModelCustom arrowModel;
-//	public static void drawArrow(){
-//		if(arrowModel==null)arrowModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/arrow.obj"));
-//		else{
-//			GL11.glPushMatrix();
-//			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
-//			GL11H.rotateXYZ(0, 45, 0);
-//			arrowModel.renderAll();
-//			GL11.glPopMatrix();
-//		}
-//	}
-//	private static IModelCustom ballModel;
-//	public static void drawBall(){
-//		if(ballModel==null)ballModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/ball.obj"));
-//		else{
-//			ballModel.renderAll();
-//		}
-//	}
+	private static IModelCustom arrowModel;
+	public static void drawArrow(){
+		if(arrowModel==null)arrowModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/arrow.obj"));
+		else{
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
+			GL11H.rotateXYZ(0, 45, 0);
+			arrowModel.renderAll();
+			GL11.glPopMatrix();
+		}
+	}
+	private static IModelCustom ballModel;
+	public static void drawBall(){
+		if(ballModel==null)ballModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/ball.obj"));
+		else{
+			ballModel.renderAll();
+		}
+	}
 	public static void drawPlayerIntoGUI(int x, int y, int scale, float mouseX, float mouseY, EntityLivingBase player,boolean... WillRotate){
 		boolean willRotate=false;
 		if(WillRotate.length!=0){

@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.gui.fpgui.FirstPersonGui;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.render.Textures;
 
@@ -27,7 +28,7 @@ public class TexturedColoredButton extends ColoredGuiButton{
 		r=(float)Helper.slowlyEqalize(r, wantedR, 0.1);
 		g=(float)Helper.slowlyEqalize(g, wantedG, 0.1);
 		b=(float)Helper.slowlyEqalize(b, wantedB, 0.1);
-		wantedAlpha=Helper.booleanToInt(field_146123_n);
+		wantedAlpha=Helper.booleanToInt(hovered);
 		alpha+=0.03;
 		alpha=(float)Helper.slowlyEqalize(prevAlpha, wantedAlpha, 0.17);
 		
@@ -41,9 +42,9 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	public void drawButton(Minecraft p_146112_1_, int x, int y){
         if (this.visible){
 			float r=Helper.calculateRenderPos(prevR, this.r),g=Helper.calculateRenderPos(prevG, this.g),b=Helper.calculateRenderPos(prevB, this.b),alpha=Helper.calculateRenderPos(prevAlpha, this.alpha);
-            FontRenderer fontrenderer = p_146112_1_.fontRenderer;
+            FontRenderer fr = H.getFontRenderer();
             p_146112_1_.getTextureManager().bindTexture(Textures.ISidedIns);
-            this.field_146123_n=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;
+            this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;
             GL11H.SetUpOpaqueRendering(1);
 
             float k=Helper.calculateRenderPos(prevAlpha, alpha);
@@ -60,7 +61,7 @@ public class TexturedColoredButton extends ColoredGuiButton{
             int l = 14737632;
             if (packedFGColour != 0)l = packedFGColour;
             else if (!this.enabled)l = 10526880;
-            else if (this.field_146123_n)l = 16777120;
+            else if (this.hovered)l = 16777120;
             
             float[] rgb=Helper.codeToRGBABPrecentage(l);
             
@@ -68,7 +69,7 @@ public class TexturedColoredButton extends ColoredGuiButton{
             rgb[1]=(rgb[1]+g)/2F;
             rgb[2]=(rgb[2]+b)/2F;
             
-            this.drawCenteredString(fontrenderer, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, new Color(r,g,b,alpha).hashCode());
+            this.drawCenteredString(fr, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, new Color(r,g,b,alpha).hashCode());
             GL11H.EndOpaqueRendering();
         }
     }

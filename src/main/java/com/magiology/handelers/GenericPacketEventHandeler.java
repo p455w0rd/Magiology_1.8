@@ -1,6 +1,7 @@
 package com.magiology.handelers;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.forgepowered.event.GenericPacketEvents;
 

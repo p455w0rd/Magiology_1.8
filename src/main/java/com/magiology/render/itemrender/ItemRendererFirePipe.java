@@ -1,14 +1,13 @@
 package com.magiology.render.itemrender;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
 public class ItemRendererFirePipe implements IItemRenderer {
@@ -22,7 +21,9 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	private final float tHFSL=1F/38F;
 	private final float tWS=1F/16F;
 	private final float tHS=1F/32F;
-
+	
+	NoramlisedVertixBuffer buf=TessHelper.getNVB();
+	
 	public ItemRendererFirePipe(){}
 	
 	@Override
@@ -76,7 +77,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-	    GL11.glTranslatef(pos);
+	    GL11.glTranslatef(x,y,z);
 	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
 	    GL11.glScalef(scale, scale, scale);
 	    
@@ -88,43 +89,42 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	}
 	
 	public void drawCore(){
-		Tessellator tessellator = Tessellator.instance;
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.firePipeCore);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*10, p*6, tWC*4, tHC*4);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6,  p*6, tWC*4, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6,  p*10,tWC*0, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*10, p*10,tWC*0, tHC*4);
+		TessHelper.bindTexture(Textures.firePipeCore);
+		buf.addVertexWithUV(p*6, p*10, p*6, tWC*4, tHC*4);
+		buf.addVertexWithUV(p*6, p*6,  p*6, tWC*4, tHC*0);
+		buf.addVertexWithUV(p*6, p*6,  p*10,tWC*0, tHC*0);
+		buf.addVertexWithUV(p*6, p*10, p*10,tWC*0, tHC*4);
 		
-		ShadedQuad.addVertexWithUVWRender(p*10, p*10, p*10, tWC*4, tHC*4);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*6,  p*10, tWC*4, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*6,  p*6, tWC*0, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*10, p*6, tWC*0, tHC*4);
+		buf.addVertexWithUV(p*10, p*10, p*10, tWC*4, tHC*4);
+		buf.addVertexWithUV(p*10, p*6,  p*10, tWC*4, tHC*0);
+		buf.addVertexWithUV(p*10, p*6,  p*6, tWC*0, tHC*0);
+		buf.addVertexWithUV(p*10, p*10, p*6, tWC*0, tHC*4);
 		
-		ShadedQuad.addVertexWithUVWRender(p*6, p*10, p*10, tWC*0, tHC*4);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6 , p*10, tWC*0, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*6, p*10, tWC*4, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*10, p*10, tWC*4, tHC*4);
+		buf.addVertexWithUV(p*6, p*10, p*10, tWC*0, tHC*4);
+		buf.addVertexWithUV(p*6, p*6 , p*10, tWC*0, tHC*0);
+		buf.addVertexWithUV(p*10, p*6, p*10, tWC*4, tHC*0);
+		buf.addVertexWithUV(p*10, p*10, p*10, tWC*4, tHC*4);
 		
-		ShadedQuad.addVertexWithUVWRender(p*10, p*10, p*6, tWC*4, tHC*4);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*6, p*6, tWC*4, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6 , p*6, tWC*0, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*10, p*6, tWC*0, tHC*4);
+		buf.addVertexWithUV(p*10, p*10, p*6, tWC*4, tHC*4);
+		buf.addVertexWithUV(p*10, p*6, p*6, tWC*4, tHC*0);
+		buf.addVertexWithUV(p*6, p*6 , p*6, tWC*0, tHC*0);
+		buf.addVertexWithUV(p*6, p*10, p*6, tWC*0, tHC*4);
 		
-		ShadedQuad.addVertexWithUVWRender(p*10, p*10, p*10, tWC*4, tHC*4);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*10, p*6, tWC*4, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*10, p*6, tWC*0, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*10, p*10, tWC*0, tHC*4);
+		buf.addVertexWithUV(p*10, p*10, p*10, tWC*4, tHC*4);
+		buf.addVertexWithUV(p*10, p*10, p*6, tWC*4, tHC*0);
+		buf.addVertexWithUV(p*6, p*10, p*6, tWC*0, tHC*0);
+		buf.addVertexWithUV(p*6, p*10, p*10, tWC*0, tHC*4);
 			
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6, p*10, tWC*0, tHC*4);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6, p*6, tWC*0, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*6, p*6, tWC*4, tHC*0);
-		ShadedQuad.addVertexWithUVWRender(p*10, p*6, p*10, tWC*4, tHC*4);
+		buf.addVertexWithUV(p*6, p*6, p*10, tWC*0, tHC*4);
+		buf.addVertexWithUV(p*6, p*6, p*6, tWC*0, tHC*0);
+		buf.addVertexWithUV(p*10, p*6, p*6, tWC*4, tHC*0);
+		buf.addVertexWithUV(p*10, p*6, p*10, tWC*4, tHC*4);
+		buf.draw();
 	}
 	
 	public void drawConector(EnumFacing dir){
 		GL11.glPushMatrix();
-		Tessellator tessellator = Tessellator.instance;
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.FirePipeConection);
+		TessHelper.bindTexture(Textures.FirePipeConection);
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		if(dir.equals(EnumFacing.WEST)){}
@@ -135,56 +135,57 @@ public class ItemRendererFirePipe implements IItemRenderer {
 		else if (dir.equals(EnumFacing.NORTH)){GL11.glRotatef(-90, 0, 1, 0);}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5,  p*9.5,tW*24.5, tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*6.5,  p*9.5,tW*24.5, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6.5,  p*9.5,tW*0,    tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9.5,  p*9.5,tW*0,    tH*16);
+		buf.addVertexWithUV(p*0, p*9.5,  p*9.5,tW*24.5, tH*16);
+		buf.addVertexWithUV(p*0, p*6.5,  p*9.5,tW*24.5, tH*0);
+		buf.addVertexWithUV(p*6, p*6.5,  p*9.5,tW*0,    tH*0);
+		buf.addVertexWithUV(p*6, p*9.5,  p*9.5,tW*0,    tH*16);
 
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9, p*9  ,tW*0,   tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*7, p*9 ,tW*0,   tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*7, p*9, tW*24.5,tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9, p*9,  tW*24.5,tH*0);
+		buf.addVertexWithUV(p*6, p*9, p*9  ,tW*0,   tH*0);
+		buf.addVertexWithUV(p*6, p*7, p*9 ,tW*0,   tH*16);
+		buf.addVertexWithUV(p*0, p*7, p*9, tW*24.5,tH*16);
+		buf.addVertexWithUV(p*0, p*9, p*9,  tW*24.5,tH*0);
 		
 		
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9.5, p*6.5  ,tW*0,   tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6.5, p*6.5 ,tW*0,   tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*6.5, p*6.5, tW*24.5,tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5, p*6.5,  tW*24.5,tH*0);
+		buf.addVertexWithUV(p*6, p*9.5, p*6.5  ,tW*0,   tH*0);
+		buf.addVertexWithUV(p*6, p*6.5, p*6.5 ,tW*0,   tH*16);
+		buf.addVertexWithUV(p*0, p*6.5, p*6.5, tW*24.5,tH*16);
+		buf.addVertexWithUV(p*0, p*9.5, p*6.5,  tW*24.5,tH*0);
 		
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9,  p*7,tW*24.5, tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*7,  p*7,tW*24.5, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*7,  p*7,tW*0,    tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9,  p*7,tW*0,    tH*16);
+		buf.addVertexWithUV(p*0, p*9,  p*7,tW*24.5, tH*16);
+		buf.addVertexWithUV(p*0, p*7,  p*7,tW*24.5, tH*0);
+		buf.addVertexWithUV(p*6, p*7,  p*7,tW*0,    tH*0);
+		buf.addVertexWithUV(p*6, p*9,  p*7,tW*0,    tH*16);
 		
 		
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9.5, p*9.5, tW*0,    tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9.5, p*6.5, tW*0,    tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5, p*6.5, tW*24.5, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5, p*9.5, tW*24.5, tH*16);
+		buf.addVertexWithUV(p*6, p*9.5, p*9.5, tW*0,    tH*16);
+		buf.addVertexWithUV(p*6, p*9.5, p*6.5, tW*0,    tH*0);
+		buf.addVertexWithUV(p*0, p*9.5, p*6.5, tW*24.5, tH*0);
+		buf.addVertexWithUV(p*0, p*9.5, p*9.5, tW*24.5, tH*16);
 
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9, p*9, tW*24.5, tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9, p*7, tW*24.5, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9, p*7, tW*0,    tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*9, p*9, tW*0,    tH*16);
+		buf.addVertexWithUV(p*0, p*9, p*9, tW*24.5, tH*16);
+		buf.addVertexWithUV(p*0, p*9, p*7, tW*24.5, tH*0);
+		buf.addVertexWithUV(p*6, p*9, p*7, tW*0,    tH*0);
+		buf.addVertexWithUV(p*6, p*9, p*9, tW*0,    tH*16);
 		
 
-		ShadedQuad.addVertexWithUVWRender(p*0, p*6.5, p*9.5, tW*24.5, tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*6.5, p*6.5, tW*24.5, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6.5, p*6.5, tW*0,    tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*6.5, p*9.5, tW*0,    tH*16);
+		buf.addVertexWithUV(p*0, p*6.5, p*9.5, tW*24.5, tH*16);
+		buf.addVertexWithUV(p*0, p*6.5, p*6.5, tW*24.5, tH*0);
+		buf.addVertexWithUV(p*6, p*6.5, p*6.5, tW*0,    tH*0);
+		buf.addVertexWithUV(p*6, p*6.5, p*9.5, tW*0,    tH*16);
 
-		ShadedQuad.addVertexWithUVWRender(p*6, p*7, p*9, tW*0,    tH*16);
-		ShadedQuad.addVertexWithUVWRender(p*6, p*7, p*7, tW*0,    tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*7, p*7, tW*24.5, tH*0);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*7, p*9, tW*24.5, tH*16);
+		buf.addVertexWithUV(p*6, p*7, p*9, tW*0,    tH*16);
+		buf.addVertexWithUV(p*6, p*7, p*7, tW*0,    tH*0);
+		buf.addVertexWithUV(p*0, p*7, p*7, tW*24.5, tH*0);
+		buf.addVertexWithUV(p*0, p*7, p*9, tW*24.5, tH*16);
+		buf.draw();
 		
+		TessHelper.bindTexture(Textures.FirePipeConectionEnd);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.FirePipeConectionEnd);
-		
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5, p*9.5, 1, 1);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*9.5, p*6.5, 1, 0);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*6.5, p*6.5, 0, 0);
-		ShadedQuad.addVertexWithUVWRender(p*0, p*6.5, p*9.5, 0, 1);
+		buf.addVertexWithUV(p*0, p*9.5, p*9.5, 1, 1);
+		buf.addVertexWithUV(p*0, p*9.5, p*6.5, 1, 0);
+		buf.addVertexWithUV(p*0, p*6.5, p*6.5, 0, 0);
+		buf.addVertexWithUV(p*0, p*6.5, p*9.5, 0, 1);
+		buf.draw();
 		GL11.glPopMatrix();
 	}
 

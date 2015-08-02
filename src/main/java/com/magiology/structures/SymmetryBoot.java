@@ -2,6 +2,8 @@ package com.magiology.structures;
 
 import net.minecraft.block.Block;
 
+import com.magiology.objhelper.vectors.Pos;
+
 public class SymmetryBoot{
 	
 	/**
@@ -16,26 +18,26 @@ public class SymmetryBoot{
 		if(!s.isStructureInitialized()){
 			BlockAt[] blocksat;
 			Block block=blockat.bl;
-			int x=blockat.x,y=blockat.y,z=blockat.z;
+			int x=blockat.pos.getX(),y=blockat.pos.getY(),z=blockat.pos.getZ();
 			switch (type){
 			case 1://----------------------------
-				if(blockat.x==0){
+				if(blockat.pos.getX()==0){
 					blocksat=new BlockAt[1];
 					blocksat[0]=blockat;
 				}else{
 					blocksat=new BlockAt[2];
-					blocksat[0]=new BlockAt(block,  pos);
-					blocksat[1]=new BlockAt(block, -pos);
+					blocksat[0]=new BlockAt(block, blockat.pos);
+					blocksat[1]=new BlockAt(block, blockat.pos.multiply(-1));
 				}
 			break;
 			case 2://----------------------------
-				if(blockat.z==0){
+				if(blockat.pos.getZ()==0){
 					blocksat=new BlockAt[1];
 					blocksat[0]=blockat;
 				}else{
 					blocksat=new BlockAt[2];
-					blocksat[0]=new BlockAt(block,  pos);
-					blocksat[1]=new BlockAt(block,  x, y,-z);
+					blocksat[0]=new BlockAt(block,  blockat.pos);
+					blocksat[1]=new BlockAt(block,  new Pos(x, y,-z));
 				}
 			break;
 			case 3://----------------------------
@@ -51,8 +53,8 @@ public class SymmetryBoot{
 					blocksat[3]=new BlockAt(block, 0, y, -size);
 				}else{
 					blocksat=new BlockAt[4];
-					blocksat[0]=new BlockAt(block,  pos);
-					blocksat[1]=new BlockAt(block, -pos);
+					blocksat[0]=new BlockAt(block, blockat.pos);
+					blocksat[1]=new BlockAt(block, blockat.pos.multiply(-1));
 					blocksat[2]=new BlockAt(block,  x, y,-z);
 					blocksat[3]=new BlockAt(block, -x, y,-z);
 				}

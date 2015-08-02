@@ -22,14 +22,14 @@ public class NetworkHelper{
 		if(!(tile2 instanceof ISidedNetworkComponent))return true;
 		
 		ISidedNetworkComponent Tile1=(ISidedNetworkComponent) tile1,Tile2=(ISidedNetworkComponent) tile2;
-		if(Tile1.getHost().getWorldObj()!=Tile2.getHost().getWorldObj())return false;
+		if(Tile1.getHost().getWorld()!=Tile2.getHost().getWorld())return false;
 		int side=-1;
 		TileEntity[] tiles=SideHelper.getTilesOnSides(Tile1.getHost());
 		for(int i=0;i<tiles.length;i++)if(tiles[i]==Tile2.getHost()){
 			side=i;
 			continue;
 		}
-		if(EnumFacing.getOrientation(side)==EnumFacing.UNKNOWN)return false;
+		if(EnumFacing.getFront(side)==null)return false;
 		try{
 			if(Tile2 instanceof UpdateablePipe){
 				List<Class> excluded=new ArrayList<Class>(),included=new ArrayList<Class>();

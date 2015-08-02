@@ -19,15 +19,15 @@ public interface UpdateablePipe{
 		private UpdateablePipeHandeler(){}
 		
 		public static<T extends TileEntity&UpdateablePipe> void setConnections(EnumFacing[] array,T tile){
-			setConnections(array, UNKNOWN, null, tile);
+			setConnections(array, EnumFacing.DOWN, null, tile);
 			for(int i=0;i<6;i++){
 				if(array[i]!=null)switch(i){
-				case 0:array[i]=UP;break;
-				case 1:array[i]=DOWN;break;
-				case 2:array[i]=NORTH;break;
-				case 3:array[i]=EAST;break;
-				case 4:array[i]=SOUTH;break;
-				case 5:array[i]=WEST;break;
+				case 0:array[i]=EnumFacing.UP;break;
+				case 1:array[i]=EnumFacing.DOWN;break;
+				case 2:array[i]=EnumFacing.NORTH;break;
+				case 3:array[i]=EnumFacing.EAST;break;
+				case 4:array[i]=EnumFacing.SOUTH;break;
+				case 5:array[i]=EnumFacing.WEST;break;
 				}
 			}
 		}

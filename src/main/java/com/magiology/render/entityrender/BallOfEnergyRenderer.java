@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
@@ -17,6 +18,7 @@ public class BallOfEnergyRenderer extends Render{
 
 	ModelBase model;
 	public BallOfEnergyRenderer(ModelBase model, float scale){
+		super(TessHelper.getRM());
 		this.model=model;
 	}
 
@@ -28,7 +30,7 @@ public class BallOfEnergyRenderer extends Render{
 	@Override
 	public void doRender(Entity en, double var1, double var2, double var3, float var4,float partialTicks){
 		EntityBallOfEnergy entity=(EntityBallOfEnergy)en;
-		EntityClientPlayerMP player=Minecraft.getMinecraft().thePlayer;
+		EntityPlayer player=Minecraft.getMinecraft().thePlayer;
 		int time360=entity.age%90*4,offs=25,many=1;
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),

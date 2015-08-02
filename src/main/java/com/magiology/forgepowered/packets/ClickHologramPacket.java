@@ -6,45 +6,37 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.vectors.Vec3M;
 
 public class ClickHologramPacket extends AbstractToServerMessage{
 	
 	private Vec3M pos;
-	private int pos;
+	private BlockPos bPos;
 	
 	public ClickHologramPacket(){}
-	public ClickHologramPacket(Vec3M pos,BlockPos pos){
+	public ClickHologramPacket(Vec3M pos,BlockPos bPos){
+		this.bPos=bPos;
 		this.pos=pos;
-		this.x=x;
-		this.y=y;
-		this.z=z;
 	}
 	
 	@Override
 	public void write(PacketBuffer buffer)throws IOException{
-		buffer.writeInt(x);
-		buffer.writeInt(y);
-		buffer.writeInt(z);
-		buffer.writeFloat((float)pos.xCoord);
-		buffer.writeFloat((float)pos.yCoord);
-		buffer.writeFloat((float)pos.zCoord);
+		writePos(buffer, bPos);
+		writeVec3M(buffer, pos);
 	}
 
 	@Override
 	public void read(PacketBuffer buffer)throws IOException{
-		x=buffer.readInt();
-		y=buffer.readInt();
-		z=buffer.readInt();
-		pos=Helper.Vec3M(buffer.readFloat(), buffer.readFloat(), buffer.readFloat());
+		bPos=readPos(buffer);
+		pos=readVec3M(buffer);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side){
-		TileEntity test=player.worldObj.getTileEntity(pos);
+		TileEntity test=player.worldObj.getTileEntity(bPos);
 		if(test instanceof TileEntityHologramProjector){
 			TileEntityHologramProjector tile=(TileEntityHologramProjector)test;
 			tile.point.isPointing=true;
@@ -53,5 +45,4 @@ public class ClickHologramPacket extends AbstractToServerMessage{
 			tile.onPressed(player);
 		}
 	}
-
 }

@@ -4,33 +4,30 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 
 
 public class TileRedstone extends AbstractToServerMessage{
-	 private int id,x,y,z;
+	 private int id;
+	 private BlockPos pos;
 	 public TileRedstone(){}
 	 public TileRedstone(TileEntityControlBlock tile){
 		 id=tile.redstoneC;
-		 x=tile.xCoord;
-		 y=tile.yCoord;
-		 z=tile.zCoord;
+		 pos=tile.getPos();
 	 }
 	@Override
 	public void write(PacketBuffer buffer)throws IOException{
-		 buffer.writeInt(id);
-		 buffer.writeInt(x);
-		 buffer.writeInt(y);
-		 buffer.writeInt(z);
+		 buffer.writeInt(id);;
+		 writePos(buffer, pos);
 	}
 	@Override
 	public void read(PacketBuffer buffer)throws IOException{
 		 id=buffer.readInt();
-		 x=buffer.readInt();
-		 y=buffer.readInt();
-		 z=buffer.readInt();
+		 pos=readPos(buffer);
 	}
 	@Override
 	public void process(EntityPlayer player, Side side){

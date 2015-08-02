@@ -1,5 +1,7 @@
 package com.magiology.forgepowered.packets;
 
+import net.minecraftforge.fml.relauncher.Side;
+
 
 public abstract class AbstractToServerMessage extends AbstractPacket{
 	

@@ -1,13 +1,13 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
 
 public class RenderBFCPowerOut extends TileEntitySpecialRenderer {
@@ -19,13 +19,14 @@ public class RenderBFCPowerOut extends TileEntitySpecialRenderer {
 	private final float tHC=1F/40F;
 	private final float tW=1F/96F;
 	private final float tH=1F/80F;
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	
 @Override
-public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
+public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
 	TileEntityBFCPowerOut tile=(TileEntityBFCPowerOut) tileentity;
 	int roation=0;
 	int rotat;
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
@@ -80,39 +81,38 @@ public void renderTileEntityAt(TileEntity tileentity, double x, double y, double
 	}
 
 	public void renderTop(){
-		Tessellator tessellator = Tessellator.instance;
 		this.bindTexture(Textures.BigFurnaceOutput);
-			ShadedQuad.addVertexWithUVWRender(p*16+0.0002, p*10, p*6,     tWC*4, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*16+0.0002, p*10, p*10,    tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*16+0.0002, p*6,  p*10,    tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*16+0.0002, p*6,  p*6,     tWC*0, tHC*4);
-			
+			buf.addVertexWithUV(p*16+0.0002, p*10, p*6,     tWC*4, tHC*4);
+			buf.addVertexWithUV(p*16+0.0002, p*10, p*10,    tWC*4, tHC*0);
+			buf.addVertexWithUV(p*16+0.0002, p*6,  p*10,    tWC*0, tHC*0);
+			buf.addVertexWithUV(p*16+0.0002, p*6,  p*6,     tWC*0, tHC*4);
+			buf.draw();
 			
 	}
 	public void renderHand(){
-		Tessellator tessellator = Tessellator.instance;
 		this.bindTexture(Textures.BigFurnaceOutput);
 		
 				GL11.glTranslated(0, p*0.25, p*0.75);
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*12, p*8,     tWC*4, tHC*4);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*12, p*8,     tWC*4, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*10.5, p*8,   tWC*0, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*10.5, p*8,   tWC*0, tHC*4);
+				buf.addVertexWithUV(p*17.5, p*12, p*8,     tWC*4, tHC*4);
+				buf.addVertexWithUV(p*16,   p*12, p*8,     tWC*4, tHC*0);
+				buf.addVertexWithUV(p*16,   p*10.5, p*8,   tWC*0, tHC*0);
+				buf.addVertexWithUV(p*17.5, p*10.5, p*8,   tWC*0, tHC*4);
 	
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*10.5, p*6.5, tWC*0, tHC*4);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*10.5, p*6.5, tWC*0, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*12,  p*6.5,  tWC*4, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*12,  p*6.5,  tWC*4, tHC*4);
+				buf.addVertexWithUV(p*17.5, p*10.5, p*6.5, tWC*0, tHC*4);
+				buf.addVertexWithUV(p*16,   p*10.5, p*6.5, tWC*0, tHC*0);
+				buf.addVertexWithUV(p*16,   p*12,  p*6.5,  tWC*4, tHC*0);
+				buf.addVertexWithUV(p*17.5, p*12,  p*6.5,  tWC*4, tHC*4);
 				
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*12, p*6.5,   tWC*4, tHC*4);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*12, p*8,     tWC*4, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*12, p*8,     tWC*0, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*12, p*6.5,   tWC*0, tHC*4);
+				buf.addVertexWithUV(p*16,   p*12, p*6.5,   tWC*4, tHC*4);
+				buf.addVertexWithUV(p*16,   p*12, p*8,     tWC*4, tHC*0);
+				buf.addVertexWithUV(p*17.5, p*12, p*8,     tWC*0, tHC*0);
+				buf.addVertexWithUV(p*17.5, p*12, p*6.5,   tWC*0, tHC*4);
 	
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*10.5, p*6.5, tWC*0, tHC*4);
-				ShadedQuad.addVertexWithUVWRender(p*17.5, p*10.5, p*8,   tWC*0, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*10.5, p*8,   tWC*4, tHC*0);
-				ShadedQuad.addVertexWithUVWRender(p*16,   p*10.5, p*6.5, tWC*4, tHC*4);
+				buf.addVertexWithUV(p*17.5, p*10.5, p*6.5, tWC*0, tHC*4);
+				buf.addVertexWithUV(p*17.5, p*10.5, p*8,   tWC*0, tHC*0);
+				buf.addVertexWithUV(p*16,   p*10.5, p*8,   tWC*4, tHC*0);
+				buf.addVertexWithUV(p*16,   p*10.5, p*6.5, tWC*4, tHC*4);
+				buf.draw();
 			GL11.glTranslated(0, -p*0.25, -p*0.75);
 		
 		
@@ -120,37 +120,37 @@ public void renderTileEntityAt(TileEntity tileentity, double x, double y, double
 	}
 	
 	public void renderHand2(){
-		Tessellator tessellator = Tessellator.instance;
 		this.bindTexture(Textures.BigFurnaceOutput);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*13, p*6,    tWC*4, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*13, p*10,   tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*10, p*10,   tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*19, p*10, p*6,    tWC*0, tHC*4);
+			buf.addVertexWithUV(p*19, p*13, p*6,    tWC*4, tHC*4);
+			buf.addVertexWithUV(p*19, p*13, p*10,   tWC*4, tHC*0);
+			buf.addVertexWithUV(p*19, p*10, p*10,   tWC*0, tHC*0);
+			buf.addVertexWithUV(p*19, p*10, p*6,    tWC*0, tHC*4);
 			
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*10, p*6,    tWC*0, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*10, p*10,   tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*13, p*10,   tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*13, p*6,    tWC*4, tHC*4);
+			buf.addVertexWithUV(p*17.5, p*10, p*6,    tWC*0, tHC*4);
+			buf.addVertexWithUV(p*17.5, p*10, p*10,   tWC*0, tHC*0);
+			buf.addVertexWithUV(p*17.5, p*13, p*10,   tWC*4, tHC*0);
+			buf.addVertexWithUV(p*17.5, p*13, p*6,    tWC*4, tHC*4);
 			
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*13, p*10, tWC*4, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*13, p*10, tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*10, p*10, tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*10, p*10, tWC*0, tHC*4);
+			buf.addVertexWithUV(p*19,   p*13, p*10, tWC*4, tHC*4);
+			buf.addVertexWithUV(p*17.5, p*13, p*10, tWC*4, tHC*0);
+			buf.addVertexWithUV(p*17.5, p*10, p*10, tWC*0, tHC*0);
+			buf.addVertexWithUV(p*19,   p*10, p*10, tWC*0, tHC*4);
 			
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*10, p*6,  tWC*0, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*10, p*6,  tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*13, p*6,  tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*13, p*6,  tWC*4, tHC*4);
+			buf.addVertexWithUV(p*19,   p*10, p*6,  tWC*0, tHC*4);
+			buf.addVertexWithUV(p*17.5, p*10, p*6,  tWC*0, tHC*0);
+			buf.addVertexWithUV(p*17.5, p*13, p*6,  tWC*4, tHC*0);
+			buf.addVertexWithUV(p*19,   p*13, p*6,  tWC*4, tHC*4);
 			
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*13, p*6,    tWC*4, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*13, p*10,   tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*13, p*10,   tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*13, p*6,    tWC*0, tHC*4);
+			buf.addVertexWithUV(p*17.5, p*13, p*6,    tWC*4, tHC*4);
+			buf.addVertexWithUV(p*17.5, p*13, p*10,   tWC*4, tHC*0);
+			buf.addVertexWithUV(p*19,   p*13, p*10,   tWC*0, tHC*0);
+			buf.addVertexWithUV(p*19,   p*13, p*6,    tWC*0, tHC*4);
 			
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*10, p*6,    tWC*0, tHC*4);
-			ShadedQuad.addVertexWithUVWRender(p*19,   p*10, p*10,   tWC*0, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*10, p*10,   tWC*4, tHC*0);
-			ShadedQuad.addVertexWithUVWRender(p*17.5, p*10, p*6,    tWC*4, tHC*4);
+			buf.addVertexWithUV(p*19,   p*10, p*6,    tWC*0, tHC*4);
+			buf.addVertexWithUV(p*19,   p*10, p*10,   tWC*0, tHC*0);
+			buf.addVertexWithUV(p*17.5, p*10, p*10,   tWC*4, tHC*0);
+			buf.addVertexWithUV(p*17.5, p*10, p*6,    tWC*4, tHC*4);
+			buf.draw();
 			
 			
 		

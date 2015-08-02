@@ -94,10 +94,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 		Vec3M
 			p1=main.getPoint("min x,min y,min z"),
 			p2=main.getPoint("max x,max y,max z");
-		result.minX+=p1.x+offset.x;
-		result.minY+=p1.y+offset.y;
-		result.maxX+=p2.x+offset.x;
-		result.maxY+=p2.y+offset.y;
+		result.addCoord(p1.x+offset.x, p1.y+offset.y, 0);
 		return result;
 	}
 	public void onPressed(EntityPlayer player){
@@ -106,10 +103,10 @@ public class TileEntityHologramProjector extends TileEntityM{
 			double[] b=Helper.cricleXZ(a+Helper.CRandF(16));
 			b[0]*=0.06;
 			b[1]*=0.06;
-			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.xCoord+xCoord, size.y+offset.y+point.pointedPos.yCoord+yCoord, point.pointedPos.zCoord+zCoord+0.5,
-					b[0], b[1], 0, 200, 0.8, 0, mainColor.xCoord, mainColor.yCoord, mainColor.zCoord, 0.1);
+			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.x+x(), size.y+offset.y+point.pointedPos.y+y(), point.pointedPos.z+z()+0.5,
+					b[0], b[1], 0, 200, 0.8, 0, mainColor.x, mainColor.y, mainColor.z, 0.1);
 			Helper.spawnEntityFX(part);
-			part.rotation.xCoord=180;
+			part.rotation.x=180;
 		}
 		
 		boolean changed=false;
@@ -128,7 +125,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 			NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(this,Interface);
 			if(netInterface!=null)netInterface.onInterfaceProviderActionInvoked(Interface, lastPartClicked instanceof StringContainer?((StringContainer)lastPartClicked).getString():"", lastPartClicked,Interface,this);
 		}
-		if(Helper.isRemote(player)&&lastPartClicked!=null)Helper.sendMessage(new ClickHologramPacket(point.pointedPos,xCoord,yCoord,zCoord));
+		if(Helper.isRemote(player)&&lastPartClicked!=null)Helper.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
 	}
 	
 	
@@ -144,7 +141,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 				float distance=0;
 				int id=0;
 				for(int i=0;i<rayTraceResult[0].length;i++){
-					float distanceTo=(float)player.getLook(1).distanceTo((Vec3M)rayTraceResult[0][i]);
+					float distanceTo=(float)player.getLook(1).distanceTo(((Vec3M)rayTraceResult[0][i]).conv());
 					if(distance<distanceTo){
 						id=i;
 						distance=distanceTo;
@@ -154,7 +151,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 				TileEntityHologramProjector tile=(TileEntityHologramProjector)rayTraceResult[1][id];
 				MovingObjectPosition target=player.rayTrace(4, 0);
 				
-				hologramCloserThanHit=hit.distanceTo(player.getLook(0))>target.hitVec.distanceTo(player.getLook(0));
+				hologramCloserThanHit=hit.conv().distanceTo(player.getLook(0))>target.hitVec.distanceTo(player.getLook(0));
 				miss=target.typeOfHit==MovingObjectType.MISS;
 				if(miss||hologramCloserThanHit){
 					tile.onPressed(player);

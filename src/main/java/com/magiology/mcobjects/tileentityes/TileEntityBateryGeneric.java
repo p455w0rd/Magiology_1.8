@@ -1,5 +1,7 @@
 package com.magiology.mcobjects.tileentityes;
 
+import net.minecraft.util.BlockPos;
+
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.SideHelper;
@@ -16,9 +18,9 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 		int[] s=SideHelper.randomizeSides();
 		for(int a=0;a<6;a++){
 			int side=s[a];
-			int x=SideHelper.offset(side,xCoord), y=SideHelper.Y(side,yCoord), z=SideHelper.Z(side,zCoord);
-			if(this.isAnyBatery(x,y,z)){
-				TileEntityBateryGeneric tile= (TileEntityBateryGeneric) worldObj.getTileEntity(x,y,z);
+			BlockPos pos1=SideHelper.offset(side,pos);
+			if(this.isAnyBatery(pos1)){
+				TileEntityBateryGeneric tile= (TileEntityBateryGeneric) worldObj.getTileEntity(pos1);
 				
 				PowerHelper.tryToEquateEnergy(this, tile, PowerHelper.getMaxSpeed(this, tile),side);
 				PowerHelper.tryToEquateEnergy(this, tile, PowerHelper.getMiddleSpeed(this, tile),side);

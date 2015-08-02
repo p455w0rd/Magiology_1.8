@@ -9,7 +9,6 @@ import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.NetworkHelper;
 
 public class TileEntityNetworkConductor extends TileEntityNetwork{

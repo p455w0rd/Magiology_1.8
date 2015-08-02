@@ -1,15 +1,16 @@
 package com.magiology.mcobjects.effect;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityCloudFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
+import com.magiology.mcobjects.effect.mc.EntityCloudFXM;
+import com.magiology.mcobjects.effect.mc.EntityLavaFXM;
+import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
@@ -40,7 +41,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 	
 	
 	@Override
-	public void render(Tessellator tess){
+	public void render(WorldRenderer tess){
 		GL11.glDisable(GL11.GL_LIGHTING);
 //		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
@@ -70,7 +71,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 		
 //		GL11.glPushMatrix();
 //		GL11.glEnable(GL11.GL_LIGHTING);
-//		GL11.glTranslated(pos);
+//		GL11.glTranslated(x,y,z);
 //		GL11.glRotated(roration[0], 1, 0, 0);
 //		GL11.glRotated(roration[1], 0, 1, 0);
 //		GL11.glRotated(roration[2], 0, 0, 1);
@@ -83,12 +84,12 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
         RenderHelper.enableStandardItemLighting();
 		
 		GL11.glPushMatrix();
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		GL11H.rotateXYZ(Helper.calculateRenderPosArray(prevRoration, roration));
 		GL11.glTranslated(-x, -y, -z);
 		
 		GL11.glPushMatrix();
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		double lol=2.3;
 		
 		
@@ -140,15 +141,6 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 //		GL11.glEnable(GL11.GL_LIGHTING);
 //		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
-	@Override
-	public void renderParticle(Tessellator tess, float pa2, float pa3, float pa4, float pa5, float pa6, float pa7){
-		par2=pa2;par3=pa3;par4=pa4;par5=pa5;par6=pa6;par7=pa7;
-		queuedRenders.add(this);
-	}
-	public static void RenderQueuedParticle(Tessellator tess){
-		for(EntityMagiologyBaseFX particle:queuedRenders)particle.render(tess);
-		queuedRenders.clear();
-	}
 	
 	@Override
 	public int getFXLayer(){return 3;}
@@ -178,8 +170,8 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
     		this.particleMaxAge=100;
 			if(this.particleAge++>=this.particleMaxAge){
 				this.setDead();
-				if(Minecraft.getMinecraft().gameSettings.particleSetting==0)for(int gol=0;gol<200;gol++)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, this.posX, this.posY, this.posZ, 0.25-0.5*worldObj.rand.nextFloat(),-0.25+0.25-0.5*worldObj.rand.nextFloat(), 0.25-0.5*worldObj.rand.nextFloat()));
-				Helper.spawnEntityFX(new EntityLavaFX(worldObj, this.posX, this.posY, this.posZ));
+				if(Minecraft.getMinecraft().gameSettings.particleSetting==0)for(int gol=0;gol<200;gol++)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, 0.25-0.5*worldObj.rand.nextFloat(),-0.25+0.25-0.5*worldObj.rand.nextFloat(), 0.25-0.5*worldObj.rand.nextFloat()));
+				Helper.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX, this.posY, this.posZ));
 			}
 		}
 		
@@ -202,12 +194,12 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
         if(this.motionY<-3.5&&this.particleScale>=15){
         	if(worldObj.rand.nextInt(2)==0)Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, this.motionX/2+0.05-0.1*worldObj.rand.nextFloat(),this.motionY/2, this.motionX/2+0.05-0.1*worldObj.rand.nextFloat(), worldObj.rand.nextBoolean(),1+worldObj.rand.nextInt(3)));
         	for(int grde=0;grde<10;grde++){
-        		Helper.spawnEntityFX(new EntitySmokeFX(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
-        		Helper.spawnEntityFX(new EntitySmokeFX(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
-        		Helper.spawnEntityFX(new EntitySmokeFX(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
-        		Helper.spawnEntityFX(new EntityCloudFX(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
-        		Helper.spawnEntityFX(new EntityLavaFX( worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat()));
-        		Helper.spawnEntityFX(new EntityLavaFX( worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat()));
+        		Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
+        		Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
+        		Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
+        		Helper.spawnEntityFX(new EntityCloudFXM(worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat(), this.motionX/2+0.25-0.5*worldObj.rand.nextFloat(),-this.motionY/3, this.motionX/2+0.25-0.5*worldObj.rand.nextFloat()));
+        		Helper.spawnEntityFX(new EntityLavaFXM( worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat()));
+        		Helper.spawnEntityFX(new EntityLavaFXM( worldObj, this.posX+worldObj.rand.nextFloat(), this.posY+worldObj.rand.nextFloat(), this.posZ+worldObj.rand.nextFloat()));
         	}
         }
 	}
@@ -229,7 +221,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 	    		}
 	    		if(Minecraft.getMinecraft().gameSettings.particleSetting>=1){
 //	    			for(int i=0;i<10;i++)
-	    				Helper.spawnEntityFX(new EntityLavaFX(worldObj, this.posX+worldObj.rand.nextFloat()*10, this.posY+1+worldObj.rand.nextFloat()*10, this.posZ+worldObj.rand.nextFloat()*10));
+	    				Helper.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX+worldObj.rand.nextFloat()*10, this.posY+1+worldObj.rand.nextFloat()*10, this.posZ+worldObj.rand.nextFloat()*10));
 	    		}
 	    	}
 	    	else if(this.active==true){
@@ -263,7 +255,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
         		EntitySmoothBubleFX sb=new EntitySmoothBubleFX(worldObj,this.posX, this.posY, this.posZ,this.motionX/2+Helper.CRandF(0.1)*particleScale, this.motionY/2+Helper.CRandF(0.1)*particleScale, this.motionZ/2+Helper.CRandF(0.1)*particleScale,(int) (600*particleScale), 1.5,this.motionY/2, false,1,"tx1",1,0,0, 0.3, 0.96);
             	Helper.spawnEntityFX(sb);
             	sb.noClip=true;
-            	if(particleScale>0.8)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, this.posX, this.posY, this.posZ, Helper.CRandF(0.1), Helper.CRandF(0.1), Helper.CRandF(0.1)));
+            	if(particleScale>0.8)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, Helper.CRandF(0.1), Helper.CRandF(0.1), Helper.CRandF(0.1)));
         		
         		
         	}
@@ -271,17 +263,17 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 		if(particleScale<0.8)return;
         
         if(worldObj.rand.nextInt(500)<=1){
-        	worldObj.spawnParticle("smoke", this.posX, this.posY, this.posZ, 0, 0, 0);
-        	worldObj.spawnParticle("smoke", this.posX, this.posY, this.posZ, 0, 0, 0);
+        	worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0, 0);
+        	worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0, 0);
         	if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.15-0.3*worldObj.rand.nextFloat(), 0.1+this.motionY*2, 0.15-0.3*worldObj.rand.nextFloat(), true,particleScale));
         }
 	}
 	
 	public void spda(){
 		if(particleScale<0.8)return;
-		worldObj.spawnParticle("smoke", this.posX, this.posY, this.posZ, 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0, 0);
 		if(worldObj.rand.nextInt(40)==1){
-			if(Minecraft.getMinecraft().gameSettings.particleSetting==0)worldObj.spawnParticle("smoke", this.posX, this.posY, this.posZ, 0, 0.1, 0);
+			if(Minecraft.getMinecraft().gameSettings.particleSetting==0)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0.1, 0);
 			if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0+this.motionX/2,    -this.motionY, 0+this.motionZ/2, true,particleScale));
     		if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.1+this.motionX/2,  -this.motionY, 0+this.motionZ/2, true,particleScale));
     		if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.1+this.motionX/2,  -this.motionY, 0.1+this.motionZ/2, true,particleScale));
@@ -296,14 +288,14 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
     	else if(worldObj.rand.nextInt(2)==0){
     		Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.05-0.1*worldObj.rand.nextFloat()+this.motionX/2, worldObj.rand.nextFloat()*0.3-this.motionY/3, 0.05-0.1*worldObj.rand.nextFloat()+this.motionZ/2, true,1));
     		if(Minecraft.getMinecraft().gameSettings.particleSetting==0){
-    			for(int i=0;i<10;i++)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, this.posX, this.posY, this.posZ, 0.05-0.1*worldObj.rand.nextFloat(),0.05-0.1*worldObj.rand.nextFloat(),0.05-0.1*worldObj.rand.nextFloat()));
+    			for(int i=0;i<10;i++)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, 0.05-0.1*worldObj.rand.nextFloat(),0.05-0.1*worldObj.rand.nextFloat(),0.05-0.1*worldObj.rand.nextFloat()));
     		}
     	}
     	else if(Minecraft.getMinecraft().gameSettings.particleSetting==0){
-    		for(int i=0;i<2;i++)Helper.spawnEntityFX(new EntityLavaFX(worldObj, this.posX, this.posY, this.posZ));
+    		for(int i=0;i<2;i++)Helper.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX, this.posY, this.posZ));
     		if(H.getFPS()>20)for(int i=0;i<2+H.RInt(10);i++)Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, H.CRandF(0.1)+motionX,    0.15+H.CRandF(0.1), H.CRandF(0.1)+motionZ, true,0.2F));
-    		worldObj.spawnParticle("largesmoke", this.posX, this.posY, this.posZ, 0, 0, 0);
-    		Helper.spawnEntityFX(new EntityCloudFX(worldObj, this.posX, this.posY, this.posZ, 0,0.1,0));
+    		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0, 0, 0);
+    		Helper.spawnEntityFX(new EntityCloudFXM(worldObj, this.posX, this.posY, this.posZ, 0,0.1,0));
     	}
 	}
 	

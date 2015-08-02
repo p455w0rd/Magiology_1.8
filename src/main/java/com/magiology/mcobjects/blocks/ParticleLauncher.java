@@ -13,8 +13,6 @@ public class ParticleLauncher extends BlockContainer {
 	
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
     
 	public ParticleLauncher() {
 		super(Material.iron);

@@ -5,15 +5,18 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 
 public class NotifyPointedBoxChangePacket extends AbstractToServerMessage{
-	private int pos[],id;
+	BlockPos pos;
+	private int id;
 	public NotifyPointedBoxChangePacket(){}
 	public<T extends TileEntity&MultiColisionProvider> NotifyPointedBoxChangePacket(T tile){
-		pos=new int[]{tile.xCoord,tile.yCoord,tile.zCoord};
+		pos=tile.getPos();
 		id=MultiColisionProviderRayTracer.getPointedId(tile);
 	}
 	@Override
@@ -28,7 +31,7 @@ public class NotifyPointedBoxChangePacket extends AbstractToServerMessage{
 	}
 	@Override
 	public void process(EntityPlayer player, Side side){
-		TileEntity tile=player.worldObj.getTileEntity(pos[0], pos[1], pos[2]);
+		TileEntity tile=player.worldObj.getTileEntity(pos);
 		if(tile instanceof MultiColisionProvider){
 			((MultiColisionProvider)tile).setPointedBox(((MultiColisionProvider)tile).getBoxes()[id]);
 		}

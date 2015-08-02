@@ -8,18 +8,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.magiology.core.MReference;
 import com.magiology.core.init.MCreativeTabs;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.objhelper.helpers.FontEH;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.upgrades.RegisterUpgrades;
 import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
 
@@ -36,7 +35,7 @@ public class GenericItemUpgrade extends Item{
 			this.setUnlocalizedName(typeTS+" upgrade level."+level);
 		}
 		this.setCreativeTab(MCreativeTabs.Whwmmt_upgrades);
-		this.setTextureName(MReference.MODID+":"+typeTS+"Upgrades");
+//		this.setTextureName(MReference.MODID+":"+typeTS+"Upgrades");
 		this.setMaxStackSize(1);
 	}
 	
@@ -48,10 +47,7 @@ public class GenericItemUpgrade extends Item{
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player){
-		if(is.stackTagCompound==null)is.stackTagCompound=new NBTTagCompound();
-		else{
-			
-		}
+		H.createNBT(is);
 		if(w.isRemote){
 //			int ID=RegisterUpgrades.getItemUpgradeID(is.getItem());
 //			System.out.print("ID="+ID+","+RegisterUpgrades.getItemTypeID(ID)+" level:"+RegisterUpgrades.getItemUpgradeLevel(ID)+" type: "+RegisterUpgrades.getItemUpgradeType(ID).toString()+"\n");
@@ -63,10 +59,9 @@ public class GenericItemUpgrade extends Item{
     }
 	
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, int side, float hitX, float hitY, float hitZ){
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		boolean result=false;
-		if(stack.stackTagCompound==null)stack.stackTagCompound=new NBTTagCompound();
-		else{
+		if(H.createNBT(stack)){
 			UpgradeType type=RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(stack.getItem()));
 			Block block=Helper.getBlock(world, pos);
 			if(!player.isSneaking()&&type==UpgradeType.Priority){
@@ -75,22 +70,22 @@ public class GenericItemUpgrade extends Item{
 				double MaxZ=block.getBlockBoundsMaxZ(),MinZ=block.getBlockBoundsMinZ();
 				
 				
-				switch (side){
-				case 0:stack.stackTagCompound.setInteger("side", 1);break;
-				case 1:stack.stackTagCompound.setInteger("side", 0);break;
-				case 2:stack.stackTagCompound.setInteger("side", 2);break;
-				case 3:stack.stackTagCompound.setInteger("side", 4);break;
-				case 4:stack.stackTagCompound.setInteger("side", 5);break;
-				case 5:stack.stackTagCompound.setInteger("side", 3);break;
+				switch (side.getIndex()){
+				case 0:stack.getTagCompound().setInteger("side", 1);break;
+				case 1:stack.getTagCompound().setInteger("side", 0);break;
+				case 2:stack.getTagCompound().setInteger("side", 2);break;
+				case 3:stack.getTagCompound().setInteger("side", 4);break;
+				case 4:stack.getTagCompound().setInteger("side", 5);break;
+				case 5:stack.getTagCompound().setInteger("side", 3);break;
 				}
 				
-				for(int a=0;a<20;a++)switch(side){
-				case 0:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, x+Helper.RF()*(MaxX-MinX)+MinX, y,      z+Helper.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Helper.CRandF(0.5), -10+Helper.CRandF(0.5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 1:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, x+Helper.RF()*(MaxX-MinX)+MinX, y+MaxY, z+Helper.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Helper.CRandF(0.5), 10+Helper.CRandF(0.5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 2:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, x+Helper.RF()*(MaxX-MinX)+MinX, y+Helper.RF()*(MaxY-MinY)+MinY, z+MinZ, 0, 0, -0.1, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 3:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, x+Helper.RF()*(MaxX-MinX)+MinX, y+Helper.RF()*(MaxY-MinY)+MinY, z+MaxZ, 0, 0, 0.1, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 4:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, x+MinX, y+Helper.RF()*(MaxY-MinY)+MinY, z+Helper.RF()*(MaxZ-MinZ)+MinZ, -0.1, 0, 0, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 5:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, x+MaxX, y+Helper.RF()*(MaxY-MinY)+MinY, z+Helper.RF()*(MaxZ-MinZ)+MinZ, 0.1, 0, 0, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				for(int a=0;a<20;a++)switch(side.getIndex()){
+				case 0:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY(),      pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Helper.CRandF(0.5), -10+Helper.CRandF(0.5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				case 1:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY()+MaxY, pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Helper.CRandF(0.5), 10+Helper.CRandF(0.5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				case 2:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+MinZ, 0, 0, -0.1, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				case 3:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+MaxZ, 0, 0, 0.1, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				case 4:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MinX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, -0.1, 0, 0, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				case 5:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MaxX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, 0.1, 0, 0, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
 				}
 			}
 			
@@ -100,10 +95,9 @@ public class GenericItemUpgrade extends Item{
     }
 	@Override
 	public void onUpdate(ItemStack is, World w, Entity entity, int var1, boolean b1){
-		if(is.stackTagCompound==null)is.stackTagCompound=new NBTTagCompound();
-		else{
+		if(H.createNBT(is)){
 			if(RegisterUpgrades.getItemUpgradeType(UT.GetTypeID())==UpgradeType.Priority){
-				if(!is.stackTagCompound.hasKey("side"))is.stackTagCompound.setInteger("side", 0);
+				if(!is.getTagCompound().hasKey("side"))is.getTagCompound().setInteger("side", 0);
 			}
 			
 		}
@@ -156,7 +150,7 @@ public class GenericItemUpgrade extends Item{
 			list.add(FontEH.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
 			
 			if(stack.hasTagCompound()){
-				int id=stack.stackTagCompound.getInteger("side");
+				int id=stack.getTagCompound().getInteger("side");
 				switch(id){
 				case 0:id=1;break;
 				case 1:id=0;break;
@@ -165,7 +159,7 @@ public class GenericItemUpgrade extends Item{
 				case 4:id=3;break;
 				case 5:id=4;break;
 				}
-				list.add("Current side: "+EnumFacing.getOrientation(id).toString().toLowerCase());
+				list.add("Current side: "+EnumFacing.getFront(id).toString().toLowerCase());
 			}
 			else list.add(FontEH.RED+""+FontEH.UNDERLINE+"No NBT on stack!");
 			if(i==2){
@@ -184,7 +178,7 @@ public class GenericItemUpgrade extends Item{
 			list.add(FontEH.BLUE+"In right place it could let you see more than ");
 			list.add(FontEH.BLUE+"only your "+(i!=0?FontEH.RED+"xRay ":"")+FontEH.BLUE+"eyes can see.");
 			if(i>0){
-				list.add(FontEH.GOLD+"If you could only press another button to see"+(i==1?" more":"")+(i==1?"":(" "+FontEH.getRandEff()+"A"+FontEH.getRandEff()+"B"+FontEH.getRandEff()+"S"+FontEH.getRandEff()+"O"+FontEH.getRandEff()+"L"+FontEH.getRandEff()+"U"+FontEH.getRandEff()+"T"+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"L"+FontEH.getRandEff()+"Y"+FontEH.getRandEff()+" "+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"V"+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"R"+FontEH.getRandEff()+"Y"+FontEH.getRandEff()+"T"+FontEH.getRandEff()+"H"+FontEH.getRandEff()+"I"+FontEH.getRandEff()+"N"+FontEH.getRandEff()+"G"+FontEH.getRandEff()+"!"+FontEH.getRandEff()+"!")));
+				list.add(FontEH.GOLD+"If you could only press another button to see"+(i==1?" more":"")+(i==1?"":(" "+FontEH.getRandEff()+"A"+FontEH.getRandEff()+"B"+FontEH.getRandEff()+"S"+FontEH.getRandEff()+"O"+FontEH.getRandEff()+"L"+FontEH.getRandEff()+"U"+FontEH.getRandEff()+"T"+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"L"+FontEH.getRandEff()+"pos.getY()"+FontEH.getRandEff()+" "+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"V"+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"R"+FontEH.getRandEff()+"pos.getY()"+FontEH.getRandEff()+"T"+FontEH.getRandEff()+"H"+FontEH.getRandEff()+"I"+FontEH.getRandEff()+"N"+FontEH.getRandEff()+"G"+FontEH.getRandEff()+"!"+FontEH.getRandEff()+"!")));
 			}
 		}break;
 

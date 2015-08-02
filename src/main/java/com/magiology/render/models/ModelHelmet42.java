@@ -3,7 +3,7 @@ package com.magiology.render.models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
 public class ModelHelmet42 extends ModelBiped{
@@ -106,7 +107,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  EntityPlayer player=(EntityPlayer)entity;
 		  ItemStack arInv=player.inventory.armorInventory[3];
 		  if(arInv!=null&&arInv.stackSize>0){
-			  float max=arInv.getMaxDamage(),now=arInv.getItemDamageForDisplay();
+			  float max=arInv.getMaxDamage(),now=arInv.getItemDamage();
 			  if(arInv.getMaxDamage()>0)color=(max-now)/max;
 			  if(color<0.3)color=0.3F;
 		  }
@@ -134,7 +135,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  GL11.glRotated(rotationX, 1.0F, 0.0F, 0.0F);
 	  {
 		  float p=1F/16F;
-		  Tessellator tess=Tessellator.instance;
+		  WorldRenderer tess=TessHelper.getWR();
 		  GL11.glColor4f(color, color, color, 1);
 		  baseTop1.render(f5);
 		  baseTop2.render(f5);

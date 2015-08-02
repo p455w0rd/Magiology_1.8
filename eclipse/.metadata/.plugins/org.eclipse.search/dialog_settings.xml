@@ -4,7 +4,6 @@
 		<item value="0" key="scope"/>
 	</section>
 	<section name="">
-		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
 		<item value="1000" key="org.eclipse.jdt.search.resultpage.limit"/>
 		<item value="TRUE" key="org.eclipse.jdt.search.resultpage.limit_enabled"/>
 	</section>
@@ -22,8 +21,8 @@
 		<section name="HISTORY6">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
-			<item value="false" key="isWholeWord"/>
-			<item value="spawnParticle(&quot;lava&quot;" key="textPattern"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="renderStandardBlock" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -34,8 +33,8 @@
 		<section name="HISTORY7">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
-			<item value="false" key="isWholeWord"/>
-			<item value="world.getBlock(pos)" key="textPattern"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="renderBlocks" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -46,8 +45,8 @@
 		<section name="HISTORY4">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
-			<item value="false" key="isWholeWord"/>
-			<item value="int x1, int y1, int z1" key="textPattern"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="ShadedQuad.addVertexWithUVWRender" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -59,7 +58,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value=",int x,int y,int z" key="textPattern"/>
+			<item value="stackTagCompound" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -70,8 +69,8 @@
 		<section name="HISTORY5">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
-			<item value="false" key="isWholeWord"/>
-			<item value="spawnParticle(&quot;flame&quot;" key="textPattern"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="renderFromInside" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -87,7 +86,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value="xCoord, yCoord, zCoord" key="textPattern"/>
+			<item value="Tessellator tess=Tessellator.instance;" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -99,7 +98,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value="x, y, z" key="textPattern"/>
+			<item value="renderAllFaces" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -111,7 +110,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value=", int x, int y, int z" key="textPattern"/>
+			<item value="fancyGrass" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -122,8 +121,8 @@
 		<section name="HISTORY2">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
-			<item value="false" key="isWholeWord"/>
-			<item value="SideHelper.offset(side, pos.getX()),SideHelper.Y(side, pos.getY()),SideHelper.Z(side, pos.getZ())" key="textPattern"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="GuiBrewingStand" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -134,8 +133,8 @@
 		<section name="HISTORY3">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
-			<item value="false" key="isWholeWord"/>
-			<item value="x1, y1, z1" key="textPattern"/>
+			<item value="true" key="isWholeWord"/>
+			<item value=".getWorldObj()" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -147,7 +146,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value="public void update(){" key="textPattern"/>
+			<item value="render" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -159,7 +158,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value="Helper.AxisAlignedBB" key="textPattern"/>
+			<item value="renderblock" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -187,17 +186,17 @@
 	</section>
 	<section name="ReplaceDialog2">
 		<list key="replace_with">
+			<item value=".getWorld()"/>
+			<item value="buf.addVertexWithUV"/>
+			<item value="getTagCompound()"/>
+			<item value="WorldRenderer tess=TessHelper.getWR();"/>
 			<item value="public void updateEntity(){"/>
 			<item value="new AxisAlignedBB"/>
 			<item value="pos"/>
-			<item value="BlockPos pos"/>
-			<item value="spawnParticle(EnumParticleTypes.FLAME"/>
-			<item value="spawnParticle(EnumParticleTypes.LAVA"/>
-			<item value="Helper.getBlock(world, pos)"/>
 		</list>
 	</section>
 	<section name="SearchDialog">
-		<item value="org.eclipse.search.internal.ui.text.TextSearchPage" key="PREVIOUS_PAGE"/>
+		<item value="org.eclipse.jdt.ui.JavaSearchPage" key="PREVIOUS_PAGE"/>
 	</section>
 	<section name="org.eclipse.jdt.ui.JavaSearchResultPage">
 		<item value="1000" key="org.eclipse.jdt.search.resultpage.limit"/>

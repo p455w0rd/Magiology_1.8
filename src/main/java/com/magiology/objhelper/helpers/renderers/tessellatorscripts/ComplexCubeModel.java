@@ -4,8 +4,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.ShadedQuad;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.objhelper.vectors.Vec8F;
@@ -15,6 +16,7 @@ public class ComplexCubeModel{
 	public Vec3M[] points=new Vec3M[8];
 	public Vec8F[] UVs=new Vec8F[6];
 	ResourceLocation[] st=new ResourceLocation[6];
+	NoramlisedVertixBuffer buf=RenderGet.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=minX;this.minY=minY;this.minZ=minZ;
@@ -76,88 +78,98 @@ public class ComplexCubeModel{
 		try{
 			if(willSideRender[0])try{
 				if(st[0]!=null)TessHelper.bindTexture(st[0]);
-				ShadedQuad.addVertexWithUV(points[0],UVs[0].x2,UVs[0].y2);
-				ShadedQuad.addVertexWithUV(points[1],UVs[0].x1,UVs[0].y1);
-				ShadedQuad.addVertexWithUV(points[2],UVs[0].x4,UVs[0].y4);
-				ShadedQuad.addVertexWithUV(points[3],UVs[0].x3,UVs[0].y3);
-				ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[0],UVs[0].x2,UVs[0].y2);
+				buf.addVertexWithUV(points[1],UVs[0].x1,UVs[0].y1);
+				buf.addVertexWithUV(points[2],UVs[0].x4,UVs[0].y4);
+				buf.addVertexWithUV(points[3],UVs[0].x3,UVs[0].y3);
+				buf.draw();
 			}catch(Exception exception){
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				ShadedQuad.addVertex(points[0]);
-				ShadedQuad.addVertex(points[1]);
-				ShadedQuad.addVertex(points[2]);
-				ShadedQuad.addVertex(points[3]);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[0],0,0);
+				buf.addVertexWithUV(points[1],0,0);
+				buf.addVertexWithUV(points[2],0,0);
+				buf.addVertexWithUV(points[3],0,0);
+				buf.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[1])try{
 				if(st[1]!=null)TessHelper.bindTexture(st[1]);
-				ShadedQuad.addVertexWithUV(points[7],UVs[1].x2,UVs[1].y2);
-				ShadedQuad.addVertexWithUV(points[6],UVs[1].x1,UVs[1].y1);
-				ShadedQuad.addVertexWithUV(points[5],UVs[1].x4,UVs[1].y4);
-				ShadedQuad.addVertexWithUV(points[4],UVs[1].x3,UVs[1].y3);
-				ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[7],UVs[1].x2,UVs[1].y2);
+				buf.addVertexWithUV(points[6],UVs[1].x1,UVs[1].y1);
+				buf.addVertexWithUV(points[5],UVs[1].x4,UVs[1].y4);
+				buf.addVertexWithUV(points[4],UVs[1].x3,UVs[1].y3);
+				buf.draw();
 			}catch(Exception exception){
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				ShadedQuad.addVertex(points[7]);
-				ShadedQuad.addVertex(points[6]);
-				ShadedQuad.addVertex(points[5]);
-				ShadedQuad.addVertex(points[4]);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[7],0,0);
+				buf.addVertexWithUV(points[6],0,0);
+				buf.addVertexWithUV(points[5],0,0);
+				buf.addVertexWithUV(points[4],0,0);
+				buf.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[2])try{
 				if(st[2]!=null)TessHelper.bindTexture(st[2]);
-				ShadedQuad.addVertexWithUV(points[2],UVs[2].x2,UVs[2].y2);
-				ShadedQuad.addVertexWithUV(points[1],UVs[2].x1,UVs[2].y1);
-				ShadedQuad.addVertexWithUV(points[5],UVs[2].x4,UVs[2].y4);
-				ShadedQuad.addVertexWithUV(points[6],UVs[2].x3,UVs[2].y3);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[2],UVs[2].x2,UVs[2].y2);
+				buf.addVertexWithUV(points[1],UVs[2].x1,UVs[2].y1);
+				buf.addVertexWithUV(points[5],UVs[2].x4,UVs[2].y4);
+				buf.addVertexWithUV(points[6],UVs[2].x3,UVs[2].y3);
+				buf.draw();
 			}catch(Exception exception){
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				ShadedQuad.addVertex(points[2]);
-				ShadedQuad.addVertex(points[1]);
-				ShadedQuad.addVertex(points[5]);
-				ShadedQuad.addVertex(points[6]);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[2],0,0);
+				buf.addVertexWithUV(points[1],0,0);
+				buf.addVertexWithUV(points[5],0,0);
+				buf.addVertexWithUV(points[6],0,0);
+				buf.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[3])try{
 				if(st[3]!=null)TessHelper.bindTexture(st[3]);
-				ShadedQuad.addVertexWithUV(points[7],UVs[3].x2,UVs[3].y2);
-				ShadedQuad.addVertexWithUV(points[4],UVs[3].x1,UVs[3].y1);
-				ShadedQuad.addVertexWithUV(points[0],UVs[3].x4,UVs[3].y4);
-				ShadedQuad.addVertexWithUV(points[3],UVs[3].x3,UVs[3].y3);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[7],UVs[3].x2,UVs[3].y2);
+				buf.addVertexWithUV(points[4],UVs[3].x1,UVs[3].y1);
+				buf.addVertexWithUV(points[0],UVs[3].x4,UVs[3].y4);
+				buf.addVertexWithUV(points[3],UVs[3].x3,UVs[3].y3);
+				buf.draw();
 			}catch(Exception exception){
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				ShadedQuad.addVertex(points[7]);
-				ShadedQuad.addVertex(points[4]);
-				ShadedQuad.addVertex(points[0]);
-				ShadedQuad.addVertex(points[3]);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[7],0,0);
+				buf.addVertexWithUV(points[4],0,0);
+				buf.addVertexWithUV(points[0],0,0);
+				buf.addVertexWithUV(points[3],0,0);
+				buf.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[4])try{
 				if(st[4]!=null)TessHelper.bindTexture(st[4]);
-				ShadedQuad.addVertexWithUV(points[4],UVs[4].x2,UVs[4].y2);
-				ShadedQuad.addVertexWithUV(points[5],UVs[4].x1,UVs[4].y1);
-				ShadedQuad.addVertexWithUV(points[1],UVs[4].x4,UVs[4].y4);
-				ShadedQuad.addVertexWithUV(points[0],UVs[4].x3,UVs[4].y3);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[4],UVs[4].x2,UVs[4].y2);
+				buf.addVertexWithUV(points[5],UVs[4].x1,UVs[4].y1);
+				buf.addVertexWithUV(points[1],UVs[4].x4,UVs[4].y4);
+				buf.addVertexWithUV(points[0],UVs[4].x3,UVs[4].y3);
+				buf.draw();
 			}catch(Exception exception){
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				ShadedQuad.addVertex(points[4]);
-				ShadedQuad.addVertex(points[5]);
-				ShadedQuad.addVertex(points[1]);
-				ShadedQuad.addVertex(points[0]);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[4],0,0);
+				buf.addVertexWithUV(points[5],0,0);
+				buf.addVertexWithUV(points[1],0,0);
+				buf.addVertexWithUV(points[0],0,0);
+				buf.draw();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[5])try{
 				if(st[5]!=null)TessHelper.bindTexture(st[5]);
-				ShadedQuad.addVertexWithUV(points[3],UVs[5].x2,UVs[5].y2);
-				ShadedQuad.addVertexWithUV(points[2],UVs[5].x1,UVs[5].y1);
-				ShadedQuad.addVertexWithUV(points[6],UVs[5].x4,UVs[5].y4);
-				ShadedQuad.addVertexWithUV(points[7],UVs[5].x3,UVs[5].y3);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[3],UVs[5].x2,UVs[5].y2);
+				buf.addVertexWithUV(points[2],UVs[5].x1,UVs[5].y1);
+				buf.addVertexWithUV(points[6],UVs[5].x4,UVs[5].y4);
+				buf.addVertexWithUV(points[7],UVs[5].x3,UVs[5].y3);
+				buf.draw();
 			}catch(Exception exception){
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				ShadedQuad.addVertex(points[3]);
-				ShadedQuad.addVertex(points[2]);
-				ShadedQuad.addVertex(points[6]);
-				ShadedQuad.addVertex(points[7]);ShadedQuad.drawQuad();
+				buf.addVertexWithUV(points[3],0,0);
+				buf.addVertexWithUV(points[2],0,0);
+				buf.addVertexWithUV(points[6],0,0);
+				buf.addVertexWithUV(points[7],0,0);
+				buf.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			

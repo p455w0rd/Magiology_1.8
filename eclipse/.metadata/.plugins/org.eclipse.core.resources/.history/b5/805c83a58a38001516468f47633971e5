@@ -1,0 +1,7 @@
+package com.magiology.objhelper.vectors;
+
+import net.minecraft.util.BlockPos;
+
+public class Pos extends BlockPos {
+
+}

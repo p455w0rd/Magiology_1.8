@@ -3,6 +3,7 @@ package com.magiology.forgepowered.event;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.gui.fpgui.WingModeChangerGui;

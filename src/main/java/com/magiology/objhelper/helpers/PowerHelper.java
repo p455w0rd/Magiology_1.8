@@ -130,8 +130,8 @@ public class PowerHelper{
 //			if(fromTile instanceof TileEntity&&Helper.RInt(200)==0){
 //				boolean fromTileB=((TileEntityPow)fromTile).canSendOnSide(sideOfSender),toTileB=((TileEntityPow)toTile).canReceiveOnSide(SideHelper.getOppositeSide(sideOfSender));
 //				Helper.printInln(fromTileB,toTileB);
-//				if(fromTileB)Helper.spawnEntityFX(new EntityFlameFX(((TileEntityPow)fromTile).getWorldObj(), 0.5+((TileEntityPow)fromTile).xCoord, 0.5+((TileEntityPow)fromTile).yCoord, 0.5+((TileEntityPow)fromTile).zCoord, 0, 0.1, 0));
-//				if(toTileB)Helper.spawnEntityFX(new EntityFlameFX(((TileEntityPow)toTile).getWorldObj(), 0.5+((TileEntityPow)toTile).xCoord, 0.5+((TileEntityPow)toTile).yCoord, 0.5+((TileEntityPow)toTile).zCoord, 0, 0.1, 0));
+//				if(fromTileB)Helper.spawnEntityFX(new EntityFlameFX(((TileEntityPow)fromTile).getWorld(), 0.5+((TileEntityPow)fromTile).xCoord, 0.5+((TileEntityPow)fromTile).yCoord, 0.5+((TileEntityPow)fromTile).zCoord, 0, 0.1, 0));
+//				if(toTileB)Helper.spawnEntityFX(new EntityFlameFX(((TileEntityPow)toTile).getWorld(), 0.5+((TileEntityPow)toTile).xCoord, 0.5+((TileEntityPow)toTile).yCoord, 0.5+((TileEntityPow)toTile).zCoord, 0, 0.1, 0));
 //			}
 			return false;
 		}
@@ -167,7 +167,7 @@ public class PowerHelper{
 		boolean[] data=getNextCricleSideInteraction(iSidedPower, side);
 		iSidedPower.setReceaveOnSide(side,data[0]);
 		iSidedPower.setSendOnSide(side,data[1]);
-		if(iSidedPower instanceof TileEntity)ForcePipeUpdate.updatein3by3(((TileEntity)iSidedPower).getWorldObj(), ((TileEntity)iSidedPower).xCoord, ((TileEntity)iSidedPower).yCoord, ((TileEntity)iSidedPower).zCoord);
+		if(iSidedPower instanceof TileEntity)ForcePipeUpdate.updatein3by3(((TileEntity)iSidedPower).getWorld(), ((TileEntity)iSidedPower).getPos());
 	}
 	public static boolean[] getNextCricleSideInteraction(ISidedPower iSidedPower,int side){
 		boolean[] result=new boolean[2];

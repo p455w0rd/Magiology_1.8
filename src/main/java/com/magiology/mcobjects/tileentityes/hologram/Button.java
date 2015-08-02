@@ -46,7 +46,7 @@ public class Button extends TextBox{
 	public void update(){
 		scale=1;
 		fixPos();
-		if(host.getWorldObj().getTotalWorldTime()%40==0)body=new ComplexCubeModel(0, 0, -Helper.p/2, -size.x, -size.y, Helper.p/2);
+		if(host.getWorld().getTotalWorldTime()%40==0)body=new ComplexCubeModel(0, 0, -Helper.p/2, -size.x, -size.y, Helper.p/2);
 		
 		prevColor=color.copy();
 		checkHighlight();

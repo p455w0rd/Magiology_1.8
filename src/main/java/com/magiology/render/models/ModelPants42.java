@@ -203,7 +203,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
   			
   		}
   		if(item!=null){
-  			NBTTagCompound stackTC=item.stackTagCompound;
+  			NBTTagCompound stackTC=item.getTagCompound();
   			float[] r=new float[6];
   			
   			for(int b=0;b<r.length;b++)r[b]=stackTC.getFloat("r"+b);

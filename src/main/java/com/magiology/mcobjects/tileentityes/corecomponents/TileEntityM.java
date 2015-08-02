@@ -20,7 +20,7 @@ public abstract class TileEntityM extends TileEntity implements IUpdatePlayerLis
     	worldObj.markBlockForUpdate(pos);
     	markDirty();
     }
-    public void write3I(NBTTagCompound NBT,BlockPos pos,String name){NBT.setInteger(name+"X", pos.getX());NBT.setInteger(name+"Y", pos.getY());NBT.setInteger(name+"Z", pos.getZ());}
+    public void write3I(NBTTagCompound NBT,int x,int y,int z,String name){NBT.setInteger(name+"X", pos.getX());NBT.setInteger(name+"Y", pos.getY());NBT.setInteger(name+"Z", pos.getZ());}
     public int[] read3I(NBTTagCompound NBT,String name){return new int[]{ NBT.getInteger(name+"X"),   NBT.getInteger(name+"Y"),   NBT.getInteger(name+"Z")};  }
     public void writePos(NBTTagCompound NBT,BlockPos pos,String name){NBT.setInteger(name+"X", pos.getX());NBT.setInteger(name+"Y", pos.getY());NBT.setInteger(name+"Z", pos.getZ());}
     public BlockPos readPos(NBTTagCompound NBT,String name){return new BlockPos(NBT.getInteger(name+"X"),   NBT.getInteger(name+"Y"),   NBT.getInteger(name+"Z"));  }

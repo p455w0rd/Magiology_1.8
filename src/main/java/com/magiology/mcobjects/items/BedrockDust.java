@@ -6,15 +6,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 public class BedrockDust extends ItemFlintAndSteel{
 	@Override
-	public boolean onItemUse (ItemStack is, EntityPlayer player, World w, BlockPos pos, int l, float f, float f1, float f2){
-		boolean return1=false;
-		if(!w.isRemote){
-			
-		}
-		return return1;
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+		return false;
 	}
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean is){

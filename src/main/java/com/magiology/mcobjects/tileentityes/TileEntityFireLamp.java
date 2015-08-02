@@ -62,7 +62,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	}
 	
 	@Override
-	public void update(){
+	public void updateEntity(){
 		if(connection!=null)mode=1;
 		else mode=0;
 		

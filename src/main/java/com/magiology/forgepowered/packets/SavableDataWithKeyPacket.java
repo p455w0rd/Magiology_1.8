@@ -5,37 +5,34 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.network.NetworkBaseInterface;
 
 public class SavableDataWithKeyPacket extends AbstractToClientMessage{
-	private int id,x,y,z;
+	private int id;
+	private BlockPos pos;
 	private String key;
 	private SavableData data;
 	public SavableDataWithKeyPacket(){}
 	public SavableDataWithKeyPacket(NetworkBaseInterface tile,String key, SavableData data){
-		super(new SendingTarget(tile.getHost().getWorldObj(), tile.getHost().getWorldObj().provider.dimensionId));
-		x=tile.getHost().xCoord;
-		y=tile.getHost().yCoord;
-		z=tile.getHost().zCoord;
+		super(new SendingTarget(tile.getHost().getWorld(), tile.getHost().getWorld().provider.getDimensionId()));
+		pos=tile.getHost().getPos();
 		this.key=key;
 		this.data=data;
 	}
 	@Override
 	public void write(PacketBuffer buffer)throws IOException{
-		buffer.writeInt(x);
-		buffer.writeInt(y);
-		buffer.writeInt(z);
+		writePos(buffer, pos);
 		writeString(buffer, key);
 		writeSavableData(buffer, data);
 	}
 	@Override
 	public void read(PacketBuffer buffer)throws IOException{
-		x=buffer.readInt();
-		y=buffer.readInt();
-		z=buffer.readInt();
+		pos=readPos(buffer);
 		key=readString(buffer);
 		data=readSavableData(buffer);
 	}

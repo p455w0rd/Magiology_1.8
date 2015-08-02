@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
@@ -16,6 +18,7 @@ import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.Vec3M;
 
 public class FirePipe extends BlockContainerMultiColision{
 	
@@ -40,7 +43,7 @@ public class FirePipe extends BlockContainerMultiColision{
 	}
 	
     @Override
-	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player, int side, float xHit, float yHit, float zHit){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float xHit, float yHit, float zHit){
     	TileEntity test=world.getTileEntity(pos);
     	boolean return1=false;
     	
@@ -60,9 +63,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					List<AxisAlignedBB> boxes=new ArrayList<AxisAlignedBB>();
     					tile1.getExpectedBoxesOnSide(boxes, 1);
     					for(AxisAlignedBB box:boxes){
-    						if(box.expand(a, a, a).isVecInside(Helper.Vec3M(xHit, yHit, zHit))){
+    						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
     							tile1.bannedConnections[1]=tile1.connections[1]!=null;
-        	    				tile2=world.getTileEntity(x, y-1, z);
+        	    				tile2=world.getTileEntity(pos.add(0,-1,0));
         	    				if(tile2 instanceof ISidedPower)((ISidedPower)tile2).setBannedSide(tile1.connections[1]!=null, 0);
     							continue;
     						}
@@ -72,9 +75,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					List<AxisAlignedBB> boxes=new ArrayList<AxisAlignedBB>();
     					tile1.getExpectedBoxesOnSide(boxes, 0);
     					for(AxisAlignedBB box:boxes){
-    						if(box.expand(a, a, a).isVecInside(Helper.Vec3M(xHit, yHit, zHit))){
+    						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
         	    				tile1.bannedConnections[0]=tile1.connections[0]!=null;
-        	    				tile2=world.getTileEntity(x, y+1, z);
+        	    				tile2=world.getTileEntity(pos.add(0,1,0));
         	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[0]!=null, 1);
     							continue;
     						}
@@ -84,9 +87,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					List<AxisAlignedBB> boxes=new ArrayList<AxisAlignedBB>();
     					tile1.getExpectedBoxesOnSide(boxes, 5);
     					for(AxisAlignedBB box:boxes){
-    						if(box.expand(a, a, a).isVecInside(Helper.Vec3M(xHit, yHit, zHit))){
+    						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
         	    				tile1.bannedConnections[5]=tile1.connections[5]!=null;
-        	    				tile2=world.getTileEntity(x-1, y, z);
+        	    				tile2=world.getTileEntity(pos.add(-1,0,0));
         	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[5]!=null, 3);
     							continue;
     						}
@@ -96,9 +99,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					List<AxisAlignedBB> boxes=new ArrayList<AxisAlignedBB>();
     					tile1.getExpectedBoxesOnSide(boxes, 3);
     					for(AxisAlignedBB box:boxes){
-    						if(box.expand(a, a, a).isVecInside(Helper.Vec3M(xHit, yHit, zHit))){
+    						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
         	    				tile1.bannedConnections[3]=tile1.connections[3]!=null;
-        	    				tile2=world.getTileEntity(x+1, y, z);
+        	    				tile2=world.getTileEntity(pos.add(1,0,0));
         	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[3]!=null, 5);
     							continue;
     						}
@@ -108,9 +111,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					List<AxisAlignedBB> boxes=new ArrayList<AxisAlignedBB>();
     					tile1.getExpectedBoxesOnSide(boxes, 2);
     					for(AxisAlignedBB box:boxes){
-    						if(box.expand(a, a, a).isVecInside(Helper.Vec3M(xHit, yHit, zHit))){
+    						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
     							tile1.bannedConnections[2]=tile1.connections[2]!=null;
-        	    				tile2=world.getTileEntity(pos-1);
+        	    				tile2=world.getTileEntity(pos.add(0,0,-1));
         	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[2]!=null, 4);
     							continue;
     						}
@@ -120,9 +123,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					List<AxisAlignedBB> boxes=new ArrayList<AxisAlignedBB>();
     					tile1.getExpectedBoxesOnSide(boxes, 4);
     					for(AxisAlignedBB box:boxes){
-    						if(box.expand(a, a, a).isVecInside(Helper.Vec3M(xHit, yHit, zHit))){
+    						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
     							tile1.bannedConnections[4]=tile1.connections[4]!=null;
-        	    				tile2=world.getTileEntity(pos+1);
+        	    				tile2=world.getTileEntity(pos.add(0,0,-1));
         	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[4]!=null, 2);
     							continue;
     						}

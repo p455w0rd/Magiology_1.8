@@ -17,16 +17,16 @@ public class RenderHologramProjector extends TileEntitySpecialRenderer{
 	private TileEntityHologramProjector tile;
 	
 	@Override
-	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float partialTicks){
+	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float partialTicks,int pass){
 		tile=(TileEntityHologramProjector)t;
 		GL11.glPushMatrix();
-		GL11.glTranslated(pos);
+		GL11.glTranslated(x,y,z);
 		GL11H.texture(false);
 		GL11H.lighting(true);
-		TessHelper.drawCube(t.blockType.getBlockBoundsMinX(),t.blockType.getBlockBoundsMinY(),t.blockType.getBlockBoundsMinZ(),t.blockType.getBlockBoundsMaxX(),t.blockType.getBlockBoundsMaxY(),t.blockType.getBlockBoundsMaxZ());
+		TessHelper.drawCube(t.getBlockType().getBlockBoundsMinX(),t.getBlockType().getBlockBoundsMinY(),t.getBlockType().getBlockBoundsMinZ(),t.getBlockType().getBlockBoundsMaxX(),t.getBlockType().getBlockBoundsMaxY(),t.getBlockType().getBlockBoundsMaxZ());
 		GL11H.SetUpOpaqueRendering(1);
 		GL11H.scaled(0.99999);
-		ColorF color=new ColorF(Helper.fluctuatorSmooth(10, 0)*0.2+tile.mainColor.xCoord,Helper.fluctuatorSmooth(35, 0)*0.2+tile.mainColor.yCoord,Helper.fluctuatorSmooth(16, 0)*0.2+tile.mainColor.zCoord,0.2);
+		ColorF color=new ColorF(Helper.fluctuatorSmooth(10, 0)*0.2+tile.mainColor.x,Helper.fluctuatorSmooth(35, 0)*0.2+tile.mainColor.y,Helper.fluctuatorSmooth(16, 0)*0.2+tile.mainColor.z,0.2);
 		color.bind();
 		GL11.glTranslatef(tile.offset.x, tile.offset.y-Helper.p*1.45F, 0.5F);
 		tile.main.draw();

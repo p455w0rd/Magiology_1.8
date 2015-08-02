@@ -5,6 +5,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 
 import com.magiology.modedmcstuff.items.UpgItem;
 import com.magiology.upgrades.RegisterUpgrades;
@@ -21,7 +23,7 @@ public class UpgItemContainer implements IInventory{
 		this.container=container;
 		if(container.getItem() instanceof UpgItem){
 			invSS=64;
-			NBT=container.stackTagCompound;
+			NBT=container.getTagCompound();
 			Citem=container.getItem();
 		}
 		else{
@@ -98,12 +100,12 @@ public class UpgItemContainer implements IInventory{
 	}
 
 	@Override
-	public String getInventoryName(){
+	public String getName(){
 		return container.getDisplayName()+" inventory";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName(){
+	public boolean hasCustomName(){
 		return false;
 	}
 
@@ -122,12 +124,12 @@ public class UpgItemContainer implements IInventory{
 	}
 
 	@Override
-	public void openInventory(){
+	public void openInventory(EntityPlayer player){
 		
 	}
 
 	@Override
-	public void closeInventory(){
+	public void closeInventory(EntityPlayer player){
 		this.markDirty();
 	}
 	@Override
@@ -140,6 +142,35 @@ public class UpgItemContainer implements IInventory{
 	@Override
 	public void markDirty(){
 		((UpgItem)Citem).setStacks(container, ((UpgItem)Citem).getStacks(container));
+	}
+
+	@Override
+	public IChatComponent getDisplayName(){
+		return new ChatComponentText(this.getName());
+	}
+
+	@Override
+	public int getField(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getFieldCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -1,7 +1,7 @@
 package com.magiology.mcobjects.effect;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -58,17 +58,7 @@ public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
 	}
 	
 	@Override
-	public void renderParticle(Tessellator tess, float pa2, float pa3, float pa4, float pa5, float pa6, float pa7){
-		par2=pa2;par3=pa3;par4=pa4;par5=pa5;par6=pa6;par7=pa7;
-		queuedRenders.add(this);
-	}
-	public static void RenderQueuedParticle(Tessellator tess){
-		for(EntityMagiologyBaseFX particle : queuedRenders)particle.render(tess);
-		queuedRenders.clear();
-	}
-	
-	@Override
-	public void render(Tessellator tess){
+	public void render(WorldRenderer tess){
 		GL11.glDisable(GL11.GL_FOG);
 		GL11H.SetUpOpaqueRendering(2);
         

@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -73,7 +73,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		}
 		prevMouseX=mouseX;
 		prevMouseY=mouseY;
-		FontRenderer fr=Minecraft.getMinecraft().fontRenderer;
+		FontRenderer fr=Helper.getFontRenderer();
 		GL11.glTranslated(-guiLeft, -guiTop, 0);
 		TessHelper.bindTexture(main);
 		this.drawTexturedModalRect(addButton.xPosition, addButton.yPosition, 93, 167, 9, 9);
@@ -108,7 +108,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	}
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
-		Tessellator tess=Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		TessHelper.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 //		this.drawTexturedModalRect(guiLeft, guiTop-66, 0, -32, xSize, 100);
@@ -219,7 +219,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		((GuiButton)buttonList.get(0)).enabled=((GuiButton)buttonList.get(1)).enabled=tileCB.isActive;
 		if(Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){
 			mouseleftTime++;
-			if(mouseleftTime>10&&tileCB.getWorldObj().getTotalWorldTime()%2==0){
+			if(mouseleftTime>10&&tileCB.getWorld().getTotalWorldTime()%2==0){
 				if(((GuiButton)buttonList.get(5)).mousePressed(mc,mouseX,mouseY)){
 					actionPerformed(((GuiButton)buttonList.get(5)));
 				}

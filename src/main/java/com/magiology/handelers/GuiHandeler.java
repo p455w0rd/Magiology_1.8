@@ -24,15 +24,16 @@ import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.Pos;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomize;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomizeContainer;
 
 public class GuiHandeler implements IGuiHandler{
 	
 	public Container GetServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
-		TileEntity tile=world.getTileEntity(pos);
+		TileEntity tile=world.getTileEntity(new Pos(x, y, z));
 		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
-		int side=hit!=null?hit.sideHit:-1;
+		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
 		case MGui.GuiUpgrade:              if(tile instanceof TileEntityPow)         
@@ -54,9 +55,9 @@ public class GuiHandeler implements IGuiHandler{
 	}
 
 	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
-		TileEntity tile=world.getTileEntity(pos);
+		TileEntity tile=world.getTileEntity(new Pos(x,y,z));
 		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
-		int side=hit!=null?hit.sideHit:-1;
+		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
 		case MGui.GuiUpgrade:              if(tile instanceof TileEntityPow)         
@@ -76,6 +77,6 @@ public class GuiHandeler implements IGuiHandler{
 		Helper.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
-	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetServerGuiElement(ID, player, world, pos);}
-	@Override public Object getClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetClientGuiElement(ID, player, world, pos);}
+	@Override public Object getServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetServerGuiElement(ID, player, world, x,y,z);}
+	@Override public Object getClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){return GetClientGuiElement(ID, player, world, x,y,z);}
 }

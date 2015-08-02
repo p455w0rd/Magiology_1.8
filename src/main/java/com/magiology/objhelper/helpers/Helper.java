@@ -466,8 +466,11 @@ public class Helper{
 		openGui(player, Magiology.getMagiology(), modGuiId, pos);
 	}
 	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, BlockPos pos){
+		openGui(player, mainModClassInstance, modGuiId, pos.getX(),pos.getY(),pos.getZ());
+	}
+	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, int x,int y,int z){
 		if(isRemote(player))return;
-		FMLNetworkHandler.openGui(player, mainModClassInstance, modGuiId, player.getEntityWorld(), pos.getX(),pos.getY(),pos.getZ());
+		FMLNetworkHandler.openGui(player, mainModClassInstance, modGuiId, player.getEntityWorld(), x,y,z);
 	}
 	public static float[] calculateRenderPos(Entity entity){
 		return new float[]{
@@ -755,11 +758,20 @@ public class Helper{
 	}
 	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
 	public static void setMetadata(World world, BlockPos pos,int meta){
-		world.setBlockState(pos, getBlock(world, pos).getDefaultState().withProperty(MetadataMarker, meta), 2);
+		world.setBlockState(pos, getBlock(world, pos).getDefaultState().withProperty(MetadataMarker, meta), 3);
 	}
 	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
 	public static Block getBlock(World world, BlockPos pos){
 		return world.getBlockState(pos).getBlock();
+	}
+	public static Block getBlock(World world, int x, int y, int z){
+		return getBlock(world, new BlockPos(x, y, z));
+	}
+	public static void setBlock(World world, BlockPos pos,Block block){
+		world.setBlockState(pos, block.getDefaultState(), 3);
+	}
+	public static void setBlock(World world, BlockPos pos, Block block, int meta){
+		world.setBlockState(pos, block.getDefaultState().withProperty(MetadataMarker, meta), 3);
 	}
 	public static BlockPos BlockPos(int[] array3i){
 		return new BlockPos(array3i[0], array3i[1], array3i[2]);
@@ -786,5 +798,17 @@ public class Helper{
 
 		}
 		return null;
+	}
+	public static BlockPos[] BlockPosArray(int[] pos1, int[] pos2, int[] pos3){
+		BlockPos[] result=new BlockPos[0];
+		for(int i=0;i<pos1.length;i++)result=ArrayUtils.add(result, new BlockPos(pos1[i],pos2[i],pos3[i]));
+		return result;
+	}
+	public static boolean createNBT(Object a){
+		if(a instanceof ItemStack){
+			if(!((ItemStack)a).hasTagCompound())((ItemStack)a).setTagCompound(new NBTTagCompound());
+			return ((ItemStack)a).hasTagCompound();
+		}
+		return false;
 	}
 }

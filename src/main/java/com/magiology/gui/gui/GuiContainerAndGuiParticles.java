@@ -5,13 +5,14 @@ import java.util.List;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 
 import com.magiology.Annotations.GUINeedsWorldUpdates;
 import com.magiology.Annotations.GUIWorldUpdater;
 import com.magiology.mcobjects.effect.GuiParticle;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 @GUINeedsWorldUpdates
 public abstract class GuiContainerAndGuiParticles extends GuiContainer{
 	
@@ -54,7 +55,7 @@ public abstract class GuiContainerAndGuiParticles extends GuiContainer{
 		}
 	}
 	public void renderParticles(float partialTicks){
-		Tessellator tess=Tessellator.instance;
+		WorldRenderer tess=TessHelper.getWR();
 		if(!guiParticles.isEmpty())for(int c=0;c<guiParticles.size();c++){
 			GuiParticle ab=guiParticles.get(c);
 			if(ab!=null&&!ab.isDead)ab.renderParticle(tess, partialTicks);
@@ -62,9 +63,9 @@ public abstract class GuiContainerAndGuiParticles extends GuiContainer{
 	}
 	public boolean isMouseOverObj(Object obj,int x,int y){
 		if(obj instanceof Slot){
-			return this.func_146978_c(((Slot)obj).xDisplayPosition, ((Slot)obj).yDisplayPosition, 16, 16, x,y);
+			return this.isPointInRegion(((Slot)obj).xDisplayPosition, ((Slot)obj).yDisplayPosition, 16, 16, x,y);
 		}else if(obj instanceof GuiButton){
-			return this.func_146978_c(((GuiButton)obj).xPosition, ((GuiButton)obj).yPosition, ((GuiButton)obj).width, ((GuiButton)obj).height, x,y);
+			return this.isPointInRegion(((GuiButton)obj).xPosition, ((GuiButton)obj).yPosition, ((GuiButton)obj).width, ((GuiButton)obj).height, x,y);
 		}else return false;
     }
 }

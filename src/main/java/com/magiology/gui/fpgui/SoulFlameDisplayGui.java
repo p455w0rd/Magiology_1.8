@@ -2,13 +2,13 @@ package com.magiology.gui.fpgui;
 
 import java.awt.Color;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 
@@ -34,7 +34,7 @@ public class SoulFlameDisplayGui extends FirstPersonGui{
 		renderMain();
 		renderFire();
 		GL11H.EndOpaqueRendering();
-		Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(" "+soulFlame+"/"+maxSoulFlame, 0, 90, Color.WHITE.hashCode());
+		RenderGet.FR().drawStringWithShadow(" "+soulFlame+"/"+maxSoulFlame, 0, 90, Color.WHITE.hashCode());
 	}
 	private void renderMain(){
 		drawRect(pngW, pngH, 0, 0, 0, 0, 28, 75);

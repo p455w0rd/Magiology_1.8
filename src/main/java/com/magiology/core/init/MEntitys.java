@@ -8,10 +8,8 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import com.magiology.core.Magiology;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
-import com.magiology.mcobjects.entitys.ModedEntityFallingBlock;
 import com.magiology.render.entityrender.BallOfEnergyRenderer;
 import com.magiology.render.entityrender.EntitySubatomicWorldDeconstructorRenderer;
-import com.magiology.render.entityrender.RenderModedFallingBlock;
 import com.magiology.render.models.entitys.BallOfEnergyModel;
 
 public class MEntitys{
@@ -20,7 +18,6 @@ public class MEntitys{
 
 	public static void init(){
 		reg(EntityBallOfEnergy.class, 100, 1, true,new BallOfEnergyRenderer(new BallOfEnergyModel(),1));
-		reg(ModedEntityFallingBlock.class, 100, 1, true,new RenderModedFallingBlock());
 		reg(EntitySubatomicWorldDeconstructor.class, 100, 1, true,new EntitySubatomicWorldDeconstructorRenderer(10));
 	}
 

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.api.network.BasicNetworkInterfaceProvider;
@@ -35,7 +36,7 @@ public class InterfaceRegistration{
 		return Interface;
 	}
 	
-	public static BasicNetworkInterfaceProvider getBasicInterface(World world, int x, int y,int z){
+	public static BasicNetworkInterfaceProvider getBasicInterface(World world, BlockPos pos){
 		TileEntity tile=world.getTileEntity(pos);
 		if(tile!=null){
 			BasicNetworkInterfaceProvider interf=tileFinder.get(tile.getClass());
@@ -56,7 +57,7 @@ public class InterfaceRegistration{
 		}
 		return null;
 	}
-	public static NetworkInterfaceProvider getInterface(World world, int x, int y,int z){
+	public static NetworkInterfaceProvider getInterface(World world, BlockPos pos){
 		TileEntity tile=world.getTileEntity(pos);
 		NetworkInterfaceProvider inter=getInterface(tile);
 		if(inter!=null)return inter;

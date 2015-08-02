@@ -19,6 +19,9 @@ import org.lwjgl.util.vector.WritableVector3f;
 public class Vec3M extends Vector implements Serializable, ReadableVector, ReadableVector3f, WritableVector3f{
     public double x,y,z;
 
+    public Vec3M(){
+    	this(0, 0, 0);
+    }
     public Vec3M(double x, double y, double z){
         this.x=x;
         this.y=y;

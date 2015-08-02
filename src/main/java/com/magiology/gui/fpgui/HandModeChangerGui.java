@@ -2,7 +2,6 @@ package com.magiology.gui.fpgui;
 
 import java.awt.Color;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -25,7 +24,7 @@ public class HandModeChangerGui extends FirstPersonGui{
 		if(data.player!=player){
 			data=ExtendedPlayerData.get(player);
 		}if(data==null)return;
-		FontRenderer fr=Minecraft.getMinecraft().fontRenderer;
+		FontRenderer fr=Helper.getFontRenderer();
 		if(Helper.isNull(player,fr))return;
 		if(handAlpha>0&&Helper.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
 			float HandAlpha=Helper.calculateRenderPos(lastHandAlpha,handAlpha);

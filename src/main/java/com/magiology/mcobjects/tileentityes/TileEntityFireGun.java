@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -9,7 +8,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.objhelper.helpers.Helper.H;
 
 public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListBox{
 	int optimizer=0;

@@ -4,9 +4,6 @@ import static net.minecraftforge.client.IItemRenderer.ItemRenderType.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -23,6 +20,7 @@ import com.magiology.gui.guiparticels.GuiStandardFX;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.modedmcstuff.gui.InvisivleGuiButton;
 import com.magiology.modedmcstuff.items.UpgItem;
+import com.magiology.objhelper.getters.RenderGet;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
@@ -32,7 +30,6 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	private ItemRendererHelmet42 IRH42 = new ItemRendererHelmet42();
 	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
-    protected static RenderItem itemRender = new RenderItem();
     protected static ItemRenderer itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
 	ResourceLocation texture1=new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
 	ItemStack[] p42;
@@ -168,11 +165,12 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
             else customRenderer.renderItem(EQUIPPED, stack);
 			GL11.glPopMatrix();
 		}else{
-			TessHelper.bindTexture(TextureMap.locationItemsTexture);
-            IIcon iicon = stack.getItem().getIcon(stack, 0);
-			GL11.glDisable(GL11.GL_LIGHTING);
-			ItemRenderer.renderItemIn2D(Tessellator.instance, iicon.getMaxU(), iicon.getMaxV(), iicon.getMinU(), iicon.getMinV(), iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
-			GL11.glEnable(GL11.GL_LIGHTING);
+//			TessHelper.bindTexture(TextureMap.locationItemsTexture);
+//            IIcon iicon = stack.getItem().getIcon(stack, 0);
+//			GL11.glDisable(GL11.GL_LIGHTING);
+//			ItemRenderer.renderItemIn2D(Tessellator.instance, iicon.getMaxU(), iicon.getMaxV(), iicon.getMinU(), iicon.getMinV(), iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
+//			GL11.glEnable(GL11.GL_LIGHTING);
+			RenderGet.RI().renderItemModel(stack);
 		}
 		GL11.glPopMatrix();
 	}
@@ -250,7 +248,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		 }
 	 }
 	 private boolean isMouseOverFakeSlot(int xPos,int yPos,int x, int y){
-		 return this.func_146978_c(xPos, yPos, 15, 14, x, y);
+		 return this.isPointInRegion(xPos, yPos, 15, 14, x, y);
 	 }
 	 
 }

@@ -26,7 +26,7 @@ public class PowerCounter extends Item{
 	}
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
-		boolean state=itemstack.stackTagCompound.getBoolean("state");
+		boolean state=itemstack.getTagCompound().getBoolean("state");
 		boolean notDone=true;
 		RenderLoopEvents.disabledEquippItemAnimationTime=2;
 		if(player.isSneaking()&&world.isRemote){
@@ -39,7 +39,7 @@ public class PowerCounter extends Item{
 				notDone=false;
 			}
 		}
-		itemstack.stackTagCompound.setBoolean("state", state);
+		itemstack.getTagCompound().setBoolean("state", state);
 		return itemstack;
 	}
 	@Override

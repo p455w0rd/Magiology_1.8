@@ -13,7 +13,7 @@ public class EntityPosAndBB{
 	
 	public EntityPosAndBB(Entity entity){
 		this.entity=entity;
-		this.BB=new double[]{entity.boundingBox.minX,entity.boundingBox.minY,entity.boundingBox.minZ,entity.boundingBox.maxX,entity.boundingBox.maxY,entity.boundingBox.maxZ};
+		this.BB=new double[]{entity.getBoundingBox().minX,entity.getBoundingBox().minY,entity.getBoundingBox().minZ,entity.getBoundingBox().maxX,entity.getBoundingBox().maxY,entity.getBoundingBox().maxZ};
 	}
 	
 	public double[] getRandDotInBB(double randomness){
@@ -38,7 +38,7 @@ public class EntityPosAndBB{
 		return isDead;
 		}
 	public boolean isRendering(){
-		EntityClientPlayerMP p=Minecraft.getMinecraft().thePlayer;
+		EntityPlayer p=Minecraft.getMinecraft().thePlayer;
 		isRendering=entity.isInRangeToRender3d(p.posX, p.posY, p.posZ);
 		return isRendering;
 		}
