@@ -47,21 +47,21 @@ public abstract class RenderObject implements SavableData{
 		if(host.point.isPointing){
 			Vec3M hit=host.point.pointedPos;
 			isHighlighted=
-					hit.xCoord<offset.x&&
-					hit.xCoord>offset.x-size.x&&
-					hit.yCoord<offset.y&&
-					hit.yCoord>offset.y-size.y
+					hit.x<offset.x&&
+					hit.x>offset.x-size.x&&
+					hit.y<offset.y&&
+					hit.y>offset.y-size.y
 					;
 		}else isHighlighted=false;
 	}
 	public void handleGuiAndMovment(EntityPlayer player){
 		if(player.isSneaking()){
 			if(moveMode)moveMode=false;
-			else Helper.openGui(player, MGui.HologramProjectorObjectCustomGui, host.xCoord, host.yCoord, host.zCoord);
+			else Helper.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
 		}
 		if(moveMode){
-			offset.x=(float)host.point.pointedPos.xCoord+size.x/2;
-			offset.y=(float)host.point.pointedPos.yCoord+size.y/2;
+			offset.x=(float)host.point.pointedPos.x+size.x/2;
+			offset.y=(float)host.point.pointedPos.y+size.y/2;
 		}
 	
 	}

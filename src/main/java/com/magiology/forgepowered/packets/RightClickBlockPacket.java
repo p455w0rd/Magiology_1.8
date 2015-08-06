@@ -15,9 +15,9 @@ public class RightClickBlockPacket extends AbstractToServerMessage{
 	private BlockPos pos;
 	
 	public RightClickBlockPacket(){}
-	public RightClickBlockPacket(int x,int y,int z,byte side){
+	public RightClickBlockPacket(BlockPos pos,byte side){
 		this.side=side;
-		this.pos=new BlockPos(x, y, z);
+		this.pos=pos;
 	}
 	@Override
 	public void write(PacketBuffer buffer) throws IOException{

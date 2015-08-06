@@ -43,9 +43,7 @@ public class Structure{
 			return;
 		}
 		BlockAt BA=BlocksAt[nextBlock];
-		x+=BA.x;
-		y+=BA.y;
-		z+=BA.z;
+		pos=pos.add(BA.pos);
 		Block block=Helper.getBlock(world, pos);
 		isBlockInPlace[nextBlock]=(block==BA.bl);
 //		if(!isBlockInPlace[nextBlock]){

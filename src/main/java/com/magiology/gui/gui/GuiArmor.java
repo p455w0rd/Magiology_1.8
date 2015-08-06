@@ -20,7 +20,7 @@ import com.magiology.gui.guiparticels.GuiStandardFX;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.modedmcstuff.gui.InvisivleGuiButton;
 import com.magiology.modedmcstuff.items.UpgItem;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
@@ -170,7 +170,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 //			GL11.glDisable(GL11.GL_LIGHTING);
 //			ItemRenderer.renderItemIn2D(Tessellator.instance, iicon.getMaxU(), iicon.getMaxV(), iicon.getMinU(), iicon.getMinV(), iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
 //			GL11.glEnable(GL11.GL_LIGHTING);
-			RenderGet.RI().renderItemModel(stack);
+			Render.RI().renderItemModel(stack);
 		}
 		GL11.glPopMatrix();
 	}

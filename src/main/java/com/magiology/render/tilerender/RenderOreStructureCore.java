@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
 
@@ -14,7 +14,7 @@ public class RenderOreStructureCore extends TileEntitySpecialRenderer{
 	private final float p= 1F/16F;
 	private final float tW=1F/96F;
 	private final float tH=1F/80F;
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){

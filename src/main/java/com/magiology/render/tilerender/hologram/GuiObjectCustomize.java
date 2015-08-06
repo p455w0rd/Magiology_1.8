@@ -1,6 +1,7 @@
 package com.magiology.render.tilerender.hologram;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -60,7 +61,7 @@ public class GuiObjectCustomize extends GuiContainer{
 		GL11H.SetUpOpaqueRendering(1);
 		GL11H.texture(false);
 		
-		ColorF mainColor=new ColorF(hologramProjector.mainColor.xCoord, hologramProjector.mainColor.yCoord, hologramProjector.mainColor.zCoord,0.2);
+		ColorF mainColor=new ColorF(hologramProjector.mainColor.x, hologramProjector.mainColor.y, hologramProjector.mainColor.z,0.2);
 		mainColor.bind();
 		int xs=(int)hologramProjector.size.x*20, ys=(int)hologramProjector.size.y*20;
 		
@@ -102,7 +103,7 @@ public class GuiObjectCustomize extends GuiContainer{
 	public void initGui(){
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
-		txt=new GuiTextField(fontRendererObj,  guiLeft,  guiTop, 300, 14);
+		txt=new GuiTextField(0, fontRendererObj,  guiLeft,  guiTop, 300, 14);
 		if(suportsText){
 			txt.setText(sc.getString().equals("   ")?"":sc.getString());
 			txt.setMaxStringLength(Integer.MAX_VALUE);
@@ -111,10 +112,10 @@ public class GuiObjectCustomize extends GuiContainer{
 		txt.setEnabled(suportsText);
 		
 		int start=guiLeft+xSize-50;
-		red=new GuiTextField(fontRendererObj, start-50*1, guiTop-17, 50, 14);
-		green=new GuiTextField(fontRendererObj, start-50*2, guiTop-17, 50, 14);
-		blue=new GuiTextField(fontRendererObj, start-50*3, guiTop-17, 50, 14);
-		alpha=new GuiTextField(fontRendererObj, start-50*4, guiTop-17, 50, 14);
+		red=new GuiTextField(0,fontRendererObj, start-50*1, guiTop-17, 50, 14);
+		green=new GuiTextField(0,fontRendererObj, start-50*2, guiTop-17, 50, 14);
+		blue=new GuiTextField(0,fontRendererObj, start-50*3, guiTop-17, 50, 14);
+		alpha=new GuiTextField(0,fontRendererObj, start-50*4, guiTop-17, 50, 14);
 		red.setText(ro.setColor.r+"");
 		green.setText(ro.setColor.g+"");
 		blue.setText(ro.setColor.b+"");
@@ -132,7 +133,7 @@ public class GuiObjectCustomize extends GuiContainer{
 		buttonList.add(new GuiButton(0, guiLeft+xSize/2-15, guiTop+15, 30, 18, "move"));
 	}
 	@Override
-	protected void keyTyped(char Char, int smth){
+	protected void keyTyped(char Char, int smth) throws IOException{
 		//Enter simulates the esc button
 		if(Char==13)Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 		if(!txt.textboxKeyTyped(Char, smth))
@@ -169,7 +170,7 @@ public class GuiObjectCustomize extends GuiContainer{
 		Helper.sendMessage(new RenderObjectUploadPacket(hologramProjector, ro));
 	}
 	@Override
-	protected void mouseClicked(int x, int y, int id){
+	protected void mouseClicked(int x, int y, int id) throws IOException{
 		txt.mouseClicked(x, y, id);
 		red.mouseClicked(x, y, id);
 		green.mouseClicked(x, y, id);

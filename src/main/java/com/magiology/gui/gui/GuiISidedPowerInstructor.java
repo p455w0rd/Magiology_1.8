@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -26,6 +25,7 @@ import com.magiology.gui.guiContainer.GuiISidedPowerInstructorContainer;
 import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
 import com.magiology.modedmcstuff.gui.ColoredGuiButton;
 import com.magiology.modedmcstuff.gui.TexturedColoredButton;
+import com.magiology.objhelper.Get;
 import com.magiology.objhelper.SimpleCounter;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
@@ -217,10 +217,10 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 				GL11.glPushMatrix();
 				try{
 					TessHelper.bindTexture(TextureMap.locationBlocksTexture);
-					Tessellator.getInstance().getWorldRenderer().startDrawingQuads();
+					Get.Render.WR().startDrawingQuads();
 					Helper.getRenderBlocks().renderBlockByRenderType(block, tile.getPos());
 					GL11.glTranslated(-tile.getPos().getX()-0.5, -tile.getPos().getY()-0.5, -tile.getPos().getZ()-0.5);
-					Tessellator.getInstance().getWorldRenderer().finishDrawing();
+					Get.Render.WR().finishDrawing();
 				}catch(Exception e){e.printStackTrace();}
 				GL11.glPopMatrix();
 			}
@@ -299,16 +299,16 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 		GL11H.rotateXYZ(xRotation.wantedPoint+180, yRotation.wantedPoint, zRotation.wantedPoint);
 		GL11.glColor4f(1, 0, 0, 1F);
 		GL11.glLineWidth(2.5F);
-		Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_LINES);
-		Tessellator.getInstance().getWorldRenderer().addVertex(0,0,0);
-		Tessellator.getInstance().getWorldRenderer().addVertex(13,0,0);
-		Tessellator.getInstance().getWorldRenderer().finishDrawing();
+		Get.Render.WR().startDrawing(GL11.GL_LINES);
+		Get.Render.WR().addVertex(0,0,0);
+		Get.Render.WR().addVertex(13,0,0);
+		Get.Render.WR().finishDrawing();
 		GL11.glColor4f(1, 0, 0, 0.3F);
 		GL11.glLineWidth(5F);
-		Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_LINES);
-		Tessellator.getInstance().getWorldRenderer().addVertex(0,0,0);
-		Tessellator.getInstance().getWorldRenderer().addVertex(13,0,0);
-		Tessellator.getInstance().getWorldRenderer().finishDrawing();
+		Get.Render.WR().startDrawing(GL11.GL_LINES);
+		Get.Render.WR().addVertex(0,0,0);
+		Get.Render.WR().addVertex(13,0,0);
+		Get.Render.WR().finishDrawing();
 		GL11.glPopMatrix();
 		
 		
@@ -316,16 +316,16 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 		GL11H.rotateXYZ(xRot,yRot,zRot);
 		GL11.glColor4f(0, 1, 0, 1F);
 		GL11.glLineWidth(2.5F);
-		Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_LINES);
-		Tessellator.getInstance().getWorldRenderer().addVertex(0,0,0);
-		Tessellator.getInstance().getWorldRenderer().addVertex(13,0,0);
-		Tessellator.getInstance().getWorldRenderer().finishDrawing();
+		Get.Render.WR().startDrawing(GL11.GL_LINES);
+		Get.Render.WR().addVertex(0,0,0);
+		Get.Render.WR().addVertex(13,0,0);
+		Get.Render.WR().finishDrawing();
 		GL11.glColor4f(0, 1, 0, 0.3F);
 		GL11.glLineWidth(5F);
-		Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_LINES);
-		Tessellator.getInstance().getWorldRenderer().addVertex(0,0,0);
-		Tessellator.getInstance().getWorldRenderer().addVertex(13,0,0);
-		Tessellator.getInstance().getWorldRenderer().finishDrawing();
+		Get.Render.WR().startDrawing(GL11.GL_LINES);
+		Get.Render.WR().addVertex(0,0,0);
+		Get.Render.WR().addVertex(13,0,0);
+		Get.Render.WR().finishDrawing();
 		GL11.glPopMatrix();
 		
 		
@@ -386,12 +386,12 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 			GL11.glTranslated(guiLeft, guiTop+12, 0);
 			GL11.glColor4f(1, 0.6F, 0.6F, 1F);
 			GL11.glLineWidth(1F);
-			Tessellator.getInstance().getWorldRenderer().startDrawing(GL11.GL_LINES);
-			Tessellator.getInstance().getWorldRenderer().addVertex(20,0,0);
-			Tessellator.getInstance().getWorldRenderer().addVertex(20,46,0);
-			Tessellator.getInstance().getWorldRenderer().addVertex(52,0,0);
-			Tessellator.getInstance().getWorldRenderer().addVertex(52,46,0);
-			Tessellator.getInstance().getWorldRenderer().finishDrawing();
+			Get.Render.WR().startDrawing(GL11.GL_LINES);
+			Get.Render.WR().addVertex(20,0,0);
+			Get.Render.WR().addVertex(20,46,0);
+			Get.Render.WR().addVertex(52,0,0);
+			Get.Render.WR().addVertex(52,46,0);
+			Get.Render.WR().finishDrawing();
 			GL11.glPopMatrix();
 		}
 	}

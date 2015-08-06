@@ -4,12 +4,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.helpers.Helper;
 
-public class TileEntityControlBlock extends TileEntityM implements ISidedInventory{
+public class TileEntityControlBlock extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
 	
 	public ItemStack[] slots=new ItemStack[4];
 	public boolean onOf=true;
@@ -39,16 +42,16 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		
 		Helper.saveItemsToNBT(nbt, "slots", slots);
 		
-		if(this.hasCustomInventoryName()){
-			nbt.setString("CustomName", this.getInventoryName());
+		if(this.hasCustomName()){
+			nbt.setString("CustomName", this.getName());
 		}
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		prevThingyPos=thingyPos;
 		prevAngle=angle;
-		boolean rc=worldObj.isBlockIndirectlyGettingPowered(pos);
+		boolean rc=worldObj.isBlockIndirectlyGettingPowered(pos)>0;
 		int wantedAngle=0;
 		
 		switch (redstoneC){
@@ -162,13 +165,13 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public String getInventoryName(){
+	public String getName(){
 		
 		return "ControlBlockInventory";
 	}
 
 	@Override
-	public boolean hasCustomInventoryName(){
+	public boolean hasCustomName(){
 		
 		return true;
 	}
@@ -189,37 +192,50 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public void openInventory() {
-		
-	}
-
-	@Override
-	public void closeInventory() {
-		
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int v1, ItemStack stack) {
 		boolean reurn1=true;
 //		reurn1=GameRegistry.getFuelValue(stack)>0;
 		
 		return reurn1;
 	}
-
 	@Override
-	public int[] getAccessibleSlotsFromSide(int v1){
+	public void openInventory(EntityPlayer player){
+		
+	}
+	@Override
+	public void closeInventory(EntityPlayer player){
+		
+	}
+	@Override
+	public int getField(int id){
+		return 0;
+	}
+	@Override
+	public void setField(int id, int value){
+		
+	}
+	@Override
+	public int getFieldCount(){
+		return 0;
+	}
+	@Override
+	public void clear(){
+	}
+	@Override
+	public IChatComponent getDisplayName(){
 		return null;
 	}
-
 	@Override
-	public boolean canInsertItem(int v1, ItemStack stack,int v2){
-		return true;
+	public int[] getSlotsForFace(EnumFacing side){
+		return null;
 	}
-
 	@Override
-	public boolean canExtractItem(int v1, ItemStack stack,int v2){
-		
-		return true;
+	public boolean canInsertItem(int index, ItemStack itemStackIn,EnumFacing direction) {
+		return false;
+	}
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack,EnumFacing direction){
+		return false;
 	}
 	
 	

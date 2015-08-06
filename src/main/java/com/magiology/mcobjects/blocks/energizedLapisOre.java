@@ -12,8 +12,6 @@ public class energizedLapisOre extends BlockContainer {
 	
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	public energizedLapisOre(){
 		super(Material.ground);
 		this.setLightLevel(1F).setHardness(0.2F).setHarvestLevel("pickaxe", 1);

@@ -4,13 +4,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
 import com.magiology.objhelper.helpers.Helper.H;
 
-public abstract class TileEntityM extends TileEntity implements IUpdatePlayerListBox{
+public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerListBox*/{
 	public static final float p=1F/16F;
 	@Override public Packet getDescriptionPacket(){NBTTagCompound tag=new NBTTagCompound();writeToNBT(tag);return new S35PacketUpdateTileEntity(pos, 1, tag);}
     @Override public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet){readFromNBT(packet.getNbtCompound());}
@@ -27,15 +26,4 @@ public abstract class TileEntityM extends TileEntity implements IUpdatePlayerLis
     public int x(){return pos.getX();}
     public int y(){return pos.getY();}
     public int z(){return pos.getZ();}
-    
-    //IUpdatePlayerListBox fix
-    private boolean needsUpdates=true;
-    public void setNeedsUpdates(boolean needs){
-    	needsUpdates=needs;
-    }
-    @Override
-    public final void update(){
-    	if(needsUpdates)updateEntity();
-    }
-    public void updateEntity(){}
 }

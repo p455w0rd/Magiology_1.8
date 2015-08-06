@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
@@ -15,15 +14,6 @@ public class PowerCounter extends Item{
 		   super();
 	   }
 	
-	
-	@Override
-	public boolean onItemUse (ItemStack is, EntityPlayer player, World world, BlockPos pos, int l, float f, float f1, float f3)
-	{
-		
-		
-		
-		return false;
-	}
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
 		boolean state=itemstack.getTagCompound().getBoolean("state");

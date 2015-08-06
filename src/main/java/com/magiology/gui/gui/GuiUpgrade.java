@@ -1,5 +1,7 @@
 package com.magiology.gui.gui;
 
+import java.io.IOException;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -102,7 +104,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	int mouseStartX,mouseStartY;
 	
 	@Override
-	protected void mouseClicked(int x, int y, int var1){
+	protected void mouseClicked(int x, int y, int var1) throws IOException{
 		super.mouseClicked(x,y,var1);
 		if(particleAttractionTime>=0){
 			for(int c=0;c<guiParticles.size();c++){

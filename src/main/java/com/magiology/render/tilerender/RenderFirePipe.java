@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBufferModel;
@@ -60,7 +60,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 			}
 			if(var2)RenderLoopEvents.spawnLARR(new RenderFirePipeGlow(pipe));
 		}
-		RenderGet.WR().setTranslation(pipe.getPos().getX(), pipe.getPos().getY(), pipe.getPos().getZ());
+		Render.WR().setTranslation(pipe.getPos().getX(), pipe.getPos().getY(), pipe.getPos().getZ());
 		
 		
 		if(pipe.DCFFL!=null)drawConectorFFL();
@@ -79,7 +79,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		}
 		else for(int a=0;a<pipe.strateConnection.length;a++)if(pipe.strateConnection[a]!=null)drawStrateCore(pipe.strateConnection[a]);
 		
-		RenderGet.WR().setTranslation(0,0,0);
+		Render.WR().setTranslation(0,0,0);
 	}
 	
 	

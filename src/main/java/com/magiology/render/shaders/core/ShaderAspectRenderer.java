@@ -32,7 +32,7 @@ public abstract class ShaderAspectRenderer{
 	public void init(ShaderRunner handeler){
 		List listShaders=DataStalker.getVariable(ShaderGroup.class, "listShaders", handeler.shaders[shaderId]);
 		if(listShaders!=null&&!listShaders.isEmpty())for(String i:uniformNames){
-			ShaderUniform uniform=((Shader)listShaders.get(0)).getShaderManager().func_147991_a(i);
+			ShaderUniform uniform=((Shader)listShaders.get(0)).getShaderManager().getShaderUniform(i);
 			if(uniform!=null)uniforms.add(uniform);
 		}
 	}

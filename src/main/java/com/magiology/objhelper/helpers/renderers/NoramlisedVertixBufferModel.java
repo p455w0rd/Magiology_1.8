@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer.ShadedTriangle;
 import com.magiology.objhelper.vectors.Vec3M;
 
@@ -27,7 +27,7 @@ public class NoramlisedVertixBufferModel{
 		return new NoramlisedVertixBufferModel();
 	}
 	private NoramlisedVertixBufferModel(){
-		this.renderer=RenderGet.WR();
+		this.renderer=Render.WR();
 		
 	}
 	public void draw(){

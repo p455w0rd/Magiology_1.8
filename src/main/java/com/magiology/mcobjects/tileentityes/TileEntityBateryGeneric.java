@@ -31,8 +31,7 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 	}
 
 	@Override
-	public void updateEntity(){
-		super.updateEntity();
+	public void update(){
 		this.power();
 		PowerHelper.sortSides(this);
 	}

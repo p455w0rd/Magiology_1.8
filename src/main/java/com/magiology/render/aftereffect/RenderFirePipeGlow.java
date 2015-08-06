@@ -37,11 +37,11 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		float fc=Helper.keepAValueInBounds(PowerHelper.getPowerPrecentage(pipe), 0, 1);
 		if(fc>0.01){
 			GL11.glPushMatrix();
-			GL11.glTranslated(pipe.xCoord, pipe.yCoord, pipe.zCoord);
+			GL11.glTranslated(pipe.x(), pipe.y(), pipe.z());
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11H.SetUpOpaqueRendering(1);
-			double var1=Helper.fluctuator(20,(pipe.xCoord+pipe.yCoord+pipe.zCoord)*4),
-				   var2=Helper.fluctuator(47,(pipe.xCoord+pipe.yCoord+pipe.zCoord)*4);
+			double var1=Helper.fluctuator(20,(pipe.x()+pipe.y()+pipe.z())*4),
+				   var2=Helper.fluctuator(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
 			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*Helper.calculateRenderPos(prevAlpha, alpha));
 			GL11.glDepthMask(true);
@@ -206,7 +206,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		
 		alpha+=0.4*(Helper.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
 		
-		if(!(player.worldObj.getTileEntity(pipe.xCoord, pipe.yCoord, pipe.zCoord)instanceof TileEntityFirePipe))kill();
+		if(!(player.worldObj.getTileEntity(pipe.getPos())instanceof TileEntityFirePipe))kill();
 		
 		alpha=Helper.keepAValueInBounds(alpha, 0, 1);
 		if(alpha<0.05)kill();

@@ -4,7 +4,6 @@ import static com.magiology.api.power.SixSidedBoolean.Modifier.*;
 import static com.magiology.objhelper.helpers.SideHelper.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,6 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.EntitySparkFX;
+import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
@@ -62,7 +62,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		if(connection!=null)mode=1;
 		else mode=0;
 		
@@ -121,16 +121,16 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		
 		if(canGeneratePower(3)||isforced){
 			if(optimizer2.isTimeWithAddProgress()){
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
 				Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+p*5.5, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,5,100,new Vec3M(0,0,0)));
 			}else{
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
+				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
 			}
 			if(Helper.RB())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+p*6+(Helper.RF()*p*4), pos.getY()+p*11-Helper.RF()*p*5, pos.getZ()+p*6+(Helper.RF()*p*4), Helper.CRandF(0.005), -0.01, Helper.CRandF(0.005), 300, 2, -1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
 			else Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+0.35+(Helper.RF()*0.35), pos.getY()+Helper.RF()*p*5, pos.getZ()+0.35+(Helper.RF()*0.35), Helper.CRandF(0.005), 0.01, Helper.CRandF(0.005), 300, 2, 1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);

@@ -99,7 +99,7 @@ public class InterfaceBinder{
 		}
 	}
 	public static NetworkInterfaceProvider get(World world,BlockPos pos){
-		return InterfaceRegistration.getInterface(world,x,y,z);
+		return InterfaceRegistration.getInterface(world,pos);
 	}
 	public static NetworkInterfaceProvider get(TileEntity tile){
 		return InterfaceRegistration.getInterface(tile);

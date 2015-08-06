@@ -2,7 +2,6 @@ package com.magiology.mcobjects.tileentityes;
 
 import java.util.List;
 
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -16,6 +15,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
+import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateablePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
@@ -72,7 +72,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
     }
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		power(true);
 		
 		//Get if/what side is first
@@ -95,7 +95,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			spawnParticles();
 		}
 //		if(worldObj.isRemote)for(int i=0;i<containerItems.length;i++)if(containerItems[i]!=null){
-//			Helper.spawnEnitiyFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0.2, 0));
+//			Helper.spawnEnitiyFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0.2, 0));
 //		}
 		PowerHelper.sortSides(this);
 	}
@@ -112,36 +112,36 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		if(Helper.RB(0.2)&&currentEnergy+100>maxEnergyBuffer)
 		{
 			if(strateConnection[0]==null&&strateConnection[1]==null&&strateConnection[2]==null){
-				if(Helper.RB(0.33)&&isSolidDown==false&&connections[1]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5-p*2, pos.getZ()+0.5, 0, -0.1, 0));
-				if(Helper.RB(0.33)&&isSolidUp==false&&connections[0]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5+p*2, pos.getZ()+0.5, 0, 0.05, 0));
-				if(Helper.RB(0.33)&&connections[2]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5-p*2, 0, 0, -0.1));
-				if(Helper.RB(0.33)&&connections[4]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5+p*2, 0, 0, 0.1));
-				if(Helper.RB(0.33)&&connections[3]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5+p*2, pos.getY()+0.5, pos.getZ()+0.5, 0.1, 0, 0));
-				if(Helper.RB(0.33)&&connections[5]==null)Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5-p*2, pos.getY()+0.5, pos.getZ()+0.5, -0.1, 0, 0));
+				if(Helper.RB(0.33)&&isSolidDown==false&&connections[1]==null)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5-p*2, pos.getZ()+0.5, 0, -0.1, 0));
+				if(Helper.RB(0.33)&&isSolidUp==false&&connections[0]==null)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5+p*2, pos.getZ()+0.5, 0, 0.05, 0));
+				if(Helper.RB(0.33)&&connections[2]==null)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5-p*2, 0, 0, -0.1));
+				if(Helper.RB(0.33)&&connections[4]==null)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5+p*2, 0, 0, 0.1));
+				if(Helper.RB(0.33)&&connections[3]==null)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5+p*2, pos.getY()+0.5, pos.getZ()+0.5, 0.1, 0, 0));
+				if(Helper.RB(0.33)&&connections[5]==null)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5-p*2, pos.getY()+0.5, pos.getZ()+0.5, -0.1, 0, 0));
 			}
 		}
 	}
 
 	public void updatestand(){
-		if(worldObj.isSideSolid(pos.getX(), pos.getY()-1, pos.getZ(), EnumFacing.DOWN)==true&&connections[1]==null)isSolidDown=true;
+		if(worldObj.isSideSolid(pos.add(0, -1, 0), EnumFacing.DOWN)==true&&connections[1]==null)isSolidDown=true;
 		else isSolidDown=false;
 		
-		if(worldObj.isSideSolid(pos.getX(), pos.getY()+1, pos.getZ(), EnumFacing.UP)==true&&connections[0]==null)isSolidUp=true;
+		if(worldObj.isSideSolid(pos.add(0, 1, 0), EnumFacing.UP)==true&&connections[0]==null)isSolidUp=true;
 		else isSolidUp=false;
 	}
 	@Override
 	public void updateConnections(){
 		if(H.isRemote(worldObj))updatestand();
-		if(isTPipe(0)||isTRand(SideHelper.offset(0, pos.getX()), SideHelper.Y(0, pos.getY()), SideHelper.Z(0, pos.getZ()))) connections[0] = EnumFacing.UP;else connections[0] = null;
-		if(isTPipe(1)||isTRand(SideHelper.offset(1, pos.getX()), SideHelper.Y(1, pos.getY()), SideHelper.Z(1, pos.getZ()))||(worldObj.getTileEntity(SideHelper.offset(1, pos.getX()), SideHelper.Y(1, pos.getY()), SideHelper.Z(1, pos.getZ()))instanceof TileEntityFireExhaust)) connections[1] = EnumFacing.DOWN;else connections[1] = null;
-		if(isTPipe(2)||isTRand(SideHelper.offset(2, pos.getX()), SideHelper.Y(2, pos.getY()), SideHelper.Z(2, pos.getZ()))) connections[2] = EnumFacing.NORTH;else connections[2] = null;
-		if(isTPipe(3)||isTRand(SideHelper.offset(3, pos.getX()), SideHelper.Y(3, pos.getY()), SideHelper.Z(3, pos.getZ()))) connections[3] = EnumFacing.EAST;else connections[3] = null;
-		if(isTPipe(4)||isTRand(SideHelper.offset(4, pos.getX()), SideHelper.Y(4, pos.getY()), SideHelper.Z(4, pos.getZ()))) connections[4] = EnumFacing.SOUTH;else connections[4] = null;
-		if(isTPipe(5)||isTRand(SideHelper.offset(5, pos.getX()), SideHelper.Y(5, pos.getY()), SideHelper.Z(5, pos.getZ()))) connections[5] = EnumFacing.WEST;else connections[5] = null;
+		if(isTPipe(0)||isTRand(SideHelper.offset(0, pos))) connections[0] = EnumFacing.UP;else connections[0] = null;
+		if(isTPipe(1)||isTRand(SideHelper.offset(1, pos))||(worldObj.getTileEntity(SideHelper.offset(1, pos)))instanceof TileEntityFireExhaust) connections[1] = EnumFacing.DOWN;else connections[1] = null;
+		if(isTPipe(2)||isTRand(SideHelper.offset(2, pos))) connections[2] = EnumFacing.NORTH;else connections[2] = null;
+		if(isTPipe(3)||isTRand(SideHelper.offset(3, pos))) connections[3] = EnumFacing.EAST;else connections[3] = null;
+		if(isTPipe(4)||isTRand(SideHelper.offset(4, pos))) connections[4] = EnumFacing.SOUTH;else connections[4] = null;
+		if(isTPipe(5)||isTRand(SideHelper.offset(5, pos))) connections[5] = EnumFacing.WEST;else connections[5] = null;
 		boolean[] in1={},out1={};
 		TileEntity[] tiles=new TileEntity[6];
 		for(int a=0;a<6;a++){
-			tiles[a]=worldObj.getTileEntity(SideHelper.offset(a, pos.getX()), SideHelper.Y(a, pos.getY()), SideHelper.Z(a, pos.getZ()));
+			tiles[a]=worldObj.getTileEntity(SideHelper.offset(a, pos));
 			if(tiles[a]==null){
 				in1 =ArrayUtils.add( in1, false);
 				out1=ArrayUtils.add(out1, false);

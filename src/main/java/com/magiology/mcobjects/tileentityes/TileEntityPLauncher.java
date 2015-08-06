@@ -1,16 +1,18 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.EnumParticleTypes;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
 
-public class TileEntityPLauncher extends TileEntityM{
+public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerListBox{
 	
 	SlowdownHelper optimizer=new SlowdownHelper(100);
 	Structure MultiBlock=null;
@@ -26,7 +28,7 @@ public class TileEntityPLauncher extends TileEntityM{
 	int block7=-1;
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		if(MultiBlock==null)MultiBlock=Structures.generateNewStructure(1);
 //		if(worldObj.getTotalWorldTime()%30==0)MultiBlock=Structures.generateNewStructure(1);
 		MultiBlock.checkForNextBlock(worldObj, pos);
@@ -40,21 +42,21 @@ public class TileEntityPLauncher extends TileEntityM{
 //				+"\n");
 			
 			
-			if(MultiBlock.isStructureCompleate()&&worldObj.canBlockSeeTheSky(pos)){
+			if(MultiBlock.isStructureCompleate()&&worldObj.canBlockSeeSky(pos)){
 				if(optimizer.isTimeWithAddProgress()){
 					blocks();
 					if(worldObj.rand.nextInt(2)==0){
-						if(!worldObj.isBlockIndirectlyGettingPowered(pos)){
+						if(!(worldObj.isBlockIndirectlyGettingPowered(pos)>0)){
 							spawnP();
 						}
 						else {
 							buffer++;
-							Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+0.5, yCoord+1.2, zCoord+0.5, 0, 0.03, 0,400,4,1,true,2,"tx1", 1, 1, 1, 0.5, 0.99));
+							Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+0.5, y()+1.2, z()+0.5, 0, 0.03, 0,400,4,1,true,2,"tx1", 1, 1, 1, 0.5, 0.99));
 						}
 					}
 				}
 				
-				if(worldObj.isBlockIndirectlyGettingPowered(pos)==false&&buffer>0){
+				if(worldObj.isBlockIndirectlyGettingPowered(pos)==0&&buffer>0){
 					spawnP();
 					buffer--;
 				}
@@ -63,10 +65,10 @@ public class TileEntityPLauncher extends TileEntityM{
 				if(spawn>0){
 					spawn--; 
 					boolean random=worldObj.rand.nextBoolean();
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+1+worldObj.rand.nextFloat(), yCoord+3.2, zCoord-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord-1+worldObj.rand.nextFloat(), yCoord+3.2, zCoord-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord+1+worldObj.rand.nextFloat(), yCoord+3.2, zCoord+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,xCoord-1+worldObj.rand.nextFloat(), yCoord+3.2, zCoord+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+1+worldObj.rand.nextFloat(), y()+3.2, z()-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()-1+worldObj.rand.nextFloat(), y()+3.2, z()-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+1+worldObj.rand.nextFloat(), y()+3.2, z()+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()-1+worldObj.rand.nextFloat(), y()+3.2, z()+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
 				}
 				
 				
@@ -98,63 +100,63 @@ public class TileEntityPLauncher extends TileEntityM{
 				}
 				
 			}
-			else worldObj.spawnParticle(EnumParticleTypes.FLAME, xCoord+worldObj.rand.nextFloat(), yCoord+1.1, zCoord+worldObj.rand.nextFloat(),0,0.01,0);
+			else worldObj.spawnParticle(EnumParticleTypes.FLAME, x()+worldObj.rand.nextFloat(), y()+1.1, z()+worldObj.rand.nextFloat(),0,0.01,0);
 		}
 	}
 	
 	public void blocks(){
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.redstone_lamp||
-			worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.redstone_lamp||
-			worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.redstone_lamp||
-			worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.redstone_lamp
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.redstone_lamp||
+			H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.redstone_lamp||
+			H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.redstone_lamp||
+			H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.redstone_lamp
 			){
 			block1=1;
 		}
 		else block1=-1;
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.bookshelf||
-				worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.bookshelf||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.bookshelf||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.bookshelf
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.bookshelf||
+				H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.bookshelf||
+				H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.bookshelf||
+				H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.bookshelf
 				){
 			block1=1;
 		}
 		else block1=-1;
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.glass||
-				worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.glass||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.glass||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.glass
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.glass||
+				H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.glass||
+				H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.glass||
+				H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.glass
 				){
 			block2=1;
 		}
 		else block2=-1;
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.sand||
-				worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.sand||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.sand||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.sand
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.sand||
+				H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.sand||
+				H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.sand||
+				H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.sand
 				){
 			block3=1;
 		}
 		else block3=-1;
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.wool||
-				worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.wool||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.wool||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.wool
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.wool||
+				H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.wool||
+				H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.wool||
+				H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.wool
 				){
 			block4=1;
 		}
 		else block4=-1;
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.soul_sand||
-				worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.soul_sand||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.soul_sand||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.soul_sand
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.soul_sand||
+				H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.soul_sand||
+				H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.soul_sand||
+				H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.soul_sand
 				){
 			block5=1;
 		}
 		else block5=-1;
-		if(	worldObj.getBlock(xCoord+1, yCoord+1, zCoord)==Blocks.nether_brick_fence||
-				worldObj.getBlock(xCoord-1, yCoord+1, zCoord)==Blocks.nether_brick_fence||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord+1)==Blocks.nether_brick_fence||
-				worldObj.getBlock(xCoord, yCoord+1, zCoord-1)==Blocks.nether_brick_fence
+		if(	H.getBlock(worldObj,pos.add(1, 1, 0))==Blocks.nether_brick_fence||
+				H.getBlock(worldObj,pos.add(-1, 1, 0))==Blocks.nether_brick_fence||
+				H.getBlock(worldObj,pos.add(0, 1, 1))==Blocks.nether_brick_fence||
+				H.getBlock(worldObj,pos.add(0, 1, -1))==Blocks.nether_brick_fence
 				){
 			block6=1;
 		}
@@ -169,7 +171,7 @@ public class TileEntityPLauncher extends TileEntityM{
 		if(worldObj.isRemote){
 			for(int a=0;a<2;a++){
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-				xCoord+worldObj.rand.nextFloat(), yCoord+3+worldObj.rand.nextFloat(), zCoord+worldObj.rand.nextFloat(), (0.5-worldObj.rand.nextFloat())*random1, -1+(worldObj.rand.nextFloat())*random1, (0.5-worldObj.rand.nextFloat())*random1,
+				x()+worldObj.rand.nextFloat(), y()+3+worldObj.rand.nextFloat(), z()+worldObj.rand.nextFloat(), (0.5-worldObj.rand.nextFloat())*random1, -1+(worldObj.rand.nextFloat())*random1, (0.5-worldObj.rand.nextFloat())*random1,
 				300+worldObj.rand.nextInt(500),50,0.2,1, worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), 0.5+worldObj.rand.nextFloat()/2, 0.99));
 		} }
 		
@@ -177,7 +179,7 @@ public class TileEntityPLauncher extends TileEntityM{
 		if(rand==0){
 			for(int a=0;a<10;a++){
 				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-						xCoord+worldObj.rand.nextFloat(), yCoord+1+worldObj.rand.nextFloat(), zCoord+worldObj.rand.nextFloat(), 
+						x()+worldObj.rand.nextFloat(), y()+1+worldObj.rand.nextFloat(), z()+worldObj.rand.nextFloat(), 
 						(0.5-worldObj.rand.nextFloat())*random, 1+(worldObj.rand.nextFloat())*random, (0.5-worldObj.rand.nextFloat())*random,
 						300+worldObj.rand.nextInt(500),50,0.2,1, 
 						worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), 0.5+worldObj.rand.nextFloat()/2, 0.99));
@@ -186,7 +188,7 @@ public class TileEntityPLauncher extends TileEntityM{
 		else if(rand==1){
 			for(int a=0;a<10;a++){
 				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-						xCoord+worldObj.rand.nextFloat(), yCoord+1+worldObj.rand.nextFloat(), zCoord+worldObj.rand.nextFloat(), 
+						x()+worldObj.rand.nextFloat(), y()+1+worldObj.rand.nextFloat(), z()+worldObj.rand.nextFloat(), 
 						(0.5-worldObj.rand.nextFloat())*random, 1+(worldObj.rand.nextFloat())*random, (0.5-worldObj.rand.nextFloat())*random,
 						300+worldObj.rand.nextInt(500),50,0.2,true,2,"tx1", 
 						worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), 0.5+worldObj.rand.nextFloat()/2, 0.99));
@@ -194,35 +196,35 @@ public class TileEntityPLauncher extends TileEntityM{
 		}
 		else if(rand==2){
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-					xCoord+0.5, yCoord+1.1, zCoord+0.5, 
+					x()+0.5, y()+1.1, z()+0.5, 
 					0, 2+worldObj.rand.nextFloat(), 0,
 					800,10,1,true,3,"tx3", 
 					0, 0, 1, 1, 0.99));
 		}
 		else if(rand==3){
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-					xCoord+0.5, yCoord+1.1, zCoord+0.5, 
+					x()+0.5, y()+1.1, z()+0.5, 
 					0, 2+worldObj.rand.nextFloat(), 0,
 					800,10,1,true,4,"tx3", 
 					0, 0, 1, 1, 0.99));
 		}
 		else if(rand==4){
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-					xCoord+0.5, yCoord+1.1, zCoord+0.5, 
+					x()+0.5, y()+1.1, z()+0.5, 
 					0, 3+worldObj.rand.nextFloat(), 0,
 					800,10,1,true,5,"tx3", 
 					0, 0, 1, 1, 0.99));
 		}
 		else if(rand==5){
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-					xCoord+0.5, yCoord+1.1, zCoord+0.5, 
+					x()+0.5, y()+1.1, z()+0.5, 
 					0, 1.5+worldObj.rand.nextFloat()*0.5, 0,
 					800,10,-2,true,6,"tx3", 
 					1, 0, 0, 1, 0.99));
 		}
 		else if(rand==6){
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
-					xCoord+0.5, yCoord+1.1, zCoord+0.5, 
+					x()+0.5, y()+1.1, z()+0.5, 
 					0, 5+worldObj.rand.nextFloat(), 0,
 					800,15,-2,true,7,"tx3", 
 					1, 0, 0, 1, 0.99));

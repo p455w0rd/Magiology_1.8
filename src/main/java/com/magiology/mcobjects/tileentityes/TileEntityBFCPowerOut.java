@@ -1,12 +1,16 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.objhelper.vectors.Pos;
 
-public class TileEntityBFCPowerOut extends TileEntityM{
+public class TileEntityBFCPowerOut extends TileEntityM implements IUpdatePlayerListBox{
 	
 	public EnumFacing[] CallDir = new EnumFacing[4];
 	public EnumFacing[] PallDir = new EnumFacing[4];
@@ -18,42 +22,41 @@ public class TileEntityBFCPowerOut extends TileEntityM{
 	
 	
 	@Override
-	public void updateEntity()
-	{
+	public void update(){
 		if(optimizer1++>=60){
 			optimizer1=0;
-			if(getTEBFC(xCoord-2, yCoord-1, zCoord))CallDir[0]=EnumFacing.EAST;
+			if(getTEBFC(pos.add(-2, -1, 0)))CallDir[0]=EnumFacing.EAST;
 			else CallDir[0]=null;
 			
-			if(getTEBFC(xCoord+2, yCoord-1, zCoord))CallDir[1]=EnumFacing.WEST;
+			if(getTEBFC(pos.add(2, -1, 0)))CallDir[1]=EnumFacing.WEST;
 			else CallDir[1]=null;
 			
-			if(getTEBFC(xCoord, yCoord-1, zCoord-2))CallDir[2]=EnumFacing.NORTH;
+			if(getTEBFC(pos.add(0, -1, -2)))CallDir[2]=EnumFacing.NORTH;
 			else CallDir[2]=null;
 			
-			if(getTEBFC(xCoord, yCoord-1, zCoord+2))CallDir[3]=EnumFacing.SOUTH;
+			if(getTEBFC(pos.add(0, -1, 2)))CallDir[3]=EnumFacing.SOUTH;
 			else CallDir[3]=null;
 			
 			if(optimizer3++>=2){
 				optimizer3=0;
 				
 				if(CallDir[0]==null&&CallDir[1]==null&&CallDir[2]==null&&CallDir[3]==null){
-					worldObj.setBlock(pos, Blocks.nether_brick);
+					H.setBlock(worldObj,pos, Blocks.nether_brick);
 				}
 			}
 		}
 		if(optimizer2++>=10){
 			optimizer2=0;
-			if(CallDir[0]!=null&&getPipe(xCoord+1, yCoord, zCoord))PallDir[0]=EnumFacing.EAST;
+			if(CallDir[0]!=null&&getPipe(pos.add(1, 0, 0)))PallDir[0]=EnumFacing.EAST;
 			else PallDir[0]=null;
 			
-			if(CallDir[1]!=null&&getPipe(xCoord-1, yCoord, zCoord))PallDir[1]=EnumFacing.WEST;
+			if(CallDir[1]!=null&&getPipe(pos.add(-1, 0, 0)))PallDir[1]=EnumFacing.WEST;
 			else PallDir[1]=null;
 			
-			if(CallDir[2]!=null&&getPipe(pos+1))PallDir[2]=EnumFacing.NORTH;
+			if(CallDir[2]!=null&&getPipe(pos.add(0,0,1)))PallDir[2]=EnumFacing.NORTH;
 			else PallDir[2]=null;
 			
-			if(CallDir[3]!=null&&getPipe(pos-1))PallDir[3]=EnumFacing.SOUTH;
+			if(CallDir[3]!=null&&getPipe(pos.add(0,0,-1)))PallDir[3]=EnumFacing.SOUTH;
 			else PallDir[3]=null;
 		}
 		
@@ -66,29 +69,26 @@ public class TileEntityBFCPowerOut extends TileEntityM{
 	public void sendEnergy(){
 		TileEntityBigFurnaceCore tile;
 		if(PallDir[0]!=null){
-			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(xCoord-2, yCoord-1, zCoord);
+			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(pos.add(-2, -1, 0));
 		}
 		else if(PallDir[1]!=null){
-			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(xCoord+2, yCoord-1, zCoord);
+			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(pos.add(2, -1, 0));
 		}
 		else if(PallDir[2]!=null){
-			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(xCoord, yCoord-1, zCoord-2);
+			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(pos.add(0, -1, -2));
 		}
 		else if(PallDir[3]!=null){
-			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(xCoord, yCoord-1, zCoord+2);
+			tile=(TileEntityBigFurnaceCore)worldObj.getTileEntity(pos.add(0, -1, 2));
 		}
 		else tile=null;
 		
 		if(tile!=null){
-			int x;
-			int y;
-			int z;
+			BlockPos pos=new Pos();
 			
-			if(PallDir[0]!=null){x=xCoord+1; y=yCoord; z=zCoord;}
-			else if(PallDir[1]!=null){x=xCoord-1; y=yCoord; z=zCoord;}
-			else if(PallDir[2]!=null){x=xCoord; y=yCoord; z=zCoord+1;}
-			else if(PallDir[3]!=null){x=xCoord; y=yCoord; z=zCoord-1;}
-			else {x=0;y=0;z=0;}
+			if(PallDir[0]!=null)pos=new Pos(1, 0, 0);
+			else if(PallDir[1]!=null)pos=new Pos(1, 0, 0);
+			else if(PallDir[2]!=null)pos=new Pos(0, 0, 1);
+			else if(PallDir[3]!=null)pos=new Pos(0, 0, -1);
 			
 			
 			if(worldObj.getTileEntity(pos)instanceof TileEntityPow){
@@ -139,14 +139,14 @@ public class TileEntityBFCPowerOut extends TileEntityM{
 			
 		}
 	}
-	public boolean getTEBFC(int x, int y, int z){
+	public boolean getTEBFC(BlockPos pos){
 		if(worldObj.getTileEntity(pos)instanceof TileEntityBigFurnaceCore){
 			TileEntityBigFurnaceCore tile= (TileEntityBigFurnaceCore)worldObj.getTileEntity(pos);
 			return tile.isMultiblockHelper==true;
 		}
 		else return false;
 	}
-	public boolean getPipe(int x, int y, int z){
+	public boolean getPipe(BlockPos pos){
 			return worldObj.getTileEntity(pos)instanceof TileEntityPow;
 		
 	}

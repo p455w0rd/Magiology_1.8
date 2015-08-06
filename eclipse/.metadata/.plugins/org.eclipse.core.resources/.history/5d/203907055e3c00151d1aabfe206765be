@@ -1,0 +1,42 @@
+package com.magiology.objhelper;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+
+public final class Get{
+	@SideOnly(value=Side.CLIENT)
+	public static final class Render{
+		public static ItemRenderer IR(){
+			return Minecraft.getMinecraft().getItemRenderer();
+		}
+		public static RenderItem RI(){
+			return Minecraft.getMinecraft().getRenderItem();
+		}
+		public static NoramlisedVertixBuffer NVB(){
+			return TessHelper.getNVB();
+		}
+		public static WorldRenderer WR(){
+			return TessHelper.getWR();
+		}
+		public static FontRenderer FR(){
+			return Helper.getFontRenderer();
+		}
+	}
+	@SideOnly(value=Side.CLIENT)
+	public static final class Client{
+		public static EntityPlayer TP(){
+			return Helper.getThePlayer();
+		}
+	}
+	
+}

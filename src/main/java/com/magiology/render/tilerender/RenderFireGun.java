@@ -7,7 +7,7 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
@@ -17,7 +17,7 @@ public class RenderFireGun extends TileEntitySpecialRenderer {
 	private final float p= 1F/16F;
 	private final float tW=1F/72F;
 	private final float tH=1F/64F;
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
 		TileEntityFireGun dir= (TileEntityFireGun) tileentity;

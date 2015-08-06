@@ -137,7 +137,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  		EntityPlayer player=(EntityPlayer)entity;
 	  		ItemStack arInv=player.inventory.armorInventory[1];
 	  		if(arInv!=null&&arInv.stackSize>0){
-	  			float max=arInv.getMaxDamage(),now=arInv.getItemDamageForDisplay();
+	  			float max=arInv.getMaxDamage(),now=arInv.getItemDamage();
 	  			if(arInv.getMaxDamage()>0)color=(max-now)/max;
 	  		}
 	  	}

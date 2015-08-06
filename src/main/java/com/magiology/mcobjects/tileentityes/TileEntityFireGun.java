@@ -24,7 +24,7 @@ public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListB
 	public TileEntityFireGun(){}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		detectIfTimeForAnimation();
 		animationF();
 		optimizer++;

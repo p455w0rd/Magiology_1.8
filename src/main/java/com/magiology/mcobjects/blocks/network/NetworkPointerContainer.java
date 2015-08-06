@@ -1,11 +1,14 @@
 package com.magiology.mcobjects.blocks.network;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -45,17 +48,16 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkPointerContainer());
 	}
 	@Override
-	public void onPostBlockPlaced(World world, BlockPos pos, int md){
-		super.onPostBlockPlaced(world, pos, md);
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
 		TileEntityNetworkPointerContainer tile=(TileEntityNetworkPointerContainer)world.getTileEntity(pos);
 		int side=SideHelper.convert(tile.getOrientation());
-		TileEntity test=world.getTileEntity(SideHelper.offset(side, x), SideHelper.Y(side, y), SideHelper.Z(side, z));
+		TileEntity test=world.getTileEntity(SideHelper.offset(side, pos));
 		
 		if(!(test instanceof ISidedNetworkComponent)){
 			for(int i=0;i<tile.connections.length;i++){
 				if(
 						tile.connections[i]!=null&&
-						(test=world.getTileEntity(SideHelper.offset(i, x), SideHelper.Y(i, y), SideHelper.Z(i, z)))instanceof ISidedNetworkComponent&&
+						(test=world.getTileEntity(SideHelper.offset(i, pos)))instanceof ISidedNetworkComponent&&
 						((ISidedNetworkComponent)test).getBrain()!=null
 				   ){
 					side=i;
@@ -63,29 +65,25 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 				}
 			}
 		}
-		TileEntity test2=world.getTileEntity(SideHelper.offset(side, x), SideHelper.Y(side, y), SideHelper.Z(side, z));
+		TileEntity test2=world.getTileEntity(SideHelper.offset(side, pos));
 		if(side!=-1&&test2 instanceof ISidedNetworkComponent){
 			ISidedNetworkComponent component=(ISidedNetworkComponent) test2;
 			if(component!=null)tile.setBrain(component.getBrain());
 			tile.canPathFindTheBrain=true;
 		}
 		if(tile.getBrain()!=null)tile.getBrain().restartNetwork();
-		super.onPostBlockPlaced(world, pos, md);
+		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 	}
 	@Override
-	public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int v1){
-        return side+v1;
-    }
-	@Override
-	public void onNeighborChange(IBlockAccess world, BlockPos pos, int tileX, int tileY, int tileZ){
-    	super.onNeighborChange(world, pos, tileX, tileY, tileZ);
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor){
+    	super.onNeighborChange(world, pos, neighbor);
     	TileEntity test=world.getTileEntity(pos);
     	if(!(test instanceof ISidedNetworkComponent))return;
     	ISidedNetworkComponent tile=(ISidedNetworkComponent)test;
     	if(tile.getBrain()!=null)tile.getBrain().restartNetwork();
     }
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player,int md, float xHit, float yHit, float zHit){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
 		TileEntityNetworkPointerContainer tile=(TileEntityNetworkPointerContainer) world.getTileEntity(pos);
 		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
 		if(id<0)return false;
@@ -95,7 +93,7 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 			if(!player.capabilities.isCreativeMode)player.inventory.mainInventory[player.inventory.currentItem]=null;
 			return true;
 		}else{
-			EntityItem stack=Helper.dropBlockAsItem(world, x+0.5, y+0.5, z+0.5, tile.getStackInSlot(id));
+			EntityItem stack=Helper.dropBlockAsItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, tile.getStackInSlot(id));
 			if(stack!=null){
 				stack.motionX=0;
 				stack.motionY=0;

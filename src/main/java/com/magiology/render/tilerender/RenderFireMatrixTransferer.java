@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.render.Textures;
@@ -16,7 +16,7 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 	private final float p=1F/16F;
 	private final float tW=1F/64F;
 	private final float tH=1F/64F;
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	
 	public RenderFireMatrixTransferer(){
 		

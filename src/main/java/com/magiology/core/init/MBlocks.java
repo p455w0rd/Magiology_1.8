@@ -8,7 +8,6 @@ import com.magiology.core.MReference;
 import com.magiology.mcobjects.blocks.BFCPowerOut;
 import com.magiology.mcobjects.blocks.BateryGeneric;
 import com.magiology.mcobjects.blocks.BedrockBreaker;
-import com.magiology.mcobjects.blocks.BigChunksOOre;
 import com.magiology.mcobjects.blocks.BigFurnaceCore;
 import com.magiology.mcobjects.blocks.ControlBlock;
 import com.magiology.mcobjects.blocks.DontLookAtMe;
@@ -44,8 +43,8 @@ public class MBlocks{
 		EmeraldLevel3,EmeraldLevel4,EmeraldLevel5,SuperDuperEmerald,CoalLevel2,CoalLevel3,CoalLevel4,
 		CoalLevel5,SuperDuperCoal,FireLamp,DiscoFlor,DiscoFlorPlatform,OreStructureCore,FirePipe,FireGun,
 		FireExhaust,FakeAir,bedrockBreaker,PileODust,BigFurnaceCore,BFCPowerOut,BatteryL1,BatteryL2,BatteryL3,
-		BateryL100,particleLauncher,BigChunksOOre,DontLookAtMe,energizedLapisOre,ControlBlock,
-		RemotePowerCounter,FireMatrixTransferer,FireMatrixReceaver,smartCrafter,hologramProjector,
+		BateryL100,particleLauncher,DontLookAtMe,energizedLapisOre,ControlBlock,RemotePowerCounter,
+		FireMatrixTransferer,FireMatrixReceaver,smartCrafter,hologramProjector,
 		networkController,networkConductor,networkPointerContainer,networkInterface;
 
 	public static void preInit(){
@@ -72,7 +71,6 @@ public class MBlocks{
 		BatteryL2=init(new BateryGeneric(2).setBlockName("BatteryL2").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
 		BatteryL3=init(new BateryGeneric(3).setBlockName("BatteryL3").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
 		BateryL100=init(new BateryGeneric(100).setBlockName("BateryL100").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
-		BigChunksOOre=init(new BigChunksOOre().setBlockName("BigChunksOOre").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
 		BFCPowerOut=init(new BFCPowerOut().setBlockName("BFCPowerOut").setStepSound(Block.soundTypeMetal));
 		bedrockBreaker=init(new BedrockBreaker().setBlockName("bedrockBreaker").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
 		PileODust=init(new PileODust().setBlockName("PileODust").setCreativeTab(MCreativeTabs.Whwmmt_core).setStepSound(Block.soundTypeMetal).setBlockTextureName(MReference.MODID + ":" + "IronLevel2"));

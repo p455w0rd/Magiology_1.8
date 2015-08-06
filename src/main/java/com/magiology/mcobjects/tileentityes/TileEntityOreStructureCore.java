@@ -1,8 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.client.particle.EntitySmokeFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,6 +12,8 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntityCustomfireFX;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.EntitySparkFX;
+import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
+import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
@@ -70,8 +70,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	}
 	
 	@Override
-	public void updateEntity(){
-			super.updateEntity();
+	public void update(){
 			if(mainMultiBlock==null){
 				mainMultiBlock=Structures.generateNewStructure(2);
 				diamondAddon=Structures.generateNewStructure(3);
@@ -250,8 +249,8 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  -0.05+0.1*Helper.RF(2), -0.05-0.1*Helper.RF(2), 0);
 		}
 		else{
-			Helper.spawnEntityFX(new EntityFlameFX(worldObj, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0));
-			Helper.spawnEntityFX(new EntityFlameFX(worldObj, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0));
+			Helper.spawnEntityFX(new EntityFlameFXM(worldObj, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0));
+			Helper.spawnEntityFX(new EntityFlameFXM(worldObj, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0));
 		}
 
 	}
@@ -364,7 +363,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			double v2=Helper.CRandD(3);
 			double v1=Helper.CRandD(1);
 	        if(Helper.RB(5))worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18);
-	        else Helper.spawnEntityFX(new EntitySmokeFX(worldObj, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18));
+	        else Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18));
 	        }
 		 	if(this.optimizer2.progress==1){
 	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+Helper.RF(), pos.getY()+1, pos.getZ()-3+Helper.RF(), 0, 0, 0);

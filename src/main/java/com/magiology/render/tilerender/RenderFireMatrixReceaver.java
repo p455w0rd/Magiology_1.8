@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
@@ -26,7 +26,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 	
 	
 	public EnumFacing[] connections = new EnumFacing[6];
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {

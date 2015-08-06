@@ -27,7 +27,7 @@ public class TileEntityFireMatrixReceaver extends TileEntityPow{
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		prevRotation=rotation;
 		rotation+=3;
 		if(rotation>360)rotation-=360;

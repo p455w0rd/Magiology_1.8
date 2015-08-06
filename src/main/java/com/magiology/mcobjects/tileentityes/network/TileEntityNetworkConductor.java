@@ -2,6 +2,7 @@ package com.magiology.mcobjects.tileentityes.network;
 
 import java.util.List;
 
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
@@ -11,14 +12,14 @@ import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.NetworkHelper;
 
-public class TileEntityNetworkConductor extends TileEntityNetwork{
+public class TileEntityNetworkConductor extends TileEntityNetwork implements IUpdatePlayerListBox{
 	
 	private SlowdownHelper optimizer=new SlowdownHelper(40);
 	
 	public TileEntityNetworkConductor(){}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		if(getBrain()==null){
 			findBrain();
 			ForcePipeUpdate.updatePipe(worldObj, pos);

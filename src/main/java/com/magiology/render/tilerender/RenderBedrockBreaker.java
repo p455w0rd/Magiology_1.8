@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
@@ -40,7 +40,7 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 	private final float tH5=1F/32F;
 	int state=0;
 	int StartStop=0;
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {

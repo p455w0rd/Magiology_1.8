@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.inventory.ContainerPlayer;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -21,12 +22,13 @@ import com.magiology.gui.fpgui.FirstPersonGui;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.objhelper.vectors.Pos;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 
 public class TickEvents{
 	Minecraft mc=Minecraft.getMinecraft();
 	public static TickEvents instance=new TickEvents();
-	public static CientPlayerBufferedGui bufferedGui=instance.new CientPlayerBufferedGui(0, 0, 0);
+	public static CientPlayerBufferedGui bufferedGui=instance.new CientPlayerBufferedGui(new Pos());
 	boolean bufferedGuiFirst=true;
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event){
@@ -93,7 +95,7 @@ public class TickEvents{
 		}
 		if(mc.thePlayer!=null&&mc.thePlayer.openContainer.getClass().equals(ContainerPlayer.class)&&!bufferedGui.isDone){
 			bufferedGui.isDone=true;
-			Helper.sendMessage(new RightClickBlockPacket(bufferedGui.x, bufferedGui.y, bufferedGui.z, (byte) 0));
+			Helper.sendMessage(new RightClickBlockPacket(bufferedGui.pos, (byte) 0));
 		}
 		
 		if(Magiology.modInfGUI!=null&&!Magiology.modInfGUI.isExited)Magiology.modInfGUI=null;
@@ -124,12 +126,10 @@ public class TickEvents{
 		
 	}
 	public class CientPlayerBufferedGui{
-		public int x,y,z;
+		public BlockPos pos;
 		public boolean isDone=false;
-		public CientPlayerBufferedGui(int x,int y,int z){
-			this.x=x;
-			this.y=y;
-			this.z=z;
+		public CientPlayerBufferedGui(BlockPos pos){
+			this.pos=pos;
 		}
 	}
 }

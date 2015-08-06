@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
@@ -27,7 +27,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
 	double powerBar;
 	int maxPB,currentP;
 	float p=1F/16F;
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	FontRenderer fr=Helper.getFontRenderer();
 	
 	@Override

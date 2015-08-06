@@ -6,6 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
@@ -14,7 +15,7 @@ import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.CraftingGridWOutput;
 import com.magiology.objhelper.helpers.Helper;
 
-public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory{
+public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
 	
 	public boolean isActive=false;
 	public int rotation=-1;
@@ -22,7 +23,7 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	public TileEntity tile1=null,tile2=null;
 	public CraftingGridWOutput[] wantedProducts=new CraftingGridWOutput[50];
 	@Override
-	public void updateEntity(){
+	public void update(){
 		
 		isActive=isActive();
 		if(!isActive){

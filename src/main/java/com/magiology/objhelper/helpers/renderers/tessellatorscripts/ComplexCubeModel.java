@@ -4,7 +4,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
@@ -16,7 +16,7 @@ public class ComplexCubeModel{
 	public Vec3M[] points=new Vec3M[8];
 	public Vec8F[] UVs=new Vec8F[6];
 	ResourceLocation[] st=new ResourceLocation[6];
-	NoramlisedVertixBuffer buf=RenderGet.NVB();
+	NoramlisedVertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=minX;this.minY=minY;this.minZ=minZ;

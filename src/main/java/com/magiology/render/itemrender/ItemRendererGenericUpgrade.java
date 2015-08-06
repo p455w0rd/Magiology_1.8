@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.MReference;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.render.Textures;
 
 
@@ -88,7 +88,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 			width*=0.5;
 			GL11.glTranslated(0, 0, -width/2);
 		}
-		RenderGet.RI().renderItemModel(is);
+		Render.RI().renderItemModel(is);
 		GL11.glPopMatrix();
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -97,7 +97,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glColor4d(1, 1, 1, 0.2);
-		RenderGet.RI().renderItemModel(is);
+		Render.RI().renderItemModel(is);
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);

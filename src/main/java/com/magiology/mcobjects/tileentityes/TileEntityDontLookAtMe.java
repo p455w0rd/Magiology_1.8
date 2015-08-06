@@ -7,11 +7,4 @@ public class TileEntityDontLookAtMe extends TileEntityM{
 	
 	public TileEntityDontLookAtMe(){}
 	
-	@Override
-	public void updateEntity(){
-		
-		
-		
-	}
-	
 }

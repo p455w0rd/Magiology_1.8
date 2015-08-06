@@ -43,7 +43,7 @@ public class FireLamp extends BlockContainer {
 	
 	@Override
 	public int getRenderType(){
-        return RenderFireLampISBRH.renderId;
+        return 0;
     }
 	
 	@Override

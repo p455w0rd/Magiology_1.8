@@ -1,9 +1,12 @@
 package com.magiology.mcobjects.blocks.network;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -40,17 +43,17 @@ public class NetworkConductor extends BlockContainerMultiColision{
 		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkConductor());
 	}
 	@Override
-	public void onPostBlockPlaced(World world, BlockPos pos, int md){
-		super.onPostBlockPlaced(world, pos, md);
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
+		super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 		TileEntityNetworkConductor tile=(TileEntityNetworkConductor)world.getTileEntity(pos);
 		int side=SideHelper.convert(tile.getOrientation());
-		TileEntity test=world.getTileEntity(SideHelper.offset(side, x), SideHelper.Y(side, y), SideHelper.Z(side, z));
+		TileEntity test=world.getTileEntity(SideHelper.offset(side, pos));
 		
 		if(!(test instanceof ISidedNetworkComponent)){
 			for(int i=0;i<tile.connections.length;i++){
 				if(
 						tile.connections[i]!=null&&
-						(test=world.getTileEntity(SideHelper.offset(i, x), SideHelper.Y(i, y), SideHelper.Z(i, z)))instanceof ISidedNetworkComponent&&
+						(test=world.getTileEntity(SideHelper.offset(i, pos)))instanceof ISidedNetworkComponent&&
 						((ISidedNetworkComponent)test).getBrain()!=null
 				   ){
 					side=i;
@@ -58,22 +61,18 @@ public class NetworkConductor extends BlockContainerMultiColision{
 				}
 			}
 		}
-		TileEntity test2=world.getTileEntity(SideHelper.offset(side, x), SideHelper.Y(side, y), SideHelper.Z(side, z));
+		TileEntity test2=world.getTileEntity(SideHelper.offset(side, pos));
 		if(side!=-1&&test2 instanceof ISidedNetworkComponent){
 			ISidedNetworkComponent component=(ISidedNetworkComponent) test2;
 			if(component!=null)tile.setBrain(component.getBrain());
 			tile.canPathFindTheBrain=true;
 		}
 		if(tile.getBrain()!=null)tile.getBrain().restartNetwork();
-		super.onPostBlockPlaced(world, pos, md);
+		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 	}
 	@Override
-	public int onBlockPlaced(World world, BlockPos pos, int side, float hitX, float hitY, float hitZ, int v1){
-        return side+v1;
-    }
-	@Override
-	public void onNeighborChange(IBlockAccess world, BlockPos pos, int tileX, int tileY, int tileZ){
-    	super.onNeighborChange(world, pos, tileX, tileY, tileZ);
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor){
+    	super.onNeighborChange(world, pos, neighbor);
     	TileEntity test=world.getTileEntity(pos);
     	if(!(test instanceof ISidedNetworkComponent))return;
     	ISidedNetworkComponent tile=(ISidedNetworkComponent)test;

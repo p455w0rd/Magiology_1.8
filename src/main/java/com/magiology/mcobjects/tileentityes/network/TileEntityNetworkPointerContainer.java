@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
@@ -23,7 +24,7 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.NetworkHelper;
 import com.magiology.objhelper.helpers.SideHelper;
 
-public class TileEntityNetworkPointerContainer extends TileEntityNetwork implements ISidedInventory{
+public class TileEntityNetworkPointerContainer extends TileEntityNetwork implements ISidedInventory,IUpdatePlayerListBox{
 	
 	private SlowdownHelper optimizer=new SlowdownHelper(40);
 	public ItemStack[] slots=new ItemStack[9];
@@ -42,7 +43,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		if(getBrain()==null){
 			findBrain();
 			ForcePipeUpdate.updatePipe(worldObj, pos);

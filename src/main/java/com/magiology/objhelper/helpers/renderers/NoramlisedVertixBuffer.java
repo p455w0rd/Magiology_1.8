@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.magiology.objhelper.getters.RenderGet;
+import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.objhelper.vectors.Vec3M;
 
@@ -27,7 +27,7 @@ public class NoramlisedVertixBuffer{
 	private Vector3f rotation=new Vector3f(),backupRotation=new Vector3f();
 	
 	public NoramlisedVertixBuffer(){
-		this.renderer=RenderGet.WR();
+		this.renderer=Render.WR();
 	}
 	
 	public NoramlisedVertixBuffer createNewSubBuffer(){

@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import com.magiology.api.network.ISidedNetworkComponent;
@@ -50,13 +51,13 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		for(int b=0;b<network.size();b++){
 			ISidedNetworkComponent a=network.get(b);
 			if(a instanceof NetworkBaseInterface){
-				int x=a.getHost().xCoord,y=a.getHost().yCoord,z=a.getHost().zCoord;
+				BlockPos pos1=a.getHost().getPos();
 				List<ItemStack> pointers=Interface.getPointers();
 				boolean pass=false;
 				for(ItemStack stack:pointers){
 					if(stack.hasTagCompound()){
 						NBTTagCompound nbt=stack.getTagCompound();
-						if(nbt.getInteger("xLink")==x&&nbt.getInteger("yLink")==y&&nbt.getInteger("zLink")==z)pass=true;
+						if(nbt.getInteger("xLink")==pos1.getX()&&nbt.getInteger("yLink")==pos1.getY()&&nbt.getInteger("zLink")==pos1.getZ())pass=true;
 					}
 				}
 				if(pass){
@@ -70,8 +71,8 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	public void addToReadFromNBT(NBTTagCompound NBTTC){
     	for(int i=0;i<6;i++){
     		bannedConnections[i]=NBTTC.getBoolean("bannedConnections"+i);
-    		connections[i]=EnumFacing.getOrientation(NBTTC.getInteger("connections"+i));
-    		if(connections[i]==EnumFacing.UNKNOWN)connections[i]=null;
+    		connections[i]=EnumFacing.getFront(NBTTC.getInteger("connections"+i));
+    		if(connections[i]==null)connections[i]=null;
     	}
     	networkIdMap.put(this, NBTTC.getLong("NI"));
     }
@@ -86,8 +87,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
     }
 	
 	@Override
-	public void updateEntity(){
-		super.updateEntity();
+	public void update(){
 		this.power(true);
 		canPathFindTheBrain=true;
 		if(optimizer.isTimeWithAddProgress()){
@@ -146,7 +146,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		Object[] keys=networkIdMap.keySet().toArray();
 		for(int i=0;i<keys.length;i++){
 			TileEntity test=(TileEntity)keys[i];
-			if(test.getWorld().getTileEntity(test.xCoord, test.yCoord, test.zCoord)!=test)networkIdMap.remove(test);
+			if(test.getWorld().getTileEntity(test.getPos())!=test)networkIdMap.remove(test);
 		}
 		
 		//generate && save
@@ -215,7 +215,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					if(isDone)done++;
 					else notDone++;
 					if(!isDone)for(int i=0;i<6;i++)if(workTile.getAccessibleOnSide(i)){
-						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideHelper.offset(i, workTile.getHost().xCoord), SideHelper.Y(i, workTile.getHost().yCoord), SideHelper.Z(i, workTile.getHost().zCoord));
+						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideHelper.offset(i, workTile.getHost().getPos()));
 						if(test instanceof ISidedNetworkComponent){
 							ISidedNetworkComponent t=(ISidedNetworkComponent)test;
 							if(t instanceof ISidedNetworkComponent&&!network.contains(t)&&t.getBrain()!=null&&t.getNetworkId()==getNetworkId()){

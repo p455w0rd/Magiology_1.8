@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -21,7 +22,7 @@ import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.NetworkHelper;
 import com.magiology.objhelper.helpers.SideHelper;
 
-public class TileEntityNetworkInterface extends TileEntityNetworkInteract{
+public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements IUpdatePlayerListBox{
 	
 	SlowdownHelper optimizer=new SlowdownHelper(40);
 	private float[] conBox=new float[5];
@@ -30,7 +31,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract{
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		if(getBrain()==null){
 			findBrain();
 			ForcePipeUpdate.updatePipe(worldObj, pos);

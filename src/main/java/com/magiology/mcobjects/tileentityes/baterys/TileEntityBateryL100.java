@@ -9,8 +9,8 @@ public class TileEntityBateryL100 extends TileEntityBateryGeneric {
 		super(null, null, 1, 5, 50, 2147483640);
 	}
 	@Override
-	public void updateEntity(){
-		super.updateEntity();
+	public void update(){
+		super.update();
 		if(worldObj.isRemote){
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+0.2, y()+0.5, z()+0.5,  0.01+0.001-0.002*worldObj.rand.nextFloat(), 0,     0.001-0.002*worldObj.rand.nextFloat(),     100, 3, 0.6+0.001-0.002*worldObj.rand.nextFloat(),1, 1,worldObj.rand.nextFloat()/4,worldObj.rand.nextFloat()/4, 0.5, 0.99));
 			Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+0.8, y()+0.5, z()+0.5, -0.01+0.001-0.002*worldObj.rand.nextFloat(), 0,     0.001-0.002*worldObj.rand.nextFloat(),     100, 3, 0.6+0.001-0.002*worldObj.rand.nextFloat(),1, 1,worldObj.rand.nextFloat()/4,worldObj.rand.nextFloat()/4, 0.3, 0.99));

@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
 import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
-import com.magiology.mcobjects.tileentityes.TileEntityBigChunksOOre;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityDontLookAtMe;
@@ -38,7 +37,6 @@ import com.magiology.render.tilerender.RenderBateryL100;
 import com.magiology.render.tilerender.RenderBateryL2;
 import com.magiology.render.tilerender.RenderBateryL3;
 import com.magiology.render.tilerender.RenderBedrockBreaker;
-import com.magiology.render.tilerender.RenderBigChunksOOre;
 import com.magiology.render.tilerender.RenderDontLookAtMe;
 import com.magiology.render.tilerender.RenderEnergizedLapisOre;
 import com.magiology.render.tilerender.RenderFireExhaust;
@@ -71,7 +69,6 @@ public class MTileEntitys{
 		register(TileEntityBateryL100.class);
 		register(TileEntityPLauncher.class);
 		register(TileEntityBFCPowerOut.class);
-		register(TileEntityBigChunksOOre.class);
 		register(TileEntityEnergizedLapisOre.class);
 		register(TileEntityDontLookAtMe.class);
 		register(TileEntityControlBlock.class);
@@ -97,7 +94,6 @@ public class MTileEntitys{
 		bindTileWRender(TileEntityBateryL3.class,               new RenderBateryL3());
 		bindTileWRender(TileEntityBateryL100.class,             new RenderBateryL100());
 		bindTileWRender(TileEntityBFCPowerOut.class,            new RenderBFCPowerOut());
-		bindTileWRender(TileEntityBigChunksOOre.class,          new RenderBigChunksOOre());
 		bindTileWRender(TileEntityEnergizedLapisOre.class,      new RenderEnergizedLapisOre());
 		bindTileWRender(TileEntityDontLookAtMe.class,           new RenderDontLookAtMe());
 		bindTileWRender(TileEntityRemotePowerCounter.class,     new RenderRemotePowerCounter());

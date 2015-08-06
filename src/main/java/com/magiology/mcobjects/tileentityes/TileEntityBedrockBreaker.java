@@ -3,6 +3,7 @@ package com.magiology.mcobjects.tileentityes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -15,7 +16,7 @@ import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 
-public class TileEntityBedrockBreaker extends TileEntityM{
+public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlayerListBox{
 	EffectRenderer efrenderer = Minecraft.getMinecraft().effectRenderer;
 	public double animation=40,speed=0,positionForLaser=0;
 	public float p=1F/16F;
@@ -26,7 +27,7 @@ public class TileEntityBedrockBreaker extends TileEntityM{
 	int state=0,progres=0;
 
 	@Override
-	public void updateEntity(){
+	public void update(){
 		
 		
 		if(IRFA==true)action();

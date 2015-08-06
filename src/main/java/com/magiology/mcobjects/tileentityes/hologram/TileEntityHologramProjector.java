@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -26,7 +27,7 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.objhelper.vectors.Vec3M;
 
-public class TileEntityHologramProjector extends TileEntityM{
+public class TileEntityHologramProjector extends TileEntityM implements IUpdatePlayerListBox{
 	
 	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<TileEntityHologramProjector>();
 	private static long lastTick=0;
@@ -72,7 +73,7 @@ public class TileEntityHologramProjector extends TileEntityM{
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		boolean contains=false;
 		for(TileEntityHologramProjector a:hologramProjectors){
 			if(a==this){

@@ -20,7 +20,7 @@ public class TileEntityFireMatrixTransferer extends TileEntityPow{
 	}
 	
 	@Override
-	public void updateEntity(){
+	public void update(){
 		ballRotation+=10;
 		
 		if(Pos<p*1.5)speed+=0.0015;

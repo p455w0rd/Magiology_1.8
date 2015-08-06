@@ -6,12 +6,6 @@ public class TileEntityEnergizedLapisOre extends TileEntityM{
 	
 	public TileEntityEnergizedLapisOre(){}
 	
-	@Override
-	public void updateEntity(){
-		
-		
-	}
-	
 	
 	
 }

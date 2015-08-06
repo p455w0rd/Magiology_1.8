@@ -2,9 +2,11 @@ package com.magiology.mcobjects.blocks;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -26,8 +28,6 @@ public class HologramProjector extends BlockContainer{
 	}
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    @Override
-	public boolean renderAsNormalBlock() {return false;}
 	
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, BlockPos pos){
@@ -35,7 +35,7 @@ public class HologramProjector extends BlockContainer{
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, EntityPlayer player,int metadata, float xHit, float yHit, float zHit){
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
 		Helper.openGui(player, MGui.HologramProjectorGui, pos);
 		return true;
 	}

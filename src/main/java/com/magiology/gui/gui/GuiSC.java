@@ -1,6 +1,7 @@
 package com.magiology.gui.gui;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -142,12 +143,12 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		buttonList.add(new GuiButton(8, guiLeft+152, guiTop+81+20, 20, 10, ""));
 		
         Keyboard.enableRepeatEvents(true);
-		txt1 = new GuiTextField(fontRendererObj,  guiLeft+25,  guiTop+18, 56, 10);
+		txt1 = new GuiTextField(0,fontRendererObj,  guiLeft+25,  guiTop+18, 56, 10);
 		txt1.setFocused(false);
         txt1.setMaxStringLength(8);
         txt1.setTextColor(Color.WHITE.hashCode());
 		txt1.setEnableBackgroundDrawing(false);
-        txt2 = new GuiTextField(fontRendererObj,  guiLeft+25,  guiTop+75, 56, 10);
+        txt2 = new GuiTextField(0,fontRendererObj,  guiLeft+25,  guiTop+75, 56, 10);
         txt2.setFocused(false);
         txt2.setMaxStringLength(8);
         txt2.setTextColor(Color.WHITE.hashCode());
@@ -155,7 +156,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	}
 	
 	@Override
-	protected void keyTyped(char c, int i){
+	protected void keyTyped(char c, int i) throws IOException{
 		if(Integer.valueOf(c)==13){
 			mouseClicked(-10000, -10000, 0);
 		}
@@ -190,7 +191,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		
     }
 	@Override
-	protected void mouseClicked(int x, int y, int id){
+	protected void mouseClicked(int x, int y, int id) throws IOException{
 		boolean prevTxt1State=txt1.isFocused(),prevTxt2State=txt2.isFocused();
 		super.mouseClicked(x, y, id);
 		txt1.mouseClicked(x, y, id);
@@ -257,12 +258,12 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		if(rot<155&&rot>25)sideSwitcher=true;
 		switch (b.id){
 		case 0:{
-			Magiology.NETWORK_CHANNEL.sendToServer(new RightClickBlockPacket(tileCB.xCoord, tileCB.yCoord, tileCB.zCoord-(sideSwitcher?-1:1), (byte)side));
-			TickEvents.bufferedGui=TickEvents.instance.new CientPlayerBufferedGui(tileCB.xCoord, tileCB.yCoord, tileCB.zCoord);
+			Magiology.NETWORK_CHANNEL.sendToServer(new RightClickBlockPacket(tileCB.getPos().add(0, 0, (sideSwitcher?1:-1)), (byte)side));
+			TickEvents.bufferedGui=TickEvents.instance.new CientPlayerBufferedGui(tileCB.getPos());
 		}break;
 		case 1:{
-			Magiology.NETWORK_CHANNEL.sendToServer(new RightClickBlockPacket(tileCB.xCoord, tileCB.yCoord, tileCB.zCoord+(sideSwitcher?-1:1), (byte)side));
-			TickEvents.bufferedGui=TickEvents.instance.new CientPlayerBufferedGui(tileCB.xCoord, tileCB.yCoord, tileCB.zCoord);
+			Magiology.NETWORK_CHANNEL.sendToServer(new RightClickBlockPacket(tileCB.getPos().add(0,0,(sideSwitcher?-1:1)), (byte)side));
+			TickEvents.bufferedGui=TickEvents.instance.new CientPlayerBufferedGui(tileCB.getPos());
 		}break;
 		case 2:{
 			
