@@ -65,7 +65,8 @@ public class EntityEvents{
 				   !entity.isDead&&
 				   entity.isInRangeToRender3d(player.posX+Helper.CRandI(50), player.posY+Helper.CRandI(50), player.posZ+Helper.CRandI(50))&&
 				   ((EntityLivingBase)entity).getCreatureAttribute()!=EnumCreatureAttribute.UNDEAD&&
-				   entity.isInRangeToRenderDist(entity.renderDistanceWeight)
+				   entity.isInRangeToRenderDist(entity.renderDistanceWeight)&&
+				   entity.getBoundingBox()!=null
 				   ){
 					EntityPosAndBB EPABB=new EntityPosAndBB(entity);
 //					if(!contains&&RenderLoopEvents.entitys.size()<100)RenderLoopEvents.entitys.add(EPABB);

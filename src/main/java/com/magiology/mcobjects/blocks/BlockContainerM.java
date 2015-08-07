@@ -3,16 +3,23 @@ package com.magiology.mcobjects.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.api.network.RedstoneData;
+import com.magiology.core.MReference;
+import com.magiology.objhelper.Get;
 import com.magiology.objhelper.helpers.Helper;
 
 public abstract class BlockContainerM extends BlockContainer{
@@ -59,4 +66,21 @@ public abstract class BlockContainerM extends BlockContainer{
 		return sides.contains(side.getIndex());
 	}
 	public void getRedstoneConnectableSides(IBlockAccess world, TileEntity tile, BlockPos pos, List<Integer> sides){}
+	
+	
+	//#fucka youuu json models!
+	@SideOnly(value=Side.CLIENT)
+	public Block setBlockTextureName(String modPath,String name){
+		BlockM.modelsInit.put(this, new ModelResourceLocation(modPath,name));
+		return this;
+	}
+	@SideOnly(value=Side.CLIENT)
+	public Block setBlockTextureName(String name){
+		BlockM.modelsInit.put(this, new ModelResourceLocation(name));
+		return this;
+	}
+	@SideOnly(value=Side.CLIENT)
+	public Block setBlockTextureName(){
+		return setBlockTextureName(MReference.MODID, getUnlocalizedName().substring(5));
+	}
 }

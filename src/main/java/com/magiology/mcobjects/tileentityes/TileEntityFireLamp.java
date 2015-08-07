@@ -22,6 +22,7 @@ import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.objhelper.vectors.Pos;
 import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.upgrades.RegisterUpgrades.Container;
 
@@ -35,7 +36,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	TileEntity tileE;
 	
-	public BlockPos control,c;
+	public BlockPos control=new Pos(),c=new Pos();
 	public TileEntityControlBlock controlBlock=null;
 	
 	public EnumFacing[] canAcceptEnergyOnSide=new EnumFacing[6];

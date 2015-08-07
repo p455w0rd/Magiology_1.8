@@ -1,81 +1,60 @@
-[00:39:42] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
-[00:39:42] [main/INFO] [FML/]: Forge Mod Loader version 8.99.196.1499 for Minecraft 1.8 loading
-[00:39:42] [main/INFO] [FML/]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_51, running on Windows 7:amd64:6.1, installed at C:\Program Files\Java\jre1.8.0_51
-[00:39:42] [main/DEBUG] [FML/]: Java classpath at launch is C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\bin;C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\snapshot\20141130\forgeSrc-1.8-11.14.3.1499.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.minecraft\launchwrapper\1.12\111e7bea9c968cdb3d06ef4632bf7ff0824d0f36\launchwrapper-1.12.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-debug-all\5.0.3\f9e364ae2a66ce2a543012a4668856e84e5dab74\asm-debug-all-5.0.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe.akka\akka-actor_2.11\2.3.3\ed62e9fc709ca0f2ff1a3220daa8b70a2870078e\akka-actor_2.11-2.3.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe\config\1.2.1\f771f71fdae3df231bcd54d5ca2d57f0bf93f467\config-1.2.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-compiler\2.11.1\56ea2e6c025e0821f28d73ca271218b8dd04926a\scala-compiler-2.11.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-library_2.11\1.0.2\e517c53a7e9acd6b1668c5a35eccbaa3bab9aac\scala-continuations-library_2.11-1.0.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-plugin_2.11.1\1.0.2\f361a3283452c57fa30c1ee69448995de23c60f7\scala-continuations-plugin_2.11.1-1.0.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-reflect\2.11.1\6580347e61cc7f8e802941e7fde40fa83b8badeb\scala-reflect-2.11.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-swing_2.11\1.0.1\b1cdd92bd47b1e1837139c1c53020e86bb9112ae\scala-swing_2.11-1.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-xml_2.11\1.0.2\820fbca7e524b530fdadc594c39d49a21ea0337e\scala-xml_2.11-1.0.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\lzma\lzma\0.0.1\521616dc7487b42bef0e803bd2fa3faf668101d7\lzma-0.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.5.2\79846ba34cbd89e2422d74d53752f993dcc2ccaf\vecmath-1.5.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.trove4j\trove4j\3.0.3\42ccaf4761f0dfdfa805c9e340d99a755907e2dd\trove4j-3.0.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.ibm.icu\icu4j-core-mojang\51.2\63d216a9311cca6be337c1e458e587f99d382b84\icu4j-core-mojang-51.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.jopt-simple\jopt-simple\4.6\306816fb57cf94f108a43c95731b08934dcae15c\jopt-simple-4.6.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecjorbis\20101023\c73b5636faf089d9f00e8732a829577de25237ee\codecjorbis-20101023.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecwav\20101023\12f031cfe88fef5c1dd36c563c0a3a69bd7261da\codecwav-20101023.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\libraryjavasound\20101123\5c5e304366f75f9eaa2e8cca546a1fb6109348b3\libraryjavasound-20101123.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\librarylwjglopenal\20100824\73e80d0794c39665aec3f62eee88ca91676674ef\librarylwjglopenal-20100824.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\soundsystem\20120107\419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6\soundsystem-20120107.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\io.netty\netty-all\4.0.15.Final\85cad5eb4fc8ae2ecc990dc7c411771a091ded5\netty-all-4.0.15.Final.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\17.0\9c6ef172e8de35fd8d4d8783e4821e57cdef7445\guava-17.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.3.2\90a3822c38ec8c996e84c16a3477ef632cbc87a3\commons-lang3-3.3.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.9\9ce04e34240f674bc72680f8b843b1457383161a\commons-codec-1.9.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jutils\jutils\1.0.0\e12fe1fda814bd348c1579329c86943d2cd3c6a6\jutils-1.0.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\authlib\1.5.17\893a8c553c0cfc9b6fbdff023747e30152ab09ec\authlib-1.5.17.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.8.1\a698750c16740fd5b3871425f4cb3bbaa87f529d\commons-compress-1.8.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.3.3\18f4247ff4572a074444572cee34647c43e7c9c7\httpclient-4.3.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.1.3\f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f\commons-logging-1.1.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.3.2\31fbbff1ddbf98f3aa7377c94d33b0447c646b6e\httpcore-4.3.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.0-beta9\1dd66e68cccd907880229f9e2de1314bd13ff785\log4j-api-2.0-beta9.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.0-beta9\678861ba1b2e1fccb594bb0ca03114bb05da9695\log4j-core-2.0-beta9.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl\2.9.1\f58c5aabcef0e41718a564be9f8e412fff8db847\lwjgl-2.9.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl_util\2.9.1\290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e\lwjgl_util-2.9.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch\6.5\320a2dfd18513a5f41b4e75729df684488cbd925\twitch-6.5.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors\2.11.0\8ccfb6541de179bb1c4d45cf414acee069b7f78b\scala-actors-2.11.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\7ff832a6eb9ab6a767f1ade2b548092d0fa64795\jinput-platform-2.0.5-natives-linux.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\385ee093e01f587f30ee1c8a2ee7d408fd732e16\jinput-platform-2.0.5-natives-windows.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\53f9c919f34d2ca9de8c51fc4e1e8282029a9232\jinput-platform-2.0.5-natives-osx.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\9fdd0fd5aed0817063dcf95b69349a171f447ebd\twitch-platform-6.5-natives-windows-64.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\5f9d1ee26257b3a33f0ca06fed335ef462af659f\twitch-platform-6.5-natives-osx.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\18215140f010c05b9f86ef6f0f8871954d2ccebf\twitch-external-platform-4.5-natives-windows-32.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\c3cde57891b935d41b6680a9c5e1502eeab76d86\twitch-external-platform-4.5-natives-windows-64.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\4c517eca808522457dd95ee8fc1fbcdbb602efbe\lwjgl-platform-2.9.1-natives-windows.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\aa9aae879af8eb378e22cfc64db56ec2ca9a44d1\lwjgl-platform-2.9.1-natives-linux.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac\lwjgl-platform-2.9.1-natives-osx.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\start
-[00:39:42] [main/DEBUG] [FML/]: Java library path at launch is C:\Program Files\Java\jre1.8.0_51\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_51/bin/server;C:/Program Files/Java/jre1.8.0_51/bin;C:/Program Files/Java/jre1.8.0_51/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Broadcom\Broadcom 802.11 Network Adapter;;;;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Skype\Phone\;C:\Users\Toni.THE_RAIN\Desktop\eclipse;;.;C:/Users/Toni.THE_RAIN/.gradle/caches/minecraft/net/minecraft/minecraft_natives/1.8
-[00:39:42] [main/INFO] [FML/]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
-[00:39:42] [main/DEBUG] [FML/]: Instantiating coremod class FMLCorePlugin
-[00:39:42] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.fml.common.asm.transformers.AccessTransformer to enqueued access transformers
-[00:39:42] [main/DEBUG] [FML/]: Enqueued coremod FMLCorePlugin
-[00:39:42] [main/DEBUG] [FML/]: Instantiating coremod class FMLForgePlugin
-[00:39:42] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.transformers.ForgeAccessTransformer to enqueued access transformers
-[00:39:42] [main/DEBUG] [FML/]: Enqueued coremod FMLForgePlugin
-[00:39:42] [main/DEBUG] [FML/]: All fundamental core mods are successfully located
-[00:39:42] [main/DEBUG] [FML/]: Attempting to load commandline specified mods, relative to C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\.
-[00:39:42] [main/DEBUG] [FML/]: Discovering coremods
-[00:39:42] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
-[00:39:42] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
-[00:39:42] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
-[00:39:42] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[00:39:42] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[00:39:42] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[00:39:42] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[00:39:42] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
-[00:39:42] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[00:39:42] [main/DEBUG] [FML/]: Injecting coremod FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin} class transformers
-[00:39:42] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.BlamingTransformer
-[00:39:43] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.MarkerTransformer
-[00:39:43] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.SideTransformer
-[00:39:43] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriptionTransformer
-[00:39:43] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriberTransformer
-[00:39:43] [main/DEBUG] [FML/]: Injection complete
-[00:39:43] [main/DEBUG] [FML/]: Running coremod plugin for FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin}
-[00:39:43] [main/DEBUG] [FML/]: Running coremod plugin FMLCorePlugin
-[00:39:43] [main/ERROR] [FML/]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
-[00:39:51] [main/ERROR] [FML/]: FML appears to be missing any signature data. This is not a good thing
-[00:39:51] [main/DEBUG] [FML/]: Coremod plugin class FMLCorePlugin run successfully
-[00:39:51] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
-[00:39:51] [main/DEBUG] [FML/]: Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
-[00:39:51] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.classloading.FluidIdTransformer
-[00:39:51] [main/DEBUG] [FML/]: Injection complete
-[00:39:51] [main/DEBUG] [FML/]: Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
-[00:39:51] [main/DEBUG] [FML/]: Running coremod plugin FMLForgePlugin
-[00:39:51] [main/DEBUG] [FML/]: Coremod plugin class FMLForgePlugin run successfully
-[00:39:51] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
-[00:39:51] [main/DEBUG] [FML/]: Loaded 60 rules from AccessTransformer config file fml_at.cfg
-[00:39:51] [main/DEBUG] [FML/]: Loaded 121 rules from AccessTransformer config file forge_at.cfg
-[00:39:51] [main/DEBUG] [FML/]: Validating minecraft
-[00:39:52] [main/DEBUG] [FML/]: Minecraft validated, launching...
-[00:39:52] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
-[00:39:52] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
-[00:39:52] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
-[00:39:52] [main/INFO] [LaunchWrapper/]: Launching wrapped minecraft {net.minecraft.client.main.Main}
-[00:40:01] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - LanguageManager took 0.113s
-[00:40:01] [Client thread/INFO] [FML/]: Could not load splash.properties, will create a default one
-[00:40:01] [Client thread/ERROR] [FML/]: Could not save the splash.properties file
-java.io.FileNotFoundException: .\config\splash.properties (The system cannot find the path specified)
-	at java.io.FileOutputStream.open0(Native Method) ~[?:1.8.0_51]
-	at java.io.FileOutputStream.open(Unknown Source) ~[?:1.8.0_51]
-	at java.io.FileOutputStream.<init>(Unknown Source) ~[?:1.8.0_51]
-	at java.io.FileOutputStream.<init>(Unknown Source) ~[?:1.8.0_51]
-	at java.io.FileWriter.<init>(Unknown Source) ~[?:1.8.0_51]
-	at net.minecraftforge.fml.client.SplashProgress.start(SplashProgress.java:198) [SplashProgress.class:?]
-	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:199) [FMLClientHandler.class:?]
-	at net.minecraft.client.Minecraft.startGame(Minecraft.java:446) [Minecraft.class:?]
-	at net.minecraft.client.Minecraft.run(Minecraft.java:356) [Minecraft.class:?]
-	at net.minecraft.client.main.Main.main(Main.java:117) [Main.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
-	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
-	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
-	at GradleStart.main(Unknown Source) [start/:?]
-[00:40:02] [Client thread/INFO] [STDOUT/]: [net.minecraftforge.fml.client.SplashProgress:start:235]: ---- Minecraft Crash Report ----
-// I'm sorry, Dave.
+[15:33:01] [main/DEBUG] [FML/]: Injecting tracing printstreams for STDOUT/STDERR.
+[15:33:01] [main/INFO] [FML/]: Forge Mod Loader version 8.99.196.1499 for Minecraft 1.8 loading
+[15:33:01] [main/INFO] [FML/]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_51, running on Windows 7:amd64:6.1, installed at C:\Program Files\Java\jre1.8.0_51
+[15:33:01] [main/DEBUG] [FML/]: Java classpath at launch is C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\bin;C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\snapshot\20141130\forgeSrc-1.8-11.14.3.1499.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.minecraft\launchwrapper\1.12\111e7bea9c968cdb3d06ef4632bf7ff0824d0f36\launchwrapper-1.12.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-debug-all\5.0.3\f9e364ae2a66ce2a543012a4668856e84e5dab74\asm-debug-all-5.0.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe.akka\akka-actor_2.11\2.3.3\ed62e9fc709ca0f2ff1a3220daa8b70a2870078e\akka-actor_2.11-2.3.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe\config\1.2.1\f771f71fdae3df231bcd54d5ca2d57f0bf93f467\config-1.2.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-compiler\2.11.1\56ea2e6c025e0821f28d73ca271218b8dd04926a\scala-compiler-2.11.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-library_2.11\1.0.2\e517c53a7e9acd6b1668c5a35eccbaa3bab9aac\scala-continuations-library_2.11-1.0.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-plugin_2.11.1\1.0.2\f361a3283452c57fa30c1ee69448995de23c60f7\scala-continuations-plugin_2.11.1-1.0.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-reflect\2.11.1\6580347e61cc7f8e802941e7fde40fa83b8badeb\scala-reflect-2.11.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-swing_2.11\1.0.1\b1cdd92bd47b1e1837139c1c53020e86bb9112ae\scala-swing_2.11-1.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-xml_2.11\1.0.2\820fbca7e524b530fdadc594c39d49a21ea0337e\scala-xml_2.11-1.0.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\lzma\lzma\0.0.1\521616dc7487b42bef0e803bd2fa3faf668101d7\lzma-0.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.5.2\79846ba34cbd89e2422d74d53752f993dcc2ccaf\vecmath-1.5.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.trove4j\trove4j\3.0.3\42ccaf4761f0dfdfa805c9e340d99a755907e2dd\trove4j-3.0.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.ibm.icu\icu4j-core-mojang\51.2\63d216a9311cca6be337c1e458e587f99d382b84\icu4j-core-mojang-51.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.jopt-simple\jopt-simple\4.6\306816fb57cf94f108a43c95731b08934dcae15c\jopt-simple-4.6.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecjorbis\20101023\c73b5636faf089d9f00e8732a829577de25237ee\codecjorbis-20101023.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecwav\20101023\12f031cfe88fef5c1dd36c563c0a3a69bd7261da\codecwav-20101023.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\libraryjavasound\20101123\5c5e304366f75f9eaa2e8cca546a1fb6109348b3\libraryjavasound-20101123.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\librarylwjglopenal\20100824\73e80d0794c39665aec3f62eee88ca91676674ef\librarylwjglopenal-20100824.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\soundsystem\20120107\419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6\soundsystem-20120107.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\io.netty\netty-all\4.0.15.Final\85cad5eb4fc8ae2ecc990dc7c411771a091ded5\netty-all-4.0.15.Final.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\17.0\9c6ef172e8de35fd8d4d8783e4821e57cdef7445\guava-17.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.3.2\90a3822c38ec8c996e84c16a3477ef632cbc87a3\commons-lang3-3.3.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.9\9ce04e34240f674bc72680f8b843b1457383161a\commons-codec-1.9.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jutils\jutils\1.0.0\e12fe1fda814bd348c1579329c86943d2cd3c6a6\jutils-1.0.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\authlib\1.5.17\893a8c553c0cfc9b6fbdff023747e30152ab09ec\authlib-1.5.17.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.8.1\a698750c16740fd5b3871425f4cb3bbaa87f529d\commons-compress-1.8.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.3.3\18f4247ff4572a074444572cee34647c43e7c9c7\httpclient-4.3.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.1.3\f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f\commons-logging-1.1.3.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.3.2\31fbbff1ddbf98f3aa7377c94d33b0447c646b6e\httpcore-4.3.2.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.0-beta9\1dd66e68cccd907880229f9e2de1314bd13ff785\log4j-api-2.0-beta9.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.0-beta9\678861ba1b2e1fccb594bb0ca03114bb05da9695\log4j-core-2.0-beta9.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl\2.9.1\f58c5aabcef0e41718a564be9f8e412fff8db847\lwjgl-2.9.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl_util\2.9.1\290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e\lwjgl_util-2.9.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch\6.5\320a2dfd18513a5f41b4e75729df684488cbd925\twitch-6.5.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors\2.11.0\8ccfb6541de179bb1c4d45cf414acee069b7f78b\scala-actors-2.11.0.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\7ff832a6eb9ab6a767f1ade2b548092d0fa64795\jinput-platform-2.0.5-natives-linux.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\385ee093e01f587f30ee1c8a2ee7d408fd732e16\jinput-platform-2.0.5-natives-windows.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\53f9c919f34d2ca9de8c51fc4e1e8282029a9232\jinput-platform-2.0.5-natives-osx.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\9fdd0fd5aed0817063dcf95b69349a171f447ebd\twitch-platform-6.5-natives-windows-64.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\5f9d1ee26257b3a33f0ca06fed335ef462af659f\twitch-platform-6.5-natives-osx.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\18215140f010c05b9f86ef6f0f8871954d2ccebf\twitch-external-platform-4.5-natives-windows-32.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\c3cde57891b935d41b6680a9c5e1502eeab76d86\twitch-external-platform-4.5-natives-windows-64.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\4c517eca808522457dd95ee8fc1fbcdbb602efbe\lwjgl-platform-2.9.1-natives-windows.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\aa9aae879af8eb378e22cfc64db56ec2ca9a44d1\lwjgl-platform-2.9.1-natives-linux.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac\lwjgl-platform-2.9.1-natives-osx.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar;C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\start
+[15:33:01] [main/DEBUG] [FML/]: Java library path at launch is C:\Program Files\Java\jre1.8.0_51\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_51/bin/server;C:/Program Files/Java/jre1.8.0_51/bin;C:/Program Files/Java/jre1.8.0_51/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Broadcom\Broadcom 802.11 Network Adapter;;;;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Skype\Phone\;C:\Users\Toni.THE_RAIN\Desktop\eclipse;;.;C:/Users/Toni.THE_RAIN/.gradle/caches/minecraft/net/minecraft/minecraft_natives/1.8
+[15:33:01] [main/INFO] [FML/]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[15:33:01] [main/DEBUG] [FML/]: Instantiating coremod class FMLCorePlugin
+[15:33:01] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.fml.common.asm.transformers.AccessTransformer to enqueued access transformers
+[15:33:01] [main/DEBUG] [FML/]: Enqueued coremod FMLCorePlugin
+[15:33:01] [main/DEBUG] [FML/]: Instantiating coremod class FMLForgePlugin
+[15:33:01] [main/DEBUG] [FML/]: Added access transformer class net.minecraftforge.transformers.ForgeAccessTransformer to enqueued access transformers
+[15:33:01] [main/DEBUG] [FML/]: Enqueued coremod FMLForgePlugin
+[15:33:01] [main/DEBUG] [FML/]: All fundamental core mods are successfully located
+[15:33:01] [main/DEBUG] [FML/]: Attempting to load commandline specified mods, relative to C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\.
+[15:33:01] [main/DEBUG] [FML/]: Discovering coremods
+[15:33:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[15:33:01] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[15:33:01] [main/INFO] [GradleStart/]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[15:33:01] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[15:33:01] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[15:33:01] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[15:33:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[15:33:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[15:33:01] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[15:33:01] [main/DEBUG] [FML/]: Injecting coremod FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin} class transformers
+[15:33:01] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.BlamingTransformer
+[15:33:01] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.MarkerTransformer
+[15:33:02] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.SideTransformer
+[15:33:02] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriptionTransformer
+[15:33:02] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.fml.common.asm.transformers.EventSubscriberTransformer
+[15:33:02] [main/DEBUG] [FML/]: Injection complete
+[15:33:02] [main/DEBUG] [FML/]: Running coremod plugin for FMLCorePlugin {net.minecraftforge.fml.relauncher.FMLCorePlugin}
+[15:33:02] [main/DEBUG] [FML/]: Running coremod plugin FMLCorePlugin
+[15:33:02] [main/ERROR] [FML/]: The binary patch set is missing. Either you are in a development environment, or things are not going to work!
+[15:33:06] [main/ERROR] [FML/]: FML appears to be missing any signature data. This is not a good thing
+[15:33:06] [main/DEBUG] [FML/]: Coremod plugin class FMLCorePlugin run successfully
+[15:33:06] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[15:33:06] [main/DEBUG] [FML/]: Injecting coremod FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin} class transformers
+[15:33:06] [main/TRACE] [FML/]: Registering transformer net.minecraftforge.classloading.FluidIdTransformer
+[15:33:06] [main/DEBUG] [FML/]: Injection complete
+[15:33:06] [main/DEBUG] [FML/]: Running coremod plugin for FMLForgePlugin {net.minecraftforge.classloading.FMLForgePlugin}
+[15:33:06] [main/DEBUG] [FML/]: Running coremod plugin FMLForgePlugin
+[15:33:06] [main/DEBUG] [FML/]: Coremod plugin class FMLForgePlugin run successfully
+[15:33:06] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[15:33:06] [main/DEBUG] [FML/]: Loaded 60 rules from AccessTransformer config file fml_at.cfg
+[15:33:06] [main/DEBUG] [FML/]: Loaded 121 rules from AccessTransformer config file forge_at.cfg
+[15:33:06] [main/DEBUG] [FML/]: Validating minecraft
+[15:33:07] [main/DEBUG] [FML/]: Minecraft validated, launching...
+[15:33:07] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[15:33:07] [main/INFO] [LaunchWrapper/]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[15:33:07] [main/INFO] [LaunchWrapper/]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[15:33:07] [main/INFO] [LaunchWrapper/]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[15:33:15] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - LanguageManager took 0.010s
+[15:33:15] [Client thread/INFO] [STDOUT/]: [net.minecraftforge.fml.client.SplashProgress:start:235]: ---- Minecraft Crash Report ----
+// Ouch. That hurt :(
 
-Time: 7/30/15 12:40 AM
+Time: 8/7/15 3:33 PM
 Description: Loading screen debug info
 
 This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
@@ -90,303 +69,601 @@ Details:
 	Operating System: Windows 7 (amd64) version 6.1
 	Java Version: 1.8.0_51, Oracle Corporation
 	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
-	Memory: 957703328 bytes (913 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	Memory: 733509896 bytes (699 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
 	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
 	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
 	FML: 
 	Loaded coremods (and transformers): 
 	GL info: ' Vendor: 'Intel' Version: '3.1.0 - Build 9.17.10.2932' Renderer: 'Intel(R) HD Graphics 3000'
-[00:40:02] [Client thread/INFO] [MinecraftForge/]: Attempting early MinecraftForge initialization
-[00:40:02] [Client thread/INFO] [FML/]: MinecraftForge v11.14.3.1499 Initialized
-[00:40:02] [Client thread/INFO] [FML/]: Replaced 204 ore recipies
-[00:40:02] [Client thread/INFO] [MinecraftForge/]: Completed early MinecraftForge initialization
-[00:40:02] [Client thread/DEBUG] [FML/]: No config directory found, creating one: C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\config
-[00:40:02] [Client thread/INFO] [FML/]: Config directory created successfully
-[00:40:02] [Client thread/DEBUG] [FML/]: File C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\config\injectedDependencies.json not found. No dependencies injected
-[00:40:03] [Client thread/DEBUG] [FML/]: Building injected Mod Containers [net.minecraftforge.fml.common.FMLContainer, net.minecraftforge.common.ForgeModContainer]
-[00:40:03] [Client thread/DEBUG] [FML/]: Attempting to load mods contained in the minecraft jar file and associated classes
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\bin, examining for mod candidates
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\snapshot\20141130\forgeSrc-1.8-11.14.3.1499.jar, examining for mod candidates
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.minecraft\launchwrapper\1.12\111e7bea9c968cdb3d06ef4632bf7ff0824d0f36\launchwrapper-1.12.jar
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-debug-all\5.0.3\f9e364ae2a66ce2a543012a4668856e84e5dab74\asm-debug-all-5.0.3.jar, examining for mod candidates
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe.akka\akka-actor_2.11\2.3.3\ed62e9fc709ca0f2ff1a3220daa8b70a2870078e\akka-actor_2.11-2.3.3.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe\config\1.2.1\f771f71fdae3df231bcd54d5ca2d57f0bf93f467\config-1.2.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-compiler\2.11.1\56ea2e6c025e0821f28d73ca271218b8dd04926a\scala-compiler-2.11.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-library_2.11\1.0.2\e517c53a7e9acd6b1668c5a35eccbaa3bab9aac\scala-continuations-library_2.11-1.0.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-plugin_2.11.1\1.0.2\f361a3283452c57fa30c1ee69448995de23c60f7\scala-continuations-plugin_2.11.1-1.0.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-reflect\2.11.1\6580347e61cc7f8e802941e7fde40fa83b8badeb\scala-reflect-2.11.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-swing_2.11\1.0.1\b1cdd92bd47b1e1837139c1c53020e86bb9112ae\scala-swing_2.11-1.0.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-xml_2.11\1.0.2\820fbca7e524b530fdadc594c39d49a21ea0337e\scala-xml_2.11-1.0.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\lzma\lzma\0.0.1\521616dc7487b42bef0e803bd2fa3faf668101d7\lzma-0.0.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.5.2\79846ba34cbd89e2422d74d53752f993dcc2ccaf\vecmath-1.5.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.trove4j\trove4j\3.0.3\42ccaf4761f0dfdfa805c9e340d99a755907e2dd\trove4j-3.0.3.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.ibm.icu\icu4j-core-mojang\51.2\63d216a9311cca6be337c1e458e587f99d382b84\icu4j-core-mojang-51.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.jopt-simple\jopt-simple\4.6\306816fb57cf94f108a43c95731b08934dcae15c\jopt-simple-4.6.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecjorbis\20101023\c73b5636faf089d9f00e8732a829577de25237ee\codecjorbis-20101023.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecwav\20101023\12f031cfe88fef5c1dd36c563c0a3a69bd7261da\codecwav-20101023.jar
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\libraryjavasound\20101123\5c5e304366f75f9eaa2e8cca546a1fb6109348b3\libraryjavasound-20101123.jar, examining for mod candidates
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\librarylwjglopenal\20100824\73e80d0794c39665aec3f62eee88ca91676674ef\librarylwjglopenal-20100824.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\soundsystem\20120107\419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6\soundsystem-20120107.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\io.netty\netty-all\4.0.15.Final\85cad5eb4fc8ae2ecc990dc7c411771a091ded5\netty-all-4.0.15.Final.jar
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\17.0\9c6ef172e8de35fd8d4d8783e4821e57cdef7445\guava-17.0.jar, examining for mod candidates
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.3.2\90a3822c38ec8c996e84c16a3477ef632cbc87a3\commons-lang3-3.3.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.9\9ce04e34240f674bc72680f8b843b1457383161a\commons-codec-1.9.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jutils\jutils\1.0.0\e12fe1fda814bd348c1579329c86943d2cd3c6a6\jutils-1.0.0.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\authlib\1.5.17\893a8c553c0cfc9b6fbdff023747e30152ab09ec\authlib-1.5.17.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.8.1\a698750c16740fd5b3871425f4cb3bbaa87f529d\commons-compress-1.8.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.3.3\18f4247ff4572a074444572cee34647c43e7c9c7\httpclient-4.3.3.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.1.3\f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f\commons-logging-1.1.3.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.3.2\31fbbff1ddbf98f3aa7377c94d33b0447c646b6e\httpcore-4.3.2.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.0-beta9\1dd66e68cccd907880229f9e2de1314bd13ff785\log4j-api-2.0-beta9.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.0-beta9\678861ba1b2e1fccb594bb0ca03114bb05da9695\log4j-core-2.0-beta9.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl\2.9.1\f58c5aabcef0e41718a564be9f8e412fff8db847\lwjgl-2.9.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl_util\2.9.1\290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e\lwjgl_util-2.9.1.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch\6.5\320a2dfd18513a5f41b4e75729df684488cbd925\twitch-6.5.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors\2.11.0\8ccfb6541de179bb1c4d45cf414acee069b7f78b\scala-actors-2.11.0.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\7ff832a6eb9ab6a767f1ade2b548092d0fa64795\jinput-platform-2.0.5-natives-linux.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\385ee093e01f587f30ee1c8a2ee7d408fd732e16\jinput-platform-2.0.5-natives-windows.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\53f9c919f34d2ca9de8c51fc4e1e8282029a9232\jinput-platform-2.0.5-natives-osx.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\9fdd0fd5aed0817063dcf95b69349a171f447ebd\twitch-platform-6.5-natives-windows-64.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\5f9d1ee26257b3a33f0ca06fed335ef462af659f\twitch-platform-6.5-natives-osx.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\18215140f010c05b9f86ef6f0f8871954d2ccebf\twitch-external-platform-4.5-natives-windows-32.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\c3cde57891b935d41b6680a9c5e1502eeab76d86\twitch-external-platform-4.5-natives-windows-64.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\4c517eca808522457dd95ee8fc1fbcdbb602efbe\lwjgl-platform-2.9.1-natives-windows.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\aa9aae879af8eb378e22cfc64db56ec2ca9a44d1\lwjgl-platform-2.9.1-natives-linux.jar
-[00:40:03] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac\lwjgl-platform-2.9.1-natives-osx.jar
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar, examining for mod candidates
-[00:40:03] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\start, examining for mod candidates
-[00:40:03] [Client thread/DEBUG] [FML/]: Minecraft jar mods loaded successfully
-[00:40:03] [Client thread/INFO] [FML/]: Found 0 mods from the command line. Injecting into mod discoverer
-[00:40:03] [Client thread/INFO] [FML/]: Searching C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\mods for mods
-[00:40:03] [Client thread/DEBUG] [FML/]: Examining directory bin for potential mods
-[00:40:03] [Client thread/DEBUG] [FML/]: Found an mcmod.info file in directory bin
-[00:40:03] [Client thread/TRACE] [FML/]: Recursing into package com
-[00:40:03] [Client thread/TRACE] [FML/]: Recursing into package com.example
-[00:40:03] [Client thread/TRACE] [FML/]: Recursing into package com.example.examplemod
-[00:40:03] [Client thread/DEBUG] [FML/]: Identified a mod of type Lnet/minecraftforge/fml/common/Mod; (com.example.examplemod.ExampleMod) - loading
-[00:40:03] [Client thread/TRACE] [examplemod/]: Parsed dependency info : [] [] []
-[00:40:03] [Client thread/DEBUG] [FML/]: Examining file forgeSrc-1.8-11.14.3.1499.jar for potential mods
-[00:40:03] [Client thread/DEBUG] [FML/]: The mod container forgeSrc-1.8-11.14.3.1499.jar appears to be missing an mcmod.info file
-[00:40:07] [Client thread/DEBUG] [FML/]: Examining file asm-debug-all-5.0.3.jar for potential mods
-[00:40:07] [Client thread/DEBUG] [FML/]: The mod container asm-debug-all-5.0.3.jar appears to be missing an mcmod.info file
-[00:40:07] [Client thread/DEBUG] [FML/]: Examining file libraryjavasound-20101123.jar for potential mods
-[00:40:07] [Client thread/DEBUG] [FML/]: The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
-[00:40:07] [Client thread/DEBUG] [FML/]: Examining file guava-17.0.jar for potential mods
-[00:40:07] [Client thread/DEBUG] [FML/]: The mod container guava-17.0.jar appears to be missing an mcmod.info file
-[00:40:09] [Client thread/DEBUG] [FML/]: Examining file jsr305-2.0.1.jar for potential mods
-[00:40:09] [Client thread/DEBUG] [FML/]: The mod container jsr305-2.0.1.jar appears to be missing an mcmod.info file
-[00:40:09] [Client thread/DEBUG] [FML/]: Examining directory start for potential mods
-[00:40:09] [Client thread/DEBUG] [FML/]: No mcmod.info file found in directory start
-[00:40:09] [Client thread/TRACE] [FML/]: Recursing into package net
-[00:40:09] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge
-[00:40:09] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle
-[00:40:09] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle.tweakers
-[00:40:09] [Client thread/INFO] [FML/]: Forge Mod Loader has identified 4 mods to load
-[00:40:09] [Client thread/TRACE] [FML/]: Received a system property request ''
-[00:40:09] [Client thread/TRACE] [FML/]: System property request managing the state of 0 mods
-[00:40:09] [Client thread/DEBUG] [FML/]: After merging, found state information for 0 mods
-[00:40:09] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1499.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
-[00:40:10] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1499.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
-[00:40:10] [Client thread/DEBUG] [examplemod/]: Enabling mod examplemod
-[00:40:10] [Client thread/TRACE] [FML/]: Verifying mod requirements are satisfied
-[00:40:10] [Client thread/TRACE] [FML/]: All mod requirements are satisfied
-[00:40:10] [Client thread/TRACE] [FML/]: Sorting mods into an ordered list
-[00:40:10] [Client thread/TRACE] [FML/]: Mod sorting completed successfully
-[00:40:10] [Client thread/DEBUG] [FML/]: Mod sorting data
-[00:40:10] [Client thread/DEBUG] [FML/]: 	examplemod(Example Mod:1.0): bin ()
-[00:40:10] [Client thread/TRACE] [mcp/mcp]: Sending event FMLConstructionEvent to mod mcp
-[00:40:10] [Client thread/TRACE] [mcp/mcp]: Sent event FMLConstructionEvent to mod mcp
-[00:40:10] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Coder Pack took 0.025s
-[00:40:10] [Client thread/TRACE] [FML/FML]: Sending event FMLConstructionEvent to mod FML
-[00:40:10] [Client thread/TRACE] [FML/FML]: Mod FML is using network checker : Invoking method checkModLists
-[00:40:10] [Client thread/TRACE] [FML/FML]: Testing mod FML to verify it accepts its own version in a remote connection
-[00:40:10] [Client thread/TRACE] [FML/FML]: The mod FML accepts its own version (8.0.99.99)
-[00:40:10] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, examplemod] at CLIENT
-[00:40:10] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, examplemod] at SERVER
-[00:40:11] [Client thread/TRACE] [FML/FML]: Sent event FMLConstructionEvent to mod FML
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Forge Mod Loader took 1.573s
-[00:40:11] [Client thread/TRACE] [Forge/Forge]: Sending event FMLConstructionEvent to mod Forge
-[00:40:11] [Client thread/TRACE] [FML/Forge]: Mod Forge is using network checker : No network checking performed
-[00:40:11] [Client thread/TRACE] [FML/Forge]: Testing mod Forge to verify it accepts its own version in a remote connection
-[00:40:11] [Client thread/TRACE] [FML/Forge]: The mod Forge accepts its own version (11.14.3.1499)
-[00:40:11] [Client thread/TRACE] [Forge/Forge]: Sent event FMLConstructionEvent to mod Forge
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Forge took 0.047s
-[00:40:11] [Client thread/TRACE] [examplemod/examplemod]: Sending event FMLConstructionEvent to mod examplemod
-[00:40:11] [Client thread/TRACE] [FML/examplemod]: Mod examplemod is using network checker : Accepting version 1.0
-[00:40:11] [Client thread/TRACE] [FML/examplemod]: Testing mod examplemod to verify it accepts its own version in a remote connection
-[00:40:11] [Client thread/TRACE] [FML/examplemod]: The mod examplemod accepts its own version (1.0)
-[00:40:11] [Client thread/DEBUG] [FML/examplemod]: Attempting to inject @SidedProxy classes into examplemod
-[00:40:11] [Client thread/TRACE] [examplemod/examplemod]: Sent event FMLConstructionEvent to mod examplemod
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Example Mod took 0.066s
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Finished: Construction took 1.711s
-[00:40:11] [Client thread/DEBUG] [FML/]: Mod signature data
-[00:40:11] [Client thread/DEBUG] [FML/]:  	Valid Signatures:
-[00:40:11] [Client thread/DEBUG] [FML/]:  	Missing Signatures:
-[00:40:11] [Client thread/DEBUG] [FML/]: 		mcp	(Minecraft Coder Pack	9.05)	minecraft.jar
-[00:40:11] [Client thread/DEBUG] [FML/]: 		FML	(Forge Mod Loader	8.0.99.99)	forgeSrc-1.8-11.14.3.1499.jar
-[00:40:11] [Client thread/DEBUG] [FML/]: 		Forge	(Minecraft Forge	11.14.3.1499)	forgeSrc-1.8-11.14.3.1499.jar
-[00:40:11] [Client thread/DEBUG] [FML/]: 		examplemod	(Example Mod	1.0)	bin
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.023s
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.042s
-[00:40:11] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.070s
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Example Mod took 0.003s
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading - LanguageManager took 0.194s
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 0.196s
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 0.334s
-[00:40:12] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
-[00:40:12] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
-[00:40:12] [Client thread/DEBUG] [Example Mod/]: Mod Example Mod is missing a pack.mcmeta file, substituting a dummy one
-[00:40:12] [Client thread/INFO] [FML/]: Processing ObjectHolder annotations
-[00:40:12] [Client thread/INFO] [FML/]: Found 384 ObjectHolder annotations
-[00:40:12] [Client thread/INFO] [FML/]: Identifying ItemStackHolder annotations
-[00:40:12] [Client thread/INFO] [FML/]: Found 0 ItemStackHolder annotations
-[00:40:12] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPreInitializationEvent to mod mcp
-[00:40:12] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPreInitializationEvent to mod mcp
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Coder Pack took 0.002s
-[00:40:12] [Client thread/TRACE] [FML/FML]: Sending event FMLPreInitializationEvent to mod FML
-[00:40:12] [Client thread/TRACE] [FML/FML]: Sent event FMLPreInitializationEvent to mod FML
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Forge Mod Loader took 0.101s
-[00:40:12] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPreInitializationEvent to mod Forge
-[00:40:12] [Client thread/INFO] [FML/Forge]: Configured a dormant chunk cache size of 0
-[00:40:12] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPreInitializationEvent to mod Forge
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Forge took 0.236s
-[00:40:12] [Client thread/TRACE] [examplemod/examplemod]: Sending event FMLPreInitializationEvent to mod examplemod
-[00:40:12] [Client thread/TRACE] [examplemod/examplemod]: Sent event FMLPreInitializationEvent to mod examplemod
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Example Mod took 0.002s
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Finished: PreInitialization took 0.342s
-[00:40:12] [Client thread/INFO] [FML/]: Applying holder lookups
-[00:40:12] [Client thread/INFO] [FML/]: Holder lookups applied
-[00:40:12] [Client thread/INFO] [FML/]: Injecting itemstacks
-[00:40:12] [Client thread/INFO] [FML/]: Itemstack injection complete
-[00:40:12] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - TextureManager took 0.001s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - SoundHandler took 4.312s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.008s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.007s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - GrassColorReloadListener took 0.029s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FoliageColorReloadListener took 0.030s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - GL Setup took 0.001s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Texture Map took 0.019s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
-[00:40:17] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
-[00:40:22] [Client thread/INFO] [FML/]: Max texture size: 8192
-[00:40:22] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching - missingno took 0.004s
-[00:40:22] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.028s
-[00:40:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelManager took 6.170s
-[00:40:24] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Model Manager took 6.407s
-[00:40:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderItem took 0.008s
-[00:40:24] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Item Renderer took 0.735s
-[00:40:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - EntityRenderer took 0.000s
-[00:40:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - BlockRendererDispatcher took 0.000s
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - RenderGlobal took 0.000s
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Entity Renderer took 0.663s
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Finished: Rendering Setup took 7.824s
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sending event FMLInitializationEvent to mod mcp
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sent event FMLInitializationEvent to mod mcp
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Coder Pack took 0.001s
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sending event FMLInitializationEvent to mod FML
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sent event FMLInitializationEvent to mod FML
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Forge Mod Loader took 0.001s
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sending event FMLInitializationEvent to mod Forge
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sent event FMLInitializationEvent to mod Forge
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Minecraft Forge took 0.008s
-[00:40:25] [Client thread/TRACE] [examplemod/examplemod]: Sending event FMLInitializationEvent to mod examplemod
-[00:40:25] [Client thread/INFO] [STDOUT/examplemod]: [com.example.examplemod.ExampleMod:init:18]: DIRT BLOCK >> tile.dirt
-[00:40:25] [Client thread/TRACE] [examplemod/examplemod]: Sent event FMLInitializationEvent to mod examplemod
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: Initialization - Example Mod took 0.002s
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Finished: Initialization took 0.012s
-[00:40:25] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod mcp
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sending event IMCEvent to mod mcp
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sent event IMCEvent to mod mcp
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Coder Pack took 0.014s
-[00:40:25] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod FML
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sending event IMCEvent to mod FML
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sent event IMCEvent to mod FML
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Forge Mod Loader took 0.007s
-[00:40:25] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod Forge
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sending event IMCEvent to mod Forge
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sent event IMCEvent to mod Forge
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Minecraft Forge took 0.001s
-[00:40:25] [Client thread/TRACE] [FML/]: Attempting to deliver 0 IMC messages to mod examplemod
-[00:40:25] [Client thread/TRACE] [examplemod/examplemod]: Sending event IMCEvent to mod examplemod
-[00:40:25] [Client thread/TRACE] [examplemod/examplemod]: Sent event IMCEvent to mod examplemod
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: InterModComms$IMC - Example Mod took 0.001s
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Finished: InterModComms$IMC took 0.024s
-[00:40:25] [Client thread/INFO] [FML/]: Injecting itemstacks
-[00:40:25] [Client thread/INFO] [FML/]: Itemstack injection complete
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPostInitializationEvent to mod mcp
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPostInitializationEvent to mod mcp
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Coder Pack took 0.001s
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sending event FMLPostInitializationEvent to mod FML
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sent event FMLPostInitializationEvent to mod FML
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Forge Mod Loader took 0.001s
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPostInitializationEvent to mod Forge
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPostInitializationEvent to mod Forge
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Minecraft Forge took 0.455s
-[00:40:25] [Client thread/TRACE] [examplemod/examplemod]: Sending event FMLPostInitializationEvent to mod examplemod
-[00:40:25] [Client thread/TRACE] [examplemod/examplemod]: Sent event FMLPostInitializationEvent to mod examplemod
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: PostInitialization - Example Mod took 0.002s
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Finished: PostInitialization took 0.459s
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sending event FMLLoadCompleteEvent to mod mcp
-[00:40:25] [Client thread/TRACE] [mcp/mcp]: Sent event FMLLoadCompleteEvent to mod mcp
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Coder Pack took 0.001s
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sending event FMLLoadCompleteEvent to mod FML
-[00:40:25] [Client thread/TRACE] [FML/FML]: Sent event FMLLoadCompleteEvent to mod FML
-[00:40:25] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Forge Mod Loader took 0.001s
-[00:40:25] [Client thread/TRACE] [Forge/Forge]: Sending event FMLLoadCompleteEvent to mod Forge
-[00:40:26] [Client thread/DEBUG] [FML/Forge]: Forge RecipeSorter Baking:
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   14: RecipeEntry("Before", UNKNOWN, )
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   13: RecipeEntry("minecraft:shaped", SHAPED, net.minecraft.item.crafting.ShapedRecipes) Before: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   12: RecipeEntry("forge:shapedore", SHAPED, net.minecraftforge.oredict.ShapedOreRecipe) Before: minecraft:shapeless After: minecraft:shaped
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   11: RecipeEntry("minecraft:mapextending", SHAPED, net.minecraft.item.crafting.RecipesMapExtending) Before: minecraft:shapeless After: minecraft:shaped
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   10: RecipeEntry("minecraft:shapeless", SHAPELESS, net.minecraft.item.crafting.ShapelessRecipes) After: minecraft:shaped
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   9: RecipeEntry("minecraft:repair", SHAPELESS, net.minecraft.item.crafting.RecipeRepairItem) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   8: RecipeEntry("forge:shapelessore", SHAPELESS, net.minecraftforge.oredict.ShapelessOreRecipe) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   7: RecipeEntry("minecraft:armordyes", SHAPELESS, net.minecraft.item.crafting.RecipesArmorDyes) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   6: RecipeEntry("minecraft:fireworks", SHAPELESS, net.minecraft.item.crafting.RecipeFireworks) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   5: RecipeEntry("minecraft:pattern_add", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeAddPattern) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   4: RecipeEntry("minecraft:pattern_dupe", SHAPELESS, net.minecraft.item.crafting.RecipesBanners$RecipeDuplicatePattern) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   3: RecipeEntry("minecraft:bookcloning", SHAPELESS, net.minecraft.item.crafting.RecipeBookCloning) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   2: RecipeEntry("minecraft:mapcloning", SHAPELESS, net.minecraft.item.crafting.RecipesMapCloning) After: minecraft:shapeless
-[00:40:26] [Client thread/DEBUG] [FML/Forge]:   1: RecipeEntry("After", UNKNOWN, )
-[00:40:26] [Client thread/DEBUG] [FML/Forge]: Sorting recipies
-[00:40:26] [Client thread/TRACE] [Forge/Forge]: Sent event FMLLoadCompleteEvent to mod Forge
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Minecraft Forge took 0.029s
-[00:40:26] [Client thread/TRACE] [examplemod/examplemod]: Sending event FMLLoadCompleteEvent to mod examplemod
-[00:40:26] [Client thread/TRACE] [examplemod/examplemod]: Sent event FMLLoadCompleteEvent to mod examplemod
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: LoadComplete - Example Mod took 0.001s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Finished: LoadComplete took 0.032s
-[00:40:26] [Client thread/DEBUG] [FML/]: Freezing block and item id maps
-[00:40:26] [Client thread/DEBUG] [FML/]: Registry consistency check successful
-[00:40:26] [Client thread/DEBUG] [FML/]: Registry consistency check successful
-[00:40:26] [Client thread/INFO] [FML/]: Forge Mod Loader has successfully loaded 4 mods
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.003s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.063s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.060s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Example Mod took 0.008s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/atlas/blocks.png took 0.000s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii.png took 0.132s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:dynamic/lightMap_1 took 0.004s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/misc/forcefield.png took 0.028s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Step: Reloading Texture Manager - minecraft:textures/font/ascii_sga.png took 0.014s
-[00:40:26] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading Texture Manager took 0.178s
-[00:40:34] [Client thread/INFO] [FML/]: Max texture size: 8192
-[00:40:35] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 1.129s
-[00:40:35] [Client thread/DEBUG] [FML/]: Bar Finished: Mipmap generation took 0.446s
-[00:40:35] [Client thread/DEBUG] [FML/]: Bar Finished: Texture stitching took 0.077s
-[00:40:36] [Client thread/DEBUG] [FML/]: Bar Finished: Texture creation took 0.827s
-[00:40:37] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading took 11.075s
-[00:40:37] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 11.077s
-[00:40:37] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 11.210s
-[00:40:37] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
-[00:40:37] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
-[00:40:37] [Client thread/DEBUG] [Example Mod/]: Mod Example Mod is missing a pack.mcmeta file, substituting a dummy one
-[00:40:37] [Client thread/DEBUG] [FML/]: Bar Finished: Loading took 34.838s
+[15:33:15] [Client thread/INFO] [MinecraftForge/]: Attempting early MinecraftForge initialization
+[15:33:15] [Client thread/INFO] [FML/]: MinecraftForge v11.14.3.1499 Initialized
+[15:33:15] [Client thread/INFO] [FML/]: Replaced 204 ore recipies
+[15:33:15] [Client thread/INFO] [MinecraftForge/]: Completed early MinecraftForge initialization
+[15:33:15] [Client thread/DEBUG] [FML/]: File C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\config\injectedDependencies.json not found. No dependencies injected
+[15:33:15] [Client thread/DEBUG] [FML/]: Building injected Mod Containers [net.minecraftforge.fml.common.FMLContainer, net.minecraftforge.common.ForgeModContainer]
+[15:33:16] [Client thread/DEBUG] [FML/]: Attempting to load mods contained in the minecraft jar file and associated classes
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\bin, examining for mod candidates
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\snapshot\20141130\forgeSrc-1.8-11.14.3.1499.jar, examining for mod candidates
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.minecraft\launchwrapper\1.12\111e7bea9c968cdb3d06ef4632bf7ff0824d0f36\launchwrapper-1.12.jar
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-debug-all\5.0.3\f9e364ae2a66ce2a543012a4668856e84e5dab74\asm-debug-all-5.0.3.jar, examining for mod candidates
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe.akka\akka-actor_2.11\2.3.3\ed62e9fc709ca0f2ff1a3220daa8b70a2870078e\akka-actor_2.11-2.3.3.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.typesafe\config\1.2.1\f771f71fdae3df231bcd54d5ca2d57f0bf93f467\config-1.2.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors-migration_2.11\1.1.0\dfa8bc42b181d5b9f1a5dd147f8ae308b893eb6f\scala-actors-migration_2.11-1.1.0.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-compiler\2.11.1\56ea2e6c025e0821f28d73ca271218b8dd04926a\scala-compiler-2.11.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-library_2.11\1.0.2\e517c53a7e9acd6b1668c5a35eccbaa3bab9aac\scala-continuations-library_2.11-1.0.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.plugins\scala-continuations-plugin_2.11.1\1.0.2\f361a3283452c57fa30c1ee69448995de23c60f7\scala-continuations-plugin_2.11.1-1.0.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-library\2.11.1\e11da23da3eabab9f4777b9220e60d44c1aab6a\scala-library-2.11.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-parser-combinators_2.11\1.0.1\f05d7345bf5a58924f2837c6c1f4d73a938e1ff0\scala-parser-combinators_2.11-1.0.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-reflect\2.11.1\6580347e61cc7f8e802941e7fde40fa83b8badeb\scala-reflect-2.11.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-swing_2.11\1.0.1\b1cdd92bd47b1e1837139c1c53020e86bb9112ae\scala-swing_2.11-1.0.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang.modules\scala-xml_2.11\1.0.2\820fbca7e524b530fdadc594c39d49a21ea0337e\scala-xml_2.11-1.0.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\lzma\lzma\0.0.1\521616dc7487b42bef0e803bd2fa3faf668101d7\lzma-0.0.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\java3d\vecmath\1.5.2\79846ba34cbd89e2422d74d53752f993dcc2ccaf\vecmath-1.5.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.trove4j\trove4j\3.0.3\42ccaf4761f0dfdfa805c9e340d99a755907e2dd\trove4j-3.0.3.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.ibm.icu\icu4j-core-mojang\51.2\63d216a9311cca6be337c1e458e587f99d382b84\icu4j-core-mojang-51.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.sf.jopt-simple\jopt-simple\4.6\306816fb57cf94f108a43c95731b08934dcae15c\jopt-simple-4.6.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecjorbis\20101023\c73b5636faf089d9f00e8732a829577de25237ee\codecjorbis-20101023.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\codecwav\20101023\12f031cfe88fef5c1dd36c563c0a3a69bd7261da\codecwav-20101023.jar
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\libraryjavasound\20101123\5c5e304366f75f9eaa2e8cca546a1fb6109348b3\libraryjavasound-20101123.jar, examining for mod candidates
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\librarylwjglopenal\20100824\73e80d0794c39665aec3f62eee88ca91676674ef\librarylwjglopenal-20100824.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.paulscode\soundsystem\20120107\419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6\soundsystem-20120107.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\io.netty\netty-all\4.0.15.Final\85cad5eb4fc8ae2ecc990dc7c411771a091ded5\netty-all-4.0.15.Final.jar
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\17.0\9c6ef172e8de35fd8d4d8783e4821e57cdef7445\guava-17.0.jar, examining for mod candidates
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.3.2\90a3822c38ec8c996e84c16a3477ef632cbc87a3\commons-lang3-3.3.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.4\b1b6ea3b7e4aa4f492509a4952029cd8e48019ad\commons-io-2.4.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-codec\commons-codec\1.9\9ce04e34240f674bc72680f8b843b1457383161a\commons-codec-1.9.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jutils\jutils\1.0.0\e12fe1fda814bd348c1579329c86943d2cd3c6a6\jutils-1.0.0.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\authlib\1.5.17\893a8c553c0cfc9b6fbdff023747e30152ab09ec\authlib-1.5.17.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.mojang\realms\1.6.1\5655f6fb44aece10e5b3ad7cfee3e6936031c068\realms-1.6.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-compress\1.8.1\a698750c16740fd5b3871425f4cb3bbaa87f529d\commons-compress-1.8.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpclient\4.3.3\18f4247ff4572a074444572cee34647c43e7c9c7\httpclient-4.3.3.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\commons-logging\commons-logging\1.1.3\f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f\commons-logging-1.1.3.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.3.2\31fbbff1ddbf98f3aa7377c94d33b0447c646b6e\httpcore-4.3.2.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-api\2.0-beta9\1dd66e68cccd907880229f9e2de1314bd13ff785\log4j-api-2.0-beta9.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.apache.logging.log4j\log4j-core\2.0-beta9\678861ba1b2e1fccb594bb0ca03114bb05da9695\log4j-core-2.0-beta9.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl\2.9.1\f58c5aabcef0e41718a564be9f8e412fff8db847\lwjgl-2.9.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl_util\2.9.1\290d7ba8a1bd9566f5ddf16ad06f09af5ec9b20e\lwjgl_util-2.9.1.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch\6.5\320a2dfd18513a5f41b4e75729df684488cbd925\twitch-6.5.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.scala-lang\scala-actors\2.11.0\8ccfb6541de179bb1c4d45cf414acee069b7f78b\scala-actors-2.11.0.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\7ff832a6eb9ab6a767f1ade2b548092d0fa64795\jinput-platform-2.0.5-natives-linux.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\385ee093e01f587f30ee1c8a2ee7d408fd732e16\jinput-platform-2.0.5-natives-windows.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput-platform\2.0.5\53f9c919f34d2ca9de8c51fc4e1e8282029a9232\jinput-platform-2.0.5-natives-osx.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\206c4ccaecdbcfd2a1631150c69a97bbc9c20c11\twitch-platform-6.5-natives-windows-32.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\9fdd0fd5aed0817063dcf95b69349a171f447ebd\twitch-platform-6.5-natives-windows-64.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-platform\6.5\5f9d1ee26257b3a33f0ca06fed335ef462af659f\twitch-platform-6.5-natives-osx.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\18215140f010c05b9f86ef6f0f8871954d2ccebf\twitch-external-platform-4.5-natives-windows-32.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\tv.twitch\twitch-external-platform\4.5\c3cde57891b935d41b6680a9c5e1502eeab76d86\twitch-external-platform-4.5-natives-windows-64.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\4c517eca808522457dd95ee8fc1fbcdbb602efbe\lwjgl-platform-2.9.1-natives-windows.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\aa9aae879af8eb378e22cfc64db56ec2ca9a44d1\lwjgl-platform-2.9.1-natives-linux.jar
+[15:33:16] [Client thread/TRACE] [FML/]: Skipping known library file C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\org.lwjgl.lwjgl\lwjgl-platform\2.9.1\2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac\lwjgl-platform-2.9.1-natives-osx.jar
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related file at C:\Users\Toni.THE_RAIN\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar, examining for mod candidates
+[15:33:16] [Client thread/DEBUG] [FML/]: Found a minecraft related directory at C:\Users\Toni.THE_RAIN\.gradle\caches\minecraft\net\minecraftforge\forge\1.8-11.14.3.1499\start, examining for mod candidates
+[15:33:16] [Client thread/DEBUG] [FML/]: Minecraft jar mods loaded successfully
+[15:33:16] [Client thread/INFO] [FML/]: Found 0 mods from the command line. Injecting into mod discoverer
+[15:33:16] [Client thread/INFO] [FML/]: Searching C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\mods for mods
+[15:33:16] [Client thread/DEBUG] [FML/]: Examining directory bin for potential mods
+[15:33:16] [Client thread/DEBUG] [FML/]: Found an mcmod.info file in directory bin
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.blockstates
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.lang
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.models
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.models.block
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.models.textures
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.sounds
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.blocks
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.gui
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.gui.fp
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.gui.statsgui
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.items
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.items.thehand
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.models
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.models.firepipe
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.models.powercounter
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.magiology.textures.particle
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.shaders
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.shaders.post
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.shaders.program
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.textures
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.textures.gui
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.textures.gui.container
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package assets.minecraft.textures.gui.container.creative_inventory
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.api
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.api.network
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.api.network.skeleton
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.api.power
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.clientdata
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.core
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.core.init
+[15:33:16] [Client thread/DEBUG] [FML/]: Identified a mod of type Lnet/minecraftforge/fml/common/Mod; (com.magiology.core.Magiology) - loading
+[15:33:16] [Client thread/TRACE] [magiology/]: Parsed dependency info : [] [] []
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.exceptions
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.forgepowered
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.forgepowered.event
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.forgepowered.packets
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.forgepowered.packets.generic
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.forgepowered.proxy
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.gui
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.gui.fpgui
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.gui.gui
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.gui.guiContainer
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.gui.guiparticels
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.animationhandelers
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.obj
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.obj.handeler
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.obj.handeler.revived
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.obj.handeler.revived.yayformc1_8
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.obj.handeler.revived.yayformc1_8.obj
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.handelers.obj.handeler.revived.yayformc1_8.techne
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.blocks
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.blocks.network
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.effect
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.effect.mc
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.entitys
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.items
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.items.armor
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.baterys
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.corecomponents
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.corecomponents.powertiles
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.hologram
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.network
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.network.interfaces
+[15:33:16] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.mcobjects.tileentityes.network.interfaces.registration
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.modedmcstuff
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.modedmcstuff.gui
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.modedmcstuff.guiContainer
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.modedmcstuff.items
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.objhelper
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.objhelper.helpers
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.objhelper.helpers.renderers
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.objhelper.helpers.renderers.tessellatorscripts
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.objhelper.partialtickshelper
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.objhelper.vectors
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.aftereffect
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.entityrender
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.itemrender
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.models
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.models.entitys
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.shaders
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.shaders.core
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.tilerender
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.tilerender.hologram
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.tilerender.isbhrrender
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.render.tilerender.network
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.structures
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.upgrades
+[15:33:17] [Client thread/TRACE] [FML/]: Recursing into package com.magiology.windowsgui
+[15:33:17] [Client thread/DEBUG] [FML/]: Examining file forgeSrc-1.8-11.14.3.1499.jar for potential mods
+[15:33:17] [Client thread/DEBUG] [FML/]: The mod container forgeSrc-1.8-11.14.3.1499.jar appears to be missing an mcmod.info file
+[15:33:19] [Client thread/DEBUG] [FML/]: Examining file asm-debug-all-5.0.3.jar for potential mods
+[15:33:19] [Client thread/DEBUG] [FML/]: The mod container asm-debug-all-5.0.3.jar appears to be missing an mcmod.info file
+[15:33:20] [Client thread/DEBUG] [FML/]: Examining file libraryjavasound-20101123.jar for potential mods
+[15:33:20] [Client thread/DEBUG] [FML/]: The mod container libraryjavasound-20101123.jar appears to be missing an mcmod.info file
+[15:33:20] [Client thread/DEBUG] [FML/]: Examining file guava-17.0.jar for potential mods
+[15:33:20] [Client thread/DEBUG] [FML/]: The mod container guava-17.0.jar appears to be missing an mcmod.info file
+[15:33:20] [Client thread/DEBUG] [FML/]: Examining file jsr305-2.0.1.jar for potential mods
+[15:33:20] [Client thread/DEBUG] [FML/]: The mod container jsr305-2.0.1.jar appears to be missing an mcmod.info file
+[15:33:20] [Client thread/DEBUG] [FML/]: Examining directory start for potential mods
+[15:33:20] [Client thread/DEBUG] [FML/]: No mcmod.info file found in directory start
+[15:33:20] [Client thread/TRACE] [FML/]: Recursing into package net
+[15:33:20] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge
+[15:33:20] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle
+[15:33:20] [Client thread/TRACE] [FML/]: Recursing into package net.minecraftforge.gradle.tweakers
+[15:33:20] [Client thread/INFO] [FML/]: Forge Mod Loader has identified 4 mods to load
+[15:33:20] [Client thread/TRACE] [FML/]: Received a system property request ''
+[15:33:20] [Client thread/TRACE] [FML/]: System property request managing the state of 0 mods
+[15:33:20] [Client thread/DEBUG] [FML/]: After merging, found state information for 0 mods
+[15:33:20] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1499.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
+[15:33:21] [Client thread/DEBUG] [FML/]: Found translations in forgeSrc-1.8-11.14.3.1499.jar [en_US, af_ZA, ar_SA, br_FR, ca_ES, cs_CZ, da_DK, de_DE, el_GR, en_US, es_ES, fa_IR, fi_FI, fr_FR, he_IL, hu_HU, it_IT, ja_JP, ko_KR, lt_LT, nb_NO, nl_NL, nn_NO, no_NO, pl_PL, pt_BR, pt_PT, ro_RO, ru_RU, sl_SI, sr_SP, sv_SE, tr_TR, uk_UA, vi_VN, zh_CN, zh_TW, en_US]
+[15:33:21] [Client thread/DEBUG] [magiology/]: Enabling mod magiology
+[15:33:21] [Client thread/DEBUG] [FML/]: Injecting found translation assets for lang en_US at assets/magiology/lang/en_US.lang into language system
+[15:33:21] [Client thread/TRACE] [FML/]: Verifying mod requirements are satisfied
+[15:33:21] [Client thread/TRACE] [FML/]: All mod requirements are satisfied
+[15:33:21] [Client thread/TRACE] [FML/]: Sorting mods into an ordered list
+[15:33:21] [Client thread/TRACE] [FML/]: Mod sorting completed successfully
+[15:33:21] [Client thread/DEBUG] [FML/]: Mod sorting data
+[15:33:21] [Client thread/DEBUG] [FML/]: 	magiology(Magiology:0.1052A): bin ()
+[15:33:21] [Client thread/TRACE] [mcp/mcp]: Sending event FMLConstructionEvent to mod mcp
+[15:33:21] [Client thread/TRACE] [mcp/mcp]: Sent event FMLConstructionEvent to mod mcp
+[15:33:21] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Coder Pack took 0.013s
+[15:33:21] [Client thread/TRACE] [FML/FML]: Sending event FMLConstructionEvent to mod FML
+[15:33:21] [Client thread/TRACE] [FML/FML]: Mod FML is using network checker : Invoking method checkModLists
+[15:33:21] [Client thread/TRACE] [FML/FML]: Testing mod FML to verify it accepts its own version in a remote connection
+[15:33:21] [Client thread/TRACE] [FML/FML]: The mod FML accepts its own version (8.0.99.99)
+[15:33:21] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, magiology] at CLIENT
+[15:33:21] [Client thread/INFO] [FML/FML]: Attempting connection with missing mods [mcp, FML, Forge, magiology] at SERVER
+[15:33:22] [Client thread/TRACE] [FML/FML]: Sent event FMLConstructionEvent to mod FML
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Forge Mod Loader took 0.898s
+[15:33:22] [Client thread/TRACE] [Forge/Forge]: Sending event FMLConstructionEvent to mod Forge
+[15:33:22] [Client thread/TRACE] [FML/Forge]: Mod Forge is using network checker : No network checking performed
+[15:33:22] [Client thread/TRACE] [FML/Forge]: Testing mod Forge to verify it accepts its own version in a remote connection
+[15:33:22] [Client thread/TRACE] [FML/Forge]: The mod Forge accepts its own version (11.14.3.1499)
+[15:33:22] [Client thread/TRACE] [Forge/Forge]: Sent event FMLConstructionEvent to mod Forge
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Minecraft Forge took 0.033s
+[15:33:22] [Client thread/TRACE] [magiology/magiology]: Sending event FMLConstructionEvent to mod magiology
+[15:33:22] [Client thread/TRACE] [FML/magiology]: Mod magiology is using network checker : Accepting version 0.1052A
+[15:33:22] [Client thread/TRACE] [FML/magiology]: Testing mod magiology to verify it accepts its own version in a remote connection
+[15:33:22] [Client thread/TRACE] [FML/magiology]: The mod magiology accepts its own version (0.1052A)
+[15:33:22] [Client thread/DEBUG] [FML/magiology]: Attempting to inject @SidedProxy classes into magiology
+[15:33:22] [Client thread/TRACE] [magiology/magiology]: Sent event FMLConstructionEvent to mod magiology
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Construction - Magiology took 0.153s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Finished: Construction took 1.098s
+[15:33:22] [Client thread/DEBUG] [FML/]: Mod signature data
+[15:33:22] [Client thread/DEBUG] [FML/]:  	Valid Signatures:
+[15:33:22] [Client thread/DEBUG] [FML/]:  	Missing Signatures:
+[15:33:22] [Client thread/DEBUG] [FML/]: 		mcp	(Minecraft Coder Pack	9.05)	minecraft.jar
+[15:33:22] [Client thread/DEBUG] [FML/]: 		FML	(Forge Mod Loader	8.0.99.99)	forgeSrc-1.8-11.14.3.1499.jar
+[15:33:22] [Client thread/DEBUG] [FML/]: 		Forge	(Minecraft Forge	11.14.3.1499)	forgeSrc-1.8-11.14.3.1499.jar
+[15:33:22] [Client thread/DEBUG] [FML/]: 		magiology	(Magiology	0.1052A)	bin
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Default took 0.010s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Forge Mod Loader took 0.039s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Minecraft Forge took 0.036s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - FMLFileResourcePack:Magiology took 0.011s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Finished: Reloading - LanguageManager took 0.074s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: Loading Resources - Reloading listeners took 0.075s
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resources took 0.172s
+[15:33:22] [Client thread/DEBUG] [Forge Mod Loader/]: Mod Forge Mod Loader is missing a pack.mcmeta file, substituting a dummy one
+[15:33:22] [Client thread/DEBUG] [Minecraft Forge/]: Mod Minecraft Forge is missing a pack.mcmeta file, substituting a dummy one
+[15:33:22] [Client thread/DEBUG] [Magiology/]: Mod Magiology is missing a pack.mcmeta file, substituting a dummy one
+[15:33:22] [Client thread/INFO] [FML/]: Processing ObjectHolder annotations
+[15:33:22] [Client thread/INFO] [FML/]: Found 384 ObjectHolder annotations
+[15:33:22] [Client thread/INFO] [FML/]: Identifying ItemStackHolder annotations
+[15:33:22] [Client thread/INFO] [FML/]: Found 0 ItemStackHolder annotations
+[15:33:22] [Client thread/TRACE] [mcp/mcp]: Sending event FMLPreInitializationEvent to mod mcp
+[15:33:22] [Client thread/TRACE] [mcp/mcp]: Sent event FMLPreInitializationEvent to mod mcp
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Coder Pack took 0.001s
+[15:33:22] [Client thread/TRACE] [FML/FML]: Sending event FMLPreInitializationEvent to mod FML
+[15:33:22] [Client thread/TRACE] [FML/FML]: Sent event FMLPreInitializationEvent to mod FML
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Forge Mod Loader took 0.040s
+[15:33:22] [Client thread/TRACE] [Forge/Forge]: Sending event FMLPreInitializationEvent to mod Forge
+[15:33:22] [Client thread/INFO] [FML/Forge]: Configured a dormant chunk cache size of 0
+[15:33:22] [Client thread/TRACE] [Forge/Forge]: Sent event FMLPreInitializationEvent to mod Forge
+[15:33:22] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Minecraft Forge took 0.070s
+[15:33:22] [Client thread/TRACE] [magiology/magiology]: Sending event FMLPreInitializationEvent to mod magiology
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: java.io.IOException: The system cannot find the path specified
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.WinNTFileSystem.createFileExclusively(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.File.createNewFile(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:75)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:70)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.loadFiles(Magiology.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.preInitStarter(Magiology.java:128)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.Loader.preinitializeMods(Loader.java:550)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:249)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.startGame(Minecraft.java:446)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.main.Main.main(Main.java:117)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at GradleStart.main(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: java.io.IOException: The system cannot find the path specified
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.WinNTFileSystem.createFileExclusively(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.File.createNewFile(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:75)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:70)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.loadFiles(Magiology.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.preInitStarter(Magiology.java:128)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.Loader.preinitializeMods(Loader.java:550)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:249)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.startGame(Minecraft.java:446)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.main.Main.main(Main.java:117)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at GradleStart.main(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: java.io.IOException: The system cannot find the path specified
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.WinNTFileSystem.createFileExclusively(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.File.createNewFile(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:75)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:70)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.loadFiles(Magiology.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.preInitStarter(Magiology.java:128)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.Loader.preinitializeMods(Loader.java:550)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:249)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.startGame(Minecraft.java:446)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.main.Main.main(Main.java:117)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at GradleStart.main(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: java.io.IOException: The system cannot find the path specified
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.WinNTFileSystem.createFileExclusively(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.io.File.createNewFile(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:75)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.windowsgui.ZipManager.extractFileFromZip(ZipManager.java:70)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.loadFiles(Magiology.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.magiology.core.Magiology.preInitStarter(Magiology.java:128)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322)
+[15:33:22] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at com.google.common.eventbus.EventBus.post(EventBus.java:275)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.common.Loader.preinitializeMods(Loader.java:550)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:249)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.startGame(Minecraft.java:446)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.client.main.Main.main(Main.java:117)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at java.lang.reflect.Method.invoke(Unknown Source)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+[15:33:23] [Client thread/INFO] [STDERR/magiology]: [java.lang.Throwable$WrappedPrintStream:println:-1]: 	at GradleStart.main(Unknown Source)
+[15:33:24] [Client thread/TRACE] [magiology/magiology]: Sent event FMLPreInitializationEvent to mod magiology
+[15:33:24] [Client thread/DEBUG] [FML/]: Bar Step: PreInitialization - Magiology took 1.126s
+[15:33:24] [Client thread/DEBUG] [FML/]: Bar Finished: PreInitialization took 1.238s
+[15:33:24] [Client thread/INFO] [FML/]: Applying holder lookups
+[15:33:24] [Client thread/INFO] [FML/]: Holder lookups applied
+[15:33:24] [Client thread/INFO] [FML/]: Injecting itemstacks
+[15:33:24] [Client thread/INFO] [FML/]: Itemstack injection complete
+[15:33:24] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - TextureManager took 0.000s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - SoundHandler took 3.802s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.010s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FontRenderer took 0.004s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - GrassColorReloadListener took 0.013s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - FoliageColorReloadListener took 0.023s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - GL Setup took 0.001s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Step: Rendering Setup - Loading Texture Map took 0.014s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[15:33:28] [Client thread/DEBUG] [FML/]: Bar Finished: Loading Resource - ModelLoaderRegistry$1 took 0.000s
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:smartCrafter#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FireMatrixTransferer#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FireMatrixReceaver#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FireLamp#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:ControlBlock#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:RemotePowerCounter#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FireGun#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FirePipe#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FireExhaust#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:FakeAir#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:OreStructureCore#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:BigFurnaceCore#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:particleLauncher#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:BatteryL1#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:BatteryL2#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:BatteryL3#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:BateryL100#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:BFCPowerOut#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:bedrockBreaker#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:PileODust#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:DontLookAtMe#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:energizedLapisOre#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:hologramProjector#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:networkController#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:networkConductor#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:networkInterface#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:networkPointerContainer#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:IronLevel2#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/DEBUG] [FML/]: Item json isn't found for 'magiology:IronLevel3#inventory', trying to load the variant from the blockstate json
+[15:33:34] [Client thread/INFO] [STDOUT/]: [net.minecraft.init.Bootstrap:printToSYSOUT:663]: ---- Minecraft Crash Report ----
+// Shall we play a game?
+
+Time: 8/7/15 3:33 PM
+Description: Initializing game
+
+java.lang.RuntimeException: Encountered an exception when loading model definition of 'magiology:IronLevel3#inventory' from: 'magiology:blockstates/IronLevel3.json' in resourcepack: 'FMLFileResourcePack:Magiology'
+	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:167)
+	at net.minecraftforge.client.model.ModelLoader.loadItems(ModelLoader.java:201)
+	at net.minecraftforge.client.model.ModelLoader.setupModelRegistry(ModelLoader.java:99)
+	at net.minecraft.client.resources.model.ModelManager.onResourceManagerReload(ModelManager.java:29)
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.registerReloadListener(SimpleReloadableResourceManager.java:130)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:511)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+Caused by: com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Not a JSON Object: "IronLevel3"
+	at com.google.gson.Gson.fromJson(Gson.java:815)
+	at com.google.gson.Gson.fromJson(Gson.java:868)
+	at com.google.gson.Gson$1.deserialize(Gson.java:126)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseVariants(ModelBlockDefinition.java:141)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseVariantsList(ModelBlockDefinition.java:117)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseModelBlockDefinition(ModelBlockDefinition.java:104)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.deserialize(ModelBlockDefinition.java:149)
+	at com.google.gson.TreeTypeAdapter.read(TreeTypeAdapter.java:58)
+	at com.google.gson.Gson.fromJson(Gson.java:803)
+	at com.google.gson.Gson.fromJson(Gson.java:741)
+	at net.minecraftforge.client.model.BlockStateLoader.load(BlockStateLoader.java:84)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition.parseFromReader(ModelBlockDefinition.java:35)
+	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:162)
+	... 15 more
+Caused by: java.lang.IllegalStateException: Not a JSON Object: "IronLevel3"
+	at com.google.gson.JsonElement.getAsJsonObject(JsonElement.java:90)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Variant$Deserializer.parseVariant(ModelBlockDefinition.java:234)
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Variant$Deserializer.deserialize(ModelBlockDefinition.java:282)
+	at com.google.gson.TreeTypeAdapter.read(TreeTypeAdapter.java:58)
+	at com.google.gson.Gson.fromJson(Gson.java:803)
+	... 27 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:167)
+	at net.minecraftforge.client.model.ModelLoader.loadItems(ModelLoader.java:201)
+	at net.minecraftforge.client.model.ModelLoader.setupModelRegistry(ModelLoader.java:99)
+	at net.minecraft.client.resources.model.ModelManager.onResourceManagerReload(ModelManager.java:29)
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.registerReloadListener(SimpleReloadableResourceManager.java:130)
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:511)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.Minecraft.run(Minecraft.java:356)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_51, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 912402760 bytes (870 MB) / 1038876672 bytes (990 MB) up to 1038876672 bytes (990 MB)
+	JVM Flags: 3 total; -Xincgc -Xmx1024M -Xms1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.10 FML v8.0.99.99 Minecraft Forge 11.14.3.1499 4 mods loaded, 4 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCH	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCH	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.8-11.14.3.1499.jar) 
+	UCH	Forge{11.14.3.1499} [Minecraft Forge] (forgeSrc-1.8-11.14.3.1499.jar) 
+	UCH	magiology{0.1052A} [Magiology] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel' Version: '3.1.0 - Build 9.17.10.2932' Renderer: 'Intel(R) HD Graphics 3000'
+	Launched Version: 1.8
+	LWJGL: 2.9.1
+	OpenGL: Intel(R) HD Graphics 3000 GL version 3.1.0 - Build 9.17.10.2932, Intel
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+[15:33:34] [Client thread/INFO] [STDOUT/]: [net.minecraft.init.Bootstrap:printToSYSOUT:663]: #@!@# Game crashed! Crash report saved to: #@!@# C:\Users\Toni.THE_RAIN\Desktop\Magiology 1.8\eclipse\.\crash-reports\crash-2015-08-07_15.33.34-client.txt

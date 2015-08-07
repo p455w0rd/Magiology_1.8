@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityPLauncher;
 
-public class ParticleLauncher extends BlockContainer {
+public class ParticleLauncher extends BlockContainerM {
 
 	float p=1F/16F;
 	

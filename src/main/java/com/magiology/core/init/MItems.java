@@ -54,13 +54,13 @@ public class MItems{
 	
 	public static void register(){
 		//Random items
-		EquivalentRightClickWandOfMagic=init(new EquivalentRightClickWandOfMagic().setUnlocalizedName("EquivalentRightClickWandOfMagic").setCreativeTab(MCreativeTabs.Whwmmt_core).setTextureName(MReference.MODID + ":" + "EquivalentRightClickWandOfMagic").setMaxStackSize(1));
-		PowerCounter=init(new PowerCounter().setUnlocalizedName("PowerCounter").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "PowerCounter").setMaxStackSize(1));
-		IPowerSidenessInstructor=init(new IPowerSidenessInstructor().setUnlocalizedName("IPowerSidenessInstructor").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "PowerCounter").setMaxStackSize(1));
-		BedrockDust=init(new BedrockDust().setUnlocalizedName("BedrockDust").setCreativeTab(MCreativeTabs.Whwmmt_core).setTextureName(MReference.MODID + ":" + "BedrockDust").setMaxStackSize(17));
-		FireHammer=init(new FireHammer().setUnlocalizedName("FireHammer").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "FireHammer").setMaxStackSize(1));
-		FireBarrel=init(new FireBarrel(Container.FireBarrel).setUnlocalizedName("FireBarrel").setCreativeTab(MCreativeTabs.Whwmmt_power).setTextureName(MReference.MODID + ":" + "FireBarrel").setMaxStackSize(1));
-		TheHand=init(new TheHand().setUnlocalizedName("TheHand").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
+		EquivalentRightClickWandOfMagic=init(new EquivalentRightClickWandOfMagic().setTextureName(MReference.MODID + ":" + "EquivalentRightClickWandOfMagic").setUnlocalizedName("EquivalentRightClickWandOfMagic").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
+		PowerCounter=init(new PowerCounter().setTextureName(MReference.MODID + ":" + "PowerCounter").setUnlocalizedName("PowerCounter").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		IPowerSidenessInstructor=init(new IPowerSidenessInstructor().setTextureName(MReference.MODID + ":" + "PowerCounter").setUnlocalizedName("IPowerSidenessInstructor").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		BedrockDust=init(new BedrockDust().setTextureName(MReference.MODID + ":" + "BedrockDust").setUnlocalizedName("BedrockDust").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(17));
+		FireHammer=init(new FireHammer().setTextureName(MReference.MODID + ":" + "FireHammer").setUnlocalizedName("FireHammer").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		FireBarrel=init(new FireBarrel(Container.FireBarrel).setTextureName(MReference.MODID + ":" + "FireBarrel").setUnlocalizedName("FireBarrel").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		TheHand=init(new TheHand().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("TheHand").setMaxStackSize(1));
 		NetworkPointer=init(new NetworkPointer().setUnlocalizedName("NetworkPointer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
 		//Upgrades
 		controlUpgrades=initGIU(new GenericItemUpgrade(1,UpgradeType.Control,null));

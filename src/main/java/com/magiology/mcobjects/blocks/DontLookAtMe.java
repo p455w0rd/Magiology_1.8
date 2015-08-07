@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityDontLookAtMe;
 
-public class DontLookAtMe extends BlockContainer {
+public class DontLookAtMe extends BlockContainerM {
 	
 	float p=1F/16F;
 	@Override

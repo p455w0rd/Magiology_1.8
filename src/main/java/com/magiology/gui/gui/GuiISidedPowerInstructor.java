@@ -196,7 +196,7 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 			if(tile==null)return;
 			mouseX=x;
 			mouseY=y;
-			Helper.getRenderBlocks().blockAccess=tile.getWorld();
+//			Helper.getRenderBlocks().blockAccess=tile.getWorld();
 			
 			
 			
@@ -218,7 +218,7 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 				try{
 					TessHelper.bindTexture(TextureMap.locationBlocksTexture);
 					Get.Render.WR().startDrawingQuads();
-					Helper.getRenderBlocks().renderBlockByRenderType(block, tile.getPos());
+//					Helper.getRenderBlocks().renderBlockByRenderType(block, tile.getPos());
 					GL11.glTranslated(-tile.getPos().getX()-0.5, -tile.getPos().getY()-0.5, -tile.getPos().getZ()-0.5);
 					Get.Render.WR().finishDrawing();
 				}catch(Exception e){e.printStackTrace();}

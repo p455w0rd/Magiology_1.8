@@ -28,7 +28,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 
-public class FireHammer extends Item{
+public class FireHammer extends ItemM{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){

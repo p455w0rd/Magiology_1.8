@@ -16,7 +16,7 @@ import com.magiology.core.init.MGui;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 
-public class IPowerSidenessInstructor extends Item{
+public class IPowerSidenessInstructor extends ItemM{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){

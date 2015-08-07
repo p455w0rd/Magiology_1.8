@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
-public class PowerCounter extends Item{
+public class PowerCounter extends ItemM{
 	public PowerCounter(){
 		   super();
 	   }

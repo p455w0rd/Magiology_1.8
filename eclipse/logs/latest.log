@@ -1,21 +1,61 @@
-[00:39:54] [Client thread/INFO]: Setting user: Player163
-[00:40:00] [Client thread/INFO]: LWJGL Version: 2.9.1
-[00:40:11] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod
-[00:40:13] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[00:40:13] [Thread-8/INFO]: Initializing LWJGL OpenAL
-[00:40:13] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[00:40:13] [Thread-8/INFO]: OpenAL initialized.
-[00:40:13] [Sound Library Loader/INFO]: Sound engine started
-[00:40:22] [Client thread/INFO]: Created: 16x16 textures-atlas
-[00:40:26] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Example Mod
-[00:40:26] [Client thread/INFO]: SoundSystem shutting down...
-[00:40:26] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[00:40:26] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[00:40:26] [Thread-10/INFO]: Initializing LWJGL OpenAL
-[00:40:26] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[00:40:26] [Thread-10/INFO]: OpenAL initialized.
-[00:40:27] [Sound Library Loader/INFO]: Sound engine started
-[00:40:35] [Client thread/INFO]: Created: 512x512 textures-atlas
-[00:40:41] [Client thread/INFO]: Stopping!
-[00:40:41] [Client thread/INFO]: SoundSystem shutting down...
-[00:40:41] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[15:33:08] [Client thread/INFO]: Setting user: Player620
+[15:33:14] [Client thread/INFO]: LWJGL Version: 2.9.1
+[15:33:22] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[15:33:24] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[15:33:24] [Thread-10/INFO]: Initializing LWJGL OpenAL
+[15:33:24] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[15:33:25] [Thread-10/INFO]: OpenAL initialized.
+[15:33:25] [Sound Library Loader/INFO]: Sound engine started
+[15:33:32] [Client thread/WARN]: Unable to load definition magiology:IronLevel3#normal
+java.lang.RuntimeException: Encountered an exception when loading model definition of 'magiology:IronLevel3#normal' from: 'magiology:blockstates/IronLevel3.json' in resourcepack: 'FMLFileResourcePack:Magiology'
+	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:167) ~[ModelBakery.class:?]
+	at net.minecraft.client.resources.model.ModelBakery.loadVariants(ModelBakery.java:118) [ModelBakery.class:?]
+	at net.minecraftforge.client.model.ModelLoader.loadBlocks(ModelLoader.java:150) [ModelLoader.class:?]
+	at net.minecraftforge.client.model.ModelLoader.setupModelRegistry(ModelLoader.java:98) [ModelLoader.class:?]
+	at net.minecraft.client.resources.model.ModelManager.onResourceManagerReload(ModelManager.java:29) [ModelManager.class:?]
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.registerReloadListener(SimpleReloadableResourceManager.java:130) [SimpleReloadableResourceManager.class:?]
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:511) [Minecraft.class:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:356) [Minecraft.class:?]
+	at net.minecraft.client.main.Main.main(Main.java:117) [Main.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
+	at GradleStart.main(Unknown Source) [start/:?]
+Caused by: com.google.gson.JsonSyntaxException: java.lang.IllegalStateException: Not a JSON Object: "IronLevel3"
+	at com.google.gson.Gson.fromJson(Gson.java:815) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:868) ~[Gson.class:?]
+	at com.google.gson.Gson$1.deserialize(Gson.java:126) ~[Gson$1.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseVariants(ModelBlockDefinition.java:141) ~[ModelBlockDefinition$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseVariantsList(ModelBlockDefinition.java:117) ~[ModelBlockDefinition$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseModelBlockDefinition(ModelBlockDefinition.java:104) ~[ModelBlockDefinition$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.deserialize(ModelBlockDefinition.java:149) ~[ModelBlockDefinition$Deserializer.class:?]
+	at com.google.gson.TreeTypeAdapter.read(TreeTypeAdapter.java:58) ~[TreeTypeAdapter.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:803) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:741) ~[Gson.class:?]
+	at net.minecraftforge.client.model.BlockStateLoader.load(BlockStateLoader.java:84) ~[BlockStateLoader.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition.parseFromReader(ModelBlockDefinition.java:35) ~[ModelBlockDefinition.class:?]
+	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:162) ~[ModelBakery.class:?]
+	... 16 more
+Caused by: java.lang.IllegalStateException: Not a JSON Object: "IronLevel3"
+	at com.google.gson.JsonElement.getAsJsonObject(JsonElement.java:90) ~[JsonElement.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Variant$Deserializer.parseVariant(ModelBlockDefinition.java:234) ~[ModelBlockDefinition$Variant$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Variant$Deserializer.deserialize(ModelBlockDefinition.java:282) ~[ModelBlockDefinition$Variant$Deserializer.class:?]
+	at com.google.gson.TreeTypeAdapter.read(TreeTypeAdapter.java:58) ~[TreeTypeAdapter.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:803) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:868) ~[Gson.class:?]
+	at com.google.gson.Gson$1.deserialize(Gson.java:126) ~[Gson$1.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseVariants(ModelBlockDefinition.java:141) ~[ModelBlockDefinition$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseVariantsList(ModelBlockDefinition.java:117) ~[ModelBlockDefinition$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.parseModelBlockDefinition(ModelBlockDefinition.java:104) ~[ModelBlockDefinition$Deserializer.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition$Deserializer.deserialize(ModelBlockDefinition.java:149) ~[ModelBlockDefinition$Deserializer.class:?]
+	at com.google.gson.TreeTypeAdapter.read(TreeTypeAdapter.java:58) ~[TreeTypeAdapter.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:803) ~[Gson.class:?]
+	at com.google.gson.Gson.fromJson(Gson.java:741) ~[Gson.class:?]
+	at net.minecraftforge.client.model.BlockStateLoader.load(BlockStateLoader.java:84) ~[BlockStateLoader.class:?]
+	at net.minecraft.client.renderer.block.model.ModelBlockDefinition.parseFromReader(ModelBlockDefinition.java:35) ~[ModelBlockDefinition.class:?]
+	at net.minecraft.client.resources.model.ModelBakery.getModelBlockDefinition(ModelBakery.java:162) ~[ModelBakery.class:?]
+	... 16 more

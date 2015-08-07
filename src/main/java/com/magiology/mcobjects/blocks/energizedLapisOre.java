@@ -7,12 +7,12 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityEnergizedLapisOre;
 
-public class energizedLapisOre extends BlockContainer {
+public class EnergizedLapisOre extends BlockContainerM {
 
 	
 	@Override
 	public boolean isOpaqueCube() {return false;}
-	public energizedLapisOre(){
+	public EnergizedLapisOre(){
 		super(Material.ground);
 		this.setLightLevel(1F).setHardness(0.2F).setHarvestLevel("pickaxe", 1);
 	}

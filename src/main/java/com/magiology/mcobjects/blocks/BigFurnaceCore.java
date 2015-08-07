@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
 
-public class BigFurnaceCore extends BlockContainer {
+public class BigFurnaceCore extends BlockContainerM{
 	
 	public BigFurnaceCore() {
 		super(Material.glass);

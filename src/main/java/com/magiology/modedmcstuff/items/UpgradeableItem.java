@@ -13,12 +13,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.mcobjects.items.ItemM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.upgrades.RegisterUpgrades;
 import com.magiology.upgrades.RegisterUpgrades.Container;
 
-public class UpgradeableItem extends Item implements UpgItem{
+public class UpgradeableItem extends ItemM implements UpgItem{
 	public static String slotNBT="thatSlot";
 	public Container container=null;
 	public int NumberOfContainerSlots=0;

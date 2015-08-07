@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 
 import com.magiology.core.init.MItems;
 
-public class PileODust extends Block {
+public class PileODust extends BlockM {
 	
 	float p=1F/16F;
 	
