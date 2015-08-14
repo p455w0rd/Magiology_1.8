@@ -21,7 +21,7 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value="render" key="textPattern"/>
+			<item value="implements IBakedModel" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -33,42 +33,6 @@
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
-			<item value="renderblock" key="textPattern"/>
-			<item value="false" key="isRegExSearch"/>
-			<list key="fileNamePatterns">
-				<item value="*java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY4">
-			<item value="true" key="ignoreCase"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="isWholeWord"/>
-			<item value="implements IBakedModel" key="textPattern"/>
-			<item value="false" key="isRegExSearch"/>
-			<list key="fileNamePatterns">
-				<item value="*java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY10">
-			<item value="true" key="ignoreCase"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="isWholeWord"/>
-			<item value="ShadedQuad.addVertexWithUVWRender" key="textPattern"/>
-			<item value="false" key="isRegExSearch"/>
-			<list key="fileNamePatterns">
-				<item value="*java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY5">
-			<item value="true" key="ignoreCase"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="isWholeWord"/>
 			<item value="Tessellator.getInstance().getWorldRenderer()" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
@@ -77,47 +41,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="EXTENSIONS">
-			<item value="*" key="0"/>
-			<item value="*java" key="1"/>
-		</section>
-		<section name="HISTORY11">
-			<item value="true" key="ignoreCase"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="isWholeWord"/>
-			<item value="renderFromInside" key="textPattern"/>
-			<item value="false" key="isRegExSearch"/>
-			<list key="fileNamePatterns">
-				<item value="*java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY8">
-			<item value="true" key="ignoreCase"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="isWholeWord"/>
-			<item value="GuiBrewingStand" key="textPattern"/>
-			<item value="false" key="isRegExSearch"/>
-			<list key="fileNamePatterns">
-				<item value="*java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY9">
-			<item value="true" key="ignoreCase"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="isWholeWord"/>
-			<item value=".getWorldObj()" key="textPattern"/>
-			<item value="false" key="isRegExSearch"/>
-			<list key="fileNamePatterns">
-				<item value="*java"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY2">
+		<section name="HISTORY4">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="false" key="isWholeWord"/>
@@ -129,7 +53,19 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY3">
+		<section name="HISTORY10">
+			<item value="true" key="ignoreCase"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="GuiBrewingStand" key="textPattern"/>
+			<item value="false" key="isRegExSearch"/>
+			<list key="fileNamePatterns">
+				<item value="*java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY5">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="isWholeWord"/>
@@ -141,7 +77,47 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY0">
+		<section name="EXTENSIONS">
+			<item value="*java" key="0"/>
+			<item value="*" key="1"/>
+		</section>
+		<section name="HISTORY11">
+			<item value="true" key="ignoreCase"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="isWholeWord"/>
+			<item value=".getWorldObj()" key="textPattern"/>
+			<item value="false" key="isRegExSearch"/>
+			<list key="fileNamePatterns">
+				<item value="*java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY8">
+			<item value="true" key="ignoreCase"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="render" key="textPattern"/>
+			<item value="false" key="isRegExSearch"/>
+			<list key="fileNamePatterns">
+				<item value="*java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY9">
+			<item value="true" key="ignoreCase"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="isWholeWord"/>
+			<item value="renderblock" key="textPattern"/>
+			<item value="false" key="isRegExSearch"/>
+			<list key="fileNamePatterns">
+				<item value="*java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY2">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="false" key="isWholeWord"/>
@@ -153,11 +129,35 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY3">
 			<item value="true" key="ignoreCase"/>
 			<item value="0" key="scope"/>
 			<item value="false" key="isWholeWord"/>
 			<item value="*=models/block" key="textPattern"/>
+			<item value="false" key="isRegExSearch"/>
+			<list key="fileNamePatterns">
+				<item value="*java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY0">
+			<item value="true" key="ignoreCase"/>
+			<item value="0" key="scope"/>
+			<item value="false" key="isWholeWord"/>
+			<item value="renderItem" key="textPattern"/>
+			<item value="false" key="isRegExSearch"/>
+			<list key="fileNamePatterns">
+				<item value="*java"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="true" key="ignoreCase"/>
+			<item value="0" key="scope"/>
+			<item value="false" key="isWholeWord"/>
+			<item value="normal" key="textPattern"/>
 			<item value="false" key="isRegExSearch"/>
 			<list key="fileNamePatterns">
 				<item value="*java"/>
@@ -195,7 +195,7 @@
 		</list>
 	</section>
 	<section name="SearchDialog">
-		<item value="org.eclipse.search.internal.ui.text.TextSearchPage" key="PREVIOUS_PAGE"/>
+		<item value="org.eclipse.jdt.ui.JavaSearchPage" key="PREVIOUS_PAGE"/>
 	</section>
 	<section name="org.eclipse.jdt.ui.JavaSearchResultPage">
 		<item value="1000" key="org.eclipse.jdt.search.resultpage.limit"/>

@@ -1,7 +1,0 @@
-package com.magiology.mcobjects.blocks;
-
-import net.minecraft.block.Block;
-
-public class BlockM extends Block {
-
-}

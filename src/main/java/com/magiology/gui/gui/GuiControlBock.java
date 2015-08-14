@@ -231,6 +231,6 @@ public class GuiControlBock extends GuiContainer{
 	     renderer.addVertexWithUV(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
 	     renderer.addVertexWithUV(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
 	     renderer.addVertexWithUV(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
-	     renderer.finishDrawing();
+	     TessHelper.draw();
 	}
 }

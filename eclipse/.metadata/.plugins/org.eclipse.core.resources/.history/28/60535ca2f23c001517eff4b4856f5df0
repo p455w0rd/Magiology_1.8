@@ -1,8 +1,0 @@
-package assets.magiology.models.block;
-
-public class Snippet {
-	public static void main(String[] args) {
-		dirt.json
-	}
-}
-

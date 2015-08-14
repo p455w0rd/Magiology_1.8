@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public class EntityBaseFX extends EntityFX{
 	
@@ -74,7 +75,7 @@ public class EntityBaseFX extends EntityFX{
         renderer.addVertexWithUV(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0);
         renderer.addVertexWithUV(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1);
         renderer.addVertexWithUV(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1);
-		renderer.finishDrawing();
+		TessHelper.draw();
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);

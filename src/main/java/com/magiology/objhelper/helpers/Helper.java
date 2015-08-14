@@ -68,7 +68,7 @@ public class Helper{
     private static final float SMALL_NUM = 0.00000001f;
 	
 	public static void spawnEntityFX(EntityFX particleFX){
-		if(particleFX.worldObj.isRemote){
+		if(isRemote(particleFX)){
 			Minecraft mc=Minecraft.getMinecraft();
 			Entity ent=mc.getRenderViewEntity();
 			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
@@ -544,50 +544,13 @@ public class Helper{
 				distance=z-ray.from.z,
 				rayLenght=ray.from.distanceTo(ray.to),
 				pecentage=distance/rayLenght;
+			AxisAlignedBB Plane=new AxisAlignedBB(plane.q.x, plane.q.y, plane.q.z, plane.s.x, plane.s.y, plane.s.z+0.01);
+			MovingObjectPosition rayt=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
+			if(rayt==null||rayt.hitVec==null){if(printProcess)printInln("target clipped out");return false;}
+			result.x=rayt.hitVec.xCoord;
+			result.y=rayt.hitVec.yCoord;
+			result.z=rayt.hitVec.zCoord;
 			
-			result.x=ray.from.x+(ray.to.x-ray.from.x)*pecentage;
-			result.y=ray.from.y+(ray.to.y-ray.from.y)*pecentage;
-			result.z=ray.from.z+(ray.to.z-ray.from.z)*pecentage;
-			Vec3M norm=ray.from.subtract(ray.to).normalize();
-			norm.x*=0.5;
-			norm.y*=0.5;
-			norm.z*=0.5;
-			
-			
-			while(result.z-z>0.5){
-				result.x-=norm.x;
-				result.y-=norm.y;
-				result.z-=norm.z;
-			}
-			while(result.z-z<0.5){
-				result.x+=norm.x;
-				result.y+=norm.y;
-				result.z+=norm.z;
-			}
-			norm.x/=50;
-			norm.y/=50;
-			norm.z/=50;
-			while(result.z-z>0.01){
-				result.x-=norm.x;
-				result.y-=norm.y;
-				result.z-=norm.z;
-			}
-			while(result.z-z<0.01){
-				result.x+=norm.x;
-				result.y+=norm.y;
-				result.z+=norm.z;
-			}
-//			result.z=z;
-			result.y-=0.03;
-			double
-				minX=Math.min(plane.q.x, Math.min(plane.r.x, plane.s.x)),
-				maxX=Math.max(plane.q.x, Math.max(plane.r.x, plane.s.x)),
-				minY=Math.min(plane.q.y, Math.min(plane.r.y, plane.s.y)),
-				maxY=Math.max(plane.q.y, Math.max(plane.r.y, plane.s.y));
-			if(result.x<minX){if(printProcess)printInln("target clipped out on min x");return false;}
-			if(result.x>maxX){if(printProcess)printInln("target clipped out on max x");return false;}
-			if(result.y<minY){if(printProcess)printInln("target clipped out on min y");return false;}
-			if(result.y>maxY){if(printProcess)printInln("target clipped out on max y");return false;}
 			if(printProcess)printInln("Ray trace has resolwed a valid intersection point!");
 			return true;
 		}
@@ -751,16 +714,13 @@ public class Helper{
 //	}
 	//yay for 1.8 code changes
 	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
-	public static final PropertyInteger MetadataMarker = PropertyInteger.create("bites", 0, 15);
-	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
+	public static final PropertyInteger MetadataMarker = PropertyInteger.create("data", 0, 15);
 	public static int getBlockMetadata(World world, BlockPos pos){
-		return ((Integer)world.getBlockState(pos).getValue(MetadataMarker)).intValue();
+		return 0;
 	}
-	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
 	public static void setMetadata(World world, BlockPos pos,int meta){
-		world.setBlockState(pos, getBlock(world, pos).getDefaultState().withProperty(MetadataMarker, meta), 3);
+		world.setBlockState(pos, world.getBlockState(pos).withProperty(MetadataMarker, meta), 3);
 	}
-	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
 	public static Block getBlock(World world, BlockPos pos){
 		return world.getBlockState(pos).getBlock();
 	}
@@ -809,6 +769,15 @@ public class Helper{
 			if(!((ItemStack)a).hasTagCompound())((ItemStack)a).setTagCompound(new NBTTagCompound());
 			return ((ItemStack)a).hasTagCompound();
 		}
+		return false;
+	}
+	public static void printIsRemote(Object worldContainer){
+		println(isRemote(worldContainer));
+	}
+	public static boolean TRUE(){
+		return true;
+	}
+	public static boolean FALSE(){
 		return false;
 	}
 }

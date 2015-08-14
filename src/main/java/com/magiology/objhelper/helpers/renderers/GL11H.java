@@ -70,7 +70,7 @@ public class GL11H{
 		BlendIs(false);
 		glEnable(GL_ALPHA_TEST);
 		glDepthMask(true);
-		GL11BlendFunc(2);
+		GL11BlendFunc(1);
 		ResetOpacity();
 	}
 	public static void scaled(double scale){
@@ -133,7 +133,7 @@ public class GL11H{
 	}
 	public static Vector3f transformVector(Vector3f vectorForTransformation,Matrix4f transformation){
 		if(vectorForTransformation==null)vectorForTransformation=new Vector3f();
-		Vector4f vec4=Matrix4f.transform(transformation, new Vector4f((float)vectorForTransformation.x,(float)vectorForTransformation.y,(float)vectorForTransformation.z,1), null);
+		Vector4f vec4=Matrix4f.transform(transformation, new Vector4f(vectorForTransformation.x,vectorForTransformation.y,vectorForTransformation.z,1), null);
 		vectorForTransformation.x=vec4.x;
 		vectorForTransformation.y=vec4.y;
 		vectorForTransformation.z=vec4.z;
@@ -141,5 +141,16 @@ public class GL11H{
 	}
 	public static void translate(BlockPos pos){
 		translate(new float[]{pos.getX(),pos.getY(),pos.getZ()});
+	}
+	private static boolean isProtecting=false;
+	public static void protect(){
+		glColor4f(1, 1, 1, 1);
+		lighting(true);
+		ResetOpacity();
+		glDepthMask(true);
+		glPushMatrix();
+	}
+	public static void endProtection(){
+		glPopMatrix();
 	}
 }

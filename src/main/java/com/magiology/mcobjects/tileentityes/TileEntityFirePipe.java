@@ -14,6 +14,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
+import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
@@ -33,18 +34,21 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	SlowdownHelper optimizer=new SlowdownHelper(40);
 	SlowdownHelper optimizer2=new SlowdownHelper(6);
 	
-	public EnumFacing[] connections = new EnumFacing[6];
-	public boolean[] shouldConnectionsBeRendered=new boolean[6];
-	public EnumFacing[] connectionsToObjInMe = new EnumFacing[6];
-	public EnumFacing[] connectionsToObjOut = new EnumFacing[6];
-	public EnumFacing[] strateConnection = new EnumFacing[3];
-	public EnumFacing DCFFL=EnumFacing.UP;
-	public boolean isSolidDown;
-	public boolean isSolidUp;
+	public EnumFacing connections[] = new EnumFacing[6],
+		connectionsToObjInMe[] = new EnumFacing[6],
+		connectionsToObjOut[] = new EnumFacing[6],
+		strateConnection[] = new EnumFacing[3],
+		DCFFL;
+	public boolean
+		shouldConnectionsBeRendered[]=new boolean[6],
+		isSolidDown,
+		isSolidUp,
+		texAnimP2=true;
 	public int texAnim=0;
-	public AxisAlignedBB pointId,prevPointId;
-	public boolean texAnimP2=true;
-	public AxisAlignedBB[] collisionBoxes=null;
+	public AxisAlignedBB 
+		pointId,
+		prevPointId,
+		collisionBoxes[];
 	
 	public TileEntityFirePipe(){
 		super(null, null, 1, 5, 50, 3000);
@@ -61,6 +65,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
     		if(con<6&&con>-1)connections[i]=EnumFacing.getFront(con);
     		else connections[i]=null;
     	}
+    	ForcePipeUpdate.updatein3by3(worldObj, pos);
     }
 	
     @Override

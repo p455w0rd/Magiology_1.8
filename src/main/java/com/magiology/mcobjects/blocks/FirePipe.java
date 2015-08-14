@@ -29,7 +29,11 @@ public class FirePipe extends BlockContainerMultiColision{
 		setBlockBounds(p*6, p*6, p*6, p*10, p*10, p*10);
 		useNeighborBrightness=true;
 	}
-	
+
+    @Override
+	public boolean isFullCube(){
+        return false;
+    }
 	@Override
 	public AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos){
 		TileEntityFirePipe tile=(TileEntityFirePipe)world.getTileEntity(pos);
@@ -37,7 +41,7 @@ public class FirePipe extends BlockContainerMultiColision{
 		float minY=p*6  -(tile.DCFFL!=null?(p*10.7F):0) -(tile.connections[1]!=null?(p*6):0);
 		float minZ=p*6  -(tile.DCFFL!=null?(p*1.5F):0)  -(tile.connections[2]!=null?(p*6):0);
 		float maxX=p*10 +(tile.DCFFL!=null?(p*1.5F):0)  +(tile.connections[3]!=null?(p*6):0);
-		float maxY=p*10                                    +(tile.connections[0]!=null?(p*6):0);
+		float maxY=p*10                                 +(tile.connections[0]!=null?(p*6):0);
 		float maxZ=p*10 +(tile.DCFFL!=null?(p*1.5F):0)  +(tile.connections[4]!=null?(p*6):0);
 		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
@@ -135,8 +139,6 @@ public class FirePipe extends BlockContainerMultiColision{
 	    		}
     		}
     	}
-    	
-    	
         return return1;
     }
     

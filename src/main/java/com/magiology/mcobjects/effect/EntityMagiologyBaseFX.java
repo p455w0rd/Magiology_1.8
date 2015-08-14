@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+
 public class EntityMagiologyBaseFX extends EntityFX{
 	
 	double gravity,friction;
@@ -49,7 +51,7 @@ public class EntityMagiologyBaseFX extends EntityFX{
     	tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
     	tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
     	tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-    	if(draw)tess.finishDrawing();
+    	if(draw)TessHelper.draw();
 	}
 	@Override
 	public int getFXLayer(){return 3;}

@@ -169,7 +169,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 			  tess.addVertex( p*3+Helper.CRandF(0.01), -p*3+Helper.CRandF(0.01), -p*4.005);
 			  tess.addVertex( p*3+Helper.CRandF(0.01), -p*4+Helper.CRandF(0.01), -p*4.005);
 		  }
-		  tess.finishDrawing();
+		  TessHelper.draw();
 		  tess.startDrawing(GL11.GL_TRIANGLES);
 		  tess.setColorRGBA_F((float)(0.8+Helper.CRandF(0.4)), (float)(0.2+Helper.CRandF(0.2)), (float)(0.1+Helper.CRandF(0.2)), 1);
 		  tess.setBrightness(255);
@@ -180,7 +180,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 			  tess.addVertex(criclexyz[0]+Helper.CRandF(0.3), criclexyz[1]+Helper.CRandF(0.3), criclexyz[2]+Helper.CRandF(0.3));
 		  }
 		  
-		  tess.finishDrawing();
+		  TessHelper.draw();
 		  GL11.glEnable(GL11.GL_TEXTURE_2D);
 		  GL11.glEnable(GL11.GL_LIGHTING);
 		  GL11.glDisable(GL11.GL_BLEND);

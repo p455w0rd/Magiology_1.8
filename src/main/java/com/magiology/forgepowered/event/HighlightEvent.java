@@ -48,95 +48,100 @@ import com.magiology.render.aftereffect.RenderNetworkPointerContainerHighlight;
 public class HighlightEvent{
 	
 	float p=1F/16F;
-	WorldRenderer tess=TessHelper.getWR();
+	WorldRenderer renderer=TessHelper.getWR();
 	@SubscribeEvent
 	public void onDrawHighlight(DrawBlockHighlightEvent event){
 		BlockPos pos=event.target.getBlockPos();
 		ItemStack item=event.currentItem;
 		EntityPlayer player=event.player;
 		World world=player.worldObj;
-		Block block=Helper.getBlock(world, pos);
-		TileEntity tileEn=player.worldObj.getTileEntity(pos);
-		
-		Object[][] rayTraceResult=Helper.rayTraceHolograms(player, 7);
-		if(rayTraceResult[0].length>0){
-			float distance=0;
-			int id=0;
-			for(int i=0;i<rayTraceResult[0].length;i++){
-				float distanceTo=(float)player.getLook(1).distanceTo(((Vec3M)rayTraceResult[0][i]).conv());
-				if(distance<distanceTo){
-					id=i;
-					distance=distanceTo;
-				}
-			}
-			Vec3M hit=(Vec3M)rayTraceResult[0][id];
-			TileEntityHologramProjector tile=(TileEntityHologramProjector)rayTraceResult[1][id];
+		if(world==null)return;
+		try{if(event.target.typeOfHit!=MovingObjectType.ENTITY){
+			Block block=Helper.getBlock(world, pos);
+			TileEntity tileEn=player.worldObj.getTileEntity(pos);
 			
-			boolean
-				hologramCloserThanHit=hit.conv().distanceTo(player.getLook(event.partialTicks))>event.target.hitVec.distanceTo(player.getLook(event.partialTicks)),
-				miss=event.target.typeOfHit==MovingObjectType.MISS;
-			if(miss||hologramCloserThanHit){
-				tile.point.isPointing=true;
-				tile.point.pointedPos=hit.addVector(
-						-tile.x()+tile.offset.x-1,
-						-tile.y()-tile.offset.y-tile.size.y,
-						0);
-				tile.point.pointedPos.z=0;
-				tile.point.pointingPlayer=player;
-				event.setCanceled(true);
-				return;
-			}
-		}else{
-			for(int a=0;a<TileEntityHologramProjector.hologramProjectors.size();a++){
-				TileEntityHologramProjector tile=null;
-				TileEntity test=world.getTileEntity(TileEntityHologramProjector.hologramProjectors.get(a).getPos());
-				if(test instanceof TileEntityHologramProjector)tile=(TileEntityHologramProjector) test;
-				if(tile!=null)tile.point.isPointing=false;
-			}
-		}
-		
-		
-		if(event.target.typeOfHit==MovingObjectType.BLOCK){
-			if(event.target.hitVec==null)return;
-			double xHit=event.target.hitVec.xCoord,yHit=event.target.hitVec.yCoord,zHit=event.target.hitVec.zCoord;
-			
-			if(block==MBlocks.DontLookAtMe)onDrawHlDontLookAtMe(event);
-			
-			if(item!=null&&item.getItem().equals(MItems.FireHammer)){
-				if(tileEn instanceof TileEntityFireLamp){
-					TileEntityFireLamp tile=(TileEntityFireLamp)tileEn;
-					onDrawHlFireLmap(event,tile,tile.getPos());
-				}
-				if(tileEn instanceof TileEntityFireMatrixReceaver){
-					TileEntityFireMatrixReceaver tile=(TileEntityFireMatrixReceaver) tileEn;
-					try{
-						onDrawHlFireLmap(event,tile,tile.transferp);
-					}catch(Exception e){
-						e.printStackTrace();
+			Object[][] rayTraceResult=Helper.rayTraceHolograms(player, 7);
+			if(rayTraceResult[0].length>0){
+				float distance=0;
+				int id=0;
+				for(int i=0;i<rayTraceResult[0].length;i++){
+					float distanceTo=(float)player.getLook(1).distanceTo(((Vec3M)rayTraceResult[0][i]).conv());
+					if(distance<distanceTo){
+						id=i;
+						distance=distanceTo;
 					}
 				}
+				Vec3M hit=(Vec3M)rayTraceResult[0][id];
+				TileEntityHologramProjector tile=(TileEntityHologramProjector)rayTraceResult[1][id];
+				
+				boolean
+					hologramCloserThanHit=hit.conv().distanceTo(player.getLook(event.partialTicks))>event.target.hitVec.distanceTo(player.getLook(event.partialTicks)),
+					miss=event.target.typeOfHit==MovingObjectType.MISS;
+				if(miss||!hologramCloserThanHit){
+					tile.point.isPointing=true;
+					tile.point.pointedPos=hit.addVector(
+							-tile.x()+tile.offset.x-1,
+							-tile.y()-tile.offset.y-tile.size.y,
+							0);
+					tile.point.pointedPos.z=0;
+					tile.point.pointingPlayer=player;
+					event.setCanceled(true);
+					return;
+				}
+			}else{
+				for(int a=0;a<TileEntityHologramProjector.hologramProjectors.size();a++){
+					TileEntityHologramProjector tile=null;
+					TileEntity test=world.getTileEntity(TileEntityHologramProjector.hologramProjectors.get(a).getPos());
+					if(test instanceof TileEntityHologramProjector)tile=(TileEntityHologramProjector) test;
+					if(tile!=null)tile.point.isPointing=false;
+				}
 			}
-			if(item!=null&&item.getTagCompound()!=null&&item.getItem().equals(MItems.PowerCounter))doPowerCounterDisplay(pos,item,event);
-			try{
-				if(tileEn instanceof MultiColisionProvider){
-					doMultiColision(pos, item, event, xHit, yHit, zHit);
-					if(tileEn instanceof TileEntityNetworkPointerContainer){
-						int curentHighlight=MultiColisionProviderRayTracer.getPointedId((MultiColisionProvider)tileEn);
-						boolean contains=false;
-						for(LongAfterRenderRenderer part:MEvents.RenderLoopInstance.universalLongRender){
-							if(part instanceof RenderNetworkPointerContainerHighlight){
-								RenderNetworkPointerContainerHighlight Part=(RenderNetworkPointerContainerHighlight) part;
-								if(!Part.isDead()&&Part.tile.getPos().equals(pos)&&Part.highlightedBoxId==curentHighlight){
-									contains=true;
+			
+			
+			if(event.target.typeOfHit==MovingObjectType.BLOCK){
+				if(event.target.hitVec==null)return;
+				double xHit=event.target.hitVec.xCoord,yHit=event.target.hitVec.yCoord,zHit=event.target.hitVec.zCoord;
+				
+				if(block==MBlocks.DontLookAtMe)onDrawHlDontLookAtMe(event);
+				
+				if(item!=null&&item.getItem().equals(MItems.FireHammer)){
+					if(tileEn instanceof TileEntityFireLamp){
+						TileEntityFireLamp tile=(TileEntityFireLamp)tileEn;
+						onDrawHlFireLmap(event,tile,tile.getPos());
+					}
+					if(tileEn instanceof TileEntityFireMatrixReceaver){
+						TileEntityFireMatrixReceaver tile=(TileEntityFireMatrixReceaver) tileEn;
+						try{
+							onDrawHlFireLmap(event,tile,tile.transferp);
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+					}
+				}
+				if(item!=null&&item.getTagCompound()!=null&&item.getItem().equals(MItems.PowerCounter))doPowerCounterDisplay(pos,item,event);
+				try{
+					if(tileEn instanceof MultiColisionProvider){
+						doMultiColision(pos, item, event, xHit, yHit, zHit);
+						if(tileEn instanceof TileEntityNetworkPointerContainer){
+							int curentHighlight=MultiColisionProviderRayTracer.getPointedId((MultiColisionProvider)tileEn);
+							boolean contains=false;
+							for(LongAfterRenderRenderer part:MEvents.RenderLoopInstance.universalLongRender){
+								if(part instanceof RenderNetworkPointerContainerHighlight){
+									RenderNetworkPointerContainerHighlight Part=(RenderNetworkPointerContainerHighlight) part;
+									if(!Part.isDead()&&Part.tile.getPos().equals(pos)&&Part.highlightedBoxId==curentHighlight){
+										contains=true;
+									}
 								}
 							}
+							if(!contains&&curentHighlight-7>=0)MEvents.RenderLoopInstance.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkPointerContainer) tileEn));
 						}
-						if(!contains&&curentHighlight-7>=0)MEvents.RenderLoopInstance.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkPointerContainer) tileEn));
 					}
+				}catch(Exception e){
+					e.printStackTrace();
 				}
-			}catch(Exception e){
-				e.printStackTrace();
 			}
+		}}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -157,10 +162,14 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_FOG);
 		GL11H.SetUpOpaqueRendering(1);
 		event.setCanceled(true);
+		
+		
 		double selectionAlphaHelper=(wtt%120.0)/60.0,selectionAlpha=selectionAlphaHelper>1?2-selectionAlphaHelper:selectionAlphaHelper;
 		drawBox(mainBox.minX-ex+pos1.getX(),mainBox.maxX+ex+pos1.getX(),mainBox.minY-ex+pos1.getY(),mainBox.maxY+ex+pos1.getY(),mainBox.minZ-ex+pos1.getZ(),mainBox.maxZ+ex+pos1.getZ(),0.9, 0.1, 0.2, 0.1+0.05*centerAlpha);
 		
 		AxisAlignedBB pointedBox=colisionProvider.getPointedBox();
+		
+		
 		
 		drawBox(pos1.getX()+pointedBox.minX-ex*2,
 				pos1.getX()+pointedBox.maxX+ex*2,
@@ -186,7 +195,7 @@ public class HighlightEvent{
 					pos1.getY()+pointedBox.maxY+ex*2,
 					pos1.getZ()+pointedBox.minZ-ex*2,
 					pos1.getZ()+pointedBox.maxZ+ex*2,
-					Helper.fluctuator(11, 21)/4, Helper.fluctuator(16, 45)/4, 0.7+Helper.fluctuator(36, 74)*0.3, 2.5, 0.5);
+					Helper.fluctuatorSmooth(11, 21)/4, Helper.fluctuatorSmooth(16, 45)/4, 0.7+Helper.fluctuatorSmooth(36, 74)*0.3, 2.5, 0.5);
 		}
 		else GL11H.SetUpOpaqueRendering(1);
 		
@@ -414,7 +423,7 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glLineWidth(2F);
 		GL11.glColor4f(0F, 0F, 1F, 1F);
-		tess.startDrawing(GL11.GL_LINES);
+		renderer.startDrawing(GL11.GL_LINES);
 		{
 			float[] xpoints=new float[8];float[] ypoints=new float[8];float[] zpoints=new float[8];
 			
@@ -424,10 +433,10 @@ public class HighlightEvent{
 			ypoints[0]+=(bounds.minY+bounds.maxY)/2;
 			zpoints[0]+=(bounds.minZ+bounds.maxZ)/2;
 			
-			tess.addVertexWithUV(xpoints[0], ypoints[0], zpoints[0], 0, 1);
-			tess.addVertexWithUV((bounds2.minX+bounds2.maxX)/2, (bounds2.minY+bounds2.maxY)/2, (bounds2.minZ+bounds2.maxZ)/2, 0, 1);
+			renderer.addVertexWithUV(xpoints[0], ypoints[0], zpoints[0], 0, 1);
+			renderer.addVertexWithUV((bounds2.minX+bounds2.maxX)/2, (bounds2.minY+bounds2.maxY)/2, (bounds2.minZ+bounds2.maxZ)/2, 0, 1);
 		}
-		tess.finishDrawing();
+		TessHelper.draw();
 		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,0,0,1,2,1);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -444,7 +453,7 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glLineWidth(2F);
 		GL11.glColor4f(0F, 0F, 1F, 1F);
-		tess.startDrawing(GL11.GL_LINES);{
+		renderer.startDrawing(GL11.GL_LINES);{
 			float[] xpoints=new float[8];float[] ypoints=new float[8];float[] zpoints=new float[8];
 			
 			for(int a=0;a<xpoints.length;a++){xpoints[a]=0;ypoints[a]=0;zpoints[a]=0;}
@@ -453,9 +462,9 @@ public class HighlightEvent{
 			ypoints[0]+=bounds.minY;
 			zpoints[0]+=bounds.minZ;
 			
-			tess.addVertexWithUV(xpoints[0]+0.5, ypoints[0]+0.5, zpoints[0]+0.5, 0, 1);
-			tess.addVertexWithUV(bounds2.minX+0.5, bounds2.minY+0.5, bounds2.minZ+0.5, 0, 1);
-		}tess.finishDrawing();
+			renderer.addVertexWithUV(xpoints[0]+0.5, ypoints[0]+0.5, zpoints[0]+0.5, 0, 1);
+			renderer.addVertexWithUV(bounds2.minX+0.5, bounds2.minY+0.5, bounds2.minZ+0.5, 0, 1);
+		}TessHelper.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,0,0,1,2,1);
 	}
@@ -499,57 +508,57 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4d(rColor,gColor,bColor,alpha);
 		GL11.glLineWidth((float)thickens);
-		tess.startDrawing(GL11.GL_LINES);{
+		renderer.startDrawing(GL11.GL_LINES);{
 			int a=0;
 			if(bs[a]){
-				tess.addVertex(xpoints[0], ypoints[0], zpoints[0]);
-				tess.addVertex(xpoints[1], ypoints[1], zpoints[1]);
+				renderer.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+				renderer.addVertex(xpoints[1], ypoints[1], zpoints[1]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[2], ypoints[2], zpoints[2]);
-				tess.addVertex(xpoints[3], ypoints[3], zpoints[3]);
+				renderer.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+				renderer.addVertex(xpoints[3], ypoints[3], zpoints[3]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[4], ypoints[4], zpoints[4]);
-				tess.addVertex(xpoints[5], ypoints[5], zpoints[5]);
+				renderer.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+				renderer.addVertex(xpoints[5], ypoints[5], zpoints[5]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[6], ypoints[6], zpoints[6]);
-				tess.addVertex(xpoints[7], ypoints[7], zpoints[7]);
+				renderer.addVertex(xpoints[6], ypoints[6], zpoints[6]);
+				renderer.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[0], ypoints[0], zpoints[0]);
-				tess.addVertex(xpoints[6], ypoints[6], zpoints[6]);
+				renderer.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+				renderer.addVertex(xpoints[6], ypoints[6], zpoints[6]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[1], ypoints[1], zpoints[1]);
-				tess.addVertex(xpoints[7], ypoints[7], zpoints[7]);
+				renderer.addVertex(xpoints[1], ypoints[1], zpoints[1]);
+				renderer.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[0], ypoints[0], zpoints[0]);
-				tess.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+				renderer.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+				renderer.addVertex(xpoints[2], ypoints[2], zpoints[2]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[1], ypoints[1], zpoints[1]);
-				tess.addVertex(xpoints[3], ypoints[3], zpoints[3]);
+				renderer.addVertex(xpoints[1], ypoints[1], zpoints[1]);
+				renderer.addVertex(xpoints[3], ypoints[3], zpoints[3]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[2], ypoints[2], zpoints[2]);
-				tess.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+				renderer.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+				renderer.addVertex(xpoints[4], ypoints[4], zpoints[4]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[3], ypoints[3], zpoints[3]);
-				tess.addVertex(xpoints[5], ypoints[5], zpoints[5]);
+				renderer.addVertex(xpoints[3], ypoints[3], zpoints[3]);
+				renderer.addVertex(xpoints[5], ypoints[5], zpoints[5]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[4], ypoints[4], zpoints[4]);
-				tess.addVertex(xpoints[6], ypoints[6], zpoints[6]);
+				renderer.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+				renderer.addVertex(xpoints[6], ypoints[6], zpoints[6]);
 			}a++;
 			if(bs[a]){
-				tess.addVertex(xpoints[5], ypoints[5], zpoints[5]);
-				tess.addVertex(xpoints[7], ypoints[7], zpoints[7]);
+				renderer.addVertex(xpoints[5], ypoints[5], zpoints[5]);
+				renderer.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}
-		}tess.finishDrawing();
+		}TessHelper.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	

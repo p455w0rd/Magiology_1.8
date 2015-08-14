@@ -76,7 +76,7 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 					}
 				}
 				boolean isUnderWater=Helper.getBlock(world, x,y,z).getMaterial()==Material.water;
-				if((bol&&!isUnderWater)!=prevState||world.getTotalWorldTime()%20==0)Helper.sendMessage(new GenericServerIntPacket(5, Helper.booleanToInt(bol&&!isUnderWater)));
+				if((bol&&!isUnderWater)!=prevState||world.getTotalWorldTime()%20==0)Helper.sendMessage(new GenericServerIntPacket(5, Helper.booleanToInt(bol&&!isUnderWater||true)));
 			}
 		}else H.createNBT(TheDFWings);
 	}

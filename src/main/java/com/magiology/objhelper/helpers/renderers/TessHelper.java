@@ -190,19 +190,19 @@ public class TessHelper{
 		}
 		GL11.glColor4d(r, g, b, alpha);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		WorldRenderer tess=getWR();
+		WorldRenderer renderer=getWR();
 		GL11.glPushMatrix();
-		tess.startDrawing(GL11.GL_TRIANGLES);
+		renderer.startDrawing(GL11.GL_TRIANGLES);
 		{
 			int i=0;
 			while(i<xy[0].length-1){
-				tess.addVertex(0, 0, 0);
-				tess.addVertex(xy[0][i], xy[1][i], 0);
+				renderer.addVertex(0, 0, 0);
+				renderer.addVertex(xy[0][i], xy[1][i], 0);
 				if(i<xy[0].length)i++;
-				tess.addVertex(xy[0][i], xy[1][i], 0);
+				renderer.addVertex(xy[0][i], xy[1][i], 0);
 			}
 		}
-		tess.finishDrawing();
+		TessHelper.draw();
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
@@ -210,7 +210,7 @@ public class TessHelper{
 	private static IModelCustom arrowModel;
 	public static void drawArrow(){
 		if(arrowModel==null)arrowModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/arrow.obj"));
-		else{
+		else{ 
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
 			GL11H.rotateXYZ(0, 45, 0);
@@ -338,7 +338,7 @@ public class TessHelper{
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NoramlisedVertixBuffer nvb,double textueOffset,double textueScale){
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
 		EntityPlayer player=Helper.getThePlayer();
-		WorldRenderer tess=getWR();
+		WorldRenderer renderer=getWR();
 		Vec3M[] points=new Vec3M[4];
 		
 //		RenderGlobal.drawOutlinedBoundingBox(p_147590_0_, p_147590_1_);
@@ -353,21 +353,21 @@ public class TessHelper{
 			points[a].rotateAroundY((rotationX));
 		}
 		if(nvb==null){
-			tess.startDrawingQuads();
-			tess.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
-			tess.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
-			tess.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
-			tess.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
+			renderer.startDrawingQuads();
+			renderer.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
+			renderer.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
+			renderer.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
+			renderer.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
 			for(int a=0;a<4;a++){
 				points[a].rotateAroundY((-rotationX));
 				points[a].rotateAroundZ((float) Math.toRadians(90));
 				points[a].rotateAroundY((rotationX));
 			}
-			tess.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
-			tess.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
-			tess.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
-			tess.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
-			tess.finishDrawing();
+			renderer.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
+			renderer.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
+			renderer.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
+			renderer.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
+			TessHelper.draw();
 		}else{
 			nvb.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
 			nvb.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
@@ -401,5 +401,8 @@ public class TessHelper{
 		if(isFP)GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDepthMask(true);
 		
+	}
+	public static void draw(){
+		Tessellator.getInstance().draw();
 	}
 }

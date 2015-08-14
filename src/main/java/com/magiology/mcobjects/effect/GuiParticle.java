@@ -11,6 +11,7 @@ import com.magiology.gui.guiparticels.GuiStandardFX;
 import com.magiology.gui.guiparticels.GuiStandardFX.GuiFXProp;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
 public class GuiParticle{
@@ -100,7 +101,7 @@ public class GuiParticle{
 		tess.addVertexWithUV(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1);
 		tess.addVertexWithUV( boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 1, 1);
 		tess.addVertexWithUV( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0);
-		tess.finishDrawing();
+		TessHelper.draw();
 		GL11H.EndOpaqueRendering();
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glPopMatrix();

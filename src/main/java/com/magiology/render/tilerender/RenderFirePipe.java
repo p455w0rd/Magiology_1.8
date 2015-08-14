@@ -10,6 +10,7 @@ import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBufferModel;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
@@ -31,6 +32,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	NoramlisedVertixBuffer buf=TessHelper.getNVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
+		GL11H.protect();
 		TileEntityFirePipe pipe= (TileEntityFirePipe) tileentity;
 		if(Helper.isItemInStack(MItems.FireHammer, Helper.getThePlayer().getCurrentEquippedItem())){
 			if(pipe.hasPriorityUpg){
@@ -60,9 +62,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 			}
 			if(var2)RenderLoopEvents.spawnLARR(new RenderFirePipeGlow(pipe));
 		}
-		Render.WR().setTranslation(pipe.getPos().getX(), pipe.getPos().getY(), pipe.getPos().getZ());
-		
-		
+		Render.WR().setTranslation(x,y,z);
 		if(pipe.DCFFL!=null)drawConectorFFL();
 		for(int i=0; i< pipe.connectionsToObjInMe.length; i++){
 			if(pipe.shouldConnectionsBeRendered[i]){
@@ -80,6 +80,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		else for(int a=0;a<pipe.strateConnection.length;a++)if(pipe.strateConnection[a]!=null)drawStrateCore(pipe.strateConnection[a]);
 		
 		Render.WR().setTranslation(0,0,0);
+		GL11H.endProtection();
 	}
 	
 	
@@ -192,11 +193,11 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	}
 	private void drawStand(EnumFacing dir){
 		if(modelStand==null)generateModelStand();
-		modelStand.push();
+		modelStand.pushMatrix();
 		if(dir.equals(EnumFacing.UP))modelStand.rotateAt(0.5, 0.5, 0.5, 0, 0, 180);
 		bindTexture(Textures.FirePipeConectionFF);
 		modelStand.draw();
-		modelStand.pop();
+		modelStand.popMatrix();
 	}
 	
 	
@@ -234,7 +235,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	private void drawConectionToObj(EnumFacing dir, String type){
 		if(conectionToObjModel[0]==null)generateModelConectionToObj();
 		for(int i=0;i<2;i++){
-			conectionToObjModel[i].push();
+			conectionToObjModel[i].pushMatrix();
 			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
 			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
 			else if(dir.equals(EnumFacing.SOUTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
@@ -248,8 +249,8 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		bindTexture(Textures.FirePipeConecterBase);
 		conectionToObjModel[1].draw();
 		
-		conectionToObjModel[0].pop();
-		conectionToObjModel[1].pop();
+		conectionToObjModel[0].popMatrix();
+		conectionToObjModel[1].popMatrix();
 	}
 	private NoramlisedVertixBufferModel strateCoreModel;
 	private void generateModelStrateCore(){
@@ -277,18 +278,19 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	}
 	private void drawStrateCore(EnumFacing dir){
 		if(strateCoreModel==null)generateModelStrateCore();
-		strateCoreModel.push();
+		strateCoreModel.pushMatrix();
 		if(dir.equals(EnumFacing.UP))strateCoreModel.rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
 		else if(dir.equals(EnumFacing.SOUTH))strateCoreModel.rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
 		bindTexture(Textures.FirePipeConection);
 		strateCoreModel.draw();
-		strateCoreModel.pop();
+		
+		strateCoreModel.popMatrix();
 	}
 	
 	public void drawCore(int txAnim){
 		bindTexture(Textures.firePipeCore);
 		float teHC=tHC*txAnim*4;
-		buf.push();
+		buf.pushMatrix();
 		buf.cleanUp();
 		buf.addVertexWithUV(p*6, p*10, p*6, tWC*4, tHC*4-teHC);
 		buf.addVertexWithUV(p*6, p*6,  p*6, tWC*4, tHC*0-teHC);
@@ -320,10 +322,10 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.addVertexWithUV(p*10, p*6, p*6, tWC*4, tHC*0-teHC);
 		buf.addVertexWithUV(p*10, p*6, p*10, tWC*4, tHC*4-teHC);
 		buf.draw();
-		buf.pop();
+		buf.popMatrix();
 	}
 	public void drawConector(EnumFacing dir){
-		buf.push();
+		buf.pushMatrix();
 		bindTexture(Textures.FirePipeConection);
 		float rX=0,rY=0,rZ=0;
 		int t=-1;
@@ -365,7 +367,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		
 		buf.rotateAt(0.5F,0.5F,0.5F,rX, rY, rZ);
 		buf.draw();
-		buf.pop();
+		buf.popMatrix();
 	}
 	private NoramlisedVertixBufferModel conectorFFLModel;
 	private void generateModelConectorFFL(){

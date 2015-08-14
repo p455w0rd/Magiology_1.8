@@ -31,7 +31,7 @@ public class CraftingGridWOutput{
 	     renderer.addVertexWithUV((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1));
 	     renderer.addVertexWithUV((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1));
 	     renderer.addVertexWithUV((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1));
-	     renderer.finishDrawing();
+	     TessHelper.draw();
 	}
 	public void clear(){
 		product[0]=null;

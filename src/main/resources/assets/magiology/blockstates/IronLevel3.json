@@ -1,5 +1,5 @@
 {
-    "variants":{
-        "model": "IronLevel3"
-    }
+	"variants": {
+		"normal": { "model": "magiology:IronLevel3" }
+	}
 }

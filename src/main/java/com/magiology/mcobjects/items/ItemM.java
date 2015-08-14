@@ -16,16 +16,12 @@ public class ItemM extends Item{
 		
 		//#fucka youuu json models!
 		public static Map<Item, ModelResourceLocation> modelsInit=new HashMap<Item, ModelResourceLocation>();
-		public ItemM setTextureName(String modPath,String name){
-			modelsInit.put(this, new ModelResourceLocation(modPath,name));
-			return this;
-		}
 		public ItemM setTextureName(String name){
-			modelsInit.put(this, new ModelResourceLocation(name));
+			modelsInit.put(this, new ModelResourceLocation(name,"inventory"));
 			return this;
 		}
 		public ItemM setBlockTextureName(){
-			return setTextureName(MReference.MODID, getUnlocalizedName().substring(5));
+			return setTextureName(MReference.MODID+":"+getUnlocalizedName().substring(5));
 		}
 		
 		public static void registerItemModels(){

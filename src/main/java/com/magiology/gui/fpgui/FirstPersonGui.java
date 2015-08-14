@@ -15,7 +15,7 @@ public abstract class FirstPersonGui{
         renderer.addVertexWithUV(xPos + xSize, yPos + ySize, 0, (float)(xTextureOffset + xSize) * xPngSize, (float)(yTextureOffset + ySize) * yPngSize);
         renderer.addVertexWithUV(xPos + xSize, yPos + 0, 0, (float)(xTextureOffset + xSize) * xPngSize, (float)(yTextureOffset + 0) * yPngSize);
         renderer.addVertexWithUV(xPos + 0, yPos + 0, 0, (float)(xTextureOffset + 0) * xPngSize, (float)(yTextureOffset + 0) * yPngSize);
-        renderer.finishDrawing();
+        TessHelper.draw();
 	}
 	public void update(){}
 }

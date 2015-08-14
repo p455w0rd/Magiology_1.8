@@ -1,7 +1,0 @@
-package com.magiology.mcobjects.effect.mc;
-
-import net.minecraft.client.particle.EntityFX;
-
-public class EntityCloudFXM extends EntityFX {
-
-}

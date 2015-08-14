@@ -33,7 +33,9 @@ public class Textures{
 	SmoothBuble1,SmoothBuble1Add2,SmoothBuble1Add1,FireHD,SmoothBuble2,SmoothBuble3,
 	
 	//gui
-	ISidedIns
+	ISidedIns,
+	//TODO
+	WingColors
 	;
 	
 	public static void postInit(){
@@ -41,66 +43,67 @@ public class Textures{
 		Helper.println("TEXTURE INIT STARTED!");
 		BumpMapHandeler.loadBumpMaps();
 		if(isInit)return;isInit=true;
-		Helmet42Model=             GetResource(MReference.MODID,"/models/textures/Helmet42Model.png");
-		GuiArmorEditor=            GetResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
-		firePipeCore=              GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeCore.png");
-		FirePipeConection=         GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConection.png");
-		FirePipeConectionEnd=      GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConectionEnd.png");
-		Pants42Model=              GetResource(MReference.MODID,"/models/textures/Pants42Model.png");
-		PowerCounterCore=          GetResource(MReference.MODID,"/textures/items/PowerCounter.png");
-		PowerCounterFront=         GetResource(MReference.MODID,"/textures/models/powercounter/PowerCounter1.png");
-		PowerCounterSide1=         GetResource(MReference.MODID,"/textures/models/PowerCounter/PowerCounter2.png");
-		PowerCounterEnergyBar=     GetResource(MReference.MODID,"/textures/models/PowerCounter/EnergyBar.png");
+		Helmet42Model=             getResource(MReference.MODID,"/models/textures/Helmet42Model.png");
+		GuiArmorEditor=            getResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
+		firePipeCore=              getResource(MReference.MODID,"/textures/models/firepipe/FirePipeCore.png");
+		FirePipeConection=         getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConection.png");
+		FirePipeConectionEnd=      getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConectionEnd.png");
+		Pants42Model=              getResource(MReference.MODID,"/models/textures/Pants42Model.png");
+		PowerCounterCore=          getResource(MReference.MODID,"/textures/items/PowerCounter.png");
+		PowerCounterFront=         getResource(MReference.MODID,"/textures/models/powercounter/PowerCounter1.png");
+		PowerCounterSide1=         getResource(MReference.MODID,"/textures/models/PowerCounter/PowerCounter2.png");
+		PowerCounterEnergyBar=     getResource(MReference.MODID,"/textures/models/PowerCounter/EnergyBar.png");
 		vanillaBrick=              GetResource("textures/blocks/stonebrick.png");
-		BateryL1Core=              GetResource(MReference.MODID,textur);
-		BateryL2Core=              GetResource(MReference.MODID,textur);
-		BateryL3Core=              GetResource(MReference.MODID,textur);
-		BateryL100Core=            GetResource(MReference.MODID,textur);
-		BedrockBreakerBase=        GetResource(MReference.MODID,"/textures/models/bedrock_breaker_base.png");
-		BedrockBreakerLegSide=     GetResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_side.png");
-		BedrockBreakerLegFront=    GetResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_front.png");
-		BedrockBreakerLegBack=     GetResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_back.png");
-		BedrockBreakerLegTopBottom=GetResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_top_bottom.png");
-		BedrockBreakerLegLaser=    GetResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_laser.png");
-		BigFurnaceOutput=          GetResource(MReference.MODID,textur);
-		EnergizedLapisOre=         GetResource(MReference.MODID,"/textures/models/energized_lapis_ore.png");
-		FireExhaust=               GetResource(MReference.MODID,"/textures/models/fire_exhaust.png");
-		FireGunGun=                GetResource(MReference.MODID,"/textures/models/gun.png");
-		FireGunGear=               GetResource(MReference.MODID,"/textures/models/gear.png");
-		FireLampSide=              GetResource(MReference.MODID,"/textures/blocks/FireLamp.png");
-		FireLampUpNDown=           GetResource(MReference.MODID,"/textures/blocks/FireLampTop.png");
-		FireMatrixReceaverBase=    GetResource(MReference.MODID,"/textures/models/fire_matrix_receaver_base.png");
-		FireMatrixTransfererBase=  GetResource(MReference.MODID,textur);
-		FirePipeConectionFSL=      GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConectionFSL.png");
-		FirePipeConectionFF=       GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConectionFF.png");
-		FirePipeConecterBase=      GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConecter.png");
-		FirePipeConecterInMe=      GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConecterIn.png");
-		FirePipeConecterOutOfMe=   GetResource(MReference.MODID,"/textures/models/firepipe/FirePipeConecterOut.png");
-		OreStructureCore=          GetResource(MReference.MODID,"/textures/models/ore_structure_core.png");
-		StatsGui1=                 GetResource(MReference.MODID,"/textures/gui/statsgui/StatsGui1.png");
-		handBaseTop=               GetResource(MReference.MODID,"/textures/items/thehand/baseTop.png");
-		handBaseSide=              GetResource(MReference.MODID,"/textures/items/thehand/baseSide.png");
-		handBaseSide2=             GetResource(MReference.MODID,"/textures/items/thehand/baseSide2.png");
-		handBaseBotom=             GetResource(MReference.MODID,"/textures/items/thehand/baseBotom.png");
-		handThumbTop=              GetResource(MReference.MODID,"/textures/items/thehand/thumbTop.png");
-		handThumbBottom=           GetResource(MReference.MODID,"/textures/items/thehand/thumbBotom.png");
-		handThumbEnd=              GetResource(MReference.MODID,"/textures/items/thehand/thumbEnd.png");
-		handThumbStart=            GetResource(MReference.MODID,"/textures/items/thehand/thumbStart.png");
-		handThumbTxtClip=          GetResource(MReference.MODID,"/textures/items/thehand/thumbTextureClip.png");
-		handThumbSide=             GetResource(MReference.MODID,"/textures/items/thehand/thumbSide.png");
-		handNormalFingerTop=       GetResource(MReference.MODID,"/textures/items/thehand/normalFingerTop.png");
-		handNormalFingerBottom=    GetResource(MReference.MODID,"/textures/items/thehand/normalFingerBotom.png");
-		handnormalFingerEnd=       GetResource(MReference.MODID,"/textures/items/thehand/normalFingerEnd.png");
-		handNormalFingerStart=     GetResource(MReference.MODID,"/textures/items/thehand/normalFingerStart.png");
-		handNormalFingerTxtClip=   GetResource(MReference.MODID,"/textures/items/thehand/normalFingerTextureClip.png");
-		handNormalFingerSide=      GetResource(MReference.MODID,"/textures/particle/fire_hd.png");
-		SmoothBuble1=              GetResource(MReference.MODID,"/textures/particle/smooth_buble1.png");
-		SmoothBuble2=              GetResource(MReference.MODID,"/textures/particle/smooth_buble2.png");
-		SmoothBuble3=              GetResource(MReference.MODID,"/textures/particle/smooth_buble3.png");
-		SmoothBuble1Add1=          GetResource(MReference.MODID,"/textures/particle/smooth_buble1_add1.png");
-		SmoothBuble1Add2=          GetResource(MReference.MODID,"/textures/particle/smooth_buble1_add2.png");
-		FireHD=                    GetResource(MReference.MODID,"/textures/particle/fire_hd.png");
-		ISidedIns=                 GetResource(MReference.MODID,"/textures/gui/ISidedIns.png");
+		BateryL1Core=              getResource(MReference.MODID,textur);
+		BateryL2Core=              getResource(MReference.MODID,textur);
+		BateryL3Core=              getResource(MReference.MODID,textur);
+		BateryL100Core=            getResource(MReference.MODID,textur);
+		BedrockBreakerBase=        getResource(MReference.MODID,"/textures/models/bedrock_breaker_base.png");
+		BedrockBreakerLegSide=     getResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_side.png");
+		BedrockBreakerLegFront=    getResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_front.png");
+		BedrockBreakerLegBack=     getResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_back.png");
+		BedrockBreakerLegTopBottom=getResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_top_bottom.png");
+		BedrockBreakerLegLaser=    getResource(MReference.MODID,"/textures/models/bedrock_breaker_leg_laser.png");
+		BigFurnaceOutput=          getResource(MReference.MODID,textur);
+		EnergizedLapisOre=         getResource(MReference.MODID,"/textures/models/energized_lapis_ore.png");
+		FireExhaust=               getResource(MReference.MODID,"/textures/models/fire_exhaust.png");
+		FireGunGun=                getResource(MReference.MODID,"/textures/models/gun.png");
+		FireGunGear=               getResource(MReference.MODID,"/textures/models/gear.png");
+		FireLampSide=              getResource(MReference.MODID,"/textures/blocks/FireLamp.png");
+		FireLampUpNDown=           getResource(MReference.MODID,"/textures/blocks/FireLampTop.png");
+		FireMatrixReceaverBase=    getResource(MReference.MODID,"/textures/models/fire_matrix_receaver_base.png");
+		FireMatrixTransfererBase=  getResource(MReference.MODID,textur);
+		FirePipeConectionFSL=      getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConectionFSL.png");
+		FirePipeConectionFF=       getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConectionFF.png");
+		FirePipeConecterBase=      getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConecter.png");
+		FirePipeConecterInMe=      getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConecterIn.png");
+		FirePipeConecterOutOfMe=   getResource(MReference.MODID,"/textures/models/firepipe/FirePipeConecterOut.png");
+		OreStructureCore=          getResource(MReference.MODID,"/textures/models/ore_structure_core.png");
+		StatsGui1=                 getResource(MReference.MODID,"/textures/gui/statsgui/StatsGui1.png");
+		handBaseTop=               getResource(MReference.MODID,"/textures/items/thehand/baseTop.png");
+		handBaseSide=              getResource(MReference.MODID,"/textures/items/thehand/baseSide.png");
+		handBaseSide2=             getResource(MReference.MODID,"/textures/items/thehand/baseSide2.png");
+		handBaseBotom=             getResource(MReference.MODID,"/textures/items/thehand/baseBotom.png");
+		handThumbTop=              getResource(MReference.MODID,"/textures/items/thehand/thumbTop.png");
+		handThumbBottom=           getResource(MReference.MODID,"/textures/items/thehand/thumbBotom.png");
+		handThumbEnd=              getResource(MReference.MODID,"/textures/items/thehand/thumbEnd.png");
+		handThumbStart=            getResource(MReference.MODID,"/textures/items/thehand/thumbStart.png");
+		handThumbTxtClip=          getResource(MReference.MODID,"/textures/items/thehand/thumbTextureClip.png");
+		handThumbSide=             getResource(MReference.MODID,"/textures/items/thehand/thumbSide.png");
+		handNormalFingerTop=       getResource(MReference.MODID,"/textures/items/thehand/normalFingerTop.png");
+		handNormalFingerBottom=    getResource(MReference.MODID,"/textures/items/thehand/normalFingerBotom.png");
+		handnormalFingerEnd=       getResource(MReference.MODID,"/textures/items/thehand/normalFingerEnd.png");
+		handNormalFingerStart=     getResource(MReference.MODID,"/textures/items/thehand/normalFingerStart.png");
+		handNormalFingerTxtClip=   getResource(MReference.MODID,"/textures/items/thehand/normalFingerTextureClip.png");
+		handNormalFingerSide=      getResource(MReference.MODID,"/textures/particle/fire_hd.png");
+		SmoothBuble1=              getResource(MReference.MODID,"/textures/particle/smooth_buble1.png");
+		SmoothBuble2=              getResource(MReference.MODID,"/textures/particle/smooth_buble2.png");
+		SmoothBuble3=              getResource(MReference.MODID,"/textures/particle/smooth_buble3.png");
+		SmoothBuble1Add1=          getResource(MReference.MODID,"/textures/particle/smooth_buble1_add1.png");
+		SmoothBuble1Add2=          getResource(MReference.MODID,"/textures/particle/smooth_buble1_add2.png");
+		FireHD=                    getResource(MReference.MODID,"/textures/particle/fire_hd.png");
+		ISidedIns=                 getResource(MReference.MODID,"/textures/gui/ISidedIns.png");
+		WingColors=                getResource(MReference.MODID,"/models/textures/wingColorMap.png");
 		
 		Helper.println("TEXTURE INIT ENDED!");
 		Helper.println("----\n--------\n------------");
@@ -110,8 +113,8 @@ public class Textures{
 		}else Helper.println("Yay! there is no errors!");
 		Helper.println("------------\n--------\n----");
 	}
-	public static ResourceLocation GetResource(String FolderPath){return GetResource("",FolderPath);}
-	public static ResourceLocation GetResource(String modID,String AfterModIDFolderPath){
+	public static ResourceLocation GetResource(String FolderPath){return getResource("",FolderPath);}
+	public static ResourceLocation getResource(String modID,String AfterModIDFolderPath){
 		ResourceLocation result=new ResourceLocation(modID,AfterModIDFolderPath);
 		boolean isLoaded=re.loadTexture(result, new SimpleTexture(result));
 		if(!isLoaded){

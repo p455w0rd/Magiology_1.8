@@ -13,7 +13,7 @@ public class TexturedTriangle{
     public int nVertices;
     private boolean invertNormal;
     private static final String __OBFID = "CL_00000850";
-    private static WorldRenderer tess=TessHelper.getWR();
+    private static WorldRenderer renderer=TessHelper.getWR();
 
     public TexturedTriangle(PositionTextureVertex[] PTV){
     	if(PTV.length!=3)return;
@@ -30,13 +30,13 @@ public class TexturedTriangle{
         Vec3M Vec3=Vec3M.conv(vertexPositions[1].vector3D.subtract(vertexPositions[0].vector3D));
         Vec3M vec31=Vec3M.conv(vertexPositions[1].vector3D.subtract(vertexPositions[2].vector3D));
         Vec3M vec32=vec31.crossProduct(Vec3).normalize();
-        tess.startDrawing(GL11.GL_TRIANGLES);
-        if(invertNormal)tess.setNormal(-((float)vec32.x),-((float)vec32.y),-((float)vec32.z));
-        else tess.setNormal((float)vec32.x,(float)vec32.y,(float)vec32.z);
+        renderer.startDrawing(GL11.GL_TRIANGLES);
+        if(invertNormal)renderer.setNormal(-((float)vec32.x),-((float)vec32.y),-((float)vec32.z));
+        else renderer.setNormal((float)vec32.x,(float)vec32.y,(float)vec32.z);
         for(int i=0;i<3;++i){
             PositionTextureVertex PTV=vertexPositions[i];
-            tess.addVertexWithUV(((float)PTV.vector3D.xCoord), ((float)PTV.vector3D.yCoord), ((float)PTV.vector3D.zCoord), PTV.texturePositionX, PTV.texturePositionY);
+            renderer.addVertexWithUV(((float)PTV.vector3D.xCoord), ((float)PTV.vector3D.yCoord), ((float)PTV.vector3D.zCoord), PTV.texturePositionX, PTV.texturePositionY);
         }
-        tess.finishDrawing();
+        TessHelper.draw();
     }
 }

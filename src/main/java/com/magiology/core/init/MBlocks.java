@@ -89,7 +89,7 @@ public class MBlocks{
 	}
 	
 	public static void oresInit(){
-		IronLevel2=init(new OreLevelX(Material.ground, 0.1, 2, "pickaxe", 1, "IronLevel2").setCreativeTab(MCreativeTabs.Whwmmt_ores));
+		IronLevel2=init(new OreLevelX(Material.ground, 0.1, 2, "pickaxe", 1, "IronLevel2").setCreativeTab(MCreativeTabs.Whwmmt_ores).setBlockTextureName(MReference.MODID + ":" + "IronLevel2"));
 		IronLevel3=init(new OreLevelX(Material.ground, 0.2, 4, "pickaxe", 1, "IronLevel3").setCreativeTab(MCreativeTabs.Whwmmt_ores).setBlockTextureName(MReference.MODID + ":" + "IronLevel3"));
 		IronLevel4=init(new OreLevelX(Material.ground, 0.3, 8, "pickaxe", 2, "IronLevel4").setCreativeTab(MCreativeTabs.Whwmmt_ores).setBlockTextureName(MReference.MODID + ":" + "IronLevel4"));
 		IronLevel5=init(new OreLevelX(Material.ground, 0.4, 16, "pickaxe", 2, "IronLevel5").setCreativeTab(MCreativeTabs.Whwmmt_ores).setBlockTextureName(MReference.MODID + ":" + "IronLevel5"));

@@ -69,7 +69,7 @@ public class Magiology{
     public boolean modWindowOpen(){return modInfGUI!=null&&!modInfGUI.isExited;}
     
     public void loadFiles(){
-    	String dir="mods\\1.7.10\\"+MODID;
+    	String dir="mods\\1.8\\"+MODID;
     	new File(dir).mkdir();
     	ZipManager.extractFileFromZip("mods\\Magiology-0.026A.jar", dir,"MagiZip.zip","OpenUp.wav","Close.wav","Loaded.wav");
     	
@@ -89,7 +89,7 @@ public class Magiology{
     }
 	public void preInit(FMLPreInitializationEvent event){
 		//TODO
-		Config.shadersEnabled=false;
+		Config.setShadersEnabled(false);
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){@Override
 		public void run(){
@@ -105,6 +105,8 @@ public class Magiology{
 		MPackets.preInit();
     }
     public void init(FMLInitializationEvent event){
+//		RenderItemM.castRenderItemToRenderItemM();
+    	
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandeler());
     	MRecepies.init();
     	MTileEntitys.init();

@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -149,6 +150,7 @@ public class RenderLoopEvents{
 		GL11.glPopMatrix();
 		
 		universalRender.clear();
+		GL11H.EndOpaqueRendering();
 	}
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void render2Dscreem(RenderGameOverlayEvent e){
@@ -169,6 +171,7 @@ public class RenderLoopEvents{
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();
+		GL11H.BlendIs(true);
 	}
 
     private float f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
@@ -238,5 +241,9 @@ public class RenderLoopEvents{
 	        player.prevRotationYawHead=f8;
         }
 		GL11.glPopMatrix();
+	}
+	@SubscribeEvent(priority=EventPriority.HIGHEST)
+	public void renderHand(RenderHandEvent e){
+//		Helper.printInln(H.getThePlayer().getCurrentEquippedItem());
 	}
 }

@@ -61,7 +61,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 		tess.addVertexWithUV((x-par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z-par5*ps/1.5+par7*ps/1.5), 1, 0);
 		tess.addVertexWithUV((x+par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z+par5*ps/1.5+par7*ps/1.5), 1, 1);
 		tess.addVertexWithUV((x+par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z+par5*ps/1.5-par7*ps/1.5), 0, 1);
-		tess.finishDrawing();
+		
 		
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);

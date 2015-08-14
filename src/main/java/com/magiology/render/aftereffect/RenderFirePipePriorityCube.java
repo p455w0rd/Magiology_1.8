@@ -12,6 +12,7 @@ import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	
@@ -75,41 +76,31 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 		tess.addVertex(minx, miny, minz);
 		tess.addVertex(maxx, miny, minz);
 		tess.addVertex(maxx, miny, maxz);
-		tess.finishDrawing();
-		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 1.0F, 0.0F);
 		tess.addVertex(maxx, maxy, maxz);
 		tess.addVertex(maxx, maxy, minz);
 		tess.addVertex(minx, maxy, minz);
 		tess.addVertex(minx, maxy, maxz);
-		tess.finishDrawing();
-		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, -1F);
 		tess.addVertex(maxx, maxy, minz);
 		tess.addVertex(maxx, miny, minz);
 		tess.addVertex(minx, miny , minz);
 		tess.addVertex(minx, maxy, minz);
-		tess.finishDrawing();
-		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, 1.0F);
 		tess.addVertex(minx, maxy, maxz);
 		tess.addVertex(minx, miny , maxz);
 		tess.addVertex(maxx, miny, maxz);
 		tess.addVertex(maxx, maxy, maxz);
-		tess.finishDrawing();
-		tess.startDrawingQuads();
 		tess.setNormal(-1F, 0.0F, 0.0F);
 		tess.addVertex(minx, maxy, minz);
 		tess.addVertex(minx, miny, minz);
 		tess.addVertex(minx, miny, maxz);
 		tess.addVertex(minx, maxy, maxz);
-		tess.finishDrawing();
-		tess.startDrawingQuads();
 		tess.setNormal(1.0F, 0.0F, 0.0F);
 		tess.addVertex(maxx, maxy, maxz);
 		tess.addVertex(maxx, miny,  maxz);
 		tess.addVertex(maxx, miny,  minz);
 		tess.addVertex(maxx, maxy, minz);
-		tess.finishDrawing();
+		TessHelper.draw();
 	}
 }

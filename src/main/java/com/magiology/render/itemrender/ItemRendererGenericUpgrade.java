@@ -36,7 +36,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 	
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack is, Object... data){
-		texture=Textures.GetResource(MReference.MODID,"/textures/items/"+((GenericItemUpgrade)is.getItem()).UT.toString()+"Upgrades.png");
+		texture=Textures.getResource(MReference.MODID,"/textures/items/"+((GenericItemUpgrade)is.getItem()).UT.toString()+"Upgrades.png");
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON||type==ItemRenderType.EQUIPPED){
 			double x=0,y=0,z=0,xr=0,yr=0,zr=0;

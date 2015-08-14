@@ -67,7 +67,7 @@ public class ShaderRunner{
 	
 	@SubscribeEvent
 	public void renderShaders(RenderGameOverlayEvent.Pre event){
-		if(Config.shadersEnabled&&event.type==ElementType.ALL&&OpenGlHelper.shadersSupported&&!shaderGroups.isEmpty()){
+		if(Config.isShadersEnabled()&&event.type==ElementType.ALL&&OpenGlHelper.shadersSupported&&!shaderGroups.isEmpty()){
 			for(ShaderAspectRenderer handeler:handelers){
 				if(handeler.uniforms.isEmpty())handeler.init(this);
 			}
@@ -103,7 +103,7 @@ public class ShaderRunner{
 	@SideOnly(value=Side.CLIENT)
 	@SubscribeEvent
 	public void updateShaders(LivingUpdateEvent event){
-		if(!Config.shadersEnabled||!H.isRemote(event.entity)||event.entity!=H.getThePlayer())return;
+		if(!Config.isShadersEnabled()||!H.isRemote(event.entity)||event.entity!=H.getThePlayer())return;
 		player=H.getThePlayer();
 		if(handelers.isEmpty())init();
 		Map<Integer, Boolean> enabledMap=new HashMap<Integer, Boolean>();
@@ -141,7 +141,7 @@ public class ShaderRunner{
 	public void setShader(ShaderGroup target, int shaderId){
 		if(OpenGlHelper.shadersSupported){
 			if(shaderGroups.containsKey(shaderId)){
-				((ShaderGroup)shaderGroups.get(shaderId)).deleteShaderGroup();
+				shaderGroups.get(shaderId).deleteShaderGroup();
 				shaderGroups.remove(Integer.valueOf(shaderId));
 			}
 			try{

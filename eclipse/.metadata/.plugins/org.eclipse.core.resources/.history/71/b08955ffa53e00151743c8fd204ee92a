@@ -1,0 +1,29 @@
+package com.magiology.gui.fpgui;
+
+import java.awt.Color;
+
+import net.minecraft.client.gui.FontRenderer;
+
+import org.lwjgl.opengl.GL11;
+
+import com.magiology.core.init.MItems;
+import com.magiology.handelers.animationhandelers.TheHandHandeler;
+import com.magiology.handelers.animationhandelers.TheHandHandeler.HandComonPositions;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.renderers.GL11H;
+
+public class HandModeChangerGui extends FirstPersonGui{
+	public static HandModeChangerGui instance=new HandModeChangerGui();
+	private ExtendedPlayerData data;
+	public float handAlpha=0,lastHandAlpha;
+	@Override
+	public void render(int xScreen, int yScreen, float partialTicks){}
+	@Override
+	public void update(){
+		if(Helper.isNull(Helper.getThePlayer()))return;
+		lastHandAlpha=handAlpha;
+		handAlpha+=Helper.getThePlayer().isSneaking()?0.25:-0.25;
+		handAlpha=Helper.keepAValueInBounds(handAlpha, 0, 1);
+	}
+}

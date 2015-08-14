@@ -6,25 +6,30 @@ import java.util.List;
 
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.util.Vec3;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.objhelper.Get.Render;
+import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.objhelper.vectors.Vec3M;
 
 public class NoramlisedVertixBuffer{
 	
-	private List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
-	private List<PositionTextureVertex> unfinishedTriangle=new ArrayList<PositionTextureVertex>();
-	private WorldRenderer renderer;
-	private boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClearAfterDraw=true;
-	private List<NoramlisedVertixBuffer> subBuffers=new ArrayList<NoramlisedVertixBuffer>();
+	protected List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
+	protected List<PositionTextureVertex> unfinishedTriangle=new ArrayList<PositionTextureVertex>();
+	protected WorldRenderer renderer;
+	protected boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClearAfterDraw=true;
+	protected List<NoramlisedVertixBuffer> subBuffers=new ArrayList<NoramlisedVertixBuffer>();
 	
-	private Matrix4f transformation=new Matrix4f(),backupTransformation=new Matrix4f();
-	private Vector3f rotation=new Vector3f(),backupRotation=new Vector3f();
+	protected Matrix4f transformation=new Matrix4f();
+	protected Vector3f rotation=new Vector3f();
+	
+	protected List<Matrix4f> transformationStacks=new ArrayList<Matrix4f>();
+	protected List<Vector3f> rotationStacks=new ArrayList<Vector3f>();
 	
 	public NoramlisedVertixBuffer(){
 		this.renderer=Render.WR();
@@ -49,7 +54,7 @@ public class NoramlisedVertixBuffer{
 	public void addVertexWithUV(Vec3M vec3m, double u, double v){
 		addVertexWithUV((float)vec3m.x, (float)vec3m.y, (float)vec3m.z, (float)u, (float)v);
 	}
-	private final static float NULL_UV_ID=123456789;
+	protected final static float NULL_UV_ID=123456789;
 	public void addVertex(double x,double y,double z){
 		addVertexWithUV(x,y,z, NULL_UV_ID, NULL_UV_ID);
 	}
@@ -62,9 +67,9 @@ public class NoramlisedVertixBuffer{
 	private ShadedTriangle generateShadedTriangle(PositionTextureVertex pos0,PositionTextureVertex pos1,PositionTextureVertex pos2,boolean hasNormal){
 		Vec3M normal;
 		if(instantNormalCalculation){
-			Vec3M angle1=Vec3M.conv(pos1.vector3D.subtract(pos0.vector3D));
-			Vec3M angle2=Vec3M.conv(pos1.vector3D.subtract(pos2.vector3D));
-			normal=angle2.crossProduct(angle1).normalize();
+			Vec3 vec3  = pos1.vector3D.subtractReverse(pos0.vector3D);
+	        Vec3 vec31 = pos1.vector3D.subtractReverse(pos2.vector3D);
+	        normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
 		}else normal=new Vec3M(0, 1, 0);
 		return new ShadedTriangle(pos0,pos1,pos2, normal);
 	}
@@ -74,47 +79,87 @@ public class NoramlisedVertixBuffer{
 		unfinishedTriangle.clear();
 	}
 	
-	private void startRecordingTesselator(int type){
+	protected void startRecordingTesselator(int type){
 		renderer.startDrawing(type);
 	}
 	
 	public void pasteToTesselator(boolean type){
-		
 		for(NoramlisedVertixBuffer a:subBuffers){
-			
 			for(ShadedTriangle b:a.shadedTriangles){
-				GL11H.transformVector(b.normal, new Vector3f(),a.rotation.x,a.rotation.y,a.rotation.z,1);
+				GL11H.transformVector(b.normal, new Vector3f(0,0,0),a.rotation.x,a.rotation.y,a.rotation.z,1);
 				for(int b1=0;b1<2;b1++)b.pos3[b1].vector3D=GL11H.transformVector(b.pos3[b1].vector3D, a.transformation);
 			}
-			
 			shadedTriangles.addAll(a.shadedTriangles);
 		}
 		subBuffers.clear();
-		
-		for(ShadedTriangle a:shadedTriangles){
-			if(type){
-				for(int b=0;b<a.pos3.length;b++){
-					Vec3M finalNormal=GL11H.transformVector(new Vec3M(a.normal.x, a.normal.y, a.normal.z), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
+		try {
+			for(int s=0;s<shadedTriangles.size();s++){
+				ShadedTriangle a=shadedTriangles.get(s);
+				if(type){
+					Vec3M finalNormal=GL11H.transformVector(a.normal.addVector(0,0,0), new Vector3f(0,0,0),rotation.x,rotation.y,rotation.z,1);
 					renderer.setNormal((float)finalNormal.x, (float)finalNormal.y, (float)finalNormal.z);
-					
-					
-					Vec3M finalVec=GL11H.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
-					if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY){
-						renderer.addVertex(finalVec.x, finalVec.y, finalVec.z);
+					for(int b=0;b<a.pos3.length;b++){
+						Vec3M finalVec=GL11H.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
+						if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY)renderer.addVertex(finalVec.x, finalVec.y, finalVec.z);
+						else renderer.addVertexWithUV(finalVec.x, finalVec.y, finalVec.z, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY);
 					}
-					renderer.addVertexWithUV(finalVec.x, finalVec.y, finalVec.z, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY);
+					
+//			        Vec3 vec32 = finalNormal.conv().normalize();
+//			        renderer.setNormal((float)vec32.xCoord, (float)vec32.yCoord, (float)vec32.zCoord);
+//			        
+//			        for(int b=0;b<a.pos3.length;b++)
+//			        {
+//			        	Vec3M finalVec=GL11H.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
+//			            PositionTextureVertex positiontexturevertex = a.pos3[b];
+//			            renderer.addVertexWithUV(finalVec.x, finalVec.y, finalVec.z, positiontexturevertex.texturePositionX, positiontexturevertex.texturePositionY);
+//			        }
+//					PositionTextureVertex[] vertexPositions=new PositionTextureVertex[]{
+//							new PositionTextureVertex(GL11H.transformVector(new Vec3M(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord), transformation).conv(), a.pos3[0].texturePositionX, a.pos3[0].texturePositionY),
+//							new PositionTextureVertex(GL11H.transformVector(new Vec3M(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord), transformation).conv(), a.pos3[1].texturePositionX, a.pos3[1].texturePositionY),
+//							new PositionTextureVertex(GL11H.transformVector(new Vec3M(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord), transformation).conv(), a.pos3[2].texturePositionX, a.pos3[2].texturePositionY),
+//							new PositionTextureVertex(GL11H.transformVector(new Vec3M(
+//									shadedTriangles.get(s+1).pos3[1].vector3D.xCoord, 
+//									shadedTriangles.get(s+1).pos3[1].vector3D.yCoord, 
+//									shadedTriangles.get(s+1).pos3[1].vector3D.zCoord), transformation).conv(), 
+//									shadedTriangles.get(s+1).pos3[1].texturePositionX, 
+//									shadedTriangles.get(s+1).pos3[1].texturePositionY)
+//							
+//					};
+					
+					
+//			        Vec3 vec32 = finalNormal.conv();
+//			        renderer.setNormal((float)vec32.xCoord, (float)vec32.yCoord, (float)vec32.zCoord);
+			        
+
+//			        for (int i = 0; i < 4; ++i)
+//			        {
+//			            PositionTextureVertex positiontexturevertex = vertexPositions[i];
+//			            renderer.addVertexWithUV(positiontexturevertex.vector3D.xCoord, positiontexturevertex.vector3D.yCoord, positiontexturevertex.vector3D.zCoord, positiontexturevertex.texturePositionX, positiontexturevertex.texturePositionY);
+//			        }
+			        
+
+					
+					
+					
+				}else{
+					Vec3M finalVects[]={
+							GL11H.transformVector(Vec3M.conv(a.pos3[0].vector3D), transformation),
+							GL11H.transformVector(Vec3M.conv(a.pos3[1].vector3D), transformation),
+							GL11H.transformVector(Vec3M.conv(a.pos3[2].vector3D), transformation)
+						};
+					renderer.addVertexWithUV(finalVects[0].x, finalVects[0].y, finalVects[0].z, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
+					renderer.addVertexWithUV(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
+					
+					renderer.addVertexWithUV(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
+					renderer.addVertexWithUV(finalVects[2].x, finalVects[2].y, finalVects[2].z, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
+					
+//					tessellator.addVertexWithUV(a.pos3[2].xCoord, a.pos3[2].yCoord, a.pos3[2].vector3D.zCoord, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
+//					tessellator.addVertexWithUV(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
 				}
-			}else{
-				renderer.addVertexWithUV(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
-				renderer.addVertexWithUV(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
 				
-				renderer.addVertexWithUV(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
-				renderer.addVertexWithUV(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
-				
-//				tessellator.addVertexWithUV(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
-//				tessellator.addVertexWithUV(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
 			}
-			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	public NoramlisedVertixBufferModel exportToNoramlisedVertixBufferModel(){
@@ -124,7 +169,7 @@ public class NoramlisedVertixBuffer{
 		return model;
 	}
 	public void renderToScreen(){
-		renderer.finishDrawing();
+		TessHelper.draw();
 		if(willClearAfterDraw)cleanUp();
 	}
 	
@@ -150,9 +195,9 @@ public class NoramlisedVertixBuffer{
 			this.normal=normal;
 		}
 		public void recalculateNormal(){
-			Vec3M angle1=Vec3M.conv(pos3[1].vector3D.subtract(pos3[0].vector3D));
-			Vec3M angle2=Vec3M.conv(pos3[1].vector3D.subtract(pos3[2].vector3D));
-			normal=angle2.crossProduct(angle1).normalize();
+			Vec3 vec3  = this.pos3[1].vector3D.subtractReverse(this.pos3[0].vector3D);
+	        Vec3 vec31 = this.pos3[1].vector3D.subtractReverse(this.pos3[2].vector3D);
+	        normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
 		}
 	}
 	public void recalculateNormals(){
@@ -204,13 +249,20 @@ public class NoramlisedVertixBuffer{
 	public void disableClearing(){
 		willClearAfterDraw=false;
 	}
-	public void push(){
-		backupTransformation=Matrix4f.add(transformation, Matrix4f.setZero(new Matrix4f()), null);
-		backupRotation=new Vector3f(rotation.x, rotation.y, rotation.z);
+	public void pushMatrix(){
+		transformationStacks.add(Matrix4f.add(transformation, Matrix4f.setZero(new Matrix4f()), null));
+		rotationStacks.add(new Vector3f(rotation.x, rotation.y, rotation.z));
 	}
-	public void pop(){
-		transformation=Matrix4f.add(backupTransformation, Matrix4f.setZero(new Matrix4f()), null);
-		rotation=new Vector3f(backupRotation.x, backupRotation.y, backupRotation.z);
+	public void popMatrix(){
+		if(transformationStacks.isEmpty()){
+			H.printInln("Buffer is out of stacks to pop! You need to push before popping!\nFunction aborted.",H.getStackTrace());
+			return;
+		}
+		int pos=transformationStacks.size()-1;
+		transformation=transformationStacks.get(pos);
+		rotation=rotationStacks.get(pos);
+		transformationStacks.remove(pos);
+		rotationStacks.remove(pos);
 	}
 	
 	public void importComplexCube(ComplexCubeModel... cubeModels){

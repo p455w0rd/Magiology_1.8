@@ -8,7 +8,6 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -19,7 +18,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.api.network.RedstoneData;
 import com.magiology.core.MReference;
-import com.magiology.objhelper.Get;
 import com.magiology.objhelper.helpers.Helper;
 
 public abstract class BlockContainerM extends BlockContainer{
