@@ -15,7 +15,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.LogHelper;
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0,ModedMaxEnergyBuffer=0,ModedMaxTSpeed=0;

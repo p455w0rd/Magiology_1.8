@@ -11,7 +11,7 @@ import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public class TileEntityFireMatrixReceaver extends TileEntityPow{
 	

@@ -12,7 +12,7 @@ import com.magiology.Annotations.GUIWorldUpdater;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.modedmcstuff.guiContainer.CustomSlot;
 import com.magiology.modedmcstuff.guiContainer.FakeContainer;
-import com.magiology.upgrades.RegisterUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
 
 @GUINeedsWorldUpdates
 public class GuiUpgradeContainer extends Container{
@@ -57,7 +57,7 @@ public class GuiUpgradeContainer extends Container{
 						if(!mergeItemStack(itemstack1, 0, 27, false))return null;
 					slot.onSlotChange(itemstack1, itemstack);
 					
-				}else if(RegisterUpgrades.isItemUpgrade(slot.getStack().getItem())&&RegisterUpgrades.isUpgradeValid(RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(slot.getStack().getItem())),tileCB.container)){
+				}else if(RegisterItemUpgrades.isItemUpgrade(slot.getStack().getItem())&&RegisterItemUpgrades.isUpgradeValid(RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(slot.getStack().getItem())),tileCB.container)){
 					
 					if(!mergeItemStack(itemstack1, 36, 36+tileCB.containerItems.length, false)){
 						if(slotNumber>=36&&slotNumber<=36+tileCB.containerItems.length){

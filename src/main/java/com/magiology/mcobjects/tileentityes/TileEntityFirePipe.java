@@ -25,9 +25,9 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.SideHelper;
-import com.magiology.upgrades.RegisterUpgrades;
-import com.magiology.upgrades.RegisterUpgrades.Container;
-import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.UpgradeType;
 
 public class TileEntityFirePipe extends TileEntityPow implements MultiColisionProvider,UpdateablePipe{
 	PowerHelper PH=new PowerHelper();
@@ -83,7 +83,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		//Get if/what side is first
 		hasPriorityUpg=false;
 		for(int i=0;i<containerItems.length;i++)if(containerItems[i]!=null&&containerItems[i].hasTagCompound()){
-			UpgradeType type=RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(containerItems[i].getItem()));
+			UpgradeType type=RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(containerItems[i].getItem()));
 			if(type==UpgradeType.Priority){
 				hasPriorityUpg=true;
 				FirstSide=containerItems[i].getTagCompound().getInteger("side");

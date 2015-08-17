@@ -24,7 +24,7 @@ import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.SideHelper;
 import com.magiology.objhelper.vectors.Pos;
 import com.magiology.objhelper.vectors.Vec3M;
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public class TileEntityFireLamp extends TileEntityPowGen{
 	EffectRenderer efr=Minecraft.getMinecraft().effectRenderer;

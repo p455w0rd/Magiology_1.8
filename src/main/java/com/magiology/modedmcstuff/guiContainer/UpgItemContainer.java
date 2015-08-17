@@ -9,7 +9,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 
 import com.magiology.modedmcstuff.items.UpgItem;
-import com.magiology.upgrades.RegisterUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
 
 public class UpgItemContainer implements IInventory{
 	
@@ -135,7 +135,7 @@ public class UpgItemContainer implements IInventory{
 	@Override
 	public boolean isItemValidForSlot(int v1, ItemStack stack) {
 		boolean reurn1=false;
-		if(RegisterUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
+		if(RegisterItemUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
 		return reurn1;
 	}
 

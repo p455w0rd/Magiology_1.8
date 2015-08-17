@@ -1,0 +1,15 @@
+package com.magiology.forgepowered.event.custom;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+
+public class PlayerWrenchEvent extends PlayerInteractEvent{
+	
+	public PlayerWrenchEvent(EntityPlayer player, Action action, BlockPos pos, EnumFacing face, World world){
+		super(player, action, pos, face, world);
+	}
+	
+}

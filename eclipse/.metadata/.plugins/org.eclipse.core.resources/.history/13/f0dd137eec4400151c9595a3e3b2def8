@@ -1,0 +1,5 @@
+package com.magiology.registry;
+
+public class WrenchRegistry {
+
+}

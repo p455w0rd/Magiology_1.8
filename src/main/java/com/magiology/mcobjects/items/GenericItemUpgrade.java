@@ -19,8 +19,8 @@ import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.objhelper.helpers.FontEH;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.upgrades.RegisterUpgrades;
-import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.UpgradeType;
 
 public class GenericItemUpgrade extends Item{
 	int Level;
@@ -40,7 +40,7 @@ public class GenericItemUpgrade extends Item{
 	}
 	
 	public void registerItemUpgrade(){
-		RegisterUpgrades.RegisterItemUpgrades(this,Level,UT);
+		RegisterItemUpgrades.registerItemUpgrades(this,Level,UT);
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
 		MItems.setGenericUpgradeRenderer(this);
 	}
@@ -62,7 +62,7 @@ public class GenericItemUpgrade extends Item{
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		boolean result=false;
 		if(H.createNBT(stack)){
-			UpgradeType type=RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(stack.getItem()));
+			UpgradeType type=RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(stack.getItem()));
 			Block block=Helper.getBlock(world, pos);
 			if(!player.isSneaking()&&type==UpgradeType.Priority){
 				double MaxX=block.getBlockBoundsMaxX(),MinX=block.getBlockBoundsMinX();
@@ -96,7 +96,7 @@ public class GenericItemUpgrade extends Item{
 	@Override
 	public void onUpdate(ItemStack is, World w, Entity entity, int var1, boolean b1){
 		if(H.createNBT(is)){
-			if(RegisterUpgrades.getItemUpgradeType(UT.GetTypeID())==UpgradeType.Priority){
+			if(RegisterItemUpgrades.getItemUpgradeType(UT.GetTypeID())==UpgradeType.Priority){
 				if(!is.getTagCompound().hasKey("side"))is.getTagCompound().setInteger("side", 0);
 			}
 			

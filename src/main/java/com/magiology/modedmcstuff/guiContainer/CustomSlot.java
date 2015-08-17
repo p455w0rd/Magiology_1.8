@@ -5,7 +5,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.upgrades.RegisterUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
 
 public class CustomSlot extends Slot{
 	
@@ -18,6 +18,6 @@ public class CustomSlot extends Slot{
 	
 	@Override
 	public boolean isItemValid(ItemStack itemstack){
-		return RegisterUpgrades.isItemUpgrade(itemstack.getItem())&&RegisterUpgrades.isUpgradeValid(RegisterUpgrades.getItemUpgradeType(RegisterUpgrades.getItemUpgradeID(itemstack.getItem())),tile.container);
+		return RegisterItemUpgrades.isItemUpgrade(itemstack.getItem())&&RegisterItemUpgrades.isUpgradeValid(RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(itemstack.getItem())),tile.container);
 	}
 }

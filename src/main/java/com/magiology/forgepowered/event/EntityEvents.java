@@ -35,6 +35,7 @@ import com.magiology.objhelper.EntityPosAndBB;
 import com.magiology.objhelper.GetSpecialPlayer;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.registry.events.PlayerWrenchEvent;
 
 public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
@@ -150,6 +151,7 @@ public class EntityEvents{
 		EntityPlayer player=event.entityPlayer;
 		BlockPos pos=event.pos;
 		ItemStack equippedItemStack=player.getCurrentEquippedItem();
+		PlayerWrenchEvent.create(player, event.action, pos, event.face);
 		if(TileEntityHologramProjector.invokeRayTrace(event, player))return;
 		if((equippedItemStack==null?true:equippedItemStack.getItem()!=MItems.FireHammer)&&event.action==Action.RIGHT_CLICK_BLOCK&&player.isSneaking()){
 			TileEntity tile=world.getTileEntity(pos);

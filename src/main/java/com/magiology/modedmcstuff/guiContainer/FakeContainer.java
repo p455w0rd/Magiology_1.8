@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IChatComponent;
 
-import com.magiology.upgrades.RegisterUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
 
 public class FakeContainer implements IInventory{
 	
@@ -100,7 +100,7 @@ public class FakeContainer implements IInventory{
 	@Override
 	public boolean isItemValidForSlot(int v1, ItemStack stack) {
 		boolean reurn1=false;
-		if(RegisterUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
+		if(RegisterItemUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
 		return reurn1;
 	}
 	

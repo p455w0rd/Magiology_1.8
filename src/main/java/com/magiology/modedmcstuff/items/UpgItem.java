@@ -3,7 +3,7 @@ package com.magiology.modedmcstuff.items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public interface UpgItem{
 	

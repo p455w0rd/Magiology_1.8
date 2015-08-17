@@ -21,9 +21,9 @@ import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.SideHelper;
 import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
-import com.magiology.upgrades.RegisterUpgrades.Container;
 
 public class TileEntityOreStructureCore extends TileEntityPow{
 

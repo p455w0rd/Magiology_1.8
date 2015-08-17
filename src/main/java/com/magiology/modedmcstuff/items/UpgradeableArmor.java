@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.upgrades.RegisterUpgrades;
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	public static String slotNBT="someSlot";
@@ -107,8 +107,8 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 			for(ItemStack a:stacks){
 				if(a!=null){
 					Item theItem=a.getItem();
-					if(RegisterUpgrades.isItemUpgrade(theItem)&&RegisterUpgrades.getItemUpgradeID(theItem)==RegisterUpgrades.getItemUpgradeID(item)){
-						return RegisterUpgrades.getItemUpgradeLevel(theItem);
+					if(RegisterItemUpgrades.isItemUpgrade(theItem)&&RegisterItemUpgrades.getItemUpgradeID(theItem)==RegisterItemUpgrades.getItemUpgradeID(item)){
+						return RegisterItemUpgrades.getItemUpgradeLevel(theItem);
 					}
 				}
 			}

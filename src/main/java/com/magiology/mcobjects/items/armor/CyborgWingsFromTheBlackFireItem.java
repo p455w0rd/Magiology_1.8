@@ -21,8 +21,8 @@ import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.modedmcstuff.items.UpgradeableArmor;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.render.models.ModelWingsFromTheBlackFire;
-import com.magiology.upgrades.RegisterUpgrades.Container;
 
 public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 

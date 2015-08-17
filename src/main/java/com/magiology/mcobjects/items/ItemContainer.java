@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.Constants;
 
-import com.magiology.upgrades.RegisterUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
 
 public class ItemContainer extends Item implements IInventory{
 	
@@ -98,7 +98,7 @@ public class ItemContainer extends Item implements IInventory{
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack){
-		return !(RegisterUpgrades.isItemUpgrade(itemstack.getItem()));
+		return !(RegisterItemUpgrades.isItemUpgrade(itemstack.getItem()));
 	}
 	
 	public void readFromNBT(NBTTagCompound tagcompound){

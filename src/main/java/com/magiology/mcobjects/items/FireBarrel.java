@@ -11,7 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.magiology.modedmcstuff.items.UpgradeableItem;
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 public class FireBarrel extends UpgradeableItem{
 	
 	public FireBarrel(Container container){

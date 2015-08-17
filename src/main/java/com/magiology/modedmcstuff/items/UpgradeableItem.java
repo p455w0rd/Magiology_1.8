@@ -16,8 +16,8 @@ import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.mcobjects.items.ItemM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.upgrades.RegisterUpgrades;
-import com.magiology.upgrades.RegisterUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public class UpgradeableItem extends ItemM implements UpgItem{
 	public static String slotNBT="thatSlot";
@@ -98,8 +98,8 @@ public class UpgradeableItem extends ItemM implements UpgItem{
 			for(ItemStack a:stacks){
 				if(a!=null){
 					Item theItem=a.getItem();
-					if(RegisterUpgrades.isItemUpgrade(theItem)&&RegisterUpgrades.getItemUpgradeID(theItem)==RegisterUpgrades.getItemUpgradeID(item)){
-						return RegisterUpgrades.getItemUpgradeLevel(theItem);
+					if(RegisterItemUpgrades.isItemUpgrade(theItem)&&RegisterItemUpgrades.getItemUpgradeID(theItem)==RegisterItemUpgrades.getItemUpgradeID(item)){
+						return RegisterItemUpgrades.getItemUpgradeLevel(theItem);
 					}
 				}
 			}

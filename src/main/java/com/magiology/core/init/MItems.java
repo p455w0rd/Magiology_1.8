@@ -21,13 +21,13 @@ import com.magiology.mcobjects.items.TheHand;
 import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
 import com.magiology.mcobjects.items.armor.Helmet_42;
 import com.magiology.mcobjects.items.armor.Pants_42;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.registry.upgrades.RegisterItemUpgrades.UpgradeType;
 import com.magiology.render.itemrender.ItemRendererFirePipe;
 import com.magiology.render.itemrender.ItemRendererGenericUpgrade;
 import com.magiology.render.itemrender.ItemRendererHelmet42;
 import com.magiology.render.itemrender.ItemRendererPants42;
 import com.magiology.render.itemrender.ItemRendererPowerCounter;
-import com.magiology.upgrades.RegisterUpgrades.Container;
-import com.magiology.upgrades.RegisterUpgrades.UpgradeType;
 
 public class MItems{
 
