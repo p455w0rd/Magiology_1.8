@@ -163,8 +163,8 @@ public class EntityEvents{
 		EntityPlayer player=event.entityPlayer;
 		BlockPos pos=event.pos;
 		ItemStack equippedItemStack=player.getCurrentEquippedItem();
-		if(TileEntityHologramProjector.invokeRayTrace(event, player))return;
 		PlayerWrenchEvent.create(player, event.action, pos, event.face);
+		if(TileEntityHologramProjector.invokeRayTrace(event, player))return;
 		if((equippedItemStack==null?true:equippedItemStack.getItem()!=MItems.FireHammer)&&event.action==Action.RIGHT_CLICK_BLOCK&&player.isSneaking()){
 			TileEntity tile=world.getTileEntity(pos);
 			if(tile instanceof TileEntityPow){
