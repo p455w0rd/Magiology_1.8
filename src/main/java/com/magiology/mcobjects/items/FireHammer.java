@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -18,8 +17,6 @@ import net.minecraft.world.World;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.forgepowered.event.GameLoopEvents;
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
@@ -27,8 +24,13 @@ import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
+import com.magiology.registry.WrenchRegistry;
 
 public class FireHammer extends ItemM{
+	
+	public FireHammer(){
+		WrenchRegistry.registerWrench(this);
+	}
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
@@ -76,20 +78,20 @@ public class FireHammer extends ItemM{
 		if(player.isSneaking()){
 			Block b=Helper.getBlock(world, pos);
 			if(tile1 instanceof PowerCore){
-				PowerCore tileMT=(PowerCore) tile1;
-				if(world.isRemote){
-					int ab=(int)(((float)tileMT.getCurrentEnergy()/(float)tileMT.getMaxEnergyBuffer())*10);
-					for(int a=0;a<ab*3;a++)world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0, 0);
-					for(int a=0;a<ab;a++)Helper.spawnEntityFX(new EntitySmoothBubleFX(world,
-						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,Helper.CRandF(0.05),Helper.CRandF(0.05),Helper.CRandF(0.05),
-						150,4+Helper.RInt(3),3,true,2,"tx1",
-						1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1, 0.99));
-				}
-				if(!player.capabilities.isCreativeMode){
-					GameLoopEvents.dropContainerOnDerstroy(world, pos);
-					Helper.getBlock(world, pos).dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
-				}
-				world.setBlockToAir(pos);
+//				PowerCore tileMT=(PowerCore) tile1;
+//				if(world.isRemote){
+//					int ab=(int)(((float)tileMT.getCurrentEnergy()/(float)tileMT.getMaxEnergyBuffer())*10);
+//					for(int a=0;a<ab*3;a++)world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0, 0);
+//					for(int a=0;a<ab;a++)Helper.spawnEntityFX(new EntitySmoothBubleFX(world,
+//						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,Helper.CRandF(0.05),Helper.CRandF(0.05),Helper.CRandF(0.05),
+//						150,4+Helper.RInt(3),3,true,2,"tx1",
+//						1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1, 0.99));
+//				}
+//				if(!player.capabilities.isCreativeMode){
+//					GameLoopEvents.dropContainerOnDerstroy(world, pos);
+//					Helper.getBlock(world, pos).dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+//				}
+//				world.setBlockToAir(pos);
 				isit2=true;
 			}
 		}

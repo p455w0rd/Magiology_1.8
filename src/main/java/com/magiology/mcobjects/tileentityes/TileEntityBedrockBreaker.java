@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
@@ -12,12 +11,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.objhelper.Get;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 
 public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlayerListBox{
-	EffectRenderer efrenderer = Minecraft.getMinecraft().effectRenderer;
+	EffectRenderer efrenderer = Get.Render.ER();
 	public double animation=40,speed=0,positionForLaser=0;
 	public float p=1F/16F;
 	//RMB=is there a valid block to process?

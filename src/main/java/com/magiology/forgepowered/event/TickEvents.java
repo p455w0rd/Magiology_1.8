@@ -67,7 +67,7 @@ public class TickEvents{
 //		if(Helper.getFPS()<30||true){
 //			if(Helper.getTheWorld().getTotalWorldTime()%100==0){
 //				try{
-//					List[] fxLayers=DataStalker.getVariable(EffectRenderer.class, "fxLayers", Minecraft.getMinecraft().effectRenderer);
+//					List[] fxLayers=DataStalker.getVariable(EffectRenderer.class, "fxLayers", Get.Render.ER());
 //					Integer[] dead=new Integer[fxLayers.length];
 //					for(int i=0;i<fxLayers.length;i++){
 //						dead[i]=new Integer(0);

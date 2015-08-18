@@ -1,0 +1,269 @@
+package com.magiology.forgepowered.event;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.magiology.core.Magiology;
+import com.magiology.core.init.MGui;
+import com.magiology.core.init.MItems;
+import com.magiology.gui.guiContainer.GuiUpdater;
+import com.magiology.handelers.animationhandelers.TheHandHandeler;
+import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
+import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
+import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.objhelper.EntityPosAndBB;
+import com.magiology.objhelper.GetSpecialPlayer;
+import com.magiology.objhelper.SlowdownHelper;
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.registry.events.PlayerWrenchEvent;
+
+public class EntityEvents{
+//	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
+//	WorldRenderer tess=TessHelper.getWR();
+	boolean isFP;
+	SpecialPlayerParicleHandeler_SubEvent spph=new SpecialPlayerParicleHandeler_SubEvent();
+	SlowdownHelper slowdown2=new SlowdownHelper(20);
+	@SubscribeEvent
+	public void onLivingUpdateEvent(LivingUpdateEvent event){
+		World world=event.entity.worldObj;
+		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ,xv=event.entity.motionX,yv=event.entity.motionY,zv=event.entity.motionZ;
+		
+		{
+			Entity entity=event.entity;
+//			if(RenderLoopEvents.entitys.size()>50)RenderLoopEvents.entitys.remove(Helper.RInt(RenderLoopEvents.entitys.size()));
+			if(world.isRemote)if(entity instanceof EntityLivingBase){
+				EntityPlayer player=Helper.getThePlayer();
+				
+				boolean contains=false;
+				for (int i=0;i<RenderLoopEvents.entitys.size();i++){
+					if(RenderLoopEvents.entitys.get(i).entity==entity){
+						contains=true;
+						i=RenderLoopEvents.entitys.size();
+					}
+				}
+				
+				if(
+				   !entity.isDead&&
+				   entity.isInRangeToRender3d(player.posX+Helper.CRandI(50), player.posY+Helper.CRandI(50), player.posZ+Helper.CRandI(50))&&
+				   ((EntityLivingBase)entity).getCreatureAttribute()!=EnumCreatureAttribute.UNDEAD&&
+				   entity.isInRangeToRenderDist(entity.renderDistanceWeight)&&
+				   entity.getBoundingBox()!=null
+				   ){
+					EntityPosAndBB EPABB=new EntityPosAndBB(entity);
+//					if(!contains&&RenderLoopEvents.entitys.size()<100)RenderLoopEvents.entitys.add(EPABB);
+					
+					
+					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&Helper.RB()&&(Helper.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1]))){
+						double[] l=EPABB.getRandDotInBB(1.5),k=EPABB.getMiddleOfBB();
+						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+Helper.CRandF(0.4), k[1]+Helper.CRandF(0.4), k[2]+Helper.CRandF(0.4), 600, 4, 1,0.2+Helper.RF()*0.5,0.2+Helper.RF()*0.5,0.5/(entity==player?8:1));
+						particle.isGL_DEPTHDisabled=true;
+						particle.noClip=true;
+						Helper.spawnEntityFX(particle);
+					}
+				}
+			}
+		}
+		
+		if(event.entity instanceof EntityPlayer){
+			EntityPlayer player=(EntityPlayer) event.entity;
+			WingsFromTheBlackFireHandeler.updateModel(player);
+			GuiUpdater.tryToUpdateOpenContainer(player);
+			if(world.isRemote)if(ComplexPlayerRenderingData.get(player)==null)ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
+			ExtendedPlayerData playerData=ExtendedPlayerData.get(player);
+			if(playerData==null){
+				ExtendedPlayerData.register(player);
+				ExtendedPlayerData.get(player).sendData();
+			}else{
+				if(playerData.soulFlame+5<=playerData.maxSoulFlame)playerData.soulFlame+=5;
+				if(world.getTotalWorldTime()%40==0)playerData.sendData();
+				
+				if(playerData.getReducedFallDamage()>0.01&&player.fallDistance>2){
+					player.fallDistance-=playerData.getReducedFallDamage();
+					playerData.setReducedFallDamage(0);
+					if(player.fallDistance<0){
+						playerData.setReducedFallDamage(-player.fallDistance);
+						player.fallDistance=0.001F;
+					}
+				}
+				if(playerData.isFlappingDown)SpecialMovmentEvents.instance.onFlap(player, playerData.getKeysX(), playerData.getKeysY(), playerData.getKeysZ());
+			}
+			if(WingsFromTheBlackFireHandeler.getIsActive(player))SpecialMovmentEvents.instance.handleWingPhysics(player);
+			if(TheHandHandeler.isActive(player))TheHandHandeler.update(player);
+			{
+				InventoryPlayer inv=player.inventory;
+				
+				for(ItemStack a:inv.mainInventory){
+					if(Helper.isItemInStack(MItems.PowerCounter, a)){
+						Helper.createNBT(a);
+						boolean state=a.getTagCompound().getBoolean("state");
+						double animation=a.getTagCompound().getDouble("anim"),prevAnimation=a.getTagCompound().getDouble("pAnim");
+						prevAnimation=animation;
+						for(int i=0;i<5;i++)
+							if(state==true){if(animation<1)animation+=0.01;}
+							else{if(animation>0)animation-=0.01;}
+						
+						if(!player.isSneaking()){
+							state=false;
+						}
+						
+						a.getTagCompound().setDouble("anim", animation);
+						a.getTagCompound().setDouble("pAnim", prevAnimation);
+						a.getTagCompound().setBoolean("state", state);
+					
+					}
+				}
+				
+			}
+			if(GetSpecialPlayer.getPlayerRank(player)!=-1){
+				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				if(player.isCollidedVertically)yv=0;
+				
+				if(isFP)spph.onUpdate(world, player, x,y,z,xv,yv,zv, 0);
+			}
+			//---------------------
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerInteract(PlayerInteractEvent event){
+		Entity entity=event.entity;
+		World world=event.world;
+		EntityPlayer player=event.entityPlayer;
+		BlockPos pos=event.pos;
+		ItemStack equippedItemStack=player.getCurrentEquippedItem();
+		if(!event instanceof PlayerWrenchEvent)PlayerWrenchEvent.create(player, event.action, pos, event.face);
+		if(TileEntityHologramProjector.invokeRayTrace(event, player))return;
+		if((equippedItemStack==null?true:equippedItemStack.getItem()!=MItems.FireHammer)&&event.action==Action.RIGHT_CLICK_BLOCK&&player.isSneaking()){
+			TileEntity tile=world.getTileEntity(pos);
+			if(tile instanceof TileEntityPow){
+				if(!world.isRemote){
+					Helper.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, pos);
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onEntityConstructing(EntityConstructing event){
+		World world=event.entity.worldObj;
+		Entity entity=event.entity;
+//		if(entity instanceof EntityItem);else{
+//			if(entity instanceof EntitySubatomicWorldDeconstructor){
+//				EntitySubatomicWorldDeconstructor Entity=(EntitySubatomicWorldDeconstructor)entity;
+//				Helper.printInln(world.isRemote,Entity.shootingEntity);
+//			}
+//		}
+		if(entity instanceof EntityPlayer){
+			EntityPlayer player=(EntityPlayer)entity;
+			
+		}
+		
+	}
+	@SubscribeEvent
+	public void onEntityJoinWorld(EntityJoinWorldEvent event){
+		World world=event.world;
+		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ,xv=event.entity.motionX,yv=event.entity.motionY,zv=event.entity.motionZ;
+		Entity entity=event.entity;
+		
+		
+		if(entity instanceof EntityPlayer){
+			EntityPlayer player=(EntityPlayer)entity;
+			
+//			if(GetSpecialPlayer.getPlayerRank(player)==1){
+//				double R,G,B;
+//				for (int i=0;i<25;i++){
+//					double xr=x+Helper.CRandF(0.8);
+//					double yr=y+Helper.CRandF(1.8)-0.6;
+//					double zr=z+Helper.CRandF(0.8);
+//					R=world.rand.nextFloat();G=world.rand.nextFloat();B=world.rand.nextFloat();
+//					Helper.spawnEnitiyFX(new EntitySmoothBubleFX(world,xr,yr,zr, 0,-0.05,0, 400, 6+world.rand.nextInt(2), 8,true,2,"tx1", R,G,B, 1, 0.95));
+//				}
+//			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingJumpEvent(LivingJumpEvent event){
+		World world=event.entity.worldObj;
+		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ,xv=event.entity.motionX,yv=event.entity.motionY,zv=event.entity.motionZ;
+		
+		
+		if(event.entity instanceof EntityPlayer){
+			EntityPlayer player=(EntityPlayer)event.entity;
+			
+			if(GetSpecialPlayer.getPlayerRank(player)!=-1){
+				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				if(isFP)spph.onJump(world, player, x,y,z, xv, yv, zv, 0);
+			}
+			//---------------------
+			{
+				
+				
+				
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onLivingFallEvent(LivingFallEvent event){
+		World world=event.entity.worldObj;double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ;
+		if(event.entity instanceof EntityPlayer){
+			EntityPlayer player=(EntityPlayer)event.entity;
+			if(GetSpecialPlayer.getPlayerRank(player)!=-1){
+				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
+			}
+			ExtendedPlayerData.get(player).onLand(true);
+			//---------------------
+			{
+				
+				
+				
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onPlayerFlyableFallEvent(PlayerFlyableFallEvent event){
+		World world=event.entity.worldObj;double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ;
+		if(event.entity instanceof EntityPlayer){
+			ExtendedPlayerData.get((EntityPlayer)event.entity).onLand(false);
+			if(GetSpecialPlayer.getPlayerRank((EntityPlayer) event.entity)!=-1){
+				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
+			}
+			//---------------------
+			{
+				
+				
+				
+			}
+		}
+	}
+	@SubscribeEvent
+	public void onPlayerWrenchEvent(PlayerWrenchEvent event){
+		Helper.printInln(event.action);
+	}
+	
+	
+	
+	
+}

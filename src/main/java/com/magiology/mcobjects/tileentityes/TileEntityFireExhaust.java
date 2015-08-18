@@ -18,7 +18,7 @@ public class TileEntityFireExhaust extends TileEntityM implements IUpdatePlayerL
 	public void update(){
 		if(optimizer.isTimeWithAddProgress()){
 			if(H.getBlock(worldObj, pos.add(0, -4, 0))!=MBlocks.OreStructureCore){
-//				Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, H.getBlock(worldObj, pos), 0);
+//				Get.Render.ER().addBlockDestroyEffects(pos, H.getBlock(worldObj, pos), 0);
 				worldObj.setBlockToAir(pos);
 				worldObj.setTileEntity(pos, null);
 			}

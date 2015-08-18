@@ -29,6 +29,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
@@ -45,6 +47,7 @@ import com.magiology.forgepowered.packets.AbstractToClientMessage.SendingTarget.
 import com.magiology.forgepowered.packets.AbstractToServerMessage;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.modedmcstuff.ColorF;
+import com.magiology.objhelper.Get;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.vectors.Plane;
 import com.magiology.objhelper.vectors.Ray;
@@ -75,7 +78,7 @@ public class Helper{
 				int i = mc.gameSettings.particleSetting;
 	            double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
 	            if(i>1);else{
-	            	if (d6*d6+d7*d7+d8*d8>d9*d9);else if(RB(Config.getParticleAmount()))Minecraft.getMinecraft().effectRenderer.addEffect(particleFX);
+	            	if (d6*d6+d7*d7+d8*d8>d9*d9);else if(RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 	            }
 			}
 		}
@@ -88,7 +91,7 @@ public class Helper{
 				int i = mc.gameSettings.particleSetting;
 				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ;
 				if(i>1);else{
-					if (d6*d6+d7*d7+d8*d8>distance*distance);else if(RB(Config.getParticleAmount()))Minecraft.getMinecraft().effectRenderer.addEffect(particleFX);
+					if (d6*d6+d7*d7+d8*d8>distance*distance);else if(RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 				}
 			}
 		}
@@ -254,8 +257,14 @@ public class Helper{
 		}
 		NBTTC.setTag(baseName+"Slots", list);
 	}
+	private static void print(Object obj){
+		System.out.print(obj);
+	}
 	private static void println(Object obj){
 		System.out.print(obj+"\n");
+	}
+	public static void print(Object... objs){
+		for(Object a:objs)print(a+" ");
 	}
 	public static void println(Object... objs){
 		for(Object a:objs)println(a+" ");
@@ -398,6 +407,8 @@ public class Helper{
 		if(object instanceof Entity)return((Entity)object).worldObj.isRemote;
 		if(object instanceof World)return((World)object).isRemote;
 		if(object instanceof TileEntity)return((TileEntity)object).getWorld().isRemote;
+		if(object instanceof EntityEvent)return((EntityEvent)object).entity.worldObj.isRemote;
+		if(object instanceof BlockEvent)return((BlockEvent)object).world.isRemote;
 		println("Given object has no data reference to world!");
 		return false;
 	}

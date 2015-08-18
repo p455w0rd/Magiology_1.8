@@ -20,6 +20,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.magiology.api.power.PowerCore;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
@@ -86,6 +87,17 @@ public class EntityEvents{
 		
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer) event.entity;
+			
+//			if(player.getCurrentEquippedItem()!=null&&player.getCurrentEquippedItem().getTagCompound()!=null){
+//				NBTTagCompound nbt=player.getCurrentEquippedItem().getTagCompound();
+//				for(Object i:nbt.getKeySet()){
+//					Helper.print(i);
+//					Helper.println(nbt.getInteger(i.toString()));
+//				}
+//				Helper.println("----------");
+//			}
+			
+			
 			WingsFromTheBlackFireHandeler.updateModel(player);
 			GuiUpdater.tryToUpdateOpenContainer(player);
 			if(world.isRemote)if(ComplexPlayerRenderingData.get(player)==null)ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
@@ -164,6 +176,17 @@ public class EntityEvents{
 		}
 	}
 	@SubscribeEvent
+	public void onPlayerWrenchEvent(PlayerWrenchEvent event){
+		World world=event.world;
+		EntityPlayer player=event.entityPlayer;
+		BlockPos pos=event.pos;
+		ItemStack equippedItemStack=player.getCurrentEquippedItem();
+		TileEntity tile=world.getTileEntity(pos);
+		if(tile instanceof PowerCore&&((PowerCore)tile).isPowerKeptOnWrench()){
+			PowerCore.SavePowerToItemEvents.onPowerCoreWrenched(pos, player, world, tile);
+		}
+	}
+	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event){
 		World world=event.entity.worldObj;
 		Entity entity=event.entity;
@@ -233,7 +256,7 @@ public class EntityEvents{
 				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
 			}
 			ExtendedPlayerData.get(player).onLand(true);
-			//---------------------
+			//---------------------  
 			{
 				
 				
@@ -258,9 +281,4 @@ public class EntityEvents{
 			}
 		}
 	}
-	
-	
-	
-	
-	
 }

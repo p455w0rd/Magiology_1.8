@@ -16,7 +16,7 @@ import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.vectors.Vec3M;
 
-public class EntitySparkFX extends EntityMagiologyBaseFX{
+public class EntitySparkFX extends EntityFXM{
 	
 	public List<Fragment> fragments=new ArrayList<Fragment>();
 	public SlowdownHelper slowdown=new SlowdownHelper(2);

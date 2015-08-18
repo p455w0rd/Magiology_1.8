@@ -11,7 +11,7 @@ import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
-public class EntitySmoothBubleFX extends EntityMagiologyBaseFX{
+public class EntitySmoothBubleFX extends EntityFXM{
 	
 	double length,gravity,friction;
 	int type;

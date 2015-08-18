@@ -321,13 +321,13 @@ public class HighlightEvent{
 		PC.setString("block", Helper.getBlock(event.player.worldObj,pos).getLocalizedName());
 		
 		if(tile instanceof PowerCore){
-			powerBar=(float)((PowerCore)tile).getCurrentEnergy()/(float)((PowerCore)tile).getMaxEnergyBuffer();
-			currentEn=((PowerCore)tile).getCurrentEnergy();
+			powerBar=(float)((PowerCore)tile).getEnergy()/(float)((PowerCore)tile).getMaxEnergyBuffer();
+			currentEn=((PowerCore)tile).getEnergy();
 			maxEn=((PowerCore)tile).getMaxEnergyBuffer();
 		}else if(tile instanceof TileEntityBigFurnaceCore){
-			powerBar=(float)((TileEntityBigFurnaceCore)tile).getCurrentEnergy()/(float)((TileEntityBigFurnaceCore)tile).getMaxEnergyBuffer();
+			powerBar=(float)((TileEntityBigFurnaceCore)tile).getEnergy()/(float)((TileEntityBigFurnaceCore)tile).getMaxEnergyBuffer();
 			
-			currentEn=((TileEntityBigFurnaceCore)tile).getCurrentEnergy();
+			currentEn=((TileEntityBigFurnaceCore)tile).getEnergy();
 			maxEn=((TileEntityBigFurnaceCore)tile).getMaxEnergyBuffer();
 		}else if(tile instanceof TileEntityBFCPowerOut){
 			int x1=0;int y1=1000;int z1=0;
@@ -340,17 +340,17 @@ public class HighlightEvent{
 			if(y1!=1000){
 				pos=new BlockPos(x1, y1, z1);
 				tile= event.player.worldObj.getTileEntity(pos);
-				powerBar=(float)((TileEntityBigFurnaceCore)tile).getCurrentEnergy()/(float)((TileEntityBigFurnaceCore)tile).getMaxEnergyBuffer();
-				currentEn=((TileEntityBigFurnaceCore)tile).getCurrentEnergy();
+				powerBar=(float)((TileEntityBigFurnaceCore)tile).getEnergy()/(float)((TileEntityBigFurnaceCore)tile).getMaxEnergyBuffer();
+				currentEn=((TileEntityBigFurnaceCore)tile).getEnergy();
 				maxEn=((TileEntityBigFurnaceCore)tile).getMaxEnergyBuffer();
 			}
 		}else if(tile instanceof TileEntityBateryGeneric){
-			powerBar=(float)((TileEntityBateryGeneric)tile).getCurrentEnergy()/(float)((TileEntityBateryGeneric)tile).getMaxEnergyBuffer();
-			currentEn=((TileEntityBateryGeneric)tile).getCurrentEnergy();
+			powerBar=(float)((TileEntityBateryGeneric)tile).getEnergy()/(float)((TileEntityBateryGeneric)tile).getMaxEnergyBuffer();
+			currentEn=((TileEntityBateryGeneric)tile).getEnergy();
 			maxEn=((TileEntityBateryGeneric)tile).getMaxEnergyBuffer();
 		}else if(tile instanceof TileEntityFireLamp){
-			powerBar=(float)((TileEntityFireLamp)tile).getCurrentEnergy()/(float)((TileEntityFireLamp)tile).getMaxEnergyBuffer();
-			currentEn=((TileEntityFireLamp)tile).getCurrentEnergy();
+			powerBar=(float)((TileEntityFireLamp)tile).getEnergy()/(float)((TileEntityFireLamp)tile).getMaxEnergyBuffer();
+			currentEn=((TileEntityFireLamp)tile).getEnergy();
 			maxEn=((TileEntityFireLamp)tile).getMaxEnergyBuffer();
 		}else if(tile instanceof TileEntityRemotePowerCounter){
 			powerBar=(float)((TileEntityRemotePowerCounter)tile).powerBar;

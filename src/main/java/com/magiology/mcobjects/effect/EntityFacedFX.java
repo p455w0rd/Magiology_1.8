@@ -12,7 +12,7 @@ import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.render.Textures;
 
-public class EntityFacedFX extends EntityMagiologyBaseFX{
+public class EntityFacedFX extends EntityFXM{
 	
 	double length,gravity,friction;
 	int type;

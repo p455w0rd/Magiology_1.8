@@ -217,7 +217,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 						int meta=H.getBlockMetadata(worldObj, pos1);
 						Block block=H.getBlock(worldObj, pos1);
 						if(H.isRemote(this)){
-//							Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, block, 0);
+//							Get.Render.ER().addBlockDestroyEffects(pos, block, 0);
 						}else{
 							block.dropBlockAsItem(worldObj, pos1, worldObj.getBlockState(pos1), 1);
 							worldObj.setBlockToAir(pos1);

@@ -24,7 +24,7 @@ import org.lwjgl.opengl.GL12;
 import com.magiology.core.MReference;
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.AdvancedModelLoader;
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
-import com.magiology.mcobjects.effect.EntityMagiologyBaseFX;
+import com.magiology.mcobjects.effect.EntityFXM;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.vectors.Vec3M;
@@ -393,7 +393,7 @@ public class TessHelper{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 		
-		EntityMagiologyBaseFX.renderBufferedParticle(tess);
+		EntityFXM.renderBufferedParticle(tess);
 		
 		
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);

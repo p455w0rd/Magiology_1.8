@@ -228,7 +228,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			if(processing>20)processing=processing-processing;
 			if(processing==20){
 				if(worldObj.isRemote){
-//					Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos.add(0,1,0), H.getBlock(worldObj,pos.add(0,1,0)), 0);
+//					Get.Render.ER().addBlockDestroyEffects(pos.add(0,1,0), H.getBlock(worldObj,pos.add(0,1,0)), 0);
 					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5,  0, 0.06, 0,600,99,0.1,true,2,"tx3", 0, 0, 1, 1, 0.99));
 					Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+100, pos.getZ()+0.5, 0.5F, 4F, 1, 4, 130, new Vec3M(0, -2F, 0)));
 				}

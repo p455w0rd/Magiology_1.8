@@ -34,7 +34,7 @@ public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListB
 			
 			if(rotation[0]==null&&rotation[1]==null&&rotation[2]==null&&rotation[3]==null)
 			{
-//				if(worldObj.isRemote)Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, H.getBlock(worldObj, pos), 0);
+//				if(worldObj.isRemote)Get.Render.ER().addBlockDestroyEffects(pos, H.getBlock(worldObj, pos), 0);
 				worldObj.setBlockToAir(pos);
 			}
 		}

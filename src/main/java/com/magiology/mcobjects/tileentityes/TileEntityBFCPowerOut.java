@@ -93,17 +93,17 @@ public class TileEntityBFCPowerOut extends TileEntityM implements IUpdatePlayerL
 			
 			if(worldObj.getTileEntity(pos)instanceof TileEntityPow){
 				TileEntityPow pipe= (TileEntityPow) worldObj.getTileEntity(pos);
-				for(int a=0;a<10;a++)if(tile.getCurrentEnergy()>=tile.getMaxTSpeed()){
-					if(pipe.getCurrentEnergy()+tile.getMaxTSpeed()<=pipe.getMaxEnergyBuffer()){
+				for(int a=0;a<10;a++)if(tile.getEnergy()>=tile.getMaxTSpeed()){
+					if(pipe.getEnergy()+tile.getMaxTSpeed()<=pipe.getMaxEnergyBuffer()){
 						pipe.addEnergy(tile.getMaxTSpeed());
 						tile.subtractEnergy(tile.getMaxTSpeed());
 					}
-					else if(pipe.getCurrentEnergy()+tile.getMinTSpeed()<=pipe.getMaxEnergyBuffer()){
+					else if(pipe.getEnergy()+tile.getMinTSpeed()<=pipe.getMaxEnergyBuffer()){
 						pipe.addEnergy(tile.getMinTSpeed());
 						tile.subtractEnergy(tile.getMinTSpeed());
 					}
 				}
-				if(pipe.getCurrentEnergy()==2999){
+				if(pipe.getEnergy()==2999){
 					pipe.addEnergy(1);
 					tile.subtractEnergy(1);
 				}

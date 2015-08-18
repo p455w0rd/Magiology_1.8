@@ -22,7 +22,7 @@ public class PowerHelper{
 	}public static float getPowerPrecentage(Object object){
 		if(object instanceof PowerCore);else return 0;
 		PowerCore obj=(PowerCore)object;
-		return (float)obj.getCurrentEnergy()/(float)obj.getMaxEnergyBuffer();
+		return (float)obj.getEnergy()/(float)obj.getMaxEnergyBuffer();
 	}
 	public static int getHowMuchToSendFromToForEquate(Object fromTile,Object toTile){
 		int result=-1;
@@ -30,8 +30,8 @@ public class PowerHelper{
 			PowerCore framTile=(PowerCore) fromTile,taTile=(PowerCore) toTile;
 			int sender=-1,target=-1;
 			
-			sender=(int)((framTile.getCurrentEnergy()-taTile.getCurrentEnergy())/2.0);//hey I want to be equal with you
-			target=taTile.getMaxEnergyBuffer()-taTile.getCurrentEnergy();//OK :) but here is how much I can get if I can do it
+			sender=(int)((framTile.getEnergy()-taTile.getEnergy())/2.0);//hey I want to be equal with you
+			target=taTile.getMaxEnergyBuffer()-taTile.getEnergy();//OK :) but here is how much I can get if I can do it
 			
 			int abc=Math.min(sender, target);
 			 result=Math.min(getMaxSpeed(fromTile, toTile), abc);
@@ -44,8 +44,8 @@ public class PowerHelper{
 			PowerCore framTile=(PowerCore) fromTile,taTile=(PowerCore) toTile;
 			int sender=-1,target=-1;
 			
-			sender=framTile.getCurrentEnergy();//hey I want to send everything to you
-			target=taTile.getMaxEnergyBuffer()-taTile.getCurrentEnergy();//OK :) but here is how much I can get if I can do it
+			sender=framTile.getEnergy();//hey I want to send everything to you
+			target=taTile.getMaxEnergyBuffer()-taTile.getEnergy();//OK :) but here is how much I can get if I can do it
 			
 			int abc=Math.min(sender, target);
 			result=Math.min(getMaxSpeed(fromTile, toTile), abc);
@@ -83,9 +83,9 @@ public class PowerHelper{
 	public static boolean tryToEquateEnergy(Object fromTile,Object toTile,int amount, int sideOfSender){
 		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
 			PowerCore tileFrom=(PowerCore)fromTile,tileTo=(PowerCore)toTile;
-			if( tileTo.getCurrentEnergy()+amount<=tileTo.getMaxEnergyBuffer()&&// so target can't get more than it can store
-				tileFrom.getCurrentEnergy()>=tileTo.getCurrentEnergy()+amount&&// so sender wont send if they have equal energy
-				tileFrom.getCurrentEnergy()>=amount//---------------------------- so sender can't send more than it has
+			if( tileTo.getEnergy()+amount<=tileTo.getMaxEnergyBuffer()&&// so target can't get more than it can store
+				tileFrom.getEnergy()>=tileTo.getEnergy()+amount&&// so sender wont send if they have equal energy
+				tileFrom.getEnergy()>=amount//---------------------------- so sender can't send more than it has
 				){
 				return moveFromTo(tileFrom, tileTo, amount,sideOfSender);
 			}else{
@@ -95,9 +95,9 @@ public class PowerHelper{
 				tileTo=a;
 				
 				if(
-					tileTo.getCurrentEnergy()+amount<=tileTo.getMaxEnergyBuffer()&&// so target can't get more than it can store
-					tileFrom.getCurrentEnergy()>=tileTo.getCurrentEnergy()+amount&&// so sender wont send if they have equal energy
-					tileFrom.getCurrentEnergy()>=amount//---------------------------- so sender can't send more than it has
+					tileTo.getEnergy()+amount<=tileTo.getMaxEnergyBuffer()&&// so target can't get more than it can store
+					tileFrom.getEnergy()>=tileTo.getEnergy()+amount&&// so sender wont send if they have equal energy
+					tileFrom.getEnergy()>=amount//---------------------------- so sender can't send more than it has
 					){
 					return moveFromTo(tileFrom, tileTo, amount,sideOfSender);
 				}
@@ -112,7 +112,7 @@ public class PowerHelper{
 		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
 			PowerCore tileFrom=(PowerCore)fromTile;
 			PowerCore tileTo=(PowerCore)toTile;
-			if(tileFrom.getCurrentEnergy()>=amount&&tileTo.getCurrentEnergy()+amount<=tileTo.getMaxEnergyBuffer()){
+			if(tileFrom.getEnergy()>=amount&&tileTo.getEnergy()+amount<=tileTo.getMaxEnergyBuffer()){
 				boolean var1=moveFromTo(tileFrom, tileTo, amount,side);
 				return amount>0&&var1;
 			}

@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerUpgrades;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
@@ -17,7 +16,7 @@ import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.LogHelper;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
-public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
+public abstract class TileEntityPow extends TileEntityM implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0,ModedMaxEnergyBuffer=0,ModedMaxTSpeed=0;
 	//0-6 receivers, 6-12 senders
 	public boolean[]
@@ -32,6 +31,7 @@ public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISi
 	public Container container=null;
 	public int NumberOfContainerSlots=0;
 	public ItemStack[] containerItems=null;
+	
 	
 	public TileEntityPow(boolean[] allowedSidedPower,boolean[] sidedPower,int minTSpeed, int middleTSpeed, int maxTSpeed, int maxEnergyBuffer){
 		if(allowedSidedPower!=null)this.allowedSidedPower=allowedSidedPower;
@@ -164,7 +164,7 @@ public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISi
 		sidedPower[direction+6]=bolean;
 	}
 	@Override
-	public int getCurrentEnergy(){
+	public int getEnergy(){
 		return currentEnergy;
 	}
 	@Override
@@ -192,7 +192,7 @@ public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISi
 		return ModedMaxTSpeed;
 	}
 	@Override
-	public void setCurrentEnergy(int Int){
+	public void setEnergy(int Int){
 		currentEnergy=Int;
 	}
 	@Override
@@ -251,5 +251,18 @@ public abstract class TileEntityPow extends TileEntityM implements PowerCore,ISi
 	@Override
 	public void setBannedSide(boolean Boolean, int id){
 		bannedConnections[id]=Boolean;
+	}
+	@Override
+	public boolean isPowerKeptOnWrench(){
+		return true;
+	}
+	
+	@Override
+	public void readFromItemOnPlace(NBTTagCompound NBT){
+		setEnergy(NBT.getInteger(SAVE_TO_ITEM_PREFIX+"energy"));
+	}
+	@Override
+	public void writeToItemOnWrenched(NBTTagCompound NBT){
+		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energy", getEnergy());
 	}
 }

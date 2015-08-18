@@ -263,7 +263,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			int side=Helper.RInt(6);
 			TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side, pos));
 			
-			if(connections[side]!=null&&connectionsToObjInMe[side]==null&&connectionsToObjOut[side]==null&&tile instanceof TileEntityFirePipe&&getCurrentEnergy()>0&&((TileEntityFirePipe)tile).getCurrentEnergy()<((TileEntityFirePipe)tile).getMaxEnergyBuffer()-1){
+			if(connections[side]!=null&&connectionsToObjInMe[side]==null&&connectionsToObjOut[side]==null&&tile instanceof TileEntityFirePipe&&getEnergy()>0&&((TileEntityFirePipe)tile).getEnergy()<((TileEntityFirePipe)tile).getMaxEnergyBuffer()-1){
 				PowerHelper.tryToDrainFromTo(this, tile, 1,side);
 			}
 			

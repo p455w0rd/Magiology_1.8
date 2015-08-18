@@ -3,3 +3,12 @@
 1439821387097	Rename package 'com.magiology.upgrades'
 1439821415722	Move compilation unit
 1439821419477	Delete element
+1439885664365	Delete element
+1439885666998	Delete element
+1439885859190	Rename package 'com.magiology.registry.upgrades'
+1439885863124	Delete element
+1439886072721	Delete element
+1439891212252	Rename type 'EntityFXM'
+1439891249880	Rename type 'EntityMagiologyBaseFX'
+1439909553822	Rename method 'setCurrentEnergy'
+1439909557626	Rename method 'getCurrentEnergy'

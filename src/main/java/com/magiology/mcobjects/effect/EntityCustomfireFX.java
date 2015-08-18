@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.effect.mc.EntityCloudFXM;
 import com.magiology.mcobjects.effect.mc.EntityLavaFXM;
 import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
+import com.magiology.objhelper.Get;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
@@ -18,7 +19,7 @@ import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
-public class EntityCustomfireFX extends EntityMagiologyBaseFX{
+public class EntityCustomfireFX extends EntityFXM{
 	public boolean active=false;
 	int optimizer;
 	boolean random;
@@ -147,7 +148,7 @@ public class EntityCustomfireFX extends EntityMagiologyBaseFX{
 	
 	@Override
 	public void onUpdate(){
-		if(Integer.valueOf(Minecraft.getMinecraft().effectRenderer.getStatistics())>2500)if(Helper.RInt(10)==0)this.setDead();
+		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500)if(Helper.RInt(10)==0)this.setDead();
 		if(Minecraft.getMinecraft().gameSettings.particleSetting==2)this.setDead();
 		prevRoration=roration.clone();
 		this.particleWithSize15andSpeed35();

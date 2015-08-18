@@ -1,6 +1,6 @@
 package com.magiology.api.power;
 
-public interface ISidedPower{
+public interface ISidedPower extends PowerCore{
 	public boolean getReceiveOnSide(int id);
 	public void setReceaveOnSide(int direction,boolean bolean);
 	
