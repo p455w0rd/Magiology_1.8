@@ -285,6 +285,10 @@ public class RenderLoopEvents{
 									if(PowerItemHelper.hasDataType(itemStack, "fuel"))
 										list.add("Contained fuel: "+PowerItemHelper.getFuel(itemStack)+"/"+PowerItemHelper.getMaxFuel(itemStack));
 									
+//									Helper.printInln(PowerItemHelper.hasDataType(itemStack, "energy"));
+									
+//									itemStack.getTagCompound().g
+									
 									//add other stuff here
 									
 								}else list.add(AQUA+""+UNDERLINE+"<No Data Saved On Item>");
