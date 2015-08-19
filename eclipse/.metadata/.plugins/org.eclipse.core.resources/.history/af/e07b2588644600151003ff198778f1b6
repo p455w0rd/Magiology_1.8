@@ -277,7 +277,7 @@ public class RenderLoopEvents{
 					if(tileFromItem instanceof PowerCore&&((PowerCore)tileFromItem).isPowerKeptOnWrench()){
 						
 						if(itemStack.getTagCompound()!=null){
-							if(!GuiScreen.isShiftKeyDown()){
+							if(GuiScreen.isShiftKeyDown()){
 								NBTTagCompound nbt=itemStack.getTagCompound();
 								if(PowerItemHelper.hasData(itemStack)){
 									
@@ -285,9 +285,6 @@ public class RenderLoopEvents{
 									if(PowerItemHelper.hasDataType(itemStack, "fuel"))
 										list.add("Contained fuel: "+PowerItemHelper.getFuel(itemStack)+"/"+PowerItemHelper.getMaxFuel(itemStack));
 									
-//									Helper.printInln(PowerItemHelper.hasDataType(itemStack, "energy"));
-									
-//									itemStack.getTagCompound().g
 									
 									//add other stuff here
 									

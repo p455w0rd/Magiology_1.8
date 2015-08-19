@@ -285,9 +285,7 @@ public class RenderLoopEvents{
 									if(PowerItemHelper.hasDataType(itemStack, "fuel"))
 										list.add("Contained fuel: "+PowerItemHelper.getFuel(itemStack)+"/"+PowerItemHelper.getMaxFuel(itemStack));
 									
-//									Helper.printInln(PowerItemHelper.hasDataType(itemStack, "energy"));
-									
-//									itemStack.getTagCompound().g
+//									Helper.printInln(itemStack.getTagCompound().getKeySet());
 									
 									//add other stuff here
 									

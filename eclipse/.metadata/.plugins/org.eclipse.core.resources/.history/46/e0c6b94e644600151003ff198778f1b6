@@ -243,13 +243,13 @@ public class PowerHelper{
 			return hasData(stack)&&stack.getTagCompound().hasKey(PowerCore.SAVE_TO_ITEM_PREFIX+key);
 		}
 		public static int getDataType(ItemStack stack, String key){
-			return hasData(stack)?stack.getTagCompound().getInteger(PowerCore.SAVE_TO_ITEM_PREFIX+key):0;
+			return hasData(stack)?stack.getTagCompound().getInteger(key):0;
 		}
 		public static int getPower(ItemStack stack){
-			return getDataType(stack, "energy");
+			return getDataType(stack, "power");
 		}
 		public static int getMaxPower(ItemStack stack){
-			return getDataType(stack, "energyMax");
+			return getDataType(stack, "powerMax");
 		}
 		public static int getFuel(ItemStack stack){
 			return getDataType(stack, "fuel");
