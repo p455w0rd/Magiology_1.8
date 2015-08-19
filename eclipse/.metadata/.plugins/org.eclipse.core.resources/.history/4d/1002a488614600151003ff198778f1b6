@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -274,7 +275,7 @@ public class RenderLoopEvents{
 			if(block!=null){
 				if(block instanceof BlockContainer){
 					TileEntity tileFromItem=((BlockContainer)block).createNewTileEntity(H.getTheWorld(), 0);
-					if(tileFromItem instanceof PowerCore&&((PowerCore)tileFromItem).isPowerKeptOnWrench()){
+					if(tileFromItem instanceof PowerCore){
 						
 						if(itemStack.getTagCompound()!=null){
 							if(GuiScreen.isShiftKeyDown()){
@@ -285,8 +286,6 @@ public class RenderLoopEvents{
 									if(PowerItemHelper.hasDataType(itemStack, "fuel"))
 										list.add("Contained fuel: "+PowerItemHelper.getFuel(itemStack)+"/"+PowerItemHelper.getMaxFuel(itemStack));
 									
-									
-									//add other stuff here
 									
 								}else list.add(AQUA+""+UNDERLINE+"<No Data Saved On Item>");
 							}else list.add(UNDERLINE+"<<Press SHIFT>>");

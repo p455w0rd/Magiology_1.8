@@ -274,7 +274,7 @@ public class RenderLoopEvents{
 			if(block!=null){
 				if(block instanceof BlockContainer){
 					TileEntity tileFromItem=((BlockContainer)block).createNewTileEntity(H.getTheWorld(), 0);
-					if(tileFromItem instanceof PowerCore&&((PowerCore)tileFromItem).isPowerKeptOnWrench()){
+					if(tileFromItem instanceof PowerCore){
 						
 						if(itemStack.getTagCompound()!=null){
 							if(GuiScreen.isShiftKeyDown()){
