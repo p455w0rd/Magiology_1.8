@@ -1,7 +1,5 @@
 package com.magiology.objhelper.helpers;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 import com.magiology.api.power.ISidedPower;
@@ -21,22 +19,10 @@ public class PowerHelper{
 		if(object instanceof PowerProducer);else return 0;
 		PowerProducer obj=(PowerProducer)object;
 		return (float)obj.getFuel()/(float)obj.getMaxFuel();
-	}
-	public static float getPowerPrecentage(Object object){
-		if(object instanceof PowerCore){
-			PowerCore obj=(PowerCore)object;
-			return (float)obj.getEnergy()/(float)obj.getMaxEnergyBuffer();
-		}
-		if(object instanceof ItemStack){
-			ItemStack stack=(ItemStack)object;
-			NBTTagCompound NBT=stack.getTagCompound();
-			if(stack.hasTagCompound()&&NBT.hasKey(PowerCore.SAVE_TO_ITEM_PREFIX)){
-				try{
-					return (float)NBT.getInteger(PowerCore.SAVE_TO_ITEM_PREFIX+"energy")/(float)NBT.getInteger(PowerCore.SAVE_TO_ITEM_PREFIX+"energyMax");
-				}catch(Exception e){}
-			}
-		}
-		return 0;
+	}public static float getPowerPrecentage(Object object){
+		if(object instanceof PowerCore);else return 0;
+		PowerCore obj=(PowerCore)object;
+		return (float)obj.getEnergy()/(float)obj.getMaxEnergyBuffer();
 	}
 	public static int getHowMuchToSendFromToForEquate(Object fromTile,Object toTile){
 		int result=-1;

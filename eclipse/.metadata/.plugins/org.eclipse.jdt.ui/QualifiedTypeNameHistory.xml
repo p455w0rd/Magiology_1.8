@@ -2,10 +2,8 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="net.minecraft.world.World"/>
 <fullyQualifiedTypeName name="com.magiology.forgepowered.event.custom.PlayerWrenchEvent"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="net.minecraft.item.Item"/>
-<fullyQualifiedTypeName name="com.magiology.registry.WrenchRegistry"/>
 <fullyQualifiedTypeName name="net.minecraftforge.event.entity.player.PlayerInteractEvent.Action"/>
 <fullyQualifiedTypeName name="net.minecraftforge.fml.common.eventhandler.Event"/>
 <fullyQualifiedTypeName name="net.minecraft.inventory.Container"/>
@@ -23,7 +21,11 @@
 <fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntity"/>
 <fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM"/>
 <fullyQualifiedTypeName name="com.magiology.objhelper.helpers.Helper"/>
-<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.Helper.H"/>
 <fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
 <fullyQualifiedTypeName name="com.magiology.api.power.PowerCore"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.PowerHelper"/>
+<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.Helper.H"/>
+<fullyQualifiedTypeName name="com.magiology.registry.WrenchRegistry"/>
+<fullyQualifiedTypeName name="net.minecraft.util.AxisAlignedBB"/>
 </qualifiedTypeNameHistroy>

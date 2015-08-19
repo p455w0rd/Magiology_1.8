@@ -260,11 +260,9 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 	@Override
 	public void readFromItemOnPlace(NBTTagCompound NBT){
 		setEnergy(NBT.getInteger(SAVE_TO_ITEM_PREFIX+"energy"));
-//		setMaxEnergyBuffer(NBT.getInteger(SAVE_TO_ITEM_PREFIX+"energyMax"));
 	}
 	@Override
 	public void writeToItemOnWrenched(NBTTagCompound NBT){
 		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energy", getEnergy());
-		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energyMax", getMaxEnergyBuffer());
 	}
 }
