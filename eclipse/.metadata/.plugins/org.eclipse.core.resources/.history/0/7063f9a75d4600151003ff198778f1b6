@@ -235,27 +235,5 @@ public class PowerHelper{
 		return result;
 	}
 	
-	public static class PowerItemHelper{
-		public static boolean hasData(ItemStack stack){
-			return stack.hasTagCompound()&&stack.getTagCompound().hasKey(PowerCore.SAVE_TO_ITEM_PREFIX);
-		}
-		public static boolean hasDataType(ItemStack stack, String key){
-			return hasData(stack)&&stack.getTagCompound().hasKey(PowerCore.SAVE_TO_ITEM_PREFIX+key);
-		}
-		public static int getDataType(ItemStack stack, String key){
-			return hasData(stack)?stack.getTagCompound().getInteger(key):0;
-		}
-		public static int getPower(ItemStack stack){
-			return getDataType(stack, "power");
-		}
-		public static int getMaxPower(ItemStack stack){
-			return getDataType(stack, "powerMax");
-		}
-		public static int getFuel(ItemStack stack){
-			return getDataType(stack, "fuel");
-		}
-		public static int getMaxFuel(ItemStack stack){
-			return getDataType(stack, "fuelMax");
-		}
-	}
+	
 }
