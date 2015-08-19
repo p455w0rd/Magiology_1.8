@@ -272,7 +272,7 @@ public class RenderLoopEvents{
 	public void renderItemTooltip(ItemTooltipEvent e){
 		ItemStack itemStack=e.itemStack;
 		List list=e.toolTip;
-//		Helper.printInln(registerdTiles.keySet().size());
+		
 		if(itemStack!=null&&itemStack.getItem()!=null){
 			Item item=itemStack.getItem();
 			Block block=Block.getBlockFromItem(item);

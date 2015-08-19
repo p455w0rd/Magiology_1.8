@@ -51,6 +51,5 @@ public abstract class TileEntityPowGen extends TileEntityPow implements PowerPro
 	public void writeToItemOnWrenched(NBTTagCompound NBT){
 		super.writeToItemOnWrenched(NBT);
 		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"fuel", getFuel());
-		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"fuelMax", getMaxFuel());
 	}
 }

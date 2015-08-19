@@ -9,9 +9,7 @@ import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -266,27 +264,17 @@ public class RenderLoopEvents{
 //		Helper.printInln(H.getThePlayer().getCurrentEquippedItem());
 	}
 	
-	private static Map<Block, TileEntity> registerdTiles=new HashMap<Block, TileEntity>();
-	
 	@SubscribeEvent()
 	public void renderItemTooltip(ItemTooltipEvent e){
 		ItemStack itemStack=e.itemStack;
 		List list=e.toolTip;
-//		Helper.printInln(registerdTiles.keySet().size());
+		
 		if(itemStack!=null&&itemStack.getItem()!=null){
 			Item item=itemStack.getItem();
 			Block block=Block.getBlockFromItem(item);
 			if(block!=null){
 				if(block instanceof BlockContainer){
-					TileEntity tileFromItem=registerdTiles.get(block);
-					//register
-					if(tileFromItem==null){
-						TileEntity tile=((BlockContainer)block).createNewTileEntity(H.getTheWorld(), 0);
-						if(tile!=null){
-							tileFromItem=tile;
-							registerdTiles.put(block, tile);
-						}else registerdTiles.put(block, new TileEntity(){});
-					}
+					TileEntity tileFromItem=((BlockContainer)block).createNewTileEntity(H.getTheWorld(), 0);
 					if(tileFromItem instanceof PowerCore&&((PowerCore)tileFromItem).isPowerKeptOnWrench()){
 						
 						if(itemStack.getTagCompound()!=null){
@@ -302,7 +290,7 @@ public class RenderLoopEvents{
 									
 								}else list.add(AQUA+""+UNDERLINE+"<No Data Saved On Item>");
 							}else list.add(UNDERLINE+"<<Press SHIFT>>");
-						}else list.add("<No NBT>");
+						}else list.add("<No NBT On stack>");
 						
 					}
 				}
