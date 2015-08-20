@@ -23,9 +23,7 @@ public interface PowerCore{
 	public int getMaxTSpeed();
 	public int getMiddleTSpeed();
 	public int getMinTSpeed();
-	public int getMaxEnergyBuffer();
-	public int getModedMaxEnergyBuffer();
-	public int getModedMaxTSpeed();
+	public int getMaxEnergy();
 	public boolean isPowerKeptOnWrench();
 	
 	public void setEnergy(int Int);
@@ -33,8 +31,6 @@ public interface PowerCore{
 	public void setMiddleTSpeed(int Int);
 	public void setMinTSpeed(int Int);
 	public void setMaxEnergyBuffer(int Int);
-	public void setModedMaxEnergyBuffer(int Int);
-	public void setModedMaxTSpeed(int Int);
 	
 	public void addEnergy(int amount);
 	public void subtractEnergy(int amount);
@@ -49,7 +45,7 @@ public interface PowerCore{
 				PowerCore tileMT=(PowerCore) tile;
 				if(world.isRemote){
 					//optional!! spawns particles from percentage of how full the power tile is
-					int ab=(int)(((float)tileMT.getEnergy()/(float)tileMT.getMaxEnergyBuffer())*10);
+					int ab=(int)(((float)tileMT.getEnergy()/(float)tileMT.getMaxEnergy())*10);
 					for(int a=0;a<ab*3;a++)world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0, 0);
 					for(int a=0;a<ab;a++)Helper.spawnEntityFX(new EntitySmoothBubleFX(world,
 						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,Helper.CRandF(0.05),Helper.CRandF(0.05),Helper.CRandF(0.05),

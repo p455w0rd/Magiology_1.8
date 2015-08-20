@@ -3,6 +3,7 @@ package com.magiology.objhelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -35,6 +36,9 @@ public final class Get{
 		}
 		public static EffectRenderer ER(){
 			return Minecraft.getMinecraft(). effectRenderer;
+		}
+		public static ItemModelMesher IMM(){
+			return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		}
 	}
 	@SideOnly(value=Side.CLIENT)

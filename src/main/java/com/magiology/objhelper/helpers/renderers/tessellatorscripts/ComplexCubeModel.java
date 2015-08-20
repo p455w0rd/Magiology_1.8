@@ -15,6 +15,7 @@ public class ComplexCubeModel{
 	private final float minX,minY,minZ,maxX,maxY,maxZ;
 	public Vec3M[] points=new Vec3M[8];
 	public Vec8F[] UVs=new Vec8F[6];
+	public Vec8F[] UVs2=new Vec8F[6];
 	ResourceLocation[] st=new ResourceLocation[6];
 	NoramlisedVertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
@@ -59,7 +60,7 @@ public class ComplexCubeModel{
 		UVs[3]=new Vec8F(maxX, minZ, maxX, maxZ, minX, maxZ, minX, minZ);
 		UVs[4]=new Vec8F(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
 		UVs[5]=new Vec8F(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
-
+		UVs2=UVs.clone();
 	}
 	private Vec3M[] genPoints(){
 		//2=all max, 4=all min
@@ -74,6 +75,13 @@ public class ComplexCubeModel{
 		result[7]=new Vec3M(minX, minY, maxZ);
 		return result;
 	}
+	
+	public void flipUVs(){
+		Vec8F[] h=UVs2;
+		UVs2=UVs;
+		UVs=h;
+	}
+	
 	public void draw(){
 		try{
 			if(willSideRender[0])try{

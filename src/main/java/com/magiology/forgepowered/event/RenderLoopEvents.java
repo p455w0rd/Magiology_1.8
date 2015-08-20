@@ -68,7 +68,7 @@ public class RenderLoopEvents{
 	public static void registerFirstPersonGui(FirstPersonGui gui){
 		FPGui.add(gui);
 	}
-	public void renderAfterRenderRenderers(){
+	public void renderEffects(){
         glEnable(GL_COLOR_MATERIAL);
         RenderHelper.enableStandardItemLighting();
         //------------------
@@ -165,7 +165,7 @@ public class RenderLoopEvents{
 		RenderHelper.disableStandardItemLighting();
 		
 		
-		this.renderAfterRenderRenderers();
+		this.renderEffects();
 		GL11.glPopMatrix();
 		
 		universalRender.clear();
@@ -173,7 +173,6 @@ public class RenderLoopEvents{
 	}
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void render2Dscreem(RenderGameOverlayEvent e){
-		Minecraft.getMinecraft();
 		if(!Minecraft.isGuiEnabled())return;
 		if(e.type!=ElementType.CHAT)return;
 		FontRenderer fr=Helper.getFontRenderer();
@@ -267,7 +266,6 @@ public class RenderLoopEvents{
 	}
 	
 	private static Map<Block, TileEntity> registerdTiles=new HashMap<Block, TileEntity>();
-	
 	@SubscribeEvent()
 	public void renderItemTooltip(ItemTooltipEvent e){
 		ItemStack itemStack=e.itemStack;
@@ -294,7 +292,7 @@ public class RenderLoopEvents{
 								NBTTagCompound nbt=itemStack.getTagCompound();
 								if(PowerItemHelper.hasData(itemStack)){
 									
-									list.add("Contained Power: "+NumberFormat.getInstance().format(PowerItemHelper.getPower(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemHelper.getMaxPower(itemStack)));
+									list.add("Contained Power: "+NumberFormat.getInstance().format(PowerItemHelper.getPower(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemHelper.getMaxEnergy(itemStack)));
 									if(PowerItemHelper.hasDataType(itemStack, "fuel"))
 									   list.add("Contained Fuel: "+NumberFormat.getInstance().format(PowerItemHelper.getFuel(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemHelper.getMaxFuel(itemStack)));
 									

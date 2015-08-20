@@ -3,14 +3,13 @@ package com.magiology.mcobjects.items;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.magiology.core.MReference;
-import com.magiology.mcobjects.blocks.BlockM;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.Helper;
-
-import net.minecraft.block.Block;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+
+import com.magiology.core.Fixes1_8;
+import com.magiology.core.MReference;
+import com.magiology.objhelper.Get;
+import com.magiology.objhelper.helpers.Helper;
 
 public class ItemM extends Item{
 		
@@ -27,7 +26,8 @@ public class ItemM extends Item{
 		public static void registerItemModels(){
 			for(Item item:modelsInit.keySet()){
 				try{
-					Get.Render.RI().getItemModelMesher().register(item, 0, modelsInit.get(item));
+//					Get.Render.RI().getItemModelMesher().register(item, 0, modelsInit.get(item));
+					Fixes1_8.injectStandardJsonModel(item, 0, modelsInit.get(item));
 				} catch (Exception e){
 					Helper.printInln("failed!",item,Get.Render.RI());
 					throw e;

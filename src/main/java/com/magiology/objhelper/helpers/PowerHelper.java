@@ -1,5 +1,6 @@
 package com.magiology.objhelper.helpers;
 
+import static com.magiology.api.power.PowerCore.SAVE_TO_ITEM_PREFIX;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -25,7 +26,7 @@ public class PowerHelper{
 	public static float getPowerPrecentage(Object object){
 		if(object instanceof PowerCore){
 			PowerCore obj=(PowerCore)object;
-			return (float)obj.getEnergy()/(float)obj.getMaxEnergyBuffer();
+			return (float)obj.getEnergy()/(float)obj.getMaxEnergy();
 		}
 		if(object instanceof ItemStack){
 			ItemStack stack=(ItemStack)object;
@@ -45,7 +46,7 @@ public class PowerHelper{
 			int sender=-1,target=-1;
 			
 			sender=(int)((framTile.getEnergy()-taTile.getEnergy())/2.0);//hey I want to be equal with you
-			target=taTile.getMaxEnergyBuffer()-taTile.getEnergy();//OK :) but here is how much I can get if I can do it
+			target=taTile.getMaxEnergy()-taTile.getEnergy();//OK :) but here is how much I can get if I can do it
 			
 			int abc=Math.min(sender, target);
 			 result=Math.min(getMaxSpeed(fromTile, toTile), abc);
@@ -59,7 +60,7 @@ public class PowerHelper{
 			int sender=-1,target=-1;
 			
 			sender=framTile.getEnergy();//hey I want to send everything to you
-			target=taTile.getMaxEnergyBuffer()-taTile.getEnergy();//OK :) but here is how much I can get if I can do it
+			target=taTile.getMaxEnergy()-taTile.getEnergy();//OK :) but here is how much I can get if I can do it
 			
 			int abc=Math.min(sender, target);
 			result=Math.min(getMaxSpeed(fromTile, toTile), abc);
@@ -97,7 +98,7 @@ public class PowerHelper{
 	public static boolean tryToEquateEnergy(Object fromTile,Object toTile,int amount, int sideOfSender){
 		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
 			PowerCore tileFrom=(PowerCore)fromTile,tileTo=(PowerCore)toTile;
-			if( tileTo.getEnergy()+amount<=tileTo.getMaxEnergyBuffer()&&// so target can't get more than it can store
+			if( tileTo.getEnergy()+amount<=tileTo.getMaxEnergy()&&// so target can't get more than it can store
 				tileFrom.getEnergy()>=tileTo.getEnergy()+amount&&// so sender wont send if they have equal energy
 				tileFrom.getEnergy()>=amount//---------------------------- so sender can't send more than it has
 				){
@@ -109,7 +110,7 @@ public class PowerHelper{
 				tileTo=a;
 				
 				if(
-					tileTo.getEnergy()+amount<=tileTo.getMaxEnergyBuffer()&&// so target can't get more than it can store
+					tileTo.getEnergy()+amount<=tileTo.getMaxEnergy()&&// so target can't get more than it can store
 					tileFrom.getEnergy()>=tileTo.getEnergy()+amount&&// so sender wont send if they have equal energy
 					tileFrom.getEnergy()>=amount//---------------------------- so sender can't send more than it has
 					){
@@ -126,7 +127,7 @@ public class PowerHelper{
 		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
 			PowerCore tileFrom=(PowerCore)fromTile;
 			PowerCore tileTo=(PowerCore)toTile;
-			if(tileFrom.getEnergy()>=amount&&tileTo.getEnergy()+amount<=tileTo.getMaxEnergyBuffer()){
+			if(tileFrom.getEnergy()>=amount&&tileTo.getEnergy()+amount<=tileTo.getMaxEnergy()){
 				boolean var1=moveFromTo(tileFrom, tileTo, amount,side);
 				return amount>0&&var1;
 			}
@@ -236,26 +237,91 @@ public class PowerHelper{
 	}
 	
 	public static class PowerItemHelper{
+		//core needed in any situation---------------------------------------------------------------
 		public static boolean hasData(ItemStack stack){
-			return stack.hasTagCompound()&&stack.getTagCompound().hasKey(PowerCore.SAVE_TO_ITEM_PREFIX);
+			return stack.hasTagCompound()&&stack.getTagCompound().hasKey(SAVE_TO_ITEM_PREFIX);
 		}
 		public static boolean hasDataType(ItemStack stack, String key){
-			return hasData(stack)&&stack.getTagCompound().hasKey(PowerCore.SAVE_TO_ITEM_PREFIX+key);
+			return hasData(stack)&&stack.getTagCompound().hasKey(SAVE_TO_ITEM_PREFIX+key);
 		}
-		public static int getDataType(ItemStack stack, String key){
-			return hasData(stack)?stack.getTagCompound().getInteger(PowerCore.SAVE_TO_ITEM_PREFIX+key):0;
+		//-------------------------------------------------------------------------------------------
+		//helpers------------------------------------------------------------------------------------
+		public static int getDataTypeI(ItemStack stack, String key){
+			return hasData(stack)?stack.getTagCompound().getInteger(SAVE_TO_ITEM_PREFIX+key):0;
 		}
+		public static void setDataType(ItemStack stack, String key, int data){
+			if(hasData(stack))stack.getTagCompound().setInteger(SAVE_TO_ITEM_PREFIX+key, data);
+		}
+		public static boolean getDataTypeB(ItemStack stack, String key){
+			return hasData(stack)?stack.getTagCompound().getBoolean(SAVE_TO_ITEM_PREFIX+key):false;
+		}
+		public static void setDataType(ItemStack stack, String key, boolean data){
+			if(hasData(stack))stack.getTagCompound().setBoolean(SAVE_TO_ITEM_PREFIX+key, data);
+		}
+		//-------------------------------------------------------------------------------------------
+		//convenient methods that you will actually use----------------------------------------------
 		public static int getPower(ItemStack stack){
-			return getDataType(stack, "energy");
+			return getDataTypeI(stack, "energy");
 		}
-		public static int getMaxPower(ItemStack stack){
-			return getDataType(stack, "energyMax");
+		public static void setPower(ItemStack stack, int value){
+			setDataType(stack, "energy", value);
+		}
+		public static int getMaxEnergy(ItemStack stack){
+			return getDataTypeI(stack, "energyMax");
+		}
+		public static void setMaxEnergy(ItemStack stack, int value){
+			setDataType(stack, "energyMax", value);
 		}
 		public static int getFuel(ItemStack stack){
-			return getDataType(stack, "fuel");
+			return getDataTypeI(stack, "fuel");
+		}
+		public static void setFuel(ItemStack stack, int value){
+			setDataType(stack, "fuel", value);
 		}
 		public static int getMaxFuel(ItemStack stack){
-			return getDataType(stack, "fuelMax");
+			return getDataTypeI(stack, "fuelMax");
 		}
+		public static void setMaxFuel(ItemStack stack, int value){
+			setDataType(stack, "fuelMax", value);
+		}
+		public static int getMaxTransfer(ItemStack stack){
+			return getDataTypeI(stack, "transferMax");
+		}
+		public static void setMaxTransfer(ItemStack stack, int value){
+			setDataType(stack, "transferMax", value);
+		}
+		public static int getMiddleTransfer(ItemStack stack){
+			return getDataTypeI(stack, "transferMiddle");
+		}
+		public static void setMiddleTransfer(ItemStack stack, int value){
+			setDataType(stack, "transferMiddle", value);
+		}
+		public static int getMinTransfer(ItemStack stack){
+			return getDataTypeI(stack, "transferMin");
+		}
+		public static void setMinTransfer(ItemStack stack, int value){
+			setDataType(stack, "transferMin", value);
+		}
+		public static boolean getPowerKeptOnWrench(ItemStack stack){
+			return getDataTypeB(stack, "transferMin");
+		}
+		public static void setPowerKeptOnWrench(ItemStack stack, boolean value){
+			setDataType(stack, "transferMin", value);
+		}
+		//-------------------------------------------------------------------------------------------
+		//-------------------------------------------------------------------------------------------
+		public static void setEssencialPow(ItemStack stack, PowerCore value){
+			setPower(stack, value.getEnergy());
+			setMaxTransfer(stack, value.getMaxTSpeed());
+			setMiddleTransfer(stack, value.getMiddleTSpeed());
+			setMinTransfer(stack, value.getMinTSpeed());
+			setMaxEnergy(stack, value.getMaxEnergy());
+			setPowerKeptOnWrench(stack, value.isPowerKeptOnWrench());
+		}
+		public static void setEssencialPowGen(ItemStack stack, PowerProducer value){
+			setFuel(stack, value.getFuel());
+			setMaxFuel(stack, value.getMaxFuel());
+		}
+		//-------------------------------------------------------------------------------------------
 	}
 }

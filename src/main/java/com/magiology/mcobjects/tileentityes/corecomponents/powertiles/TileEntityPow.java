@@ -17,7 +17,7 @@ import com.magiology.objhelper.helpers.LogHelper;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public abstract class TileEntityPow extends TileEntityM implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
-	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0,ModedMaxEnergyBuffer=0,ModedMaxTSpeed=0;
+	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;
 	//0-6 receivers, 6-12 senders
 	public boolean[]
 			sidedPower={false,false,false,false,false,false,false,false,false,false,false,false},
@@ -111,10 +111,6 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 	public void addEnergy(int amount){currentEnergy+=amount;}
 	@Override
 	public void subtractEnergy(int amount){currentEnergy-=amount;}
-    public void upgradeHandeler(){
-    	ModedMaxEnergyBuffer=maxEnergyBuffer;
-    	ModedMaxTSpeed=maxEnergyBuffer;
-    }
     
     @Override
 	public boolean isUpgradeInInv(Item item){
@@ -180,16 +176,8 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 		return minTSpeed;
 	}
 	@Override
-	public int getMaxEnergyBuffer(){
+	public int getMaxEnergy(){
 		return maxEnergyBuffer;
-	}
-	@Override
-	public int getModedMaxEnergyBuffer(){
-		return ModedMaxEnergyBuffer;
-	}
-	@Override
-	public int getModedMaxTSpeed(){
-		return ModedMaxTSpeed;
 	}
 	@Override
 	public void setEnergy(int Int){
@@ -210,14 +198,6 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 	@Override
 	public void setMaxEnergyBuffer(int Int){
 		maxEnergyBuffer=Int;
-	}
-	@Override
-	public void setModedMaxEnergyBuffer(int Int){
-		ModedMaxEnergyBuffer=Int;
-	}
-	@Override
-	public void setModedMaxTSpeed(int Int){
-		ModedMaxTSpeed=Int;
 	}
 	@Override
 	public boolean getAllowedSender(int id){
@@ -265,6 +245,6 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 	@Override
 	public void writeToItemOnWrenched(NBTTagCompound NBT){
 		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energy", getEnergy());
-		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energyMax", getMaxEnergyBuffer());
+		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energyMax", getMaxEnergy());
 	}
 }

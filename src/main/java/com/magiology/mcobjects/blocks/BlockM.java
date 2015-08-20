@@ -5,9 +5,11 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 import com.magiology.core.MReference;
 import com.magiology.objhelper.Get;
@@ -20,9 +22,12 @@ public class BlockM extends Block{
 	}
 	
 	//#fucka youuu json models!
-	public static Map<Block, ModelResourceLocation> modelsInit=new HashMap<Block, ModelResourceLocation>();
+	public static Map<Block, ResourceLocation> modelsInit=new HashMap<Block, ResourceLocation>();
+	public static IBakedModel[] models,invmodels;
+	
+	
 	public BlockM setBlockTextureName(String name){
-		modelsInit.put(this, new ModelResourceLocation(name,"inventory"));
+		modelsInit.put(this, new ResourceLocation(name));
 		return this;
 	}
 	public BlockM setBlockTextureName(){
@@ -33,13 +38,13 @@ public class BlockM extends Block{
 		for(Block block:modelsInit.keySet()){ 
 			Item itemBlock=Item.getItemFromBlock(block);
 			try{
-				Get.Render.RI().getItemModelMesher().register(itemBlock, 0, modelsInit.get(block));
+				Get.Render.RI().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(modelsInit.get(block), "inventory"));
 			} catch (Exception e){
 				Helper.printInln("failed!",block,itemBlock,Get.Render.RI());
 				throw e;
 			}
 		}
-		modelsInit.clear();
+//		modelsInit.clear();
 	}
 	
 	@Override

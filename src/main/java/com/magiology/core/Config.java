@@ -11,7 +11,7 @@ public class Config{
 	public static float getParticleAmount(){return PARTICLE_AMOUNT;}
 	public static void setParticleAmount(float particleAmount){PARTICLE_AMOUNT=particleAmount;}
 
-	private static boolean wingsThick=false;
+	private static boolean wingsThick=true;
 	public static boolean isWingsThick(){return wingsThick;}
 	public static void setWingsThick(boolean wingsThick){ModelWingsFromTheBlackFire.wings3D(Config.wingsThick=wingsThick);}
 }

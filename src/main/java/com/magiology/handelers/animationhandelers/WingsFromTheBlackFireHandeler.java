@@ -8,6 +8,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.Sounds;
+import com.magiology.core.Config;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
@@ -174,6 +175,7 @@ public class WingsFromTheBlackFireHandeler{
 	}
 	public static Positions getPos(EntityPlayer player){
 //		if(H.TRUE())return Positions.ErrorPos;
+		Config.setWingsThick(true);
 		if(player.capabilities.isFlying)return Positions.NormalPos;
 		int id=getPosId(player);
 		Positions result=id>=0?Positions.values()[id]:Positions.ErrorPos;

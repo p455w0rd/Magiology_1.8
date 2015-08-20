@@ -257,17 +257,12 @@ public class Helper{
 		}
 		NBTTC.setTag(baseName+"Slots", list);
 	}
-	private static void print(Object obj){
-		System.out.print(obj);
-	}
-	private static void println(Object obj){
-		System.out.print(obj+"\n");
-	}
+	//Print cluster----------------------------------------
 	public static void print(Object... objs){
-		for(Object a:objs)print(a+" ");
+		for(Object a:objs)System.out.print(a+" ");
 	}
 	public static void println(Object... objs){
-		for(Object a:objs)println(a+" ");
+		for(Object a:objs)System.out.print(a+" \n");
 	}
 	public static void printInln(Object... objs){
 		for(Object a:objs){
@@ -282,6 +277,14 @@ public class Helper{
 			else System.out.print(a+" ");
 		}
 		System.out.print("\n");
+	}
+	public static<T> T printlnAndReturn(T obj){
+		println(obj);
+		return obj;
+	}
+	public static<T> T printAndReturn(T obj){
+		print(obj);
+		return obj;
 	}
 	
 	public static Object callMethod(Method method,Object objFromWhereFunctionIsCalled,Object...argsOfTheCalledFunction){
@@ -719,10 +722,6 @@ public class Helper{
 		if(isNull(box1,box2))return false;
 		return box1.minX==box2.minX&&box1.minY==box2.minY&&box1.minZ==box2.minZ&&box1.maxX==box2.maxX&&box1.maxY==box2.maxY&&box1.maxZ==box2.maxZ;
 	}
-//	private static RenderBlocks renderBlocks=new RenderBlocks();
-//	public static RenderBlocks getRenderBlocks(){
-//		return renderBlocks;
-//	}
 	//yay for 1.8 code changes
 	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
 	public static final PropertyInteger MetadataMarker = PropertyInteger.create("data", 0, 15);
@@ -766,7 +765,6 @@ public class Helper{
 			if(varName.endsWith("X"))return new AxisAlignedBB(box.minX, box.minY, box.minZ, value, box.maxY, box.maxZ);
 			if(varName.endsWith("Y"))return new AxisAlignedBB(box.minX, box.minY, box.minZ, box.maxX, value, box.maxZ);
 			if(varName.endsWith("z"))return new AxisAlignedBB(box.minX, box.minY, box.minZ, box.maxX, box.maxY, value);
-
 		}
 		return null;
 	}

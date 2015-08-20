@@ -28,7 +28,6 @@ public class MEvents{
 				MouseInstance=new MouseEvents(),
 				GameLoopInstance=new GameLoopEvents(),
 				shaderHandeler=new ShaderRunner()
-				
 		);
 		EventRegister(1,
 				TickEvents.instance

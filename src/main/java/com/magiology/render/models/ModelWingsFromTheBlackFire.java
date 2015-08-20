@@ -63,15 +63,22 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				modelsBack=ArrayUtils.add(modelsBack, WingPart);
 				wings3D(Config.isWingsThick());
 			}
+			
 			for(int a=0;a<modelsBack.length;a++)for(int b=0;b<modelsBack[a].length;b++)for(int c=0;c<models[a].UVs.length;c++){
 				if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate();
 				else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror().rotate();
 				else modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
+				if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate() .rotate().mirror().rotate().rotate().rotate();
+				else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror().rotate() .rotate().mirror().rotate().rotate().rotate();
+				else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate().mirror().rotate().rotate().rotate();
 			}
-			for(int a=0;a<modelsBack.length;a++)for(int c=0;c<models[a].UVs.length;c++){
+			for(int a=0;a<models.length;a++)for(int c=0;c<models[a].UVs.length;c++){
 				if(c==0)models[a].UVs[c]=genUV(a, 0)[0].rotate();
 				else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
 				else models[a].UVs[c]=genUV(a, 0)[0];
+				if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate() .rotate().mirror().rotate().rotate().rotate();
+				else if(c==1)models[a].UVs2[c]=genUV(a, 0)[0].mirror().rotate() .rotate().mirror().rotate().rotate().rotate();
+				else models[a].UVs2[c]=genUV(a, 0)[0] .rotate().mirror().rotate().rotate().rotate();
 			}
 		}
 		//rendering
@@ -91,14 +98,76 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		renderWingBase(renderRotations,true,data);
 		GL11.glPopMatrix();
 		GL11H.endProtection();
-		Config.setWingsThick(true);
+//		Config.setWingsThick(true);
 	}
 	public void renderWingBase(float[][] renderRotations,boolean side, CyborgWingsFromTheBlackFireData data){
-		renderRotations=renderRotations.clone();
+//		renderRotations=renderRotations.clone();
+		
+		for(int a=0;a<modelsBack.length;a++)for(int b=0;b<modelsBack[a].length;b++)for(int c=0;c<models[a].UVs.length;c++){
+			if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate();
+			else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror().rotate();
+			else if(c==4){
+				modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
+				modelsBack[a][b].UVs[c].x2=modelsBack[a][b].UVs[c].x4;
+				modelsBack[a][b].UVs[c].x3=modelsBack[a][b].UVs[c].x1;
+			}
+			else modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
+			
+			if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate();
+			else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror().rotate();
+			else if(c==4){
+				modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0];
+				modelsBack[a][b].UVs2[c].x2=modelsBack[a][b].UVs[c].x4;
+				modelsBack[a][b].UVs2[c].x3=modelsBack[a][b].UVs[c].x1;
+				modelsBack[a][b].UVs2[c]=modelsBack[a][b].UVs2[c].rotate().mirror().rotate().rotate().rotate();
+			}
+			else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate().mirror().rotate().rotate().rotate();
+		}
+		//main strip
+		for(int a=0;a<models.length;a++)for(int c=0;c<models[a].UVs.length;c++){
+			//uv 1
+			if(c==0){
+				models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
+				models[a].UVs[c].y2=models[a].UVs[c].y4;
+				models[a].UVs[c].y3=models[a].UVs[c].y1;
+				models[a].UVs[c]=models[a].UVs[c].rotate().mirror().rotate().rotate().rotate();
+			}
+			else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
+			else if(c==4){
+				models[a].UVs[c]=genUV(a, 0)[0];
+				models[a].UVs[c].x2=models[a].UVs[c].x4;
+				models[a].UVs[c].x3=models[a].UVs[c].x1;
+			}
+			else models[a].UVs[c]=genUV(a, 0)[0];
+			//uv 2
+			if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate();
+			else if(c==1){
+				models[a].UVs2[c]=genUV(a, 0)[0].mirror().rotate();
+				models[a].UVs2[c].y2=models[a].UVs[c].y4;
+				models[a].UVs2[c].y3=models[a].UVs[c].y1;
+			}
+			else if(c==4){
+				models[a].UVs2[c]=genUV(a, 0)[0];
+				models[a].UVs2[c].x2=models[a].UVs[c].x4;
+				models[a].UVs2[c].x3=models[a].UVs[c].x1;
+				models[a].UVs2[c]=models[a].UVs2[c].rotate().mirror().rotate().rotate().rotate();
+			}
+			else models[a].UVs2[c]=genUV(a, 0)[0] .rotate().mirror().rotate().rotate().rotate();
+		}
+		
+		
+		
 		
 		for(int a=0;a<renderRotations.length;a++){
 			renderRotations[a][1]*=-1;
 			renderRotations[a][2]*=-1;
+		}
+		
+		if(!side){
+			for(int a=0;a<modelsBack.length;a++){
+				for(int b=0;b<modelsBack[a].length;b++)modelsBack[a][b].flipUVs();
+				models[a].flipUVs();
+			}
 		}
 		GL11.glPushMatrix();
 		for(int a1=0;a1<models.length;a1++){
@@ -119,6 +188,12 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 			GL11.glTranslatef(0, 0, a.points[3].getZ());
 		}
 		GL11.glPopMatrix();
+		if(!side){
+			for(int a=0;a<modelsBack.length;a++){
+				for(int b=0;b<modelsBack[a].length;b++)modelsBack[a][b].flipUVs();
+				models[a].flipUVs();
+			}
+		}
 	}
 	
 	

@@ -1,6 +1,6 @@
 package com.magiology.api.power;
 
-public interface PowerProducer{
+public interface PowerProducer extends PowerCore{
 	/**returns power of the object*/
 	public int getFuel();
 	/**returns maximal possible amount of the power in the fuel buffer*/
