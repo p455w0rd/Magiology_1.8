@@ -1,6 +1,7 @@
 package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import com.magiology.api.power.PowerProducer;
 import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;

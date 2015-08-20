@@ -261,7 +261,7 @@ public class PowerHelper{
 		//-------------------------------------------------------------------------------------------
 		//convenient methods that you will actually use----------------------------------------------
 		public static void markWithData(ItemStack stack){
-			if(!hasData(stack))stack.getTagCompound().setBoolean(SAVE_TO_ITEM_PREFIX, true);
+			stack.getTagCompound().setBoolean(SAVE_TO_ITEM_PREFIX, true);
 		}
 		public static int getPower(ItemStack stack){
 			return getDataTypeI(stack, "energy");

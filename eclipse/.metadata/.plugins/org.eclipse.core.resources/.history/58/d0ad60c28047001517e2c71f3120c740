@@ -1,9 +1,8 @@
 package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import com.magiology.api.power.PowerProducer;
-import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;
 
 public abstract class TileEntityPowGen extends TileEntityPow implements PowerProducer{
 	
@@ -44,13 +43,14 @@ public abstract class TileEntityPowGen extends TileEntityPow implements PowerPro
 	@Override public abstract boolean canGeneratePowerAddon();
 
 	@Override
-	public void readFromItemOnPlace(ItemStack stack){
-		super.readFromItemOnPlace(stack);
-		setFuel(PowerItemHelper.getFuel(stack));
+	public void readFromItemOnPlace(NBTTagCompound NBT){
+		super.readFromItemOnPlace(NBT);
+		setFuel(NBT.getInteger(SAVE_TO_ITEM_PREFIX+"fuel"));
 	}
 	@Override
-	public void writeToItemOnWrenched(ItemStack stack){
-		super.writeToItemOnWrenched(stack);
-		PowerItemHelper.setEssencialPowGen(stack, this);
+	public void writeToItemOnWrenched(NBTTagCompound NBT){
+		super.writeToItemOnWrenched(NBT);
+		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"fuel", getFuel());
+		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"fuelMax", getMaxFuel());
 	}
 }

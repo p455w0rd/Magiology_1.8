@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;
 
 public interface PowerCore{
 	/**Keep it short! The shorter it is less bandwidth it takes!*/
@@ -65,8 +64,8 @@ public interface PowerCore{
 						//enshure that the nbt is not null
 						H.createNBT(stack);
 						//write everything to item
-						PowerItemHelper.markWithData(stack);
-						tileMT.writeToItemOnWrenched(stack);
+						stack.getTagCompound().setBoolean(SAVE_TO_ITEM_PREFIX, true);
+						tileMT.writeToItemOnWrenched(stack.getTagCompound());
 						//export to item & spawn
 						Helper.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, stack);
 					}
@@ -85,7 +84,7 @@ public interface PowerCore{
 			//Hey! Item! You have some NBT? And do you contain NBT that is saved from a tile?
 			if(itemInHand!=null&&itemInHand.hasTagCompound()&&itemInHand.getTagCompound().hasKey(SAVE_TO_ITEM_PREFIX)){
 				//cool now give that NBT to your creator!
-				((PowerCore)tile).readFromItemOnPlace(itemInHand);
+				((PowerCore)tile).readFromItemOnPlace(itemInHand.getTagCompound());
 			}
 		}
 	}

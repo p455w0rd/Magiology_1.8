@@ -14,7 +14,6 @@ import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.LogHelper;
-import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 
 public abstract class TileEntityPow extends TileEntityM implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
@@ -237,12 +236,15 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 	public boolean isPowerKeptOnWrench(){
 		return true;
 	}
+	
 	@Override
-	public void readFromItemOnPlace(ItemStack stack){
-		setEnergy(PowerItemHelper.getPower(stack));
+	public void readFromItemOnPlace(NBTTagCompound NBT){
+		setEnergy(NBT.getInteger(SAVE_TO_ITEM_PREFIX+"energy"));
+//		setMaxEnergyBuffer(NBT.getInteger(SAVE_TO_ITEM_PREFIX+"energyMax"));
 	}
 	@Override
-	public void writeToItemOnWrenched(ItemStack stack){
-		PowerItemHelper.setEssencialPow(stack, this);
+	public void writeToItemOnWrenched(NBTTagCompound NBT){
+		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energy", getEnergy());
+		NBT.setInteger(SAVE_TO_ITEM_PREFIX+"energyMax", getMaxEnergy());
 	}
 }
