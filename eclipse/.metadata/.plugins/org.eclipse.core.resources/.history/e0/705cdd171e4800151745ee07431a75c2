@@ -40,7 +40,6 @@ import com.magiology.objhelper.EntityPosAndBB;
 import com.magiology.objhelper.GetSpecialPlayer;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.registry.events.PlayerWrenchEvent;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
@@ -218,15 +217,18 @@ public class EntityEvents{
 		if(entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)entity;
 			
-			if(VersionChecker.show&&H.isRemote(event)){
+			if(VersionChecker.show){
+				ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.google.hr");
+				ChatStyle style = new ChatStyle().setChatClickEvent(clickEvent);
+				ChatComponentText text = new ChatComponentText(ChatFormatting.GREEN +"Click Here " +
+						ChatFormatting.GOLD + "[" +
+						ChatFormatting.AQUA + "Download" +
+						ChatFormatting.GOLD + "]" +
+						ChatFormatting.GREEN + " to Download it");
+				text.setChatStyle(style);
+	    		
 				player.addChatMessage(new ChatComponentText(VersionChecker.updateStatus));
-				if(VersionChecker.foundNew){
-					ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.google.hr");
-					ChatStyle style = new ChatStyle().setChatClickEvent(clickEvent);
-					ChatComponentText text = new ChatComponentText(ChatFormatting.GREEN +"Click Here " +ChatFormatting.GOLD + "[" +ChatFormatting.AQUA + "Download" +ChatFormatting.GOLD + "]" +ChatFormatting.GREEN + " to Download it");
-					text.setChatStyle(style);
-					player.addChatMessage(text);
-				}
+				player.addChatMessage(text);
 			}
 //			if(GetSpecialPlayer.getPlayerRank(player)==1){
 //				double R,G,B;

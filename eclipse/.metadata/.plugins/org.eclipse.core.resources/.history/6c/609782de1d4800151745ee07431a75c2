@@ -541,6 +541,6 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	}
 	@Override
 	public boolean isPowerKeptOnWrench(){
-		return false;
+		return true;
 	}
 }

@@ -1,11 +1,10 @@
 package com.magiology.core;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.*;
-
 import java.net.URL;
 import java.util.Scanner;
 
 import com.magiology.objhelper.helpers.Helper;
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
 public class VersionChecker{
 	private static float currentVersion=Float.parseFloat(MReference.VERSION);

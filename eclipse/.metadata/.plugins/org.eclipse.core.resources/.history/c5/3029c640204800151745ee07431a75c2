@@ -220,7 +220,7 @@ public class EntityEvents{
 			
 			if(VersionChecker.show&&H.isRemote(event)){
 				player.addChatMessage(new ChatComponentText(VersionChecker.updateStatus));
-				if(VersionChecker.foundNew){
+				if(VersionChecker.updateStatus.equals(VersionChecker.updateStatusUpdate)){
 					ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.google.hr");
 					ChatStyle style = new ChatStyle().setChatClickEvent(clickEvent);
 					ChatComponentText text = new ChatComponentText(ChatFormatting.GREEN +"Click Here " +ChatFormatting.GOLD + "[" +ChatFormatting.AQUA + "Download" +ChatFormatting.GOLD + "]" +ChatFormatting.GREEN + " to Download it");

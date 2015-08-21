@@ -1,6 +1,9 @@
 package com.magiology.core;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import static com.mojang.realmsclient.gui.ChatFormatting.AQUA;
+import static com.mojang.realmsclient.gui.ChatFormatting.BLUE;
+import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
+import static com.mojang.realmsclient.gui.ChatFormatting.ITALIC;
 
 import java.net.URL;
 import java.util.Scanner;

@@ -21,7 +21,11 @@ java_single_line_comment=0,224,0
 java_string=220,120,220
 org.eclipse.jdt.ui.editor.tab.width=
 org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.ui.ignorelowercasenames=true
+org.eclipse.jdt.ui.importorder=java;javax;org;com;
 org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.ondemandthreshold=99
+org.eclipse.jdt.ui.staticondemandthreshold=1
 org.eclipse.jdt.ui.text.code_templates_migrated=true
 org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="false" context\="java-statements" deleted\="false" description\="try catch block" enabled\="true" id\="org.eclipse.jdt.ui.templates.try" name\="try">try{\r\n\t${line_selection}${cursor}\r\n}catch(${Exception} ${exception_variable_name}){\r\n\t${exception_variable_name}.printStackTrace();\r\n}</template></templates>
@@ -71,7 +75,7 @@ semanticHighlighting.typeArgument.color=191,164,164
 semanticHighlighting.typeArgument.enabled=true
 semanticHighlighting.typeParameter.color=191,164,164
 semanticHighlighting.typeParameter.enabled=true
-sourceHoverBackgroundColor=255,255,255
+sourceHoverBackgroundColor=16,16,32
 sp_cleanup.add_default_serial_version_id=true
 sp_cleanup.add_generated_serial_version_id=false
 sp_cleanup.add_missing_annotations=true
