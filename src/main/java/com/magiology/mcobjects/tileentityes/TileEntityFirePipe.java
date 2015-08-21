@@ -539,4 +539,8 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	public AxisAlignedBB[] getBoxes(){
 		return collisionBoxes;
 	}
+	@Override
+	public boolean isPowerKeptOnWrench(){
+		return true;
+	}
 }

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -22,6 +23,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.magiology.api.power.PowerCore;
 import com.magiology.core.Magiology;
+import com.magiology.core.VersionChecker;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
 import com.magiology.gui.guiContainer.GuiUpdater;
@@ -212,6 +214,7 @@ public class EntityEvents{
 		if(entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)entity;
 			
+			if (VersionChecker.show)player.addChatMessage(new ChatComponentText(VersionChecker.updateStatus));
 //			if(GetSpecialPlayer.getPlayerRank(player)==1){
 //				double R,G,B;
 //				for (int i=0;i<25;i++){

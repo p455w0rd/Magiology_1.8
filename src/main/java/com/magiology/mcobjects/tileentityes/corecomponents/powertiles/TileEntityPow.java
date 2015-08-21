@@ -245,4 +245,8 @@ public abstract class TileEntityPow extends TileEntityM implements ISidedPower,P
 	public void writeToItemOnWrenched(ItemStack stack){
 		PowerItemHelper.setEssencialPow(stack, this);
 	}
+	@Override
+	public boolean isSavingFullNBT() {
+		return true;
+	}
 }

@@ -20,7 +20,7 @@ import com.magiology.objhelper.vectors.Vec8F;
 import com.magiology.render.Textures;
 
 public class ModelWingsFromTheBlackFire extends ModelBiped{
-	private float p=1F/16F;
+	private static float p=1F/16F;
 	private static ComplexCubeModel[] models;
 	private static ComplexCubeModel[][] modelsBack;
 	private static NoramlisedVertixBuffer buff=TessHelper.getNVB();
@@ -30,7 +30,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		for(int a=0;a<models.length;a++)models[a].willSideRender=new boolean[]{bol,bol,bol,true,bol,bol};
 		for(int a=0;a<modelsBack.length;a++)for(int b=0;b<modelsBack[0].length;b++)modelsBack[a][b].willSideRender=new boolean[]{bol,bol,bol,true,bol,bol};
 	}
-	private Vec8F[] genUV(int x1,int y1){
+	private static Vec8F[] genUV(int x1,int y1){
 		float x=(1F*x1)/7F,y=y1/6F,x2=2/14F,y2=1/6F;
 		return new Vec8F[]{new Vec8F(
 				x,    y+y2,
@@ -39,6 +39,76 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				x+x2, y+y2
 				).rotate().mirror()};
 	}
+	
+	private static void init(float[][] renderRotations){
+		for(int a=0;a<renderRotations.length;a++){
+			float thickness=0;
+			if(a>0)thickness=(((float)a)/((float)renderRotations.length))*p;
+			models=ArrayUtils.add(models, new ComplexCubeModel(thickness, thickness, 0, p*3-thickness, p*3-thickness, p*7,genUV(a, 0),new ResourceLocation[]{Textures.WingColors}));
+			ComplexCubeModel[] WingPart={};
+			for(int b=0;b<5;b++){
+				float njnj=(float)(renderRotations.length-a)/(float)renderRotations.length;
+				WingPart=ArrayUtils.add(WingPart, new ComplexCubeModel(thickness, thickness+njnj*(b*0.02F), thickness/2, p*3-thickness, p*3-thickness-njnj*(b*0.02F), p*8-thickness,genUV(a, b),new ResourceLocation[]{Textures.WingColors}));
+			}
+			modelsBack=ArrayUtils.add(modelsBack, WingPart);
+			wings3D(Config.isWingsThick());
+		}
+		
+		for(int a=0;a<modelsBack.length;a++){
+			for(int b=0;b<modelsBack[a].length;b++)for(int c=0;c<models[a].UVs.length;c++){
+				if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate();
+				else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror().rotate();
+				else if(c==4){
+					modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
+					modelsBack[a][b].UVs[c].x2=modelsBack[a][b].UVs[c].x4;
+					modelsBack[a][b].UVs[c].x3=modelsBack[a][b].UVs[c].x1;
+				}
+				else modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
+				
+				if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate();
+				else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror().rotate();
+				else if(c==4){
+					modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0];
+					modelsBack[a][b].UVs2[c].x2=modelsBack[a][b].UVs[c].x4;
+					modelsBack[a][b].UVs2[c].x3=modelsBack[a][b].UVs[c].x1;
+					modelsBack[a][b].UVs2[c]=modelsBack[a][b].UVs2[c].rotate().mirror().rotate().rotate().rotate();
+				}
+				else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate().mirror().rotate().rotate().rotate();
+			}
+			for(int c=0;c<models[a].UVs.length;c++){
+				//uv 1
+				if(c==0){
+					models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
+					models[a].UVs[c].y2=models[a].UVs[c].y4;
+					models[a].UVs[c].y3=models[a].UVs[c].y1;
+					models[a].UVs[c]=models[a].UVs[c].rotate().mirror().rotate().rotate().rotate();
+				}
+				else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
+				else if(c==4){
+					models[a].UVs[c]=genUV(a, 0)[0];
+					models[a].UVs[c].x2=models[a].UVs[c].x4;
+					models[a].UVs[c].x3=models[a].UVs[c].x1;
+				}
+				else models[a].UVs[c]=genUV(a, 0)[0];
+				//uv 2
+				if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate();
+				else if(c==1){
+					models[a].UVs2[c]=genUV(a, 0)[0].mirror().rotate();
+					models[a].UVs2[c].y2=models[a].UVs[c].y4;
+					models[a].UVs2[c].y3=models[a].UVs[c].y1;
+				}
+				else if(c==4){
+					models[a].UVs2[c]=genUV(a, 0)[0];
+					models[a].UVs2[c].x2=models[a].UVs[c].x4;
+					models[a].UVs2[c].x3=models[a].UVs[c].x1;
+					models[a].UVs2[c]=models[a].UVs2[c].rotate().mirror().rotate().rotate().rotate();
+				}
+				else models[a].UVs2[c]=genUV(a, 0)[0] .rotate().mirror().rotate().rotate().rotate();
+			}
+		}
+	}
+	
+	
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
 		//calculating and safety
@@ -50,37 +120,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		rotation=Helper.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
 		float[][] renderRotations=new float[7][3];
 		for(int a=0;a<data.calcRotationAnglesBase.length;a++)for(int a1=0;a1<data.calcRotationAnglesBase[a].length;a1++)renderRotations[a][a1]=Helper.calculateRenderPos(data.calcPrevRotationAnglesBase[a][a1],data.calcRotationAnglesBase[a][a1]);
-		if(models==null){
-			for(int a=0;a<renderRotations.length;a++){
-				float thickness=0;
-				if(a>0)thickness=(((float)a)/((float)renderRotations.length))*p;
-				models=ArrayUtils.add(models, new ComplexCubeModel(thickness, thickness, 0, p*3-thickness, p*3-thickness, p*7,genUV(a, 0),new ResourceLocation[]{Textures.WingColors}));
-				ComplexCubeModel[] WingPart={};
-				for(int b=0;b<5;b++){
-					float njnj=(float)(renderRotations.length-a)/(float)renderRotations.length;
-					WingPart=ArrayUtils.add(WingPart, new ComplexCubeModel(thickness, thickness+njnj*(b*0.02F), thickness/2, p*3-thickness, p*3-thickness-njnj*(b*0.02F), p*8-thickness,genUV(a, b),new ResourceLocation[]{Textures.WingColors}));
-				}
-				modelsBack=ArrayUtils.add(modelsBack, WingPart);
-				wings3D(Config.isWingsThick());
-			}
-			
-			for(int a=0;a<modelsBack.length;a++)for(int b=0;b<modelsBack[a].length;b++)for(int c=0;c<models[a].UVs.length;c++){
-				if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate();
-				else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror().rotate();
-				else modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
-				if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate() .rotate().mirror().rotate().rotate().rotate();
-				else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror().rotate() .rotate().mirror().rotate().rotate().rotate();
-				else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate().mirror().rotate().rotate().rotate();
-			}
-			for(int a=0;a<models.length;a++)for(int c=0;c<models[a].UVs.length;c++){
-				if(c==0)models[a].UVs[c]=genUV(a, 0)[0].rotate();
-				else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
-				else models[a].UVs[c]=genUV(a, 0)[0];
-				if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate() .rotate().mirror().rotate().rotate().rotate();
-				else if(c==1)models[a].UVs2[c]=genUV(a, 0)[0].mirror().rotate() .rotate().mirror().rotate().rotate().rotate();
-				else models[a].UVs2[c]=genUV(a, 0)[0] .rotate().mirror().rotate().rotate().rotate();
-			}
-		}
+		if(models==null)init(renderRotations);
 		//rendering
 		GL11H.protect();
 		GL11H.culFace(Config.isWingsThick());
@@ -101,68 +141,10 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 //		Config.setWingsThick(true);
 	}
 	public void renderWingBase(float[][] renderRotations,boolean side, CyborgWingsFromTheBlackFireData data){
-//		renderRotations=renderRotations.clone();
-		
-		for(int a=0;a<modelsBack.length;a++)for(int b=0;b<modelsBack[a].length;b++)for(int c=0;c<models[a].UVs.length;c++){
-			if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate();
-			else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror().rotate();
-			else if(c==4){
-				modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
-				modelsBack[a][b].UVs[c].x2=modelsBack[a][b].UVs[c].x4;
-				modelsBack[a][b].UVs[c].x3=modelsBack[a][b].UVs[c].x1;
-			}
-			else modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
-			
-			if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate();
-			else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror().rotate();
-			else if(c==4){
-				modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0];
-				modelsBack[a][b].UVs2[c].x2=modelsBack[a][b].UVs[c].x4;
-				modelsBack[a][b].UVs2[c].x3=modelsBack[a][b].UVs[c].x1;
-				modelsBack[a][b].UVs2[c]=modelsBack[a][b].UVs2[c].rotate().mirror().rotate().rotate().rotate();
-			}
-			else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate().mirror().rotate().rotate().rotate();
-		}
-		//main strip
-		for(int a=0;a<models.length;a++)for(int c=0;c<models[a].UVs.length;c++){
-			//uv 1
-			if(c==0){
-				models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
-				models[a].UVs[c].y2=models[a].UVs[c].y4;
-				models[a].UVs[c].y3=models[a].UVs[c].y1;
-				models[a].UVs[c]=models[a].UVs[c].rotate().mirror().rotate().rotate().rotate();
-			}
-			else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
-			else if(c==4){
-				models[a].UVs[c]=genUV(a, 0)[0];
-				models[a].UVs[c].x2=models[a].UVs[c].x4;
-				models[a].UVs[c].x3=models[a].UVs[c].x1;
-			}
-			else models[a].UVs[c]=genUV(a, 0)[0];
-			//uv 2
-			if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate();
-			else if(c==1){
-				models[a].UVs2[c]=genUV(a, 0)[0].mirror().rotate();
-				models[a].UVs2[c].y2=models[a].UVs[c].y4;
-				models[a].UVs2[c].y3=models[a].UVs[c].y1;
-			}
-			else if(c==4){
-				models[a].UVs2[c]=genUV(a, 0)[0];
-				models[a].UVs2[c].x2=models[a].UVs[c].x4;
-				models[a].UVs2[c].x3=models[a].UVs[c].x1;
-				models[a].UVs2[c]=models[a].UVs2[c].rotate().mirror().rotate().rotate().rotate();
-			}
-			else models[a].UVs2[c]=genUV(a, 0)[0] .rotate().mirror().rotate().rotate().rotate();
-		}
-		
-		
-		
-		
 		for(int a=0;a<renderRotations.length;a++){
 			renderRotations[a][1]*=-1;
 			renderRotations[a][2]*=-1;
 		}
-		
 		if(!side){
 			for(int a=0;a<modelsBack.length;a++){
 				for(int b=0;b<modelsBack[a].length;b++)modelsBack[a][b].flipUVs();

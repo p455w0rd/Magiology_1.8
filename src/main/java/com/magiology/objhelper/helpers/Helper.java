@@ -264,6 +264,9 @@ public class Helper{
 	public static void println(Object... objs){
 		for(Object a:objs)System.out.print(a+" \n");
 	}
+	public static void printlnEr(Object... objs){
+		for(Object a:objs)System.err.print(a+" \n");
+	}
 	public static void printInln(Object... objs){
 		for(Object a:objs){
 			if(a instanceof boolean[]){

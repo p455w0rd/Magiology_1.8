@@ -11,16 +11,12 @@
 <fullyQualifiedTypeName name="com.magiology.api.power.PowerCore.SavePowerToItemEvents"/>
 <fullyQualifiedTypeName name="net.minecraftforge.event.world.BlockEvent"/>
 <fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM"/>
-<fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
 <fullyQualifiedTypeName name="net.minecraft.util.AxisAlignedBB"/>
 <fullyQualifiedTypeName name="com.magiology.objhelper.helpers.PowerHelper"/>
-<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper"/>
 <fullyQualifiedTypeName name="net.minecraftforge.event.entity.player.ItemTooltipEvent"/>
-<fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
 <fullyQualifiedTypeName name="net.minecraft.init.Items"/>
 <fullyQualifiedTypeName name="net.minecraft.block.BlockContainer"/>
 <fullyQualifiedTypeName name="com.magiology.objhelper.helpers.Helper.H"/>
-<fullyQualifiedTypeName name="com.magiology.api.power.PowerCore"/>
 <fullyQualifiedTypeName name="java.text.NumberFormat"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="net.minecraft.item.Item"/>
@@ -56,4 +52,9 @@
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="com.magiology.core.Config"/>
+<fullyQualifiedTypeName name="com.magiology.api.power.PowerProducer"/>
+<fullyQualifiedTypeName name="com.magiology.api.power.PowerCore"/>
+<fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
+<fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
+<fullyQualifiedTypeName name="com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper"/>
 </qualifiedTypeNameHistroy>

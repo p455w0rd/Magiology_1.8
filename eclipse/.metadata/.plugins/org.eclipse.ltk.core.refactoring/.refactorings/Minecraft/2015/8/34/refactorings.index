@@ -19,3 +19,4 @@
 1440098141061	Rename method 'setMaxPower'
 1440103782314	Rename method 'getMaxEnergyBuffer'
 1440103981784	Rename method 'getDataType'
+1440158279587	Rename type 'UpdateChecker'
