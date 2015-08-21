@@ -24,11 +24,10 @@ public class VersionChecker{
 	
 	private static void getNewestVersion(){
 		try{
-			URL url=new URL("https://github.com/LapisSea/Magiology_1.8/blob/master/src/main/java/com/magiology/core/MReference.java");
+			URL url=new URL("https://raw.githubusercontent.com/DrShadow/TechProject/master/version/version.txt");
 			Scanner s=new Scanner(url.openStream());
 			try{
-				Helper.printInln(s.findInLine("VERSION"),s.next());
-//				newestVersion=Float.parseFloat(s.next());
+				newestVersion=Float.parseFloat(s.next());
 			}catch(Exception e){
 				e.printStackTrace();
 			}
