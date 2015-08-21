@@ -214,7 +214,7 @@ public class EntityEvents{
 		if(entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)entity;
 			
-			if (VersionChecker.show)player.addChatMessage(new ChatComponentText(VersionChecker.updateStatus));
+			if(VersionChecker.show)player.addChatMessage(new ChatComponentText(VersionChecker.updateStatus));
 //			if(GetSpecialPlayer.getPlayerRank(player)==1){
 //				double R,G,B;
 //				for (int i=0;i<25;i++){

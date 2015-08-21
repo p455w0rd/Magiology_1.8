@@ -73,7 +73,6 @@ public class Magiology{
     public boolean modWindowOpen(){return modInfGUI!=null&&!modInfGUI.isExited;}
     
     public void loadFiles(){
-		VersionChecker.init();
     	String dir="mods\\1.8\\"+MODID;
     	new File(dir).mkdir();
     	ZipManager.extractFileFromZip("mods\\Magiology-0.026A.jar", dir,"MagiZip.zip","OpenUp.wav","Close.wav","Loaded.wav");
@@ -94,6 +93,7 @@ public class Magiology{
 		if(willOpen)modInfGUI.downloadData(infoFile);
     }
 	public void preInit(FMLPreInitializationEvent event){
+		VersionChecker.init();
 		//TODO
 		Config.setShadersEnabled(false);
 		
