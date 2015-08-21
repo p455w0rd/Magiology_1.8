@@ -1,10 +1,10 @@
 package com.magiology.core;
 
 public class MReference{
-
+	public static final Float 
+		VERSION= 0.1052F;
 	public static final String
 		MODID="magiology",
-		VERSION="0.1052",
 		NAME="Magiology",
 		CHANNEL_NAME="magicpackets",
 		MOD_START_FOLDER="com.",

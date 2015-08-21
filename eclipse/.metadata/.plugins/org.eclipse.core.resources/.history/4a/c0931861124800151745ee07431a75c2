@@ -84,7 +84,6 @@ public class Magiology{
     		willOpen=file.next().equals("true");
     		file.close();
 		}catch(Exception e){e.printStackTrace();}
-    	willOpen=false;
 		if(willOpen){
 	    	Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 	    	new ModInfoGUI((int)screenSize.getWidth(),(int)screenSize.getHeight(),-680,0);
@@ -93,7 +92,6 @@ public class Magiology{
 		if(willOpen)modInfGUI.downloadData(infoFile);
     }
 	public void preInit(FMLPreInitializationEvent event){
-		VersionChecker.init();
 		//TODO
 		Config.setShadersEnabled(false);
 		

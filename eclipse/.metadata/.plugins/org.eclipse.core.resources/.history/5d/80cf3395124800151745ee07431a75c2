@@ -35,7 +35,7 @@ public class VersionChecker{
 			s.close();
 		}catch(Exception ex){}
 		if(newestVersion==-1)Helper.printlnEr(MReference.NAME+" has failed to check for updates");
-		Helper.printInln("aaaaaaaaaaaaaaaaa",currentVersion,newestVersion);
+		Helper.printInln("aaaaaaaaaaaaaaaaa",newestVersion);
 		Helper.exit(404);
 	}
 }

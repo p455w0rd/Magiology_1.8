@@ -7,7 +7,7 @@ import com.magiology.objhelper.helpers.Helper;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class VersionChecker{
-	private static float currentVersion=Float.parseFloat(MReference.VERSION);
+	private static float currentVersion=MReference.VERSION;
 	private static float newestVersion=-1;
 	
 	public static String updateStatus="NULL";
@@ -35,7 +35,5 @@ public class VersionChecker{
 			s.close();
 		}catch(Exception ex){}
 		if(newestVersion==-1)Helper.printlnEr(MReference.NAME+" has failed to check for updates");
-		Helper.printInln("aaaaaaaaaaaaaaaaa",currentVersion,newestVersion);
-		Helper.exit(404);
 	}
 }
