@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.event.ClickEvent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
@@ -36,13 +35,13 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.modedmcstuff.gui.chatevents.ClickEventMoreInfo;
 import com.magiology.objhelper.EntityPosAndBB;
 import com.magiology.objhelper.GetSpecialPlayer;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.registry.events.PlayerWrenchEvent;
-import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
@@ -188,7 +187,7 @@ public class EntityEvents{
 		BlockPos pos=event.pos;
 		ItemStack equippedItemStack=player.getCurrentEquippedItem();
 		TileEntity tile=world.getTileEntity(pos);
-		if(tile instanceof PowerCore&&((PowerCore)tile).isPowerKeptOnWrench()){
+		if(tile instanceof PowerCore){
 			PowerCore.SavePowerToItemEvents.onPowerCoreWrenched(pos, player, world, tile);
 		}
 	}
@@ -218,16 +217,8 @@ public class EntityEvents{
 		if(entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)entity;
 			
-			if(VersionChecker.show&&H.isRemote(event)){
-				player.addChatMessage(new ChatComponentText(VersionChecker.updateStatus));
-				if(VersionChecker.foundNew){
-					ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.google.hr");
-					ChatStyle style = new ChatStyle().setChatClickEvent(clickEvent);
-					ChatComponentText text = new ChatComponentText(ChatFormatting.GREEN +"Click Here " +ChatFormatting.GOLD + "[" +ChatFormatting.AQUA + "Download" +ChatFormatting.GOLD + "]" +ChatFormatting.GREEN + " to Download it");
-					text.setChatStyle(style);
-					player.addChatMessage(text);
-				}
-			}
+			if(VersionChecker.getShow()&&H.isRemote(event))player.addChatMessage(new ChatComponentText(VersionChecker.getUpdateStatus()).setChatStyle(new ChatStyle().setChatClickEvent(new ClickEventMoreInfo(player))));
+			
 //			if(GetSpecialPlayer.getPlayerRank(player)==1){
 //				double R,G,B;
 //				for (int i=0;i<25;i++){

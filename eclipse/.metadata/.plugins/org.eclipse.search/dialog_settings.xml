@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="SearchDialog.ScopePart">
-		<item value="2" key="scope"/>
+		<item value="0" key="scope"/>
 		<list key="lastUsedWorkingSetNames">
 			<item value="Magiology"/>
 		</list>

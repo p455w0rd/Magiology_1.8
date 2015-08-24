@@ -1,5 +1,7 @@
 package com.magiology.objhelper.helpers;
 
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
+
 import java.awt.Color;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
@@ -52,6 +54,7 @@ import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.vectors.Plane;
 import com.magiology.objhelper.vectors.Ray;
 import com.magiology.objhelper.vectors.Vec3M;
+import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class Helper{
 	public class H extends Helper{}
@@ -437,6 +440,9 @@ public class Helper{
 	public static void exit(int Int){
 		FMLCommonHandler.instance().exitJava(Int, false);
 	}
+	public static void exitSoft(){
+		getMC().shutdown();
+	}
 	public static boolean isAny(Object tester,Object... objects){
 		for(int a=0;a<objects.length;a++)if(tester==objects[a])return true;
 		return false;
@@ -791,5 +797,13 @@ public class Helper{
 	}
 	public static boolean FALSE(){
 		return false;
+	}
+	public static String signature(){
+		return signature(RESET);
+	}
+	public static String signature(ChatFormatting... colorAfter){
+		String result=GOLD+"["+ChatFormatting.DARK_GREEN+MReference.NAME+GOLD+"] ";
+		for(ChatFormatting a:colorAfter)result+=a;
+		return result;
 	}
 }

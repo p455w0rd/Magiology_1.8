@@ -32,9 +32,31 @@
 		<item value="350" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_WIDTH"/>
 		<item value="false" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
 	</section>
+	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
+		<item value="529" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="695" key="DIALOG_HEIGHT"/>
+		<item value="704" key="DIALOG_X_ORIGIN"/>
+		<item value="65" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.jdt.internal.ui.text.QuickOutline">
+		<item value="true" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_USE_PERSISTED_SIZE"/>
+		<item value="350" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_WIDTH"/>
+		<item value="300" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_HEIGHT"/>
+		<item value="false" key="GoIntoTopLevelTypeAction.isChecked"/>
+		<item value="false" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
+	</section>
 	<section name="RefactoringWizard.preview">
 		<item value="600" key="width"/>
 		<item value="400" key="height"/>
+	</section>
+	<section name="SourceActionDialog.methods">
+		<item value="false" key="SynchronizedModifier"/>
+		<item value="false" key="Comments"/>
+		<item value="1" key="VisibilityModifier"/>
+		<item value="false" key="FinalModifier"/>
+	</section>
+	<section name="BreadcrumbItemDropDown">
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.preferences.EditTemplateDialog_dialogBounds">
 		<item value="611" key="DIALOG_WIDTH"/>
@@ -51,60 +73,10 @@
 		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="JavaSearchPage">
-		<item value="7" key="HISTORY_SIZE"/>
+		<item value="10" key="HISTORY_SIZE"/>
 		<item value="false" key="CASE_SENSITIVE"/>
 		<item value="11" key="INCLUDE_MASK"/>
 		<section name="HISTORY6">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraftforge.event.entity.player(PlayerInteractEvent.class[PlayerInteractEvent" key="javaElement"/>
-			<item value="0" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="net.minecraftforge.event.entity.player.PlayerInteractEvent" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="0" key="searchFor"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY4">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setBlockTextureName" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.mcobjects.items.ItemM.setBlockTextureName()" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY5">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.block(Block.class[Block~getItemDropped~Lnet.minecraft.block.state.IBlockState;~Ljava.util.Random;~I" key="javaElement"/>
-			<item value="0" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="net.minecraft.block.Block.getItemDropped(net.minecraft.block.state.IBlockState, java.util.Random, int)" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY2">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.core{Config.java[Config~setWingsThick~Z" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.core.Config.setWingsThick(boolean)" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY3">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setTextureName~QString;" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -117,20 +89,20 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY0">
+		<section name="HISTORY7">
 			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.api.power{PowerCore.java[PowerCore^SAVE_TO_ITEM_PREFIX" key="javaElement"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setBlockTextureName" key="javaElement"/>
 			<item value="2" key="scope"/>
 			<item value="11" key="includeMask"/>
-			<item value="com.magiology.api.power.PowerCore.SAVE_TO_ITEM_PREFIX" key="pattern"/>
+			<item value="com.magiology.mcobjects.items.ItemM.setBlockTextureName()" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
-			<item value="4" key="searchFor"/>
+			<item value="1" key="searchFor"/>
 			<list key="workingSets">
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY4">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/src\/main\/java&lt;com.magiology.api.power{PowerProducer.java[PowerProducer" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -143,11 +115,103 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
+		<section name="HISTORY5">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.core{Config.java[Config~setWingsThick~Z" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.core.Config.setWingsThick(boolean)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY8">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.block(Block.class[Block~getItemDropped~Lnet.minecraft.block.state.IBlockState;~Ljava.util.Random;~I" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraft.block.Block.getItemDropped(net.minecraft.block.state.IBlockState, java.util.Random, int)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY9">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraftforge.event.entity.player(PlayerInteractEvent.class[PlayerInteractEvent" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraftforge.event.entity.player.PlayerInteractEvent" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY2">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.core.UpdateChecker.init()" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY3">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.api.power{PowerCore.java[PowerCore^SAVE_TO_ITEM_PREFIX" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.api.power.PowerCore.SAVE_TO_ITEM_PREFIX" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="4" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY0">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.event(ClickEvent.class[ClickEvent" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraft.event.ClickEvent" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.event(ClickEvent$Action.class[Action" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraft.event.ClickEvent.Action" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
 	</section>
 	<section name="NewPackageWizardPage">
 		<item value="false" key="create_package_info_java"/>
 	</section>
 	<section name="completion_proposal_size">
+	</section>
+	<section name="AddGetterSetterDialog">
+		<item value="false" key="SortOrdering"/>
+		<item value="false" key="RemoveFinal"/>
 	</section>
 	<section name="JavaElementSearchActions">
 		<list key="lastUsedWorkingSetNames0">

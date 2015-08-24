@@ -1,0 +1,29 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+
+import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
+
+public class ClickEvent_UPDATE_MOD extends AbstractCustomClickEvent{
+	public ClickEvent_UPDATE_MOD(EntityPlayer player){
+		super(ClickEvent.Action.CHANGE_PAGE, "", player);
+	}
+	@Override
+	protected void onClickEvent(){
+		player.addChatMessage(new ChatComponentText("BOOOM!!!"));
+		try{
+			new ProcessBuilder("C:\\Program Files\\Paint.NET\\PaintDotNet.exe").start();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		H.getTheWorld().sendQuittingDisconnectingPacket();
+        H.getMC().loadWorld((WorldClient)null);
+        H.getMC().displayGuiScreen(new GuiMainMenu());
+		Helper.exit(404);
+	}
+}

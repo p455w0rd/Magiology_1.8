@@ -3,6 +3,7 @@ package com.magiology.forgepowered.event;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.util.BlockPos;
@@ -20,6 +21,7 @@ import com.magiology.forgepowered.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
 import com.magiology.gui.fpgui.FirstPersonGui;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.modedmcstuff.gui.chatevents.ClickEvent_UPDATE_MOD;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.vectors.Pos;
@@ -33,6 +35,9 @@ public class TickEvents{
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event){
 		if(event.phase!=Phase.START)return;
+		if(ClickEvent_UPDATE_MOD.IS_UPDATE_PROCESS_ACTIVATED&&H.getMC().currentScreen instanceof GuiMainMenu){
+			ClickEvent_UPDATE_MOD.terminateAndOpenUpdater();
+		}
 		if(H.getTheWorld()==null){
 			MEvents.RenderLoopInstance.universalLongRender.clear();
 		}

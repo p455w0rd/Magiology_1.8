@@ -6,25 +6,22 @@ import java.net.URL;
 import java.util.Scanner;
 
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 
 public class VersionChecker{
-	private static float currentVersion=Float.parseFloat(MReference.VERSION);
-	private static float newestVersion=-1;
-	
-	public static String updateStatus="NULL";
-	public static boolean show=false,foundNew;
+	private static float currentVersion=Float.parseFloat(MReference.VERSION),newestVersion=-1;
+	private static String extraData;
+	private static boolean show=false,foundNew;
 	
 	public static void init(){
-		getNewestVersion();
+		getVersion();
 		if(newestVersion!=-1){
 			show=true;
 			foundNew=newestVersion>currentVersion;
-			if(foundNew)updateStatus=BLUE+"["+MReference.NAME+"] "+AQUA+ITALIC+"There's a newer Version of the Mod "+GOLD+"["+AQUA+newestVersion+GOLD + "]";
-			else updateStatus=MReference.NAME+" is up to date.";
-			updateStatus+=AQUA+" Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
+			extraData=H.signature(AQUA)+"Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
 		}
 	}
-	private static void getNewestVersion(){
+	private static void getVersion(){
 		try{
 			URL url=new URL("https://raw.githubusercontent.com/LapisSea/Magiology_1.8/master/src/main/java/com/magiology/core/MReference.java");
 			Scanner s=new Scanner(url.openStream());
@@ -38,4 +35,13 @@ public class VersionChecker{
 		}catch(Exception ex){}
 		if(newestVersion==-1)Helper.printlnEr(MReference.NAME+" has failed to check for updates");
 	}
+	public static float getCurrentVersion(){return currentVersion;}
+	public static float getNewestVersion(){return newestVersion;}
+	public static String getUpdateStatus(){
+		if(!foundNew)return H.signature(AQUA,ITALIC)+"Found a newer version! "+RESET+GOLD+"["+BLUE+"More info"+GOLD+"]";
+		else return H.signature(AQUA,ITALIC)+"I am up to date! "+BLUE+";)";
+	}
+	public static String getExtraData(){return extraData;}
+	public static boolean getFoundNew(){return foundNew;}
+	public static boolean getShow(){return show;}
 }

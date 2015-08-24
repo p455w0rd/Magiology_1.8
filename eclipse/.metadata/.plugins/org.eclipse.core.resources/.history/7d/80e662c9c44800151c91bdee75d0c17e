@@ -1,0 +1,25 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import com.magiology.objhelper.helpers.Helper;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+
+public class ClickEvent_UPDATE_MOD extends AbstractCustomClickEvent{
+	public ClickEvent_UPDATE_MOD(EntityPlayer player){
+		super(ClickEvent.Action.CHANGE_PAGE, "", player);
+	}
+	@Override
+	protected void onClickEvent(){
+		player.addChatMessage(new ChatComponentText("BOOOM!!!"));
+		
+		
+		try{
+			new ProcessBuilder("C:\\PathToExe\\MyExe.exe","param1","param2").start();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		Helper.exit(0);
+	}
+}

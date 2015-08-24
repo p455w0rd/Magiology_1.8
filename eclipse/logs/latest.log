@@ -1,19 +1,117 @@
-[18:22:40] [Client thread/INFO]: Setting user: LapisSea
-[18:22:46] [Client thread/INFO]: LWJGL Version: 2.9.1
-[18:22:55] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
-[18:22:59] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[18:23:00] [Thread-10/INFO]: Initializing LWJGL OpenAL
-[18:23:00] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[18:23:00] [Thread-10/INFO]: OpenAL initialized.
-[18:23:00] [Sound Library Loader/INFO]: Sound engine started
-[18:23:05] [Client thread/INFO]: Created: 16x16 textures-atlas
-[18:23:08] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[12:41:24] [Client thread/INFO]: Setting user: LapisSea
+[12:41:30] [Client thread/INFO]: LWJGL Version: 2.9.1
+[12:41:40] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[12:41:42] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:41:42] [Thread-10/INFO]: Initializing LWJGL OpenAL
+[12:41:42] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:41:43] [Thread-10/INFO]: OpenAL initialized.
+[12:41:43] [Sound Library Loader/INFO]: Sound engine started
+[12:42:05] [Client thread/INFO]: Created: 16x16 textures-atlas
+[12:42:07] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
 	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
-	at com.magiology.render.Textures.getResource(Textures.java:119) [Textures.class:?]
+	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
+	at com.magiology.render.Textures.postInit(Textures.java:55) [Textures.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537) [FMLModContainer.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
+	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
+	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212) [LoadController.class:?]
+	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190) [LoadController.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
+	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
+	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119) [LoadController.class:?]
+	at net.minecraftforge.fml.common.Loader.initializeMods(Loader.java:736) [Loader.class:?]
+	at net.minecraftforge.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:316) [FMLClientHandler.class:?]
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:529) [Minecraft.class:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:356) [Minecraft.class:?]
+	at net.minecraft.client.main.Main.main(Main.java:117) [Main.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
+	at GradleStart.main(Unknown Source) [start/:?]
+[12:42:07] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+java.io.FileNotFoundException: magiology:WTF!?!!
+	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
+	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
+	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
+	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
+	at com.magiology.render.Textures.postInit(Textures.java:56) [Textures.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537) [FMLModContainer.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
+	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
+	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212) [LoadController.class:?]
+	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190) [LoadController.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
+	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
+	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
+	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119) [LoadController.class:?]
+	at net.minecraftforge.fml.common.Loader.initializeMods(Loader.java:736) [Loader.class:?]
+	at net.minecraftforge.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:316) [FMLClientHandler.class:?]
+	at net.minecraft.client.Minecraft.startGame(Minecraft.java:529) [Minecraft.class:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:356) [Minecraft.class:?]
+	at net.minecraft.client.main.Main.main(Main.java:117) [Main.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
+	at GradleStart.main(Unknown Source) [start/:?]
+[12:42:07] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+java.io.FileNotFoundException: magiology:WTF!?!!
+	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
+	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
+	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
+	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
+	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:57) [Textures.class:?]
 	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
 	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
@@ -56,13 +154,13 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[18:23:08] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[12:42:07] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
 	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
-	at com.magiology.render.Textures.getResource(Textures.java:119) [Textures.class:?]
+	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:58) [Textures.class:?]
 	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
 	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
@@ -105,14 +203,14 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[18:23:08] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[12:42:07] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
 	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
-	at com.magiology.render.Textures.getResource(Textures.java:119) [Textures.class:?]
-	at com.magiology.render.Textures.postInit(Textures.java:59) [Textures.class:?]
+	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
+	at com.magiology.render.Textures.postInit(Textures.java:65) [Textures.class:?]
 	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
 	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
@@ -154,14 +252,14 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[18:23:08] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[12:42:07] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
 	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
-	at com.magiology.render.Textures.getResource(Textures.java:119) [Textures.class:?]
-	at com.magiology.render.Textures.postInit(Textures.java:60) [Textures.class:?]
+	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
+	at com.magiology.render.Textures.postInit(Textures.java:73) [Textures.class:?]
 	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
 	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
@@ -203,122 +301,24 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[18:23:08] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
-java.io.FileNotFoundException: magiology:WTF!?!!
-	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
-	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
-	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
-	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
-	at com.magiology.render.Textures.getResource(Textures.java:119) [Textures.class:?]
-	at com.magiology.render.Textures.postInit(Textures.java:67) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537) [FMLModContainer.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
-	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
-	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212) [LoadController.class:?]
-	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190) [LoadController.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
-	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
-	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119) [LoadController.class:?]
-	at net.minecraftforge.fml.common.Loader.initializeMods(Loader.java:736) [Loader.class:?]
-	at net.minecraftforge.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:316) [FMLClientHandler.class:?]
-	at net.minecraft.client.Minecraft.startGame(Minecraft.java:529) [Minecraft.class:?]
-	at net.minecraft.client.Minecraft.run(Minecraft.java:356) [Minecraft.class:?]
-	at net.minecraft.client.main.Main.main(Main.java:117) [Main.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
-	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
-	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
-	at GradleStart.main(Unknown Source) [start/:?]
-[18:23:08] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
-java.io.FileNotFoundException: magiology:WTF!?!!
-	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
-	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
-	at net.minecraft.client.renderer.texture.SimpleTexture.loadTexture(SimpleTexture.java:34) ~[SimpleTexture.class:?]
-	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
-	at com.magiology.render.Textures.getResource(Textures.java:119) [Textures.class:?]
-	at com.magiology.render.Textures.postInit(Textures.java:75) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:126) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:138) [Magiology.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at net.minecraftforge.fml.common.FMLModContainer.handleModStateEvent(FMLModContainer.java:537) [FMLModContainer.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
-	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
-	at net.minecraftforge.fml.common.LoadController.sendEventToModContainer(LoadController.java:212) [LoadController.class:?]
-	at net.minecraftforge.fml.common.LoadController.propogateStateMessage(LoadController.java:190) [LoadController.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at com.google.common.eventbus.EventSubscriber.handleEvent(EventSubscriber.java:74) [guava-17.0.jar:?]
-	at com.google.common.eventbus.SynchronizedEventSubscriber.handleEvent(SynchronizedEventSubscriber.java:47) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatch(EventBus.java:322) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.dispatchQueuedEvents(EventBus.java:304) [guava-17.0.jar:?]
-	at com.google.common.eventbus.EventBus.post(EventBus.java:275) [guava-17.0.jar:?]
-	at net.minecraftforge.fml.common.LoadController.distributeStateMessage(LoadController.java:119) [LoadController.class:?]
-	at net.minecraftforge.fml.common.Loader.initializeMods(Loader.java:736) [Loader.class:?]
-	at net.minecraftforge.fml.client.FMLClientHandler.finishMinecraftLoading(FMLClientHandler.java:316) [FMLClientHandler.class:?]
-	at net.minecraft.client.Minecraft.startGame(Minecraft.java:529) [Minecraft.class:?]
-	at net.minecraft.client.Minecraft.run(Minecraft.java:356) [Minecraft.class:?]
-	at net.minecraft.client.main.Main.main(Main.java:117) [Main.class:?]
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_51]
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_51]
-	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_51]
-	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
-	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
-	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
-	at GradleStart.main(Unknown Source) [start/:?]
-[18:23:09] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
-[18:23:10] [Client thread/INFO]: SoundSystem shutting down...
-[18:23:10] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[18:23:10] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[18:23:10] [Thread-12/INFO]: Initializing LWJGL OpenAL
-[18:23:10] [Thread-12/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[18:23:10] [Thread-12/INFO]: OpenAL initialized.
-[18:23:10] [Sound Library Loader/INFO]: Sound engine started
-[18:23:15] [Client thread/INFO]: Created: 512x512 textures-atlas
-[18:23:24] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[18:23:24] [Server thread/INFO]: Generating keypair
-[18:23:25] [Server thread/INFO]: Preparing start region for level 0
-[18:23:26] [Server thread/INFO]: Preparing spawn area: 55%
-[18:23:27] [Server thread/INFO]: Changing view distance to 9, from 10
-[18:23:29] [Server thread/INFO]: LapisSea[local:E:9550fcaa] logged in with entity id 57 at (-535.5378777463461, 4.0, -1171.7609021234246)
-[18:23:29] [Server thread/INFO]: LapisSea joined the game
-[18:23:29] [Client thread/INFO]: [CHAT] Magiology is up to date.§b Latest version is: §60.1052§b, and you are using version: §60.1052
-[18:23:30] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@3bce4b76[id=22933b80-6bc9-3708-8ef7-64754df18d7e,name=LapisSea,properties={},legacy=false]
+[12:42:07] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[12:42:08] [Client thread/INFO]: SoundSystem shutting down...
+[12:42:08] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[12:42:08] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[12:42:08] [Thread-12/INFO]: Initializing LWJGL OpenAL
+[12:42:08] [Thread-12/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[12:42:08] [Thread-12/INFO]: OpenAL initialized.
+[12:42:09] [Sound Library Loader/INFO]: Sound engine started
+[12:42:12] [Client thread/INFO]: Created: 512x512 textures-atlas
+[12:42:17] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[12:42:17] [Server thread/INFO]: Generating keypair
+[12:42:18] [Server thread/INFO]: Preparing start region for level 0
+[12:42:19] [Server thread/INFO]: Preparing spawn area: 42%
+[12:42:19] [Server thread/INFO]: Changing view distance to 9, from 10
+[12:42:21] [Server thread/INFO]: LapisSea[local:E:1e5ce1f3] logged in with entity id 58 at (-516.2976557879952, 4.0, -1173.720435598599)
+[12:42:21] [Server thread/INFO]: LapisSea joined the game
+[12:42:21] [Client thread/INFO]: [CHAT] §6[§2Magiology§6] §b§oFound a newer version! §r§6[§9More info§6]
+[12:42:22] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@7191c18b[id=22933b80-6bc9-3708-8ef7-64754df18d7e,name=LapisSea,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:65) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:158) [YggdrasilMinecraftSessionService.class:?]
@@ -339,7 +339,31 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_51]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_51]
 	at java.lang.Thread.run(Unknown Source) [?:1.8.0_51]
-[18:23:30] [Server thread/INFO]: Saving and pausing game...
-[18:23:31] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[18:23:31] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[18:23:31] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[12:42:28] [Client thread/INFO]: [CHAT] §aClick §6[§bHERE§6]§a to update the mod!
+[12:42:28] [Client thread/INFO]: [CHAT] §c§lWARNING: §r§eThe message above will:
+[12:42:28] [Client thread/INFO]: [CHAT] §b§l1. §cturn off§e minecraft!
+[12:42:28] [Client thread/INFO]: [CHAT] §b§l2. §eopen an automatic updater aplication
+[12:42:28] [Client thread/INFO]: [CHAT] §r§eThe aplication will:
+[12:42:28] [Client thread/INFO]: [CHAT] §b§l1. §eremove the old mod file
+[12:42:28] [Client thread/INFO]: [CHAT] §b§l2. §edownlad a new one
+[12:42:28] [Client thread/INFO]: [CHAT] §b§l3. §eplace it in your mods folder
+[12:42:28] [Client thread/ERROR]: Don't know how to handle ClickEvent{action=CHANGE_PAGE, value=''}
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Client thread/INFO]: [CHAT] TERMINATING!!!
+[12:43:14] [Server thread/INFO]: LapisSea lost connection: TextComponent{text='Disconnected', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}
+[12:43:14] [Server thread/INFO]: LapisSea left the game
+[12:43:14] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[12:43:14] [Server thread/INFO]: Stopping server
+[12:43:14] [Server thread/INFO]: Saving players
+[12:43:14] [Server thread/INFO]: Saving worlds
+[12:43:14] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[12:43:14] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[12:43:14] [Server thread/INFO]: Saving chunks for level 'New World'/The End

@@ -41,7 +41,8 @@ public class BlockM extends Block{
 				Get.Render.RI().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(modelsInit.get(block), "inventory"));
 			} catch (Exception e){
 				Helper.printInln("failed!",block,itemBlock,Get.Render.RI());
-				throw e;
+				e.printStackTrace();
+				Helper.exit(404);
 			}
 		}
 //		modelsInit.clear();

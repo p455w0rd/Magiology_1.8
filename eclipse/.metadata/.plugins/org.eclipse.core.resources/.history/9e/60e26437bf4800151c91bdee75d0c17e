@@ -1,0 +1,38 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+
+import com.magiology.core.VersionChecker;
+import com.magiology.objhelper.helpers.Helper;
+
+public class ClickEventMoreInfo extends ClickEvent{
+	private boolean openedMore=false;
+	private int nuberOfGets=0;
+	private EntityPlayer player;
+	public ClickEventMoreInfo(Action theAction, String theValue,EntityPlayer player){
+		super(theAction, theValue);
+		this.player=player;
+		Helper.printInln(getAction());
+	}
+	@Override
+	public Action getAction(){
+		nuberOfGets++;
+		if(!openedMore&&nuberOfGets>1){
+			openedMore=true;
+			if(!VersionChecker.getFoundNew()){
+				ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.youtube.com/watch?v=MKHmwmEGFqI");
+				ChatStyle style = new ChatStyle().setChatClickEvent(clickEvent);
+				ChatComponentText text = new ChatComponentText(GREEN+"Click Here "+GOLD+"["+AQUA+"Download"+GOLD+"]"+GREEN+" to Download it!");
+				text.setChatStyle(style);
+				player.addChatMessage(text);
+				player.addChatMessage(new ChatComponentText(""+RED+BOLD+"WARNING: "+RESET+YELLOW+"The message above will "+BOLD+"turn off"+RESET+YELLOW+" minecraft!"));
+				player.addChatMessage(new ChatComponentText(YELLOW+"And open an automatic updater aplication that will remove "+YELLOW+"the old mod file and replace it with a newer one!"));
+			}
+		}
+		return super.getAction();
+	}
+}

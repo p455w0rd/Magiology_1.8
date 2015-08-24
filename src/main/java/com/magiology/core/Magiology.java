@@ -1,10 +1,6 @@
 package com.magiology.core;
 
-import static com.magiology.core.MReference.COMMON_PROXY_LOCATION;
-import static com.magiology.core.MReference.ClIENT_PROXY_LOCATION;
-import static com.magiology.core.MReference.MODID;
-import static com.magiology.core.MReference.NAME;
-import static com.magiology.core.MReference.VERSION;
+import static com.magiology.core.MReference.*;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -68,7 +64,7 @@ public class Magiology{
     
     
     //proxy cluster
-    @SidedProxy(clientSide=ClIENT_PROXY_LOCATION, serverSide=COMMON_PROXY_LOCATION)
+    @SidedProxy(clientSide=MReference.ClIENT_PROXY_LOCATION, serverSide=MReference.COMMON_PROXY_LOCATION)
 	public static CommonProxy proxy;
     public boolean modWindowOpen(){return modInfGUI!=null&&!modInfGUI.isExited;}
     

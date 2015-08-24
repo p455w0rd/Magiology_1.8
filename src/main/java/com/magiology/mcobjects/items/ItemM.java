@@ -10,6 +10,7 @@ import com.magiology.core.Fixes1_8;
 import com.magiology.core.MReference;
 import com.magiology.objhelper.Get;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.helpers.Helper.H;
 
 public class ItemM extends Item{
 		
@@ -30,7 +31,8 @@ public class ItemM extends Item{
 					Fixes1_8.injectStandardJsonModel(item, 0, modelsInit.get(item));
 				} catch (Exception e){
 					Helper.printInln("failed!",item,Get.Render.RI());
-					throw e;
+					e.printStackTrace();
+					H.exit(404);
 				}
 			}
 			modelsInit.clear();

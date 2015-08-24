@@ -1,0 +1,37 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+
+import com.magiology.core.VersionChecker;
+
+public class ClickEvent_UPDATE_MOD extends AbstractCustomClickEvent{
+	
+	public ClickEvent_UPDATE_MOD(Action theAction, String theValue,
+			EntityPlayer player) {
+		super(theAction, theValue, player);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public Action getAction(){
+		nuberOfGets++;
+		if(!openedMore&&nuberOfGets>1){
+			openedMore=true;
+			if(!VersionChecker.getFoundNew()){
+				player.addChatMessage(new ChatComponentText(GREEN+"Click "+GOLD+"["+AQUA+"HERE"+GOLD+"]"+GREEN+" to update the mod!").setChatStyle(new ChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.youtube.com/watch?v=MKHmwmEGFqI"))));
+				player.addChatMessage(new ChatComponentText(""+RED+BOLD+"WARNING: "+RESET+YELLOW+"The message above will:"));
+				player.addChatMessage(new ChatComponentText(""+AQUA+BOLD+"1. "+RED+"turn off"+YELLOW+" minecraft!"));
+				player.addChatMessage(new ChatComponentText(""+AQUA+BOLD+"2. "+YELLOW+"open an automatic updater aplication"));
+				player.addChatMessage(new ChatComponentText(""+RESET+YELLOW+"The aplication will:"));
+				player.addChatMessage(new ChatComponentText(""+AQUA+BOLD+"1. "+YELLOW+"remove the old mod file"));
+				player.addChatMessage(new ChatComponentText(""+AQUA+BOLD+"2. "+YELLOW+"downlad a new one"));
+				player.addChatMessage(new ChatComponentText(""+AQUA+BOLD+"3. "+YELLOW+"place it in your mods folder"));
+			}
+		}
+		return super.getAction();
+	}
+}

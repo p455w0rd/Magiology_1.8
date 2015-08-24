@@ -11,7 +11,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.MReference;
-import com.magiology.handelers.BumpMapHandeler;
 import com.magiology.objhelper.helpers.Helper;
 
 @SideOnly(Side.CLIENT)
@@ -41,7 +40,6 @@ public class Textures{
 	public static void postInit(){
 		//---textur stands for "no texture and it should be made as soon as possible"---\\
 		Helper.println("TEXTURE INIT STARTED!");
-		BumpMapHandeler.loadBumpMaps();
 		if(isInit)return;isInit=true;
 		Helmet42Model=             getResource(MReference.MODID,"/models/textures/Helmet42Model.png");
 		GuiArmorEditor=            getResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");

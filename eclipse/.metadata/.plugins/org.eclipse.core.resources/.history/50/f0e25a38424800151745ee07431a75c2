@@ -1,0 +1,16 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import net.minecraft.event.ClickEvent;
+
+public class ClickEventMoreInfo extends ClickEvent{
+	public ClickEventMoreInfo(Action theAction, String theValue){
+		super(theAction, theValue);
+	}
+	@Override
+	public Action getAction(){
+		
+		
+		
+		return super.getAction();
+	}
+}

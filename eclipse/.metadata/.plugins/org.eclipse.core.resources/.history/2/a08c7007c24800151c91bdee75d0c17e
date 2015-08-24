@@ -1,0 +1,20 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+
+import com.magiology.objhelper.helpers.Helper;
+
+public abstract class AbstractCustomClickEvent extends ClickEvent{
+	
+	private boolean openedMore=false;
+	private int nuberOfGets=0;
+	private EntityPlayer player;
+	
+	public ClickEvent_UPDATE_MOD(Action theAction, String theValue,EntityPlayer player){
+		super(theAction, theValue);
+		this.player=player;
+		Helper.printInln(getAction());
+	}
+
+}

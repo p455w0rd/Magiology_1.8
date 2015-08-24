@@ -1,0 +1,19 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+
+import com.magiology.core.VersionChecker;
+
+public class ClickEvent_UPDATE_MOD extends AbstractCustomClickEvent{
+	public ClickEvent_UPDATE_MOD(Action theAction, String theValue,EntityPlayer player){
+		super(theAction, theValue, player);
+	}
+	@Override
+	protected void onClickEvent(){
+		player.addChatMessage(new ChatComponentText("BOOOM!!!"));
+	}
+}

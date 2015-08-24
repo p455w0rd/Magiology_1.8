@@ -1,0 +1,19 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import com.magiology.objhelper.helpers.Helper;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.event.ClickEvent.Action;
+
+public abstract class AbstractCustomClickEvent extends ClickEvent{
+	private boolean openedMore=false;
+	private int nuberOfGets=0;
+	private EntityPlayer player;
+	
+	public AbstractCustomClickEvent(Action theAction, String theValue,EntityPlayer player){
+		super(theAction, theValue);
+		this.player=player;
+		Helper.printInln(getAction());
+	}
+}

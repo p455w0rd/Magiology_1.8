@@ -1,0 +1,7 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import net.minecraft.event.ClickEvent;
+
+public class AbstractCustomClickEvent extends ClickEvent {
+
+}

@@ -1,0 +1,36 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+
+import com.magiology.core.VersionChecker;
+import com.magiology.objhelper.helpers.Helper;
+import com.mojang.realmsclient.gui.ChatFormatting;
+
+public class ClickEventMoreInfo extends ClickEvent{
+	private boolean openedMore=false;
+	private int nuberOfGets=0;
+	private EntityPlayer player;
+	public ClickEventMoreInfo(Action theAction, String theValue,EntityPlayer player){
+		super(theAction, theValue);
+		this.player=player;
+		Helper.printInln(getAction());
+	}
+	@Override
+	public Action getAction(){
+		nuberOfGets++;
+		if(!openedMore&&nuberOfGets>1){
+			openedMore=true;
+			if(!VersionChecker.getFoundNew()){
+				ClickEvent clickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.youtube.com/watch?v=MKHmwmEGFqI");
+				ChatStyle style = new ChatStyle().setChatClickEvent(clickEvent);
+				ChatComponentText text = new ChatComponentText(ChatFormatting.GREEN +"Click Here " +ChatFormatting.GOLD + "[" +ChatFormatting.AQUA + "Download" +ChatFormatting.GOLD + "]" +ChatFormatting.GREEN + " to Download it");
+				text.setChatStyle(style);
+				player.addChatMessage(text);
+			}
+		}
+		return super.getAction();
+	}
+}

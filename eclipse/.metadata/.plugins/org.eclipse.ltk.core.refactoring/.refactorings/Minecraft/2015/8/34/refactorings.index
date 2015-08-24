@@ -21,3 +21,8 @@
 1440103981784	Rename method 'getDataType'
 1440158279587	Rename type 'UpdateChecker'
 1440168458157	Delete element
+1440187532432	Rename method 'getNewestVersion'
+1440187668376	Rename method 'isShow'
+1440187687983	Rename method 'isFoundNew'
+1440243246566	Copy compilation unit
+1440334831530	Delete element

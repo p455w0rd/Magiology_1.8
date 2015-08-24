@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="models[a]" key="selection"/>
+		<item value="exit" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="exit"/>
+			<item value="leng"/>
+			<item value="updateStatus="/>
+			<item value="addChatMessage"/>
 			<item value="modelsBack[a][b]"/>
 			<item value="],"/>
 			<item value="hulk"/>
 			<item value="DenseOresMod.block.invmodels"/>
-			<item value="DenseOresMod.block.models"/>
-			<item value="Precentage"/>
-			<item value="world.getBlockState"/>
-			<item value="EnumParticleTypes"/>
 		</list>
 		<list key="replacehistory">
+			<item value="return "/>
 			<item value="models[a]"/>
 			<item value="],-"/>
 			<item value="BlockM.invmodels"/>
