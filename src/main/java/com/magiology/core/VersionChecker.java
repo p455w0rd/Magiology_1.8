@@ -2,9 +2,7 @@ package com.magiology.core;
 
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
-import java.net.URL;
-import java.util.Scanner;
-
+import com.magiology.handelers.DownloadingHandeler;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 
@@ -22,17 +20,7 @@ public class VersionChecker{
 		}
 	}
 	private static void getVersion(){
-		try{
-			URL url=new URL("https://raw.githubusercontent.com/LapisSea/Magiology_1.8/master/src/main/java/com/magiology/core/MReference.java");
-			Scanner s=new Scanner(url.openStream());
-			try{
-				s.findWithinHorizon("VERSION=", 9999);
-				String version=s.next();
-				version=version.substring(1, version.length()-2);
-				newestVersion=Float.parseFloat(version);
-			}catch(Exception e){}
-			s.close();
-		}catch(Exception ex){}
+		newestVersion=Float.parseFloat(DownloadingHandeler.findValue("VERSION"));
 		if(newestVersion==-1)Helper.printlnEr(MReference.NAME+" has failed to check for updates");
 	}
 	public static float getCurrentVersion(){return currentVersion;}

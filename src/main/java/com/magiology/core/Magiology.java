@@ -69,9 +69,8 @@ public class Magiology{
     public boolean modWindowOpen(){return modInfGUI!=null&&!modInfGUI.isExited;}
     
     public void loadFiles(){
-    	String dir="mods\\1.8\\"+MODID;
-    	new File(dir).mkdir();
-    	ZipManager.extractFileFromZip("mods\\Magiology-0.026A.jar", dir,"MagiZip.zip","OpenUp.wav","Close.wav","Loaded.wav");
+    	new File(MODS_SUBFOLDER_DIR).mkdir();
+    	ZipManager.extractFileFromZip("mods\\Magiology-0.026A.jar", MODS_SUBFOLDER_DIR,"MagiZip.zip","OpenUp.wav","Close.wav","Loaded.wav");
     	
     	boolean willOpen=true;
     	try{

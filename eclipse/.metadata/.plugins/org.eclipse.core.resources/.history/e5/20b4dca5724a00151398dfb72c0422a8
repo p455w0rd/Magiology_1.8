@@ -1,0 +1,10 @@
+package com.magiology.handelers;
+
+public class DownloadingHandeler{
+	public static void downladAssets(){
+		
+	}
+	public static void downloadUpdater(){
+		
+	}
+}
