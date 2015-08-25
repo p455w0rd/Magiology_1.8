@@ -13,7 +13,7 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.objhelper.vectors.Vec8F;
@@ -23,7 +23,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static float p=1F/16F;
 	private static ComplexCubeModel[] models;
 	private static ComplexCubeModel[][] modelsBack;
-	private static NoramlisedVertixBuffer buff=TessHelper.getNVB();
+	private static NormalizedVertixBuffer buff=TessHelper.getNVB();
 	
 	public static void wings3D(boolean bol){
 		if(models==null)return;

@@ -12,15 +12,15 @@ import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBufferModel;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBufferModel;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
 
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
 	private final float p= 1F/16F;
-	NoramlisedVertixBuffer buf=TessHelper.getNVB();
+	NormalizedVertixBuffer buf=TessHelper.getNVB();
 	public TileEntityFirePipe pipe;
 	public  double alpha=0,prevAlpha;
 	private World world;
@@ -61,7 +61,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	}
 	
 
-	private static NoramlisedVertixBufferModel strateCoreModel;
+	private static NormalizedVertixBufferModel strateCoreModel;
 	private void generateModelStrateCoreGlow(){
 		buf.cleanUp();
 		ComplexCubeModel
@@ -89,7 +89,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	}
 	
 	
-	private static NoramlisedVertixBufferModel connectorGlowModel;
+	private static NormalizedVertixBufferModel connectorGlowModel;
 	private void generateModelConnectorGlow(){
 		buf.cleanUp();
 		ComplexCubeModel 
@@ -136,7 +136,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		}
 	}
 	
-	private static NoramlisedVertixBufferModel coreGlowModel;
+	private static NormalizedVertixBufferModel coreGlowModel;
 	private void generateModelCoreGlow(){
 		buf.cleanUp();
 		ComplexCubeModel 

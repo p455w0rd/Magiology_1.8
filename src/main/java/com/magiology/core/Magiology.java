@@ -5,7 +5,6 @@ import static com.magiology.core.MReference.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
-import java.util.Scanner;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -34,11 +33,11 @@ import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handelers.EnhancedRobot;
 import com.magiology.handelers.GuiHandeler;
+import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.Textures;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
-import com.magiology.windowsgui.ZipManager;
 
 @Mod(modid=MODID,version=VERSION,name=NAME)
 public class Magiology{
@@ -69,23 +68,15 @@ public class Magiology{
     public boolean modWindowOpen(){return modInfGUI!=null&&!modInfGUI.isExited;}
     
     public void loadFiles(){
-    	new File(MODS_SUBFOLDER_DIR).mkdir();
-    	ZipManager.extractFileFromZip("mods\\Magiology-0.026A.jar", MODS_SUBFOLDER_DIR,"MagiZip.zip","OpenUp.wav","Close.wav","Loaded.wav");
+    	new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
+    	if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandeler.downladAssets();
+		infoFile.readFromFile();
     	
-    	boolean willOpen=true;
-    	try{
-    		Scanner file=new Scanner(new File(InfoFileName+".McModClientSave"));
-    		file.findWithinHorizon("1->", 9999999);
-    		willOpen=file.next().equals("true");
-    		file.close();
-		}catch(Exception e){e.printStackTrace();}
-    	willOpen=false;
-		if(willOpen){
+		if(infoFile.data.get("GUIOpen")==null||infoFile.getB("GUIOpen")){
 	    	Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 	    	new ModInfoGUI((int)screenSize.getWidth(),(int)screenSize.getHeight(),-680,0);
+	    	modInfGUI.downloadData(infoFile);
 		}
-		infoFile.setUpInfoFile();
-		if(willOpen)modInfGUI.downloadData(infoFile);
     }
 	public void preInit(FMLPreInitializationEvent event){
 		VersionChecker.init();
@@ -94,7 +85,7 @@ public class Magiology{
 		
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){@Override
 		public void run(){
-			if(modInfGUI!=null)SoundPlayer.playSound("mods\\1.7.10\\"+MODID+"\\Close.wav");
+			if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");
 		}}, "Shutdown-thread"));
 		
 		

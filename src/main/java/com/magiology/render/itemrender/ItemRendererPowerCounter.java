@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
@@ -133,7 +133,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		double var1=powerBar;
 		double var2=p*5+p*4*var1;
 		double var3=1-var1;
-		NoramlisedVertixBuffer buf=TessHelper.getNVB();
+		NormalizedVertixBuffer buf=TessHelper.getNVB();
 		buf.cleanUp();
 		buf.addVertexWithUV(p*4-0.0001, var2, p*11, 0, var3);
 		buf.addVertexWithUV(p*4-0.0001, p*5,  p*11, 0, 1);

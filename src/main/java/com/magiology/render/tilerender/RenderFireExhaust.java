@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.render.Textures;
 
 public class RenderFireExhaust extends TileEntitySpecialRenderer {
@@ -15,7 +15,7 @@ public class RenderFireExhaust extends TileEntitySpecialRenderer {
 	private final float tW=1F/97F;
 	private final float tH=1F/90F;
 	double animation;
-	NoramlisedVertixBuffer buf=Render.NVB();
+	NormalizedVertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {

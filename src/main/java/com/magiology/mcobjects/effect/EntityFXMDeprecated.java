@@ -4,7 +4,7 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.world.World;
 
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 @Deprecated
@@ -15,7 +15,7 @@ public abstract class EntityFXMDeprecated extends EntityFX{
 		super(world, x,y,z, xSpeed, ySpeed, zSpeed);
 	}
 	
-	public void renderParticle(NoramlisedVertixBuffer buf, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
+	public void renderParticle(NormalizedVertixBuffer buf, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
         float f6 = particleTextureIndexX / 16.0F;
         float f7 = f6 + 0.0624375F;

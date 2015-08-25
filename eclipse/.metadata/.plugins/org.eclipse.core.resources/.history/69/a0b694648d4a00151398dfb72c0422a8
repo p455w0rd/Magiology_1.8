@@ -1,0 +1,40 @@
+package com.magiology.clientdata;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.magiology.core.Magiology;
+import com.magiology.objhelper.helpers.Helper;
+
+@SideOnly(Side.CLIENT)
+public class InfoFile extends Magiology{
+	
+	public String fileDir;
+	
+	public Map<String, String> data=new HashMap<String, String>();
+	
+	boolean isInit=true;
+	
+	
+	public InfoFile(String fileName,String prefix){
+		fileDir=fileName+"."+prefix;
+//	  this.fileName=fileName;this.prefix=prefix;
+	}
+	
+	public void readFromFile(){
+		
+	}
+	public void writeToFile(){
+		
+	}
+	
+	private void yellowLine(String string){if(modInfGUI!=null)modInfGUI.addLine(modInfGUI.newLine(string, new Font(Font.SANS_SERIF, Font.PLAIN,15), Color.YELLOW));else Helper.println(string);}
+	private void errorLine(String string){if(modInfGUI!=null)modInfGUI.addLine(modInfGUI.newLine(string, new Font(Font.SANS_SERIF, Font.BOLD+Font.ITALIC,15), Color.RED));else Helper.println(string);}
+	private void sucessLine(String string){if(modInfGUI!=null)modInfGUI.addLine(modInfGUI.newLine(string, new Font(Font.SANS_SERIF, Font.PLAIN,15), Color.GREEN));else Helper.println(string);}
+}
+

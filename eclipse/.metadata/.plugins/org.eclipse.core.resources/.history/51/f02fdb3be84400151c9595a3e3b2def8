@@ -1,7 +1,0 @@
-package com.magiology.forgepowered.event.custom;
-
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-
-public class PlayerWrenchEvent extends PlayerInteractEvent {
-
-}

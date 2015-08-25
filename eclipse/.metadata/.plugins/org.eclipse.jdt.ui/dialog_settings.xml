@@ -73,36 +73,10 @@
 		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="JavaSearchPage">
-		<item value="10" key="HISTORY_SIZE"/>
+		<item value="12" key="HISTORY_SIZE"/>
 		<item value="false" key="CASE_SENSITIVE"/>
 		<item value="11" key="INCLUDE_MASK"/>
 		<section name="HISTORY6">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setTextureName~QString;" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.mcobjects.items.ItemM.setTextureName(String)" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY7">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setBlockTextureName" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.mcobjects.items.ItemM.setBlockTextureName()" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY4">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/src\/main\/java&lt;com.magiology.api.power{PowerProducer.java[PowerProducer" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -115,7 +89,7 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY5">
+		<section name="HISTORY7">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/src\/main\/java&lt;com.magiology.core{Config.java[Config~setWingsThick~Z" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -128,31 +102,7 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY8">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.block(Block.class[Block~getItemDropped~Lnet.minecraft.block.state.IBlockState;~Ljava.util.Random;~I" key="javaElement"/>
-			<item value="0" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="net.minecraft.block.Block.getItemDropped(net.minecraft.block.state.IBlockState, java.util.Random, int)" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY9">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraftforge.event.entity.player(PlayerInteractEvent.class[PlayerInteractEvent" key="javaElement"/>
-			<item value="0" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="net.minecraftforge.event.entity.player.PlayerInteractEvent" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="0" key="searchFor"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY2">
+		<section name="HISTORY4">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -165,7 +115,19 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY3">
+		<section name="HISTORY10">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.block(Block.class[Block~getItemDropped~Lnet.minecraft.block.state.IBlockState;~Ljava.util.Random;~I" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraft.block.Block.getItemDropped(net.minecraft.block.state.IBlockState, java.util.Random, int)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY5">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/src\/main\/java&lt;com.magiology.api.power{PowerCore.java[PowerCore^SAVE_TO_ITEM_PREFIX" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -178,7 +140,45 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY0">
+		<section name="HISTORY11">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraftforge.event.entity.player(PlayerInteractEvent.class[PlayerInteractEvent" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraftforge.event.entity.player.PlayerInteractEvent" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY8">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setTextureName~QString;" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.mcobjects.items.ItemM.setTextureName(String)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY9">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items{ItemM.java[ItemM~setBlockTextureName" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.mcobjects.items.ItemM.setBlockTextureName()" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY2">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.event(ClickEvent.class[ClickEvent" key="javaElement"/>
 			<item value="0" key="scope"/>
@@ -190,7 +190,7 @@
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY3">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.event(ClickEvent$Action.class[Action" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -201,6 +201,30 @@
 			<item value="0" key="searchFor"/>
 			<list key="workingSets">
 				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY0">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.client(Minecraft.class[Minecraft~displayGuiScreen~Lnet.minecraft.client.gui.GuiScreen;" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraft.client.Minecraft.displayGuiScreen(net.minecraft.client.gui.GuiScreen)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.world(World.class[World~sendQuittingDisconnectingPacket" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraft.world.World.sendQuittingDisconnectingPacket()" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
 			</list>
 		</section>
 	</section>

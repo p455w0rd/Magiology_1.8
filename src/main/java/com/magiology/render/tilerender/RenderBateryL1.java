@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
@@ -19,7 +19,7 @@ public class RenderBateryL1 extends TileEntitySpecialRenderer {
 	private final float tH=1F/64F;
 	private final float tWC=1F/112F;
 	private final float tHC=1F/16F;
-	NoramlisedVertixBuffer buf=Render.NVB();
+	NormalizedVertixBuffer buf=Render.NVB();
 	
 	public EnumFacing[] connections = new EnumFacing[6];
 	

@@ -6,7 +6,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
@@ -22,7 +22,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	private final float tWS=1F/16F;
 	private final float tHS=1F/32F;
 	
-	NoramlisedVertixBuffer buf=TessHelper.getNVB();
+	NormalizedVertixBuffer buf=TessHelper.getNVB();
 	
 	public ItemRendererFirePipe(){}
 	

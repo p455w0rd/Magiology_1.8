@@ -12,7 +12,7 @@ import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.vectors.TwoDots;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -26,7 +26,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 	
 	
 	public EnumFacing[] connections = new EnumFacing[6];
-	NoramlisedVertixBuffer buf=Render.NVB();
+	NormalizedVertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {

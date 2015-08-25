@@ -22,7 +22,6 @@ import com.magiology.api.power.ISidedPower;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.guiContainer.GuiISidedPowerInstructorContainer;
-import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
 import com.magiology.modedmcstuff.gui.ColoredGuiButton;
 import com.magiology.modedmcstuff.gui.TexturedColoredButton;
 import com.magiology.objhelper.Get;
@@ -32,6 +31,7 @@ import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
 import com.magiology.render.Textures;
 
 @GUINeedsWorldUpdates

@@ -36,8 +36,8 @@ import com.magiology.objhelper.vectors.Vec3M;
  */
 public class TessHelper{
 	
-	private static NoramlisedVertixBuffer buf=new NoramlisedVertixBuffer();
-	public static NoramlisedVertixBuffer getNVB(){return buf;}
+	private static NormalizedVertixBuffer buf=new NormalizedVertixBuffer();
+	public static NormalizedVertixBuffer getNVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
 	public static RenderManager getRM(){return Helper.getMC().getRenderManager();}
 	
@@ -130,7 +130,7 @@ public class TessHelper{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			NoramlisedVertixBuffer r1=TessHelper.getNVB();
+			NormalizedVertixBuffer r1=TessHelper.getNVB();
 			r1.cleanUp();
 			int i=0;
 			while(i<xy[0].length-1){
@@ -161,7 +161,7 @@ public class TessHelper{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			NoramlisedVertixBuffer r1=TessHelper.getNVB();
+			NormalizedVertixBuffer r1=TessHelper.getNVB();
 			r1.cleanUp();
 			int i=0;
 			while(i<xy[0].length-1){
@@ -335,7 +335,7 @@ public class TessHelper{
 			e.printStackTrace();
 		}
 	}
-	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NoramlisedVertixBuffer nvb,double textueOffset,double textueScale){
+	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NormalizedVertixBuffer nvb,double textueOffset,double textueScale){
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
 		EntityPlayer player=Helper.getThePlayer();
 		WorldRenderer renderer=getWR();

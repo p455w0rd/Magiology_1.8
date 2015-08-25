@@ -8,12 +8,12 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
 import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
 import com.magiology.objhelper.vectors.Vec3M;
 
 public class EntitySparkFX extends EntityFXM{

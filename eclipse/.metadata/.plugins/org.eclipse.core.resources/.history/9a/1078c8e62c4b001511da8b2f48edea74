@@ -1,0 +1,43 @@
+package com.magiology.modedmcstuff.gui.chatevents;
+
+import static com.magiology.core.MReference.*;
+
+import java.io.File;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+
+import com.magiology.core.Magiology;
+import com.magiology.handelers.web.DownloadingHandeler;
+import com.magiology.objhelper.helpers.Helper;
+
+public class ClickEvent_UPDATE_MOD extends AbstractCustomClickEvent{
+	
+	public static boolean IS_UPDATE_PROCESS_ACTIVATED=false;
+	
+	public ClickEvent_UPDATE_MOD(EntityPlayer player){
+		super(ClickEvent.Action.CHANGE_PAGE, "", player);
+	}
+	@Override
+	protected void onClickEvent(){
+		
+		Helper.printInln(DownloadingHandeler.findValue("NEWEST_VERSION_URL"));
+		
+//		for(int i=0;i<10;i++)player.addChatMessage(new ChatComponentText("TERMINATING!!!"));
+//		H.getTheWorld().sendQuittingDisconnectingPacket();
+//        H.getMC().loadWorld((WorldClient)null);
+//        H.getMC().displayGuiScreen(new GuiMainMenu());
+//		IS_UPDATE_PROCESS_ACTIVATED=true;
+	}
+	public static void terminateAndOpenUpdater(){
+		IS_UPDATE_PROCESS_ACTIVATED=false;
+		try{
+			if(new File(UPDATER_DIR).exists()){
+				new ProcessBuilder(UPDATER_DIR,DownloadingHandeler.findValue("NEWEST_VERSION_URL"),Magiology.class.getProtectionDomain().getCodeSource().getLocation().toString()).start();
+			}else DownloadingHandeler.downloadUpdater();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		Helper.exitSoft();
+	}
+}

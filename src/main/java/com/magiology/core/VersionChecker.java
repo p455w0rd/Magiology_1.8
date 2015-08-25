@@ -2,7 +2,7 @@ package com.magiology.core;
 
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
-import com.magiology.handelers.DownloadingHandeler;
+import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 
@@ -10,8 +10,14 @@ public class VersionChecker{
 	private static float currentVersion=Float.parseFloat(MReference.VERSION),newestVersion=-1;
 	private static String extraData;
 	private static boolean show=false,foundNew;
+	public static boolean debug=false;
 	
 	public static void init(){
+		
+		//TODO
+		debug=true;
+		//TODO
+		
 		getVersion();
 		if(newestVersion!=-1){
 			show=true;
@@ -30,6 +36,6 @@ public class VersionChecker{
 		else return H.signature(AQUA,ITALIC)+"I am up to date! "+BLUE+";)";
 	}
 	public static String getExtraData(){return extraData;}
-	public static boolean getFoundNew(){return foundNew;}
+	public static boolean getFoundNew(){return foundNew||debug;}
 	public static boolean getShow(){return show;}
 }

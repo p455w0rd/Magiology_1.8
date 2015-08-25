@@ -9,14 +9,14 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
 import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
 
 public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRendererBase{
 	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
@@ -92,7 +92,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//draw behind block
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		Helper.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)*0.3).toCode());
-		NoramlisedVertixBuffer buff=TessHelper.getNVB();
+		NormalizedVertixBuffer buff=TessHelper.getNVB();
 		GL11.glColor4f(0, 0, 0, 0.03F);
 		GL11H.texture(false);
 		GL11H.GL11BlendFunc(1);

@@ -2,34 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="exit" key="selection"/>
+		<item value="Helper" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="exit"/>
-			<item value="leng"/>
-			<item value="updateStatus="/>
-			<item value="addChatMessage"/>
-			<item value="modelsBack[a][b]"/>
-			<item value="],"/>
-			<item value="hulk"/>
-			<item value="DenseOresMod.block.invmodels"/>
+			<item value="System.out"/>
+			<item value="visible"/>
+			<item value="GUITxtSize"/>
+			<item value="+&quot;&quot;"/>
+			<item value="infoFile.data.put"/>
+			<item value="Boolean.parseBoolean(infoFile.data.get"/>
+			<item value="Integer.parseInt(infoFile.data.get"/>
+			<item value="FileContent="/>
 		</list>
 		<list key="replacehistory">
+			<item value="Helper"/>
+			<item value=""/>
+			<item value="infoFile.set"/>
+			<item value="infoFile.getB"/>
+			<item value="infoFile.getI"/>
+			<item value="MReference.MODS_SUBFOLDER_DIR"/>
 			<item value="return "/>
 			<item value="models[a]"/>
-			<item value="],-"/>
-			<item value="BlockM.invmodels"/>
-			<item value="BlockM.models"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="257" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="1177" key="DIALOG_X_ORIGIN"/>
-		<item value="160" key="DIALOG_Y_ORIGIN"/>
+		<item value="1344" key="DIALOG_X_ORIGIN"/>
+		<item value="164" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

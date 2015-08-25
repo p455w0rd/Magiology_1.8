@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 
 public final class Get{
@@ -25,7 +25,7 @@ public final class Get{
 		public static final RenderItem RI(){
 			return Minecraft.getMinecraft().getRenderItem();
 		}
-		public static final NoramlisedVertixBuffer NVB(){
+		public static final NormalizedVertixBuffer NVB(){
 			return TessHelper.getNVB();
 		}
 		public static final WorldRenderer WR(){

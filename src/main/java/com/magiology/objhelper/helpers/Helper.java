@@ -315,6 +315,7 @@ public class Helper{
 		}return true;
 	}
 	public static boolean isBoolean(String str){
+		if(str==null)return false;
 		return str.equals("true")||str.equals("false");
 	}
 	public static void throwAnException(Throwable object)throws Throwable{throw object;}

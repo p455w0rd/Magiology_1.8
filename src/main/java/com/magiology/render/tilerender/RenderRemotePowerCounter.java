@@ -14,7 +14,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
@@ -27,7 +27,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
 	double powerBar;
 	int maxPB,currentP;
 	float p=1F/16F;
-	NoramlisedVertixBuffer buf=Render.NVB();
+	NormalizedVertixBuffer buf=Render.NVB();
 	FontRenderer fr=Helper.getFontRenderer();
 	
 	@Override

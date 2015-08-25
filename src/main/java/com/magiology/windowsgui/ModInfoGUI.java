@@ -60,7 +60,6 @@ public class ModInfoGUI extends JFrame{
 	TheHandler3 mouseEvents=new TheHandler3();
 	TheHandler4 keyEvents=new TheHandler4();
 	ImageIcon[] imageIcons=null;
-	String dir="mods\\1.7.10\\"+MReference.MODID+"\\";
 	int txtSize=18,offset=0;
 	public int exitOn=0;
 	public long systemTime=-1;
@@ -68,24 +67,96 @@ public class ModInfoGUI extends JFrame{
 	
 	public Line[] lines=new Line[200];
 	
-	public void downloadData(InfoFile infoFile){
+	
+	public ModInfoGUI(int x,int y,int xPos,int yPos){
+		this();
+		int width=548,height=384;
+		x/=2;y/=2;
+		x-=width/2;
+		y-=height/2;
+		x+=xPos;y+=yPos;
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setSize(width,height);
+		setLocation(new Point(x,y));
+//		setUndecorated(true);
+		setVisible(true);
+	}
+	private ModInfoGUI(){
+		super(MReference.NAME+" graphical interface");
+		imageIcons=ZipManager.getAllImagesFromZip(MReference.MODS_SUBFOLDER_WIN_GUI+"/MagiZip");
+		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(imageIcons[2].getImage(), new Point(0,1), "sword"));
+		setIconImage(imageIcons[1].getImage());
+		//middle
+		setLayout(new BorderLayout());
+		visual=new Renderer(this);
+		setContentPane(visual);
+		//right
+		layout.setAlignment(FlowLayout.RIGHT);
+	    setLayout(layout);
+	    up=new JButton("",imageIcons[3]);
+	    down=new JButton("",imageIcons[5]);
+		//left
+		layout.setAlignment(FlowLayout.LEFT);
+	    setLayout(layout);
+		setResizable(false);
+		addLine(newLine("STARTED LOADING "+MReference.MODID.toUpperCase(), new Font(Font.SANS_SERIF, Font.BOLD+Font.ITALIC,15),Color.RED));
 		
-		txtSize=infoFile.GUITxtSize.Int;
-		autoRemove=infoFile.GUIAR.Boolean;
-		autoActivate=infoFile.GUIAA.Boolean;
-		exitOn=infoFile.GUIExitOn.Int;
+		//dropDowns
+		dropDown=new JComboBox(comands);
+		
+		//buttons
+		button1=new JButton("EXIT");
+		button1.setFont(new Font("Serif",Font.BOLD,10));
+		up.setPreferredSize(new Dimension(20, 20));
+		down.setPreferredSize(new Dimension(20, 20));
+		//checkBoxes
+		CB1=new JCheckBox("never open again");
+		CB1.setBounds(CB1.getX(), CB1.getY(), 10, 1);
+		//boxes
+		item1=new JTextField("");
+		item1.setPreferredSize(new Dimension(120, item1.getPreferredSize().height));
+		//register
+		button1.addActionListener(handeler1);
+		item1.addActionListener(handeler1);
+		CB1.addItemListener(handeler2);
+		dropDown.addItemListener(handeler2);
+		up.addActionListener(handeler1);
+		down.addActionListener(handeler1);
+		visual.addMouseListener(mouseEvents);
+		visual.addMouseMotionListener(mouseEvents);
+		visual.addMouseWheelListener(mouseEvents);
+		addKeyListener(keyEvents);
+		setFocusable(true);
+		add(button1);
+		add(CB1);
+		add(dropDown);
+		add(item1);
+		add(up);
+		add(down);
+		Magiology.modInfGUI=this;
+		SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/OpenUp.wav");
+	}
+	
+public void downloadData(InfoFile infoFile){
+		
+		if(infoFile.getI("GUITxtSize")==0)infoFile.set("GUITxtSize", 18);
+		txtSize=infoFile.getI("GUITxtSize");
+		autoRemove=infoFile.getB("GUIAR");
+		autoActivate=infoFile.getB("GUIAA");
+		if(infoFile.getI("GUIExitOn")==0)infoFile.set("GUIExitOn", 2);
+		exitOn=infoFile.getI("GUIExitOn");
 		isMuted=true;
 		setCommand("c5");
 		useCommand(""+exitOn);
 		setCommand("c0");
 		isMuted=false;
 		item1.setText("Press Enter to use!");
-		setSide(infoFile.GUIPos.Int==1?"left":"right");
+		setSide(infoFile.getI("GUIPos")==1?"left":"right");
 		
 		if(txtSize==-1){
 			txtSize=19;
-			infoFile.GUITxtSize.Int=txtSize;
-			infoFile.GUITxtSize.save();
+			infoFile.set("GUITxtSize",txtSize);
+			infoFile.sync();
 		}
 		
 		Update();
@@ -103,7 +174,7 @@ public class ModInfoGUI extends JFrame{
 		addLine(newLine("Loading data...", Color.YELLOW, true));
 		//-------------------------------------------
 		addLine(newLine("Window open on startup = "+!CB1.isSelected(), Color.YELLOW, true));
-		addLine(newLine("Window side = "+(Magiology.infoFile.GUIPos.Int==1?"left":"right"), Color.YELLOW, true));
+		addLine(newLine("Window side = "+(Magiology.infoFile.getI("GUIPos")==1?"left":"right"), Color.YELLOW, true));
 		addLine(newLine("Window text size = "+txtSize, Color.YELLOW, true));
 		addLine(newLine("Auto remove user input = "+var1, Color.YELLOW, true));
 		addLine(newLine("Auto invoke no input commands = "+autoActivate, Color.YELLOW, true));
@@ -165,8 +236,8 @@ public class ModInfoGUI extends JFrame{
 				isInputOk=true;
 				addLine(newLine("Command output: User input will not be removed",new Font(Font.SANS_SERIF, Font.BOLD,15), Color.RED, true));
 			}
-			Magiology.infoFile.GUIAR.Boolean=autoRemove;
-			Magiology.infoFile.GUIAR.save();
+			Magiology.infoFile.set("GUIAR", autoRemove);
+			Magiology.infoFile.sync();
 		}break;
 		case 2:{
 			isInputInvoked=true;
@@ -192,8 +263,8 @@ public class ModInfoGUI extends JFrame{
 					addLine(newLine("No input commands will not be auto activated!", Color.RED, true));
 				}
 			}
-			Magiology.infoFile.GUIAA.Boolean=autoActivate;
-			Magiology.infoFile.GUIAA.save();
+			Magiology.infoFile.set("GUIAA", autoActivate);
+			Magiology.infoFile.sync();
 		}break;
 		case 5:{
 			isInputInvoked=true;
@@ -207,14 +278,14 @@ public class ModInfoGUI extends JFrame{
 				case 3:{SExitOn="Start menu";}break;
 				default:isInputOk=false;break;
 				}
-				Magiology.infoFile.GUIExitOn.Int=exitOn;
-				Magiology.infoFile.GUIExitOn.save();
+				Magiology.infoFile.set("GUIExitOn", exitOn);
+				Magiology.infoFile.sync();
 			}
 		}break;
 		case 6:{
 			isInputInvoked=true;
 			isInputOk=true;
-			Magiology.infoFile.setUpInfoFile();
+			Magiology.infoFile.readFromFile();
 			
 		}break;
 		}
@@ -224,6 +295,7 @@ public class ModInfoGUI extends JFrame{
 		Update();
 	}
 	public void printCommands(){
+		
 		if(autoRemove)addLine(newLine("dummy", Color.RED, true));
 		addLine(newLine("____________", Color.RED, true));
 		boolean var1=autoRemove;
@@ -250,22 +322,22 @@ public class ModInfoGUI extends JFrame{
 	public void setSide(String command){
 		int y=Toolkit.getDefaultToolkit().getScreenSize().height/2-192,left=4,right=Toolkit.getDefaultToolkit().getScreenSize().width-552;
 		if(command.equals("left")){
-			Magiology.infoFile.GUIPos.Int=1;
+			Magiology.infoFile.set("GUIPos", 1);
 			setLocation(new Point(left,y));
 		}else if(command.equals("right")){
-			Magiology.infoFile.GUIPos.Int=0;
+			Magiology.infoFile.set("GUIPos", 0);
 			setLocation(new Point(right,y));
 		}else if(command.equals("switch")){
-			if(Magiology.infoFile.GUIPos.Int==1){
-				Magiology.infoFile.GUIPos.Int=0;
+			if(Magiology.infoFile.getI("GUIPos")==1){
+				Magiology.infoFile.set("GUIPos", 0);
 				setLocation(new Point(right,y));
 			}else{
-				Magiology.infoFile.GUIPos.Int=1;
+				Magiology.infoFile.set("GUIPos", 1);
 				setLocation(new Point(left,y));
 			}
 		}
 		else addLine(newLine("THAT IS NOT A VALID SIDE!"+(Helper.RInt(20)==0?"(i think)":""), Color.RED, true));
-		Magiology.infoFile.GUIPos.save();
+		Magiology.infoFile.sync();
 	}
 	public void clearUserInput(){
 		for(int b=0;b<lines.length;b++)if(lines[b]!=null&&lines[b].isUserCasted)lines[b]=newLine("ClearThisLine!6578", Color.WHITE);
@@ -285,8 +357,8 @@ public class ModInfoGUI extends JFrame{
 		if(Helper.isInteger(command)){
 			int var1=txtSize;
 			txtSize=Integer.parseInt(command);
-			Magiology.infoFile.GUITxtSize.Int=txtSize;
-			Magiology.infoFile.GUITxtSize.save();
+			Magiology.infoFile.set("GUITxtSize", txtSize);
+			Magiology.infoFile.sync();
 			if(var1!=txtSize)addLine(newLine("Font size changed to: "+txtSize,Color.YELLOW,true));
 		}else if(!command.isEmpty())addLine(newLine("Invalid number! Use only 0-9",Color.RED,true));
 	}
@@ -330,73 +402,7 @@ public class ModInfoGUI extends JFrame{
 		else a.lines[0].string+="!";
 		exit();
 	}
-	public ModInfoGUI(int x,int y,int xPos,int yPos){
-		this();
-		int width=548,height=384;
-		x/=2;y/=2;
-		x-=width/2;
-		y-=height/2;
-		x+=xPos;y+=yPos;
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(width,height);
-		setVisible(true);
-		setLocation(new Point(x,y));
-	}
-	private ModInfoGUI(){
-		super(MReference.NAME+" graphical interface");
-		imageIcons=ZipManager.getAllImagesFromZip(dir+"MagiZip");
-		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(imageIcons[2].getImage(), new Point(0,1), "sword"));
-		setIconImage(imageIcons[1].getImage());
-		//middle
-		setLayout(new BorderLayout());
-		visual=new Renderer(this);
-		setContentPane(visual);
-		//right
-		layout.setAlignment(FlowLayout.RIGHT);
-	    setLayout(layout);
-	    up=new JButton("",imageIcons[3]);
-	    down=new JButton("",imageIcons[5]);
-		//left
-		layout.setAlignment(FlowLayout.LEFT);
-	    setLayout(layout);
-		setResizable(false);
-		addLine(newLine("STARTED LOADING "+MReference.MODID.toUpperCase(), new Font(Font.SANS_SERIF, Font.BOLD+Font.ITALIC,15),Color.RED));
-		
-		//dropDowns
-		dropDown=new JComboBox(comands);
-		
-		//buttons
-		button1=new JButton("EXIT");
-		button1.setFont(new Font("Serif",Font.BOLD,10));
-		up.setPreferredSize(new Dimension(20, 20));
-		down.setPreferredSize(new Dimension(20, 20));
-		//checkBoxes
-		CB1=new JCheckBox("never open again");
-		CB1.setBounds(CB1.getX(), CB1.getY(), 10, 1);
-		//boxes
-		item1=new JTextField("");
-		item1.setPreferredSize(new Dimension(120, item1.getPreferredSize().height));
-		//register
-		button1.addActionListener(handeler1);
-		item1.addActionListener(handeler1);
-		CB1.addItemListener(handeler2);
-		dropDown.addItemListener(handeler2);
-		up.addActionListener(handeler1);
-		down.addActionListener(handeler1);
-		visual.addMouseListener(mouseEvents);
-		visual.addMouseMotionListener(mouseEvents);
-		visual.addMouseWheelListener(mouseEvents);
-		addKeyListener(keyEvents);
-		setFocusable(true);
-		add(button1);
-		add(CB1);
-		add(dropDown);
-		add(item1);
-		add(up);
-		add(down);
-		Magiology.modInfGUI=this;
-		SoundPlayer.playSound(dir+"OpenUp.wav");
-	}
+	
 	public void exit(){
 		if(isExited)return;
 		Frame[] window=Frame.getFrames();
@@ -410,7 +416,7 @@ public class ModInfoGUI extends JFrame{
 		if(frame==this){
 			addLine(newLine("Bye Bye! o/", Color.BLUE));
 			Update();
-			SoundPlayer.playSound(dir+"Close.wav");
+			SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/Close.wav");
 			dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			isExited=true;
 			return true;
@@ -491,8 +497,9 @@ public class ModInfoGUI extends JFrame{
 				if(src==CB1){
 					if(CB1Last!=CB1.isSelected()){
 						addLine(newLine("This window will "+(CB1.isSelected()?"not ":"")+"open on the next startup!",CB1.isSelected()?Color.RED:Color.YELLOW,true));
-						Magiology.infoFile.GUIOpen.Boolean=!CB1.isSelected();
-						Magiology.infoFile.GUIOpen.save();
+						
+						Magiology.infoFile.set("GUIOpen", !CB1.isSelected());
+						Magiology.infoFile.sync();
 					}
 					CB1Last=CB1.isSelected();
 				}
@@ -575,11 +582,11 @@ public class ModInfoGUI extends JFrame{
 			}
 			if(MCStat!=MCStat2){
 				MCStat2=MCStat;
-				SoundPlayer.playSound(dir+"Loaded.wav");
+				SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/Loaded.wav");
 			}
 			if(modStat!=modStat2){
 				modStat2=modStat;
-				SoundPlayer.playSound(dir+"Loaded.wav");
+				SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/Loaded.wav");
 			}
 		}
 		

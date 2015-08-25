@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.objhelper.vectors.Vec8F;
@@ -17,7 +17,7 @@ public class ComplexCubeModel{
 	public Vec8F[] UVs=new Vec8F[6];
 	public Vec8F[] UVs2=new Vec8F[6];
 	ResourceLocation[] st=new ResourceLocation[6];
-	NoramlisedVertixBuffer buf=Render.NVB();
+	NormalizedVertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=minX;this.minY=minY;this.minZ=minZ;

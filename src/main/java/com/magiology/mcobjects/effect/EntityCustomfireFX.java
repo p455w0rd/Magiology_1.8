@@ -15,7 +15,7 @@ import com.magiology.objhelper.Get;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 
@@ -100,7 +100,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		GL11H.EndOpaqueRendering();
 		GL11.glPopMatrix();
 		
-		NoramlisedVertixBuffer a=TessHelper.getNVB();
+		NormalizedVertixBuffer a=TessHelper.getNVB();
 		
 		
 		a.addVertexWithUV(x-p*ps, y+p*ps, z+p*ps, 0, 1);

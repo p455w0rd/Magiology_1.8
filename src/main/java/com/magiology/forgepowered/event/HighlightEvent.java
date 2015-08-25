@@ -36,7 +36,7 @@ import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -594,7 +594,7 @@ public class HighlightEvent{
 		GL11.glDepthMask(false);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glColor4d(rColor,gColor,bColor,alpha);
-		NoramlisedVertixBuffer buff=TessHelper.getNVB();
+		NormalizedVertixBuffer buff=TessHelper.getNVB();
 		buff.cleanUp();{
 			int a=0;
 			if(bs[a]){

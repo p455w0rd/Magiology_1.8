@@ -14,7 +14,7 @@ public class ClickEventMoreInfo extends AbstractCustomClickEvent{
 	}
 	@Override
 	protected void onClickEvent(){
-		if(!VersionChecker.getFoundNew()){
+		if(VersionChecker.getFoundNew()){
 			player.addChatMessage(new ChatComponentText(GREEN+"Click "+GOLD+"["+AQUA+"HERE"+GOLD+"]"+GREEN+" to update the mod!").setChatStyle(new ChatStyle().setChatClickEvent(new ClickEvent_UPDATE_MOD(player))));
 			player.addChatMessage(new ChatComponentText(""+RED+BOLD+"WARNING: "+RESET+YELLOW+"The message above will:"));
 			player.addChatMessage(new ChatComponentText(""+AQUA+BOLD+"1. "+RED+"turn off"+YELLOW+" minecraft!"));

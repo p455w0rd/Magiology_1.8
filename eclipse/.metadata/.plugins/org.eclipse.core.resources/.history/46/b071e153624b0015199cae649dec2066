@@ -1,0 +1,5 @@
+package com.magiology.objhelper.vectors;
+
+public class AdvancedPhysicsVec3F {
+
+}

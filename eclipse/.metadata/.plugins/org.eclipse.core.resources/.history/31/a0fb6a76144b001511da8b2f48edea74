@@ -1,0 +1,8 @@
+package com.magiology.handelers;
+
+
+public class mainwindow{
+    static mainwindow thisInstance;
+    
+    
+}

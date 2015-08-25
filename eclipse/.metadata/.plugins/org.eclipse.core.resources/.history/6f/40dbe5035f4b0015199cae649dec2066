@@ -1,0 +1,5 @@
+package com.magiology.gui;
+
+public class MainMenuUpdateNotification{
+	
+}

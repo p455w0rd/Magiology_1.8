@@ -13,6 +13,8 @@ public class MReference{
 		COMMON_PROXY_LOCATION=PROXY_LOCATION+".CommonProxy",
 		MC_VERSION="1.8",
 		MODS_SUBFOLDER_DIR="mods/"+MC_VERSION+"/"+NAME,
-		UPDATER_DIR=MODS_SUBFOLDER_DIR+"/"+NAME+"Updater.jar",
-		NEWEST_VERSION_URL= "http://download2129.mediafire.com/iuy8e16njlug/d41w4px39x74gzt/Magiology.jar";
+		UPDATER_DIR=MODS_SUBFOLDER_DIR+"/updater/"+NAME+"Updater.jar",
+		NEWEST_VERSION_URL= "http://www.mediafire.com/download/d41w4px39x74gzt/Magiology.jar",
+//		MODS_SUBFOLDER_COMMON_ASSETS=MODS_SUBFOLDER_DIR+"/common assets",
+		MODS_SUBFOLDER_WIN_GUI=MODS_SUBFOLDER_DIR+"/ win gui";
 }

@@ -43,6 +43,9 @@ public class GL11H{
 	public static void rotateXYZ(double[] double3){
 		rotateXYZ(double3[0], double3[1], double3[2]);
 	}
+	public static void rotateXYZ(Vec3M vec){
+		rotateXYZ(vec.x, vec.y, vec.z);
+	}
 	public static void BlendIs(boolean enabled){
 		if(enabled)glEnable(GL_BLEND);
 		else glDisable(GL_BLEND);
@@ -98,6 +101,10 @@ public class GL11H{
 	public static void culFace(boolean enabled){
 		if(enabled)glEnable(GL_CULL_FACE);
 		else glDisable(GL_CULL_FACE);
+	}
+	public static void depth(boolean enabled){
+		if(enabled)glEnable(GL_DEPTH_TEST);
+		else glDisable(GL_DEPTH_TEST);
 	}
 	public static Matrix4f createMatrix(Vec3M translation,float rotationX,float rotationY,float rotationZ, float scale){
 		return createMatrix(new Vector3f((float)translation.x, (float)translation.y, (float)translation.z), rotationX, rotationY, rotationZ, scale);

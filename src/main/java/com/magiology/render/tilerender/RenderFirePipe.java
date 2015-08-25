@@ -11,8 +11,8 @@ import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.objhelper.Get.Render;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.NoramlisedVertixBufferModel;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
+import com.magiology.objhelper.helpers.renderers.NormalizedVertixBufferModel;
 import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -29,7 +29,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	private final float tHFSL=1F/38F;
 	private final float tWS=1F/16F;
 	private final float tHS=1F/32F;
-	NoramlisedVertixBuffer buf=TessHelper.getNVB();
+	NormalizedVertixBuffer buf=TessHelper.getNVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
 		GL11H.protect();
@@ -84,7 +84,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	}
 	
 	
-	private NoramlisedVertixBufferModel modelStand;
+	private NormalizedVertixBufferModel modelStand;
 	private void generateModelStand(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*7.5,  p*6, p*8.5,  tWS*0, tHS*0);
@@ -202,7 +202,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	
 	
 	
-	private NoramlisedVertixBufferModel[] conectionToObjModel=new NoramlisedVertixBufferModel[2];
+	private NormalizedVertixBufferModel[] conectionToObjModel=new NormalizedVertixBufferModel[2];
 	private void generateModelConectionToObj(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*0,   p*10, p*10,1, 0);
@@ -252,7 +252,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		conectionToObjModel[0].popMatrix();
 		conectionToObjModel[1].popMatrix();
 	}
-	private NoramlisedVertixBufferModel strateCoreModel;
+	private NormalizedVertixBufferModel strateCoreModel;
 	private void generateModelStrateCore(){
 		buf.cleanUp();
 		buf.addVertexWithUV(0, p*9.5, p*9.5,tW*103, tH*0);
@@ -369,7 +369,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		buf.draw();
 		buf.popMatrix();
 	}
-	private NoramlisedVertixBufferModel conectorFFLModel;
+	private NormalizedVertixBufferModel conectorFFLModel;
 	private void generateModelConectorFFL(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*0, 0);

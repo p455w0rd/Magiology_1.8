@@ -1,8 +1,8 @@
 package com.magiology.render.shaders;
 
-import com.magiology.modedmcstuff.AdvancedPhysicsFloat;
 import com.magiology.objhelper.helpers.Cricle;
 import com.magiology.objhelper.helpers.Helper;
+import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
 import com.magiology.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.render.shaders.core.ShaderUniformEditor;
 

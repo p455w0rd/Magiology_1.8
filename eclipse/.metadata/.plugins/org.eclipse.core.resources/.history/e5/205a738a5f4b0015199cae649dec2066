@@ -1,0 +1,10 @@
+package com.magiology.gui;
+
+
+public class MainMenuUpdateNotification{
+	
+	public static void render(int width,int height){
+		
+	}
+	
+}
