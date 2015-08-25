@@ -310,3 +310,6 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 [22:31:30] [Thread-12/INFO]: OpenAL initialized.
 [22:31:31] [Sound Library Loader/INFO]: Sound engine started
 [22:31:34] [Client thread/INFO]: Created: 512x512 textures-atlas
+[22:50:00] [Client thread/INFO]: Stopping!
+[22:50:00] [Client thread/INFO]: SoundSystem shutting down...
+[22:50:00] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com

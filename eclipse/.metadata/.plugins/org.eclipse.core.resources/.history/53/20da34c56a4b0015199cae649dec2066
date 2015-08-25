@@ -49,7 +49,7 @@ public class MainMenuUpdateNotification{
 
 		GL11H.depth(true);
 //		GL11H.texture(true);
-//		GL11H.EndOpaqueRendering();
+		GL11H.EndOpaqueRendering();
 		GL11H.endProtection();
 	}
 	

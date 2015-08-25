@@ -26,9 +26,9 @@ public class MainMenuUpdateNotification{
 	public static void update(){
 		rotation.update();
 		if(H.RB(0.1)){
-			rotation.x.wantedPoint=H.CRandF(1);
-			rotation.y.wantedPoint=H.CRandF(1);
-			rotation.z.wantedPoint=H.CRandF(1);
+			rotation.x.wantedPoint=H.CRandF(5);
+			rotation.y.wantedPoint=H.CRandF(5);
+			rotation.z.wantedPoint=H.CRandF(5);
 		}
 	}
 	
@@ -44,12 +44,12 @@ public class MainMenuUpdateNotification{
 		
 		
 		Get.Render.FR().drawStringWithShadow("New updat for: "+MReference.NAME+"[click for more]", 0, 0, Color.WHITE.hashCode());
-		Get.Render.FR().drawStringWithShadow("[click for more]", 0, 10, Color.WHITE.hashCode());
+		Get.Render.FR().drawStringWithShadow("[click for more]", 0, 20, Color.WHITE.hashCode());
 		
 
 		GL11H.depth(true);
 //		GL11H.texture(true);
-//		GL11H.EndOpaqueRendering();
+		GL11H.EndOpaqueRendering();
 		GL11H.endProtection();
 	}
 	
