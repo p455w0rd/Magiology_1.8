@@ -14,9 +14,7 @@ public class VersionChecker{
 	
 	public static void init(){
 		
-		//TODO
-		debug=true;
-		//TODO
+//		debug=true;
 		
 		getVersion();
 		if(newestVersion!=-1){

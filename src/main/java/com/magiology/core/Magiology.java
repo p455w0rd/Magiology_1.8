@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.clientdata.InfoFile;
 import com.magiology.core.init.Init;
 import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MCreativeTabs;
@@ -34,6 +33,7 @@ import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handelers.EnhancedRobot;
 import com.magiology.handelers.GuiHandeler;
 import com.magiology.handelers.web.DownloadingHandeler;
+import com.magiology.io.IOReadableMap;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.Textures;
 import com.magiology.windowsgui.ModInfoGUI;
@@ -42,10 +42,9 @@ import com.magiology.windowsgui.SoundPlayer;
 @Mod(modid=MODID,version=VERSION,name=NAME)
 public class Magiology{
     public static SimpleNetworkWrapper NETWORK_CHANNEL;
-    public static String[] InfoFileContent=null;
     public static final EnhancedRobot ROBOT;
-    @SideOnly(Side.CLIENT)
-    public static String InfoFileName="File for mod - "+MODID;
+    //TODO: change this when you compile the mod! (you dumbass)
+    public static final boolean IS_DEV=true;
     @Instance(MODID)
     private static Magiology instance;
     public static Magiology getMagiology(){return instance;}
@@ -57,7 +56,7 @@ public class Magiology{
     	ROBOT=robotH;
     }
     
-    public static InfoFile infoFile=new InfoFile(InfoFileName, "McModClientSave");
+    public static IOReadableMap infoFile=new IOReadableMap(INFO_FILE_NAME);
     @SideOnly(Side.CLIENT)
     public static ModInfoGUI modInfGUI;
     
@@ -83,10 +82,12 @@ public class Magiology{
 		//TODO
 		Config.setShadersEnabled(false);
 		
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){@Override
-		public void run(){
-			if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");
-		}}, "Shutdown-thread"));
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+			@Override
+			public void run(){
+				exit();
+			}
+		}, "Shutdown-thread"));
 		
 		
 		MCreativeTabs.preInit();
@@ -97,8 +98,6 @@ public class Magiology{
 		MPackets.preInit();
     }
     public void init(FMLInitializationEvent event){
-//		RenderItemM.castRenderItemToRenderItemM();
-    	
     	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandeler());
     	MRecepies.init();
     	MTileEntitys.init();
@@ -110,6 +109,10 @@ public class Magiology{
     public void postInit(FMLPostInitializationEvent event){
     	if(modInfGUI!=null)modInfGUI.modStat=true;
 		Textures.postInit();
+    }
+    public void exit(){
+    	if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");
+		Magiology.infoFile.writeToFile();
     }
     
     

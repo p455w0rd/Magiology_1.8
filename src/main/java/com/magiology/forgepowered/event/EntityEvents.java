@@ -9,8 +9,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -24,7 +22,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.magiology.api.power.PowerCore;
 import com.magiology.core.Magiology;
-import com.magiology.core.VersionChecker;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
 import com.magiology.gui.guiContainer.GuiUpdater;
@@ -35,12 +32,10 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.modedmcstuff.gui.chatevents.ClickEventMoreInfo;
 import com.magiology.objhelper.EntityPosAndBB;
 import com.magiology.objhelper.GetSpecialPlayer;
 import com.magiology.objhelper.SlowdownHelper;
 import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.registry.events.PlayerWrenchEvent;
 
 public class EntityEvents{
@@ -216,8 +211,6 @@ public class EntityEvents{
 		
 		if(entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)entity;
-			
-			if(VersionChecker.getShow()&&H.isRemote(event))player.addChatMessage(new ChatComponentText(VersionChecker.getUpdateStatus()).setChatStyle(new ChatStyle().setChatClickEvent(new ClickEventMoreInfo(player))));
 			
 //			if(GetSpecialPlayer.getPlayerRank(player)==1){
 //				double R,G,B;

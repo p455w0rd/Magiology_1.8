@@ -7,17 +7,25 @@ import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
 
+import com.magiology.gui.MainMenuUpdateNotification;
+import com.magiology.objhelper.helpers.Helper;
+
 
 public class DownloadingHandeler{
 	public static void downladAssets(){
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
-		downladAndName(MODS_SUBFOLDER_WIN_GUI,  "http://www.mediafire.com/listen/5psc9ipik0uk96y/Close.wav");
-		downladAndName(MODS_SUBFOLDER_WIN_GUI, "http://www.mediafire.com/listen/1u2c4h3sc5s9258/Loaded.wav");
+		downladAndName(MODS_SUBFOLDER_WIN_GUI,    "http://www.mediafire.com/listen/5psc9ipik0uk96y/Close.wav");
+		downladAndName(MODS_SUBFOLDER_WIN_GUI,   "http://www.mediafire.com/listen/1u2c4h3sc5s9258/Loaded.wav");
 		downladAndName(MODS_SUBFOLDER_WIN_GUI,"http://www.mediafire.com/download/1cyu902d1kqb517/MagiZip.zip");
-		downladAndName(MODS_SUBFOLDER_WIN_GUI, "http://www.mediafire.com/listen/azulbuu0x71gadg/OpenUp.wav");
+		downladAndName(MODS_SUBFOLDER_WIN_GUI,   "http://www.mediafire.com/listen/azulbuu0x71gadg/OpenUp.wav");
 	}
 	public static void downloadUpdater(){
-		downlad(UPDATER_DIR, "http://www.mediafire.com/download/bps59al3r24tmuo/MagiologyUpdater.jar");
+		new Thread(new Runnable(){@Override public void run(){
+			MainMenuUpdateNotification.isDownloading=MainMenuUpdateNotification.downloadingInvoked=true;
+			downlad(UPDATER_DIR, "http://www.mediafire.com/download/bps59al3r24tmuo/MagiologyUpdater.jar");
+			Helper.sleep(100);
+			MainMenuUpdateNotification.isDownloading=false;
+		}}).start();
 	}
 	
 	public static String findValue(String tag){

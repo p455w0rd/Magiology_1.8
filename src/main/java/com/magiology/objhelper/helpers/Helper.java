@@ -15,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.entity.Entity;
@@ -385,6 +386,7 @@ public class Helper{
 	public static float handleSpeedFolower(float speed, float pos,float wantedPos,float acceleration){
 	return (float)handleSpeedFolower((double)speed, (double)pos, (double)wantedPos, (double)acceleration);}
 	public static double handleSpeedFolower(double speed, double pos,double wantedPos,double acceleration){
+		if(pos==wantedPos)return speed;
 		if(pos>wantedPos)speed-=acceleration;
 		else speed+=acceleration;
 		return speed;
@@ -806,5 +808,18 @@ public class Helper{
 		String result=GOLD+"["+ChatFormatting.DARK_GREEN+MReference.NAME+GOLD+"] ";
 		for(ChatFormatting a:colorAfter)result+=a;
 		return result;
+	}
+	public static float getGuiScale(){
+		return Math.max(getGuiScaleRaw()/4F,1);
+	}
+	public static int getGuiScaleRaw(){
+		return new ScaledResolution(getMC(), getMC().displayWidth, getMC().displayHeight).getScaleFactor();
+	}
+	public static void sleep(int time){
+		try{
+			Thread.sleep(time);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }

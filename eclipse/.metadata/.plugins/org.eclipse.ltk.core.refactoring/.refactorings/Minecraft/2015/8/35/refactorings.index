@@ -31,3 +31,16 @@
 1440531806161	Move compilation unit
 1440533815319	Rename type 'NoramlisedVertixBuffer'
 1440533823989	Rename type 'NoramlisedVertixBufferModel'
+1440579472799	Rename local variable 'scaleFactor'
+1440581576464	Delete element
+1440581618317	Delete element
+1440592327505	Delete element
+1440592986048	Rename type 'InfoFile'
+1440593081396	Delete element
+1440593089779	Move compilation unit
+1440593092585	Delete element
+1440593103479	Move compilation unit
+1440593541892	Rename field 'InfoFileName'
+1440602191858	Rename method 'writeToFile'
+1440602215454	Rename method 'sync'
+1440667797693	Rename field 'donlwoadInvoked'

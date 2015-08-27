@@ -11,7 +11,6 @@ import com.magiology.Annotations.GUIWorldUpdater;
 public class GuiISidedPowerInstructorContainer extends Container{
 	
 	public TileEntity tile;
-	public int side;
 	EntityPlayer player;
 	public GuiISidedPowerInstructorContainer(EntityPlayer player,TileEntity tile){
 		this.tile=tile;

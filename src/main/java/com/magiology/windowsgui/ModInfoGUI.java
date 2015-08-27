@@ -36,10 +36,11 @@ import javax.swing.WindowConstants;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.clientdata.InfoFile;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.exceptions.NopeException;
+import com.magiology.io.IOReadableMap;
+import com.magiology.io.ZipManager;
 import com.magiology.objhelper.helpers.Helper;
 
 public class ModInfoGUI extends JFrame{
@@ -137,7 +138,7 @@ public class ModInfoGUI extends JFrame{
 		SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/OpenUp.wav");
 	}
 	
-public void downloadData(InfoFile infoFile){
+public void downloadData(IOReadableMap infoFile){
 		
 		if(infoFile.getI("GUITxtSize")==0)infoFile.set("GUITxtSize", 18);
 		txtSize=infoFile.getI("GUITxtSize");
@@ -156,7 +157,7 @@ public void downloadData(InfoFile infoFile){
 		if(txtSize==-1){
 			txtSize=19;
 			infoFile.set("GUITxtSize",txtSize);
-			infoFile.sync();
+			infoFile.writeToFile();
 		}
 		
 		Update();
@@ -237,7 +238,7 @@ public void downloadData(InfoFile infoFile){
 				addLine(newLine("Command output: User input will not be removed",new Font(Font.SANS_SERIF, Font.BOLD,15), Color.RED, true));
 			}
 			Magiology.infoFile.set("GUIAR", autoRemove);
-			Magiology.infoFile.sync();
+			Magiology.infoFile.writeToFile();
 		}break;
 		case 2:{
 			isInputInvoked=true;
@@ -264,7 +265,7 @@ public void downloadData(InfoFile infoFile){
 				}
 			}
 			Magiology.infoFile.set("GUIAA", autoActivate);
-			Magiology.infoFile.sync();
+			Magiology.infoFile.writeToFile();
 		}break;
 		case 5:{
 			isInputInvoked=true;
@@ -279,7 +280,7 @@ public void downloadData(InfoFile infoFile){
 				default:isInputOk=false;break;
 				}
 				Magiology.infoFile.set("GUIExitOn", exitOn);
-				Magiology.infoFile.sync();
+				Magiology.infoFile.writeToFile();
 			}
 		}break;
 		case 6:{
@@ -337,7 +338,7 @@ public void downloadData(InfoFile infoFile){
 			}
 		}
 		else addLine(newLine("THAT IS NOT A VALID SIDE!"+(Helper.RInt(20)==0?"(i think)":""), Color.RED, true));
-		Magiology.infoFile.sync();
+		Magiology.infoFile.writeToFile();
 	}
 	public void clearUserInput(){
 		for(int b=0;b<lines.length;b++)if(lines[b]!=null&&lines[b].isUserCasted)lines[b]=newLine("ClearThisLine!6578", Color.WHITE);
@@ -358,7 +359,7 @@ public void downloadData(InfoFile infoFile){
 			int var1=txtSize;
 			txtSize=Integer.parseInt(command);
 			Magiology.infoFile.set("GUITxtSize", txtSize);
-			Magiology.infoFile.sync();
+			Magiology.infoFile.writeToFile();
 			if(var1!=txtSize)addLine(newLine("Font size changed to: "+txtSize,Color.YELLOW,true));
 		}else if(!command.isEmpty())addLine(newLine("Invalid number! Use only 0-9",Color.RED,true));
 	}
@@ -416,6 +417,7 @@ public void downloadData(InfoFile infoFile){
 		if(frame==this){
 			addLine(newLine("Bye Bye! o/", Color.BLUE));
 			Update();
+			Magiology.infoFile.writeToFile();
 			SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/Close.wav");
 			dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			isExited=true;
@@ -499,7 +501,7 @@ public void downloadData(InfoFile infoFile){
 						addLine(newLine("This window will "+(CB1.isSelected()?"not ":"")+"open on the next startup!",CB1.isSelected()?Color.RED:Color.YELLOW,true));
 						
 						Magiology.infoFile.set("GUIOpen", !CB1.isSelected());
-						Magiology.infoFile.sync();
+						Magiology.infoFile.writeToFile();
 					}
 					CB1Last=CB1.isSelected();
 				}

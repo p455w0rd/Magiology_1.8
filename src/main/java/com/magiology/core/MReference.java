@@ -1,6 +1,7 @@
 package com.magiology.core;
 
 
+
 public class MReference{
 	public static final String
 		MODID="magiology",
@@ -16,5 +17,6 @@ public class MReference{
 		UPDATER_DIR=MODS_SUBFOLDER_DIR+"/updater/"+NAME+"Updater.jar",
 		NEWEST_VERSION_URL= "http://www.mediafire.com/download/d41w4px39x74gzt/Magiology.jar",
 //		MODS_SUBFOLDER_COMMON_ASSETS=MODS_SUBFOLDER_DIR+"/common assets",
-		MODS_SUBFOLDER_WIN_GUI=MODS_SUBFOLDER_DIR+"/ win gui";
+		MODS_SUBFOLDER_WIN_GUI=MODS_SUBFOLDER_DIR+"/externalGui",
+		INFO_FILE_NAME="FileForMod-"+MODID;
 }

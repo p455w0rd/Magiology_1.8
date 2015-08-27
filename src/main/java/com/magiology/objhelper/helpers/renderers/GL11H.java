@@ -4,10 +4,12 @@ import static org.lwjgl.opengl.GL11.*;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
+import com.magiology.modedmcstuff.ColorF;
 import com.magiology.objhelper.vectors.Vec3M;
 
 
@@ -159,5 +161,8 @@ public class GL11H{
 	}
 	public static void endProtection(){
 		glPopMatrix();
+	}
+	public static void color(ColorF color){
+		GL11.glColor4f(color.r, color.g, color.b, color.a);
 	}
 }

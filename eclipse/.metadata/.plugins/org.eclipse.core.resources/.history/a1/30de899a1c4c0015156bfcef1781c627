@@ -1,0 +1,58 @@
+package com.magiology.gui;
+
+import java.util.ArrayList;
+
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
+
+import com.magiology.core.MReference;
+import com.magiology.gui.fpgui.FirstPersonGui;
+import com.magiology.modedmcstuff.ColorF;
+import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.objhelper.helpers.renderers.GL11H;
+import com.magiology.objhelper.helpers.renderers.TessHelper;
+
+public class DownloadingIcon {
+	private static ResourceLocation main=new ResourceLocation(MReference.MODID,"/textures/gui/downloading.png");
+	
+	private static ArrayList<Drop> drops=new ArrayList<Drop>();
+	
+	public static void update(){
+		if(H.RB(0.2))drops.add(new Drop(new Vector2f(0, H.RF(170-28)+14),H.RF(0.25)+0.75F));
+		for(Drop drop:drops){
+			drop.speed++;
+			drop.prevPos=drop.pos;
+			drop.prevAlpha=drop.alpha;
+			
+			drop.pos.y+=drop.speed;
+			drop.alpha=(200F-drop.pos.y)/200;
+		}
+	}
+	public static void draw(ColorF color){
+		GL11.glPushMatrix();
+		GL11H.SetUpOpaqueRendering(1);
+		WorldRenderer tess=TessHelper.getWR();
+		TessHelper.bindTexture(main);
+		GL11.glColor4f(1, 1, 1, 0.5F);
+		
+		FirstPersonGui.drawRect(1F/368, 1F/399, 0, 0, 340, 0, 28, 51);
+		GL11H.color(color);
+		FirstPersonGui.drawRect(1F/368, 1F/399, 0, 0, 170, 0, 170, 399);
+		GL11.glColor4f(1, 1, 1, 1);
+		FirstPersonGui.drawRect(1F/368, 1F/399, 0, 0, 0, 0, 170, 399);
+		GL11H.EndOpaqueRendering();
+		GL11.glPopMatrix();
+	}
+	private static class Drop{
+		public Vector2f pos,prevPos;
+		public float alpha,prevAlpha,scale,speed;
+		public Drop(Vector2f pos, float scale){
+			this.pos = pos;
+			this.scale = scale;
+		}
+		
+	}
+}
