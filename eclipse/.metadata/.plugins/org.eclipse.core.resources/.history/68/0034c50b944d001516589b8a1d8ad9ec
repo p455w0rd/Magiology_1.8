@@ -1,0 +1,28 @@
+package com.magiology.core.init;
+
+import com.magiology.core.MReference;
+
+public class Init{
+		public static void Message(int a){
+	    	switch(a){
+	    	case(1):{
+	        	System.out.printf("\n\n\n_________________________________________________________________");
+	        	System.out.printf("\n----------------------------------------------------------------|");
+	    		System.out.printf("\n==========|> "+MReference.MODID.toUpperCase()+" "+MReference.VERSION+" -> "+"Pre initialization compleate! :D |");
+	        	System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n\n");
+	    	}break;
+	    	case(2):{
+	        	System.out.printf("\n\n\n_________________________________________________________________");
+	        	System.out.printf("\n----------------------------------------------------------------|");
+	        	System.out.printf("\n==========|> "+MReference.MODID.toUpperCase()+" "+MReference.VERSION+" -> "+"FML initialization compleate! ;D |");
+	        	System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n\n");
+	    	}break;
+	    	case(3):{
+	        	System.out.printf("\n\n\n_______________________________________________________________________");
+	        	System.out.printf("\n----------------------------------------------------------------------|");
+	        	System.out.printf("\n==========|> "+MReference.MODID.toUpperCase()+" "+MReference.VERSION+" -> "+"FML Post initialization compleate! >:D |");
+	        	System.out.printf("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n\n");
+	    	}break;
+	    	}
+	    }
+	}

@@ -17,9 +17,9 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
 	public void update(){
 		
-		r=Helper.keepAValueInBounds(r, 0, 1);
-		g=Helper.keepAValueInBounds(g, 0, 1);
-		b=Helper.keepAValueInBounds(b, 0, 1);
+		r=Helper.keepValueInBounds(r, 0, 1);
+		g=Helper.keepValueInBounds(g, 0, 1);
+		b=Helper.keepValueInBounds(b, 0, 1);
 		prevR=r;
 		prevG=g;
 		prevB=b;

@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 
 import com.magiology.core.init.MItems;
+import com.magiology.mcobjects.BlockM;
 
 public class PileODust extends BlockM {
 	

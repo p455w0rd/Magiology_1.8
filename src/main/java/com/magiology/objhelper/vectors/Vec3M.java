@@ -3,6 +3,7 @@ package com.magiology.objhelper.vectors;
 import java.io.Serializable;
 import java.nio.FloatBuffer;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,7 +35,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     	return new Vec3M(x-this.x,x-this.y,x-this.z);
     }
     public Vec3M normalize(){
-        double d0 = (double)MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
+        double d0 = MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
         return d0 < 1.0E-4D ? new Vec3M(0.0D, 0.0D, 0.0D) : new Vec3M(this.x / d0, this.y / d0, this.z / d0);
     }
     public double dotProduct(Vec3M vec){
@@ -62,13 +63,13 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
         double d0 = vec.x - this.x;
         double d1 = vec.y - this.y;
         double d2 = vec.z - this.z;
-        return (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+        return MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
     }
     public double distanceTo(double x, double y, double z){
     	double d0 = x - this.x;
     	double d1 = y - this.y;
     	double d2 = z - this.z;
-    	return (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+    	return MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
     }
     public double squareDistanceTo(Vec3M vec){
         double d0 = vec.x - this.x;
@@ -77,7 +78,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
         return d0 * d0 + d1 * d1 + d2 * d2;
     }
     public double lengthVector(){
-        return (double)MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
+        return MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
     }
     public Vec3M getIntermediateWithXValue(Vec3M vec, double x){
         double d1 = vec.x - this.x;
@@ -125,7 +126,8 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
         }
     }
 
-    public String toString(){
+    @Override
+	public String toString(){
         return "(" + this.x + ", " + this.y + ", " + this.z + ")";
     }
 
@@ -133,17 +135,17 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
         float f1 = MathHelper.cos(pitch);
         float f2 = MathHelper.sin(pitch);
         double d0 = this.x;
-        double d1 = this.y * (double)f1 + this.z * (double)f2;
-        double d2 = this.z * (double)f1 - this.y * (double)f2;
+        double d1 = this.y * f1 + this.z * f2;
+        double d2 = this.z * f1 - this.y * f2;
         return new Vec3M(d0, d1, d2);
     }
 
     public Vec3M rotateYaw(float yaw){
         float f1 = MathHelper.cos(yaw);
         float f2 = MathHelper.sin(yaw);
-        double d0 = this.x * (double)f1 + this.z * (double)f2;
+        double d0 = this.x * f1 + this.z * f2;
         double d1 = this.y;
-        double d2 = this.z * (double)f1 - this.x * (double)f2;
+        double d2 = this.z * f1 - this.x * f2;
         return new Vec3M(d0, d1, d2);
     }
 	@Override
@@ -223,8 +225,8 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
         float f1 = MathHelper.cos(par1);
         float f2 = MathHelper.sin(par1);
         double d0 = this.x;
-        double d1 = this.y * (double)f1 + this.z * (double)f2;
-        double d2 = this.z * (double)f1 - this.y * (double)f2;
+        double d1 = this.y * f1 + this.z * f2;
+        double d2 = this.z * f1 - this.y * f2;
         this.x = d0;
         this.y = d1;
         this.z = d2;
@@ -237,9 +239,9 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     {
         float f1 = MathHelper.cos(par1);
         float f2 = MathHelper.sin(par1);
-        double d0 = this.x * (double)f1 + this.z * (double)f2;
+        double d0 = this.x * f1 + this.z * f2;
         double d1 = this.y;
-        double d2 = this.z * (double)f1 - this.x * (double)f2;
+        double d2 = this.z * f1 - this.x * f2;
         this.x = d0;
         this.y = d1;
         this.z = d2;
@@ -254,11 +256,23 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     {
         float f1 = MathHelper.cos(par1);
         float f2 = MathHelper.sin(par1);
-        double d0 = this.x * (double)f1 + this.y * (double)f2;
-        double d1 = this.y * (double)f1 - this.x * (double)f2;
+        double d0 = this.x * f1 + this.y * f2;
+        double d1 = this.y * f1 - this.x * f2;
         double d2 = this.z;
         this.x = d0;
         this.y = d1;
         this.z = d2;
     }
+	public Vec3M add(BlockPos pos){
+		return new Vec3M(getX()+pos.getX(), getY()+pos.getY(), getZ()+pos.getZ());
+	}
+	public Vec3M mul(double value){
+		return new Vec3M(getX()*value, getY()*value, getZ()*value);
+	}
+	public Vec3M mul(double x, double y, double z){
+		return new Vec3M(getX()*x, getY()*y, getZ()*z);
+	}
+	public Vec3M mul(Vec3M vec){
+		return new Vec3M(getX()*vec.getX(), getY()*vec.getY(), getZ()*vec.getZ());
+	}
 }

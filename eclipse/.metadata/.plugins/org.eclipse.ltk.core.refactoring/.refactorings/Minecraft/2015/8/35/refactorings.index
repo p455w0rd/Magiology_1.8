@@ -44,3 +44,17 @@
 1440602191858	Rename method 'writeToFile'
 1440602215454	Rename method 'sync'
 1440667797693	Rename field 'donlwoadInvoked'
+1440769303276	Delete element
+1440772678416	Delete element
+1440772682262	Delete element
+1440778555333	Move compilation unit
+1440778563684	Move compilation unit
+1440779819829	Copy compilation unit
+1440786755809	Rename method 'keepAValueInBounds'
+1440786765336	Rename method 'keepAValueInBounds'
+1440851216268	Copy compilation unit
+1440852586904	Rename field 'RareSpacePipe'
+1440859089911	Rename method 'ForgeDirgetOrientationInverted'
+1440859093214	Rename method 'EnumFacingOrientation'
+1440861898642	Rename method 'Offset'
+1440866058956	Rename local variable 'pos1'

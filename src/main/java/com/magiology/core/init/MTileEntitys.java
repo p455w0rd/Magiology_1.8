@@ -19,6 +19,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
 import com.magiology.mcobjects.tileentityes.TileEntityPLauncher;
+import com.magiology.mcobjects.tileentityes.TileEntityRareSpacePipe;
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
@@ -81,6 +82,7 @@ public class MTileEntitys{
 		register(TileEntityNetworkConductor.class);
 		register(TileEntityNetworkInterface.class);
 		register(TileEntityNetworkPointerContainer.class);
+		register(TileEntityRareSpacePipe.class);
 	}
 	public static void initRenders(){
 		bindTileWRender(TileEntityFireLamp.class,               new RenderFireLamp());
@@ -104,6 +106,7 @@ public class MTileEntitys{
 		bindTileWRender(TileEntityNetworkController.class,      new RenderNetworkController());
 		bindTileWRender(TileEntityNetworkInterface.class,       new RenderNetworkInterface());
 		bindTileWRender(TileEntityNetworkPointerContainer.class,new RenderNetworkPointerContainer());
+		bindTileWRender(TileEntityRareSpacePipe.class,          new RenderNetworkConductor());
 	}
 	private static<T extends TileEntityM> void register(Class<T> clazz){
 		String name=clazz.getSimpleName().substring("TileEntity".length());

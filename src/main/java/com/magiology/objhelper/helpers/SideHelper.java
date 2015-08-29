@@ -27,17 +27,21 @@ public class SideHelper{
 		switch(side){
 		case 0:result=1;break;
 		case 1:result=0;break;
-		case 2:result=4;break;
-		case 3:result=5;break;
-		case 4:result=2;break;
-		case 5:result=3;break;
+		case 2:result=3;break;
+		case 3:result=2;break;
+		case 4:result=5;break;
+		case 5:result=4;break;
 		}
+//		Helper.printInln(EnumFacing.getFront(5));
 		return result;
 	}
 	
 	
 	public static BlockPos offset(int side,BlockPos pos){
 		return pos.add(x[side],y[side],z[side]);
+	}
+	public static BlockPos offsetNew(int side,BlockPos pos){
+		return pos.offset(EnumFacing.getFront(side));
 	}
 	public static int[] randomizeSides(){
 		int[] side=new int[6];
@@ -61,7 +65,7 @@ public class SideHelper{
 	}
 
 
-	public static int ForgeDirgetOrientationInverted(EnumFacing fDir){
+	public static int enumFacingOrientation(EnumFacing fDir){
 		if(fDir==null)return -1;
 		else if(fDir==EnumFacing.DOWN) return 0;
 		else if(fDir==EnumFacing.UP)   return 1;
@@ -72,22 +76,22 @@ public class SideHelper{
 		return -1;
 	}
 	public static int DOWN(){
-		return ForgeDirgetOrientationInverted(EnumFacing.DOWN);
+		return enumFacingOrientation(EnumFacing.DOWN);
 	}
 	public static int UP(){
-		return ForgeDirgetOrientationInverted(EnumFacing.UP);
+		return enumFacingOrientation(EnumFacing.UP);
 	}
 	public static int NORTH(){
-		return ForgeDirgetOrientationInverted(EnumFacing.NORTH);
+		return enumFacingOrientation(EnumFacing.NORTH);
 	}
 	public static int SOUTH(){
-		return ForgeDirgetOrientationInverted(EnumFacing.SOUTH);
+		return enumFacingOrientation(EnumFacing.SOUTH);
 	}
 	public static int WEST(){
-		return ForgeDirgetOrientationInverted(EnumFacing.WEST);
+		return enumFacingOrientation(EnumFacing.WEST);
 	}
 	public static int EAST(){
-		return ForgeDirgetOrientationInverted(EnumFacing.EAST);
+		return enumFacingOrientation(EnumFacing.EAST);
 	}
 	public static TileEntity[] getTilesOnSides(TileEntity tileEntity){
 		TileEntity[] result=new TileEntity[6];
@@ -97,14 +101,15 @@ public class SideHelper{
 
 
 	public static int convert(int side){
-		switch(side){
-		case 0:return 0;
-		case 1:return 1;
-		case 2:return 4;
-		case 3:return 2;
-		case 4:return 3;
-		case 5:return 5;
-		}
-		return -1;
+		return side;
+//		switch(side){
+//		case 0:return 0;
+//		case 1:return 1;
+//		case 2:return 4;
+//		case 3:return 2;
+//		case 4:return 3;
+//		case 5:return 5;
+//		}
+//		return -1;
 	}
 }

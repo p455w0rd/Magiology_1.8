@@ -36,7 +36,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	public TileEntityNetworkController(){
 		super(SixSidedBoolean.create(
 				Modifier.First6False,Modifier.Exclude,
-				SideHelper.ForgeDirgetOrientationInverted(EnumFacing.UP),SideHelper.ForgeDirgetOrientationInverted(EnumFacing.DOWN),
+				SideHelper.enumFacingOrientation(EnumFacing.UP),SideHelper.enumFacingOrientation(EnumFacing.DOWN),
 				Modifier.Last6False,Modifier.Exclude,
 				-1
 				).sides, SixSidedBoolean.lastGen.sides, 1, 20, 200, 100000);
@@ -81,7 +81,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	public void addToWriteToNBT(NBTTagCompound NBTTC){
     	for(int i=0;i<6;i++){
     		NBTTC.setBoolean("bannedConnections"+i, bannedConnections[i]);
-    		NBTTC.setInteger("connections"+i, SideHelper.ForgeDirgetOrientationInverted(connections[i]));
+    		NBTTC.setInteger("connections"+i, SideHelper.enumFacingOrientation(connections[i]));
     	}
     	NBTTC.setLong("NI", getNetworkId());
     }

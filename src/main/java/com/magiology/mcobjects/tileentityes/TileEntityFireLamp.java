@@ -171,7 +171,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		TileEntity aa=worldObj.getTileEntity(pos.add(0,1,0));
 		if(aa instanceof TileEntityFirePipe){
 			TileEntityFirePipe pipe= (TileEntityFirePipe)aa;
-			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),SideHelper.ForgeDirgetOrientationInverted(EnumFacing.UP)))if(worldObj.isRemote&&optimizer3.progress==0){
+			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),SideHelper.enumFacingOrientation(EnumFacing.UP)))if(worldObj.isRemote&&optimizer3.progress==0){
 				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
 				if(Helper.RInt(3)==0)Helper.spawnEntityFX(particle);
 				else Helper.spawnEntityFX(particle,20);

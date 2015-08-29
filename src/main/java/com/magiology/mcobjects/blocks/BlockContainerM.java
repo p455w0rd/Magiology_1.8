@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.api.network.RedstoneData;
 import com.magiology.core.MReference;
+import com.magiology.mcobjects.BlockM;
 import com.magiology.objhelper.helpers.Helper;
 
 public abstract class BlockContainerM extends BlockContainer{

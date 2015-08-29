@@ -129,7 +129,7 @@ public class Helper{
 	 * @return
 	 */
 	public static boolean RB(double precentage){
-		precentage=keepAValueInBounds(precentage, 0, 1);
+		precentage=keepValueInBounds(precentage, 0, 1);
 		if(precentage==0)return false;
 		if(precentage==1)return true;
 		return RF()<precentage;
@@ -327,14 +327,17 @@ public class Helper{
 			throwException(object);
 		}catch(Throwable e){}
 	}
-	public static double keepAValueInBounds(double value,double min,double max){
+	public static double keepValueInBounds(double value,double min,double max){
 		if(min>=max)return value;
 		if(value<min)value=min;
 		if(value>max)value=max;
 		return value;
 	}
-	public static float keepAValueInBounds(float value,float min,float max){
-		return (float)keepAValueInBounds((double)value, (double)min, (double)max);
+	public static float keepValueInBounds(float value,float min,float max){
+		return (float)keepValueInBounds((double)value, (double)min, (double)max);
+	}
+	public static int keepValueInBounds(int value,int min,int max){
+		return (int)keepValueInBounds((double)value, (double)min, (double)max);
 	}
 	public static MovingObjectPosition rayTrace(EntityLivingBase entity,float lenght, float var1){
 		if(entity.worldObj.isRemote)return entity.rayTrace(lenght, var1);

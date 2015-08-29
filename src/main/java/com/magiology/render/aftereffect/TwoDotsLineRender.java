@@ -72,7 +72,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 		
 		alpha+=0.4*(Helper.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
 		
-		alpha=Helper.keepAValueInBounds(alpha, 0, 1);
+		alpha=Helper.keepValueInBounds(alpha, 0, 1);
 		if(alpha<0.05)kill();
 	}
 }

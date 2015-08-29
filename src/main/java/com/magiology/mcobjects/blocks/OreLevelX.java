@@ -1,6 +1,8 @@
 package com.magiology.mcobjects.blocks;
 
 
+import com.magiology.mcobjects.BlockM;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 

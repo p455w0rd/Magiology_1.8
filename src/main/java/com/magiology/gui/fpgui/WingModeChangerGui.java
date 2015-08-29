@@ -58,7 +58,7 @@ public class WingModeChangerGui extends FirstPersonGui{
 			GL11.glPushMatrix();
 			GL11.glTranslated(xScreen-fr.getStringWidth(poz)*0.7, yScreen-fr.FONT_HEIGHT*0.7,0);
 			GL11H.scaled(0.7);
-			Color c=new Color(255,255,255,(int)(255*Helper.keepAValueInBounds(calcAlpha+0.25, 0, 1)));
+			Color c=new Color(255,255,255,(int)(255*Helper.keepValueInBounds(calcAlpha+0.25, 0, 1)));
 			fr.drawStringWithShadow(poz, -1,-1, c.hashCode());
 			GL11.glPopMatrix();
 		}
@@ -153,14 +153,14 @@ public class WingModeChangerGui extends FirstPersonGui{
 		sliderSpeed=Helper.handleSpeedFolower(sliderSpeed,sliderPos,sliderWantedPos,15F);
 		sliderSpeed*=0.7;
 		double multiplayer=Math.abs((sliderPos-sliderWantedPos)/nextLineOffset);
-		multiplayer=Helper.keepAValueInBounds(multiplayer, 0, 1);
+		multiplayer=Helper.keepValueInBounds(multiplayer, 0, 1);
 		sliderSpeed*=multiplayer;
 		sliderPos+=sliderSpeed;
 		int perPos=((int)(sliderWantedPos/nextLineOffset));
 		if(perPos>validPoss.length-1)sliderWantedPos=0;
 		if(perPos<0)sliderWantedPos=(validPoss.length-1)*nextLineOffset;
 		selectionId=(int)((sliderPos+nextLineOffset/2)/nextLineOffset);
-		selectionId=(int)Helper.keepAValueInBounds(selectionId, 0, 4);
+		selectionId=(int)Helper.keepValueInBounds(selectionId, 0, 4);
 		curentPoss=Positions.values()[validPoss[selectionId].id];
 		alpha+=0.2F*(isExited?-1:1);
 		double noise=0.05,speed=0.15;
@@ -175,11 +175,11 @@ public class WingModeChangerGui extends FirstPersonGui{
 				backgroundColor[a][2]=(float)Helper.slowlyEqalize(backgroundColor[a][2], 0.2+Helper.CRandF(noise),speed);
 			}
 			
-			backgroundColor[a][0]=Helper.keepAValueInBounds(backgroundColor[a][0], 0, 1);
-			backgroundColor[a][1]=Helper.keepAValueInBounds(backgroundColor[a][1], 0, 1);
-			backgroundColor[a][2]=Helper.keepAValueInBounds(backgroundColor[a][2], 0, 1);
+			backgroundColor[a][0]=Helper.keepValueInBounds(backgroundColor[a][0], 0, 1);
+			backgroundColor[a][1]=Helper.keepValueInBounds(backgroundColor[a][1], 0, 1);
+			backgroundColor[a][2]=Helper.keepValueInBounds(backgroundColor[a][2], 0, 1);
 		}
-		alpha=Helper.keepAValueInBounds(alpha, 0F, 1);
+		alpha=Helper.keepValueInBounds(alpha, 0F, 1);
 		boolean prevIsExited=isExited;
 		isExited=!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandeler.getIsActive(player);
 		if(prevIsExited!=isExited){

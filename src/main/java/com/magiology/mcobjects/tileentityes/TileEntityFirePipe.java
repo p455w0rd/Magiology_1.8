@@ -72,7 +72,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	public void addToWriteToNBT(NBTTagCompound NBTTC){
     	for (int i=0;i<6;i++){
     		NBTTC.setBoolean("bannedConnections"+i, bannedConnections[i]);
-    		NBTTC.setInteger("connections"+i, SideHelper.ForgeDirgetOrientationInverted(connections[i]));
+    		NBTTC.setInteger("connections"+i, SideHelper.enumFacingOrientation(connections[i]));
     	}
     }
 	
@@ -137,16 +137,16 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	@Override
 	public void updateConnections(){
 		if(H.isRemote(worldObj))updatestand();
-		if(isTPipe(0)||isTRand(SideHelper.offset(0, pos))) connections[0] = EnumFacing.UP;else connections[0] = null;
-		if(isTPipe(1)||isTRand(SideHelper.offset(1, pos))||(worldObj.getTileEntity(SideHelper.offset(1, pos)))instanceof TileEntityFireExhaust) connections[1] = EnumFacing.DOWN;else connections[1] = null;
-		if(isTPipe(2)||isTRand(SideHelper.offset(2, pos))) connections[2] = EnumFacing.NORTH;else connections[2] = null;
-		if(isTPipe(3)||isTRand(SideHelper.offset(3, pos))) connections[3] = EnumFacing.EAST;else connections[3] = null;
-		if(isTPipe(4)||isTRand(SideHelper.offset(4, pos))) connections[4] = EnumFacing.SOUTH;else connections[4] = null;
-		if(isTPipe(5)||isTRand(SideHelper.offset(5, pos))) connections[5] = EnumFacing.WEST;else connections[5] = null;
+		if(isTPipe(0)||isTRand(SideHelper.offsetNew(0, pos))) connections[0] = EnumFacing.UP;else connections[0] = null;
+		if(isTPipe(1)||isTRand(SideHelper.offsetNew(1, pos))||(worldObj.getTileEntity(SideHelper.offsetNew(1, pos)))instanceof TileEntityFireExhaust) connections[1] = EnumFacing.DOWN;else connections[1] = null;
+		if(isTPipe(2)||isTRand(SideHelper.offsetNew(2, pos))) connections[2] = EnumFacing.NORTH;else connections[2] = null;
+		if(isTPipe(3)||isTRand(SideHelper.offsetNew(3, pos))) connections[3] = EnumFacing.EAST;else connections[3] = null;
+		if(isTPipe(4)||isTRand(SideHelper.offsetNew(4, pos))) connections[4] = EnumFacing.SOUTH;else connections[4] = null;
+		if(isTPipe(5)||isTRand(SideHelper.offsetNew(5, pos))) connections[5] = EnumFacing.WEST;else connections[5] = null;
 		boolean[] in1={},out1={};
 		TileEntity[] tiles=new TileEntity[6];
 		for(int a=0;a<6;a++){
-			tiles[a]=worldObj.getTileEntity(SideHelper.offset(a, pos));
+			tiles[a]=worldObj.getTileEntity(SideHelper.offsetNew(a, pos));
 			if(tiles[a]==null){
 				in1 =ArrayUtils.add( in1, false);
 				out1=ArrayUtils.add(out1, false);
@@ -179,8 +179,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			if(connectionsToObjInMe[a]!=null)connections[a]=connectionsToObjInMe[a];
 			else if(connectionsToObjOut[a]!=null)connections[a]=connectionsToObjOut[a];
 		}
-		
-		if(isTLamp(pos.add(0,-1,0))&&connections[1]!=null){
+		if(isTLamp(pos.add(0,-1,0))&&connections[0]!=null){
 			DCFFL=EnumFacing.UP;
 		}else DCFFL = null;
 		
@@ -192,12 +191,13 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			}
 		}
 		if(((connections[0]!=null&&DCFFL==null)&&connections[1]!=null)&&(connections[2]==null&&connections[3]==null&&connections[4]==null&&connections[5]==null))strateConnection[0] = EnumFacing.UP;else strateConnection[0] = null;
-		if((connections[3]!=null&&connections[5]!= null)&&(connections[0]==null&&(connections[1]==null&&DCFFL==null)&&connections[2]==null&&connections[4]==null))strateConnection[1] = EnumFacing.WEST;else strateConnection[1] = null;
-		if((connections[2]!=null&&connections[4]!= null)&&(connections[0]==null&&(connections[1]==null&&DCFFL==null)&&connections[3]==null&&connections[5]==null))strateConnection[2] = EnumFacing.SOUTH;else strateConnection[2] = null;
+		if((connections[4]!=null&&connections[5]!= null)&&(connections[1]==null&&(connections[0]==null&&DCFFL==null)&&connections[2]==null&&connections[3]==null))strateConnection[1] = EnumFacing.WEST;else strateConnection[1] = null;
+		if((connections[2]!=null&&connections[3]!= null)&&(connections[1]==null&&(connections[0]==null&&DCFFL==null)&&connections[4]==null&&connections[5]==null))strateConnection[2] = EnumFacing.SOUTH;else strateConnection[2] = null;
+		
 		
 		if(DCFFL!=null){
-			connectionsToObjInMe[1] = EnumFacing.DOWN;
-			shouldConnectionsBeRendered[1]=false;
+			connectionsToObjInMe[0] = EnumFacing.DOWN;
+			shouldConnectionsBeRendered[0]=false;
 		}
 		setColisionBoxes();
 		for(int a=0;a<6;a++){
@@ -227,7 +227,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	}
 	
 	public boolean isTPipe(int side){
-		BlockPos pos1=SideHelper.offset(side,pos);
+		BlockPos pos1=SideHelper.offsetNew(side,pos);
 		int dir=0;
 		switch(side){
 		case 0:{dir=1;}break;
@@ -261,7 +261,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		doSidedPowerTransferBasedOnConections(isRepeatable);
 		if(Helper.RInt(5)==0){
 			int side=Helper.RInt(6);
-			TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side, pos));
+			TileEntity tile=worldObj.getTileEntity(SideHelper.offsetNew(side, pos));
 			
 			if(connections[side]!=null&&connectionsToObjInMe[side]==null&&connectionsToObjOut[side]==null&&tile instanceof TileEntityFirePipe&&getEnergy()>0&&((TileEntityFirePipe)tile).getEnergy()<((TileEntityFirePipe)tile).getMaxEnergy()-1){
 				PowerHelper.tryToDrainFromTo(this, tile, 1,side);
@@ -296,7 +296,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		//try to send/receive power from all sides
 		for (int i=0;i<randSides.length;i++){
 			int side=randSides[i];
-			TileEntity ab=worldObj.getTileEntity(SideHelper.offset(side,pos));
+			TileEntity ab=worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
 			//if there is nothing to interact with than skip the process (only for optimization)
 			boolean var1=ab!=null&&ab instanceof PowerCore&&ab instanceof ISidedPower;
 			//Is next to a special pipe
@@ -304,7 +304,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 			if(var1){
 				//special interaction for pipes that contains Priority upgrade
 				if(hasPriorityUpg){
-					TileEntity a=worldObj.getTileEntity(SideHelper.offset(randSides[0],pos));
+					TileEntity a=worldObj.getTileEntity(SideHelper.offsetNew(randSides[0],pos));
 					TileEntityPow tile=a instanceof TileEntityPow?(TileEntityPow)a:null;
 					if(tile!=null){
 						if(i!=0)var1=false;
@@ -315,7 +315,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				else{
 					TileEntityFirePipe tile=ab instanceof TileEntityFirePipe?(TileEntityFirePipe)ab:null;
 					if(tile!=null&&tile.hasPriorityUpg){
-						if(SideHelper.offset(tile.FirstSide,tile.pos).equals(pos)){
+						if(SideHelper.offsetNew(tile.FirstSide,tile.pos).equals(pos)){
 							var1=false;
 							var2=true;
 						}
@@ -328,7 +328,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				if(connections[side]!=null&&connectionsToObjInMe[side]==null&&connectionsToObjOut[side]==null){
 					doCustomSidedPowerTransfer(side,ab instanceof TileEntityFirePipe?(var2?-1:(hasPriorityUpg&&FirstSide==side?1:-1)):0);
 					if(isRepeatable){
-						TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side,pos));
+						TileEntity tile=worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
 						if(tile instanceof TileEntityFirePipe)((TileEntityFirePipe)tile).power(false);
 					}
 				}else{
@@ -343,8 +343,8 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	 * @param type : send to something is 1 and send out itself is 0
 	 */
 	public void doCustomSidedPowerTransfer(int side,int type){
-		TileEntity tile=worldObj.getTileEntity(SideHelper.offset(side,pos));
-		TransferEnergyToPosition(SideHelper.offset(side,pos), type,side);
+		TileEntity tile=worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
+		TransferEnergyToPosition(SideHelper.offsetNew(side,pos), type,side);
 	}
 	/**
 	 * This gets coordinates from given side and if there is a pipe it searches for pipes that are connected to that found pipe and returns a random one if there is more than 1 pipe
@@ -353,12 +353,12 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	 */
 	public TileEntityFirePipe getPipeNextToAnotherPipe(int side){
 		TileEntityFirePipe result=null;
-		BlockPos pos1=SideHelper.offset(side,pos);
+		BlockPos pos1=SideHelper.offsetNew(side,pos);
 		TileEntity firstPipe=worldObj.getTileEntity(pos1);
 		int[] randSides=SideHelper.randomizeSides();
 		if(firstPipe instanceof TileEntityFirePipe)
 		for(int a=0;a<6;a++){int rSide=randSides[a];if(rSide!=SideHelper.getOppositeSide(side)&&connections[side]!=null){
-			BlockPos pos2=SideHelper.offset(rSide,pos1);
+			BlockPos pos2=SideHelper.offsetNew(rSide,pos1);
 			TileEntity tile=worldObj.getTileEntity(pos);
 			if(tile instanceof TileEntityFirePipe&&((TileEntityFirePipe) firstPipe).connections[rSide]!=null){
 				result=(TileEntityFirePipe)tile;
@@ -437,12 +437,12 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		};
 	}
 	private AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-			new AxisAlignedBB(0      ,p*6,p*6,p*6,p*10,p*10),
-			new AxisAlignedBB(p*6,0      ,p*6,p*10,p*6,p*10),
-			new AxisAlignedBB(p*6,p*6,0      ,p*10,p*10,p*6),
 			new AxisAlignedBB(p*10,p*6,p*6,1      ,p*10,p*10),
 			new AxisAlignedBB(p*6,p*10,p*6,p*10,1      ,p*10),
+			new AxisAlignedBB(p*6,p*6,0      ,p*10,p*10,p*6),
 			new AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1      ),
+			new AxisAlignedBB(p*6,0      ,p*6,p*10,p*6,p*10),
+			new AxisAlignedBB(0      ,p*6,p*6,p*6,p*10,p*10),
 			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),
 			new AxisAlignedBB(p*4.5F,-p*4.7F,p*4.5F,p*11.5F,p*0.1F,p*11.5F),
 			new AxisAlignedBB(p*6,0 ,p*6,p*10,p*6F,p*10),

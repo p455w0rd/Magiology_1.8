@@ -2,6 +2,8 @@ package com.magiology.mcobjects.items;
 
 import java.util.List;
 
+import com.magiology.mcobjects.ItemM;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

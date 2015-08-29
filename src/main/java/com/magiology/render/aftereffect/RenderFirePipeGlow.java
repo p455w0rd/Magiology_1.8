@@ -34,7 +34,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 
 	@Override
 	public void render(){
-		float fc=Helper.keepAValueInBounds(PowerHelper.getPowerPrecentage(pipe), 0, 1);
+		float fc=Helper.keepValueInBounds(PowerHelper.getPowerPrecentage(pipe), 0, 1);
 		if(fc>0.01){
 			GL11.glPushMatrix();
 			GL11.glTranslated(pipe.x(), pipe.y(), pipe.z());
@@ -208,7 +208,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		
 		if(!(player.worldObj.getTileEntity(pipe.getPos())instanceof TileEntityFirePipe))kill();
 		
-		alpha=Helper.keepAValueInBounds(alpha, 0, 1);
+		alpha=Helper.keepValueInBounds(alpha, 0, 1);
 		if(alpha<0.05)kill();
 	}
 }

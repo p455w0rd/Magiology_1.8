@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MGui;
+import com.magiology.mcobjects.ItemM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 

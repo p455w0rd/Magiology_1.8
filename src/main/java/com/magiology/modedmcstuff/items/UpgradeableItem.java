@@ -12,8 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import com.magiology.mcobjects.ItemM;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
-import com.magiology.mcobjects.items.ItemM;
 import com.magiology.objhelper.helpers.Helper;
 import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.registry.upgrades.RegisterItemUpgrades;

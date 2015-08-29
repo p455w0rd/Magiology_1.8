@@ -22,9 +22,9 @@ public class ColoredGuiButton extends GuiButton{
 	wantedR=1,wantedG=1,wantedB=1,wantedAlpha=1;
 	
 	public void update(){
-		r=Helper.keepAValueInBounds(r, 0, 1);
-		g=Helper.keepAValueInBounds(g, 0, 1);
-		b=Helper.keepAValueInBounds(b, 0, 1);
+		r=Helper.keepValueInBounds(r, 0, 1);
+		g=Helper.keepValueInBounds(g, 0, 1);
+		b=Helper.keepValueInBounds(b, 0, 1);
 		prevR=r;
 		prevG=g;
 		prevB=b;
@@ -43,9 +43,9 @@ public class ColoredGuiButton extends GuiButton{
 		r+=f;
 		g+=f;
 		b+=f;
-		r=Helper.keepAValueInBounds(r, 0, 1);
-		g=Helper.keepAValueInBounds(g, 0, 1);
-		b=Helper.keepAValueInBounds(b, 0, 1);
+		r=Helper.keepValueInBounds(r, 0, 1);
+		g=Helper.keepValueInBounds(g, 0, 1);
+		b=Helper.keepValueInBounds(b, 0, 1);
 	}
 	@Override
 	public void drawButton(Minecraft v1, int v2, int v3){

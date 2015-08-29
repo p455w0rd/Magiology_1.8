@@ -11,6 +11,7 @@ import com.magiology.mcobjects.blocks.BedrockBreaker;
 import com.magiology.mcobjects.blocks.BigFurnaceCore;
 import com.magiology.mcobjects.blocks.ControlBlock;
 import com.magiology.mcobjects.blocks.DontLookAtMe;
+import com.magiology.mcobjects.blocks.EnergizedLapisOre;
 import com.magiology.mcobjects.blocks.FakeAir;
 import com.magiology.mcobjects.blocks.FireExhaust;
 import com.magiology.mcobjects.blocks.FireGun;
@@ -23,9 +24,9 @@ import com.magiology.mcobjects.blocks.OreLevelX;
 import com.magiology.mcobjects.blocks.OreStructureCore;
 import com.magiology.mcobjects.blocks.ParticleLauncher;
 import com.magiology.mcobjects.blocks.PileODust;
+import com.magiology.mcobjects.blocks.RareSpacePipe;
 import com.magiology.mcobjects.blocks.RemotePowerCounter;
 import com.magiology.mcobjects.blocks.SmartCrafter;
-import com.magiology.mcobjects.blocks.EnergizedLapisOre;
 import com.magiology.mcobjects.blocks.network.NetworkConductor;
 import com.magiology.mcobjects.blocks.network.NetworkController;
 import com.magiology.mcobjects.blocks.network.NetworkInterface;
@@ -44,7 +45,7 @@ public class MBlocks{
 		CoalLevel5,SuperDuperCoal,FireLamp,DiscoFlor,DiscoFlorPlatform,OreStructureCore,FirePipe,FireGun,
 		FireExhaust,FakeAir,bedrockBreaker,PileODust,BigFurnaceCore,BFCPowerOut,BatteryL1,BatteryL2,BatteryL3,
 		BateryL100,particleLauncher,DontLookAtMe,energizedLapisOre,ControlBlock,RemotePowerCounter,
-		FireMatrixTransferer,FireMatrixReceaver,smartCrafter,hologramProjector,
+		FireMatrixTransferer,FireMatrixReceaver,smartCrafter,hologramProjector,rareSpacePipe,
 		networkController,networkConductor,networkPointerContainer,networkInterface;
 
 	public static void preInit(){
@@ -81,6 +82,7 @@ public class MBlocks{
 		networkConductor=init(new NetworkConductor().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkConductor"));
 		networkInterface=init(new NetworkInterface().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkInterface"));
 		networkPointerContainer=init(new NetworkPointerContainer().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkPointerContainer"));
+		rareSpacePipe=init(new RareSpacePipe().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("rareSpacePipe"));
 	}
 
 	static Block init(Block block){

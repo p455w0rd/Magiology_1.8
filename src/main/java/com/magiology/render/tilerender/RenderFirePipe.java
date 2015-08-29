@@ -236,11 +236,11 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		if(conectionToObjModel[0]==null)generateModelConectionToObj();
 		for(int i=0;i<2;i++){
 			conectionToObjModel[i].pushMatrix();
-			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
-			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
-			else if(dir.equals(EnumFacing.SOUTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
-			else if(dir.equals(EnumFacing.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -180, 0);
+			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
+			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
+			else if(dir.equals(EnumFacing.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
 			else if(dir.equals(EnumFacing.NORTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -90, 0);
+			else if(dir.equals(EnumFacing.WEST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 180, 0);
 		}
 		
 		if(type=="inMe")bindTexture(Textures.FirePipeConecterInMe);
@@ -332,11 +332,11 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		double tw1=-1,tw2=-1,th1=-1,th2=-1;
 		boolean[] flipTH=new boolean[5];
 		
-		if(dir.equals(EnumFacing.WEST)){t=1;}
-		else if (dir.equals(EnumFacing.UP)){rZ=-90;t=1;}
-		else if (dir.equals(EnumFacing.DOWN)){rZ=90;t=2;}//texture2
-		else if (dir.equals(EnumFacing.SOUTH)){rY=90;t=1;}
-		else if (dir.equals(EnumFacing.EAST)){rY=-180;t=3;}//texture2
+		if(dir.equals(EnumFacing.WEST)){rY=-180;t=1;}
+		else if (dir.equals(EnumFacing.UP)){rZ=90;t=1;}
+		else if (dir.equals(EnumFacing.DOWN)){rZ=-90;t=2;}//texture2
+		else if (dir.equals(EnumFacing.SOUTH)){t=1;}
+		else if (dir.equals(EnumFacing.EAST)){rY=90;t=3;}//texture2
 		else if (dir.equals(EnumFacing.NORTH)){rY=-90;t=3;}//texture2
 		
 		switch(t){

@@ -48,7 +48,7 @@ public class MainMenuUpdateNotification{
 		"Click [HERE] to update the mod!",
 		"WARNING: The message above will:",
 		"1. turn off minecraft!",
-		"2. open an automatic updater aplication",
+		"2. open an automatic updater program",
 		"The aplication will:",
 		"1. remove the old mod file",
 		"2. download a new one",

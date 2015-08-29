@@ -160,6 +160,7 @@ public class GL11H{
 		glPushMatrix();
 	}
 	public static void endProtection(){
+		GL11.glColor4f(1, 1, 1, 1);
 		glPopMatrix();
 	}
 	public static void color(ColorF color){

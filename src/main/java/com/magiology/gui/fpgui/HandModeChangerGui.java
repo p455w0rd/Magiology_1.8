@@ -81,6 +81,6 @@ public class HandModeChangerGui extends FirstPersonGui{
 		if(Helper.isNull(Helper.getThePlayer()))return;
 		lastHandAlpha=handAlpha;
 		handAlpha+=Helper.getThePlayer().isSneaking()?0.25:-0.25;
-		handAlpha=Helper.keepAValueInBounds(handAlpha, 0, 1);
+		handAlpha=Helper.keepValueInBounds(handAlpha, 0, 1);
 	}
 }

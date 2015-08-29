@@ -1,9 +1,5 @@
 package com.magiology.io;
 
-import static com.magiology.core.Magiology.*;
-
-import java.awt.Color;
-import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -86,9 +82,5 @@ public class IOReadableMap{
 			file.createNewFile();
 		}
 	}
-	
-	private void yellowLine(String string){if(modInfGUI!=null)modInfGUI.addLine(modInfGUI.newLine(string, new Font(Font.SANS_SERIF, Font.PLAIN,15), Color.YELLOW));else Helper.println(string);}
-	private void errorLine(String string){if(modInfGUI!=null)modInfGUI.addLine(modInfGUI.newLine(string, new Font(Font.SANS_SERIF, Font.BOLD+Font.ITALIC,15), Color.RED));else Helper.println(string);}
-	private void sucessLine(String string){if(modInfGUI!=null)modInfGUI.addLine(modInfGUI.newLine(string, new Font(Font.SANS_SERIF, Font.PLAIN,15), Color.GREEN));else Helper.println(string);}
 }
 

@@ -64,7 +64,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//calculation of rotation
 		float
 			point=progress.getPoint(),
-			point2=Helper.keepAValueInBounds(point, 0, 1),
+			point2=Helper.keepValueInBounds(point, 0, 1),
 			playerX=Helper.calculateRenderPos(player, 'x'),
 			playerY=Helper.calculateRenderPos(player, 'y'),
 			playerZ=Helper.calculateRenderPos(player, 'z'),

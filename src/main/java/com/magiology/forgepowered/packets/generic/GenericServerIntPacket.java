@@ -14,6 +14,7 @@ public class GenericServerIntPacket extends AbstractToServerMessage{
 	
 	private int data,eventId;
 	
+	
 	public GenericServerIntPacket(){}
 	public GenericServerIntPacket(int eventId,int data){
 		this.data=data;
