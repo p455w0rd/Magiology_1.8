@@ -7,7 +7,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.mcobjects.TileEntityM;
 
 public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListBox{
 	int optimizer=0;

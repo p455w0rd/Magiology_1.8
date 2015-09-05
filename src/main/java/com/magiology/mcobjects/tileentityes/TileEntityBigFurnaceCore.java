@@ -8,10 +8,10 @@ import net.minecraft.util.EnumParticleTypes;
 import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.PowerHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	
@@ -196,6 +196,11 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	@Override
 	public boolean canGeneratePowerAddon(){
 		return isMultiblockHelper;
+	}
+
+	@Override
+	public void updateConnections(){
+		
 	}
 	
 }

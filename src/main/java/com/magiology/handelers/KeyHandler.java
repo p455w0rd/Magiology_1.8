@@ -21,8 +21,8 @@ import com.magiology.forgepowered.packets.generic.GenericServerVoidPacket;
 import com.magiology.gui.fpgui.HandModeChangerGui;
 import com.magiology.gui.fpgui.StatsDisplayGui;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.objhelper.SimpleCounter;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.SimpleCounter;
 
 public class KeyHandler{
 	Minecraft mc=Minecraft.getMinecraft();

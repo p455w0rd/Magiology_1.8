@@ -23,9 +23,9 @@ import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.registry.WrenchRegistry;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
 
 public class FireHammer extends ItemM{
 	

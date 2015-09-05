@@ -1,0 +1,76 @@
+package com.magiology.util.utilobjects;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
+import net.minecraft.world.World;
+
+import org.lwjgl.util.vector.Vector3f;
+
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+public class BlockPosM extends BlockPos{
+	
+	public BlockPosM(int x, int y, int z){
+		super(x, y, z);
+	}
+	public BlockPosM(double x, double y, double z){
+		super(x, y, z);
+	}
+	public BlockPosM(Entity source){
+		this(source.posX, source.posY, source.posZ);
+	}
+	public BlockPosM(Vec3 source){
+		this(source.xCoord, source.yCoord, source.zCoord);
+	} 
+	public BlockPosM(Vec3M source){
+		this(source.x, source.y, source.z);
+	}
+	public BlockPosM(Vec3i source){
+		this(source.getX(), source.getY(), source.getZ());
+	}
+	
+	public TileEntity getTile(World world){
+		return world.getTileEntity(this);
+	}
+	public Block getBlock(World world){
+		return Helper.getBlock(world, this);
+	}
+	public IBlockState getState(World world){
+		return world.getBlockState(this);
+	}
+	public BlockPos conv(){
+		return new BlockPos(getX(), getY(), getZ());
+	}
+	public static BlockPosM get(BlockPos pos){
+		return new BlockPosM(pos);
+	}
+	public static Vector3f wallXZ(int minX,int minZ,int maxX,int maxZ,int y){
+		Vector3f result=new Vector3f();
+		result.y=Helper.CRandF(2)+y+0.5F;
+		switch (Helper.RInt(4)){
+		case 0:{
+//			result.x=minX;
+//			result.z=minZ+Helper.RF(minZ-maxZ);
+		}break;
+		case 1:{
+			result.x=maxX;
+			result.z=maxZ+Helper.RF(minZ-maxZ);
+		}break;
+		case 2:{
+			result.x=minX+Helper.RF(minX-maxX);
+			result.z=minZ;
+		}break;
+		case 3:{
+			result.x=maxX+Helper.RF(minX-maxX);
+			result.z=maxZ;
+		}break;
+		}
+		return result;
+	}
+}

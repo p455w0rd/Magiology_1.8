@@ -4,13 +4,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.EnumParticleTypes;
 
+import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerListBox{
 	

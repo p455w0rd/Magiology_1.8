@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public final class MediaFireDownlader{
 	

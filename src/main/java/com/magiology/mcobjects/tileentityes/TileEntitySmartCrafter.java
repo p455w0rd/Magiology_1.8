@@ -11,9 +11,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.objhelper.CraftingGridWOutput;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.gui.gui.CraftingGridWOutput;
+import com.magiology.mcobjects.TileEntityM;
+import com.magiology.util.utilclasses.Helper;
 
 public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
 	

@@ -6,9 +6,9 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
 
 public class ItemRendererFirePipe implements IItemRenderer {
 	

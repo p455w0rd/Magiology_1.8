@@ -8,16 +8,16 @@ import net.minecraft.util.EnumFacing;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBufferModel;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.RenderFirePipeGlow;
 import com.magiology.render.aftereffect.RenderFirePipePriorityCube;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.NormalizedVertixBufferModel;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Get.Render;
 
 public class RenderFirePipe extends TileEntitySpecialRenderer {
 	private final float p= 1F/16F;
@@ -63,22 +63,27 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 			if(var2)RenderLoopEvents.spawnLARR(new RenderFirePipeGlow(pipe));
 		}
 		Render.WR().setTranslation(x,y,z);
-		if(pipe.DCFFL!=null)drawConectorFFL();
-		for(int i=0; i< pipe.connectionsToObjInMe.length; i++){
-			if(pipe.shouldConnectionsBeRendered[i]){
-				if(pipe.connectionsToObjInMe[i]!= null)drawConectionToObj(pipe.connectionsToObjInMe[i],"outOfMe");
-				else if(pipe.connectionsToObjOut[i]!= null)drawConectionToObj(pipe.connectionsToObjOut[i],"inMe");
+		if(pipe.DCFFL)drawConectorFFL();
+		for(int i=0;i<pipe.connections.length;i++){
+			if(pipe.connections[i].willRender()){
+				if(pipe.connections[i].getIn())drawConectionToObj(pipe.connections[i].getFaceEF(),"outOfMe");
+				else if(pipe.connections[i].getOut())drawConectionToObj(pipe.connections[i].getFaceEF(),"inMe");
 			}
 		}
 		
-		if(pipe.strateConnection[0]==null&&pipe.strateConnection[1]==null&&pipe.strateConnection[2]==null){
+		if(!pipe.isStrate(null)){
 			drawCore(pipe.texAnim);
-			for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i]!=null&&pipe.shouldConnectionsBeRendered[i])drawConector(pipe.connections[i]);
+			for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i].getMain()&&pipe.connections[i].willRender())drawConector(pipe.connections[i].getFaceEF());
 			if(pipe.isSolidDown==true)drawStand(EnumFacing.DOWN);
 			else if(pipe.isSolidUp==true)drawStand(EnumFacing.UP);
+		}else{
+			for(int a=0;a<3;a++){
+				int b=a==0?3:a==1?4:1;
+				if(pipe.isStrate(EnumFacing.getFront(b))){
+					drawStrateCore(EnumFacing.getFront(b));
+				}
+			}
 		}
-		else for(int a=0;a<pipe.strateConnection.length;a++)if(pipe.strateConnection[a]!=null)drawStrateCore(pipe.strateConnection[a]);
-		
 		Render.WR().setTranslation(0,0,0);
 		GL11H.endProtection();
 	}
@@ -236,11 +241,12 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		if(conectionToObjModel[0]==null)generateModelConectionToObj();
 		for(int i=0;i<2;i++){
 			conectionToObjModel[i].pushMatrix();
-			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
-			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
-			else if(dir.equals(EnumFacing.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
+			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
+			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
+			else if(dir.equals(EnumFacing.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 180, 0);
 			else if(dir.equals(EnumFacing.NORTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -90, 0);
-			else if(dir.equals(EnumFacing.WEST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 180, 0);
+			else if(dir.equals(EnumFacing.WEST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 0);
+			else if(dir.equals(EnumFacing.SOUTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 90, 0);
 		}
 		
 		if(type=="inMe")bindTexture(Textures.FirePipeConecterInMe);
@@ -332,11 +338,11 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 		double tw1=-1,tw2=-1,th1=-1,th2=-1;
 		boolean[] flipTH=new boolean[5];
 		
-		if(dir.equals(EnumFacing.WEST)){rY=-180;t=1;}
-		else if (dir.equals(EnumFacing.UP)){rZ=90;t=1;}
-		else if (dir.equals(EnumFacing.DOWN)){rZ=-90;t=2;}//texture2
-		else if (dir.equals(EnumFacing.SOUTH)){t=1;}
-		else if (dir.equals(EnumFacing.EAST)){rY=90;t=3;}//texture2
+		if(dir.equals(EnumFacing.WEST)){t=1;}
+		else if (dir.equals(EnumFacing.UP)){rZ=-90;t=1;}
+		else if (dir.equals(EnumFacing.DOWN)){rZ=90;t=2;}//texture2
+		else if (dir.equals(EnumFacing.SOUTH)){rY=90;t=1;}
+		else if (dir.equals(EnumFacing.EAST)){rY=180;t=3;}//texture2
 		else if (dir.equals(EnumFacing.NORTH)){rY=-90;t=3;}//texture2
 		
 		switch(t){

@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import com.magiology.api.network.BasicNetworkInterfaceProvider;
 import com.magiology.api.network.NetworkInterfaceProvider;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class InterfaceRegistration{
 	

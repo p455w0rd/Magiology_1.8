@@ -1,7 +1,7 @@
 package com.magiology.gui.gui;
 
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class ColorSlider{
 	private static ColorF[] image;

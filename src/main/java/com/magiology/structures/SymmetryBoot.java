@@ -2,7 +2,7 @@ package com.magiology.structures;
 
 import net.minecraft.block.Block;
 
-import com.magiology.objhelper.vectors.Pos;
+import com.magiology.util.utilobjects.vectors.Pos;
 
 public class SymmetryBoot{
 	

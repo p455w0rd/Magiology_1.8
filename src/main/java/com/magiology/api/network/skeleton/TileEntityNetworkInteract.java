@@ -21,10 +21,10 @@ import com.magiology.forgepowered.packets.SavableDataWithKeyPacket;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder;
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.objhelper.DoubleObject;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.DoubleObject;
 
 public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkBaseInterface{
 	
@@ -61,8 +61,8 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	}
 	@Override
 	public NetworkInterfaceProvider getInterfaceProvider(){
-		int orientation=SideHelper.convert(getOrientation());
-		return InterfaceBinder.get(worldObj, SideHelper.offset(orientation, pos));
+		int orientation=(getOrientation());
+		return InterfaceBinder.get(worldObj, SideHelper.offsetNew(orientation, pos));
 	}
 	private List<InteractType> interactTypes=new ArrayList<InteractType>();
 	@Override
@@ -107,8 +107,8 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		if(hasWorldObj()){
 			if(object instanceof RedstoneData){
 				worldObj.notifyBlockOfStateChange(pos, blockType);
-				int side=SideHelper.convert(getOrientation());
-				BlockPos pos1=SideHelper.offset(side, pos);
+				int side=getOrientation();
+				BlockPos pos1=SideHelper.offsetNew(side, pos);
 				if(H.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos, H.getBlock(worldObj, pos1));
 			}
 		}

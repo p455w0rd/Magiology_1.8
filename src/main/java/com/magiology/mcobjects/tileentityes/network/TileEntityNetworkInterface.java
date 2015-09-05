@@ -10,17 +10,18 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
+import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.NetworkHelper;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.NetworkHelper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements IUpdatePlayerListBox{
 	
@@ -49,7 +50,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	public void updateConnections(){
 		UpdateablePipeHandeler.setConnections(connections, this);
 		for(int i=0;i<connections.length;i++){
-			int side=SideHelper.convert(getOrientation());
+			int side=SideHelper.getOppositeSide(getOrientation());
 			if(connections[i]==null&&i==side)connections[i]=EnumFacing.UP;
 			setAccessibleOnSide(i, i!=side);
 		}
@@ -59,26 +60,19 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	@Override
 	public void setColisionBoxes(){
 		if(!hasWorldObj())return;
-		int side=SideHelper.convert(getOrientation());
-		BlockPos pos1=SideHelper.offset(side, pos);
-		Block block=H.getBlock(worldObj, pos1);
+		int side=getOrientation();
+		Block block=H.getBlock(worldObj, SideHelper.offsetNew(SideHelper.getOppositeSide(getOrientation()), pos));
 		
 		float minX,minY,minZ,maxX,maxY,maxZ;
-		if(block instanceof BlockContainerMultiColision){
-			AxisAlignedBB box=((BlockContainerMultiColision)block).getResetBoundsOptional(worldObj,pos);
-			minX=(float)box.minX;minY=(float)box.minY;minZ=(float)box.minZ;
-			maxX=(float)box.maxX;maxY=(float)box.maxY;maxZ=(float)box.maxZ;
-		}else{
-			minX=(float)block.getBlockBoundsMinX();minY=(float)block.getBlockBoundsMinY();
-			minZ=(float)block.getBlockBoundsMinZ();maxX=(float)block.getBlockBoundsMaxX();
-			maxY=(float)block.getBlockBoundsMaxY();maxZ=(float)block.getBlockBoundsMaxZ();
-		}
+		minX=(float)block.getBlockBoundsMinX();minY=(float)block.getBlockBoundsMinY();
+		minZ=(float)block.getBlockBoundsMinZ();maxX=(float)block.getBlockBoundsMaxX();
+		maxY=(float)block.getBlockBoundsMaxY();maxZ=(float)block.getBlockBoundsMaxZ();
 		switch(side){
 		case 0:{conBox=new float[]{minX,minZ,maxX,maxZ,  -minY+0.001F};}break;
 		case 1:{conBox=new float[]{minX,minZ,maxX,maxZ,-1+maxY+0.001F};}break;
 		case 2:{conBox=new float[]{minX,minY,maxX,maxY,-1+maxZ+0.001F};}break;
-		case 3:{conBox=new float[]{minY,minZ,maxY,maxZ,  -minX+0.001F};}break;
-		case 4:{conBox=new float[]{minX,minY,maxX,maxY,  -minZ+0.001F};}break;
+		case 3:{conBox=new float[]{minX,minZ,maxX,maxY,  -minX+0.001F};}break;
+		case 4:{conBox=new float[]{minX,minY,maxY,maxX,  -minZ+0.001F};}break;
 		case 5:{conBox=new float[]{minY,minZ,maxY,maxZ,-1+maxX+0.001F};}break;
 		}if(block.getMaterial()==Material.air)conBox[0]=conBox[1]=conBox[2]=conBox[3]=0.5F;
 		for(int i=0;i<2;i++){conBox[i]=Math.min(p*5, conBox[i]+p/2);conBox[i+2]=Math.max(p*11, conBox[i+2]-p/2);}
@@ -87,10 +81,10 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 		expectedBoxes=new AxisAlignedBB[]{
 				new AxisAlignedBB(side==5?p*2+conBox[4]:0, p*6, p*6, p*6,  p*10, p*10),//0
 				new AxisAlignedBB(p*6, side==1?p*2+conBox[4]:0, p*6, p*10, p*6,  p*10),//1
-				new AxisAlignedBB(p*6, p*6, side==2?p*2+conBox[4]:0, p*10, p*10, p*6 ),//2
-				new AxisAlignedBB(p*10,p*6, p*6, side==3?p*14-conBox[4]:1, p*10, p*10),//3
+				new AxisAlignedBB(p*6, p*6, side==3?p*2+conBox[4]:0, p*10, p*10, p*6 ),//2
+				new AxisAlignedBB(p*10,p*6, p*6, side==4?p*14-conBox[4]:1, p*10, p*10),//3
 				new AxisAlignedBB(p*6, p*10,p*6, p*10, side==0?p*14-conBox[4]:1, p*10),//4
-				new AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, side==4?p*14-conBox[4]:1),//5
+				new AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, side==2?p*14-conBox[4]:1),//5
 				new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),                    //6
 				new AxisAlignedBB(     conBox[4], 	  conBox[0],      conBox[1], p*2+conBox[4],     conBox[2],     conBox[3]),//7
 				new AxisAlignedBB(     conBox[0], 	  conBox[4],      conBox[1],     conBox[2], p*2+conBox[4],     conBox[3]),//8
@@ -99,21 +93,20 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 				new AxisAlignedBB(	  conBox[0], p*14-conBox[4],      conBox[1],     conBox[2],   1-conBox[4],     conBox[3]),//11
 				new AxisAlignedBB(	  conBox[0],      conBox[1], p*14-conBox[4],     conBox[2],     conBox[3],   1-conBox[4]),//12
 		};
-		
 		collisionBoxes=new AxisAlignedBB[]{
-			connections[5]!=null?expectedBoxes[0 ]:null,//0
-			connections[1]!=null?expectedBoxes[1 ]:null,//1
-			connections[2]!=null?expectedBoxes[2 ]:null,//2
-			connections[3]!=null?expectedBoxes[3 ]:null,//3
-			connections[0]!=null?expectedBoxes[4 ]:null,//4
-			connections[4]!=null?expectedBoxes[5 ]:null,//5
-			                     expectedBoxes[6 ]     ,//6
-			             side==5?expectedBoxes[7 ]:null,//7
-		                 side==1?expectedBoxes[8 ]:null,//8
-			             side==2?expectedBoxes[9 ]:null,//9
-			             side==3?expectedBoxes[10]:null,//10
-			             side==0?expectedBoxes[11]:null,//11
-			             side==4?expectedBoxes[12]:null,//12
+			connections[5]!=null?getExpectedColisionBoxes()[3 ]:null,//0
+			connections[1]!=null?getExpectedColisionBoxes()[4 ]:null,//1
+			connections[2]!=null?getExpectedColisionBoxes()[2 ]:null,//2
+			connections[3]!=null?getExpectedColisionBoxes()[5 ]:null,//3
+			connections[0]!=null?getExpectedColisionBoxes()[1 ]:null,//4
+			connections[4]!=null?getExpectedColisionBoxes()[0 ]:null,//5
+			                     getExpectedColisionBoxes()[6 ]     ,//6
+			             side==5?getExpectedColisionBoxes()[7 ]:null,//7
+		                 side==1?getExpectedColisionBoxes()[8 ]:null,//8
+			             side==3?getExpectedColisionBoxes()[9 ]:null,//9
+			             side==4?getExpectedColisionBoxes()[10]:null,//10
+			             side==0?getExpectedColisionBoxes()[11]:null,//11
+			             side==2?getExpectedColisionBoxes()[12]:null,//12
 		};
 	}
 	@Override
@@ -199,7 +192,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 		if(H.isRemote(this))return;
 		if(getInterfaceProvider()!=null)return;
 		int side=SideHelper.convert(getOrientation());
-		BlockPos pos1=SideHelper.offset(side, pos);
+		BlockPos pos1=SideHelper.offsetNew(side, pos);
 		try{
 			String[] actionWords=action.split(" ");
 			int acitonSize=actionWords.length;
@@ -262,5 +255,17 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public IConnection[] getConnections() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isStrate(EnumFacing facing) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

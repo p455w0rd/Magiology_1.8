@@ -1,8 +1,8 @@
 package com.magiology.render.shaders;
 
-import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.render.shaders.core.ShaderUniformEditor;
+import com.magiology.util.utilclasses.Helper;
 
 public class ColorCutRenderer extends ShaderAspectRenderer{
 	public static ColorCutRenderer instance;

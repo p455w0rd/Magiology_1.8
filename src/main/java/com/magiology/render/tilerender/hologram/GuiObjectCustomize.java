@@ -19,9 +19,9 @@ import com.magiology.mcobjects.tileentityes.hologram.RenderObject;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
 @GUINeedsWorldUpdates
 public class GuiObjectCustomize extends GuiContainer{

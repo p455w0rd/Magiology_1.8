@@ -5,10 +5,10 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.utilclasses.Get.Render;
 
 public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
 

@@ -7,10 +7,10 @@ import net.minecraft.util.EnumFacing;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Get.Render;
 
 public class RenderBateryL3 extends TileEntitySpecialRenderer {
 

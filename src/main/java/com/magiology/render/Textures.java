@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.MReference;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 @SideOnly(Side.CLIENT)
 public class Textures{

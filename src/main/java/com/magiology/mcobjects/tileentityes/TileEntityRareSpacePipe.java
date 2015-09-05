@@ -14,22 +14,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.magiology.api.connection.IConnection;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateablePipe;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
-public class TileEntityRareSpacePipe extends TileEntityM implements MultiColisionProvider,UpdateablePipe,IUpdatePlayerListBox{
+public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,IUpdatePlayerListBox{
 	
 	public EnumFacing connections[] = new EnumFacing[6],
 		connectionsToObjInMe[] = new EnumFacing[6],
 		connectionsToObjOut[] = new EnumFacing[6],
-		strateConnection[] = new EnumFacing[3],
-		DCFFL;
+		strateConnection[] = new EnumFacing[3];
 	public boolean bannedConnections[] = new boolean[6];
 	public AxisAlignedBB 
 		pointId,
@@ -69,7 +69,7 @@ public class TileEntityRareSpacePipe extends TileEntityM implements MultiColisio
 	@Override
 	public void updateConnections(){
 		if(!hasWorldObj())return;
-		UpdateablePipe.UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateableTile.UpdateablePipeHandeler.setConnections(connections, this);
 		setColisionBoxes();
 	}
 	
@@ -77,22 +77,20 @@ public class TileEntityRareSpacePipe extends TileEntityM implements MultiColisio
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()
     {
-        AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY()-(DCFFL!=null?0.5:0), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
+        AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
         return bb;
     }
 	
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?getExpectedColisionBoxes()[0]:null,
-				connections[1]!=null?getExpectedColisionBoxes()[1]:null,
+				connections[5]!=null?getExpectedColisionBoxes()[3]:null,
+				connections[1]!=null?getExpectedColisionBoxes()[4]:null,
 				connections[2]!=null?getExpectedColisionBoxes()[2]:null,
-				connections[3]!=null?getExpectedColisionBoxes()[3]:null,
-				connections[0]!=null?getExpectedColisionBoxes()[4]:null,
-				connections[4]!=null?getExpectedColisionBoxes()[5]:null,
-									 getExpectedColisionBoxes()[6],
-				DCFFL!=null?         getExpectedColisionBoxes()[7]:null,
-				DCFFL!=null?         getExpectedColisionBoxes()[8]:null,
+				connections[3]!=null?getExpectedColisionBoxes()[5]:null,
+				connections[0]!=null?getExpectedColisionBoxes()[1]:null,
+				connections[4]!=null?getExpectedColisionBoxes()[0]:null,
+									 getExpectedColisionBoxes()[6]
 		};
 	}
 	private AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
@@ -158,9 +156,7 @@ public class TileEntityRareSpacePipe extends TileEntityM implements MultiColisio
 			result.add(collisionBoxes[4]);
 		}break;
 		case 1:if(connections[side]!=null){
-			if(DCFFL==null)result.add(collisionBoxes[1]);
-			else result.add(collisionBoxes[8]);
-			result.add(collisionBoxes[7]);
+			result.add(collisionBoxes[1]);
 		}break;
 		case 2:if(connections[side]!=null){
 			result.add(collisionBoxes[2]);

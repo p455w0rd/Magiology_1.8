@@ -1,10 +1,13 @@
 package com.magiology.mcobjects.tileentityes;
 
+import java.util.List;
+
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.helpers.PowerHelper;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.SideHelper;
 
 public class TileEntityBateryGeneric extends TileEntityPow{
 	
@@ -18,7 +21,7 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 		int[] s=SideHelper.randomizeSides();
 		for(int a=0;a<6;a++){
 			int side=s[a];
-			BlockPos pos1=SideHelper.offset(side,pos);
+			BlockPos pos1=SideHelper.offsetNew(side,pos);
 			if(this.isAnyBatery(pos1)){
 				TileEntityBateryGeneric tile= (TileEntityBateryGeneric) worldObj.getTileEntity(pos1);
 				
@@ -38,5 +41,10 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 	
 	public void power(){
 		fromBateryToBatery();
+	}
+
+	@Override
+	public void updateConnections(){
+		
 	}
 }

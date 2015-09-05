@@ -1,6 +1,6 @@
 package com.magiology.api.power;
 
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class SixSidedBoolean{
 	public boolean[] sides=new boolean[]{false,false,false,false,false,false,false,false,false,false,false,false};

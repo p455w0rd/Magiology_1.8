@@ -11,8 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.magiology.objhelper.DataStalker;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.DataStalker;
+import com.magiology.util.utilclasses.Helper;
 
 public abstract class ShaderAspectRenderer{
 	

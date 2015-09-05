@@ -11,13 +11,13 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.Config;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.objhelper.vectors.Vec8F;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec8F;
 
 public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static float p=1F/16F;

@@ -13,16 +13,16 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
+import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateablePipe;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
-public abstract class TileEntityNetwork extends TileEntityM implements MultiColisionProvider,ISidedNetworkComponent,UpdateablePipe{
+public abstract class TileEntityNetwork extends TileEntityM implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public EnumFacing[] connections = new EnumFacing[6];
 	public EnumFacing[] strateConnection = new EnumFacing[3];
 	public boolean[] bannedConnections = new boolean[6],accessibleSides={true,true,true,true,true,true};
@@ -47,7 +47,7 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	public void checkBrainConnection(){
 		if(getBrain()!=null)canPathFindTheBrain=getBrain().isInNetwork(this);
 		if(!canPathFindTheBrain)for(int i=0;i<6;i++)if(getAccessibleOnSide(i)){
-			TileEntity test=worldObj.getTileEntity(SideHelper.offset(i, pos));
+			TileEntity test=worldObj.getTileEntity(SideHelper.offsetNew(i, pos));
 			if(test instanceof ISidedNetworkComponent){
 				ISidedNetworkComponent t=(ISidedNetworkComponent)test;
 				if(t.getBrain()!=null){
@@ -62,11 +62,11 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	public void findBrain(){
 		int side=-1;TileEntity test=null;
 		for(int i=0;i<this.connections.length;i++)if(this.connections[i]!=null&&
-				(test=worldObj.getTileEntity(SideHelper.offset(i, getPos())))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
+				(test=worldObj.getTileEntity(SideHelper.offsetNew(i, getPos())))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
 			side=i;i=this.connections.length;
 		}
 		if(side!=-1){
-			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offset(side, pos));
+			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offsetNew(side, pos));
 			if(component!=null)NetworkBaseComponentHandeler.setBrain(component.getBrain(), this);
 		}
 	}
@@ -152,12 +152,12 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?getExpectedColisionBoxes()[0]:null,
-				connections[1]!=null?getExpectedColisionBoxes()[1]:null,
+				connections[5]!=null?getExpectedColisionBoxes()[3]:null,
+				connections[1]!=null?getExpectedColisionBoxes()[4]:null,
 				connections[2]!=null?getExpectedColisionBoxes()[2]:null,
-				connections[3]!=null?getExpectedColisionBoxes()[3]:null,
-				connections[0]!=null?getExpectedColisionBoxes()[4]:null,
-				connections[4]!=null?getExpectedColisionBoxes()[5]:null,
+				connections[3]!=null?getExpectedColisionBoxes()[5]:null,
+				connections[0]!=null?getExpectedColisionBoxes()[1]:null,
+				connections[4]!=null?getExpectedColisionBoxes()[0]:null,
 				                     getExpectedColisionBoxes()[6]
 		};
 	}

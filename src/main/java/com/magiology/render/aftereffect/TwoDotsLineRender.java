@@ -10,10 +10,10 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.vectors.TwoDots;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.TwoDots;
 
 public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 

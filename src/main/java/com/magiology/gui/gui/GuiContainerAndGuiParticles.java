@@ -12,7 +12,7 @@ import net.minecraft.inventory.Slot;
 import com.magiology.Annotations.GUINeedsWorldUpdates;
 import com.magiology.Annotations.GUIWorldUpdater;
 import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.TessHelper;
 @GUINeedsWorldUpdates
 public abstract class GuiContainerAndGuiParticles extends GuiContainer{
 	

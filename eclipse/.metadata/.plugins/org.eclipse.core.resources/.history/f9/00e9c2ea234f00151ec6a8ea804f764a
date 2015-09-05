@@ -1,0 +1,8 @@
+package com.magiology.api.connection;
+
+public interface IConnectionProvider{
+	public Object getHost();
+	public boolean is3D();
+	public boolean is2D();
+	public IConnection[] getConnections();
+}

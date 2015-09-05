@@ -24,15 +24,15 @@ import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.guiContainer.GuiISidedPowerInstructorContainer;
 import com.magiology.modedmcstuff.gui.ColoredGuiButton;
 import com.magiology.modedmcstuff.gui.TexturedColoredButton;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.SimpleCounter;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.SimpleCounter;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
 @GUINeedsWorldUpdates
 public class GuiISidedPowerInstructor extends GuiContainer{
@@ -110,8 +110,8 @@ public class GuiISidedPowerInstructor extends GuiContainer{
 		boolean 
 		allowedReceive=((ISidedPower)tile).getAllowedReceaver(side),
 		allowedSend   =((ISidedPower)tile).getAllowedSender  (side),
-		receive=((ISidedPower)tile).getReceiveOnSide(side),
-		send   =((ISidedPower)tile).getSendOnSide   (side);
+		receive=((ISidedPower)tile).getIn(side),
+		send   =((ISidedPower)tile).getOut   (side);
 		
 		((GuiButton)buttonList.get(7)).enabled=allowedSend;
 		((GuiButton)buttonList.get(8)).enabled=allowedReceive;

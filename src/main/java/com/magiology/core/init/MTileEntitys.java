@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
 import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
@@ -26,7 +27,6 @@ import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL3;
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;

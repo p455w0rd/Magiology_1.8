@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
-import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class FireMatrixTransferer extends BlockContainer {
 

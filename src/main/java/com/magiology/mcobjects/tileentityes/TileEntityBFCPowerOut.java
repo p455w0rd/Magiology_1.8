@@ -5,10 +5,10 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.vectors.Pos;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.vectors.Pos;
 
 public class TileEntityBFCPowerOut extends TileEntityM implements IUpdatePlayerListBox{
 	

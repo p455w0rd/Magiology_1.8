@@ -23,11 +23,11 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.core.Config;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.render.shaders.BlurRenderer;
 import com.magiology.render.shaders.ColorCutRenderer;
 import com.magiology.render.shaders.ColorRenderer;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class ShaderRunner{
 	

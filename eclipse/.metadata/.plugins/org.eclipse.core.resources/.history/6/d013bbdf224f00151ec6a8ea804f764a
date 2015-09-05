@@ -1,0 +1,5 @@
+package com.magiology.api.connection;
+
+public static enum ConnectionType{
+	Item,Fluid,Enery,Space;
+}

@@ -17,7 +17,7 @@ import com.magiology.modedmcstuff.guiContainer.OnlyShiftClickSlot;
 import com.magiology.modedmcstuff.guiContainer.UpgItemContainer;
 import com.magiology.modedmcstuff.guiContainer.UpgItemSlot;
 import com.magiology.modedmcstuff.items.UpgItem;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 
 @GUINeedsWorldUpdates

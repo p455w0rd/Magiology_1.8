@@ -10,13 +10,14 @@ import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Cricle;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.CricleHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRendererBase{
 	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
@@ -32,7 +33,6 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		progress.friction=0.9F;
 		progress.addWall("zero", 0, false);
 		progress.addWall("one", 1, true);
-		progress.bounciness=0.6F;
 		highlightedBoxId=MultiColisionProviderRayTracer.getPointedId(tile);
 	}
 
@@ -45,18 +45,10 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//move to block
 		GL11.glTranslated(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5);
 		//move to side
-		float x=0,y=0,z=0;
-		int id=highlightedBoxId-7,idX=id/3,idY=id%3;
-		switch(tile.getOrientation()){
-		case 2:{
-			z=-0.5F;
-			x+=p*2;
-			y+=p*2;
-			x-=p*2*idX;
-			y-=p*2*idY;
-		}break;
-		}
-		GL11.glTranslatef(x,y,z);
+		
+		Vec3M off=getOffset();
+		
+		GL11H.translate(off);
 		//set up openGl opaque
 		GL11H.SetUpOpaqueRendering(3);
 		GL11H.scaled(-H.p/4);
@@ -66,11 +58,11 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			point=progress.getPoint(),
 			point2=Helper.keepValueInBounds(point, 0, 1),
 			playerX=Helper.calculateRenderPos(player, 'x'),
-			playerY=Helper.calculateRenderPos(player, 'y'),
+			playerY=Helper.calculateRenderPos(player, 'y')+player.getEyeHeight(),
 			playerZ=Helper.calculateRenderPos(player, 'z'),
-			txtX=tile.x()+0.5F+x,
-			txtY=tile.y()+0.5F+y,
-			txtZ=tile.z()+0.5F+z,
+			txtX=tile.x()+0.5F+off.getX(),
+			txtY=tile.y()+0.5F+off.getY(),
+			txtZ=tile.z()+0.5F+off.getZ(),
 			difX=playerX-txtX,
 			difY=playerY-txtY,
 			difZ=playerZ-txtZ,
@@ -93,9 +85,6 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		Helper.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)*0.3).toCode());
 		NormalizedVertixBuffer buff=TessHelper.getNVB();
-		GL11.glColor4f(0, 0, 0, 0.03F);
-		GL11H.texture(false);
-		GL11H.GL11BlendFunc(1);
 		float expand=-1;
 		buff.cleanUp();
 		for(int i=0;i<5;i++){
@@ -105,11 +94,18 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			buff.addVertexWithUV(expand+Helper.getFontRenderer().getStringWidth(text), -expand, -0.001, 0, 0);
 			expand++;
 		}
+		GL11.glColor4f(0, 0, 0, 0.06F);
+		GL11H.texture(false);
+		GL11H.GL11BlendFunc(1);
 		buff.disableClearing();
+		buff.setDrawModeToWireFrame();
 		buff.draw();
-		buff.enableClearing();
+		buff.setDrawModeToQuadPlate();
+		GL11.glColor4f(0, 0.4F+H.fluctuatorSmooth(50, 0)*0.6F, 0.6F+H.fluctuatorSmooth(97, 61)*0.4F, 0.01F);
+		buff.draw();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		buff.draw();
+		buff.enableClearing();
 		GL11H.texture(true);
 		//reset openGl
 		GL11H.EndOpaqueRendering();
@@ -150,37 +146,54 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			}
 		}else text="empty";
 		
-
-		float x=0,y=0,z=0;
-		int id=highlightedBoxId-7,idX=id/3,idY=id%3;
-		switch(tile.getOrientation()){
-		case 2:{
-			z=-0.5F;
-			x+=p*2;
-			y+=p*2;
-			x-=p*2*idX;
-			y-=p*2*idY;
-		}break;
-		}
+		Vec3M off=getOffset();
 		float
 			point=progress.getPoint(),
 			playerX=(float)player.posX,
 			playerZ=(float)player.posZ,
-			txtX=tile.x()+0.5F+x,
-			txtZ=tile.z()+0.5F+z,
+			txtX=tile.x()+0.5F+off.getX(),
+			txtZ=tile.z()+0.5F+off.getZ(),
 			difX=playerX-txtX,
 			difZ=playerZ-txtZ,
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
 			width=Helper.getFontRenderer().getStringWidth(text)*H.p/4,
 			height=Helper.getFontRenderer().FONT_HEIGHT*H.p/4,
-			leftX=(float)Cricle.sin(-camYaw+90)*width/2,
-			leftZ=(float)Cricle.cos(-camYaw+90)*width/2,
+			leftX=(float)CricleHelper.sin(-camYaw+90)*width/2,
+			leftZ=(float)CricleHelper.cos(-camYaw+90)*width/2,
 			rand=Helper.CRandF(2);
 		
 		
 		float r=0.8F,g=Helper.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;
 		Helper.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
-				tile.x()+0.5+x+leftX*rand+Helper.CRandF(0.1), tile.y()+0.5+y+Helper.CRandF(0.1), tile.z()+0.5+z+leftZ*rand+Helper.CRandF(0.1),
+				tile.x()+0.5+off.x+leftX*rand+Helper.CRandF(0.1), tile.y()+0.5+off.y+Helper.CRandF(0.1), tile.z()+0.5+off.z+leftZ*rand+Helper.CRandF(0.1),
 				Helper.CRandF(0.01), 0.005+Helper.CRandF(0.01), Helper.CRandF(0.01), 200, 5, H.RB()?-0.5:0.1, r,g,b,0.1*point));
+	}
+	private Vec3M getOffset(){
+		float x=0,y=0,z=0;
+		int id=highlightedBoxId-7,idX=id/3,idY=id%3,side=tile.getOrientation(),multi=(side%2==0?-1:1);
+		switch(side/2){
+		case 0:{
+			y=4*p*multi;
+			x+=p*2;
+			z+=p*2;
+			x-=p*2*idX;
+			z-=p*2*idY;
+		}break;
+		case 1:{
+			z=4*p*multi;
+			x+=p*2;
+			y+=p*2;
+			x-=p*2*idX;
+			y-=p*2*idY;
+		}break;
+		case 2:{
+			x=4*p*multi;
+			z+=p*2;
+			y+=p*2;
+			z-=p*2*idX;
+			y-=p*2*idY;
+		}break;
+		}
+		return new Vec3M(x, y, z);
 	}
 }

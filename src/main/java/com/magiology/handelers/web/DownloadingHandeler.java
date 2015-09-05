@@ -8,7 +8,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 
 public class DownloadingHandeler{

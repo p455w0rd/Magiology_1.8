@@ -3,7 +3,7 @@ mouseSensitivity:0.5
 fov:0.0
 gamma:0.0
 saturation:0.0
-renderDistance:9
+renderDistance:12
 guiScale:0
 particles:0
 bobView:true
@@ -13,7 +13,7 @@ fboEnable:true
 difficulty:0
 fancyGraphics:true
 ao:2
-renderClouds:false
+renderClouds:true
 resourcePacks:[]
 lastServer:
 lang:en_US
@@ -98,7 +98,7 @@ soundCategory_block:1.0
 soundCategory_hostile:1.0
 soundCategory_neutral:1.0
 soundCategory_player:1.0
-soundCategory_ambient:1.0
+soundCategory_ambient:0.0
 modelPart_cape:true
 modelPart_jacket:true
 modelPart_left_sleeve:true

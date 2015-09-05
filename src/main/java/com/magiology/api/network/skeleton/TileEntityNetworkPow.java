@@ -14,14 +14,14 @@ import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateablePipe;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
-public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateablePipe{
+public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public EnumFacing[] connections = new EnumFacing[6];
 	public EnumFacing[] strateConnection = new EnumFacing[3];
 	public boolean[] bannedConnections = new boolean[6],accessibleSides={true,true,true,true,true,true};
@@ -45,7 +45,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
 		super.writeToNBT(NBT);
-		writePos(NBT, brainPos, "brainP");
+		if(brainPos!=null)writePos(NBT, brainPos, "brainP");
 		NBT.setBoolean("brainPath", canPathFindTheBrain);
 	}
 	public void checkBrainConnection(){
@@ -54,11 +54,11 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	public void findBrain(){
 		int side=-1;TileEntity test=null;
 		for(int i=0;i<this.connections.length;i++)if(this.connections[i]!=null&&
-				(test=worldObj.getTileEntity(SideHelper.offset(i, pos)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
+				(test=worldObj.getTileEntity(SideHelper.offsetNew(i, pos)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
 			side=i;i=this.connections.length;
 		}
 		if(side!=-1){
-			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offset(side, pos));
+			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offsetNew(side, pos));
 			if(component!=null)NetworkBaseComponentHandeler.setBrain(component.getBrain(), this);
 		}
 	}

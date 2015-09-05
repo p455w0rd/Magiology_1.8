@@ -14,9 +14,9 @@ import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler.Positions;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 public class WingModeChangerGui extends FirstPersonGui{
 	public static WingModeChangerGui instance=new WingModeChangerGui();

@@ -7,7 +7,7 @@ import net.minecraft.client.shader.Shader;
 import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.client.shader.ShaderUniform;
 
-import com.magiology.objhelper.DataStalker;
+import com.magiology.util.utilclasses.DataStalker;
 
 public class ShaderUniformEditor{
 	public static void setUniform(ShaderGroup sg,String uniformName,float... values){

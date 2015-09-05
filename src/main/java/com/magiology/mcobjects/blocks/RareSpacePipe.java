@@ -28,12 +28,12 @@ public class RareSpacePipe extends BlockContainerMultiColision{
 	@Override
 	public AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos){
 		TileEntityRareSpacePipe tile=(TileEntityRareSpacePipe)world.getTileEntity(pos);
-		float minX=p*6  -(tile.DCFFL!=null?(p*1.5F):0)  -(tile.connections[5]!=null?(p*6):0);
-		float minY=p*6  -(tile.DCFFL!=null?(p*10.7F):0) -(tile.connections[1]!=null?(p*6):0);
-		float minZ=p*6  -(tile.DCFFL!=null?(p*1.5F):0)  -(tile.connections[2]!=null?(p*6):0);
-		float maxX=p*10 +(tile.DCFFL!=null?(p*1.5F):0)  +(tile.connections[3]!=null?(p*6):0);
-		float maxY=p*10                                 +(tile.connections[0]!=null?(p*6):0);
-		float maxZ=p*10 +(tile.DCFFL!=null?(p*1.5F):0)  +(tile.connections[4]!=null?(p*6):0);
+		float minX=p*6  -(tile.connections[5]!=null?(p*6):0);
+		float minY=p*6  -(tile.connections[1]!=null?(p*6):0);
+		float minZ=p*6  -(tile.connections[2]!=null?(p*6):0);
+		float maxX=p*10 +(tile.connections[3]!=null?(p*6):0);
+		float maxY=p*10 +(tile.connections[0]!=null?(p*6):0);
+		float maxZ=p*10 +(tile.connections[4]!=null?(p*6):0);
 		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	

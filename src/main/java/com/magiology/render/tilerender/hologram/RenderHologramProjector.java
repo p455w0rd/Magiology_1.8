@@ -8,9 +8,9 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.tileentityes.hologram.RenderObject;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 public class RenderHologramProjector extends TileEntitySpecialRenderer{
 	

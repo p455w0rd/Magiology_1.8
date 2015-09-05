@@ -1,0 +1,9 @@
+package com.magiology.api.connection;
+
+import net.minecraft.inventory.Slot;
+import net.minecraft.tileentity.TileEntity;
+
+public interface IConnectionProvider{
+	public TileEntity getHost();
+	public IConnection[] getConnections();
+}

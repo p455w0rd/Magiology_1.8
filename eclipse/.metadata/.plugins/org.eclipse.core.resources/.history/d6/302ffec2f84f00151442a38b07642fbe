@@ -1,0 +1,24 @@
+package com.magiology.api.connection;
+
+import com.magiology.objhelper.helpers.Helper;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
+
+public final class IConnectionFactory{
+	private IConnectionFactory(){}
+	
+	public static IConnection New(IConnectionProvider host,ConnectionType type,int side){
+		return new Connection(host, type, side);
+	}
+	public static IConnection New(IConnectionProvider host,ConnectionType type,EnumFacing side){
+		return new Connection(host, type, side);
+	}
+	public static IConnection[] NewArray(IConnectionProvider host,ConnectionType type){
+		IConnection[] result=new IConnection[6];
+		for(int i=0;i<6;i++)result[i]=New(host, type, i);
+		Helper.print("asfknasf ");
+		Helper.printInln(result);
+		return result;
+	}
+}

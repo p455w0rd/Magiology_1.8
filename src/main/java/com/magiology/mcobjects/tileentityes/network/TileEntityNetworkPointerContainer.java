@@ -14,15 +14,16 @@ import net.minecraft.util.IChatComponent;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.NetworkHelper;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.NetworkHelper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class TileEntityNetworkPointerContainer extends TileEntityNetwork implements ISidedInventory,IUpdatePlayerListBox{
 	
@@ -58,20 +59,27 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 		UpdateablePipeHandeler.setConnections(connections, this);
 		
 		int side=SideHelper.convert(getOrientation());
+		side=SideHelper.getOppositeSide(side);
 		for(int i=0;i<6;i++)setAccessibleOnSide(i, i==side);
 		setColisionBoxes();
 	}
 	@Override
 	public void setColisionBoxes(){
-		int side=SideHelper.convert(getOrientation());
+		int side=getOrientation();
+		
+		switch (side){
+		case 2:side=4;break;
+		case 4:side=3;break;
+		case 3:side=2;break;
+		}
 		
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?new AxisAlignedBB(0,   p*6, p*6, p*5,  p*10, p*10):null,
-				connections[1]!=null?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*5,  p*10):null,
+				connections[5]!=null?new AxisAlignedBB(p*11,p*6, p*6, 1,    p*10, p*10):null,
+				connections[1]!=null?new AxisAlignedBB(p*6, p*11,p*6, p*10, 1,    p*10):null,
 				connections[2]!=null?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*5 ):null,
-				connections[3]!=null?new AxisAlignedBB(p*11,p*6, p*6, 1,    p*10, p*10):null,
-				connections[0]!=null?new AxisAlignedBB(p*6, p*11,p*6, p*10, 1,    p*10):null,
-				connections[4]!=null?new AxisAlignedBB(p*6, p*6, p*11,p*10, p*10, 1   ):null,
+				connections[3]!=null?new AxisAlignedBB(p*6, p*6, p*11,p*10, p*10, 1   ):null,
+				connections[0]!=null?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*5,  p*10):null,
+				connections[4]!=null?new AxisAlignedBB(0,   p*6, p*6, p*5,  p*10, p*10):null,
 						new AxisAlignedBB(p*5, p*5, p*5, p*11, p*11, p*11),
 		};
 //		Helper.printInln(side);
@@ -113,8 +121,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	@Override
 	public <T extends TileEntity>boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array, int side){
-		if(clazz.equals(ISidedNetworkComponent.class))return false;
-		return NetworkHelper.canConnect(this, (ISidedNetworkComponent)tile);
+		return !(clazz.equals(ISidedNetworkComponent.class))&&NetworkHelper.canConnect(this, (ISidedNetworkComponent)tile);
 	}
 	
 	@Override
@@ -235,5 +242,15 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	@Override
 	public boolean canExtractItem(int index, ItemStack stack,EnumFacing direction){
 		return canInsertItem(index, stack,direction);
+	}
+
+	@Override
+	public IConnection[] getConnections(){
+		return null;
+	}
+
+	@Override
+	public boolean isStrate(EnumFacing facing){
+		return false;
 	}
 }

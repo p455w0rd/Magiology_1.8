@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 import com.magiology.core.init.MGui;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class SmartCrafter extends BlockContainer {
 //	implements ISimpleBlockRenderingHandler

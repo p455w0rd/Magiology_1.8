@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.objhelper.DoubleObject;
+import com.magiology.util.utilobjects.DoubleObject;
 
 public interface NetworkBaseInterface{
 	

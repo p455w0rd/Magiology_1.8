@@ -17,10 +17,9 @@ import com.magiology.forgepowered.packets.TileRedstone;
 import com.magiology.gui.guiContainer.GuiControlBockContainer;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.modedmcstuff.gui.CustomButton;
-import com.magiology.objhelper.DrawThatSexyDotHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 @GUINeedsWorldUpdates
 public class GuiControlBock extends GuiContainer{

@@ -8,9 +8,9 @@ import net.minecraft.item.Item;
 
 import com.magiology.core.Fixes1_8;
 import com.magiology.core.MReference;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class ItemM extends Item{
 		

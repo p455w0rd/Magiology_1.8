@@ -10,8 +10,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Get;
 
 public class EntityFXM extends EntityFX{
 	

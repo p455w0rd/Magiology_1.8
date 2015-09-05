@@ -3,8 +3,8 @@ package com.magiology.core;
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
 import com.magiology.handelers.web.DownloadingHandeler;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class VersionChecker{
 	private static float currentVersion=Float.parseFloat(MReference.VERSION),newestVersion=-1;

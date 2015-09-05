@@ -9,7 +9,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class ClickHologramPacket extends AbstractToServerMessage{
 	

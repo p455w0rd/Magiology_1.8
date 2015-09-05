@@ -3,8 +3,8 @@ package com.magiology.mcobjects.tileentityes;
 import static com.magiology.api.power.SixSidedBoolean.Modifier.First6True;
 import static com.magiology.api.power.SixSidedBoolean.Modifier.Include;
 import static com.magiology.api.power.SixSidedBoolean.Modifier.Last6True;
-import static com.magiology.objhelper.helpers.SideHelper.DOWN;
-import static com.magiology.objhelper.helpers.SideHelper.UP;
+import static com.magiology.util.utilclasses.SideHelper.DOWN;
+import static com.magiology.util.utilclasses.SideHelper.UP;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -15,19 +15,21 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.api.connection.ConnectionType;
+import com.magiology.api.connection.IConnectionFactory;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.EntitySparkFX;
 import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
-import com.magiology.objhelper.helpers.SideHelper;
-import com.magiology.objhelper.vectors.Pos;
-import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.vectors.Pos;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TileEntityFireLamp extends TileEntityPowGen{
 	EffectRenderer efr=Get.Render.ER();
@@ -42,23 +44,22 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	public BlockPos control=new Pos(),c=new Pos();
 	public TileEntityControlBlock controlBlock=null;
 	
-	public EnumFacing[] canAcceptEnergyOnSide=new EnumFacing[6];
-	public EnumFacing[] canSendEnergyOnSide=new EnumFacing[6];
-	public EnumFacing connection=null;
 	public TileEntityFireLamp(){
-		super(SixSidedBoolean.create(First6True,Include,UP(),Last6True,Include,DOWN()).sides,SixSidedBoolean.lastGen.sides.clone(), 1, 2, 5, 115, 100);
+		super(SixSidedBoolean.create(First6True,Include,DOWN(),Last6True,Include,UP()).sides,SixSidedBoolean.lastGen.sides.clone(), 1, 2, 5, 115, 100);
 		initUpgrades(Container.FireGen);
 	}
 	
 	@Override
-	public void addToReadFromNBT(NBTTagCompound NBTTC){
+	public void readFromNBT(NBTTagCompound NBTTC){
+		super.readFromNBT(NBTTC);
 		fuel=NBTTC.getInteger("FT");
 		maxFuel=NBTTC.getInteger("MFT");
 		IsControlledByOSC=NBTTC.getBoolean("ICBOSC");
 		control=readPos(NBTTC, "C");
 	}
 	@Override
-	public void addToWriteToNBT(NBTTagCompound NBTTC){
+	public void writeToNBT(NBTTagCompound NBTTC){
+		super.writeToNBT(NBTTC);
 		NBTTC.setInteger("FT", fuel);
 		NBTTC.setInteger("MFT", maxFuel);
 		NBTTC.setBoolean("ICBOSC", IsControlledByOSC);
@@ -67,7 +68,6 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	@Override
 	public void update(){
-		mode=connection!=null?1:0;
 		
 		
 		if(control.equals(pos))active=false;
@@ -113,16 +113,13 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	}
 	public void updateConnections(){
 		TileEntity tile=worldObj.getTileEntity(pos.add(0, -1, 0));
-		if(tile instanceof TileEntityFirePipe)connection=((TileEntityFirePipe)tile).connections[0]!=null?EnumFacing.UP:null;
-		else connection=null;
+		if(tile instanceof TileEntityFirePipe)connections[1].setMain(((TileEntityFirePipe)tile).connections[0].getMain());
+		else connections[1].setMain(false);
+		connections[1].setForce(true);
 	}
 	@SideOnly(Side.CLIENT)
 	public void spawnPaticle(boolean isforced){
 		if(!worldObj.isRemote)return;
-		if(connection!=null){
-			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+p*4+(Helper.RF()*p*8), pos.getY()+p*11, pos.getZ()+p*4+(Helper.RF()*p*8), 0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+p*4+(Helper.RF()*p*8), pos.getY()+p*11, pos.getZ()+p*4+(Helper.RF()*p*8), 0.025-(Helper.RF()*0.05), (Helper.RF()*0.2), 0.025-(Helper.RF()*0.05));
-		}
 		if(optimizer3.isTimeWithAddProgress())return;
 		
 		if(canGeneratePower(3)||isforced){
@@ -146,16 +143,20 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	}
 	
 	public void power(){
+		
+		int i=getEnergy();
+		handleStandardPowerTransmission(true);
+		if(i!=getEnergy())if(worldObj.isRemote&&optimizer3.progress==0){
+			EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
+			if(Helper.RInt(3)==0)Helper.spawnEntityFX(particle);
+			else Helper.spawnEntityFX(particle,20);
+		}
+		
 		if(isInMultiblockStructureBFCHelper==true){
 			currentEnergy=0;
 			controlBlock=null;
 		}
 		else if(canGeneratePower(3))generateFunction();
-		
-		if(connection!=null&&currentEnergy>5){
-			currentEnergy-=5;
-		}
-		
 		
 		if(controlBlock!=null){
 			for(int a=0;a<2;a++)if(controlBlock.tank>0&&fuel<maxFuel){
@@ -163,7 +164,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 				controlBlock.tank-=1;
 			}
 		}
-		tryToSendEnergyToObj();
+//		tryToSendEnergyToObj();
 	}
 	
 	
@@ -171,7 +172,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		TileEntity aa=worldObj.getTileEntity(pos.add(0,1,0));
 		if(aa instanceof TileEntityFirePipe){
 			TileEntityFirePipe pipe= (TileEntityFirePipe)aa;
-			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),SideHelper.enumFacingOrientation(EnumFacing.UP)))if(worldObj.isRemote&&optimizer3.progress==0){
+			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),EnumFacing.UP.getIndex()))if(worldObj.isRemote&&optimizer3.progress==0){
 				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
 				if(Helper.RInt(3)==0)Helper.spawnEntityFX(particle);
 				else Helper.spawnEntityFX(particle,20);

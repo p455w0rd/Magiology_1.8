@@ -13,8 +13,8 @@ import com.magiology.handelers.GenericPacketEventHandeler.PacketEvent;
 import com.magiology.handelers.GenericPacketEventHandeler.StringPacketEvent;
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
 
 public class GenericPacketEvents{
 	public static GenericPacketEventHandeler callerInstance;
@@ -56,13 +56,13 @@ public class GenericPacketEvents{
 		case 8:{
 			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
-			tile.setSendOnSide(integer, !tile.getSendOnSide(integer));
+			tile.setSendOnSide(integer, !tile.getOut(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 9:{
 			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
-			tile.setReceaveOnSide(integer, !tile.getReceiveOnSide(integer));
+			tile.setReceaveOnSide(integer, !tile.getIn(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		default:{Helper.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;

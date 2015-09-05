@@ -17,8 +17,8 @@ import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class FirePipe extends BlockContainerMultiColision{
 	
@@ -37,12 +37,12 @@ public class FirePipe extends BlockContainerMultiColision{
 	@Override
 	public AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos){
 		TileEntityFirePipe tile=(TileEntityFirePipe)world.getTileEntity(pos);
-		float minX=p*6  -(tile.DCFFL!=null?(p*1.5F):0)  -(tile.connections[5]!=null?(p*6):0);
-		float minY=p*6  -(tile.DCFFL!=null?(p*10.7F):0) -(tile.connections[1]!=null?(p*6):0);
-		float minZ=p*6  -(tile.DCFFL!=null?(p*1.5F):0)  -(tile.connections[2]!=null?(p*6):0);
-		float maxX=p*10 +(tile.DCFFL!=null?(p*1.5F):0)  +(tile.connections[3]!=null?(p*6):0);
-		float maxY=p*10                                 +(tile.connections[0]!=null?(p*6):0);
-		float maxZ=p*10 +(tile.DCFFL!=null?(p*1.5F):0)  +(tile.connections[4]!=null?(p*6):0);
+		float minX=p*6  -(tile.DCFFL?(p*1.5F):0)  -(tile.connections[5].getMain()?(p*6):0);
+		float minY=p*6  -(tile.DCFFL?(p*10.7F):0) -(tile.connections[1].getMain()?(p*6):0);
+		float minZ=p*6  -(tile.DCFFL?(p*1.5F):0)  -(tile.connections[2].getMain()?(p*6):0);
+		float maxX=p*10 +(tile.DCFFL?(p*1.5F):0)  +(tile.connections[3].getMain()?(p*6):0);
+		float maxY=p*10                                 +(tile.connections[0].getMain()?(p*6):0);
+		float maxZ=p*10 +(tile.DCFFL?(p*1.5F):0)  +(tile.connections[4].getMain()?(p*6):0);
 		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 	
@@ -68,9 +68,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					tile1.getExpectedBoxesOnSide(boxes, 1);
     					for(AxisAlignedBB box:boxes){
     						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
-    							tile1.bannedConnections[1]=tile1.connections[1]!=null;
+    							tile1.connections[1].setBanned(tile1.connections[1].getMain());
         	    				tile2=world.getTileEntity(pos.add(0,-1,0));
-        	    				if(tile2 instanceof ISidedPower)((ISidedPower)tile2).setBannedSide(tile1.connections[1]!=null, 0);
+        	    				if(tile2 instanceof ISidedPower)((ISidedPower)tile2).setBannedSide(tile1.connections[1].getMain(), 0);
     							continue;
     						}
     					}
@@ -80,9 +80,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					tile1.getExpectedBoxesOnSide(boxes, 0);
     					for(AxisAlignedBB box:boxes){
     						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
-        	    				tile1.bannedConnections[0]=tile1.connections[0]!=null;
+        	    				tile1.connections[0].setBanned(tile1.connections[0].getMain());
         	    				tile2=world.getTileEntity(pos.add(0,1,0));
-        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[0]!=null, 1);
+        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[0].getMain(), 1);
     							continue;
     						}
     					}
@@ -92,9 +92,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					tile1.getExpectedBoxesOnSide(boxes, 5);
     					for(AxisAlignedBB box:boxes){
     						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
-        	    				tile1.bannedConnections[5]=tile1.connections[5]!=null;
+        	    				tile1.connections[5].setBanned(tile1.connections[5].getMain());
         	    				tile2=world.getTileEntity(pos.add(-1,0,0));
-        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[5]!=null, 3);
+        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[5].getMain(), 3);
     							continue;
     						}
     					}
@@ -104,9 +104,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					tile1.getExpectedBoxesOnSide(boxes, 3);
     					for(AxisAlignedBB box:boxes){
     						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
-        	    				tile1.bannedConnections[3]=tile1.connections[3]!=null;
+        	    				tile1.connections[3].setBanned(tile1.connections[3].getMain());
         	    				tile2=world.getTileEntity(pos.add(1,0,0));
-        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[3]!=null, 5);
+        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[3].getMain(), 5);
     							continue;
     						}
     					}
@@ -116,9 +116,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					tile1.getExpectedBoxesOnSide(boxes, 2);
     					for(AxisAlignedBB box:boxes){
     						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
-    							tile1.bannedConnections[2]=tile1.connections[2]!=null;
+    							tile1.connections[2].setBanned(tile1.connections[2].getMain());
         	    				tile2=world.getTileEntity(pos.add(0,0,-1));
-        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[2]!=null, 4);
+        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[2].getMain(), 4);
     							continue;
     						}
     					}
@@ -128,9 +128,9 @@ public class FirePipe extends BlockContainerMultiColision{
     					tile1.getExpectedBoxesOnSide(boxes, 4);
     					for(AxisAlignedBB box:boxes){
     						if(box.expand(a, a, a).isVecInside(new Vec3M(xHit, yHit, zHit).conv())){
-    							tile1.bannedConnections[4]=tile1.connections[4]!=null;
+    							tile1.connections[4].setBanned(tile1.connections[4].getMain());
         	    				tile2=world.getTileEntity(pos.add(0,0,-1));
-        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[4]!=null, 2);
+        	    				if(tile2 instanceof TileEntityFirePipe)((TileEntityFirePipe)tile2).setBannedSide(tile1.connections[4].getMain(), 2);
     							continue;
     						}
     					}

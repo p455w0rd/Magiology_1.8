@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.MReference;
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
-import com.magiology.objhelper.Get.Render;
 import com.magiology.render.Textures;
+import com.magiology.util.utilclasses.Get.Render;
 
 
 public class ItemRendererGenericUpgrade implements IItemRenderer {

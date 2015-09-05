@@ -16,8 +16,8 @@ import com.magiology.gui.guiContainer.GuiUpgradeContainer;
 import com.magiology.gui.guiparticels.GuiStandardFX;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	

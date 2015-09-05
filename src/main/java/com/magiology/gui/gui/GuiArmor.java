@@ -20,11 +20,11 @@ import com.magiology.gui.guiparticels.GuiStandardFX;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.modedmcstuff.gui.InvisivleGuiButton;
 import com.magiology.modedmcstuff.items.UpgItem;
-import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.itemrender.ItemRendererHelmet42;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Get.Render;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	

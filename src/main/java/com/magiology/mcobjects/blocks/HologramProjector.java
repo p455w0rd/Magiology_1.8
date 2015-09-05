@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 import com.magiology.core.init.MGui;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class HologramProjector extends BlockContainerM{
 	private float p=1F/16F;

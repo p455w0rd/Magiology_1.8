@@ -8,10 +8,10 @@ import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.gui.fpgui.FirstPersonGui;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.GL11H;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class TexturedColoredButton extends ColoredGuiButton{
 	@Override

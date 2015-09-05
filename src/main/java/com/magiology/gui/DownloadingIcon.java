@@ -11,9 +11,9 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.core.MReference;
 import com.magiology.gui.fpgui.FirstPersonGui;
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class DownloadingIcon {
 	private static ResourceLocation main=new ResourceLocation(MReference.MODID,"/textures/gui/downloading.png");

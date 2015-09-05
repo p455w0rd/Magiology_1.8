@@ -1,0 +1,5 @@
+package com.magiology.api.connection;
+
+public class IConnectionProvider {
+
+}

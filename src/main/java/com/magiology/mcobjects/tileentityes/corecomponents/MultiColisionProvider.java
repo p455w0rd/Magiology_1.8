@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public interface MultiColisionProvider{
 	

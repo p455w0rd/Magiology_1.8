@@ -1,60 +1,15 @@
-1440427155772	Rename local variable 'ZipName'
-1440427159177	Rename local variable 'FileName'
-1440427164734	Rename local variable 'ZipURL'
-1440429853814	Rename local variable 'version'
-1440431238690	Rename local variable 'ZipName'
-1440431244111	Rename local variable 'ZipURL'
-1440498696352	Delete element
-1440499208017	Rename local variable 'sufix'
-1440499409585	Rename local variable 'filename'
-1440499417128	Rename local variable 'filePaft'
-1440499424460	Rename local variable 'url'
-1440499638888	Rename method 'navigate'
-1440499669043	Rename local variable 'filename'
-1440499683707	Rename local variable 'urlString'
-1440499698812	Rename local variable 'url'
-1440499914479	Rename method 'saveUrl'
-1440499930275	Rename method 'getUrlSource'
-1440499953691	Rename local variable 'yahoo'
-1440499971776	Rename local variable 'yc'
-1440499986283	Rename local variable 'in'
-1440500070312	Rename method 'fetchDownloadLink'
-1440500319984	Rename local variable 'regex'
-1440500328990	Rename local variable 'str'
-1440500354201	Rename local variable 'found'
-1440500373381	Rename local variable 'dat'
-1440500382748	Rename local variable 'Data'
-1440500406278	Rename local variable 'wentthru'
-1440500416521	Rename local variable 'clean'
-1440500671320	Move compilation unit
-1440503486721	Delete element
-1440531806161	Move compilation unit
-1440533815319	Rename type 'NoramlisedVertixBuffer'
-1440533823989	Rename type 'NoramlisedVertixBufferModel'
-1440579472799	Rename local variable 'scaleFactor'
-1440581576464	Delete element
-1440581618317	Delete element
-1440592327505	Delete element
-1440592986048	Rename type 'InfoFile'
-1440593081396	Delete element
-1440593089779	Move compilation unit
-1440593092585	Delete element
-1440593103479	Move compilation unit
-1440593541892	Rename field 'InfoFileName'
-1440602191858	Rename method 'writeToFile'
-1440602215454	Rename method 'sync'
-1440667797693	Rename field 'donlwoadInvoked'
-1440769303276	Delete element
-1440772678416	Delete element
-1440772682262	Delete element
-1440778555333	Move compilation unit
-1440778563684	Move compilation unit
-1440779819829	Copy compilation unit
-1440786755809	Rename method 'keepAValueInBounds'
-1440786765336	Rename method 'keepAValueInBounds'
-1440851216268	Copy compilation unit
-1440852586904	Rename field 'RareSpacePipe'
-1440859089911	Rename method 'ForgeDirgetOrientationInverted'
-1440859093214	Rename method 'EnumFacingOrientation'
-1440861898642	Rename method 'Offset'
-1440866058956	Rename local variable 'pos1'
+1440939714399	Rename type 'Connection'
+1440944374545	Rename field 'side'
+1440944645254	Move compilation unit
+1440946303837	Rename method 'isMainStandAlone'
+1440946316895	Rename field 'isMainStandAlone'
+1440946346771	Rename method 'setIsMainStandAlone'
+1440946391589	Rename method 'getHostT'
+1440959372888	Rename type 'ConvinientMap'
+1440960442358	Rename enum constant 'Enery'
+1440962204384	Rename type 'UpdateablePipe'
+1440962495539	Rename method 'setIsBanned'
+1440962669059	Rename local variable 'allowedSidedPower'
+1440965128397	Rename method 'readIConnection'
+1440965135579	Rename method 'writeIConnection'
+1440970502468	Rename local variable 'NumberOfSlots'

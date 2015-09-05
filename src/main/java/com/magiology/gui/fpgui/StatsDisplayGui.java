@@ -3,10 +3,10 @@ package com.magiology.gui.fpgui;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 public class StatsDisplayGui extends FirstPersonGui{
 	public static StatsDisplayGui instance=new StatsDisplayGui();

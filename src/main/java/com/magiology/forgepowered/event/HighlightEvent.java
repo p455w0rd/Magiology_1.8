@@ -29,18 +29,19 @@ import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.RenderNetworkPointerContainerHighlight;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 /**
  * ONLY CLIENT SIDE
  * @author LapisSea
@@ -100,6 +101,17 @@ public class HighlightEvent{
 			
 			if(event.target.typeOfHit==MovingObjectType.BLOCK){
 				if(event.target.hitVec==null)return;
+				
+				
+//				if(tileEn instanceof TileEntityFirePipe){
+//					TileEntityFirePipe ti=((TileEntityFirePipe)tileEn);
+//					
+//					if(ti.connections[0].isEnding())Helper.printInln("Ending");
+//					else if(ti.connections[0].isIntersection())Helper.printInln("Intersection");
+//					else Helper.printInln("Line");
+//					
+//				}
+				
 				double xHit=event.target.hitVec.xCoord,yHit=event.target.hitVec.yCoord,zHit=event.target.hitVec.zCoord;
 				
 				if(block==MBlocks.DontLookAtMe)onDrawHlDontLookAtMe(event);

@@ -12,7 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class RemotePowerCounter extends BlockContainer {
 
@@ -55,7 +55,7 @@ public class RemotePowerCounter extends BlockContainer {
 	
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-        return world.getBlockState(pos).withProperty(Helper.MetadataMarker, facing.getIndex()+meta);
+        return world.getBlockState(pos).withProperty(Helper.META, facing.getIndex()+meta);
     }
 	
 	

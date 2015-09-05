@@ -13,9 +13,9 @@ import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.NetworkBaseInterface.InteractType;
 import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.objhelper.DoubleObject;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilobjects.DoubleObject;
 
 public class TileHologramProjectorInterface implements NetworkInterfaceProvider,InterfaceTileEntitySaver{
 	@Override public TileEntity getBoundTile(){return tile;}

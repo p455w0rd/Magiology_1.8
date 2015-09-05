@@ -14,9 +14,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
-import com.magiology.objhelper.helpers.Cricle;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.util.utilclasses.CricleHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class EntitySubatomicWorldDeconstructor extends Entity implements IProjectile{
     public BlockPos pos;
@@ -47,15 +47,15 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         this.setSize(0.5F, 0.5F);
         this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
         
-        motionX=-Cricle.sin((int)this.rotationYaw)*Cricle.cos((int)this.rotationPitch)*speed;
-        motionZ= Cricle.cos((int) this.rotationYaw)*Cricle.cos((int)(this.rotationPitch))*speed;
-        motionY=-Cricle.sin((int) this.rotationPitch)*speed;
+        motionX=-CricleHelper.sin((int)this.rotationYaw)*CricleHelper.cos((int)this.rotationPitch)*speed;
+        motionZ= CricleHelper.cos((int) this.rotationYaw)*CricleHelper.cos((int)(this.rotationPitch))*speed;
+        motionY=-CricleHelper.sin((int) this.rotationPitch)*speed;
         
         double multiplayer=5,X=4,Y=-0.3,Z=4;
         
-        this.posX-=Cricle.cos((int)rotationYaw)*0.1F-(Cricle.sin(-(int)this.rotationYaw)*Cricle.cos((int)this.rotationPitch))/multiplayer*X;
-        this.posY-=-Y+Cricle.sin((int) this.rotationPitch)/multiplayer;
-        this.posZ-=Cricle.sin((int)rotationYaw)*0.1F-(Cricle.cos(-(int) this.rotationYaw)*Cricle.cos((int)(this.rotationPitch)))/multiplayer*Z;
+        this.posX-=CricleHelper.cos((int)rotationYaw)*0.1F-(CricleHelper.sin(-(int)this.rotationYaw)*CricleHelper.cos((int)this.rotationPitch))/multiplayer*X;
+        this.posY-=-Y+CricleHelper.sin((int) this.rotationPitch)/multiplayer;
+        this.posZ-=CricleHelper.sin((int)rotationYaw)*0.1F-(CricleHelper.cos(-(int) this.rotationYaw)*CricleHelper.cos((int)(this.rotationPitch)))/multiplayer*Z;
         
         this.setPosition(this.posX, this.posY, this.posZ);
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);

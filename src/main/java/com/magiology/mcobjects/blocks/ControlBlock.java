@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class ControlBlock extends BlockContainer {
 	private float p= 1F/16F;

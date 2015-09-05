@@ -11,10 +11,10 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 public class ItemRendererPowerCounter implements IItemRenderer {
 	WorldRenderer tess=TessHelper.getWR();

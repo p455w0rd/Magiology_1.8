@@ -8,15 +8,15 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.vectors.TwoDots;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.TwoDotsLineRender;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.vectors.TwoDots;
 
 public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 

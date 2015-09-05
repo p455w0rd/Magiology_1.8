@@ -1,0 +1,101 @@
+---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 03.09.15. 11:20
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at com.magiology.mcobjects.blocks.network.NetworkPointerContainer.onBlockPlaced(NetworkPointerContainer.java:53)
+	at net.minecraft.item.ItemBlock.onItemUse(ItemBlock.java:73)
+	at net.minecraft.item.ItemStack.onItemUse(ItemStack.java:147)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.func_178890_a(PlayerControllerMP.java:442)
+	at net.minecraft.client.Minecraft.rightClickMouse(Minecraft.java:1572)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:2132)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1088)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:376)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at com.magiology.mcobjects.blocks.network.NetworkPointerContainer.onBlockPlaced(NetworkPointerContainer.java:53)
+	at net.minecraft.item.ItemBlock.onItemUse(ItemBlock.java:73)
+	at net.minecraft.item.ItemStack.onItemUse(ItemStack.java:147)
+	at net.minecraft.client.multiplayer.PlayerControllerMP.func_178890_a(PlayerControllerMP.java:442)
+	at net.minecraft.client.Minecraft.rightClickMouse(Minecraft.java:1572)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player936'/117, l='MpServer', x=-141,67, y=5,80, z=1026,47]]
+	Chunk stats: MultiplayerChunkCache: 625, 625
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: -129,00,4,00,1036,00 - World: (-129,4,1036), Chunk: (at 15,0,12 in -9,64; contains blocks -144,0,1024 to -129,255,1039), Region: (-1,2; contains chunks -32,64 to -1,95, blocks -512,0,1024 to -1,255,1535)
+	Level time: 386471 game time, 1295 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 38 total; [EntityChicken['Chicken'/64, l='MpServer', x=-128,38, y=4,00, z=1094,63], EntityItem['item.item.egg'/74, l='MpServer', x=-86,03, y=4,00, z=1022,19], EntityChicken['Chicken'/75, l='MpServer', x=-84,31, y=4,00, z=1015,53], EntityItem['item.item.egg'/76, l='MpServer', x=-85,16, y=4,00, z=1015,09], EntityChicken['Chicken'/77, l='MpServer', x=-91,34, y=4,00, z=1027,31], EntityChicken['Chicken'/78, l='MpServer', x=-90,44, y=4,00, z=1035,31], EntityItem['item.item.egg'/79, l='MpServer', x=-85,56, y=4,00, z=1027,75], EntityChicken['Chicken'/80, l='MpServer', x=-95,63, y=4,00, z=1055,38], EntitySheep['Sheep'/81, l='MpServer', x=-91,88, y=4,00, z=1050,66], EntityChicken['Chicken'/82, l='MpServer', x=-83,66, y=4,00, z=1051,47], EntityItem['item.item.egg'/83, l='MpServer', x=-95,25, y=4,00, z=1055,59], EntityChicken['Chicken'/84, l='MpServer', x=-83,69, y=4,00, z=1098,41], EntityPig['Pig'/86, l='MpServer', x=-86,19, y=4,00, z=1088,13], EntitySheep['Sheep'/87, l='MpServer', x=-75,94, y=4,00, z=953,94], EntitySheep['Sheep'/88, l='MpServer', x=-71,72, y=4,00, z=958,13], EntityChicken['Chicken'/89, l='MpServer', x=-67,56, y=4,00, z=1007,34], EntityChicken['Chicken'/90, l='MpServer', x=-71,34, y=4,00, z=1009,63], EntityItem['item.item.egg'/91, l='MpServer', x=-75,69, y=4,00, z=1013,41], EntityChicken['Chicken'/93, l='MpServer', x=-68,63, y=4,00, z=1021,38], EntityChicken['Chicken'/94, l='MpServer', x=-63,66, y=4,00, z=1056,53], EntitySheep['Sheep'/95, l='MpServer', x=-74,59, y=4,00, z=1063,72], EntityCow['Cow'/96, l='MpServer', x=-75,94, y=4,00, z=1077,16], EntityChicken['Chicken'/101, l='MpServer', x=-61,28, y=4,00, z=1004,53], EntitySheep['Sheep'/103, l='MpServer', x=-58,59, y=4,00, z=1073,19], EntitySheep['Sheep'/104, l='MpServer', x=-60,31, y=4,00, z=1087,78], EntityHorse['Horse'/105, l='MpServer', x=-64,94, y=4,00, z=1095,22], EntityCow['Cow'/43, l='MpServer', x=-217,09, y=4,00, z=959,66], EntitySheep['Sheep'/47, l='MpServer', x=-195,16, y=4,00, z=1046,63], EntitySheep['Sheep'/48, l='MpServer', x=-192,22, y=4,00, z=1045,84], EntitySheep['Sheep'/49, l='MpServer', x=-185,06, y=4,00, z=1071,06], EntitySheep['Sheep'/50, l='MpServer', x=-185,00, y=4,00, z=1066,97], EntitySheep['Sheep'/51, l='MpServer', x=-160,66, y=4,00, z=983,25], EntityRabbit['Rabbit'/52, l='MpServer', x=-164,97, y=4,00, z=1031,09], EntityPlayerSP['Player936'/117, l='MpServer', x=-141,67, y=5,80, z=1026,47], EntityChicken['Chicken'/53, l='MpServer', x=-163,34, y=4,00, z=1099,53], EntitySheep['Sheep'/55, l='MpServer', x=-144,13, y=4,00, z=967,19], EntitySheep['Sheep'/61, l='MpServer', x=-124,13, y=4,00, z=979,16], EntitySheep['Sheep'/62, l='MpServer', x=-111,78, y=4,00, z=1058,19]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:392)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2615)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:405)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_60, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 855444336 bytes (815 MB) / 1056309248 bytes (1007 MB) up to 1056309248 bytes (1007 MB)
+	JVM Flags: 4 total; -Xincgc -Xmx1024M -Xms1024M -Xmx1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.10 FML v8.0.99.99 Minecraft Forge 11.14.3.1502 4 mods loaded, 4 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.8-11.14.3.1502.jar) 
+	UCHIJAAAA	Forge{11.14.3.1502} [Minecraft Forge] (forgeSrc-1.8-11.14.3.1502.jar) 
+	UCHIJAAAA	magiology{0.1052} [Magiology] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'ATI Technologies Inc.' Version: '4.1.10750 Compatibility Profile Context' Renderer: 'ATI Radeon HD 5700 Series '
+	Launched Version: 1.8
+	LWJGL: 2.9.1
+	OpenGL: ATI Radeon HD 5700 Series  GL version 4.1.10750 Compatibility Profile Context, ATI Technologies Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)

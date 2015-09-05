@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 
 import com.magiology.registry.WrenchRegistry;
 
-	public class PlayerWrenchEvent extends Event{
+public class PlayerWrenchEvent extends Event{
 	
 	public final EntityPlayer entityPlayer;
 	public final Action action;

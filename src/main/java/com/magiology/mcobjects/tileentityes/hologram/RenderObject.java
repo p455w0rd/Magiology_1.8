@@ -10,8 +10,8 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.core.init.MGui;
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public abstract class RenderObject implements SavableData{
 	public TileEntityHologramProjector host;

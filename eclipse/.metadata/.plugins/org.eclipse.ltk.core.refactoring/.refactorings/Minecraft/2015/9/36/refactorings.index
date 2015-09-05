@@ -1,0 +1,26 @@
+1441095897566	Rename local variable 'i'
+1441097148988	Rename method 'handlePowerTransmission'
+1441199443228	Delete element
+1441270962913	Rename field 'FACE'
+1441273366301	Move compilation unit
+1441373341882	Rename package 'com.magiology.objhelper'
+1441375110699	Rename package 'com.magiology.util'
+1441375133195	Rename package 'com.magiology.objhelper'
+1441375181515	Rename type 'FontEH'
+1441375187046	Rename type 'Cricle'
+1441375252890	Rename package 'com.magiology.util.helpers.renderers'
+1441375258517	Delete element
+1441375290155	Rename package 'com.magiology.util.helpers'
+1441375320371	Delete element
+1441375334595	Rename type 'GetSpecialPlayer'
+1441375351088	Move compilation unit
+1441375367042	Move compilation unit
+1441375410551	Move compilation unit
+1441375443806	Move compilation unit
+1441375493781	Move compilation unit
+1441375549561	Move compilation units
+1441375575165	Rename package 'com.magiology.util.vectors'
+1441399962249	Rename local variable 'vec3m'
+1441399981906	Rename local variable 'vec3'
+1441400045557	Rename method 'tanslateVec'
+1441467532906	Move compilation unit

@@ -11,11 +11,11 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.objhelper.vectors.Vec8F;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Vec8F;
 
 public class ItemRendererTheHand implements IItemRenderer{
 	private final float p=1F/16F;

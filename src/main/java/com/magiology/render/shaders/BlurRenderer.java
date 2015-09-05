@@ -1,10 +1,10 @@
 package com.magiology.render.shaders;
 
-import com.magiology.objhelper.helpers.Cricle;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
 import com.magiology.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.render.shaders.core.ShaderUniformEditor;
+import com.magiology.util.utilclasses.CricleHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
 public class BlurRenderer extends ShaderAspectRenderer{
 	public static BlurRenderer instance;
@@ -26,8 +26,8 @@ public class BlurRenderer extends ShaderAspectRenderer{
 		y.update();
 		if(world.getTotalWorldTime()%10==0){
 			float rotation=Helper.RF(360);
-			x.wantedPoint=Cricle.sin(rotation)*2;
-			y.wantedPoint=Cricle.cos(rotation)*2;
+			x.wantedPoint=CricleHelper.sin(rotation)*2;
+			y.wantedPoint=CricleHelper.cos(rotation)*2;
 		}
 	}
 	

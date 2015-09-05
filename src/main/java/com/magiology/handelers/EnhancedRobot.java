@@ -3,7 +3,7 @@ package com.magiology.handelers;
 import java.awt.AWTException;
 import java.awt.Robot;
 
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class EnhancedRobot extends Robot{
 	public EnhancedRobot()throws AWTException{super();}

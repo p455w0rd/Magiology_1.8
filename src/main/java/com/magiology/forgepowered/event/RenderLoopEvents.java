@@ -1,7 +1,11 @@
 package com.magiology.forgepowered.event;
 
-import static com.magiology.objhelper.helpers.FontEH.*;
-import static org.lwjgl.opengl.GL11.*;
+import static com.magiology.util.utilclasses.FontEHelper.AQUA;
+import static com.magiology.util.utilclasses.FontEHelper.UNDERLINE;
+import static org.lwjgl.opengl.GL11.GL_COLOR_MATERIAL;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -41,16 +45,16 @@ import com.magiology.core.init.MItems;
 import com.magiology.gui.fpgui.FirstPersonGui;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.objhelper.EntityPosAndBB;
-import com.magiology.objhelper.EntityToRender;
-import com.magiology.objhelper.EntityToRender.EntityToRenderInt;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.aftereffect.AfterRenderRenderer;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
+import com.magiology.util.utilobjects.EntityPosAndBB;
+import com.magiology.util.utilobjects.EntityToRender;
+import com.magiology.util.utilobjects.EntityToRender.EntityToRenderInt;
 
 public class RenderLoopEvents{
 	public static List<AfterRenderRenderer> universalRender=new ArrayList<AfterRenderRenderer>();
@@ -259,7 +263,7 @@ public class RenderLoopEvents{
 	}
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderHand(RenderHandEvent e){
-//		Helper.printInln(H.getThePlayer().getCurrentEquippedItem());
+		
 	}
 	
 	private static Map<Block, TileEntity> registerdTiles=new HashMap<Block, TileEntity>();

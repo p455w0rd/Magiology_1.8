@@ -12,8 +12,8 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class SpecialPlayerParicleHandeler_SubEvent{
 

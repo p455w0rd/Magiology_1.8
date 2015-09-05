@@ -16,11 +16,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.magiology.core.init.MCreativeTabs;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.objhelper.helpers.FontEH;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.registry.upgrades.RegisterItemUpgrades;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.UpgradeType;
+import com.magiology.util.utilclasses.FontEHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class GenericItemUpgrade extends Item{
 	int Level;
@@ -108,37 +108,37 @@ public class GenericItemUpgrade extends Item{
 		int i=0;
 		if(GuiScreen.isShiftKeyDown())i++;
 		if(GuiScreen.isCtrlKeyDown()) i++;
-		FontEH a=new FontEH();
+		FontEHelper a=new FontEHelper();
 		switch (UT.GetTypeID()){
 		case 0:{
-			list.add(FontEH.AQUA+"Increases range");
+			list.add(FontEHelper.AQUA+"Increases range");
 			if(i>0){
-				list.add(FontEH.getRandEff()+"How surprising!");
-				if(i==2)list.add(FontEH.GOLD+"IT IS! :-)");
+				list.add(FontEHelper.getRandEff()+"How surprising!");
+				if(i==2)list.add(FontEHelper.GOLD+"IT IS! :-)");
 			}
 		}break;
 		case 1:{
-			list.add(FontEH.YELLOW+"Speeds up effects of objects!");
+			list.add(FontEHelper.YELLOW+"Speeds up effects of objects!");
 			if(i>0){
-				list.add(FontEH.AQUA+"If this is in a block it speeds up things like processing of materials");
-				list.add(FontEH.AQUA+"or if it is in a aromur peace like pants it makes you run faster.");
-				if(i==2)list.add(FontEH.BLUE+"I am so boring. Like extreamly boring!");
+				list.add(FontEHelper.AQUA+"If this is in a block it speeds up things like processing of materials");
+				list.add(FontEHelper.AQUA+"or if it is in a aromur peace like pants it makes you run faster.");
+				if(i==2)list.add(FontEHelper.BLUE+"I am so boring. Like extreamly boring!");
 			}
 		}break;
 		case 2:{
 			list.add("Adds extra controll to objects.");
 			if(i>0){
-				list.add(FontEH.DARK_GRAY+"IT CONTROLS EVERYTHING! "+FontEH.UNDERLINE+FontEH.AQUA+">:D");
-				if(i==2)list.add(FontEH.BLUE+"It controls every player in the worldObj and that includes you!");
+				list.add(FontEHelper.DARK_GRAY+"IT CONTROLS EVERYTHING! "+FontEHelper.UNDERLINE+FontEHelper.AQUA+">:D");
+				if(i==2)list.add(FontEHelper.BLUE+"It controls every player in the worldObj and that includes you!");
 			}
 		}break;
 		case 3:{
-			list.add(FontEH.BLUE+"Adds ability to "+FontEH.DARK_RED+"fly"+FontEH.BLUE+"!");
+			list.add(FontEHelper.BLUE+"Adds ability to "+FontEHelper.DARK_RED+"fly"+FontEHelper.BLUE+"!");
 			if(i>0){
 				if(Helper.RInt(20)==0)list.add("When pigs fly");
 				
 				if(i==2)if(Helper.RInt(80)==0){
-					String lolITrollerYou=FontEH.RED+""+FontEH.UNDERLINE+FontEH.OBFUSCATED+"aaa  "+FontEH.RESET+FontEH.RED+""+FontEH.UNDERLINE+"illuminati is"+(Helper.RB()?" not":"")+" real".toUpperCase()+"!  "+FontEH.OBFUSCATED+"  aaa";
+					String lolITrollerYou=FontEHelper.RED+""+FontEHelper.UNDERLINE+FontEHelper.OBFUSCATED+"aaa  "+FontEHelper.RESET+FontEHelper.RED+""+FontEHelper.UNDERLINE+"illuminati is"+(Helper.RB()?" not":"")+" real".toUpperCase()+"!  "+FontEHelper.OBFUSCATED+"  aaa";
 					list.add(lolITrollerYou);
 					list.add(lolITrollerYou);
 				}
@@ -147,7 +147,7 @@ public class GenericItemUpgrade extends Item{
 		case 4:{
 			String[] side={"up","down","left","right","forward","back","nowhere","overthere","to your mama","away from me","to hell","to store","to your computer","to that upgrade overthere"};
 			int r1=Helper.RInt(side.length),r2=Helper.RInt(side.length);
-			list.add(FontEH.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
+			list.add(FontEHelper.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
 			
 			if(stack.hasTagCompound()){
 				int id=stack.getTagCompound().getInteger("side");
@@ -161,24 +161,24 @@ public class GenericItemUpgrade extends Item{
 				}
 				list.add("Current side: "+EnumFacing.getFront(id).toString().toLowerCase());
 			}
-			else list.add(FontEH.RED+""+FontEH.UNDERLINE+"No NBT on stack!");
+			else list.add(FontEHelper.RED+""+FontEHelper.UNDERLINE+"No NBT on stack!");
 			if(i==2){
-				list.add(FontEH.GOLD+"First go "+FontEH.RED+side[r1]+FontEH.GOLD+"!");
-				list.add(FontEH.GOLD+"No actually go "+FontEH.RED+side[r2]+FontEH.GOLD+"!");
+				list.add(FontEHelper.GOLD+"First go "+FontEHelper.RED+side[r1]+FontEHelper.GOLD+"!");
+				list.add(FontEHelper.GOLD+"No actually go "+FontEHelper.RED+side[r2]+FontEHelper.GOLD+"!");
 			}
 		}break;
 		case 5:{
-			list.add(FontEH.BLUE+"Adds more capacity to containers.");
+			list.add(FontEHelper.BLUE+"Adds more capacity to containers.");
 			if(i>0){
 				list.add("If you could only press another button to see more.");
 				if(i==2)list.add("But unfortunately you can't.");
 			}
 		}break;
 		case 6:{
-			list.add(FontEH.BLUE+"In right place it could let you see more than ");
-			list.add(FontEH.BLUE+"only your "+(i!=0?FontEH.RED+"xRay ":"")+FontEH.BLUE+"eyes can see.");
+			list.add(FontEHelper.BLUE+"In right place it could let you see more than ");
+			list.add(FontEHelper.BLUE+"only your "+(i!=0?FontEHelper.RED+"xRay ":"")+FontEHelper.BLUE+"eyes can see.");
 			if(i>0){
-				list.add(FontEH.GOLD+"If you could only press another button to see"+(i==1?" more":"")+(i==1?"":(" "+FontEH.getRandEff()+"A"+FontEH.getRandEff()+"B"+FontEH.getRandEff()+"S"+FontEH.getRandEff()+"O"+FontEH.getRandEff()+"L"+FontEH.getRandEff()+"U"+FontEH.getRandEff()+"T"+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"L"+FontEH.getRandEff()+"pos.getY()"+FontEH.getRandEff()+" "+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"V"+FontEH.getRandEff()+"E"+FontEH.getRandEff()+"R"+FontEH.getRandEff()+"pos.getY()"+FontEH.getRandEff()+"T"+FontEH.getRandEff()+"H"+FontEH.getRandEff()+"I"+FontEH.getRandEff()+"N"+FontEH.getRandEff()+"G"+FontEH.getRandEff()+"!"+FontEH.getRandEff()+"!")));
+				list.add(FontEHelper.GOLD+"If you could only press another button to see"+(i==1?" more":"")+(i==1?"":(" "+FontEHelper.getRandEff()+"A"+FontEHelper.getRandEff()+"B"+FontEHelper.getRandEff()+"S"+FontEHelper.getRandEff()+"O"+FontEHelper.getRandEff()+"L"+FontEHelper.getRandEff()+"U"+FontEHelper.getRandEff()+"T"+FontEHelper.getRandEff()+"E"+FontEHelper.getRandEff()+"L"+FontEHelper.getRandEff()+"pos.getY()"+FontEHelper.getRandEff()+" "+FontEHelper.getRandEff()+"E"+FontEHelper.getRandEff()+"V"+FontEHelper.getRandEff()+"E"+FontEHelper.getRandEff()+"R"+FontEHelper.getRandEff()+"pos.getY()"+FontEHelper.getRandEff()+"T"+FontEHelper.getRandEff()+"H"+FontEHelper.getRandEff()+"I"+FontEHelper.getRandEff()+"N"+FontEHelper.getRandEff()+"G"+FontEHelper.getRandEff()+"!"+FontEHelper.getRandEff()+"!")));
 			}
 		}break;
 

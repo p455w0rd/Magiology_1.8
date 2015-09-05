@@ -8,9 +8,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.objhelper.Get.Render;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Get.Render;
 
 public class SoulFlameDisplayGui extends FirstPersonGui{
 	public static SoulFlameDisplayGui instance=new SoulFlameDisplayGui();

@@ -15,15 +15,15 @@ import com.magiology.mcobjects.effect.EntitySparkFX;
 import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
 import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.SlowdownHelper;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.PowerHelper;
-import com.magiology.objhelper.helpers.SideHelper;
-import com.magiology.objhelper.vectors.Vec3M;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TileEntityOreStructureCore extends TileEntityPow{
 
@@ -378,6 +378,12 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		}
 	public void spawnParticleNe(){
 		for (int la = 0; la < 1; ++la)worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+Helper.RF(), pos.getY()+1,pos.getZ()+Helper.RF(), 0,0,0);
+	}
+
+	@Override
+	public void updateConnections() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

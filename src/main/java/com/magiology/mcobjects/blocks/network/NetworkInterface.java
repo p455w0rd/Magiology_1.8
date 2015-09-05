@@ -3,7 +3,10 @@ package com.magiology.mcobjects.blocks.network;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
@@ -17,7 +20,8 @@ import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class NetworkInterface extends BlockContainerMultiColision{
 	
@@ -32,6 +36,7 @@ public class NetworkInterface extends BlockContainerMultiColision{
 	@Override
 	public AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos){
 		TileEntityNetworkInterface tile=(TileEntityNetworkInterface) world.getTileEntity(pos);
+		if(tile==null)return null;
     	float minX=p*6  -(tile.connections[5]!=null?(p*6):0);
     	float minY=p*6  -(tile.connections[1]!=null?(p*6):0);
     	float minZ=p*6  -(tile.connections[2]!=null?(p*6):0);
@@ -40,6 +45,12 @@ public class NetworkInterface extends BlockContainerMultiColision{
     	float maxZ=p*10 +(tile.connections[4]!=null?(p*6):0);
 		return new AxisAlignedBB(minX, minY, minZ, maxX, maxY, maxZ);
 	}
+	
+	@Override
+	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
+		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(H.META, facing.getIndex());
+	}
+	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
 		super.onBlockAdded(world, pos, state);
@@ -108,5 +119,17 @@ public class NetworkInterface extends BlockContainerMultiColision{
 	@Override
 	public TileEntity createNewTileEntity(World var0, int var1){
 		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkInterface());
+	}
+	@Override 
+	protected BlockState createBlockState(){
+		return new BlockState(this,new IProperty[]{H.META});
+	}
+	@Override
+	public IBlockState getStateFromMeta(int meta){
+	    return getDefaultState().withProperty(H.META, Integer.valueOf(meta));
+	}
+	@Override
+	public int getMetaFromState(IBlockState state){
+		return ((Integer)state.getValue(H.META)).intValue();
 	}
 }

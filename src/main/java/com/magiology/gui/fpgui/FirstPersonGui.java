@@ -3,7 +3,7 @@ package com.magiology.gui.fpgui;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.TessHelper;
 
 public abstract class FirstPersonGui{
 	public EntityPlayer player;

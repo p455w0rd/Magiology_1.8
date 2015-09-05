@@ -1,0 +1,71 @@
+package com.magiology.api.connection;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+
+public class Connection implements IConnection{
+	
+	private final EnumFacing face;
+	private final ConnectionType type;
+	private final IConnectionProvider host;
+	
+	private boolean main,in,out,banned,changeableByUser,isMainStandAlone;
+	
+	
+	public Connection(IConnectionProvider host,ConnectionType type,int side){
+		this(host, type, EnumFacing.getFront(side));
+	}
+	public Connection(IConnectionProvider host,ConnectionType type,EnumFacing side){
+		this.type=type;
+		this.face=side;
+		this.host=host;
+	}
+	
+	@Override
+	public boolean hasOpposite(){
+		return false;
+	}
+	@Override
+	public boolean isEnding(){
+		return false;
+	}
+	@Override
+	public boolean isIntersection(){
+		getMates();
+		return false;
+	}
+	@Override
+	public IConnection[] getMates(){
+		return host.getConnections();
+	}
+	@Override 
+	public void setIn(boolean var){
+		in=var;
+		fixMain();
+	}
+	@Override 
+	public void setOut(boolean var){
+		out=var;
+		fixMain();
+	}
+	
+	private void fixMain(){
+		if(isMainStandAlone())return;
+		if(!getIn()&&!getOut())setMain(false);
+	}
+	
+	@Override public boolean getIn(){return in;}
+	@Override public boolean getOut(){return out;}
+	@Override public boolean getMain(){return main;}
+	@Override public boolean isBanned(){return banned;}
+	@Override public void setMain(boolean var){main=var;}
+	@Override public EnumFacing getFaceEF(){return face;}
+	@Override public ConnectionType getType(){return type;}
+	@Override public int getFaceI(){return face.getIndex();}
+	@Override public void setIsBanned(boolean var){banned=var;}
+	@Override public IConnectionProvider getHost(){return host;}
+	@Override public boolean isMainStandAlone(){return isMainStandAlone;}
+	@Override public boolean getChangeableByUser(){return changeableByUser;}
+	@Override public void setChangeableByUser(boolean var){changeableByUser=var;}
+	@Override public void setIsMainStandAlone(boolean var){isMainStandAlone=var;}
+}

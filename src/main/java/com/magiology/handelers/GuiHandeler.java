@@ -23,10 +23,10 @@ import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.vectors.Pos;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomize;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomizeContainer;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.vectors.Pos;
 
 public class GuiHandeler implements IGuiHandler{
 	

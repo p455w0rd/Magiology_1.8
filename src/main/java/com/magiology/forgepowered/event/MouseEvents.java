@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.gui.fpgui.WingModeChangerGui;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 @SideOnly(value=Side.CLIENT)
 public class MouseEvents{

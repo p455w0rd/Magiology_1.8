@@ -8,7 +8,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 import com.magiology.forgepowered.packets.SendPlayerDataPacket;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 //props to coolAlias on mc forums for teaching me this! :D
 public class ExtendedPlayerData implements IExtendedEntityProperties{

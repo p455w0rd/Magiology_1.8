@@ -9,9 +9,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
 
 public class TileEntityFireMatrixReceaver extends TileEntityPow{
 	
@@ -41,11 +41,13 @@ public class TileEntityFireMatrixReceaver extends TileEntityPow{
 	}
 	
 	@Override
-	public void addToReadFromNBT(NBTTagCompound NBTTC){
+	public void readFromNBT(NBTTagCompound NBTTC){
+		super.readFromNBT(NBTTC);
 		transferp=readPos(NBTTC, "target");
 	}
 	@Override
-	public void addToWriteToNBT(NBTTagCompound NBTTC){
+	public void writeToNBT(NBTTagCompound NBTTC){
+		super.writeToNBT(NBTTC);
 		writePos(NBTTC, transferp, "target");
 	}
 	
@@ -119,17 +121,20 @@ public class TileEntityFireMatrixReceaver extends TileEntityPow{
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public double getMaxRenderDistanceSquared()
-    {
+    public double getMaxRenderDistanceSquared(){
         return 40096.0D;
     }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox()
-    {
+    public AxisAlignedBB getRenderBoundingBox(){
         AxisAlignedBB bb = new AxisAlignedBB(pos, pos.add(1,1,1));
         return bb;
     }
+
+	@Override
+	public void updateConnections(){
+		
+	}
 	
 }

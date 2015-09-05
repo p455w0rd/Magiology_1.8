@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class IOReadableMap{
 	

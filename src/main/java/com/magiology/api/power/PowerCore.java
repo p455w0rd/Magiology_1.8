@@ -12,9 +12,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
 
 public interface PowerCore{
 	/**Keep it short! The shorter it is less bandwidth it takes!*/
@@ -67,16 +67,14 @@ public interface PowerCore{
 						//do i save you?
 						if(tileMT.isPowerKeptOnWrench()){
 							PowerItemHelper.markWithData(stack);
-							if(tileMT.isSavingFullNBT()){
-								NBTTagCompound nbt=new NBTTagCompound();
-								tile.writeToNBT(nbt);
-								stack.setTagCompound(nbt);
-							}else{
-								//enshure that the nbt is not null
-								H.createNBT(stack);
+							H.printInln(tileMT.isSavingFullNBT());
+//							if(tileMT.isSavingFullNBT()){
+//								NBTTagCompound nbt=stack.getTagCompound();
+//								tile.writeToNBT(nbt);
+//							}else{
 								//write everything to item
 								tileMT.writeToItemOnWrenched(stack);
-							}
+//							}
 						}
 						//export to item & spawn
 						Helper.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, stack);
@@ -96,8 +94,9 @@ public interface PowerCore{
 			//Hey! Item! You have some NBT? And do you contain NBT that is saved from a tile?
 			if(itemInHand!=null&&PowerItemHelper.hasData(itemInHand)){
 				//cool now give that NBT to your creator!
-				if(((PowerCore)tile).isSavingFullNBT())tile.readFromNBT(itemInHand.getTagCompound());
-				else ((PowerCore)tile).readFromItemOnPlace(itemInHand);
+//				if(((PowerCore)tile).isSavingFullNBT())tile.readFromNBT(itemInHand.getTagCompound());
+//				else 
+					((PowerCore)tile).readFromItemOnPlace(itemInHand);
 				
 			}
 		}

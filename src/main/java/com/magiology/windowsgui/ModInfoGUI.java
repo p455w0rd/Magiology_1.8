@@ -40,7 +40,7 @@ import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.io.IOReadableMap;
 import com.magiology.io.ZipManager;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class ModInfoGUI extends JFrame{
 	JTextField item1;

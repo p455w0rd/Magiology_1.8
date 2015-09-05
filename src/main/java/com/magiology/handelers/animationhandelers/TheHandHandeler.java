@@ -14,8 +14,8 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
-import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.itemrender.ItemRendererTheHand;
+import com.magiology.util.utilclasses.Helper;
 
 public class TheHandHandeler{
 	static float p=1F/16F;

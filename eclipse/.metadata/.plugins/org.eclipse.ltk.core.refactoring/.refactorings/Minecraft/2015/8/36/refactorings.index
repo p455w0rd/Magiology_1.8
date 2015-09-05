@@ -1,0 +1,9 @@
+1441017145213	Rename method 'shouldBeRendered'
+1441022404991	Copy compilation unit
+1441022602550	Rename type 'TileEntitySided'
+1441023332028	Rename local variable 'NBTTC'
+1441023336869	Rename local variable 'NBTTC'
+1441053044340	Rename method 'getReceiveOnSide'
+1441053051926	Rename method 'getSendOnSide'
+1441053059339	Rename method 'getInOnSide'
+1441053063308	Rename method 'getOutOnSide'

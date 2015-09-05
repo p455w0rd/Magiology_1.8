@@ -1,0 +1,34 @@
+package com.magiology.util.utilobjects;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
+
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+public class BlockPosM extends BlockPos{
+	
+	public BlockPosM(int x, int y, int z){
+		super(x, y, z);
+	}
+	public BlockPosM(double x, double y, double z){
+		super(x, y, z);
+	}
+	public BlockPosM(Entity source){
+		this(source.posX, source.posY, source.posZ);
+	}
+	public BlockPosM(Vec3 source){
+		this(source.xCoord, source.yCoord, source.zCoord);
+	}
+	public BlockPosM(Vec3M source){
+		this(source.x, source.y, source.z);
+	}
+	public BlockPosM(Vec3i source){
+		this(source.getX(), source.getY(), source.getZ());
+	}
+	
+	
+	
+	
+}

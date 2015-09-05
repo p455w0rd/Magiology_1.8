@@ -5,10 +5,10 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM;
+import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.SideHelper;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class TileEntityRemotePowerCounter extends TileEntityM implements IUpdatePlayerListBox{
 	
@@ -22,7 +22,7 @@ public class TileEntityRemotePowerCounter extends TileEntityM implements IUpdate
 	public void update(){
 		boolean okBlock=true;
 		int metadata=H.getBlockMetadata(worldObj, pos);
-		pos1=SideHelper.offset(metadata, pos);
+		pos1=SideHelper.offsetNew(metadata, pos);
 		
 		block=H.getBlock(worldObj, pos);
 		tile1=worldObj.getTileEntity(pos);

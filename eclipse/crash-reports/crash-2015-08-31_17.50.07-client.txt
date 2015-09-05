@@ -1,0 +1,103 @@
+---- Minecraft Crash Report ----
+// Sorry :(
+
+Time: 31.08.15. 17:50
+Description: Unexpected error
+
+java.lang.NullPointerException: Unexpected error
+	at com.magiology.mcobjects.blocks.FirePipe.getResetBoundsOptional(FirePipe.java:40)
+	at com.magiology.mcobjects.blocks.BlockContainerMultiColision.getResetBoundsOptionalFix(BlockContainerMultiColision.java:51)
+	at com.magiology.mcobjects.blocks.BlockContainerMultiColision.collisionRayTrace(BlockContainerMultiColision.java:44)
+	at net.minecraft.world.World.rayTraceBlocks(World.java:1086)
+	at net.minecraft.entity.Entity.rayTrace(Entity.java:1484)
+	at net.minecraft.client.renderer.EntityRenderer.getMouseOver(EntityRenderer.java:381)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1718)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1088)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:376)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at com.magiology.mcobjects.blocks.FirePipe.getResetBoundsOptional(FirePipe.java:40)
+	at com.magiology.mcobjects.blocks.BlockContainerMultiColision.getResetBoundsOptionalFix(BlockContainerMultiColision.java:51)
+	at com.magiology.mcobjects.blocks.BlockContainerMultiColision.collisionRayTrace(BlockContainerMultiColision.java:44)
+	at net.minecraft.world.World.rayTraceBlocks(World.java:1086)
+	at net.minecraft.entity.Entity.rayTrace(Entity.java:1484)
+	at net.minecraft.client.renderer.EntityRenderer.getMouseOver(EntityRenderer.java:381)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player5'/36, l='MpServer', x=-136,50, y=4,00, z=1026,50]]
+	Chunk stats: MultiplayerChunkCache: 619, 619
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: -129,00,4,00,1036,00 - World: (-129,4,1036), Chunk: (at 15,0,12 in -9,64; contains blocks -144,0,1024 to -129,255,1039), Region: (-1,2; contains chunks -32,64 to -1,95, blocks -512,0,1024 to -1,255,1535)
+	Level time: 1040 game time, 1040 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 37 total; [EntityPig['Pig'/79433, l='MpServer', x=-62,84, y=4,00, z=1104,50], EntityPig['Pig'/79432, l='MpServer', x=-61,22, y=4,00, z=1104,50], EntityPig['Pig'/79435, l='MpServer', x=-63,50, y=4,00, z=1101,50], EntityPig['Pig'/79434, l='MpServer', x=-64,50, y=4,00, z=1103,50], EntitySheep['Sheep'/79437, l='MpServer', x=-79,59, y=4,00, z=950,19], EntitySheep['Sheep'/79436, l='MpServer', x=-79,50, y=4,00, z=952,78], EntitySheep['Sheep'/79439, l='MpServer', x=-86,13, y=4,00, z=958,91], EntitySheep['Sheep'/79438, l='MpServer', x=-83,50, y=4,00, z=952,50], EntityHorse['Horse'/79453, l='MpServer', x=-65,50, y=4,00, z=1099,50], EntityHorse['Horse'/79454, l='MpServer', x=-65,50, y=4,00, z=1101,50], EntityCow['Cow'/79457, l='MpServer', x=-71,50, y=4,00, z=1096,50], EntityHorse['Horse'/79456, l='MpServer', x=-68,50, y=4,00, z=1102,50], EntitySheep['Sheep'/79459, l='MpServer', x=-106,84, y=4,00, z=1044,50], EntitySheep['Sheep'/79458, l='MpServer', x=-105,22, y=4,00, z=1044,50], EntityChicken['Chicken'/79461, l='MpServer', x=-106,41, y=4,00, z=1051,38], EntityChicken['Chicken'/79460, l='MpServer', x=-106,31, y=4,00, z=1046,56], EntitySheep['Sheep'/79401, l='MpServer', x=-190,50, y=4,00, z=1057,16], EntitySheep['Sheep'/79400, l='MpServer', x=-190,50, y=4,00, z=1058,78], EntitySheep['Sheep'/79403, l='MpServer', x=-192,50, y=4,00, z=1054,50], EntityChicken['Chicken'/79467, l='MpServer', x=-74,50, y=4,00, z=1006,50], EntitySheep['Sheep'/79402, l='MpServer', x=-199,84, y=4,00, z=1052,88], EntityChicken['Chicken'/79466, l='MpServer', x=-76,50, y=4,00, z=1006,50], EntityChicken['Chicken'/79469, l='MpServer', x=-75,50, y=4,00, z=1006,50], EntitySheep['Sheep'/79404, l='MpServer', x=-154,16, y=4,00, z=1014,28], EntityChicken['Chicken'/79468, l='MpServer', x=-79,41, y=4,00, z=1019,31], EntitySheep['Sheep'/79407, l='MpServer', x=-152,16, y=4,00, z=1024,84], EntitySheep['Sheep'/79406, l='MpServer', x=-163,44, y=4,00, z=1009,78], EntityRabbit['Rabbit'/79409, l='MpServer', x=-167,22, y=4,00, z=1005,19], EntityPlayerSP['Player5'/36, l='MpServer', x=-136,50, y=4,00, z=1026,50], EntitySheep['Sheep'/79479, l='MpServer', x=-61,13, y=4,00, z=1077,09], EntitySheep['Sheep'/79478, l='MpServer', x=-66,38, y=4,00, z=1074,13], EntityChicken['Chicken'/79417, l='MpServer', x=-87,50, y=4,00, z=1023,50], EntitySheep['Sheep'/79481, l='MpServer', x=-64,28, y=4,00, z=1077,25], EntityChicken['Chicken'/79416, l='MpServer', x=-89,50, y=4,00, z=1021,50], EntityChicken['Chicken'/79419, l='MpServer', x=-87,50, y=4,00, z=1025,50], EntityChicken['Chicken'/79418, l='MpServer', x=-85,50, y=4,00, z=1024,50], EntityPig['Pig'/79482, l='MpServer', x=-68,94, y=4,00, z=1078,81]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:392)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2615)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:405)
+	at net.minecraft.client.main.Main.main(Main.java:117)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
+	at GradleStart.main(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_60, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 754491952 bytes (719 MB) / 1056309248 bytes (1007 MB) up to 1056309248 bytes (1007 MB)
+	JVM Flags: 4 total; -Xincgc -Xmx1024M -Xms1024M -Xmx1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.10 FML v8.0.99.99 Minecraft Forge 11.14.3.1502 4 mods loaded, 4 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.8-11.14.3.1502.jar) 
+	UCHIJAAAA	Forge{11.14.3.1502} [Minecraft Forge] (forgeSrc-1.8-11.14.3.1502.jar) 
+	UCHIJAAAA	magiology{0.1052} [Magiology] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'ATI Technologies Inc.' Version: '4.1.10750 Compatibility Profile Context' Renderer: 'ATI Radeon HD 5700 Series '
+	Launched Version: 1.8
+	LWJGL: 2.9.1
+	OpenGL: ATI Radeon HD 5700 Series  GL version 4.1.10750 Compatibility Profile Context, ATI Technologies Inc.
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)

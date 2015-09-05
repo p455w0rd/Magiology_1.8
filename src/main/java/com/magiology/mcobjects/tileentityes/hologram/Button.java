@@ -6,9 +6,9 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.Helper;
 
 public class Button extends TextBox{
 	

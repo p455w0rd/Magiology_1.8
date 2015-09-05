@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.objhelper.Get;
+import com.magiology.util.utilclasses.Get;
 
 public class Fixes1_8{
 	//--------------------------------------------------------------------------------------------------------------------------------//

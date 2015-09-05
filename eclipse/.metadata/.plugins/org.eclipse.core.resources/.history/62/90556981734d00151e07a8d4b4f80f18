@@ -1,5 +1,0 @@
-package com.magiology.forgepowered.packets;
-
-public class UploadFrequency {
-
-}

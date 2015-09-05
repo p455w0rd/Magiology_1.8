@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
+import com.magiology.util.renderers.TessHelper;
 
 public class EntityBaseFX extends EntityFX{
 	

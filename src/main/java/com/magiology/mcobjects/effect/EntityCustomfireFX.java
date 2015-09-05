@@ -11,13 +11,13 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.effect.mc.EntityCloudFXM;
 import com.magiology.mcobjects.effect.mc.EntityLavaFXM;
 import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class EntityCustomfireFX extends EntityFXM{
 	public boolean active=false;

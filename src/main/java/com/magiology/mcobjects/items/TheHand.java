@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.TheHandHandeler.HandComonPositions;
-import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class TheHand extends Item{
 	

@@ -34,8 +34,8 @@ import com.magiology.handelers.EnhancedRobot;
 import com.magiology.handelers.GuiHandeler;
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.io.IOReadableMap;
-import com.magiology.objhelper.helpers.Helper;
 import com.magiology.render.Textures;
+import com.magiology.util.utilclasses.Helper;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 

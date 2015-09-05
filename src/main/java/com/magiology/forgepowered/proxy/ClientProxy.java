@@ -12,10 +12,10 @@ import com.magiology.core.init.MTileEntitys;
 import com.magiology.handelers.KeyHandler;
 import com.magiology.mcobjects.BlockM;
 import com.magiology.mcobjects.ItemM;
-import com.magiology.objhelper.DataStalker;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
+import com.magiology.util.utilclasses.DataStalker;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 
 public class ClientProxy extends CommonProxy{

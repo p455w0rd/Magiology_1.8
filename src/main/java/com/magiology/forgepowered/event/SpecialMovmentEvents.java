@@ -11,7 +11,7 @@ import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.items.armor.Pants_42;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 
 public class SpecialMovmentEvents{

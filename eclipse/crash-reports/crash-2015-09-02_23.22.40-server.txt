@@ -1,0 +1,78 @@
+---- Minecraft Crash Report ----
+// Quite honestly, I wouldn't worry myself about that.
+
+Time: 02.09.15. 23:22
+Description: Exception ticking world
+
+java.lang.NullPointerException: Exception ticking world
+	at com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM.writePos(TileEntityM.java:25)
+	at com.magiology.api.network.skeleton.TileEntityNetworkPow.writeToNBT(TileEntityNetworkPow.java:48)
+	at com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController.writeToNBT(TileEntityNetworkController.java:83)
+	at com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM.getDescriptionPacket(TileEntityM.java:15)
+	at net.minecraft.server.management.PlayerManager$PlayerInstance.sendTileToAllPlayersWatchingChunk(PlayerManager.java:640)
+	at net.minecraft.server.management.PlayerManager$PlayerInstance.onUpdate(PlayerManager.java:581)
+	at net.minecraft.server.management.PlayerManager.updatePlayerInstances(PlayerManager.java:82)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:230)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:764)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:669)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:171)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:540)
+	at java.lang.Thread.run(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM.writePos(TileEntityM.java:25)
+	at com.magiology.api.network.skeleton.TileEntityNetworkPow.writeToNBT(TileEntityNetworkPow.java:48)
+	at com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController.writeToNBT(TileEntityNetworkController.java:83)
+	at com.magiology.mcobjects.tileentityes.corecomponents.TileEntityM.getDescriptionPacket(TileEntityM.java:15)
+	at net.minecraft.server.management.PlayerManager$PlayerInstance.sendTileToAllPlayersWatchingChunk(PlayerManager.java:640)
+	at net.minecraft.server.management.PlayerManager$PlayerInstance.onUpdate(PlayerManager.java:581)
+	at net.minecraft.server.management.PlayerManager.updatePlayerInstances(PlayerManager.java:82)
+	at net.minecraft.world.WorldServer.tick(WorldServer.java:230)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 1 total; [EntityPlayerMP['Player695'/116, l='New World', x=-132,68, y=5,41, z=1026,79]]
+	Chunk stats: ServerChunkCache: 725 Drop: 0
+	Level seed: -8929610050660520782
+	Level generator: ID 01 - flat, ver 0. Features enabled: true
+	Level generator options: 
+	Level spawn location: -129,00,4,00,1036,00 - World: (-129,4,1036), Chunk: (at 15,0,12 in -9,64; contains blocks -144,0,1024 to -129,255,1039), Region: (-1,2; contains chunks -32,64 to -1,95, blocks -512,0,1024 to -1,255,1535)
+	Level time: 355440 game time, 1295 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 122101 (now: false), thunder time: 24115 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:764)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:669)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:171)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:540)
+	at java.lang.Thread.run(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_60, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 778449768 bytes (742 MB) / 1056309248 bytes (1007 MB) up to 1056309248 bytes (1007 MB)
+	JVM Flags: 4 total; -Xincgc -Xmx1024M -Xms1024M -Xmx1024M
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.10 FML v8.0.99.99 Minecraft Forge 11.14.3.1502 4 mods loaded, 4 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.8-11.14.3.1502.jar) 
+	UCHIJAAAA	Forge{11.14.3.1502} [Minecraft Forge] (forgeSrc-1.8-11.14.3.1502.jar) 
+	UCHIJAAAA	magiology{0.1052} [Magiology] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player695'/116, l='New World', x=-132,68, y=5,41, z=1026,79]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

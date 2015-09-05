@@ -17,16 +17,16 @@ import com.magiology.core.Magiology;
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.modedmcstuff.ColorF;
-import com.magiology.objhelper.DoubleObject;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.vectors.AdvancedPhysicsFloat;
-import com.magiology.objhelper.vectors.AdvancedPhysicsVec3F;
-import com.magiology.objhelper.vectors.Vec3M;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsVec3F;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class MainMenuUpdateNotification{
 	

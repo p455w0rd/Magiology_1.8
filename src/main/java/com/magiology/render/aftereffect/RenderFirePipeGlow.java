@@ -9,13 +9,13 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
-import com.magiology.objhelper.helpers.renderers.GL11H;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBuffer;
-import com.magiology.objhelper.helpers.renderers.NormalizedVertixBufferModel;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
-import com.magiology.objhelper.helpers.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.NormalizedVertixBufferModel;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
 
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
@@ -40,18 +40,22 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			GL11.glTranslated(pipe.x(), pipe.y(), pipe.z());
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11H.SetUpOpaqueRendering(1);
+			
 			double var1=Helper.fluctuator(20,(pipe.x()+pipe.y()+pipe.z())*4),
 				   var2=Helper.fluctuator(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
 			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*Helper.calculateRenderPos(prevAlpha, alpha));
 			GL11.glDepthMask(true);
-			if(pipe.strateConnection[0]==null&&pipe.strateConnection[1]==null&&pipe.strateConnection[2]==null){
-				for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i]!=null&&pipe.shouldConnectionsBeRendered[i]){
-					drawConnectorGlow(pipe.connections[i]);
-				}
+			if(!pipe.isStrate(null)){
+				for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i].getMain()&&pipe.connections[i].willRender())drawConnectorGlow(pipe.connections[i].getFaceEF());
 				drawCoreGlow();
-			}else for(int a=0;a<pipe.strateConnection.length;a++)if(pipe.strateConnection[a]!=null) drawStrateCoreGlow(pipe.strateConnection[a]);
-			
+			}else for(int a=0;a<3;a++){
+				int b=a;
+				if(a==0)b=3;
+				else if(a==1)b=4;
+				else if(a==2)b=1;
+				if(pipe.isStrate(EnumFacing.getFront(b)))drawStrateCoreGlow(EnumFacing.getFront(b));
+			}
 			
 			GL11H.EndOpaqueRendering();
 			GL11.glColor4d(1,1,1,1);

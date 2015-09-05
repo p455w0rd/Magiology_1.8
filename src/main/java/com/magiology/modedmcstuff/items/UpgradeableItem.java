@@ -1,6 +1,6 @@
 package com.magiology.modedmcstuff.items;
 
-import static com.magiology.objhelper.helpers.FontEH.*;
+import static com.magiology.util.utilclasses.FontEHelper.*;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.ItemM;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
 import com.magiology.registry.upgrades.RegisterItemUpgrades;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class UpgradeableItem extends ItemM implements UpgItem{
 	public static String slotNBT="thatSlot";

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerUpgrades;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class GameLoopEvents{
 	

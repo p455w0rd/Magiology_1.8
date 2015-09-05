@@ -1,6 +1,9 @@
 package com.magiology.mcobjects.blocks.network;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -10,6 +13,7 @@ import net.minecraft.world.World;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class NetworkController extends BlockContainerMultiColision{
 	
@@ -42,5 +46,17 @@ public class NetworkController extends BlockContainerMultiColision{
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata){
 		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkController());
+	}
+	@Override 
+	protected BlockState createBlockState(){
+		return new BlockState(this,new IProperty[]{H.META});
+	}
+	@Override
+	public IBlockState getStateFromMeta(int meta){
+	    return getDefaultState().withProperty(H.META, Integer.valueOf(meta));
+	}
+	@Override
+	public int getMetaFromState(IBlockState state){
+		return ((Integer)state.getValue(H.META)).intValue();
 	}
 }

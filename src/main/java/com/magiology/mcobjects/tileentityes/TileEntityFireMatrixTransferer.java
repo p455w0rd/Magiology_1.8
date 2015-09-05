@@ -6,9 +6,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.PowerHelper;
 import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.PowerHelper;
 
 public class TileEntityFireMatrixTransferer extends TileEntityPow{
 	
@@ -54,4 +54,9 @@ public class TileEntityFireMatrixTransferer extends TileEntityPow{
         AxisAlignedBB bb = new AxisAlignedBB(pos, pos.add(1,1,1));
         return bb;
     }
+
+	@Override
+	public void updateConnections(){
+		
+	}
 }

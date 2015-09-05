@@ -3,7 +3,7 @@ package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 import net.minecraft.item.ItemStack;
 
 import com.magiology.api.power.PowerProducer;
-import com.magiology.objhelper.helpers.PowerHelper.PowerItemHelper;
+import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
 
 public abstract class TileEntityPowGen extends TileEntityPow implements PowerProducer{
 	

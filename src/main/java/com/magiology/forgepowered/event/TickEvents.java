@@ -25,10 +25,10 @@ import com.magiology.gui.DownloadingIcon;
 import com.magiology.gui.MainMenuUpdateNotification;
 import com.magiology.gui.fpgui.FirstPersonGui;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.Helper.H;
-import com.magiology.objhelper.vectors.Pos;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.vectors.Pos;
 
 public class TickEvents{
 	Minecraft mc=Minecraft.getMinecraft();

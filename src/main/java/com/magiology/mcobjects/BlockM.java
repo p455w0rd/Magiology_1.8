@@ -12,8 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import com.magiology.core.MReference;
-import com.magiology.objhelper.Get;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper;
 
 public class BlockM extends Block{
 

@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.objhelper.helpers.Helper;
-import com.magiology.objhelper.helpers.renderers.TessHelper;
 import com.magiology.render.Textures;
+import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper;
 
 public class ModelHelmet42 extends ModelBiped{
     ModelRenderer baseTop1,baseTop2,baseTop3,baseTop4,baseSide1,baseSide2,baseSide3,baseSide4,baseBack1,baseBack2,baseBack3,baseBack4;

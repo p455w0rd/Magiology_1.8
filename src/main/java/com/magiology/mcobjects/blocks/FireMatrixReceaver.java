@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.objhelper.helpers.Helper;
+import com.magiology.util.utilclasses.Helper;
 
 public class FireMatrixReceaver extends BlockContainer {
 
@@ -65,7 +65,7 @@ public class FireMatrixReceaver extends BlockContainer {
 		
 		
 		
-        return world.getBlockState(pos).withProperty(Helper.MetadataMarker, side.getIndex()+v1);
+        return world.getBlockState(pos).withProperty(Helper.META, side.getIndex()+v1);
     }
 	
 	
