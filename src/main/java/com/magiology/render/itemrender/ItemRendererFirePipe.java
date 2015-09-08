@@ -17,10 +17,6 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	private final float tH=1F/16F;
 	private final float tWC=1F/4F;
 	private final float tHC=1F/40F;
-	private final float tWFSL=1F/62F;
-	private final float tHFSL=1F/38F;
-	private final float tWS=1F/16F;
-	private final float tHS=1F/32F;
 	
 	NormalizedVertixBuffer buf=TessHelper.getNVB();
 	

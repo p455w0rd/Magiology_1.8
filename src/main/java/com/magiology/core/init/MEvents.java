@@ -5,10 +5,10 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import com.magiology.forgepowered.event.EntityEvents;
 import com.magiology.forgepowered.event.GameLoopEvents;
-import com.magiology.forgepowered.event.HighlightEvent;
 import com.magiology.forgepowered.event.MouseEvents;
-import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.forgepowered.event.TickEvents;
+import com.magiology.forgepowered.event.client.HighlightEvent;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.render.shaders.core.ShaderRunner;
 
 public class MEvents{

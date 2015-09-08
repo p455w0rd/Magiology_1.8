@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -17,8 +16,9 @@ import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
+public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 	
 	World world;
 	int metadata=0;
@@ -31,7 +31,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {
 	FontRenderer fr=Helper.getFontRenderer();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentit, double x1, double y1, double z1, float f,int pass) {
+	public void renderTileEntityAt(TileEntity tileentit, double x1, double y1, double z1, float f) {
 		TileEntityRemotePowerCounter tileentity=(TileEntityRemotePowerCounter)tileentit;
 		world=tileentity.getWorld();
 		metadata=H.getBlockMetadata(tileentity.getWorld(), tileentity.getPos());

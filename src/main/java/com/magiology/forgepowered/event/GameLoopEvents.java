@@ -29,7 +29,7 @@ public class GameLoopEvents{
 		BlockPos pos=e.pos;
 		EntityPlayer player=e.getPlayer();
 		World world=e.world;
-		TileEntity tile=world.getTileEntity(pos);
+		world.getTileEntity(pos);
 		if(player.capabilities.isCreativeMode){
 			
 		}else{

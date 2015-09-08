@@ -14,10 +14,8 @@ import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper.H;
 
 public class EntitySubatomicWorldDeconstructorRenderer extends Render{
-	private float scale;
 	public EntitySubatomicWorldDeconstructorRenderer(float scale){
 		super(TessHelper.getRM());
-		this.scale=scale;
 	}
 
 	@Override
@@ -30,7 +28,6 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 		try{
 			EntitySubatomicWorldDeconstructor entity=(EntitySubatomicWorldDeconstructor)en;
 			EntityPlayer player=H.getMC().thePlayer;
-			int time360=entity.age%90*4,offs=25,many=1;
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),
 					-(float)(player.lastTickPosY+(player.posY-player.lastTickPosY)*partialTicks), 
@@ -39,7 +36,7 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 			GL11.glTranslatef((float)(entity.lastTickPosX+(entity.posX-entity.lastTickPosX)*partialTicks),
 					(float)(entity.lastTickPosY+(entity.posY-entity.lastTickPosY)*partialTicks), 
 					(float)(entity.lastTickPosZ+(entity.posZ-entity.lastTickPosZ)*partialTicks));
-			float smoothRotation=(time360-4)+4*partialTicks,size=0.1F;
+			float size=0.1F;
 			AxisAlignedBB cube=new AxisAlignedBB(-size,-size,-size,size,size,size+1);
 //			GL11H.SetUpOpaqueRendering(1);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);

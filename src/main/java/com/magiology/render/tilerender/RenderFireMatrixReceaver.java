@@ -1,12 +1,10 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -16,21 +14,16 @@ import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
-public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
-
-	private final float p=1F/16F;
-	private final float tW=1F/64F;
-	private final float tH=1F/64F;
+public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 	
-	
-	public EnumFacing[] connections = new EnumFacing[6];
 	NormalizedVertixBuffer buf=Render.NVB();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
-		TileEntityFireMatrixReceaver tile=(TileEntityFireMatrixReceaver) tileentity;
+	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float partialTicks) {
+		TileEntityFireMatrixReceaver tile=(TileEntityFireMatrixReceaver) tileEntity;
 		
 		boolean var1=true;
 		for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){
@@ -46,8 +39,8 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
 		float rotation=Helper.calculateRenderPos(tile.prevRotation,tile.rotation);
-		
-		GL11.glTranslated(x,y,z);
+		GL11.glPushMatrix();
+		GL11.glTranslated(posX,posY,posZ);
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		
 		this.bindTexture(Textures.FireMatrixReceaverBase);
@@ -107,7 +100,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 		
 		
 		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glTranslated(-x, -y, -z);
+		GL11.glPopMatrix();
 	}
 
 	

@@ -2,7 +2,6 @@ package com.magiology.mcobjects.items;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -77,7 +76,7 @@ public class FireHammer extends ItemM{
 //		}
 		
 		if(player.isSneaking()){
-			Block b=Helper.getBlock(world, pos);
+			Helper.getBlock(world, pos);
 			if(tile1 instanceof PowerCore){
 //				PowerCore tileMT=(PowerCore) tile1;
 //				if(world.isRemote){

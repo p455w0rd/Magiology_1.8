@@ -42,7 +42,7 @@
 		<item value="false" key="linkWithEditor"/>
 	</section>
 	<section name="NewClassWizardPage">
-		<item value="true" key="create_constructor"/>
+		<item value="false" key="create_constructor"/>
 		<item value="true" key="create_unimplemented"/>
 	</section>
 	<section name="OptionalMessageDialog.hide.">
@@ -85,73 +85,10 @@
 	<section name="quick_assist_proposal_size">
 	</section>
 	<section name="JavaSearchPage">
-		<item value="8" key="HISTORY_SIZE"/>
+		<item value="11" key="HISTORY_SIZE"/>
 		<item value="false" key="CASE_SENSITIVE"/>
 		<item value="15" key="INCLUDE_MASK"/>
 		<section name="HISTORY6">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="" key="javaElement"/>
-			<item value="0" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.objhelper.helpers.SideHelper.offset(int, BlockPos)" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY7">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="" key="javaElement"/>
-			<item value="0" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.objhelper.helpers.SideHelper.rand" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="4" key="searchFor"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY4">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraftforge.client(MinecraftForgeClient.class[MinecraftForgeClient~registerItemRenderer~Lnet.minecraft.item.Item;~Lnet.minecraftforge.client.IItemRenderer;" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="net.minecraftforge.client.MinecraftForgeClient.registerItemRenderer(net.minecraft.item.Item, net.minecraftforge.client.IItemRenderer)" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="1" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY5">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/C:\/Program Files\/Java\/jre1.8.0_60\/lib\/rt.jar&lt;java.util(Map.class[Map" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="java.util.Map&lt;String, Object&gt;" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="0" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY2">
-			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items.armor{Helmet_42.java[Helmet_42" key="javaElement"/>
-			<item value="2" key="scope"/>
-			<item value="11" key="includeMask"/>
-			<item value="com.magiology.mcobjects.items.armor.Helmet_42" key="pattern"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="matchLocations"/>
-			<item value="0" key="searchFor"/>
-			<list key="workingSets">
-				<item value="Magiology"/>
-			</list>
-		</section>
-		<section name="HISTORY3">
 			<item value="true" key="isCaseSensitive"/>
 			<item value="" key="javaElement"/>
 			<item value="2" key="scope"/>
@@ -164,9 +101,97 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY0">
+		<section name="HISTORY7">
 			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.forgepowered.event{RenderLoopEvents.java[RenderLoopEvents^entitysToRender" key="javaElement"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraftforge.client(MinecraftForgeClient.class[MinecraftForgeClient~registerItemRenderer~Lnet.minecraft.item.Item;~Lnet.minecraftforge.client.IItemRenderer;" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="net.minecraftforge.client.MinecraftForgeClient.registerItemRenderer(net.minecraft.item.Item, net.minecraftforge.client.IItemRenderer)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY4">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="15" key="includeMask"/>
+			<item value="com.magiology.util.utilobjects.EntityToRender" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY10">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.objhelper.helpers.SideHelper.rand" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="4" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY5">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.mcobjects.items.armor{Helmet_42.java[Helmet_42" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.mcobjects.items.armor.Helmet_42" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY8">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Program Files\/Java\/jre1.8.0_60\/lib\/rt.jar&lt;java.util(Map.class[Map" key="javaElement"/>
+			<item value="2" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="java.util.Map&lt;String, Object&gt;" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="0" key="searchFor"/>
+			<list key="workingSets">
+				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY9">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="11" key="includeMask"/>
+			<item value="com.magiology.objhelper.helpers.SideHelper.offset(int, BlockPos)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY2">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/src\/main\/java&lt;com.magiology.util.utilobjects.m_extension{TileEntitySpecialRendererM.java[TileEntitySpecialRendererM~renderTileEntityAt~QTileEntity;~D~D~D~F~I" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="15" key="includeMask"/>
+			<item value="com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM.renderTileEntityAt(TileEntity, double, double, double, float, int)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY3">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="" key="javaElement"/>
 			<item value="2" key="scope"/>
 			<item value="15" key="includeMask"/>
 			<item value="com.magiology.forgepowered.event.RenderLoopEvents.entitysToRender" key="pattern"/>
@@ -177,17 +202,28 @@
 				<item value="Magiology"/>
 			</list>
 		</section>
-		<section name="HISTORY1">
+		<section name="HISTORY0">
 			<item value="true" key="isCaseSensitive"/>
-			<item value="=Minecraft/src\/main\/java&lt;com.magiology.util.utilobjects{EntityToRender.java[EntityToRender" key="javaElement"/>
-			<item value="2" key="scope"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.client.renderer.tileentity(TileEntityRendererDispatcher.class[TileEntityRendererDispatcher~renderTileEntity~Lnet.minecraft.tileentity.TileEntity;~F~I" key="javaElement"/>
+			<item value="0" key="scope"/>
 			<item value="15" key="includeMask"/>
-			<item value="com.magiology.util.utilobjects.EntityToRender" key="pattern"/>
+			<item value="net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher.renderTileEntity(net.minecraft.tileentity.TileEntity, float, int)" key="pattern"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="matchLocations"/>
-			<item value="0" key="searchFor"/>
+			<item value="1" key="searchFor"/>
 			<list key="workingSets">
-				<item value="Magiology"/>
+			</list>
+		</section>
+		<section name="HISTORY1">
+			<item value="true" key="isCaseSensitive"/>
+			<item value="=Minecraft/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.3.1502\/snapshot\/20141130\/forgeSrc-1.8-11.14.3.1502.jar&lt;net.minecraft.client.renderer.tileentity(TileEntityRendererDispatcher.class[TileEntityRendererDispatcher~renderTileEntityAt~Lnet.minecraft.tileentity.TileEntity;~D~D~D~F~I" key="javaElement"/>
+			<item value="0" key="scope"/>
+			<item value="15" key="includeMask"/>
+			<item value="net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher.renderTileEntityAt(net.minecraft.tileentity.TileEntity, double, double, double, float, int)" key="pattern"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="matchLocations"/>
+			<item value="1" key="searchFor"/>
+			<list key="workingSets">
 			</list>
 		</section>
 	</section>

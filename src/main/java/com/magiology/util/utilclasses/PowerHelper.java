@@ -123,7 +123,6 @@ public class PowerHelper{
 	}
 //	function to use
 	public static boolean tryToDrainFromTo(Object fromTile,Object toTile,int amount, int side){
-		boolean isSent=false;
 		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
 			PowerCore tileFrom=(PowerCore)fromTile;
 			PowerCore tileTo=(PowerCore)toTile;

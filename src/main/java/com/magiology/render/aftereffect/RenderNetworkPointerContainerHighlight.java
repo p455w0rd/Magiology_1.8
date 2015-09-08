@@ -155,11 +155,9 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			difX=playerX-txtX,
 			difZ=playerZ-txtZ,
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
-			width=Helper.getFontRenderer().getStringWidth(text)*H.p/4,
-			height=Helper.getFontRenderer().FONT_HEIGHT*H.p/4,
-			leftX=(float)CricleHelper.sin(-camYaw+90)*width/2,
-			leftZ=(float)CricleHelper.cos(-camYaw+90)*width/2,
-			rand=Helper.CRandF(2);
+			width=Helper.getFontRenderer().getStringWidth(text)*H.p/4;
+		Helper.getFontRenderer();
+		float leftX=(float)CricleHelper.sin(-camYaw+90)*width/2, leftZ=(float)CricleHelper.cos(-camYaw+90)*width/2, rand=Helper.CRandF(2);
 		
 		
 		float r=0.8F,g=Helper.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;

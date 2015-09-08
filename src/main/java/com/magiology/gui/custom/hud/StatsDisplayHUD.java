@@ -1,11 +1,9 @@
 package com.magiology.gui.custom.hud;
 
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.Helper;
 
 public class StatsDisplayHUD extends HUD{
 	public static StatsDisplayHUD instance=new StatsDisplayHUD();
-	private ExtendedPlayerData data;
 	public boolean isStatsShowed=false;
 	public float statsAlpha=0,prevStatsAlpha=0,statsWantedAlpha=0;
 	private StatsDisplayHUD(){}

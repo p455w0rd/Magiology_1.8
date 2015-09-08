@@ -1,7 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
@@ -11,8 +9,9 @@ import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderBateryL1 extends TileEntitySpecialRenderer {
+public class RenderBateryL1 extends TileEntitySpecialRendererM {
 
 	private final float p=1F/16F;
 	private final float tW=1F/64F;
@@ -24,7 +23,7 @@ public class RenderBateryL1 extends TileEntitySpecialRenderer {
 	public EnumFacing[] connections = new EnumFacing[6];
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);
@@ -43,8 +42,6 @@ public class RenderBateryL1 extends TileEntitySpecialRenderer {
 	}
 	
 	public void renderSides() {
-
-		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(Textures.BateryL1Core);
 		TessHelper.drawQuad(new double[]{p*6, p*6,p*6, p*6, p*10,p*10,p*10,p*10},
 				            new double[]{p*10,p*6,p*6, p*10,p*10,p*6, p*6, p*10}, 
@@ -75,7 +72,6 @@ public class RenderBateryL1 extends TileEntitySpecialRenderer {
 	}
 	public void renderConections(EnumFacing dir)
 	{
-		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(Textures.BateryL1Core);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 			if(dir.equals(EnumFacing.WEST)){

@@ -77,7 +77,6 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		if(CustomButton!=null){
 			CustomButton.update(guiLeft+40, guiTop+40);
 		}
-		double angle=tileCB.speed;
 		TessHelper.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.9F);

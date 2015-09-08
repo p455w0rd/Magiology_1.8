@@ -1,6 +1,6 @@
 package com.magiology.core.init;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.gui.GuiUpdater;
 import com.magiology.gui.custom.hud.HandModeChangerHUD;
 import com.magiology.gui.custom.hud.SoulFlameHUD;

@@ -17,7 +17,7 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.gui.container.ISidedPowerInstructorContainer;
@@ -40,14 +40,12 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 	AdvancedPhysicsFloat xRotation,yRotation,zRotation;
 	
 	private final TileEntity tile;
-	private final EntityPlayer player;
 	TileEntitySpecialRenderer renderer;
 	
 	private ComplexCubeModel cube;
 	
 	public GuiISidedPowerInstructor(EntityPlayer player,TileEntity tile){
 		super(new ISidedPowerInstructorContainer(player, tile));
-		this.player=player;
 		this.tile=tile;
 		this.xSize=176;
 		this.ySize=166;
@@ -140,7 +138,6 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 	@Override
 	protected void actionPerformed(GuiButton b){
 		int id=b.id;
-		String buttonTxt=b.displayString;
 		if(id<6){
 			buttonId=id;
 		}
@@ -214,7 +211,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			}
 			Block block=H.getBlock(tile.getWorld(), tile.getPos());
 			if(block!=null){
-				int renderId=block.getRenderType();
+				block.getRenderType();
 				GL11.glPushMatrix();
 				try{
 					TessHelper.bindTexture(TextureMap.locationBlocksTexture);

@@ -195,12 +195,10 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	}
 	public void findLevelOfStructure(){
 		if(pipeStructure[0]==null)return;
-		int lvl=0;
 		structureUpg[0]=false;
 		
 		if(pipeStructure[0].isStructureCompleate()&&Helper.booleanToInt(pipeStructure[1].isStructureCompleate())+Helper.booleanToInt(pipeStructure[2].isStructureCompleate())==1){
 			structureUpg[0]=true;
-			lvl++;
 			
 		}
 		

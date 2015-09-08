@@ -1,9 +1,7 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
 
@@ -16,9 +14,6 @@ public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 	double[] sideOpacity=new double[8];
 	int[] sideOpacityChange=new int[8];
 	
-	private static final ResourceLocation texture = new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
-	private static final ResourceLocation texture1add1 = new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1Add1.png");
-	private static final ResourceLocation texture1add2 = new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1Add2.png");
 	public EntityMovingParticleFX(World w, double xp1, double yp1, double zp1, double xp2, double yp2, double zp2, int siz, double Ra,double Ga,double Ba,double opacita){
         super(w, xp1, yp1, zp1, 0, 0, 0, 0, 0, 1, Ra, Ga, Ba, opacita);
         

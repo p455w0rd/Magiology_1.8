@@ -50,7 +50,7 @@ public class ItemRendererTheHand implements IItemRenderer{
 			GL11.glRotated(-110, 1, -0.4, -0.2);
 			GL11.glTranslated(-0.6, -2.2,-1.5);
 			GL11.glScaled(1.2, 1.2, 1.2);
-			long time=Minecraft.getSystemTime();
+			Minecraft.getSystemTime();
 			GL11.glTranslated(0, data.thirdPresonPos, 0);
 			GL11.glRotated(-data.thirdPresonPosSpeed*350+20, 1, 0, 0);
 		}

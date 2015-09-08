@@ -21,7 +21,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 
@@ -345,7 +344,7 @@ public class TessHelper{
 	}
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NormalizedVertixBuffer nvb,double textueOffset,double textueScale){
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
-		EntityPlayer player=Helper.getThePlayer();
+		Helper.getThePlayer();
 		WorldRenderer renderer=getWR();
 		Vec3M[] points=new Vec3M[4];
 		

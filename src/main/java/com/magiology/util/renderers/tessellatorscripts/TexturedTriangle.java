@@ -12,7 +12,6 @@ public class TexturedTriangle{
     public PositionTextureVertex[] vertexPositions;
     public int nVertices;
     private boolean invertNormal;
-    private static final String __OBFID = "CL_00000850";
     private static WorldRenderer renderer=TessHelper.getWR();
 
     public TexturedTriangle(PositionTextureVertex[] PTV){

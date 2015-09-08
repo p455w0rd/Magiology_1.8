@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -9,15 +8,16 @@ import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderOreStructureCore extends TileEntitySpecialRenderer{
+public class RenderOreStructureCore extends TileEntitySpecialRendererM{
 	private final float p= 1F/16F;
 	private final float tW=1F/96F;
 	private final float tH=1F/80F;
 	NormalizedVertixBuffer buf=Render.NVB();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		TileEntityOreStructureCore core= (TileEntityOreStructureCore) tileentity;
 		GL11.glTranslated(x,y,z);
 		GL11.glTranslated(0.5, 1, 0.5);

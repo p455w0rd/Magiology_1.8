@@ -37,7 +37,6 @@ import com.magiology.render.tilerender.RenderBateryL100;
 import com.magiology.render.tilerender.RenderBateryL2;
 import com.magiology.render.tilerender.RenderBateryL3;
 import com.magiology.render.tilerender.RenderBedrockBreaker;
-import com.magiology.render.tilerender.RenderDontLookAtMe;
 import com.magiology.render.tilerender.RenderEnergizedLapisOre;
 import com.magiology.render.tilerender.RenderFireExhaust;
 import com.magiology.render.tilerender.RenderFireGun;
@@ -97,7 +96,6 @@ public class MTileEntitys{
 		bindTileWRender(TileEntityBateryL100.class,             new RenderBateryL100());
 		bindTileWRender(TileEntityBFCPowerOut.class,            new RenderBFCPowerOut());
 		bindTileWRender(TileEntityEnergizedLapisOre.class,      new RenderEnergizedLapisOre());
-		bindTileWRender(TileEntityDontLookAtMe.class,           new RenderDontLookAtMe());
 		bindTileWRender(TileEntityRemotePowerCounter.class,     new RenderRemotePowerCounter());
 		bindTileWRender(TileEntityFireMatrixTransferer.class,   new RenderFireMatrixTransferer());
 		bindTileWRender(TileEntityFireMatrixReceaver.class,     new RenderFireMatrixReceaver());

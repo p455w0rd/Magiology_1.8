@@ -40,7 +40,6 @@ public class RedstoneData implements SavableData{
 	}
 	@Override
 	public void readData(Iterator<Integer> integers, Iterator<Boolean> booleans, Iterator<Byte> bytes___, Iterator<Long> longs___,Iterator<Double> doubles_, Iterator<Float> floats__, Iterator<String> strings_, Iterator<Short> shorts__){
-		int bolId=0;
 		strenght=integers.next();
 		on=booleans.next();
 		isStrong=booleans.next();

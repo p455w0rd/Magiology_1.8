@@ -69,7 +69,6 @@ public class EntitySparkFX extends EntityFXM{
 		if(fragments.size()<size&&slowdown.isTimeWithAddProgress()){
 			for(int b=0;b<numberOfSplitsPerUpdate;b++){
 				int siz=fragments.size();
-				boolean first=true;
 				double chanse=1;
 				for(int a=0;a<siz;a++){
 					Fragment lastFragment=fragments.get(a);

@@ -36,7 +36,7 @@ public class CleanButton extends GuiButton implements Updateable{
         if(!this.visible)return;
         this.mouseDragged(mc, mouseX, mouseY);
         this.hovered=mouseX>=this.xPosition&&mouseY>=this.yPosition&&mouseX<this.xPosition+this.width&&mouseY<this.yPosition+this.height;
-        int selected=this.getHoverState(this.hovered);
+        this.getHoverState(this.hovered);
         GL11H.blend(true);
         GL11H.blendFunc(1);
             ColorF color=H.calculateRenderColor(prevColor, this.color).mul(highlight.getPoint()+1);

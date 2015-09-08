@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -8,8 +7,9 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderFireExhaust extends TileEntitySpecialRenderer {
+public class RenderFireExhaust extends TileEntitySpecialRendererM {
 	
 	private final float p= 1F/16F;
 	private final float tW=1F/97F;
@@ -18,7 +18,7 @@ public class RenderFireExhaust extends TileEntitySpecialRenderer {
 	NormalizedVertixBuffer buf=Render.NVB();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_CULL_FACE);

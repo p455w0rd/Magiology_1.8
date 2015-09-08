@@ -232,9 +232,6 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
   		legSideAdd21.rotateAngleX+=(float)rightLegRx;
   		legSideAdd22.rotateAngleX+=(float)rightLegRx;
   		
-  		float BRAX=bipedBody.rotateAngleX,BRAY=bipedBody.rotateAngleY,BRAZ=bipedBody.rotateAngleZ,
-			LRAX=bipedLeftLeg.rotateAngleX,LRAY=bipedLeftLeg.rotateAngleY,LRAZ=bipedLeftLeg.rotateAngleZ,
-			LPX=bipedLeftLeg.offsetX,LPY=bipedLeftLeg.offsetX,LPZ=bipedLeftLeg.offsetZ;
   		syncBoxes(Base,bipedBody);
   		syncBoxes(Stick1,bipedBody);
   		syncBoxes(Stick2,bipedBody);

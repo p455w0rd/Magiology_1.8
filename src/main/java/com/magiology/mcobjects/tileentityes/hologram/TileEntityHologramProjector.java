@@ -30,8 +30,6 @@ import com.magiology.util.utilobjects.vectors.Vec3M;
 public class TileEntityHologramProjector extends TileEntityM implements IUpdatePlayerListBox{
 	
 	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<TileEntityHologramProjector>();
-	private static long lastTick=0;
-	
 	public Point point=new Point();
 	public ComplexCubeModel main;
 	public ArrayList<RenderObject> renderObjects=new ArrayList<RenderObject>();

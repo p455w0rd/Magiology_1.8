@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender.network;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
@@ -11,11 +10,12 @@ import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderNetworkController extends TileEntitySpecialRenderer{
+public class RenderNetworkController extends TileEntitySpecialRendererM{
 
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt,int pass){
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
 		GL11.glPushMatrix();
 		GL11.glTranslated(x,y,z);
 		new ColorF(0.6,0,0,0.5).bind();

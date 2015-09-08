@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender.hologram;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -11,13 +10,14 @@ import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderHologramProjector extends TileEntitySpecialRenderer{
+public class RenderHologramProjector extends TileEntitySpecialRendererM{
 	
 	private TileEntityHologramProjector tile;
 	
 	@Override
-	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float partialTicks,int pass){
+	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float partialTicks){
 		tile=(TileEntityHologramProjector)t;
 		GL11.glPushMatrix();
 		GL11.glTranslated(x,y,z);

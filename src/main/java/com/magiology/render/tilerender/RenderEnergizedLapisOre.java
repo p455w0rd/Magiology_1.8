@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -9,16 +8,13 @@ import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderEnergizedLapisOre extends TileEntitySpecialRenderer {
-
-	private final float p= 1F/16F;
-	private final float tW=1F/64F;
-	private final float tH=1F/64F;
+public class RenderEnergizedLapisOre extends TileEntitySpecialRendererM {
 
 	NormalizedVertixBuffer buf=Render.NVB();
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		GL11.glPushMatrix();
 		this.bindTexture(Textures.EnergizedLapisOre);
 		GL11.glEnable(GL11.GL_LIGHTING);

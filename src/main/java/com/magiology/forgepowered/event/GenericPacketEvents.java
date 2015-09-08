@@ -2,8 +2,6 @@ package com.magiology.forgepowered.event;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
 import com.magiology.api.power.ISidedPower;
 import com.magiology.gui.container.ISidedPowerInstructorContainer;
 import com.magiology.gui.container.SmartCrafterContainer;
@@ -21,7 +19,6 @@ public class GenericPacketEvents{
 	public void intPacketEvent(IntegerPacketEvent event){
 		EntityPlayer player=event.player;
 		int integer=event.integer;
-		boolean isRemote=event.isRemote;
 		try{switch (event.eventId){
 		case 0:{
 			if(!(player.openContainer instanceof SmartCrafterContainer))break;
@@ -72,7 +69,6 @@ public class GenericPacketEvents{
 	public void stringPacketEvent(StringPacketEvent event){
 		EntityPlayer player=event.player;
 		String string=event.string;
-		boolean isRemote=event.isRemote;
 		try{switch (event.eventId){
 		case 0:{
 			int x=0,y=0,xTest,yTest;
@@ -91,8 +87,6 @@ public class GenericPacketEvents{
 	}
 	public void voidPacketEvent(PacketEvent event){
 		EntityPlayer player=event.player;
-		World world=player.worldObj;
-		boolean isRemote=event.isRemote;
 		try{switch (event.eventId){
 		case 0:{
 			TheHandHandeler.nextPosition(player);

@@ -39,7 +39,7 @@ public class RareSpacePipe extends BlockContainerMultiColision{
 	
     @Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float xHit, float yHit, float zHit){
-    	TileEntity test=world.getTileEntity(pos);
+    	world.getTileEntity(pos);
     	boolean return1=false;
     	
 //    	if(test instanceof TileEntityRareSpacePipe){

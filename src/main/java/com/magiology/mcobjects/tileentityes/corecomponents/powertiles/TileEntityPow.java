@@ -325,7 +325,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	 * @param type : send to something is 1 and send out itself is 0
 	 */
 	public void doCustomSidedPowerTransfer(int side,int type){
-		TileEntity tile=worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
+		worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
 		TransferEnergyToPosition(SideHelper.offsetNew(side,pos), type,side);
 	}
 	/**
@@ -337,7 +337,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	 */
 	public void TransferEnergyToPosition(BlockPos pos1,int type, int side){
 		TileEntity tileEn=worldObj.getTileEntity(pos1);
-		int i=getEnergy();
+		getEnergy();
 		if(type==-1&&tileEn instanceof TileEntityFirePipe){
 			for(int l=0;l<20;l++){
 				PowerHelper.tryToEquateEnergy(this, tileEn, PowerHelper.getMaxSpeed(tileEn, this),side);

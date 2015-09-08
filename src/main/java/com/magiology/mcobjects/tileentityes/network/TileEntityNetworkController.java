@@ -47,7 +47,6 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		if(interfaces.contains(tile))interfaces.add(tile);
 	}
 	public void invokeInterfaces(NetworkBaseInterface Interface,String action,Object... data){
-		int g=0;
 		for(int b=0;b<network.size();b++){
 			ISidedNetworkComponent a=network.get(b);
 			if(a instanceof NetworkBaseInterface){
@@ -62,7 +61,6 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 				}
 				if(pass){
 					((NetworkBaseInterface)a).onNetworkActionInvoked(action, data);
-					g++;
 				}
 			}
 		}
@@ -206,7 +204,6 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 			network.clear();
 			network.add(currentTile);
 			Map<TileEntity,boolean[]> tileSkipper=new HashMap<TileEntity,boolean[]>();
-			int done=0,notDone=0;
 			do{
 				more=false;
 				for(int j=0;j<network.size();j++){
@@ -215,8 +212,9 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					if(tileSkipper.get(workTile.getHost())==null)tileSkipper.put(workTile.getHost(), new boolean[]{true,true,true,true,true,true});
 					boolean isDone=true;
 					for(boolean a:tileSkipper.get(workTile.getHost()))if(a)isDone=false;
-					if(isDone)done++;
-					else notDone++;
+					if(isDone) {
+					} else {
+					}
 					if(!isDone)for(int i=0;i<6;i++)if(workTile.getAccessibleOnSide(i)){
 						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideHelper.offsetNew(i, workTile.getHost().getPos()));
 						if(test instanceof ISidedNetworkComponent){

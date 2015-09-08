@@ -40,9 +40,7 @@ public class UpgradeableItem extends ItemM implements UpgItem{
 	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){
 		if(itemStack.getTagCompound()!=null){
 			if(GuiScreen.isShiftKeyDown()){
-//				list.add("power= "+this.geten);
-				NBTTagCompound nbt=itemStack.getTagCompound();
-				ItemStack[] stacks=this.getStacks(itemStack);
+ItemStack[] stacks=this.getStacks(itemStack);
 				for(int b=0;b<stacks.length;b++){
 					ItemStack a=stacks[b];
 					list.add((a!=null?GREEN:RED+""+UNDERLINE)+""+BOLD+""+(1+b)+(a!=null?"":UNDERLINE)+"."+RESET+" "+YELLOW+(a!=null?"":UNDERLINE)+"Slot:"+RESET+" "+AQUA+(a!=null?a.getDisplayName():RED+"empty"));
@@ -99,7 +97,6 @@ public class UpgradeableItem extends ItemM implements UpgItem{
 		if(itemStack==null)return -1;
 		if(itemStack.getItem() instanceof UpgItem&&item instanceof GenericItemUpgrade){
 			UpgItem upgContainer=((UpgItem)itemStack.getItem());
-			GenericItemUpgrade Item=(GenericItemUpgrade)item;
 			ItemStack[] stacks=upgContainer.getStacks(itemStack);
 			for(ItemStack a:stacks){
 				if(a!=null){

@@ -206,7 +206,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 						} 
 					}
 					else if(actionWords[1].equals("destroy")){
-						int meta=H.getBlockMetadata(worldObj, pos1);
+						H.getBlockMetadata(worldObj, pos1);
 						Block block=H.getBlock(worldObj, pos1);
 						if(H.isRemote(this)){
 //							Get.Render.ER().addBlockDestroyEffects(pos, block, 0);

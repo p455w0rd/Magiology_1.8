@@ -50,11 +50,7 @@ public class TechneModel extends ModelBase implements IModelCustom {
   private Map<String, byte[]> zipContents = new HashMap<String, byte[]>();
 
   private Map<String, ModelRenderer> parts = new LinkedHashMap<String, ModelRenderer>();
-  private String texture = null;
   private Dimension textureDims = null;
-  private int textureName;
-  private boolean textureNameSet = false;
-
   public TechneModel(ResourceLocation resource) throws ModelFormatException
   {
     this.fileName = resource.toString();
@@ -115,12 +111,6 @@ public class TechneModel extends ModelBase implements IModelCustom {
       if (modelAttributes == null)
       {
         throw new ModelFormatException("Model " + fileName + " contains a Model tag with no attributes");
-      }
-
-      Node modelTexture = modelAttributes.getNamedItem("texture");
-      if (modelTexture != null)
-      {
-        texture = modelTexture.getTextContent();
       }
 
       NodeList textureDim = document.getElementsByTagName("TextureSize");

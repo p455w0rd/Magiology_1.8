@@ -17,7 +17,6 @@ public class ExtendedPlayerData implements IExtendedEntityProperties{
 	public int soulFlame,maxSoulFlame;
 	private int jumpCount;
 	private float reducedFallDamage;
-	private boolean isCollidedVertically,isCollidedHorizontally;
 	public boolean isFlappingDown;
 	public boolean[] keys=new boolean[6];
 	

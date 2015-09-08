@@ -1,7 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
@@ -11,10 +9,10 @@ import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
+public class RenderBedrockBreaker extends TileEntitySpecialRendererM {
 //	ResourceLocation BBB = new ResourceLocation(Magiology.MODID+":"+"/textures/models/BedrockBreakerBase.png");
 //	ResourceLocation BBLS = new ResourceLocation(Magiology.MODID+":"+"/textures/models/BedrockBreakerLegSide.png");
 //	ResourceLocation BBLF = new ResourceLocation(Magiology.MODID+":"+"/textures/models/BedrockBreakerLegFront.png");
@@ -43,7 +41,7 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 	NormalizedVertixBuffer buf=Render.NVB();
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		TileEntityBedrockBreaker entity= (TileEntityBedrockBreaker) tileentity;
 		GL11.glPushMatrix();
 		GL11.glTranslated(x,y,z);
@@ -62,7 +60,6 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 	
 	
 	public void drawBase(){
-		WorldRenderer tess=TessHelper.getWR();
 		this.bindTexture(Textures.BedrockBreakerBase);
 		
 		{
@@ -102,7 +99,6 @@ public class RenderBedrockBreaker extends TileEntitySpecialRenderer {
 	}
 
 	public void drawLeg(EnumFacing dir,double animation){
-		WorldRenderer tess=TessHelper.getWR();
 		//sides-----------------------------------------------------
 		//----------------------------------------------------------
 		

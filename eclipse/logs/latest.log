@@ -1,13 +1,13 @@
-[14:00:18] [Client thread/INFO]: Setting user: Player818
-[14:00:27] [Client thread/INFO]: LWJGL Version: 2.9.1
-[14:00:41] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
-[14:00:43] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[14:00:44] [Thread-10/INFO]: Initializing LWJGL OpenAL
-[14:00:44] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[14:00:45] [Thread-10/INFO]: OpenAL initialized.
-[14:00:45] [Sound Library Loader/INFO]: Sound engine started
-[14:00:49] [Client thread/INFO]: Created: 16x16 textures-atlas
-[14:00:52] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[23:16:45] [Client thread/INFO]: Setting user: Player790
+[23:16:53] [Client thread/INFO]: LWJGL Version: 2.9.1
+[23:17:04] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[23:17:11] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[23:17:11] [Thread-10/INFO]: Initializing LWJGL OpenAL
+[23:17:11] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[23:17:12] [Thread-10/INFO]: OpenAL initialized.
+[23:17:12] [Sound Library Loader/INFO]: Sound engine started
+[23:17:43] [Client thread/INFO]: Created: 16x16 textures-atlas
+[23:17:47] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -15,8 +15,8 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
 	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:55) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:111) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:127) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:115) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:131) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_60]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
@@ -56,7 +56,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[14:00:52] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[23:17:47] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -64,8 +64,8 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
 	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:56) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:111) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:127) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:115) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:131) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_60]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
@@ -105,7 +105,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[14:00:52] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[23:17:47] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -113,8 +113,8 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
 	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:57) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:111) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:127) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:115) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:131) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_60]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
@@ -154,7 +154,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[14:00:52] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[23:17:47] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -162,8 +162,8 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
 	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:58) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:111) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:127) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:115) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:131) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_60]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
@@ -203,7 +203,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[14:00:52] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[23:17:48] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -211,8 +211,8 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
 	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:65) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:111) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:127) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:115) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:131) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_60]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
@@ -252,7 +252,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[14:00:52] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[23:17:48] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -260,8 +260,8 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.renderer.texture.TextureManager.loadTexture(TextureManager.java:70) [TextureManager.class:?]
 	at com.magiology.render.Textures.getResource(Textures.java:117) [Textures.class:?]
 	at com.magiology.render.Textures.postInit(Textures.java:73) [Textures.class:?]
-	at com.magiology.core.Magiology.postInit(Magiology.java:111) [Magiology.class:?]
-	at com.magiology.core.Magiology.postInitStarter(Magiology.java:127) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInit(Magiology.java:115) [Magiology.class:?]
+	at com.magiology.core.Magiology.postInitStarter(Magiology.java:131) [Magiology.class:?]
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_60]
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_60]
@@ -301,32 +301,32 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[14:00:52] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
-[14:00:53] [Client thread/INFO]: SoundSystem shutting down...
-[14:00:53] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[14:00:53] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[14:00:53] [Thread-12/INFO]: Initializing LWJGL OpenAL
-[14:00:53] [Thread-12/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[14:00:53] [Thread-12/INFO]: OpenAL initialized.
-[14:00:54] [Sound Library Loader/INFO]: Sound engine started
-[14:00:58] [Client thread/INFO]: Created: 512x512 textures-atlas
-[14:02:36] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[14:02:36] [Server thread/INFO]: Generating keypair
-[14:02:37] [Server thread/INFO]: Preparing start region for level 0
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:37] [Server thread/WARN]: Skipping BlockEntity with id 
-[14:02:38] [Server thread/INFO]: Preparing spawn area: 93%
-[14:02:38] [Server thread/INFO]: Changing view distance to 12, from 10
-[14:02:40] [Server thread/INFO]: Player818[local:E:cd1d6606] logged in with entity id 112 at (-141.51043716863384, 4.0, 1015.2621747150155)
-[14:02:40] [Server thread/INFO]: Player818 joined the game
-[14:02:42] [Server thread/INFO]: Saving and pausing game...
-[14:02:42] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@3689931e[id=84e9e4f6-df8d-3fc9-b2c7-0eb3b9531d39,name=Player818,properties={},legacy=false]
+[23:17:49] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[23:17:50] [Client thread/INFO]: SoundSystem shutting down...
+[23:17:50] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[23:17:50] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[23:17:51] [Thread-12/INFO]: Initializing LWJGL OpenAL
+[23:17:51] [Thread-12/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[23:17:51] [Thread-12/INFO]: OpenAL initialized.
+[23:17:51] [Sound Library Loader/INFO]: Sound engine started
+[23:17:57] [Client thread/INFO]: Created: 512x512 textures-atlas
+[23:18:02] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[23:18:02] [Server thread/INFO]: Generating keypair
+[23:18:03] [Server thread/INFO]: Preparing start region for level 0
+[23:18:04] [Server thread/INFO]: Preparing spawn area: 10%
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:04] [Server thread/WARN]: Skipping BlockEntity with id 
+[23:18:05] [Server thread/INFO]: Changing view distance to 12, from 10
+[23:18:08] [Server thread/INFO]: Player790[local:E:6be067dd] logged in with entity id 112 at (-141.51043716863384, 4.0, 1015.2621747150155)
+[23:18:08] [Server thread/INFO]: Player790 joined the game
+[23:18:15] [Server thread/INFO]: Saving and pausing game...
+[23:18:16] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@6e0b851e[id=2f0d3d8c-afbe-358f-b8f3-786d7b0f9259,name=Player790,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:65) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:158) [YggdrasilMinecraftSessionService.class:?]
@@ -347,10 +347,7 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_60]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_60]
 	at java.lang.Thread.run(Unknown Source) [?:1.8.0_60]
-[14:02:44] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[14:02:44] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[14:02:44] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[14:02:46] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3855ms behind, skipping 77 tick(s)
-[14:06:25] [Client thread/INFO]: [CHAT] clear, rain, thunder
-[14:06:25] [Server thread/INFO]: [Player818: Changing to clear weather]
-[14:06:25] [Client thread/INFO]: [CHAT] Changing to clear weather
+[23:18:17] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[23:18:17] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[23:18:17] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[23:18:18] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3576ms behind, skipping 71 tick(s)

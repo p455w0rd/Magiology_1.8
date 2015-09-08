@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.magiology.api.connection.IConnection"/>
-<fullyQualifiedTypeName name="com.magiology.api.connection.Connection"/>
-<fullyQualifiedTypeName name="scala.collection.generic.Clearable"/>
 <fullyQualifiedTypeName name="net.minecraft.client.stream.ChatController.EnumEmoticonMode"/>
 <fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.TileEntityFirePipe"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
@@ -25,15 +22,12 @@
 <fullyQualifiedTypeName name="java.lang.Class"/>
 <fullyQualifiedTypeName name="com.magiology.gui.gui.GuiHologramProjectorMain"/>
 <fullyQualifiedTypeName name="com.magiology.gui.guiContainer.GuiHologramProjectorMainContainer"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Helper"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.vectors.Vec3M"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.Entity"/>
 <fullyQualifiedTypeName name="net.minecraft.util.BlockPos"/>
 <fullyQualifiedTypeName name="net.minecraft.util.Vec3i"/>
-<fullyQualifiedTypeName name="com.magiology.util.renderers.GL11H"/>
 <fullyQualifiedTypeName name="net.minecraft.entity.item.EntityItem"/>
 <fullyQualifiedTypeName name="com.magiology.gui.guiutil.gui.buttons.CleanButton"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="com.magiology.util.renderers.TessHelper"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat"/>
 <fullyQualifiedTypeName name="org.lwjgl.input.Mouse"/>
@@ -46,18 +40,24 @@
 <fullyQualifiedTypeName name="com.magiology.util.utilclasses.Helper.H"/>
 <fullyQualifiedTypeName name="com.magiology.api.updateable.Updateable"/>
 <fullyQualifiedTypeName name="net.minecraft.client.renderer.Tessellator"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get.Render"/>
 <fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
 <fullyQualifiedTypeName name="com.magiology.core.init.MItems"/>
 <fullyQualifiedTypeName name="net.minecraft.enchantment.Enchantment"/>
 <fullyQualifiedTypeName name="org.apache.commons.lang3.ArrayUtils"/>
 <fullyQualifiedTypeName name="net.minecraftforge.fml.relauncher.SideOnly"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="net.minecraft.client.renderer.entity.RenderPlayer"/>
 <fullyQualifiedTypeName name="net.minecraft.client.gui.inventory.GuiContainer"/>
 <fullyQualifiedTypeName name="java.awt.Container"/>
 <fullyQualifiedTypeName name="net.minecraft.inventory.Container"/>
 <fullyQualifiedTypeName name="com.magiology.gui.guiContainer.ContainerEmpty"/>
 <fullyQualifiedTypeName name="com.magiology.forgepowered.event.RenderLoopEvents"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
+<fullyQualifiedTypeName name="net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM"/>
+<fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get.Render"/>
+<fullyQualifiedTypeName name="com.magiology.util.renderers.GL11H"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Helper"/>
 </qualifiedTypeNameHistroy>

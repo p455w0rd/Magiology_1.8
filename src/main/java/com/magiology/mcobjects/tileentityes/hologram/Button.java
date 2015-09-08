@@ -33,7 +33,7 @@ public class Button extends TextBox{
 		if(body==null)body=new ComplexCubeModel(0, 0, -Helper.p/2, -size.x, -size.y, Helper.p/2);
 		body.draw();
 		
-		float spaceY=size.y-Helper.getFontRenderer().FONT_HEIGHT*Helper.p;
+		Helper.getFontRenderer();
 		GL11.glTranslatef(-size.x/2, -size.y/2, 0);
 		GL11H.culFace(false);
 		GL11H.scaled(-Helper.p);

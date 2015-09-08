@@ -1,26 +1,24 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.TwoDotsLineRender;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
-public class RenderFireLamp extends TileEntitySpecialRenderer {
+public class RenderFireLamp extends TileEntitySpecialRendererM {
 
 	private final float p= 1F/16F;
-	private final float tW=1F/64F;
-	private final float tH=1F/64F;
 	@Override
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f,int pass){
+	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f){
 		TileEntityFireLamp tileFL=(TileEntityFireLamp) tile;
 		boolean var1=true;
 		for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){

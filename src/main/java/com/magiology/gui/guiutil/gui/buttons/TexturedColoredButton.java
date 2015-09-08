@@ -47,8 +47,6 @@ public class TexturedColoredButton extends ColoredGuiButton{
             this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;
             GL11H.SetUpOpaqueRendering(1);
 
-            float k=Helper.calculateRenderPos(prevAlpha, alpha);
-
             GL11.glColor4f(r,g,b,1);
             HUD.drawRect(1F/512F,1F/512F,this.xPosition, this.yPosition, 352, 72+20, this.width / 2, this.height);
 	        HUD.drawRect(1F/512F,1F/512F,this.xPosition + this.width / 2, this.yPosition, 424-width/2, 72+20, this.width / 2, this.height);

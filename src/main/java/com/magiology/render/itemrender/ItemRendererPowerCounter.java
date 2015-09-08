@@ -10,7 +10,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessHelper;
@@ -20,8 +20,6 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 	WorldRenderer tess=TessHelper.getWR();
 	FontRenderer fr=Helper.getFontRenderer();
 	private final float p= 1F/16F;
-	private final float tWC=1F/64F;
-	private final float tHC=1F/64F;
 	double anim,powerBar;
 	int maxPB,currentP;
 	String block;

@@ -1,12 +1,11 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
 
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
@@ -18,8 +17,9 @@ import com.magiology.util.renderers.NormalizedVertixBufferModel;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderFirePipe extends TileEntitySpecialRenderer {
+public class RenderFirePipe extends TileEntitySpecialRendererM {
 	private final float p= 1F/16F;
 	private final float tW=1F/131F;
 	private final float tH=1F/16F;
@@ -31,7 +31,7 @@ public class RenderFirePipe extends TileEntitySpecialRenderer {
 	private final float tHS=1F/32F;
 	NormalizedVertixBuffer buf=TessHelper.getNVB();
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass){
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		GL11H.protect();
 		TileEntityFirePipe pipe= (TileEntityFirePipe) tileentity;
 		if(Helper.isItemInStack(MItems.FireHammer, Helper.getThePlayer().getCurrentEquippedItem())){

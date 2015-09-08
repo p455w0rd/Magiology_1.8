@@ -98,7 +98,6 @@ public class ArmorContainer extends Container implements Updateable{
 	@Override
 	public ItemStack slotClick(int slotid, int x, int y, EntityPlayer player){
 		Helper.println(slotid);
-		int pos=sliderPosId;
 		int id=slotid-36;
 		if(id>=0&&id<=3)sliderVantedPos=-id*16;
 		while(inventorySlots.size()>inventoryItemStacks.size()){
@@ -142,7 +141,6 @@ public class ArmorContainer extends Container implements Updateable{
 		}
 	}
 	protected Slot addSlotToList(Slot slot,List list){
-		int pos=sliderPosId;
 		slot.slotNumber=list.size();
 		list.add(slot);
         return slot;

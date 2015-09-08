@@ -6,7 +6,6 @@ import java.io.IOException;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,8 +15,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.forgepowered.event.TickEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.container.SmartCrafterContainer;
@@ -109,7 +108,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	}
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
-		WorldRenderer tess=TessHelper.getWR();
+		TessHelper.getWR();
 		TessHelper.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 //		this.drawTexturedModalRect(guiLeft, guiTop-66, 0, -32, xSize, 100);

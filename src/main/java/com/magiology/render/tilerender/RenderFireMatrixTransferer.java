@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
@@ -10,24 +9,17 @@ import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
+public class RenderFireMatrixTransferer extends TileEntitySpecialRendererM {
 
 	private final float p=1F/16F;
-	private final float tW=1F/64F;
-	private final float tH=1F/64F;
 	NormalizedVertixBuffer buf=Render.NVB();
-	
-	public RenderFireMatrixTransferer(){
-		
-		
-	}
 	
 	float pos=0,ballRotation=0;
 	
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int i1) {
-//		endertank=ModelInstrument(new ResourceLocation(Magiology.MODID,"/models/stick.obj"));
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		
 		if(ballRotation>360)ballRotation-=360;
 		ballRotation++;
@@ -36,15 +28,9 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRenderer {
 			pos=((TileEntityFireMatrixTransferer)tileentity).Pos;
 			this.ballRotation=((TileEntityFireMatrixTransferer)tileentity).ballRotation;
 		}
-
 		this.bindTexture(Textures.FireMatrixTransfererBase);
 		GL11.glTranslated(x,y,z);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-//		GL11.glTranslatef(0, 0, 1);
-//		GL11.glRotated(-90, 1, 0, 0);
-//		endertank.renderAll();
-//		GL11.glRotated(90, 1, 0, 0);
-//		GL11.glTranslatef(-0, -0, -1);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		
 		for(int i=0;i<4;i++){

@@ -71,8 +71,6 @@ public class SpecialMovmentEvents{
 	}
 	public void handleWingPhysics(EntityPlayer player){
 		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
-		World world=player.worldObj;
-		boolean isRemote=world.isRemote;
 		if(!Helper.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2)))return;
 		double[] a=Helper.cricleXZ(player.rotationYaw);
 		if(position==Positions.HoverPos||position==Positions.FlyBackvardPos||position==Positions.FlyStationarPos||position==Positions.FlyForvardPos){
@@ -96,8 +94,6 @@ public class SpecialMovmentEvents{
 	}
 	public void onFlap(EntityPlayer player,int x,int y,int z){
 		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
-		World world=player.worldObj;
-		boolean isRemote=world.isRemote;
 		if(player.capabilities.isFlying)return;
 		ExtendedPlayerData extendedData=ExtendedPlayerData.get(player);
 		if(extendedData!=null){

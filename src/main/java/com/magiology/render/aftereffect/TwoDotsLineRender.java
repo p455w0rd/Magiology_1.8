@@ -3,8 +3,6 @@ package com.magiology.render.aftereffect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
@@ -18,7 +16,6 @@ import com.magiology.util.utilobjects.vectors.TwoDots;
 public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 
 	public  double alpha=0,prevAlpha;
-	private World world;
 	private static EntityPlayer player=H.getMC().thePlayer;
 	TwoDots td;
 	public TileEntity tile;

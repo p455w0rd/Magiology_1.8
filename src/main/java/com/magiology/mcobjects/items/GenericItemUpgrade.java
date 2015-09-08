@@ -108,7 +108,7 @@ public class GenericItemUpgrade extends Item{
 		int i=0;
 		if(GuiScreen.isShiftKeyDown())i++;
 		if(GuiScreen.isCtrlKeyDown()) i++;
-		FontEffectHelper a=new FontEffectHelper();
+		new FontEffectHelper();
 		switch (UT.GetTypeID()){
 		case 0:{
 			list.add(FontEffectHelper.AQUA+"Increases range");

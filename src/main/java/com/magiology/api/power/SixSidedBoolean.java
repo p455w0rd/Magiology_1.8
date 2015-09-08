@@ -73,7 +73,7 @@ public class SixSidedBoolean{
 		try{
 			//for loop: reading all Modifier clusters
 			for(int id=0;id<modifiers.length;id++){
-				generic modifier=modifiers[id],prevModifier=id>0?modifiers[id-1]:null;
+				generic modifier=modifiers[id];
 				
 				//detecting possible start input error
 				if(modifier instanceof Integer||!isAStarter(modifier)){
@@ -83,7 +83,6 @@ public class SixSidedBoolean{
 					starter=(Modifier)modifiers[id];
 					id++;
 					modifier=modifiers[id];
-					prevModifier=modifiers[id-1];
 				}
 				
 				
@@ -103,7 +102,6 @@ public class SixSidedBoolean{
 				//reading numbers after include/exclude for inverting
 				while(id<modifiers.length&&var1){
 					modifier=modifiers[id];
-					prevModifier=modifiers[id-1];
 					try{
 						int i=(Integer)modifier;
 						if(i<0||i>=6);

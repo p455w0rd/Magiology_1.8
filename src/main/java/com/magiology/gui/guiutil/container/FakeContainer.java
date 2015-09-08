@@ -10,14 +10,12 @@ import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 public class FakeContainer implements IInventory{
 	
 
-	private int INV_SIZE=0;
 	public ItemStack[] slots;
 	private int invSS;
 	
 	
 	public FakeContainer(ItemStack[] stacks,int invStackSize){
 		slots=stacks;
-		INV_SIZE=stacks.length;
 		invSS=invStackSize;
 	}
 	

@@ -58,9 +58,8 @@ public class FirePipe extends BlockContainerMultiColision{
     		if(player!=null){
 	    		if(Helper.isItemInStack(MItems.FireHammer, player.getHeldItem())){
 	    			return1=true;
-    				boolean result;
     				TileEntity tile2 = null;
-    	    		int id=MultiColisionProviderRayTracer.getPointedId(tile1);
+    	    		MultiColisionProviderRayTracer.getPointedId(tile1);
     				double a=0.001;
     				
     				{

@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.gui.container.ArmorContainer;
 import com.magiology.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.gui.guiutil.gui.buttons.InvisivleGuiButton;

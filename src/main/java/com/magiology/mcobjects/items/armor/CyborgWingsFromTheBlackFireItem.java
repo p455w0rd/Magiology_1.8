@@ -56,7 +56,6 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 			if(x<0)x--;
 			if(y<0)y--;
 			if(z<0)z--;
-			boolean hasSpace=true;
 			if(world.getTotalWorldTime()%3==0&&world.isRemote){
 				boolean bol=true;
 				float rotation=-player.rotationYaw;

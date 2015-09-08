@@ -13,7 +13,6 @@ import com.magiology.api.SavableData;
 import com.magiology.api.network.NetworkBaseInterface;
 
 public class SavableDataWithKeyPacket extends AbstractToClientMessage{
-	private int id;
 	private BlockPos pos;
 	private String key;
 	private SavableData data;

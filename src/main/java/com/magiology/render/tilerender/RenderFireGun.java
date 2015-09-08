@@ -1,6 +1,5 @@
 package com.magiology.render.tilerender;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
@@ -11,15 +10,16 @@ import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-public class RenderFireGun extends TileEntitySpecialRenderer {
+public class RenderFireGun extends TileEntitySpecialRendererM {
 	
 	private final float p= 1F/16F;
 	private final float tW=1F/72F;
 	private final float tH=1F/64F;
 	NormalizedVertixBuffer buf=Render.NVB();
 	@Override
-	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f,int pass) {
+	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		TileEntityFireGun dir= (TileEntityFireGun) tileentity;
 		buf.cleanUp();
 		GL11.glTranslated(x,y,z);

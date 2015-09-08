@@ -9,7 +9,7 @@ import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.render.Textures;
 import com.magiology.util.utilclasses.Get.Render;
@@ -21,8 +21,6 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 	ResourceLocation texture=null;
 	ItemRenderer IR=new ItemRenderer(mc);
 	
-	private final float p= 1F/16F;
-
 	public ItemRendererGenericUpgrade(){}
 	
 	@Override

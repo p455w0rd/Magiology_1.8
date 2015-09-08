@@ -13,8 +13,6 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilobjects.vectors.Vec8F;
@@ -23,7 +21,6 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static float p=1F/16F;
 	private static ComplexCubeModel[] models;
 	private static ComplexCubeModel[][] modelsBack;
-	private static NormalizedVertixBuffer buff=TessHelper.getNVB();
 	
 	public static void wings3D(boolean bol){
 		if(models==null)return;
@@ -154,7 +151,6 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		GL11.glPushMatrix();
 		for(int a1=0;a1<models.length;a1++){
 			ComplexCubeModel a=models[a1];
-			float precent=(float)a1/(float)models.length;
 			GL11H.rotateXYZAt(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0, true);
 			a.draw();
 			GL11.glPushMatrix();

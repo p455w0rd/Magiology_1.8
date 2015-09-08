@@ -84,8 +84,7 @@ public abstract class TileEntityConnectionProvider extends TileEntityM implement
 	public static IConnection[] readIConnections(IConnectionProvider host,NBTTagCompound NBT, String tag){
 		IConnection[] result=new IConnection[6]; 
 		NBTTagList list= NBT.getTagList(tag+"Slots", 10);
-		int size=6;
-    	for(int i=0;i<list.tagCount();i++){
+		for(int i=0;i<list.tagCount();i++){
     		NBTTagCompound connection=list.getCompoundTagAt(i);
 			result[i]=new Connection(host, 
 			ConnectionType.values()[connection.getByte("type")], 

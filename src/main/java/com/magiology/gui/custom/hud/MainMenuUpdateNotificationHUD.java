@@ -11,7 +11,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
@@ -79,7 +78,6 @@ public class MainMenuUpdateNotificationHUD{
 	}
 	
 	public static void update(){
-		float scale=Helper.getGuiScaleRaw();
 		popup.update();
 		rotation.update();
 		backgroundBlue.update();
@@ -93,7 +91,6 @@ public class MainMenuUpdateNotificationHUD{
 			rotation.z.wantedPoint=H.CRandF(1);
 		}
 		reimplementMouseEvents();
-		Rectangle boundingBox=getBoundingBox(false);
 		if(selected){
 			timeout++;
 			rotation.x.wantedPoint=rotation.y.wantedPoint=rotation.z.wantedPoint=0;
@@ -149,8 +146,6 @@ public class MainMenuUpdateNotificationHUD{
 	}
 	
 	public static void render(int width,int height){
-		Vector2f defultSize=new Vector2f(854,480);
-		
 		float 
 			x=rotation.x.getPoint(), 
 			y=rotation.y.getPoint(), 

@@ -171,7 +171,6 @@ public class GL11H{
 	public static void translate(BlockPos pos){
 		translate(new float[]{pos.getX(),pos.getY(),pos.getZ()});
 	}
-	private static boolean isProtecting=false;
 	public static void protect(){
 		glColor4f(1, 1, 1, 1);
 		lighting(true);

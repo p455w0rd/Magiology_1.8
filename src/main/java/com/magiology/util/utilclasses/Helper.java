@@ -46,7 +46,7 @@ import com.google.common.collect.ImmutableMap;
 import com.magiology.core.Config;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.event.RenderLoopEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.AbstractPacket;
 import com.magiology.forgepowered.packets.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.AbstractToClientMessage.SendingTarget.TypeOfSending;
@@ -74,9 +74,7 @@ public class Helper{
 	
 	static Random rand=new Random();
 	public  static final float p=1F/16F;
-    private static final float SMALL_NUM = 0.00000001f;
-	
-	public static void spawnEntityFX(EntityFX particleFX){
+    public static void spawnEntityFX(EntityFX particleFX){
 		if(isRemote(particleFX)){
 			Minecraft mc=H.getMC();
 			Entity ent=mc.getRenderViewEntity();
@@ -561,10 +559,6 @@ public class Helper{
 			double z=plane.q.z;
 			if(ray.from.z>z){if(printProcess)printInln("target behind");return false;}
 			if(ray.to.z<z){if(printProcess)printInln("target to far");return false;}
-			double
-				distance=z-ray.from.z,
-				rayLenght=ray.from.distanceTo(ray.to),
-				pecentage=distance/rayLenght;
 			AxisAlignedBB Plane=new AxisAlignedBB(plane.q.x, plane.q.y, plane.q.z, plane.s.x, plane.s.y, plane.s.z+0.01);
 			MovingObjectPosition rayt=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
 			if(rayt==null||rayt.hitVec==null){if(printProcess)printInln("target clipped out");return false;}
@@ -656,7 +650,6 @@ public class Helper{
 	public static String getStringForSize(String text, float allowedWidth){
 		if(text.isEmpty())return text;
 		String Return=""+text;
-		boolean cap=false;
 		while(getFontRenderer().getStringWidth(Return)>allowedWidth){
 			Return=Return.substring(0, Return.length()-1);
 		}

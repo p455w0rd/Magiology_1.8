@@ -44,7 +44,6 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){
 		if(itemStack.getTagCompound()!=null){
 			if(GuiScreen.isShiftKeyDown()){
-				NBTTagCompound nbt=itemStack.getTagCompound();
 				ItemStack[] stacks=this.getStacks(itemStack);
 				for(int b=0;b<stacks.length;b++){
 					ItemStack a=stacks[b];
@@ -108,7 +107,6 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 		if(itemStack==null)return -1;
 		if(itemStack.getItem() instanceof UpgItem&&item instanceof GenericItemUpgrade){
 			UpgItem upgContainer=((UpgItem)itemStack.getItem());
-			GenericItemUpgrade Item=(GenericItemUpgrade)item;
 			ItemStack[] stacks=upgContainer.getStacks(itemStack);
 			for(ItemStack a:stacks){
 				if(a!=null){

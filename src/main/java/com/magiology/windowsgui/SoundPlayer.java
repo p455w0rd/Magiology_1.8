@@ -64,7 +64,6 @@ public class SoundPlayer{
                 e.printStackTrace();
             }
             if (nBytesRead >= 0) {
-                int nBytesWritten = sourceLine.write(abData, 0, nBytesRead);
             }
         }
 

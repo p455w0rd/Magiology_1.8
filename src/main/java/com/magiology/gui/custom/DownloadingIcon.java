@@ -2,7 +2,6 @@ package com.magiology.gui.custom;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -30,7 +29,6 @@ public class DownloadingIcon {
 			if(!drop.dead){
 				drop.speed++;
 				drop.prevPos=drop.pos;
-				drop.prevAlpha=drop.alpha;
 				
 				drop.pos.y+=drop.speed;
 				drop.alpha=(260F-drop.pos.y)/260*2;
@@ -41,7 +39,6 @@ public class DownloadingIcon {
 	public static void draw(ColorF color){
 		timeout=40;
 		GL11.glPushMatrix();
-		WorldRenderer tess=TessHelper.getWR();
 		TessHelper.bindTexture(main);
 		
 		for(Drop drop:drops){
@@ -63,7 +60,7 @@ public class DownloadingIcon {
 	private static class Drop{
 		public boolean dead=false;
 		public Vector2f pos,prevPos;
-		public float alpha,prevAlpha,scale,speed;
+		public float alpha,scale,speed;
 		public Drop(Vector2f pos, float scale){
 			this.pos = pos;
 			this.scale = scale;

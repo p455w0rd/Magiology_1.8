@@ -51,11 +51,10 @@ public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListB
 	}
 	
 	public void detectIfTimeForAnimation(){
-		BlockPos pos1;
-		if(rotation[0]!=null)     {pos1=pos.add(0,-1,-3);}
-		else if(rotation[1]!=null){pos1=pos.add(3,-1,0);}
-		else if(rotation[2]!=null){pos1=pos.add(0,-1,3);}
-		else if(rotation[3]!=null){pos1=pos.add(-3,-1,0);}
+		if(rotation[0]!=null)     {pos.add(0,-1,-3);}
+		else if(rotation[1]!=null){pos.add(3,-1,0);}
+		else if(rotation[2]!=null){pos.add(0,-1,3);}
+		else if(rotation[3]!=null){pos.add(-3,-1,0);}
 		
 		if(worldObj.getTileEntity(pos)instanceof TileEntityOreStructureCore){
 			TileEntityOreStructureCore tile=(TileEntityOreStructureCore) worldObj.getTileEntity(pos);

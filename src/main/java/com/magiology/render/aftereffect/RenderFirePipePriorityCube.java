@@ -3,7 +3,6 @@ package com.magiology.render.aftereffect;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
@@ -21,7 +20,6 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	private final double speed;
 	private final AxisAlignedBB box;
 	private final BlockPos pos;
-	private final World world;
 	public final TileEntityFirePipe pipe;
 	private static EntityPlayer player=H.getMC().thePlayer;
 	
@@ -30,7 +28,6 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 		this.pipe=pipe;
 		this.speed=0.06;
 		alpha=speed;
-		world=pipe.getWorld();
 		this.pos=pos;
 	}
 	

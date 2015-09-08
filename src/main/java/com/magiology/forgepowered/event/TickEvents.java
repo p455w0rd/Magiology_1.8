@@ -18,7 +18,7 @@ import org.lwjgl.opengl.Display;
 
 import com.magiology.core.Magiology;
 import com.magiology.core.VersionChecker;
-import com.magiology.core.init.MEvents;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
 import com.magiology.gui.custom.DownloadingIcon;
@@ -45,7 +45,6 @@ public class TickEvents{
 		if(mc.isGamePaused())return;
 		if(Helper.getThePlayer()==null)return;
 		/**RenderLoopEvents sync**/{
-			RenderLoopEvents renderE=MEvents.RenderLoopInstance;
 			List<LongAfterRenderRenderer> render=RenderLoopEvents.universalLongRender;
 			if(!render.isEmpty())for(LongAfterRenderRenderer a:render)if(a!=null&&!a.isDead())a.update();
 		}
@@ -103,7 +102,6 @@ public class TickEvents{
 		//checking if the tick should be activated: start--|
 		World world=event.world;//-------------------------|
 		if(Helper.isNull(world))return;//------------------|
-		long wTime=world.getWorldTime();//-----------------|
 		if(event.phase==Phase.END)return;
 //		if(event.type!=Type.WORLD)return;
 		//checking if the tick should be activated: end----|
