@@ -9,8 +9,8 @@ import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
 import com.magiology.core.init.MGui;
-import com.magiology.modedmcstuff.ColorF;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.handelers.GuiHandelerM;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public abstract class RenderObject implements SavableData{
@@ -57,7 +57,7 @@ public abstract class RenderObject implements SavableData{
 	public void handleGuiAndMovment(EntityPlayer player){
 		if(player.isSneaking()){
 			if(moveMode)moveMode=false;
-			else Helper.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
+			else GuiHandelerM.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
 		}
 		if(moveMode){
 			offset.x=(float)host.point.pointedPos.x+size.x/2;

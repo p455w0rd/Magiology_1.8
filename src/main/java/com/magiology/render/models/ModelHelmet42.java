@@ -1,6 +1,5 @@
 package com.magiology.render.models;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -13,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class ModelHelmet42 extends ModelBiped{
     ModelRenderer baseTop1,baseTop2,baseTop3,baseTop4,baseSide1,baseSide2,baseSide3,baseSide4,baseBack1,baseBack2,baseBack3,baseBack4;
@@ -100,7 +100,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  if(entity.isInvisible())return;
 		  isSneak=entity.isSneaking();
 	  }
-	  Minecraft.getMinecraft().renderEngine.bindTexture(Textures.Helmet42Model);
+	  H.getMC().renderEngine.bindTexture(Textures.Helmet42Model);
 	  setRotationAngles(f, f1, f2, f3, f4, f5,entity);
 	  float color=1;
 	  if(entity!=null)if(entity instanceof EntityPlayer){
@@ -117,8 +117,8 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  if(shouldFollowThePlayerHasAMaster)shouldFollowThePlayer=shouldFollowThePlayerMaster;
 	  
 	  double yt=0,
-			  rotationX=entity!=null?bipedHead.rotateAngleX:shouldFollowThePlayer?-(Minecraft.getMinecraft().thePlayer.rotationPitch/ (180F / (float)Math.PI)):0,
-			  rotationY=entity!=null?bipedHead.rotateAngleY:shouldFollowThePlayer?(Minecraft.getMinecraft().thePlayer.rotationYawHead/(180F / (float)Math.PI)):0,
+			  rotationX=entity!=null?bipedHead.rotateAngleX:shouldFollowThePlayer?-(H.getMC().thePlayer.rotationPitch/ (180F / (float)Math.PI)):0,
+			  rotationY=entity!=null?bipedHead.rotateAngleY:shouldFollowThePlayer?(H.getMC().thePlayer.rotationYawHead/(180F / (float)Math.PI)):0,
 			  rotationZ=bipedHead.rotateAngleZ;
 	  
 	  rotationX*=(180F / (float)Math.PI);

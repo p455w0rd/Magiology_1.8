@@ -19,12 +19,12 @@ import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.forgepowered.packets.ClickHologramPacket;
 import com.magiology.forgepowered.packets.RenderObjectUploadPacket;
-import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder;
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TileEntityHologramProjector extends TileEntityM implements IUpdatePlayerListBox{

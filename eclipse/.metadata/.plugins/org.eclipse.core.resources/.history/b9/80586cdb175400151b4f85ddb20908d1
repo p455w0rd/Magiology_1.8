@@ -1,0 +1,9 @@
+package com.magiology.gui.guiutil.gui.buttons;
+
+public class CleanButton {
+
+	public CleanButton() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

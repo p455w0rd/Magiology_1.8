@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.mcobjects.ItemM;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
@@ -26,6 +25,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.registry.WrenchRegistry;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 
 public class FireHammer extends ItemM{
 	

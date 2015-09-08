@@ -1,0 +1,34 @@
+package com.magiology.gui.gui;
+
+import com.magiology.gui.guiContainer.GuiHologramProjectorMainContainer;
+import com.magiology.gui.guiutil.gui.buttons.CleanButton;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.util.utilobjects.ColorF;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+
+public class GuiHologramProjectorMain extends GuiContainer{
+	
+	EntityPlayer player;
+	TileEntityHologramProjector tile;
+	
+	public GuiHologramProjectorMain(EntityPlayer player,TileEntityHologramProjector tile){
+		super(new GuiHologramProjectorMainContainer(player,tile));
+		this.player=player;
+		this.tile=tile;
+		this.xSize=200;
+		this.ySize=300;
+	}
+		
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
+		
+	}
+	@Override
+	public void initGui(){
+		super.initGui();
+		buttonList.add(new CleanButton(0, guiLeft, guiTop, 200, 100, "lolz", new ColorF(0.3, 0.3, 1, 0.5)));
+	}
+}

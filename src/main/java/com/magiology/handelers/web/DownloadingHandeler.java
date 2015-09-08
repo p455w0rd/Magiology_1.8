@@ -1,8 +1,11 @@
 package com.magiology.handelers.web;
 
-import static com.magiology.core.MReference.*;
-import static com.magiology.gui.MainMenuUpdateNotification.*;
-import static com.magiology.handelers.web.MediaFireDownlader.*;
+import static com.magiology.core.MReference.MODS_SUBFOLDER_WIN_GUI;
+import static com.magiology.core.MReference.UPDATER_DIR;
+import static com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD.downloadingInvoked;
+import static com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD.isDownloading;
+import static com.magiology.handelers.web.MediaFireDownlader.downlad;
+import static com.magiology.handelers.web.MediaFireDownlader.downladAndName;
 
 import java.io.File;
 import java.net.URL;

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.resources.IResource;
@@ -20,6 +19,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.ModelFormatException;
+import com.magiology.util.utilclasses.Helper.H;
 
 /**
  *  Wavefront Object importer
@@ -53,7 +53,7 @@ public class WavefrontObject implements IModelCustom
 
     try
     {
-      IResource res = Minecraft.getMinecraft().getResourceManager().getResource(resource);
+      IResource res = H.getMC().getResourceManager().getResource(resource);
       loadObjModel(res.getInputStream());
     }
     catch (IOException e)

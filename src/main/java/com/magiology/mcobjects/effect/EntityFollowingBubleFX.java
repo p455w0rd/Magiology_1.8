@@ -37,7 +37,7 @@ public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 		super.onUpdate();
 		this.opacityHandeler();
 		
-//		if(entity==Minecraft.getMinecraft().thePlayer){
+//		if(entity==H.getMC().thePlayer){
 ////			System.out.println(sideOpacity[0]);
 //		}
 		

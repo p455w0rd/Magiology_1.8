@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityPLauncher;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
 public class ParticleLauncher extends BlockContainerM {
 

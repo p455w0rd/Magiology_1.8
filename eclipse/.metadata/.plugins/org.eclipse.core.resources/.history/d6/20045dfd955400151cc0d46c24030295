@@ -1,0 +1,5 @@
+package com.magiology.gui.guiutil.gui.buttons;
+
+public interface Updateable {
+
+}

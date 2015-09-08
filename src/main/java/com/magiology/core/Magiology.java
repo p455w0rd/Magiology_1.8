@@ -1,6 +1,10 @@
 package com.magiology.core;
 
-import static com.magiology.core.MReference.*;
+import static com.magiology.core.MReference.INFO_FILE_NAME;
+import static com.magiology.core.MReference.MODID;
+import static com.magiology.core.MReference.MODS_SUBFOLDER_WIN_GUI;
+import static com.magiology.core.MReference.NAME;
+import static com.magiology.core.MReference.VERSION;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -31,7 +35,7 @@ import com.magiology.core.init.MRecepies;
 import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handelers.EnhancedRobot;
-import com.magiology.handelers.GuiHandeler;
+import com.magiology.handelers.GuiHandelerM;
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.render.Textures;
@@ -98,7 +102,7 @@ public class Magiology{
 		MPackets.preInit();
     }
     public void init(FMLInitializationEvent event){
-    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandeler());
+    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandelerM());
     	MRecepies.init();
     	MTileEntitys.init();
     	proxy.registerProxies();

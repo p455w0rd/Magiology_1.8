@@ -1,10 +1,10 @@
 package com.magiology.util.utilobjects;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class EntityPosAndBB{
 	public double[] BB;
@@ -38,13 +38,13 @@ public class EntityPosAndBB{
 		return isDead;
 		}
 	public boolean isRendering(){
-		EntityPlayer p=Minecraft.getMinecraft().thePlayer;
+		EntityPlayer p=H.getMC().thePlayer;
 		isRendering=entity.isInRangeToRender3d(p.posX, p.posY, p.posZ);
 		return isRendering;
 		}
 	
 //	public void update(Entity entity){
-//		EntityClientPlayerMP p=Minecraft.getMinecraft().thePlayer;
+//		EntityClientPlayerMP p=H.getMC().thePlayer;
 //		isRendering=entity.isInRangeToRender3d(p.posX, p.posY, p.posZ);
 //		isDead=entity.isDead;
 //	}

@@ -1,6 +1,9 @@
 package com.magiology.handelers;
 
-import static com.magiology.handelers.KeyHandler.Keys.*;
+import static com.magiology.handelers.KeyHandler.Keys.ArmorGui;
+import static com.magiology.handelers.KeyHandler.Keys.BusGui;
+import static com.magiology.handelers.KeyHandler.Keys.HandMode;
+import static com.magiology.handelers.KeyHandler.Keys.StatsGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.GameSettings;
@@ -18,14 +21,15 @@ import com.magiology.forgepowered.packets.OpenGuiPacket;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
 import com.magiology.forgepowered.packets.generic.GenericServerStringPacket;
 import com.magiology.forgepowered.packets.generic.GenericServerVoidPacket;
-import com.magiology.gui.fpgui.HandModeChangerGui;
-import com.magiology.gui.fpgui.StatsDisplayGui;
+import com.magiology.gui.custom.hud.HandModeChangerHUD;
+import com.magiology.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.SimpleCounter;
 
 public class KeyHandler{
-	Minecraft mc=Minecraft.getMinecraft();
+	Minecraft mc=H.getMC();
 	static SimpleCounter counter=new SimpleCounter();
 	public static enum Keys{
 		StatsGui("key.stats",Keyboard.KEY_B),
@@ -74,13 +78,13 @@ public class KeyHandler{
 	public void decodeKeyInput(int rawKey){
 //		try {
 //			if(Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)){
-//				IResourceManager IRM=Minecraft.getMinecraft().getResourceManager();
+//				IResourceManager IRM=H.getMC().getResourceManager();
 //				Map domainResourceManagers=DataStalker.getVariable(SimpleReloadableResourceManager.class, "domainResourceManagers",IRM);
 //				IResourceManager iresourcemanager = (IResourceManager)domainResourceManagers.get(Textures.BedrockBreakerBase.getResourceDomain());
 //				Helper.println(iresourcemanager.getResource(Textures.BedrockBreakerBase));
 //			}
 //		} catch (Exception e){e.printStackTrace();}
-		GameSettings gs=Minecraft.getMinecraft().gameSettings;
+		GameSettings gs=H.getMC().gameSettings;
 		boolean[] keys={Keyboard.isKeyDown(gs.keyBindForward.getKeyCode()),Keyboard.isKeyDown(gs.keyBindBack.getKeyCode()),Keyboard.isKeyDown(gs.keyBindJump.getKeyCode()),Keyboard.isKeyDown(gs.keyBindSneak.getKeyCode()),Keyboard.isKeyDown(gs.keyBindRight.getKeyCode()),Keyboard.isKeyDown(gs.keyBindLeft.getKeyCode())};
 		if(Keyboard.getEventKeyState()){
 			for(Keys i:Keys.values()){
@@ -107,7 +111,7 @@ public class KeyHandler{
 	// 3.
 	public void keyInput(int keyId){
 		if(StatsGui.check(keyId)){
-			StatsDisplayGui.instance.isStatsShowed=!StatsDisplayGui.instance.isStatsShowed;
+			StatsDisplayHUD.instance.isStatsShowed=!StatsDisplayHUD.instance.isStatsShowed;
 		}
 		else if(ArmorGui.check(keyId)){
 			Helper.sendMessage(new OpenGuiPacket(MGui.GuiArmor));
@@ -116,7 +120,7 @@ public class KeyHandler{
 			
 		}
 		else if(HandMode.check(keyId)){
-			if(HandModeChangerGui.instance.handAlpha>0.9){
+			if(HandModeChangerHUD.instance.handAlpha>0.9){
 				Helper.sendMessage(new GenericServerVoidPacket(0));
 			}
 		}

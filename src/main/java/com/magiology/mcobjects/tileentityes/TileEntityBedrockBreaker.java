@@ -9,12 +9,12 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlayerListBox{
 	EffectRenderer efrenderer = Get.Render.ER();

@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 	
@@ -50,7 +50,7 @@ public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 		particleAge++;
 		
 		
-		if(Minecraft.getMinecraft().gameSettings.particleSetting==2)setDead();
+		if(H.getMC().gameSettings.particleSetting==2)setDead();
 		if(particleAge>particleMaxAge)setDead();
 		motionHandeler();
 		opacityHandeler();

@@ -1,0 +1,23 @@
+1441660895414	Delete element
+1441661136708	Rename type 'GuiArmorContainer'
+1441661207189	Rename type 'GuiContainerEmpty'
+1441661287262	Rename package 'com.magiology.gui.guiContainer'
+1441661293780	Rename package 'com.magiology.gui.guiutil.guicontainer'
+1441661304455	Rename type 'GuiControlBockContainer'
+1441661309248	Rename type 'GuiControlBockContainerSlot'
+1441661313997	Rename type 'GuiISidedPowerInstructorContainer'
+1441661334285	Rename type 'GuiSCContainer'
+1441661344810	Rename type 'GuiUpgradeContainer'
+1441661356048	Move compilation unit
+1441661376017	Rename package 'com.magiology.gui.guiparticels'
+1441661417273	Rename package 'com.magiology.gui.custom.fpgui'
+1441661519712	Rename type 'FirstPersonGui'
+1441661540455	Rename type 'SoulFlameDisplayGui'
+1441661595325	Rename type 'HandModeChangerGui'
+1441661692793	Rename type 'WingModeChangerGui'
+1441661700094	Rename type 'StatsDisplayGui'
+1441661722101	Move compilation unit
+1441661731937	Rename type 'MainMenuUpdateNotification'
+1441662014449	Delete element
+1441662035361	Rename type 'FontEHelper'
+1441663083183	Rename type 'SpecialPlayerParicleHandeler_SubEvent'

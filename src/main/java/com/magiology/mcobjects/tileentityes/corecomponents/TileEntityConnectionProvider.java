@@ -1,28 +1,21 @@
 package com.magiology.mcobjects.tileentityes.corecomponents;
 
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.connection.Connection;
 import com.magiology.api.connection.ConnectionType;
 import com.magiology.api.connection.IConnection;
 import com.magiology.api.connection.IConnectionFactory;
 import com.magiology.api.connection.IConnectionProvider;
-import com.magiology.mcobjects.TileEntityM;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public abstract class TileEntityConnectionProvider extends TileEntityM implements UpdateableTile{
 	

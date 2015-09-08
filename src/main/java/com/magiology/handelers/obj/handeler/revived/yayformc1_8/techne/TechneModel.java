@@ -17,7 +17,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.resources.IResource;
@@ -34,6 +33,7 @@ import org.xml.sax.SAXException;
 
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.ModelFormatException;
+import com.magiology.util.utilclasses.Helper.H;
 
 
 /**
@@ -61,7 +61,7 @@ public class TechneModel extends ModelBase implements IModelCustom {
 
     try
     {
-      IResource res = Minecraft.getMinecraft().getResourceManager().getResource(resource);
+      IResource res = H.getMC().getResourceManager().getResource(resource);
       loadTechneModel(res.getInputStream());
     }
     catch (IOException e)
@@ -278,7 +278,7 @@ public class TechneModel extends ModelBase implements IModelCustom {
                     }
                     
                     BufferedImage image = ImageIO.read(new ByteArrayInputStream(textureEntry));
-                    textureName = Minecraft.getMinecraft().renderEngine.allocateAndSetupTexture(image);
+                    textureName = H.getMC().renderEngine.allocateAndSetupTexture(image);
                     textureNameSet = true;
                 }
                 catch (ZipException e)
@@ -294,7 +294,7 @@ public class TechneModel extends ModelBase implements IModelCustom {
             if (textureNameSet)
             {
                 GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureName);
-                Minecraft.getMinecraft().renderEngine.resetBoundTexture();
+                H.getMC().renderEngine.resetBoundTexture();
             }
         }
         */

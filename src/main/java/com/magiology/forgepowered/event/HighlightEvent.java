@@ -21,7 +21,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.power.PowerCore;
 import com.magiology.core.init.MBlocks;
-import com.magiology.core.init.MEvents;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
@@ -29,7 +28,6 @@ import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
@@ -112,8 +110,6 @@ public class HighlightEvent{
 //					
 //				}
 				
-				double xHit=event.target.hitVec.xCoord,yHit=event.target.hitVec.yCoord,zHit=event.target.hitVec.zCoord;
-				
 				if(block==MBlocks.DontLookAtMe)onDrawHlDontLookAtMe(event);
 				
 				if(item!=null&&item.getItem().equals(MItems.FireHammer)){
@@ -133,11 +129,11 @@ public class HighlightEvent{
 				if(item!=null&&item.getTagCompound()!=null&&item.getItem().equals(MItems.PowerCounter))doPowerCounterDisplay(pos,item,event);
 				try{
 					if(tileEn instanceof MultiColisionProvider){
-						doMultiColision(pos, item, event, xHit, yHit, zHit);
+						doMultiColision(pos, item, event);
 						if(tileEn instanceof TileEntityNetworkPointerContainer){
 							int curentHighlight=MultiColisionProviderRayTracer.getPointedId((MultiColisionProvider)tileEn);
 							boolean contains=false;
-							for(LongAfterRenderRenderer part:MEvents.RenderLoopInstance.universalLongRender){
+							for(LongAfterRenderRenderer part:RenderLoopEvents.universalLongRender){
 								if(part instanceof RenderNetworkPointerContainerHighlight){
 									RenderNetworkPointerContainerHighlight Part=(RenderNetworkPointerContainerHighlight) part;
 									if(!Part.isDead()&&Part.tile.getPos().equals(pos)&&Part.highlightedBoxId==curentHighlight){
@@ -145,7 +141,7 @@ public class HighlightEvent{
 									}
 								}
 							}
-							if(!contains&&curentHighlight-7>=0)MEvents.RenderLoopInstance.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkPointerContainer) tileEn));
+							if(!contains&&curentHighlight-7>=0)RenderLoopEvents.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkPointerContainer) tileEn));
 						}
 					}
 				}catch(Exception e){
@@ -157,10 +153,8 @@ public class HighlightEvent{
 		}
 	}
 	
-	private void doMultiColision(BlockPos pos, ItemStack item, DrawBlockHighlightEvent event,double xHit,double yHit,double zHit){
+	private void doMultiColision(BlockPos pos, ItemStack item, DrawBlockHighlightEvent event){
 		MultiColisionProvider colisionProvider=(MultiColisionProvider)event.player.worldObj.getTileEntity(pos);
-		TileEntity tile=event.player.worldObj.getTileEntity(pos);
-		int side=event.target.sideHit.getIndex();
 		double ex=0.002;
 		int DFPBBwidth=2;
 		double DFPBBalpha=0.6;
@@ -400,9 +394,6 @@ public class HighlightEvent{
 	}
 	
 	public void onDrawHlFireLmap(DrawBlockHighlightEvent event,TileEntity tile,BlockPos pos){
-		float p=1F/16F;
-		
-		
 //		if(tile instanceof TileEntityFireLamp){
 //			System.out.println(((TileEntityFireLamp)tile).fuelTicks);
 //		}
@@ -421,7 +412,6 @@ public class HighlightEvent{
 	}
 	
 	public void onDrawHFireReceaver(DrawBlockHighlightEvent event,TileEntity tile,BlockPos pos){
-		float p=1F/16F;
 		double x1=(event.player.lastTickPosX+(event.player.posX-event.player.lastTickPosX)*event.partialTicks);
 		double y1=(event.player.lastTickPosY+(event.player.posY-event.player.lastTickPosY)*event.partialTicks);
 		double z1=(event.player.lastTickPosZ+(event.player.posZ-event.player.lastTickPosZ)*event.partialTicks);

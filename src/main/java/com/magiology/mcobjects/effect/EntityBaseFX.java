@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
@@ -11,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class EntityBaseFX extends EntityFX{
 	
@@ -67,7 +67,7 @@ public class EntityBaseFX extends EntityFX{
     	float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-        Minecraft.getMinecraft().renderEngine.bindTexture(texture1);
+        H.getMC().renderEngine.bindTexture(texture1);
         renderer.startDrawingQuads();
 		renderer.setColorRGBA_F((float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
     	renderer.setBrightness(240);
@@ -88,7 +88,7 @@ public class EntityBaseFX extends EntityFX{
 	@Override
 	public void onUpdate(){
 		if(particleAge>particleMaxAge)this.setDead();
-		if(Minecraft.getMinecraft().gameSettings.particleSetting==2)this.setDead();
+		if(H.getMC().gameSettings.particleSetting==2)this.setDead();
 		
 		if(worldObj.isRemote)this.motionHandeler();
 		

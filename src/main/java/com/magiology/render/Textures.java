@@ -3,7 +3,6 @@ package com.magiology.render;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
@@ -12,10 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 @SideOnly(Side.CLIENT)
 public class Textures{
-	private static TextureManager re=Minecraft.getMinecraft().renderEngine;
+	private static TextureManager re=H.getMC().renderEngine;
 	private static boolean isInit=false;
 	private static ArrayList<String> failedTextures=new ArrayList<String>();
 	private static String textur="WTF!?!!";

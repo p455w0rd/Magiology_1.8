@@ -1,10 +1,9 @@
 package com.magiology.mcobjects.blocks;
 
 
-import com.magiology.mcobjects.BlockM;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+
+import com.magiology.util.utilobjects.m_extension.BlockM;
 
 public class OreLevelX extends BlockM{ 
 	public OreLevelX(Material m,double LightLevel , double Hardness, String tool, int HarvestLevel, String unlName)

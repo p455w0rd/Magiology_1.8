@@ -1,6 +1,5 @@
 package com.magiology.util.utilclasses;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -20,10 +19,10 @@ public final class Get{
 	@SideOnly(value=Side.CLIENT)
 	public static final class Render{
 		public static final ItemRenderer IR(){
-			return Minecraft.getMinecraft().getItemRenderer();
+			return H.getMC().getItemRenderer();
 		}
 		public static final RenderItem RI(){
-			return Minecraft.getMinecraft().getRenderItem();
+			return H.getMC().getRenderItem();
 		}
 		public static final NormalizedVertixBuffer NVB(){
 			return TessHelper.getNVB();
@@ -35,10 +34,10 @@ public final class Get{
 			return H.getFontRenderer();
 		}
 		public static EffectRenderer ER(){
-			return Minecraft.getMinecraft(). effectRenderer;
+			return H.getMC(). effectRenderer;
 		}
 		public static ItemModelMesher IMM(){
-			return Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+			return H.getMC().getRenderItem().getItemModelMesher();
 		}
 	}
 	@SideOnly(value=Side.CLIENT)

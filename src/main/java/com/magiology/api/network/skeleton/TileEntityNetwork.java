@@ -13,14 +13,14 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
-import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public abstract class TileEntityNetwork extends TileEntityM implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public EnumFacing[] connections = new EnumFacing[6];

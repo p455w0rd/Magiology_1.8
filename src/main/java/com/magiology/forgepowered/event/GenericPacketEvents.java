@@ -5,8 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.gui.guiContainer.GuiISidedPowerInstructorContainer;
-import com.magiology.gui.guiContainer.GuiSCContainer;
+import com.magiology.gui.container.ISidedPowerInstructorContainer;
+import com.magiology.gui.container.SmartCrafterContainer;
 import com.magiology.handelers.GenericPacketEventHandeler;
 import com.magiology.handelers.GenericPacketEventHandeler.IntegerPacketEvent;
 import com.magiology.handelers.GenericPacketEventHandeler.PacketEvent;
@@ -24,22 +24,22 @@ public class GenericPacketEvents{
 		boolean isRemote=event.isRemote;
 		try{switch (event.eventId){
 		case 0:{
-			if(!(player.openContainer instanceof GuiSCContainer))break;
+			if(!(player.openContainer instanceof SmartCrafterContainer))break;
 			boolean doIt=true;
-			int listOffset=((GuiSCContainer)player.openContainer).listOffset;
+			int listOffset=((SmartCrafterContainer)player.openContainer).listOffset;
 			if(integer<0){if(listOffset+integer<0)doIt=false;}
-			else{if(listOffset+integer>((GuiSCContainer)player.openContainer).tileSC.wantedProducts.length-2)doIt=false;}
-	        if(doIt)((GuiSCContainer)player.openContainer).listOffset+=integer;
+			else{if(listOffset+integer>((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts.length-2)doIt=false;}
+	        if(doIt)((SmartCrafterContainer)player.openContainer).listOffset+=integer;
 		}break;
 		case 1:{
-			((GuiSCContainer)player.openContainer).tileSC.wantedProducts[integer].clear();
-			((GuiSCContainer)player.openContainer).tileSC.wantedProducts[integer].ammountWanted=0;
+			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[integer].clear();
+			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[integer].ammountWanted=0;
 		}break;
 		case 2:{
-			((GuiSCContainer)player.openContainer).tileSC.wantedProducts[((GuiSCContainer)player.openContainer).listOffset].ammountWanted=integer;
+			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[((SmartCrafterContainer)player.openContainer).listOffset].ammountWanted=integer;
 		}break;
 		case 3:{
-			((GuiSCContainer)player.openContainer).tileSC.wantedProducts[((GuiSCContainer)player.openContainer).listOffset+1].ammountWanted=integer;
+			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[((SmartCrafterContainer)player.openContainer).listOffset+1].ammountWanted=integer;
 		}break;
 		case 5:{
 			//wings has space update
@@ -49,18 +49,18 @@ public class GenericPacketEvents{
 			WingsFromTheBlackFireHandeler.setPosId(player, integer);
 		}break;
 		case 7:{
-			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
+			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
 			PowerHelper.cricleSideInteraction((ISidedPower)tileEn, integer);
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 8:{
-			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
+			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
 			tile.setSendOnSide(integer, !tile.getOut(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 9:{
-			TileEntity tileEn=((GuiISidedPowerInstructorContainer)player.openContainer).tile;
+			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
 			tile.setReceaveOnSide(integer, !tile.getIn(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());

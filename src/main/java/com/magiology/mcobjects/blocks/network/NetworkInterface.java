@@ -20,8 +20,8 @@ import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
 
 public class NetworkInterface extends BlockContainerMultiColision{
 	

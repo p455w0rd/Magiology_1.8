@@ -1,0 +1,26 @@
+package com.magiology.gui.gui;
+
+import com.magiology.gui.guiContainer.GuiHologramProjectorMainContainer;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+
+public class GuiHologramProjectorMain extends GuiContainer{
+	
+	EntityPlayer player;
+	TileEntityHologramProjector tile;
+	
+	public GuiHologramProjectorMain(EntityPlayer player,TileEntityHologramProjector tile){
+		super(new GuiHologramProjectorMainContainer(player,tile));
+		this.player=player;
+		this.tile=tile;
+	}
+		
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
+		
+	}
+
+}

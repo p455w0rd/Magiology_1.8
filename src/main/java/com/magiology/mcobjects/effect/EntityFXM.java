@@ -3,15 +3,15 @@ package com.magiology.mcobjects.effect;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.ColorF;
 
 public class EntityFXM extends EntityFX{
 	
@@ -63,7 +63,7 @@ public class EntityFXM extends EntityFX{
 		this.prevPosZ=this.posZ;
 		this.particleAge++;
 		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500&&worldObj.rand.nextBoolean())this.setDead();
-		if(Minecraft.getMinecraft().gameSettings.particleSetting==2)this.setDead();
+		if(H.getMC().gameSettings.particleSetting==2)this.setDead();
 		this.motionHandeler();
 	}
 	

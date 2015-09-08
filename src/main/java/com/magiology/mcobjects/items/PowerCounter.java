@@ -4,12 +4,11 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.magiology.forgepowered.event.RenderLoopEvents;
-import com.magiology.mcobjects.ItemM;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 public class PowerCounter extends ItemM{
 	public PowerCounter(){
 		   super();

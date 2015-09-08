@@ -1,6 +1,26 @@
 package com.magiology.util.renderers;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_ALPHA_TEST;
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.GL_GREATER;
+import static org.lwjgl.opengl.GL11.GL_LIGHTING;
+import static org.lwjgl.opengl.GL11.GL_ONE;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glAlphaFunc;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glColor4f;
+import static org.lwjgl.opengl.GL11.glDepthMask;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotated;
+import static org.lwjgl.opengl.GL11.glScaled;
+import static org.lwjgl.opengl.GL11.glTranslated;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 
@@ -9,7 +29,7 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
-import com.magiology.modedmcstuff.ColorF;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 
@@ -19,7 +39,7 @@ import com.magiology.util.utilobjects.vectors.Vec3M;
  */
 public class GL11H{
 	/**@param ID 1-2*/
-	public static void GL11BlendFunc(int ID){switch(ID){
+	public static void blendFunc(int ID){switch(ID){
 		case 1:glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);return;
 		case 2:glBlendFunc(GL_SRC_ALPHA, GL_ONE);return;
 		case 3:glBlendFunc(GL_ONE, GL_ONE);return;
@@ -48,7 +68,7 @@ public class GL11H{
 	public static void rotateXYZ(Vec3M vec){
 		rotateXYZ(vec.x, vec.y, vec.z);
 	}
-	public static void BlendIs(boolean enabled){
+	public static void blend(boolean enabled){
 		if(enabled)glEnable(GL_BLEND);
 		else glDisable(GL_BLEND);
 	}
@@ -65,17 +85,17 @@ public class GL11H{
 	/**Sets the rendering mode to render opaque texture.*/
 	public static void SetUpOpaqueRendering(int ID){
 		glDepthMask(false);
-		BlendIs(true);
-		GL11BlendFunc(ID);
+		blend(true);
+		blendFunc(ID);
 		AllOpacityIs(true);
 		glDisable(GL_ALPHA_TEST);
 	}
 	/**Sets the rendering mode to render 100% opaque texture only.*/
 	public static void EndOpaqueRendering(){
-		BlendIs(false);
+		blend(false);
 		glEnable(GL_ALPHA_TEST);
 		glDepthMask(true);
-		GL11BlendFunc(1);
+		blendFunc(1);
 		ResetOpacity();
 	}
 	public static void scaled(double scale){

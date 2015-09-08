@@ -2,7 +2,6 @@ package com.magiology.handelers.animationhandelers;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -16,6 +15,7 @@ import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.render.itemrender.ItemRendererTheHand;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class TheHandHandeler{
 	static float p=1F/16F;
@@ -218,8 +218,8 @@ public class TheHandHandeler{
 			}else for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[b][3])<0.8)a1.xyzPosRotSpeed[b][3]=-4;
 		}
 		if(bol1){
-			if(Math.abs(data.handRotationSpeed[5])<3)addANewEvent(player,Minecraft.getMinecraft().theWorld.getTotalWorldTime()+2,"noiserHandSpeed",-0.05F,true,5);
-			if(Math.abs(data.noiserHandSpeed[5])<1)addANewEvent(player,Minecraft.getMinecraft().theWorld.getTotalWorldTime()+9,"noiserHandSpeed",0.05F,true,5);
+			if(Math.abs(data.handRotationSpeed[5])<3)addANewEvent(player,H.getMC().theWorld.getTotalWorldTime()+2,"noiserHandSpeed",-0.05F,true,5);
+			if(Math.abs(data.noiserHandSpeed[5])<1)addANewEvent(player,H.getMC().theWorld.getTotalWorldTime()+9,"noiserHandSpeed",0.05F,true,5);
 		}
 	}
 	@SideOnly(Side.CLIENT)
@@ -330,7 +330,7 @@ public class TheHandHandeler{
 	public static void customEventHandeler(EntityPlayer player,BufferedEvent event){
 		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
 		if(data==null)return;
-		if(event.time>Minecraft.getMinecraft().theWorld.getTotalWorldTime()||event.isActivated)return;
+		if(event.time>H.getMC().theWorld.getTotalWorldTime()||event.isActivated)return;
 		event.isActivated=true;
 		try{
 			String name=event.string;

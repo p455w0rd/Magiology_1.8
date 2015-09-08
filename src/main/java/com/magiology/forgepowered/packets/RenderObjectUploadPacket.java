@@ -13,7 +13,7 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.mcobjects.tileentityes.hologram.RenderObject;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.modedmcstuff.ColorF;
+import com.magiology.util.utilobjects.ColorF;
 
 public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	

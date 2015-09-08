@@ -5,7 +5,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
 import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
@@ -53,6 +52,7 @@ import com.magiology.render.tilerender.network.RenderNetworkConductor;
 import com.magiology.render.tilerender.network.RenderNetworkController;
 import com.magiology.render.tilerender.network.RenderNetworkInterface;
 import com.magiology.render.tilerender.network.RenderNetworkPointerContainer;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class MTileEntitys{
 

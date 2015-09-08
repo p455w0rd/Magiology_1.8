@@ -16,8 +16,8 @@ import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.NormalizedVertixBufferModel;
 import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.Helper;
 
 public class RenderFirePipe extends TileEntitySpecialRenderer {
 	private final float p= 1F/16F;

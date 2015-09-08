@@ -1,11 +1,18 @@
 package com.magiology.util.renderers;
 
-import static java.lang.Math.*;
-import static org.lwjgl.opengl.GL11.*;
+import static java.lang.Math.max;
+import static org.lwjgl.opengl.GL11.GL_COLOR_MATERIAL;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslatef;
 
 import java.lang.reflect.Field;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -27,6 +34,7 @@ import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
 import com.magiology.mcobjects.effect.EntityFXM;
 import com.magiology.util.utilclasses.CricleHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 
@@ -42,7 +50,7 @@ public class TessHelper{
 	public static RenderManager getRM(){return Helper.getMC().getRenderManager();}
 	
 	
-	public static void bindTexture(ResourceLocation texture){Minecraft.getMinecraft().getTextureManager().bindTexture(texture);}
+	public static void bindTexture(ResourceLocation texture){H.getMC().getTextureManager().bindTexture(texture);}
 	public static void drawTri(double[] X, double[] Y,double[] Z, double[] U, double[] V){
 		int hi=max(max(max(max(X.length,Y.length),Z.length),U.length),V.length);
 		if(hi%3!=0||X.length<hi||Y.length<hi||Z.length<hi||U.length<hi||V.length<hi)return;
@@ -321,7 +329,7 @@ public class TessHelper{
 	}
 	static Field equippedProgress,prevEquippedProgress;
 	public static void setItemRendererEquippProgress(float From0To1,boolean isSmooth){
-		ItemRenderer IR=Minecraft.getMinecraft().entityRenderer.itemRenderer;
+		ItemRenderer IR=H.getMC().entityRenderer.itemRenderer;
 		if(IR!=null)try{
 			if(!isSmooth){
 				if(prevEquippedProgress==null)prevEquippedProgress = ItemRenderer.class.getDeclaredField("prevEquippedProgress");
@@ -386,7 +394,7 @@ public class TessHelper{
 	}
 	public static void renderParticle(){
 		WorldRenderer tess=TessHelper.getWR();
-		boolean isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView==2;
+		boolean isFP=H.getMC().gameSettings.thirdPersonView==2;
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
 		if(isFP)GL11.glDisable(GL11.GL_CULL_FACE);

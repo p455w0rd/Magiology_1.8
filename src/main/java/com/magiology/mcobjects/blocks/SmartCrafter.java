@@ -12,8 +12,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.core.init.MGui;
+import com.magiology.handelers.GuiHandelerM;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
 
 public class SmartCrafter extends BlockContainer {
@@ -35,7 +35,7 @@ public class SmartCrafter extends BlockContainer {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
         
 		if(!world.isRemote){
-			Helper.openGui(player, MGui.GuiSC, pos);
+			GuiHandelerM.openGui(player, MGui.GuiSC, pos);
 		}else{
 			
 		}

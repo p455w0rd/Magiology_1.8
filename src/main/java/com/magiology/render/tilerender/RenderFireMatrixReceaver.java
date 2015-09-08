@@ -13,9 +13,9 @@ import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.TwoDotsLineRender;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
 public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
@@ -110,45 +110,6 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRenderer {
 		GL11.glTranslated(-x, -y, -z);
 	}
 
-	
-	private void drawBase(){
-		double minx=p*8;double miny=p*4;double minz=p*2;
-		double maxx=p*10;double maxy=p*10;double maxz=p*14;
-
-		this.bindTexture(Textures.FireMatrixReceaverBase);
-		
-		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
-		buf.addVertexWithUV(minx, miny, minz, 0, 1);
-		buf.addVertexWithUV(minx, miny, maxz, 1, 1);
-		buf.addVertexWithUV(minx, maxy, maxz, 1, 0);
-		
-		buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
-		buf.addVertexWithUV(maxx, miny,  maxz, 1, 0);
-		buf.addVertexWithUV(maxx, miny,  minz, 0, 0);
-		buf.addVertexWithUV(maxx, maxy, minz,  0, 1);
-		
-		buf.addVertexWithUV(minx, maxy, maxz,  0, 1);
-		buf.addVertexWithUV(minx, miny , maxz, 0, 0);
-		buf.addVertexWithUV(maxx, miny, maxz,  1, 0);
-		buf.addVertexWithUV(maxx, maxy, maxz,  1, 1);
-		
-		buf.addVertexWithUV(maxx, maxy, minz,  1, 1);
-		buf.addVertexWithUV(maxx, miny, minz,  1, 0);
-		buf.addVertexWithUV(minx, miny , minz, 0, 0);
-		buf.addVertexWithUV(minx, maxy, minz,  0, 1);
-		
-		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
-		buf.addVertexWithUV(maxx, maxy, minz, 1, 0);
-		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
-		buf.addVertexWithUV(minx, maxy, maxz, 0, 1);
-		
-		buf.addVertexWithUV(minx, miny, maxz, 0, 1);
-		buf.addVertexWithUV(minx, miny, minz, 0, 0);
-		buf.addVertexWithUV(maxx, miny, minz, 1, 0);
-		buf.addVertexWithUV(maxx, miny, maxz, 1, 1);
-		buf.draw();
-		
-	}
 	
 	public void drawCube(double minx,double miny,double minz,double maxx,double maxy,double maxz){
 			

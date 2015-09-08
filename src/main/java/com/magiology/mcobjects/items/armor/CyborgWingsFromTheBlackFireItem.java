@@ -18,8 +18,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
-import com.magiology.modedmcstuff.items.UpgradeableArmor;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
 import com.magiology.render.models.ModelWingsFromTheBlackFire;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;

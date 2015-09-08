@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
 public class BigFurnaceCore extends BlockContainerM{
 	

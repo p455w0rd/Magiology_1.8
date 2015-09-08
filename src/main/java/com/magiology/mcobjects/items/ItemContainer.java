@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.common.util.Constants;
 
-import com.magiology.registry.upgrades.RegisterItemUpgrades;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 
 public class ItemContainer extends Item implements IInventory{
 	

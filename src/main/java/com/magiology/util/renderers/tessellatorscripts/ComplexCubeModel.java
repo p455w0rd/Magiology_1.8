@@ -6,8 +6,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 import com.magiology.util.utilobjects.vectors.Vec8F;
 

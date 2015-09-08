@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
@@ -13,9 +12,9 @@ import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MGui;
-import com.magiology.mcobjects.ItemM;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.handelers.GuiHandelerM;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 
 public class IPowerSidenessInstructor extends ItemM{
 	
@@ -39,7 +38,7 @@ public class IPowerSidenessInstructor extends ItemM{
 		boolean isIt=false;
 		if(world.getTileEntity(pos) instanceof ISidedPower){
 			isIt=true;
-			Helper.openGui(player, MGui.GuiISidedPowerInstructor, pos);
+			GuiHandelerM.openGui(player, MGui.GuiISidedPowerInstructor, pos);
 		}
 		
 		

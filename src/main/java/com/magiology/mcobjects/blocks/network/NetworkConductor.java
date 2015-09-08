@@ -2,7 +2,6 @@ package com.magiology.mcobjects.blocks.network;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +16,6 @@ import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
 
 public class NetworkConductor extends BlockContainerMultiColision{

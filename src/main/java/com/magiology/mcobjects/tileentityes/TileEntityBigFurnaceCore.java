@@ -9,8 +9,8 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.PowerHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.PowerHelper;
 import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class TileEntityBigFurnaceCore extends TileEntityPowGen{

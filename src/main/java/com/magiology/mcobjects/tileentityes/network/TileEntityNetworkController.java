@@ -19,14 +19,14 @@ import com.magiology.api.network.skeleton.TileEntityNetworkPow;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
-import com.magiology.mcobjects.TileEntityM;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.NetworkHelper;
 import com.magiology.util.utilclasses.PowerHelper;
 import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
 	SlowdownHelper optimizer=new SlowdownHelper(40);

@@ -2,14 +2,12 @@ package com.magiology.util.utilclasses;
 
 import java.util.Random;
 
-import org.lwjgl.util.vector.Vector3f;
-
-import com.magiology.util.utilclasses.Helper.H;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+
+import com.magiology.util.utilclasses.Helper.H;
 
 public class SideHelper{
 	

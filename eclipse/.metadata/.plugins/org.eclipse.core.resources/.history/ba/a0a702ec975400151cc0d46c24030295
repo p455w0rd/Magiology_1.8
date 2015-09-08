@@ -1,0 +1,9 @@
+package com.magiology.api.updateable;
+
+public class Updater {
+
+	public Updater() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

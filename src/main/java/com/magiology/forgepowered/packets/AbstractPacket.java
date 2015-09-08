@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.BlockPos;
@@ -22,8 +21,9 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 /* Inspired by Integrated-Circuits, thanks! o/ */
@@ -33,7 +33,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	
 	@Override
 	public IMessage onMessage(T message, MessageContext ctx){
-		message.process(ctx.side.isServer()?ctx.getServerHandler().playerEntity:Minecraft.getMinecraft().thePlayer,ctx.side);
+		message.process(ctx.side.isServer()?ctx.getServerHandler().playerEntity:H.getMC().thePlayer,ctx.side);
 		return null;
 	}
 

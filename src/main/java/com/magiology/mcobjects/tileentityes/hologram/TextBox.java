@@ -5,9 +5,9 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.ColorF;
 
 public class TextBox extends RenderObject implements StringContainer{
 	

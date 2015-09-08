@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.world.World;
 
@@ -10,6 +9,7 @@ import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class EntitySmoothBubleFX extends EntityFXM{
 	
@@ -69,9 +69,9 @@ public class EntitySmoothBubleFX extends EntityFXM{
     	float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
     	float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
     	{
-    		if(texture=="tx1")     Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble1);
-    		else if(texture=="tx2")Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble2);
-    		else if(texture=="tx3")Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble3);
+    		if(texture=="tx1")     H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
+    		else if(texture=="tx2")H.getMC().renderEngine.bindTexture(Textures.SmoothBuble2);
+    		else if(texture=="tx3")H.getMC().renderEngine.bindTexture(Textures.SmoothBuble3);
     		tess.startDrawingQuads();
     		tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
     		tess.setBrightness(240);
@@ -83,7 +83,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
     	}
 		
 		if(texture=="tx1"){
-			Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble1Add1);
+			H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add1);
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[0]);
         	tess.setBrightness(240);
@@ -118,7 +118,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			TessHelper.draw();
 			
 			
-			Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble1Add2);
+			H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add2);
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[4]);
         	tess.setBrightness(240);
@@ -179,11 +179,11 @@ public class EntitySmoothBubleFX extends EntityFXM{
 				double x1=(0.025-0.05*worldObj.rand.nextFloat())*particleScale/10;
 				double y1=(0.025-0.05*worldObj.rand.nextFloat())*particleScale/10;
 				double z1=(0.025-0.05*worldObj.rand.nextFloat())*particleScale/10;
-				if(Minecraft.getMinecraft().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+x1*4, posY+y1*4, posZ+z1*4, -x1/3+motionX,-y1/3+motionY, -z1/3+motionZ, particleMaxAge/2, 3,0, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
+				if(H.getMC().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+x1*4, posY+y1*4, posZ+z1*4, -x1/3+motionX,-y1/3+motionY, -z1/3+motionZ, particleMaxAge/2, 3,0, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
 			}
 			if(particleAge>particleMaxAge/8.5/2){
 				particleScale-=0.004*particleMaxAge;
-				if(active==true&&Minecraft.getMinecraft().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()+motionX,0.025-0.05*worldObj.rand.nextFloat()+motionY, 0.025-0.05*worldObj.rand.nextFloat()+motionZ, particleMaxAge/2, 3,-10, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
+				if(active==true&&H.getMC().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()+motionX,0.025-0.05*worldObj.rand.nextFloat()+motionY, 0.025-0.05*worldObj.rand.nextFloat()+motionZ, particleMaxAge/2, 3,-10, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
 			}
 			if(particleAge>particleMaxAge/8.5){
 				setDead();

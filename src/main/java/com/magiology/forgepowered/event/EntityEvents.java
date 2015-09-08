@@ -1,6 +1,5 @@
 package com.magiology.forgepowered.event;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -10,8 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -25,6 +22,7 @@ import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
 import com.magiology.gui.GuiUpdater;
+import com.magiology.handelers.GuiHandelerM;
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
@@ -34,6 +32,7 @@ import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntity
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.registry.events.PlayerWrenchEvent;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilclasses.SpecialPlayerHelper;
 import com.magiology.util.utilobjects.EntityPosAndBB;
 import com.magiology.util.utilobjects.SlowdownHelper;
@@ -42,7 +41,7 @@ public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
 //	WorldRenderer tess=TessHelper.getWR();
 	boolean isFP;
-	SpecialPlayerParicleHandeler_SubEvent spph=new SpecialPlayerParicleHandeler_SubEvent();
+	SpecialPlayerParicleHandeler spph=new SpecialPlayerParicleHandeler();
 	SlowdownHelper slowdown2=new SlowdownHelper(20);
 	@SubscribeEvent
 	public void onLivingUpdateEvent(LivingUpdateEvent event){
@@ -54,15 +53,6 @@ public class EntityEvents{
 //			if(RenderLoopEvents.entitys.size()>50)RenderLoopEvents.entitys.remove(Helper.RInt(RenderLoopEvents.entitys.size()));
 			if(world.isRemote)if(entity instanceof EntityLivingBase){
 				EntityPlayer player=Helper.getThePlayer();
-				
-				boolean contains=false;
-				for (int i=0;i<RenderLoopEvents.entitys.size();i++){
-					if(RenderLoopEvents.entitys.get(i).entity==entity){
-						contains=true;
-						i=RenderLoopEvents.entitys.size();
-					}
-				}
-				
 				if(
 				   !entity.isDead&&
 				   entity.isInRangeToRender3d(player.posX+Helper.CRandI(50), player.posY+Helper.CRandI(50), player.posZ+Helper.CRandI(50))&&
@@ -99,7 +89,7 @@ public class EntityEvents{
 			
 			
 			WingsFromTheBlackFireHandeler.updateModel(player);
-			GuiUpdater.tryToUpdateOpenContainer(player);
+			GuiUpdater.tryToUpdate(player);
 			if(world.isRemote)if(ComplexPlayerRenderingData.get(player)==null)ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
 			ExtendedPlayerData playerData=ExtendedPlayerData.get(player);
 			if(playerData==null){
@@ -147,10 +137,10 @@ public class EntityEvents{
 				
 			}
 			if(SpecialPlayerHelper.getPlayerRank(player)!=-1){
-				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				isFP=H.getMC().gameSettings.thirdPersonView!=0;
 				if(player.isCollidedVertically)yv=0;
 				
-				if(isFP)spph.onUpdate(world, player, x,y,z,xv,yv,zv, 0);
+				if(isFP)spph.onUpdate(world, player, x,y,z,xv,yv,zv);
 			}
 			//---------------------
 		}
@@ -158,7 +148,6 @@ public class EntityEvents{
 	
 	@SubscribeEvent
 	public void onPlayerInteract(PlayerInteractEvent event){
-		Entity entity=event.entity;
 		World world=event.world;
 		EntityPlayer player=event.entityPlayer;
 		BlockPos pos=event.pos;
@@ -169,7 +158,7 @@ public class EntityEvents{
 			TileEntity tile=world.getTileEntity(pos);
 			if(tile instanceof TileEntityPow){
 				if(!world.isRemote){
-					Helper.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, pos);
+					GuiHandelerM.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, pos);
 					event.setCanceled(true);
 				}
 			}
@@ -180,38 +169,37 @@ public class EntityEvents{
 		World world=event.world;
 		EntityPlayer player=event.entityPlayer;
 		BlockPos pos=event.pos;
-		ItemStack equippedItemStack=player.getCurrentEquippedItem();
 		TileEntity tile=world.getTileEntity(pos);
 		if(tile instanceof PowerCore){
 			PowerCore.SavePowerToItemEvents.onPowerCoreWrenched(pos, player, world, tile);
 		}
 	}
-	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event){
-		World world=event.entity.worldObj;
-		Entity entity=event.entity;
+//	@SubscribeEvent
+//	public void onEntityConstructing(EntityConstructing event){
+//		World world=event.entity.worldObj;
+//		Entity entity=event.entity;
 //		if(entity instanceof EntityItem);else{
 //			if(entity instanceof EntitySubatomicWorldDeconstructor){
 //				EntitySubatomicWorldDeconstructor Entity=(EntitySubatomicWorldDeconstructor)entity;
 //				Helper.printInln(world.isRemote,Entity.shootingEntity);
 //			}
 //		}
-		if(entity instanceof EntityPlayer){
-			EntityPlayer player=(EntityPlayer)entity;
-			
-		}
-		
-	}
-	@SubscribeEvent
-	public void onEntityJoinWorld(EntityJoinWorldEvent event){
-		World world=event.world;
-		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ,xv=event.entity.motionX,yv=event.entity.motionY,zv=event.entity.motionZ;
-		Entity entity=event.entity;
-		
-		
-		if(entity instanceof EntityPlayer){
-			EntityPlayer player=(EntityPlayer)entity;
-			
+//		if(entity instanceof EntityPlayer){
+//			EntityPlayer player=(EntityPlayer)entity;
+//			
+//		}
+//		
+//	}
+//	@SubscribeEvent
+//	public void onEntityJoinWorld(EntityJoinWorldEvent event){
+//		World world=event.world;
+//		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ,xv=event.entity.motionX,yv=event.entity.motionY,zv=event.entity.motionZ;
+//		Entity entity=event.entity;
+//		
+//		
+//		if(entity instanceof EntityPlayer){
+//			EntityPlayer player=(EntityPlayer)entity;
+//			
 //			if(GetSpecialPlayer.getPlayerRank(player)==1){
 //				double R,G,B;
 //				for (int i=0;i<25;i++){
@@ -222,21 +210,21 @@ public class EntityEvents{
 //					Helper.spawnEnitiyFX(new EntitySmoothBubleFX(world,xr,yr,zr, 0,-0.05,0, 400, 6+world.rand.nextInt(2), 8,true,2,"tx1", R,G,B, 1, 0.95));
 //				}
 //			}
-		}
-	}
+//		}
+//	}
 	
 	@SubscribeEvent
 	public void onLivingJumpEvent(LivingJumpEvent event){
 		World world=event.entity.worldObj;
-		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ,xv=event.entity.motionX,yv=event.entity.motionY,zv=event.entity.motionZ;
+		double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ;
 		
 		
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)event.entity;
 			
 			if(SpecialPlayerHelper.getPlayerRank(player)!=-1){
-				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
-				if(isFP)spph.onJump(world, player, x,y,z, xv, yv, zv, 0);
+				isFP=H.getMC().gameSettings.thirdPersonView!=0;
+				if(isFP)spph.onJump(world, player, x,y,z);
 			}
 			//---------------------
 			{
@@ -252,7 +240,7 @@ public class EntityEvents{
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)event.entity;
 			if(SpecialPlayerHelper.getPlayerRank(player)!=-1){
-				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				isFP=H.getMC().gameSettings.thirdPersonView!=0;
 				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
 			}
 			ExtendedPlayerData.get(player).onLand(true);
@@ -270,7 +258,7 @@ public class EntityEvents{
 		if(event.entity instanceof EntityPlayer){
 			ExtendedPlayerData.get((EntityPlayer)event.entity).onLand(false);
 			if(SpecialPlayerHelper.getPlayerRank((EntityPlayer) event.entity)!=-1){
-				isFP=Minecraft.getMinecraft().gameSettings.thirdPersonView!=0;
+				isFP=H.getMC().gameSettings.thirdPersonView!=0;
 				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
 			}
 			//---------------------

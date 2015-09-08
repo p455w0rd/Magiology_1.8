@@ -14,8 +14,8 @@ import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
 
 public class RenderRemotePowerCounter extends TileEntitySpecialRenderer {

@@ -1,7 +1,6 @@
 package com.magiology.util.utilclasses;
 
 import static com.magiology.api.power.PowerCore.SAVE_TO_ITEM_PREFIX;
-import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -11,8 +10,6 @@ import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerProducer;
 import com.magiology.api.power.PowerUpgrades;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.utilclasses.Helper.H;
 
 

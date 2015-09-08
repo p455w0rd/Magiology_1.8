@@ -2,7 +2,6 @@ package com.magiology.mcobjects.items.armor;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -14,8 +13,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
-import com.magiology.modedmcstuff.items.UpgradeableArmor;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
 import com.magiology.render.models.ModelHelmet42;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
@@ -51,7 +50,7 @@ public class Helmet_42 extends UpgradeableArmor{
 				double[] roundXYZ=Helper.createBallXYZ(1,true);
 				roundXYZ[1]-=0.5;
 				roundXYZ[4]-=0.5;
-	            EntityFollowingBubleFX part=new EntityFollowingBubleFX(world, roundXYZ[0]+player.posX, roundXYZ[1]+player.posY, roundXYZ[2]+player.posZ, Helper.CRandF(0.01), Helper.CRandF(0.01), Helper.CRandF(0.01), player, 0, roundXYZ[3], roundXYZ[4], roundXYZ[5], 300, 3+(player.isSneaking()?10:0), Helper.RF(), Helper.RF(), Helper.RF(), 1-(player==Minecraft.getMinecraft().thePlayer?(Minecraft.getMinecraft().gameSettings.thirdPersonView==0?0.95:0):0));
+	            EntityFollowingBubleFX part=new EntityFollowingBubleFX(world, roundXYZ[0]+player.posX, roundXYZ[1]+player.posY, roundXYZ[2]+player.posZ, Helper.CRandF(0.01), Helper.CRandF(0.01), Helper.CRandF(0.01), player, 0, roundXYZ[3], roundXYZ[4], roundXYZ[5], 300, 3+(player.isSneaking()?10:0), Helper.RF(), Helper.RF(), Helper.RF(), 1-(player==H.getMC().thePlayer?(H.getMC().gameSettings.thirdPersonView==0?0.95:0):0));
 	            part.noClip=false;
 	            part.isChangingPos=false;
 	            Helper.spawnEntityFX(part);

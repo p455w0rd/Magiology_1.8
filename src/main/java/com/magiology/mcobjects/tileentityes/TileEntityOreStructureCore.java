@@ -12,17 +12,17 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntityCustomfireFX;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.EntitySparkFX;
-import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
-import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilclasses.PowerHelper;
 import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TileEntityOreStructureCore extends TileEntityPow{

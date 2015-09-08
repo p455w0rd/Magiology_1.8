@@ -1,6 +1,5 @@
 package com.magiology.render.aftereffect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -13,13 +12,14 @@ import com.magiology.core.init.MItems;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
 public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 
 	public  double alpha=0,prevAlpha;
 	private World world;
-	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
+	private static EntityPlayer player=H.getMC().thePlayer;
 	TwoDots td;
 	public TileEntity tile;
 	

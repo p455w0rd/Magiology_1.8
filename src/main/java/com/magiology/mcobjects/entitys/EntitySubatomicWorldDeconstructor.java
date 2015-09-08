@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.mcobjects.effect.mc.EntityFlameFXM;
 import com.magiology.util.utilclasses.CricleHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class EntitySubatomicWorldDeconstructor extends Entity implements IProjectile{

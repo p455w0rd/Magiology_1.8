@@ -5,10 +5,10 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
-import com.magiology.mcobjects.TileEntityM;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityRemotePowerCounter extends TileEntityM implements IUpdatePlayerListBox{
 	

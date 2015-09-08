@@ -22,8 +22,8 @@ import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerCont
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder;
 import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilobjects.DoubleObject;
 
 public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkBaseInterface{

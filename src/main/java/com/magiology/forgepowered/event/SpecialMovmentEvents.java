@@ -8,10 +8,10 @@ import com.magiology.core.init.MItems;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler.Positions;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.items.armor.Pants_42;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
 
 public class SpecialMovmentEvents{

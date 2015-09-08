@@ -1,4 +1,0 @@
-
-public static enum ConnectionType{
-	Item,Fluid,Enery,Space;
-}

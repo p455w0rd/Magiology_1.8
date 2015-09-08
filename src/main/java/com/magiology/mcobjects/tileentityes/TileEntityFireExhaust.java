@@ -3,9 +3,9 @@ package com.magiology.mcobjects.tileentityes;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 
 import com.magiology.core.init.MBlocks;
-import com.magiology.mcobjects.TileEntityM;
 import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityFireExhaust extends TileEntityM implements IUpdatePlayerListBox{
 	

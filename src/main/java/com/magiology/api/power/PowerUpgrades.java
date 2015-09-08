@@ -3,7 +3,7 @@ package com.magiology.api.power;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 
 public interface PowerUpgrades{
 	//getters

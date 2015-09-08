@@ -24,3 +24,38 @@
 1441399981906	Rename local variable 'vec3'
 1441400045557	Rename method 'tanslateVec'
 1441467532906	Move compilation unit
+1441470621860	Move compilation unit
+1441470663727	Rename package 'com.magiology.util.mextension'
+1441470677140	Rename package 'com.magiology.util.utilobjects.mextension'
+1441470684208	Move compilation unit
+1441470691470	Move compilation units
+1441470774380	Move compilation unit
+1441470803758	Rename package 'com.magiology.mcobjects.effect.mc'
+1441470810188	Delete element
+1441477099833	Rename type 'GuiHandeler'
+1441477121393	Move member 'openGui'
+1441477130156	Move member 'openGui'
+1441477134137	Move member 'openGui'
+1441477283917	Rename field 'HologramProjectorGui'
+1441482551325	Rename local variable 'player'
+1441487486390	Move compilation unit
+1441487830482	Delete element
+1441487867084	Rename package 'com.magiology.modedmcstuff.gui'
+1441487911896	Move compilation unit
+1441488488946	Rename package 'com.magiology.registry.upgrades'
+1441488526601	Rename package 'com.magiology.modedmcstuff.items'
+1441488618856	Move compilation units
+1441488628225	Rename package 'com.magiology.gui.guiutil.buttons'
+1441488665693	Rename package 'com.magiology.modedmcstuff.guiContainer'
+1441488710053	Move compilation units
+1441488724598	Rename package 'com.magiology.gui.fpgui'
+1441489714716	Delete element
+1441490240060	Rename method 'BlendIs'
+1441490246195	Rename method 'blendIs'
+1441490365024	Rename method 'GL11BlendFunc'
+1441541167396	Rename local variable 'k'
+1441543932319	Move compilation unit
+1441566777381	Delete element
+1441576951304	Rename method 'tryToUpdateOpenContainer'
+1441576960988	Rename method 'tryToUpdateOpenGui'
+1441577237520	Delete element

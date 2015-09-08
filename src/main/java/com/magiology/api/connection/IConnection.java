@@ -1,12 +1,7 @@
 package com.magiology.api.connection;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
-import com.sun.prism.impl.BaseMesh.FaceMembers;
-
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 public interface IConnection{

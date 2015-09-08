@@ -1,6 +1,5 @@
 package com.magiology.render.entityrender;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 	private float scale;
@@ -29,7 +29,7 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 	public void doRender(Entity en, double var1, double var2, double var3, float var4,float partialTicks){
 		try{
 			EntitySubatomicWorldDeconstructor entity=(EntitySubatomicWorldDeconstructor)en;
-			EntityPlayer player=Minecraft.getMinecraft().thePlayer;
+			EntityPlayer player=H.getMC().thePlayer;
 			int time360=entity.age%90*4,offs=25,many=1;
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),

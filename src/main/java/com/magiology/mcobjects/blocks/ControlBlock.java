@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
+import com.magiology.handelers.GuiHandelerM;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-import com.magiology.util.utilclasses.Helper;
 
 public class ControlBlock extends BlockContainer {
 	private float p= 1F/16F;
@@ -55,7 +55,7 @@ public class ControlBlock extends BlockContainer {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
         
 		if(!world.isRemote){
-			Helper.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, pos);
+			GuiHandelerM.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, pos);
 		}else{
 			
 		}

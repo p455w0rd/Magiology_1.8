@@ -2,13 +2,13 @@ package com.magiology.forgepowered.packets.generic;
 
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.forgepowered.packets.AbstractToServerMessage;
 import com.magiology.handelers.GenericPacketEventHandeler;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class GenericServerStringPacket extends AbstractToServerMessage{
 	
@@ -19,7 +19,7 @@ public class GenericServerStringPacket extends AbstractToServerMessage{
 	public GenericServerStringPacket(int eventId,String data){
 		this.data=data;
 		this.eventId=eventId;
-		GenericPacketEventHandeler.addNewStringPacketEvent(eventId, data, Minecraft.getMinecraft().thePlayer,Side.CLIENT);
+		GenericPacketEventHandeler.addNewStringPacketEvent(eventId, data, H.getMC().thePlayer,Side.CLIENT);
 	}
 	@Override
 	public void write(PacketBuffer buffer) throws IOException{

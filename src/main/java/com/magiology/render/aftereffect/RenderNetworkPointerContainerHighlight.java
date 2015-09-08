@@ -1,6 +1,5 @@
 package com.magiology.render.aftereffect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -9,18 +8,18 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.CricleHelper;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRendererBase{
-	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
+	private static EntityPlayer player=H.getMC().thePlayer;
 	private static final float p= 1F/16F;
 	public TileEntityNetworkPointerContainer tile;
 	public AdvancedPhysicsFloat progress;
@@ -96,7 +95,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		}
 		GL11.glColor4f(0, 0, 0, 0.06F);
 		GL11H.texture(false);
-		GL11H.GL11BlendFunc(1);
+		GL11H.blendFunc(1);
 		buff.disableClearing();
 		buff.setDrawModeToWireFrame();
 		buff.draw();

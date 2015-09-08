@@ -6,6 +6,7 @@ import java.nio.FloatBuffer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -69,6 +70,12 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     	double d0 = x - this.x;
     	double d1 = y - this.y;
     	double d2 = z - this.z;
+    	return MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+    }
+    public double distanceTo(Vec3i pos){
+    	double d0 = pos.getX() - this.x;
+    	double d1 = pos.getY() - this.y;
+    	double d2 = pos.getZ() - this.z;
     	return MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
     }
     public double squareDistanceTo(Vec3M vec){

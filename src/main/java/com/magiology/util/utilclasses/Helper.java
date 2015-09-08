@@ -1,6 +1,7 @@
 package com.magiology.util.utilclasses;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
+import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
 
 import java.awt.Color;
 import java.lang.reflect.Method;
@@ -36,7 +37,8 @@ import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -50,8 +52,8 @@ import com.magiology.forgepowered.packets.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.AbstractToClientMessage.SendingTarget.TypeOfSending;
 import com.magiology.forgepowered.packets.AbstractToServerMessage;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.renderers.GL11H;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Plane;
 import com.magiology.util.utilobjects.vectors.Ray;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -76,7 +78,7 @@ public class Helper{
 	
 	public static void spawnEntityFX(EntityFX particleFX){
 		if(isRemote(particleFX)){
-			Minecraft mc=Minecraft.getMinecraft();
+			Minecraft mc=H.getMC();
 			Entity ent=mc.getRenderViewEntity();
 			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
 				int i = mc.gameSettings.particleSetting;
@@ -89,7 +91,7 @@ public class Helper{
 	}
 	public static void spawnEntityFX(EntityFX particleFX,int distance){
 		if(particleFX.worldObj.isRemote){
-			Minecraft mc=Minecraft.getMinecraft();
+			Minecraft mc=H.getMC();
 			Entity ent=mc.getRenderViewEntity();
 			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
 				int i = mc.gameSettings.particleSetting;
@@ -106,9 +108,9 @@ public class Helper{
 		entity.forceSpawn=true;
 		return entity;
 	}
-	public static Minecraft getMC(){return Minecraft.getMinecraft();}
-	public static World getTheWorld(){return Minecraft.getMinecraft().theWorld;}
-	public static EntityPlayer getThePlayer(){return Minecraft.getMinecraft().thePlayer;}
+	@SideOnly(value=Side.CLIENT)public static Minecraft getMC(){return Minecraft.getMinecraft();}
+	@SideOnly(value=Side.CLIENT)public static World getTheWorld(){return H.getMC().theWorld;}
+	@SideOnly(value=Side.CLIENT)public static EntityPlayer getThePlayer(){return H.getMC().thePlayer;}
 	public static int booleanToInt(boolean bool){if(bool)return 1;return 0;}
 	public static boolean intToBoolean(int i){return i==1;}
 	public static float CRandF(double scale){return (float)((0.5-rand.nextFloat())*scale);}
@@ -343,7 +345,7 @@ public class Helper{
 		if(entity.worldObj.isRemote)return entity.rayTrace(lenght, var1);
 		
 		Vec3M vec3 =new Vec3M(entity.posX, entity.posY, entity.posZ);
-		Vec3M vec31=vec3.conv(entity.getLook(var1));
+		Vec3M vec31=Vec3M.conv(entity.getLook(var1));
 		Vec3M vec32=vec3.addVector(vec31.x*var1, vec31.y*var1, vec31.z*var1);
 		return entity.worldObj.rayTraceBlocks(vec3.conv(), vec32.conv(), false, false, true);
 	}
@@ -401,7 +403,7 @@ public class Helper{
 	private static int fps=0;
 	private static long lastTime=0;
 	private static void updateFps(){
-		char[] debug=Minecraft.getMinecraft().debug.toCharArray();
+		char[] debug=H.getMC().debug.toCharArray();
 		String number="";
 		for(int a=0;a<debug.length;a++){
 			char c=debug[a];
@@ -491,16 +493,6 @@ public class Helper{
 		float[] data=codeToRGBABPrecentage(code);
 		return new ColorF(data[0],data[1],data[2],data[3]);
 	}
-	public static void openGui(EntityPlayer player, int modGuiId, BlockPos pos){
-		openGui(player, Magiology.getMagiology(), modGuiId, pos);
-	}
-	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, BlockPos pos){
-		openGui(player, mainModClassInstance, modGuiId, pos.getX(),pos.getY(),pos.getZ());
-	}
-	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, int x,int y,int z){
-		if(isRemote(player))return;
-		FMLNetworkHandler.openGui(player, mainModClassInstance, modGuiId, player.getEntityWorld(), x,y,z);
-	}
 	public static float[] calculateRenderPos(Entity entity){
 		return new float[]{
 				calculateRenderPos(entity,'x'),
@@ -541,7 +533,7 @@ public class Helper{
 		return Return;
 	}
 	public static FontRenderer getFontRenderer(){
-		return Minecraft.getMinecraft().fontRendererObj;
+		return H.getMC().fontRendererObj;
 	}
 	
 	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3M result){
@@ -591,7 +583,7 @@ public class Helper{
 		Object[][] result={{},{}};
 		try{
 	        Vec3M Vec3M=getPosition(player,RenderLoopEvents.partialTicks);
-	        Vec3M vec31=Vec3M.conv(player.getLook(RenderLoopEvents.partialTicks));
+	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderLoopEvents.partialTicks));
 	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
 			
 			Ray ray=new Ray(Vec3M, vec32);
@@ -830,5 +822,8 @@ public class Helper{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	public static Vec3M getEntityPos(Entity entity){
+		return new Vec3M(entity.posX, entity.posY, entity.posZ);
 	}
 }

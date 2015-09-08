@@ -1,8 +1,5 @@
 package com.magiology.api.connection;
 
-import com.magiology.util.utilclasses.Helper;
-
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 
 public final class IConnectionFactory{

@@ -2,7 +2,6 @@ package com.magiology.gui.gui;
 
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,12 +11,13 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
-import com.magiology.gui.guiContainer.GuiUpgradeContainer;
-import com.magiology.gui.guiparticels.GuiStandardFX;
+import com.magiology.gui.container.UpgradeContainer;
+import com.magiology.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	
@@ -28,7 +28,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	private final TileEntityPow tileCB;
 	
 	public GuiUpgrade(InventoryPlayer pInventory,TileEntityPow tileCB){
-		super(new GuiUpgradeContainer(pInventory,tileCB));
+		super(new UpgradeContainer(pInventory,tileCB));
 		
 		this.tileCB=tileCB;
 		this.xSize=176;
@@ -80,7 +80,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		}
 		GL11.glColor4d(1, 1, 1, guiAlpha);
-		Minecraft.getMinecraft().getTextureManager().bindTexture(main);
+		H.getMC().getTextureManager().bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, 6);
 		this.drawTexturedModalRect(guiLeft, guiTop+6, 0, 7, xSize, 17);
 		this.drawTexturedModalRect(guiLeft, guiTop+23, 0, 25, xSize, ySize);
@@ -133,7 +133,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
     }
 	
 	@Override
-	public void pickupTickingFromTileEntityEveryTick(){
+	public void update(){
 		if(particleAttractionTime>0)particleAttractionTime--;
 		else if(particleAttractionTime<0)particleAttractionTime++;
 		if(Helper.RInt(40)==0)spawnGuiParticle(new GuiParticle(Helper.RInt(height), Helper.RInt(width),600, 0,0,80,0.02,0.7,Helper.RF(),Helper.RF(),Helper.RF(),texture1,GuiStandardFX.BigCloudFX));

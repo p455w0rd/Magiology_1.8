@@ -1,0 +1,24 @@
+package com.magiology.gui.guiContainer;
+
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.util.utilclasses.Helper;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+
+public class GuiHologramProjectorMainContainer extends Container {
+	
+	EntityPlayer player;
+	TileEntityHologramProjector tile;
+	
+	public GuiHologramProjectorMainContainer(EntityPlayer player, TileEntityHologramProjector tile){
+		this.player=player;
+		this.tile=tile;
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player){
+		return Helper.getEntityPos(player).distanceTo(tile.getPos())<20;
+	}
+
+}

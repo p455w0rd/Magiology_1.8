@@ -47,7 +47,6 @@ public class WingsFromTheBlackFireHandeler{
 		}
 	}
 	public static void updateModel(EntityPlayer player){
-		long wTime=Helper.getTheWorld().getTotalWorldTime();
 		ExtendedPlayerData.enshure(player);
 		ExtendedPlayerData extendedData=ExtendedPlayerData.get(player);
 		ComplexPlayerRenderingData.enshure(player);
@@ -59,7 +58,7 @@ public class WingsFromTheBlackFireHandeler{
 			Positions[] flap=getFlap(player);
 			if(extendedData.isFlappingDown){
 				setFlap(player,flap);
-				int x=extendedData.getKeysX(),y=extendedData.getKeysY(),z=extendedData.getKeysZ();
+				int x=extendedData.getKeysX();
 				if(x==0)setPosId(player, 3);
 				else if(x==1)setPosId(player, 2);
 				else if(x==-1)setPosId(player, 4);
@@ -168,7 +167,7 @@ public class WingsFromTheBlackFireHandeler{
 		return player.getCurrentArmor(2).hasTagCompound();
 	}
 	public static int getPosId(EntityPlayer player){
-		int id=-1;Positions[] positions=Positions.values();
+		int id=-1;
 		ItemStack wings=player.getCurrentArmor(2);
 		if(getIsActive(player))id=wings.getTagCompound().getInteger("WMID");
 		return id;

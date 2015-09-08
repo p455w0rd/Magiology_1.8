@@ -1,8 +1,5 @@
 package com.magiology.mcobjects.tileentityes;
 
-import java.util.List;
-
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;

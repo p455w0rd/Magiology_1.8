@@ -18,8 +18,8 @@ import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
 
 public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public EnumFacing[] connections = new EnumFacing[6];

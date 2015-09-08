@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public abstract class BlockContainerMultiColision extends BlockContainerM{

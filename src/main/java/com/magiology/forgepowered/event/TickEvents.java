@@ -21,9 +21,9 @@ import com.magiology.core.VersionChecker;
 import com.magiology.core.init.MEvents;
 import com.magiology.forgepowered.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
-import com.magiology.gui.DownloadingIcon;
-import com.magiology.gui.MainMenuUpdateNotification;
-import com.magiology.gui.fpgui.FirstPersonGui;
+import com.magiology.gui.custom.DownloadingIcon;
+import com.magiology.gui.custom.hud.HUD;
+import com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.util.utilclasses.Helper;
@@ -31,16 +31,16 @@ import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 public class TickEvents{
-	Minecraft mc=Minecraft.getMinecraft();
+	Minecraft mc=H.getMC();
 	public static TickEvents instance=new TickEvents();
 	public static CientPlayerBufferedGui bufferedGui=instance.new CientPlayerBufferedGui(new Pos());
 	boolean bufferedGuiFirst=true;
 	@SubscribeEvent
 	public void onClientTick(TickEvent.ClientTickEvent event){
 		if(event.phase!=Phase.START)return;
-		if(VersionChecker.getFoundNew()&&H.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotification.update();
+		if(VersionChecker.getFoundNew()&&H.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.update();
 		DownloadingIcon.update();
-		if(H.getTheWorld()==null)MEvents.RenderLoopInstance.universalLongRender.clear();
+		if(H.getTheWorld()==null)RenderLoopEvents.universalLongRender.clear();
 		
 		if(mc.isGamePaused())return;
 		if(Helper.getThePlayer()==null)return;
@@ -52,7 +52,7 @@ public class TickEvents{
 		if(RenderLoopEvents.disabledEquippItemAnimationTime>0)RenderLoopEvents.disabledEquippItemAnimationTime--;
 		else if(RenderLoopEvents.disabledEquippItemAnimationTime<0)RenderLoopEvents.disabledEquippItemAnimationTime=0;
 
-		GameSettings gs=Minecraft.getMinecraft().gameSettings;
+		GameSettings gs=H.getMC().gameSettings;
 		boolean[] keys={Keyboard.isKeyDown(gs.keyBindForward.getKeyCode()),Keyboard.isKeyDown(gs.keyBindBack.getKeyCode()),Keyboard.isKeyDown(gs.keyBindJump.getKeyCode()),Keyboard.isKeyDown(gs.keyBindSneak.getKeyCode()),Keyboard.isKeyDown(gs.keyBindRight.getKeyCode()),Keyboard.isKeyDown(gs.keyBindLeft.getKeyCode())};
 		ExtendedPlayerData data=ExtendedPlayerData.get(Helper.getThePlayer());
 		if(data!=null){
@@ -67,7 +67,7 @@ public class TickEvents{
 			}
 		}
 		for(int a=0;a<RenderLoopEvents.FPGui.size();a++){
-			FirstPersonGui gui=RenderLoopEvents.FPGui.get(a);
+			HUD gui=RenderLoopEvents.FPGui.get(a);
 			gui.update();
 		}
 	}
@@ -90,13 +90,13 @@ public class TickEvents{
 		if(Magiology.modInfGUI!=null&&!Magiology.modInfGUI.isExited)Magiology.modInfGUI=null;
 		else if(Magiology.getMagiology().modWindowOpen()){
 			if(Magiology.modInfGUI.exitOn==3) Magiology.modInfGUI.exit();
-			else if(Magiology.modInfGUI.exitOn==2&&Minecraft.getMinecraft().theWorld!=null) Magiology.modInfGUI.exit();
+			else if(Magiology.modInfGUI.exitOn==2&&H.getMC().theWorld!=null) Magiology.modInfGUI.exit();
 			if(!Magiology.modInfGUI.MCStat){
 				Magiology.modInfGUI.MCStat=true;
 				Magiology.modInfGUI.Update();
 			}
 		}
-		if(event.phase==Phase.END&&VersionChecker.getFoundNew()&&H.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotification.render(Display.getWidth(), Display.getHeight());
+		if(event.phase==Phase.END&&VersionChecker.getFoundNew()&&H.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.render(Display.getWidth(), Display.getHeight());
 	}
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event){

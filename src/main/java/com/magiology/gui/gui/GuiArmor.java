@@ -1,7 +1,6 @@
 package com.magiology.gui.gui;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.*;
-import net.minecraft.client.Minecraft;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,22 +14,23 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.RenderLoopEvents;
-import com.magiology.gui.guiContainer.GuiArmorContainer;
-import com.magiology.gui.guiparticels.GuiStandardFX;
+import com.magiology.gui.container.ArmorContainer;
+import com.magiology.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.modedmcstuff.gui.InvisivleGuiButton;
-import com.magiology.modedmcstuff.items.UpgItem;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.render.itemrender.ItemRendererHelmet42;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	private ItemRendererHelmet42 IRH42 = new ItemRendererHelmet42();
 	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
-    protected static ItemRenderer itemRenderer = new ItemRenderer(Minecraft.getMinecraft());
+    protected static ItemRenderer itemRenderer = new ItemRenderer(H.getMC());
 	ResourceLocation texture1=new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
 	ItemStack[] p42;
 	EntityPlayer player;
@@ -39,7 +39,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	InvisivleGuiButton playerButton=new InvisivleGuiButton(5, (int)playerXPos, (int)playerYPos, 18, 32, 5+"");
 	
 	public GuiArmor(EntityPlayer player,ItemStack[] armorInventory){
-		super(new GuiArmorContainer(player, armorInventory));
+		super(new ArmorContainer(player, armorInventory));
 		this.p42=armorInventory;
 		this.player=player;
 		this.xSize=176;
@@ -51,7 +51,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	}
 	
 	@Override
-	public void pickupTickingFromTileEntityEveryTick(){
+	public void update(){
 		prevPlayerYPos=playerYPos;
 		prevSliderPos=sliderPos;
 		this.updateParticles();
@@ -73,13 +73,13 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	@Override
 	public void drawGuiContainerForegroundLayer(int i,int e){
-		sliderPos=(player.openContainer instanceof GuiArmorContainer)?((GuiArmorContainer)player.openContainer).sliderPos:0;
+		sliderPos=(player.openContainer instanceof ArmorContainer)?((ArmorContainer)player.openContainer).sliderPos:0;
 		int pos=(int)Math.round(Math.abs(sliderPos/16));
 		for(int a=0;a<5;a++){
 			if(o1<o2)o1+=0.035;
 			if(o1>o2)o1-=0.035;
 		}
-		long WT=Minecraft.getMinecraft().theWorld.getTotalWorldTime();
+		long WT=H.getMC().theWorld.getTotalWorldTime();
 		if(Helper.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, 15, 0);
 		GL11.glTranslated(0, 0, 250);
 		drawBIGRotatingItemStack(p42[pos]);
@@ -130,7 +130,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	}
 	
 	public void drawBIGRotatingItemStack(ItemStack stack){
-		long WT=Minecraft.getMinecraft().theWorld.getTotalWorldTime();
+		long WT=H.getMC().theWorld.getTotalWorldTime();
 		int angleX=(int)(WT%360),rotatePosX=37+8*3;
 		double angleY2=500,angleY1=(int)(WT%angleY2),angleY3=(angleY1>angleY2/2?angleY2-angleY1:angleY1),
 				angleY=(angleY3-angleY2/4)/(angleY2/25),rotateYOffset=36;

@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.gui.fpgui.WingModeChangerGui;
+import com.magiology.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
 import com.magiology.util.utilclasses.Helper;
 
@@ -15,8 +15,8 @@ public class MouseEvents{
 	
 	public void roll(MouseEvent event, int direction){
 		//switch scrolling to WingModeChangerGui
-		if(direction==1)WingModeChangerGui.instance.next();
-		else WingModeChangerGui.instance.prev();
+		if(direction==1)WingModeChangerHUD.instance.next();
+		else WingModeChangerHUD.instance.prev();
 		if(!(!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandeler.getIsActive(Helper.getThePlayer())))event.setCanceled(true);
 		
 		

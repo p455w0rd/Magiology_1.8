@@ -1,6 +1,5 @@
 package com.magiology.render.aftereffect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -15,6 +14,7 @@ import com.magiology.util.renderers.NormalizedVertixBufferModel;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilclasses.PowerHelper;
 
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
@@ -24,7 +24,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	public TileEntityFirePipe pipe;
 	public  double alpha=0,prevAlpha;
 	private World world;
-	private static EntityPlayer player=Minecraft.getMinecraft().thePlayer;
+	private static EntityPlayer player=H.getMC().thePlayer;
 	
 	public RenderFirePipeGlow(TileEntityFirePipe pipe){
 		this.pipe=pipe;

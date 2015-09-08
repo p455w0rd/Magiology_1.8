@@ -1,6 +1,10 @@
 package com.magiology.core;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import static com.mojang.realmsclient.gui.ChatFormatting.AQUA;
+import static com.mojang.realmsclient.gui.ChatFormatting.BLUE;
+import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
+import static com.mojang.realmsclient.gui.ChatFormatting.ITALIC;
+import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
 
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.util.utilclasses.Helper;

@@ -14,15 +14,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.api.connection.IConnection;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
 
 public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,IUpdatePlayerListBox{
 	

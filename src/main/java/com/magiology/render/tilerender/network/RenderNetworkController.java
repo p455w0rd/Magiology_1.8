@@ -8,9 +8,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.utilobjects.ColorF;
 
 public class RenderNetworkController extends TileEntitySpecialRenderer{
 

@@ -10,8 +10,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import com.magiology.modedmcstuff.items.UpgradeableItem;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableItem;
 public class FireBarrel extends UpgradeableItem{
 	
 	public FireBarrel(Container container){

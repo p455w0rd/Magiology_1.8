@@ -5,10 +5,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.modedmcstuff.ColorF;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilobjects.ColorF;
 
 public class Button extends TextBox{
 	

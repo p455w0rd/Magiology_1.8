@@ -12,17 +12,15 @@ import net.minecraft.util.BlockPos;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerUpgrades;
-import com.magiology.mcobjects.effect.EntityMovingParticleFX;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
-import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.LogHelper;
 import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
+import com.magiology.util.utilclasses.SideHelper;
 
 public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;

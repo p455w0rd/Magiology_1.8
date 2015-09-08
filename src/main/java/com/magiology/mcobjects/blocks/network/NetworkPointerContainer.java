@@ -22,8 +22,8 @@ import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
 import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.SideHelper;
 
 public class NetworkPointerContainer extends BlockContainerMultiColision{
 	

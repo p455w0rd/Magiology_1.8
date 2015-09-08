@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.EnumParticleTypes;
@@ -8,9 +7,6 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.mcobjects.effect.mc.EntityCloudFXM;
-import com.magiology.mcobjects.effect.mc.EntityLavaFXM;
-import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
@@ -18,6 +14,9 @@ import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.m_extension.effect.EntityCloudFXM;
+import com.magiology.util.utilobjects.m_extension.effect.EntityLavaFXM;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
 public class EntityCustomfireFX extends EntityFXM{
 	public boolean active=false;
@@ -53,7 +52,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		float y=(float)(prevPosY + (posY-prevPosY)* par2 - interpPosY);
 		float z=(float)(prevPosZ + (posZ-prevPosZ)* par2 - interpPosZ);
 		
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble1);
+		H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		
 		GL11H.SetUpOpaqueRendering(2);
 		tess.startDrawingQuads();
@@ -149,7 +148,7 @@ public class EntityCustomfireFX extends EntityFXM{
 	@Override
 	public void onUpdate(){
 		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500)if(Helper.RInt(10)==0)this.setDead();
-		if(Minecraft.getMinecraft().gameSettings.particleSetting==2)this.setDead();
+		if(H.getMC().gameSettings.particleSetting==2)this.setDead();
 		prevRoration=roration.clone();
 		this.particleWithSize15andSpeed35();
 		this.spawningParticleHandeler();
@@ -171,7 +170,7 @@ public class EntityCustomfireFX extends EntityFXM{
     		this.particleMaxAge=100;
 			if(this.particleAge++>=this.particleMaxAge){
 				this.setDead();
-				if(Minecraft.getMinecraft().gameSettings.particleSetting==0)for(int gol=0;gol<200;gol++)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, 0.25-0.5*worldObj.rand.nextFloat(),-0.25+0.25-0.5*worldObj.rand.nextFloat(), 0.25-0.5*worldObj.rand.nextFloat()));
+				if(H.getMC().gameSettings.particleSetting==0)for(int gol=0;gol<200;gol++)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, 0.25-0.5*worldObj.rand.nextFloat(),-0.25+0.25-0.5*worldObj.rand.nextFloat(), 0.25-0.5*worldObj.rand.nextFloat()));
 				Helper.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX, this.posY, this.posZ));
 			}
 		}
@@ -220,7 +219,7 @@ public class EntityCustomfireFX extends EntityFXM{
     				
 
 	    		}
-	    		if(Minecraft.getMinecraft().gameSettings.particleSetting>=1){
+	    		if(H.getMC().gameSettings.particleSetting>=1){
 //	    			for(int i=0;i<10;i++)
 	    				Helper.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX+worldObj.rand.nextFloat()*10, this.posY+1+worldObj.rand.nextFloat()*10, this.posZ+worldObj.rand.nextFloat()*10));
 	    		}
@@ -251,7 +250,7 @@ public class EntityCustomfireFX extends EntityFXM{
 	
 	public void spawningParticleHandeler(){
         if(this.active==true){
-        	if(optimizer++>=1&&Minecraft.getMinecraft().gameSettings.particleSetting==0){
+        	if(optimizer++>=1&&H.getMC().gameSettings.particleSetting==0){
         		optimizer=0;
         		EntitySmoothBubleFX sb=new EntitySmoothBubleFX(worldObj,this.posX, this.posY, this.posZ,this.motionX/2+Helper.CRandF(0.1)*particleScale, this.motionY/2+Helper.CRandF(0.1)*particleScale, this.motionZ/2+Helper.CRandF(0.1)*particleScale,(int) (600*particleScale), 1.5,this.motionY/2, false,1,"tx1",1,0,0, 0.3, 0.96);
             	Helper.spawnEntityFX(sb);
@@ -274,7 +273,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		if(particleScale<0.8)return;
 		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0, 0);
 		if(worldObj.rand.nextInt(40)==1){
-			if(Minecraft.getMinecraft().gameSettings.particleSetting==0)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0.1, 0);
+			if(H.getMC().gameSettings.particleSetting==0)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY, this.posZ, 0, 0.1, 0);
 			if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0+this.motionX/2,    -this.motionY, 0+this.motionZ/2, true,particleScale));
     		if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.1+this.motionX/2,  -this.motionY, 0+this.motionZ/2, true,particleScale));
     		if(worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.1+this.motionX/2,  -this.motionY, 0.1+this.motionZ/2, true,particleScale));
@@ -288,11 +287,11 @@ public class EntityCustomfireFX extends EntityFXM{
     	}
     	else if(worldObj.rand.nextInt(2)==0){
     		Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, 0.05-0.1*worldObj.rand.nextFloat()+this.motionX/2, worldObj.rand.nextFloat()*0.3-this.motionY/3, 0.05-0.1*worldObj.rand.nextFloat()+this.motionZ/2, true,1));
-    		if(Minecraft.getMinecraft().gameSettings.particleSetting==0){
+    		if(H.getMC().gameSettings.particleSetting==0){
     			for(int i=0;i<10;i++)Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, 0.05-0.1*worldObj.rand.nextFloat(),0.05-0.1*worldObj.rand.nextFloat(),0.05-0.1*worldObj.rand.nextFloat()));
     		}
     	}
-    	else if(Minecraft.getMinecraft().gameSettings.particleSetting==0){
+    	else if(H.getMC().gameSettings.particleSetting==0){
     		for(int i=0;i<2;i++)Helper.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX, this.posY, this.posZ));
     		if(H.getFPS()>20)for(int i=0;i<2+H.RInt(10);i++)Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, H.CRandF(0.1)+motionX,    0.15+H.CRandF(0.1), H.CRandF(0.1)+motionZ, true,0.2F));
     		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0, 0, 0);

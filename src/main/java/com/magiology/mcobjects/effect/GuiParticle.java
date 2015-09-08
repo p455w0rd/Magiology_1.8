@@ -1,18 +1,18 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import com.magiology.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
 import com.magiology.gui.gui.GuiContainerAndGuiParticles;
-import com.magiology.gui.guiparticels.GuiStandardFX;
-import com.magiology.gui.guiparticels.GuiStandardFX.GuiFXProp;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class GuiParticle{
 	
@@ -87,7 +87,7 @@ public class GuiParticle{
 	private void setDead(){this.isDead=true;}
 	public void renderParticle(WorldRenderer tess,float partialTicks){
 		GL11.glPushMatrix();
-		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.SmoothBuble1);
+		H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		GL11H.SetUpOpaqueRendering(2);
 		double opacityF=opacity,
 				x=Helper.calculateRenderPos(lastXPos,xPos),

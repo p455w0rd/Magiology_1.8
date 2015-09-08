@@ -8,8 +8,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilclasses.PowerHelper;
 

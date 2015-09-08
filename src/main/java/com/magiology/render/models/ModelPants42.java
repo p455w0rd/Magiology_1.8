@@ -1,7 +1,6 @@
 
 package com.magiology.render.models;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -13,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.init.MItems;
 import com.magiology.render.Textures;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class ModelPants42 extends ModelBiped{
     ModelRenderer legFront1,legFront2,legFront3,legFront4,Base,legSideAdd11,legSideAdd12,legSideAdd21,legSideAdd22,Stick1,Stick2,Stick3,Stick4,FrontStickB1,FrontStickAdd1,FrontStickB2,FrontStickAdd2;
@@ -141,7 +141,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  			if(arInv.getMaxDamage()>0)color=(max-now)/max;
 	  		}
 	  	}
-	  Minecraft.getMinecraft().renderEngine.bindTexture(Textures.Pants42Model);
+	  H.getMC().renderEngine.bindTexture(Textures.Pants42Model);
 	  setRotationAngles(f, f1, f2, f3, f4, f5,entity);
 	  
       GL11.glColor4f(color, color, color, 1);

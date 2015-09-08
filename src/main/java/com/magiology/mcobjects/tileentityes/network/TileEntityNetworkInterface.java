@@ -16,11 +16,10 @@ import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilclasses.NetworkHelper;
 import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.SlowdownHelper;
 
 public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements IUpdatePlayerListBox{

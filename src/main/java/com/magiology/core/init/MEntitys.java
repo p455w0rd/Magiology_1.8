@@ -21,13 +21,13 @@ public class MEntitys{
 		reg(EntitySubatomicWorldDeconstructor.class, 100, 1, true,new EntitySubatomicWorldDeconstructorRenderer(10));
 	}
 
-	private static void reg(Class<? extends Entity> entityClass, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates,Render model){
+	public static void reg(Class<? extends Entity> entityClass, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates,Render model){
 		EntityRegistry.registerModEntity(entityClass, entityClass.getClass().getCanonicalName(), id, Magiology.getMagiology(),  trackingRange, updateFrequency, sendsVelocityUpdates);
 		RenderingRegistry.registerEntityRenderingHandler(entityClass, model);
 		id++;
 	}
 
-	private static void reg(Class<? extends Entity> entityClass, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates){
+	public static void reg(Class<? extends Entity> entityClass, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates){
 		EntityRegistry.registerModEntity(entityClass, entityClass.getClass().getCanonicalName(), id, Magiology.getMagiology(),  trackingRange, updateFrequency, sendsVelocityUpdates);
 		id++;
 	}

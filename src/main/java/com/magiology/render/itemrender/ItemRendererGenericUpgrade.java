@@ -13,10 +13,11 @@ import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.render.Textures;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.Helper.H;
 
 
 public class ItemRendererGenericUpgrade implements IItemRenderer {
-	Minecraft mc=Minecraft.getMinecraft();
+	Minecraft mc=H.getMC();
 	ResourceLocation texture=null;
 	ItemRenderer IR=new ItemRenderer(mc);
 	
@@ -37,11 +38,11 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack is, Object... data){
 		texture=Textures.getResource(MReference.MODID,"/textures/items/"+((GenericItemUpgrade)is.getItem()).UT.toString()+"Upgrades.png");
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		H.getMC().renderEngine.bindTexture(texture);
 		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON||type==ItemRenderType.EQUIPPED){
 			double x=0,y=0,z=0,xr=0,yr=0,zr=0;
 			if(type==ItemRenderType.EQUIPPED){
-//				double angle=((float)Minecraft.getMinecraft().theWorld.getTotalWorldTime()%180)*2;
+//				double angle=((float)H.getMC().theWorld.getTotalWorldTime()%180)*2;
 				xr=90;
 				yr=45;
 				zr=90;
@@ -57,7 +58,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 			GL11.glRotated(yr, 0, 1, 0);
 			GL11.glRotated(zr, 0, 0, 1);
 			GL11.glTranslated(x,y,z);
-			double time=Minecraft.getMinecraft().theWorld.getTotalWorldTime()%180,angle=((time)*2-2)+(2)*RenderLoopEvents.partialTicks;
+			double time=H.getMC().theWorld.getTotalWorldTime()%180,angle=((time)*2-2)+(2)*RenderLoopEvents.partialTicks;
 			GL11.glTranslated(0.5, 0, 0);
 			GL11.glRotated(angle, 0, 1, 0);
 			GL11.glTranslated(-0.5, 0, 0);

@@ -3,7 +3,6 @@ package com.magiology.gui.gui;
 import java.awt.Color;
 import java.io.IOException;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
@@ -21,14 +20,15 @@ import com.magiology.forgepowered.event.RenderLoopEvents;
 import com.magiology.forgepowered.event.TickEvents;
 import com.magiology.forgepowered.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
-import com.magiology.gui.guiContainer.GuiSCContainer;
-import com.magiology.gui.guiparticels.GuiStandardFX;
+import com.magiology.gui.container.SmartCrafterContainer;
+import com.magiology.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
-import com.magiology.modedmcstuff.gui.InvisivleGuiButton;
 import com.magiology.util.renderers.GL11H;
 import com.magiology.util.renderers.TessHelper;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 
 public class GuiSC extends GuiContainerAndGuiParticles{
 	
@@ -41,7 +41,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
     GuiTextField txt1,txt2;
 	int side=0;
 	public GuiSC(EntityPlayer player,TileEntitySmartCrafter tileCB,int side){
-		super(new GuiSCContainer(player,tileCB,side));
+		super(new SmartCrafterContainer(player,tileCB,side));
 		this.player=player;
 		this.side=side;
 		this.tileCB=tileCB;
@@ -64,7 +64,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 				GuiContainerAndGuiParticles.spawnGuiParticle(part);
 				part.scale=2;
 				part.opacity=0.03;
-			}else if(Minecraft.getMinecraft().theWorld.getTotalWorldTime()%2==0){
+			}else if(H.getMC().theWorld.getTotalWorldTime()%2==0){
 				part=new GuiParticle(mouseX,  mouseY, 6, 0, 0, 1, 0.15, 0.15, txt, GuiStandardFX.InpactFX);
 				GuiContainerAndGuiParticles.spawnGuiParticle(part);
 				part.scale=2;
@@ -216,7 +216,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
     }
 	
 	@Override
-	public void pickupTickingFromTileEntityEveryTick(){
+	public void update(){
 		((GuiButton)buttonList.get(0)).enabled=((GuiButton)buttonList.get(1)).enabled=tileCB.isActive;
 		if(Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){
 			mouseleftTime++;
@@ -230,8 +230,8 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			}
 		}else mouseleftTime=0;
 		
-		listOffset=((GuiSCContainer)player.openContainer).listOffset;
-		if(!isCtrlKeyDown())super.pickupTickingFromTileEntityEveryTick();
+		listOffset=((SmartCrafterContainer)player.openContainer).listOffset;
+		if(!isCtrlKeyDown())super.update();
 		else{
 			if(!guiParticles.isEmpty())for(int c=0;c<guiParticles.size();c++){
 				GuiParticle ab=guiParticles.get(c);
@@ -253,7 +253,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	@Override
 	protected void actionPerformed(GuiButton b){
 		boolean sideSwitcher=false;
-		int rot=(int)(Minecraft.getMinecraft().thePlayer.rotationYawHead%360);
+		int rot=(int)(H.getMC().thePlayer.rotationYawHead%360);
 		while(rot<0)rot+=360; 
 		if(rot<155&&rot>25)sideSwitcher=true;
 		switch (b.id){

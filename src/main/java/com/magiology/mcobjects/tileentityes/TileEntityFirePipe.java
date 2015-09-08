@@ -2,7 +2,6 @@ package com.magiology.mcobjects.tileentityes;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -13,27 +12,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import scala.collection.generic.Clearable;
-
-import com.magiology.api.connection.ConnectionType;
-import com.magiology.api.connection.IConnection;
-import com.magiology.api.connection.IConnectionFactory;
 import com.magiology.api.power.ISidedPower;
-import com.magiology.api.power.PowerCore;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
-import com.magiology.mcobjects.effect.mc.EntitySmokeFXM;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.registry.upgrades.RegisterItemUpgrades;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.registry.upgrades.RegisterItemUpgrades.UpgradeType;
 import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilclasses.PowerHelper;
 import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilclasses.Helper.H;
 import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
 public class TileEntityFirePipe extends TileEntityPow implements MultiColisionProvider{
 	PowerHelper PH=new PowerHelper();
