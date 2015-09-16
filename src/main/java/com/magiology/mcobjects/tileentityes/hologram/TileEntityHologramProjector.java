@@ -6,25 +6,29 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandeler;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.NetworkInterfaceProvider;
-import com.magiology.forgepowered.packets.ClickHologramPacket;
-import com.magiology.forgepowered.packets.RenderObjectUploadPacket;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
+import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
 import com.magiology.mcobjects.effect.EntityFacedFX;
-import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder;
-import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.util.utilobjects.vectors.Plane;
+import com.magiology.util.utilobjects.vectors.Ray;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TileEntityHologramProjector extends TileEntityM implements IUpdatePlayerListBox{
@@ -38,8 +42,8 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public RenderObject lastPartClicked;
 	public TileEntityHologramProjector(){
 		size=new Vector2f(11,6);
-		offset=new Vector2f(-5, 1+Helper.p*1.45F);
-		main=new ComplexCubeModel(0,0,-Helper.p/2, size.x,size.y,Helper.p/2);
+		offset=new Vector2f(-5, 1+Util.p*1.45F);
+		main=new ComplexCubeModel(0,0,-Util.p/2, size.x,size.y,Util.p/2);
 //		hologramProjectors.add(this);
 	}
 	
@@ -83,25 +87,24 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		for(RenderObject ro:renderObjects){
 			if(ro.host==null)ro.host=this;
 			ro.update();
-			if(worldObj.getTotalWorldTime()%40==0&&Helper.isRemote(this))Helper.sendMessage(new RenderObjectUploadPacket(this, ro));
+//			if(worldObj.getTotalWorldTime()%40==0&&Helper.isRemote(this))Helper.sendMessage(new RenderObjectUploadPacket(ro));
 		}
 	}
 	@Override
 	public AxisAlignedBB getRenderBoundingBox(){
 		Vec3M
-			p1=main.getPoint("min x,min y,min z"),
-			p2=main.getPoint("max x,max y,max z");
-		AxisAlignedBB result=super.getRenderBoundingBox().union(new AxisAlignedBB(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z).addCoord(x(), y(), z()));
-		return result;
+			p1=main.getPoint(false,false,false).addVector(offset.x, offset.y, 0),
+			p2=main.getPoint(true,true,true).addVector(offset.x, offset.y, 0);
+		return super.getRenderBoundingBox().union(new AxisAlignedBB(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z).addCoord(x(), y(), z()));
 	}
 	public void onPressed(EntityPlayer player){
-		if(Helper.isRemote(player))for(int a=0;a<360;a+=30){
-			double[] b=Helper.cricleXZ(a+Helper.CRandF(16));
+		if(Util.isRemote(player))for(int a=0;a<360;a+=30){
+			double[] b=Util.cricleXZ(a+Util.CRandF(16));
 			b[0]*=0.06;
 			b[1]*=0.06;
 			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.x+x(), size.y+offset.y+point.pointedPos.y+y(), point.pointedPos.z+z()+0.5,
 					b[0], b[1], 0, 200, 0.8, 0, mainColor.x, mainColor.y, mainColor.z, 0.1);
-			Helper.spawnEntityFX(part);
+			Util.spawnEntityFX(part);
 			part.rotation.x=180;
 		}
 		
@@ -121,7 +124,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 			NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(this,Interface);
 			if(netInterface!=null)netInterface.onInterfaceProviderActionInvoked(Interface, lastPartClicked instanceof StringContainer?((StringContainer)lastPartClicked).getString():"", lastPartClicked,Interface,this);
 		}
-		if(Helper.isRemote(player))Helper.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
+		if(Util.isRemote(player))Util.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
 	}
 	
 	
@@ -129,11 +132,54 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	
 	
 	
+	public static Object[][] rayTraceHolograms(EntityPlayer player,float lenght){
+		Object[][] result={{},{}};
+		try{
+	        Vec3M Vec3M=Util.getPosition(player,RenderLoopEvents.partialTicks);
+	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderLoopEvents.partialTicks));
+	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
+			
+			Ray ray=new Ray(Vec3M, vec32);
+			for(int a=0;a<hologramProjectors.size();a++){
+				TileEntityHologramProjector tile=null;
+				TileEntity test=player.worldObj.getTileEntity(hologramProjectors.get(a).getPos());
+				if(test instanceof TileEntityHologramProjector)tile=(TileEntityHologramProjector)test;
+				if(tile!=null){
+					Vec3M hit=new Vec3M(0, 0, 0);
+					Vec3M
+						min=tile.main.getPoint(false,false,false),
+						max=tile.main.getPoint(true,true,true);
+					
+					if(Util.intersectLinePlane(ray, new Plane(
+							new Vec3M(
+									tile.x()+min.x+tile.offset.x,
+									tile.y()+min.y+tile.offset.y,
+									tile.z()+min.z+0.5),
+							new Vec3M(
+									tile.x()+max.x+tile.offset.x,
+									tile.y()+min.y+tile.offset.y,
+									tile.z()+min.z+0.5),
+							new Vec3M(
+									tile.x()+max.x+tile.offset.x,
+									tile.y()+max.y+tile.offset.y,
+									tile.z()+min.z+0.5)
+							), hit)){
+						result[0]=ArrayUtils.add(result[0], hit);
+						result[1]=ArrayUtils.add(result[1], tile);
+					}
+				}else hologramProjectors.remove(a);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public static boolean invokeRayTrace(PlayerInteractEvent event,EntityPlayer player){
-		Object[][] rayTraceResult=Helper.rayTraceHolograms(player, 7);
+		Object[][] rayTraceResult=TileEntityHologramProjector.rayTraceHolograms(player, 7);
 		if(rayTraceResult[0].length>0){
 			boolean hologramCloserThanHit=false,miss=false;
-			if(Helper.isRemote(player)){
+			if(Util.isRemote(player)){
 				float distance=0;
 				int id=0;
 				for(int i=0;i<rayTraceResult[0].length;i++){

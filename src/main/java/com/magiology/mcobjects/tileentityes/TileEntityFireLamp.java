@@ -1,10 +1,7 @@
 package com.magiology.mcobjects.tileentityes;
 
-import static com.magiology.api.power.SixSidedBoolean.Modifier.First6True;
-import static com.magiology.api.power.SixSidedBoolean.Modifier.Include;
-import static com.magiology.api.power.SixSidedBoolean.Modifier.Last6True;
-import static com.magiology.util.utilclasses.SideHelper.DOWN;
-import static com.magiology.util.utilclasses.SideHelper.UP;
+import static com.magiology.api.power.SixSidedBoolean.Modifier.*;
+import static com.magiology.util.utilclasses.SideUtil.*;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,16 +17,16 @@ import com.magiology.mcobjects.effect.EntitySparkFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Pos;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TileEntityFireLamp extends TileEntityPowGen{
 	EffectRenderer efr=Get.Render.ER();
-	SlowdownHelper optimizer=new SlowdownHelper(20),optimizer2=new SlowdownHelper(4), optimizer3=new SlowdownHelper(3);
+	SlowdownUtil optimizer=new SlowdownUtil(20),optimizer2=new SlowdownUtil(4), optimizer3=new SlowdownUtil(3);
 	
 	public int XZr=15,Yr=4,mode=0;
 	public boolean isInMultiblockStructureBFCHelper=false,IsControlledByOSC=false,active,first=true,onOf=false;
@@ -105,7 +102,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		}
 		
 		
-		PowerHelper.sortSides(this);
+		PowerUtil.sortSides(this);
 	}
 	@Override
 	public void updateConnections(){
@@ -121,19 +118,19 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		
 		if(canGeneratePower(3)||isforced){
 			if(optimizer2.isTimeWithAddProgress()){
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
-				Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+p*5.5, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,5,100,new Vec3M(0,0,0)));
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
+				Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+p*5.5, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,5,100,new Vec3M(0,0,0)));
 			}else{
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
-				Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
+				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
 			}
-			if(Helper.RB())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+p*6+(Helper.RF()*p*4), pos.getY()+p*11-Helper.RF()*p*5, pos.getZ()+p*6+(Helper.RF()*p*4), Helper.CRandF(0.005), -0.01, Helper.CRandF(0.005), 300, 2, -1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
-			else Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+0.35+(Helper.RF()*0.35), pos.getY()+Helper.RF()*p*5, pos.getZ()+0.35+(Helper.RF()*0.35), Helper.CRandF(0.005), 0.01, Helper.CRandF(0.005), 300, 2, 1, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 0.7),20);
+			if(Util.RB())Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+p*6+(Util.RF()*p*4), pos.getY()+p*11-Util.RF()*p*5, pos.getZ()+p*6+(Util.RF()*p*4), Util.CRandF(0.005), -0.01, Util.CRandF(0.005), 300, 2, -1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 0.7),20);
+			else Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+0.35+(Util.RF()*0.35), pos.getY()+Util.RF()*p*5, pos.getZ()+0.35+(Util.RF()*0.35), Util.CRandF(0.005), 0.01, Util.CRandF(0.005), 300, 2, 1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 0.7),20);
 		}
 		
 		
@@ -144,9 +141,9 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		int i=getEnergy();
 		handleStandardPowerTransmission(true);
 		if(i!=getEnergy())if(worldObj.isRemote&&optimizer3.progress==0){
-			EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
-			if(Helper.RInt(3)==0)Helper.spawnEntityFX(particle);
-			else Helper.spawnEntityFX(particle,20);
+			EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1);
+			if(Util.RInt(3)==0)Util.spawnEntityFX(particle);
+			else Util.spawnEntityFX(particle,20);
 		}
 		
 		if(isInMultiblockStructureBFCHelper==true){
@@ -169,10 +166,10 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		TileEntity aa=worldObj.getTileEntity(pos.add(0,1,0));
 		if(aa instanceof TileEntityFirePipe){
 			TileEntityFirePipe pipe= (TileEntityFirePipe)aa;
-			if(PowerHelper.tryToDrainFromTo(this, pipe, PowerHelper.getHowMuchToSendFromToForDrain(this, pipe),EnumFacing.UP.getIndex()))if(worldObj.isRemote&&optimizer3.progress==0){
-				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1);
-				if(Helper.RInt(3)==0)Helper.spawnEntityFX(particle);
-				else Helper.spawnEntityFX(particle,20);
+			if(PowerUtil.tryToDrainFromTo(this, pipe, PowerUtil.getHowMuchToSendFromToForDrain(this, pipe),EnumFacing.UP.getIndex()))if(worldObj.isRemote&&optimizer3.progress==0){
+				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1);
+				if(Util.RInt(3)==0)Util.spawnEntityFX(particle);
+				else Util.spawnEntityFX(particle,20);
 			}
 		}
 	}

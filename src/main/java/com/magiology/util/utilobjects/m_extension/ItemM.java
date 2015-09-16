@@ -9,8 +9,8 @@ import net.minecraft.item.Item;
 import com.magiology.core.Fixes1_8;
 import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class ItemM extends Item{
 		
@@ -30,9 +30,9 @@ public class ItemM extends Item{
 //					Get.Render.RI().getItemModelMesher().register(item, 0, modelsInit.get(item));
 					Fixes1_8.injectStandardJsonModel(item, 0, modelsInit.get(item));
 				} catch (Exception e){
-					Helper.printInln("failed!",item,Get.Render.RI());
+					Util.printInln("failed!",item,Get.Render.RI());
 					e.printStackTrace();
-					H.exit(404);
+					U.exit(404);
 				}
 			}
 			modelsInit.clear();

@@ -11,14 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
-import com.magiology.forgepowered.packets.TileRedstone;
+import com.magiology.forgepowered.packets.packets.TileRedstone;
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.gui.container.ControlBockContainer;
 import com.magiology.gui.guiutil.gui.buttons.CustomButton;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
 
 public class GuiControlBock extends GuiContainer implements Updateable{
 	
@@ -46,7 +46,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		case 1:text1="Ignore";break;
 		case 2:text1="Turn ON";break;
 		}
-		int colorGray=Helper.colorToCode(Color.GRAY);
+		int colorGray=Util.colorToCode(Color.GRAY);
 		int first=-1,second=-1;
 		if(tileCB.redstoneC==0)second=colorGray;
 		if(tileCB.redstoneC==1)first=colorGray;
@@ -77,7 +77,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		if(CustomButton!=null){
 			CustomButton.update(guiLeft+40, guiTop+40);
 		}
-		TessHelper.bindTexture(main);
+		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.9F);
 		GL11.glTranslated(0, 0, 1);
@@ -87,15 +87,15 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		this.drawTexturedModalRect(guiLeft+11, guiTop+10, 206, 51, 19, 10);
 		this.drawTexturedModalRect(guiLeft+11, guiTop+24, 206, 51, 19, 10);
 		}
-		GL11H.SetUpOpaqueRendering(2);
+		GL11U.SetUpOpaqueRendering(2);
 		drawSmartShit(true);
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		
 		dot1.render(guiLeft+9-6, guiTop+8-6);
 		dot2.render(guiLeft+9-6, guiTop+22-6);
 		dot3.render(guiLeft+11-6,guiTop+35-6);
 
-		TessHelper.bindTexture(EnergyBar);
+		TessUtil.bindTexture(EnergyBar);
 		double scale=((float)(tileCB.tank)/(float)(tileCB.maxT))*100.0;
 		if(scale>1)scale=1;
 		
@@ -108,7 +108,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	}
 	
 	public void drawSmartShit(boolean type){
-		double angle=Helper.calculateRenderPos(tileCB.prevAngle,tileCB.angle);
+		double angle=Util.calculateRenderPos(tileCB.prevAngle,tileCB.angle);
 		switch (tileCB.redstoneC){
 		case 0:{
 			this.drawTexturedModalRect(guiLeft+12, guiTop+35, 176, 21, 16, 16);
@@ -137,7 +137,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		GL11.glRotated(-angle, 0, 0, 1);
 		GL11.glTranslated(-20.5, -4.5, 0);
 		GL11.glTranslated(-(guiLeft+31), -(guiTop+18), 0);
-		double thingyPos=Helper.calculateRenderPos(tileCB.prevThingyPos, tileCB.thingyPos);
+		double thingyPos=Util.calculateRenderPos(tileCB.prevThingyPos, tileCB.thingyPos);
 		{
 			GL11.glTranslated(guiLeft+83, guiTop+79, 0);
 			GL11.glTranslated(-thingyPos*5, 0, 0);
@@ -174,9 +174,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 			 tileCB.redstoneC++;
 			 if(tileCB.redstoneC>2)tileCB.redstoneC=0;
 			 if(CustomButton!=null){
-				 CustomButton.rGoal=Helper.RD();
-				 CustomButton.gGoal=Helper.RD();
-				 CustomButton.bGoal=Helper.RD();
+				 CustomButton.rGoal=Util.RD();
+				 CustomButton.gGoal=Util.RD();
+				 CustomButton.bGoal=Util.RD();
 			 }
 			 if(dot1!=null){
 				 dot1.glow+=20;
@@ -192,7 +192,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		 }break;
 		 
 		 }
-		 Helper.sendMessage(new TileRedstone(tileCB));
+		 Util.sendMessage(new TileRedstone(tileCB));
 		 tileCB.getWorld().markBlockForUpdate(tileCB.getPos());
 		 
 	 }
@@ -204,9 +204,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 			dot2=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+22-6, 214-6, 67-6, 16, 16,1.5);
 			dot3=new DrawThatSexyDotHelper(guiLeft+11-6,guiTop+35-6, 214-6, 67-6, 16, 16, 1.5);
 		}
-		dotS1+=Helper.CRandD(5);
-		dotS2+=Helper.CRandD(5);
-		dotS3+=Helper.CRandD(5);
+		dotS1+=Util.CRandD(5);
+		dotS2+=Util.CRandD(5);
+		dotS3+=Util.CRandD(5);
 		dotS1*=0.99;
 		dotS2*=0.99;
 		dotS3*=0.99;
@@ -221,12 +221,12 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	 protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 0.00390625F;
 	     float f1 = 0.00390625F;
-	     WorldRenderer renderer = TessHelper.getWR();
+	     WorldRenderer renderer = TessUtil.getWR();
 	     renderer.startDrawingQuads();
 	     renderer.addVertexWithUV(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
 	     renderer.addVertexWithUV(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
 	     renderer.addVertexWithUV(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
 	     renderer.addVertexWithUV(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
-	     TessHelper.draw();
+	     TessUtil.draw();
 	}
 }

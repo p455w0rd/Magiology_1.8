@@ -15,28 +15,28 @@ public class DataStalker{
 	
 	public static void printResources(){
 		if(!huntedFunctions.isEmpty()){
-			Helper.println("Captured functions:");
-			for(Method fun:huntedFunctions)Helper.printInln("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
-		}else Helper.println("No functions has been captured. Yet...");
-		Helper.println(" ");
+			Util.println("Captured functions:");
+			for(Method fun:huntedFunctions)Util.printInln("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
+		}else Util.println("No functions has been captured. Yet...");
+		Util.println(" ");
 		if(!huntedVariables.isEmpty()){
-			Helper.println("Captured variables:");
-			for(Field fun:huntedVariables)Helper.printInln("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
-		}else Helper.println("No variables has been captured. Yet...");
-		Helper.println("--------------------------");
+			Util.println("Captured variables:");
+			for(Field fun:huntedVariables)Util.printInln("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
+		}else Util.println("No variables has been captured. Yet...");
+		Util.println("--------------------------");
 	}
 	public static void callAShakedowForAClass(Class clazz){
-		Helper.println("Warning! DataStalker has called a shakedow for a class!");
+		Util.println("Warning! DataStalker has called a shakedow for a class!");
 		colecterMode=true;
 		huntVariable(clazz, "SomerandomName");
 		huntFunction(clazz, "SomerandomName");
 		colecterMode=false;
-		Helper.println("Info: DataStalker has finished a shakedow for a class!");
+		Util.println("Info: DataStalker has finished a shakedow for a class!");
 	}
 	
 	public static<T> T getVariable(Class clazz,String name,Object objectForExtractingData){
 		Field field=getVariable(clazz, name);
-		if(Helper.isNull(field==null,objectForExtractingData))return null;
+		if(Util.isNull(field==null,objectForExtractingData))return null;
 		T result=null;
 		try{result=(T)field.get(objectForExtractingData);
 		}catch(Exception e){e.printStackTrace();}
@@ -45,13 +45,13 @@ public class DataStalker{
 	public static Field getVariable(Class clazz,String name){
 		for(Field a:huntedVariables)if(a.getName().equals(name))return a;
 		Field hunted=huntVariable(clazz, name);
-		if(hunted!=null)Helper.println("Info: Variable with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
+		if(hunted!=null)Util.println("Info: Variable with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
 		return hunted;
 	}
 	public static Method getFunction(Class clazz,String name){
 		for(Method a:huntedFunctions)if(a.getName().equals(name))return a;
 		Method hunted=huntFunction(clazz, name);
-		if(hunted!=null)Helper.println("Info: Function with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
+		if(hunted!=null)Util.println("Info: Function with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
 		return hunted;
 	}
 	

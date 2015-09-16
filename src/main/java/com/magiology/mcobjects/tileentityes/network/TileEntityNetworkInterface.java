@@ -16,15 +16,15 @@ import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.NetworkHelper;
-import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements IUpdatePlayerListBox{
 	
-	SlowdownHelper optimizer=new SlowdownHelper(40);
+	SlowdownUtil optimizer=new SlowdownUtil(40);
 	private float[] conBox=new float[5];
 	
 	public TileEntityNetworkInterface(){
@@ -49,7 +49,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	public void updateConnections(){
 		UpdateablePipeHandeler.setConnections(connections, this);
 		for(int i=0;i<connections.length;i++){
-			int side=SideHelper.getOppositeSide(getOrientation());
+			int side=SideUtil.getOppositeSide(getOrientation());
 			if(connections[i]==null&&i==side)connections[i]=EnumFacing.UP;
 			setAccessibleOnSide(i, i!=side);
 		}
@@ -60,7 +60,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	public void setColisionBoxes(){
 		if(!hasWorldObj())return;
 		int side=getOrientation();
-		Block block=H.getBlock(worldObj, SideHelper.offsetNew(SideHelper.getOppositeSide(getOrientation()), pos));
+		Block block=U.getBlock(worldObj, SideUtil.offsetNew(SideUtil.getOppositeSide(getOrientation()), pos));
 		
 		float minX,minY,minZ,maxX,maxY,maxZ;
 		minX=(float)block.getBlockBoundsMinX();minY=(float)block.getBlockBoundsMinY();
@@ -177,7 +177,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	}
 	@Override
 	public <T extends TileEntity>boolean getExtraClassCheck(Class<T> clazz, T tile,Object[] array,int side){
-		return NetworkHelper.canConnect(this, (ISidedNetworkComponent)tile);
+		return NetworkUtil.canConnect(this, (ISidedNetworkComponent)tile);
 	}
 
 	@Override
@@ -188,27 +188,27 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	
 	@Override
 	public void onNetworkActionInvoked(String action, int dataSize, Object... data){
-		if(H.isRemote(this))return;
+		if(U.isRemote(this))return;
 		if(getInterfaceProvider()!=null)return;
-		int side=SideHelper.convert(getOrientation());
-		BlockPos pos1=SideHelper.offsetNew(side, pos);
+		int side=SideUtil.convert(getOrientation());
+		BlockPos pos1=SideUtil.offsetNew(side, pos);
 		try{
 			String[] actionWords=action.split(" ");
 			int acitonSize=actionWords.length;
 			if(acitonSize>1){
 				if(actionWords[0].equals("block")){
 					if(actionWords[1].equals("place")){
-						if(acitonSize>2&&H.isInteger(actionWords[2])){
+						if(acitonSize>2&&U.isInteger(actionWords[2])){
 							Block block=Block.getBlockById(Integer.parseInt(actionWords[2]));
 							int meta=0;
-							if(acitonSize>4&&H.isInteger(actionWords[3]))meta=Integer.parseInt(actionWords[3]);
-							Helper.setBlock(worldObj, pos1, block, meta);
+							if(acitonSize>4&&U.isInteger(actionWords[3]))meta=Integer.parseInt(actionWords[3]);
+							Util.setBlock(worldObj, pos1, block, meta);
 						} 
 					}
 					else if(actionWords[1].equals("destroy")){
-						H.getBlockMetadata(worldObj, pos1);
-						Block block=H.getBlock(worldObj, pos1);
-						if(H.isRemote(this)){
+						U.getBlockMetadata(worldObj, pos1);
+						Block block=U.getBlock(worldObj, pos1);
+						if(U.isRemote(this)){
 //							Get.Render.ER().addBlockDestroyEffects(pos, block, 0);
 						}else{
 							block.dropBlockAsItem(worldObj, pos1, worldObj.getBlockState(pos1), 1);
@@ -224,20 +224,20 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 				}
 				else if(actionWords[0].equals("redstone")){
 					if(actionWords[1].equals("set")){
-						if(acitonSize>2&&H.isBoolean(actionWords[2])){
+						if(acitonSize>2&&U.isBoolean(actionWords[2])){
 							
 							int strenght=15;
 							boolean isStrong=Boolean.parseBoolean(actionWords[2]);
 							long delay=-1;
 							RedstoneData redstoneData=new RedstoneData();
-							if(acitonSize>4&&H.isInteger(actionWords[4])){
+							if(acitonSize>4&&U.isInteger(actionWords[4])){
 								delay=Integer.parseInt(actionWords[4]);
 							}
 							if(delay<0)redstoneData.prepareForNetwork(worldObj);
 							else redstoneData.prepareForNetwork(worldObj,delay);
 							
 							
-							if(acitonSize>3&&H.isInteger(actionWords[3])){
+							if(acitonSize>3&&U.isInteger(actionWords[3])){
 								strenght=Integer.parseInt(actionWords[3]);
 							}
 							redstoneData.on=true;
@@ -246,7 +246,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 							
 							setInteractData("redstone", redstoneData);
 							worldObj.notifyBlockOfStateChange(pos, blockType);
-							if(H.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos1, H.getBlock(worldObj, pos1));
+							if(U.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos1, U.getBlock(worldObj, pos1));
 						}
 					}
 				}

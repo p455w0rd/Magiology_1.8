@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 
 public class ItemRendererFirePipe implements IItemRenderer {
 	
@@ -18,7 +18,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	private final float tWC=1F/4F;
 	private final float tHC=1F/40F;
 	
-	NormalizedVertixBuffer buf=TessHelper.getNVB();
+	NormalizedVertixBuffer buf=TessUtil.getNVB();
 	
 	public ItemRendererFirePipe(){}
 	
@@ -85,7 +85,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	}
 	
 	public void drawCore(){
-		TessHelper.bindTexture(Textures.firePipeCore);
+		TessUtil.bindTexture(Textures.firePipeCore);
 		buf.addVertexWithUV(p*6, p*10, p*6, tWC*4, tHC*4);
 		buf.addVertexWithUV(p*6, p*6,  p*6, tWC*4, tHC*0);
 		buf.addVertexWithUV(p*6, p*6,  p*10,tWC*0, tHC*0);
@@ -120,7 +120,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	
 	public void drawConector(EnumFacing dir){
 		GL11.glPushMatrix();
-		TessHelper.bindTexture(Textures.FirePipeConection);
+		TessUtil.bindTexture(Textures.FirePipeConection);
 		
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		if(dir.equals(EnumFacing.WEST)){}
@@ -175,7 +175,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 		buf.addVertexWithUV(p*0, p*7, p*9, tW*24.5, tH*16);
 		buf.draw();
 		
-		TessHelper.bindTexture(Textures.FirePipeConectionEnd);
+		TessUtil.bindTexture(Textures.FirePipeConectionEnd);
 		
 		buf.addVertexWithUV(p*0, p*9.5, p*9.5, 1, 1);
 		buf.addVertexWithUV(p*0, p*9.5, p*6.5, 1, 0);

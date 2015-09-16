@@ -14,8 +14,8 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.render.itemrender.ItemRendererTheHand;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class TheHandHandeler{
 	static float p=1F/16F;
@@ -92,7 +92,7 @@ public class TheHandHandeler{
 	public static HandComonPositions nextPosition(EntityPlayer player){
 		if(!isActive(player))return null;
 		HandComonPositions[] values=HandComonPositions.values();
-		int now=Helper.getPosInArray(TheHandHandeler.getActivePosition(player), values);
+		int now=Util.getPosInArray(TheHandHandeler.getActivePosition(player), values);
 		now++;
 		if(now==values.length)now=0;
 		if(values[now]==HandComonPositions.ErrorPos)now++;
@@ -108,7 +108,7 @@ public class TheHandHandeler{
 	
 	
 	public static void update(EntityPlayer player){
-		if(Helper.isNull(Helper.getTheWorld()))return;
+		if(Util.isNull(Util.getTheWorld()))return;
 		if(!isActive(player))return;
 		HandComonPositions pos=getActivePosition(player);
 		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
@@ -123,16 +123,16 @@ public class TheHandHandeler{
 				else event.activate(player.worldObj.getTotalWorldTime());
 			}
 		}
-		if(Helper.isRemote(player)&&isActive(player))animate(player,data);
+		if(Util.isRemote(player)&&isActive(player))animate(player,data);
 	}
 	@SideOnly(Side.CLIENT)
 	public static void animate(EntityPlayer player, PowerHandData data){
-		if(!Helper.isRemote(player))return;
+		if(!Util.isRemote(player))return;
 		if(renderer.base==null||renderer.fingers==null)renderer.init();
 		HandComonPositions pos=getActivePosition(player);
 		data.prevHandRotationCalc=data.handRotationCalc.clone();
 		
-		long wTime=Helper.getTheWorld().getTotalWorldTime();
+		long wTime=Util.getTheWorld().getTotalWorldTime();
 		if(wTime%5==0)generateNewNoiseValue();
 		
 		//updates the bobbing of the 3.camPos render
@@ -150,14 +150,14 @@ public class TheHandHandeler{
 				float[][] rotations1=pos.thumbRotations;
 				for(int a11=0;a11<2;a11++)for(int a12=0;a12<3;a12++){
 					a1.xyzPosRot[a11][3+a12]+=a1.xyzPosRotSpeed[a11][3+a12];
-					a1.xyzPosRot[a11][3+a12]=(float)Helper.slowlyEqalize(a1.xyzPosRot[a11][3+a12], rotations1[a11][a12], 2);
+					a1.xyzPosRot[a11][3+a12]=(float)Util.slowlyEqalize(a1.xyzPosRot[a11][3+a12], rotations1[a11][a12], 2);
 					a1.xyzPosRotSpeed[a11][3+a12]*=0.8;
 				}
-				a1.xyzPosRotNoise[1][4]=(float)Helper.slowlyEqalize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
-				a1.xyzPosRotNoise[0][4]=(float)Helper.slowlyEqalize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
-				a1.xyzPosRot[0][4]=Helper.keepValueInBounds(a1.xyzPosRot[0][4], -4, 65);
-				a1.xyzPosRot[1][4]=Helper.keepValueInBounds(a1.xyzPosRot[1][4], -80, 2);
-				a1.xyzPosRot[0][3]=Helper.keepValueInBounds(a1.xyzPosRot[0][3], -45, 5);
+				a1.xyzPosRotNoise[1][4]=(float)Util.slowlyEqalize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
+				a1.xyzPosRotNoise[0][4]=(float)Util.slowlyEqalize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
+				a1.xyzPosRot[0][4]=Util.keepValueInBounds(a1.xyzPosRot[0][4], -4, 65);
+				a1.xyzPosRot[1][4]=Util.keepValueInBounds(a1.xyzPosRot[1][4], -80, 2);
+				a1.xyzPosRot[0][3]=Util.keepValueInBounds(a1.xyzPosRot[0][3], -45, 5);
 			}else{
 				//for every box in the finger
 				for(int b=0;b<a1.xyzPosRot.length;b++){
@@ -165,13 +165,13 @@ public class TheHandHandeler{
 					for(int a11=0;a11<3;a11++){
 						a1.xyzPosRot[b][3+a11]+=a1.xyzPosRotSpeed[b][3+a11];
 						a1.xyzPosRotSpeed[b][3+a11]*=0.8;
-						a1.xyzPosRot[b][3+a11]=(float)Helper.slowlyEqalize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
+						a1.xyzPosRot[b][3+a11]=(float)Util.slowlyEqalize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
 					}
-					a1.xyzPosRotNoise[b][3]=(float)Helper.slowlyEqalize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
-					a1.xyzPosRot[b][3]=Helper.keepValueInBounds(a1.xyzPosRot[b][3], -90, 5);
+					a1.xyzPosRotNoise[b][3]=(float)Util.slowlyEqalize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
+					a1.xyzPosRot[b][3]=Util.keepValueInBounds(a1.xyzPosRot[b][3], -90, 5);
 				}
 			}
-			a1.calcXyzPosRot=Helper.addToDoubleFloatArray(a1.xyzPosRot,a1.xyzPosRotNoise);
+			a1.calcXyzPosRot=Util.addToDoubleFloatArray(a1.xyzPosRot,a1.xyzPosRotNoise);
 		}
 		//updates noise of hand
 		for(int g=0;g<2;g++)for(int h=0;h<data.noiserHandSpeed.length;h++){
@@ -185,7 +185,7 @@ public class TheHandHandeler{
 		for(int g=0;g<10;g++)for(int h=0;h<data.handRotation.length;h++){
 			float speed=Math.abs(pos.handRotations[h]-getLastActivePosition(player).handRotations[h]);
 			if(speed<=0)speed=1;
-			data.handRotation[h]=(float)Helper.slowlyEqalize(data.handRotation[h],pos.handRotations[h], (0.05*(Helper.RF()*0.5+0.5)*speed/8));
+			data.handRotation[h]=(float)Util.slowlyEqalize(data.handRotation[h],pos.handRotations[h], (0.05*(Util.RF()*0.5+0.5)*speed/8));
 		}
 		//makes the holding animation
 		if(player.isUsingItem()){
@@ -193,20 +193,20 @@ public class TheHandHandeler{
 			for(int finger=0;finger<renderer.fingers.length;finger++){
 				PowerHandData_sub_fingerData a1=data.fingerData[finger];
 				if(finger==0){
-					for(int a11=0;a11<2;a11++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[a11][4])<0.8)a1.xyzPosRotSpeed[a11][4]-=1.3+Helper.RF()*2;
+					for(int a11=0;a11<2;a11++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[a11][4])<0.8)a1.xyzPosRotSpeed[a11][4]-=1.3+Util.RF()*2;
 				}else{
-					for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[b][3])<0.8)a1.xyzPosRotSpeed[b][3]-=1.3+Helper.RF()*2;
+					for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[b][3])<0.8)a1.xyzPosRotSpeed[b][3]-=1.3+Util.RF()*2;
 				}
 			}
 		}
-		data.handRotationCalc=Helper.addToFloatArray(data.handRotation,data.handRotationSpeed);
+		data.handRotationCalc=Util.addToFloatArray(data.handRotation,data.handRotationSpeed);
 		//updates speed of the noise
 		for(int a1=0;a1<noiser.length;a1++)for(int a2=0;a2<noiser[a1].length;a2++)for(int a3=0;a3<noiser[a1][a2].length;a3++)
-			noiserSpeed[a1][a2][a3]=(float)Helper.slowlyEqalize(noiserSpeed[a1][a2][a3], noiser[a1][a2][a3], 0.05);
+			noiserSpeed[a1][a2][a3]=(float)Util.slowlyEqalize(noiserSpeed[a1][a2][a3], noiser[a1][a2][a3], 0.05);
 	}
 	@SideOnly(Side.CLIENT)
 	public static void handUseAnimation(EntityPlayer player){
-		if(!Helper.isRemote(player))return;
+		if(!Util.isRemote(player))return;
 		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
 		if(data==null)return;
 		RenderLoopEvents.disabledEquippItemAnimationTime=2;
@@ -218,15 +218,15 @@ public class TheHandHandeler{
 			}else for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[b][3])<0.8)a1.xyzPosRotSpeed[b][3]=-4;
 		}
 		if(bol1){
-			if(Math.abs(data.handRotationSpeed[5])<3)addANewEvent(player,H.getMC().theWorld.getTotalWorldTime()+2,"noiserHandSpeed",-0.05F,true,5);
-			if(Math.abs(data.noiserHandSpeed[5])<1)addANewEvent(player,H.getMC().theWorld.getTotalWorldTime()+9,"noiserHandSpeed",0.05F,true,5);
+			if(Math.abs(data.handRotationSpeed[5])<3)addANewEvent(player,U.getMC().theWorld.getTotalWorldTime()+2,"noiserHandSpeed",-0.05F,true,5);
+			if(Math.abs(data.noiserHandSpeed[5])<1)addANewEvent(player,U.getMC().theWorld.getTotalWorldTime()+9,"noiserHandSpeed",0.05F,true,5);
 		}
 	}
 	@SideOnly(Side.CLIENT)
 	public static void actionAnimation(EntityPlayer player){
-		if(!Helper.isRemote(player))return;
+		if(!Util.isRemote(player))return;
 		handUseAnimation(player);
-		long tim=Helper.getTheWorld().getTotalWorldTime();
+		long tim=Util.getTheWorld().getTotalWorldTime();
 
 		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
 		if(data==null)return;
@@ -246,23 +246,23 @@ public class TheHandHandeler{
 			for(int finger=0;finger<renderer.fingers.length-1;finger++){
 				addANewEvent(player,tim+6,
 						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
-						BufferedEventVariableEnum.X_ROTATION, 6.4F*(Helper.RF()*0.3F+0.7F), true);
+						BufferedEventVariableEnum.X_ROTATION, 6.4F*(Util.RF()*0.3F+0.7F), true);
 				addANewEvent(player,tim+8,
 						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
-						BufferedEventVariableEnum.X_ROTATION, 6F  *(Helper.RF()*0.3F+0.7F), true);
+						BufferedEventVariableEnum.X_ROTATION, 6F  *(Util.RF()*0.3F+0.7F), true);
 				addANewEvent(player,tim,
 						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
-						BufferedEventVariableEnum.X_ROTATION, -1  *(Helper.RF()*0.3F+0.7F), true);
+						BufferedEventVariableEnum.X_ROTATION, -1  *(Util.RF()*0.3F+0.7F), true);
 			}
 			addANewEvent(player,tim+6,
 					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
-					BufferedEventVariableEnum.Y_ROTATION, 4.4F*(Helper.RF()*0.3F+0.7F), true);
+					BufferedEventVariableEnum.Y_ROTATION, 4.4F*(Util.RF()*0.3F+0.7F), true);
 			addANewEvent(player,tim+8,
 					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
-					BufferedEventVariableEnum.Y_ROTATION, 4F  *(Helper.RF()*0.3F+0.7F), true);
+					BufferedEventVariableEnum.Y_ROTATION, 4F  *(Util.RF()*0.3F+0.7F), true);
 			addANewEvent(player,tim,
 					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
-					BufferedEventVariableEnum.Y_ROTATION, -1  *(Helper.RF()*0.3F+0.7F), true);
+					BufferedEventVariableEnum.Y_ROTATION, -1  *(Util.RF()*0.3F+0.7F), true);
 		}
 	}
 	@SideOnly(Side.CLIENT)
@@ -330,25 +330,25 @@ public class TheHandHandeler{
 	public static void customEventHandeler(EntityPlayer player,BufferedEvent event){
 		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
 		if(data==null)return;
-		if(event.time>H.getMC().theWorld.getTotalWorldTime()||event.isActivated)return;
+		if(event.time>U.getMC().theWorld.getTotalWorldTime()||event.isActivated)return;
 		event.isActivated=true;
 		try{
 			String name=event.string;
 			float action=Float.parseFloat(event.objects[0].toString());
-			boolean isAdding=event.objects.length>1?Helper.isBoolean(event.objects[1].toString())?Boolean.parseBoolean(event.objects[1].toString()):false:false;
+			boolean isAdding=event.objects.length>1?Util.isBoolean(event.objects[1].toString())?Boolean.parseBoolean(event.objects[1].toString()):false:false;
 			if(name.equals("noiserHandSpeed")){
 				if(isAdding)data.noiserHandSpeed[Integer.parseInt(event.objects[2].toString())]+=action;
 				else        data.noiserHandSpeed[Integer.parseInt(event.objects[2].toString())] =action;
 			}else if(name.equals("spawnProjectile")){
 				int timeHeld=(Integer)event.objects[0];
 				EntityBallOfEnergy entity=new EntityBallOfEnergy(player.worldObj, player, 2F+timeHeld/300F,timeHeld);
-				Helper.spawnEntity(entity);
+				Util.spawnEntity(entity);
 				entity.motionX+=player.motionX*0.8;
 				entity.motionY+=player.motionY*0.8;
 				entity.motionZ+=player.motionZ*0.8;
 			}else if(name.equals("spawnEntitySubatomicWorldDeconstructor")){
 				EntitySubatomicWorldDeconstructor entity=new EntitySubatomicWorldDeconstructor(player.worldObj, player, 1);
-				Helper.spawnEntity(entity);
+				Util.spawnEntity(entity);
 				entity.motionX+=player.motionX*0.8;
 				entity.motionY+=player.motionY*0.8;
 				entity.motionZ+=player.motionZ*0.8;
@@ -398,7 +398,7 @@ public class TheHandHandeler{
 		else events.add(event);
 	}
 	public static boolean isActive(EntityPlayer player){
-		if(!Helper.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))return false;
+		if(!Util.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))return false;
 		return player.getCurrentEquippedItem().hasTagCompound();
 	}
 	@SideOnly(Side.CLIENT)
@@ -406,7 +406,7 @@ public class TheHandHandeler{
 		for(int a1=0;a1<noiser.length;a1++){
 			for(int a2=0;a2<noiser[a1].length;a2++){
 				for(int a3=0;a3<noiser[a1][a2].length;a3++){
-					if(Helper.RInt(4)==0)noiser[a1][a2][a3]=Helper.CRandF(8);
+					if(Util.RInt(4)==0)noiser[a1][a2][a3]=Util.CRandF(8);
 				}
 			}
 		}

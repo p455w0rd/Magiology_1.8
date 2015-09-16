@@ -12,13 +12,13 @@ import net.minecraft.world.World;
 
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.TheHandHandeler.HandComonPositions;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.NBTUtil;
 
 public class TheHand extends Item{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-	    H.createNBT(itemStack);
+	    NBTUtil.createNBT(itemStack);
 	}
 	
 	@Override
@@ -84,7 +84,7 @@ public class TheHand extends Item{
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5){
-		H.createNBT(itemstack);
+		NBTUtil.createNBT(itemstack);
 		if(entity instanceof EntityPlayer){
 //			((EntityPlayer)entity).setItemInUse(itemstack, 100);
 		}

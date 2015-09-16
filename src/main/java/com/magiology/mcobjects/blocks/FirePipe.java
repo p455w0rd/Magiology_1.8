@@ -17,7 +17,7 @@ import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class FirePipe extends BlockContainerMultiColision{
@@ -56,7 +56,7 @@ public class FirePipe extends BlockContainerMultiColision{
     		
     		
     		if(player!=null){
-	    		if(Helper.isItemInStack(MItems.FireHammer, player.getHeldItem())){
+	    		if(Util.isItemInStack(MItems.FireHammer, player.getHeldItem())){
 	    			return1=true;
     				TileEntity tile2 = null;
     	    		MultiColisionProviderRayTracer.getPointedId(tile1);

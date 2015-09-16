@@ -1,7 +1,0 @@
-package com.magiology.util.utilobjects;
-
-import net.minecraft.util.BlockPos;
-
-public class BlockPosM extends BlockPos {
-
-}

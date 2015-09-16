@@ -7,8 +7,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
 import com.magiology.api.connection.IConnectionProvider;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
 
 public interface UpdateableTile extends IConnectionProvider{
 	public void updateConnections();
@@ -35,18 +35,18 @@ public interface UpdateableTile extends IConnectionProvider{
 		public static<T extends TileEntity&UpdateableTile,arrayType> void setConnections(arrayType[] array,arrayType trueValue,arrayType falseValue,T tile){
 			List<Class> excluded=new ArrayList<Class>(),included=new ArrayList<Class>();
 			tile.getValidTileEntitys(included, excluded);
-			TileEntity[] tiles=SideHelper.getTilesOnSides(tile);
+			TileEntity[] tiles=SideUtil.getTilesOnSides(tile);
 			for(int i=0;i<6;i++){
 				if(tiles[i]!=null){
 					TileEntity possibleConector=tiles[i];
 					boolean pass=false;
 					
 					for(int j=0;j<excluded.size();j++){
-						if(Helper.Instanceof(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
+						if(Util.Instanceof(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
 						if(pass)j=excluded.size();
 					}
 					for(int j=0;j<included.size();j++){
-						if(Helper.Instanceof(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
+						if(Util.Instanceof(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
 						if(pass)j=included.size();
 					}
 					if(pass)array[i]=trueValue;

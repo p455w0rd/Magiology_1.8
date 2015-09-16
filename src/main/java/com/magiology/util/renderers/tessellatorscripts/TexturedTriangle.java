@@ -5,14 +5,14 @@ import net.minecraft.client.renderer.WorldRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class TexturedTriangle{
     public PositionTextureVertex[] vertexPositions;
     public int nVertices;
     private boolean invertNormal;
-    private static WorldRenderer renderer=TessHelper.getWR();
+    private static WorldRenderer renderer=TessUtil.getWR();
 
     public TexturedTriangle(PositionTextureVertex[] PTV){
     	if(PTV.length!=3)return;
@@ -36,6 +36,6 @@ public class TexturedTriangle{
             PositionTextureVertex PTV=vertexPositions[i];
             renderer.addVertexWithUV(((float)PTV.vector3D.xCoord), ((float)PTV.vector3D.yCoord), ((float)PTV.vector3D.zCoord), PTV.texturePositionX, PTV.texturePositionY);
         }
-        TessHelper.draw();
+        TessUtil.draw();
     }
 }

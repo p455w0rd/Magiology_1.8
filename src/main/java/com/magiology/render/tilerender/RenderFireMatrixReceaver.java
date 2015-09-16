@@ -9,11 +9,11 @@ import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.TwoDotsLineRender;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
@@ -38,7 +38,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		}
 		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
-		float rotation=Helper.calculateRenderPos(tile.prevRotation,tile.rotation);
+		float rotation=Util.calculateRenderPos(tile.prevRotation,tile.rotation);
 		GL11.glPushMatrix();
 		GL11.glTranslated(posX,posY,posZ);
 		GL11.glEnable(GL11.GL_CULL_FACE);
@@ -48,7 +48,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11H.SetUpOpaqueRendering(1);
+		GL11U.SetUpOpaqueRendering(1);
 		GL11.glColor4d(1, 0.01, 0.01, 0.2);
 		
 		GL11.glPushMatrix();
@@ -56,43 +56,43 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		GL11.glRotated(rotation, 0, 1, 0);
 		GL11.glRotated(rotation+20, 0, 0, 1);
 		
-		float noise=PowerHelper.getPowerPrecentage(tile)/50.0F;
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		float noise=PowerUtil.getPowerPrecentage(tile)/50.0F;
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		
 		GL11.glRotated(rotation+90, 0, -2, 0);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(-rotation-90, 0, -2, 0);
 		
 		GL11.glRotated(rotation+72, 1, 1, 0);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(-rotation-72, 1, 1, 0);
 		
 		GL11.glRotated(rotation+64, 0, 1, 1);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(-rotation-64, 0, 1, 1);
 		
 		GL11.glRotated(rotation+170, 1, 0, 1);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(-rotation-170, 1, 0, 1);
 		
 
 		GL11.glRotated(-rotation-231, 1, 1, 0);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(rotation+231, 1, 1, 0);
 		
 		GL11.glRotated(-rotation-267, 0, 1, 1);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(rotation+267, 0, 1, 1);
 		
 		GL11.glRotated(-rotation-192, 1, 0, 1);
-		this.drawCube(p*-0.75+Helper.CRandF(noise), p*-1.25+Helper.CRandF(noise), p*-0.75+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise), p*0.25+Helper.CRandF(noise), p*0.75+Helper.CRandF(noise));
+		this.drawCube(p*-0.75+Util.CRandF(noise), p*-1.25+Util.CRandF(noise), p*-0.75+Util.CRandF(noise), p*0.75+Util.CRandF(noise), p*0.25+Util.CRandF(noise), p*0.75+Util.CRandF(noise));
 		GL11.glRotated(rotation+192, 1, 0, 1);
 		
 		GL11.glPopMatrix();
 		
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		
 		this.drawCube(0.25, 0.25, 0.25, 0.75, 0.75, 0.75);
 		

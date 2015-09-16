@@ -1,12 +1,6 @@
 package com.magiology.mcobjects.items.upgrades.skeleton;
 
-import static com.magiology.util.utilclasses.FontEffectHelper.AQUA;
-import static com.magiology.util.utilclasses.FontEffectHelper.BOLD;
-import static com.magiology.util.utilclasses.FontEffectHelper.GREEN;
-import static com.magiology.util.utilclasses.FontEffectHelper.RED;
-import static com.magiology.util.utilclasses.FontEffectHelper.RESET;
-import static com.magiology.util.utilclasses.FontEffectHelper.UNDERLINE;
-import static com.magiology.util.utilclasses.FontEffectHelper.YELLOW;
+import static com.magiology.util.utilclasses.FontEffectUtil.*;
 
 import java.util.List;
 
@@ -22,8 +16,8 @@ import net.minecraft.world.World;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilobjects.NBTUtil;
 
 public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	public static String slotNBT="someSlot";
@@ -37,7 +31,7 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-		H.createNBT(itemStack);
+		NBTUtil.createNBT(itemStack);
 	}
 	
 	@Override
@@ -55,7 +49,7 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity entity, int par4, boolean par5){
-		H.createNBT(itemStack);
+		NBTUtil.createNBT(itemStack);
 	}
 	
 	@Override
@@ -73,12 +67,12 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 		if(!itemStack.hasTagCompound())return null;
 		ItemStack[] result=new ItemStack[getInventorySize()];
 		NBTTagCompound nbt=itemStack.getTagCompound();
-		result=Helper.loadItemsFromNBT(nbt, slotNBT, result);
+		result=Util.loadItemsFromNBT(nbt, slotNBT, result);
 		return result;
 	}
 	@Override
 	public void setStacks(ItemStack itemStack,ItemStack[] itemStacks){
-		Helper.saveItemsToNBT(itemStack.getTagCompound(), slotNBT, itemStacks);
+		Util.saveItemsToNBT(itemStack.getTagCompound(), slotNBT, itemStacks);
 	}
 	@Override
 	public int getInventorySize(){

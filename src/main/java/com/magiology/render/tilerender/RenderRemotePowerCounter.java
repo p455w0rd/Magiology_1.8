@@ -12,10 +12,10 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
 public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
@@ -28,13 +28,13 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 	int maxPB,currentP;
 	float p=1F/16F;
 	NormalizedVertixBuffer buf=Render.NVB();
-	FontRenderer fr=Helper.getFontRenderer();
+	FontRenderer fr=Util.getFontRenderer();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentit, double x1, double y1, double z1, float f) {
 		TileEntityRemotePowerCounter tileentity=(TileEntityRemotePowerCounter)tileentit;
 		world=tileentity.getWorld();
-		metadata=H.getBlockMetadata(tileentity.getWorld(), tileentity.getPos());
+		metadata=U.getBlockMetadata(tileentity.getWorld(), tileentity.getPos());
 		
 		float x=0,y=0,z=0,xr=0,yr=0,zr=0;
 		switch (metadata){
@@ -66,7 +66,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 			
 		}
 		
-		block=H.getBlock(world,tileentity.getPos());
+		block=U.getBlock(world,tileentity.getPos());
 		
 		
 		powerBar=tileentity.powerBar;
@@ -133,7 +133,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 
 	public void drawCore(int x, int y, int z){
 			
-			TessHelper.bindTexture(Textures.PowerCounterEnergyBar);
+			TessUtil.bindTexture(Textures.PowerCounterEnergyBar);
 			double var1=powerBar;
 			double var2=p*5+p*4*var1;
 			double var3=1-var1;
@@ -151,7 +151,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 				double maxx=p*10;double maxy=p*10;double maxz=p*14;
 				
 
-				TessHelper.bindTexture(Textures.vanillaBrick);
+				TessUtil.bindTexture(Textures.vanillaBrick);
 				
 				
 				{

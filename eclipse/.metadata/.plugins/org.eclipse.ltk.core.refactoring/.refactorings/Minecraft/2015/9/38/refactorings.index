@@ -1,0 +1,18 @@
+1442325891899	Rename type 'FontEffectHelper'
+1442325905647	Rename type 'Helper'
+1442325920750	Delete element
+1442325955319	Rename type 'NetworkHelper'
+1442325959710	Rename type 'PowerHelper'
+1442325963712	Rename type 'SideHelper'
+1442325970895	Rename type 'SpecialPlayerHelper'
+1442325981938	Rename type 'CricleHelper'
+1442325991018	Rename type 'TessHelper'
+1442326008343	Rename type 'SlowdownHelper'
+1442328661335	Move member 'createNBT'
+1442328976296	Rename method 'hasTag'
+1442347008697	Rename type 'H'
+1442347028994	Rename type 'GL11H'
+1442408901025	Rename local variable 'smth'
+1442418094327	Rename method 'getDataOutput'
+1442418484289	Rename package 'com.magiology.mcobjects.tileentityes.network.interfaces'
+1442418695322	Move compilation unit

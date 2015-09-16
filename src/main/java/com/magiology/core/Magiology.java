@@ -1,10 +1,6 @@
 package com.magiology.core;
 
-import static com.magiology.core.MReference.INFO_FILE_NAME;
-import static com.magiology.core.MReference.MODID;
-import static com.magiology.core.MReference.MODS_SUBFOLDER_WIN_GUI;
-import static com.magiology.core.MReference.NAME;
-import static com.magiology.core.MReference.VERSION;
+import static com.magiology.core.MReference.*;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -39,11 +35,11 @@ import com.magiology.handelers.GuiHandelerM;
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.render.Textures;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 
-@Mod(modid=MODID,version=VERSION,name=NAME)
+@Mod(modid=MODID,version=VERSION,name=NAME,acceptedMinecraftVersions=ACCEPTED_MC_VERSION)
 public class Magiology{
     public static SimpleNetworkWrapper NETWORK_CHANNEL;
     public static final EnhancedRobot ROBOT;
@@ -55,7 +51,7 @@ public class Magiology{
     static{
     	EnhancedRobot robotH=null;
     	try{robotH=new EnhancedRobot();}catch(Exception e){
-    		throw new NullPointerException((Helper.RB(0.1)?"CRAP! :(":"")+" "+"Magiology"+" has encountered with a problem while trying to initialize the input robot! This might be the result of incompatible hardware or java version.");
+    		throw new NullPointerException((Util.RB(0.1)?"CRAP! :(":"")+" "+"Magiology"+" has encountered with a problem while trying to initialize the input robot! This might be the result of incompatible hardware or java version.");
 		}
     	ROBOT=robotH;
     }
@@ -71,6 +67,42 @@ public class Magiology{
     public boolean modWindowOpen(){return modInfGUI!=null&&!modInfGUI.isExited;}
     
     public void loadFiles(){
+    	
+//    	CalculationFormat format=CalculationFormat.format("%f-%f[]+%l[]+%i");
+//    	
+//		format.calc(5F,new float[]{1.7F,1.7F,1.7F},new long[]{1,2,3},1);
+//    	
+//    	long calcTime1=0,calcTime2=0;
+//    	
+//    	for(int i=0;i<1000000;i++){
+//    		{
+//    			long start=System.nanoTime();
+//    			
+//    			format.calc(5F,new float[]{1.7F,1.7F,1.7F},new long[]{1,2,3},1);
+//    			
+//    			calcTime1+=System.nanoTime()-start;
+//    		}{
+//    			long start=System.nanoTime();
+//    			
+//    			float[] a=new float[]{1.7F,1.7F,1.7F};
+//    			long[] b=new long[]{1,2,3};
+//    			for(int j=0;j<a.length;j++){
+//    				a[j]-=5;
+//    			}
+//    			for(int j=0;j<a.length;j++){
+//    				a[j]+=b[j];
+//    			}
+//    			for(int j=0;j<a.length;j++){
+//    				a[j]+=1;
+//    			}
+//    			
+//    			calcTime2+=System.nanoTime()-start;
+//    		}
+//    	}
+//    	Helper.printInln(calcTime1,calcTime2,(double)calcTime1/(double)calcTime2);
+//    	Helper.printInln(275F/50F);
+//    	H.exit(404);
+    	
     	new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
     	if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandeler.downladAssets();
 		infoFile.readFromFile();
@@ -85,14 +117,6 @@ public class Magiology{
 		VersionChecker.init();
 		//TODO
 		Config.setShadersEnabled(false);
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
-			@Override
-			public void run(){
-				exit();
-			}
-		}, "Shutdown-thread"));
-		
 		
 		MCreativeTabs.preInit();
 		MGui.preInit();
@@ -126,7 +150,30 @@ public class Magiology{
     
     //You can't see this!
     public Magiology(){instance=this;}
-    @EventHandler public void preInitStarter(FMLPreInitializationEvent event){loadFiles();Init.Message(-1);preInit(event);Init.Message(1);}
-    @EventHandler public void initStarter(FMLInitializationEvent event){Init.Message(-2);init(event);Init.Message(2);}
-    @EventHandler public void postInitStarter(FMLPostInitializationEvent event){Init.Message(-3);postInit(event);Init.Message(3);Init.Message(4);}
+    @EventHandler
+    public void preInitStarter(FMLPreInitializationEvent event){
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+			@Override
+			public void run(){
+				exit();
+			}
+		}));
+    	loadFiles();
+    	Init.Message(-1);
+    	preInit(event);
+    	Init.Message(1);
+    }
+    @EventHandler
+    public void initStarter(FMLInitializationEvent event){
+    	Init.Message(-2);
+    	init(event);
+    	Init.Message(2);
+    }
+    @EventHandler
+    public void postInitStarter(FMLPostInitializationEvent event){
+    	Init.Message(-3);
+    	postInit(event);
+    	Init.Message(3);
+    	Init.Message(4);
+    }
 }

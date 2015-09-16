@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public interface MultiColisionProvider{
@@ -43,7 +43,7 @@ public interface MultiColisionProvider{
 		public static int getRayTracedBoxId(World world, BlockPos pos, Vec3M startVec, Vec3M endVec,AxisAlignedBB resetBoundsOptional){
 			TileEntity tester=world.getTileEntity(pos);
 			if(!(tester instanceof MultiColisionProvider)){
-				Helper.println("There is no instance of ISidedColisionProvider at"+"("+pos.toString()+")!",Helper.getStackTrace());
+				Util.println("There is no instance of ISidedColisionProvider at"+"("+pos.toString()+")!",Util.getStackTrace());
 				return -1;
 			}
 	    	results=new MovingObjectPosition[0];
@@ -51,12 +51,12 @@ public interface MultiColisionProvider{
 	    	isRayTracing=true;
 			//start
 			MultiColisionProvider tile=(MultiColisionProvider)tester;
-			Block block=Helper.getBlock(world, pos);
+			Block block=Util.getBlock(world, pos);
 			
 	    	AxisAlignedBB[] aciveBoxes=tile.getActiveBoxes();
 	    	if(aciveBoxes==null||aciveBoxes.length==0){
 	    		//fail switch
-				Helper.println("ISidedColisionProviderRayTracer could not resolve a valid box!",Helper.getStackTrace());
+				Util.println("ISidedColisionProviderRayTracer could not resolve a valid box!",Util.getStackTrace());
 				isRayTracing=false;
 				return -1;
 	    	}
@@ -94,8 +94,8 @@ public interface MultiColisionProvider{
 		    try{
 		    	tile.setPointedBox(selectedBoxes[id]);
 			}catch(Exception e){
-				Helper.printInln("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
-				Helper.printInln("selectedBoxes size",selectedBoxes.length,"results size",results.length);
+				Util.printInln("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
+				Util.printInln("selectedBoxes size",selectedBoxes.length,"results size",results.length);
 				e.printStackTrace();
 			}
 		    isRayTracing=false;
@@ -107,7 +107,7 @@ public interface MultiColisionProvider{
 				AxisAlignedBB[] boxes=provider.getBoxes();
 				for(int i=0;i<boxes.length;i++){
 					AxisAlignedBB box2=provider.getBoxes()[i];
-					if(Helper.AxisAlignedBBEqual(box1, box2)){
+					if(Util.AxisAlignedBBEqual(box1, box2)){
 						return i;
 					}
 				}

@@ -11,12 +11,12 @@ import com.magiology.render.Textures;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.render.aftereffect.RenderFirePipeGlow;
 import com.magiology.render.aftereffect.RenderFirePipePriorityCube;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.NormalizedVertixBufferModel;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
 public class RenderFirePipe extends TileEntitySpecialRendererM {
@@ -29,12 +29,12 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	private final float tHFSL=1F/38F;
 	private final float tWS=1F/16F;
 	private final float tHS=1F/32F;
-	NormalizedVertixBuffer buf=TessHelper.getNVB();
+	NormalizedVertixBuffer buf=TessUtil.getNVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
-		GL11H.protect();
+		GL11U.protect();
 		TileEntityFirePipe pipe= (TileEntityFirePipe) tileentity;
-		if(Helper.isItemInStack(MItems.FireHammer, Helper.getThePlayer().getCurrentEquippedItem())){
+		if(Util.isItemInStack(MItems.FireHammer, Util.getThePlayer().getCurrentEquippedItem())){
 			if(pipe.hasPriorityUpg){
 				boolean var1=true;
 				for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){
@@ -85,7 +85,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 			}
 		}
 		Render.WR().setTranslation(0,0,0);
-		GL11H.endProtection();
+		GL11U.endProtection();
 	}
 	
 	

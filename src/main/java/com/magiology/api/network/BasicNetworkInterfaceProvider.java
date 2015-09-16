@@ -5,5 +5,5 @@ import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.util.utilobjects.DoubleObject;
 
 public interface BasicNetworkInterfaceProvider{
-	public DoubleObject<DataOutput,Object> getDataOutput(DataOutputDesc desc);
+	public DoubleObject<DataOutput,Object> getData(DataOutputDesc desc);
 }

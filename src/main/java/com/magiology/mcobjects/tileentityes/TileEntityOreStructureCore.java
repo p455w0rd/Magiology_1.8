@@ -16,11 +16,11 @@ import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -28,11 +28,11 @@ import com.magiology.util.utilobjects.vectors.Vec3M;
 public class TileEntityOreStructureCore extends TileEntityPow{
 
 	Structure mainMultiBlock,diamondAddon,bedrockAddon,beaconAddon,pipeStructure[]=new Structure[3];
-	SlowdownHelper optimizer=new SlowdownHelper(30),optimizer2=new SlowdownHelper(20),optimizer3=new SlowdownHelper(10);
+	SlowdownUtil optimizer=new SlowdownUtil(30),optimizer2=new SlowdownUtil(20),optimizer3=new SlowdownUtil(10);
 	public int go=0,set=0,yes=10,no=6,processing=0,level=-1;
 	public boolean firstTime,validOreInPlace,updateStructureHelper;
 	public boolean[] structureUpg=new boolean[4];
-	BlockPos[] poses=Helper.BlockPosArray(new int[]{3,-3, 3,-3,-3,-2,-3,-2,3,2,3,2},new int[]{3, 3, 3, 3, 4, 4, 4, 4,4,4,4,4},new int[]{3, 3,-3,-3,-2,-3,2,3,-2,-3,2,3});
+	BlockPos[] poses=Util.BlockPosArray(new int[]{3,-3, 3,-3,-3,-2,-3,-2,3,2,3,2},new int[]{3, 3, 3, 3, 4, 4, 4, 4,4,4,4,4},new int[]{3, 3,-3,-3,-2,-3,2,3,-2,-3,2,3});
 	Block[] block={
 			Blocks.iron_ore,Blocks.tnt, MBlocks.IronLevel2, MBlocks.IronLevel3, MBlocks.IronLevel4, MBlocks.IronLevel5, MBlocks.SuperDuperIron,
 			Blocks.gold_ore, MBlocks.GoldLevel2, MBlocks.GoldLevel3, MBlocks.GoldLevel4, MBlocks.GoldLevel5, MBlocks.SuperDuperGold,
@@ -49,8 +49,8 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		diamondAddon=Structures.generateNewStructure(3);
 		bedrockAddon=Structures.generateNewStructure(4);
 		beaconAddon=Structures.generateNewStructure(5);
-		setReceaveOnSide(SideHelper.UP(), true);
-		setReceaveOnSide(SideHelper.DOWN(), true);
+		setReceaveOnSide(SideUtil.UP(), true);
+		setReceaveOnSide(SideUtil.DOWN(), true);
 		initUpgrades(Container.Machine);
 	}
 	
@@ -117,11 +117,11 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 				if(optimizer.isTimeWithAddProgress()){
 				//------------------------------
 					if(updateStructureHelper==true){
-						if(worldObj.isAirBlock(pos.add(3, 1, 0)))Helper.setBlock(worldObj, pos.add(3, 1, 0), MBlocks.FireGun);
-						if(worldObj.isAirBlock(pos.add(-3, 1,0)))Helper.setBlock(worldObj, pos.add(-3,1, 0), MBlocks.FireGun);
-						if(worldObj.isAirBlock(pos.add(0, 1, 3)))Helper.setBlock(worldObj, pos.add(0, 1, 3), MBlocks.FireGun);
-						if(worldObj.isAirBlock(pos.add(0, 1,-3)))Helper.setBlock(worldObj, pos.add(0, 1,-3), MBlocks.FireGun);
-						if(worldObj.isAirBlock(pos.add(0, 4, 0)))Helper.setBlock(worldObj, pos.add(0, 4, 0), MBlocks.FireExhaust);
+						if(worldObj.isAirBlock(pos.add(3, 1, 0)))Util.setBlock(worldObj, pos.add(3, 1, 0), MBlocks.FireGun);
+						if(worldObj.isAirBlock(pos.add(-3, 1,0)))Util.setBlock(worldObj, pos.add(-3,1, 0), MBlocks.FireGun);
+						if(worldObj.isAirBlock(pos.add(0, 1, 3)))Util.setBlock(worldObj, pos.add(0, 1, 3), MBlocks.FireGun);
+						if(worldObj.isAirBlock(pos.add(0, 1,-3)))Util.setBlock(worldObj, pos.add(0, 1,-3), MBlocks.FireGun);
+						if(worldObj.isAirBlock(pos.add(0, 4, 0)))Util.setBlock(worldObj, pos.add(0, 4, 0), MBlocks.FireExhaust);
 					}
 					this.updateStructure();
 				}
@@ -129,7 +129,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 				//___________________________________________________________________________________
 				
 			}
-			PowerHelper.sortSides(this);
+			PowerUtil.sortSides(this);
 		
 	}
 	
@@ -170,7 +170,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		if(go==6){
 	        if(mainMultiBlock.isStructureCompleate()){
 				set=yes;
-				H.setMetadata(worldObj, pos, 1);
+				U.setMetadata(worldObj, pos, 1);
 				updateStructureHelper=true;
 				findLevelOfStructure();
 
@@ -187,7 +187,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			}
 			else{
 				set=no;
-				Helper.setMetadata(worldObj,pos, 2);
+				Util.setMetadata(worldObj,pos, 2);
 				worldObj.createExplosion((Entity)null, pos.getX()+0.5, pos.getY()+2, pos.getZ()+0.5, 1, false);
 				updateStructureHelper=false;
 			}
@@ -197,7 +197,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		if(pipeStructure[0]==null)return;
 		structureUpg[0]=false;
 		
-		if(pipeStructure[0].isStructureCompleate()&&Helper.booleanToInt(pipeStructure[1].isStructureCompleate())+Helper.booleanToInt(pipeStructure[2].isStructureCompleate())==1){
+		if(pipeStructure[0].isStructureCompleate()&&Util.booleanToInt(pipeStructure[1].isStructureCompleate())+Util.booleanToInt(pipeStructure[2].isStructureCompleate())==1){
 			structureUpg[0]=true;
 			
 		}
@@ -206,10 +206,10 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	}
 
 	public void checkForValidOre(){
-		if(Helper.isNull(block,worldObj))return;
+		if(Util.isNull(block,worldObj))return;
 		boolean ok=false;
 		for(int a=0;a<block.length;a++){
-			if(block[a]==H.getBlock(worldObj,pos.add(0,1,0))){
+			if(block[a]==U.getBlock(worldObj,pos.add(0,1,0))){
 				a=block.length;
 				ok=true;
 			}
@@ -227,10 +227,10 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			if(processing==20){
 				if(worldObj.isRemote){
 //					Get.Render.ER().addBlockDestroyEffects(pos.add(0,1,0), H.getBlock(worldObj,pos.add(0,1,0)), 0);
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5,  0, 0.06, 0,600,99,0.1,true,2,"tx3", 0, 0, 1, 1, 0.99));
-					Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+100, pos.getZ()+0.5, 0.5F, 4F, 1, 4, 130, new Vec3M(0, -2F, 0)));
+					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.5, pos.getZ()+0.5,  0, 0.06, 0,600,99,0.1,true,2,"tx3", 0, 0, 1, 1, 0.99));
+					Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+100, pos.getZ()+0.5, 0.5F, 4F, 1, 4, 130, new Vec3M(0, -2F, 0)));
 				}
-				else H.setBlock(worldObj,pos.add(0,1,0), Blocks.air);
+				else U.setBlock(worldObj,pos.add(0,1,0), Blocks.air);
 				processing=0;
 			}
 		}
@@ -239,143 +239,143 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	
 	public void processingParticels(){
 		if(worldObj.getTotalWorldTime()%4!=0){
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  -0.05+0.1*Helper.RF(2), -0.05-0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  -0.05+0.1*Helper.RF(2), -0.05-0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  -0.05+0.1*Helper.RF(2), -0.05-0.1*Helper.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  0, -0.05-0.1*Util.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  0, -0.05-0.1*Util.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  0, -0.05-0.1*Util.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  -0.05+0.1*Util.RF(2), -0.05-0.1*Util.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  -0.05+0.1*Util.RF(2), -0.05-0.1*Util.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  -0.05+0.1*Util.RF(2), -0.05-0.1*Util.RF(2), 0);
 		}
 		else{
-			Helper.spawnEntityFX(new EntityFlameFXM(worldObj, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0));
-			Helper.spawnEntityFX(new EntityFlameFXM(worldObj, pos.getX()+Helper.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Helper.RF(p*7)+p*5,  0, -0.05-0.1*Helper.RF(2), 0));
+			Util.spawnEntityFX(new EntityFlameFXM(worldObj, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  0, -0.05-0.1*Util.RF(2), 0));
+			Util.spawnEntityFX(new EntityFlameFXM(worldObj, pos.getX()+Util.RF(p*7)+p*5, pos.getY()+5-p*12, pos.getZ()+Util.RF(p*7)+p*5,  0, -0.05-0.1*Util.RF(2), 0));
 		}
 
 	}
 	public void processingParticelsForGunz(){
 		for(int k=0; k<10; k++){
-		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+2.55, pos.getY()+1.3, pos.getZ()+0.5, -0.4, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(),250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+2.7, pos.getY()+1.35, pos.getZ()+0.5, -0.05, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF());
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+2.55, pos.getY()+1.3, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,6,50,new Vec3M(-0.05F,0,0)));
+		Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+2.55, pos.getY()+1.3, pos.getZ()+0.5, -0.4, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF(),250,3+Util.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+2.7, pos.getY()+1.35, pos.getZ()+0.5, -0.05, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF());
+		Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+2.55, pos.getY()+1.3, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,6,50,new Vec3M(-0.05F,0,0)));
 		
-		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()-1.7, pos.getY()+1.35, pos.getZ()+0.5, 0.3, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(),250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()-1.7, pos.getY()+1.35, pos.getZ()+0.5, 0.05, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF());
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()-1.7, pos.getY()+1.35, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,6,50, new Vec3M(0.05F,0,0)));
+		Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()-1.7, pos.getY()+1.35, pos.getZ()+0.5, 0.3, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF(),250,3+Util.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()-1.7, pos.getY()+1.35, pos.getZ()+0.5, 0.05, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF());
+		Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()-1.7, pos.getY()+1.35, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,6,50, new Vec3M(0.05F,0,0)));
 		
-		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.35, pos.getZ()+2.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), -0.3,250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()+2.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), -0.05);
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()+2.7, 0.5F/16F, 0.1F,1,6,50, new Vec3M(0,0,-0.05F)));
+		Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.35, pos.getZ()+2.7, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF(), -0.3,250,3+Util.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()+2.7, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF(), -0.05);
+		Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()+2.7, 0.5F/16F, 0.1F,1,6,50, new Vec3M(0,0,-0.05F)));
 		
-		Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.35, pos.getZ()-1.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), 0.3,250,3+Helper.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()-1.7, 0.025-0.05*Helper.RF(), 0.025-0.05*Helper.RF(), 0.05);
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()-1.7, 0.5F/16F, 0.1F,1,6,50,new Vec3M( 0,0, 0.05F)));
+		Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.35, pos.getZ()-1.7, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF(), 0.3,250,3+Util.RInt(2),0.1,1, 1, 0, 0, 0.7, 0.99));
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()-1.7, 0.025-0.05*Util.RF(), 0.025-0.05*Util.RF(), 0.05);
+		Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+1.35, pos.getZ()-1.7, 0.5F/16F, 0.1F,1,6,50,new Vec3M( 0,0, 0.05F)));
 		}
 	}
 	public void processingParticelsEnding(){
 		for(int r=0; r<2;r++){
-		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+1.08, pos.getY()+2, pos.getZ()+Helper.RF(), 0, -0.1*Helper.RF(2), 0);
-		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Helper.RF(), pos.getY()+2, pos.getZ()+1.08, 0, -0.1*Helper.RF(2), 0);
-		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Helper.RF(), pos.getY()+2, pos.getZ()-0.08, 0, -0.1*Helper.RF(2), 0);
-			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()-0.08, pos.getY()+2, pos.getZ()+Helper.RF(), 0, -0.1*Helper.RF(2), 0);
+		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+1.08, pos.getY()+2, pos.getZ()+Util.RF(), 0, -0.1*Util.RF(2), 0);
+		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.RF(), pos.getY()+2, pos.getZ()+1.08, 0, -0.1*Util.RF(2), 0);
+		worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.RF(), pos.getY()+2, pos.getZ()-0.08, 0, -0.1*Util.RF(2), 0);
+			worldObj.spawnParticle(EnumParticleTypes.FLAME, pos.getX()-0.08, pos.getY()+2, pos.getZ()+Util.RF(), 0, -0.1*Util.RF(2), 0);
 		}
-		worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+Helper.RF(), pos.getY()+2, pos.getZ()+Helper.RF(), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+Util.RF(), pos.getY()+2, pos.getZ()+Util.RF(), 0, 0, 0);
 		
-		for(int f=0; f<10;f++)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()-2.5+Helper.RF(5), pos.getY()+1.01, pos.getZ()-2.5+Helper.RF(5), 0, 0.1*Helper.RF(2), 0);
+		for(int f=0; f<10;f++)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()-2.5+Util.RF(5), pos.getY()+1.01, pos.getZ()-2.5+Util.RF(5), 0, 0.1*Util.RF(2), 0);
 		
 	}
 	public void processingParticelsEnding2(){
 		for(int l=0; l<3;l++){
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+1.08,                          pos.getY()+1+Helper.RF(), pos.getZ()+Helper.RF(), 0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+Helper.RF(), pos.getY()+1+Helper.RF(), pos.getZ()+1.08,                          0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+Helper.RF(), pos.getY()+1+Helper.RF(), pos.getZ()-0.08,                          0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()-0.08,                          pos.getY()+1+Helper.RF(), pos.getZ()+Helper.RF(), 0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+Helper.RF(), pos.getY()+2,                               pos.getZ()+Helper.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+1.08,                          pos.getY()+1+Util.RF(), pos.getZ()+Util.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+Util.RF(), pos.getY()+1+Util.RF(), pos.getZ()+1.08,                          0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+Util.RF(), pos.getY()+1+Util.RF(), pos.getZ()-0.08,                          0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()-0.08,                          pos.getY()+1+Util.RF(), pos.getZ()+Util.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+Util.RF(), pos.getY()+2,                               pos.getZ()+Util.RF(), 0, 0, 0);
 		}
 		
-		for(int l=0; l<4;l++)worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-2.5+Helper.RF(5), pos.getY()+1.21, pos.getZ()-2.5+Helper.RF(5), 0, 0.1*Helper.RF(2), 0);
+		for(int l=0; l<4;l++)worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-2.5+Util.RF(5), pos.getY()+1.21, pos.getZ()-2.5+Util.RF(5), 0, 0.1*Util.RF(2), 0);
 	
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+1.58,                          pos.getY()+1+Helper.RF(), pos.getZ()+Helper.RF(2), 0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+Helper.RF(2), pos.getY()+1+Helper.RF(), pos.getZ()+1.58,                          0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+Helper.RF(2), pos.getY()+1+Helper.RF(), pos.getZ()-0.58,                          0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()-0.58,                          pos.getY()+1+Helper.RF(), pos.getZ()+Helper.RF(2), 0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+Helper.RF(2), pos.getY()+2.5,                             pos.getZ()+Helper.RF(2), 0, 0, 0);
-		Helper.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+Helper.RF()*5-2, pos.getY()+1, pos.getZ()+Helper.RF()*5-2, 0.5F/16F, 0.1F,1,4,40, new Vec3M(0,0.03F,0)));
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+1.58,                          pos.getY()+1+Util.RF(), pos.getZ()+Util.RF(2), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+Util.RF(2), pos.getY()+1+Util.RF(), pos.getZ()+1.58,                          0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+Util.RF(2), pos.getY()+1+Util.RF(), pos.getZ()-0.58,                          0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()-0.58,                          pos.getY()+1+Util.RF(), pos.getZ()+Util.RF(2), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+Util.RF(2), pos.getY()+2.5,                             pos.getZ()+Util.RF(2), 0, 0, 0);
+		Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+Util.RF()*5-2, pos.getY()+1, pos.getZ()+Util.RF()*5-2, 0.5F/16F, 0.1F,1,4,40, new Vec3M(0,0.03F,0)));
 	}
 	public void spawnCustomFire(){
 		if(updateStructureHelper==true){
 			if(worldObj.isRemote){
 				if(!structureUpg[0]){
-					if(optimizer3.progress==1+Helper.RInt(1)){
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Helper.RF()*p, pos.getY()+4-p*5, pos.getZ()+3.5+Helper.RF()*p, -0.05, 0.3, -0.05,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Helper.RF()*p, pos.getY()+4-p*5, pos.getZ()+3.5+Helper.RF()*p,  0.05, 0.3, -0.05,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Helper.RF()*p, pos.getY()+4-p*5, pos.getZ()-2.5+Helper.RF()*p, -0.05, 0.3,  0.05,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Helper.RF()*p, pos.getY()+4-p*5, pos.getZ()-2.5+Helper.RF()*p,  0.05, 0.3,  0.05,false,1));
+					if(optimizer3.progress==1+Util.RInt(1)){
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Util.RF()*p, pos.getY()+4-p*5, pos.getZ()+3.5+Util.RF()*p, -0.05, 0.3, -0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Util.RF()*p, pos.getY()+4-p*5, pos.getZ()+3.5+Util.RF()*p,  0.05, 0.3, -0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Util.RF()*p, pos.getY()+4-p*5, pos.getZ()-2.5+Util.RF()*p, -0.05, 0.3,  0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Util.RF()*p, pos.getY()+4-p*5, pos.getZ()-2.5+Util.RF()*p,  0.05, 0.3,  0.05,false,1));
 						
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+2.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()+3.5+Helper.RF()*p, -0.05, 0.2, -0.072,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-1.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()+3.5+Helper.RF()*p,  0.05, 0.2, -0.072,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+2.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()-2.5+Helper.RF()*p, -0.05, 0.2,  0.072,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-1.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()-2.5+Helper.RF()*p,  0.05, 0.2,  0.072,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+2.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()+3.5+Util.RF()*p, -0.05, 0.2, -0.072,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-1.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()+3.5+Util.RF()*p,  0.05, 0.2, -0.072,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+2.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()-2.5+Util.RF()*p, -0.05, 0.2,  0.072,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-1.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()-2.5+Util.RF()*p,  0.05, 0.2,  0.072,false,1));
 						
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()+2.5+Helper.RF()*p, -0.072, 0.2, -0.05,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()+2.5+Helper.RF()*p,  0.072, 0.2, -0.05,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()-1.5+Helper.RF()*p, -0.072, 0.2,  0.05,false,1));
-						if(Helper.RB())Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Helper.RF()*p, pos.getY()+5-p*5, pos.getZ()-1.5+Helper.RF()*p,  0.072, 0.2,  0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()+2.5+Util.RF()*p, -0.072, 0.2, -0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()+2.5+Util.RF()*p,  0.072, 0.2, -0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+3.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()-1.5+Util.RF()*p, -0.072, 0.2,  0.05,false,1));
+						if(Util.RB())Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()-2.5+Util.RF()*p, pos.getY()+5-p*5, pos.getZ()-1.5+Util.RF()*p,  0.072, 0.2,  0.05,false,1));
 					}
 				}
-				else if(optimizer3.progress==1&&Helper.RInt(3)==0)Helper.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+0.5+Helper.RF()*p, pos.getY()+6-p*6, pos.getZ()+0.5+Helper.RF()*p, 0.5-Helper.RF(), 0.2+0.3*Helper.RF(), 0.5-Helper.RF(),true,1));
+				else if(optimizer3.progress==1&&Util.RInt(3)==0)Util.spawnEntityFX(new EntityCustomfireFX(worldObj, pos.getX()+0.5+Util.RF()*p, pos.getY()+6-p*6, pos.getZ()+0.5+Util.RF()*p, 0.5-Util.RF(), 0.2+0.3*Util.RF(), 0.5-Util.RF(),true,1));
 			}
 		}
 	}
 	public void spawnBubles(int number){
 		for(int pm=-1;pm<=1;pm+=2){
 			if(number==1){
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-4*pm, pos.getY()+1.2, pos.getZ()+0.5-2,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-4*pm, pos.getY()+1.2, pos.getZ()+0.5+2,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+2*pm, pos.getY()+1.2, pos.getZ()+0.5-4,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+2*pm, pos.getY()+1.2, pos.getZ()+0.5+4,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-4*pm, pos.getY()+1.2, pos.getZ()+0.5-2,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-4*pm, pos.getY()+1.2, pos.getZ()+0.5+2,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+2*pm, pos.getY()+1.2, pos.getZ()+0.5-4,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+2*pm, pos.getY()+1.2, pos.getZ()+0.5+4,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0, 0.25, 0.8, 0.5, 0.99));
 			}
 			if(number==2){
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-5*pm, pos.getY()+1.2, pos.getZ()+0.5-1,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-5*pm, pos.getY()+1.2, pos.getZ()+0.5+1,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+1*pm, pos.getY()+1.2, pos.getZ()+0.5-5,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+1*pm, pos.getY()+1.2, pos.getZ()+0.5+5,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-5*pm, pos.getY()+1.2, pos.getZ()+0.5-1,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5-5*pm, pos.getY()+1.2, pos.getZ()+0.5+1,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+1*pm, pos.getY()+1.2, pos.getZ()+0.5-5,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+1*pm, pos.getY()+1.2, pos.getZ()+0.5+5,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 0.5, 0, 1, 0.5, 0.99));
 			}
 			if(number==3){
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+5*pm, pos.getY()+1.2, pos.getZ()+0.5,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 1, 0, 0, 0.5, 0.99));
-				Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.2, pos.getZ()+0.5+5*pm,  0, 0, 0,150,3+Helper.RInt(2),1,true,1,"tx1", 1, 0, 0, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5+5*pm, pos.getY()+1.2, pos.getZ()+0.5,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 1, 0, 0, 0.5, 0.99));
+				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,pos.getX()+0.5, pos.getY()+1.2, pos.getZ()+0.5+5*pm,  0, 0, 0,150,3+Util.RInt(2),1,true,1,"tx1", 1, 0, 0, 0.5, 0.99));
 			}
 		}
 	}
 	
 	public void spawnParticleDa(){
 		if(optimizer3.isTimeWithAddProgress()){
-			EntitySmoothBubleFX a=new EntitySmoothBubleFX(worldObj,0.5+-15+Helper.RInt(30)+pos.getX(), 1.5+Helper.RInt(10)+pos.getY(), 0.5+-15+Helper.RInt(30)+pos.getZ(),
-					0.04*(Helper.RB()?1:-1), 0.04*(Helper.RB()?1:-1), 0.04*(Helper.RB()?1:-1),
-					300+Helper.RInt(300),0,0,true,2,"tx1",Helper.RF(),Helper.RF(),Helper.RF(),1, 0.99);
-			Helper.spawnEntityFX(a);
+			EntitySmoothBubleFX a=new EntitySmoothBubleFX(worldObj,0.5+-15+Util.RInt(30)+pos.getX(), 1.5+Util.RInt(10)+pos.getY(), 0.5+-15+Util.RInt(30)+pos.getZ(),
+					0.04*(Util.RB()?1:-1), 0.04*(Util.RB()?1:-1), 0.04*(Util.RB()?1:-1),
+					300+Util.RInt(300),0,0,true,2,"tx1",Util.RF(),Util.RF(),Util.RF(),1, 0.99);
+			Util.spawnEntityFX(a);
 			a.noClip=true;
 		}
 		
 		for (int la = 0; la < 4; ++la){
-			double v0=Helper.CRandD(3);
-			double v2=Helper.CRandD(3);
-			double v1=Helper.CRandD(1);
-	        if(Helper.RB(5))worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18);
-	        else Helper.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18));
+			double v0=Util.CRandD(3);
+			double v2=Util.CRandD(3);
+			double v1=Util.CRandD(1);
+	        if(Util.RB(5))worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18);
+	        else Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18));
 	        }
 		 	if(this.optimizer2.progress==1){
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+Helper.RF(), pos.getY()+1, pos.getZ()-3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+Helper.RF(), pos.getY()+1, pos.getZ()+3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+Helper.RF(), pos.getY()+1, pos.getZ()-3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+Helper.RF(), pos.getY()+1, pos.getZ()+3+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+Helper.RF(), pos.getY()+1, pos.getZ()-7+Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+ 3F + Helper.RF(), pos.getY() + 1, pos.getZ()- 7 + Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+Helper.RF(), pos.getY()+1, pos.getZ()+7 + Helper.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+3+Helper.RF(), pos.getY()+1, pos.getZ()+7+Helper.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+Util.RF(), pos.getY()+1, pos.getZ()-3+Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+Util.RF(), pos.getY()+1, pos.getZ()+3+Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+Util.RF(), pos.getY()+1, pos.getZ()-3+Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+Util.RF(), pos.getY()+1, pos.getZ()+3+Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+Util.RF(), pos.getY()+1, pos.getZ()-7+Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+ 3F + Util.RF(), pos.getY() + 1, pos.getZ()- 7 + Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+Util.RF(), pos.getY()+1, pos.getZ()+7 + Util.RF(), 0, 0, 0);
+	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+3+Util.RF(), pos.getY()+1, pos.getZ()+7+Util.RF(), 0, 0, 0);
 			}
 		}
 	public void spawnParticleNe(){
-		for (int la = 0; la < 1; ++la)worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+Helper.RF(), pos.getY()+1,pos.getZ()+Helper.RF(), 0,0,0);
+		for (int la = 0; la < 1; ++la)worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+Util.RF(), pos.getY()+1,pos.getZ()+Util.RF(), 0,0,0);
 	}
 
 	@Override

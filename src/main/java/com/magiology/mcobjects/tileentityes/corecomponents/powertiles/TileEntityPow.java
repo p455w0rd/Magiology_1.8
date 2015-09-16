@@ -16,11 +16,10 @@ import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.LogHelper;
-import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
 
 public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;
@@ -54,7 +53,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
         currentEnergy = NBTTC.getInteger("energy");
         
         containerItems=new ItemStack[NumberOfContainerSlots];
-        containerItems=Helper.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
+        containerItems=Util.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
     }
     
     @Override
@@ -62,7 +61,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		super.writeToNBT(NBTTC);
     	NBTTC.setInteger("energy", currentEnergy);
     	if(containerItems!=null){
-    		Helper.saveItemsToNBT(NBTTC, "TEMT", containerItems);
+    		Util.saveItemsToNBT(NBTTC, "TEMT", containerItems);
         }
     }
     
@@ -106,7 +105,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
     @Override
 	public boolean isUpgradeInInv(Item item){
     	for(int a=0;a<NumberOfContainerSlots;a++){
-    		if(Helper.isItemInStack(item, containerItems[a]))return true;
+    		if(Util.isItemInStack(item, containerItems[a]))return true;
     	}
     	return false;
     }
@@ -198,18 +197,10 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	}
 	@Override
 	public boolean getAllowedSender(int id){
-		if(id<0||id>6){
-			LogHelper.fatal(id);
-			return false;
-		}
 		return connections[id].getOutEnabled();
 	}
 	@Override
 	public boolean getAllowedReceaver(int id){
-		if(id<0||id>6){
-			LogHelper.fatal(id);
-			return false;
-		}
 		return connections[id].getInEnabled();
 	}
 	@Override
@@ -262,7 +253,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	 */
 	public void handleStandardPowerTransmission(boolean isRepeatable){
 		//Get a random order of sides that are going to be done
-		int[] randSides=SideHelper.randomizeSides();
+		int[] randSides=SideUtil.randomizeSides();
 		
 		//Set the first loop of sending power to a specific side if there is one
 		if(hasPriorityUpg){
@@ -280,7 +271,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		//try to send/receive power from all sides
 		for (int i=0;i<randSides.length;i++){
 			int side=randSides[i];
-			TileEntity ab=worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
+			TileEntity ab=worldObj.getTileEntity(SideUtil.offsetNew(side,pos));
 			//if there is nothing to interact with than skip the process (only for optimization)
 			boolean var1=ab instanceof PowerCore&&ab instanceof ISidedPower;
 			//Is next to a special pipe
@@ -288,7 +279,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 			if(var1&&this instanceof TileEntityFirePipe){
 				//special interaction for pipes that contains Priority upgrade
 				if(hasPriorityUpg){
-					TileEntity a=worldObj.getTileEntity(SideHelper.offsetNew(randSides[0],pos));
+					TileEntity a=worldObj.getTileEntity(SideUtil.offsetNew(randSides[0],pos));
 					TileEntityPow tile=a instanceof TileEntityPow?(TileEntityPow)a:null;
 					if(tile!=null){
 						if(i!=0)var1=false;
@@ -299,7 +290,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 				else{
 					TileEntityFirePipe tile=ab instanceof TileEntityFirePipe?(TileEntityFirePipe)ab:null;
 					if(tile!=null&&tile.hasPriorityUpg){
-						if(SideHelper.offsetNew(tile.FirstSide,tile.pos).equals(pos)){
+						if(SideUtil.offsetNew(tile.FirstSide,tile.pos).equals(pos)){
 							var1=false;
 							var2=true;
 						}
@@ -310,7 +301,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 				if(connections[side].getMain()&&!connections[side].getIn()&&!connections[side].getOut()){
 					doCustomSidedPowerTransfer(side,ab instanceof TileEntityFirePipe?(var2?-1:(hasPriorityUpg&&FirstSide==side?1:-1)):0);
 					if(isRepeatable){
-						TileEntity tile=worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
+						TileEntity tile=worldObj.getTileEntity(SideUtil.offsetNew(side,pos));
 						if(tile instanceof TileEntityFirePipe)((TileEntityFirePipe)tile).power(false);
 					}
 				}else{
@@ -325,8 +316,8 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	 * @param type : send to something is 1 and send out itself is 0
 	 */
 	public void doCustomSidedPowerTransfer(int side,int type){
-		worldObj.getTileEntity(SideHelper.offsetNew(side,pos));
-		TransferEnergyToPosition(SideHelper.offsetNew(side,pos), type,side);
+		worldObj.getTileEntity(SideUtil.offsetNew(side,pos));
+		TransferEnergyToPosition(SideUtil.offsetNew(side,pos), type,side);
 	}
 	/**
 	 * @param x
@@ -340,26 +331,26 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		getEnergy();
 		if(type==-1&&tileEn instanceof TileEntityFirePipe){
 			for(int l=0;l<20;l++){
-				PowerHelper.tryToEquateEnergy(this, tileEn, PowerHelper.getMaxSpeed(tileEn, this),side);
-				PowerHelper.tryToEquateEnergy(this, tileEn, PowerHelper.getMiddleSpeed(tileEn, this),side);
-				PowerHelper.tryToEquateEnergy(this, tileEn, PowerHelper.getMinSpeed(tileEn, this),side);
+				PowerUtil.tryToEquateEnergy(this, tileEn, PowerUtil.getMaxSpeed(tileEn, this),side);
+				PowerUtil.tryToEquateEnergy(this, tileEn, PowerUtil.getMiddleSpeed(tileEn, this),side);
+				PowerUtil.tryToEquateEnergy(this, tileEn, PowerUtil.getMinSpeed(tileEn, this),side);
 			}
 		}
 		else if(tileEn instanceof TileEntityPow){
 			switch(type){
 			case 0:{
-				side=SideHelper.getOppositeSide(side);
+				side=SideUtil.getOppositeSide(side);
 				for(int l=0;l<20;l++){
-					PowerHelper.tryToDrainFromTo(tileEn, this, PowerHelper.getMaxSpeed(tileEn, this),side);
-					PowerHelper.tryToDrainFromTo(tileEn, this, PowerHelper.getMiddleSpeed(tileEn, this),side);
-					PowerHelper.tryToDrainFromTo(tileEn, this, PowerHelper.getMinSpeed(tileEn, this),side);
+					PowerUtil.tryToDrainFromTo(tileEn, this, PowerUtil.getMaxSpeed(tileEn, this),side);
+					PowerUtil.tryToDrainFromTo(tileEn, this, PowerUtil.getMiddleSpeed(tileEn, this),side);
+					PowerUtil.tryToDrainFromTo(tileEn, this, PowerUtil.getMinSpeed(tileEn, this),side);
 				}
 			}break;
 			case 1:{
 				for(int l=0;l<20;l++){
-					PowerHelper.tryToDrainFromTo(this, tileEn, PowerHelper.getMaxSpeed(tileEn, this),side);
-					PowerHelper.tryToDrainFromTo(this, tileEn, PowerHelper.getMiddleSpeed(tileEn, this),side);
-					PowerHelper.tryToDrainFromTo(this, tileEn, PowerHelper.getMinSpeed(tileEn, this),side);
+					PowerUtil.tryToDrainFromTo(this, tileEn, PowerUtil.getMaxSpeed(tileEn, this),side);
+					PowerUtil.tryToDrainFromTo(this, tileEn, PowerUtil.getMiddleSpeed(tileEn, this),side);
+					PowerUtil.tryToDrainFromTo(this, tileEn, PowerUtil.getMinSpeed(tileEn, this),side);
 				}
 			}break;
 			}

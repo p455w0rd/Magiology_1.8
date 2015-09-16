@@ -16,14 +16,14 @@ import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.RedstoneData;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.packets.SavableDataWithKeyPacket;
+import com.magiology.forgepowered.packets.packets.SavableDataWithKeyPacket;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder;
-import com.magiology.mcobjects.tileentityes.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.DoubleObject;
 
 public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkBaseInterface{
@@ -62,7 +62,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	@Override
 	public NetworkInterfaceProvider getInterfaceProvider(){
 		int orientation=(getOrientation());
-		return InterfaceBinder.get(worldObj, SideHelper.offsetNew(orientation, pos));
+		return InterfaceBinder.get(worldObj, SideUtil.offsetNew(orientation, pos));
 	}
 	private List<InteractType> interactTypes=new ArrayList<InteractType>();
 	@Override
@@ -92,14 +92,14 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	}
 	@Override
 	public void onNetworkActionInvoked(String action, Object... data){
-		if(H.isNull(getBrain(),action,data)||action.isEmpty()||data.length==0)return;onNetworkActionInvoked(action, data.length, data);
+		if(U.isNull(getBrain(),action,data)||action.isEmpty()||data.length==0)return;onNetworkActionInvoked(action, data.length, data);
 	}
 	@Override
 	public void setInteractData(String string,Object object){
 		
 		if(object instanceof SavableData){
 			interactData.put(string, object);
-			if(hasWorldObj()&&!H.isRemote(this))Helper.sendMessage(new SavableDataWithKeyPacket(this,string, (SavableData)object));
+			if(hasWorldObj()&&!U.isRemote(this))Util.sendMessage(new SavableDataWithKeyPacket(this,string, (SavableData)object));
 		}else{
 			interactData.put(string, object);
 		}
@@ -108,8 +108,8 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 			if(object instanceof RedstoneData){
 				worldObj.notifyBlockOfStateChange(pos, blockType);
 				int side=getOrientation();
-				BlockPos pos1=SideHelper.offsetNew(side, pos);
-				if(H.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos, H.getBlock(worldObj, pos1));
+				BlockPos pos1=SideUtil.offsetNew(side, pos);
+				if(U.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos, U.getBlock(worldObj, pos1));
 			}
 		}
 	}
@@ -121,7 +121,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	}
 	@Override
 	public void onInterfaceProviderActionInvoked(NetworkInterfaceProvider interfaceProvider, String action, Object... data){
-		if(H.isNull(interfaceProvider,getBrain(),action,data)||action.isEmpty()||data.length==0)return;
+		if(U.isNull(interfaceProvider,getBrain(),action,data)||action.isEmpty()||data.length==0)return;
 		onInterfaceProviderActionInvoked(interfaceProvider, action, data.length, data);
 	}
 	
@@ -137,7 +137,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	@Override
 	public List<TileEntityNetworkPointerContainer> getPointerContainers(){
 		List<TileEntityNetworkPointerContainer> result=new ArrayList<TileEntityNetworkPointerContainer>();
-		TileEntity[] tiles=SideHelper.getTilesOnSides(this);
+		TileEntity[] tiles=SideUtil.getTilesOnSides(this);
 		for(TileEntity a:tiles)if(a instanceof TileEntityNetworkPointerContainer)result.add((TileEntityNetworkPointerContainer)a);
 		return result;
 	}
@@ -148,7 +148,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		List<TileEntityNetworkPointerContainer> containers=getPointerContainers();
 		for(TileEntityNetworkPointerContainer a:containers){
 			for(int b=0;b<a.getSizeInventory();b++){
-				if(Helper.isItemInStack(MItems.NetworkPointer, a.getStackInSlot(b)))result.add(a.getStackInSlot(b));
+				if(Util.isItemInStack(MItems.NetworkPointer, a.getStackInSlot(b)))result.add(a.getStackInSlot(b));
 			}
 		}
 		return result;

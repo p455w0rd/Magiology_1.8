@@ -5,7 +5,7 @@ import java.util.Map;
 
 import net.minecraft.util.EnumFacing;
 
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
 
 //IConnection code holder
 public class Connection implements IConnection{
@@ -30,7 +30,7 @@ public class Connection implements IConnection{
 	@Override
 	public boolean hasOpposite(){
 		IConnection[] mates=getMates();
-		return mates[SideHelper.getOppositeSide(getFaceI())].isActive();
+		return mates[SideUtil.getOppositeSide(getFaceI())].isActive();
 	}
 	@Override
 	public boolean isActive(){

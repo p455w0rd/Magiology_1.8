@@ -1,7 +1,6 @@
 package com.magiology.registry.events;
 
-import static net.minecraftforge.fml.common.eventhandler.Event.Result.DEFAULT;
-import static net.minecraftforge.fml.common.eventhandler.Event.Result.DENY;
+import static net.minecraftforge.fml.common.eventhandler.Event.Result.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;

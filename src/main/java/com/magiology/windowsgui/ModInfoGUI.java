@@ -40,7 +40,7 @@ import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.io.IOReadableMap;
 import com.magiology.io.ZipManager;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public class ModInfoGUI extends JFrame{
 	JTextField item1;
@@ -191,7 +191,7 @@ public class ModInfoGUI extends JFrame{
 					for(int a=1;a<chars.length;a++){
 						stringedNumber+=chars[a];
 					}
-					if(Helper.isInteger(stringedNumber)){
+					if(Util.isInteger(stringedNumber)){
 						isValid=true;
 						int before=commandID;
 						commandID=Integer.parseInt(stringedNumber);
@@ -212,19 +212,19 @@ public class ModInfoGUI extends JFrame{
 	}
 	public void useCommand(String command){
 		if(command.equals("activate MLG mode!")){
-			for(int a=0;a<30;a++)addLine(newLine("nope...",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Helper.RInt(255),Helper.RInt(255),Helper.RInt(255)), true));
-			Helper.throwException(new Exception());
+			for(int a=0;a<30;a++)addLine(newLine("nope...",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Util.RInt(255),Util.RInt(255),Util.RInt(255)), true));
+			Util.exitSoft();
 			return;
 		}
-		addLine(newLine("Command on "+commandID+(command.equals("#autoInvoked")?" automatically":"")+" invoked!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Helper.RInt(255),Helper.RInt(255),Helper.RInt(255)), true));
+		addLine(newLine("Command on "+commandID+(command.equals("#autoInvoked")?" automatically":"")+" invoked!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Util.RInt(255),Util.RInt(255),Util.RInt(255)), true));
 		boolean isInputOk=false;
 		boolean isInputInvoked=false;
 		switch(commandID){
 		case 1:{
 			isInputInvoked=true;
 			int res=-1;
-			if(Helper.isInteger(command))res=Integer.parseInt(command);
-			else if(Helper.isBoolean(command))res=Helper.booleanToInt(Boolean.parseBoolean(command));
+			if(Util.isInteger(command))res=Integer.parseInt(command);
+			else if(Util.isBoolean(command))res=Util.booleanToInt(Boolean.parseBoolean(command));
 			if(res==0){
 				autoRemove=true;
 				isInputOk=true;
@@ -250,7 +250,7 @@ public class ModInfoGUI extends JFrame{
 		}break;
 		case 4:{
 			isInputInvoked=true;
-			if(Helper.isBoolean(command)){
+			if(Util.isBoolean(command)){
 				if(Boolean.parseBoolean(command)){
 					isInputOk=true;
 					autoActivate=true;
@@ -266,7 +266,7 @@ public class ModInfoGUI extends JFrame{
 		}break;
 		case 5:{
 			isInputInvoked=true;
-			if(Helper.isInteger(command)){
+			if(Util.isInteger(command)){
 				isInputOk=true;
 				exitOn=Integer.parseInt(command);
 				isInputOk=true;
@@ -287,8 +287,8 @@ public class ModInfoGUI extends JFrame{
 			
 		}break;
 		}
-		if(!isInputOk&&!isInputInvoked)addLine(newLine("NoSuchCommand exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Helper.RInt(255),Helper.RInt(255),Helper.RInt(255)), true));
-		else if(!isInputOk&&isInputInvoked)addLine(newLine("WrongInput exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Helper.RInt(255),Helper.RInt(255),Helper.RInt(255)), true));
+		if(!isInputOk&&!isInputInvoked)addLine(newLine("NoSuchCommand exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Util.RInt(255),Util.RInt(255),Util.RInt(255)), true));
+		else if(!isInputOk&&isInputInvoked)addLine(newLine("WrongInput exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(Util.RInt(255),Util.RInt(255),Util.RInt(255)), true));
 		item1.setText("");
 		Update();
 	}
@@ -334,7 +334,7 @@ public class ModInfoGUI extends JFrame{
 				setLocation(new Point(left,y));
 			}
 		}
-		else addLine(newLine("THAT IS NOT A VALID SIDE!"+(Helper.RInt(20)==0?"(i think)":""), Color.RED, true));
+		else addLine(newLine("THAT IS NOT A VALID SIDE!"+(Util.RInt(20)==0?"(i think)":""), Color.RED, true));
 		Magiology.infoFile.writeToFile();
 	}
 	public void clearUserInput(){
@@ -352,7 +352,7 @@ public class ModInfoGUI extends JFrame{
 		item1.setText("");
 	}
 	public void SetFontSize(String command){
-		if(Helper.isInteger(command)){
+		if(Util.isInteger(command)){
 			int var1=txtSize;
 			txtSize=Integer.parseInt(command);
 			Magiology.infoFile.set("GUITxtSize", txtSize);
@@ -468,7 +468,7 @@ public class ModInfoGUI extends JFrame{
 					}else if(dropDownID==6){printValues();
 					}else{
 						addLine(newLine(dropDownID+" is an invalid dropbox command!", new Font(Font.SANS_SERIF, Font.BOLD,15), Color.RED, true));
-						Helper.println("what?");
+						Util.println("what?");
 					}
 					Update();
 				}

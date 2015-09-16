@@ -20,14 +20,14 @@ import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.NetworkHelper;
-import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class TileEntityNetworkPointerContainer extends TileEntityNetwork implements ISidedInventory,IUpdatePlayerListBox{
 	
-	private SlowdownHelper optimizer=new SlowdownHelper(40);
+	private SlowdownUtil optimizer=new SlowdownUtil(40);
 	public ItemStack[] slots=new ItemStack[9];
 	
 	public TileEntityNetworkPointerContainer(){}
@@ -35,12 +35,12 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
 		super.writeToNBT(NBT);
-		Helper.saveItemsToNBT(NBT, "inventory", slots);
+		Util.saveItemsToNBT(NBT, "inventory", slots);
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-		slots=Helper.loadItemsFromNBT(NBT, "inventory", slots);
+		slots=Util.loadItemsFromNBT(NBT, "inventory", slots);
 	}
 	
 	@Override
@@ -58,8 +58,8 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	public void updateConnections(){
 		UpdateablePipeHandeler.setConnections(connections, this);
 		
-		int side=SideHelper.convert(getOrientation());
-		side=SideHelper.getOppositeSide(side);
+		int side=SideUtil.convert(getOrientation());
+		side=SideUtil.getOppositeSide(side);
 		for(int i=0;i<6;i++)setAccessibleOnSide(i, i==side);
 		setColisionBoxes();
 	}
@@ -121,7 +121,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	@Override
 	public <T extends TileEntity>boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array, int side){
-		return !(clazz.equals(ISidedNetworkComponent.class))&&NetworkHelper.canConnect(this, (ISidedNetworkComponent)tile);
+		return !(clazz.equals(ISidedNetworkComponent.class))&&NetworkUtil.canConnect(this, (ISidedNetworkComponent)tile);
 	}
 	
 	@Override
@@ -182,7 +182,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player){
-		return Helper.isItemInStack(MItems.NetworkPointer, player.getCurrentEquippedItem());
+		return Util.isItemInStack(MItems.NetworkPointer, player.getCurrentEquippedItem());
 	}
 	@Override
 	public void openInventory(EntityPlayer player){
@@ -194,11 +194,11 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	@Override
 	public boolean isItemValidForSlot(int id, ItemStack stack){
-		return Helper.isItemInStack(MItems.NetworkPointer, stack);
+		return Util.isItemInStack(MItems.NetworkPointer, stack);
 	}
 	public NetworkBaseInterface getBoundedBaseInterface(){
-		int side=SideHelper.convert(getOrientation());
-		TileEntity test=worldObj.getTileEntity(SideHelper.offset(side, pos));
+		int side=SideUtil.convert(getOrientation());
+		TileEntity test=worldObj.getTileEntity(SideUtil.offset(side, pos));
 		if(test instanceof NetworkBaseInterface)return (NetworkBaseInterface)test;
 		return null;
 	}
@@ -230,13 +230,13 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side){
-		if(side.getIndex()==SideHelper.convert(getOrientation()))return new int[]{0,1,2,3,4,5,6,7,8};
+		if(side.getIndex()==SideUtil.convert(getOrientation()))return new int[]{0,1,2,3,4,5,6,7,8};
 		return null;
 	}
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn,EnumFacing side){
-		return side.getIndex()==SideHelper.convert(getOrientation());
+		return side.getIndex()==SideUtil.convert(getOrientation());
 	}
 
 	@Override

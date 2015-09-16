@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
 
 public class SoulFlameHUD extends HUD{
@@ -30,13 +30,13 @@ public class SoulFlameHUD extends HUD{
 		if(data==null)return;
 		maxSoulFlame=data.maxSoulFlame;
 		soulFlame=data.soulFlame;
-		TessHelper.bindTexture(new ResourceLocation(MReference.MODID,"/textures/gui/fp/soulFlame.png"));
-		GL11H.SetUpOpaqueRendering(1);
+		TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/gui/fp/soulFlame.png"));
+		GL11U.SetUpOpaqueRendering(1);
 		GL11.glTranslatef(0, 10, 0);
 		renderSlider();
 		renderMain();
 		renderFire();
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		Render.FR().drawStringWithShadow(" "+soulFlame+"/"+maxSoulFlame, 0, 90, Color.WHITE.hashCode());
 	}
 	private void renderMain(){

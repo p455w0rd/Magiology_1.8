@@ -12,13 +12,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import com.magiology.util.utilclasses.DataStalker;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public abstract class ShaderAspectRenderer{
 	
-	protected Minecraft mc=Helper.getMC();
-	protected World world=Helper.getTheWorld();
-	protected EntityPlayer player=Helper.getThePlayer();
+	protected Minecraft mc=Util.getMC();
+	protected World world=Util.getTheWorld();
+	protected EntityPlayer player=Util.getThePlayer();
 	protected List<ShaderUniform> uniforms=new ArrayList<ShaderUniform>();
 	private final ResourceLocation shaderLocation;
 	private final String[] uniformNames;

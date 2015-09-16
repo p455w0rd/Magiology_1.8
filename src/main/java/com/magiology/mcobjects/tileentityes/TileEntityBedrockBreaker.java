@@ -11,9 +11,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlayerListBox{
@@ -23,7 +23,7 @@ public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlay
 	//RMB=is there a valid block to process?
 	public boolean RMB,IRFA=false;
 	public int IDROW=0;
-	SlowdownHelper optimizer=new SlowdownHelper(10);
+	SlowdownUtil optimizer=new SlowdownUtil(10);
 	int state=0,progres=0;
 
 	@Override
@@ -46,7 +46,7 @@ public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlay
 		
 		}//optimizer end+
 		this.animation();
-		if(IRFA==true)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Helper.RF(), pos.getY()+Helper.RF(), pos.getZ()+Helper.RF(), 0, 0, 0);
+		if(IRFA==true)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Util.RF(), pos.getY()+Util.RF(), pos.getZ()+Util.RF(), 0, 0, 0);
 		
 	}
 	
@@ -90,17 +90,17 @@ public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlay
 	}
 	
 	public void Update(){
-		if(H.getBlock(worldObj, pos.add(0,-1,0))==Blocks.bedrock||H.getBlock(worldObj, pos.add(0,-1,0))==Blocks.obsidian)RMB=true;
+		if(U.getBlock(worldObj, pos.add(0,-1,0))==Blocks.bedrock||U.getBlock(worldObj, pos.add(0,-1,0))==Blocks.obsidian)RMB=true;
 		else RMB=false;
 	}
 	
 	public void action(){
-		double[] a=Helper.cricleXZ(Helper.RInt(360));
-		a[0]*=Helper.RF()/3;
-		a[1]*=Helper.RF()/3;
-		Helper.spawnEntityFX(new EntityFacedFX(worldObj, pos.getX()+0.5+a[0], pos.getY()+0.101, pos.getZ()+0.5+a[1], 0, 0.001, 0, 300, 10, 0, 1, 1, 0.2+Helper.RF()*0.2, 0.2+Helper.RF()*0.2, 0.3));
+		double[] a=Util.cricleXZ(Util.RInt(360));
+		a[0]*=Util.RF()/3;
+		a[1]*=Util.RF()/3;
+		Util.spawnEntityFX(new EntityFacedFX(worldObj, pos.getX()+0.5+a[0], pos.getY()+0.101, pos.getZ()+0.5+a[1], 0, 0.001, 0, 300, 10, 0, 1, 1, 0.2+Util.RF()*0.2, 0.2+Util.RF()*0.2, 0.3));
 		progres++;
-			if(H.getBlock(worldObj, pos.add(0,-1,0))==Blocks.bedrock){
+			if(U.getBlock(worldObj, pos.add(0,-1,0))==Blocks.bedrock){
 				if(progres>=2000)
 				{
 					progres=progres-progres;
@@ -108,7 +108,7 @@ public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlay
 					worldObj.setBlockToAir(pos.add(0,-1,0));
 				}
 			}
-			else if(H.getBlock(worldObj, pos.add(0,-1,0))==Blocks.obsidian){
+			else if(U.getBlock(worldObj, pos.add(0,-1,0))==Blocks.obsidian){
 				if(progres>=100)
 				{
 					progres=0;

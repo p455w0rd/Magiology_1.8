@@ -18,3 +18,4 @@ org.eclipse.jdt.core.compiler.problem.unusedObjectAllocation=ignore
 org.eclipse.jdt.core.compiler.problem.unusedParameter=ignore
 org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=warning
 org.eclipse.jdt.core.compiler.source=1.6
+org.eclipse.jdt.core.timeoutForParameterNameFromAttachedJavadoc=50

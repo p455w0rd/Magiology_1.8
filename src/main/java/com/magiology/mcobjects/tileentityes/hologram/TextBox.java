@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 
 public class TextBox extends RenderObject implements StringContainer{
@@ -21,17 +21,22 @@ public class TextBox extends RenderObject implements StringContainer{
 	}
 	@Override
 	public void render(ColorF color){
-		GL11H.culFace(false);
+		GL11U.color(U.calculateRenderColor(prevColor, this.color));
+		GL11U.culFace(false);
 		checkHighlight();
-		GL11H.scaled(-scale*Helper.p);
-		Helper.getFontRenderer().drawString(txt, 0, 0, this.setColor.toCode());
-		GL11H.culFace(true);
+		GL11U.scaled(-scale*U.p);
+		U.getFontRenderer().drawString(txt, 0, 0, this.setColor.toCode());
+		GL11U.culFace(true);
 	}
 
 	@Override
 	public void update(){
-		size.x=Helper.getFontRenderer().getStringWidth(txt)*scale*Helper.p;
-		size.y=Helper.getFontRenderer().FONT_HEIGHT*scale*Helper.p;
+		prevColor=color.copy();
+		if(isHighlighted||moveMode)color=U.slowlyEqalizeColor(color, new ColorF(1,1,1,0.6).mix(setColor), 0.15F);
+		else color=U.slowlyEqalizeColor(color, setColor, 0.15F);
+		
+		size.x=U.getFontRenderer().getStringWidth(txt)*scale*U.p;
+		size.y=U.getFontRenderer().FONT_HEIGHT*scale*U.p;
 		fixPos();
 	}
 	@Override

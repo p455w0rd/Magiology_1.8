@@ -8,18 +8,18 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.CricleHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRendererBase{
-	private static EntityPlayer player=H.getMC().thePlayer;
+	private static EntityPlayer player=U.getMC().thePlayer;
 	private static final float p= 1F/16F;
 	public TileEntityNetworkPointerContainer tile;
 	public AdvancedPhysicsFloat progress;
@@ -40,25 +40,25 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		if(progress.getPoint()<0.01)return;
 		//setup openGl
 		GL11.glPushMatrix();
-		GL11H.lighting(false);
+		GL11U.lighting(false);
 		//move to block
 		GL11.glTranslated(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5);
 		//move to side
 		
 		Vec3M off=getOffset();
 		
-		GL11H.translate(off);
+		GL11U.translate(off);
 		//set up openGl opaque
-		GL11H.SetUpOpaqueRendering(3);
-		GL11H.scaled(-H.p/4);
+		GL11U.SetUpOpaqueRendering(3);
+		GL11U.scaled(-U.p/4);
 		
 		//calculation of rotation
 		float
 			point=progress.getPoint(),
-			point2=Helper.keepValueInBounds(point, 0, 1),
-			playerX=Helper.calculateRenderPos(player, 'x'),
-			playerY=Helper.calculateRenderPos(player, 'y')+player.getEyeHeight(),
-			playerZ=Helper.calculateRenderPos(player, 'z'),
+			point2=Util.keepValueInBounds(point, 0, 1),
+			playerX=Util.calculateRenderPos(player, 'x'),
+			playerY=Util.calculateRenderPos(player, 'y')+player.getEyeHeight(),
+			playerZ=Util.calculateRenderPos(player, 'z'),
 			txtX=tile.x()+0.5F+off.getX(),
 			txtY=tile.y()+0.5F+off.getY(),
 			txtZ=tile.z()+0.5F+off.getZ(),
@@ -68,53 +68,53 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			camPich=(float)Math.toDegrees(Math.atan2(difY,Math.sqrt(difX*difX+difZ*difZ))),
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90;
 		int time360=(int)((tile.getWorld().getTotalWorldTime()+highlightedBoxId*20)%360);
-		double time=Helper.calculateRenderPos(time360, time360+1);
+		double time=Util.calculateRenderPos(time360, time360+1);
 		
 		//rotation
-		GL11H.rotateXYZ(0                     , -camYaw-80+80*point2,                   0);
-		GL11H.rotateXYZ(camPich+120-120*point2, 0                   , Math.sin(time/20)*2);
-		GL11H.scaled(point2);
+		GL11U.rotateXYZ(0                     , -camYaw-80+80*point2,                   0);
+		GL11U.rotateXYZ(camPich+120-120*point2, 0                   , Math.sin(time/20)*2);
+		GL11U.scaled(point2);
 		//center string
-		GL11.glTranslatef(-Helper.getFontRenderer().getStringWidth(text)/2, -Helper.getFontRenderer().FONT_HEIGHT/2, 0);
+		GL11.glTranslatef(-Util.getFontRenderer().getStringWidth(text)/2, -Util.getFontRenderer().FONT_HEIGHT/2, 0);
 		
-		float r=0.8F,g=Helper.fluctuatorSmooth(20, 0)*0.15F+0.15F,b=0.1F;
+		float r=0.8F,g=Util.fluctuatorSmooth(20, 0)*0.15F+0.15F,b=0.1F;
 		//draw in front
-		Helper.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)).toCode());
+		Util.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)).toCode());
 		//draw behind block
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		Helper.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)*0.3).toCode());
-		NormalizedVertixBuffer buff=TessHelper.getNVB();
+		Util.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)*0.3).toCode());
+		NormalizedVertixBuffer buff=TessUtil.getNVB();
 		float expand=-1;
 		buff.cleanUp();
 		for(int i=0;i<5;i++){
 			buff.addVertexWithUV(-expand, -expand, -0.001, 0, 0);
-			buff.addVertexWithUV(-expand, expand+Helper.getFontRenderer().FONT_HEIGHT, -0.001, 0, 0);
-			buff.addVertexWithUV(expand+Helper.getFontRenderer().getStringWidth(text), expand+Helper.getFontRenderer().FONT_HEIGHT, -0.001, 0, 0);
-			buff.addVertexWithUV(expand+Helper.getFontRenderer().getStringWidth(text), -expand, -0.001, 0, 0);
+			buff.addVertexWithUV(-expand, expand+Util.getFontRenderer().FONT_HEIGHT, -0.001, 0, 0);
+			buff.addVertexWithUV(expand+Util.getFontRenderer().getStringWidth(text), expand+Util.getFontRenderer().FONT_HEIGHT, -0.001, 0, 0);
+			buff.addVertexWithUV(expand+Util.getFontRenderer().getStringWidth(text), -expand, -0.001, 0, 0);
 			expand++;
 		}
 		GL11.glColor4f(0, 0, 0, 0.06F);
-		GL11H.texture(false);
-		GL11H.blendFunc(1);
+		GL11U.texture(false);
+		GL11U.blendFunc(1);
 		buff.disableClearing();
 		buff.setDrawModeToWireFrame();
 		buff.draw();
 		buff.setDrawModeToQuadPlate();
-		GL11.glColor4f(0, 0.4F+H.fluctuatorSmooth(50, 0)*0.6F, 0.6F+H.fluctuatorSmooth(97, 61)*0.4F, 0.01F);
+		GL11.glColor4f(0, 0.4F+U.fluctuatorSmooth(50, 0)*0.6F, 0.6F+U.fluctuatorSmooth(97, 61)*0.4F, 0.01F);
 		buff.draw();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		buff.draw();
 		buff.enableClearing();
-		GL11H.texture(true);
+		GL11U.texture(true);
 		//reset openGl
-		GL11H.EndOpaqueRendering();
-		GL11H.lighting(true);
+		GL11U.EndOpaqueRendering();
+		GL11U.lighting(true);
 		GL11.glPopMatrix();
 	}
 	
 	@Override
 	public void update(){
-		player=Helper.getThePlayer();
+		player=Util.getThePlayer();
 		if(player==null)return;
 		progress.update();
 		if(MultiColisionProviderRayTracer.getPointedId(tile)==highlightedBoxId)progress.wantedPoint=1;
@@ -155,15 +155,15 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			difX=playerX-txtX,
 			difZ=playerZ-txtZ,
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
-			width=Helper.getFontRenderer().getStringWidth(text)*H.p/4;
-		Helper.getFontRenderer();
-		float leftX=(float)CricleHelper.sin(-camYaw+90)*width/2, leftZ=(float)CricleHelper.cos(-camYaw+90)*width/2, rand=Helper.CRandF(2);
+			width=Util.getFontRenderer().getStringWidth(text)*U.p/4;
+		Util.getFontRenderer();
+		float leftX=(float)CricleUtil.sin(-camYaw+90)*width/2, leftZ=(float)CricleUtil.cos(-camYaw+90)*width/2, rand=Util.CRandF(2);
 		
 		
-		float r=0.8F,g=Helper.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;
-		Helper.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
-				tile.x()+0.5+off.x+leftX*rand+Helper.CRandF(0.1), tile.y()+0.5+off.y+Helper.CRandF(0.1), tile.z()+0.5+off.z+leftZ*rand+Helper.CRandF(0.1),
-				Helper.CRandF(0.01), 0.005+Helper.CRandF(0.01), Helper.CRandF(0.01), 200, 5, H.RB()?-0.5:0.1, r,g,b,0.1*point));
+		float r=0.8F,g=Util.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;
+		Util.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
+				tile.x()+0.5+off.x+leftX*rand+Util.CRandF(0.1), tile.y()+0.5+off.y+Util.CRandF(0.1), tile.z()+0.5+off.z+leftZ*rand+Util.CRandF(0.1),
+				Util.CRandF(0.01), 0.005+Util.CRandF(0.01), Util.CRandF(0.01), 200, 5, U.RB()?-0.5:0.1, r,g,b,0.1*point));
 	}
 	private Vec3M getOffset(){
 		float x=0,y=0,z=0;

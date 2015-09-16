@@ -8,18 +8,18 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class EntitySparkFX extends EntityFXM{
 	
 	public List<Fragment> fragments=new ArrayList<Fragment>();
-	public SlowdownHelper slowdown=new SlowdownHelper(2);
+	public SlowdownUtil slowdown=new SlowdownUtil(2);
 	public boolean doesLockOnTheSpot=true;
 	public float fragmentWidth,fragmentSize,xDirection,yDirection,zDirection;
 	public int numberOfSplitsPerUpdate=1,size=20;
@@ -46,7 +46,7 @@ public class EntitySparkFX extends EntityFXM{
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11H.SetUpOpaqueRendering(1);
+		GL11U.SetUpOpaqueRendering(1);
 		float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
@@ -58,7 +58,7 @@ public class EntitySparkFX extends EntityFXM{
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 	}
 	@Override
 	public void onUpdate(){
@@ -73,9 +73,9 @@ public class EntitySparkFX extends EntityFXM{
 				for(int a=0;a<siz;a++){
 					Fragment lastFragment=fragments.get(a);
 					if(!lastFragment.hasNextFragment()){
-						if(Helper.RB(chanse)){
+						if(Util.RB(chanse)){
 							chanse-=0.1;
-							if(lastFragment!=null&&Helper.RB(6)){
+							if(lastFragment!=null&&Util.RB(6)){
 								New(lastFragment);
 								New(lastFragment);
 							}else{
@@ -93,17 +93,17 @@ public class EntitySparkFX extends EntityFXM{
 		if(fragments.size()>=size){
 			for(Fragment a:fragments){
 				a.a.wantedPoint*=0.8;
-				a.a.wantedPoint=Helper.keepValueInBounds(a.a.wantedPoint, 0, 1);
+				a.a.wantedPoint=Util.keepValueInBounds(a.a.wantedPoint, 0, 1);
 			}
 		}
 		if(fragments.size()>size&&slowdown.isTimeWithAddProgress())kill();
 	}
 	private void New(Fragment lastFragment){
-		double[] ball=Helper.createBallXYZ(fragmentSize/3+Helper.CRandF(fragmentSize), false);
+		double[] ball=Util.createBallXYZ(fragmentSize/3+Util.CRandF(fragmentSize), false);
 		
 		Fragment f=new Fragment((float)ball[0]+xDirection,(float)ball[1]+yDirection,(float)ball[2]+zDirection,lastFragment,
-				startColor.r+Helper.RF(0.1),startColor.g+Helper.CRandF(0.1),startColor.b+Helper.RF(0.1),startColor.a,
-				endColor.r+Helper.CRandF(0.1),endColor.g+Helper.RF(0.1),endColor.b+Helper.RF(0.1),endColor.a,
+				startColor.r+Util.RF(0.1),startColor.g+Util.CRandF(0.1),startColor.b+Util.RF(0.1),startColor.a,
+				endColor.r+Util.CRandF(0.1),endColor.g+Util.RF(0.1),endColor.b+Util.RF(0.1),endColor.a,
 				0.05F
 				);
 		fragments.add(f);
@@ -148,7 +148,7 @@ public class EntitySparkFX extends EntityFXM{
 		
 		public float[] getRootOffset(){
 			float[] Return={xOffset,yOffset,zOffset};
-			if(!isLastInLine())Return=Helper.addToFloatArray(Return, bindedFragment.getRootOffset());
+			if(!isLastInLine())Return=Util.addToFloatArray(Return, bindedFragment.getRootOffset());
 			else{
 				Return[0]-=xOffset;
 				Return[1]-=yOffset;
@@ -163,9 +163,9 @@ public class EntitySparkFX extends EntityFXM{
 			return nextFragment!=null;
 		}
 		public void render(){
-			float[] root=getRootOffset(),end=Helper.addToFloatArray(root,new float[]{-xOffset,-yOffset,-zOffset});
+			float[] root=getRootOffset(),end=Util.addToFloatArray(root,new float[]{-xOffset,-yOffset,-zOffset});
 			GL11.glColor4f(r.getPoint(),g.getPoint(),b.getPoint(),a.getPoint());
-			TessHelper.drawLine(root[0],root[1],root[2], end[0],end[1],end[2], fragmentWidth, false, null, 0, 0);
+			TessUtil.drawLine(root[0],root[1],root[2], end[0],end[1],end[2], fragmentWidth, false, null, 0, 0);
 		}
 	}
 	

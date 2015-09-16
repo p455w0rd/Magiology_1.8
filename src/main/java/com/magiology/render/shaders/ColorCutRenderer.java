@@ -2,7 +2,7 @@ package com.magiology.render.shaders;
 
 import com.magiology.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.render.shaders.core.ShaderUniformEditor;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public class ColorCutRenderer extends ShaderAspectRenderer{
 	public static ColorCutRenderer instance;
@@ -34,9 +34,9 @@ public class ColorCutRenderer extends ShaderAspectRenderer{
 	
 	@Override
 	public void redner(){
-		ShaderUniformEditor.setUniform(uniforms.get(0), Helper.calculateRenderPos(rPrev, r),Helper.calculateRenderPos(gPrev, g),Helper.calculateRenderPos(bPrev, b));
-		ShaderUniformEditor.setUniform(uniforms.get(1), Helper.calculateRenderPos(prevTolerance, tolerance));
-		ShaderUniformEditor.setUniform(uniforms.get(2), Helper.calculateRenderPos(prevIntensity, intensity));
+		ShaderUniformEditor.setUniform(uniforms.get(0), Util.calculateRenderPos(rPrev, r),Util.calculateRenderPos(gPrev, g),Util.calculateRenderPos(bPrev, b));
+		ShaderUniformEditor.setUniform(uniforms.get(1), Util.calculateRenderPos(prevTolerance, tolerance));
+		ShaderUniformEditor.setUniform(uniforms.get(2), Util.calculateRenderPos(prevIntensity, intensity));
 	}
 	
 	@Override

@@ -1,9 +1,6 @@
 package com.magiology.handelers;
 
-import static com.magiology.handelers.KeyHandler.Keys.ArmorGui;
-import static com.magiology.handelers.KeyHandler.Keys.BusGui;
-import static com.magiology.handelers.KeyHandler.Keys.HandMode;
-import static com.magiology.handelers.KeyHandler.Keys.StatsGui;
+import static com.magiology.handelers.KeyHandler.Keys.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.settings.GameSettings;
@@ -17,19 +14,19 @@ import org.lwjgl.input.Keyboard;
 
 import com.magiology.core.MReference;
 import com.magiology.core.init.MGui;
-import com.magiology.forgepowered.packets.OpenGuiPacket;
-import com.magiology.forgepowered.packets.UploadPlayerDataPacket;
-import com.magiology.forgepowered.packets.generic.GenericServerStringPacket;
-import com.magiology.forgepowered.packets.generic.GenericServerVoidPacket;
+import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
+import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
 import com.magiology.gui.custom.hud.HandModeChangerHUD;
 import com.magiology.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.SimpleCounter;
 
 public class KeyHandler{
-	Minecraft mc=H.getMC();
+	Minecraft mc=U.getMC();
 	static SimpleCounter counter=new SimpleCounter();
 	public static enum Keys{
 		StatsGui("key.stats",Keyboard.KEY_B),
@@ -84,7 +81,7 @@ public class KeyHandler{
 //				Helper.println(iresourcemanager.getResource(Textures.BedrockBreakerBase));
 //			}
 //		} catch (Exception e){e.printStackTrace();}
-		GameSettings gs=H.getMC().gameSettings;
+		GameSettings gs=U.getMC().gameSettings;
 		boolean[] keys={Keyboard.isKeyDown(gs.keyBindForward.getKeyCode()),Keyboard.isKeyDown(gs.keyBindBack.getKeyCode()),Keyboard.isKeyDown(gs.keyBindJump.getKeyCode()),Keyboard.isKeyDown(gs.keyBindSneak.getKeyCode()),Keyboard.isKeyDown(gs.keyBindRight.getKeyCode()),Keyboard.isKeyDown(gs.keyBindLeft.getKeyCode())};
 		if(Keyboard.getEventKeyState()){
 			for(Keys i:Keys.values()){
@@ -99,12 +96,12 @@ public class KeyHandler{
 				if(keys[1])x+=2;
 				if(keys[4])z=1;
 				if(keys[5])z+=2;
-				Helper.sendMessage(new GenericServerStringPacket(0,x+","+z));
+				Util.sendMessage(new GenericServerStringPacket(0,x+","+z));
 			}
 		}
 		if(rawKey==gs.keyBindForward.getKeyCode()||rawKey==gs.keyBindBack.getKeyCode()||rawKey==gs.keyBindJump.getKeyCode()||rawKey==gs.keyBindSneak.getKeyCode()||rawKey==gs.keyBindRight.getKeyCode()||rawKey==gs.keyBindLeft.getKeyCode()){
-			ExtendedPlayerData data=ExtendedPlayerData.get(Helper.getThePlayer());
-			Helper.sendMessage(new UploadPlayerDataPacket(Helper.getThePlayer()));
+			ExtendedPlayerData data=ExtendedPlayerData.get(Util.getThePlayer());
+			Util.sendMessage(new UploadPlayerDataPacket(Util.getThePlayer()));
 			data.keys=keys.clone();
 		}
 	}
@@ -114,14 +111,14 @@ public class KeyHandler{
 			StatsDisplayHUD.instance.isStatsShowed=!StatsDisplayHUD.instance.isStatsShowed;
 		}
 		else if(ArmorGui.check(keyId)){
-			Helper.sendMessage(new OpenGuiPacket(MGui.GuiArmor));
+			Util.sendMessage(new OpenGuiPacket(MGui.GuiArmor));
 		}
 		else if(BusGui.check(keyId)){
 			
 		}
 		else if(HandMode.check(keyId)){
 			if(HandModeChangerHUD.instance.handAlpha>0.9){
-				Helper.sendMessage(new GenericServerVoidPacket(0));
+				Util.sendMessage(new GenericServerVoidPacket(0));
 			}
 		}
 		

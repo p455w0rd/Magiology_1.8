@@ -6,10 +6,10 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.render.Textures;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class EntitySmoothBubleFX extends EntityFXM{
 	
@@ -61,7 +61,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	@Override
 	public void render(WorldRenderer tess){
 		GL11.glDisable(GL11.GL_FOG);
-		GL11H.SetUpOpaqueRendering(2);
+		GL11U.SetUpOpaqueRendering(2);
         
 		
     	float PScale = 0.01F*particleScale;
@@ -69,9 +69,9 @@ public class EntitySmoothBubleFX extends EntityFXM{
     	float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
     	float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
     	{
-    		if(texture=="tx1")     H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
-    		else if(texture=="tx2")H.getMC().renderEngine.bindTexture(Textures.SmoothBuble2);
-    		else if(texture=="tx3")H.getMC().renderEngine.bindTexture(Textures.SmoothBuble3);
+    		if(texture=="tx1")     U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
+    		else if(texture=="tx2")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble2);
+    		else if(texture=="tx3")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble3);
     		tess.startDrawingQuads();
     		tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
     		tess.setBrightness(240);
@@ -79,11 +79,11 @@ public class EntitySmoothBubleFX extends EntityFXM{
     		tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
     		tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
     		tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-    		TessHelper.draw();
+    		TessUtil.draw();
     	}
 		
 		if(texture=="tx1"){
-			H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add1);
+			U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add1);
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[0]);
         	tess.setBrightness(240);
@@ -91,7 +91,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			TessHelper.draw();
+			TessUtil.draw();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[1]);
 			tess.setBrightness(240);
@@ -99,7 +99,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
 			tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 1);
 			tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			TessHelper.draw();
+			TessUtil.draw();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[2]);
         	tess.setBrightness(240);
@@ -107,7 +107,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			TessHelper.draw();
+			TessUtil.draw();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[3]);
 			tess.setBrightness(240);
@@ -115,10 +115,10 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
 			tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
 			tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			TessHelper.draw();
+			TessUtil.draw();
 			
 			
-			H.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add2);
+			U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add2);
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[4]);
         	tess.setBrightness(240);
@@ -126,7 +126,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			TessHelper.draw();
+			TessUtil.draw();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[5]);
         	tess.setBrightness(240);
@@ -134,7 +134,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 1);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 0);
-			TessHelper.draw();
+			TessUtil.draw();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[6]);
         	tess.setBrightness(240);
@@ -142,7 +142,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 1);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 0);
-			TessHelper.draw();
+			TessUtil.draw();
 			tess.startDrawingQuads();
 			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[7]);
         	tess.setBrightness(240);
@@ -150,10 +150,10 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
 	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
 	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			TessHelper.draw();
+			TessUtil.draw();
 		}
 
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 	}
 	
 	@Override
@@ -179,16 +179,16 @@ public class EntitySmoothBubleFX extends EntityFXM{
 				double x1=(0.025-0.05*worldObj.rand.nextFloat())*particleScale/10;
 				double y1=(0.025-0.05*worldObj.rand.nextFloat())*particleScale/10;
 				double z1=(0.025-0.05*worldObj.rand.nextFloat())*particleScale/10;
-				if(H.getMC().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+x1*4, posY+y1*4, posZ+z1*4, -x1/3+motionX,-y1/3+motionY, -z1/3+motionZ, particleMaxAge/2, 3,0, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
+				if(U.getMC().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+x1*4, posY+y1*4, posZ+z1*4, -x1/3+motionX,-y1/3+motionY, -z1/3+motionZ, particleMaxAge/2, 3,0, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
 			}
 			if(particleAge>particleMaxAge/8.5/2){
 				particleScale-=0.004*particleMaxAge;
-				if(active==true&&H.getMC().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()+motionX,0.025-0.05*worldObj.rand.nextFloat()+motionY, 0.025-0.05*worldObj.rand.nextFloat()+motionZ, particleMaxAge/2, 3,-10, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
+				if(active==true&&U.getMC().gameSettings.particleSetting==0&&worldObj.rand.nextBoolean())Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()+motionX,0.025-0.05*worldObj.rand.nextFloat()+motionY, 0.025-0.05*worldObj.rand.nextFloat()+motionZ, particleMaxAge/2, 3,-10, false,1,"tx1",r_e,g_e,b_e, 1.0, 0.99));
 			}
 			if(particleAge>particleMaxAge/8.5){
 				setDead();
 				if(active==true){
-					for(int t=0;t<2;t++)Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,0.025-0.05*worldObj.rand.nextFloat()+motionX,0.025-0.05*worldObj.rand.nextFloat()+motionY, 0.025-0.05*worldObj.rand.nextFloat()+motionZ, particleMaxAge/2, 4,-1, false,1,"tx1",r_e,g_e,b_e, opacity_e, 0.99));
+					for(int t=0;t<2;t++)Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,0.025-0.05*worldObj.rand.nextFloat()+motionX,0.025-0.05*worldObj.rand.nextFloat()+motionY, 0.025-0.05*worldObj.rand.nextFloat()+motionZ, particleMaxAge/2, 4,-1, false,1,"tx1",r_e,g_e,b_e, opacity_e, 0.99));
 				}
 			}
 		}
@@ -201,7 +201,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			if(particleScale<0){
 				setDead();
 				for(int a=0;a<40;a++){
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,(0.25-0.5*worldObj.rand.nextFloat())*random,(0.25-0.5*worldObj.rand.nextFloat())*random, (0.25-0.5*worldObj.rand.nextFloat())*random,1500, 5,-5, false,1,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
+					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,(0.25-0.5*worldObj.rand.nextFloat())*random,(0.25-0.5*worldObj.rand.nextFloat())*random, (0.25-0.5*worldObj.rand.nextFloat())*random,1500, 5,-5, false,1,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 					}
 			}
 		}
@@ -214,7 +214,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			if(particleScale<0){
 				setDead();
 				for(int a=0;a<20;a++){
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+(5-10*worldObj.rand.nextFloat())*random, posY+(5-10*worldObj.rand.nextFloat())*random, posZ+(5-10*worldObj.rand.nextFloat())*random,(0.025-0.05*worldObj.rand.nextFloat())*random,(0.025-0.05*worldObj.rand.nextFloat())*random, (0.025-0.05*worldObj.rand.nextFloat())*random,1000, 5,-5, false,2,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
+					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+(5-10*worldObj.rand.nextFloat())*random, posY+(5-10*worldObj.rand.nextFloat())*random, posZ+(5-10*worldObj.rand.nextFloat())*random,(0.025-0.05*worldObj.rand.nextFloat())*random,(0.025-0.05*worldObj.rand.nextFloat())*random, (0.025-0.05*worldObj.rand.nextFloat())*random,1000, 5,-5, false,2,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 				}
 			}
 		}
@@ -224,7 +224,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 				}
 			else{
 				setDead();
-					for(int t=0;t<40;t++)Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,1-2*worldObj.rand.nextFloat()+motionX,3-4*worldObj.rand.nextFloat()+motionY*2, 1-2*worldObj.rand.nextFloat()+motionZ, particleMaxAge*4, 6,-1, false,1,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
+					for(int t=0;t<40;t++)Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,1-2*worldObj.rand.nextFloat()+motionX,3-4*worldObj.rand.nextFloat()+motionY*2, 1-2*worldObj.rand.nextFloat()+motionZ, particleMaxAge*4, 6,-1, false,1,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 			}
 		}
 		else if(type==6){
@@ -238,25 +238,25 @@ public class EntitySmoothBubleFX extends EntityFXM{
 					for(int t=0;t<8;t++){
 						for(int t1=0;t1<5;t1++){
 							if(worldObj.rand.nextInt(3)==0){
-								Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
+								Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
 										1.5-3*worldObj.rand.nextFloat()+motionX,2.5-3*worldObj.rand.nextFloat()+motionY*2, 1.5-3*worldObj.rand.nextFloat()+motionZ, 
 										800*5, 6,-1, false,2,
 												"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 							}else{
-								Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
+								Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
 										1.5-3*worldObj.rand.nextFloat()+motionX,2.5-3*worldObj.rand.nextFloat()+motionY*2, 1.5-3*worldObj.rand.nextFloat()+motionZ,  
 										800*20, 40,-1, false,1,
 												"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 							}
 						}
-						Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
+						Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
 								(2-4*worldObj.rand.nextFloat()+motionX)/2, 1+(0.5-worldObj.rand.nextFloat()+motionX)/2, (2-4*worldObj.rand.nextFloat()+motionZ)/2, 
 								800, 400,-5, false,8,
 										"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 						
 					}
 				}
-				else Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,1-2*worldObj.rand.nextFloat()+motionX,1-2*worldObj.rand.nextFloat()+motionY, 1-2*worldObj.rand.nextFloat()+motionZ, particleMaxAge*2, 4,-20, false,1,"tx1",r_e,g_e,b_e, opacity_e, 0.99));
+				else Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,1-2*worldObj.rand.nextFloat()+motionX,1-2*worldObj.rand.nextFloat()+motionY, 1-2*worldObj.rand.nextFloat()+motionZ, particleMaxAge*2, 4,-20, false,1,"tx1",r_e,g_e,b_e, opacity_e, 0.99));
 			}
 		}
 		else if(type==7){
@@ -265,11 +265,11 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			}
 			else {
 				for(int e=0;e<3;e++){
-					double[] AB=Helper.cricleXZ((particleAge/4.0)+(e>=1?180*e:0));
+					double[] AB=Util.cricleXZ((particleAge/4.0)+(e>=1?180*e:0));
 					
 					
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
-					AB[0]*3-Helper.RF()/2,3-Helper.RF(), AB[1]*3-Helper.RF()/2,
+					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
+					AB[0]*3-Util.RF()/2,3-Util.RF(), AB[1]*3-Util.RF()/2,
 					(int)(particleMaxAge*2.5), 10,-100, false,1,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 				}
 				
@@ -286,7 +286,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 					float yrand=0.5F-(worldObj.rand.nextFloat()*0.5F);
 					float zrand=0.5F-worldObj.rand.nextFloat();
 					
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+xrand, posY+yrand, posZ+zrand,
+					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+xrand, posY+yrand, posZ+zrand,
 							-xrand/21, -yrand/21, -zrand/21,200,4,0,true,1,"tx1", r_e+(0.5-worldObj.rand.nextFloat())/10, g_e+(0.5-worldObj.rand.nextFloat())/10, b_e+(0.5-worldObj.rand.nextFloat())/10,1, 0.99));
 				}
 			}
@@ -302,7 +302,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 					float yrand=0.5F-(worldObj.rand.nextFloat()*0.5F);
 					float zrand=0.5F-worldObj.rand.nextFloat();
 					
-					Helper.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+xrand, posY+yrand, posZ+zrand,
+					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX+xrand, posY+yrand, posZ+zrand,
 							-xrand/21, -yrand/21, -zrand/21,200,4,0,true,1,"tx1", r_e+(0.5-worldObj.rand.nextFloat())/10, g_e+(0.5-worldObj.rand.nextFloat())/10, b_e+(0.5-worldObj.rand.nextFloat())/10,1, 0.99));
 				}
 			}

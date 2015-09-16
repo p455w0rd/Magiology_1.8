@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
@@ -43,7 +43,7 @@ public class RenderBateryL2 extends TileEntitySpecialRendererM {
 	
 	public void renderSides() {
 
-		TessHelper.getWR();
+		TessUtil.getWR();
 		this.bindTexture(Textures.BateryL1Core);
 			buf.addVertexWithUV(p*4,  p*12,   p*4,  tW*48, tH*1);
 			buf.addVertexWithUV(p*4,  p*4,    p*4,  tW*48, tH*4);
@@ -79,7 +79,7 @@ public class RenderBateryL2 extends TileEntitySpecialRendererM {
 	}
 	public void renderConections(EnumFacing dir)
 	{
-		TessHelper.getWR();
+		TessUtil.getWR();
 		this.bindTexture(Textures.BateryL2Core);
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 			if(dir.equals(EnumFacing.WEST)){

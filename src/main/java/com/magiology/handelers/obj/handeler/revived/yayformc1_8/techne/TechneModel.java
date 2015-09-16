@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
 
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
 import com.magiology.handelers.obj.handeler.revived.yayformc1_8.ModelFormatException;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 
 /**
@@ -57,7 +57,7 @@ public class TechneModel extends ModelBase implements IModelCustom {
 
     try
     {
-      IResource res = H.getMC().getResourceManager().getResource(resource);
+      IResource res = U.getMC().getResourceManager().getResource(resource);
       loadTechneModel(res.getInputStream());
     }
     catch (IOException e)

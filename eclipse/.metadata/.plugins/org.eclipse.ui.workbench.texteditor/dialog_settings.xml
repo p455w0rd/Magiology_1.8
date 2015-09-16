@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
-		<item value="false" key="casesensitive"/>
+		<item value="buff" key="selection"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value=",int pass"/>
-			<item value="getEnchantmentLevel"/>
-			<item value="Level"/>
-			<item value="addEnchantment"/>
-			<item value="ItemStack "/>
-			<item value="0.3"/>
-			<item value="distanceTo"/>
-			<item value="expectedBoxes"/>
+			<item value="TessUtil.getNVB()"/>
+			<item value="    "/>
+			<item value="stack.getTagCompound()"/>
+			<item value="initNBTTagCompound"/>
+			<item value="stack.getTagCompound() == null"/>
+			<item value="stack.getTagCompound()!=null"/>
+			<item value="keyName"/>
+			<item value="itemStack"/>
 		</list>
 		<list key="replacehistory">
-			<item value=""/>
-			<item value="0.2"/>
-			<item value="getExpectedColisionBoxes()"/>
-			<item value=".getMain()"/>
-			<item value="connections"/>
-			<item value=".getMain());"/>
-			<item value=".getMain())"/>
-			<item value="].setBanned("/>
+			<item value="buff"/>
+			<item value="&#x09;"/>
+			<item value="getNBT(stack)"/>
+			<item value="getNBT"/>
+			<item value="createNBT"/>
+			<item value="hasNBT(stack)"/>
+			<item value="key"/>
+			<item value="stack"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
@@ -33,6 +33,6 @@
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="380" key="DIALOG_HEIGHT"/>
 		<item value="1120" key="DIALOG_X_ORIGIN"/>
-		<item value="221" key="DIALOG_Y_ORIGIN"/>
+		<item value="230" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

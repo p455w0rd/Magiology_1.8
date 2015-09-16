@@ -6,7 +6,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Pos;
 
@@ -41,7 +41,7 @@ public class TileEntityBFCPowerOut extends TileEntityM implements IUpdatePlayerL
 				optimizer3=0;
 				
 				if(CallDir[0]==null&&CallDir[1]==null&&CallDir[2]==null&&CallDir[3]==null){
-					H.setBlock(worldObj,pos, Blocks.nether_brick);
+					U.setBlock(worldObj,pos, Blocks.nether_brick);
 				}
 			}
 		}

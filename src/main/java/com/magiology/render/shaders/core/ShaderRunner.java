@@ -26,13 +26,13 @@ import com.magiology.core.Config;
 import com.magiology.render.shaders.BlurRenderer;
 import com.magiology.render.shaders.ColorCutRenderer;
 import com.magiology.render.shaders.ColorRenderer;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class ShaderRunner{
 	
-	Minecraft mc=Helper.getMC();
-	EntityPlayer player=Helper.getThePlayer();
+	Minecraft mc=Util.getMC();
+	EntityPlayer player=Util.getThePlayer();
 	public boolean redrawShaders=false,inited=false;
 	
 	public List<ShaderAspectRenderer> handelers=new ArrayList<ShaderAspectRenderer>();
@@ -72,9 +72,9 @@ public class ShaderRunner{
 				if(handeler.uniforms.isEmpty())handeler.init(this);
 			}
 			
-			player=H.getThePlayer();
+			player=U.getThePlayer();
 			updateFrameBuffers();
-			World w=Helper.getTheWorld();
+			World w=Util.getTheWorld();
 			for(int i=0;i<handelers.size();i++){
 				ShaderAspectRenderer shaderAspect=handelers.get(i);
 				shaderAspect.player=player;
@@ -103,11 +103,11 @@ public class ShaderRunner{
 	@SideOnly(value=Side.CLIENT)
 	@SubscribeEvent
 	public void updateShaders(LivingUpdateEvent event){
-		if(!Config.isShadersEnabled()||!H.isRemote(event.entity)||event.entity!=H.getThePlayer())return;
-		player=H.getThePlayer();
+		if(!Config.isShadersEnabled()||!U.isRemote(event.entity)||event.entity!=U.getThePlayer())return;
+		player=U.getThePlayer();
 		if(handelers.isEmpty())init();
 		Map<Integer, Boolean> enabledMap=new HashMap<Integer, Boolean>();
-		World w=Helper.getTheWorld();
+		World w=Util.getTheWorld();
 		for(int i=0;i<handelers.size();i++){
 			ShaderAspectRenderer shaderAspect=handelers.get(i);
 			shaderAspect.player=player;

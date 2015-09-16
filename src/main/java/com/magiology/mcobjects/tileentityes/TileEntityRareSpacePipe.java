@@ -15,13 +15,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,IUpdatePlayerListBox{
 	
@@ -56,7 +56,7 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	public void writeToNBT(NBTTagCompound NBTTC){
     	for (int i=0;i<6;i++){
     		NBTTC.setBoolean("bannedConnections"+i, bannedConnections[i]);
-    		NBTTC.setInteger("connections"+i, SideHelper.enumFacingOrientation(connections[i]));
+    		NBTTC.setInteger("connections"+i, SideUtil.enumFacingOrientation(connections[i]));
     	}
     }
 	
@@ -118,9 +118,9 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	}
 	@Override
 	public void detectAndSendChanges(){
-		if(!H.isRemote(this))return;
-		if(Helper.AxisAlignedBBEqual(pointId,prevPointId))return;
-		Helper.sendMessage(new NotifyPointedBoxChangePacket(this));
+		if(!U.isRemote(this))return;
+		if(Util.AxisAlignedBBEqual(pointId,prevPointId))return;
+		Util.sendMessage(new NotifyPointedBoxChangePacket(this));
 	}
 	
 	@Override

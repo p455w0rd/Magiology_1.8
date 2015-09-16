@@ -13,8 +13,8 @@ import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.NetworkBaseInterface.InteractType;
 import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.DoubleObject;
 
 public class TileHologramProjectorInterface implements NetworkInterfaceProvider,InterfaceTileEntitySaver{
@@ -34,7 +34,7 @@ public class TileHologramProjectorInterface implements NetworkInterfaceProvider,
 
 	@Override
 	public void onNetworkActionInvoked(NetworkBaseInterface Interface, String action, Object... data){
-		Helper.println("hi");
+		Util.println("hi");
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class TileHologramProjectorInterface implements NetworkInterfaceProvider,
 	
 	@Override
 	public NetworkBaseInterface getConnectedInterface(){
-		TileEntity[] tiles=SideHelper.getTilesOnSides(tile);
+		TileEntity[] tiles=SideUtil.getTilesOnSides(tile);
 		for(int i=0;i<tiles.length;i++){
 			if(tiles[i] instanceof NetworkBaseInterface){
 				NetworkInterfaceProvider Interface=((NetworkBaseInterface)tiles[i]).getInterfaceProvider();
@@ -62,7 +62,7 @@ public class TileHologramProjectorInterface implements NetworkInterfaceProvider,
 	}
 	
 	@Override
-	public DoubleObject<DataOutput,Object> getDataOutput(DataOutputDesc desc){
+	public DoubleObject<DataOutput,Object> getData(DataOutputDesc desc){
 		return null;
 	}
 
@@ -76,7 +76,7 @@ public class TileHologramProjectorInterface implements NetworkInterfaceProvider,
 		if(long1!=null)return long1;
 		Long id;
 		do{
-			id=Helper.RL();
+			id=Util.RL();
 		}while(cardList.containsValue(id)&&id!=-1&&id!=0&&id!=-2);
 		cardList.put(tileEntity, id);
 		return id;

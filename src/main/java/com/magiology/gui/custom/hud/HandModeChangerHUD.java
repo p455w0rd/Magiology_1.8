@@ -10,8 +10,8 @@ import com.magiology.core.init.MItems;
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.TheHandHandeler.HandComonPositions;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.utilclasses.Util;
 
 public class HandModeChangerHUD extends HUD{
 	public static HandModeChangerHUD instance=new HandModeChangerHUD();
@@ -27,10 +27,10 @@ public class HandModeChangerHUD extends HUD{
 		if(data.player!=player){
 			data=ExtendedPlayerData.get(player);
 		}if(data==null)return;
-		FontRenderer fr=Helper.getFontRenderer();
-		if(Helper.isNull(player,fr))return;
-		if(handAlpha>0&&Helper.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
-			float HandAlpha=Helper.calculateRenderPos(lastHandAlpha,handAlpha);
+		FontRenderer fr=Util.getFontRenderer();
+		if(Util.isNull(player,fr))return;
+		if(handAlpha>0&&Util.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
+			float HandAlpha=Util.calculateRenderPos(lastHandAlpha,handAlpha);
 			int slot=player.inventory.currentItem;
 			GL11.glPushMatrix();
 			
@@ -57,7 +57,7 @@ public class HandModeChangerHUD extends HUD{
 			}
 			String up="string "+a1,now="string "+a2,down="string "+a3;
 			
-			GL11H.SetUpOpaqueRendering(1);
+			GL11U.SetUpOpaqueRendering(1);
 			GL11.glTranslated(slot*20+xScreen/2-95, yScreen-38, 0);
 			
 			GL11.glTranslated(0, -HandAlpha*20+20, 0);
@@ -74,16 +74,16 @@ public class HandModeChangerHUD extends HUD{
 			fr.drawStringWithShadow(down, 0, 9, Color.WHITE.hashCode());
 			
 			
-			GL11H.EndOpaqueRendering();
+			GL11U.EndOpaqueRendering();
 			GL11.glPopMatrix();
 		}
 		
 	}
 	@Override
 	public void update(){
-		if(Helper.isNull(Helper.getThePlayer()))return;
+		if(Util.isNull(Util.getThePlayer()))return;
 		lastHandAlpha=handAlpha;
-		handAlpha+=Helper.getThePlayer().isSneaking()?0.25:-0.25;
-		handAlpha=Helper.keepValueInBounds(handAlpha, 0, 1);
+		handAlpha+=Util.getThePlayer().isSneaking()?0.25:-0.25;
+		handAlpha=Util.keepValueInBounds(handAlpha, 0, 1);
 	}
 }

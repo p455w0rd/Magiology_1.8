@@ -13,14 +13,14 @@ import net.minecraft.world.World;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MGui;
 import com.magiology.handelers.GuiHandelerM;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilobjects.NBTUtil;
 import com.magiology.util.utilobjects.m_extension.ItemM;
 
 public class IPowerSidenessInstructor extends ItemM{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-		H.createNBT(itemStack);
+		NBTUtil.createNBT(itemStack);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class IPowerSidenessInstructor extends ItemM{
 	
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
-		H.createNBT(itemstack);
+		NBTUtil.createNBT(itemstack);
 		boolean isIt=false;
 		if(world.getTileEntity(pos) instanceof ISidedPower){
 			isIt=true;
@@ -47,7 +47,7 @@ public class IPowerSidenessInstructor extends ItemM{
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5){
-		H.createNBT(itemstack);
+		NBTUtil.createNBT(itemstack);
 	}
 
 	

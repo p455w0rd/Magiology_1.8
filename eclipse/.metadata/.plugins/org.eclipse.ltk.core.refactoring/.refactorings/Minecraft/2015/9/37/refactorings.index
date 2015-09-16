@@ -23,3 +23,18 @@
 1441663083183	Rename type 'SpecialPlayerParicleHandeler_SubEvent'
 1441741648180	Delete element
 1441741859038	Move compilation units
+1441827403906	Rename field 'instatnce'
+1441871479543	Rename field 'minLenght'
+1441871483425	Rename field 'maxLenght'
+1441916720632	Move member 'rayTraceHolograms'
+1441996288940	Rename local variable 'i'
+1442000975819	Rename method 'isAnArray'
+1442051919399	Move compilation unit
+1442051922604	Move compilation unit
+1442051941801	Move compilation unit
+1442086961029	Rename method 'translate'
+1442087327740	Rename local variable 'i'
+1442137250808	Move compilation units
+1442137319313	Rename package 'com.magiology.forgepowered.packets.generic'
+1442137354670	Move compilation units
+1442137358289	Delete element

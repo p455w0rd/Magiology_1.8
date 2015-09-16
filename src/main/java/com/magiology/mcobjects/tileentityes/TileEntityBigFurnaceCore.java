@@ -8,14 +8,14 @@ import net.minecraft.util.EnumParticleTypes;
 import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	
-	SlowdownHelper optimizer=new SlowdownHelper(40);
+	SlowdownUtil optimizer=new SlowdownUtil(40);
 	float p=1F/16F;
 	int c1;
 	public int fuelTicks,maxfuelTicks;
@@ -57,34 +57,34 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 		}
 		if(worldObj.isRemote){
 			if(isMultiblockHelper){if(canGeneratePower(25)){
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+Helper.RF()*3,y()+2+Helper.RF(),z()-1.5,0,0,-0.1);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+Helper.RF()*3,y()+2+Helper.RF(),z()+2.5,0,0,0.1);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1.5,y()+2+Helper.RF(),z()-1+Helper.RF()*3,-0.1,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+2.5,y()+2+Helper.RF(),z()-1+Helper.RF()*3,0.1,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()  ,y()-1+Helper.RF(),z()+Helper.RF(),0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+1,y()-1+Helper.RF(),z()+Helper.RF(),0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Helper.RF(),y()-1+Helper.RF(),z()  ,0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Helper.RF(),y()-1+Helper.RF(),z()+1,0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Helper.RF(),y()-1.1,z()+Helper.RF(),0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+Util.RF()*3,y()+2+Util.RF(),z()-1.5,0,0,-0.1);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+Util.RF()*3,y()+2+Util.RF(),z()+2.5,0,0,0.1);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1.5,y()+2+Util.RF(),z()-1+Util.RF()*3,-0.1,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+2.5,y()+2+Util.RF(),z()-1+Util.RF()*3,0.1,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()  ,y()-1+Util.RF(),z()+Util.RF(),0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+1,y()-1+Util.RF(),z()+Util.RF(),0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Util.RF(),y()-1+Util.RF(),z()  ,0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Util.RF(),y()-1+Util.RF(),z()+1,0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Util.RF(),y()-1.1,z()+Util.RF(),0,0,0);
 				
-				String txture=Helper.RInt(5)!=0?"tx1":"tx3";
-				int tim=Helper.RInt(40)==0?15:0;
+				String txture=Util.RInt(5)!=0?"tx1":"tx3";
+				int tim=Util.RInt(40)==0?15:0;
 				EntitySmoothBubleFX sb1=new EntitySmoothBubleFX(worldObj, 
-						x()-0.5+Helper.RF()*2,y()+3,z()-0.5+Helper.RF()*2,//pos
-						0.15-0.3*Helper.RF(),0.4+Helper.CRandF(0.1),0.15-0.3*Helper.RF(),//speed
-						1200+Helper.RInt(700),2-(txture.equals("tx3")?1:0)+Helper.RInt(2)+tim,5,true,1,txture, 
-								1, txture=="tx3"?1:0.2+Helper.RF()*0.5, txture=="tx3"?1:0.2+Helper.RF()*0.2, 1, 0.99),
+						x()-0.5+Util.RF()*2,y()+3,z()-0.5+Util.RF()*2,//pos
+						0.15-0.3*Util.RF(),0.4+Util.CRandF(0.1),0.15-0.3*Util.RF(),//speed
+						1200+Util.RInt(700),2-(txture.equals("tx3")?1:0)+Util.RInt(2)+tim,5,true,1,txture, 
+								1, txture=="tx3"?1:0.2+Util.RF()*0.5, txture=="tx3"?1:0.2+Util.RF()*0.2, 1, 0.99),
 								sb2=new EntitySmoothBubleFX(worldObj, 
-										x()-0.5+Helper.RF()*2,y()+3,z()-0.5+Helper.RF()*2,0.15-0.3*Helper.RF(),0,0.15-0.3*Helper.RF(),
-										1000+Helper.RInt(500),5,-5,1, 
-										1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1, 0.99);
-				Helper.spawnEntityFX(sb1);
-				Helper.spawnEntityFX(sb2);
+										x()-0.5+Util.RF()*2,y()+3,z()-0.5+Util.RF()*2,0.15-0.3*Util.RF(),0,0.15-0.3*Util.RF(),
+										1000+Util.RInt(500),5,-5,1, 
+										1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.99);
+				Util.spawnEntityFX(sb1);
+				Util.spawnEntityFX(sb2);
 				if(tim==0)sb1.noClip=true;
 			}}
-			else worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Helper.RF()  ,y()+1,z()+Helper.RF(),0,0,0);
+			else worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+Util.RF()  ,y()+1,z()+Util.RF(),0,0,0);
 		}
-		PowerHelper.sortSides(this);
+		PowerUtil.sortSides(this);
 	}
 	
 	public void power(){
@@ -93,100 +93,100 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	
 	
 	public void detectAndReplace(BlockPos pos,Block block, Block replace){
-		if(H.getBlock(worldObj, pos)==block)H.setBlock(worldObj, pos, replace);
+		if(U.getBlock(worldObj, pos)==block)U.setBlock(worldObj, pos, replace);
 	}
 	
 	public void isMultiblock(){
 		c1=0;
 		for(int x1=-1;x1<=1;x1++){for(int y1=1;y1<=2;y1++){for(int z1=-1;z1<=1;z1++){
-			if(H.getBlock(worldObj,pos.add(x1,y1,z1))==MBlocks.FireLamp)c1+=1;
+			if(U.getBlock(worldObj,pos.add(x1,y1,z1))==MBlocks.FireLamp)c1+=1;
 		}}}
 		for(int x1=-1;x1<=1;x1+=2){
 		    if(
-		       H.getBlock(worldObj,pos.add(2*x1,2,1))==Blocks.iron_bars&&
-			   H.getBlock(worldObj,pos.add(2*x1, 2, 0  ))==Blocks.iron_bars&&
-			   H.getBlock(worldObj,pos.add(2*x1, 2, -1))==Blocks.iron_bars&&
+		       U.getBlock(worldObj,pos.add(2*x1,2,1))==Blocks.iron_bars&&
+			   U.getBlock(worldObj,pos.add(2*x1, 2, 0  ))==Blocks.iron_bars&&
+			   U.getBlock(worldObj,pos.add(2*x1, 2, -1))==Blocks.iron_bars&&
 			   
-			   H.getBlock(worldObj,pos.add(1, 2, 2*x1))==Blocks.iron_bars&&
-			   H.getBlock(worldObj,pos.add(0  , 2, 2*x1))==Blocks.iron_bars&&
-			   H.getBlock(worldObj,pos.add(-1, 2, 2*x1))==Blocks.iron_bars&&
-			   
-			   
-			   H.getBlock(worldObj,pos.add(2*x1, 4, 2))==Blocks.nether_brick_stairs&&
-			   H.getBlock(worldObj,pos.add(2*x1, 4, 1))==Blocks.nether_brick_stairs&&
-			   H.getBlock(worldObj,pos.add(2*x1, 4, 0  ))==Blocks.nether_brick_stairs&&
-			   H.getBlock(worldObj,pos.add(2*x1, 4, -1))==Blocks.nether_brick_stairs&&
-			   H.getBlock(worldObj,pos.add(2*x1, 4, -2))==Blocks.nether_brick_stairs&&
-			   
-			   H.getBlock(worldObj,pos.add(1, 4, 2*x1))==Blocks.nether_brick_stairs&&
-			   H.getBlock(worldObj,pos.add(0  , 4, 2*x1))==Blocks.nether_brick_stairs&&
-			   H.getBlock(worldObj,pos.add(-1, 4, 2*x1))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(1, 2, 2*x1))==Blocks.iron_bars&&
+			   U.getBlock(worldObj,pos.add(0  , 2, 2*x1))==Blocks.iron_bars&&
+			   U.getBlock(worldObj,pos.add(-1, 2, 2*x1))==Blocks.iron_bars&&
 			   
 			   
-			   H.getBlock(worldObj,pos.add(1, 0  , 2*x1))==Blocks.obsidian&&
-			   H.getBlock(worldObj,pos.add(-1, 0  , 2*x1))==Blocks.obsidian&&
-			   H.getBlock(worldObj,pos.add(1, 3, 2*x1))==Blocks.obsidian&&
-			   H.getBlock(worldObj,pos.add(-1, 3, 2*x1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(2*x1, 4, 2))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(2*x1, 4, 1))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(2*x1, 4, 0  ))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(2*x1, 4, -1))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(2*x1, 4, -2))==Blocks.nether_brick_stairs&&
 			   
-			   H.getBlock(worldObj,pos.add(2*x1, 0  , 1))==Blocks.obsidian&&
-			   H.getBlock(worldObj,pos.add(2*x1, 0  , -1))==Blocks.obsidian&&
-			   H.getBlock(worldObj,pos.add(2*x1, 3, 1))==Blocks.obsidian&&
-			   H.getBlock(worldObj,pos.add(2*x1, 3, -1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(1, 4, 2*x1))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(0  , 4, 2*x1))==Blocks.nether_brick_stairs&&
+			   U.getBlock(worldObj,pos.add(-1, 4, 2*x1))==Blocks.nether_brick_stairs&&
 			   
-			   H.getBlock(worldObj,pos.add(2*x1, 1, 1))==Blocks.nether_brick&&
-			  (H.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==Blocks.nether_brick||
-			   H.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==MBlocks.BFCPowerOut)&&
-			   H.getBlock(worldObj,pos.add(2*x1, 0  , 0  ))==Blocks.nether_brick&&
-			   H.getBlock(worldObj,pos.add(2*x1, 3, 0  ))==Blocks.nether_brick&&
-			   H.getBlock(worldObj,pos.add(2*x1, 1, -1))==Blocks.nether_brick&&
 			   
-			   H.getBlock(worldObj,pos.add(1, 1, 2*x1))==Blocks.nether_brick&&
-			  (H.getBlock(worldObj,pos.add(0  , 1, 2*x1))==Blocks.nether_brick||
-			   H.getBlock(worldObj,pos.add(0  , 1, 2*x1))==MBlocks.BFCPowerOut)&&
-			   H.getBlock(worldObj,pos.add(0  , 0  , 2*x1))==Blocks.nether_brick&&
-			   H.getBlock(worldObj,pos.add(0  , 3, 2*x1))==Blocks.nether_brick&&
-			   H.getBlock(worldObj,pos.add(-1, 1, 2*x1))==Blocks.nether_brick
+			   U.getBlock(worldObj,pos.add(1, 0  , 2*x1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(-1, 0  , 2*x1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(1, 3, 2*x1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(-1, 3, 2*x1))==Blocks.obsidian&&
+			   
+			   U.getBlock(worldObj,pos.add(2*x1, 0  , 1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(2*x1, 0  , -1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(2*x1, 3, 1))==Blocks.obsidian&&
+			   U.getBlock(worldObj,pos.add(2*x1, 3, -1))==Blocks.obsidian&&
+			   
+			   U.getBlock(worldObj,pos.add(2*x1, 1, 1))==Blocks.nether_brick&&
+			  (U.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==Blocks.nether_brick||
+			   U.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==MBlocks.BFCPowerOut)&&
+			   U.getBlock(worldObj,pos.add(2*x1, 0  , 0  ))==Blocks.nether_brick&&
+			   U.getBlock(worldObj,pos.add(2*x1, 3, 0  ))==Blocks.nether_brick&&
+			   U.getBlock(worldObj,pos.add(2*x1, 1, -1))==Blocks.nether_brick&&
+			   
+			   U.getBlock(worldObj,pos.add(1, 1, 2*x1))==Blocks.nether_brick&&
+			  (U.getBlock(worldObj,pos.add(0  , 1, 2*x1))==Blocks.nether_brick||
+			   U.getBlock(worldObj,pos.add(0  , 1, 2*x1))==MBlocks.BFCPowerOut)&&
+			   U.getBlock(worldObj,pos.add(0  , 0  , 2*x1))==Blocks.nether_brick&&
+			   U.getBlock(worldObj,pos.add(0  , 3, 2*x1))==Blocks.nether_brick&&
+			   U.getBlock(worldObj,pos.add(-1, 1, 2*x1))==Blocks.nether_brick
 			   )c1+=1;
 		}
 		
 			if(c1==20&&
-			   H.getBlock(worldObj,pos.add(2, 0  , 2))==Blocks.iron_block&&
-			   H.getBlock(worldObj,pos.add(-2, 0  , 2))==Blocks.iron_block&&
-			   H.getBlock(worldObj,pos.add(-2, 0  , -2))==Blocks.iron_block&&
-			   H.getBlock(worldObj,pos.add(2, 0  , -2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(2, 0  , 2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(-2, 0  , 2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(-2, 0  , -2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(2, 0  , -2))==Blocks.iron_block&&
 			   
-			   H.getBlock(worldObj,pos.add(2, 3, 2))==Blocks.iron_block&&
-			   H.getBlock(worldObj,pos.add(-2, 3, 2))==Blocks.iron_block&&
-			   H.getBlock(worldObj,pos.add(-2, 3, -2))==Blocks.iron_block&&
-			   H.getBlock(worldObj,pos.add(2, 3, -2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(2, 3, 2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(-2, 3, 2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(-2, 3, -2))==Blocks.iron_block&&
+			   U.getBlock(worldObj,pos.add(2, 3, -2))==Blocks.iron_block&&
 			   
-			   H.getBlock(worldObj,pos.add(-1, 0, -1))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(0  , 0, -1))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(1, 0, -1))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(1, 0, 0  ))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(1, 0, 0  ))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(1, 0, 1))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(0  , 0, 1))==Blocks.stonebrick&&
-			   H.getBlock(worldObj,pos.add(1, 0, 1))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(-1, 0, -1))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(0  , 0, -1))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(1, 0, -1))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(1, 0, 0  ))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(1, 0, 0  ))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(1, 0, 1))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(0  , 0, 1))==Blocks.stonebrick&&
+			   U.getBlock(worldObj,pos.add(1, 0, 1))==Blocks.stonebrick&&
 			   
-			   H.getBlockMetadata(worldObj,pos.add(2, 4, 1))==1&&
-			   H.getBlockMetadata(worldObj,pos.add(2, 4, 0  ))==1&&
-			   H.getBlockMetadata(worldObj,pos.add(2, 4, -1))==1&&
-			   H.getBlockMetadata(worldObj,pos.add(-2, 4, 1))==0&&
-			   H.getBlockMetadata(worldObj,pos.add(-2, 4, 0  ))==0&&
-			   H.getBlockMetadata(worldObj,pos.add(-2, 4, -1))==0&&
+			   U.getBlockMetadata(worldObj,pos.add(2, 4, 1))==1&&
+			   U.getBlockMetadata(worldObj,pos.add(2, 4, 0  ))==1&&
+			   U.getBlockMetadata(worldObj,pos.add(2, 4, -1))==1&&
+			   U.getBlockMetadata(worldObj,pos.add(-2, 4, 1))==0&&
+			   U.getBlockMetadata(worldObj,pos.add(-2, 4, 0  ))==0&&
+			   U.getBlockMetadata(worldObj,pos.add(-2, 4, -1))==0&&
 			   
-			   H.getBlockMetadata(worldObj,pos.add(1, 4, 2))==3&&
-			   H.getBlockMetadata(worldObj,pos.add(0  , 4, 2))==3&&
-			   H.getBlockMetadata(worldObj,pos.add(-1, 4, 2))==3&&
-			   H.getBlockMetadata(worldObj,pos.add(1, 4, -2))==2&&
-			   H.getBlockMetadata(worldObj,pos.add(0  , 4, -2))==2&&
-			   H.getBlockMetadata(worldObj,pos.add(-1, 4, -2))==2&&
+			   U.getBlockMetadata(worldObj,pos.add(1, 4, 2))==3&&
+			   U.getBlockMetadata(worldObj,pos.add(0  , 4, 2))==3&&
+			   U.getBlockMetadata(worldObj,pos.add(-1, 4, 2))==3&&
+			   U.getBlockMetadata(worldObj,pos.add(1, 4, -2))==2&&
+			   U.getBlockMetadata(worldObj,pos.add(0  , 4, -2))==2&&
+			   U.getBlockMetadata(worldObj,pos.add(-1, 4, -2))==2&&
 
-			  (H.getBlockMetadata(worldObj,pos.add(2, 4, -2))==1||H.getBlockMetadata(worldObj,pos.add(2, 4, -2))==2)&&
-			  (H.getBlockMetadata(worldObj,pos.add(2, 4, 2))==1||H.getBlockMetadata(worldObj,pos.add(2, 4, 2))==3)&&
-			  (H.getBlockMetadata(worldObj,pos.add(-2, 4, -2))==0||H.getBlockMetadata(worldObj,pos.add(-2, 4, -2))==2)&&
-			  (H.getBlockMetadata(worldObj,pos.add(-2, 4, 2))==0||H.getBlockMetadata(worldObj,pos.add(-2, 4, 2))==3)
+			  (U.getBlockMetadata(worldObj,pos.add(2, 4, -2))==1||U.getBlockMetadata(worldObj,pos.add(2, 4, -2))==2)&&
+			  (U.getBlockMetadata(worldObj,pos.add(2, 4, 2))==1||U.getBlockMetadata(worldObj,pos.add(2, 4, 2))==3)&&
+			  (U.getBlockMetadata(worldObj,pos.add(-2, 4, -2))==0||U.getBlockMetadata(worldObj,pos.add(-2, 4, -2))==2)&&
+			  (U.getBlockMetadata(worldObj,pos.add(-2, 4, 2))==0||U.getBlockMetadata(worldObj,pos.add(-2, 4, 2))==3)
 			   ){
 				this.isMultiblockHelper=true;
 			}

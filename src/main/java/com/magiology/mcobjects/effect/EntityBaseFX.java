@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util.U;
 
 public class EntityBaseFX extends EntityFX{
 	
@@ -67,7 +67,7 @@ public class EntityBaseFX extends EntityFX{
     	float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-        H.getMC().renderEngine.bindTexture(texture1);
+        U.getMC().renderEngine.bindTexture(texture1);
         renderer.startDrawingQuads();
 		renderer.setColorRGBA_F((float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
     	renderer.setBrightness(240);
@@ -75,7 +75,7 @@ public class EntityBaseFX extends EntityFX{
         renderer.addVertexWithUV(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0);
         renderer.addVertexWithUV(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1);
         renderer.addVertexWithUV(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1);
-		TessHelper.draw();
+		TessUtil.draw();
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
@@ -88,7 +88,7 @@ public class EntityBaseFX extends EntityFX{
 	@Override
 	public void onUpdate(){
 		if(particleAge>particleMaxAge)this.setDead();
-		if(H.getMC().gameSettings.particleSetting==2)this.setDead();
+		if(U.getMC().gameSettings.particleSetting==2)this.setDead();
 		
 		if(worldObj.isRemote)this.motionHandeler();
 		

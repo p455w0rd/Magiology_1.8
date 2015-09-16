@@ -2,6 +2,7 @@ package com.magiology.forgepowered.event;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+
 import com.magiology.api.power.ISidedPower;
 import com.magiology.gui.container.ISidedPowerInstructorContainer;
 import com.magiology.gui.container.SmartCrafterContainer;
@@ -11,8 +12,8 @@ import com.magiology.handelers.GenericPacketEventHandeler.PacketEvent;
 import com.magiology.handelers.GenericPacketEventHandeler.StringPacketEvent;
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.Util;
 
 public class GenericPacketEvents{
 	public static GenericPacketEventHandeler callerInstance;
@@ -47,7 +48,7 @@ public class GenericPacketEvents{
 		}break;
 		case 7:{
 			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
-			PowerHelper.cricleSideInteraction((ISidedPower)tileEn, integer);
+			PowerUtil.cricleSideInteraction((ISidedPower)tileEn, integer);
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 8:{
@@ -62,7 +63,7 @@ public class GenericPacketEvents{
 			tile.setReceaveOnSide(integer, !tile.getIn(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
-		default:{Helper.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
+		default:{Util.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	
@@ -82,7 +83,7 @@ public class GenericPacketEvents{
 		case 1:{
 			
 		}break;
-		default:{Helper.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
+		default:{Util.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	public void voidPacketEvent(PacketEvent event){
@@ -91,7 +92,7 @@ public class GenericPacketEvents{
 		case 0:{
 			TheHandHandeler.nextPosition(player);
 		}break;
-		default:{Helper.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
+		default:{Util.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 }

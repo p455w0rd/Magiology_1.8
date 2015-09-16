@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
@@ -16,19 +16,19 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
-		GL11H.protect();
+		GL11U.protect();
 		GL11.glTranslated(x,y,z);
 		new ColorF(0.6,0.6,0.6,0.5).bind();
-		GL11H.texture(false);
+		GL11U.texture(false);
 		AxisAlignedBB[] cubes=((MultiColisionProvider)tile).getActiveBoxes();
-		if(tile instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)tile).getBrain()==null)GL11H.SetUpOpaqueRendering(1);
-		else GL11H.EndOpaqueRendering();
+		if(tile instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)tile).getBrain()==null)GL11U.SetUpOpaqueRendering(1);
+		else GL11U.EndOpaqueRendering();
 		for(AxisAlignedBB a:cubes){
-			TessHelper.drawCube(a);
+			TessUtil.drawCube(a);
 		}
-		GL11H.EndOpaqueRendering();
-		GL11H.texture(true);
-		GL11H.endProtection();
+		GL11U.EndOpaqueRendering();
+		GL11U.texture(true);
+		GL11U.endProtection();
 	}
 
 }

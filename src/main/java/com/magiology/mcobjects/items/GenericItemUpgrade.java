@@ -18,9 +18,9 @@ import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.util.utilclasses.FontEffectHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.FontEffectUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilobjects.NBTUtil;
 
 public class GenericItemUpgrade extends Item{
 	int Level;
@@ -47,7 +47,7 @@ public class GenericItemUpgrade extends Item{
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack is, World w, EntityPlayer player){
-		H.createNBT(is);
+		NBTUtil.createNBT(is);
 		if(w.isRemote){
 //			int ID=RegisterUpgrades.getItemUpgradeID(is.getItem());
 //			System.out.print("ID="+ID+","+RegisterUpgrades.getItemTypeID(ID)+" level:"+RegisterUpgrades.getItemUpgradeLevel(ID)+" type: "+RegisterUpgrades.getItemUpgradeType(ID).toString()+"\n");
@@ -61,9 +61,9 @@ public class GenericItemUpgrade extends Item{
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		boolean result=false;
-		if(H.createNBT(stack)){
+		if(NBTUtil.createNBT(stack)!=null){
 			UpgradeType type=RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(stack.getItem()));
-			Block block=Helper.getBlock(world, pos);
+			Block block=Util.getBlock(world, pos);
 			if(!player.isSneaking()&&type==UpgradeType.Priority){
 				double MaxX=block.getBlockBoundsMaxX(),MinX=block.getBlockBoundsMinX();
 				double MaxY=block.getBlockBoundsMaxY(),MinY=block.getBlockBoundsMinY();
@@ -80,12 +80,12 @@ public class GenericItemUpgrade extends Item{
 				}
 				
 				for(int a=0;a<20;a++)switch(side.getIndex()){
-				case 0:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY(),      pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Helper.CRandF(0.5), -10+Helper.CRandF(0.5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 1:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY()+MaxY, pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Helper.CRandF(0.5), 10+Helper.CRandF(0.5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 2:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+MinZ, 0, 0, -0.1, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 3:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Helper.RF()*(MaxX-MinX)+MinX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+MaxZ, 0, 0, 0.1, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 4:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MinX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, -0.1, 0, 0, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
-				case 5:Helper.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MaxX, pos.getY()+Helper.RF()*(MaxY-MinY)+MinY, pos.getZ()+Helper.RF()*(MaxZ-MinZ)+MinZ, 0.1, 0, 0, 500, 1+Helper.CRandF(0.5), Helper.CRandF(5), Helper.RInt(10)==0?2:1, Helper.RF(), Helper.RF(), Helper.RF(), 0.8));break;
+				case 0:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY(),      pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Util.CRandF(0.5), -10+Util.CRandF(0.5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
+				case 1:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY()+MaxY, pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Util.CRandF(0.5), 10+Util.CRandF(0.5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
+				case 2:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+MinZ, 0, 0, -0.1, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
+				case 3:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+MaxZ, 0, 0, 0.1, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
+				case 4:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MinX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, -0.1, 0, 0, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
+				case 5:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MaxX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, 0.1, 0, 0, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
 				}
 			}
 			
@@ -95,7 +95,7 @@ public class GenericItemUpgrade extends Item{
     }
 	@Override
 	public void onUpdate(ItemStack is, World w, Entity entity, int var1, boolean b1){
-		if(H.createNBT(is)){
+		if(NBTUtil.createNBT(is)!=null){
 			if(RegisterItemUpgrades.getItemUpgradeType(UT.GetTypeID())==UpgradeType.Priority){
 				if(!is.getTagCompound().hasKey("side"))is.getTagCompound().setInteger("side", 0);
 			}
@@ -108,37 +108,37 @@ public class GenericItemUpgrade extends Item{
 		int i=0;
 		if(GuiScreen.isShiftKeyDown())i++;
 		if(GuiScreen.isCtrlKeyDown()) i++;
-		new FontEffectHelper();
+		new FontEffectUtil();
 		switch (UT.GetTypeID()){
 		case 0:{
-			list.add(FontEffectHelper.AQUA+"Increases range");
+			list.add(FontEffectUtil.AQUA+"Increases range");
 			if(i>0){
-				list.add(FontEffectHelper.getRandEff()+"How surprising!");
-				if(i==2)list.add(FontEffectHelper.GOLD+"IT IS! :-)");
+				list.add(FontEffectUtil.getRandEff()+"How surprising!");
+				if(i==2)list.add(FontEffectUtil.GOLD+"IT IS! :-)");
 			}
 		}break;
 		case 1:{
-			list.add(FontEffectHelper.YELLOW+"Speeds up effects of objects!");
+			list.add(FontEffectUtil.YELLOW+"Speeds up effects of objects!");
 			if(i>0){
-				list.add(FontEffectHelper.AQUA+"If this is in a block it speeds up things like processing of materials");
-				list.add(FontEffectHelper.AQUA+"or if it is in a aromur peace like pants it makes you run faster.");
-				if(i==2)list.add(FontEffectHelper.BLUE+"I am so boring. Like extreamly boring!");
+				list.add(FontEffectUtil.AQUA+"If this is in a block it speeds up things like processing of materials");
+				list.add(FontEffectUtil.AQUA+"or if it is in a aromur peace like pants it makes you run faster.");
+				if(i==2)list.add(FontEffectUtil.BLUE+"I am so boring. Like extreamly boring!");
 			}
 		}break;
 		case 2:{
 			list.add("Adds extra controll to objects.");
 			if(i>0){
-				list.add(FontEffectHelper.DARK_GRAY+"IT CONTROLS EVERYTHING! "+FontEffectHelper.UNDERLINE+FontEffectHelper.AQUA+">:D");
-				if(i==2)list.add(FontEffectHelper.BLUE+"It controls every player in the worldObj and that includes you!");
+				list.add(FontEffectUtil.DARK_GRAY+"IT CONTROLS EVERYTHING! "+FontEffectUtil.UNDERLINE+FontEffectUtil.AQUA+">:D");
+				if(i==2)list.add(FontEffectUtil.BLUE+"It controls every player in the worldObj and that includes you!");
 			}
 		}break;
 		case 3:{
-			list.add(FontEffectHelper.BLUE+"Adds ability to "+FontEffectHelper.DARK_RED+"fly"+FontEffectHelper.BLUE+"!");
+			list.add(FontEffectUtil.BLUE+"Adds ability to "+FontEffectUtil.DARK_RED+"fly"+FontEffectUtil.BLUE+"!");
 			if(i>0){
-				if(Helper.RInt(20)==0)list.add("When pigs fly");
+				if(Util.RInt(20)==0)list.add("When pigs fly");
 				
-				if(i==2)if(Helper.RInt(80)==0){
-					String lolITrollerYou=FontEffectHelper.RED+""+FontEffectHelper.UNDERLINE+FontEffectHelper.OBFUSCATED+"aaa  "+FontEffectHelper.RESET+FontEffectHelper.RED+""+FontEffectHelper.UNDERLINE+"illuminati is"+(Helper.RB()?" not":"")+" real".toUpperCase()+"!  "+FontEffectHelper.OBFUSCATED+"  aaa";
+				if(i==2)if(Util.RInt(80)==0){
+					String lolITrollerYou=FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+FontEffectUtil.OBFUSCATED+"aaa  "+FontEffectUtil.RESET+FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+"illuminati is"+(Util.RB()?" not":"")+" real".toUpperCase()+"!  "+FontEffectUtil.OBFUSCATED+"  aaa";
 					list.add(lolITrollerYou);
 					list.add(lolITrollerYou);
 				}
@@ -146,8 +146,8 @@ public class GenericItemUpgrade extends Item{
 		}break;
 		case 4:{
 			String[] side={"up","down","left","right","forward","back","nowhere","overthere","to your mama","away from me","to hell","to store","to your computer","to that upgrade overthere"};
-			int r1=Helper.RInt(side.length),r2=Helper.RInt(side.length);
-			list.add(FontEffectHelper.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
+			int r1=Util.RInt(side.length),r2=Util.RInt(side.length);
+			list.add(FontEffectUtil.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
 			
 			if(stack.hasTagCompound()){
 				int id=stack.getTagCompound().getInteger("side");
@@ -161,24 +161,24 @@ public class GenericItemUpgrade extends Item{
 				}
 				list.add("Current side: "+EnumFacing.getFront(id).toString().toLowerCase());
 			}
-			else list.add(FontEffectHelper.RED+""+FontEffectHelper.UNDERLINE+"No NBT on stack!");
+			else list.add(FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+"No NBT on stack!");
 			if(i==2){
-				list.add(FontEffectHelper.GOLD+"First go "+FontEffectHelper.RED+side[r1]+FontEffectHelper.GOLD+"!");
-				list.add(FontEffectHelper.GOLD+"No actually go "+FontEffectHelper.RED+side[r2]+FontEffectHelper.GOLD+"!");
+				list.add(FontEffectUtil.GOLD+"First go "+FontEffectUtil.RED+side[r1]+FontEffectUtil.GOLD+"!");
+				list.add(FontEffectUtil.GOLD+"No actually go "+FontEffectUtil.RED+side[r2]+FontEffectUtil.GOLD+"!");
 			}
 		}break;
 		case 5:{
-			list.add(FontEffectHelper.BLUE+"Adds more capacity to containers.");
+			list.add(FontEffectUtil.BLUE+"Adds more capacity to containers.");
 			if(i>0){
 				list.add("If you could only press another button to see more.");
 				if(i==2)list.add("But unfortunately you can't.");
 			}
 		}break;
 		case 6:{
-			list.add(FontEffectHelper.BLUE+"In right place it could let you see more than ");
-			list.add(FontEffectHelper.BLUE+"only your "+(i!=0?FontEffectHelper.RED+"xRay ":"")+FontEffectHelper.BLUE+"eyes can see.");
+			list.add(FontEffectUtil.BLUE+"In right place it could let you see more than ");
+			list.add(FontEffectUtil.BLUE+"only your "+(i!=0?FontEffectUtil.RED+"xRay ":"")+FontEffectUtil.BLUE+"eyes can see.");
 			if(i>0){
-				list.add(FontEffectHelper.GOLD+"If you could only press another button to see"+(i==1?" more":"")+(i==1?"":(" "+FontEffectHelper.getRandEff()+"A"+FontEffectHelper.getRandEff()+"B"+FontEffectHelper.getRandEff()+"S"+FontEffectHelper.getRandEff()+"O"+FontEffectHelper.getRandEff()+"L"+FontEffectHelper.getRandEff()+"U"+FontEffectHelper.getRandEff()+"T"+FontEffectHelper.getRandEff()+"E"+FontEffectHelper.getRandEff()+"L"+FontEffectHelper.getRandEff()+"pos.getY()"+FontEffectHelper.getRandEff()+" "+FontEffectHelper.getRandEff()+"E"+FontEffectHelper.getRandEff()+"V"+FontEffectHelper.getRandEff()+"E"+FontEffectHelper.getRandEff()+"R"+FontEffectHelper.getRandEff()+"pos.getY()"+FontEffectHelper.getRandEff()+"T"+FontEffectHelper.getRandEff()+"H"+FontEffectHelper.getRandEff()+"I"+FontEffectHelper.getRandEff()+"N"+FontEffectHelper.getRandEff()+"G"+FontEffectHelper.getRandEff()+"!"+FontEffectHelper.getRandEff()+"!")));
+				list.add(FontEffectUtil.GOLD+"If you could only press another button to see"+(i==1?" more":"")+(i==1?"":(" "+FontEffectUtil.getRandEff()+"A"+FontEffectUtil.getRandEff()+"B"+FontEffectUtil.getRandEff()+"S"+FontEffectUtil.getRandEff()+"O"+FontEffectUtil.getRandEff()+"L"+FontEffectUtil.getRandEff()+"U"+FontEffectUtil.getRandEff()+"T"+FontEffectUtil.getRandEff()+"E"+FontEffectUtil.getRandEff()+"L"+FontEffectUtil.getRandEff()+"pos.getY()"+FontEffectUtil.getRandEff()+" "+FontEffectUtil.getRandEff()+"E"+FontEffectUtil.getRandEff()+"V"+FontEffectUtil.getRandEff()+"E"+FontEffectUtil.getRandEff()+"R"+FontEffectUtil.getRandEff()+"pos.getY()"+FontEffectUtil.getRandEff()+"T"+FontEffectUtil.getRandEff()+"H"+FontEffectUtil.getRandEff()+"I"+FontEffectUtil.getRandEff()+"N"+FontEffectUtil.getRandEff()+"G"+FontEffectUtil.getRandEff()+"!"+FontEffectUtil.getRandEff()+"!")));
 			}
 		}break;
 

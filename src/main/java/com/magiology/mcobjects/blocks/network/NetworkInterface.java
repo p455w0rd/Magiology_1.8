@@ -20,8 +20,8 @@ import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util.U;
 
 public class NetworkInterface extends BlockContainerMultiColision{
 	
@@ -48,21 +48,21 @@ public class NetworkInterface extends BlockContainerMultiColision{
 	
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(H.META, facing.getIndex());
+		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(U.META, facing.getIndex());
 	}
 	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
 		super.onBlockAdded(world, pos, state);
 		TileEntityNetworkInterface tile=(TileEntityNetworkInterface)world.getTileEntity(pos);
-		int side=SideHelper.convert(tile.getOrientation());
-		TileEntity test=world.getTileEntity(SideHelper.offset(side, pos));
+		int side=SideUtil.convert(tile.getOrientation());
+		TileEntity test=world.getTileEntity(SideUtil.offset(side, pos));
 		
 		if(!(test instanceof ISidedNetworkComponent)){
 			for(int i=0;i<tile.connections.length;i++){
 				if(
 						tile.connections[i]!=null&&
-						(test=world.getTileEntity(SideHelper.offset(side, pos)))instanceof ISidedNetworkComponent&&
+						(test=world.getTileEntity(SideUtil.offset(side, pos)))instanceof ISidedNetworkComponent&&
 						((ISidedNetworkComponent)test).getBrain()!=null
 				   ){
 					side=i;
@@ -70,7 +70,7 @@ public class NetworkInterface extends BlockContainerMultiColision{
 				}
 			}
 		}
-		TileEntity test2=world.getTileEntity(SideHelper.offset(side, pos));
+		TileEntity test2=world.getTileEntity(SideUtil.offset(side, pos));
 		if(side!=-1&&test2 instanceof ISidedNetworkComponent){
 			ISidedNetworkComponent component=(ISidedNetworkComponent) test2;
 			if(component!=null)tile.setBrain(component.getBrain());
@@ -122,14 +122,14 @@ public class NetworkInterface extends BlockContainerMultiColision{
 	}
 	@Override 
 	protected BlockState createBlockState(){
-		return new BlockState(this,new IProperty[]{H.META});
+		return new BlockState(this,new IProperty[]{U.META});
 	}
 	@Override
 	public IBlockState getStateFromMeta(int meta){
-	    return getDefaultState().withProperty(H.META, Integer.valueOf(meta));
+	    return getDefaultState().withProperty(U.META, Integer.valueOf(meta));
 	}
 	@Override
 	public int getMetaFromState(IBlockState state){
-		return ((Integer)state.getValue(H.META)).intValue();
+		return ((Integer)state.getValue(U.META)).intValue();
 	}
 }

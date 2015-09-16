@@ -1,0 +1,88 @@
+package com.magiology.mcobjects.items.armor;
+
+import java.util.List;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
+import com.magiology.render.models.ModelWingsFromTheBlackFire;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.H;
+
+public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
+
+
+	public String textureName;
+	
+	public CyborgWingsFromTheBlackFireItem(String unlocalizedName, ArmorMaterial material, String textureName, int type,CreativeTabs creativeTab){
+	    super(material, 0, type);
+	    this.textureName = textureName;
+	    this.setUnlocalizedName(unlocalizedName);
+//	    this.setTextureName(MReference.MODID + ":" + unlocalizedName);
+	    this.setCreativeTab(creativeTab);
+	    this.setMaxDamage(25);
+	    initUpgrade(Container.Helmet42);
+	}
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type){
+	    return null;
+	}
+	@Override
+	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){
+		super.addInformation(itemStack, player, list, par4);
+	}
+	
+	@Override
+	public void onArmorTick(World world,EntityPlayer player,ItemStack TheDFWings){
+		if(TheDFWings.hasTagCompound()){
+			NBTTagCompound NBT=TheDFWings.getTagCompound();
+			boolean prevState=NBT.getBoolean("HS");
+			int x=(int) player.posX,y=(int) player.posY,z=(int) player.posZ;
+			if(x<0)x--;
+			if(y<0)y--;
+			if(z<0)z--;
+			if(world.getTotalWorldTime()%3==0&&world.isRemote){
+				boolean bol=true;
+				float rotation=-player.rotationYaw;
+				double[] c=Util.cricleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
+				for(int l=0;l<3;l++){
+					double[] a=Util.cricleXZ(rotation+90-10+l*10),b=Util.cricleXZ(rotation-90-10+l*10);
+					a[0]*=2.7;b[0]*=2.7;
+					a[1]*=2.7;b[1]*=2.7;
+					Vec3 pp=new Vec3(player.posX,player.posY,player.posZ);
+					MovingObjectPosition 
+					aObj=world.rayTraceBlocks(pp, new Vec3(player.posX+a[0]+c[0],player.posY,player.posZ+a[1]+c[1]), false, false, true),
+					bObj=world.rayTraceBlocks(pp, new Vec3(player.posX+b[0]+c[0],player.posY,player.posZ+b[1]+a[1]), false, false, true);
+					boolean bul=aObj!=null&&bObj!=null?aObj.typeOfHit!=MovingObjectType.BLOCK&&bObj.typeOfHit!=MovingObjectType.BLOCK:false;
+					if(!bul){
+						bol=false;
+						continue;
+					}
+				}
+				boolean isUnderWater=Util.getBlock(world, x,y,z).getMaterial()==Material.water;
+				if((bol&&!isUnderWater)!=prevState||world.getTotalWorldTime()%20==0)Util.sendMessage(new GenericServerIntPacket(5, Util.booleanToInt(bol&&!isUnderWater||true)));
+			}
+		}else H.createNBT(TheDFWings);
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public ModelBiped getArmorModel(EntityLivingBase entity, ItemStack stack, int armorSlot){
+		return new ModelWingsFromTheBlackFire();
+	}
+}

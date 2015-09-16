@@ -3,7 +3,7 @@ package com.magiology.handelers;
 import java.awt.AWTException;
 import java.awt.Robot;
 
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public class EnhancedRobot extends Robot{
 	public EnhancedRobot()throws AWTException{super();}
@@ -14,7 +14,7 @@ public class EnhancedRobot extends Robot{
 			keyRelease(keyCode);
 		}catch(Exception e){
 			e.printStackTrace();
-			Helper.println(keyCode);
+			Util.println(keyCode);
 		}
 	}
 	public void clickKeyMouse(int keyCode){
@@ -23,7 +23,7 @@ public class EnhancedRobot extends Robot{
 			mouseRelease(keyCode);
 		}catch(Exception e){
 			e.printStackTrace();
-			Helper.println(keyCode);
+			Util.println(keyCode);
 		}
 	}
 }

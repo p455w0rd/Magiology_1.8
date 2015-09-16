@@ -31,18 +31,19 @@ import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.registry.events.PlayerWrenchEvent;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.SpecialPlayerHelper;
+import com.magiology.util.utilclasses.SpecialPlayerUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.EntityPosAndBB;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilobjects.NBTUtil;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
 //	WorldRenderer tess=TessHelper.getWR();
 	boolean isFP;
 	SpecialPlayerParicleHandeler spph=new SpecialPlayerParicleHandeler();
-	SlowdownHelper slowdown2=new SlowdownHelper(20);
+	SlowdownUtil slowdown2=new SlowdownUtil(20);
 	@SubscribeEvent
 	public void onLivingUpdateEvent(LivingUpdateEvent event){
 		World world=event.entity.worldObj;
@@ -52,10 +53,10 @@ public class EntityEvents{
 			Entity entity=event.entity;
 //			if(RenderLoopEvents.entitys.size()>50)RenderLoopEvents.entitys.remove(Helper.RInt(RenderLoopEvents.entitys.size()));
 			if(world.isRemote)if(entity instanceof EntityLivingBase){
-				EntityPlayer player=Helper.getThePlayer();
+				EntityPlayer player=Util.getThePlayer();
 				if(
 				   !entity.isDead&&
-				   entity.isInRangeToRender3d(player.posX+Helper.CRandI(50), player.posY+Helper.CRandI(50), player.posZ+Helper.CRandI(50))&&
+				   entity.isInRangeToRender3d(player.posX+Util.CRandI(50), player.posY+Util.CRandI(50), player.posZ+Util.CRandI(50))&&
 				   ((EntityLivingBase)entity).getCreatureAttribute()!=EnumCreatureAttribute.UNDEAD&&
 				   entity.isInRangeToRenderDist(entity.renderDistanceWeight)&&
 				   entity.getBoundingBox()!=null
@@ -64,12 +65,12 @@ public class EntityEvents{
 //					if(!contains&&RenderLoopEvents.entitys.size()<100)RenderLoopEvents.entitys.add(EPABB);
 					
 					
-					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&Helper.RB()&&(Helper.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1]))){
+					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&Util.RB()&&(Util.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1]))){
 						double[] l=EPABB.getRandDotInBB(1.5),k=EPABB.getMiddleOfBB();
-						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+Helper.CRandF(0.4), k[1]+Helper.CRandF(0.4), k[2]+Helper.CRandF(0.4), 600, 4, 1,0.2+Helper.RF()*0.5,0.2+Helper.RF()*0.5,0.5/(entity==player?8:1));
+						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+Util.CRandF(0.4), k[1]+Util.CRandF(0.4), k[2]+Util.CRandF(0.4), 600, 4, 1,0.2+Util.RF()*0.5,0.2+Util.RF()*0.5,0.5/(entity==player?8:1));
 						particle.isGL_DEPTHDisabled=true;
 						particle.noClip=true;
-						Helper.spawnEntityFX(particle);
+						Util.spawnEntityFX(particle);
 					}
 				}
 			}
@@ -115,8 +116,8 @@ public class EntityEvents{
 				InventoryPlayer inv=player.inventory;
 				
 				for(ItemStack a:inv.mainInventory){
-					if(Helper.isItemInStack(MItems.PowerCounter, a)){
-						Helper.createNBT(a);
+					if(Util.isItemInStack(MItems.PowerCounter, a)){
+						NBTUtil.createNBT(a);
 						boolean state=a.getTagCompound().getBoolean("state");
 						double animation=a.getTagCompound().getDouble("anim"),prevAnimation=a.getTagCompound().getDouble("pAnim");
 						prevAnimation=animation;
@@ -136,8 +137,8 @@ public class EntityEvents{
 				}
 				
 			}
-			if(SpecialPlayerHelper.getPlayerRank(player)!=-1){
-				isFP=H.getMC().gameSettings.thirdPersonView!=0;
+			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
+				isFP=U.getMC().gameSettings.thirdPersonView!=0;
 				if(player.isCollidedVertically)yv=0;
 				
 				if(isFP)spph.onUpdate(world, player, x,y,z,xv,yv,zv);
@@ -222,8 +223,8 @@ public class EntityEvents{
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)event.entity;
 			
-			if(SpecialPlayerHelper.getPlayerRank(player)!=-1){
-				isFP=H.getMC().gameSettings.thirdPersonView!=0;
+			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
+				isFP=U.getMC().gameSettings.thirdPersonView!=0;
 				if(isFP)spph.onJump(world, player, x,y,z);
 			}
 			//---------------------
@@ -239,8 +240,8 @@ public class EntityEvents{
 		World world=event.entity.worldObj;double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ;
 		if(event.entity instanceof EntityPlayer){
 			EntityPlayer player=(EntityPlayer)event.entity;
-			if(SpecialPlayerHelper.getPlayerRank(player)!=-1){
-				isFP=H.getMC().gameSettings.thirdPersonView!=0;
+			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
+				isFP=U.getMC().gameSettings.thirdPersonView!=0;
 				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
 			}
 			ExtendedPlayerData.get(player).onLand(true);
@@ -257,8 +258,8 @@ public class EntityEvents{
 		World world=event.entity.worldObj;double x=event.entity.posX,y=event.entity.posY,z=event.entity.posZ;
 		if(event.entity instanceof EntityPlayer){
 			ExtendedPlayerData.get((EntityPlayer)event.entity).onLand(false);
-			if(SpecialPlayerHelper.getPlayerRank((EntityPlayer) event.entity)!=-1){
-				isFP=H.getMC().gameSettings.thirdPersonView!=0;
+			if(SpecialPlayerUtil.getPlayerRank((EntityPlayer) event.entity)!=-1){
+				isFP=U.getMC().gameSettings.thirdPersonView!=0;
 				if(isFP)spph.onHitTheGround(world, x,y,z, (EntityPlayer)event.entity,event.distance);
 			}
 			//---------------------

@@ -1,11 +1,7 @@
 package com.magiology.forgepowered.event.client;
 
-import static com.magiology.util.utilclasses.FontEffectHelper.AQUA;
-import static com.magiology.util.utilclasses.FontEffectHelper.UNDERLINE;
-import static org.lwjgl.opengl.GL11.GL_COLOR_MATERIAL;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
+import static com.magiology.util.utilclasses.FontEffectUtil.*;
+import static org.lwjgl.opengl.GL11.*;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -39,16 +35,17 @@ import org.lwjgl.opengl.GL12;
 
 import com.magiology.api.power.PowerCore;
 import com.magiology.core.init.MItems;
+import com.magiology.gui.custom.hud.FakeMessageHUD;
 import com.magiology.gui.custom.hud.HUD;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.render.aftereffect.AfterRenderRenderer;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.EntityPosAndBB;
 
 public class RenderLoopEvents{
@@ -133,11 +130,11 @@ public class RenderLoopEvents{
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderWorldLast(RenderWorldLastEvent e){
 		partialTicks=e.partialTicks;
-		TessHelper.renderParticle();
-		EntityPlayer player = Helper.getThePlayer();
+		TessUtil.renderParticle();
+		EntityPlayer player = Util.getThePlayer();
 		
 		if(disabledEquippItemAnimationTime>0){
-			TessHelper.setItemRendererEquippProgress(1, false);
+			TessUtil.setItemRendererEquippProgress(1, false);
 			player.isSwingInProgress=false;
 		}
 		
@@ -149,14 +146,15 @@ public class RenderLoopEvents{
 		GL11.glPopMatrix();
 		
 		universalRender.clear();
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 	}
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void render2Dscreem(RenderGameOverlayEvent e){
 		if(!Minecraft.isGuiEnabled())return;
 		if(e.type!=ElementType.CHAT)return;
 		ScaledResolution res=e.resolution;
-		EntityPlayer player=Helper.getThePlayer();
+		EntityPlayer player=Util.getThePlayer();
+		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), partialTicks);
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0, -10);
 		for(int a=0;a<FPGui.size();a++){
@@ -167,8 +165,7 @@ public class RenderLoopEvents{
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();
-		GL11H.blend(true);
-//		Helper.printInln(e.resolution.getScaleFactor());
+		GL11U.blend(true);
 	}
 
     private float f1,f2,f3,f4,f5,f6,f7,f8;
@@ -176,15 +173,15 @@ public class RenderLoopEvents{
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event){
 		GL11.glPushMatrix();
 		EntityPlayer player=event.entityPlayer;
-		if(Helper.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getPlayerModel().aimedBow=true;
+		if(Util.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getPlayerModel().aimedBow=true;
 		
-		if(Helper.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
+		if(Util.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 			float rotation=0;
-			if(data!=null)rotation=Helper.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
-			GL11H.rotateXYZ(0, -player.rotationYaw, 0);
+			if(data!=null)rotation=Util.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
+			GL11U.rotateXYZ(0, -player.rotationYaw, 0);
 			GL11.glTranslated(0,-player.height+player.width/2, 0);
-			GL11H.rotateXYZ(rotation,0,0);
+			GL11U.rotateXYZ(rotation,0,0);
 			GL11.glTranslated(0, player.height-player.width/2, 0);
 			
 	        f1=player.renderYawOffset;
@@ -224,7 +221,7 @@ public class RenderLoopEvents{
 		EntityPlayer player=event.entityPlayer;
 		ComplexPlayerRenderingData data=ComplexPlayerRenderingData.get(player);
 		if(data==null)data=ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
-		if(Helper.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
+		if(Util.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			player.renderYawOffset=f1;
 	        player.prevRenderYawOffset=f2;
 	        
@@ -258,7 +255,7 @@ public class RenderLoopEvents{
 					TileEntity tileFromItem=registerdTiles.get(block);
 					//register
 					if(tileFromItem==null){
-						TileEntity tile=((BlockContainer)block).createNewTileEntity(H.getTheWorld(), 0);
+						TileEntity tile=((BlockContainer)block).createNewTileEntity(U.getTheWorld(), 0);
 						if(tile!=null){
 							tileFromItem=tile;
 							registerdTiles.put(block, tile);

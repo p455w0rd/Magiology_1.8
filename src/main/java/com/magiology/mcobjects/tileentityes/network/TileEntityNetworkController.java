@@ -21,22 +21,22 @@ import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.NetworkHelper;
-import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilclasses.SideHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
-	SlowdownHelper optimizer=new SlowdownHelper(40);
+	SlowdownUtil optimizer=new SlowdownUtil(40);
 	List<NetworkBaseInterface> interfaces=new ArrayList<NetworkBaseInterface>();
 	
 	
 	public TileEntityNetworkController(){
 		super(SixSidedBoolean.create(
 				Modifier.First6False,Modifier.Exclude,
-				SideHelper.enumFacingOrientation(EnumFacing.UP),SideHelper.enumFacingOrientation(EnumFacing.DOWN),
+				SideUtil.enumFacingOrientation(EnumFacing.UP),SideUtil.enumFacingOrientation(EnumFacing.DOWN),
 				Modifier.Last6False,Modifier.Exclude,
 				-1
 				).sides, SixSidedBoolean.lastGen.sides, 1, 20, 200, 100000);
@@ -81,7 +81,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
     	super.writeToNBT(NBT);
     	for(int i=0;i<6;i++){
     		NBT.setBoolean("bannedConnections"+i, bannedConnections[i]);
-    		NBT.setInteger("connections"+i, SideHelper.enumFacingOrientation(connections[i]));
+    		NBT.setInteger("connections"+i, SideUtil.enumFacingOrientation(connections[i]));
     	}
     	NBT.setLong("NI", getNetworkId());
     }
@@ -93,7 +93,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		if(optimizer.isTimeWithAddProgress()){
 			this.updateConnections();
 		}
-		PowerHelper.sortSides(this);
+		PowerUtil.sortSides(this);
 		updateValues();
 	}
 	
@@ -115,8 +115,8 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	@Override
 	public void updateConnections(){
 		UpdateablePipeHandeler.setConnections(connections, this);
-		for(int i=0;i<6;i++)setAccessibleOnSide(i, i!=SideHelper.DOWN()||i!=SideHelper.UP());
-		PowerHelper.sortSides(this);
+		for(int i=0;i<6;i++)setAccessibleOnSide(i, i!=SideUtil.DOWN()||i!=SideUtil.UP());
+		PowerUtil.sortSides(this);
 		setColisionBoxes();
 	}
 	public void power(boolean isRepeatable){
@@ -152,7 +152,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		
 		//generate && save
 		do{
-			long1=Helper.RL();
+			long1=Util.RL();
 		}while(networkIdMap.containsValue(long1)&&long1!=-1&&long1!=-2);
 		networkIdMap.put(tile, long1);
 		
@@ -178,11 +178,11 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	public <T extends TileEntity>boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array, int side){
 		if(tile instanceof ISidedPower){
 			ISidedPower pow=(ISidedPower)tile;
-			boolean Return=PowerHelper.canISidedPowerSendFromTo(pow, this, side);
+			boolean Return=PowerUtil.canISidedPowerSendFromTo(pow, this, side);
 			if(Return&&tile instanceof UpdateableTile)((UpdateableTile)tile).updateConnections();
 			return Return;
 		}else if(tile instanceof ISidedNetworkComponent){
-			return NetworkHelper.canConnect(this, (ISidedNetworkComponent)tile);
+			return NetworkUtil.canConnect(this, (ISidedNetworkComponent)tile);
 		}
 		return false;
 	}
@@ -216,7 +216,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					} else {
 					}
 					if(!isDone)for(int i=0;i<6;i++)if(workTile.getAccessibleOnSide(i)){
-						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideHelper.offsetNew(i, workTile.getHost().getPos()));
+						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideUtil.offsetNew(i, workTile.getHost().getPos()));
 						if(test instanceof ISidedNetworkComponent){
 							ISidedNetworkComponent t=(ISidedNetworkComponent)test;
 							if(t instanceof ISidedNetworkComponent&&!network.contains(t)&&t.getBrain()!=null&&t.getNetworkId()==getNetworkId()){
@@ -238,7 +238,8 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					
 				}
 			}while(more);
-			for(ISidedNetworkComponent a:network){
+			for(int i=0;i<network.size();i++){
+				ISidedNetworkComponent a=network.get(i);
 				if(a instanceof UpdateableTile)((UpdateableTile)a).updateConnections();
 				if(a instanceof TileEntityM)((TileEntityM)a).sync();
 			}

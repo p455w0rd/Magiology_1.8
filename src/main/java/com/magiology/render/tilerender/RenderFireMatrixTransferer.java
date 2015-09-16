@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.render.Textures;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
@@ -72,7 +72,7 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRendererM {
 		}
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11H.SetUpOpaqueRendering(1);
+		GL11U.SetUpOpaqueRendering(1);
 		GL11.glColor4d(1, 0.01, 0.01, 0.2);
 		
 		GL11.glTranslatef(0.5F, p*9+pos,0.5F);
@@ -117,7 +117,7 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRendererM {
 		GL11.glRotated(-ballRotation, 0, 1, 0);
 		GL11.glTranslatef(-0.5F, -p*9-pos, -0.5F);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		 
 		drawBase();
 		

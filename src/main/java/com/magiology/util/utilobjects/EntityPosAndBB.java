@@ -3,8 +3,8 @@ package com.magiology.util.utilobjects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class EntityPosAndBB{
 	public double[] BB;
@@ -18,9 +18,9 @@ public class EntityPosAndBB{
 	
 	public double[] getRandDotInBB(double randomness){
 		double[] result={0,0,0};
-		result[0]=entity.posX+Helper.CRandF(randomness);
-		result[1]=entity.posY+Helper.CRandF(randomness);
-		result[2]=entity.posZ+Helper.CRandF(randomness);
+		result[0]=entity.posX+Util.CRandF(randomness);
+		result[1]=entity.posY+Util.CRandF(randomness);
+		result[2]=entity.posZ+Util.CRandF(randomness);
 		
 		return result;
 	}
@@ -38,7 +38,7 @@ public class EntityPosAndBB{
 		return isDead;
 		}
 	public boolean isRendering(){
-		EntityPlayer p=H.getMC().thePlayer;
+		EntityPlayer p=U.getMC().thePlayer;
 		isRendering=entity.isInRangeToRender3d(p.posX, p.posY, p.posZ);
 		return isRendering;
 		}

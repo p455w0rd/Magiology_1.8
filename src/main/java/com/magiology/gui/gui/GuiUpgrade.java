@@ -14,9 +14,9 @@ import com.magiology.gui.container.UpgradeContainer;
 import com.magiology.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	
@@ -39,7 +39,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		GL11.glScaled(0.7,0.7,0.7);
 		int result=guiParticles.size();
 		for(GuiParticle as:guiParticles)if(as.isDead)result--;
-		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.    Number of GUI particles: "+result, 3, -11, Helper.rgbPrecentageToCode(1, 1, 1, 1));
+		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.    Number of GUI particles: "+result, 3, -11, Util.rgbPrecentageToCode(1, 1, 1, 1));
 		
 		GL11.glPopMatrix();
 		
@@ -48,7 +48,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
 		mouseX=x;
 		mouseY=y;
-		TessHelper.getWR();
+		TessUtil.getWR();
 		this.renderParticles(v1);
 		
 		double GL11alpha=1;
@@ -70,16 +70,16 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 			}
 		}
 		if(!isInBlend){
-			guiAlpha+=0.06+Helper.CRandF(0.05);
+			guiAlpha+=0.06+Util.CRandF(0.05);
 			if(guiAlpha>1)guiAlpha=1;
 		}
-		for(int ad=0;ad<30;ad++)guiAlpha=Helper.slowlyEqalize(guiAlpha, GL11alpha, 0.001);
+		for(int ad=0;ad<30;ad++)guiAlpha=Util.slowlyEqalize(guiAlpha, GL11alpha, 0.001);
 		if(guiAlpha<1){
 			GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		}
 		GL11.glColor4d(1, 1, 1, guiAlpha);
-		H.getMC().getTextureManager().bindTexture(main);
+		U.getMC().getTextureManager().bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, 6);
 		this.drawTexturedModalRect(guiLeft, guiTop+6, 0, 7, xSize, 17);
 		this.drawTexturedModalRect(guiLeft, guiTop+23, 0, 25, xSize, ySize);
@@ -91,8 +91,8 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		}
 		GL11.glColor4f(1, 1, 1, 1);
 		GL11.glDisable(GL11.GL_BLEND);
-		TessHelper.drawSlotLightMapWcustomSizes(this, 7+guiLeft, 7+guiTop, 16, 27,false,false);
-		TessHelper.drawPlayerIntoGUI(15+guiLeft, 30+guiTop, 10, guiLeft-x+16 , guiTop-y+25, mc.thePlayer);
+		TessUtil.drawSlotLightMapWcustomSizes(this, 7+guiLeft, 7+guiTop, 16, 27,false,false);
+		TessUtil.drawPlayerIntoGUI(15+guiLeft, 30+guiTop, 10, guiLeft-x+16 , guiTop-y+25, mc.thePlayer);
 	}
 	
 	@Override
@@ -109,7 +109,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 			for(int c=0;c<guiParticles.size();c++){
 				GuiParticle ab=guiParticles.get(c);
 				if(ab!=null&&ab.standardFX==GuiStandardFX.StarterFX&&!ab.isDead){
-					spawnGuiParticle(new GuiParticle(ab.xPos,ab.yPos,10, -ab.xSpeed, -ab.ySpeed,1,0.7,0.7,  1,0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2,texture1,GuiStandardFX.SummonedFX));
+					spawnGuiParticle(new GuiParticle(ab.xPos,ab.yPos,10, -ab.xSpeed, -ab.ySpeed,1,0.7,0.7,  1,0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2,texture1,GuiStandardFX.SummonedFX));
 					ab.xSpeed*=1.6;
 					ab.ySpeed*=1.6;
 				}
@@ -120,8 +120,8 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		mouseStartY=y;
 		if(isCtrlKeyDown()){
 			if((x<guiLeft||y<guiTop)||(x>guiLeft+xSize||y>guiTop+ySize)){
-				double[] ab=Helper.cricleXZ(Helper.RInt(360));
-				spawnGuiParticle(new GuiParticle(x,y,100, ab[0]*20, ab[1]*20,1,0.7,0.7,Helper.RF(),Helper.RF(), Helper.RF(),texture1,GuiStandardFX.SummonedFX));
+				double[] ab=Util.cricleXZ(Util.RInt(360));
+				spawnGuiParticle(new GuiParticle(x,y,100, ab[0]*20, ab[1]*20,1,0.7,0.7,Util.RF(),Util.RF(), Util.RF(),texture1,GuiStandardFX.SummonedFX));
 			}
 		}
     }
@@ -135,12 +135,12 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	public void update(){
 		if(particleAttractionTime>0)particleAttractionTime--;
 		else if(particleAttractionTime<0)particleAttractionTime++;
-		if(Helper.RInt(40)==0)spawnGuiParticle(new GuiParticle(Helper.RInt(height), Helper.RInt(width),600, 0,0,80,0.02,0.7,Helper.RF(),Helper.RF(),Helper.RF(),texture1,GuiStandardFX.BigCloudFX));
+		if(Util.RInt(40)==0)spawnGuiParticle(new GuiParticle(Util.RInt(height), Util.RInt(width),600, 0,0,80,0.02,0.7,Util.RF(),Util.RF(),Util.RF(),texture1,GuiStandardFX.BigCloudFX));
 		this.updateParticles();
-		int amount=10+Helper.RInt(10);
+		int amount=10+Util.RInt(10);
 		while(guiParticles.size()<amount){
-			double[] ab=Helper.cricleXZ(Helper.RInt(360));
-			spawnGuiParticle(new GuiParticle(width/2, height/2,0, ab[0], ab[1],1.3,0.7,0.7,1,0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2,texture1,GuiStandardFX.StarterFX));
+			double[] ab=Util.cricleXZ(Util.RInt(360));
+			spawnGuiParticle(new GuiParticle(width/2, height/2,0, ab[0], ab[1],1.3,0.7,0.7,1,0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2,texture1,GuiStandardFX.StarterFX));
 		}
 		if(Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){
 			if(isCtrlKeyDown()){
@@ -161,8 +161,8 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 						if(ab!=null&&ab.standardFX==GuiStandardFX.StarterFX&&!ab.isDead){
 							ab.xSpeed*=0.98;
 							ab.ySpeed*=0.98;
-							ab.xSpeed-=(float)(ab.xPos-mouseX)/50.0+Helper.CRandF(0.3);
-							ab.ySpeed-=(float)(ab.yPos-mouseY)/50.0+Helper.CRandF(0.3);
+							ab.xSpeed-=(float)(ab.xPos-mouseX)/50.0+Util.CRandF(0.3);
+							ab.ySpeed-=(float)(ab.yPos-mouseY)/50.0+Util.CRandF(0.3);
 						}
 					}
 				}

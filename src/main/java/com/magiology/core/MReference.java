@@ -18,5 +18,6 @@ public class MReference{
 		NEWEST_VERSION_URL= "http://www.mediafire.com/download/d41w4px39x74gzt/Magiology.jar",
 		MODS_SUBFOLDER_COMMON_ASSETS=MODS_SUBFOLDER_DIR+"/common",
 		MODS_SUBFOLDER_WIN_GUI=MODS_SUBFOLDER_DIR+"/externalGui",
-		INFO_FILE_NAME="FileForMod-"+MODID;
+		INFO_FILE_NAME="FileForMod-"+MODID,
+		ACCEPTED_MC_VERSION="["+MC_VERSION+"]";
 }

@@ -5,9 +5,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 
 public class Button extends TextBox{
@@ -20,39 +21,38 @@ public class Button extends TextBox{
 		super(host,"");
 		this.size=size;
 		scale=1;
-		body=new ComplexCubeModel(0, 0, -Helper.p/2, -size.x, -size.y, Helper.p/2);
+		body=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y, Util.p/2);
 	}
 
 	@Override
 	public void render(ColorF color){
 		inColor=color;
 		checkHighlight();
-		ColorF renderColor=Helper.calculateRenderColor(prevColor,this.color);
+		ColorF renderColor=Util.calculateRenderColor(prevColor,this.color);
 		renderColor.bind();
-		GL11H.scaled(scale);
-		if(body==null)body=new ComplexCubeModel(0, 0, -Helper.p/2, -size.x, -size.y, Helper.p/2);
+		GL11U.scaled(scale);
+		if(body==null)body=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y, Util.p/2);
 		body.draw();
-		
-		Helper.getFontRenderer();
 		GL11.glTranslatef(-size.x/2, -size.y/2, 0);
-		GL11H.culFace(false);
-		GL11H.scaled(-Helper.p);
-		GL11.glTranslatef(-Helper.getFontRenderer().getStringWidth(txt)/2, -Helper.getFontRenderer().FONT_HEIGHT/2, 0);
-		Helper.getFontRenderer().drawString(txt, 0, 0, this.setColor.toCode());
-		GL11H.culFace(true);
+		GL11U.culFace(false);
+		GL11U.scaled(-U.p);
+		GL11.glTranslatef(-Util.getFontRenderer().getStringWidth(txt)/2, -Util.getFontRenderer().FONT_HEIGHT/2, 0);
+		Util.getFontRenderer().drawString(txt, 0, 0, renderColor.mix(renderColor.negative(), 0.8F,1F).toCode());
+		GL11U.culFace(true);
+		
 	}
 
 	@Override
 	public void update(){
 		scale=1;
 		fixPos();
-		if(host.getWorld().getTotalWorldTime()%40==0)body=new ComplexCubeModel(0, 0, -Helper.p/2, -size.x, -size.y, Helper.p/2);
+		if(host.getWorld().getTotalWorldTime()%40==0)body=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y, Util.p/2);
 		
 		prevColor=color.copy();
 		checkHighlight();
 		if(isHighlighted||moveMode)
-			 color=Helper.slowlyEqalizeColor(color, new ColorF(1,1,1,0.6).mix(setColor), 0.15F);
-		else color=Helper.slowlyEqalizeColor(color, setColor.mix(inColor), 0.15F);
+			 color=Util.slowlyEqalizeColor(color, new ColorF(1,1,1,0.6).mix(setColor), 0.2F);
+		else color=Util.slowlyEqalizeColor(color, setColor, 0.2F);
 	}
 	@Override
 	public void onPressed(EntityPlayer player){

@@ -1,7 +1,6 @@
 package com.magiology.gui.custom.hud;
 
-import static com.magiology.core.MReference.NAME;
-import static com.magiology.core.MReference.UPDATER_DIR;
+import static com.magiology.core.MReference.*;
 
 import java.awt.Desktop;
 import java.awt.Rectangle;
@@ -17,33 +16,34 @@ import com.magiology.core.Magiology;
 import com.magiology.gui.custom.DownloadingIcon;
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.io.IOReadableMap;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsVec3F;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
-public class MainMenuUpdateNotificationHUD{
+public class MainMenuUpdateNotificationHUD extends HUD{
 	
-	public static AdvancedPhysicsVec3F rotation=new AdvancedPhysicsVec3F(new Vec3M(), new Vec3M(0.2,0.2,0.2));
-	public static AdvancedPhysicsFloat 
+	public static MainMenuUpdateNotificationHUD instance=new MainMenuUpdateNotificationHUD();
+	public AdvancedPhysicsVec3F rotation=new AdvancedPhysicsVec3F(new Vec3M(), new Vec3M(0.2,0.2,0.2));
+	public  AdvancedPhysicsFloat 
 		backgroundBlue=new AdvancedPhysicsFloat(0,0.01F),
 		textTransition=new AdvancedPhysicsFloat(0,0.3F,true),
 		popup=new AdvancedPhysicsFloat(-0.5F,0.05F),
 		down=new AdvancedPhysicsFloat(0,0.05F),
 		button=new AdvancedPhysicsFloat(0,0.3F,true);
-	private static NormalizedVertixBuffer buff=TessHelper.getNVB();
-	private static DoubleObject<Integer, Boolean> mousePrev;
-	public static boolean isClicked,selected,isDownloading=false,downloadingInvoked=false;
-	public static ColorF backgroundColor=new ColorF(0, 0, 0, 0.2F);
-	public static int timeout,lenghts[],biggest=-1;
-	private static String[] text={
+	private NormalizedVertixBuffer buff=TessUtil.getNVB();
+	private DoubleObject<Integer, Boolean> mousePrev;
+	public boolean isClicked,selected,isDownloading=false,downloadingInvoked=false;
+	public ColorF backgroundColor=new ColorF(0, 0, 0, 0.2F);
+	public int timeout,lenghts[],biggest=-1;
+	private String[] text={
 		"New update for: "+MReference.NAME,
 		"[click for more]",
 		"Click [HERE] to update the mod!",
@@ -55,7 +55,7 @@ public class MainMenuUpdateNotificationHUD{
 		"2. download a new one",
 		"3. place it in your mods folder"
 	};
-	static{
+	public MainMenuUpdateNotificationHUD(){
 		popup.friction=0.95F;
 		popup.addWall("1", 0.9999F, true);
 		popup.bounciness=0.4F;
@@ -77,7 +77,8 @@ public class MainMenuUpdateNotificationHUD{
 		}
 	}
 	
-	public static void update(){
+	@Override
+	public void update(){
 		popup.update();
 		rotation.update();
 		backgroundBlue.update();
@@ -85,10 +86,10 @@ public class MainMenuUpdateNotificationHUD{
 		button.update();
 		down.update();
 		
-		if(H.RB(0.1)){
-			rotation.x.wantedPoint=H.CRandF(20);
-			rotation.y.wantedPoint=H.CRandF(20);
-			rotation.z.wantedPoint=H.CRandF(1);
+		if(U.RB(0.1)){
+			rotation.x.wantedPoint=U.CRandF(20);
+			rotation.y.wantedPoint=U.CRandF(20);
+			rotation.z.wantedPoint=U.CRandF(1);
 		}
 		reimplementMouseEvents();
 		if(selected){
@@ -98,14 +99,14 @@ public class MainMenuUpdateNotificationHUD{
 		}else{
 			rotation.x.friction=rotation.y.friction=rotation.z.friction=0.9F;
 		}
-		button.wantedPoint=H.booleanToInt(isClicked&&getBoundingBoxClick(false).contains(Mouse.getX(),Display.getHeight()-Mouse.getY()));
+		button.wantedPoint=U.booleanToInt(isClicked&&getBoundingBoxClick(false).contains(Mouse.getX(),Display.getHeight()-Mouse.getY()));
 		
 		
 		if(timeout>0)timeout--;
 		else isClicked=false;
 		down.wantedPoint=isDownloading?1:-1;
-		textTransition.wantedPoint=H.booleanToInt(selected);
-		backgroundBlue.wantedPoint=H.booleanToInt(timeout>0);
+		textTransition.wantedPoint=U.booleanToInt(selected);
+		backgroundBlue.wantedPoint=U.booleanToInt(timeout>0);
 		if(isClicked&&Math.abs(rotation.getPoint().x)<0.055){
 			rotation.x.point=0;
 			rotation.y.point=0;
@@ -118,7 +119,7 @@ public class MainMenuUpdateNotificationHUD{
 		
 	}
 	
-	private static void onClick(int x,int y){
+	private void onClick(int x,int y){
 		if(isClicked&&getBoundingBoxClick(false).contains(x, y)){
 			terminateAndOpenUpdater();
 		}
@@ -126,7 +127,7 @@ public class MainMenuUpdateNotificationHUD{
 		timeout=40;
 	}
 	
-	public static void terminateAndOpenUpdater(){
+	public void terminateAndOpenUpdater(){
 		if(!isDownloading)try{
 			File updater=new File(UPDATER_DIR);
 			if(updater.exists()){
@@ -139,13 +140,14 @@ public class MainMenuUpdateNotificationHUD{
 				config.set("isDev", Magiology.IS_DEV);
 				config.writeToFile();
 				Desktop.getDesktop().open(updater);
-				Helper.exitSoft();
+				Util.exitSoft();
 			}
 			else DownloadingHandeler.downloadUpdater();
 		}catch(Exception e){e.printStackTrace();}
 	}
-	
-	public static void render(int width,int height){
+
+	@Override
+	public void render(int width,int height, float partialTicks){
 		float 
 			x=rotation.x.getPoint(), 
 			y=rotation.y.getPoint(), 
@@ -155,28 +157,24 @@ public class MainMenuUpdateNotificationHUD{
 		int FH=Get.Render.FR().FONT_HEIGHT;
 		Rectangle boundingBox=getBoundingBox(true);
 		
-		GL11H.protect();
-		GL11H.rotateXYZAt(popup.getPoint()*90-90, -popup.getPoint()*30+30, popup.getPoint()*40-40, biggest/2, FH, 0);
-		GL11H.scaled(popup.getPoint());
-		GL11H.SetUpOpaqueRendering(1);
-		GL11H.lighting(false);
-		GL11H.depth(false);
-		GL11H.texture(false);
+		GL11U.protect();
+		GL11U.rotateXYZAt(popup.getPoint()*90-90, -popup.getPoint()*30+30, popup.getPoint()*40-40, biggest/2, FH, 0);
+		GL11U.scaled(popup.getPoint());
+		GL11U.SetUpOpaqueRendering(1);
+		GL11U.lighting(false);
+		GL11U.depth(false);
+		GL11U.texture(false);
 		
-		GL11H.rotateXYZAt(x,y,z, biggest/2, FH, 0);
+		GL11U.rotateXYZAt(x,y,z, biggest/2, FH, 0);
 		if(button.getPoint()>0){
 			Rectangle boundingBoxClick=getBoundingBoxClick(true);
 			GL11.glColor4f(1, 0F, 0F, button.getPoint());
-			buff.addVertexWithUV(boundingBoxClick.getMinX(), boundingBoxClick.getMinY(), 0, 0, 0);
-			buff.addVertexWithUV(boundingBoxClick.getMinX(), boundingBoxClick.getMaxY(), 0, 0, 0);
-			buff.addVertexWithUV(boundingBoxClick.getMaxX(), boundingBoxClick.getMaxY(), 0, 0, 0);
-			buff.addVertexWithUV(boundingBoxClick.getMaxX(), boundingBoxClick.getMinY(), 0, 0, 0);
-			buff.draw();
+			drawRect(1, 1, boundingBoxClick.getMinX(), boundingBoxClick.getMinY(), 0, 0, boundingBoxClick.getWidth(), boundingBoxClick.getHeight());
 		}
 		GL11.glTranslatef(4, 4, 0);
 		backgroundColor.a=0.2F+0.3F*backgroundBlue.getPoint();
 		backgroundColor.b=backgroundBlue.getPoint();
-		GL11H.color(backgroundColor);
+		GL11U.color(backgroundColor);
 		//input vertices
 		buff.addVertexWithUV(0,                 0,                  0, 0, 0);
 		buff.addVertexWithUV(0,                 boundingBox.height, 0, 0, 0);
@@ -197,7 +195,7 @@ public class MainMenuUpdateNotificationHUD{
 		buff.setDrawModeToQuadPlate();
 		GL11.glColor4f(1,1,1,1);
 		//reset stuff for font rendering
-		GL11H.texture(true);
+		GL11U.texture(true);
 		//move text get out of the way. Get out of the way text get out of the way.
 		
 		GL11.glTranslatef(2, 2, 0);
@@ -213,30 +211,30 @@ public class MainMenuUpdateNotificationHUD{
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0, 110, 0);
-			GL11H.scaled(0.2);
-			GL11H.rotateXYZAt(-down.getPoint()*90+90, down.getPoint()*50-50, down.getPoint()*40-40, 85, 200, 0);
-			GL11H.scaled(down.getPoint());
+			GL11U.scaled(0.2);
+			GL11U.rotateXYZAt(-down.getPoint()*90+90, down.getPoint()*50-50, down.getPoint()*40-40, 85, 200, 0);
+			GL11U.scaled(down.getPoint());
 			DownloadingIcon.draw(col);
 		}
 		
 		
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		
 		//protect vanilla rendering for my stuff
-		GL11H.depth(true);
-		GL11H.endProtection();
+		GL11U.depth(true);
+		GL11U.endProtection();
 	}
-	private static Rectangle getBoundingBox(boolean hasGL11Transformation){
+	private Rectangle getBoundingBox(boolean hasGL11Transformation){
 		float scale=0;
-		if(hasGL11Transformation)scale=Helper.getGuiScale();
-		else scale=Helper.getGuiScaleRaw();
+		if(hasGL11Transformation)scale=Util.getGuiScale();
+		else scale=Util.getGuiScaleRaw();
 		int FH=Get.Render.FR().FONT_HEIGHT;
 		return new Rectangle((int) ((4)*scale),(int) ((4)*scale),(int) ((biggest+4)*scale),(int) ((FH*2+FH*(text.length-2)*backgroundBlue.getPoint()+4)*scale));
 	}
-	private static Rectangle getBoundingBoxClick(boolean hasGL11Transformation){
+	private Rectangle getBoundingBoxClick(boolean hasGL11Transformation){
 		float scale=0;
-		if(hasGL11Transformation)scale=Helper.getGuiScale();
-		else scale=Helper.getGuiScaleRaw();
+		if(hasGL11Transformation)scale=Util.getGuiScale();
+		else scale=Util.getGuiScaleRaw();
 		int FH=Get.Render.FR().FONT_HEIGHT;
 		return new Rectangle(
 				(int) ((4+(biggest-lenghts[2])/2+Get.Render.FR().getStringWidth("Click "))*scale),
@@ -247,7 +245,7 @@ public class MainMenuUpdateNotificationHUD{
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	private static void reimplementMouseEvents(){
+	private void reimplementMouseEvents(){
 		Rectangle boundingBox=getBoundingBox(false);
 		//simulate mouse event because forge mouse event is not active in main menu :(
 		int x1=Mouse.getX(),y1=Display.getHeight()-Mouse.getY();

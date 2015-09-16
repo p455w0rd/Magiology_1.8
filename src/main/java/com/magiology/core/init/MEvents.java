@@ -22,16 +22,16 @@ public class MEvents{
 	
 	public static void init(){
 		EventRegister(0,
-				HighlightInstance=new HighlightEvent(),
-				EntityInstance=new EntityEvents(),
-				RenderLoopInstance=new RenderLoopEvents(),
-				MouseInstance=new MouseEvents(),
-				GameLoopInstance=new GameLoopEvents(),
-				shaderHandeler=new ShaderRunner()
+			HighlightInstance=new HighlightEvent(),
+			EntityInstance=new EntityEvents(),
+			RenderLoopInstance=new RenderLoopEvents(),
+			MouseInstance=new MouseEvents(),
+			GameLoopInstance=new GameLoopEvents(),
+			shaderHandeler=new ShaderRunner()
 		);
 		EventRegister(1,
-				TickEvents.instance
-				);
+			TickEvents.instance
+		);
 	}
 	public static void EventRegister(int RegisterId,Object... classes){
 		if(classes.length>0)switch(RegisterId){

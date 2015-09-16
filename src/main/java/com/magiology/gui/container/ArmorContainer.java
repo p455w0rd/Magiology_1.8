@@ -16,7 +16,7 @@ import com.magiology.gui.guiutil.container.OnlyShiftClickSlot;
 import com.magiology.gui.guiutil.container.UpgItemContainer;
 import com.magiology.gui.guiutil.container.UpgItemSlot;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 
 public class ArmorContainer extends Container implements Updateable{
@@ -97,7 +97,7 @@ public class ArmorContainer extends Container implements Updateable{
 	
 	@Override
 	public ItemStack slotClick(int slotid, int x, int y, EntityPlayer player){
-		Helper.println(slotid);
+		Util.println(slotid);
 		int id=slotid-36;
 		if(id>=0&&id<=3)sliderVantedPos=-id*16;
 		while(inventorySlots.size()>inventoryItemStacks.size()){

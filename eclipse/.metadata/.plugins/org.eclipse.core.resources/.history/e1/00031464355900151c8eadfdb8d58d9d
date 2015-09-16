@@ -1,0 +1,10 @@
+package com.magiology.util.utilclasses.math;
+
+public class ObjectCalculator{
+	
+	public static Object calc(final Object left,final Object right){
+		
+		return null;
+	}
+	
+}

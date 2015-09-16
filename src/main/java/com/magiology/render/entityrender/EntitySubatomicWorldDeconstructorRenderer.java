@@ -9,13 +9,13 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util.U;
 
 public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 	public EntitySubatomicWorldDeconstructorRenderer(float scale){
-		super(TessHelper.getRM());
+		super(TessUtil.getRM());
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 	public void doRender(Entity en, double var1, double var2, double var3, float var4,float partialTicks){
 		try{
 			EntitySubatomicWorldDeconstructor entity=(EntitySubatomicWorldDeconstructor)en;
-			EntityPlayer player=H.getMC().thePlayer;
+			EntityPlayer player=U.getMC().thePlayer;
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),
 					-(float)(player.lastTickPosY+(player.posY-player.lastTickPosY)*partialTicks), 
@@ -50,8 +50,8 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 //			}
 			
 //			GL11H.scaled(scale);
-			GL11H.rotateXYZ(Math.toDegrees(Math.atan2(entity.motionX+entity.motionZ, entity.motionY)), Math.toDegrees(Math.atan2(entity.motionX,entity.motionZ)), 0);
-			TessHelper.drawCube(cube);
+			GL11U.rotateXYZ(Math.toDegrees(Math.atan2(entity.motionX+entity.motionZ, entity.motionY)), Math.toDegrees(Math.atan2(entity.motionX,entity.motionZ)), 0);
+			TessUtil.drawCube(cube);
 			
 //			GL11H.EndOpaqueRendering();
 			GL11.glEnable(GL11.GL_TEXTURE_2D);

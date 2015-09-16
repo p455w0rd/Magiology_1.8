@@ -1,17 +1,14 @@
 package com.magiology.handelers.web;
 
-import static com.magiology.core.MReference.MODS_SUBFOLDER_WIN_GUI;
-import static com.magiology.core.MReference.UPDATER_DIR;
-import static com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD.downloadingInvoked;
-import static com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD.isDownloading;
-import static com.magiology.handelers.web.MediaFireDownlader.downlad;
-import static com.magiology.handelers.web.MediaFireDownlader.downladAndName;
+import static com.magiology.core.MReference.*;
+import static com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD.*;
+import static com.magiology.handelers.web.MediaFireDownlader.*;
 
 import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 
 public class DownloadingHandeler{
@@ -24,10 +21,10 @@ public class DownloadingHandeler{
 	}
 	public static void downloadUpdater(){
 		new Thread(new Runnable(){@Override public void run(){
-			isDownloading=downloadingInvoked=true;
+			instance.isDownloading=instance.downloadingInvoked=true;
 			downlad(UPDATER_DIR, "http://www.mediafire.com/download/bps59al3r24tmuo/MagiologyUpdater.jar");
-			Helper.sleep(100);
-			isDownloading=false;
+			Util.sleep(100);
+			instance.isDownloading=false;
 		}}).start();
 	}
 	

@@ -29,16 +29,15 @@ import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomize;
-import com.magiology.render.tilerender.hologram.GuiObjectCustomizeContainer;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 public class GuiHandelerM implements IGuiHandler{
 	
 	public Container GetServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x, y, z));
-		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
+		MovingObjectPosition hit=Util.rayTrace(player,4, 1);
 		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
@@ -54,18 +53,18 @@ public class GuiHandelerM implements IGuiHandler{
 			return new ISidedPowerInstructorContainer(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:
 			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)
-			return new GuiObjectCustomizeContainer(player, (TileEntityHologramProjector) tile);
+			return new ContainerEmpty();
 		case MGui.HologramProjectorMainGui:
 			if(tile instanceof TileEntityHologramProjector)
 				return new ContainerEmpty();
 		}
-		Helper.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
 
 	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x,y,z));
-		MovingObjectPosition hit=Helper.rayTrace(player,4, 1);
+		MovingObjectPosition hit=Util.rayTrace(player,4, 1);
 		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
@@ -89,12 +88,12 @@ public class GuiHandelerM implements IGuiHandler{
 			if(tile instanceof TileEntityHologramProjector)
 				return new GuiHologramProjectorMain(player, (TileEntityHologramProjector)tile);
 		}
-		Helper.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
 	
 	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, int x,int y,int z){
-		if(H.isRemote(player))return;
+		if(U.isRemote(player))return;
 		FMLNetworkHandler.openGui(player, mainModClassInstance, modGuiId, player.getEntityWorld(), x,y,z);
 	}
 	

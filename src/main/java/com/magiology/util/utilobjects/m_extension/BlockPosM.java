@@ -9,7 +9,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class BlockPosM extends BlockPos{
@@ -44,7 +44,7 @@ public class BlockPosM extends BlockPos{
 		return world.getTileEntity(this);
 	}
 	public Block getBlock(World world){
-		return Helper.getBlock(world, this);
+		return Util.getBlock(world, this);
 	}
 	public IBlockState getState(World world){
 		return world.getBlockState(this);

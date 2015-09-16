@@ -1,9 +1,0 @@
-package com.magiology.gui.guiContainer;
-
-public class GuiContainerEmpty {
-
-	public GuiContainerEmpty() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

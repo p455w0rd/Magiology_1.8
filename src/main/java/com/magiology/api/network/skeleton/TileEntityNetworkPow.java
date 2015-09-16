@@ -11,15 +11,15 @@ import net.minecraft.util.EnumFacing;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.forgepowered.packets.NotifyPointedBoxChangePacket;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public EnumFacing[] connections = new EnumFacing[6];
@@ -54,11 +54,11 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	public void findBrain(){
 		int side=-1;TileEntity test=null;
 		for(int i=0;i<this.connections.length;i++)if(this.connections[i]!=null&&
-				(test=worldObj.getTileEntity(SideHelper.offsetNew(i, pos)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
+				(test=worldObj.getTileEntity(SideUtil.offsetNew(i, pos)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
 			side=i;i=this.connections.length;
 		}
 		if(side!=-1){
-			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideHelper.offsetNew(side, pos));
+			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideUtil.offsetNew(side, pos));
 			if(component!=null)NetworkBaseComponentHandeler.setBrain(component.getBrain(), this);
 		}
 	}
@@ -83,9 +83,9 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	}
 	@Override
 	public void detectAndSendChanges(){
-		if(!H.isRemote(this))return;
-		if(Helper.AxisAlignedBBEqual(pointId,prevPointId))return;
-		Helper.sendMessage(new NotifyPointedBoxChangePacket(this));
+		if(!U.isRemote(this))return;
+		if(Util.AxisAlignedBBEqual(pointId,prevPointId))return;
+		Util.sendMessage(new NotifyPointedBoxChangePacket(this));
 	}
 	@Override
 	public long getNetworkId(){
@@ -97,7 +97,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	}
 	@Override
 	public int getOrientation(){
-		return H.getBlockMetadata(worldObj, pos);
+		return U.getBlockMetadata(worldObj, pos);
 	}
 	@Override
 	public void initTheComponent(){
@@ -110,7 +110,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 		accessibleSides[side]=accessible;}
 	@Override
 	public void setOrientation(int orientation){
-		Helper.setMetadata(worldObj,pos, orientation);
+		Util.setMetadata(worldObj,pos, orientation);
 	}
 	@Override
 	public void setBrain(TileEntityNetworkController brain){

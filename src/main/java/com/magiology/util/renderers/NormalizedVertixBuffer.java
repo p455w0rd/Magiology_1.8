@@ -14,7 +14,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class NormalizedVertixBuffer{
@@ -86,8 +86,8 @@ public class NormalizedVertixBuffer{
 	public void pasteToTesselator(boolean type){
 		for(NormalizedVertixBuffer a:subBuffers){
 			for(ShadedTriangle b:a.shadedTriangles){
-				GL11H.transformVector(b.normal, new Vector3f(0,0,0),a.rotation.x,a.rotation.y,a.rotation.z,1);
-				for(int b1=0;b1<2;b1++)b.pos3[b1].vector3D=GL11H.transformVector(b.pos3[b1].vector3D, a.transformation);
+				GL11U.transformVector(b.normal, new Vector3f(0,0,0),a.rotation.x,a.rotation.y,a.rotation.z,1);
+				for(int b1=0;b1<2;b1++)b.pos3[b1].vector3D=GL11U.transformVector(b.pos3[b1].vector3D, a.transformation);
 			}
 			shadedTriangles.addAll(a.shadedTriangles);
 		}
@@ -96,18 +96,18 @@ public class NormalizedVertixBuffer{
 			for(int s=0;s<shadedTriangles.size();s++){
 				ShadedTriangle a=shadedTriangles.get(s);
 				if(type){
-					Vec3M finalNormal=GL11H.transformVector(a.normal.addVector(0,0,0), new Vector3f(0,0,0),rotation.x,rotation.y,rotation.z,1);
+					Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(0,0,0),rotation.x,rotation.y,rotation.z,1);
 					renderer.setNormal((float)finalNormal.x, (float)finalNormal.y, (float)finalNormal.z);
 					for(int b=0;b<a.pos3.length;b++){
-						Vec3M finalVec=GL11H.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
+						Vec3M finalVec=GL11U.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
 						if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY)renderer.addVertex(finalVec.x, finalVec.y, finalVec.z);
 						else renderer.addVertexWithUV(finalVec.x, finalVec.y, finalVec.z, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY);
 					}
 				}else{
 					Vec3M finalVects[]={
-							GL11H.transformVector(Vec3M.conv(a.pos3[0].vector3D), transformation),
-							GL11H.transformVector(Vec3M.conv(a.pos3[1].vector3D), transformation),
-							GL11H.transformVector(Vec3M.conv(a.pos3[2].vector3D), transformation)
+							GL11U.transformVector(Vec3M.conv(a.pos3[0].vector3D), transformation),
+							GL11U.transformVector(Vec3M.conv(a.pos3[1].vector3D), transformation),
+							GL11U.transformVector(Vec3M.conv(a.pos3[2].vector3D), transformation)
 						};
 					renderer.addVertexWithUV(finalVects[0].x, finalVects[0].y, finalVects[0].z, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
 					renderer.addVertexWithUV(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
@@ -127,17 +127,17 @@ public class NormalizedVertixBuffer{
 		return model;
 	}
 	public void renderToScreen(){
-		TessHelper.draw();
+		TessUtil.draw();
 		if(willClearAfterDraw)cleanUp();
 	}
 	
 	public void draw(){
 		if(willDrawAsAWireFrame){
-			GL11H.texture(false);
+			GL11U.texture(false);
 			startRecordingTesselator(GL11.GL_LINES);
 			pasteToTesselator(false);
 			renderToScreen();
-			GL11H.texture(true);
+			GL11U.texture(true);
 		}else{
 			startRecordingTesselator(GL11.GL_TRIANGLES);
 			pasteToTesselator(true);
@@ -186,7 +186,7 @@ public class NormalizedVertixBuffer{
 	}
 	public void transform(double x,double y,double z,double rotX,double rotY,double rotZ, double scale){
 		Vector3f.add(rotation, new Vector3f((float)rotX, (float)rotY, (float)rotZ), rotation);
-		Matrix4f.mul(transformation, GL11H.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale), transformation);
+		Matrix4f.mul(transformation, GL11U.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale), transformation);
 	}
 	
 	public void useInstantNormalCalculation(){
@@ -213,7 +213,7 @@ public class NormalizedVertixBuffer{
 	}
 	public void popMatrix(){
 		if(transformationStacks.isEmpty()){
-			H.printInln("Buffer is out of stacks to pop! You need to push before popping!\nFunction aborted.",H.getStackTrace());
+			U.printInln("Buffer is out of stacks to pop! You need to push before popping!\nFunction aborted.",U.getStackTrace());
 			return;
 		}
 		int pos=transformationStacks.size()-1;

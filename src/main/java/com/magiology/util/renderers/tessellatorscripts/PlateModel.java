@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilobjects.vectors.Vec8F;
 
 public class PlateModel{
@@ -96,7 +96,7 @@ public class PlateModel{
 		}
 		GL11.glPushMatrix();
 		GL11.glTranslatef(xPos, yPos, zPos);
-		NormalizedVertixBuffer buf=TessHelper.getNVB();
+		NormalizedVertixBuffer buf=TessUtil.getNVB();
 		if(quadUV==null||texture==null){
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			buf.cleanUp();
@@ -108,7 +108,7 @@ public class PlateModel{
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 		}else{
 //			Helper.println(texture);
-			TessHelper.bindTexture(texture);
+			TessUtil.bindTexture(texture);
 			buf.cleanUp();
 			buf.addVertexWithUV(Point4X, Point4Y, Point4Z,quadUV.x4,quadUV.y4);
 			buf.addVertexWithUV(Point3X, Point3Y, Point3Z,quadUV.x3,quadUV.y3);

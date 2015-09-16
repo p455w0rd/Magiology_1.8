@@ -6,7 +6,7 @@ import com.magiology.gui.custom.hud.HandModeChangerHUD;
 import com.magiology.gui.custom.hud.SoulFlameHUD;
 import com.magiology.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.gui.custom.hud.WingModeChangerHUD;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 public class MGui{
 	public static final byte
@@ -16,8 +16,8 @@ public class MGui{
 		GuiStats=3,
 		GuiSC=4,
 		GuiISidedPowerInstructor=5,
-		HologramProjectorMainGui=6,
-		HologramProjectorObjectCustomGui=7;
+		HologramProjectorObjectCustomGui=6,
+		HologramProjectorMainGui=7;
 	
 	public static void preInit(){
 		new GuiUpdater();
@@ -31,7 +31,7 @@ public class MGui{
 			RenderLoopEvents.registerFirstPersonGui(HandModeChangerHUD.instance);
 		}catch(Exception e){
 			e.printStackTrace();
-			H.exit(404);
+			U.exit(404);
 		}
 	}
 }

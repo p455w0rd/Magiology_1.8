@@ -12,13 +12,13 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.RenderObjectUploadPacket;
+import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.mcobjects.tileentityes.hologram.RenderObject;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
@@ -56,8 +56,8 @@ public class GuiObjectCustomize extends GuiContainer implements Updateable{
 		blue.drawTextBox();
 		alpha.drawTextBox();
 		
-		GL11H.SetUpOpaqueRendering(1);
-		GL11H.texture(false);
+		GL11U.SetUpOpaqueRendering(1);
+		GL11U.texture(false);
 		
 		ColorF mainColor=new ColorF(hologramProjector.mainColor.x, hologramProjector.mainColor.y, hologramProjector.mainColor.z,0.2);
 		mainColor.bind();
@@ -88,8 +88,8 @@ public class GuiObjectCustomize extends GuiContainer implements Updateable{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		GL11H.texture(true);
-		GL11H.EndOpaqueRendering();
+		GL11U.texture(true);
+		GL11U.EndOpaqueRendering();
 		
 		GL11.glPopMatrix();
 		
@@ -123,39 +123,46 @@ public class GuiObjectCustomize extends GuiContainer implements Updateable{
 		green.setMaxStringLength(7);
 		blue.setMaxStringLength(7);
 		alpha.setMaxStringLength(7);
-		redF  =new AdvancedPhysicsFloat(ro.setColor.r, 0.1F);
-		greenF=new AdvancedPhysicsFloat(ro.setColor.g, 0.1F);
-		blueF =new AdvancedPhysicsFloat(ro.setColor.b, 0.1F);
-		alphaF=new AdvancedPhysicsFloat(ro.setColor.a, 0.1F);
-		redF.simpleVersion=greenF.simpleVersion=blueF.simpleVersion=alphaF.simpleVersion=true;
+		redF  =new AdvancedPhysicsFloat(ro.setColor.r, 0.1F,true);
+		greenF=new AdvancedPhysicsFloat(ro.setColor.g, 0.1F,true);
+		blueF =new AdvancedPhysicsFloat(ro.setColor.b, 0.1F,true);
+		alphaF=new AdvancedPhysicsFloat(ro.setColor.a, 0.1F,true);
 		buttonList.add(new GuiButton(0, guiLeft+xSize/2-15, guiTop+15, 30, 18, "move"));
 	}
 	@Override
-	protected void keyTyped(char Char, int smth) throws IOException{
+	protected void keyTyped(char Char, int id) throws IOException{
 		//Enter simulates the esc button
-		if(Char==13)Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
-		if(!txt.textboxKeyTyped(Char, smth))
-		if(!red.textboxKeyTyped(Char, smth))
-		if(!green.textboxKeyTyped(Char, smth))
-		if(!blue.textboxKeyTyped(Char, smth))
-		if(!alpha.textboxKeyTyped(Char, smth))
-		super.keyTyped(Char, smth);
-		handleSpaces();
-		txt.setText(Helper.getStringForSize(txt.getText(),textLimitedToObj?ro.size.x/Helper.p:hologramProjector.size.x/Helper.p));
+		if(Char==13){
+			Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
+			return;
+		}
+		int textLenght=txt.getText().length(),pos=txt.getCursorPosition();
+		if(!txt.textboxKeyTyped(Char, id))
+			if(!red.textboxKeyTyped(Char, id))
+				if(!green.textboxKeyTyped(Char, id))
+					if(!blue.textboxKeyTyped(Char, id))
+						if(!alpha.textboxKeyTyped(Char, id))
+							super.keyTyped(Char, id);
+		if(textLenght!=txt.getText().length()){
+			handleSpaces();
+			txt.setText(Util.getStringForSize(txt.getText(),textLimitedToObj?ro.size.x/Util.p:hologramProjector.size.x/Util.p));
+			txt.setCursorPosition(pos-textLenght+txt.getText().length());
+		}
 		ro.setColor=new ColorF(
 				Float.parseFloat(red.getText()+"0"),
 				Float.parseFloat(green.getText()+"0"),
 				Float.parseFloat(blue.getText()+"0"),
 				Float.parseFloat(alpha.getText()+"0"));
 		if(suportsText&&!sc.isTextLimitedToObj()){
-			sc.setString(Helper.getStringForSize(txt.getText(),textLimitedToObj?ro.size.x/Helper.p:hologramProjector.size.x/Helper.p).trim());
+			sc.setString(Util.getStringForSize(txt.getText(),textLimitedToObj?ro.size.x/Util.p:hologramProjector.size.x/Util.p).trim());
+			if(textLenght!=txt.getText().length())txt.setCursorPosition(pos-textLenght+txt.getText().length());
 		}
 	}
 	@Override
 	public void onGuiClosed(){
 		super.onGuiClosed();
 		Keyboard.enableRepeatEvents(false);
-		txt.setText(Helper.getStringForSize(txt.getText(),textLimitedToObj?ro.size.x/Helper.p:hologramProjector.size.x/Helper.p).trim());
+		txt.setText(Util.getStringForSize(txt.getText(),textLimitedToObj?ro.size.x/Util.p:hologramProjector.size.x/Util.p).trim());
 		if(suportsText){
 			sc.setString(txt.getText());
 			if(sc.getString().isEmpty())sc.setString("   ");
@@ -165,7 +172,7 @@ public class GuiObjectCustomize extends GuiContainer implements Updateable{
 				Float.parseFloat(green.getText()+"0"),
 				Float.parseFloat(blue.getText()+"0"),
 				Float.parseFloat(alpha.getText()+"0"));
-		Helper.sendMessage(new RenderObjectUploadPacket(hologramProjector, ro));
+		Util.sendMessage(new RenderObjectUploadPacket(ro));
 	}
 	@Override
 	protected void mouseClicked(int x, int y, int id) throws IOException{
@@ -190,12 +197,12 @@ public class GuiObjectCustomize extends GuiContainer implements Updateable{
 		}
 	}
 	private void handleSpaces(){
+		int pointerPos=txt.getCursorPosition();
 		if(!txt.getText().isEmpty()&&txt.getText().length()>2){
-			if(txt.getText().charAt(0)==' '&&txt.getText().charAt(1)==' ')
-				txt.setText(txt.getText().substring(1));
-			if(txt.getText().charAt(txt.getText().length()-1)==' '&&txt.getText().charAt(txt.getText().length()-2)==' ')
-				txt.setText(txt.getText().substring(0,txt.getText().length()-1));
+			if(txt.getText().charAt(0)==' '&&txt.getText().charAt(1)==' ')txt.setText(txt.getText().substring(1));
+			if(txt.getText().charAt(txt.getText().length()-1)==' '&&txt.getText().charAt(txt.getText().length()-2)==' ')txt.setText(txt.getText().substring(0,txt.getText().length()-1));
 		}
+		txt.setCursorPosition(pointerPos);
 	}
 	@Override
 	public void update(){

@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.render.Textures;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
@@ -18,7 +18,7 @@ public class RenderEnergizedLapisOre extends TileEntitySpecialRendererM {
 		GL11.glPushMatrix();
 		this.bindTexture(Textures.EnergizedLapisOre);
 		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11H.SetUpOpaqueRendering(2);
+		GL11U.SetUpOpaqueRendering(2);
 		GL11.glTranslated(x,y,z);
 		for(int a=0;a<6;a++){
 			int b=0;int c=0;
@@ -45,7 +45,7 @@ public class RenderEnergizedLapisOre extends TileEntitySpecialRendererM {
 			GL11.glTranslated(-0.5, -0.5, -0.5);
 		}
 
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		
 //		GL11.glDisable(GL11.GL_TEXTURE_2D);
 //		GL11.glTranslated(0.5, 1.5, 0.5);

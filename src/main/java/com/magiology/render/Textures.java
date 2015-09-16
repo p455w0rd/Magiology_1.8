@@ -10,12 +10,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 @SideOnly(Side.CLIENT)
 public class Textures{
-	private static TextureManager re=H.getMC().renderEngine;
+	private static TextureManager re=U.getMC().renderEngine;
 	private static boolean isInit=false;
 	private static ArrayList<String> failedTextures=new ArrayList<String>();
 	private static String textur="WTF!?!!";
@@ -39,7 +39,7 @@ public class Textures{
 	
 	public static void postInit(){
 		//---textur stands for "no texture and it should be made as soon as possible"---\\
-		Helper.println("TEXTURE INIT STARTED!");
+		Util.println("TEXTURE INIT STARTED!");
 		if(isInit)return;isInit=true;
 		Helmet42Model=             getResource(MReference.MODID,"/models/textures/Helmet42Model.png");
 		GuiArmorEditor=            getResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
@@ -103,13 +103,13 @@ public class Textures{
 		ISidedIns=                 getResource(MReference.MODID,"/textures/gui/ISidedIns.png");
 		WingColors=                getResource(MReference.MODID,"/models/textures/wingColorMap.png");
 		
-		Helper.println("TEXTURE INIT ENDED!");
-		Helper.println("----\n--------\n------------");
-		Helper.println("Magiology error list:");
+		Util.println("TEXTURE INIT ENDED!");
+		Util.println("----\n--------\n------------");
+		Util.println("Magiology error list:");
 		if(failedTextures.size()>0)for(String er:failedTextures){
-			Helper.println("---> "+er);
-		}else Helper.println("Yay! there is no errors!");
-		Helper.println("------------\n--------\n----");
+			Util.println("---> "+er);
+		}else Util.println("Yay! there is no errors!");
+		Util.println("------------\n--------\n----");
 	}
 	public static ResourceLocation GetResource(String FolderPath){return getResource("",FolderPath);}
 	public static ResourceLocation getResource(String modID,String AfterModIDFolderPath){

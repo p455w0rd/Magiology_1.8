@@ -1,0 +1,29 @@
+package com.magiology.gui;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+
+import com.magiology.api.updateable.Updater;
+import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Helper.H;
+
+public class GuiUpdater{
+	static Minecraft mc=H.getMC();
+	private static GuiUpdater instance;
+	public static GuiUpdater GetInstace(){return instance;}
+	public GuiUpdater(){instance=this;}
+	
+	public static void tryToUpdate(EntityPlayer player){
+		if(player==null)return;
+		List objects=new ArrayList();
+		objects.add((Updateable)player.openContainer);
+		if(H.isRemote(player))objects.add(H.getMC().currentScreen);
+		Updater.update(objects);
+	}
+	public static interface Updateable{
+		public void update();
+	}
+}

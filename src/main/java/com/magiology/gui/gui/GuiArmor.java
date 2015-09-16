@@ -1,6 +1,6 @@
 package com.magiology.gui.gui;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.*;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,17 +20,17 @@ import com.magiology.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.render.itemrender.ItemRendererHelmet42;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	private ItemRendererHelmet42 IRH42 = new ItemRendererHelmet42();
 	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
-    protected static ItemRenderer itemRenderer = new ItemRenderer(H.getMC());
+    protected static ItemRenderer itemRenderer = new ItemRenderer(U.getMC());
 	ResourceLocation texture1=new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
 	ItemStack[] p42;
 	EntityPlayer player;
@@ -56,11 +56,11 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		prevSliderPos=sliderPos;
 		this.updateParticles();
 		for(int a=0;a<4;a++){
-			GuiParticle part=new GuiParticle(100+Helper.RInt(68)+guiLeft, 60+guiTop, 30, 0,-0.5+Helper.CRandF(0.5), Helper.RF()*2+2, o1/20, 1, Helper.RF(),Helper.RF()*0.5,Helper.RF()*0.2, texture1, GuiStandardFX.CloudFX);
+			GuiParticle part=new GuiParticle(100+Util.RInt(68)+guiLeft, 60+guiTop, 30, 0,-0.5+Util.CRandF(0.5), Util.RF()*2+2, o1/20, 1, Util.RF(),Util.RF()*0.5,Util.RF()*0.2, texture1, GuiStandardFX.CloudFX);
 			part.hasMovementNoise=false;
 			GuiContainerAndGuiParticles.spawnGuiParticle(part);
 		}
-		speed+=Helper.CRandD(0.15);
+		speed+=Util.CRandD(0.15);
 		double pos1=-guiTop-100-0.2*ySize/2.9F;
 		double pos2=-guiTop-100-0.8*ySize/2.9F;
 		if(playerYPos>pos1)speed-=0.015;
@@ -79,24 +79,24 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			if(o1<o2)o1+=0.035;
 			if(o1>o2)o1-=0.035;
 		}
-		long WT=H.getMC().theWorld.getTotalWorldTime();
-		if(Helper.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, 15, 0);
+		long WT=U.getMC().theWorld.getTotalWorldTime();
+		if(Util.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, 15, 0);
 		GL11.glTranslated(0, 0, 250);
 		drawBIGRotatingItemStack(p42[pos]);
 		GL11.glTranslated(0, 0,-250);
-		if(Helper.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, -15, 0);
+		if(Util.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, -15, 0);
 		
-		TessHelper.bindTexture(main);
-		GL11H.SetUpOpaqueRendering(2);
+		TessUtil.bindTexture(main);
+		GL11U.SetUpOpaqueRendering(2);
 		double scale=0.5;
 		drawSmartShit();
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.9F);
 		GL11.glTranslated(0, 0, 1);
 		drawSmartShit();
 		GL11.glTranslated(0, 0, -1);
-		GL11H.SetUpOpaqueRendering(2);
+		GL11U.SetUpOpaqueRendering(2);
 		double r1=(WT%20.0)/10.0,g1=(WT%65.0)/32.5,b1=(WT%50.0)/25.0;
 		double r=r1>1?2-r1:r1,g=g1>1?2-g1:g1,b=b1>1?2-b1:b1;
 		for(int spot=0;spot<4;spot++)if(isMouseOverFakeSlot(11, 8+spot*16, i, e)){
@@ -115,7 +115,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			GL11.glPopMatrix();
 		}
 		
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 	}
 	
 	public void drawSmartShit(){
@@ -130,7 +130,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	}
 	
 	public void drawBIGRotatingItemStack(ItemStack stack){
-		long WT=H.getMC().theWorld.getTotalWorldTime();
+		long WT=U.getMC().theWorld.getTotalWorldTime();
 		int angleX=(int)(WT%360),rotatePosX=37+8*3;
 		double angleY2=500,angleY1=(int)(WT%angleY2),angleY3=(angleY1>angleY2/2?angleY2-angleY1:angleY1),
 				angleY=(angleY3-angleY2/4)/(angleY2/25),rotateYOffset=36;
@@ -178,13 +178,13 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float v1, int v2, int v3){
-		TessHelper.bindTexture(main);
+		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		this.renderParticles(v1);
 		int pos=(int)Math.round(Math.abs(sliderPos/16));
-		TessHelper.bindTexture(main);
+		TessUtil.bindTexture(main);
 		GL11.glTranslated(guiLeft, guiTop, 0);
-		GL11H.SetUpOpaqueRendering(1);
+		GL11U.SetUpOpaqueRendering(1);
 		GL11.glColor4d(1, 1, 1, o1);
 		this.drawTexturedModalRect(60, 65, 0, 170, 100, 12);
 		this.drawTexturedModalRect(94, 61, 34, 166, 74, 4);
@@ -200,7 +200,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			}
 		}
 		GL11.glColor4d(1, 1, 1, 1);
-		GL11H.EndOpaqueRendering();
+		GL11U.EndOpaqueRendering();
 		GL11.glTranslated(-guiLeft, -guiTop, 0);
 		
 		o2=0;
@@ -215,9 +215,9 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		float posY=(float)(prevPlayerYPos+(playerYPos-prevPlayerYPos)*RenderLoopEvents.partialTicks);
 //		posY=(float)playerYPos;
 		GL11.glTranslated(playerXPos,-posY, 0);
-		TessHelper.drawPlayerIntoGUI(0, 0, 11, (float)playerXPos-v2 , (-posY)-v3, this.mc.thePlayer);
-		TessHelper.drawSlotLightMapWcustomSizes(this, -10, -26, 18, 32,false,true);
-		TessHelper.drawSlotLightMapWcustomSizes(this, -8, -24, 17, 28,false,false);
+		TessUtil.drawPlayerIntoGUI(0, 0, 11, (float)playerXPos-v2 , (-posY)-v3, this.mc.thePlayer);
+		TessUtil.drawSlotLightMapWcustomSizes(this, -10, -26, 18, 32,false,true);
+		TessUtil.drawSlotLightMapWcustomSizes(this, -8, -24, 17, 28,false,false);
 		this.drawTexturedModalRect(6, 4, 4, 100, 3, 1);
 		this.drawTexturedModalRect(6, 5, 7, 2, 2, 1);
 		this.drawTexturedModalRect(6, -25, 4, 100, 3, 1);
@@ -235,14 +235,14 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		 playerXPos=guiLeft-5;
 		 playerYPos=-guiTop-100-startRandom;
 		 this.buttonList.add(playerButton);
-		 startRandom=Helper.RInt((int)(ySize/2.9F));
+		 startRandom=Util.RInt((int)(ySize/2.9F));
 	 }
 	 
 	 @Override
 	 protected void actionPerformed(GuiButton b){
 		 switch (b.id){
 		 case 5:{
-			speed+=Helper.CRandD(5);
+			speed+=Util.CRandD(5);
 		 }break;
 		 
 		 }

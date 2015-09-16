@@ -13,12 +13,12 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
 
 public class ItemRendererPowerCounter implements IItemRenderer {
-	WorldRenderer tess=TessHelper.getWR();
-	FontRenderer fr=Helper.getFontRenderer();
+	WorldRenderer tess=TessUtil.getWR();
+	FontRenderer fr=Util.getFontRenderer();
 	private final float p= 1F/16F;
 	double anim,powerBar;
 	int maxPB,currentP;
@@ -127,11 +127,11 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 	}
 
 	public void drawCore(){
-		TessHelper.bindTexture(Textures.PowerCounterEnergyBar);
+		TessUtil.bindTexture(Textures.PowerCounterEnergyBar);
 		double var1=powerBar;
 		double var2=p*5+p*4*var1;
 		double var3=1-var1;
-		NormalizedVertixBuffer buf=TessHelper.getNVB();
+		NormalizedVertixBuffer buf=TessUtil.getNVB();
 		buf.cleanUp();
 		buf.addVertexWithUV(p*4-0.0001, var2, p*11, 0, var3);
 		buf.addVertexWithUV(p*4-0.0001, p*5,  p*11, 0, 1);
@@ -142,13 +142,13 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		double maxx=p*10;double maxy=p*10;double maxz=p*14;
 		
 		
-		TessHelper.bindTexture(Textures.PowerCounterFront);
+		TessUtil.bindTexture(Textures.PowerCounterFront);
 		buf.addVertexWithUV(minx, maxy, minz, 0, 0);
 		buf.addVertexWithUV(minx, miny, minz, 0, 1);
 		buf.addVertexWithUV(minx, miny, maxz, 1, 1);
 		buf.addVertexWithUV(minx, maxy, maxz, 1, 0);
 		buf.draw();
-		TessHelper.bindTexture(Textures.PowerCounterSide1);
+		TessUtil.bindTexture(Textures.PowerCounterSide1);
 		buf.addVertexWithUV(maxx, maxy, maxz, 1, 1);
 		buf.addVertexWithUV(maxx, miny,  maxz, 1, 0);
 		buf.addVertexWithUV(maxx, miny,  minz, 0, 0);

@@ -11,9 +11,9 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.PowerHelper.PowerItemHelper;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public interface PowerCore{
 	/**Keep it short! The shorter it is less bandwidth it takes!*/
@@ -48,10 +48,10 @@ public interface PowerCore{
 					//optional!! spawns particles from percentage of how full the power tile is
 					int ab=(int)(((float)tileMT.getEnergy()/(float)tileMT.getMaxEnergy())*10);
 					for(int a=0;a<ab*3;a++)world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0, 0);
-					for(int a=0;a<ab;a++)Helper.spawnEntityFX(new EntitySmoothBubleFX(world,
-						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,Helper.CRandF(0.05),Helper.CRandF(0.05),Helper.CRandF(0.05),
-						150,4+Helper.RInt(3),3,true,2,"tx1",
-						1, 0.2+Helper.RF()*0.5, 0.2+Helper.RF()*0.2, 1, 0.99));
+					for(int a=0;a<ab;a++)Util.spawnEntityFX(new EntitySmoothBubleFX(world,
+						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,Util.CRandF(0.05),Util.CRandF(0.05),Util.CRandF(0.05),
+						150,4+Util.RInt(3),3,true,2,"tx1",
+						1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.99));
 				}
 				//important stuff-------------------------------------------------------
 				//you a survival player?
@@ -66,7 +66,7 @@ public interface PowerCore{
 						//do i save you?
 						if(tileMT.isPowerKeptOnWrench()){
 							PowerItemHelper.markWithData(stack);
-							H.printInln(tileMT.isSavingFullNBT());
+							U.printInln(tileMT.isSavingFullNBT());
 //							if(tileMT.isSavingFullNBT()){
 //								NBTTagCompound nbt=stack.getTagCompound();
 //								tile.writeToNBT(nbt);
@@ -76,10 +76,10 @@ public interface PowerCore{
 //							}
 						}
 						//export to item & spawn
-						Helper.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, stack);
+						Util.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, stack);
 					}
 					//"else" is important... it is important mister Lapis... *faceplam*
-					else Helper.getBlock(world, pos).dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+					else Util.getBlock(world, pos).dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
 				}
 				//go away block!
 				world.setBlockToAir(pos);

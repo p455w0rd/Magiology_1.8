@@ -1,14 +1,10 @@
 package com.magiology.core;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.AQUA;
-import static com.mojang.realmsclient.gui.ChatFormatting.BLUE;
-import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
-import static com.mojang.realmsclient.gui.ChatFormatting.ITALIC;
-import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
 import com.magiology.handelers.web.DownloadingHandeler;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class VersionChecker{
 	private static float currentVersion=Float.parseFloat(MReference.VERSION),newestVersion=-1;
@@ -24,18 +20,18 @@ public class VersionChecker{
 		if(newestVersion!=-1){
 			show=true;
 			foundNew=newestVersion>currentVersion;
-			extraData=H.signature(AQUA)+"Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
+			extraData=U.signature(AQUA)+"Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
 		}
 	}
 	private static void getVersion(){
 		newestVersion=Float.parseFloat(DownloadingHandeler.findValue("VERSION"));
-		if(newestVersion==-1)Helper.printlnEr(MReference.NAME+" has failed to check for updates");
+		if(newestVersion==-1)Util.printlnEr(MReference.NAME+" has failed to check for updates");
 	}
 	public static float getCurrentVersion(){return currentVersion;}
 	public static float getNewestVersion(){return newestVersion;}
 	public static String getUpdateStatus(){
-		if(!foundNew)return H.signature(AQUA,ITALIC)+"Found a newer version! "+RESET+GOLD+"["+BLUE+"More info"+GOLD+"]";
-		else return H.signature(AQUA,ITALIC)+"I am up to date! "+BLUE+";)";
+		if(!foundNew)return U.signature(AQUA,ITALIC)+"Found a newer version! "+RESET+GOLD+"["+BLUE+"More info"+GOLD+"]";
+		else return U.signature(AQUA,ITALIC)+"I am up to date! "+BLUE+";)";
 	}
 	public static String getExtraData(){return extraData;}
 	public static boolean getFoundNew(){return foundNew||debug;}

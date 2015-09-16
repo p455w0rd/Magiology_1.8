@@ -44,6 +44,7 @@ public abstract class RenderObject implements SavableData{
 		if(getY()-size.y<-host.size.y)offset.y=-host.size.y+size.y;
 	}
 	public void checkHighlight(){
+		if(host==null||host.point==null)return;
 		if(host.point.isPointing){
 			Vec3M hit=host.point.pointedPos;
 			isHighlighted=
@@ -73,7 +74,7 @@ public abstract class RenderObject implements SavableData{
 		writeVec2F(floats__, offset);
 		integers.add(id);
 		floats__.add(scale);
-		writeColorF(floats__, color);
+		writeColorF(floats__, setColor);
 	}
 	@Override
 	public void readData(Iterator<Integer> integers,Iterator<Boolean> booleans,Iterator<Byte> bytes___,Iterator<Long> longs___,Iterator<Double> doubles_,Iterator<Float> floats__,Iterator<String> strings_,Iterator<Short> shorts__){
@@ -83,7 +84,7 @@ public abstract class RenderObject implements SavableData{
 		offset=readVec2F(floats__);
 		id=integers.next();
 		scale=floats__.next();
-		color=readColorF(floats__);
+		setColor=readColorF(floats__);
 	}
 	
 	public void writeVec2F(List<Float> floats__,Vector2f vec2f){

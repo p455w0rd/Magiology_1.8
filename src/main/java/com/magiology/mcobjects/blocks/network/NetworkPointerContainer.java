@@ -21,9 +21,9 @@ import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class NetworkPointerContainer extends BlockContainerMultiColision{
 	
@@ -53,8 +53,8 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 	}
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		int side=SideHelper.getOppositeSide(facing.getIndex());
-		TileEntity[] sides=SideHelper.getTilesOnSides(world,pos);
+		int side=SideUtil.getOppositeSide(facing.getIndex());
+		TileEntity[] sides=SideUtil.getTilesOnSides(world,pos);
 		if(!(sides[side] instanceof NetworkBaseInterface)){
 			for(int i=0;i<6;i++){
 				if(sides[i] instanceof NetworkBaseInterface){
@@ -63,8 +63,8 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 				}
 			}
 		}
-		side=SideHelper.getOppositeSide(side);
-		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(H.META, side);
+		side=SideUtil.getOppositeSide(side);
+		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(U.META, side);
 	}
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor){
@@ -80,17 +80,17 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
 		if(id<0)return false;
 		if(tile.getStackInSlot(id)==null){
-			if(!Helper.isItemInStack(MItems.NetworkPointer,player.getCurrentEquippedItem()))return false;
+			if(!Util.isItemInStack(MItems.NetworkPointer,player.getCurrentEquippedItem()))return false;
 			tile.setInventorySlotContents(id, player.getCurrentEquippedItem());
 			if(!player.capabilities.isCreativeMode)player.inventory.mainInventory[player.inventory.currentItem]=null;
 			return true;
 		}else{
-			EntityItem stack=Helper.dropBlockAsItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, tile.getStackInSlot(id));
+			EntityItem stack=Util.dropBlockAsItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, tile.getStackInSlot(id));
 			if(stack!=null){
 				stack.motionX=0;
 				stack.motionY=0;
 				stack.motionZ=0;
-				Helper.spawnEntity(stack);
+				Util.spawnEntity(stack);
 			}
 			tile.setInventorySlotContents(id, null);
 			return true;
@@ -98,14 +98,14 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 	}
 	@Override 
 	protected BlockState createBlockState(){
-		return new BlockState(this,new IProperty[]{H.META});
+		return new BlockState(this,new IProperty[]{U.META});
 	}
 	@Override
 	public IBlockState getStateFromMeta(int meta){
-	    return getDefaultState().withProperty(H.META, Integer.valueOf(meta));
+	    return getDefaultState().withProperty(U.META, Integer.valueOf(meta));
 	}
 	@Override
 	public int getMetaFromState(IBlockState state){
-		return ((Integer)state.getValue(H.META)).intValue();
+		return ((Integer)state.getValue(U.META)).intValue();
 	}
 }

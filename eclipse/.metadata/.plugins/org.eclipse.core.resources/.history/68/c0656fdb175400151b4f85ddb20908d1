@@ -1,8 +1,0 @@
-package com.magiology.gui.guiutil.gui.buttons;
-
-public class CleanButton
-
-	public CleanButton(){
-	}
-
-}

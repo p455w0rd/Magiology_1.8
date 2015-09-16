@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.render.Textures;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class ModelHelmet42 extends ModelBiped{
     ModelRenderer baseTop1,baseTop2,baseTop3,baseTop4,baseSide1,baseSide2,baseSide3,baseSide4,baseBack1,baseBack2,baseBack3,baseBack4;
@@ -100,7 +100,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  if(entity.isInvisible())return;
 		  isSneak=entity.isSneaking();
 	  }
-	  H.getMC().renderEngine.bindTexture(Textures.Helmet42Model);
+	  U.getMC().renderEngine.bindTexture(Textures.Helmet42Model);
 	  setRotationAngles(f, f1, f2, f3, f4, f5,entity);
 	  float color=1;
 	  if(entity!=null)if(entity instanceof EntityPlayer){
@@ -117,8 +117,8 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  if(shouldFollowThePlayerHasAMaster)shouldFollowThePlayer=shouldFollowThePlayerMaster;
 	  
 	  double yt=0,
-			  rotationX=entity!=null?bipedHead.rotateAngleX:shouldFollowThePlayer?-(H.getMC().thePlayer.rotationPitch/ (180F / (float)Math.PI)):0,
-			  rotationY=entity!=null?bipedHead.rotateAngleY:shouldFollowThePlayer?(H.getMC().thePlayer.rotationYawHead/(180F / (float)Math.PI)):0,
+			  rotationX=entity!=null?bipedHead.rotateAngleX:shouldFollowThePlayer?-(U.getMC().thePlayer.rotationPitch/ (180F / (float)Math.PI)):0,
+			  rotationY=entity!=null?bipedHead.rotateAngleY:shouldFollowThePlayer?(U.getMC().thePlayer.rotationYawHead/(180F / (float)Math.PI)):0,
 			  rotationZ=bipedHead.rotateAngleZ;
 	  
 	  rotationX*=(180F / (float)Math.PI);
@@ -135,7 +135,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  GL11.glRotated(rotationX, 1.0F, 0.0F, 0.0F);
 	  {
 		  float p=1F/16F;
-		  WorldRenderer tess=TessHelper.getWR();
+		  WorldRenderer tess=TessUtil.getWR();
 		  GL11.glColor4f(color, color, color, 1);
 		  baseTop1.render(f5);
 		  baseTop2.render(f5);
@@ -156,31 +156,31 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  GL11.glDepthMask(false);
 		  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		  tess.startDrawingQuads();
-		  tess.setColorRGBA_F((float)(0.8+Helper.CRandF(0.4)), (float)(0.2+Helper.CRandF(0.2)), (float)(0.1+Helper.CRandF(0.2)), (float)(0.7+Helper.RF()*0.3));
+		  tess.setColorRGBA_F((float)(0.8+Util.CRandF(0.4)), (float)(0.2+Util.CRandF(0.2)), (float)(0.1+Util.CRandF(0.2)), (float)(0.7+Util.RF()*0.3));
 		  tess.setBrightness(255);
 		  for(int a=0;a<2;a++){
-			  tess.addVertex(-p*3+Helper.CRandF(0.01), -p*4+Helper.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p*3+Helper.CRandF(0.01), -p*3+Helper.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p  +Helper.CRandF(0.01), -p*3+Helper.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p  +Helper.CRandF(0.01), -p*4+Helper.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p*3+Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p*3+Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p  +Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p  +Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
 			  
-			  tess.addVertex( p  +Helper.CRandF(0.01), -p*4+Helper.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p  +Helper.CRandF(0.01), -p*3+Helper.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p*3+Helper.CRandF(0.01), -p*3+Helper.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p*3+Helper.CRandF(0.01), -p*4+Helper.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p  +Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p  +Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p*3+Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p*3+Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
 		  }
-		  TessHelper.draw();
+		  TessUtil.draw();
 		  tess.startDrawing(GL11.GL_TRIANGLES);
-		  tess.setColorRGBA_F((float)(0.8+Helper.CRandF(0.4)), (float)(0.2+Helper.CRandF(0.2)), (float)(0.1+Helper.CRandF(0.2)), 1);
+		  tess.setColorRGBA_F((float)(0.8+Util.CRandF(0.4)), (float)(0.2+Util.CRandF(0.2)), (float)(0.1+Util.CRandF(0.2)), 1);
 		  tess.setBrightness(255);
 		  for(int l=0;l<2+(isSneak?4:0);l++){
-			  double[] criclexyz=Helper.createBallXYZ(0.5+Helper.RF(), false);
-			  tess.addVertex(criclexyz[0]+Helper.CRandF(0.3), criclexyz[1]+Helper.CRandF(0.3), criclexyz[2]+Helper.CRandF(0.3));
-			  tess.addVertex(criclexyz[0]+Helper.CRandF(0.3), criclexyz[1]+Helper.CRandF(0.3), criclexyz[2]+Helper.CRandF(0.3));
-			  tess.addVertex(criclexyz[0]+Helper.CRandF(0.3), criclexyz[1]+Helper.CRandF(0.3), criclexyz[2]+Helper.CRandF(0.3));
+			  double[] criclexyz=Util.createBallXYZ(0.5+Util.RF(), false);
+			  tess.addVertex(criclexyz[0]+Util.CRandF(0.3), criclexyz[1]+Util.CRandF(0.3), criclexyz[2]+Util.CRandF(0.3));
+			  tess.addVertex(criclexyz[0]+Util.CRandF(0.3), criclexyz[1]+Util.CRandF(0.3), criclexyz[2]+Util.CRandF(0.3));
+			  tess.addVertex(criclexyz[0]+Util.CRandF(0.3), criclexyz[1]+Util.CRandF(0.3), criclexyz[2]+Util.CRandF(0.3));
 		  }
 		  
-		  TessHelper.draw();
+		  TessUtil.draw();
 		  GL11.glEnable(GL11.GL_TEXTURE_2D);
 		  GL11.glEnable(GL11.GL_LIGHTING);
 		  GL11.glDisable(GL11.GL_BLEND);

@@ -5,12 +5,12 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.world.World;
 
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 
 @Deprecated
 public abstract class EntityFXMDeprecated extends EntityFX{
 	public static final float p=1F/16F;
-	protected static WorldRenderer tess=TessHelper.getWR();
+	protected static WorldRenderer tess=TessUtil.getWR();
 	public EntityFXMDeprecated(World world, double x, double y, double z, double xSpeed, double ySpeed,double zSpeed){
 		super(world, x,y,z, xSpeed, ySpeed, zSpeed);
 	}

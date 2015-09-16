@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.util.utilclasses.CricleHelper;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -47,15 +47,15 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         this.setSize(0.5F, 0.5F);
         this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
         
-        motionX=-CricleHelper.sin((int)this.rotationYaw)*CricleHelper.cos((int)this.rotationPitch)*speed;
-        motionZ= CricleHelper.cos((int) this.rotationYaw)*CricleHelper.cos((int)(this.rotationPitch))*speed;
-        motionY=-CricleHelper.sin((int) this.rotationPitch)*speed;
+        motionX=-CricleUtil.sin((int)this.rotationYaw)*CricleUtil.cos((int)this.rotationPitch)*speed;
+        motionZ= CricleUtil.cos((int) this.rotationYaw)*CricleUtil.cos((int)(this.rotationPitch))*speed;
+        motionY=-CricleUtil.sin((int) this.rotationPitch)*speed;
         
         double multiplayer=5,X=4,Y=-0.3,Z=4;
         
-        this.posX-=CricleHelper.cos((int)rotationYaw)*0.1F-(CricleHelper.sin(-(int)this.rotationYaw)*CricleHelper.cos((int)this.rotationPitch))/multiplayer*X;
-        this.posY-=-Y+CricleHelper.sin((int) this.rotationPitch)/multiplayer;
-        this.posZ-=CricleHelper.sin((int)rotationYaw)*0.1F-(CricleHelper.cos(-(int) this.rotationYaw)*CricleHelper.cos((int)(this.rotationPitch)))/multiplayer*Z;
+        this.posX-=CricleUtil.cos((int)rotationYaw)*0.1F-(CricleUtil.sin(-(int)this.rotationYaw)*CricleUtil.cos((int)this.rotationPitch))/multiplayer*X;
+        this.posY-=-Y+CricleUtil.sin((int) this.rotationPitch)/multiplayer;
+        this.posZ-=CricleUtil.sin((int)rotationYaw)*0.1F-(CricleUtil.cos(-(int) this.rotationYaw)*CricleUtil.cos((int)(this.rotationPitch)))/multiplayer*Z;
         
         this.setPosition(this.posX, this.posY, this.posZ);
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, speed * 1.5F, 1.0F);
@@ -97,7 +97,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         Vec3M vec31 = new Vec3M(this.posX, this.posY, this.posZ);
         Vec3M Vec3M = new Vec3M(this.posX + this.motionX, this.posY + this.motionY-0.05, this.posZ + this.motionZ);
         MovingObjectPosition MOP=worldObj.rayTraceBlocks(vec31.conv(), Vec3M.conv(), true,true,false);
-        block=Helper.getBlock(worldObj, pos);
+        block=Util.getBlock(worldObj, pos);
         if(MOP!=null&&MOP.typeOfHit!=MovingObjectType.MISS){
         	
             if(MOP.hitVec!=null){
@@ -105,7 +105,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
                 posY=MOP.hitVec.yCoord;
                 posZ=MOP.hitVec.zCoord;
                 targetHit=true;
-                Helper.spawnEntityFX(new EntityFlameFXM(worldObj, MOP.hitVec.xCoord, MOP.hitVec.yCoord, MOP.hitVec.zCoord, 0, 0+(targetHit?0.1:0), 0));
+                Util.spawnEntityFX(new EntityFlameFXM(worldObj, MOP.hitVec.xCoord, MOP.hitVec.yCoord, MOP.hitVec.zCoord, 0, 0+(targetHit?0.1:0), 0));
             }
              
             if(MOP.typeOfHit==MovingObjectType.ENTITY){
@@ -125,7 +125,7 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         	detonationTime--;
         	if(detonationTime<=0)setDead();
         }
-        Helper.spawnEntityFX(new EntityFlameFXM(worldObj, posX, posY, posZ, 0, 0+(targetHit?0.1:0), 0));
+        Util.spawnEntityFX(new EntityFlameFXM(worldObj, posX, posY, posZ, 0, 0+(targetHit?0.1:0), 0));
         motionX*=0.99;
         motionY*=0.99;
         motionZ*=0.99;
@@ -168,13 +168,13 @@ public class EntitySubatomicWorldDeconstructor extends Entity implements IProjec
         if(!worldObj.isRemote){
     		worldObj.createExplosion(shootingEntity, posX, posY, posZ, 90, true);
         	for(int a=0;a<15;a++){
-        		double[] b=Helper.createBallXYZ(20, false);
+        		double[] b=Util.createBallXYZ(20, false);
         		worldObj.createExplosion(shootingEntity, posX+b[0], posY+b[1], posZ+b[2], 50, true);
         	}
         	int pauwa=80;
         	for(int b=0;b<pauwa;b++){
         		EntityBallOfEnergy entity=new EntityBallOfEnergy(worldObj, posX, posY, posZ);
-        		entity.setVelocity(Helper.CRandD(5), Helper.CRandD(5)-1, Helper.CRandD(5));
+        		entity.setVelocity(Util.CRandD(5), Util.CRandD(5)-1, Util.CRandD(5));
         		entity.time=430;
         		worldObj.spawnEntityInWorld(entity);
         	}

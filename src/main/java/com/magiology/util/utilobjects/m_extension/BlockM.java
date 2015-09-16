@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public class BlockM extends Block{
 
@@ -40,9 +40,9 @@ public class BlockM extends Block{
 			try{
 				Get.Render.RI().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(modelsInit.get(block), "inventory"));
 			} catch (Exception e){
-				Helper.printInln("failed!",block,itemBlock,Get.Render.RI());
+				Util.printInln("failed!",block,itemBlock,Get.Render.RI());
 				e.printStackTrace();
-				Helper.exit(404);
+				Util.exit(404);
 			}
 		}
 //		modelsInit.clear();

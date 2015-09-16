@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
@@ -43,7 +43,7 @@ public class RenderBateryL1 extends TileEntitySpecialRendererM {
 	
 	public void renderSides() {
 		this.bindTexture(Textures.BateryL1Core);
-		TessHelper.drawQuad(new double[]{p*6, p*6,p*6, p*6, p*10,p*10,p*10,p*10},
+		TessUtil.drawQuad(new double[]{p*6, p*6,p*6, p*6, p*10,p*10,p*10,p*10},
 				            new double[]{p*10,p*6,p*6, p*10,p*10,p*6, p*6, p*10}, 
 				            new double[]{p*6, p*6,p*10,p*10,p*10,p*10,p*6, p*6},  
 				            new double[]{tW*48,tW*48,tW*17,tW*17,tW*17,tW*17,tW*48,tW*48},  

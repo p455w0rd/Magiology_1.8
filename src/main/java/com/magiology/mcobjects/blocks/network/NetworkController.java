@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 public class NetworkController extends BlockContainerMultiColision{
 	
@@ -49,14 +49,14 @@ public class NetworkController extends BlockContainerMultiColision{
 	}
 	@Override 
 	protected BlockState createBlockState(){
-		return new BlockState(this,new IProperty[]{H.META});
+		return new BlockState(this,new IProperty[]{U.META});
 	}
 	@Override
 	public IBlockState getStateFromMeta(int meta){
-	    return getDefaultState().withProperty(H.META, Integer.valueOf(meta));
+	    return getDefaultState().withProperty(U.META, Integer.valueOf(meta));
 	}
 	@Override
 	public int getMetaFromState(IBlockState state){
-		return ((Integer)state.getValue(H.META)).intValue();
+		return ((Integer)state.getValue(U.META)).intValue();
 	}
 }

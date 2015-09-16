@@ -4,6 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,44 +13,47 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util.U;
 
 public final class Get{
 	@SideOnly(value=Side.CLIENT)
 	public static final class Render{
 		public static final ItemRenderer IR(){
-			return H.getMC().getItemRenderer();
+			return U.getMC().getItemRenderer();
 		}
 		public static final RenderItem RI(){
-			return H.getMC().getRenderItem();
+			return U.getMC().getRenderItem();
 		}
 		public static final NormalizedVertixBuffer NVB(){
-			return TessHelper.getNVB();
+			return TessUtil.getNVB();
 		}
 		public static final WorldRenderer WR(){
-			return TessHelper.getWR();
+			return TessUtil.getWR();
 		}
 		public static final FontRenderer FR(){
-			return H.getFontRenderer();
+			return U.getFontRenderer();
 		}
 		public static EffectRenderer ER(){
-			return H.getMC(). effectRenderer;
+			return U.getMC(). effectRenderer;
 		}
 		public static ItemModelMesher IMM(){
-			return H.getMC().getRenderItem().getItemModelMesher();
+			return U.getMC().getRenderItem().getItemModelMesher();
+		}
+		public static Tessellator T(){
+			return Tessellator.getInstance();
 		}
 	}
 	@SideOnly(value=Side.CLIENT)
 	public static final class Client{
 		public static final EntityPlayer TP(){
-			return H.getThePlayer();
+			return U.getThePlayer();
 		}
 		public static final World TW(){
-			return H.getTheWorld();
+			return U.getTheWorld();
 		}
 		public static final boolean running(){
-			return !H.isNull(TP(),TW());
+			return !U.isNull(TP(),TW());
 		}
 	}
 	

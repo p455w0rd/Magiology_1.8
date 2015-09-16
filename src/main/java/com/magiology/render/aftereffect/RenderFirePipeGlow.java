@@ -7,22 +7,22 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.util.renderers.GL11H;
+import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.NormalizedVertixBufferModel;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
-import com.magiology.util.utilclasses.PowerHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
 	private final float p= 1F/16F;
-	NormalizedVertixBuffer buf=TessHelper.getNVB();
+	NormalizedVertixBuffer buf=TessUtil.getNVB();
 	public TileEntityFirePipe pipe;
 	public  double alpha=0,prevAlpha;
-	private static EntityPlayer player=H.getMC().thePlayer;
+	private static EntityPlayer player=U.getMC().thePlayer;
 	
 	public RenderFirePipeGlow(TileEntityFirePipe pipe){
 		this.pipe=pipe;
@@ -31,17 +31,17 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 
 	@Override
 	public void render(){
-		float fc=Helper.keepValueInBounds(PowerHelper.getPowerPrecentage(pipe), 0, 1);
+		float fc=Util.keepValueInBounds(PowerUtil.getPowerPrecentage(pipe), 0, 1);
 		if(fc>0.01){
 			GL11.glPushMatrix();
 			GL11.glTranslated(pipe.x(), pipe.y(), pipe.z());
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11H.SetUpOpaqueRendering(1);
+			GL11U.SetUpOpaqueRendering(1);
 			
-			double var1=Helper.fluctuator(20,(pipe.x()+pipe.y()+pipe.z())*4),
-				   var2=Helper.fluctuator(47,(pipe.x()+pipe.y()+pipe.z())*4);
+			double var1=Util.fluctuator(20,(pipe.x()+pipe.y()+pipe.z())*4),
+				   var2=Util.fluctuator(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
-			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*Helper.calculateRenderPos(prevAlpha, alpha));
+			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*Util.calculateRenderPos(prevAlpha, alpha));
 			GL11.glDepthMask(true);
 			if(!pipe.isStrate(null)){
 				for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i].getMain()&&pipe.connections[i].willRender())drawConnectorGlow(pipe.connections[i].getFaceEF());
@@ -54,7 +54,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 				if(pipe.isStrate(EnumFacing.getFront(b)))drawStrateCoreGlow(EnumFacing.getFront(b));
 			}
 			
-			GL11H.EndOpaqueRendering();
+			GL11U.EndOpaqueRendering();
 			GL11.glColor4d(1,1,1,1);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glPopMatrix();
@@ -130,7 +130,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			GL11H.rotateXYZ(rX, rY, rZ);
+			GL11U.rotateXYZ(rX, rY, rZ);
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			connectorGlowModel.draw();
 			GL11.glPopMatrix();
@@ -200,16 +200,16 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
 	@Override
 	public void update(){
-		player=Helper.getThePlayer();
+		player=Util.getThePlayer();
 		if(player==null)return;
 		
 		prevAlpha=alpha;
 		
-		alpha+=0.4*(Helper.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
+		alpha+=0.4*(Util.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
 		
 		if(!(player.worldObj.getTileEntity(pipe.getPos())instanceof TileEntityFirePipe))kill();
 		
-		alpha=Helper.keepValueInBounds(alpha, 0, 1);
+		alpha=Util.keepValueInBounds(alpha, 0, 1);
 		if(alpha<0.05)kill();
 	}
 }

@@ -11,12 +11,12 @@ import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
-import com.magiology.util.utilclasses.NetworkHelper;
-import com.magiology.util.utilobjects.SlowdownHelper;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class TileEntityNetworkConductor extends TileEntityNetwork implements IUpdatePlayerListBox{
 	
-	private SlowdownHelper optimizer=new SlowdownHelper(40);
+	private SlowdownUtil optimizer=new SlowdownUtil(40);
 	
 	public TileEntityNetworkConductor(){}
 	
@@ -54,7 +54,7 @@ public class TileEntityNetworkConductor extends TileEntityNetwork implements IUp
 	}
 	@Override
 	public <T extends TileEntity>boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array, int side){
-		return NetworkHelper.canConnect(this, (ISidedNetworkComponent)tile);
+		return NetworkUtil.canConnect(this, (ISidedNetworkComponent)tile);
 	}
 
 	@Override

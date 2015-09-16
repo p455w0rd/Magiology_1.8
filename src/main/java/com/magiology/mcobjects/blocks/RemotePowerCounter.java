@@ -12,13 +12,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public class RemotePowerCounter extends BlockContainer {
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos){
-		int BM=Helper.getBlockMetadata((World)world, pos);
+		int BM=Util.getBlockMetadata((World)world, pos);
 		float p=1F/16F;
 		if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
 		else if(BM==1)setBlockBounds(p*5, 0F,  p*2, p*11, p*2, p*14);
@@ -30,7 +30,7 @@ public class RemotePowerCounter extends BlockContainer {
 	
 	 @Override
    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos,IBlockState state){
-			int BM=Helper.getBlockMetadata(world, pos);
+			int BM=Util.getBlockMetadata(world, pos);
 			float p=1F/16F;
 			if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
 			else if(BM==1)setBlockBounds(p*5, 0F,  p*2, p*11, p*2, p*14);
@@ -55,7 +55,7 @@ public class RemotePowerCounter extends BlockContainer {
 	
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-        return world.getBlockState(pos).withProperty(Helper.META, facing.getIndex()+meta);
+        return world.getBlockState(pos).withProperty(Util.META, facing.getIndex()+meta);
     }
 	
 	

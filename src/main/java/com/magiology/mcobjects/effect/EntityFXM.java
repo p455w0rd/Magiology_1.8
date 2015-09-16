@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 
 public class EntityFXM extends EntityFX{
@@ -52,7 +52,7 @@ public class EntityFXM extends EntityFX{
     	tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
     	tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
     	tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-    	if(draw)TessHelper.draw();
+    	if(draw)TessUtil.draw();
 	}
 	@Override
 	public int getFXLayer(){return 3;}
@@ -63,7 +63,7 @@ public class EntityFXM extends EntityFX{
 		this.prevPosZ=this.posZ;
 		this.particleAge++;
 		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500&&worldObj.rand.nextBoolean())this.setDead();
-		if(H.getMC().gameSettings.particleSetting==2)this.setDead();
+		if(U.getMC().gameSettings.particleSetting==2)this.setDead();
 		this.motionHandeler();
 	}
 	

@@ -1,5 +1,0 @@
-package com.magiology.api.updateable;
-
-public interface Updateable{
-	void update();
-}

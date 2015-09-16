@@ -16,7 +16,7 @@ import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 public class NetworkConductor extends BlockContainerMultiColision{
 	
@@ -47,7 +47,7 @@ public class NetworkConductor extends BlockContainerMultiColision{
 	}
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(H.META, facing.getIndex());
+		return super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(U.META, facing.getIndex());
 	}
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor){
@@ -59,14 +59,14 @@ public class NetworkConductor extends BlockContainerMultiColision{
     }
 	@Override 
 	protected BlockState createBlockState(){
-		return new BlockState(this,new IProperty[]{H.META});
+		return new BlockState(this,new IProperty[]{U.META});
 	}
 	@Override
 	public IBlockState getStateFromMeta(int meta){
-	    return getDefaultState().withProperty(H.META, Integer.valueOf(meta));
+	    return getDefaultState().withProperty(U.META, Integer.valueOf(meta));
 	}
 	@Override
 	public int getMetaFromState(IBlockState state){
-		return ((Integer)state.getValue(H.META)).intValue();
+		return ((Integer)state.getValue(U.META)).intValue();
 	}
 }

@@ -1,9 +1,6 @@
 package com.magiology.gui.guiutil.container;
 
-import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.getItemUpgradeID;
-import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.getItemUpgradeType;
-import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.isItemUpgrade;
-import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.isUpgradeValid;
+import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.*;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

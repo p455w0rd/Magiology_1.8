@@ -17,17 +17,17 @@ import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.event.TickEvents;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
-import com.magiology.forgepowered.packets.RightClickBlockPacket;
-import com.magiology.forgepowered.packets.generic.GenericServerIntPacket;
+import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.container.SmartCrafterContainer;
 import com.magiology.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
-import com.magiology.util.renderers.GL11H;
-import com.magiology.util.renderers.TessHelper;
-import com.magiology.util.utilclasses.Helper;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 
 public class GuiSC extends GuiContainerAndGuiParticles{
 	
@@ -63,7 +63,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 				GuiContainerAndGuiParticles.spawnGuiParticle(part);
 				part.scale=2;
 				part.opacity=0.03;
-			}else if(H.getMC().theWorld.getTotalWorldTime()%2==0){
+			}else if(U.getMC().theWorld.getTotalWorldTime()%2==0){
 				part=new GuiParticle(mouseX,  mouseY, 6, 0, 0, 1, 0.15, 0.15, txt, GuiStandardFX.InpactFX);
 				GuiContainerAndGuiParticles.spawnGuiParticle(part);
 				part.scale=2;
@@ -73,9 +73,9 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		}
 		prevMouseX=mouseX;
 		prevMouseY=mouseY;
-		FontRenderer fr=Helper.getFontRenderer();
+		FontRenderer fr=Util.getFontRenderer();
 		GL11.glTranslated(-guiLeft, -guiTop, 0);
-		TessHelper.bindTexture(main);
+		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(addButton.xPosition, addButton.yPosition, 93, 167, 9, 9);
 		{
 			GL11.glPushMatrix();
@@ -83,7 +83,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			int l=14737632;
 			if(button.mousePressed(mc,x,y))l=16777120;
 			GL11.glTranslated(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
-			GL11H.rotateXYZ(0, 0, 90);
+			GL11U.rotateXYZ(0, 0, 90);
 			GL11.glTranslated(3, -4, 1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, l);
 			GL11.glTranslated(1, -1, -1);
@@ -95,7 +95,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			int l=14737632;
 			if(button.mousePressed(mc,x,y))l=16777120;
 			GL11.glTranslated(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
-			GL11H.rotateXYZ(0, 0, -90);
+			GL11U.rotateXYZ(0, 0, -90);
 			GL11.glTranslated(-3, -4, 1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, l);
 			GL11.glTranslated(-1, 1, -1);
@@ -108,8 +108,8 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	}
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
-		TessHelper.getWR();
-		TessHelper.bindTexture(main);
+		TessUtil.getWR();
+		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 //		this.drawTexturedModalRect(guiLeft, guiTop-66, 0, -32, xSize, 100);
 		GL11.glPushMatrix();
@@ -165,11 +165,11 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		{	
 			String text=txt1.getText();
 			if(!text.isEmpty()){
-				if(!Helper.isInteger(text)){
+				if(!Util.isInteger(text)){
 					String clearedText="";
 					char[] chars=text.toCharArray();
 					boolean[] valid=new boolean[chars.length];
-					for(int a=0;a<chars.length;a++){valid[a]=Helper.isInteger(chars[a]+"");}
+					for(int a=0;a<chars.length;a++){valid[a]=Util.isInteger(chars[a]+"");}
 					for(int a=0;a<chars.length;a++)if(valid[a])clearedText+=chars[a]+"";
 					txt1.setText(clearedText);
 				}
@@ -177,11 +177,11 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		}{
 			String text=txt2.getText();
 			if(!text.isEmpty()){
-				if(!Helper.isInteger(text)){
+				if(!Util.isInteger(text)){
 					String clearedText="";
 					char[] chars=text.toCharArray();
 					boolean[] valid=new boolean[chars.length];
-					for(int a=0;a<chars.length;a++){valid[a]=Helper.isInteger(chars[a]+"");}
+					for(int a=0;a<chars.length;a++){valid[a]=Util.isInteger(chars[a]+"");}
 					for(int a=0;a<chars.length;a++)if(valid[a])clearedText+=chars[a]+"";
 					txt2.setText(clearedText);
 				}
@@ -201,14 +201,14 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 				tileCB.wantedProducts[listOffset].ammountWanted=Integer.parseInt(txt1.getText());
 				txt1.setText("");
 			}else tileCB.wantedProducts[listOffset].ammountWanted=0;
-			Helper.sendMessage(new GenericServerIntPacket(2, tileCB.wantedProducts[listOffset].ammountWanted));
+			Util.sendMessage(new GenericServerIntPacket(2, tileCB.wantedProducts[listOffset].ammountWanted));
 		}
 		if(prevTxt2State&&!txt2State){
 			if(!txt2.getText().isEmpty()){
 				tileCB.wantedProducts[listOffset+1].ammountWanted=Integer.parseInt(txt2.getText());
 				txt2.setText("");
 			}else tileCB.wantedProducts[listOffset+1].ammountWanted=0;
-			Helper.sendMessage(new GenericServerIntPacket(3, tileCB.wantedProducts[listOffset+1].ammountWanted));
+			Util.sendMessage(new GenericServerIntPacket(3, tileCB.wantedProducts[listOffset+1].ammountWanted));
 		}
 		if(!prevTxt1State&&txt1State)if(tileCB.wantedProducts[listOffset  ].ammountWanted!=0)txt1.setText(tileCB.wantedProducts[listOffset  ].ammountWanted+"");
 		if(!prevTxt2State&&txt2State)if(tileCB.wantedProducts[listOffset+1].ammountWanted!=0)txt2.setText(tileCB.wantedProducts[listOffset+1].ammountWanted+"");
@@ -238,7 +238,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 					if(ab.age<2){
 						ab.UpdateScreenRes(width,height,guiLeft,guiTop,xSize,ySize);
 						ab.UpdateParticle();
-					}else ab.maxAge=10+Helper.RInt(40);
+					}else ab.maxAge=10+Util.RInt(40);
 					
 				}
 			}
@@ -252,7 +252,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	@Override
 	protected void actionPerformed(GuiButton b){
 		boolean sideSwitcher=false;
-		int rot=(int)(H.getMC().thePlayer.rotationYawHead%360);
+		int rot=(int)(U.getMC().thePlayer.rotationYawHead%360);
 		while(rot<0)rot+=360; 
 		if(rot<155&&rot>25)sideSwitcher=true;
 		switch (b.id){
@@ -268,22 +268,22 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			
 		}break;
 		case 3:{
-			Helper.sendMessage(new GenericServerIntPacket(1, listOffset));
+			Util.sendMessage(new GenericServerIntPacket(1, listOffset));
 		}break;
 		case 4:{
-			Helper.sendMessage(new GenericServerIntPacket(1, listOffset+1));
+			Util.sendMessage(new GenericServerIntPacket(1, listOffset+1));
 		}break;
 		case 5:{
-			Helper.sendMessage(new GenericServerIntPacket(0, -1));
+			Util.sendMessage(new GenericServerIntPacket(0, -1));
 		}break;
 		case 6:{
-			Helper.sendMessage(new GenericServerIntPacket(0, 1));
+			Util.sendMessage(new GenericServerIntPacket(0, 1));
 		}break;
 		case 7:{
-			Helper.sendMessage(new GenericServerIntPacket(0, -listOffset));
+			Util.sendMessage(new GenericServerIntPacket(0, -listOffset));
 		}break;
 		case 8:{
-			Helper.sendMessage(new GenericServerIntPacket(0, 48-listOffset));
+			Util.sendMessage(new GenericServerIntPacket(0, 48-listOffset));
 		}break;
 		}
 	}

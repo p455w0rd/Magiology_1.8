@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 public abstract class GuiContainerAndGuiParticles extends GuiContainer implements Updateable{
 	
 	public static List<GuiParticle> guiParticles=new ArrayList<GuiParticle>();
@@ -53,7 +53,7 @@ public abstract class GuiContainerAndGuiParticles extends GuiContainer implement
 		}
 	}
 	public void renderParticles(float partialTicks){
-		WorldRenderer tess=TessHelper.getWR();
+		WorldRenderer tess=TessUtil.getWR();
 		if(!guiParticles.isEmpty())for(int c=0;c<guiParticles.size();c++){
 			GuiParticle ab=guiParticles.get(c);
 			if(ab!=null&&!ab.isDead)ab.renderParticle(tess, partialTicks);

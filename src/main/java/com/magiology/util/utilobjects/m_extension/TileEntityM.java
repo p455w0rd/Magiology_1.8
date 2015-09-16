@@ -7,7 +7,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerListBox*/{
 	public static final float p=1F/16F;
@@ -15,7 +15,7 @@ public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerL
     @Override public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet){readFromNBT(packet.getNbtCompound());}
     
     public void sync(){
-    	if(H.isRemote(this))return;
+    	if(U.isRemote(this))return;
     	worldObj.markBlockForUpdate(pos);
     	markDirty();
     }

@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import com.magiology.core.init.MGui;
 import com.magiology.handelers.GuiHandelerM;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 public class SmartCrafter extends BlockContainer {
 //	implements ISimpleBlockRenderingHandler
@@ -78,7 +78,7 @@ public class SmartCrafter extends BlockContainer {
 	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
-		int metadata=H.getBlockMetadata(world, pos);
+		int metadata=U.getBlockMetadata(world, pos);
 		TileEntitySmartCrafter tile=(TileEntitySmartCrafter)world.getTileEntity(pos);
 		if(metadata==3||metadata==2)tile.rotation=0;
 		if(metadata==5||metadata==4)tile.rotation=1;

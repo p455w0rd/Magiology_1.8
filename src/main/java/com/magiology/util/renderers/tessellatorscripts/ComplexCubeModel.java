@@ -5,9 +5,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessHelper;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Helper;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 import com.magiology.util.utilobjects.vectors.Vec8F;
 
@@ -85,7 +84,7 @@ public class ComplexCubeModel{
 	public void draw(){
 		try{
 			if(willSideRender[0])try{
-				if(st[0]!=null)TessHelper.bindTexture(st[0]);
+				if(st[0]!=null)TessUtil.bindTexture(st[0]);
 				buf.addVertexWithUV(points[0],UVs[0].x2,UVs[0].y2);
 				buf.addVertexWithUV(points[1],UVs[0].x1,UVs[0].y1);
 				buf.addVertexWithUV(points[2],UVs[0].x4,UVs[0].y4);
@@ -101,7 +100,7 @@ public class ComplexCubeModel{
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[1])try{
-				if(st[1]!=null)TessHelper.bindTexture(st[1]);
+				if(st[1]!=null)TessUtil.bindTexture(st[1]);
 				buf.addVertexWithUV(points[7],UVs[1].x2,UVs[1].y2);
 				buf.addVertexWithUV(points[6],UVs[1].x1,UVs[1].y1);
 				buf.addVertexWithUV(points[5],UVs[1].x4,UVs[1].y4);
@@ -117,7 +116,7 @@ public class ComplexCubeModel{
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[2])try{
-				if(st[2]!=null)TessHelper.bindTexture(st[2]);
+				if(st[2]!=null)TessUtil.bindTexture(st[2]);
 				buf.addVertexWithUV(points[2],UVs[2].x2,UVs[2].y2);
 				buf.addVertexWithUV(points[1],UVs[2].x1,UVs[2].y1);
 				buf.addVertexWithUV(points[5],UVs[2].x4,UVs[2].y4);
@@ -133,7 +132,7 @@ public class ComplexCubeModel{
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[3])try{
-				if(st[3]!=null)TessHelper.bindTexture(st[3]);
+				if(st[3]!=null)TessUtil.bindTexture(st[3]);
 				buf.addVertexWithUV(points[7],UVs[3].x2,UVs[3].y2);
 				buf.addVertexWithUV(points[4],UVs[3].x1,UVs[3].y1);
 				buf.addVertexWithUV(points[0],UVs[3].x4,UVs[3].y4);
@@ -149,7 +148,7 @@ public class ComplexCubeModel{
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[4])try{
-				if(st[4]!=null)TessHelper.bindTexture(st[4]);
+				if(st[4]!=null)TessUtil.bindTexture(st[4]);
 				buf.addVertexWithUV(points[4],UVs[4].x2,UVs[4].y2);
 				buf.addVertexWithUV(points[5],UVs[4].x1,UVs[4].y1);
 				buf.addVertexWithUV(points[1],UVs[4].x4,UVs[4].y4);
@@ -165,7 +164,7 @@ public class ComplexCubeModel{
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			}
 			if(willSideRender[5])try{
-				if(st[5]!=null)TessHelper.bindTexture(st[5]);
+				if(st[5]!=null)TessUtil.bindTexture(st[5]);
 				buf.addVertexWithUV(points[3],UVs[5].x2,UVs[5].y2);
 				buf.addVertexWithUV(points[2],UVs[5].x1,UVs[5].y1);
 				buf.addVertexWithUV(points[6],UVs[5].x4,UVs[5].y4);
@@ -185,41 +184,36 @@ public class ComplexCubeModel{
 			exception.printStackTrace();
 		}
 	}
-	
-	public Vec3M getPoint(String string){
-		String[] xyz=string.split(",");
-		boolean x=false,y=false,z=false;
-		for(int i=0;i<xyz.length;i++){
-			String[] prop=xyz[i].split(" ");
-			if(prop.length==2){
-				if(!prop[0].equals("max")&&!prop[0].equals("min")){
-					Helper.println("not min or max "+prop[0]);
-					return null;
-				}
-				boolean minMax=prop[0].equals("max");
-				
-			    	 if(prop[1].equals("x"))x=minMax;
-				else if(prop[1].equals("y"))y=minMax;
-				else if(prop[1].equals("z"))z=minMax;
-				else{
-					Helper.println("invalid cordinate");
-					return null;
-				}
-			    
-			}else return null;
-		}
-		int id=-1;
-		
-		     if( x&&!y&&!z)id=0;
-		else if( x&& y&&!z)id=1;
-		else if( x&& y&& z)id=2;
-		else if( x&&!y&& z)id=3;
-		else if(!x&&!y&&!z)id=4;
-		else if(!x&& y&&!z)id=5;
-		else if(!x&& y&& z)id=6;
-		else if(!x&&!y&& z)id=7;
-		else return null;
-//		Helper.printInln(id);
-		return points[id];
+	/**true = max, false = min*/
+	public Vec3M getPoint(boolean x,boolean y,boolean z){
+		     if( x&&!y&&!z)return points[0];
+		else if( x&& y&&!z)return points[1];
+		else if( x&& y&& z)return points[2];
+		else if( x&&!y&& z)return points[3];
+		else if(!x&&!y&&!z)return points[4];
+		else if(!x&& y&&!z)return points[5];
+		else if(!x&& y&& z)return points[6];
+		else if(!x&&!y&& z)return points[7];
+		return null;
 	}
+	
+	public ComplexCubeModel expand(float var){
+		return expand(var, var, var);
+	}
+	public ComplexCubeModel expand(float x,float y,float z){
+		points[0]=points[0].addVector(-x,y,-z);
+		points[1]=points[1].addVector(-x,-y,-z);
+		points[2]=points[2].addVector(-x,-y,z);
+		points[3]=points[3].addVector(-x,y,z);
+		points[4]=points[4].addVector(x,y,-z);
+		points[5]=points[5].addVector(x,-y,-z);
+		points[6]=points[6].addVector(x,-y,z);
+		points[7]=points[7].addVector(x,y,z);
+		
+		return this;
+	}
+	
+	
+	
+	
 }

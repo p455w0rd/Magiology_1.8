@@ -1,0 +1,19 @@
+package com.magiology.util.utilclasses.math;
+
+import com.magiology.util.utilclasses.Helper.H;
+
+public class ObjectCalculator{
+	
+	public static Object calc(final Object left,final Object right){
+		Class lc=left.getClass(),rc=right.getClass();
+		if(H.isArray(lc)||H.isArray(rc))return calcArray(left, right, lc, rc);
+		else return calcNormal(left, right, lc, rc);
+		
+	}
+	private static Object calcArray(final Object left,final Object right, final Class lc, final Class rc){
+		return null;
+	}
+	private static Object calcNormal(final Object left,final Object right, final Class lc, final Class rc){
+		return null;
+	}
+}

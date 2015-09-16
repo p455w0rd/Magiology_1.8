@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.api.network.RedstoneData;
 import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public abstract class BlockContainerM extends BlockContainer{
 	public static final float p=1F/16F;
@@ -29,26 +29,26 @@ public abstract class BlockContainerM extends BlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata){
 		if(!isNullTileEntityOk){
-			Helper.printInln(
+			Util.printInln(
 					getUnlocalizedName()+" block is a BlockContainer and it is not providing a TileEntity!",
 					"Are you sure that this is ok?",
 					"If so please add "+'"'+"isNullTileEntityOk=false;"+'"'+" for disabling this message",
 					"If not use createNewTileEntity(World world, int metadata) function to provide one!","",
-					Helper.getStackTrace());
+					Util.getStackTrace());
 		}
 		return null;
 	}
 	@Override
 	public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
 		RedstoneData data=new RedstoneData();
-		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, Helper.getBlockMetadata((World)worldIn, pos), data,side);
+		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, Util.getBlockMetadata((World)worldIn, pos), data,side);
 		if(!data.isStrong)return 0;
         return data.strenght;
     }
 	@Override
 	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
 		RedstoneData data=new RedstoneData();
-		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, Helper.getBlockMetadata((World)worldIn, pos), data,side);
+		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, Util.getBlockMetadata((World)worldIn, pos), data,side);
         return data.strenght;
 	}
 	/**

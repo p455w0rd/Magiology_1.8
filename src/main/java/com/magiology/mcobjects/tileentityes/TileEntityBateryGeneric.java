@@ -3,8 +3,8 @@ package com.magiology.mcobjects.tileentityes;
 import net.minecraft.util.BlockPos;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.PowerHelper;
-import com.magiology.util.utilclasses.SideHelper;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.SideUtil;
 
 public class TileEntityBateryGeneric extends TileEntityPow{
 	
@@ -15,16 +15,16 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 	}
 	
 	public void fromBateryToBatery(){
-		int[] s=SideHelper.randomizeSides();
+		int[] s=SideUtil.randomizeSides();
 		for(int a=0;a<6;a++){
 			int side=s[a];
-			BlockPos pos1=SideHelper.offsetNew(side,pos);
+			BlockPos pos1=SideUtil.offsetNew(side,pos);
 			if(this.isAnyBatery(pos1)){
 				TileEntityBateryGeneric tile= (TileEntityBateryGeneric) worldObj.getTileEntity(pos1);
 				
-				PowerHelper.tryToEquateEnergy(this, tile, PowerHelper.getMaxSpeed(this, tile),side);
-				PowerHelper.tryToEquateEnergy(this, tile, PowerHelper.getMiddleSpeed(this, tile),side);
-				PowerHelper.tryToEquateEnergy(this, tile, PowerHelper.getMinSpeed(this, tile),side);
+				PowerUtil.tryToEquateEnergy(this, tile, PowerUtil.getMaxSpeed(this, tile),side);
+				PowerUtil.tryToEquateEnergy(this, tile, PowerUtil.getMiddleSpeed(this, tile),side);
+				PowerUtil.tryToEquateEnergy(this, tile, PowerUtil.getMinSpeed(this, tile),side);
 			}
 			
 		}
@@ -33,7 +33,7 @@ public class TileEntityBateryGeneric extends TileEntityPow{
 	@Override
 	public void update(){
 		this.power();
-		PowerHelper.sortSides(this);
+		PowerUtil.sortSides(this);
 	}
 	
 	public void power(){

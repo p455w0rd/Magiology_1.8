@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.magiology.util.utilclasses.Helper;
+import com.magiology.util.utilclasses.Util;
 
 public class AdvancedPhysicsFloat{
 	
@@ -24,9 +24,9 @@ public class AdvancedPhysicsFloat{
 	public void update(){
 		prevPoint=point;
 		if(simpleVersion){
-			point=(float)Helper.slowlyEqalize(point, wantedPoint, acceleration);
+			point=(float)Util.slowlyEqalize(point, wantedPoint, acceleration);
 		}else{
-			speed=Helper.handleSpeedFolower(speed, point, wantedPoint, acceleration);
+			speed=Util.handleSpeedFolower(speed, point, wantedPoint, acceleration);
 			speed*=friction;
 			point+=speed;
 			if(!wallsF.isEmpty()){
@@ -56,7 +56,7 @@ public class AdvancedPhysicsFloat{
 		
 	}
 	public float getPoint(){
-		return Helper.calculateRenderPos(prevPoint, point);
+		return Util.calculateRenderPos(prevPoint, point);
 	}
 	public void bounce(float multiplyer){
 		speed*=-multiplyer;

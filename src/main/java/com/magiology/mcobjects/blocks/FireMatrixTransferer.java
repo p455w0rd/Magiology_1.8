@@ -10,13 +10,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
-import com.magiology.util.utilclasses.Helper.H;
+import com.magiology.util.utilclasses.Util.U;
 
 public class FireMatrixTransferer extends BlockContainer {
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos){
-		H.getBlockMetadata((World) world, pos);
+		U.getBlockMetadata((World) world, pos);
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 //		float p=1F/16F;
 //		if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
@@ -29,7 +29,7 @@ public class FireMatrixTransferer extends BlockContainer {
 	
 	 @Override
    public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state){
-			H.getBlockMetadata(world, pos);
+			U.getBlockMetadata(world, pos);
 		 
 		 return new AxisAlignedBB(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ).addCoord(pos.getX(), pos.getY(), pos.getZ());
 	 }
