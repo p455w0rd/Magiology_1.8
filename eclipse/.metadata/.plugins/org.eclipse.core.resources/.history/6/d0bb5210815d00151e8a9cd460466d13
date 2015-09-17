@@ -39,7 +39,7 @@ import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 
 @Mod(modid=MODID,version=VERSION,name=NAME,acceptedMinecraftVersions=ACCEPTED_MC_VERSION)
-public class Magiology{
+public class Magiology extends BaseMod{
 	
 	/***//**variables*//***/
 	
