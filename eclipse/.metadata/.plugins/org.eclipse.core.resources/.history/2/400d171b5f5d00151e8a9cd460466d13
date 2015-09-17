@@ -1,0 +1,129 @@
+package com.magiology.core;
+
+import static com.magiology.core.MReference.*;
+import static com.magiology.util.utilclasses.Util.*;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+//used to clean up the actual main class
+public class BaseMod{
+	
+	private void testOnStartup(){
+//		CalculationFormat format=CalculationFormat.format("%f-%f[]+%l[]+%i");
+//		
+//		format.calc(5F,new float[]{1.7F,1.7F,1.7F},new long[]{1,2,3},1);
+//		
+//		long calcTime1=0,calcTime2=0;
+//		
+//		for(int i=0;i<1000000;i++){
+//			{
+//				long start=System.nanoTime();
+//				
+//				format.calc(5F,new float[]{1.7F,1.7F,1.7F},new long[]{1,2,3},1);
+//				
+//				calcTime1+=System.nanoTime()-start;
+//			}{
+//				long start=System.nanoTime();
+//				
+//				float[] a=new float[]{1.7F,1.7F,1.7F};
+//				long[] b=new long[]{1,2,3};
+//				for(int j=0;j<a.length;j++){
+//					a[j]-=5;
+//				}
+//				for(int j=0;j<a.length;j++){
+//					a[j]+=b[j];
+//				}
+//				for(int j=0;j<a.length;j++){
+//					a[j]+=1;
+//				}
+//				
+//				calcTime2+=System.nanoTime()-start;
+//			}
+//		}
+//		Util.printlnInln(calcTime1,calcTime2,(double)calcTime1/(double)calcTime2);
+//		Util.printlnInln(275F/50F);
+//		Util.exit(404);
+	}
+	
+	
+	@EventHandler
+    public void preInitStarter(FMLPreInitializationEvent event){
+		testOnStartup();
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
+			@Override
+			public void run(){
+				exit();
+			}
+		}));
+    	loadFiles();
+    	message(-1);
+    	preInit(event);
+    	message(1);
+    }
+    @EventHandler
+    public void initStarter(FMLInitializationEvent event){
+    	message(-2);
+    	init(event);
+    	message(2);
+    }
+    @EventHandler
+    public void postInitStarter(FMLPostInitializationEvent event){
+    	message(-3);
+    	postInit(event);
+    	message(3);
+    	message(4);
+    }
+	public void loadFiles(){}
+	public void preInit(FMLPreInitializationEvent event){}
+	public void init(FMLInitializationEvent event){}
+	public void postInit(FMLPostInitializationEvent event){}
+	public void exit(){}
+	
+	public void message(int a){
+    	switch(a){
+    	case -1:{
+    		println("\n\n_________________________________________________________________");
+    		println("----------------------------------------------------------------|");
+    		println("==========|> "+NAME+" "+VERSION+"  ->  "+"Pre initialization started! :D |");
+    	}break;case 1:{
+    		println("==========|> "+NAME+" "+VERSION+" -> "+"Pre initialization compleate! ;D |");
+        	println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n\n");
+    	}break;
+    	case -2:{
+        	println("\n\n_________________________________________________________________");
+        	println("----------------------------------------------------------------|");
+        	println("==========|> "+MODID.toUpperCase()+" "+VERSION+"  ->  "+"Initialization started! :O |");
+    	}break;case 2:{
+    		println("==========|> "+MODID.toUpperCase()+" "+VERSION+" -> "+"Initialization compleate! XD |");
+    		println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n\n");
+    	}break;
+    	case -3:{
+        	println("\n\n_______________________________________________________________________");
+        	println("----------------------------------------------------------------------|");
+        	println("==========|> "+MODID.toUpperCase()+" "+VERSION+"  ->  "+"Post initialization started! :P |");
+    	}break;case 3:{
+    		println("==========|> "+MODID.toUpperCase()+" "+VERSION+" -> "+"Post initialization compleate! /D |");
+    		println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n\n");
+    	}break;
+    	case 4:{
+    		String[] derpyMessages={
+    				"Umm hello? Are we live? Yup! Yup! Hello everybody we are coming live from "+NAME+" and...",
+    				"Yay! the mod is loaded! :D",
+    				"Please do not crash this time!",
+    				"I think that we should be live...",
+    				"Where is the black baby so I can throw it in the wall?",
+    				"Hello everybody! My name is Puuuude... WAIT NO IT'S JAVA!",
+    				"Can I suggest a party song?",
+    				"Uff... What is this?!? I am running on another PC!?",
+    				"Yay you launched me so now I can INFECT YOUR WORLDS AND EXPLODE YOUR PC!!! MUUUUAHAHAHAHAHA!!!\nNo don't worry I am just kidding. ;)",
+    				"Such launch Much loading",
+    				"Beam me up scotty",
+    				"Is FNAF 50 out yet? Oh... And is COD advanced zombie warfare dlc edition for iPhone 8s-a extra out? No darn it!"
+    		};
+    		println(derpyMessages[RInt(derpyMessages.length-1)]);
+    	}break;
+    	}
+    }
+}

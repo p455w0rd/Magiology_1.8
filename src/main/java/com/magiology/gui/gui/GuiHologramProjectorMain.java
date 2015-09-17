@@ -1,5 +1,6 @@
 package com.magiology.gui.gui;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.updateable.Updater;
+import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.gui.container.ContainerEmpty;
@@ -64,7 +66,6 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 			
 		}break;
 		}
-		
-		
+		Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 	}
 }

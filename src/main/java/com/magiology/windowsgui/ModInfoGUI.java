@@ -133,7 +133,6 @@ public class ModInfoGUI extends JFrame{
 		add(item1);
 		add(up);
 		add(down);
-		Magiology.modInfGUI=this;
 		SoundPlayer.playSound(MReference.MODS_SUBFOLDER_WIN_GUI+"/OpenUp.wav");
 	}
 	

@@ -16,3 +16,10 @@
 1442418094327	Rename method 'getDataOutput'
 1442418484289	Rename package 'com.magiology.mcobjects.tileentityes.network.interfaces'
 1442418695322	Move compilation unit
+1442505375419	Rename method 'modWindowOpen'
+1442505494264	Rename method 'ifModWindowOpen'
+1442505506027	Rename method 'isModWindowOpen'
+1442505874723	Delete element
+1442505904780	Rename method 'Message'
+1442523427142	Rename field 'derpyMessages'
+1442523440334	Rename field 'derpyMessagesWithNoPortalReferences'

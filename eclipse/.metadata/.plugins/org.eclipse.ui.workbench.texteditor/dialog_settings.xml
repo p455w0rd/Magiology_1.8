@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="buff" key="selection"/>
+		<item value="points[" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="id="/>
+			<item value="2F"/>
+			<item value="Util"/>
+			<item value="ro"/>
 			<item value="TessUtil.getNVB()"/>
 			<item value="    "/>
 			<item value="stack.getTagCompound()"/>
 			<item value="initNBTTagCompound"/>
-			<item value="stack.getTagCompound() == null"/>
-			<item value="stack.getTagCompound()!=null"/>
-			<item value="keyName"/>
-			<item value="itemStack"/>
 		</list>
 		<list key="replacehistory">
+			<item value="points["/>
+			<item value="(scale1+scale2)"/>
+			<item value="U"/>
+			<item value="tile.lastPartClicked"/>
 			<item value="buff"/>
 			<item value="&#x09;"/>
 			<item value="getNBT(stack)"/>
 			<item value="getNBT"/>
-			<item value="createNBT"/>
-			<item value="hasNBT(stack)"/>
-			<item value="key"/>
-			<item value="stack"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

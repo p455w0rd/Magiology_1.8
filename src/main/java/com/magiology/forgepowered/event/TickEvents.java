@@ -93,7 +93,7 @@ public class TickEvents{
 		}
 		
 		if(Magiology.modInfGUI!=null&&!Magiology.modInfGUI.isExited)Magiology.modInfGUI=null;
-		else if(Magiology.getMagiology().modWindowOpen()){
+		else if(Magiology.getMagiology().isWindowOpen()){
 			if(Magiology.modInfGUI.exitOn==3) Magiology.modInfGUI.exit();
 			else if(Magiology.modInfGUI.exitOn==2&&U.getMC().theWorld!=null) Magiology.modInfGUI.exit();
 			if(!Magiology.modInfGUI.MCStat){
