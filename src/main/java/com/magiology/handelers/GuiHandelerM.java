@@ -13,12 +13,14 @@ import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.gui.container.ArmorContainer;
+import com.magiology.gui.container.CommandCenterContainer;
 import com.magiology.gui.container.ContainerEmpty;
 import com.magiology.gui.container.ControlBockContainer;
 import com.magiology.gui.container.ISidedPowerInstructorContainer;
 import com.magiology.gui.container.SmartCrafterContainer;
 import com.magiology.gui.container.UpgradeContainer;
 import com.magiology.gui.gui.GuiArmor;
+import com.magiology.gui.gui.GuiCenterContainer;
 import com.magiology.gui.gui.GuiControlBock;
 import com.magiology.gui.gui.GuiHologramProjectorMain;
 import com.magiology.gui.gui.GuiISidedPowerInstructor;
@@ -28,6 +30,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandCenter;
 import com.magiology.render.tilerender.hologram.GuiObjectCustomize;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
@@ -57,6 +60,9 @@ public class GuiHandelerM implements IGuiHandler{
 		case MGui.HologramProjectorMainGui:
 			if(tile instanceof TileEntityHologramProjector)
 				return new ContainerEmpty();
+		case MGui.CommandCenterGui:
+			if(tile instanceof TileEntityNetworkCommandCenter)
+				return new CommandCenterContainer(player, (TileEntityNetworkCommandCenter)tile);
 		}
 		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
@@ -87,6 +93,9 @@ public class GuiHandelerM implements IGuiHandler{
 		case MGui.HologramProjectorMainGui:
 			if(tile instanceof TileEntityHologramProjector)
 				return new GuiHologramProjectorMain(player, (TileEntityHologramProjector)tile);
+		case MGui.CommandCenterGui:
+			if(tile instanceof TileEntityNetworkCommandCenter)
+				return new GuiCenterContainer(player, (TileEntityNetworkCommandCenter)tile);
 		}
 		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;

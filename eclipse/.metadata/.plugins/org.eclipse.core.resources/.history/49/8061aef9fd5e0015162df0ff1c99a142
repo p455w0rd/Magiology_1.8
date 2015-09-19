@@ -1,0 +1,111 @@
+package com.magiology.gui.gui;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+
+import com.magiology.core.MReference;
+import com.magiology.forgepowered.packets.packets.TileRedstone;
+import com.magiology.gui.GuiUpdater.Updateable;
+import com.magiology.gui.container.CommandCenterContainer;
+import com.magiology.gui.guiutil.gui.buttons.CustomButton;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandCenter;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Util;
+
+public class GuiCenterContainer extends GuiContainer implements Updateable{
+	
+	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiControlBock.png");
+	ResourceLocation EnergyBar=new ResourceLocation(MReference.MODID,"/textures/models/PowerCounter/EnergyBar.png");
+	
+	private TileEntityNetworkCommandCenter tile;
+	
+	public GuiCenterContainer(EntityPlayer player,TileEntityNetworkCommandCenter tile){
+		super(new CommandCenterContainer(player,tile));
+		this.tile=tile;
+		this.xSize=176;
+		this.ySize=166;
+		
+	}
+	@Override
+	public void drawGuiContainerForegroundLayer(int a,int b){
+		
+	}
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float v1, int v2, int v3){
+		TessUtil.bindTexture(main);
+		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+		
+	}
+	
+	@Override
+	public void initGui(){
+		super.initGui();
+	}
+	 
+	 @Override
+	 protected void actionPerformed(GuiButton b){
+		 
+		 switch (b.id){
+		 case 1:{
+			 tileCB.redstoneC++;
+			 if(tileCB.redstoneC>2)tileCB.redstoneC=0;
+			 if(CustomButton!=null){
+				 CustomButton.rGoal=Util.RD();
+				 CustomButton.gGoal=Util.RD();
+				 CustomButton.bGoal=Util.RD();
+			 }
+			 if(dot1!=null){
+				 dot1.glow+=20;
+				 dot2.glow+=20;
+				 dot3.glow+=20;
+				 dot1.scale*=1.6;
+				 dot2.scale*=1.6;
+				 dot3.scale*=1.6;
+			 }
+		 }break;
+		 case 2:{
+			 
+		 }break;
+		 
+		 }
+		 Util.sendMessage(new TileRedstone(tileCB));
+		 tileCB.getWorld().markBlockForUpdate(tileCB.getPos());
+		 
+	 }
+	 
+	 @Override
+	public void update(){
+		if(dot1==null){
+			dot1=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+8-6,  214-6, 67-6, 16, 16, 1.5);
+			dot2=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+22-6, 214-6, 67-6, 16, 16,1.5);
+			dot3=new DrawThatSexyDotHelper(guiLeft+11-6,guiTop+35-6, 214-6, 67-6, 16, 16, 1.5);
+		}
+		dotS1+=Util.CRandD(5);
+		dotS2+=Util.CRandD(5);
+		dotS3+=Util.CRandD(5);
+		dotS1*=0.99;
+		dotS2*=0.99;
+		dotS3*=0.99;
+		dot1.update(tileCB.angle*10+dotS2/5, 3,false);
+		dot2.update(tileCB.angle*10+dotS1/5, 3,false);
+		dot3.update(tileCB.angle*10+dotS3/5, 3,false);
+		dot1.finishTheLoop();
+		dot2.finishTheLoop();
+		dot3.finishTheLoop();
+	 }
+	 
+	 protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
+		 float f = 0.00390625F;
+	     float f1 = 0.00390625F;
+	     WorldRenderer renderer = TessUtil.getWR();
+	     renderer.startDrawingQuads();
+	     renderer.addVertexWithUV(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
+	     renderer.addVertexWithUV(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
+	     renderer.addVertexWithUV(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
+	     renderer.addVertexWithUV(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
+	     TessUtil.draw();
+	}
+}

@@ -13,7 +13,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
-import com.magiology.mcobjects.tileentityes.hologram.RenderObject;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TextBox;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
@@ -22,28 +22,30 @@ import com.magiology.util.utilobjects.ColorF;
 public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	
 	private int id,type;
-	private boolean moveMode,suportsText;
+	private boolean moveMode,suportsText,isDead;
 	private float scale;
-	private Vector2f offset,size;
+	private Vector2f offset,size,originalSize;
 	private ColorF color;
 	private String text;
 	BlockPos pos;
 	
 	public RenderObjectUploadPacket(){}
-	public RenderObjectUploadPacket(RenderObject ro){
-		pos=ro.host.getPos();
-		id=ro.id;
+	public RenderObjectUploadPacket(HoloObject ho){
+		pos=ho.host.getPos();
+		id=ho.id;
 		
-		if(ro.getClass()==TextBox.class)type=1;
-		else if(ro.getClass()==Button.class)type=2;
+		if(ho.getClass()==TextBox.class)type=1;
+		else if(ho.getClass()==Button.class)type=2;
 		
-		moveMode=ro.moveMode;
-		scale=ro.scale;
-		offset=ro.offset;
-		size=ro.size;
-		color=ro.setColor;
-		suportsText=ro instanceof StringContainer;
-		if(suportsText)text=((StringContainer)ro).getString();
+		moveMode=ho.moveMode;
+		scale=ho.scale;
+		offset=ho.offset;
+		size=ho.size;
+		color=ho.setColor;
+		suportsText=ho instanceof StringContainer;
+		originalSize=ho.originalSize;
+		isDead=ho.isDead;
+		if(suportsText)text=((StringContainer)ho).getString();
 	}
 	@Override
 	public void write(PacketBuffer buffer) throws IOException{
@@ -51,11 +53,13 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		buffer.writeInt(id);
 		buffer.writeInt(type);
 		buffer.writeBoolean(moveMode);
+		buffer.writeBoolean(isDead);
 		buffer.writeFloat(scale);
 		write2F(buffer, offset);
 		write2F(buffer, size);
 		writeColor(buffer, color);
 		buffer.writeBoolean(suportsText);
+		write2F(buffer, originalSize);
 		if(suportsText){
 			buffer.writeInt(text.length());
 			if(text.length()>0)buffer.writeString(text);
@@ -67,11 +71,13 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		id=buffer.readInt();
 		type=buffer.readInt();
 		moveMode=buffer.readBoolean();
+		isDead=buffer.readBoolean();
 		scale=buffer.readFloat();
 		offset=read2F(buffer);
 		size=read2F(buffer);
 		color=readColor(buffer);
 		suportsText=buffer.readBoolean();
+		originalSize=read2F(buffer);
 		if(suportsText){
 			int lenght=buffer.readInt();
 			text=lenght>0?buffer.readStringFromBuffer(lenght):"";
@@ -84,22 +90,24 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 			TileEntityHologramProjector tile=(TileEntityHologramProjector)test;
 			boolean found=false;
 			int roId=-1;
-			for(int i=0;i<tile.renderObjects.size();i++){
-				if(tile.renderObjects.get(i).id==id){
+			for(int i=0;i<tile.holoObjects.size();i++){
+				if(tile.holoObjects.get(i).id==id){
 					found=true;
 					roId=i;
 					continue;
 				}
 			}
 			if(found){
-				tile.renderObjects.get(roId).moveMode=moveMode;
-				tile.renderObjects.get(roId).scale=scale;
-				tile.renderObjects.get(roId).offset=offset;
-				tile.renderObjects.get(roId).size=size;
-				tile.renderObjects.get(roId).setColor=color;
-				if(suportsText)((StringContainer)tile.renderObjects.get(roId)).setString(text);
+				tile.holoObjects.get(roId).moveMode=moveMode;
+				tile.holoObjects.get(roId).scale=scale;
+				tile.holoObjects.get(roId).offset=offset;
+				tile.holoObjects.get(roId).size=size;
+				tile.holoObjects.get(roId).originalSize=originalSize;
+				tile.holoObjects.get(roId).setColor=color;
+				tile.holoObjects.get(roId).isDead=isDead;
+				if(suportsText)((StringContainer)tile.holoObjects.get(roId)).setString(text);
 			}else{
-				RenderObject newObject=null;
+				HoloObject newObject=null;
 				if(type==1)newObject=new TextBox(tile, text);
 				else if(type==2)newObject=new Button(tile, size);
 				if(newObject!=null){
@@ -107,9 +115,11 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 					newObject.scale=scale;
 					newObject.offset=offset;
 					newObject.size=size;
+					newObject.originalSize=originalSize;
 					newObject.color=color;
+					newObject.isDead=isDead;
 					if(suportsText)((StringContainer)newObject).setString(text);
-					tile.renderObjects.add(newObject);
+					tile.holoObjects.add(newObject);
 				}
 			}
 			tile.sync();

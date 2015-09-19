@@ -91,8 +91,8 @@ public class Magiology{
 	}
 	public void preInit(FMLPreInitializationEvent event){
 		VersionChecker.init();
-		//TODO
-		Config.setShadersEnabled(false);
+//		//TODO
+//		Config.setShadersEnabled(false);
 		
 		MCreativeTabs.preInit();
 		MGui.preInit();
@@ -242,7 +242,7 @@ public class Magiology{
     		println(NAME+" master AI has been terminated because "+(RB(0.8)?"of profound reasons!":
     			"FML has detected traces of Genetic Lifeform and Disk Operating System!!"
     			+ "\nIf your computer is talking to you and it calling itself Caroline and you don't see this messages sometimes than type in your windows search bar a puzzle that is a paradox!"
-    			+ " The paradox will effectively crash the Genetic Lifeform and Disk Operating System. Do not listen to it! It may quote Moby Dick!"));
+    			+ " The paradox will effectively crash the Genetic Lifeform and Disk Operating System. Do not listen to it! It may quote Moby Dick! #ReferenceInception"));
     	}break;
     	}
     }

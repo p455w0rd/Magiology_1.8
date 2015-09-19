@@ -13,12 +13,6 @@ import com.magiology.mcobjects.blocks.ControlBlock;
 import com.magiology.mcobjects.blocks.DontLookAtMe;
 import com.magiology.mcobjects.blocks.EnergizedLapisOre;
 import com.magiology.mcobjects.blocks.FakeAir;
-import com.magiology.mcobjects.blocks.FireExhaust;
-import com.magiology.mcobjects.blocks.FireGun;
-import com.magiology.mcobjects.blocks.FireLamp;
-import com.magiology.mcobjects.blocks.FireMatrixReceaver;
-import com.magiology.mcobjects.blocks.FireMatrixTransferer;
-import com.magiology.mcobjects.blocks.FirePipe;
 import com.magiology.mcobjects.blocks.HologramProjector;
 import com.magiology.mcobjects.blocks.OreLevelX;
 import com.magiology.mcobjects.blocks.OreStructureCore;
@@ -27,6 +21,13 @@ import com.magiology.mcobjects.blocks.PileODust;
 import com.magiology.mcobjects.blocks.RareSpacePipe;
 import com.magiology.mcobjects.blocks.RemotePowerCounter;
 import com.magiology.mcobjects.blocks.SmartCrafter;
+import com.magiology.mcobjects.blocks.fire.FireExhaust;
+import com.magiology.mcobjects.blocks.fire.FireGun;
+import com.magiology.mcobjects.blocks.fire.FireLamp;
+import com.magiology.mcobjects.blocks.fire.FireMatrixReceaver;
+import com.magiology.mcobjects.blocks.fire.FireMatrixTransferer;
+import com.magiology.mcobjects.blocks.fire.FirePipe;
+import com.magiology.mcobjects.blocks.network.NetworkCommandCenter;
 import com.magiology.mcobjects.blocks.network.NetworkConductor;
 import com.magiology.mcobjects.blocks.network.NetworkController;
 import com.magiology.mcobjects.blocks.network.NetworkInterface;
@@ -46,7 +47,7 @@ public class MBlocks{
 		FireExhaust,FakeAir,bedrockBreaker,PileODust,BigFurnaceCore,BFCPowerOut,BatteryL1,BatteryL2,BatteryL3,
 		BateryL100,particleLauncher,DontLookAtMe,energizedLapisOre,ControlBlock,RemotePowerCounter,
 		FireMatrixTransferer,FireMatrixReceaver,smartCrafter,hologramProjector,rareSpacePipe,
-		networkController,networkConductor,networkPointerContainer,networkInterface;
+		networkController,networkConductor,networkPointerContainer,networkInterface,networkCommandCenter;
 
 	public static void preInit(){
 		blocksInit();
@@ -83,6 +84,7 @@ public class MBlocks{
 		networkInterface=init(new NetworkInterface().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkInterface"));
 		networkPointerContainer=init(new NetworkPointerContainer().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkPointerContainer"));
 		rareSpacePipe=init(new RareSpacePipe().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("rareSpacePipe"));
+		networkCommandCenter=init(new NetworkCommandCenter().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkCommandCenter"));
 	}
 
 	static Block init(Block block){

@@ -59,9 +59,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 						if(nbt.getInteger("xLink")==pos1.getX()&&nbt.getInteger("yLink")==pos1.getY()&&nbt.getInteger("zLink")==pos1.getZ())pass=true;
 					}
 				}
-				if(pass){
-					((NetworkBaseInterface)a).onNetworkActionInvoked(action, data);
-				}
+				if(pass)((NetworkBaseInterface)a).onNetworkActionInvoked(action, data);
 			}
 		}
 	}

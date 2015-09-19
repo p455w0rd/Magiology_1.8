@@ -16,7 +16,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
-		GL11.glPushMatrix();
+		GL11U.protect();
 		GL11.glTranslated(x,y,z);
 		new ColorF(0.6,0,0,0.5).bind();
 		GL11U.texture(false);
@@ -28,7 +28,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		}
 		GL11U.EndOpaqueRendering();
 		GL11U.texture(true);
-		GL11.glPopMatrix();
+		GL11U.endProtection();
 	}
 
 }

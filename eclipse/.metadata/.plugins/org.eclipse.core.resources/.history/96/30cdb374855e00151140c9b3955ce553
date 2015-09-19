@@ -1,0 +1,17 @@
+package com.magiology.render.tilerender.hologram;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+
+public class GuiContainerM extends GuiContainer {
+
+	public GuiContainerM(Container p_i1072_1_){
+		super(p_i1072_1_);
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
+
+	}
+
+}

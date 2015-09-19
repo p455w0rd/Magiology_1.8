@@ -49,7 +49,9 @@ public class TileHologramProjectorInterface implements NetworkInterfaceProvider,
 		for(int i=0;i<tiles.length;i++){
 			if(tiles[i] instanceof NetworkBaseInterface){
 				NetworkInterfaceProvider Interface=((NetworkBaseInterface)tiles[i]).getInterfaceProvider();
-				if(Interface instanceof InterfaceTileEntitySaver&&((InterfaceTileEntitySaver)Interface).getBoundTile()==tile)return (NetworkBaseInterface)tiles[i];
+				if(Interface instanceof InterfaceTileEntitySaver){
+					return (NetworkBaseInterface)tiles[i];
+				}
 			}
 		}
 		return null;

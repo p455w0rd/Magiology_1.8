@@ -16,16 +16,14 @@ public class VersionChecker{
 		
 //		debug=true;
 		
-		getVersion();
+		newestVersion=Float.parseFloat(DownloadingHandeler.findValue("VERSION"));
+		if(newestVersion==-1)Util.printlnEr(MReference.NAME+" has failed to check for updates");
+		
 		if(newestVersion!=-1){
 			show=true;
 			foundNew=newestVersion>currentVersion;
 			extraData=U.signature(AQUA)+"Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
 		}
-	}
-	private static void getVersion(){
-		newestVersion=Float.parseFloat(DownloadingHandeler.findValue("VERSION"));
-		if(newestVersion==-1)Util.printlnEr(MReference.NAME+" has failed to check for updates");
 	}
 	public static float getCurrentVersion(){return currentVersion;}
 	public static float getNewestVersion(){return newestVersion;}

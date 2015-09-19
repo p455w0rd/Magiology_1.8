@@ -59,8 +59,10 @@ public abstract class BlockContainerM extends BlockContainer{
 	
 	@Override
 	public boolean canConnectRedstone(IBlockAccess world, BlockPos pos, EnumFacing side){
+		if(side==null)return false;
 		List<Integer> sides=new ArrayList<Integer>();
 		getRedstoneConnectableSides(world, world.getTileEntity(pos), pos,sides);
+		
 		return sides.contains(side.getIndex());
 	}
 	public void getRedstoneConnectableSides(IBlockAccess world, TileEntity tile, BlockPos pos, List<Integer> sides){}

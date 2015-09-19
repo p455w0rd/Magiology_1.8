@@ -4,6 +4,7 @@ import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
 import java.awt.Color;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -270,7 +271,7 @@ public class Util{
 	}
 	public static void printInln(Object... objs){
 		for(Object a:objs){
-			if(a.getClass().isArray()){
+			if(a!=null&&a.getClass().isArray()){
 				if(a instanceof boolean[]){
 					boolean[] b=(boolean[])a;
 					for(boolean c:b)System.out.print(c+" ");
@@ -764,5 +765,13 @@ public class Util{
 		Vec3M entityPos=new Vec3M(entity.posX, entity.posY, entity.posZ);
 		Vec3M blockPos=new Vec3M(x+0.5, y+0.5, z+0.5);
 		return entityPos.distanceTo(blockPos);
+	}
+	public static double getDistance(TileEntity tile,int x,int y, int z){
+		Vec3M entityPos=new Vec3M(tile.getPos().getX(), tile.getPos().getY(), tile.getPos().getY());
+		Vec3M blockPos=new Vec3M(x+0.5, y+0.5, z+0.5);
+		return entityPos.distanceTo(blockPos);
+	}
+	public static float round(float d, int decimalPlace){
+		return BigDecimal.valueOf(d).setScale(decimalPlace,BigDecimal.ROUND_HALF_UP).floatValue();
 	}
 }

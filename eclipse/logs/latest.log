@@ -1,13 +1,13 @@
-[23:10:25] [Client thread/INFO]: Setting user: Player267
-[23:10:28] [Client thread/INFO]: LWJGL Version: 2.9.1
-[23:10:37] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
-[23:10:39] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[23:10:40] [Thread-11/INFO]: Initializing LWJGL OpenAL
-[23:10:40] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[23:10:40] [Thread-11/INFO]: OpenAL initialized.
-[23:10:40] [Sound Library Loader/INFO]: Sound engine started
-[23:10:44] [Client thread/INFO]: Created: 16x16 textures-atlas
-[23:10:46] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[21:12:51] [Client thread/INFO]: Setting user: Player615
+[21:12:59] [Client thread/INFO]: LWJGL Version: 2.9.1
+[21:13:07] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[21:13:10] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[21:13:11] [Thread-11/INFO]: Initializing LWJGL OpenAL
+[21:13:11] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[21:13:11] [Thread-11/INFO]: OpenAL initialized.
+[21:13:11] [Sound Library Loader/INFO]: Sound engine started
+[21:13:15] [Client thread/INFO]: Created: 16x16 textures-atlas
+[21:13:18] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -56,7 +56,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[23:10:46] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[21:13:18] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -105,7 +105,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[23:10:46] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[21:13:18] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -154,7 +154,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[23:10:46] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[21:13:18] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -203,7 +203,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[23:10:46] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[21:13:18] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -252,7 +252,7 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[23:10:47] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
+[21:13:18] [Client thread/WARN]: Failed to load texture: magiology:WTF!?!!
 java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.client.resources.FallbackResourceManager.getResource(FallbackResourceManager.java:70) ~[FallbackResourceManager.class:?]
 	at net.minecraft.client.resources.SimpleReloadableResourceManager.getResource(SimpleReloadableResourceManager.java:67) ~[SimpleReloadableResourceManager.class:?]
@@ -301,24 +301,23 @@ java.io.FileNotFoundException: magiology:WTF!?!!
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source) [start/:?]
 	at GradleStart.main(Unknown Source) [start/:?]
-[23:10:47] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
-[23:10:48] [Client thread/INFO]: SoundSystem shutting down...
-[23:10:48] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
-[23:10:48] [Sound Library Loader/INFO]: Starting up SoundSystem...
-[23:10:48] [Thread-13/INFO]: Initializing LWJGL OpenAL
-[23:10:48] [Thread-13/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
-[23:10:48] [Thread-13/INFO]: OpenAL initialized.
-[23:10:49] [Sound Library Loader/INFO]: Sound engine started
-[23:10:53] [Client thread/INFO]: Created: 512x512 textures-atlas
-[23:11:05] [Server thread/INFO]: Starting integrated minecraft server version 1.8
-[23:11:05] [Server thread/INFO]: Generating keypair
-[23:11:06] [Server thread/INFO]: Preparing start region for level 0
-[23:11:07] [Server thread/INFO]: Preparing spawn area: 45%
-[23:11:07] [Server thread/INFO]: Changing view distance to 12, from 10
-[23:11:10] [Server thread/INFO]: Player267[local:E:618f340c] logged in with entity id 115 at (-131.70282851082203, 6.748487977497231, 1023.7063531064875)
-[23:11:10] [Server thread/INFO]: Player267 joined the game
-[23:11:14] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2704ms behind, skipping 54 tick(s)
-[23:11:26] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@444d2bb6[id=e248ad6f-48ae-34b1-a009-03f2794f8f73,name=Player267,properties={},legacy=false]
+[21:13:18] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Magiology
+[21:13:19] [Client thread/INFO]: SoundSystem shutting down...
+[21:13:19] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[21:13:19] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[21:13:19] [Thread-13/INFO]: Initializing LWJGL OpenAL
+[21:13:19] [Thread-13/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[21:13:19] [Thread-13/INFO]: OpenAL initialized.
+[21:13:20] [Sound Library Loader/INFO]: Sound engine started
+[21:13:24] [Client thread/INFO]: Created: 512x512 textures-atlas
+[21:13:32] [Server thread/INFO]: Starting integrated minecraft server version 1.8
+[21:13:32] [Server thread/INFO]: Generating keypair
+[21:13:33] [Server thread/INFO]: Preparing start region for level 0
+[21:13:34] [Server thread/INFO]: Preparing spawn area: 62%
+[21:13:35] [Server thread/INFO]: Changing view distance to 2, from 10
+[21:13:37] [Server thread/INFO]: Player615[local:E:8185a6d4] logged in with entity id 116 at (-137.2086316278009, 4.0, 1024.0698581569811)
+[21:13:37] [Server thread/INFO]: Player615 joined the game
+[21:13:41] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@4991d624[id=b8c5ee80-8fcd-32b0-a4c2-2c2e7de58468,name=Player615,properties={},legacy=false]
 com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
 	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:65) ~[YggdrasilAuthenticationService.class:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:158) [YggdrasilMinecraftSessionService.class:?]
@@ -339,16 +338,34 @@ com.mojang.authlib.exceptions.AuthenticationException: The client has sent too m
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_60]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_60]
 	at java.lang.Thread.run(Unknown Source) [?:1.8.0_60]
-[23:11:42] [Server thread/INFO]: Saving and pausing game...
-[23:11:42] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[23:11:43] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[23:11:43] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[23:11:43] [Server thread/INFO]: Stopping server
-[23:11:43] [Server thread/INFO]: Saving players
-[23:11:43] [Server thread/INFO]: Saving worlds
-[23:11:43] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[23:11:43] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[23:11:43] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[23:11:45] [Client thread/INFO]: Stopping!
-[23:11:45] [Client thread/INFO]: SoundSystem shutting down...
-[23:11:45] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[21:13:42] [Client thread/WARN]: Could not find uniform named InSize in the specified shader program.
+[21:13:42] [Client thread/WARN]: Could not find uniform named InSize in the specified shader program.
+[21:13:43] [Server thread/ERROR]: Encountered an unexpected exception
+net.minecraft.util.ReportedException: Ticking entity
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:781) ~[MinecraftServer.class:?]
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:669) ~[MinecraftServer.class:?]
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:171) ~[IntegratedServer.class:?]
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:540) [MinecraftServer.class:?]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_60]
+Caused by: java.lang.ArrayIndexOutOfBoundsException: 4
+	at net.minecraft.entity.player.InventoryPlayer.getStackInSlot(InventoryPlayer.java:649) ~[InventoryPlayer.class:?]
+	at net.minecraft.inventory.Slot.getStack(Slot.java:79) ~[Slot.class:?]
+	at net.minecraft.inventory.Container.detectAndSendChanges(Container.java:97) ~[Container.class:?]
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:263) ~[EntityPlayerMP.class:?]
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2031) ~[World.class:?]
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:758) ~[WorldServer.class:?]
+	at net.minecraft.world.World.updateEntity(World.java:1997) ~[World.class:?]
+	at net.minecraft.world.World.updateEntities(World.java:1823) ~[World.class:?]
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:587) ~[WorldServer.class:?]
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:775) ~[MinecraftServer.class:?]
+	... 4 more
+[21:13:43] [Server thread/ERROR]: This crash report has been saved to: C:\Users\toni\Desktop\Magiology 1.8\eclipse\.\crash-reports\crash-2015-09-19_21.13.43-server.txt
+[21:13:43] [Server thread/INFO]: Stopping server
+[21:13:43] [Server thread/INFO]: Saving players
+[21:13:43] [Server thread/INFO]: Player615 lost connection: TextComponent{text='Server closed', siblings=[], style=Style{hasParent=false, color=null, bold=null, italic=null, underlined=null, obfuscated=null, clickEvent=null, hoverEvent=null, insertion=null}}
+[21:13:43] [Server thread/INFO]: Player615 left the game
+[21:13:43] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[21:13:43] [Server thread/INFO]: Saving worlds
+[21:13:43] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[21:13:43] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[21:13:43] [Server thread/INFO]: Saving chunks for level 'New World'/The End

@@ -4,7 +4,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.mcobjects.tileentityes.hologram.RenderObject;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
@@ -35,7 +35,7 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 		GL11.glTranslatef(tile.size.x, tile.size.y, 0);
 		boolean selected=false;
 		NormalizedVertixBuffer buff=TessUtil.getNVB();
-		for(RenderObject ro:tile.renderObjects){
+		for(HoloObject ro:tile.holoObjects){
 			if(ro.host==null)ro.host=tile;
 			GL11.glPushMatrix();
 			GL11.glTranslatef(ro.offset.x, ro.offset.y, 0);

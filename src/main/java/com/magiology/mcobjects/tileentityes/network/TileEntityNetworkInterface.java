@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -190,7 +191,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	public void onNetworkActionInvoked(String action, int dataSize, Object... data){
 		if(U.isRemote(this))return;
 		if(getInterfaceProvider()!=null)return;
-		int side=SideUtil.convert(getOrientation());
+		int side=SideUtil.getOppositeSide(getOrientation());
 		BlockPos pos1=SideUtil.offsetNew(side, pos);
 		try{
 			String[] actionWords=action.split(" ");
@@ -245,8 +246,9 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 							redstoneData.isStrong=isStrong;
 							
 							setInteractData("redstone", redstoneData);
-							worldObj.notifyBlockOfStateChange(pos, blockType);
-							if(U.getBlock(worldObj, pos1).isOpaqueCube())worldObj.notifyBlockOfStateChange(pos1, U.getBlock(worldObj, pos1));
+							IBlockState state=worldObj.getBlockState(pos1);
+							if(!U.getBlock(worldObj, pos1).isSolidFullCube())worldObj.notifyBlockOfStateChange(pos1, state.getBlock());
+							else if(!U.isNull(pos1,worldObj))for(int i=0;i<6;i++)worldObj.notifyBlockOfStateChange(pos1.offset(EnumFacing.getFront(i)), U.getBlock(worldObj, pos1.offset(EnumFacing.getFront(i))));
 						}
 					}
 				}
@@ -257,14 +259,12 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	}
 
 	@Override
-	public IConnection[] getConnections() {
-		// TODO Auto-generated method stub
+	public IConnection[] getConnections(){
 		return null;
 	}
 
 	@Override
-	public boolean isStrate(EnumFacing facing) {
-		// TODO Auto-generated method stub
+	public boolean isStrate(EnumFacing facing){
 		return false;
 	}
 }

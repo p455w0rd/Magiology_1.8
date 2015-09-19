@@ -24,3 +24,16 @@
 1442523427142	Rename field 'derpyMessages'
 1442523440334	Rename field 'derpyMessagesWithNoPortalReferences'
 1442524453217	Delete element
+1442610167525	Rename local variable 's4'
+1442610323092	Rename local variable 's3'
+1442636693278	Rename local variable 'p_i1072_1_'
+1442636840341	Rename field 'guiTextFields'
+1442671419700	Rename field 'origionalSize'
+1442675192368	Rename type 'RenderObject'
+1442678611066	Rename local variable 'ro'
+1442678774024	Rename local variable 'ro'
+1442681036820	Move compilation units
+1442682580203	Copy compilation unit
+1442687606606	Copy compilation unit
+1442687896110	Copy compilation unit
+1442688084459	Move compilation unit

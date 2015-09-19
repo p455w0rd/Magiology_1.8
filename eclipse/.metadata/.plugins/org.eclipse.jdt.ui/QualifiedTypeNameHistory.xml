@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.magiology.gui.custom.hud.HUD"/>
-<fullyQualifiedTypeName name="com.magiology.gui.custom.hud.FakeMessageHUD.Message"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get.Render"/>
-<fullyQualifiedTypeName name="com.magiology.gui.custom.hud.FakeMessageHUD"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.SmartCalculator.CalcFormat"/>
-<fullyQualifiedTypeName name="java.lang.Math"/>
-<fullyQualifiedTypeName name="org.apache.commons.lang3.StringUtils"/>
-<fullyQualifiedTypeName name="sun.java2d.loops.ProcessPath.EndSubPathHandler"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.SmartCalculator.CalcFormat.Variable"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.SmartCalculator.CalculationFormat.Variable"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="org.apache.commons.lang3.ArrayUtils"/>
 <fullyQualifiedTypeName name="net.minecraftforge.fml.client.config.GuiConfigEntries.IntegerEntry"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilclasses.ArrayMath"/>
@@ -28,7 +15,6 @@
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
 <fullyQualifiedTypeName name="java.lang.Double"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
@@ -51,13 +37,27 @@
 <fullyQualifiedTypeName name="io.netty.buffer.ByteBuf"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.Deprecated"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util.H"/>
 <fullyQualifiedTypeName name="com.magiology.util.renderers.TessUtil"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilobjects.ColorF"/>
 <fullyQualifiedTypeName name="com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util.U"/>
-<fullyQualifiedTypeName name="com.magiology.util.renderers.GL11U"/>
 <fullyQualifiedTypeName name="net.minecraft.client.Minecraft"/>
+<fullyQualifiedTypeName name="net.minecraft.util.MovingObjectPosition"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.common.Mod.Instance"/>
+<fullyQualifiedTypeName name="com.magiology.core.BaseMod"/>
+<fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface"/>
+<fullyQualifiedTypeName name="net.minecraft.util.EnumFacing"/>
+<fullyQualifiedTypeName name="com.magiology.util.renderers.GL11U"/>
+<fullyQualifiedTypeName name="com.sun.prism.paint.Color"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.IllegalStateException"/>
+<fullyQualifiedTypeName name="java.math.BigDecimal"/>
+<fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.hologram.StringContainer"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Get.Render"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilobjects.ColorF"/>
+<fullyQualifiedTypeName name="com.magiology.api.updateable.Updater"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util.U"/>
 </qualifiedTypeNameHistroy>

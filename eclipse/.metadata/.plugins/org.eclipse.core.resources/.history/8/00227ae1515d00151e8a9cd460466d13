@@ -1,6 +1,0 @@
-package com.magiology.core;
-
-public class BaseMod{
-	
-	public void loadFiles(){}
-}

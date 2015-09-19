@@ -61,7 +61,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	}
 	@Override
 	public NetworkInterfaceProvider getInterfaceProvider(){
-		int orientation=(getOrientation());
+		int orientation=SideUtil.getOppositeSide(getOrientation());
 		return InterfaceBinder.get(worldObj, SideUtil.offsetNew(orientation, pos));
 	}
 	private List<InteractType> interactTypes=new ArrayList<InteractType>();
@@ -92,7 +92,8 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	}
 	@Override
 	public void onNetworkActionInvoked(String action, Object... data){
-		if(U.isNull(getBrain(),action,data)||action.isEmpty()||data.length==0)return;onNetworkActionInvoked(action, data.length, data);
+		if(U.isNull(getBrain(),action,data)||action.isEmpty()||data.length==0)return;
+		onNetworkActionInvoked(action, data.length, data);
 	}
 	@Override
 	public void setInteractData(String string,Object object){

@@ -17,7 +17,8 @@ public class MGui{
 		GuiSC=4,
 		GuiISidedPowerInstructor=5,
 		HologramProjectorObjectCustomGui=6,
-		HologramProjectorMainGui=7;
+		HologramProjectorMainGui=7,
+		CommandCenterGui=8;
 	
 	public static void preInit(){
 		new GuiUpdater();
