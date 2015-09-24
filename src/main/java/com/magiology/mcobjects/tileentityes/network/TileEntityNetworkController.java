@@ -12,6 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
+import com.magiology.api.network.Command;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.RedstoneData;
@@ -19,6 +20,7 @@ import com.magiology.api.network.skeleton.TileEntityNetworkPow;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
+import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.NetworkUtil;
@@ -30,7 +32,12 @@ import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
 	SlowdownUtil optimizer=new SlowdownUtil(40);
-	List<NetworkBaseInterface> interfaces=new ArrayList<NetworkBaseInterface>();
+	private List<NetworkBaseInterface> interfaces=new ArrayList<NetworkBaseInterface>();
+	private List<ISidedNetworkComponent> network=new ArrayList<ISidedNetworkComponent>();
+	private List<TileEntityNetworkCommandHolder> commandHolders=new ArrayList<TileEntityNetworkCommandHolder>();
+	
+	public List<ISidedNetworkComponent> getNetworkComponents(){return network;}
+	public List<TileEntityNetworkCommandHolder> getCommandHolders(){return commandHolders;}
 	
 	
 	public TileEntityNetworkController(){
@@ -59,7 +66,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 						if(nbt.getInteger("xLink")==pos1.getX()&&nbt.getInteger("yLink")==pos1.getY()&&nbt.getInteger("zLink")==pos1.getZ())pass=true;
 					}
 				}
-				if(pass)((NetworkBaseInterface)a).onNetworkActionInvoked(action, data);
+				if(pass)((NetworkBaseInterface)a).onInvokedFromNetwork(action, data);
 			}
 		}
 	}
@@ -103,7 +110,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 				if(obj instanceof RedstoneData){
 					RedstoneData rd=(RedstoneData) obj;
 					if(rd.networkData!=null){
-						if(rd.networkData.update())key1.onNetworkActionInvoked("redstone set "+rd.isStrong+" "+rd.strenght+" "+(rd.networkData.timeEnd-worldObj.getTotalWorldTime()));
+						if(rd.networkData.update())key1.onInvokedFromNetwork("redstone set "+rd.isStrong+" "+rd.strenght+" "+(rd.networkData.timeEnd-worldObj.getTotalWorldTime()));
 					}
 				}
 			}
@@ -184,14 +191,13 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		}
 		return false;
 	}
-	public  List<ISidedNetworkComponent> getNetworkComponents(){return network;}
-	private List<ISidedNetworkComponent> network=new ArrayList<ISidedNetworkComponent>();
 	public boolean isInNetwork(Object object){
 		try{return network.contains(object);}
 		catch(Exception e){return false;}
 	}
 	private long lastRestart=0;
 	public void restartNetwork(){
+		commandHolders.clear();
 		try{
 			if(worldObj.getTotalWorldTime()!=lastRestart){
 				lastRestart=worldObj.getTotalWorldTime();
@@ -210,9 +216,6 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					if(tileSkipper.get(workTile.getHost())==null)tileSkipper.put(workTile.getHost(), new boolean[]{true,true,true,true,true,true});
 					boolean isDone=true;
 					for(boolean a:tileSkipper.get(workTile.getHost()))if(a)isDone=false;
-					if(isDone) {
-					} else {
-					}
 					if(!isDone)for(int i=0;i<6;i++)if(workTile.getAccessibleOnSide(i)){
 						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideUtil.offsetNew(i, workTile.getHost().getPos()));
 						if(test instanceof ISidedNetworkComponent){
@@ -221,6 +224,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 								more=true;
 								workTile=t;
 								network.add(workTile);
+								if(workTile instanceof TileEntityNetworkCommandHolder)commandHolders.add((TileEntityNetworkCommandHolder)workTile);
 							}else{
 								if(tileSkipper.get(workTile.getHost())==null)tileSkipper.put(workTile.getHost(), new boolean[]{true,true,true,true,true,true});
 								tileSkipper.get(workTile.getHost())[i]=false;
@@ -245,6 +249,33 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	public Command getCommand(Command command){
+		return getCommand(command.pos, command.name);
+	}
+	public Command getCommand(BlockPos pos, String name){
+		TileEntity tile=worldObj.getTileEntity(pos);
+		if(!(tile instanceof TileEntityNetworkCommandHolder))return null;
+		if(((TileEntityNetworkCommandHolder)tile).getBrain()!=this)return null;
+		for(ItemStack j:((TileEntityNetworkCommandHolder)tile).slots){
+			if(j!=null&&CommandContainer.getName(j).equals(name))return CommandContainer.getCommand(j);
+		}
+		return null;
+	}
+	public List<Command> getCommands(){
+		List<Command> result=new ArrayList<Command>();
+		for(TileEntityNetworkCommandHolder i:commandHolders){
+			for(ItemStack j:i.slots){
+				if(j!=null){
+					String name=CommandContainer.getName(j),code=CommandContainer.getCode(j);
+					if(!name.isEmpty()&&!code.isEmpty()){
+						CommandContainer.setPos(j, i.getPos());
+						result.add(CommandContainer.getCommand(j));
+					}
+				}
+			}
+		}
+		return result;
 	}
 	@Override public void findBrain(){}
 	@Override public long getNetworkId(){return getNetworkID(this);}

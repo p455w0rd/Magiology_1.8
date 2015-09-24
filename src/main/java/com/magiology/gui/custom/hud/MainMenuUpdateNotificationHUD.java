@@ -181,18 +181,18 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		buff.addVertexWithUV(boundingBox.width, boundingBox.height, 0, 0, 0);
 		buff.addVertexWithUV(boundingBox.width, 0,                  0, 0, 0);
 		//do not kill them
-		buff.disableClearing();
+		buff.setClearing(false);
 		//draw the quad
 		buff.draw();
 		//k now you can kill them and before you do so turn them into a wire
-		buff.enableClearing();
-		buff.setDrawModeToWireFrame();
+		buff.setClearing(true);
+		buff.setDrawAsWire(true);
 		//and color them
 		GL11.glColor4f(0, 0, 0, 0.4F+backgroundBlue.getPoint()*0.6F);
 		//JUST DO IT!!
 		buff.draw();
 		//dam that was messed up
-		buff.setDrawModeToQuadPlate();
+		buff.setDrawAsWire(false);
 		GL11.glColor4f(1,1,1,1);
 		//reset stuff for font rendering
 		GL11U.texture(true);

@@ -27,7 +27,7 @@ import com.magiology.mcobjects.blocks.fire.FireLamp;
 import com.magiology.mcobjects.blocks.fire.FireMatrixReceaver;
 import com.magiology.mcobjects.blocks.fire.FireMatrixTransferer;
 import com.magiology.mcobjects.blocks.fire.FirePipe;
-import com.magiology.mcobjects.blocks.network.NetworkCommandCenter;
+import com.magiology.mcobjects.blocks.network.NetworkCommandHolder;
 import com.magiology.mcobjects.blocks.network.NetworkConductor;
 import com.magiology.mcobjects.blocks.network.NetworkController;
 import com.magiology.mcobjects.blocks.network.NetworkInterface;
@@ -84,7 +84,7 @@ public class MBlocks{
 		networkInterface=init(new NetworkInterface().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkInterface"));
 		networkPointerContainer=init(new NetworkPointerContainer().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkPointerContainer"));
 		rareSpacePipe=init(new RareSpacePipe().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("rareSpacePipe"));
-		networkCommandCenter=init(new NetworkCommandCenter().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkCommandCenter"));
+		networkCommandCenter=init(new NetworkCommandHolder().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkCommandCenter"));
 	}
 
 	static Block init(Block block){

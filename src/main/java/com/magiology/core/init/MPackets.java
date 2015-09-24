@@ -1,8 +1,9 @@
 package com.magiology.core.init;
 
-import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.forgepowered.packets.packets.ClickCommandContainerInGui;
 import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
+import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
 import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
@@ -18,19 +19,21 @@ import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacke
 public class MPackets{
 
 	public static void preInit(){
-		AbstractToServerMessage.registerNewMessage(RightClickBlockPacket.class);
-		AbstractToServerMessage.registerNewMessage(TileRedstone.class);
-		AbstractToServerMessage.registerNewMessage(OpenGuiPacket.class);
-		AbstractToServerMessage.registerNewMessage(GenericServerIntPacket.class);
-		AbstractToServerMessage.registerNewMessage(GenericServerVoidPacket.class);
-		AbstractToServerMessage.registerNewMessage(GenericServerStringPacket.class);
-		AbstractToServerMessage.registerNewMessage(UploadPlayerDataPacket.class);
-		AbstractToServerMessage.registerNewMessage(ClickHologramPacket.class);
-		AbstractToServerMessage.registerNewMessage(RenderObjectUploadPacket.class);
-		AbstractToServerMessage.registerNewMessage(NotifyPointedBoxChangePacket.class);
+		AbstractPacket.registerNewMessage(RightClickBlockPacket.class);
+		AbstractPacket.registerNewMessage(TileRedstone.class);
+		AbstractPacket.registerNewMessage(OpenGuiPacket.class);
+		AbstractPacket.registerNewMessage(GenericServerIntPacket.class);
+		AbstractPacket.registerNewMessage(GenericServerVoidPacket.class);
+		AbstractPacket.registerNewMessage(GenericServerStringPacket.class);
+		AbstractPacket.registerNewMessage(UploadPlayerDataPacket.class);
+		AbstractPacket.registerNewMessage(ClickHologramPacket.class);
+		AbstractPacket.registerNewMessage(RenderObjectUploadPacket.class);
+		AbstractPacket.registerNewMessage(NotifyPointedBoxChangePacket.class);
+		AbstractPacket.registerNewMessage(ClickCommandContainerInGui.class);
+		AbstractPacket.registerNewMessage(HologramProjectorUpload.class);
 		
-		AbstractToClientMessage.registerNewMessage(SendPlayerDataPacket.class);
-		AbstractToClientMessage.registerNewMessage(SavableDataWithKeyPacket.class);
+		AbstractPacket.registerNewMessage(SendPlayerDataPacket.class);
+		AbstractPacket.registerNewMessage(SavableDataWithKeyPacket.class);
 	}
 
 }

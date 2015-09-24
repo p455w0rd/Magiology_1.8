@@ -45,14 +45,14 @@ public abstract class HoloObject implements SavableData{
 	}
 	public void checkHighlight(){
 		if(host==null||host.point==null)return;
-		if(host.point.isPointing){
+		if(host.point.isPointing&&host.selectedObj==null){
 			Vec3M hit=host.point.pointedPos;
 			isHighlighted=
-					hit.x<offset.x&&
-					hit.x>offset.x-size.x&&
-					hit.y<offset.y&&
-					hit.y>offset.y-size.y
-					;
+				hit.x<offset.x&&
+				hit.x>offset.x-size.x&&
+				hit.y<offset.y&&
+				hit.y>offset.y-size.y;
+			if(isHighlighted)host.selectedObj=this;
 		}else isHighlighted=false;
 	}
 	public void handleGuiAndMovment(EntityPlayer player){
@@ -60,7 +60,7 @@ public abstract class HoloObject implements SavableData{
 			if(moveMode)moveMode=false;
 			else GuiHandelerM.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
 		}
-		if(moveMode){
+		if(moveMode&&host.point.pointedPos!=null){
 			offset.x=(float)host.point.pointedPos.x+size.x/2;
 			offset.y=(float)host.point.pointedPos.y+size.y/2;
 		}

@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,7 +29,6 @@ import com.magiology.core.init.MRecepies;
 import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handelers.EnhancedRobot;
-import com.magiology.handelers.GuiHandelerM;
 import com.magiology.handelers.web.DownloadingHandeler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.render.Textures;
@@ -90,7 +88,7 @@ public class Magiology{
 		}
 	}
 	public void preInit(FMLPreInitializationEvent event){
-		VersionChecker.init();
+		MUpdater.init();
 //		//TODO
 //		Config.setShadersEnabled(false);
 		
@@ -102,7 +100,6 @@ public class Magiology{
 		MPackets.preInit();
 	}
 	public void init(FMLInitializationEvent event){
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandelerM());
 		MRecepies.init();
 		MTileEntitys.init();
 		proxy.registerProxies();

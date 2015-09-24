@@ -1,10 +1,13 @@
 package com.magiology.io;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -24,7 +27,19 @@ public class IOReadableMap{
 	public void readFromFile(){
 		try{
 			if(!new File(fileDir).exists())new File(fileDir).createNewFile();
-			for(String string:Files.readAllLines(new File(fileDir).toPath())){
+			
+			BufferedReader br=new BufferedReader(new FileReader(new File(fileDir)));
+			List<String> lines=new ArrayList<String>();
+			if(br!=null){
+			    String line=br.readLine();
+			    while (line!=null){
+			    	lines.add(line);
+			        line=br.readLine();
+			    }
+			}
+		    br.close();
+			
+			for(String string:lines){
 				string=string.substring(1, string.length()-1);
 				String[] line=string.split('"'+", "+'"');
 				data.put(line[0], line[1]);

@@ -7,50 +7,38 @@
 ****************************
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
-:getVersionJson
-:extractUserdev
-Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.14.3.1509/forge-1.8-11.14.3.1509.pom
-Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.14.3.1509/forge-1.8-11.14.3.1509-userdev.jar
+:compileApiJava UP-TO-DATE
+:processApiResources UP-TO-DATE
+:apiClasses UP-TO-DATE
+:sourceMainJava
+:compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+1 warning
+
+:processResources
+:classes
+:jar
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test UP-TO-DATE
 :extractMcpData SKIPPED
-:extractMcpMappings
+:extractMcpMappings SKIPPED
+:getVersionJson
+:extractUserdev UP-TO-DATE
 :genSrgs SKIPPED
-:downloadClient SKIPPED
-:downloadServer SKIPPED
-:splitServerJar SKIPPED
-:mergeJars SKIPPED
-:deobfMcSRG
-Applying SpecialSource...
-Applying Exceptor...
-:getFernFlower SKIPPED
-:decompileMcPicked up _JAVA_OPTIONS: -Xmx1024M
+:reobfJar
+:extractRangemapSrc
+:retromapSources
+remapping source...
+:sourceJar
+:assemble
+:check UP-TO-DATE
+:build
 
-:fixMcSources
-:applySourcePatches
-:remapMcSources
-:recompileMc
-[ant:javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6
-[ant:javac] C:\Users\toni\Desktop\Magiology 1.8\build\tmp\recompileMc\sources\net\minecraftforge\client\ForgeHooksClient.java:698: error: cannot find symbol
-[ant:javac]             TileEntitySpecialRenderer r = TileEntityRendererDispatcher.field_147556_a
-[ant:javac]                                                                       ^
-[ant:javac]   symbol:   variable field_147556_a
-[ant:javac]   location: class TileEntityRendererDispatcher
-[ant:javac] Note: Some input files use or override a deprecated API.
-[ant:javac] Note: Recompile with -Xlint:deprecation for details.
-[ant:javac] Note: Some input files use unchecked or unsafe operations.
-[ant:javac] Note: Recompile with -Xlint:unchecked for details.
-[ant:javac] 1 error
-[ant:javac] 1 warning
-:recompileMc FAILED
+BUILD SUCCESSFUL
 
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':recompileMc'.
-> Compile failed; see the compiler error output for details.
-
-* Try:
-Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
-
-BUILD FAILED
-
-Total time: 8 mins 41.926 secs
+Total time: 1 mins 41.514 secs

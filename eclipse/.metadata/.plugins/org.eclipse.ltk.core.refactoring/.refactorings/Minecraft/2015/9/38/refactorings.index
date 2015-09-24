@@ -37,3 +37,31 @@
 1442687606606	Copy compilation unit
 1442687896110	Copy compilation unit
 1442688084459	Move compilation unit
+1442696868552	Rename field 'NetworkPointer'
+1442749170177	Rename local variable 'itemStackIn'
+1442749176228	Rename local variable 'worldIn'
+1442758804981	Move compilation unit
+1442758846782	Move compilation unit
+1442758868652	Move compilation unit
+1442758874999	Move compilation unit
+1442758877574	Delete element
+1442770540597	Rename package 'com.magiology.QWERTZ'
+1442771174608	Rename type 'ComandPointer'
+1442771304806	Rename type 'CommandPointer'
+1442771791785	Rename field 'item'
+1442771988897	Rename type 'NetworkCommandCenter'
+1442771996197	Rename type 'TileEntityNetworkCommandCenter'
+1442772417546	Rename method 'onInterfaceProviderActionInvoked'
+1442772578119	Rename type 'BasicNetworkInterfaceProvider'
+1442772589144	Rename type 'NetworkInterfaceProvider'
+1442772633861	Rename method 'onInvokedFromNetwork'
+1442772660696	Rename method 'onNetworkActionInvoked'
+1442772995280	Rename method 'onInterfaceProviderActionInvoked'
+1442773345591	Rename method 'onNetworkActionInvoked'
+1442783890426	Rename local variable 'command'
+1442783903044	Rename method 'getCommand'
+1442784066895	Rename type 'Command'
+1442784254469	Delete element
+1442784524578	Rename method 'setInteger'
+1442785364105	Rename method 'getCommandName'
+1442785700787	Encapsulate field 'commandHolders'

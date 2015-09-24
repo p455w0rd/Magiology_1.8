@@ -96,15 +96,15 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		GL11.glColor4f(0, 0, 0, 0.06F);
 		GL11U.texture(false);
 		GL11U.blendFunc(1);
-		buff.disableClearing();
-		buff.setDrawModeToWireFrame();
+		buff.setClearing(false);
+		buff.setDrawAsWire(true);
 		buff.draw();
-		buff.setDrawModeToQuadPlate();
+		buff.setDrawAsWire(false);
 		GL11.glColor4f(0, 0.4F+U.fluctuatorSmooth(50, 0)*0.6F, 0.6F+U.fluctuatorSmooth(97, 61)*0.4F, 0.01F);
 		buff.draw();
+		buff.setClearing(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		buff.draw();
-		buff.enableClearing();
 		GL11U.texture(true);
 		//reset openGl
 		GL11U.EndOpaqueRendering();
@@ -157,7 +157,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
 			width=Util.getFontRenderer().getStringWidth(text)*U.p/4;
 		Util.getFontRenderer();
-		float leftX=(float)CricleUtil.sin(-camYaw+90)*width/2, leftZ=(float)CricleUtil.cos(-camYaw+90)*width/2, rand=Util.CRandF(2);
+		float leftX=CricleUtil.sin(-camYaw+90)*width/2, leftZ=CricleUtil.cos(-camYaw+90)*width/2, rand=Util.CRandF(2);
 		
 		
 		float r=0.8F,g=Util.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;

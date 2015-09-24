@@ -1,11 +1,15 @@
 package com.magiology.core.init;
 
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import com.magiology.core.Magiology;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.gui.GuiUpdater;
 import com.magiology.gui.custom.hud.HandModeChangerHUD;
 import com.magiology.gui.custom.hud.SoulFlameHUD;
 import com.magiology.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.gui.custom.hud.WingModeChangerHUD;
+import com.magiology.handelers.GuiHandelerM;
 import com.magiology.util.utilclasses.Util.U;
 
 public class MGui{
@@ -18,13 +22,15 @@ public class MGui{
 		GuiISidedPowerInstructor=5,
 		HologramProjectorObjectCustomGui=6,
 		HologramProjectorMainGui=7,
-		CommandCenterGui=8;
+		CommandCenterGui=8,
+		CommandContainerEditor=9;
 	
 	public static void preInit(){
 		new GuiUpdater();
 	}
 
 	public static void registerGuis(){
+		NetworkRegistry.INSTANCE.registerGuiHandler(Magiology.getMagiology(), new GuiHandelerM());
 		try{
 			RenderLoopEvents.registerFirstPersonGui(SoulFlameHUD.instance);
 			RenderLoopEvents.registerFirstPersonGui(WingModeChangerHUD.instance);

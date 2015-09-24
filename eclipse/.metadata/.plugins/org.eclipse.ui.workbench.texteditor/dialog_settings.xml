@@ -2,37 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="size" key="selection"/>
+		<item value="Get.Render.FR()" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="size"/>
-			<item value="onNetworkActionInvoked"/>
-			<item value="onInterfaceProviderActionInvoked"/>
-			<item value="U.prin"/>
-			<item value="getInterfaceProvider"/>
-			<item value="VERSION"/>
-			<item value="MODID.toUpperCase()"/>
-			<item value=" |"/>
+			<item value="Util.getFontRenderer()"/>
+			<item value="-1/scale"/>
+			<item value=" + 1/scale"/>
+			<item value="y"/>
+			<item value="x"/>
+			<item value="Color.RED.hashCode()"/>
+			<item value="Color.WHITE.hashCode()"/>
+			<item value="+&quot;0&quot;"/>
 		</list>
 		<list key="replacehistory">
-			<item value="originalSize"/>
-			<item value="MC_VERSION+&quot;-&quot;+VERSION"/>
-			<item value="MC_VERSION+&quot;-&quot;"/>
-			<item value="MC_VERSION+&quot;-&quot;+"/>
-			<item value="NAME"/>
+			<item value="Get.Render.FR()"/>
 			<item value=""/>
-			<item value="println"/>
-			<item value="Util"/>
+			<item value="yPosition"/>
+			<item value="xPosition"/>
+			<item value="RED"/>
+			<item value="WHITE"/>
+			<item value="p*5"/>
+			<item value="TileEntityNetworkCommandCenter"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="367" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="382" key="DIALOG_HEIGHT"/>
-		<item value="775" key="DIALOG_X_ORIGIN"/>
-		<item value="136" key="DIALOG_Y_ORIGIN"/>
+		<item value="1030" key="DIALOG_X_ORIGIN"/>
+		<item value="149" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

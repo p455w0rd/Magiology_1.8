@@ -80,7 +80,7 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
 		if(id<0)return false;
 		if(tile.getStackInSlot(id)==null){
-			if(!Util.isItemInStack(MItems.NetworkPointer,player.getCurrentEquippedItem()))return false;
+			if(!Util.isItemInStack(MItems.networkPointer,player.getCurrentEquippedItem()))return false;
 			tile.setInventorySlotContents(id, player.getCurrentEquippedItem());
 			if(!player.capabilities.isCreativeMode)player.inventory.mainInventory[player.inventory.currentItem]=null;
 			return true;

@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.sun.javafx.geom.Vec3f;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 
 public class SmartCalculator{
@@ -27,13 +27,13 @@ public class SmartCalculator{
 				if(type==flo)return new float[0].getClass();
 				if(type==dou)return new double[0].getClass();
 				if(type==lon)return new long[0].getClass();
-				if(type==vec)return new Vec3f[0].getClass();
+				if(type==vec)return new Vec3M[0].getClass();
 			}else{
 				if(type==Int)return Integer.class;
 				if(type==flo)return Float.class;
 				if(type==dou)return Double.class;
 				if(type==lon)return Long.class;
-				if(type==vec)return Vec3f.class;
+				if(type==vec)return Vec3M.class;
 			}
 			throw new IllegalStateException(getClass().getSimpleName()+" has an invalid type. 'Type: "+type+" isArray: "+isArray+"'");
 		}

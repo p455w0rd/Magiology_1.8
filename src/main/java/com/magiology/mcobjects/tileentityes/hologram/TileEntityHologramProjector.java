@@ -17,15 +17,14 @@ import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandeler;
-import com.magiology.api.network.NetworkBaseInterface;
-import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
-import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
 import com.magiology.mcobjects.effect.EntityFacedFX;
+import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Plane;
 import com.magiology.util.utilobjects.vectors.Ray;
@@ -40,24 +39,26 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public Vector2f size,offset;
 	public Vec3M mainColor=new Vec3M(0.05,0.5,0.8);
 	public HoloObject lastPartClicked;
+	public boolean[] highlighs=new boolean[4];
+	public HoloObject selectedObj;
+	
 	public TileEntityHologramProjector(){
 		size=new Vector2f(11,6);
 		offset=new Vector2f(-5, 1+Util.p*1.45F);
 		main=new ComplexCubeModel(0,0,-Util.p/2, size.x,size.y,Util.p/2);
-//		hologramProjectors.add(this);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
 		InterfaceBinder.readInterfaceFromNBT(this, NBT);
-
 		int dataSize=NBT.getInteger("DS");
 		List<SavableData> data=SavableDataHandeler.loadDataFromNBT(NBT, "ID",false);
 		holoObjects.clear();
 		for(int i=0;i<dataSize;i++){
 			holoObjects.add((HoloObject)data.get(i));
 		}
+		for(int i=0;i<3;i++)highlighs[i]=NBT.getBoolean("h"+i);
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
@@ -72,10 +73,29 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		int dataSize=savableData.size();
 		NBT.setInteger("DS", dataSize);
 		SavableDataHandeler.saveDataToNBT(savableData, NBT, "ID");
+		for(int i=0;i<3;i++)NBT.setBoolean("h"+i,highlighs[i]);
 	}
 	
 	@Override
 	public void update(){
+		if(Util.isRemote(this)){
+			Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+					x()+U.RF(), y()+U.p*11, z()+U.RF(), x()+offset.x+size.x*U.RF(), y()+offset.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+			switch (U.RInt(3)){
+			case 0:{
+				Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+						x()+offset.x+size.x*U.RF(), y()+offset.y+size.y, z()+0.5, x()+offset.x+size.x*U.RF(), y()+offset.y+size.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+			}break;
+			case 1:{
+				Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+						x()+offset.x, y()+offset.y+size.y*U.RF(), z()+0.5, x()+offset.x, y()+offset.y+size.y*U.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+			}break;
+			case 2:{
+				Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+						x()+offset.x+size.x, y()+offset.y+size.y*U.RF(), z()+0.5, x()+offset.x+size.x, y()+offset.y+size.y*U.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+			}break;
+			}
+		}
 		boolean contains=false;
 		for(TileEntityHologramProjector a:hologramProjectors){
 			if(a==this){
@@ -88,19 +108,13 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 			HoloObject ho=holoObjects.get(i);
 			if(!ho.isDead){
 				ho.host=this;
+				ho.fixPos();
 				ho.update();
 			}else holoObjects.remove(i);
-//			if(worldObj.getTotalWorldTime()%40==0&&Helper.isRemote(this))Helper.sendMessage(new RenderObjectUploadPacket(ro));
 		}
 	}
-	@Override
-	public AxisAlignedBB getRenderBoundingBox(){
-		Vec3M
-			p1=main.getPoint(false,false,false).addVector(offset.x, offset.y, 0),
-			p2=main.getPoint(true,true,true).addVector(offset.x, offset.y, 0);
-		return super.getRenderBoundingBox().union(new AxisAlignedBB(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z).addCoord(x(), y(), z()));
-	}
 	public void onPressed(EntityPlayer player){
+		selectedObj=null;
 		if(Util.isRemote(player))for(int a=0;a<360;a+=30){
 			double[] b=Util.cricleXZ(a+Util.CRandF(16));
 			b[0]*=0.06;
@@ -113,20 +127,22 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		
 		boolean changed=false;
 		for(HoloObject ro:holoObjects){
-			ro.checkHighlight();
-			if(ro.isHighlighted){
-				if(!changed&&ro.isHighlighted){
-					changed=true;
-					lastPartClicked=ro;
-				}ro.onPressed(player);
-			}else if(ro.moveMode)ro.onPressed(player);
+			if(ro.getClass()==Field.class?highlighs[2]:true){
+				ro.checkHighlight();
+				if(ro.isHighlighted){
+					if(!changed&&ro.isHighlighted){
+						changed=true;
+						lastPartClicked=ro;
+					}
+					ro.handleGuiAndMovment(player);
+					ro.onPressed(player);
+				}else if(ro.moveMode){
+					ro.handleGuiAndMovment(player);
+					ro.onPressed(player);
+				}
+			}
 		}
 		if(!changed)lastPartClicked=null;
-		if(lastPartClicked!=null){
-			NetworkInterfaceProvider Interface=InterfaceBinder.get(this);
-			NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(this,Interface);
-			if(netInterface!=null)netInterface.onInterfaceProviderActionInvoked(Interface, lastPartClicked instanceof StringContainer?((StringContainer)lastPartClicked).getString():"", lastPartClicked,Interface,this);
-		}
 		if(Util.isRemote(player))Util.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
 	}
 	
@@ -208,5 +224,12 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 			}
 		}
 		return false;
+	}
+	@Override
+	public AxisAlignedBB getRenderBoundingBox(){
+		Vec3M
+			p1=main.getPoint(false,false,false).addVector(offset.x, offset.y, 0),
+			p2=main.getPoint(true,true,true).addVector(offset.x, offset.y, 0);
+		return super.getRenderBoundingBox().union(new AxisAlignedBB(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z).addCoord(x(), y(), z()));
 	}
 }

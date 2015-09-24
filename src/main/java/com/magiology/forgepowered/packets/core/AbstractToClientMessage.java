@@ -3,16 +3,12 @@ package com.magiology.forgepowered.packets.core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.relauncher.Side;
 
 public abstract class AbstractToClientMessage extends AbstractPacket{
 	public final SendingTarget target;
 	public AbstractToClientMessage(){target=null;}
 	public AbstractToClientMessage(SendingTarget target){
 		this.target=target;
-	}
-	public static void registerNewMessage(Class<? extends AbstractToClientMessage> clientMessage){
-		registerPacket(clientMessage,Side.CLIENT);
 	}
 	public static class SendingTarget{
 		public TargetPoint point;

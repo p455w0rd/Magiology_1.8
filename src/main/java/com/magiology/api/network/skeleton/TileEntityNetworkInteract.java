@@ -14,8 +14,8 @@ import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandeler;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
-import com.magiology.api.network.NetworkInterfaceProvider;
 import com.magiology.api.network.RedstoneData;
+import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.core.init.MItems;
@@ -60,7 +60,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		for(int i=0;i<dataSize;i++)NBT.setString("key"+i, savableDataKeys.get(i));
 	}
 	@Override
-	public NetworkInterfaceProvider getInterfaceProvider(){
+	public WorldNetworkInterface getInterfaceProvider(){
 		int orientation=SideUtil.getOppositeSide(getOrientation());
 		return InterfaceBinder.get(worldObj, SideUtil.offsetNew(orientation, pos));
 	}
@@ -73,7 +73,6 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	public Map<String,Object> getData(){
 		return interactData;
 	}
-	public abstract void onNetworkActionInvoked(String action, int dataSize, Object... data);
 	@Override
 	public boolean hasInteractType(InteractType interactType){
 		return interactTypes.contains(interactType);
@@ -84,17 +83,13 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	}
 	@Override
 	public Object getInteractData(String string){
-		return interactData.get(string);}
-	public abstract void onInterfaceProviderActionInvoked(NetworkInterfaceProvider interfaceProvider, String action, int dataSize, Object... data);
+		return interactData.get(string);
+	}
 	@Override
 	public void setInteractType(InteractType interactType){
 		if(interactType==null)interactTypes.remove(interactType);else if(!hasInteractType(interactType))interactTypes.add(interactType);
 	}
-	@Override
-	public void onNetworkActionInvoked(String action, Object... data){
-		if(U.isNull(getBrain(),action,data)||action.isEmpty()||data.length==0)return;
-		onNetworkActionInvoked(action, data.length, data);
-	}
+	
 	@Override
 	public void setInteractData(String string,Object object){
 		
@@ -115,16 +110,24 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		}
 	}
 	@Override
-	public boolean canInteractWithProvider(NetworkInterfaceProvider provider){
+	public boolean canInteractWithProvider(WorldNetworkInterface provider){
 		InteractType[] interactTypes=provider.getInteractTypes();
 		for(InteractType i:interactTypes)if(!hasInteractType(i))return false;
 		return true;
 	}
 	@Override
-	public void onInterfaceProviderActionInvoked(NetworkInterfaceProvider interfaceProvider, String action, Object... data){
-		if(U.isNull(interfaceProvider,getBrain(),action,data)||action.isEmpty()||data.length==0)return;
-		onInterfaceProviderActionInvoked(interfaceProvider, action, data.length, data);
+	public void onInvokedFromWorld(WorldNetworkInterface interfaceProvider, String action, Object... data){
+		if(getBrain()==null)return;
+		onInvokedFromWorldInvoked(interfaceProvider, action, data.length, data);
 	}
+	public abstract void onInvokedFromWorldInvoked(WorldNetworkInterface interfaceProvider, String action, int dataSize, Object... data);
+	
+	@Override
+	public void onInvokedFromNetwork(String action, Object... data){
+		if(getBrain()==null)return;
+		onActionInvoked(action, data.length, data);
+	}
+	public abstract void onActionInvoked(String action, int dataSize, Object... data);
 	
 	@Override
 	public DoubleObject<DataOutput,Object> getInterfaceDataOutput(){
@@ -149,7 +152,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		List<TileEntityNetworkPointerContainer> containers=getPointerContainers();
 		for(TileEntityNetworkPointerContainer a:containers){
 			for(int b=0;b<a.getSizeInventory();b++){
-				if(Util.isItemInStack(MItems.NetworkPointer, a.getStackInSlot(b)))result.add(a.getStackInSlot(b));
+				if(Util.isItemInStack(MItems.networkPointer, a.getStackInSlot(b)))result.add(a.getStackInSlot(b));
 			}
 		}
 		return result;

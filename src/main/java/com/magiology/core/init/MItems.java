@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import com.magiology.core.MReference;
 import com.magiology.handelers.animationhandelers.TheHandHandeler;
 import com.magiology.mcobjects.items.BedrockDust;
+import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.mcobjects.items.EquivalentRightClickWandOfMagic;
 import com.magiology.mcobjects.items.FireBarrel;
 import com.magiology.mcobjects.items.FireHammer;
@@ -35,7 +36,7 @@ public class MItems{
 	public static Item
 		BedrockDust,BedrockIngot,EquivalentRightClickWandOfMagic,DiscoFlorPlacer,
 		PowerCounter,FireHammer,FireBarrel,TheHand,IPowerSidenessInstructor,
-		NetworkPointer;
+		networkPointer,commandContainer;
 
 	//multiple leveled Item upgrade references
 	public static Item[] capacityUpgrades=new Item[5],rangeUpgrades=new Item[2],speedUpgrades=new Item[5];
@@ -61,7 +62,8 @@ public class MItems{
 		FireHammer=init(new FireHammer().setTextureName(MReference.MODID + ":" + "FireHammer").setUnlocalizedName("FireHammer").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
 		FireBarrel=init(new FireBarrel(Container.FireBarrel).setTextureName(MReference.MODID + ":" + "FireBarrel").setUnlocalizedName("FireBarrel").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
 		TheHand=init(new TheHand().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("TheHand").setMaxStackSize(1));
-		NetworkPointer=init(new NetworkPointer().setUnlocalizedName("NetworkPointer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
+		networkPointer=init(new NetworkPointer().setUnlocalizedName("NetworkPointer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
+		commandContainer=init(new CommandContainer().setUnlocalizedName("CommandContainer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
 		//Upgrades
 		controlUpgrades=initGIU(new GenericItemUpgrade(1,UpgradeType.Control,null));
 		priorityUpgrades=initGIU(new GenericItemUpgrade(1,UpgradeType.Priority,null));

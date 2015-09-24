@@ -16,8 +16,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import com.magiology.core.MUpdater;
 import com.magiology.core.Magiology;
-import com.magiology.core.VersionChecker;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
@@ -40,7 +40,7 @@ public class TickEvents{
 	public void onClientTick(TickEvent.ClientTickEvent event){
 		if(event.phase!=Phase.START)return;
 		
-		if(VersionChecker.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.update();
+		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.update();
 		DownloadingIcon.update();
 		if(U.getTheWorld()==null)RenderLoopEvents.universalLongRender.clear();
 		
@@ -82,7 +82,8 @@ public class TickEvents{
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event){
 		RenderLoopEvents.partialTicks=event.renderTickTime;
-		if(event.phase==Phase.END)return;
+		if(event.phase!=Phase.END)return;
+		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.render(Display.getWidth(), Display.getHeight(),event.renderTickTime);
 		if(bufferedGuiFirst){
 			bufferedGuiFirst=false;
 			bufferedGui.isDone=true;
@@ -101,7 +102,6 @@ public class TickEvents{
 				Magiology.modInfGUI.Update();
 			}
 		}
-		if(event.phase==Phase.END&&VersionChecker.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.render(Display.getWidth(), Display.getHeight(),event.renderTickTime);
 	}
 	@SubscribeEvent
 	public void onWorldTick(TickEvent.WorldTickEvent event){

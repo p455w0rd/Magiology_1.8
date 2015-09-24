@@ -182,7 +182,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player){
-		return Util.isItemInStack(MItems.NetworkPointer, player.getCurrentEquippedItem());
+		return Util.isItemInStack(MItems.networkPointer, player.getCurrentEquippedItem());
 	}
 	@Override
 	public void openInventory(EntityPlayer player){
@@ -194,7 +194,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	}
 	@Override
 	public boolean isItemValidForSlot(int id, ItemStack stack){
-		return Util.isItemInStack(MItems.NetworkPointer, stack);
+		return Util.isItemInStack(MItems.networkPointer, stack);
 	}
 	public NetworkBaseInterface getBoundedBaseInterface(){
 		int side=SideUtil.convert(getOrientation());

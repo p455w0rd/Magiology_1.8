@@ -21,6 +21,7 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -31,12 +32,12 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	
 	
 	@Override
-	public IMessage onMessage(T message, MessageContext ctx){
+	public final IMessage onMessage(T message, MessageContext ctx){
 		return message.process(ctx.side.isServer()?ctx.getServerHandler().playerEntity:U.getMC().thePlayer,ctx.side);
 	}
 	
 	@Override
-	public void fromBytes(ByteBuf buf){
+	public final void fromBytes(ByteBuf buf){
 		try{
 			read(new PacketBuffer(buf));
 		}catch(IOException e){
@@ -45,7 +46,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	}
 	
 	@Override
-	public void toBytes(ByteBuf buf){
+	public final void toBytes(ByteBuf buf){
 		try{
 			write(new PacketBuffer(buf));
 		}catch(IOException e){
@@ -59,7 +60,12 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	
 	public abstract IMessage process(EntityPlayer player, Side side);
 
-	public static <T extends IMessage & IMessageHandler<T, IMessage>> void registerPacket(Class<T> clazz, Side side){
+	public static void registerNewMessage(Class<? extends AbstractPacket> serverMessage){
+		if(Util.Instanceof(serverMessage, AbstractToServerMessage.class))registerPacket(serverMessage, Side.SERVER);
+		else if(Util.Instanceof(serverMessage, AbstractToClientMessage.class))registerPacket(serverMessage, Side.CLIENT);
+	}
+	
+	private static <T extends IMessage & IMessageHandler<T, IMessage>> void registerPacket(Class<T> clazz, Side side){
 		if(Magiology.NETWORK_CHANNEL==null)Magiology.NETWORK_CHANNEL=NetworkRegistry.INSTANCE.newSimpleChannel(MReference.CHANNEL_NAME);
 		if(side==Side.CLIENT)Magiology.NETWORK_CHANNEL.registerMessage(clazz, clazz, registrationId, Side.CLIENT);
 		else if(side==Side.SERVER)Magiology.NETWORK_CHANNEL.registerMessage(clazz, clazz, registrationId, Side.SERVER);

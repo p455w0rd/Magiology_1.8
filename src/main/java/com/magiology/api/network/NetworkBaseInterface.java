@@ -13,11 +13,11 @@ import com.magiology.util.utilobjects.DoubleObject;
 
 public interface NetworkBaseInterface{
 	
-	public void onInterfaceProviderActionInvoked(NetworkInterfaceProvider interfaceProvider,String action,Object... data);
-	public void onNetworkActionInvoked(String action, Object... data);
+	public void onInvokedFromWorld(WorldNetworkInterface interfaceProvider,String action,Object... data);
+	public void onInvokedFromNetwork(String action, Object... data);
 	public TileEntityNetworkController getBrain();
-	public NetworkInterfaceProvider getInterfaceProvider();
-	public boolean canInteractWithProvider(NetworkInterfaceProvider provider);
+	public WorldNetworkInterface getInterfaceProvider();
+	public boolean canInteractWithProvider(WorldNetworkInterface provider);
 	public Map<String,Object> getData();
 	public Object getInteractData(String string);
 	public  void  setInteractData(String string,Object object);

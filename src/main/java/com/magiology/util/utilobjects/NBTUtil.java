@@ -46,7 +46,7 @@ public class NBTUtil{
 	public static int getInt(ItemStack stack, String key){
 		return getNBT(stack).getInteger(key);
 	}
-	public static void setInteger(ItemStack stack, String key, int keyValue){
+	public static void setInt(ItemStack stack, String key, int keyValue){
 		createNBT(stack);
 		getNBT(stack).setInteger(key, keyValue);
 	}
@@ -76,7 +76,7 @@ public class NBTUtil{
 		return stack!=null&&getNBT(stack)!=null;
 	}
 	public static NBTTagCompound getNBT(ItemStack stack){
-		return getNBT(stack);
+		return stack.getTagCompound();
 	}
 	@Deprecated
 	public void writeNbtToPacketBuffer(NBTTagCompound nbt, PacketBuffer buff){

@@ -195,9 +195,8 @@ public class Util{
 	 * @return
 	 */
 	public static boolean isNull(Object...objects){
-		boolean result=false;
-		for(int a=0;a<objects.length;a++)if(objects[a]==null){result=true;continue;}
-		return result;
+		for(int a=0;a<objects.length;a++)if(objects[a]==null)return true;
+		return false;
 	}
 	/**
 	 * Returns if stack contains a specific item
@@ -418,14 +417,17 @@ public class Util{
 		}
 		return fps;
 	}
-	public static boolean isRemote(Object object){
-		if(object instanceof Entity)return((Entity)object).worldObj.isRemote;
-		if(object instanceof World)return((World)object).isRemote;
-		if(object instanceof TileEntity)return((TileEntity)object).getWorld().isRemote;
-		if(object instanceof EntityEvent)return((EntityEvent)object).entity.worldObj.isRemote;
-		if(object instanceof BlockEvent)return((BlockEvent)object).world.isRemote;
+	public static World getWorld(Object object){
+		if(object instanceof Entity)return((Entity)object).worldObj;
+		if(object instanceof World)return((World)object);
+		if(object instanceof TileEntity)return((TileEntity)object).getWorld();
+		if(object instanceof EntityEvent)return((EntityEvent)object).entity.worldObj;
+		if(object instanceof BlockEvent)return((BlockEvent)object).world;
 		println("Given object has no data reference to world!");
-		return false;
+		return null;
+	}
+	public static boolean isRemote(Object object){
+		return getWorld(object).isRemote;
 	}
 	public static boolean isArray(Object object){
 		if(object!=null){
@@ -773,5 +775,8 @@ public class Util{
 	}
 	public static float round(float d, int decimalPlace){
 		return BigDecimal.valueOf(d).setScale(decimalPlace,BigDecimal.ROUND_HALF_UP).floatValue();
+	}
+	public static long getWorldTime(Object worldContainer){
+		return getWorld(worldContainer).getTotalWorldTime();
 	}
 }

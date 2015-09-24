@@ -11,13 +11,13 @@ import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.NetworkBaseInterface.InteractType;
-import com.magiology.api.network.NetworkInterfaceProvider;
+import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.DoubleObject;
 
-public class TileHologramProjectorInterface implements NetworkInterfaceProvider,InterfaceTileEntitySaver{
+public class TileHologramProjectorInterface implements WorldNetworkInterface,InterfaceTileEntitySaver{
 	@Override public TileEntity getBoundTile(){return tile;}
 	@Override public void setBoundTile(TileEntity tile){this.tile=tile;}
 	public TileEntity tile;
@@ -48,7 +48,7 @@ public class TileHologramProjectorInterface implements NetworkInterfaceProvider,
 		TileEntity[] tiles=SideUtil.getTilesOnSides(tile);
 		for(int i=0;i<tiles.length;i++){
 			if(tiles[i] instanceof NetworkBaseInterface){
-				NetworkInterfaceProvider Interface=((NetworkBaseInterface)tiles[i]).getInterfaceProvider();
+				WorldNetworkInterface Interface=((NetworkBaseInterface)tiles[i]).getInterfaceProvider();
 				if(Interface instanceof InterfaceTileEntitySaver){
 					return (NetworkBaseInterface)tiles[i];
 				}

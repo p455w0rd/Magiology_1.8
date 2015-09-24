@@ -9,6 +9,7 @@ import com.magiology.forgepowered.event.MouseEvents;
 import com.magiology.forgepowered.event.TickEvents;
 import com.magiology.forgepowered.event.client.HighlightEvent;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
 import com.magiology.render.shaders.core.ShaderRunner;
 
 public class MEvents{
@@ -27,7 +28,8 @@ public class MEvents{
 			RenderLoopInstance=new RenderLoopEvents(),
 			MouseInstance=new MouseEvents(),
 			GameLoopInstance=new GameLoopEvents(),
-			shaderHandeler=new ShaderRunner()
+			shaderHandeler=new ShaderRunner(),
+			GuiButtonClickEvent.get()
 		);
 		EventRegister(1,
 			TickEvents.instance

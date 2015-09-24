@@ -14,6 +14,9 @@ import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class BlockPosM extends BlockPos{
 	
+	public BlockPosM(){
+		super(0,0,0);
+	}
 	public BlockPosM(int x, int y, int z){
 		super(x, y, z);
 	}

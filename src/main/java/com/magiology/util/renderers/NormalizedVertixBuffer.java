@@ -22,8 +22,10 @@ public class NormalizedVertixBuffer{
 	protected List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
 	protected List<PositionTextureVertex> unfinishedTriangle=new ArrayList<PositionTextureVertex>();
 	protected WorldRenderer renderer;
-	protected boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClearAfterDraw=true;
+	protected boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClear=true;
 	protected List<NormalizedVertixBuffer> subBuffers=new ArrayList<NormalizedVertixBuffer>();
+	
+	protected NormalizedVertixBuffer transformedBuffer;
 	
 	protected Matrix4f transformation=new Matrix4f();
 	protected Vector3f rotation=new Vector3f();
@@ -32,7 +34,11 @@ public class NormalizedVertixBuffer{
 	protected List<Vector3f> rotationStacks=new ArrayList<Vector3f>();
 	
 	public NormalizedVertixBuffer(){
+		this(true);
+	}
+	public NormalizedVertixBuffer(boolean hasTransformedBuffer){
 		this.renderer=Render.WR();
+		if(hasTransformedBuffer)transformedBuffer=new NormalizedVertixBuffer(false);
 	}
 	
 	public NormalizedVertixBuffer createNewSubBuffer(){
@@ -40,7 +46,7 @@ public class NormalizedVertixBuffer{
 		subBuffers.add(result);
 		result.instantNormalCalculation=instantNormalCalculation;
 		result.willDrawAsAWireFrame=willDrawAsAWireFrame;
-		result.willClearAfterDraw=willClearAfterDraw;
+		result.willClear=willClear;
 		return result;
 	}
 	
@@ -128,7 +134,7 @@ public class NormalizedVertixBuffer{
 	}
 	public void renderToScreen(){
 		TessUtil.draw();
-		if(willClearAfterDraw)cleanUp();
+		if(willClear)cleanUp();
 	}
 	
 	public void draw(){
@@ -189,23 +195,14 @@ public class NormalizedVertixBuffer{
 		Matrix4f.mul(transformation, GL11U.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale), transformation);
 	}
 	
-	public void useInstantNormalCalculation(){
-		instantNormalCalculation=true;
+	public void setInstantNormalCalculation(boolean enabled){
+		instantNormalCalculation=enabled;
 	}
-	public void disableInstantNormalCalculation(){
-		instantNormalCalculation=false;
+	public void setDrawAsWire(boolean wireMode){
+		willDrawAsAWireFrame=wireMode;
 	}
-	public void setDrawModeToWireFrame(){
-		willDrawAsAWireFrame=true;
-	}
-	public void setDrawModeToQuadPlate(){
-		willDrawAsAWireFrame=false;
-	}
-	public void enableClearing(){
-		willClearAfterDraw=true;
-	}
-	public void disableClearing(){
-		willClearAfterDraw=false;
+	public void setClearing(boolean enabled){
+		willClear=enabled;
 	}
 	public void pushMatrix(){
 		transformationStacks.add(Matrix4f.add(transformation, Matrix4f.setZero(new Matrix4f()), null));
@@ -221,6 +218,25 @@ public class NormalizedVertixBuffer{
 		rotation=rotationStacks.get(pos);
 		transformationStacks.remove(pos);
 		rotationStacks.remove(pos);
+	}
+	public void transformAndSaveTo(NormalizedVertixBuffer buff){
+		if(buff==null||buff==this){
+			transformedBuffer.shadedTriangles.addAll(shadedTriangles);
+		}
+		else {
+			for(int s=0;s<shadedTriangles.size();s++){
+				ShadedTriangle a=shadedTriangles.get(s);
+				
+				Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(0,0,0),rotation.x,rotation.y,rotation.z,1);
+				buff.shadedTriangles.add(new ShadedTriangle(
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord), transformation),a.pos3[0].texturePositionX,a.pos3[0].texturePositionY),
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord), transformation),a.pos3[1].texturePositionX,a.pos3[1].texturePositionY),
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord), transformation),a.pos3[2].texturePositionX,a.pos3[2].texturePositionY),
+						finalNormal
+						));
+			}
+		}
+		if(willClear)shadedTriangles.clear();
 	}
 	
 	public void importComplexCube(ComplexCubeModel... cubeModels){

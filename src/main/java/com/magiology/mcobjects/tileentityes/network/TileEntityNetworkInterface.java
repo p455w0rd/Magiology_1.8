@@ -13,7 +13,7 @@ import net.minecraft.util.EnumFacing;
 
 import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.NetworkInterfaceProvider;
+import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.forgepowered.event.ForcePipeUpdate;
@@ -182,13 +182,13 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	}
 
 	@Override
-	public void onInterfaceProviderActionInvoked(NetworkInterfaceProvider interfaceProvider, String action, int dataSize, Object... data){
+	public void onInvokedFromWorldInvoked(WorldNetworkInterface interfaceProvider, String action, int dataSize, Object... data){
 		getBrain().setNetworkBaseInterfaceData(this);
 		getBrain().invokeInterfaces(this, action, data);
 	}
 	
 	@Override
-	public void onNetworkActionInvoked(String action, int dataSize, Object... data){
+	public void onActionInvoked(String action, int dataSize, Object... data){
 		if(U.isRemote(this))return;
 		if(getInterfaceProvider()!=null)return;
 		int side=SideUtil.getOppositeSide(getOrientation());

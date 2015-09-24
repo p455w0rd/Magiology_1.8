@@ -40,11 +40,10 @@ public class TextBox extends HoloObject implements StringContainer{
 		
 		size.x=U.getFontRenderer().getStringWidth(txt)*scale*U.p;
 		size.y=U.getFontRenderer().FONT_HEIGHT*scale*U.p;
-		fixPos();
 	}
 	@Override
 	public void onPressed(EntityPlayer player){
-		handleGuiAndMovment(player);
+		
 	}
 	@Override
 	public void setString(String string){
