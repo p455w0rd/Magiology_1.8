@@ -27,6 +27,7 @@ import com.magiology.gui.custom.hud.HUD;
 import com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.vectors.Pos;
@@ -81,7 +82,7 @@ public class TickEvents{
 	}
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event){
-		RenderLoopEvents.partialTicks=event.renderTickTime;
+		Render.partialTicks=event.renderTickTime;
 		if(event.phase!=Phase.END)return;
 		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.render(Display.getWidth(), Display.getHeight(),event.renderTickTime);
 		if(bufferedGuiFirst){

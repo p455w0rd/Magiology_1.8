@@ -23,11 +23,12 @@ import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
-public class Button extends TextBox{
+public class Button extends TextBox implements ICommandInteract{
 	
 	public ComplexCubeModel body;
 	
 	public Command activationTarget;
+	private String name="";
 	
 	
 	protected ColorF inColor=new ColorF();
@@ -38,7 +39,7 @@ public class Button extends TextBox{
 		scale=1;
 		body=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y, Util.p/2);
 	}
-
+	
 	@Override
 	public void render(ColorF color){
 		inColor=color;
@@ -90,16 +91,7 @@ public class Button extends TextBox{
 					activationTarget=CommandContainer.getCommand(s);
 				}
 			}
-			
-			
-			if(activationTarget!=null){
-				WorldNetworkInterface Interface=InterfaceBinder.get(host);
-				NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
-				if(netInterface!=null&&netInterface.getBrain()!=null){
-					Command com=netInterface.getBrain().getCommand(activationTarget);
-					if(netInterface!=null&&com!=null)netInterface.onInvokedFromWorld(Interface, com.code, this,Interface,host);
-				}
-			}
+			if(activationTarget!=null)sendCommand();
 		}
 	}
 	@Override
@@ -110,6 +102,7 @@ public class Button extends TextBox{
 	public void readData(Iterator<Integer> integers, Iterator<Boolean> booleans, Iterator<Byte> bytes___, Iterator<Long> longs___,Iterator<Double> doubles_, Iterator<Float> floats__, Iterator<String> strings_, Iterator<Short> shorts__){
 		super.readData(integers, booleans, bytes___, longs___, doubles_, floats__, strings_, shorts__);
 		if(booleans.next())activationTarget=new Command(strings_.next(), "", new BlockPosM(integers.next(),integers.next(),integers.next()));
+		if(strings_.hasNext())name=strings_.next();
 	}
 	@Override
 	public void writeData(List<Integer> integers, List<Boolean> booleans, List<Byte> bytes___, List<Long> longs___, List<Double> doubles_,List<Float> floats__, List<String> strings_, List<Short> shorts__){
@@ -121,5 +114,28 @@ public class Button extends TextBox{
 			integers.add(activationTarget.pos.getY());
 			integers.add(activationTarget.pos.getZ());
 		}
+		strings_.add(name);
+	}
+	@Override
+	public void sendCommand(){
+		WorldNetworkInterface Interface=InterfaceBinder.get(host);
+		NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
+		if(netInterface!=null&&netInterface.getBrain()!=null){
+			Command com=netInterface.getBrain().getCommand(activationTarget);
+			if(netInterface!=null&&com!=null)netInterface.onInvokedFromWorld(Interface, com.code, this,Interface,host);
+		}
+	}
+	@Override
+	public Object onCommandReceive(Command command){
+		String[] words=command.code.split(" ");
+		return standardHoloObjectCommandInteract(words);
+	}
+	@Override
+	public String getName(){
+		return name;
+	}
+	@Override
+	public void setName(String name){
+		this.name=name;
 	}
 }

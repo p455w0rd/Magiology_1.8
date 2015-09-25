@@ -1,6 +1,8 @@
 package com.magiology.mcobjects.tileentityes.network.interfaces;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +14,9 @@ import com.magiology.api.network.NetworkBaseInterface.DataOutput;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.NetworkBaseInterface.InteractType;
 import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.Util;
@@ -82,5 +87,11 @@ public class TileHologramProjectorInterface implements WorldNetworkInterface,Int
 		}while(cardList.containsValue(id)&&id!=-1&&id!=0&&id!=-2);
 		cardList.put(tileEntity, id);
 		return id;
+	}
+	@Override
+	public List<ICommandInteract> getCommandInteractors(){
+		List<ICommandInteract> result=new ArrayList<ICommandInteract>();
+		for(HoloObject i:((TileEntityHologramProjector)tile).holoObjects)if(i instanceof ICommandInteract)result.add((ICommandInteract)i);
+		return result;
 	}
 }

@@ -16,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.event.TickEvents;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.container.SmartCrafterContainer;
@@ -26,6 +25,7 @@ import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 
@@ -102,7 +102,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			drawCenteredStringShoadowless(fr, "<-", 0,0, Color.DARK_GRAY.hashCode());
 			GL11.glPopMatrix();
 		}
-		this.renderParticles(RenderLoopEvents.partialTicks);
+		this.renderParticles(Render.partialTicks);
 		GL11.glTranslated(guiLeft, guiTop, 0);
 		
 	}

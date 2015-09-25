@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Get.Render.FR()" key="selection"/>
+		<item value="*" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="Util.getFontRenderer()"/>
-			<item value="-1/scale"/>
-			<item value=" + 1/scale"/>
-			<item value="y"/>
-			<item value="x"/>
-			<item value="Color.RED.hashCode()"/>
-			<item value="Color.WHITE.hashCode()"/>
-			<item value="+&quot;0&quot;"/>
+			<item value=" * "/>
+			<item value="if "/>
+			<item value=" &gt; "/>
+			<item value=" = "/>
+			<item value=" {"/>
+			<item value=" != "/>
+			<item value=" - "/>
+			<item value=" + "/>
 		</list>
 		<list key="replacehistory">
-			<item value="Get.Render.FR()"/>
-			<item value=""/>
-			<item value="yPosition"/>
-			<item value="xPosition"/>
-			<item value="RED"/>
-			<item value="WHITE"/>
-			<item value="p*5"/>
-			<item value="TileEntityNetworkCommandCenter"/>
+			<item value="*"/>
+			<item value="if"/>
+			<item value="&gt;"/>
+			<item value="="/>
+			<item value="{"/>
+			<item value="!="/>
+			<item value="-"/>
+			<item value="+"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

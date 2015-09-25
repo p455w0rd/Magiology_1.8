@@ -18,11 +18,11 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandeler;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
@@ -154,8 +154,8 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float lenght){
 		Object[][] result={{},{}};
 		try{
-	        Vec3M Vec3M=Util.getPosition(player,RenderLoopEvents.partialTicks);
-	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderLoopEvents.partialTicks));
+	        Vec3M Vec3M=Util.getPosition(player,Render.partialTicks);
+	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(Render.partialTicks));
 	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
 			
 			Ray ray=new Ray(Vec3M, vec32);

@@ -44,12 +44,12 @@ import com.google.common.collect.ImmutableMap;
 import com.magiology.core.Config;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.core.AbstractPacket;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.util.renderers.GL11U;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Plane;
@@ -373,7 +373,7 @@ public class Util{
 	}
 
 	public static float calculateRenderPos(final double prevPos,final double pos){
-		return (float)(prevPos+(pos-prevPos)*RenderLoopEvents.partialTicks);
+		return (float)(prevPos+(pos-prevPos)*Render.partialTicks);
 	}
 	public static float[][] addToDoubleFloatArray(final float[][] array1,final float[][] array2){
 		float[][] result=array1.clone();
@@ -778,5 +778,10 @@ public class Util{
 	}
 	public static long getWorldTime(Object worldContainer){
 		return getWorld(worldContainer).getTotalWorldTime();
+	}
+	public static String[] stringNewlineSplit(String toSplit){
+		// ASCII is strange.
+		//Yup it is...
+		return toSplit.split("\\r\\n|\\n\\r|\\r|\\n");
 	}
 }

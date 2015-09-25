@@ -12,6 +12,7 @@ import org.lwjgl.input.Keyboard;
 
 import com.magiology.gui.container.CommandCenterContainer;
 import com.magiology.gui.container.ContainerEmpty;
+import com.magiology.gui.guiutil.gui.GuiTextArea;
 import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
 
@@ -19,6 +20,7 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 	
 	private ItemStack stack;
 	private GuiTextField name,code;
+	private GuiTextArea text=new GuiTextArea(10, 10);
 	
 	public GuiCommandContainerEditor(EntityPlayer player){
 		super(new ContainerEmpty());
@@ -32,6 +34,7 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+		text.render(300, 300);
 	}
 	@Override
 	public void initGui(){
@@ -55,5 +58,15 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 		CommandContainer.setCommandName(stack, name.getText());
 		CommandContainer.setCode(stack, code.getText());
 		super.onGuiClosed();
+	}
+	@Override
+	protected void keyTyped(char typedChar, int keyCode) throws IOException{
+		super.keyTyped(typedChar, keyCode);
+		text.onKeyTyped(keyCode, typedChar);
+	}
+	@Override
+	protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
+		super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+		text.onMouseDragged(mouseX, mouseY);
 	}
 }

@@ -17,7 +17,6 @@ import net.minecraft.util.EnumFacing;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.gui.container.ISidedPowerInstructorContainer;
@@ -28,6 +27,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.SimpleCounter;
@@ -205,9 +205,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			GL11.glScalef((-1), 1, 1);
 			if(renderer!=null){
 		        GL11.glCullFace(GL11.GL_FRONT);
-				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderLoopEvents.partialTicks,0);
+				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, Render.partialTicks,0);
 				GL11.glCullFace(GL11.GL_BACK);
-				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderLoopEvents.partialTicks,0);
+				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, Render.partialTicks,0);
 			}
 			Block block=U.getBlock(tile.getWorld(), tile.getPos());
 			if(block!=null){

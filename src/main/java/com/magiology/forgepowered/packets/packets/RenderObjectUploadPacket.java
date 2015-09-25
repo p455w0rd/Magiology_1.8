@@ -47,7 +47,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		
 		moveMode=ho.moveMode;
 		scale=ho.scale;
-		offset=ho.offset;
+		offset=ho.position;
 		size=ho.size;
 		color=ho.setColor;
 		suportsText=ho instanceof StringContainer;
@@ -118,7 +118,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 			if(found){
 				tile.holoObjects.get(roId).moveMode=moveMode;
 				tile.holoObjects.get(roId).scale=scale;
-				tile.holoObjects.get(roId).offset=offset;
+				tile.holoObjects.get(roId).position=offset;
 				tile.holoObjects.get(roId).size=size;
 				tile.holoObjects.get(roId).originalSize=originalSize;
 				tile.holoObjects.get(roId).setColor=color;
@@ -134,7 +134,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 				if(newObject!=null){
 					newObject.moveMode=moveMode;
 					newObject.scale=scale;
-					newObject.offset=offset;
+					newObject.position=offset;
 					newObject.size=size;
 					newObject.originalSize=originalSize;
 					newObject.color=color;

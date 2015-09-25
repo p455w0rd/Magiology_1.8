@@ -43,7 +43,7 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 		for(HoloObject ro:tile.holoObjects){
 			if(ro.host==null)ro.host=tile;
 			GL11.glPushMatrix();
-			GL11.glTranslatef(ro.offset.x, ro.offset.y, 0);
+			GL11.glTranslatef(ro.position.x, ro.position.y, 0);
 			ro.render(color);
 			GL11.glPopMatrix();
 			if((
@@ -58,7 +58,7 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 	            GL11U.texture(false);
 				
 				buff.pushMatrix();
-				buff.translate(ro.offset.x, ro.offset.y, 0);
+				buff.translate(ro.position.x, ro.position.y, 0);
 				buff.cleanUp();
 				
 				ComplexCubeModel selection=new ComplexCubeModel(0, 0, -Util.p/2, -ro.size.x, -ro.size.y, Util.p/2).expand(0.002F);

@@ -43,6 +43,7 @@ public final class Get{
 		public static Tessellator T(){
 			return Tessellator.getInstance();
 		}
+		public static float partialTicks=0;
 	}
 	@SideOnly(value=Side.CLIENT)
 	public static final class Client{

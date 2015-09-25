@@ -165,4 +165,7 @@ public class GL11U{
 	public static void color(ColorF color){
 		GL11.glColor4f(color.r, color.g, color.b, color.a);
 	}
+	public static void color(int color){
+		GL11.glColor4f((color>>16&255)/255.0F, (color>>8&255)/255.0F, (color & 255)/255.0F, (color>>24&255)/255.0F);
+	}
 }

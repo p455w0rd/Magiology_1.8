@@ -18,4 +18,31 @@ public class Command{
 	public String toString(){
 		return "Command{name: "+name+", code: "+code+", pos: "+pos+"}";
 	}
+	public static enum KeyWord{
+		SET,
+		GET,
+		TRUE,
+		FALSE,
+		CAN_HAVE,
+		
+		REDSTONE,
+		SIZE,
+		SCALE,
+		TEXT,
+		POSITION,
+		COLOR,
+		R,
+		G,
+		B,
+		A,
+		NAME;
+		
+		public boolean match(String string){
+			return toString().equals(string.toUpperCase());
+		}
+		public static KeyWord getByName(String string){
+			for(KeyWord i:values())if(i.match(string))return i;
+			return null;
+		}
+	}
 }

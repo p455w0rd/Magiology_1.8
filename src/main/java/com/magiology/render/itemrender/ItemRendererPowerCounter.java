@@ -10,10 +10,10 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.render.Textures;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.Util;
 
 public class ItemRendererPowerCounter implements IItemRenderer {
@@ -35,7 +35,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		if(item.getTagCompound()!=null){
 			NBTTagCompound PC= item.getTagCompound();
-			anim=PC.getDouble("pAnim")+(PC.getDouble("pAnim")-PC.getDouble("anim"))*RenderLoopEvents.partialTicks;
+			anim=PC.getDouble("pAnim")+(PC.getDouble("pAnim")-PC.getDouble("anim"))*Render.partialTicks;
 			powerBar=PC.getDouble("powerBar");
 			maxPB=PC.getInteger("maxEn");
 			currentP=PC.getInteger("currentEn");
