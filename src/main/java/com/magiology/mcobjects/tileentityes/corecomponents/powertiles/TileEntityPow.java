@@ -17,7 +17,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.Util;
 
@@ -226,11 +226,11 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	}
 	@Override
 	public void readFromItemOnPlace(ItemStack stack){
-		setEnergy(PowerItemHelper.getPower(stack));
+		setEnergy(PowerItemUtil.getPower(stack));
 	}
 	@Override
 	public void writeToItemOnWrenched(ItemStack stack){
-		PowerItemHelper.setEssencialPow(stack, this);
+		PowerItemUtil.setEssencialPow(stack, this);
 	}
 	@Override
 	public boolean isSavingFullNBT(){

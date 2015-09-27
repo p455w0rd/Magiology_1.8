@@ -10,9 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
+import com.magiology.api.LapisLang;
 import com.magiology.api.network.Command;
 import com.magiology.core.init.MGui;
 import com.magiology.handelers.GuiHandelerM;
+import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class CommandContainer extends Item{
@@ -21,6 +23,7 @@ public class CommandContainer extends Item{
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
 		createNBT(stack);
 		GuiHandelerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
+		Util.printInln(LapisLang.getName(getCode(stack)));
 		return stack;
 	}
 	
@@ -32,7 +35,7 @@ public class CommandContainer extends Item{
 		return getString(stack, "com");
 	}
 	
-	public static void setCommandName(ItemStack stack, String name){
+	private static void setCommandName(ItemStack stack, String name){
 		setString(stack, "nam", name);
 	}
 	public static String getName(ItemStack stack){
@@ -51,15 +54,34 @@ public class CommandContainer extends Item{
 		setInt(stack, "y", pos.getY());
 		setInt(stack, "z", pos.getZ());
 	}
-	public static Command getCommand(ItemStack stack){
-		return new Command(getName(stack), getCode(stack), getPos(stack));
+	public static Command run(ItemStack stack){
+		return new Command(getName(stack), getCode(stack), getPos(stack)).run();
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced){
-		Command command=getCommand(stack);
+		Command command=run(stack);
 		tooltip.add("Name: "+(command.name.isEmpty()?"<empty>":command.name));
-		tooltip.add("Command: "+(command.code.isEmpty()?"<empty>":command.code));
+		if(command.code.replace('\n', ' ').replaceAll(" ", "").isEmpty())tooltip.add("Command: "+"<empty>");
+		else{
+			for(String s:command.code.split("\n")){
+				tooltip.add(s);
+			}
+		}
 		tooltip.add("x: "+command.pos.getX()+" y: "+command.pos.getY()+" z: "+command.pos.getZ());
 	}
+	
+/*
+ #name -> "redstone to %"
+
+in{
+    boolean isStrong;
+    int strenght;
+}
+
+out String main(){
+    return isStrong?"S":"s"+" "+strenght/15;
+}
+*/
+	
 }

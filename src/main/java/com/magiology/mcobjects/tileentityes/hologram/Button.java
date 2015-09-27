@@ -88,7 +88,7 @@ public class Button extends TextBox implements ICommandInteract{
 			if(!Util.isNull(host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
 				ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
 				if(!CommandContainer.getName(s).isEmpty()){
-					activationTarget=CommandContainer.getCommand(s);
+					activationTarget=CommandContainer.run(s);
 				}
 			}
 			if(activationTarget!=null)sendCommand();
@@ -122,12 +122,12 @@ public class Button extends TextBox implements ICommandInteract{
 		NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
 		if(netInterface!=null&&netInterface.getBrain()!=null){
 			Command com=netInterface.getBrain().getCommand(activationTarget);
-			if(netInterface!=null&&com!=null)netInterface.onInvokedFromWorld(Interface, com.code, this,Interface,host);
+			if(netInterface!=null&&com!=null)netInterface.onInvokedFromWorld(Interface, com.result, this,Interface,host);
 		}
 	}
 	@Override
 	public Object onCommandReceive(Command command){
-		String[] words=command.code.split(" ");
+		String[] words=command.result.split(" ");
 		return standardHoloObjectCommandInteract(words);
 	}
 	@Override

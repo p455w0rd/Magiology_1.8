@@ -44,7 +44,7 @@ import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.EntityPosAndBB;
@@ -265,11 +265,11 @@ public class RenderLoopEvents{
 						
 						if(itemStack.getTagCompound()!=null){
 							if(GuiScreen.isShiftKeyDown()){
-								if(PowerItemHelper.hasData(itemStack)){
+								if(PowerItemUtil.hasData(itemStack)){
 									
-									list.add("Contained Power: "+NumberFormat.getInstance().format(PowerItemHelper.getPower(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemHelper.getMaxEnergy(itemStack)));
-									if(PowerItemHelper.hasDataType(itemStack, "fuel"))
-									   list.add("Contained Fuel: "+NumberFormat.getInstance().format(PowerItemHelper.getFuel(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemHelper.getMaxFuel(itemStack)));
+									list.add("Contained Power: "+NumberFormat.getInstance().format(PowerItemUtil.getPower(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemUtil.getMaxEnergy(itemStack)));
+									if(PowerItemUtil.hasDataType(itemStack, "fuel"))
+									   list.add("Contained Fuel: "+NumberFormat.getInstance().format(PowerItemUtil.getFuel(itemStack))+"/"+NumberFormat.getInstance().format(PowerItemUtil.getMaxFuel(itemStack)));
 									
 									//add other stuff here
 									

@@ -235,7 +235,7 @@ public class PowerUtil{
 		return result;
 	}
 	
-	public static class PowerItemHelper{
+	public static class PowerItemUtil{
 		//core needed in any situation---------------------------------------------------------------
 		public static boolean hasData(ItemStack stack){
 			return stack.hasTagCompound()&&stack.getTagCompound().hasKey(SAVE_TO_ITEM_PREFIX);

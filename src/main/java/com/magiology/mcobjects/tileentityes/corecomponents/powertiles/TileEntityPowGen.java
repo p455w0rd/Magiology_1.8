@@ -3,7 +3,7 @@ package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 import net.minecraft.item.ItemStack;
 
 import com.magiology.api.power.PowerProducer;
-import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 
 public abstract class TileEntityPowGen extends TileEntityPow implements PowerProducer{
 	
@@ -46,11 +46,11 @@ public abstract class TileEntityPowGen extends TileEntityPow implements PowerPro
 	@Override
 	public void readFromItemOnPlace(ItemStack stack){
 		super.readFromItemOnPlace(stack);
-		setFuel(PowerItemHelper.getFuel(stack));
+		setFuel(PowerItemUtil.getFuel(stack));
 	}
 	@Override
 	public void writeToItemOnWrenched(ItemStack stack){
 		super.writeToItemOnWrenched(stack);
-		PowerItemHelper.setEssencialPowGen(stack, this);
+		PowerItemUtil.setEssencialPowGen(stack, this);
 	}
 }

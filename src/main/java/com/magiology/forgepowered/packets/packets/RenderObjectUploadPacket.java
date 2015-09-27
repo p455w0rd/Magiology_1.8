@@ -77,7 +77,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		buffer.writeBoolean(isButton);
 		if(isButton){
 			writeString(buffer, command!=null?command.name:"");
-			writeString(buffer, command!=null?command.code:"");
+			writeString(buffer, command!=null?command.result:"");
 			writePos(buffer, command!=null?command.pos:new BlockPosM());
 		}
 	}

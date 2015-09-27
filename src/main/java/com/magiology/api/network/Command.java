@@ -6,7 +6,7 @@ import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class Command{
 	
-	public final String name,code;
+	public String name,result,code;
 	public final BlockPosM pos;
 	
 	public Command(String name, String code, Vec3i pos){
@@ -16,7 +16,7 @@ public class Command{
 	}
 	@Override
 	public String toString(){
-		return "Command{name: "+name+", code: "+code+", pos: "+pos+"}";
+		return "Command{name: "+name+", code: "+result+", pos: "+pos+"}";
 	}
 	public static enum KeyWord{
 		SET,
@@ -44,5 +44,9 @@ public class Command{
 			for(KeyWord i:values())if(i.match(string))return i;
 			return null;
 		}
+	}
+	public Command run(Object... in){
+		result=code;
+		return this;
 	}
 }

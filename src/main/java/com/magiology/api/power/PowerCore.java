@@ -11,7 +11,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.util.utilclasses.PowerUtil.PowerItemHelper;
+import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 
@@ -65,7 +65,7 @@ public interface PowerCore{
 						ItemStack stack=drops.get(0);
 						//do i save you?
 						if(tileMT.isPowerKeptOnWrench()){
-							PowerItemHelper.markWithData(stack);
+							PowerItemUtil.markWithData(stack);
 							U.printInln(tileMT.isSavingFullNBT());
 //							if(tileMT.isSavingFullNBT()){
 //								NBTTagCompound nbt=stack.getTagCompound();
@@ -91,7 +91,7 @@ public interface PowerCore{
 			//gimi the item that is placing (this can be broken by other mod's. For an example autonomous activator will break this. I think...)
 			ItemStack itemInHand=player.getCurrentEquippedItem();
 			//Hey! Item! You have some NBT? And do you contain NBT that is saved from a tile?
-			if(itemInHand!=null&&PowerItemHelper.hasData(itemInHand)){
+			if(itemInHand!=null&&PowerItemUtil.hasData(itemInHand)){
 				//cool now give that NBT to your creator!
 //				if(((PowerCore)tile).isSavingFullNBT())tile.readFromNBT(itemInHand.getTagCompound());
 //				else 

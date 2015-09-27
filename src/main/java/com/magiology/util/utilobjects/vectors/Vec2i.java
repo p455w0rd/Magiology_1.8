@@ -9,11 +9,11 @@ import net.minecraft.util.EnumFacing;
 public class Vec2i{
 	public static final Vec2i zero=new Vec2i(0, 0);
 
-	public final int x, y;
+	public int x, y;
 
-	public Vec2i(int a, int b){
-		this.x=a;
-		this.y=b;
+	public Vec2i(int x, int y){
+		this.x=x;
+		this.y=y;
 	}
 
 	public Vec2i offset(EnumFacing dir){
@@ -41,5 +41,12 @@ public class Vec2i{
 	@Override
 	public String toString(){
 		return "Vec2i["+x+", "+y+"]";
+	}
+	
+	public Vec2i add(int var){
+		return new Vec2i(x+var, y+var);
+	}
+	public Vec2i add(int x1, int y1){
+		return new Vec2i(x+x1, y+y1);
 	}
 }

@@ -258,7 +258,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		if(!(tile instanceof TileEntityNetworkCommandHolder))return null;
 		if(((TileEntityNetworkCommandHolder)tile).getBrain()!=this)return null;
 		for(ItemStack j:((TileEntityNetworkCommandHolder)tile).slots){
-			if(j!=null&&CommandContainer.getName(j).equals(name))return CommandContainer.getCommand(j);
+			if(j!=null&&CommandContainer.getName(j).equals(name))return CommandContainer.run(j);
 		}
 		return null;
 	}
@@ -270,7 +270,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 					String name=CommandContainer.getName(j),code=CommandContainer.getCode(j);
 					if(!name.isEmpty()&&!code.isEmpty()){
 						CommandContainer.setPos(j, i.getPos());
-						result.add(CommandContainer.getCommand(j));
+						result.add(CommandContainer.run(j));
 					}
 				}
 			}
