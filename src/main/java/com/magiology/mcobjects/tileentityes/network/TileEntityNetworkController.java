@@ -119,7 +119,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateablePipeHandler.setConnections(connections, this);
 		for(int i=0;i<6;i++)setAccessibleOnSide(i, i!=SideUtil.DOWN()||i!=SideUtil.UP());
 		PowerUtil.sortSides(this);
 		setColisionBoxes();

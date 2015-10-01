@@ -56,7 +56,7 @@ public class TileEntityNetworkPointerContainer extends TileEntityNetwork impleme
 	public void initNetworkComponent(){}
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateablePipeHandler.setConnections(connections, this);
 		
 		int side=SideUtil.convert(getOrientation());
 		side=SideUtil.getOppositeSide(side);

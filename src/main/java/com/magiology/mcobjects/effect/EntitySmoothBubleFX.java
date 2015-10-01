@@ -162,7 +162,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 		
 		float random=worldObj.rand.nextFloat()*4;
 		
-		if(texture=="tx1")opacityHandeler();
+		if(texture=="tx1")opacityHandler();
 		if(type==1){
 			particleScale-=0.001*particleMaxAge/(length/10);
 			if(particleScale<2)particleScale-=0.001*particleMaxAge/(length/10)/10;
@@ -311,7 +311,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	}
 	
 	@Override
-	public void motionHandeler(){
+	public void motionHandler(){
 		motionX*=friction;
 		motionY*=friction;
 		motionZ*=friction;
@@ -319,7 +319,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 		moveEntity(motionX, motionY, motionZ);
 		
 	}
-	public void opacityHandeler(){
+	public void opacityHandler(){
 		
 		if(particleAge%12==0){
 			for(int a=0;a<sideOpacity.length;a++){

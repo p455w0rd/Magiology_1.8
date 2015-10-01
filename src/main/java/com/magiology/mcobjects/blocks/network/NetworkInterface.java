@@ -15,7 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
+import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
 import com.magiology.api.network.RedstoneData;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
@@ -118,7 +118,7 @@ public class NetworkInterface extends BlockContainerMultiColision{
 	@Override public boolean canProvidePower(){return true;}
 	@Override
 	public TileEntity createNewTileEntity(World var0, int var1){
-		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkInterface());
+		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkInterface());
 	}
 	@Override 
 	protected BlockState createBlockState(){

@@ -68,7 +68,7 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	@Override
 	public void updateConnections(){
 		if(!hasWorldObj())return;
-		UpdateableTile.UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateableTile.UpdateablePipeHandler.setConnections(connections, this);
 		setColisionBoxes();
 	}
 	

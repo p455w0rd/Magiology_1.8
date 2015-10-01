@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
 import com.magiology.api.SavableData;
-import com.magiology.api.SavableData.SavableDataHandeler;
+import com.magiology.api.SavableData.SavableDataHandler;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
 import com.magiology.api.network.RedstoneData;
@@ -35,7 +35,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		super.readFromNBT(NBT);
 		int dataSize=NBT.getInteger("DS");
 
-		List<SavableData> data=SavableDataHandeler.loadDataFromNBT(NBT, "ID",0);
+		List<SavableData> data=SavableDataHandler.loadDataFromNBT(NBT, "ID",0);
 		getData().clear();
 		for(int i=0;i<dataSize;i++){
 			setInteractData(NBT.getString("key"+i), data.get(i));
@@ -56,7 +56,7 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		}
 		int dataSize=savableData.size();
 		NBT.setInteger("DS", dataSize);
-		SavableDataHandeler.saveDataToNBT(savableData, NBT, "ID");
+		SavableDataHandler.saveDataToNBT(savableData, NBT, "ID");
 		for(int i=0;i<dataSize;i++)NBT.setString("key"+i, savableDataKeys.get(i));
 	}
 	@Override

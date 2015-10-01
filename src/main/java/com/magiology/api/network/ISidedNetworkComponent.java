@@ -10,7 +10,7 @@ public interface ISidedNetworkComponent extends NetworkBaseComponent{
 	public int  getOrientation();
 	public void setOrientation(int orientation);
 	
-	public class ISidedNetworkComponentHandeler extends NetworkBaseComponentHandeler{
+	public class ISidedNetworkComponentHandler extends NetworkBaseComponentHandler{
 		
 	}
 

@@ -16,8 +16,8 @@ public interface UpdateableTile extends IConnectionProvider{
 	public void getValidTileEntitys(List<Class> included,List<Class> excluded);
 	public <T extends TileEntity> boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array,int side);
 	
-	public class UpdateablePipeHandeler{
-		private UpdateablePipeHandeler(){}
+	public class UpdateablePipeHandler{
+		private UpdateablePipeHandler(){}
 		
 		public static<T extends TileEntity&UpdateableTile> void setConnections(EnumFacing[] array,T tile){
 			setConnections(array, EnumFacing.DOWN, null, tile);

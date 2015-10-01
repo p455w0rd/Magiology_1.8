@@ -10,7 +10,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.core.init.MGui;
-import com.magiology.handelers.GuiHandelerM;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
@@ -36,7 +36,7 @@ public class HologramProjector extends BlockContainerM{
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
-		GuiHandelerM.openGui(player, MGui.HologramProjectorMainGui, pos);
+		GuiHandlerM.openGui(player, MGui.HologramProjectorMainGui, pos);
 		return true;
 	}
 	

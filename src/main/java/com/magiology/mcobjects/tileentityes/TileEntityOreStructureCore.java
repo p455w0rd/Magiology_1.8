@@ -107,7 +107,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			}
 			processing();
 			if(worldObj.isRemote){
-				spawnProcesParticelsHandeler();
+				spawnProcesParticelsHandler();
 				spawnCustomFire();
 			}
 			
@@ -133,7 +133,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		
 	}
 	
-	public void spawnProcesParticelsHandeler(){
+	public void spawnProcesParticelsHandler(){
 		if(updateStructureHelper)this.spawnParticleDa();
 		else this.spawnParticleNe();
 		if(validOreInPlace==true&&updateStructureHelper==true){

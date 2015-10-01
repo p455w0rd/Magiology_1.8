@@ -1,20 +1,27 @@
 package com.magiology.mcobjects.items;
 
-import static com.magiology.util.utilobjects.NBTUtil.*;
+import static com.magiology.util.utilobjects.NBTUtil.createNBT;
+import static com.magiology.util.utilobjects.NBTUtil.getInt;
+import static com.magiology.util.utilobjects.NBTUtil.getString;
+import static com.magiology.util.utilobjects.NBTUtil.setInt;
+import static com.magiology.util.utilobjects.NBTUtil.setString;
 
 import java.util.List;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
-import com.magiology.api.LapisLang;
+import com.magiology.api.lapislang.LapisLangCompiler;
+import com.magiology.api.lapislang.LapisProgram;
 import com.magiology.api.network.Command;
 import com.magiology.core.init.MGui;
-import com.magiology.handelers.GuiHandelerM;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class CommandContainer extends Item{
@@ -22,8 +29,35 @@ public class CommandContainer extends Item{
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
 		createNBT(stack);
-		GuiHandelerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
-		Util.printInln(LapisLang.getName(getCode(stack)));
+		String newline=System.getProperty("line.separator");
+//		setCode(stack, 
+//			"#name -> "+'"'+"redstone to percent"+'"'+";"+
+//			newline+""+
+//			newline+"in{"+
+//			newline+"    boolean isStrong;"+
+//			newline+"    float strength;"+
+//			newline+"}"+
+//			newline+""+
+//			newline+"vars{"+
+//			newline+"   float result; "+
+//			newline+"}"+
+//			newline+""+
+//			newline+"out String main(){"+
+//			newline+"    result=strength/15;"+
+//			newline+"    return result;"+
+//			newline+"}");
+		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
+		else{
+			try{
+				LapisProgram lp=LapisLangCompiler.compile(getCode(stack));
+				if(lp!=null){
+					U.printInln(lp.run(U.RB(),U.RInt(15)+0F));
+				}
+				else Util.printInln("null");
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
 		return stack;
 	}
 	
@@ -62,25 +96,36 @@ public class CommandContainer extends Item{
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced){
 		Command command=run(stack);
 		tooltip.add("Name: "+(command.name.isEmpty()?"<empty>":command.name));
-		if(command.code.replace('\n', ' ').replaceAll(" ", "").isEmpty())tooltip.add("Command: "+"<empty>");
-		else{
-			for(String s:command.code.split("\n")){
-				tooltip.add(s);
+		if(GuiScreen.isShiftKeyDown()){
+			if(command.code.replace('\n', ' ').replaceAll(" ", "").isEmpty())tooltip.add("Command: "+"<empty>");
+			else{
+				for(String s:command.code.split("\n")){
+					tooltip.add(s);
+				}
 			}
 		}
 		tooltip.add("x: "+command.pos.getX()+" y: "+command.pos.getY()+" z: "+command.pos.getZ());
 	}
+
+	public static void copile(ItemStack stack){
+		LapisProgram program=LapisLangCompiler.compile(getCode(stack));
+	}
 	
 /*
- #name -> "redstone to %"
+#name -> "redstone to precent";
 
 in{
     boolean isStrong;
     int strenght;
 }
 
+vars{
+   float result; 
+}
+
 out String main(){
-    return isStrong?"S":"s"+" "+strenght/15;
+    result=strenght/15;
+    return result;
 }
 */
 	

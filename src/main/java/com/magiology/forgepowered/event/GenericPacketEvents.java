@@ -6,17 +6,17 @@ import net.minecraft.tileentity.TileEntity;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.gui.container.ISidedPowerInstructorContainer;
 import com.magiology.gui.container.SmartCrafterContainer;
-import com.magiology.handelers.GenericPacketEventHandeler;
-import com.magiology.handelers.GenericPacketEventHandeler.IntegerPacketEvent;
-import com.magiology.handelers.GenericPacketEventHandeler.PacketEvent;
-import com.magiology.handelers.GenericPacketEventHandeler.StringPacketEvent;
-import com.magiology.handelers.animationhandelers.TheHandHandeler;
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
+import com.magiology.handlers.GenericPacketEventHandler;
+import com.magiology.handlers.GenericPacketEventHandler.IntegerPacketEvent;
+import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;
+import com.magiology.handlers.GenericPacketEventHandler.StringPacketEvent;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.Util;
 
 public class GenericPacketEvents{
-	public static GenericPacketEventHandeler callerInstance;
+	public static GenericPacketEventHandler callerInstance;
 	public void intPacketEvent(IntegerPacketEvent event){
 		EntityPlayer player=event.player;
 		int integer=event.integer;
@@ -41,10 +41,10 @@ public class GenericPacketEvents{
 		}break;
 		case 5:{
 			//wings has space update
-			if(WingsFromTheBlackFireHandeler.getIsActive(player))player.getCurrentArmor(2).getTagCompound().setBoolean("HS", integer==1);
+			if(WingsFromTheBlackFireHandler.getIsActive(player))player.getCurrentArmor(2).getTagCompound().setBoolean("HS", integer==1);
 		}break;
 		case 6:{
-			WingsFromTheBlackFireHandeler.setPosId(player, integer);
+			WingsFromTheBlackFireHandler.setPosId(player, integer);
 		}break;
 		case 7:{
 			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
@@ -63,7 +63,7 @@ public class GenericPacketEvents{
 			tile.setReceaveOnSide(integer, !tile.getIn(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
-		default:{Util.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
+		default:{Util.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	
@@ -83,16 +83,16 @@ public class GenericPacketEvents{
 		case 1:{
 			
 		}break;
-		default:{Util.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
+		default:{Util.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	public void voidPacketEvent(PacketEvent event){
 		EntityPlayer player=event.player;
 		try{switch (event.eventId){
 		case 0:{
-			TheHandHandeler.nextPosition(player);
+			TheHandHandler.nextPosition(player);
 		}break;
-		default:{Util.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDELER!");}break;
+		default:{Util.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 }

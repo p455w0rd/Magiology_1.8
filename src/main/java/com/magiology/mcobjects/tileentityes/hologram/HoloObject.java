@@ -10,7 +10,7 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.api.network.Command.KeyWord;
 import com.magiology.core.init.MGui;
-import com.magiology.handelers.GuiHandelerM;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -59,7 +59,7 @@ public abstract class HoloObject implements SavableData{
 	public void handleGuiAndMovment(EntityPlayer player){
 		if(player.isSneaking()){
 			if(moveMode)moveMode=false;
-			else GuiHandelerM.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
+			else GuiHandlerM.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
 		}
 		if(moveMode&&host.point.pointedPos!=null){
 			position.x=(float)host.point.pointedPos.x+size.x/2;

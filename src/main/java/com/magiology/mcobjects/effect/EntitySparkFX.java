@@ -170,8 +170,8 @@ public class EntitySparkFX extends EntityFXM{
 	}
 	
 	@Override
-	public void motionHandeler(){
+	public void motionHandler(){
 		if(doesLockOnTheSpot)motionX=motionY=motionZ=0;
-		else super.motionHandeler();
+		else super.motionHandler();
 	}
 }

@@ -35,22 +35,21 @@ public class ShaderRunner{
 	EntityPlayer player=Util.getThePlayer();
 	public boolean redrawShaders=false,inited=false;
 	
-	public List<ShaderAspectRenderer> handelers=new ArrayList<ShaderAspectRenderer>();
+	public List<ShaderAspectRenderer> handlers=new ArrayList<ShaderAspectRenderer>();
 	
 	public Map<Integer, ShaderGroup> shaderGroups=new HashMap();
 	public ShaderGroup[] shaders;
 	
-	public ShaderRunner(){
-	}
+	public ShaderRunner(){}
 	
 	public void init(){
-		handelers.clear();
-		handelers.add(new BlurRenderer());
-		handelers.add(new ColorRenderer());
-		handelers.add(new ColorCutRenderer());
+		handlers.clear();
+		handlers.add(new BlurRenderer());
+		handlers.add(new ColorRenderer());
+		handlers.add(new ColorCutRenderer());
 		ResourceLocation[] shaderPaths=null;
-		for(ShaderAspectRenderer handeler:handelers){
-			ResourceLocation loc=handeler.getShaderLocation();
+		for(ShaderAspectRenderer handler:handlers){
+			ResourceLocation loc=handler.getShaderLocation();
 			boolean contains=false;
 			if(shaderPaths!=null)for(ResourceLocation i:shaderPaths){
 				if(i.toString().equals(loc.toString())){
@@ -68,15 +67,15 @@ public class ShaderRunner{
 	@SubscribeEvent
 	public void renderShaders(RenderGameOverlayEvent.Pre event){
 		if(Config.isShadersEnabled()&&event.type==ElementType.ALL&&OpenGlHelper.shadersSupported&&!shaderGroups.isEmpty()){
-			for(ShaderAspectRenderer handeler:handelers){
-				if(handeler.uniforms.isEmpty())handeler.init(this);
+			for(ShaderAspectRenderer handler:handlers){
+				if(handler.uniforms.isEmpty())handler.init(this);
 			}
 			
 			player=U.getThePlayer();
 			updateFrameBuffers();
 			World w=Util.getTheWorld();
-			for(int i=0;i<handelers.size();i++){
-				ShaderAspectRenderer shaderAspect=handelers.get(i);
+			for(int i=0;i<handlers.size();i++){
+				ShaderAspectRenderer shaderAspect=handlers.get(i);
 				shaderAspect.player=player;
 				shaderAspect.world=w;
 				shaderAspect.mc=mc;
@@ -105,11 +104,11 @@ public class ShaderRunner{
 	public void updateShaders(LivingUpdateEvent event){
 		if(!Config.isShadersEnabled()||!U.isRemote(event.entity)||event.entity!=U.getThePlayer())return;
 		player=U.getThePlayer();
-		if(handelers.isEmpty())init();
+		if(handlers.isEmpty())init();
 		Map<Integer, Boolean> enabledMap=new HashMap<Integer, Boolean>();
 		World w=Util.getTheWorld();
-		for(int i=0;i<handelers.size();i++){
-			ShaderAspectRenderer shaderAspect=handelers.get(i);
+		for(int i=0;i<handlers.size();i++){
+			ShaderAspectRenderer shaderAspect=handlers.get(i);
 			shaderAspect.player=player;
 			shaderAspect.world=w;
 			shaderAspect.mc=mc;

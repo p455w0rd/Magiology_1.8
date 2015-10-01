@@ -16,7 +16,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
-import com.magiology.api.SavableData.SavableDataHandeler;
+import com.magiology.api.SavableData.SavableDataHandler;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
 import com.magiology.mcobjects.effect.EntityFacedFX;
@@ -53,7 +53,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		super.readFromNBT(NBT);
 		InterfaceBinder.readInterfaceFromNBT(this, NBT);
 		int dataSize=NBT.getInteger("DS");
-		List<SavableData> data=SavableDataHandeler.loadDataFromNBT(NBT, "ID",false);
+		List<SavableData> data=SavableDataHandler.loadDataFromNBT(NBT, "ID",false);
 		holoObjects.clear();
 		for(int i=0;i<dataSize;i++){
 			holoObjects.add((HoloObject)data.get(i));
@@ -72,7 +72,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		
 		int dataSize=savableData.size();
 		NBT.setInteger("DS", dataSize);
-		SavableDataHandeler.saveDataToNBT(savableData, NBT, "ID");
+		SavableDataHandler.saveDataToNBT(savableData, NBT, "ID");
 		for(int i=0;i<3;i++)NBT.setBoolean("h"+i,highlighs[i]);
 	}
 	

@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.magiology.core.MReference;
-import com.magiology.handelers.animationhandelers.TheHandHandeler;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.mcobjects.items.BedrockDust;
 import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.mcobjects.items.EquivalentRightClickWandOfMagic;
@@ -93,7 +93,7 @@ public class MItems{
 		bindItemWRender(PowerCounter, new ItemRendererPowerCounter());
 		bindItemWRender(pants_42I, new ItemRendererPants42());
 		bindItemWRender(helmet_42I, new ItemRendererHelmet42());
-		bindItemWRender(TheHand, TheHandHandeler.getRenderer());
+		bindItemWRender(TheHand, TheHandHandler.getRenderer());
 //		bindItemWRender(Magiology., new ItemRenderer);
 	}
 	

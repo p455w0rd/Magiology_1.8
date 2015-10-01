@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.magiology.util.utilclasses.math.ObjectCalculator.Calculator;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 
@@ -195,6 +196,7 @@ public class SmartCalculator{
 			}
 		}
 		private static class Operator extends CalcObj{
+			Calculator calculator;
 			public Operator(char type){
 				this.type=type;
 			}
@@ -203,8 +205,8 @@ public class SmartCalculator{
 				return "Operator{type: "+type+"}";
 			}
 			public Object calc(Object left,Object right){
-//				Helper.printInln(left, right,type);
-				return ObjectCalculator.calc(left, right,type);
+				if(calculator==null)calculator=ObjectCalculator.getCalculator(left, right, type);
+				return calculator.calc(left, right);
 			}
 		}
 	}

@@ -1,5 +1,11 @@
 package com.magiology.gui.guiutil.gui;
 
+import static com.magiology.util.utilclasses.Util.codeToColorF;
+import static com.magiology.util.utilclasses.Util.getGuiScaleRaw;
+import static com.magiology.util.utilclasses.Util.getTheWorld;
+import static com.magiology.util.utilclasses.Util.getWorldTime;
+import static com.magiology.util.utilclasses.Util.stringNewlineSplit;
+
 import java.awt.Color;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -18,23 +24,20 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.mcobjects.items.CommandContainer;
-import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.Drawer;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.vectors.Vec2i;
-import com.sun.corba.se.impl.orb.ParserTable.TestBadServerIdHandler;
 
 public class GuiTextArea extends Gui{
 	
 	private List<StringBuilder> textBuffer=new ArrayList<StringBuilder>();
 	private List<Integer> cachedWidth=new ArrayList<Integer>();
 	
-	private List<String> undoSteps=new ArrayList<String>();
+	private List<UndoSave> undoSteps=new ArrayList<UndoSave>();
+	private int undoPos,prevXPos;
 	
 	public Vec2i cursorPosition=Vec2i.zero,selectionStart=Vec2i.zero;
 	public Vec2i pos, size;
@@ -60,7 +63,7 @@ public class GuiTextArea extends Gui{
 		buff.addVertex(pos.x-3, pos.y-3, 0);
 		
 		GL11U.texture(false);
-		GL11.glLineWidth(Util.getGuiScaleRaw());
+		GL11.glLineWidth(getGuiScaleRaw());
 		
 		GL11U.color(black);
 		buff.setClearing(false);
@@ -90,7 +93,8 @@ public class GuiTextArea extends Gui{
 		}
 		
 		// Cursor
-		if(active&&Util.getWorldTime(Util.getTheWorld())/6%2==0){
+		if(active&&getWorldTime(getTheWorld())/6%2==0){
+			if(cursorPosition.x>getCurrentLine().length())cursorPosition.x=getCurrentLine().length();
 			int cursorX=pos.x+fr.getStringWidth(getCurrentLine().substring(0, cursorPosition.x));
 			int cursorY=pos.y+cursorPosition.y*fr.FONT_HEIGHT;
 			if(cursorPosition.x-getCurrentLine().length()<0)drawVerticalLine(cursorX, cursorY-2, cursorY+10, white);
@@ -134,7 +138,7 @@ public class GuiTextArea extends Gui{
 			active=false;
 			return;
 		}
-
+		prevXPos=intersection.x;
 		long time=System.currentTimeMillis();
 		if(time-lastClickTime>CLICK_TIME){
 			clickCount=0;
@@ -190,25 +194,17 @@ public class GuiTextArea extends Gui{
 	}
 
 	public boolean keyTyped(int code, char ch){
+		String prevText=getText();
 		try{
 			if(!visible||!active)return false;
 			boolean con=false;
 			switch(code){
-				case Keyboard.KEY_DELETE:
-					delete();
-					break;
-				case Keyboard.KEY_UP:
-					up();
-					break;
-				case Keyboard.KEY_DOWN:
-					down();
-					break;
-				case Keyboard.KEY_LEFT:
-					left();
-					break;
-				case Keyboard.KEY_RIGHT:
-					right();
-					break;
+				case Keyboard.KEY_INSERT:insertMode=!insertMode;break;
+				case Keyboard.KEY_DELETE:delete();break;
+				case Keyboard.KEY_UP:up();break;
+				case Keyboard.KEY_DOWN:down();break;
+				case Keyboard.KEY_LEFT:left();break;
+				case Keyboard.KEY_RIGHT:right();break;
 				case Keyboard.KEY_END:{
 					if(!GuiScreen.isCtrlKeyDown())cursorPosition.x=getCurrentLine().length();
 					else{
@@ -216,41 +212,56 @@ public class GuiTextArea extends Gui{
 						if(cursorPosition.x>getCurrentLine().length())cursorPosition.x=getCurrentLine().length();
 					}
 				}break;
+				case Keyboard.KEY_Z:{
+					if(GuiScreen.isCtrlKeyDown()&&!undoSteps.isEmpty()){
+						selectAll();
+						replace(undoSteps.get(undoPos).content);
+						cursorPosition=selectionStart=undoSteps.get(undoPos).cursor;
+						undoPos++;
+						if(undoPos>100)undoPos=100;
+					}
+				}break;
+				case Keyboard.KEY_Y:{
+					if(GuiScreen.isCtrlKeyDown()&&!undoSteps.isEmpty()&&undoPos>0){
+						selectAll();
+						replace(undoSteps.get(undoPos).content);
+						cursorPosition=selectionStart=undoSteps.get(undoPos).cursor;
+						undoPos--;
+						if(undoPos>100)undoPos=100;
+					}
+				}break;
 				default:con=true;
 			}
 			if(con)switch(ch){
-				case 1: // ^A
-					selectAll();
-					break;
-				case 3: // ^C
-					GuiScreen.setClipboardString(getSelectedText());
-					break;
-				case 22: // ^V
-					replace(GuiScreen.getClipboardString());
-					break;
-				case 24: // ^X
+				case 1:selectAll();break;//^A
+				case 3:GuiScreen.setClipboardString(getSelectedText());break;//^C
+				case 22:replace(GuiScreen.getClipboardString());break;//^V
+				case 24:{
 					GuiScreen.setClipboardString(getSelectedText());
 					deleteSelected();
-					break;
-				case 8: // backspace
-					backspace();
-					break;
-				case 27: // ESC
-					active=false;
-					break;
-				case 13: // CR
-					replace("\n");
-					break;
-				case '\t':
-					tab();
-					break;
+				}break;//^X
+				case 8:backspace();break;//backspace
+				case 27:active=false;break;//ESC
+				case 13:replace("\n");break;//CR
+				case '\t':tab();break;
 				default:
 					if(!Character.isISOControl(ch))replace(String.valueOf(ch));
 					break;
 			}
+			if(!GuiScreen.isCtrlKeyDown()||code!=Keyboard.KEY_Z||code!=Keyboard.KEY_Y){
+				for(int i=0;i<undoPos;i++){
+					undoSteps.remove(0);
+				}
+				undoPos=0;
+			}
+			if(!(code==Keyboard.KEY_Z&&GuiScreen.isCtrlKeyDown())){
+				if(!getText().equals(prevText)){
+					undoSteps.add(0,new UndoSave(prevText, cursorPosition.add(0, 0)));
+					if(undoSteps.size()>100)undoSteps.remove(101);
+				}
+			}
 		}catch(Exception e){
 			e.printStackTrace();
-//			Util.printlnEr("nope");
 		}
 		return true;
 	}
@@ -354,35 +365,41 @@ public class GuiTextArea extends Gui{
 
 	private void up(){
 		FontRenderer fr=Get.Render.FR();
-		if(cursorPosition.y==0)
-			return;
-
-		int x=fr.getStringWidth(getCurrentLine().substring(0, cursorPosition.x));
-		x=fr.trimStringToWidth(getLine(cursorPosition.y-1).toString(), x).length();
-		setCursorPositionInternal(new Vec2i(x, cursorPosition.y-1));
+		if(cursorPosition.y==0)return;
+		
+		int x=fr.getStringWidth(getLine(cursorPosition.y-1).substring(0, prevXPos>getLine(cursorPosition.y-1).length()?getLine(cursorPosition.y-1).length():prevXPos));
+		try{
+			x=findCharAtPos(pos.x+x, pos.y+(cursorPosition.y-1)*fr.FONT_HEIGHT).x;
+			setCursorPositionInternal(new Vec2i(x, cursorPosition.y-1));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	private void down(){
 		FontRenderer fr=Get.Render.FR();
-		if(cursorPosition.y>=textBuffer.size()-1)
-			return;
-
-		int x=fr.getStringWidth(getCurrentLine().substring(0, cursorPosition.x));
-		x=fr.trimStringToWidth(getLine(cursorPosition.y+1).toString(), x).length();
-		setCursorPositionInternal(new Vec2i(x, cursorPosition.y+1));
+		if(cursorPosition.y>=textBuffer.size()-1)return;
+		
+		int x=fr.getStringWidth(getLine(cursorPosition.y+1).substring(0, prevXPos>getLine(cursorPosition.y+1).length()?getLine(cursorPosition.y+1).length():prevXPos));
+		try{
+			x=findCharAtPos(pos.x+x, pos.y+(cursorPosition.y+1)*fr.FONT_HEIGHT).x;
+			setCursorPositionInternal(new Vec2i(x, cursorPosition.y+1));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	private void left(){
-		if(cursorPosition.equals(Vec2i.zero))
-			return;
+		if(cursorPosition.equals(Vec2i.zero))return;
+		prevXPos=cursorPosition.x;
 		if(cursorPosition.x==0){
 			setCursorPositionInternal(new Vec2i(getLength(cursorPosition.y-1), cursorPosition.y-1));
 		}else setCursorPositionInternal(new Vec2i(cursorPosition.x-1, cursorPosition.y));
 	}
 
 	private void right(){
-		if(cursorPosition.equals(getLastPosition()))
-			return;
+		if(cursorPosition.equals(getLastPosition()))return;
+		prevXPos=cursorPosition.x;
 		if(cursorPosition.x>=getLength(cursorPosition.y)){
 			setCursorPositionInternal(new Vec2i(0, cursorPosition.y+1));
 		}else{
@@ -546,7 +563,7 @@ public class GuiTextArea extends Gui{
 		if(text==null)throw new NullPointerException();
 		checkInside(pos);
 		
-		String[] toInsert=Util.stringNewlineSplit(text.replaceAll("\t", "    "));
+		String[] toInsert=stringNewlineSplit(text.replaceAll("\t", "    "));
 		if(text.equals("\n"))toInsert=new String[]{"\n"};
 		StringBuilder insertLine=getLine(pos.y);
 		String endOfLine=insertLine.substring(pos.x, insertLine.length());
@@ -600,17 +617,6 @@ public class GuiTextArea extends Gui{
 					else cursorPosition.x=0;
 				}
 			}
-//			{
-//				String s=textBuffer.get(i).toString();
-//				if(s.startsWith(" ")){
-//					int j1=1;
-//					for(int j=1;j<s.length();j++){
-//						if(s.charAt(j)==' ')j1=j;
-//						else continue;
-//					}
-//					maxSpaces=Math.min(maxSpaces, j1);
-//				}
-//			}
 		}
 		refreshLine(pos.y);
 		refreshWidth();
@@ -671,7 +677,7 @@ public class GuiTextArea extends Gui{
 			y1=y2;
 			y2=t;
 		}
-		GL11U.color(Util.codeToColorF(color));
+		GL11U.color(codeToColorF(color));
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
@@ -697,5 +703,14 @@ public class GuiTextArea extends Gui{
 		}catch(Exception e){
 			throw new RuntimeException(e);
 		}
+	}
+	private static class UndoSave{
+		public String content;
+		public Vec2i cursor;
+		public UndoSave(String content, Vec2i cursor){
+			this.content=content;
+			this.cursor=cursor;
+		}
+		
 	}
 }

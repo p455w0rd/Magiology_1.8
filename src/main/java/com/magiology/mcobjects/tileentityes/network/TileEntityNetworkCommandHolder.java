@@ -54,7 +54,7 @@ public class TileEntityNetworkCommandHolder extends TileEntityNetwork implements
 	public void initNetworkComponent(){}
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateablePipeHandler.setConnections(connections, this);
 		setColisionBoxes();
 	}
 	@Override

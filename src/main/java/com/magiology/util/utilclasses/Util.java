@@ -275,6 +275,10 @@ public class Util{
 					boolean[] b=(boolean[])a;
 					for(boolean c:b)System.out.print(c+" ");
 				}
+				if(a instanceof String[]){
+					String[] b=(String[])a;
+					for(String c:b)System.out.print(c+" ");
+				}
 				else if(a instanceof float[]){
 					float[] b=(float[])a;
 					for(float c:b)System.out.print(c+" ");

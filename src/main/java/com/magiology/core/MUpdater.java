@@ -2,7 +2,7 @@ package com.magiology.core;
 
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
-import com.magiology.handelers.web.DownloadingHandeler;
+import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 
@@ -15,7 +15,7 @@ public class MUpdater{
 		
 //		debug=true;
 		try{
-			newestVersion=Float.parseFloat(DownloadingHandeler.findValue("VERSION"));
+			newestVersion=Float.parseFloat(DownloadingHandler.findValue("VERSION"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

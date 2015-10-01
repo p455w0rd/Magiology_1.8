@@ -151,13 +151,13 @@ public class EntityCustomfireFX extends EntityFXM{
 		if(U.getMC().gameSettings.particleSetting==2)this.setDead();
 		prevRoration=roration.clone();
 		this.particleWithSize15andSpeed35();
-		this.spawningParticleHandeler();
+		this.spawningParticleHandler();
 	    this.onCollided();
-		this.motionHandeler();
+		this.motionHandler();
 	}
 	
 	@Override
-	public void motionHandeler(){
+	public void motionHandler(){
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;
@@ -248,7 +248,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		}
 	}
 	
-	public void spawningParticleHandeler(){
+	public void spawningParticleHandler(){
         if(this.active==true){
         	if(optimizer++>=1&&U.getMC().gameSettings.particleSetting==0){
         		optimizer=0;

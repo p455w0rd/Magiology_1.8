@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.handelers.GenericPacketEventHandeler;
+import com.magiology.handlers.GenericPacketEventHandler;
 import com.magiology.util.utilclasses.Util.U;
 
 public class GenericServerVoidPacket extends AbstractToServerMessage{
@@ -18,7 +18,7 @@ public class GenericServerVoidPacket extends AbstractToServerMessage{
 	public GenericServerVoidPacket(){}
 	public GenericServerVoidPacket(int eventId){
 		this.eventId=eventId;
-		GenericPacketEventHandeler.addNewVoidPacketEvent(eventId, U.getMC().thePlayer,Side.CLIENT);
+		GenericPacketEventHandler.addNewVoidPacketEvent(eventId, U.getMC().thePlayer,Side.CLIENT);
 	}
 	@Override
 	public void write(PacketBuffer buffer) throws IOException{
@@ -30,7 +30,7 @@ public class GenericServerVoidPacket extends AbstractToServerMessage{
 	}
 	@Override
 	public IMessage process(EntityPlayer player, Side side){
-		GenericPacketEventHandeler.addNewVoidPacketEvent(eventId, player,Side.SERVER);
+		GenericPacketEventHandler.addNewVoidPacketEvent(eventId, player,Side.SERVER);
 		return null;
 	}
 

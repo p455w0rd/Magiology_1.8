@@ -35,7 +35,7 @@ public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
-		this.opacityHandeler();
+		this.opacityHandler();
 		
 //		if(entity==H.getMC().thePlayer){
 ////			System.out.println(sideOpacity[0]);
@@ -54,7 +54,7 @@ public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 	}
 	
 	@Override
-	public void motionHandeler(){
+	public void motionHandler(){
 		friction=0.7+worldObj.rand.nextFloat()*0.2;
 		this.motionX*=friction;
 		this.motionY*=friction;

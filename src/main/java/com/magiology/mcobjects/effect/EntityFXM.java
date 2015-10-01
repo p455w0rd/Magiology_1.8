@@ -64,10 +64,10 @@ public class EntityFXM extends EntityFX{
 		this.particleAge++;
 		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500&&worldObj.rand.nextBoolean())this.setDead();
 		if(U.getMC().gameSettings.particleSetting==2)this.setDead();
-		this.motionHandeler();
+		this.motionHandler();
 	}
 	
-	public void motionHandeler(){
+	public void motionHandler(){
 		this.motionX*=friction;
 		this.motionY*=friction;
 		this.motionZ*=friction;

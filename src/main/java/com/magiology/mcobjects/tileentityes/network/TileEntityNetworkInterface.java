@@ -48,7 +48,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateablePipeHandler.setConnections(connections, this);
 		for(int i=0;i<connections.length;i++){
 			int side=SideUtil.getOppositeSide(getOrientation());
 			if(connections[i]==null&&i==side)connections[i]=EnumFacing.UP;

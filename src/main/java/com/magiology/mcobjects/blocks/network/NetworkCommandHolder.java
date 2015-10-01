@@ -14,9 +14,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
+import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
 import com.magiology.core.init.MGui;
-import com.magiology.handelers.GuiHandelerM;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
 import com.magiology.util.utilclasses.SideUtil;
@@ -52,7 +52,7 @@ public class NetworkCommandHolder extends BlockContainerMultiColision{
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
-		GuiHandelerM.openGui(player, MGui.CommandCenterGui, pos);
+		GuiHandlerM.openGui(player, MGui.CommandCenterGui, pos);
 		return true;
 	}
 	
@@ -95,7 +95,7 @@ public class NetworkCommandHolder extends BlockContainerMultiColision{
 	
 	@Override
 	public TileEntity createNewTileEntity(World var0, int var1){
-		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkCommandHolder());
+		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkCommandHolder());
 	}
 	@Override 
 	protected BlockState createBlockState(){

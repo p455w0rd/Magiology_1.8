@@ -14,7 +14,7 @@ public interface SavableData{
 	public void writeData(List<Integer> integers,List<Boolean> booleans,List<Byte> bytes___,List<Long> longs___,List<Double> doubles_,List<Float> floats__,List<String> strings_,List<Short> shorts__);
 	public void readData(Iterator<Integer> integers,Iterator<Boolean> booleans,Iterator<Byte> bytes___,Iterator<Long> longs___,Iterator<Double> doubles_,Iterator<Float> floats__,Iterator<String> strings_,Iterator<Short> shorts__);
 	
-	public static class SavableDataHandeler{
+	public static class SavableDataHandler{
 		public static void saveDataToNBT(List<SavableData> data,NBTTagCompound NBT,String baseName){
 			SavableData[] dataArray={};
 			for(SavableData i:data)dataArray=ArrayUtils.add(dataArray, i);

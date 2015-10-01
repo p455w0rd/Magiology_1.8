@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler.Positions;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 
 public class ComplexPlayerRenderingData{
 	// init section

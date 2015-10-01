@@ -19,7 +19,7 @@ public class MEvents{
 	public static GameLoopEvents GameLoopInstance;
 	public static EntityEvents EntityInstance;
 	public static MouseEvents MouseInstance;
-	public static ShaderRunner shaderHandeler;
+	public static ShaderRunner shaderHandler;
 	
 	public static void init(){
 		EventRegister(0,
@@ -28,7 +28,7 @@ public class MEvents{
 			RenderLoopInstance=new RenderLoopEvents(),
 			MouseInstance=new MouseEvents(),
 			GameLoopInstance=new GameLoopEvents(),
-			shaderHandeler=new ShaderRunner(),
+			shaderHandler=new ShaderRunner(),
 			GuiButtonClickEvent.get()
 		);
 		EventRegister(1,

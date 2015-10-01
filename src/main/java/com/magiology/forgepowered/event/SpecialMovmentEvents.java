@@ -5,8 +5,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.magiology.core.init.MItems;
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler.Positions;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.items.armor.Pants_42;
@@ -70,7 +70,7 @@ public class SpecialMovmentEvents{
 		}
 	}
 	public void handleWingPhysics(EntityPlayer player){
-		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
+		Positions position=WingsFromTheBlackFireHandler.getPos(player);
 		if(!Util.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2)))return;
 		double[] a=Util.cricleXZ(player.rotationYaw);
 		if(position==Positions.HoverPos||position==Positions.FlyBackvardPos||position==Positions.FlyStationarPos||position==Positions.FlyForvardPos){
@@ -93,7 +93,7 @@ public class SpecialMovmentEvents{
 		}
 	}
 	public void onFlap(EntityPlayer player,int x,int y,int z){
-		Positions position=WingsFromTheBlackFireHandeler.getPos(player);
+		Positions position=WingsFromTheBlackFireHandler.getPos(player);
 		if(player.capabilities.isFlying)return;
 		ExtendedPlayerData extendedData=ExtendedPlayerData.get(player);
 		if(extendedData!=null){

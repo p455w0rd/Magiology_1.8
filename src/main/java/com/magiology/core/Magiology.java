@@ -28,8 +28,8 @@ import com.magiology.core.init.MPackets;
 import com.magiology.core.init.MRecepies;
 import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
-import com.magiology.handelers.EnhancedRobot;
-import com.magiology.handelers.web.DownloadingHandeler;
+import com.magiology.handlers.EnhancedRobot;
+import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.render.Textures;
 import com.magiology.util.utilclasses.Util;
@@ -78,7 +78,7 @@ public class Magiology{
 	}
 	public void loadFiles(){
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
-		if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandeler.downladAssets();
+		if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandler.downladAssets();
 		infoFile.readFromFile();
 		
 		if(infoFile.data.get("GUIOpen")==null||infoFile.getB("GUIOpen")){

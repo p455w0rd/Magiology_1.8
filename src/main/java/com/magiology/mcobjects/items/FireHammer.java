@@ -54,7 +54,7 @@ public class FireHammer extends ItemM{
 	
 	@Override
 	public boolean onItemUse(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float x2, float y2, float z2){
-		if(itemstack.getTagCompound() == null)itemstack.setTagCompound(new NBTTagCompound());
+		if(itemstack.getTagCompound()==null)itemstack.setTagCompound(new NBTTagCompound());
 		boolean isit=false;
 		boolean isit2=false;
 		TileEntity tile1=world.getTileEntity(pos);

@@ -9,7 +9,7 @@ import com.magiology.gui.custom.hud.HandModeChangerHUD;
 import com.magiology.gui.custom.hud.SoulFlameHUD;
 import com.magiology.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.gui.custom.hud.WingModeChangerHUD;
-import com.magiology.handelers.GuiHandelerM;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilclasses.Util.U;
 
 public class MGui{
@@ -30,7 +30,7 @@ public class MGui{
 	}
 
 	public static void registerGuis(){
-		NetworkRegistry.INSTANCE.registerGuiHandler(Magiology.getMagiology(), new GuiHandelerM());
+		NetworkRegistry.INSTANCE.registerGuiHandler(Magiology.getMagiology(), new GuiHandlerM());
 		try{
 			RenderLoopEvents.registerFirstPersonGui(SoulFlameHUD.instance);
 			RenderLoopEvents.registerFirstPersonGui(WingModeChangerHUD.instance);

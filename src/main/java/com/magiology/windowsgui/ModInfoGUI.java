@@ -55,8 +55,8 @@ public class ModInfoGUI extends JFrame{
 	JComboBox dropDown;
 	int dropDownID,commandID;
 	public String[] comands={"clearUserInput()","Set font size:","Set side:","selectCommand()","useCommand()","printCommands()","printValues()"};
-	TheHandler1 handeler1=new TheHandler1(this);
-	TheHandler2 handeler2=new TheHandler2();
+	TheHandler1 handler1=new TheHandler1(this);
+	TheHandler2 handler2=new TheHandler2();
 	TheHandler3 mouseEvents=new TheHandler3();
 	TheHandler4 keyEvents=new TheHandler4();
 	ImageIcon[] imageIcons=null;
@@ -116,12 +116,12 @@ public class ModInfoGUI extends JFrame{
 		item1=new JTextField("");
 		item1.setPreferredSize(new Dimension(120, item1.getPreferredSize().height));
 		//register
-		button1.addActionListener(handeler1);
-		item1.addActionListener(handeler1);
-		CB1.addItemListener(handeler2);
-		dropDown.addItemListener(handeler2);
-		up.addActionListener(handeler1);
-		down.addActionListener(handeler1);
+		button1.addActionListener(handler1);
+		item1.addActionListener(handler1);
+		CB1.addItemListener(handler2);
+		dropDown.addItemListener(handler2);
+		up.addActionListener(handler1);
+		down.addActionListener(handler1);
 		visual.addMouseListener(mouseEvents);
 		visual.addMouseMotionListener(mouseEvents);
 		visual.addMouseWheelListener(mouseEvents);

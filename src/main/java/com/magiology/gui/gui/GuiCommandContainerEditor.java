@@ -66,8 +66,8 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 	@Override
 	public void onGuiClosed(){
 		Keyboard.enableRepeatEvents(false);
-		CommandContainer.setCode(stack, text.getSelectedText());
 		CommandContainer.setCode(stack, text.getText());
+		CommandContainer.copile(stack);
 		super.onGuiClosed();
 	}
 	@Override

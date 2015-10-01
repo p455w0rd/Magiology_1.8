@@ -67,7 +67,7 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 		}
 		if(side!=-1){
 			ISidedNetworkComponent component=(ISidedNetworkComponent) worldObj.getTileEntity(SideUtil.offsetNew(side, pos));
-			if(component!=null)NetworkBaseComponentHandeler.setBrain(component.getBrain(), this);
+			if(component!=null)NetworkBaseComponentHandler.setBrain(component.getBrain(), this);
 		}
 	}
 	protected boolean isInitialized=false;

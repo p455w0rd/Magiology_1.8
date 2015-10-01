@@ -47,8 +47,8 @@ public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 		
 		if(U.getMC().gameSettings.particleSetting==2)setDead();
 		if(particleAge>particleMaxAge)setDead();
-		motionHandeler();
-		opacityHandeler();
+		motionHandler();
+		opacityHandler();
 		if(type==1){
 			if(particleAge==blinktime){
 				for(int a=0;a<1+worldObj.rand.nextInt(3);a++)Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()-motionX,0.025-0.05*worldObj.rand.nextFloat()-motionY, 0.025-0.05*worldObj.rand.nextFloat()-motionZ, (int) (10+particleScale*7), 3,-10, false,1,"tx1",r_e,g_e,b_e, this.opacity_e, 0.99));
@@ -65,7 +65,7 @@ public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 	}
 	
 	@Override
-	public void motionHandeler(){
+	public void motionHandler(){
 		motionX*=0.8;
 		motionY*=0.8;
 		motionZ*=0.8;

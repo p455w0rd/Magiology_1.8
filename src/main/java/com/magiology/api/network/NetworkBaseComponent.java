@@ -11,7 +11,7 @@ public interface NetworkBaseComponent{
 	public void initTheComponent();
 	public boolean isInitialized();
 	
-	public class NetworkBaseComponentHandeler{
+	public class NetworkBaseComponentHandler{
 
 		public static TileEntityNetworkController getBrain(NetworkBaseComponent component){
 			check(component);

@@ -90,7 +90,7 @@ public class EntityBaseFX extends EntityFX{
 		if(particleAge>particleMaxAge)this.setDead();
 		if(U.getMC().gameSettings.particleSetting==2)this.setDead();
 		
-		if(worldObj.isRemote)this.motionHandeler();
+		if(worldObj.isRemote)this.motionHandler();
 		
 		this.particleScale-=particleMaxAge/10.0;
 		
@@ -104,7 +104,7 @@ public class EntityBaseFX extends EntityFX{
 		this.particleAge++;
 	}
 	
-	public void motionHandeler(){
+	public void motionHandler(){
 		this.prevPosX = this.posX;
 		this.prevPosY = this.posY;
 		this.prevPosZ = this.posZ;

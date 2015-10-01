@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MGui;
-import com.magiology.handelers.GuiHandelerM;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilobjects.NBTUtil;
 import com.magiology.util.utilobjects.m_extension.ItemM;
 
@@ -38,7 +38,7 @@ public class IPowerSidenessInstructor extends ItemM{
 		boolean isIt=false;
 		if(world.getTileEntity(pos) instanceof ISidedPower){
 			isIt=true;
-			GuiHandelerM.openGui(player, MGui.GuiISidedPowerInstructor, pos);
+			GuiHandlerM.openGui(player, MGui.GuiISidedPowerInstructor, pos);
 		}
 		
 		

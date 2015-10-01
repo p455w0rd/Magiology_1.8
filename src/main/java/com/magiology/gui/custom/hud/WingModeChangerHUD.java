@@ -10,8 +10,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler.Positions;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.renderers.GL11U;
@@ -54,8 +54,8 @@ public class WingModeChangerHUD extends HUD{
 		player=Util.getThePlayer();
 		float calcAlpha=Util.calculateRenderPos(prevAlpha, alpha);
 		GL11U.SetUpOpaqueRendering(1);
-		if(WingsFromTheBlackFireHandeler.getIsActive(player)){
-			String poz=WingsFromTheBlackFireHandeler.getPos(player)+"/"+Positions.get(WingsFromTheBlackFireHandeler.getPosId(player));
+		if(WingsFromTheBlackFireHandler.getIsActive(player)){
+			String poz=WingsFromTheBlackFireHandler.getPos(player)+"/"+Positions.get(WingsFromTheBlackFireHandler.getPosId(player));
 			GL11.glPushMatrix();
 			GL11.glTranslated(xScreen-fr.getStringWidth(poz)*0.7, yScreen-fr.FONT_HEIGHT*0.7,0);
 			GL11U.scaled(0.7);
@@ -141,7 +141,7 @@ public class WingModeChangerHUD extends HUD{
 		}
 	}
 	private void onExit(){
-		if(WingsFromTheBlackFireHandeler.getIsActive(player))Util.sendMessage(new GenericServerIntPacket(6, validPoss[selectionId].id));
+		if(WingsFromTheBlackFireHandler.getIsActive(player))Util.sendMessage(new GenericServerIntPacket(6, validPoss[selectionId].id));
 	}
 	private void onOpen(){}
 	@Override
@@ -182,7 +182,7 @@ public class WingModeChangerHUD extends HUD{
 		}
 		alpha=Util.keepValueInBounds(alpha, 0F, 1);
 		boolean prevIsExited=isExited;
-		isExited=!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandeler.getIsActive(player);
+		isExited=!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandler.getIsActive(player);
 		if(prevIsExited!=isExited){
 			if(isExited)onExit();
 			else onOpen();

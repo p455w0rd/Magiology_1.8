@@ -10,7 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
+import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.Util.U;
@@ -45,7 +45,7 @@ public class NetworkController extends BlockContainerMultiColision{
 	
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata){
-		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkController());
+		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkController());
 	}
 	@Override 
 	protected BlockState createBlockState(){

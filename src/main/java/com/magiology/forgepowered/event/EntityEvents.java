@@ -22,9 +22,9 @@ import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
 import com.magiology.gui.GuiUpdater;
-import com.magiology.handelers.GuiHandelerM;
-import com.magiology.handelers.animationhandelers.TheHandHandeler;
-import com.magiology.handelers.animationhandelers.WingsFromTheBlackFireHandeler;
+import com.magiology.handlers.GuiHandlerM;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
@@ -42,7 +42,7 @@ public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
 //	WorldRenderer tess=TessHelper.getWR();
 	boolean isFP;
-	SpecialPlayerParicleHandeler spph=new SpecialPlayerParicleHandeler();
+	SpecialPlayerParicleHandler spph=new SpecialPlayerParicleHandler();
 	SlowdownUtil slowdown2=new SlowdownUtil(20);
 	@SubscribeEvent
 	public void onLivingUpdateEvent(LivingUpdateEvent event){
@@ -89,7 +89,7 @@ public class EntityEvents{
 //			}
 			
 			
-			WingsFromTheBlackFireHandeler.updateModel(player);
+			WingsFromTheBlackFireHandler.updateModel(player);
 			GuiUpdater.tryToUpdate(player);
 			if(world.isRemote)if(ComplexPlayerRenderingData.get(player)==null)ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
 			ExtendedPlayerData playerData=ExtendedPlayerData.get(player);
@@ -110,8 +110,8 @@ public class EntityEvents{
 				}
 				if(playerData.isFlappingDown)SpecialMovmentEvents.instance.onFlap(player, playerData.getKeysX(), playerData.getKeysY(), playerData.getKeysZ());
 			}
-			if(WingsFromTheBlackFireHandeler.getIsActive(player))SpecialMovmentEvents.instance.handleWingPhysics(player);
-			if(TheHandHandeler.isActive(player))TheHandHandeler.update(player);
+			if(WingsFromTheBlackFireHandler.getIsActive(player))SpecialMovmentEvents.instance.handleWingPhysics(player);
+			if(TheHandHandler.isActive(player))TheHandHandler.update(player);
 			{
 				InventoryPlayer inv=player.inventory;
 				
@@ -159,7 +159,7 @@ public class EntityEvents{
 			TileEntity tile=world.getTileEntity(pos);
 			if(tile instanceof TileEntityPow){
 				if(!world.isRemote){
-					GuiHandelerM.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, pos);
+					GuiHandlerM.openGui(player, Magiology.getMagiology(), MGui.GuiUpgrade, pos);
 					event.setCanceled(true);
 				}
 			}

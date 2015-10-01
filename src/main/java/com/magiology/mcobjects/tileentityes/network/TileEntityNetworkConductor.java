@@ -33,7 +33,7 @@ public class TileEntityNetworkConductor extends TileEntityNetwork implements IUp
 	public void initNetworkComponent(){}
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandeler.setConnections(connections, this);
+		UpdateablePipeHandler.setConnections(connections, this);
 		setColisionBoxes();
 	}
 	@Override

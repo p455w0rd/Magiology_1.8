@@ -1,7 +1,15 @@
 package com.magiology.util.renderers;
 
-import static java.lang.Math.*;
-import static org.lwjgl.opengl.GL11.*;
+import static java.lang.Math.max;
+import static org.lwjgl.opengl.GL11.GL_COLOR_MATERIAL;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslatef;
 
 import java.lang.reflect.Field;
 
@@ -20,8 +28,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.magiology.core.MReference;
-import com.magiology.handelers.obj.handeler.revived.yayformc1_8.AdvancedModelLoader;
-import com.magiology.handelers.obj.handeler.revived.yayformc1_8.IModelCustom;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.AdvancedModelLoader;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
 import com.magiology.mcobjects.effect.EntityFXM;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
@@ -222,6 +230,15 @@ public class TessUtil{
 		if(ballModel==null)ballModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/ball.obj"));
 		else{
 			ballModel.renderAll();
+		}
+	}
+	private static IModelCustom SV98;
+	public static void drawSV98(){
+		if(SV98==null)SV98=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/SV98.obj"));
+		else{
+			GL11U.texture(false);
+			SV98.renderAll();
+			GL11U.texture(true);
 		}
 	}
 	public static void drawPlayerIntoGUI(int x, int y, int scale, float mouseX, float mouseY, EntityLivingBase player,boolean... WillRotate){

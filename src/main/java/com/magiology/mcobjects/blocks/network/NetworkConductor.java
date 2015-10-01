@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandeler;
+import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
 import com.magiology.util.utilclasses.Util.U;
@@ -43,7 +43,7 @@ public class NetworkConductor extends BlockContainerMultiColision{
 	}
 	@Override
 	public TileEntity createNewTileEntity(World var0, int var1){
-		return NetworkBaseComponentHandeler.createComponent(new TileEntityNetworkConductor());
+		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkConductor());
 	}
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){

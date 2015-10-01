@@ -75,7 +75,6 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 		GL11U.culFace(true);
 		
 		GL11U.EndOpaqueRendering();
-		GL11U.texture(true);
 		GL11.glPopMatrix();
 	}
 	

@@ -7,8 +7,8 @@ import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.init.MItems;
-import com.magiology.handelers.animationhandelers.TheHandHandeler;
-import com.magiology.handelers.animationhandelers.TheHandHandeler.HandComonPositions;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPositions;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.utilclasses.Util;
@@ -36,7 +36,7 @@ public class HandModeChangerHUD extends HUD{
 			
 			int posId=0;
 			for(int b=0;b<HandComonPositions.values().length;b++){
-				if(HandComonPositions.values()[b].equals(TheHandHandeler.getActivePosition(player))){
+				if(HandComonPositions.values()[b].equals(TheHandHandler.getActivePosition(player))){
 					posId=b;
 					continue;
 				}

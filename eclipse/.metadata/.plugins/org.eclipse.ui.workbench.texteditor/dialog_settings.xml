@@ -2,28 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="selectWo" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="selectWo"/>
-			<item value="TransferEnergyToPosition"/>
-			<item value="nope"/>
-			<item value="isVisible()"/>
-			<item value="isActive()"/>
+			<item value="[0]"/>
+			<item value=".class"/>
+			<item value="r="/>
+			<item value="LapisLang."/>
+			<item value="return"/>
+			<item value="throw new IllegalStateException(&quot;ObjectCalculator has taken unsuported or invalid object type! &quot;+left+&quot; or/and &quot;+right);"/>
+			<item value="lines[i]"/>
+			<item value="print"/>
 		</list>
 		<list key="replacehistory">
-			<item value="visible"/>
-			<item value="active"/>
+			<item value=""/>
+			<item value="(0)"/>
+			<item value="parts[i]="/>
+			<item value="return new Calculator(){@Override public Object clac(Object left, Object right){"/>
+			<item value="throw new IllegalStateException(&quot;ObjectCalculator has taken unsuported or invalid object type! &quot;+left.getClass()+&quot; or/and &quot;+right.getClass());"/>
+			<item value="line"/>
+			<item value="&quot;+&apos;&quot;&apos;+&quot;"/>
+			<item value="+&apos;&quot;&apos;+"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="257" key="DIALOG_WIDTH"/>
+		<item value="342" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="380" key="DIALOG_HEIGHT"/>
-		<item value="352" key="DIALOG_X_ORIGIN"/>
-		<item value="267" key="DIALOG_Y_ORIGIN"/>
+		<item value="395" key="DIALOG_HEIGHT"/>
+		<item value="887" key="DIALOG_X_ORIGIN"/>
+		<item value="175" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

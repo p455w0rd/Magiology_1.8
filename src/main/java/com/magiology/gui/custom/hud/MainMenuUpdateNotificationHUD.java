@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.gui.custom.DownloadingIcon;
-import com.magiology.handelers.web.DownloadingHandeler;
+import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
@@ -135,14 +135,14 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 				//bridge between the updater app and the mod
 				IOReadableMap config=new IOReadableMap(updaterFolder+"/updaterConfig");
 				config.set("modPos", "mods/"+Magiology.infoFile.getS("modPos",NAME+".jar"));
-				config.set("url", DownloadingHandeler.findValue("NEWEST_VERSION_URL"));
+				config.set("url", DownloadingHandler.findValue("NEWEST_VERSION_URL"));
 				config.set("appPos", updaterFolder);
 				config.set("isDev", Magiology.IS_DEV);
 				config.writeToFile();
 				Desktop.getDesktop().open(updater);
 				Util.exitSoft();
 			}
-			else DownloadingHandeler.downloadUpdater();
+			else DownloadingHandler.downloadUpdater();
 		}catch(Exception e){e.printStackTrace();}
 	}
 
