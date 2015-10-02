@@ -12,6 +12,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
@@ -27,39 +29,41 @@ import com.magiology.util.utilobjects.m_extension.BlockPosM;
 public class CommandContainer extends Item{
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player){
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		createNBT(stack);
+		if(U.isRemote(player))return true;
 		String newline=System.getProperty("line.separator");
-//		setCode(stack, 
-//			"#name -> "+'"'+"redstone to percent"+'"'+";"+
-//			newline+""+
-//			newline+"in{"+
-//			newline+"    boolean isStrong;"+
-//			newline+"    float strength;"+
-//			newline+"}"+
-//			newline+""+
-//			newline+"vars{"+
-//			newline+"   float result; "+
-//			newline+"}"+
-//			newline+""+
-//			newline+"out String main(){"+
-//			newline+"    result=strength/15;"+
-//			newline+"    return result;"+
-//			newline+"}");
+		setCode(stack, 
+			"#name -> "+'"'+"redstone to percent"+'"'+";"+
+			newline+""+
+			newline+"in{"+
+			newline+"    boolean isStrong;"+
+			newline+"    float strength;"+
+			newline+"}"+
+			newline+""+
+			newline+"vars{"+
+			newline+"   float result; "+
+			newline+"}"+
+			newline+""+
+			newline+"out String main(){"+
+			newline+"    result=strength/15;"+
+			newline+"    return \"redstone in percent: \"+result+\"%\";"+
+			newline+"}");
 		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
 		else{
 			try{
 				LapisProgram lp=LapisLangCompiler.compile(getCode(stack));
 				if(lp!=null){
-					U.printInln(lp.run(U.RB(),U.RInt(15)+0F));
+					Object result=lp.run(U.RB(),world.getRedstonePower(pos, side)+0F);
+					U.printInln(result,result!=null?result.getClass().getSimpleName():"");
 				}
 				else Util.printInln("null");
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 		}
-		return stack;
-	}
+		return true;
+    }
 	
 	public static void setCode(ItemStack stack, String command){
 		setString(stack, "com", command);

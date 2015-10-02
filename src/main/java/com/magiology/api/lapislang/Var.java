@@ -1,12 +1,12 @@
 package com.magiology.api.lapislang;
 
 
-public class Variable implements Operator{
+public class Var implements Operator{
 	private static final char mul='*',div='/',add='+',sub='-',Int='i',flo='f',dou='d',lon='l';
 	public String name;
 	public char type;
 	public Object value;
-	public Variable(String name, char type, Object value){
+	public Var(String name, char type, Object value){
 		this.name=name;
 		this.type=type;
 		this.value=value;

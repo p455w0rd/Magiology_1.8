@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects;
 
-public class  DoubleObject <Obj1,Obj2>{
+public class DoubleObject <Obj1,Obj2>{
 	public Obj1 obj1;
 	public Obj2 obj2;
 	public DoubleObject(){}
@@ -12,5 +12,9 @@ public class  DoubleObject <Obj1,Obj2>{
 	public boolean equals(Object obj){
 		if(!(obj instanceof DoubleObject))return false;
 		return ((DoubleObject)obj).obj1.equals(obj1)&&((DoubleObject)obj).obj2.equals(obj2);
+	}
+	@Override
+	public String toString(){
+		return "DoubleObject{"+obj1+", "+obj2+"}";
 	}
 }

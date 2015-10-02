@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilclasses.math.ObjectCalculator;
 import com.magiology.util.utilclasses.math.ObjectCalculator.Calculator;
 
@@ -13,12 +13,13 @@ public class Calculation implements Operator{
 	public List<Operator> parts;
 	public List<Character> functions;
 	public List<Calculator> calculators=new ArrayList<Calculator>();
-	public Variable saver;
+	public Var saver;
 	
-	public Calculation(Variable saver,List<Operator> parts1, List<Character> functions1){
+	public Calculation(Var saver,List<Operator> parts1, List<Character> functions1){
 		this.functions=functions1;
 		this.parts=parts1;
-		this.saver=saver==null?new Variable("subReturn", '!', null):saver;
+		this.saver=saver==null?new Var("subReturn", '!', null):saver;
+		
 		int min=Integer.MAX_VALUE;
 		for(Character character:functions){
 			if(!priorities.containsKey(character))throw new IllegalStateException("impossible function: "+character);
@@ -33,50 +34,47 @@ public class Calculation implements Operator{
 					subParts.add(parts.get(end=i+1));
 					i++;
 				}
+				List<Character> subFunctions=new ArrayList<Character>();
+				parts.remove(start);
 				for(int j=0;j<end-start;j++){
 					parts.remove(start);
-					functions.remove(start);
+					subFunctions.add(functions.remove(start));
 				}
-				List<Character> subFunctions=functions.subList(start, end-1);
-				parts.add(start, new Calculation(new Variable("subReturn", '!', null), subParts, subFunctions));
+				parts.add(start, new Calculation(null, subParts, subFunctions));
 			}
 		}
 	}
 	@Override
 	public Object run(){
 		try{
-			if(calculators.isEmpty()){
-				Object result=null;
-				for(int i=0;i<parts.size()-1;i++){
-					Calculator newCalc=ObjectCalculator.getCalculator(parts.get(i).run(), result==null?parts.get(i+1).run():result, functions.get(i));
-					result=newCalc.calc(parts.get(i).run(), result==null?parts.get(i+1).run():result);
-					calculators.add(newCalc);
+			if(parts.size()>1){
+				if(calculators.isEmpty()){
+					Object result=null;
+					for(int i=0;i<parts.size()-1;i++){
+						int j=U.booleanToInt(result!=null);
+						Object left=parts.get(j)instanceof Var?((Var)parts.get(j)).getTypeObject():parts.get(j).run(),
+							   right=parts.get(i+1)instanceof Var?((Var)parts.get(i+1)).getTypeObject():parts.get(i+1).run();
+						Calculator newCalc=ObjectCalculator.getCalculator(result==null?left:result,right, functions.get(i));
+						result=newCalc.calc(result==null?left:result,right);
+						calculators.add(newCalc);
+					}
 				}
-				char type='q';
-				if(result.equals("boolean"))type='b';
-				else if(result.equals("int"))type='i';
-				else if(result.equals("long"))type='l';
-				else if(result.equals("float"))type='f';
-				else if(result.equals("double"))type='d';
-				else if(result.equals("String"))type='s';
-				saver.type=type;
-			}
-			Object result=null;
+				Object result=null;
+				for(int i=0;i<calculators.size();i++){
+					Calculator calc=calculators.get(i);
+					result=calc.calc(result==null?parts.get(i).run():result, parts.get(i+1).run());
+				}
+				return saver.value=result;
+			}else return saver.value=parts.get(0).run();
 			
-			for(int i=0;i<calculators.size();i++){
-				Calculator calc=calculators.get(i);
-				result=calc.calc(parts.get(i).run(), result==null?parts.get(i+1).run():result);
-			}
-			
-			saver.value=result;
-			return saver.value;
-		}catch(Exception e){e.printStackTrace();}
-		Util.printInln(parts.size());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 	@Override
 	public String toString(){
-		return "\n\tCalculation{\n\t\tparts: "+parts+"'\n\t}";
+		return "Calculation{parts: "+parts+"functions: "+functions+"}";
 	}
 	private static Map<Character,Integer> priorities=new HashMap<Character,Integer>();
 	static{

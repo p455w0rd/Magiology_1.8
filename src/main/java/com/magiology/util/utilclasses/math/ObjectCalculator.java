@@ -215,6 +215,7 @@ public class ObjectCalculator{
 					return((Float)left)*((Integer)right);
 				}};
 				if(type==div)return new Calculator(){@Override public Object calc(Object left, Object right){
+//					Util.printInln(left,"/",right,"=",((Float)left)/((Integer)right));
 					return((Float)left)/((Integer)right);
 				}};
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
@@ -316,7 +317,7 @@ public class ObjectCalculator{
 			}
 			if(right instanceof String){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((Integer)left)+((String)right);
+					return(left)+((String)right);
 				}};
 			}
 		}else if(left instanceof Double){
@@ -378,7 +379,7 @@ public class ObjectCalculator{
 			}
 			if(right instanceof String){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((Double)left)+((String)right);
+					return(left)+((String)right);
 				}};
 			}
 		}else if(left instanceof Long){
@@ -440,7 +441,7 @@ public class ObjectCalculator{
 			}
 			if(right instanceof String){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((Long)left)+((String)right);
+					return(left)+((String)right);
 				}};
 			}
 		}else if(left instanceof String){
@@ -451,22 +452,22 @@ public class ObjectCalculator{
 			}
 			if(right instanceof Long){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((String)left)+((Long)right);
+					return((String)left)+(right);
 				}};
 			}
 			if(right instanceof Float){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((String)left)+((Float)right);
+					return((String)left)+(right);
 				}};
 			}
 			if(right instanceof Integer){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((String)left)+((Integer)right);
+					return((String)left)+(right);
 				}};
 			}
 			if(right instanceof Double){
 				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
-					return((String)left)+((Double)right);
+					return((String)left)+(right);
 				}};
 			}
 		}
