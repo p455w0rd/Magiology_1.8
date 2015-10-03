@@ -3,13 +3,14 @@ package com.magiology.gui.gui;
 import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 
 import org.lwjgl.input.Keyboard;
 
+import com.magiology.forgepowered.packets.packets.OpenCommandContainerInGui;
 import com.magiology.gui.container.CommandCenterContainer;
 import com.magiology.gui.container.ContainerEmpty;
 import com.magiology.gui.guiutil.gui.GuiTextArea;
@@ -21,6 +22,8 @@ import com.magiology.util.utilobjects.vectors.Vec2i;
 public class GuiCommandContainerEditor extends GuiContainerM{
 	
 	private ItemStack stack;
+	private int slotId;
+	private BlockPos tilePos;
 	private GuiTextArea text=new GuiTextArea(new Vec2i(0, 50),new Vec2i(300, 600));
 	
 	public GuiCommandContainerEditor(EntityPlayer player){
@@ -28,8 +31,11 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 		
 		if(player.openContainer instanceof CommandCenterContainer){
 			CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
-			stack=((Slot)container.inventorySlots.get(container.selectedSlotId+36)).getStack();
-		}else stack=player.getCurrentEquippedItem();
+			stack=((Slot)container.inventorySlots.get(slotId=container.selectedSlotId+36)).getStack();
+			tilePos=container.tile.getPos();
+		}else{
+			stack=player.inventory.mainInventory[slotId=player.inventory.currentItem];
+		}
 		xSize=200;
 		ySize=166;
 		
@@ -66,8 +72,10 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 	@Override
 	public void onGuiClosed(){
 		Keyboard.enableRepeatEvents(false);
-		CommandContainer.setCode(stack, text.getText());
+		String data=text.getText();
+		CommandContainer.setCode(stack, data);
 		CommandContainer.copile(stack);
+		Util.sendMessage(new OpenCommandContainerInGui.ExitGui(slotId, data,tilePos));
 		super.onGuiClosed();
 	}
 	@Override
@@ -88,7 +96,7 @@ public class GuiCommandContainerEditor extends GuiContainerM{
 		}
 	}
 	@Override
-	protected void mouseClicked(int mouseX, int mouseY, int mouseButton)throws IOException {
+	protected void mouseClicked(int mouseX, int mouseY, int mouseButton)throws IOException{
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 		try{
 			text.mouseClicked(mouseX, mouseY, mouseButton);

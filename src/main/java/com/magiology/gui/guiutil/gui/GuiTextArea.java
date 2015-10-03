@@ -1,10 +1,6 @@
 package com.magiology.gui.guiutil.gui;
 
-import static com.magiology.util.utilclasses.Util.codeToColorF;
-import static com.magiology.util.utilclasses.Util.getGuiScaleRaw;
-import static com.magiology.util.utilclasses.Util.getTheWorld;
-import static com.magiology.util.utilclasses.Util.getWorldTime;
-import static com.magiology.util.utilclasses.Util.stringNewlineSplit;
+import static com.magiology.util.utilclasses.Util.*;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
@@ -40,8 +36,9 @@ public class GuiTextArea extends Gui{
 	private int undoPos,prevXPos;
 	
 	public Vec2i cursorPosition=Vec2i.zero,selectionStart=Vec2i.zero;
-	public Vec2i pos, size;
-	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode();
+	public Vec2i pos, size,mouse=Vec2i.zero,lastMouse=Vec2i.zero;
+	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode(),maxWidth;
+	private float sliderX,sliderY;
 	
 	public boolean active=false,visible=true,insertMode=false;
 	
@@ -53,17 +50,18 @@ public class GuiTextArea extends Gui{
 		this.size=size;
 	}
 
-	public void render(int mx, int my){
+	public void render(int x, int y){
 		if(!visible)return;
 		FontRenderer fr=Get.Render.FR();
+		
+		GL11U.texture(false);
+		GL11.glLineWidth(getGuiScaleRaw());
+		
 		NormalizedVertixBuffer buff=TessUtil.getNVB();
 		buff.addVertex(pos.x-3, pos.y+size.y+3, 0);
 		buff.addVertex(pos.x+size.x+3, pos.y+size.y+3, 0);
 		buff.addVertex(pos.x+size.x+3, pos.y-3, 0);
 		buff.addVertex(pos.x-3, pos.y-3, 0);
-		
-		GL11U.texture(false);
-		GL11.glLineWidth(getGuiScaleRaw());
 		
 		GL11U.color(black);
 		buff.setClearing(false);
@@ -74,16 +72,21 @@ public class GuiTextArea extends Gui{
 		buff.setDrawAsWire(true);
 		buff.draw();
 		buff.setDrawAsWire(false);
-
+		
 		GL11.glLineWidth(1);
 		GL11U.texture(true);
 		
+		GL11.glPushMatrix();
+		GL11.glTranslated(-sliderX*(maxWidth-size.x), 0, 0);
 		if(active&&hasSelection()){
 			renderSelection(0xFFDFB578);
 		}
 		fr.drawString("", 0, 0, 0xFFBED6FF);
 		for(int i=0;i<textBuffer.size();i++){
-			drawStringNoReset(fr, textBuffer.get(i).toString(), pos.x, pos.y+i*fr.FONT_HEIGHT, false);
+			String text=textBuffer.get(i).toString();
+			//.substring(fr.trimStringToWidth(text, (int)(sliderX*(maxWidth-size.x))).length())
+			//fr.trimStringToWidth(text, size.x+6)
+			drawStringNoReset(fr, text, pos.x, pos.y+i*fr.FONT_HEIGHT, false);
 		}
 		// Selection
 		if(active&&hasSelection()){
@@ -92,13 +95,23 @@ public class GuiTextArea extends Gui{
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		}
 		
-		// Cursor
 		if(active&&getWorldTime(getTheWorld())/6%2==0){
 			if(cursorPosition.x>getCurrentLine().length())cursorPosition.x=getCurrentLine().length();
 			int cursorX=pos.x+fr.getStringWidth(getCurrentLine().substring(0, cursorPosition.x));
 			int cursorY=pos.y+cursorPosition.y*fr.FONT_HEIGHT;
 			if(cursorPosition.x-getCurrentLine().length()<0)drawVerticalLine(cursorX, cursorY-2, cursorY+10, white);
 			else drawRect(cursorX, cursorY+8, cursorX+5, cursorY+7, white);
+		}
+		GL11.glPopMatrix();
+		if(maxWidth>size.x){
+			GL11U.texture(false);
+			GL11U.SetUpOpaqueRendering(2);
+			GL11U.color(new Color(160, 160, 160, 55).hashCode());
+			int height=8,width=Math.max((int)((size.x-height)*((float)size.x/(float)maxWidth)),10),toSlide=maxWidth-size.x;
+			drawModalRectWithCustomSizedTexture((pos.x)-1, pos.y+size.y-height-1, 0, 0, size.x-height+2, height+2, 0, 0);
+			drawModalRectWithCustomSizedTexture((int)(pos.x+(size.x-width-height)*sliderX), pos.y+size.y-height, 0, 0, width, height, 0, 0);
+			GL11U.texture(true);
+			GL11U.EndOpaqueRendering();
 		}
 	}
 
@@ -130,10 +143,11 @@ public class GuiTextArea extends Gui{
 	private long lastClickTime=Long.MAX_VALUE;
 	private static final int CLICK_TIME=200;
 
-	public void mouseClicked(int mx, int my, int button){
+	public void mouseClicked(int x, int y, int button){
 		if(!visible||button!=0)return;
-		
-		Vec2i intersection=findCharAtPos(mx, my);
+		lastMouse=mouse;
+		mouse=new Vec2i(x-pos.x, y-pos.y);
+		Vec2i intersection=findCharAtPos(x, y);
 		if(intersection==null){
 			active=false;
 			return;
@@ -183,13 +197,18 @@ public class GuiTextArea extends Gui{
 		}
 	}
 
-	public void mouseClickMove(int mx, int my){
-		if(!visible||!active)
-			return;
-
-		Vec2i intersection=findCharAtPos(mx, my);
-		if(intersection!=null){
-			cursorPosition=intersection;
+	public void mouseClickMove(int x, int y){
+		if(!visible||!active)return;
+		Vec2i move=lastMouse.add(-mouse.x,-mouse.y);
+		lastMouse=mouse;
+		mouse=new Vec2i(x-pos.x, y-pos.y);
+		if(size.y-mouse.y<=8){
+			sliderX=keepValueInBounds(sliderX-((float)move.x/(float)size.x)*getGuiScaleRaw(), 0, 1);
+		}else{
+			Vec2i intersection=findCharAtPos(x, y);
+			if(intersection!=null){
+				cursorPosition=intersection;
+			}
 		}
 	}
 
@@ -262,6 +281,10 @@ public class GuiTextArea extends Gui{
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+		maxWidth=0;
+		for(int i:cachedWidth){
+			maxWidth=Math.max(maxWidth, i);
 		}
 		return true;
 	}
@@ -620,6 +643,9 @@ public class GuiTextArea extends Gui{
 		}
 		refreshLine(pos.y);
 		refreshWidth();
+		for(int i:cachedWidth){
+			maxWidth=Math.max(maxWidth, i);
+		}
 	}
 	
 	public void replace(String text){

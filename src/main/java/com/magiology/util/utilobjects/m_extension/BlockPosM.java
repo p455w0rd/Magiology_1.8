@@ -33,7 +33,7 @@ public class BlockPosM extends BlockPos{
 		this(source.x, source.y, source.z);
 	}
 	public BlockPosM(Vec3i source){
-		this(source.getX(), source.getY(), source.getZ());
+		this(source!=null?source.getX():0, source!=null?source.getY():0, source!=null?source.getZ():0);
 	}
 	
 	public<T extends TileEntity> T getTile(World world,Class<T> type){

@@ -13,8 +13,10 @@ import com.magiology.util.utilclasses.Util;
 public class CommandCenterContainer extends Container{
 	
 	public int selectedSlotId=-1;
+	public TileEntityNetworkCommandHolder tile;
 	
 	public CommandCenterContainer(EntityPlayer player,TileEntityNetworkCommandHolder tile){
+		this.tile=tile;
 		for(int i=0;i<3;i++)for(int j=0;j<9;j++)addSlotToContainer(new Slot(player.inventory,9+j+9*i,8+j*18,84+18*i));
 		for(int i=0;i<9;i++)addSlotToContainer(new Slot(player.inventory,i,8+i*18,142));
 		for(int i=0;i<4;i++)for(int j=0;j<4;j++)addSlotToContainer(new CommandCenterContainerSlot(tile,j+4*i,j*18+53,18*i+7));

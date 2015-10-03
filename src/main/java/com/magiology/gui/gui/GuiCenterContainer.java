@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.packets.packets.ClickCommandContainerInGui;
+import com.magiology.forgepowered.packets.packets.OpenCommandContainerInGui;
 import com.magiology.gui.GuiUpdater.Updateable;
 import com.magiology.gui.container.CommandCenterContainer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
@@ -58,7 +58,7 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 				int id=container.selectedSlotId+36;
 				ItemStack stack=((Slot)container.inventorySlots.get(id)).getStack();
 				if(stack!=null){
-					Util.sendMessage(new ClickCommandContainerInGui(id));
+					Util.sendMessage(new OpenCommandContainerInGui(id));
 					NBTUtil.createNBT(stack);
 				}
 			}

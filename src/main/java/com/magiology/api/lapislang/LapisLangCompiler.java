@@ -1,61 +1,80 @@
 package com.magiology.api.lapislang;
 
+import static com.magiology.util.utilclasses.Util.*;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Vec3i;
 
 import com.magiology.api.Function;
+import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.OhBabyATriple;
 
 
 public class LapisLangCompiler{
 	
-	public static LapisProgram compile(String program){
-		String newline=System.getProperty("line.separator");
-		program=program.replaceAll(newline, "");
-		while(program.contains("  "))program=program.replace("  ", " ");
-		program=LapisLangCompiler.removeSpacesFrom(program,'{','}','(',')','=',';','*','/','+','-',newline.charAt(0),'%','!','>','<','@','#');
-		
-		String name="";
-		LapisProgram lp=new LapisProgram();
+	public static LapisProgram compile(ItemStack programContainer){
+		LapisProgram program=compile(CommandContainer.getCode(programContainer));
+		if(program==null)return null;
+		String name=program.tags.get("name"),Pos=program.tags.get("pos");
+		CommandContainer.setCommandName(programContainer, name!=null?name:"<NULL>");
+		String[] pos=Pos!=null?Pos.split(","):null;
 		try{
-			String[] lines=program.split(";");
-			for(String line:lines){
-				line=line.trim();
-				if(!line.startsWith("\\")){
-					if(line.contains("\\"))line=line.substring(0, line.indexOf("\\"));
-					if(line.length()>0){
-						{//name
-							if(line.startsWith("#name")){
-								String newLine=line.substring(0, line.indexOf('"'));
-								String[] words=newLine.split("->");
-								if(words[0].equals("#name")){
-									name=line.substring(line.indexOf('"')+1, line.lastIndexOf('"'));
-								}
-							}
-						}
-					}
-				}
-			}
+			CommandContainer.setPos(programContainer, new Vec3i(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]), Integer.parseInt(pos[2])));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return program;
+	}
+	public static LapisProgram compile(String program){
+		try{
+			String newline=System.getProperty("line.separator");
+			program=program.replaceAll(newline, "");
+			while(program.contains("  "))program=program.replaceAll("  ", " ");
+			program=LapisLangCompiler.removeSpacesFrom(program,'{','}','(',')','=',';','*','/','+','-',newline.charAt(0),'%','!','>','<','@','#');
 			
+			LapisProgram lp=new LapisProgram();
+			Map<String,String> tags=new HashMap<String,String>();
+			
+			parseTags(program,tags);
 			String[] in=LapisLangCompiler.getMapInBrackets(program,"in");
 			if(in!=null)LapisLangCompiler.stringMapToVars(in,lp.in);
 			
 			String[] vars=LapisLangCompiler.getMapInBrackets(program,"vars");
 			if(vars!=null)LapisLangCompiler.stringMapToVars(vars,lp.vars);
 			
-			String main=LapisLangCompiler.getInBrackets(program,"out String main()");
+			String main=LapisLangCompiler.getInBrackets(program,"out main()");
 			if(main!=null){
 				if(!main.contains("return "))return null;
 				lp.func.add(new Function(lp,main));
 			}else return null;
+			
+			lp.tags=tags;
+			return lp;
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		lp.name=name;
-		return lp;
+		return null;
 	}
 
+	private static void parseTags(String source, Map<String,String> tags){
+		String[] lines=source.split(";");
+		for(String line:lines){
+			if(line.startsWith("#")&&line.contains("->")&&line.contains("\"")){
+				List<OhBabyATriple<Integer,Integer,String>> content=detectAndExtractString(line);
+				if(content.size()==1){
+					String name=line.substring(line.indexOf("#")+1,line.indexOf("->"));
+					name.substring(booleanToInt(name.startsWith(" ")), name.length()-booleanToInt(name.endsWith(" ")));
+					tags.put(name, content.get(0).obj3.substring(1, content.get(0).obj3.length()-1));
+				}else break;
+			}else break;
+		}
+	}
 	public static String getInBrackets(String program, String bracketName){
 		if(program.contains(bracketName)){
 			int start=-1,end=-1;
@@ -115,7 +134,7 @@ public class LapisLangCompiler{
 			//using this so java unloads the data var instantly
 			{
 				//phrase variables and functions from the dank vars provided by the program
-				DoubleObject<List<Operator>,List<Character>> data=phraseVars(line, aviableVars);
+				DoubleObject<List<Operator>,List<Character>> data=parseVars(line, aviableVars);
 				//export
 				vars=data.obj1;
 				functions=data.obj2;
@@ -132,16 +151,16 @@ public class LapisLangCompiler{
 			//using this so java unloads the data var instantly
 			{
 				//phrase variables and functions from the dank vars provided by the program
-				DoubleObject<List<Operator>,List<Character>> data=phraseVars(right, aviableVars);
+				DoubleObject<List<Operator>,List<Character>> data=parseVars(right, aviableVars);
 				//export
 				vars=data.obj1;
 				functions=data.obj2;
 			}
-			return new DoubleObject<Calculation,Boolean>(new Calculation((Var)phraseVars(left, aviableVars).obj1.get(0), vars, functions), false);
+			return new DoubleObject<Calculation,Boolean>(new Calculation((Var)parseVars(left, aviableVars).obj1.get(0), vars, functions), false);
 		}
 		return new DoubleObject<Calculation,Boolean>(null, false);
 	}
-	private static DoubleObject<List<Operator>,List<Character>> phraseVars(String source, List<Var> aviableVars){
+	private static DoubleObject<List<Operator>,List<Character>> parseVars(String source, List<Var> aviableVars){
 		List<OhBabyATriple<Integer,Integer,String>> strings=detectAndExtractString(source);
 		String[] split=source.split("\\*|\\+|\\-|\\/");
 		List<Operator>  vars	 =new ArrayList<Operator>();

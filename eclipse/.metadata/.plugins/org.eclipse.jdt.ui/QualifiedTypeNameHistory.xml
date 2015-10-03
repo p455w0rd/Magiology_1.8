@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.Color"/>
-<fullyQualifiedTypeName name="com.magiology.mcobjects.tileentityes.TileEntityFirePipe"/>
-<fullyQualifiedTypeName name="com.magiology.api.power.SixSidedBoolean"/>
-<fullyQualifiedTypeName name="com.magiology.api.power.SixSidedBoolean.Modifier"/>
-<fullyQualifiedTypeName name="com.magiology.mcobjects.items.CommandContainer"/>
-<fullyQualifiedTypeName name="com.magiology.api.network.Command"/>
-<fullyQualifiedTypeName name="com.sun.javafx.webkit.prism.PrismGraphicsManager"/>
 <fullyQualifiedTypeName name="com.magiology.api.LapisLang"/>
 <fullyQualifiedTypeName name="net.minecraft.util.BlockPos"/>
 <fullyQualifiedTypeName name="com.sun.xml.internal.bind.v2.schemagen.xmlschema.List"/>
@@ -21,7 +14,6 @@
 <fullyQualifiedTypeName name="net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemCraftedEvent"/>
 <fullyQualifiedTypeName name="net.minecraftforge.event.entity.player.PlayerInteractEvent"/>
 <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
-<fullyQualifiedTypeName name="net.minecraft.util.Vec3i"/>
 <fullyQualifiedTypeName name="com.magiology.gui.guiutil.gui.GuiTextArea.UndoSave"/>
 <fullyQualifiedTypeName name="com.magiology.api.LapisLang.Calculation"/>
 <fullyQualifiedTypeName name="scala.collection.parallel.ParIterableLike.Forall"/>
@@ -33,9 +25,7 @@
 <fullyQualifiedTypeName name="net.minecraft.client.gui.GuiScreen"/>
 <fullyQualifiedTypeName name="java.lang.IndexOutOfBoundsException"/>
 <fullyQualifiedTypeName name="java.lang.Runnable"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.lang.Character"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilclasses.math.ObjectCalculator"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilclasses.math.ObjectCalculator.Calculator"/>
@@ -46,18 +36,28 @@
 <fullyQualifiedTypeName name="com.magiology.api.lapislang.LapisProgram"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.magiology.api.lapislang.Calculation"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="javafx.util.Pair"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.DoubleObject"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilobjects.m_extension.BlockPosM"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.magiology.api.lapislang.Var"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util"/>
-<fullyQualifiedTypeName name="com.magiology.util.renderers.GL11U"/>
-<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util.U"/>
 <fullyQualifiedTypeName name="com.magiology.api.lapislang.Brackets"/>
 <fullyQualifiedTypeName name="com.magiology.api.lapislang.Operator"/>
+<fullyQualifiedTypeName name="com.magiology.gui.container.CommandCenterContainer"/>
+<fullyQualifiedTypeName name="com.magiology.forgepowered.packets.packets.OpenCommandContainerInGui"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util"/>
+<fullyQualifiedTypeName name="com.magiology.forgepowered.packets.packets.OpenCommandContainerInGui.ExitGui"/>
+<fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntity"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilobjects.m_extension.BlockPosM"/>
+<fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.magiology.mcobjects.items.CommandContainer"/>
+<fullyQualifiedTypeName name="net.minecraft.util.Vec3i"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util.U"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
+<fullyQualifiedTypeName name="com.magiology.util.renderers.GL11U"/>
 </qualifiedTypeNameHistroy>

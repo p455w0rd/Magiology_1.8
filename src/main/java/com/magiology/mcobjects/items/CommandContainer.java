@@ -1,10 +1,6 @@
 package com.magiology.mcobjects.items;
 
-import static com.magiology.util.utilobjects.NBTUtil.createNBT;
-import static com.magiology.util.utilobjects.NBTUtil.getInt;
-import static com.magiology.util.utilobjects.NBTUtil.getString;
-import static com.magiology.util.utilobjects.NBTUtil.setInt;
-import static com.magiology.util.utilobjects.NBTUtil.setString;
+import static com.magiology.util.utilobjects.NBTUtil.*;
 
 import java.util.List;
 
@@ -33,31 +29,31 @@ public class CommandContainer extends Item{
 		createNBT(stack);
 		if(U.isRemote(player))return true;
 		String newline=System.getProperty("line.separator");
-		setCode(stack, 
-			"#name -> "+'"'+"redstone to percent"+'"'+";"+
-			newline+""+
-			newline+"in{"+
-			newline+"    boolean isStrong;"+
-			newline+"    float strength;"+
-			newline+"}"+
-			newline+""+
-			newline+"vars{"+
-			newline+"   float result; "+
-			newline+"}"+
-			newline+""+
-			newline+"out String main(){"+
-			newline+"    result=strength/15;"+
-			newline+"    return \"redstone in percent: \"+result+\"%\";"+
-			newline+"}");
+//		setCode(stack, 
+//			"#name -> "+'"'+"redstone to percent"+'"'+";"+
+//			newline+""+
+//			newline+"in{"+
+//			newline+"    boolean isStrong;"+
+//			newline+"    float strength;"+
+//			newline+"}"+
+//			newline+""+
+//			newline+"vars{"+
+//			newline+"   float result; "+
+//			newline+"}"+
+//			newline+""+
+//			newline+"out String main(){"+
+//			newline+"    result=strength/15;"+
+//			newline+"    return \"redstone in percent: \"+result+\"%\";"+
+//			newline+"}");
 		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
 		else{
 			try{
-				LapisProgram lp=LapisLangCompiler.compile(getCode(stack));
+				LapisProgram lp=LapisLangCompiler.compile(stack);
 				if(lp!=null){
-					Object result=lp.run(U.RB(),world.getRedstonePower(pos, side)+0F);
-					U.printInln(result,result!=null?result.getClass().getSimpleName():"");
+					Object result=lp.run(U.RB(),world.getRedstonePower(pos, side));
+					U.printInln("Function return: ",result);
 				}
-				else Util.printInln("null");
+				else Util.printInln("Program failed to compile!");
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -73,7 +69,7 @@ public class CommandContainer extends Item{
 		return getString(stack, "com");
 	}
 	
-	private static void setCommandName(ItemStack stack, String name){
+	public static void setCommandName(ItemStack stack, String name){
 		setString(stack, "nam", name);
 	}
 	public static String getName(ItemStack stack){
@@ -112,7 +108,7 @@ public class CommandContainer extends Item{
 	}
 
 	public static void copile(ItemStack stack){
-		LapisProgram program=LapisLangCompiler.compile(getCode(stack));
+		LapisProgram program=LapisLangCompiler.compile(stack);
 	}
 	
 /*

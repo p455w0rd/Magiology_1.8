@@ -41,7 +41,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 		try{
 			read(new PacketBuffer(buf));
 		}catch(IOException e){
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 	}
 	
@@ -50,7 +50,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 		try{
 			write(new PacketBuffer(buf));
 		}catch(IOException e){
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 	}
 	
