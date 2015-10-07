@@ -17,7 +17,7 @@ import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToI
 import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
@@ -52,8 +52,8 @@ public class Button extends TextBox implements ICommandInteract{
 		GL11U.culFace(false);
 		GL11U.scaled(-U.p);
 		GL11U.scaled(scale);
-		GL11.glTranslatef(-Get.Render.FR().getStringWidth(txt)/2, -Get.Render.FR().FONT_HEIGHT/2, 0);
-		Get.Render.FR().drawString(txt, 0, 0, renderColor.mix(renderColor.negative(), 0.8F,1F).toCode());
+		GL11.glTranslatef(-Font.FR().getStringWidth(txt)/2, -Font.FR().FONT_HEIGHT/2, 0);
+		Font.FR().drawString(txt, 0, 0, renderColor.mix(renderColor.negative(), 0.8F,1F).toCode());
 		GL11U.culFace(true);
 		
 	}

@@ -17,6 +17,7 @@ public class UploadPlayerDataPacket extends AbstractToServerMessage{
 	private boolean[] keys;
 	public UploadPlayerDataPacket(){}
 	public UploadPlayerDataPacket(EntityPlayer player){
+		ExtendedPlayerData.enshure(player);
 		ExtendedPlayerData data=ExtendedPlayerData.get(player);
 		this.isFlap=data.isFlappingDown;
 		keys=data.keys.clone();

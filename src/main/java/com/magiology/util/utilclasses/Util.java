@@ -13,7 +13,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFlameFX;
@@ -48,7 +47,7 @@ import com.magiology.forgepowered.packets.core.AbstractPacket;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.ColorF;
@@ -72,6 +71,7 @@ public class Util{
 	
 	static Random rand=new Random();
 	public  static final float p=1F/16F;
+	@SideOnly(value=Side.CLIENT)
     public static void spawnEntityFX(EntityFX particleFX){
 		if(isRemote(particleFX)){
 			Minecraft mc=U.getMC();
@@ -85,6 +85,7 @@ public class Util{
 			}
 		}
 	}
+	@SideOnly(value=Side.CLIENT)
 	public static void spawnEntityFX(EntityFX particleFX,int distance){
 		if(particleFX.worldObj.isRemote){
 			Minecraft mc=U.getMC();
@@ -401,25 +402,9 @@ public class Util{
 		if(entity.worldObj.isRemote)return;
         entity.worldObj.playSoundAtEntity(entity,(MReference.MODID+":"+name.toString()),(float)volume,(float)pitch);
 	}
-	private static int fps=0;
-	private static long lastTime=0;
-	private static void updateFps(){
-		char[] debug=U.getMC().debug.toCharArray();
-		String number="";
-		for(int a=0;a<debug.length;a++){
-			char c=debug[a];
-			if(c==' ')a=debug.length;
-			else number+=c;
-		}
-		try{fps=Integer.parseInt(number);}
-		catch(Exception e){fps=-1;}
-	}
+	@SideOnly(value=Side.CLIENT)
 	public static int getFPS(){
-		if(lastTime!=getTheWorld().getTotalWorldTime()){
-			lastTime=getTheWorld().getTotalWorldTime();
-			updateFps();
-		}
-		return fps;
+		return Minecraft.getDebugFPS();
 	}
 	public static World getWorld(Object object){
 		if(object instanceof Entity)return((Entity)object).worldObj;
@@ -455,6 +440,7 @@ public class Util{
 	public static void exit(int Int){
 		FMLCommonHandler.instance().exitJava(Int, false);
 	}
+	@SideOnly(value=Side.CLIENT)
 	public static void exitSoft(){
 		getMC().shutdown();
 	}
@@ -500,38 +486,6 @@ public class Util{
 		float[] data=codeToRGBABPrecentage(code);
 		return new ColorF(data[0],data[1],data[2],data[3]);
 	}
-	public static float[] calculateRenderPos(Entity entity){
-		return new float[]{
-				calculateRenderPos(entity,'x'),
-				calculateRenderPos(entity,'y'),
-				calculateRenderPos(entity,'z')};
-	}
-	public static Vec3M calculateRenderPosV(Entity entity){
-		return new Vec3M(
-				calculateRenderPos(entity,'x'),
-				calculateRenderPos(entity,'y'),
-				calculateRenderPos(entity,'z'));
-	}
-	public static float calculateRenderPos(Entity entity, char xyz){
-		if((""+xyz).toLowerCase().equals("x")){
-			return calculateRenderPos(entity.lastTickPosX,entity.posX);
-		}
-		if((""+xyz).toLowerCase().equals("y")){
-			return calculateRenderPos(entity.lastTickPosY,entity.posY);
-		}
-		if((""+xyz).toLowerCase().equals("z")){
-			return calculateRenderPos(entity.lastTickPosZ,entity.posZ);
-		}
-		printInln(xyz,"is not a valid key! Use x or y or z.");
-		return -1;
-	}
-	public static void translateByEntityPos(Entity entity){
-		GL11U.translate(calculateRenderPos(entity));
-	}
-	public static FontRenderer getFontRenderer(){
-		return U.getMC().fontRendererObj;
-	}
-	
 	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3M result){
 		if(result==null){
 			println("Result is null!\nResult can't be set if it is null!\nInitialize it!\n------------");
@@ -605,7 +559,7 @@ public class Util{
 	public static String getStringForSize(String text, float allowedWidth){
 		if(text.isEmpty())return text;
 		String Return=""+text;
-		while(getFontRenderer().getStringWidth(Return)>allowedWidth){
+		while(TessUtil.getFontRenderer().getStringWidth(Return)>allowedWidth){
 			Return=Return.substring(0, Return.length()-1);
 		}
 		return Return;
@@ -751,9 +705,11 @@ public class Util{
 		for(ChatFormatting a:colorAfter)result+=a;
 		return result;
 	}
+	@SideOnly(value=Side.CLIENT)
 	public static float getGuiScale(){
 		return Math.max(getGuiScaleRaw()/4F,1);
 	}
+	@SideOnly(value=Side.CLIENT)
 	public static int getGuiScaleRaw(){
 		return new ScaledResolution(getMC(), getMC().displayWidth, getMC().displayHeight).getScaleFactor();
 	}

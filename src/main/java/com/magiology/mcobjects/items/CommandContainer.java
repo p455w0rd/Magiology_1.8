@@ -27,24 +27,6 @@ public class CommandContainer extends Item{
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		createNBT(stack);
-		if(U.isRemote(player))return true;
-		String newline=System.getProperty("line.separator");
-//		setCode(stack, 
-//			"#name -> "+'"'+"redstone to percent"+'"'+";"+
-//			newline+""+
-//			newline+"in{"+
-//			newline+"    boolean isStrong;"+
-//			newline+"    float strength;"+
-//			newline+"}"+
-//			newline+""+
-//			newline+"vars{"+
-//			newline+"   float result; "+
-//			newline+"}"+
-//			newline+""+
-//			newline+"out String main(){"+
-//			newline+"    result=strength/15;"+
-//			newline+"    return \"redstone in percent: \"+result+\"%\";"+
-//			newline+"}");
 		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
 		else{
 			try{

@@ -5,12 +5,12 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import com.magiology.client.render.entityrender.BallOfEnergyRenderer;
+import com.magiology.client.render.entityrender.EntitySubatomicWorldDeconstructorRenderer;
+import com.magiology.client.render.models.entitys.BallOfEnergyModel;
 import com.magiology.core.Magiology;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
-import com.magiology.render.entityrender.BallOfEnergyRenderer;
-import com.magiology.render.entityrender.EntitySubatomicWorldDeconstructorRenderer;
-import com.magiology.render.models.entitys.BallOfEnergyModel;
 
 public class MEntitys{
 

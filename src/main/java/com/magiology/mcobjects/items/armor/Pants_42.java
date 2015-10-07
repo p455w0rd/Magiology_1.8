@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.client.render.models.ModelPants42;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
-import com.magiology.render.models.ModelPants42;
 import com.magiology.util.utilclasses.Util;
 
 public class Pants_42 extends UpgradeableArmor{

@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 
-import com.magiology.gui.gui.CraftingGridWOutput;
+import com.magiology.client.gui.gui.CraftingGridWOutput;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 

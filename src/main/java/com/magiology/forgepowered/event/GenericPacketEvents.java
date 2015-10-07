@@ -4,8 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.gui.container.ISidedPowerInstructorContainer;
-import com.magiology.gui.container.SmartCrafterContainer;
+import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
+import com.magiology.client.gui.container.SmartCrafterContainer;
 import com.magiology.handlers.GenericPacketEventHandler;
 import com.magiology.handlers.GenericPacketEventHandler.IntegerPacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;

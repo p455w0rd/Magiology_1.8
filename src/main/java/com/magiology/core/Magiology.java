@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.client.render.Textures;
 import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MCreativeTabs;
 import com.magiology.core.init.MEntitys;
@@ -31,7 +32,6 @@ import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
 import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.io.IOReadableMap;
-import com.magiology.render.Textures;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;

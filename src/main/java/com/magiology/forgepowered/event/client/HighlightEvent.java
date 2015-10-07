@@ -20,6 +20,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.power.PowerCore;
+import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.client.render.aftereffect.RenderNetworkPointerContainerHighlight;
 import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
@@ -33,8 +35,6 @@ import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
-import com.magiology.render.aftereffect.LongAfterRenderRenderer;
-import com.magiology.render.aftereffect.RenderNetworkPointerContainerHighlight;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
@@ -159,7 +159,7 @@ public class HighlightEvent{
 		int DFPBBwidth=2;
 		double DFPBBalpha=0.6;
 		
-		Vec3M off=Util.calculateRenderPosV(event.player);
+		Vec3M off=TessUtil.calculateRenderPosV(event.player);
 		GL11.glPushMatrix();
 		GL11.glTranslated(-off.getX(), -off.getY(), -off.getZ());
 		GL11.glTranslated(pos.getX(), pos.getY(), pos.getZ());
@@ -398,7 +398,7 @@ public class HighlightEvent{
 //			System.out.println(((TileEntityFireLamp)tile).fuelTicks);
 //		}
 		
-		Vec3M off=Util.calculateRenderPosV(event.player);
+		Vec3M off=TessUtil.calculateRenderPosV(event.player);
 		AxisAlignedBB bounds=Util.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-off.x, -off.y, -off.z);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);

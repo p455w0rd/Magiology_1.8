@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.client.render.itemrender.ItemRendererTheHand;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
@@ -13,7 +14,6 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
-import com.magiology.render.itemrender.ItemRendererTheHand;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 

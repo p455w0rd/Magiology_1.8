@@ -5,10 +5,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.gui.custom.guiparticels.GuiStandardFX;
-import com.magiology.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
-import com.magiology.gui.gui.GuiContainerAndGuiParticles;
-import com.magiology.render.Textures;
+import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.client.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
+import com.magiology.client.gui.gui.GuiContainerAndGuiParticles;
+import com.magiology.client.render.Textures;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Util;

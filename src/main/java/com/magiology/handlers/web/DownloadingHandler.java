@@ -1,7 +1,7 @@
 package com.magiology.handlers.web;
 
+import static com.magiology.client.gui.custom.hud.MainMenuUpdateNotificationHUD.*;
 import static com.magiology.core.MReference.*;
-import static com.magiology.gui.custom.hud.MainMenuUpdateNotificationHUD.*;
 import static com.magiology.handlers.web.MediaFireDownlader.*;
 
 import java.io.File;

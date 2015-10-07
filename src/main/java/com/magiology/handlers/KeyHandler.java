@@ -12,14 +12,14 @@ import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 import org.lwjgl.input.Keyboard;
 
+import com.magiology.client.gui.custom.hud.HandModeChangerHUD;
+import com.magiology.client.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.core.MReference;
 import com.magiology.core.init.MGui;
 import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
 import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
-import com.magiology.gui.custom.hud.HandModeChangerHUD;
-import com.magiology.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;

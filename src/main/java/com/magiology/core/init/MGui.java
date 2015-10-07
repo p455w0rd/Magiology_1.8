@@ -2,13 +2,13 @@ package com.magiology.core.init;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
+import com.magiology.client.gui.GuiUpdater;
+import com.magiology.client.gui.custom.hud.HandModeChangerHUD;
+import com.magiology.client.gui.custom.hud.SoulFlameHUD;
+import com.magiology.client.gui.custom.hud.StatsDisplayHUD;
+import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
-import com.magiology.gui.GuiUpdater;
-import com.magiology.gui.custom.hud.HandModeChangerHUD;
-import com.magiology.gui.custom.hud.SoulFlameHUD;
-import com.magiology.gui.custom.hud.StatsDisplayHUD;
-import com.magiology.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilclasses.Util.U;
 

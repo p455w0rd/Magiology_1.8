@@ -34,13 +34,13 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.magiology.api.power.PowerCore;
+import com.magiology.client.gui.custom.hud.FakeMessageHUD;
+import com.magiology.client.gui.custom.hud.HUD;
+import com.magiology.client.render.aftereffect.AfterRenderRenderer;
+import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.core.init.MItems;
-import com.magiology.gui.custom.hud.FakeMessageHUD;
-import com.magiology.gui.custom.hud.HUD;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.render.aftereffect.AfterRenderRenderer;
-import com.magiology.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;

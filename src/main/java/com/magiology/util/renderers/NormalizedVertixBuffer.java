@@ -238,7 +238,12 @@ public class NormalizedVertixBuffer{
 		}
 		if(willClear)shadedTriangles.clear();
 	}
-	
+	public Matrix4f getTransformation(){
+		return Matrix4f.add(transformation, Matrix4f.setZero(new Matrix4f()), null);
+	}
+	public Vector3f getRotation(){
+		return Vector3f.add(rotation, new Vector3f(), null);
+	}
 	public void importComplexCube(ComplexCubeModel... cubeModels){
 		for(ComplexCubeModel a:cubeModels)importComplexCube(a);
 	}

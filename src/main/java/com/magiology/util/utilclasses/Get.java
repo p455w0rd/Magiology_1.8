@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.client.render.font.FontRendererMBase;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Util.U;
@@ -19,6 +20,9 @@ import com.magiology.util.utilclasses.Util.U;
 public final class Get{
 	@SideOnly(value=Side.CLIENT)
 	public static final class Render{
+		
+		public static float partialTicks=0;
+		
 		public static final ItemRenderer IR(){
 			return U.getMC().getItemRenderer();
 		}
@@ -31,11 +35,8 @@ public final class Get{
 		public static final WorldRenderer WR(){
 			return TessUtil.getWR();
 		}
-		public static final FontRenderer FR(){
-			return U.getFontRenderer();
-		}
 		public static EffectRenderer ER(){
-			return U.getMC(). effectRenderer;
+			return U.getMC().effectRenderer;
 		}
 		public static ItemModelMesher IMM(){
 			return U.getMC().getRenderItem().getItemModelMesher();
@@ -43,18 +44,26 @@ public final class Get{
 		public static Tessellator T(){
 			return Tessellator.getInstance();
 		}
-		public static float partialTicks=0;
+		public static class Font{
+			public static FontRendererMBase FRB(){
+				return TessUtil.getCustomFontRednerer();
+			}
+
+			public static final FontRenderer FR(){
+				return TessUtil.getFontRenderer();
+			}
+		}
 	}
 	@SideOnly(value=Side.CLIENT)
 	public static final class Client{
-		public static final EntityPlayer TP(){
+		public static final EntityPlayer EP(){
 			return U.getThePlayer();
 		}
-		public static final World TW(){
+		public static final World W(){
 			return U.getTheWorld();
 		}
 		public static final boolean running(){
-			return !U.isNull(TP(),TW());
+			return !U.isNull(EP(),W());
 		}
 	}
 	

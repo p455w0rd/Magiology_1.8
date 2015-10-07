@@ -2,7 +2,7 @@ package com.magiology.api.updateable;
 
 import java.util.Collection;
 
-import com.magiology.gui.GuiUpdater.Updateable;
+import com.magiology.client.gui.GuiUpdater.Updateable;
 
 public class Updater{
 	private Updater(){}

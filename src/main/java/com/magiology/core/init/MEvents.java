@@ -3,14 +3,14 @@ package com.magiology.core.init;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import com.magiology.client.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
+import com.magiology.client.render.shaders.core.ShaderRunner;
 import com.magiology.forgepowered.event.EntityEvents;
 import com.magiology.forgepowered.event.GameLoopEvents;
 import com.magiology.forgepowered.event.MouseEvents;
 import com.magiology.forgepowered.event.TickEvents;
 import com.magiology.forgepowered.event.client.HighlightEvent;
 import com.magiology.forgepowered.event.client.RenderLoopEvents;
-import com.magiology.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
-import com.magiology.render.shaders.core.ShaderRunner;
 
 public class MEvents{
 	

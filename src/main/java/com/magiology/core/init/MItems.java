@@ -7,6 +7,11 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.magiology.client.render.itemrender.ItemRendererFirePipe;
+import com.magiology.client.render.itemrender.ItemRendererGenericUpgrade;
+import com.magiology.client.render.itemrender.ItemRendererHelmet42;
+import com.magiology.client.render.itemrender.ItemRendererPants42;
+import com.magiology.client.render.itemrender.ItemRendererPowerCounter;
 import com.magiology.core.MReference;
 import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.mcobjects.items.BedrockDust;
@@ -24,11 +29,6 @@ import com.magiology.mcobjects.items.armor.Helmet_42;
 import com.magiology.mcobjects.items.armor.Pants_42;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.render.itemrender.ItemRendererFirePipe;
-import com.magiology.render.itemrender.ItemRendererGenericUpgrade;
-import com.magiology.render.itemrender.ItemRendererHelmet42;
-import com.magiology.render.itemrender.ItemRendererPants42;
-import com.magiology.render.itemrender.ItemRendererPowerCounter;
 
 public class MItems{
 

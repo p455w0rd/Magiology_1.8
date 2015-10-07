@@ -18,10 +18,10 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.magiology.api.power.PowerCore;
+import com.magiology.client.gui.GuiUpdater;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
-import com.magiology.gui.GuiUpdater;
 import com.magiology.handlers.GuiHandlerM;
 import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;

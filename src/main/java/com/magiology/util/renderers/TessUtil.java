@@ -1,18 +1,11 @@
 package com.magiology.util.renderers;
 
-import static java.lang.Math.max;
-import static org.lwjgl.opengl.GL11.GL_COLOR_MATERIAL;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glScalef;
-import static org.lwjgl.opengl.GL11.glTranslatef;
+import static java.lang.Math.*;
+import static org.lwjgl.opengl.GL11.*;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -20,6 +13,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import com.magiology.client.render.font.FontRendererMBase;
 import com.magiology.core.MReference;
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.AdvancedModelLoader;
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
@@ -44,6 +39,7 @@ import com.magiology.util.utilobjects.vectors.Vec3M;
 public class TessUtil{
 	
 	private static NormalizedVertixBuffer buf=new NormalizedVertixBuffer();
+	private static FontRendererMBase fontRendererMBase=new FontRendererMBase(new ResourceLocation("textures/font/ascii.png"));
 	public static NormalizedVertixBuffer getNVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
 	public static RenderManager getRM(){return Util.getMC().getRenderManager();}
@@ -420,5 +416,40 @@ public class TessUtil{
 	}
 	public static void draw(){
 		Tessellator.getInstance().draw();
+	}
+	
+	public static FontRendererMBase getCustomFontRednerer(){
+		return fontRendererMBase;
+	}
+	public static FontRenderer getFontRenderer(){
+		return Util.getMC().fontRendererObj;
+	}
+	public static void translateByEntityPos(Entity entity){
+		GL11U.translate(TessUtil.calculateRenderPos(entity));
+	}
+	public static float calculateRenderPos(Entity entity, char xyz){
+		if((""+xyz).toLowerCase().equals("x")){
+			return Util.calculateRenderPos(entity.lastTickPosX,entity.posX);
+		}
+		if((""+xyz).toLowerCase().equals("y")){
+			return Util.calculateRenderPos(entity.lastTickPosY,entity.posY);
+		}
+		if((""+xyz).toLowerCase().equals("z")){
+			return Util.calculateRenderPos(entity.lastTickPosZ,entity.posZ);
+		}
+		Util.printInln(xyz,"is not a valid key! Use x or y or z.");
+		return -1;
+	}
+	public static Vec3M calculateRenderPosV(Entity entity){
+		return new Vec3M(
+				calculateRenderPos(entity,'x'),
+				calculateRenderPos(entity,'y'),
+				calculateRenderPos(entity,'z'));
+	}
+	public static float[] calculateRenderPos(Entity entity){
+		return new float[]{
+				calculateRenderPos(entity,'x'),
+				calculateRenderPos(entity,'y'),
+				calculateRenderPos(entity,'z')};
 	}
 }

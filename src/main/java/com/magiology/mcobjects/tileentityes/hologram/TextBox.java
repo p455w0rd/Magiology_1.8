@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
 
@@ -27,7 +28,7 @@ public class TextBox extends HoloObject implements StringContainer{
 		GL11U.culFace(false);
 		checkHighlight();
 		GL11U.scaled(-scale*U.p);
-		U.getFontRenderer().drawString(txt, 0, 0, this.setColor.toCode());
+		TessUtil.getFontRenderer().drawString(txt, 0, 0, this.setColor.toCode());
 		GL11U.culFace(true);
 	}
 
@@ -38,8 +39,8 @@ public class TextBox extends HoloObject implements StringContainer{
 		if(isHighlighted||moveMode)color=U.slowlyEqalizeColor(color, new ColorF(1,1,1,0.6).mix(setColor), 0.15F);
 		else color=U.slowlyEqalizeColor(color, setColor, 0.15F);
 		
-		size.x=U.getFontRenderer().getStringWidth(txt)*scale*U.p;
-		size.y=U.getFontRenderer().FONT_HEIGHT*scale*U.p;
+		size.x=TessUtil.getFontRenderer().getStringWidth(txt)*scale*U.p;
+		size.y=TessUtil.getFontRenderer().FONT_HEIGHT*scale*U.p;
 	}
 	@Override
 	public void onPressed(EntityPlayer player){

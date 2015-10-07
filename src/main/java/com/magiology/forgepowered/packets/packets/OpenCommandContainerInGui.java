@@ -11,8 +11,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
+import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.gui.container.CommandCenterContainer;
 import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
