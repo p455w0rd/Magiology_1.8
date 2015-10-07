@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.magiology.api.lapislang.Calculation"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="javafx.util.Pair"/>
@@ -41,7 +40,6 @@
 <fullyQualifiedTypeName name="com.magiology.gui.guiutil.gui.GuiTextArea"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.vectors.Vec2i"/>
 <fullyQualifiedTypeName name="com.magiology.gui.GuiUpdater.Updateable"/>
-<fullyQualifiedTypeName name="org.lwjgl.input.Mouse"/>
 <fullyQualifiedTypeName name="net.minecraftforge.fml.relauncher.SideOnly"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.ColorF"/>
 <fullyQualifiedTypeName name="com.magiology.client.render.font.FontRendererMBase"/>
@@ -58,6 +56,8 @@
 <fullyQualifiedTypeName name="org.lwjgl.util.vector.Matrix4f"/>
 <fullyQualifiedTypeName name="org.lwjgl.util.vector.Vector2f"/>
 <fullyQualifiedTypeName name="java.awt.Rectangle"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
+<fullyQualifiedTypeName name="scala.reflect.internal.Kinds.Kind..Head"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.Util"/>
+<fullyQualifiedTypeName name="org.lwjgl.input.Mouse"/>
 </qualifiedTypeNameHistroy>

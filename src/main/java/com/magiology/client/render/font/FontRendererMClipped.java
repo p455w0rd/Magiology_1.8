@@ -119,7 +119,7 @@ public class FontRendererMClipped extends FontRendererMBase{
 				push.y/=8F;
 				float 
 					minXUV=(f+Math.max(push.x*charWidth[p_78266_1_], 0))/128.0F,maxXUV=(f+f3-1.0F+Math.min(push.x*charWidth[p_78266_1_], 0))/128.0F,
-					minYUV=(f1+Math.max(push.y*charWidth[p_78266_1_], 0))/128.0F,maxYUV=((f1+Math.min(push.x*charWidth[p_78266_1_], 0))+7.99F)/128.0F;
+					minYUV=(f1+Math.max((push.y-0.006F)*FONT_HEIGHT, 0))/128.0F,maxYUV=((f1+Math.min(push.y*FONT_HEIGHT, 0))+8F)/128.0F;
 				rednerer.addVertexWithUV(min.x, min.y, 0.0F, minXUV, minYUV);
 				rednerer.addVertexWithUV(min.x, max.y, 0.0F, minXUV, maxYUV);
 				rednerer.addVertexWithUV(max.x, max.y, 0.0F, maxXUV, maxYUV);

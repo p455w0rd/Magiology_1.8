@@ -63,7 +63,9 @@ public class GuiTextArea extends Gui implements Updateable{
 			lastMouse=mouse;
 			mouse=new Vec2i(x-pos.x, y-pos.y);
 		}
+		float sliderX=calculateRenderPos(prevSliderX,this.sliderX);
 		FontRendererMClipped fr=FontRendererMClipped.get();
+		int maxHeight=(textBuffer.size()+1)*fr.FONT_HEIGHT;
 		int guiScale=getGuiScaleRaw();
 		GL11U.texture(false);
 		GL11.glLineWidth(guiScale);
@@ -88,22 +90,22 @@ public class GuiTextArea extends Gui implements Updateable{
 		GL11U.texture(true);
 		
 		GL11.glPushMatrix();
-		float xOffset=-sliderX*(maxWidth-size.x);
-		GL11.glTranslated(xOffset, 0, 0);
+		float xOffset=-sliderX*(maxWidth-size.x),yOffset=-sliderY*(maxHeight-size.y);
+		GL11.glTranslated(xOffset, yOffset, 0);
 		if(active&&hasSelection()){
 			renderSelection(0xFFDFB578);
 		}
 		
-		GL11.glTranslated(-xOffset, 0, 0);
+		GL11.glTranslated(-xOffset, -yOffset, 0);
 		buff.pushMatrix();
-		buff.translate(xOffset, 0, 0);
+		buff.translate(xOffset, yOffset, 0);
 		for(int i=0;i<textBuffer.size();i++){
 			fr.min=new Vector2f(pos.x-2,pos.y-2);
 			fr.max=new Vector2f(pos.x+size.x+2,pos.y+size.y+2);
 			fr.drawString(textBuffer.get(i).toString(), pos.x, pos.y+i*fr.FONT_HEIGHT, white);
 		}
 		buff.popMatrix();
-		GL11.glTranslated(xOffset, 0, 0);
+		GL11.glTranslated(xOffset, yOffset, 0);
 		
 		// Selection
 		if(active&&hasSelection()){
@@ -124,15 +126,31 @@ public class GuiTextArea extends Gui implements Updateable{
 			}
 		}
 		GL11.glPopMatrix();
-		
+		if(maxHeight>size.y){
+			GL11U.texture(false);
+			GL11U.SetUpOpaqueRendering(2);
+			int width=8,height=(int)Math.max(((size.y-width)*((float)size.y/(float)maxHeight)),10);
+			
+			GL11U.color(new Color(160, 160, 160, 55).hashCode());
+			drawModalRectWithCustomSizedTexture((pos.x+size.x-width)-1, pos.y-1, 0, 0, width+2, size.y-width+2, 0, 0);
+			
+			GL11U.color(new Color(160, 160, 160, (int)(75*sliderYCol.getPoint())).hashCode());
+			drawModalRectWithCustomSizedTexture(pos.x+(size.x-width), (int)(pos.y+(size.y-height)*sliderY), 0, 0, width, height-width, 0, 0);
+			
+			GL11U.texture(true);
+			GL11U.EndOpaqueRendering();
+		}
 		if(maxWidth>size.x){
 			GL11U.texture(false);
 			GL11U.SetUpOpaqueRendering(2);
+			int height=8,width=Math.max((int)((size.x-height)*((float)size.x/(float)maxWidth)),10);
+			
 			GL11U.color(new Color(160, 160, 160, 55).hashCode());
-			int height=8,width=Math.max((int)((size.x-height)*((float)size.x/(float)maxWidth)),10),toSlide=maxWidth-size.x;
 			drawModalRectWithCustomSizedTexture((pos.x)-1, pos.y+size.y-height-1, 0, 0, size.x-height+2, height+2, 0, 0);
+			
 			GL11U.color(new Color(160, 160, 160, (int)(75*sliderXCol.getPoint())).hashCode());
 			drawModalRectWithCustomSizedTexture((int)(pos.x+(size.x-width-height)*sliderX), pos.y+size.y-height, 0, 0, width, height, 0, 0);
+			
 			GL11U.texture(true);
 			GL11U.EndOpaqueRendering();
 		}else sliderX=0;
@@ -144,22 +162,35 @@ public class GuiTextArea extends Gui implements Updateable{
 		Vec2i first=selection.getLeft();
 		Vec2i last=selection.getRight();
 		
-		float xOffset=-sliderX*(maxWidth-size.x);
+		float xOffset=-sliderX*(maxWidth-size.x),yOffset=-sliderY*((textBuffer.size()+1)*fr.FONT_HEIGHT-size.y);
 		if(first.y==last.y){
 			int x1=fr.getStringWidth(getLine(first.y).substring(0, first.x));
 			int x2=fr.getStringWidth(getLine(first.y).substring(0, last.x));
-			drawRect((int)Math.max(pos.x+x1, pos.x-xOffset-2), pos.y+first.y*fr.FONT_HEIGHT, (int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2), pos.y+(first.y+1)*fr.FONT_HEIGHT,color);
+			int min=(int)Math.max(pos.x+x1, pos.x-xOffset-2),max=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2);
+			if(min<max)drawRect(min, (int)Math.max(pos.y+first.y*fr.FONT_HEIGHT,pos.y-yOffset-2), max, pos.y+(first.y+1)*fr.FONT_HEIGHT,color);
 		}else{
 			int x1=fr.getStringWidth(getLine(first.y).substring(0, first.x));
 			int x2=cachedWidth.get(first.y);
-			drawRect(pos.x+x1, pos.y+first.y*fr.FONT_HEIGHT, pos.x+x2, pos.y+(first.y+1)*fr.FONT_HEIGHT, color);
+			{
+				int 
+					minX=(int)Math.max(pos.x+x1, pos.x-xOffset-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2),
+					minY=(int)Math.max(pos.y+first.y*fr.FONT_HEIGHT, pos.y-yOffset-2),maxY=(int)Math.min(pos.y+(first.y+1)*fr.FONT_HEIGHT, pos.y+size.y-yOffset+3);
+				if(minX<maxX&&minY<maxY)drawRect(minX, minY, maxX, maxY, color);
+			}
 			for(int i=0;i<last.y-first.y-1;i++){
 				x2=cachedWidth.get(first.y+i+1);
-				drawRect((int)Math.max(pos.x, pos.x-xOffset-2), pos.y+(first.y+i+1)*fr.FONT_HEIGHT, (int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2), pos.y+(first.y+i+2)*fr.FONT_HEIGHT, color);
+				int 
+					minX=(int)Math.max(pos.x, pos.x-xOffset-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2),
+					minY=(int)Math.max(pos.y+(first.y+i+1)*fr.FONT_HEIGHT, pos.y-yOffset-2),maxY=(int)Math.min(pos.y+(first.y+i+2)*fr.FONT_HEIGHT, pos.y+size.y-yOffset+3);
+				if(minX<maxX&&minY<maxY)drawRect(minX, minY, maxX, maxY, color);
 			}
 
 			x2=fr.getStringWidth(getLine(last.y).substring(0, last.x));
-			drawRect((int)Math.max(pos.x, pos.x-xOffset-2), pos.y+last.y*fr.FONT_HEIGHT, (int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2), pos.y+(last.y+1)*fr.FONT_HEIGHT, color);
+			
+			int 
+				minX=(int)Math.max(pos.x, pos.x-xOffset-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2),
+				minY=(int)Math.max(pos.y+last.y*fr.FONT_HEIGHT, pos.y-yOffset-2),maxY=(int)Math.min(pos.y+(last.y+1)*fr.FONT_HEIGHT, pos.y+size.y-yOffset+3);
+			if(minX<maxX&&minY<maxY)drawRect(minX, minY, maxX, maxY, color);
 		}
 	}
 
@@ -214,10 +245,15 @@ public class GuiTextArea extends Gui implements Updateable{
 	}
 	private boolean handleSlider(int x, int y){
 		if(size.y-mouseClick.y<=8){
-//			TODO: if(mouseClick.x)
 			int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
-			prevSliderX=sliderX;
 			sliderX=keepValueInBounds(((float)(mouse.x-width/2)/(float)(size.x-width)), 0, 1);
+			return false;
+		}
+		if(size.x-mouseClick.x<=8){
+			FontRendererMClipped fr=FontRendererMClipped.get();
+			int maxHeight=textBuffer.size()*fr.FONT_HEIGHT;
+			int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
+			sliderY=keepValueInBounds((float)(mouse.y-height/2)/(float)(size.y-height), 0, 1);
 			return false;
 		}
 		return true;
@@ -467,12 +503,14 @@ public class GuiTextArea extends Gui implements Updateable{
 	private Vec2i findCharAtPos(int mx, int my){
 		FontRenderer fr=Font.FR();
 		try{
-			mx+=sliderX*(maxWidth-size.x);
+			float offsetX=sliderX*(maxWidth-size.x),offsetY=sliderY*((textBuffer.size()+1)*fr.FONT_HEIGHT-size.y);
+			mx+=offsetX;
+			my+=offsetY;
 			int y=my-pos.y;
-			if(y<0||y>=size.y)return null;
+			if(y<offsetY||y>=size.y+offsetY)return null;
 			y/=fr.FONT_HEIGHT;
 			int x=mx-pos.x;
-			if(x<0||x>size.x*2)return null;
+			if(x<offsetX||x>size.x*2+offsetX)return null;
 			y=Math.min(y,textBuffer.size()-1);
 			x=Math.min(x,width);
 			String s=fr.trimStringToWidth(textBuffer.get(y).toString(), x);
@@ -778,11 +816,28 @@ public class GuiTextArea extends Gui implements Updateable{
 	}
 	@Override
 	public void update(){
+		int rool=Mouse.getDWheel()/120;
+		//sliderX
+		if(rool!=0){
+			int side=rool>0?1:-1;
+			for(int i=0;i<rool*side;i++){
+//				float move=
+			}
+		}
+		
+		prevSliderX=sliderX;
 		if((Mouse.isButtonDown(0)?size.y-mouseClick.y<=8:false)||size.y-mouse.y<=8){
 			if(Mouse.isButtonDown(0))sliderXCol.wantedPoint=1;
 			else sliderXCol.wantedPoint=0.5F;
 		}
 		else sliderXCol.wantedPoint=0.2F;
+		
+		if((Mouse.isButtonDown(0)?size.x-mouseClick.x<=8:false)||size.x-mouse.x<=8){
+			if(Mouse.isButtonDown(0))sliderYCol.wantedPoint=1;
+			else sliderYCol.wantedPoint=0.5F;
+		}
+		else sliderYCol.wantedPoint=0.2F;
 		sliderXCol.update();
+		sliderYCol.update();
 	}
 }
