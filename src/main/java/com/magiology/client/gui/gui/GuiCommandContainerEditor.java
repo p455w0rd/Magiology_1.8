@@ -13,7 +13,7 @@ import org.lwjgl.input.Keyboard;
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.client.gui.container.ContainerEmpty;
-import com.magiology.client.gui.guiutil.gui.GuiTextArea;
+import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
 import com.magiology.forgepowered.packets.packets.OpenCommandContainerInGui;
 import com.magiology.mcobjects.items.CommandContainer;
 import com.magiology.util.utilclasses.Util;
@@ -25,7 +25,7 @@ public class GuiCommandContainerEditor extends GuiContainerM implements Updateab
 	private ItemStack stack;
 	private int slotId;
 	private BlockPos tilePos;
-	private GuiTextArea text=new GuiTextArea(new Vec2i(0, 50),new Vec2i(300, 600));
+	private GuiTextEditor text=new GuiTextEditor(new Vec2i(0, 50),new Vec2i(300, 600));
 	
 	public GuiCommandContainerEditor(EntityPlayer player){
 		super(new ContainerEmpty());
