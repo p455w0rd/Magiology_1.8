@@ -93,7 +93,7 @@ public class EntitySparkFX extends EntityFXM{
 		if(fragments.size()>=size){
 			for(Fragment a:fragments){
 				a.a.wantedPoint*=0.8;
-				a.a.wantedPoint=Util.keepValueInBounds(a.a.wantedPoint, 0, 1);
+				a.a.wantedPoint=Util.snap(a.a.wantedPoint, 0, 1);
 			}
 		}
 		if(fragments.size()>size&&slowdown.isTimeWithAddProgress())kill();

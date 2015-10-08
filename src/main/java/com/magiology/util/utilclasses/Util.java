@@ -128,7 +128,7 @@ public class Util{
 	 * @return
 	 */
 	public static boolean RB(double precentage){
-		precentage=keepValueInBounds(precentage, 0, 1);
+		precentage=snap(precentage, 0, 1);
 		if(precentage==0)return false;
 		if(precentage==1)return true;
 		return RF()<precentage;
@@ -331,17 +331,17 @@ public class Util{
 		if(str==null)return false;
 		return str.equals("true")||str.equals("false");
 	}
-	public static double keepValueInBounds(double value,double min,double max){
+	public static double snap(double value,double min,double max){
 		if(min>=max)return value;
 		if(value<min)value=min;
 		if(value>max)value=max;
 		return value;
 	}
-	public static float keepValueInBounds(float value,float min,float max){
-		return (float)keepValueInBounds((double)value, (double)min, (double)max);
+	public static float snap(float value,float min,float max){
+		return (float)snap((double)value, (double)min, (double)max);
 	}
-	public static int keepValueInBounds(int value,int min,int max){
-		return (int)keepValueInBounds((double)value, (double)min, (double)max);
+	public static int snap(int value,int min,int max){
+		return (int)snap((double)value, (double)min, (double)max);
 	}
 	public static MovingObjectPosition rayTrace(EntityLivingBase entity,float lenght, float var1){
 		if(entity.worldObj.isRemote)return entity.rayTrace(lenght, var1);

@@ -78,7 +78,7 @@ public class FakeMessageHUD extends HUD{
 		public void update(){
 			prevColor=color;
 			if(age>80)color.a-=0.1;
-			color.a=U.keepValueInBounds(color.a, 0, 1);
+			color.a=U.snap(color.a, 0, 1);
 			if(color.a<=0)isDead=true;
 			age++;
 		}

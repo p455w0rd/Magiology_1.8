@@ -18,7 +18,7 @@ public class ColorSlider{
 		return image[a];
 	}
 	public static ColorF getColor(float a){
-		a=Util.keepValueInBounds(a, 0, 1);
+		a=Util.snap(a, 0, 1);
 		return image[(int)(image.length*a)];
 	}
 }

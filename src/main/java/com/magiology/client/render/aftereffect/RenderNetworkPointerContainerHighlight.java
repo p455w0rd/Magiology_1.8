@@ -55,7 +55,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//calculation of rotation
 		float
 			point=progress.getPoint(),
-			point2=Util.keepValueInBounds(point, 0, 1),
+			point2=Util.snap(point, 0, 1),
 			playerX=TessUtil.calculateRenderPos(player, 'x'),
 			playerY=TessUtil.calculateRenderPos(player, 'y')+player.getEyeHeight(),
 			playerZ=TessUtil.calculateRenderPos(player, 'z'),

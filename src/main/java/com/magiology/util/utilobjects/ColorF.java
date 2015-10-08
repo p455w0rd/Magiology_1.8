@@ -24,10 +24,10 @@ public class ColorF{
 	public float r,g,b,a;
 	
 	public ColorF(double r, double g, double b, double a){
-		this.r=(float)Util.keepValueInBounds(r, 0, 1);
-		this.g=(float)Util.keepValueInBounds(g, 0, 1);
-		this.b=(float)Util.keepValueInBounds(b, 0, 1);
-		this.a=(float)Util.keepValueInBounds(a, 0, 1);
+		this.r=(float)Util.snap(r, 0, 1);
+		this.g=(float)Util.snap(g, 0, 1);
+		this.b=(float)Util.snap(b, 0, 1);
+		this.a=(float)Util.snap(a, 0, 1);
 	}
 	public ColorF(){
 		this(1,1,1,1);
@@ -66,7 +66,7 @@ public class ColorF{
 				);
 	}
 	public ColorF set(float modifier, char c){
-		modifier=Util.keepValueInBounds(modifier, 0, 1);
+		modifier=Util.snap(modifier, 0, 1);
 		return new ColorF(c=='r'?modifier:r, c=='g'?modifier:g, c=='b'?modifier:b, c=='a'?modifier:a);
 	}
 	public ColorF copy(){

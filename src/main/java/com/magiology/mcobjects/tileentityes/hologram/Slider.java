@@ -58,7 +58,7 @@ public class Slider extends HoloObject{
 	@Override
 	public void onPressed(EntityPlayer player){
 		if(moveMode)return;
-		sliderPos=Util.keepValueInBounds((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
+		sliderPos=Util.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
 	}
 	@Override
 	public void readData(Iterator<Integer> integers, Iterator<Boolean> booleans, Iterator<Byte> bytes___, Iterator<Long> longs___,Iterator<Double> doubles_, Iterator<Float> floats__, Iterator<String> strings_, Iterator<Short> shorts__){

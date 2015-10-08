@@ -155,9 +155,9 @@ public class TheHandHandler{
 				}
 				a1.xyzPosRotNoise[1][4]=(float)Util.slowlyEqalize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
 				a1.xyzPosRotNoise[0][4]=(float)Util.slowlyEqalize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
-				a1.xyzPosRot[0][4]=Util.keepValueInBounds(a1.xyzPosRot[0][4], -4, 65);
-				a1.xyzPosRot[1][4]=Util.keepValueInBounds(a1.xyzPosRot[1][4], -80, 2);
-				a1.xyzPosRot[0][3]=Util.keepValueInBounds(a1.xyzPosRot[0][3], -45, 5);
+				a1.xyzPosRot[0][4]=Util.snap(a1.xyzPosRot[0][4], -4, 65);
+				a1.xyzPosRot[1][4]=Util.snap(a1.xyzPosRot[1][4], -80, 2);
+				a1.xyzPosRot[0][3]=Util.snap(a1.xyzPosRot[0][3], -45, 5);
 			}else{
 				//for every box in the finger
 				for(int b=0;b<a1.xyzPosRot.length;b++){
@@ -168,7 +168,7 @@ public class TheHandHandler{
 						a1.xyzPosRot[b][3+a11]=(float)Util.slowlyEqalize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
 					}
 					a1.xyzPosRotNoise[b][3]=(float)Util.slowlyEqalize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
-					a1.xyzPosRot[b][3]=Util.keepValueInBounds(a1.xyzPosRot[b][3], -90, 5);
+					a1.xyzPosRot[b][3]=Util.snap(a1.xyzPosRot[b][3], -90, 5);
 				}
 			}
 			a1.calcXyzPosRot=Util.addToDoubleFloatArray(a1.xyzPosRot,a1.xyzPosRotNoise);

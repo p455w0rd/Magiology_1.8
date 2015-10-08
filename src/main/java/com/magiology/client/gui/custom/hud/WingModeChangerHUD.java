@@ -59,7 +59,7 @@ public class WingModeChangerHUD extends HUD{
 			GL11.glPushMatrix();
 			GL11.glTranslated(xScreen-fr.getStringWidth(poz)*0.7, yScreen-fr.FONT_HEIGHT*0.7,0);
 			GL11U.scaled(0.7);
-			Color c=new Color(255,255,255,(int)(255*Util.keepValueInBounds(calcAlpha+0.25, 0, 1)));
+			Color c=new Color(255,255,255,(int)(255*Util.snap(calcAlpha+0.25, 0, 1)));
 			fr.drawStringWithShadow(poz, -1,-1, c.hashCode());
 			GL11.glPopMatrix();
 		}
@@ -154,14 +154,14 @@ public class WingModeChangerHUD extends HUD{
 		sliderSpeed=Util.handleSpeedFolower(sliderSpeed,sliderPos,sliderWantedPos,15F);
 		sliderSpeed*=0.7;
 		double multiplayer=Math.abs((sliderPos-sliderWantedPos)/nextLineOffset);
-		multiplayer=Util.keepValueInBounds(multiplayer, 0, 1);
+		multiplayer=Util.snap(multiplayer, 0, 1);
 		sliderSpeed*=multiplayer;
 		sliderPos+=sliderSpeed;
 		int perPos=((int)(sliderWantedPos/nextLineOffset));
 		if(perPos>validPoss.length-1)sliderWantedPos=0;
 		if(perPos<0)sliderWantedPos=(validPoss.length-1)*nextLineOffset;
 		selectionId=(int)((sliderPos+nextLineOffset/2)/nextLineOffset);
-		selectionId=(int)Util.keepValueInBounds(selectionId, 0, 4);
+		selectionId=(int)Util.snap(selectionId, 0, 4);
 		curentPoss=Positions.values()[validPoss[selectionId].id];
 		alpha+=0.2F*(isExited?-1:1);
 		double noise=0.05,speed=0.15;
@@ -176,11 +176,11 @@ public class WingModeChangerHUD extends HUD{
 				backgroundColor[a][2]=(float)Util.slowlyEqalize(backgroundColor[a][2], 0.2+Util.CRandF(noise),speed);
 			}
 			
-			backgroundColor[a][0]=Util.keepValueInBounds(backgroundColor[a][0], 0, 1);
-			backgroundColor[a][1]=Util.keepValueInBounds(backgroundColor[a][1], 0, 1);
-			backgroundColor[a][2]=Util.keepValueInBounds(backgroundColor[a][2], 0, 1);
+			backgroundColor[a][0]=Util.snap(backgroundColor[a][0], 0, 1);
+			backgroundColor[a][1]=Util.snap(backgroundColor[a][1], 0, 1);
+			backgroundColor[a][2]=Util.snap(backgroundColor[a][2], 0, 1);
 		}
-		alpha=Util.keepValueInBounds(alpha, 0F, 1);
+		alpha=Util.snap(alpha, 0F, 1);
 		boolean prevIsExited=isExited;
 		isExited=!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandler.getIsActive(player);
 		if(prevIsExited!=isExited){

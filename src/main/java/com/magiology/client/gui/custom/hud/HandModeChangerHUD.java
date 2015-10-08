@@ -85,6 +85,6 @@ public class HandModeChangerHUD extends HUD{
 		if(Util.isNull(Util.getThePlayer()))return;
 		lastHandAlpha=handAlpha;
 		handAlpha+=Util.getThePlayer().isSneaking()?0.25:-0.25;
-		handAlpha=Util.keepValueInBounds(handAlpha, 0, 1);
+		handAlpha=Util.snap(handAlpha, 0, 1);
 	}
 }
