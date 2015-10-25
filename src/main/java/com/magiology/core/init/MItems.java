@@ -14,16 +14,7 @@ import com.magiology.client.render.itemrender.ItemRendererPants42;
 import com.magiology.client.render.itemrender.ItemRendererPowerCounter;
 import com.magiology.core.MReference;
 import com.magiology.handlers.animationhandlers.TheHandHandler;
-import com.magiology.mcobjects.items.BedrockDust;
-import com.magiology.mcobjects.items.CommandContainer;
-import com.magiology.mcobjects.items.EquivalentRightClickWandOfMagic;
-import com.magiology.mcobjects.items.FireBarrel;
-import com.magiology.mcobjects.items.FireHammer;
-import com.magiology.mcobjects.items.GenericItemUpgrade;
-import com.magiology.mcobjects.items.IPowerSidenessInstructor;
-import com.magiology.mcobjects.items.NetworkPointer;
-import com.magiology.mcobjects.items.PowerCounter;
-import com.magiology.mcobjects.items.TheHand;
+import com.magiology.mcobjects.items.*;
 import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
 import com.magiology.mcobjects.items.armor.Helmet_42;
 import com.magiology.mcobjects.items.armor.Pants_42;
@@ -63,7 +54,7 @@ public class MItems{
 		FireBarrel=init(new FireBarrel(Container.FireBarrel).setTextureName(MReference.MODID + ":" + "FireBarrel").setUnlocalizedName("FireBarrel").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
 		TheHand=init(new TheHand().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("TheHand").setMaxStackSize(1));
 		networkPointer=init(new NetworkPointer().setUnlocalizedName("NetworkPointer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
-		commandContainer=init(new CommandContainer().setUnlocalizedName("CommandContainer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
+		commandContainer=init(new ProgramContainer().setUnlocalizedName("CommandContainer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
 		//Upgrades
 		controlUpgrades=initGIU(new GenericItemUpgrade(1,UpgradeType.Control,null));
 		priorityUpgrades=initGIU(new GenericItemUpgrade(1,UpgradeType.Priority,null));

@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;

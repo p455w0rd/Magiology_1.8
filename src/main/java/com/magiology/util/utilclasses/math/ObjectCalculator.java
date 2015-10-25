@@ -14,8 +14,6 @@ public class ObjectCalculator{
 	
 	public static Calculator getCalculator(final Object left,final Object right, final char type){
 		Class lc=left.getClass(),rc=right.getClass();
-		if(!isSupported(lc))throw new IllegalStateException("ObjectCalculator has taken unsuported or invalid object type! "+left);
-		if(!isSupported(rc))throw new IllegalStateException("ObjectCalculator has taken unsuported or invalid object type! "+right);
 		boolean arrayL=U.isArray(lc),arrayR=U.isArray(rc);
 		if(arrayL||arrayR)return arrayCalculator(left, right, type, arrayL, arrayR);
 		else return normalCalculator(left, right, type);
@@ -470,6 +468,15 @@ public class ObjectCalculator{
 					return((String)left)+(right);
 				}};
 			}
+			if(right instanceof Boolean){
+				if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
+					return((String)left)+(right);
+				}};
+			}
+		}else if(left instanceof Boolean){
+			if(type==add)return new Calculator(){@Override public Object calc(Object left, Object right){
+				return(left)+((String)right);
+			}};
 		}
 		
 		throw new IllegalStateException("ObjectCalculator has taken unsuported or invalid object type! "+left.getClass()+" or/and "+right.getClass());
@@ -481,7 +488,7 @@ public class ObjectCalculator{
 	private static Set<Class> SupportedTypes;
 	static{
 		SupportedTypes=new HashSet<Class>();
-//      SupportedTypes.add(Boolean.class);
+		SupportedTypes.add(Boolean.class);
 //      SupportedTypes.add(Character.class);
 //      SupportedTypes.add(Byte.class);
 //      SupportedTypes.add(Short.class);

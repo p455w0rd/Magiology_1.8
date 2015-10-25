@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.client.render.itemrender.ItemRendererTheHand;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;

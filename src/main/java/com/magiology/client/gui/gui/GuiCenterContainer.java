@@ -11,7 +11,7 @@ import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.packets.packets.OpenCommandContainerInGui;
+import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Util;
@@ -58,7 +58,7 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 				int id=container.selectedSlotId+36;
 				ItemStack stack=((Slot)container.inventorySlots.get(id)).getStack();
 				if(stack!=null){
-					Util.sendMessage(new OpenCommandContainerInGui(id));
+					Util.sendMessage(new OpenProgramContainerInGui(id));
 					NBTUtil.createNBT(stack);
 				}
 			}

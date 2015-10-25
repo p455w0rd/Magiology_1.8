@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.client.render.Textures;
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.client.render.aftereffect.TwoDotsLineRender;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;

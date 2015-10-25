@@ -64,6 +64,13 @@ public class GuiTextEditor extends Gui implements Updateable{
 		lastMouse=mouse;
 		mouse=new Vec2i(x-pos.x, y-pos.y);
 		mouseClick=new Vec2i(x-pos.x, y-pos.y);
+		
+		
+		if(mouseClick.x<0||mouseClick.y<0||mouseClick.x>size.x||mouseClick.y>size.y){
+			active=false;
+			return;
+		}
+		
 		if(handleSlider(x, y)){
 			Vec2i intersection=findCharAtPos(x, y);
 			if(intersection==null){
@@ -94,7 +101,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	
 	public void mouseClickMove(int x, int y){
 		if(!visible||!active)return;
-		Vec2i move=lastMouse.add(-mouse.x,-mouse.y);
+		Vec2i move=lastMouse.sub(mouse.x,mouse.y);
 		lastMouse=mouse;
 		mouse=new Vec2i(x-pos.x, y-pos.y);
 		if(handleSlider(x, y)){
@@ -132,6 +139,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 						undoPos++;
 						if(undoPos>100)undoPos=100;
 					}
+					if(!GuiScreen.isCtrlKeyDown())con=true;
 				}break;
 				case Keyboard.KEY_Y:{
 					if(GuiScreen.isCtrlKeyDown()&&!undoSteps.isEmpty()&&undoPos>0){
@@ -141,6 +149,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 						undoPos--;
 						if(undoPos>100)undoPos=100;
 					}
+					if(!GuiScreen.isCtrlKeyDown())con=true;
 				}break;
 				default:con=true;
 			}
@@ -784,6 +793,8 @@ public class GuiTextEditor extends Gui implements Updateable{
 	@Override
 	public void update(){
 		if(!visible||!active)return;
+		int maxHeight=(textBuffer.size()+1)*Get.Render.Font.FRB().FONT_HEIGHT;
+		
 		int rool=Mouse.getDWheel()/120;
 		if(rool!=0){
 			int side=rool>0?1:-1;
@@ -793,7 +804,6 @@ public class GuiTextEditor extends Gui implements Updateable{
 				
 				if(!GuiScreen.isShiftKeyDown()){
 					
-					int maxHeight=(textBuffer.size()+1)*Get.Render.Font.FRB().FONT_HEIGHT;
 					if(maxHeight>size.y){
 						int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
 						move=(float)height/(float)size.y*-side/3.5F;
@@ -810,6 +820,25 @@ public class GuiTextEditor extends Gui implements Updateable{
 					}
 				}
 			}
+		}else if(Mouse.isButtonDown(0)&&isSelected()){
+			Vec2i mouse1=mouse.sub(size);
+			if(mouse.x<10){
+				int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
+				sliderX=snap(sliderX+((float)width/(float)size.x*+(mouse.x-10)/20F)/3.5F, 0, 1);
+			}
+			if(mouse.y<10){
+				int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
+				sliderY=snap(sliderY+((float)height/(float)size.y*+(mouse.y-10)/20F)/3.5F, 0, 1);
+			}
+			if(mouse1.x>-10){
+				int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
+				sliderX=snap(sliderX+((float)width/(float)size.x*+(mouse1.x+10)/20F)/3.5F, 0, 1);
+			}
+			if(mouse1.y>-10){
+				int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
+				sliderY=snap(sliderY+((float)height/(float)size.y*+(mouse1.y+10)/20F)/3.5F, 0, 1);
+			}
+			
 		}
 		
 		prevSliderX=sliderX;

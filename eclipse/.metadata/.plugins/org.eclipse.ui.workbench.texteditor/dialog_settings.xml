@@ -2,30 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="x" key="selection"/>
+		<item value="World" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
-		<item value="true" key="wholeword"/>
+		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="x"/>
-			<item value="Util."/>
-			<item value="readFontTexture"/>
-			<item value="getStringWidth"/>
-			<item value="parse"/>
-			<item value="print"/>
-			<item value="--&gt;"/>
-			<item value="EnumFacing"/>
+			<item value="IBlockAccess"/>
+			<item value="pos"/>
+			<item value="this"/>
+			<item value="World"/>
+			<item value="missing"/>
+			<item value="removeSpacesFrom"/>
+			<item value="words[1]"/>
+			<item value="word"/>
 		</list>
 		<list key="replacehistory">
-			<item value="y"/>
+			<item value="World"/>
+			<item value="this"/>
+			<item value="world"/>
+			<item value="IBlockAccess"/>
+			<item value="value"/>
+			<item value="type"/>
+			<item value="ICommandInteract"/>
 			<item value=""/>
-			<item value="obj2"/>
-			<item value="obj1"/>
-			<item value="DoubleObject"/>
-			<item value="Var"/>
-			<item value="(0)"/>
-			<item value="parts[i]="/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

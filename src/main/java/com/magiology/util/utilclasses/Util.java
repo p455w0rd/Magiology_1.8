@@ -29,6 +29,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -646,7 +647,7 @@ public class Util{
 		return i.keySet().contains(META);
 	}
 	
-	public static Block getBlock(World world, BlockPos pos){
+	public static Block getBlock(IBlockAccess world, BlockPos pos){
 		return world.getBlockState(pos).getBlock();
 	}
 	public static Block getBlock(World world, int x, int y, int z){
@@ -740,8 +741,32 @@ public class Util{
 		return getWorld(worldContainer).getTotalWorldTime();
 	}
 	public static String[] stringNewlineSplit(String toSplit){
-		// ASCII is strange.
-		//Yup it is...
 		return toSplit.split("\\r\\n|\\n\\r|\\r|\\n");
 	}
+	//
+	public static boolean isRemote(){
+		return FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT;
+	}
+	public static String join(Object[] args){
+		StringBuilder result=new StringBuilder();
+		for(Object o:args)result.append(o);
+		return result.toString();
+	}
+	public static String join(CharSequence splitter,Object[] args){
+		StringBuilder result=new StringBuilder();
+		for(Object o:args)result.append(o).append(splitter);
+		return result.substring(0, result.length()-splitter.length());
+	}
+	
+	private static long startTime;
+	public static void startTime(){
+		startTime=System.currentTimeMillis();
+	}
+	public static long endTime(){
+		return System.currentTimeMillis()-startTime;
+	}
+	public static void printTime(){
+		println(endTime());
+	}
+	
 }

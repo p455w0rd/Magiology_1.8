@@ -164,7 +164,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	}
 
 	public void writeString(PacketBuffer buffer, String string){
-		ByteBufUtils.writeUTF8String(buffer, string);
+		ByteBufUtils.writeUTF8String(buffer, string!=null?string:"");
 	}
 	public String readString(PacketBuffer buffer){
 		return ByteBufUtils.readUTF8String(buffer);

@@ -1,0 +1,86 @@
+package com.magiology.api.lang;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import com.magiology.api.lang.bridge.WorldWrapper;
+import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilobjects.ObjectHolder;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
+
+
+public class LangHandeler{
+	
+	public static Object[] compileArgs(String source, ObjectHolder<Integer>... errorPos){
+		if(errorPos.length==1)errorPos[0].setVar(-1);
+		if(source==null||source.isEmpty())return new Object[0];
+		List<Object> result=new ArrayList<Object>();
+		
+		String newline=System.getProperty("line.separator");
+		
+		source=source.replaceAll(newline, "");
+		while(source.contains("  "))source=source.replaceAll("  ", " ");
+		source=removeSpacesFrom(source,'{','}','(',')','=',';','*','/','+','-',newline.charAt(0),'%','!','>','<','@','#');
+		
+		String[] args=source.split(";");
+		
+		for(int i=0;i<args.length;i++)try{
+			String arg=args[i];
+			String[] words=arg.split(" ");
+			if(words.length==2){
+				String type=words[0],value=words[1];
+				if(words[0].equals("boolean")){
+					if(U.isBoolean(value))result.add(Boolean.parseBoolean(value));
+				}
+				else if(type.equals("int"))result.add(Integer.parseInt(value));
+				else if(type.equals("long"))result.add(Long.parseLong(value));
+				else if(type.equals("float"))result.add(Float.parseFloat(value));
+				else if(type.equals("double"))result.add(Double.parseDouble(value));
+				else if(type.equals("String"))result.add(value);
+			}
+		}catch(Exception e){
+			if(errorPos.length==1)errorPos[0].setVar(i);
+		}
+		return result.toArray(new Object[result.size()]);
+	}
+	public static String removeSpacesFrom(String raw,char...cs){
+		String result=new String(raw);
+		for(char c:cs){
+			while(result.contains(c+" "))result=result.replace(c+" ", c+"");
+			while(result.contains(" "+c))result=result.replace(" "+c, c+"");
+		}
+		return result;
+	}
+	private static String worldJSVar=loadWorld();
+	public static CharSequence defultVars(Object[] environment){
+		StringBuilder result=new StringBuilder();
+		IBlockAccess w=null;
+		for(Object o:environment){
+			if(o instanceof IBlockAccess)w=(IBlockAccess)o;
+		}
+		if(w!=null)result.append(new DefaultJavaScriptLoader(environment).result);
+		return result;
+	}
+	private static class DefaultJavaScriptLoader{
+		public String result;
+		private DefaultJavaScriptLoader(Object[] environment){
+			StringBuilder res=new StringBuilder();
+			for(Object o:environment){
+				if(o instanceof World){
+					res.append(worldJSVar);
+					WorldWrapper.setBlockAccess((World)o);
+				}
+			}
+		}
+	}
+	private static String loadWorld(){
+		return 
+			"World=Java.type("+WorldWrapper.class.getName()+");\n"+
+			"BlockPos=Java.type("+BlockPosM.class.getName()+");\n"+
+			"EnumFacing=Java.type("+EnumFacing.class.getName()+");\n";
+	}
+}

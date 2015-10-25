@@ -11,11 +11,12 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.api.network.Command;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
 import com.magiology.mcobjects.tileentityes.hologram.Field;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
 import com.magiology.mcobjects.tileentityes.hologram.Slider;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TextBox;
@@ -32,8 +33,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	private ColorF color;
 	private String text;
 	private BlockPos pos;
-	private Command command;
-	private boolean isButton;
+	private Program command;
+	private boolean isCommand;
 	
 	public RenderObjectUploadPacket(){}
 	public RenderObjectUploadPacket(HoloObject ho){
@@ -54,8 +55,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		originalSize=ho.originalSize;
 		isDead=ho.isDead;
 		if(suportsText)text=((StringContainer)ho).getString();
-		isButton=ho instanceof Button;
-		if(isButton)command=((Button)ho).activationTarget;
+		isCommand=ho instanceof ICommandInteract;
+		if(isCommand)command=((ICommandInteract)ho).getActivationTarget();
 	}
 	@Override
 	public void write(PacketBuffer buffer) throws IOException{
@@ -74,11 +75,12 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 			buffer.writeInt(text.length());
 			if(text.length()>0)buffer.writeString(text);
 		}
-		buffer.writeBoolean(isButton);
-		if(isButton){
+		buffer.writeBoolean(isCommand);
+		if(isCommand){
 			writeString(buffer, command!=null?command.name:"");
-			writeString(buffer, command!=null?command.result:"");
+			buffer.writeInt(command!=null?command.programId:0);
 			writePos(buffer, command!=null?command.pos:new BlockPosM());
+			writeString(buffer, command!=null?command.argsSrc:"");
 		}
 	}
 	@Override
@@ -98,8 +100,11 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 			int lenght=buffer.readInt();
 			text=lenght>0?buffer.readStringFromBuffer(lenght):"";
 		}
-		isButton=buffer.readBoolean();
-		if(isButton)command=new Command(readString(buffer), readString(buffer), readPos(buffer));
+		isCommand=buffer.readBoolean();
+		if(isCommand){
+			command=new Program(readString(buffer), buffer.readInt(), readPos(buffer));
+			command.argsSrc=readString(buffer);
+		}
 	}
 	@Override
 	public IMessage process(EntityPlayer player, Side side){
@@ -123,8 +128,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 				tile.holoObjects.get(roId).originalSize=originalSize;
 				tile.holoObjects.get(roId).setColor=color;
 				tile.holoObjects.get(roId).isDead=isDead;
-				if(suportsText)((StringContainer)tile.holoObjects.get(roId)).setString(text);
-				if(isButton)((Button)tile.holoObjects.get(roId)).activationTarget=command;
+				if(suportsText&&tile.holoObjects.get(roId) instanceof StringContainer)((StringContainer)tile.holoObjects.get(roId)).setString(text);
+				if(isCommand&&tile.holoObjects.get(roId) instanceof ICommandInteract)((ICommandInteract)tile.holoObjects.get(roId)).setActivationTarget(command);
 			}else{
 				HoloObject newObject=null;
 				if(type==1)newObject=new TextBox(tile, text);
@@ -140,7 +145,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 					newObject.color=color;
 					newObject.isDead=isDead;
 					if(suportsText)((StringContainer)newObject).setString(text);
-					if(isButton)((Button)newObject).activationTarget=command;
+					if(isCommand)((Button)newObject).setActivationTarget(command);
 					tile.holoObjects.add(newObject);
 				}
 			}

@@ -46,7 +46,19 @@ public class Vec2i{
 	public Vec2i add(int var){
 		return new Vec2i(x+var, y+var);
 	}
+	public Vec2i add(Vec2i var){
+		return new Vec2i(x+var.x, y+var.y);
+	}
 	public Vec2i add(int x1, int y1){
 		return new Vec2i(x+x1, y+y1);
+	}
+	public Vec2i sub(int var){
+		return new Vec2i(x-var, y-var);
+	}
+	public Vec2i sub(Vec2i var){
+		return new Vec2i(x-var.x, y-var.y);
+	}
+	public Vec2i sub(int x1, int y1){
+		return new Vec2i(x-x1, y-y1);
 	}
 }

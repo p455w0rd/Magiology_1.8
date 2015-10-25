@@ -19,7 +19,7 @@ import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.Util;

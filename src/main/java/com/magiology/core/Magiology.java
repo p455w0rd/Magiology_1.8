@@ -18,16 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.client.render.Textures;
-import com.magiology.core.init.MBlocks;
-import com.magiology.core.init.MCreativeTabs;
-import com.magiology.core.init.MEntitys;
-import com.magiology.core.init.MEvents;
-import com.magiology.core.init.MGui;
-import com.magiology.core.init.MInterfaces;
-import com.magiology.core.init.MItems;
-import com.magiology.core.init.MPackets;
-import com.magiology.core.init.MRecepies;
-import com.magiology.core.init.MTileEntitys;
+import com.magiology.core.init.*;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
 import com.magiology.handlers.web.DownloadingHandler;
@@ -55,16 +46,17 @@ public class Magiology{
 	@SideOnly(Side.CLIENT)
 	public static ModInfoGUI modInfGUI;
 	
-	@SidedProxy(clientSide=MReference.ClIENT_PROXY_LOCATION, serverSide=MReference.COMMON_PROXY_LOCATION)
+	@SidedProxy(clientSide=MReference.ClIENT_PROXY_LOCATION, serverSide=MReference.SERVER_PROXY_LOCATION)
 	public static CommonProxy proxy;
 	
 	public static EnhancedRobot ROBOT;
 	
 	
-	/***//**init, stuff and things*//***/
+	/**_xXx__init, stuff and things_xXx_**/
 	
 	
 	public Magiology(){
+		testOnStartup();
 		instance=this;
 		infoFile=new IOReadableMap(INFO_FILE_NAME);
 		
@@ -80,8 +72,8 @@ public class Magiology{
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
 		if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandler.downladAssets();
 		infoFile.readFromFile();
-		
-		if(infoFile.data.get("GUIOpen")==null||infoFile.getB("GUIOpen")){
+		Util.printInln(infoFile.getB("GUIOpen", true));
+		if(infoFile.getB("GUIOpen", true)){
 			Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 			modInfGUI=new ModInfoGUI((int)screenSize.getWidth(),(int)screenSize.getHeight(),-680,0);
 			modInfGUI.downloadData(infoFile);
@@ -155,21 +147,15 @@ public class Magiology{
 	};
 	private void testOnStartup(){
 //		CalculationFormat format=CalculationFormat.format("%f-%f[]+%l[]+%i");
-//		
 //		format.calc(5F,new float[]{1.7F,1.7F,1.7F},new long[]{1,2,3},1);
-//		
 //		long calcTime1=0,calcTime2=0;
-//		
 //		for(int i=0;i<1000000;i++){
 //			{
 //				long start=System.nanoTime();
-//				
 //				format.calc(5F,new float[]{1.7F,1.7F,1.7F},new long[]{1,2,3},1);
-//				
 //				calcTime1+=System.nanoTime()-start;
 //			}{
 //				long start=System.nanoTime();
-//				
 //				float[] a=new float[]{1.7F,1.7F,1.7F};
 //				long[] b=new long[]{1,2,3};
 //				for(int j=0;j<a.length;j++){
@@ -181,19 +167,31 @@ public class Magiology{
 //				for(int j=0;j<a.length;j++){
 //					a[j]+=1;
 //				}
-//				
 //				calcTime2+=System.nanoTime()-start;
 //			}
 //		}
 //		Util.printlnInln(calcTime1,calcTime2,(double)calcTime1/(double)calcTime2);
-//		Util.printlnInln(275F/50F);
+//	    try{
+//	    	long timeStart=System.currentTimeMillis();
+//	    	ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
+//	    	for(int i=0;i<10;i++)Util.printInln(engine.eval("function sum() { return Math.random(); }sum();"));
+//	    	Util.printInln(System.currentTimeMillis()-timeStart);
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		try{
+//    		ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
+//    		engine.eval("function main(a,b){return a+b;}");
+//    		Util.printInln(((Invocable)engine).invokeFunction("main", 10,5));
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
 //		Util.exit(404);
 	}
 	
 	
 	@EventHandler
     public void preInitStarter(FMLPreInitializationEvent event){
-		testOnStartup();
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
 			@Override
 			public void run(){

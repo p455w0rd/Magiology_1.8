@@ -5,8 +5,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraft.util.Vec3i;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.magiology.util.utilclasses.Util;
@@ -36,20 +38,20 @@ public class BlockPosM extends BlockPos{
 		this(source!=null?source.getX():0, source!=null?source.getY():0, source!=null?source.getZ():0);
 	}
 	
-	public<T extends TileEntity> T getTile(World world,Class<T> type){
+	public<T extends TileEntity> T getTile(IBlockAccess world,Class<T> type){
 		try{
 			return (T)getTile(world);
 		}catch(Exception e){
 			return null;
 		}
 	}
-	public TileEntity getTile(World world){
+	public TileEntity getTile(IBlockAccess world){
 		return world.getTileEntity(this);
 	}
-	public Block getBlock(World world){
+	public Block getBlock(IBlockAccess world){
 		return Util.getBlock(world, this);
 	}
-	public IBlockState getState(World world){
+	public IBlockState getState(IBlockAccess world){
 		return world.getBlockState(this);
 	}
 	public Vec3M vecAdd(Vec3M vec){
@@ -70,5 +72,34 @@ public class BlockPosM extends BlockPos{
 	}
 	public static BlockPosM get(BlockPos pos){
 		return new BlockPosM(pos);
+	}
+	public int getRedstonePower(IBlockAccess world, EnumFacing side){
+		if(world instanceof World)((World)world).getRedstonePower(this, side);
+        IBlockState iblockstate = world.getBlockState(this);
+        Block block = iblockstate.getBlock();
+        return block.shouldCheckWeakPower(world, this, side)?getStrongPower(world):block.isProvidingWeakPower(world, this, iblockstate, side);
+	}
+	private int getStrongPower(IBlockAccess world){
+		byte b0=0;
+		int i=Math.max(b0, world.getStrongPower(this.down(), EnumFacing.DOWN));
+		if(i>=15)return i;
+		else{
+			i=Math.max(i, world.getStrongPower(this.up(), EnumFacing.UP));
+			if(i>=15)return i;
+			else{
+				i=Math.max(i, world.getStrongPower(this.north(), EnumFacing.NORTH));
+				if(i>=15)return i;
+				else{
+					i=Math.max(i, world.getStrongPower(this.south(), EnumFacing.SOUTH));
+					if(i>=15)return i;
+					else{
+						i=Math.max(i, world.getStrongPower(this.west(), EnumFacing.WEST));
+						if(i>=15)return i;
+						else i=Math.max(i, world.getStrongPower(this.east(), EnumFacing.EAST));
+						return i>=15?i:i;
+					}
+				}
+			}
+		}
 	}
 }

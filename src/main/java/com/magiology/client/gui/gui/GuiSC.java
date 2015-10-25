@@ -18,7 +18,7 @@ import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.event.TickEvents;
+import com.magiology.forgepowered.events.TickEvents;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.mcobjects.effect.GuiParticle;

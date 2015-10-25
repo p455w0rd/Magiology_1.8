@@ -8,7 +8,7 @@ import com.magiology.client.gui.custom.hud.SoulFlameHUD;
 import com.magiology.client.gui.custom.hud.StatsDisplayHUD;
 import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilclasses.Util.U;
 

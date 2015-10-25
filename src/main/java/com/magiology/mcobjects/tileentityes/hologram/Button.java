@@ -9,25 +9,27 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.api.network.Command;
+import com.magiology.api.lang.LangHandeler;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.mcobjects.items.CommandContainer;
+import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class Button extends TextBox implements ICommandInteract{
 	
 	public ComplexCubeModel body;
 	
-	public Command activationTarget;
+	private Program activationTarget;
 	private String name="";
 	
 	
@@ -72,7 +74,7 @@ public class Button extends TextBox implements ICommandInteract{
 			try{
 				if(!Util.isNull(host,host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
 					ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
-					if(!CommandContainer.getName(s).isEmpty())color1=new ColorF(1, 0.2, 0.2, 0.8);
+					if(!ProgramContainer.getName(s).isEmpty())color1=new ColorF(1, 0.2, 0.2, 0.8);
 				}
 			}catch(Exception e){}
 			color=Util.slowlyEqalizeColor(color, color1, 0.2F);
@@ -84,14 +86,20 @@ public class Button extends TextBox implements ICommandInteract{
 		if(!moveMode&&!player.isSneaking()){
 			color=inColor;
 			color.set(1,'a');
-			
+			boolean pasted=false;
 			if(!Util.isNull(host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
 				ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
-				if(!CommandContainer.getName(s).isEmpty()){
-					activationTarget=CommandContainer.run(s);
+				if(!ProgramContainer.getName(s).isEmpty()){
+					pasted=true;
+					if(activationTarget==null)activationTarget=new Program(ProgramContainer.getName(s), -1, ProgramContainer.getPos(s));
+					else{
+						activationTarget.name=ProgramContainer.getName(s);
+						activationTarget.pos=ProgramContainer.getPos(s);
+					}
 				}
 			}
-			if(activationTarget!=null)sendCommand();
+			if(activationTarget.pos==null)activationTarget.pos=new BlockPosM();
+			if(!pasted&&activationTarget!=null&&!activationTarget.pos.equals(BlockPosM.ORIGIN))sendCommand();
 		}
 	}
 	@Override
@@ -101,8 +109,10 @@ public class Button extends TextBox implements ICommandInteract{
 	@Override
 	public void readData(Iterator<Integer> integers, Iterator<Boolean> booleans, Iterator<Byte> bytes___, Iterator<Long> longs___,Iterator<Double> doubles_, Iterator<Float> floats__, Iterator<String> strings_, Iterator<Short> shorts__){
 		super.readData(integers, booleans, bytes___, longs___, doubles_, floats__, strings_, shorts__);
-		if(booleans.next())activationTarget=new Command(strings_.next(), "", new BlockPosM(integers.next(),integers.next(),integers.next()));
-		if(strings_.hasNext())name=strings_.next();
+		boolean b=booleans.next();
+		if(b)activationTarget=new Program(strings_.next(), -1, new BlockPosM(integers.next(),integers.next(),integers.next()));
+		name=strings_.next();
+		if(b)activationTarget.argsSrc=strings_.next().substring(1);
 	}
 	@Override
 	public void writeData(List<Integer> integers, List<Boolean> booleans, List<Byte> bytes___, List<Long> longs___, List<Double> doubles_,List<Float> floats__, List<String> strings_, List<Short> shorts__){
@@ -115,18 +125,31 @@ public class Button extends TextBox implements ICommandInteract{
 			integers.add(activationTarget.pos.getZ());
 		}
 		strings_.add(name);
+		if(activationTarget!=null)strings_.add("i"+activationTarget.argsSrc);
 	}
 	@Override
 	public void sendCommand(){
+		if(activationTarget==null)return;
 		WorldNetworkInterface Interface=InterfaceBinder.get(host);
 		NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
 		if(netInterface!=null&&netInterface.getBrain()!=null){
-			Command com=netInterface.getBrain().getCommand(activationTarget);
-			if(netInterface!=null&&com!=null)netInterface.onInvokedFromWorld(Interface, com.result, this,Interface,host);
+			try{
+				ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
+				Object[] args=LangHandeler.compileArgs(activationTarget.argsSrc,ErrorPos);
+				if(ErrorPos.getVar()==-1){
+					Program com=netInterface.getBrain().getCommand(activationTarget);
+					if(netInterface!=null&&com!=null){
+						com.run(args,new Object[]{host.getWorld()});
+						netInterface.onInvokedFromWorld(Interface, com.result, this,Interface,host);
+					}
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 	}
 	@Override
-	public Object onCommandReceive(Command command){
+	public Object onCommandReceive(Program command){
 		String[] words=command.result.split(" ");
 		return standardHoloObjectCommandInteract(words);
 	}
@@ -137,5 +160,13 @@ public class Button extends TextBox implements ICommandInteract{
 	@Override
 	public void setName(String name){
 		this.name=name;
+	}
+	@Override
+	public Program getActivationTarget(){
+		return activationTarget;
+	}
+	@Override
+	public void setActivationTarget(Program com){
+		activationTarget=com;
 	}
 }

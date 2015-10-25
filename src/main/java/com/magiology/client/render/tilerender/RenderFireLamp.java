@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.client.render.aftereffect.TwoDotsLineRender;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;

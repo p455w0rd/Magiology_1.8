@@ -9,7 +9,7 @@ import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.client.render.aftereffect.RenderFirePipeGlow;
 import com.magiology.client.render.aftereffect.RenderFirePipePriorityCube;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;

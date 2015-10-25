@@ -12,7 +12,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.util.utilobjects.m_extension.BlockContainerM;

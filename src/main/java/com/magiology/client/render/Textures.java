@@ -51,7 +51,7 @@ public class Textures{
 		PowerCounterFront=         getResource(MReference.MODID,"/textures/models/powercounter/PowerCounter1.png");
 		PowerCounterSide1=         getResource(MReference.MODID,"/textures/models/PowerCounter/PowerCounter2.png");
 		PowerCounterEnergyBar=     getResource(MReference.MODID,"/textures/models/PowerCounter/EnergyBar.png");
-		vanillaBrick=              GetResource("textures/blocks/stonebrick.png");
+		vanillaBrick=              getResource("textures/blocks/stonebrick.png");
 		BateryL1Core=              getResource(MReference.MODID,textur);
 		BateryL2Core=              getResource(MReference.MODID,textur);
 		BateryL3Core=              getResource(MReference.MODID,textur);
@@ -111,7 +111,7 @@ public class Textures{
 		}else Util.println("Yay! there is no errors!");
 		Util.println("------------\n--------\n----");
 	}
-	public static ResourceLocation GetResource(String FolderPath){return getResource("",FolderPath);}
+	public static ResourceLocation getResource(String FolderPath){return getResource("",FolderPath);}
 	public static ResourceLocation getResource(String modID,String AfterModIDFolderPath){
 		ResourceLocation result=new ResourceLocation(modID,AfterModIDFolderPath);
 		boolean isLoaded=re.loadTexture(result, new SimpleTexture(result));

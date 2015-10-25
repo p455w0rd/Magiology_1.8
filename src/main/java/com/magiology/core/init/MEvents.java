@@ -5,12 +5,12 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import com.magiology.client.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
 import com.magiology.client.render.shaders.core.ShaderRunner;
-import com.magiology.forgepowered.event.EntityEvents;
-import com.magiology.forgepowered.event.GameLoopEvents;
-import com.magiology.forgepowered.event.MouseEvents;
-import com.magiology.forgepowered.event.TickEvents;
-import com.magiology.forgepowered.event.client.HighlightEvent;
-import com.magiology.forgepowered.event.client.RenderLoopEvents;
+import com.magiology.forgepowered.events.EntityEvents;
+import com.magiology.forgepowered.events.GameLoopEvents;
+import com.magiology.forgepowered.events.MouseEvents;
+import com.magiology.forgepowered.events.TickEvents;
+import com.magiology.forgepowered.events.client.HighlightEvent;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 
 public class MEvents{
 	

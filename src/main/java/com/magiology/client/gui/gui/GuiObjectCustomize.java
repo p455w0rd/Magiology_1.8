@@ -11,7 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.api.network.Command;
+import com.magiology.api.lang.LangHandeler;
+import com.magiology.api.lang.ProgramHolder;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
@@ -19,11 +20,13 @@ import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToI
 import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.container.GuiObjectCustomizeContainer;
+import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
 import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
-import com.magiology.mcobjects.tileentityes.hologram.Button;
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.util.renderers.GL11U;
@@ -31,18 +34,22 @@ import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.Vec2i;
 
 public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 	
 	private TileEntityHologramProjector hologramProjector;
 	private GuiTextField txt,red,green,blue,alpha,scale,size,comName,comPos;
 	private HoloObject ro;
-	private boolean suportsText,textLimitedToObj,deleteStarted=false;
+	private boolean suportsText,textLimitedToObj,deleteStarted=false,showOut;
 	private StringContainer sc;
 	private AdvancedPhysicsFloat redF,greenF,blueF,alphaF;
+	private String commandOut="";
+	private GuiTextEditor commandIn=new GuiTextEditor(new Vec2i(0, 0),new Vec2i(0, 0));
 	
 	public GuiObjectCustomize(EntityPlayer player,TileEntityHologramProjector hologramProjector,HoloObject ro){
 		super(new GuiObjectCustomizeContainer(player,hologramProjector));
@@ -61,14 +68,14 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 	protected void drawGuiContainerBackgroundLayer(float partTick, int x, int y){
 		GL11.glPushMatrix();
 		
-		
-		GL11U.SetUpOpaqueRendering(1);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(100, 100, 0);
-		GL11U.scaled(-20);
-		ro.render(new ColorF(hologramProjector.mainColor.x, hologramProjector.mainColor.y, hologramProjector.mainColor.z,0.2));
-		
-		GL11.glPopMatrix();
+		commandIn.render(x, y);
+//		GL11U.SetUpOpaqueRendering(1);
+//		GL11.glPushMatrix();
+//		GL11.glTranslatef(100, 100, 0);
+//		GL11U.scaled(-20);
+//		ro.render(new ColorF(hologramProjector.mainColor.x, hologramProjector.mainColor.y, hologramProjector.mainColor.z,0.2));
+//		
+//		GL11.glPopMatrix();
 		
 		
 		super.drawGuiContainerBackgroundLayer(partTick, x, y);
@@ -99,6 +106,13 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		Font.FR().drawStringWithShadow(s2, start-50*4-Font.FR().getStringWidth(s2)-2, guiTop-13, Color.WHITE.hashCode());
 		Font.FR().drawStringWithShadow(s2, start+3, guiTop-13, Color.WHITE.hashCode());
 		Font.FR().drawStringWithShadow(s3, guiLeft+xSize-Font.FR().getStringWidth(s3)-1, guiTop+33, Color.WHITE.hashCode());
+		
+		GL11.glPushMatrix();
+		GL11.glScalef(0.7F, 0.7F, 0.7F);
+		float scale=1F/0.7F;
+		Font.FR().drawSplitString(commandOut, (int)(guiLeft*scale), (int)((guiTop+80)*scale), (int)(xSize*scale), Color.WHITE.hashCode());
+		GL11.glPopMatrix();
+		
 		if(deleteStarted){
 			GL11.glPushMatrix();
 			GL11.glTranslated(0, Math.sin(ro.host.getWorld().getTotalWorldTime()/8F)*4, 0);
@@ -117,12 +131,6 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
 		textFieldList.add(txt=new GuiTextField(0, fontRendererObj,  guiLeft,  guiTop, 300, 14));
-		if(suportsText){
-			txt.setText(sc.getString().equals("   ")?"":sc.getString());
-			txt.setMaxStringLength(Integer.MAX_VALUE);
-		}
-		txt.setFocused(suportsText);
-		txt.setEnabled(suportsText);
 		
 		int start=guiLeft+xSize-50;
 		textFieldList.add(red=new GuiTextField(0,fontRendererObj, start-50*1, guiTop-17, 50, 14));
@@ -134,17 +142,28 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		textFieldList.add(comName=new GuiTextField(0,fontRendererObj, start-50*1, guiTop+44, 100, 14));
 		textFieldList.add(comPos=new GuiTextField(0,fontRendererObj, start-50*1, guiTop+61, 100, 14));
 		
+		String commandInTxt=commandIn.getText();
+		commandIn=new GuiTextEditor(new Vec2i(guiLeft+xSize-102, guiTop+100),new Vec2i(100, 50));
+		if(commandInTxt!=null&&!commandInTxt.isEmpty())commandIn.setText(commandInTxt);
+		else if(ro instanceof ICommandInteract&&((ICommandInteract)ro).getActivationTarget()!=null)commandIn.setText(((ICommandInteract)ro).getActivationTarget().argsSrc);
+		
+		for(int i=0;i<textFieldList.size();i++)textFieldList.get(i).setMaxStringLength(100);
+		
+		if(suportsText)txt.setText(sc.getString().equals("   ")?"":sc.getString());
+		txt.setFocused(suportsText);
+		txt.setEnabled(suportsText);
 		red.setText(ro.setColor.r+"");
 		green.setText(ro.setColor.g+"");
 		blue.setText(ro.setColor.b+"");
 		alpha.setText(ro.setColor.a+"");
 		scale.setText(ro.scale+"");
 		size.setText(U.round(ro.originalSize.x, 3)+", "+U.round(ro.originalSize.y, 3));
-		if(ro instanceof Button){
-			Command command=((Button)ro).activationTarget;
+		
+		if(Util.printlnAndReturn(ro instanceof ICommandInteract)){
+			Program command=((ICommandInteract)ro).getActivationTarget();
 			if(command!=null){
 				comName.setText(command.name);
-				comPos.setText(command.pos.getX()+", "+command.pos.getY()+", "+command.pos.getZ());
+				if(command.pos!=null)comPos.setText(command.pos.getX()+", "+command.pos.getY()+", "+command.pos.getZ());
 			}
 		}else{
 			comName.setEnabled(false);
@@ -169,6 +188,11 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		sx.enabled=sy.enabled=suportsText?((StringContainer)ro).isTextLimitedToObj():false;
 		buttonList.add(sx);
 		buttonList.add(sy);
+		try{
+			keyTyped('', -1);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	@Override
 	protected void keyTyped(char Char, int id) throws IOException{
@@ -184,11 +208,13 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 			}
 			return;
 		}
-		if(Char==13){
-			Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
-			return;
+		if(!commandIn.keyTyped(id,Char)){
+			if(Char==13){
+				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
+				return;
+			}
+			super.keyTyped(Char, id);
 		}
-		super.keyTyped(Char, id);
 		
 		if(textLenght!=txt.getText().length()){
 			handleSpaces();
@@ -222,7 +248,10 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		}catch(Exception e){
 			size.setTextColor(RED);
 		}
-		if(ro instanceof Button){
+		//redstone to percent-args:trueB,0I
+		showOut=false;
+		if(ro instanceof ICommandInteract){
+			String target=comName.getText();
 			int x=0,y=0,z=0;
 			boolean coolPos;
 			try{
@@ -235,19 +264,33 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 			}catch(Exception e){
 				coolPos=false;
 			}
-			((Button)ro).activationTarget=new Command(comName.getText(), "", new BlockPosM(x, y, z));
+			((ICommandInteract)ro).setActivationTarget(new Program(target, 0, new BlockPosM(x, y, z)));
+			ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
+			Object[] args=LangHandeler.compileArgs(((ICommandInteract)ro).getActivationTarget().argsSrc=commandIn.getText(),null,ErrorPos);
+			int errorPos=ErrorPos.getVar();
 			boolean isCommandFound=false;
-			if(ro.host!=null){
-				WorldNetworkInterface Interface=InterfaceBinder.get(ro.host);
-				NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(ro.host,Interface);
-				if(netInterface!=null&&netInterface.getBrain()!=null){
-					Command com=netInterface.getBrain().getCommand(((Button)ro).activationTarget);
-					isCommandFound=com!=null;
-				}
-			}
+			if(errorPos==-1){
+				if(ro.host!=null){
+					WorldNetworkInterface Interface=InterfaceBinder.get(ro.host);
+					NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(ro.host,Interface);
+					if(netInterface!=null&&netInterface.getBrain()!=null){
+						Program com=netInterface.getBrain().getCommand(((ICommandInteract)ro).getActivationTarget());
+						if(com!=null){
+							Object Return=com.run(args,new Object[]{ro.host.getWorld()});
+							if(Return!=null&&!Return.toString().startsWith(ProgramHolder.err)){
+								isCommandFound=true;
+								commandOut="The command is successfully compiled and it is ready for use!";
+							}else{
+								commandOut="The command is given an invalid combination of arguments! All in vars have to be filled! Log: "+Return.toString().substring(ProgramHolder.err.length(), Return.toString().length());
+								showOut=true;
+							}
+						}else commandOut="Can't find the command by the target name!";
+					}else commandOut="No valid system can be found!";
+				}else commandOut="Can't find the host!";
+			}else commandOut="Command arguments contain a syntax error on argument "+errorPos+".";
 			
 			comPos.setTextColor(!coolPos?RED:isCommandFound?WHITE:Color.YELLOW.hashCode());
-			comName.setTextColor(comName.getText().isEmpty()?RED:isCommandFound?WHITE:Color.YELLOW.hashCode());
+			comName.setTextColor(target.isEmpty()?RED:isCommandFound?WHITE:Color.YELLOW.hashCode());
 		}
 		if(suportsText&&!sc.isTextLimitedToObj()){
 			sc.setString(Util.getStringForSize(txt.getText(),textLimitedToObj?ro.originalSize.x/Util.p:hologramProjector.size.x/Util.p).trim());
@@ -276,11 +319,11 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 			if(ro.originalSize.x*scal>hologramProjector.size.x||ro.originalSize.y*scal>hologramProjector.size.y)throw new IllegalStateException("To big scale!");
 			ro.scale=scal;
 		}catch(Exception e){}
-		if(ro instanceof Button)try{
+		if(ro instanceof ICommandInteract)try{
 			String[] xyz=size.getText().split(",");
 			if(xyz.length!=3)throw new IllegalStateException("Wrong string!");
 			float x=Float.parseFloat(xyz[0]),y=Float.parseFloat(xyz[1]),z=Float.parseFloat(xyz[2]);
-			((Button)ro).activationTarget=new Command(comName.getText(), "", new BlockPosM(x, y, z));
+			((ICommandInteract)ro).setActivationTarget(new Program(comName.getText(), 0, new BlockPosM(x, y, z)));
 		}catch(Exception e){}
 		
 		Util.sendMessage(new RenderObjectUploadPacket(ro));
@@ -290,6 +333,12 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 	protected void mouseClicked(int x, int y, int id) throws IOException{
 		if(deleteStarted)return;
 		super.mouseClicked(x,y,id);
+		commandIn.mouseClicked(x, y, id);
+	}
+	@Override
+	protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
+		super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+		commandIn.mouseClickMove(mouseX, mouseY);
 	}
 	@Override
 	protected void actionPerformed(GuiButton g){
@@ -311,6 +360,7 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		case 1:deleteStarted=true;break;
 		case 2:{
 			try{
+				sc.setString(txt.getText());
 				String[] xy=size.getText().replaceAll("\\s","").split(",");
 				if(xy.length!=2)throw new IllegalStateException("Wrong string!");
 				xy[0]=U.round((Font.FR().getStringWidth(sc.getString())+2)*U.p, 3)+"";
@@ -322,6 +372,7 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 		}break;
 		case 3:{
 			try{
+				sc.setString(txt.getText());
 				String[] xy=size.getText().replaceAll("\\s","").split(",");
 				if(xy.length!=2)throw new IllegalStateException("Wrong string!");
 				xy[1]=U.round((Font.FR().FONT_HEIGHT+2)*U.p, 3)+"";
@@ -343,6 +394,7 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 	}
 	@Override
 	public void update(){
+		commandIn.update();
 		Updater.update(buttonList);
 		try{
 			redF.wantedPoint=Float.parseFloat(red.getText());

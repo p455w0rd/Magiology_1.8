@@ -19,7 +19,7 @@ import com.magiology.client.gui.container.SmartCrafterContainer;
 import com.magiology.client.gui.container.UpgradeContainer;
 import com.magiology.client.gui.gui.GuiArmor;
 import com.magiology.client.gui.gui.GuiCenterContainer;
-import com.magiology.client.gui.gui.GuiCommandContainerEditor;
+import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.gui.gui.GuiControlBock;
 import com.magiology.client.gui.gui.GuiHologramProjectorMain;
 import com.magiology.client.gui.gui.GuiISidedPowerInstructor;
@@ -100,7 +100,7 @@ public class GuiHandlerM implements IGuiHandler{
 			if(tile instanceof TileEntityNetworkCommandHolder)
 				return new GuiCenterContainer(player, (TileEntityNetworkCommandHolder)tile);
 		case MGui.CommandContainerEditor:
-			return new GuiCommandContainerEditor(player);
+			return new GuiProgramContainerEditor(player);
 		}
 		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;

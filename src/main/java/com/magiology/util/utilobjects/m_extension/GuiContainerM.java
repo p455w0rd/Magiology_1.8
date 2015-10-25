@@ -36,6 +36,10 @@ public class GuiContainerM extends GuiContainer{
 		for(GuiTextField textField:textFieldList)textField.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 	@Override
+	protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick){
+		super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+	}
+	@Override
 	public void onGuiClosed(){
 		textFieldList.clear();
 		super.onGuiClosed();
@@ -44,5 +48,9 @@ public class GuiContainerM extends GuiContainer{
 	public void initGui(){
 		textFieldList.clear();
 		super.initGui();
+	}
+	@Override
+	public void updateScreen(){
+		for(GuiTextField textField:textFieldList)textField.updateCursorCounter();
 	}
 }

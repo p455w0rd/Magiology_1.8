@@ -10,7 +10,7 @@ import net.minecraft.util.EnumFacing;
 import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilobjects.SlowdownUtil;
 

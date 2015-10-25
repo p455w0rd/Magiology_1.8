@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;

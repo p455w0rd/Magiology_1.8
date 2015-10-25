@@ -8,13 +8,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
-import com.magiology.api.network.Command.KeyWord;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
+import com.magiology.mcobjects.items.ProgramContainer.Program.KeyWord;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public abstract class HoloObject implements SavableData{
+	
 	public TileEntityHologramProjector host;
 	public boolean isHighlighted,moveMode=false,isDead=false;
 	public Vector2f
@@ -24,14 +25,17 @@ public abstract class HoloObject implements SavableData{
 	public int id=-1;
 	public float scale=1;
 	public ColorF color=new ColorF(1,1,1,0.3),prevColor=new ColorF(),setColor=new ColorF();
+	
 	public abstract void render(ColorF color);
 	public abstract void update();
 	public abstract void onPressed(EntityPlayer player);
+	
 	public HoloObject(){}
 	public HoloObject(TileEntityHologramProjector host){
 		this.host=host;
 		id=host.holoObjects.size();
 	}
+	
 	public float getX(){
 		return position.x;
 	}
@@ -57,13 +61,17 @@ public abstract class HoloObject implements SavableData{
 		}else isHighlighted=false;
 	}
 	public void handleGuiAndMovment(EntityPlayer player){
-		if(player.isSneaking()){
-			if(moveMode)moveMode=false;
-			else GuiHandlerM.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
-		}
-		if(moveMode&&host.point.pointedPos!=null){
-			position.x=(float)host.point.pointedPos.x+size.x/2;
-			position.y=(float)host.point.pointedPos.y+size.y/2;
+		try{
+			if(player.isSneaking()){
+				if(moveMode)moveMode=false;
+				else GuiHandlerM.openGui(player, MGui.HologramProjectorObjectCustomGui, host.getPos());
+			}
+			else if(moveMode&&host.point!=null&&host.point.pointedPos!=null){
+				position.x=(float)host.point.pointedPos.x+size.x/2;
+				position.y=(float)host.point.pointedPos.y+size.y/2;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	
 	}
@@ -231,4 +239,21 @@ public abstract class HoloObject implements SavableData{
 		default:break;
 		}
 	}
+//	public List<Var> getStandardVars(){
+//		List<Var> result=new ArrayList<Var>();
+//		result.add(new Var("size.x", 'f', size.x));
+//		result.add(new Var("size.x", 'f', size.y));
+//		result.add(new Var("position.x", 'f', position.x));
+//		result.add(new Var("position.x", 'f', position.y));
+//		result.add(new Var("text", 's', this instanceof StringContainer?((StringContainer)this).getString():"<no_text>"));
+//		result.add(new Var("color.r", 'f', color.r));
+//		result.add(new Var("color.g", 'f', color.g));
+//		result.add(new Var("color.b", 'f', color.b));
+//		result.add(new Var("name", 's', this instanceof ICommandInteract?((ICommandInteract)this).getName():"<no_name>"));
+//		return result;
+//	}
+//	public Var getVar(String name){
+//		if(name!=null)for(Var var:getStandardVars())if(name.equals(var.name))return var;
+//		return new Var("null", 's', "");
+//	}
 }

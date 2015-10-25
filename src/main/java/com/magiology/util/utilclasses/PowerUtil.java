@@ -9,7 +9,7 @@ import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerProducer;
 import com.magiology.api.power.PowerUpgrades;
-import com.magiology.forgepowered.event.ForcePipeUpdate;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilobjects.NBTUtil;
 
 

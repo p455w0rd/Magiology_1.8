@@ -12,7 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
-import com.magiology.api.network.Command;
+import com.magiology.api.lang.ProgramHolder;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.RedstoneData;
@@ -20,7 +20,8 @@ import com.magiology.api.network.skeleton.TileEntityNetworkPow;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
-import com.magiology.mcobjects.items.CommandContainer;
+import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.NetworkUtil;
@@ -250,27 +251,31 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 			e.printStackTrace();
 		}
 	}
-	public Command getCommand(Command command){
+	public Program getCommand(Program command){
 		return getCommand(command.pos, command.name);
 	}
-	public Command getCommand(BlockPos pos, String name){
-		TileEntity tile=worldObj.getTileEntity(pos);
-		if(!(tile instanceof TileEntityNetworkCommandHolder))return null;
-		if(((TileEntityNetworkCommandHolder)tile).getBrain()!=this)return null;
-		for(ItemStack j:((TileEntityNetworkCommandHolder)tile).slots){
-			if(j!=null&&CommandContainer.getName(j).equals(name))return CommandContainer.run(j);
+	public Program getCommand(BlockPos pos, String name){
+		try{
+			TileEntity tile=worldObj.getTileEntity(pos);
+			if(!(tile instanceof TileEntityNetworkCommandHolder))return null;
+			if(((TileEntityNetworkCommandHolder)tile).getBrain()!=this)return null;
+			for(ItemStack j:((TileEntityNetworkCommandHolder)tile).slots){
+				if(j!=null&&ProgramContainer.getName(j).equals(name))return ProgramContainer.getProgram(j);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return null;
 	}
-	public List<Command> getCommands(){
-		List<Command> result=new ArrayList<Command>();
+	public List<Program> getCommands(){
+		List<Program> result=new ArrayList<Program>();
 		for(TileEntityNetworkCommandHolder i:commandHolders){
 			for(ItemStack j:i.slots){
 				if(j!=null){
-					String name=CommandContainer.getName(j),code=CommandContainer.getCode(j);
+					String name=ProgramContainer.getName(j),code=ProgramHolder.getProgram(ProgramContainer.getId(j)).src;
 					if(!name.isEmpty()&&!code.isEmpty()){
-						CommandContainer.setPos(j, i.getPos());
-						result.add(CommandContainer.run(j));
+						ProgramContainer.setPos(j, i.getPos());
+						result.add(ProgramContainer.getProgram(j));
 					}
 				}
 			}
