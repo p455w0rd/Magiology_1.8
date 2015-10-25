@@ -16,7 +16,6 @@ import com.magiology.api.lang.LangHandeler;
 import com.magiology.api.lang.ProgramHolder;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
-import com.magiology.util.utilclasses.Util;
 import com.magiology.util.utilclasses.Util.U;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
@@ -27,7 +26,7 @@ public class ProgramContainer extends Item{
 		createNBT(stack);
 		if(!world.isRemote){
 			initId(stack);
-			Util.printInln(getNBT(stack));
+//			Util.printInln(getNBT(stack));
 		}
 		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
 		else{

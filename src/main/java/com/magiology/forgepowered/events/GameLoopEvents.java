@@ -49,13 +49,13 @@ public class GameLoopEvents{
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save e){
 		if(!e.world.isRemote){
-			ProgramHolder.save();
+			ProgramHolder.save(e.world);
 		}
 	}
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e){
 		if(!e.world.isRemote){
-			ProgramHolder.load();
+			ProgramHolder.load(e.world);
 		}
 	}
 }

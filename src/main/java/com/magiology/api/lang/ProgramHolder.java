@@ -9,6 +9,8 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import net.minecraft.world.World;
+
 import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.FileUtil;
 import com.magiology.util.utilclasses.Util;
@@ -57,18 +59,28 @@ public class ProgramHolder{
 		StringBuilder code=programs.get(programId);
 		return code!=null?code.toString():"";
 	}
-	public static void save(){
+	public static void save(World world){
 		if(Util.isRemote())return;
-		File[] listOfFiles=new File(MReference.JS_PROGRAMS_DIR).listFiles();
+		
+		String worldFile=world.getSaveHandler().getWorldDirectory().getName();
+		File mainPath=new File("saves/"+MReference.NAME+"/"+worldFile+"/jsPrograms");
+		mainPath.mkdirs();
+		
+		File[] listOfFiles=mainPath.listFiles();
 		for(File program:listOfFiles)if(program.isFile())program.delete();
 		for(Entry<Integer,StringBuilder> program:programs.entrySet()){
-			File prFile=new File(MReference.JS_PROGRAMS_DIR+"/"+program.getKey()+".js");
+			File prFile=new File(mainPath+"/"+program.getKey()+".js");
 			FileUtil.writeToWholeFile(prFile, program.getValue().toString());
 		}
 	}
-	public static void load(){
+	public static void load(World world){
 		if(Util.isRemote())return;
-		File[] listOfFiles=new File(MReference.JS_PROGRAMS_DIR).listFiles();
+
+		String worldFile=world.getSaveHandler().getWorldDirectory().getPath();
+		File mainPath=new File("saves/"+MReference.NAME+"/"+worldFile+"/jsPrograms");
+		mainPath.mkdirs();
+		
+		File[] listOfFiles=mainPath.listFiles();
 		for(File program:listOfFiles)try{
 			if(program.isFile())programs.put(Integer.parseInt(program.getName().substring(0, program.getName().lastIndexOf('.'))), FileUtil.readWholeFile(program));
 		}catch(Exception e){
