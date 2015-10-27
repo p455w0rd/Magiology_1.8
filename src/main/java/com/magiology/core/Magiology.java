@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.magiology.api.lang.ProgramHolder;
 import com.magiology.client.render.Textures;
 import com.magiology.core.init.*;
 import com.magiology.forgepowered.proxy.CommonProxy;
@@ -102,6 +103,7 @@ public class Magiology{
 	public void postInit(FMLPostInitializationEvent event){
 		if(modInfGUI!=null)modInfGUI.modStat=true;
 		Textures.postInit();
+		ProgramHolder.getCode(0);
 	}
 	public void exit(){
 		if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");

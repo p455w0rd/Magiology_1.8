@@ -1,34 +1,30 @@
 package com.magiology.api.lang;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import static com.magiology.io.WorldData.WorkingProtocol.*;
+
 import java.util.Map.Entry;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-import net.minecraft.world.World;
-
-import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.FileUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.io.WorldData;
+import com.magiology.io.WorldData.FileContent;
 
 
 public class ProgramHolder{
 	
-	private static Map<Integer,StringBuilder> programs=new HashMap<Integer,StringBuilder>();
 	public static final String err="<ERROR> (DO NOT RETURN SOMETHING THAT STARTS WITH THIS!): ";
-		
+	
+	private static WorldData<String,StringBuilder> programs=new WorldData<String,StringBuilder>("jsPrograms","js","jsProg",SYNC,FROM_SERVER,SYNC_ON_LOAD,SYNC_ON_CHANGE);
+	
 	public static void registerProgram(int programId,CharSequence program){
 		if(program==null||program.length()<0)return;
-		programs.put(programId, new StringBuilder(program));
+		programs.addFile(programId+"", new StringBuilder(program));
 	}
 	
 	public static String removeProgram(int programId){
-		
-		return programs.remove(programId).toString();
+		return programs.removeFile(programId+"").toString();
 	}
 	
 	
@@ -50,41 +46,13 @@ public class ProgramHolder{
 	}
 	public static int getNexAviableId(){
 		int result=1;
-		for(Entry<Integer,StringBuilder> i:programs.entrySet()){
-			if(i.getKey()==result)result=i.getKey()+1;
+		for(Entry<String,FileContent<StringBuilder>> i:programs.entrySet()){
+			if(i.getKey().equals(result+""))result=Integer.parseInt(i.getKey().toString())+1;
 		}
 		return result;
 	}
 	public static String getCode(int programId){
-		StringBuilder code=programs.get(programId);
-		return code!=null?code.toString():"";
-	}
-	public static void save(World world){
-		if(Util.isRemote())return;
-		
-		String worldFile=world.getSaveHandler().getWorldDirectory().getName();
-		File mainPath=new File("saves/"+MReference.NAME+"/"+worldFile+"/jsPrograms");
-		mainPath.mkdirs();
-		
-		File[] listOfFiles=mainPath.listFiles();
-		for(File program:listOfFiles)if(program.isFile())program.delete();
-		for(Entry<Integer,StringBuilder> program:programs.entrySet()){
-			File prFile=new File(mainPath+"/"+program.getKey()+".js");
-			FileUtil.writeToWholeFile(prFile, program.getValue().toString());
-		}
-	}
-	public static void load(World world){
-		if(Util.isRemote())return;
-
-		String worldFile=world.getSaveHandler().getWorldDirectory().getPath();
-		File mainPath=new File("saves/"+MReference.NAME+"/"+worldFile+"/jsPrograms");
-		mainPath.mkdirs();
-		
-		File[] listOfFiles=mainPath.listFiles();
-		for(File program:listOfFiles)try{
-			if(program.isFile())programs.put(Integer.parseInt(program.getName().substring(0, program.getName().lastIndexOf('.'))), FileUtil.readWholeFile(program));
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		FileContent<CharSequence> code=programs.getFileContent(programId+"");
+		return code!=null?code.text.toString():"";
 	}
 }

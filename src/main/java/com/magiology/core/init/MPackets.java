@@ -5,6 +5,8 @@ import com.magiology.forgepowered.packets.packets.*;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
+import com.magiology.io.WorldData.SyncClientsWorldData;
+import com.magiology.io.WorldData.SyncServerWorldData;
 
 public class MPackets{
 
@@ -22,9 +24,10 @@ public class MPackets{
 		AbstractPacket.registerNewMessage(OpenProgramContainerInGui.class);
 		AbstractPacket.registerNewMessage(OpenProgramContainerInGui.ExitGui.class);
 		AbstractPacket.registerNewMessage(HologramProjectorUpload.class);
-		
 		AbstractPacket.registerNewMessage(SendPlayerDataPacket.class);
 		AbstractPacket.registerNewMessage(SavableDataWithKeyPacket.class);
+		AbstractPacket.registerNewMessage(SyncServerWorldData.class);
+		AbstractPacket.registerNewMessage(SyncClientsWorldData.class);
 	}
 
 }

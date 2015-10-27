@@ -262,41 +262,48 @@ public class Util{
 	}
 	//Print cluster----------------------------------------
 	public static void print(Object... objs){
-		for(Object a:objs)System.out.print(a+" ");
+		StringBuilder print=new StringBuilder();
+		for(Object a:objs)print.append(a+" ");
+		LogUtil.info(print.toString());
 	}
 	public static void println(Object... objs){
-		for(Object a:objs)System.out.print(a+" \n");
+		StringBuilder print=new StringBuilder();
+		for(Object a:objs)print.append(a+" \n");
+		LogUtil.info(print.toString());
 	}
 	public static void printlnEr(Object... objs){
-		for(Object a:objs)System.err.print(a+" \n");
+		StringBuilder print=new StringBuilder();
+		for(Object a:objs)print.append(a+" \n");
+		LogUtil.info(print.toString());
 	}
 	public static void printInln(Object... objs){
+		StringBuilder print=new StringBuilder();
 		for(Object a:objs){
 			if(a!=null&&a.getClass().isArray()){
 				if(a instanceof boolean[]){
 					boolean[] b=(boolean[])a;
-					for(boolean c:b)System.out.print(c+" ");
+					for(boolean c:b)print.append(c+" ");
 				}
 				if(a instanceof String[]){
 					String[] b=(String[])a;
-					for(String c:b)System.out.print(c+" ");
+					for(String c:b)print.append(c+" ");
 				}
 				else if(a instanceof float[]){
 					float[] b=(float[])a;
-					for(float c:b)System.out.print(c+" ");
+					for(float c:b)print.append(c+" ");
 				}
 				else if(a instanceof int[]){
 					int[] b=(int[])a;
-					for(int c:b)System.out.print(c+" ");
+					for(int c:b)print.append(c+" ");
 				}
 				else if(a instanceof double[]){
 					double[] b=(double[])a;
-					for(double c:b)System.out.print(c+" ");
+					for(double c:b)print.append(c+" ");
 				}
 			}
-			else System.out.print(a+" ");
+			else print.append(a+" ");
 		}
-		System.out.print("\n");
+		LogUtil.info(print.toString());
 	}
 	public static<T> T printlnAndReturn(T obj){
 		println(obj);

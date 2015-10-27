@@ -10,7 +10,6 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.magiology.api.lang.ProgramHolder;
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerUpgrades;
 import com.magiology.util.utilclasses.Util;
@@ -48,14 +47,10 @@ public class GameLoopEvents{
 	}
 	@SubscribeEvent
 	public void onWorldSave(WorldEvent.Save e){
-		if(!e.world.isRemote){
-			ProgramHolder.save(e.world);
-		}
+		
 	}
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e){
-		if(!e.world.isRemote){
-			ProgramHolder.load(e.world);
-		}
+		
 	}
 }
