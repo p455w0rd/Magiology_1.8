@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="HashMap&lt;KeyCast,FileContent&lt;ValueCast&gt;&gt;" key="selection"/>
+		<item value="Saving files to" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Saving files to"/>
+			<item value="program"/>
+			<item value="getPoint()"/>
+			<item value="message"/>
+			<item value="print"/>
+			<item value="setBlockBounds"/>
+			<item value="Bytes sent"/>
 			<item value="HashMap&lt;KeyCast,FileContent&lt;ValueCast&gt;&gt;"/>
-			<item value="onChange"/>
-			<item value="Loading files from"/>
-			<item value="magiology"/>
-			<item value="magio"/>
-			<item value=" "/>
-			<item value="LogUtil.info(c+&quot; &quot;);"/>
-			<item value="System.err.print"/>
 		</list>
 		<list key="replacehistory">
+			<item value="getPoint()*overallAlpha.getPoint()"/>
 			<item value="Map&lt;KeyCast,FileContent&lt;ValueCast&gt;&gt;"/>
 			<item value="_"/>
 			<item value="print.append(c+&quot; &quot;);"/>
@@ -25,11 +26,10 @@
 			<item value=""/>
 			<item value="String"/>
 			<item value="World"/>
-			<item value="this"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="342" key="DIALOG_WIDTH"/>
+		<item value="341" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="385" key="DIALOG_HEIGHT"/>
 		<item value="1273" key="DIALOG_X_ORIGIN"/>

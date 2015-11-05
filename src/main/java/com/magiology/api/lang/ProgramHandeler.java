@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -13,10 +14,11 @@ import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 
-public class LangHandeler{
+public class ProgramHandeler{
 	
 	public static Object[] compileArgs(String source, ObjectHolder<Integer>... errorPos){
 		if(errorPos.length==1)errorPos[0].setVar(-1);
+		else if(errorPos.length!=0)throw new IllegalStateException("You can't use more than 1 ObjectHolder's!");
 		if(source==null||source.isEmpty())return new Object[0];
 		List<Object> result=new ArrayList<Object>();
 		
@@ -55,14 +57,16 @@ public class LangHandeler{
 		}
 		return result;
 	}
-	private static String worldJSVar=loadWorld();
+	private static String worldJSVar=loadWorld(),blockPosJSvar=loadPos();
 	public static CharSequence defultVars(Object[] environment){
 		StringBuilder result=new StringBuilder();
-		IBlockAccess w=null;
+		IBlockAccess world=null;
+		Vec3i runPos=null;
 		for(Object o:environment){
-			if(o instanceof IBlockAccess)w=(IBlockAccess)o;
+			if(o instanceof IBlockAccess)world=(IBlockAccess)o;
+			if(o instanceof Vec3i)runPos=(Vec3i)o;
 		}
-		if(w!=null)result.append(new DefaultJavaScriptLoader(environment).result);
+		if(world!=null||runPos!=null)result.append(new DefaultJavaScriptLoader(environment).result);
 		return result;
 	}
 	private static class DefaultJavaScriptLoader{
@@ -74,13 +78,28 @@ public class LangHandeler{
 					res.append(worldJSVar);
 					WorldWrapper.setBlockAccess((World)o);
 				}
+				if(o instanceof Vec3i){
+					res.append(loadPos((Vec3i)o));
+				}
 			}
+			result=res.toString();
 		}
 	}
-	private static String loadWorld(){
+	private static String loadWorld(){try{
 		return 
-			"World=Java.type("+WorldWrapper.class.getName()+");\n"+
-			"BlockPos=Java.type("+BlockPosM.class.getName()+");\n"+
-			"EnumFacing=Java.type("+EnumFacing.class.getName()+");\n";
+			"World=Java.type('"+WorldWrapper.class.getName()+"');\n"+
+			"BlockPos=Java.type('"+BlockPosM.class.getName()+"');\n"+
+			"EnumFacing=Java.type('"+EnumFacing.class.getName()+"');\n";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	private static String loadPos(Vec3i...vec3i){
+		if(vec3i.length==0)
+		return "BlockPos=Java.type('"+BlockPosM.class.getName()+"');\n"
+			 + "runPos=new BlockPos(";
+		else return blockPosJSvar+vec3i[0].getX()+","+vec3i[0].getY()+","+vec3i[0].getZ()+");";
 	}
 }

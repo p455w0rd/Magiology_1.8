@@ -111,7 +111,7 @@ public class OnOffGuiButton extends GuiButton implements Updateable{
 		private GuiButtonClickEvent(){}
 		@SubscribeEvent
 		public void onClickPre(ActionPerformedEvent.Pre e){
-			if(e.button instanceof OnOffGuiButton)e.setCanceled(!((OnOffGuiButton)e.button).onClicked());
+			if(e.button.visible&&e.button instanceof OnOffGuiButton)e.setCanceled(!((OnOffGuiButton)e.button).onClicked());
 		}
 	}
 	public boolean isOn(){

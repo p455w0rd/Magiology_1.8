@@ -32,7 +32,7 @@ import com.magiology.util.utilobjects.vectors.Vec2i;
 public class GuiTextEditor extends Gui implements Updateable{
 	
 	private static String newline=System.getProperty("line.separator");
-	private List<StringBuilder> textBuffer=new ArrayList<StringBuilder>();
+	public List<StringBuilder> textBuffer=new ArrayList<StringBuilder>();
 	private List<Integer> cachedWidth=new ArrayList<Integer>();
 	
 	private List<UndoSave> undoSteps=new ArrayList<UndoSave>();
@@ -43,11 +43,11 @@ public class GuiTextEditor extends Gui implements Updateable{
 	public Vec2i cursorPosition=Vec2i.zero,selectionStart=Vec2i.zero;
 	public Vec2i pos, size,mouse=Vec2i.zero,lastMouse=Vec2i.zero,mouseClick=Vec2i.zero;
 	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode(),maxWidth;
-	private float sliderX,prevSliderX,sliderY,prevSliderY;
+	public float sliderX,prevSliderX,sliderY,prevSliderY;
 	private AdvancedPhysicsFloat sliderXCol=new AdvancedPhysicsFloat(0, 0.2F,true),sliderYCol=new AdvancedPhysicsFloat(0, 0.2F,true);
 	private static final Pattern blankSpace=Pattern.compile("^\\s*$"),notWhitespace=Pattern.compile("[^\\s]|\\s$"),word=Pattern.compile("\\b");
 	
-	public boolean active=false,visible=true,insertMode=false;
+	public boolean active=false,visible=true,insertMode=false,viewOnly=false;
 	
 
 	public GuiTextEditor(Vec2i pos,Vec2i size){
@@ -60,59 +60,67 @@ public class GuiTextEditor extends Gui implements Updateable{
 	//TODO: user control------------------------------------------------------
 	
 	public void mouseClicked(int x, int y, int button){
-		if(!visible||button!=0)return;
-		lastMouse=mouse;
-		mouse=new Vec2i(x-pos.x, y-pos.y);
-		mouseClick=new Vec2i(x-pos.x, y-pos.y);
-		
-		
-		if(mouseClick.x<0||mouseClick.y<0||mouseClick.x>size.x||mouseClick.y>size.y){
-			active=false;
-			return;
-		}
-		
-		if(handleSlider(x, y)){
-			Vec2i intersection=findCharAtPos(x, y);
-			if(intersection==null){
+		try{
+			if(!visible||button!=0)return;
+			lastMouse=mouse;
+			mouse=new Vec2i(x-pos.x, y-pos.y);
+			mouseClick=new Vec2i(x-pos.x, y-pos.y);
+			
+			
+			if(mouseClick.x<0||mouseClick.y<0||mouseClick.x>size.x||mouseClick.y>size.y){
 				active=false;
 				return;
 			}
-			prevXPos=intersection.x;
-			long time=System.currentTimeMillis();
-			if(time-lastClickTime>CLICK_TIME){
-				clickCount=0;
-			}
-			lastClickTime=time;
+			
+			if(handleSlider(x, y)){
+				Vec2i intersection=findCharAtPos(x, y);
+				if(intersection==null){
+					active=false;
+					return;
+				}
+				prevXPos=intersection.x;
+				long time=System.currentTimeMillis();
+				if(time-lastClickTime>CLICK_TIME){
+					clickCount=0;
+				}
+				lastClickTime=time;
 
-			active=true;
+				active=true;
 
-			if(clickCount==0){
-				setCursorPositionInternal(intersection);
-			}else if(clickCount==1){
-				selectWord(intersection);
-			}else if(clickCount==2){
-				selectLine(intersection);
-				clickCount=0;
+				if(clickCount==0){
+					setCursorPositionInternal(intersection);
+				}else if(clickCount==1){
+					selectWord(intersection);
+				}else if(clickCount==2){
+					selectLine(intersection);
+					clickCount=0;
+				}
 			}
+			clickCount++;
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-
-		clickCount++;
 	}
 	
 	public void mouseClickMove(int x, int y){
-		if(!visible||!active)return;
-		Vec2i move=lastMouse.sub(mouse.x,mouse.y);
-		lastMouse=mouse;
-		mouse=new Vec2i(x-pos.x, y-pos.y);
-		if(handleSlider(x, y)){
-			Vec2i intersection=findCharAtPos(x, y);
-			if(intersection!=null){
-				cursorPosition=intersection;
+		try{
+			if(!visible||!active)return;
+			Vec2i move=lastMouse.sub(mouse.x,mouse.y);
+			lastMouse=mouse;
+			mouse=new Vec2i(x-pos.x, y-pos.y);
+			if(handleSlider(x, y)){
+				Vec2i intersection=findCharAtPos(x, y);
+				if(intersection!=null){
+					cursorPosition=intersection;
+				}
 			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
 	public boolean keyTyped(int code, char ch){
+		if(viewOnly)return false;
 		String prevText=getText();
 		try{
 			if(!visible||!active)return false;
@@ -193,16 +201,20 @@ public class GuiTextEditor extends Gui implements Updateable{
 	
 	private boolean handleSlider(int x, int y){
 		if(size.y-mouseClick.y<=8){
-			int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
-			sliderX=snap(((float)(mouse.x-width/2)/(float)(size.x-width)), 0, 1);
-			return false;
+			if(maxWidth>size.x){
+				int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
+				sliderX=snap(((float)(mouse.x-width/2)/(float)(size.x-width)), 0, 1);
+				return false;
+			}
 		}
 		if(size.x-mouseClick.x<=8){
-			FontRendererMClipped fr=FontRendererMClipped.get();
-			int maxHeight=textBuffer.size()*fr.FONT_HEIGHT;
-			int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
-			sliderY=snap((float)(mouse.y-height/2)/(float)(size.y-height), 0, 1);
-			return false;
+			if((textBuffer.size()+1)*FontRendererMClipped.get().FONT_HEIGHT>size.y){
+				FontRendererMClipped fr=FontRendererMClipped.get();
+				int maxHeight=textBuffer.size()*fr.FONT_HEIGHT;
+				int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
+				sliderY=snap((float)(mouse.y-height/2)/(float)(size.y-height), 0, 1);
+				return false;
+			}
 		}
 		return true;
 	}
@@ -218,7 +230,6 @@ public class GuiTextEditor extends Gui implements Updateable{
 		float sliderX=calculateRenderPos(prevSliderX,this.sliderX);
 		FontRendererMClipped fr=FontRendererMClipped.get();
 		int maxHeight=(textBuffer.size()+1)*fr.FONT_HEIGHT;
-		
 		if(maxHeight>size.y);else this.sliderY=0;
 		if(maxWidth>size.x);else this.sliderX=0;
 		

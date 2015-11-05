@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
-import com.magiology.api.lang.LangHandeler;
+import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.lang.ProgramHolder;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
@@ -24,46 +24,38 @@ public class ProgramContainer extends Item{
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		createNBT(stack);
-		if(!world.isRemote){
-			initId(stack);
-//			Util.printInln(getNBT(stack));
-		}
+		initId(stack);
 		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
 		else{
-//			if(!world.isRemote){
-//				setPos(stack, pos);
-//				setCommandName(stack, "redstone to percent");
-//				try{
-//					LapisProgram lp=LapisLangCompiler.compile(stack);
-//					if(lp!=null){
-//						Object result=lp.run(U.RB(),world.getRedstonePower(pos, side));
-//						U.printInln("Function return: ",result);
-//					}
-//					else Util.printInln("Program failed to compile!");
-//				}catch(Exception e){
-//					e.printStackTrace();
-//				}
-//			}
+			try{
+				getProgram(stack).run(new Object[]{},new Object[]{world,pos});
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		return true;
     }
 	
 	public static void setCommandName(ItemStack stack, String name){
 		if(U.isRemote())return;
+		initId(stack);
 		setTag(stack, "name", name);
 	}
 	public static void initId(ItemStack stack){
-		if(getId(stack)<1)setId(stack, ProgramHolder.getNexAviableId());
+		if(U.isRemote())return;
+		if(getId(stack)<1)setId(stack, ProgramHolder.code_aviableId());
 	}
 
 	public static String getName(ItemStack stack){
 		createNBT(stack);
+		initId(stack);
 		String name=getTag(stack, "name");
 		return name==null?"error-noName":name;
 	}
 	
 	public static BlockPosM getPos(ItemStack stack){
 		try{
+			initId(stack);
 			String[] pos=getTag(stack,"pos").split(",");
 			return new BlockPosM(Integer.parseInt(pos[0].replaceAll(" ", "")),Integer.parseInt(pos[1].replaceAll(" ", "")),Integer.parseInt(pos[2].replaceAll(" ", "")));
 		}catch(Exception e){
@@ -72,13 +64,16 @@ public class ProgramContainer extends Item{
 	}
 	public static void setPos(ItemStack stack, Vec3i pos){
 		if(U.isRemote())return;
+		initId(stack);
 		setTag(stack, "pos", pos.getX()+", "+pos.getY()+", "+pos.getZ());
 	}
 	
 	public static String getTag(ItemStack stack, String tag){
+		initId(stack);
 		return getString(stack, tag);
 	}
 	public static void setTag(ItemStack stack, String tag, String content){
+		initId(stack);
 		setString(stack, tag, content);
 	}
 	
@@ -89,9 +84,11 @@ public class ProgramContainer extends Item{
 		setInt(stack, "id", content);
 	}
 	public static Program getProgram(ItemStack stack){
+		initId(stack);
 		return new Program(getName(stack), getId(stack), getPos(stack));
 	}
 	public static void run(World world,ItemStack stack,Object...args){
+		initId(stack);
 		try{
 			getProgram(stack).run(args,new Object[]{world});
 		}catch(Exception e){
@@ -101,7 +98,7 @@ public class ProgramContainer extends Item{
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced){
-		Program program=new Program(getName(stack), getId(stack), getPos(stack));
+		Program program=getProgram(stack);
 		try{
 			tooltip.add("Name: "+(program.name==null||program.name.isEmpty()?"<empty>":program.name));
 			tooltip.add("x: "+program.pos.getX()+" y: "+program.pos.getY()+" z: "+program.pos.getZ());
@@ -151,8 +148,8 @@ public class ProgramContainer extends Item{
 				return null;
 			}
 		}
-		public Program run(Object[] args, Object[]environment){
-			result=ProgramHolder.run(programId, args,LangHandeler.defultVars(environment)).toString();
+		public Program run(Object[] args, Object[] environment){
+			result=ProgramHolder.run(programId, args,ProgramHandeler.defultVars(environment)).toString();
 			return this;
 		}
 	}

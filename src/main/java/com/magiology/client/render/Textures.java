@@ -32,8 +32,8 @@ public class Textures{
 	SmoothBuble1,SmoothBuble1Add2,SmoothBuble1Add1,FireHD,SmoothBuble2,SmoothBuble3,
 	
 	//gui
-	ISidedIns,
-	//TODO
+	ISidedIns,ProgramGui,
+	
 	WingColors
 	;
 	
@@ -102,6 +102,7 @@ public class Textures{
 		FireHD=                    getResource(MReference.MODID,"/textures/particle/fire_hd.png");
 		ISidedIns=                 getResource(MReference.MODID,"/textures/gui/ISidedIns.png");
 		WingColors=                getResource(MReference.MODID,"/models/textures/wingColorMap.png");
+		ProgramGui=                getResource(MReference.MODID,"/textures/gui/Program.png");
 		
 		Util.println("TEXTURE INIT ENDED!");
 		Util.println("----\n--------\n------------");

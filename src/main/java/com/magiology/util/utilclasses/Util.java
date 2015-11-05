@@ -284,10 +284,6 @@ public class Util{
 					boolean[] b=(boolean[])a;
 					for(boolean c:b)print.append(c+" ");
 				}
-				if(a instanceof String[]){
-					String[] b=(String[])a;
-					for(String c:b)print.append(c+" ");
-				}
 				else if(a instanceof float[]){
 					float[] b=(float[])a;
 					for(float c:b)print.append(c+" ");
@@ -299,6 +295,10 @@ public class Util{
 				else if(a instanceof double[]){
 					double[] b=(double[])a;
 					for(double c:b)print.append(c+" ");
+				}
+				else if(a instanceof Object[]){
+					Object[] b=(Object[])a;
+					for(Object c:b)print.append(c+" ");
 				}
 			}
 			else print.append(a+" ");
@@ -573,7 +573,7 @@ public class Util{
 		return Return;
 	}
 	public static void printStackTrace(){
-		println(getStackTrace());
+		print(getStackTrace());
 	}
 	public static String getStackTrace(){
 		String Return="";
@@ -762,7 +762,7 @@ public class Util{
 	public static String join(CharSequence splitter,Object[] args){
 		StringBuilder result=new StringBuilder();
 		for(Object o:args)result.append(o).append(splitter);
-		return result.substring(0, result.length()-splitter.length());
+		return result.substring(0, result.length()-splitter.length()+1);
 	}
 	
 	private static long startTime;

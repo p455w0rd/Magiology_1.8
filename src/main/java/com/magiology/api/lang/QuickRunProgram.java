@@ -10,6 +10,6 @@ public class QuickRunProgram{
 	}
 	
 	public Object run(Object[] args,Object[] environment){
-		return ProgramHolder.run(src, args,LangHandeler.defultVars(environment));
+		return ProgramHolder.run(src, args,ProgramHandeler.defultVars(environment));
 	}
 }

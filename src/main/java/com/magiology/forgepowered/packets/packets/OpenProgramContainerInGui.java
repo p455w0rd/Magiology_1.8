@@ -88,13 +88,13 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 					TileEntityNetworkCommandHolder tile=(TileEntityNetworkCommandHolder)test;
 					ItemStack stack=tile.getStackInSlot(slotId);
 					if(stack!=null&&stack.hasTagCompound()){
-						ProgramHolder.registerProgram(ProgramContainer.getId(stack), data);
+						ProgramHolder.code_register(ProgramContainer.getId(stack), data);
 					}
 				}
 			}else{
 				ItemStack stack=player.inventory.mainInventory[slotId];
 				if(stack!=null&&stack.hasTagCompound()){
-					ProgramHolder.registerProgram(ProgramContainer.getId(stack), data);
+					ProgramHolder.code_register(ProgramContainer.getId(stack), data);
 				}
 			}
 			return null;

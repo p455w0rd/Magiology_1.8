@@ -44,11 +44,12 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	//TODO: START-----------------------------------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
+	public static List<WorldData<CharSequence,CharSequence>> worldDataList=new ArrayList<WorldData<CharSequence,CharSequence>>();
 	private static final String deleteMarker="<DO_NOT_USE_THIS_IT_WILL_DELETE_THE_FILE_THAT_IT_IS_WRITTEN_IN>";
+	public static boolean printsActions=true;
 	
 	private final String folderName,extension,worldDataName;
 	private boolean fromServer,fromClient,dimSpesific,dataStatic,usesSyncing,syncingOnLoad,syncingOnChange;
-	public static List<WorldData<CharSequence,CharSequence>> worldDataList=new ArrayList<WorldData<CharSequence,CharSequence>>();
 	/**Key = file path, Value = file content*/
 	private Map<KeyCast,FileContent<ValueCast>> data=new HashMap<KeyCast,FileContent<ValueCast>>(),unsyncedData=new HashMap<KeyCast,FileContent<ValueCast>>();
 	
@@ -94,16 +95,31 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	//----------------------------------------------------------------------------------------------------------------------------------
 	@SubscribeEvent
 	public void save(WorldEvent.Save e){
-		if(!shallRun(e.world))return;
-		saveFromWorld(e.world);
+//		Util.printInln("--------------------------------------------");
+//		Util.printInln(folderName,extension,worldDataName);
+//		Util.printInln(fromServer,fromClient,dimSpesific,dataStatic,usesSyncing,syncingOnLoad,syncingOnChange);
+//		Util.printInln(data);
+//		Util.printInln(worldDataName,shallRun(e.world),e.world);
+//		Util.printInln("____________________________________________");
+		try{
+			if(!shallRun(e.world))return;
+			saveFromWorld(e.world);
+		}catch(Exception e2){
+			e2.printStackTrace();
+		}
 	}
 	@SubscribeEvent
 	public void load(WorldEvent.Load e){
-		if(!shallRun(e.world))return;
-		loadFromWorld(e.world);
+		try{
+			if(!shallRun(e.world))return;
+			loadFromWorld(e.world);
+		}catch(Exception e2){
+			e2.printStackTrace();
+		}
+		
 	}
 	
-	private void loadFromWorld(World world){
+	public void loadFromWorld(World world){
 		//clear from any leftover data from the previous world
 		data.clear();
 		
@@ -112,7 +128,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		File basePath=new File(bp);
 		//Make sure that the folder exists.
 		basePath.mkdirs();
-		Util.printInln("Loading files from:",".../"+bp.substring(0, bp.length()-1));
+		if(printsActions)Util.printInln("Loading files from:",".../"+bp.substring(0, bp.length()-1));
 		for(File file:basePath.listFiles()){
 			try{
 				String name=file.getName().replace("."+extension, "");
@@ -123,7 +139,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		}
 		onLoad();
 	}
-	private void saveFromWorld(World world){
+	public void saveFromWorld(World world){
 		//Get the base path.
 		String bp=getSavePath(world);
 		File basePath=new File(bp);
@@ -132,8 +148,8 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		
 		//Mark all files to be deleted.
 		for(File file:basePath.listFiles())if(file.isFile())file.delete();
-		Util.printInln("Saving files to:",".../"+bp.substring(0, bp.length()-1));
-		
+		if(printsActions)Util.printInln("Saving files to:",".../"+bp.substring(0, bp.length()-1));
+//		Util.printStackTrace();
 		for(Entry<KeyCast,FileContent<ValueCast>> fileWrite:data.entrySet()){
 			FileContent<ValueCast> file=fileWrite.getValue();
 			if(dimSpesific?world.provider.getDimensionId()==file.dimension:true){
@@ -148,13 +164,13 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
 	public void syncClients(){
-		Util.printInln("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)Util.printInln("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncClientsWorldData((Map<CharSequence,FileContent<CharSequence>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToAll(packet);
 	}
 	
 	public void syncServer(){
-		Util.printInln("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)Util.printInln("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncServerWorldData((Map<CharSequence,FileContent<CharSequence>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToServer(packet);
 	}
@@ -264,7 +280,12 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	private String getSavePath(World world){
 		StringBuilder result=new StringBuilder();
 		addDir(addDir(result, "saves"), getModName());
-		if(!dataStatic)addDir(result, world!=null?world.getSaveHandler().getWorldDirectory().getName():"<world name>");
+		if(!dataStatic){
+			if(world.isRemote){
+				addDir(result, Util.getMC().getIntegratedServer().getFolderName());
+			}else addDir(result, world!=null?world.getSaveHandler().getWorldDirectory().getName():"<world name>");
+		}
+		
 		if(dimSpesific)addDir(result, world!=null?world.provider.getDimensionId()+"":"<dimension id>");
 		addDir(result,folderName);
 		return result.toString();

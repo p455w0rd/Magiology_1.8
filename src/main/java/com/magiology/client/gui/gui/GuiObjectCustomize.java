@@ -11,7 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.api.lang.LangHandeler;
+import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.lang.ProgramHolder;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.WorldNetworkInterface;
@@ -266,7 +266,7 @@ public class GuiObjectCustomize extends GuiContainerM implements Updateable{
 			}
 			((ICommandInteract)ro).setActivationTarget(new Program(target, 0, new BlockPosM(x, y, z)));
 			ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-			Object[] args=LangHandeler.compileArgs(((ICommandInteract)ro).getActivationTarget().argsSrc=commandIn.getText(),null,ErrorPos);
+			Object[] args=ProgramHandeler.compileArgs(((ICommandInteract)ro).getActivationTarget().argsSrc=commandIn.getText(),null,ErrorPos);
 			int errorPos=ErrorPos.getVar();
 			boolean isCommandFound=false;
 			if(errorPos==-1){

@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.api.lang.LangHandeler;
+import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.network.NetworkBaseInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
@@ -107,7 +107,7 @@ public class Slider extends HoloObject implements ICommandInteract{
 		if(netInterface!=null&&netInterface.getBrain()!=null){
 			try{
 				ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-				Object[] args=LangHandeler.compileArgs(activationTarget.argsSrc,null,ErrorPos);
+				Object[] args=ProgramHandeler.compileArgs(activationTarget.argsSrc,ErrorPos);
 				if(ErrorPos.getVar()==-1){
 					Program com=netInterface.getBrain().getCommand(activationTarget);
 					if(netInterface!=null&&com!=null){

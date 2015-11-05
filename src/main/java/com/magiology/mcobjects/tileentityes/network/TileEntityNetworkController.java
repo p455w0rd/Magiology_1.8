@@ -272,7 +272,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		for(TileEntityNetworkCommandHolder i:commandHolders){
 			for(ItemStack j:i.slots){
 				if(j!=null){
-					String name=ProgramContainer.getName(j),code=ProgramHolder.getProgram(ProgramContainer.getId(j)).src;
+					String name=ProgramContainer.getName(j),code=ProgramHolder.code_quick(ProgramContainer.getId(j)).src;
 					if(!name.isEmpty()&&!code.isEmpty()){
 						ProgramContainer.setPos(j, i.getPos());
 						result.add(ProgramContainer.getProgram(j));

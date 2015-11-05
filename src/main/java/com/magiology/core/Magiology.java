@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.api.lang.ProgramHolder;
+import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.render.Textures;
 import com.magiology.core.init.*;
 import com.magiology.forgepowered.proxy.CommonProxy;
@@ -103,7 +104,9 @@ public class Magiology{
 	public void postInit(FMLPostInitializationEvent event){
 		if(modInfGUI!=null)modInfGUI.modStat=true;
 		Textures.postInit();
-		ProgramHolder.getCode(0);
+		
+		ProgramHolder.loadClass();
+		GuiProgramContainerEditor.loadClass();
 	}
 	public void exit(){
 		if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");
@@ -182,12 +185,11 @@ public class Magiology{
 //			e.printStackTrace();
 //		}
 //		try{
-//    		ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
-//    		engine.eval("function main(a,b){return a+b;}");
-//    		Util.printInln(((Invocable)engine).invokeFunction("main", 10,5));
+//		       new ScriptEngineManager(null).getEngineByName("nashorn").eval("var EmptyClass = Java.type('"+EmptyClass.class.getName()+"');\nnew EmptyClass().lol();");
 //		}catch(Exception e){
 //			e.printStackTrace();
 //		}
+//		
 //		Util.exit(404);
 	}
 	

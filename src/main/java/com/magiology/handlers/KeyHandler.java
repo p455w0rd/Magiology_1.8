@@ -101,8 +101,10 @@ public class KeyHandler{
 		}
 		if(rawKey==gs.keyBindForward.getKeyCode()||rawKey==gs.keyBindBack.getKeyCode()||rawKey==gs.keyBindJump.getKeyCode()||rawKey==gs.keyBindSneak.getKeyCode()||rawKey==gs.keyBindRight.getKeyCode()||rawKey==gs.keyBindLeft.getKeyCode()){
 			ExtendedPlayerData data=ExtendedPlayerData.get(Util.getThePlayer());
-			Util.sendMessage(new UploadPlayerDataPacket(Util.getThePlayer()));
-			data.keys=keys.clone();
+			if(data!=null){
+				data.keys=keys.clone();
+				Util.sendMessage(new UploadPlayerDataPacket(Util.getThePlayer()));
+			}
 		}
 	}
 	// 3.

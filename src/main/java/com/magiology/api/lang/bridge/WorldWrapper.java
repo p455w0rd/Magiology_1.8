@@ -28,7 +28,7 @@ public class WorldWrapper{
 		}
 		return "undefined";
 	}
-	public static int getRedstone(BlockPosM pos,EnumFacing side){
-		return pos.getRedstonePower(world, side);
+	public static int getRedstone(BlockPosM pos, int side){
+		return pos.getRedstonePower(world, EnumFacing.getFront(side));
 	}
 }
