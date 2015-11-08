@@ -99,7 +99,7 @@ public class ProgramHandeler{
 	private static String loadPos(Vec3i...vec3i){
 		if(vec3i.length==0)
 		return "BlockPos=Java.type('"+BlockPosM.class.getName()+"');\n"
-			 + "runPos=new BlockPos(";
+			 + "var runPos=new BlockPos(";
 		else return blockPosJSvar+vec3i[0].getX()+","+vec3i[0].getY()+","+vec3i[0].getZ()+");";
 	}
 }

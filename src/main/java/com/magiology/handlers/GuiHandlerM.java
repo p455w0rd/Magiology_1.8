@@ -23,7 +23,7 @@ import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.gui.gui.GuiControlBock;
 import com.magiology.client.gui.gui.GuiHologramProjectorMain;
 import com.magiology.client.gui.gui.GuiISidedPowerInstructor;
-import com.magiology.client.gui.gui.GuiObjectCustomize;
+import com.magiology.client.gui.gui.GuiHoloObjectCustomize;
 import com.magiology.client.gui.gui.GuiSC;
 import com.magiology.client.gui.gui.GuiUpgrade;
 import com.magiology.core.Magiology;
@@ -92,7 +92,7 @@ public class GuiHandlerM implements IGuiHandler{
 			return new GuiISidedPowerInstructor(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:
 			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)
-				return new GuiObjectCustomize(player, (TileEntityHologramProjector)tile,((TileEntityHologramProjector)tile).lastPartClicked);
+				return new GuiHoloObjectCustomize(player, (TileEntityHologramProjector)tile,((TileEntityHologramProjector)tile).lastPartClicked);
 		case MGui.HologramProjectorMainGui:
 			if(tile instanceof TileEntityHologramProjector)
 				return new GuiHologramProjectorMain(player, (TileEntityHologramProjector)tile);

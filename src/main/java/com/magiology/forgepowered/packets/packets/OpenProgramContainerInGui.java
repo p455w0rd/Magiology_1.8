@@ -54,14 +54,15 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 	public static class ExitGui extends AbstractToServerMessage{
 		
 		private int slotId;
-		private String data;
+		private String data,name;
 		private BlockPosM tilePos;
 		
 		public ExitGui(){}
-		public ExitGui(int slotId, String data, BlockPos tilePos){
+		public ExitGui(int slotId, String data, String name, BlockPos tilePos){
 			this.slotId=slotId;
 			this.tilePos=tilePos!=null?new BlockPosM(tilePos):null;
 			this.data=data;
+			this.name=name;
 		}
 		
 		
@@ -69,6 +70,7 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 		public void write(PacketBuffer buffer)throws IOException{
 			buffer.writeInt(slotId);
 			writeString(buffer, data);
+			writeString(buffer, name);
 			buffer.writeBoolean(tilePos!=null);
 			if(tilePos!=null)buffer.writeBlockPos(tilePos);
 		}
@@ -77,6 +79,7 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 		public void read(PacketBuffer buffer)throws IOException{
 			slotId=buffer.readInt();
 			data=readString(buffer);
+			name=readString(buffer);
 			if(buffer.readBoolean())tilePos=new BlockPosM(buffer.readBlockPos());
 		}
 
@@ -89,12 +92,14 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 					ItemStack stack=tile.getStackInSlot(slotId);
 					if(stack!=null&&stack.hasTagCompound()){
 						ProgramHolder.code_register(ProgramContainer.getId(stack), data);
+						ProgramContainer.setName(stack, name);
 					}
 				}
 			}else{
 				ItemStack stack=player.inventory.mainInventory[slotId];
 				if(stack!=null&&stack.hasTagCompound()){
 					ProgramHolder.code_register(ProgramContainer.getId(stack), data);
+					ProgramContainer.setName(stack, name);
 				}
 			}
 			return null;

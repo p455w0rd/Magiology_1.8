@@ -36,10 +36,10 @@ public class ProgramContainer extends Item{
 		return true;
     }
 	
-	public static void setCommandName(ItemStack stack, String name){
+	public static void setName(ItemStack stack, String name){
 		if(U.isRemote())return;
 		initId(stack);
-		setTag(stack, "name", name);
+		setTag(stack, "nam", name);
 	}
 	public static void initId(ItemStack stack){
 		if(U.isRemote())return;
@@ -49,7 +49,7 @@ public class ProgramContainer extends Item{
 	public static String getName(ItemStack stack){
 		createNBT(stack);
 		initId(stack);
-		String name=getTag(stack, "name");
+		String name=getTag(stack, "nam");
 		return name==null?"error-noName":name;
 	}
 	

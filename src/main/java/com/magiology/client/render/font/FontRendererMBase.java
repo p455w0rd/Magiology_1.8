@@ -295,7 +295,8 @@ public class FontRendererMBase extends FontRenderer{
 					}
 					k=colorCode[j];
 					textColor=k;
-					setColor((k>>16)/255.0F, (k>>8&255)/255.0F, (k&255)/255.0F, color.a);
+					color=new ColorF((k>>16)/255.0F, (k>>8&255)/255.0F, (k&255)/255.0F, color.a);
+					color.bind();
 				}else if(j==16){
 					randomStyle=true;
 				}else if(j==17){
@@ -419,8 +420,8 @@ public class FontRendererMBase extends FontRenderer{
 				p_180455_4_=(p_180455_4_&16579836)>>2|p_180455_4_&-16777216;
 			}
 			color.r=(p_180455_4_>>16&255)/255.0F;
-			color.b=(p_180455_4_>>8&255)/255.0F;
-			color.g=(p_180455_4_&255)/255.0F;
+			color.g=(p_180455_4_>>8&255)/255.0F;
+			color.b=(p_180455_4_&255)/255.0F;
 			color.a=(p_180455_4_>>24&255)/255.0F;
 			color.bind();
 			posX=p_180455_2_;

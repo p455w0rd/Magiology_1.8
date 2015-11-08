@@ -25,7 +25,7 @@ public class ProgramHolder{
 	
 	private static WorldData<String,StringBuilder> programs=new WorldData<String,StringBuilder>("jsPrograms","js","jsProg",SYNC,FROM_SERVER,SYNC_ON_LOAD,SYNC_ON_CHANGE);
 	private static Map<Integer,List<CharSequence>> log=new HashMap<Integer,List<CharSequence>>();
-	public static void loadClass(){}
+	public static void loadClass(){programs.getFileContent("");}
 	
 	//TODO: run-------------------------------------------------------------------------------------------
 	public static Object run(int programId,Object[] args, CharSequence defultVars){

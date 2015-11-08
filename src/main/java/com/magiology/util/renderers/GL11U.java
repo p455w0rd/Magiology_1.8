@@ -1,6 +1,7 @@
 package com.magiology.util.renderers;
 
 import static org.lwjgl.opengl.GL11.*;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 
@@ -9,6 +10,7 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
+import com.magiology.util.utilclasses.DataStalker;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -167,5 +169,19 @@ public class GL11U{
 	}
 	public static void color(int color){
 		GL11.glColor4f((color>>16&255)/255.0F, (color>>8&255)/255.0F, (color & 255)/255.0F, (color>>24&255)/255.0F);
+	}
+	@Deprecated
+	public static int textureId;
+	@Deprecated
+	public static void captureTexture(){
+		try{
+			Integer id=(Integer)DataStalker.getVariable(GlStateManager.class, "activeTextureUnit").get(null);
+			Object texture=((Object[])DataStalker.getVariable(GlStateManager.class, "textureState").get(null))[id];
+			textureId=(Integer)DataStalker.getVariable(texture.getClass(), "textureName", texture);
+		}catch(Exception e){}
+	}
+	@Deprecated
+	public static void setTexture(){
+		GlStateManager.bindTexture(textureId);
 	}
 }

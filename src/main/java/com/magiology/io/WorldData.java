@@ -110,6 +110,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	}
 	@SubscribeEvent
 	public void load(WorldEvent.Load e){
+		Util.printInln(worldDataName,shallRun(e.world));
 		try{
 			if(!shallRun(e.world))return;
 			loadFromWorld(e.world);
@@ -149,7 +150,6 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		//Mark all files to be deleted.
 		for(File file:basePath.listFiles())if(file.isFile())file.delete();
 		if(printsActions)Util.printInln("Saving files to:",".../"+bp.substring(0, bp.length()-1));
-//		Util.printStackTrace();
 		for(Entry<KeyCast,FileContent<ValueCast>> fileWrite:data.entrySet()){
 			FileContent<ValueCast> file=fileWrite.getValue();
 			if(dimSpesific?world.provider.getDimensionId()==file.dimension:true){
@@ -281,9 +281,8 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		StringBuilder result=new StringBuilder();
 		addDir(addDir(result, "saves"), getModName());
 		if(!dataStatic){
-			if(world.isRemote){
-				addDir(result, Util.getMC().getIntegratedServer().getFolderName());
-			}else addDir(result, world!=null?world.getSaveHandler().getWorldDirectory().getName():"<world name>");
+			if(Util.isRemote())addDir(result, Util.getMC().getIntegratedServer().getFolderName());
+			else addDir(result, world!=null?world.getSaveHandler().getWorldDirectory().getName():"<world name>");
 		}
 		
 		if(dimSpesific)addDir(result, world!=null?world.provider.getDimensionId()+"":"<dimension id>");

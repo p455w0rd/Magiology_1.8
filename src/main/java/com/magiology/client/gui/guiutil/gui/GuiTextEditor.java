@@ -186,7 +186,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 			if(!(code==Keyboard.KEY_Z&&GuiScreen.isCtrlKeyDown())){
 				if(!getText().equals(prevText)){
 					undoSteps.add(0,new UndoSave(prevText, cursorPosition.add(0, 0)));
-					if(undoSteps.size()>100)undoSteps.remove(101);
+					if(undoSteps.size()>200)undoSteps.remove(200);
 				}
 			}
 		}catch(Exception e){
@@ -266,11 +266,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 		GL11.glTranslated(-xOffset, -yOffset, 0);
 		buff.pushMatrix();
 		buff.translate(xOffset, yOffset, 0);
-		for(int i=0;i<textBuffer.size();i++){
-			fr.min=new Vector2f(pos.x-2,pos.y-2);
-			fr.max=new Vector2f(pos.x+size.x+2,pos.y+size.y+2);
-			fr.drawString(textBuffer.get(i).toString(), pos.x, pos.y+i*fr.FONT_HEIGHT, white);
-		}
+		rednerText(fr);
 		buff.popMatrix();
 		GL11.glTranslated(xOffset, yOffset, 0);
 		
@@ -319,6 +315,14 @@ public class GuiTextEditor extends Gui implements Updateable{
 			
 			GL11U.texture(true);
 			GL11U.EndOpaqueRendering();
+		}
+	}
+
+	protected void rednerText(FontRendererMClipped fr){
+		for(int i=0;i<textBuffer.size();i++){
+			fr.min=new Vector2f(pos.x-2,pos.y-2);
+			fr.max=new Vector2f(pos.x+size.x+2,pos.y+size.y+2);
+			fr.drawString(textBuffer.get(i).toString(), pos.x, pos.y+i*fr.FONT_HEIGHT, white);
 		}
 	}
 

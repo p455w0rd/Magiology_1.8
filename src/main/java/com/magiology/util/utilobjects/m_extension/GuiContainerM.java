@@ -11,6 +11,7 @@ import net.minecraft.inventory.Container;
 public class GuiContainerM extends GuiContainer{
 	
 	public List<GuiTextField> textFieldList=new ArrayList<GuiTextField>();
+	protected boolean superClicked=false;
 	public GuiContainerM(Container container){
 		super(container);
 	}
@@ -28,6 +29,7 @@ public class GuiContainerM extends GuiContainer{
 			else break;
 		}
 		if(next)super.keyTyped(typedChar, keyCode);
+		superClicked=next;
 	}
 	
 	@Override
