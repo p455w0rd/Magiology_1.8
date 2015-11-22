@@ -61,6 +61,15 @@ public class ComplexCubeModel{
 		UVs[5]=new Vec8F(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
 		UVs2=UVs.clone();
 	}
+	public ComplexCubeModel(final ComplexCubeModel cube){
+		st=cube.st;
+		this.minX=cube.minX;this.minY=cube.minY;this.minZ=cube.minZ;
+		this.maxX=cube.maxX;this.maxY=cube.maxY;this.maxZ=cube.maxZ;
+		points=cube.points.clone();
+		UVs=cube.UVs.clone();
+		UVs2=cube.UVs2.clone();
+	}
+	
 	private Vec3M[] genPoints(){
 		//2=all max, 4=all min
 		Vec3M[] result=new Vec3M[8];
@@ -201,19 +210,25 @@ public class ComplexCubeModel{
 		return expand(var, var, var);
 	}
 	public ComplexCubeModel expand(float x,float y,float z){
-		points[0]=points[0].addVector(-x,y,-z);
+		points[0]=points[0].addVector(-x, y,-z);
 		points[1]=points[1].addVector(-x,-y,-z);
-		points[2]=points[2].addVector(-x,-y,z);
-		points[3]=points[3].addVector(-x,y,z);
-		points[4]=points[4].addVector(x,y,-z);
-		points[5]=points[5].addVector(x,-y,-z);
-		points[6]=points[6].addVector(x,-y,z);
-		points[7]=points[7].addVector(x,y,z);
-		
+		points[2]=points[2].addVector(-x,-y, z);
+		points[3]=points[3].addVector(-x, y, z);
+		points[4]=points[4].addVector( x, y,-z);
+		points[5]=points[5].addVector( x,-y,-z);
+		points[6]=points[6].addVector( x,-y, z);
+		points[7]=points[7].addVector( x, y, z);
 		return this;
 	}
-	
-	
-	
-	
+	public ComplexCubeModel translate(float x, float y, float z){
+		points[0]=points[0].addVector(x,y,z);
+		points[1]=points[1].addVector(x,y,z);
+		points[2]=points[2].addVector(x,y,z);
+		points[3]=points[3].addVector(x,y,z);
+		points[4]=points[4].addVector(x,y,z);
+		points[5]=points[5].addVector(x,y,z);
+		points[6]=points[6].addVector(x,y,z);
+		points[7]=points[7].addVector(x,y,z);
+		return this;
+	}
 }

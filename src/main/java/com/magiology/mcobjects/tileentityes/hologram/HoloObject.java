@@ -1,5 +1,6 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +12,12 @@ import com.magiology.api.SavableData;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
 import com.magiology.mcobjects.items.ProgramContainer.Program.KeyWord;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public abstract class HoloObject implements SavableData{
@@ -73,7 +79,6 @@ public abstract class HoloObject implements SavableData{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	
 	}
 	@Override
 	public void writeData(List<Integer> integers,List<Boolean> booleans,List<Byte> bytes___,List<Long> longs___,List<Double> doubles_,List<Float> floats__,List<String> strings_,List<Short> shorts__){
@@ -239,21 +244,36 @@ public abstract class HoloObject implements SavableData{
 		default:break;
 		}
 	}
-//	public List<Var> getStandardVars(){
-//		List<Var> result=new ArrayList<Var>();
-//		result.add(new Var("size.x", 'f', size.x));
-//		result.add(new Var("size.x", 'f', size.y));
-//		result.add(new Var("position.x", 'f', position.x));
-//		result.add(new Var("position.x", 'f', position.y));
-//		result.add(new Var("text", 's', this instanceof StringContainer?((StringContainer)this).getString():"<no_text>"));
-//		result.add(new Var("color.r", 'f', color.r));
-//		result.add(new Var("color.g", 'f', color.g));
-//		result.add(new Var("color.b", 'f', color.b));
-//		result.add(new Var("name", 's', this instanceof ICommandInteract?((ICommandInteract)this).getName():"<no_name>"));
-//		return result;
-//	}
-//	public Var getVar(String name){
-//		if(name!=null)for(Var var:getStandardVars())if(name.equals(var.name))return var;
-//		return new Var("null", 's', "");
-//	}
+	public List<DoubleObject<String,Object>> getStandardVars(){
+		List<DoubleObject<String,Object>> result=new ArrayList<DoubleObject<String,Object>>();
+		result.add(new DoubleObject("size.x", size.x));
+		result.add(new DoubleObject("size.x", size.y));
+		result.add(new DoubleObject("position.x", position.x));
+		result.add(new DoubleObject("position.x", position.y));
+		if(this instanceof StringContainer)result.add(new DoubleObject("text", ((StringContainer)this).getString()));
+		result.add(new DoubleObject("color.r", color.r));
+		result.add(new DoubleObject("color.g", color.g));
+		result.add(new DoubleObject("color.b", color.b));
+		if(this instanceof ICommandInteract)result.add(new DoubleObject("name", ((ICommandInteract)this).getName()));
+		return result;
+	}
+	public Object getVar(String name){
+		if(name!=null){
+			List<DoubleObject<String,Object>> list=getStandardVars();
+			for(DoubleObject<String,Object> i:list)if(name.equals(i.obj1))return i.obj2;
+		}
+		return "undefined";
+	}
+	public void drawHighlight(){
+		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		buff.pushMatrix();
+		buff.translate(position.x, position.y, 0);
+		buff.cleanUp();
+		
+		buff.importComplexCube(new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2).expand(0.002F));
+		buff.setDrawAsWire(true);
+		buff.draw();
+		buff.setDrawAsWire(false);
+		buff.popMatrix();
+	}
 }

@@ -13,14 +13,13 @@ import net.minecraft.util.EnumFacing;
 
 import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.RedstoneData;
-import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.api.network.Redstone;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements IUpdatePlayerListBox{
@@ -182,13 +181,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	}
 
 	@Override
-	public void onInvokedFromWorldInvoked(WorldNetworkInterface interfaceProvider, String action, int dataSize, Object... data){
-		getBrain().setNetworkBaseInterfaceData(this);
-		getBrain().invokeInterfaces(this, action, data);
-	}
-	
-	@Override
-	public void onActionInvoked(String action, int dataSize, Object... data){
+	public void messageReceved(String action){
 		if(U.isRemote(this))return;
 		if(getInterfaceProvider()!=null)return;
 		int side=SideUtil.getOppositeSide(getOrientation());
@@ -203,7 +196,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 							Block block=Block.getBlockById(Integer.parseInt(actionWords[2]));
 							int meta=0;
 							if(acitonSize>4&&U.isInteger(actionWords[3]))meta=Integer.parseInt(actionWords[3]);
-							Util.setBlock(worldObj, pos1, block, meta);
+							UtilM.setBlock(worldObj, pos1, block, meta);
 						} 
 					}
 					else if(actionWords[1].equals("destroy")){
@@ -229,14 +222,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 							
 							int strenght=15;
 							boolean isStrong=Boolean.parseBoolean(actionWords[2]);
-							long delay=-1;
-							RedstoneData redstoneData=new RedstoneData();
-							if(acitonSize>4&&U.isInteger(actionWords[4])){
-								delay=Integer.parseInt(actionWords[4]);
-							}
-							if(delay<0)redstoneData.prepareForNetwork(worldObj);
-							else redstoneData.prepareForNetwork(worldObj,delay);
-							
+							Redstone redstoneData=new Redstone();
 							
 							if(acitonSize>3&&U.isInteger(actionWords[3])){
 								strenght=Integer.parseInt(actionWords[3]);

@@ -12,7 +12,7 @@ import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPosition
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class HandModeChangerHUD extends HUD{
 	public static HandModeChangerHUD instance=new HandModeChangerHUD();
@@ -29,9 +29,9 @@ public class HandModeChangerHUD extends HUD{
 			data=ExtendedPlayerData.get(player);
 		}if(data==null)return;
 		FontRenderer fr=TessUtil.getFontRenderer();
-		if(Util.isNull(player,fr))return;
-		if(handAlpha>0&&Util.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
-			float HandAlpha=Util.calculateRenderPos(lastHandAlpha,handAlpha);
+		if(UtilM.isNull(player,fr))return;
+		if(handAlpha>0&&UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
+			float HandAlpha=UtilM.calculateRenderPos(lastHandAlpha,handAlpha);
 			int slot=player.inventory.currentItem;
 			GL11.glPushMatrix();
 			
@@ -58,7 +58,7 @@ public class HandModeChangerHUD extends HUD{
 			}
 			String up="string "+a1,now="string "+a2,down="string "+a3;
 			
-			GL11U.SetUpOpaqueRendering(1);
+			GL11U.setUpOpaqueRendering(1);
 			GL11.glTranslated(slot*20+xScreen/2-95, yScreen-38, 0);
 			
 			GL11.glTranslated(0, -HandAlpha*20+20, 0);
@@ -75,16 +75,16 @@ public class HandModeChangerHUD extends HUD{
 			fr.drawStringWithShadow(down, 0, 9, Color.WHITE.hashCode());
 			
 			
-			GL11U.EndOpaqueRendering();
+			GL11U.endOpaqueRendering();
 			GL11.glPopMatrix();
 		}
 		
 	}
 	@Override
 	public void update(){
-		if(Util.isNull(Util.getThePlayer()))return;
+		if(UtilM.isNull(UtilM.getThePlayer()))return;
 		lastHandAlpha=handAlpha;
-		handAlpha+=Util.getThePlayer().isSneaking()?0.25:-0.25;
-		handAlpha=Util.snap(handAlpha, 0, 1);
+		handAlpha+=UtilM.getThePlayer().isSneaking()?0.25:-0.25;
+		handAlpha=UtilM.snap(handAlpha, 0, 1);
 	}
 }

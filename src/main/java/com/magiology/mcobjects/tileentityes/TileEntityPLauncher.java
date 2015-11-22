@@ -7,8 +7,8 @@ import net.minecraft.util.EnumParticleTypes;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.structures.Structure;
 import com.magiology.structures.Structures;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
@@ -51,7 +51,7 @@ public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerLis
 						}
 						else {
 							buffer++;
-							Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+0.5, y()+1.2, z()+0.5, 0, 0.03, 0,400,4,1,true,2,"tx1", 1, 1, 1, 0.5, 0.99));
+							UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+0.5, y()+1.2, z()+0.5, 0, 0.03, 0,400,4,1,true,2,"tx1", 1, 1, 1, 0.5, 0.99));
 						}
 					}
 				}
@@ -65,10 +65,10 @@ public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerLis
 				if(spawn>0){
 					spawn--; 
 					boolean random=worldObj.rand.nextBoolean();
-					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+1+worldObj.rand.nextFloat(), y()+3.2, z()-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
-					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()-1+worldObj.rand.nextFloat(), y()+3.2, z()-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
-					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+1+worldObj.rand.nextFloat(), y()+3.2, z()+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
-					Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()-1+worldObj.rand.nextFloat(), y()+3.2, z()+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+1+worldObj.rand.nextFloat(), y()+3.2, z()-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()-1+worldObj.rand.nextFloat(), y()+3.2, z()-1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+1+worldObj.rand.nextFloat(), y()+3.2, z()+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
+					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()-1+worldObj.rand.nextFloat(), y()+3.2, z()+1+worldObj.rand.nextFloat(), 0, 0.01, 0,200,4+worldObj.rand.nextInt(2),1,1, random?0:1, 0, random?1:0, 1, 0.99));
 				}
 				
 				
@@ -170,7 +170,7 @@ public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerLis
 		float random1=worldObj.rand.nextFloat();
 		if(worldObj.isRemote){
 			for(int a=0;a<2;a++){
-		Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+		UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 				x()+worldObj.rand.nextFloat(), y()+3+worldObj.rand.nextFloat(), z()+worldObj.rand.nextFloat(), (0.5-worldObj.rand.nextFloat())*random1, -1+(worldObj.rand.nextFloat())*random1, (0.5-worldObj.rand.nextFloat())*random1,
 				300+worldObj.rand.nextInt(500),50,0.2,1, worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), worldObj.rand.nextFloat(), 0.5+worldObj.rand.nextFloat()/2, 0.99));
 		} }
@@ -178,7 +178,7 @@ public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerLis
 		float random=worldObj.rand.nextFloat();
 		if(rand==0){
 			for(int a=0;a<10;a++){
-				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+				UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 						x()+worldObj.rand.nextFloat(), y()+1+worldObj.rand.nextFloat(), z()+worldObj.rand.nextFloat(), 
 						(0.5-worldObj.rand.nextFloat())*random, 1+(worldObj.rand.nextFloat())*random, (0.5-worldObj.rand.nextFloat())*random,
 						300+worldObj.rand.nextInt(500),50,0.2,1, 
@@ -187,7 +187,7 @@ public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerLis
 		}
 		else if(rand==1){
 			for(int a=0;a<10;a++){
-				Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+				UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 						x()+worldObj.rand.nextFloat(), y()+1+worldObj.rand.nextFloat(), z()+worldObj.rand.nextFloat(), 
 						(0.5-worldObj.rand.nextFloat())*random, 1+(worldObj.rand.nextFloat())*random, (0.5-worldObj.rand.nextFloat())*random,
 						300+worldObj.rand.nextInt(500),50,0.2,true,2,"tx1", 
@@ -195,35 +195,35 @@ public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerLis
 				}
 		}
 		else if(rand==2){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 					x()+0.5, y()+1.1, z()+0.5, 
 					0, 2+worldObj.rand.nextFloat(), 0,
 					800,10,1,true,3,"tx3", 
 					0, 0, 1, 1, 0.99));
 		}
 		else if(rand==3){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 					x()+0.5, y()+1.1, z()+0.5, 
 					0, 2+worldObj.rand.nextFloat(), 0,
 					800,10,1,true,4,"tx3", 
 					0, 0, 1, 1, 0.99));
 		}
 		else if(rand==4){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 					x()+0.5, y()+1.1, z()+0.5, 
 					0, 3+worldObj.rand.nextFloat(), 0,
 					800,10,1,true,5,"tx3", 
 					0, 0, 1, 1, 0.99));
 		}
 		else if(rand==5){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 					x()+0.5, y()+1.1, z()+0.5, 
 					0, 1.5+worldObj.rand.nextFloat()*0.5, 0,
 					800,10,-2,true,6,"tx3", 
 					1, 0, 0, 1, 0.99));
 		}
 		else if(rand==6){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,
 					x()+0.5, y()+1.1, z()+0.5, 
 					0, 5+worldObj.rand.nextFloat(), 0,
 					800,15,-2,true,7,"tx3", 

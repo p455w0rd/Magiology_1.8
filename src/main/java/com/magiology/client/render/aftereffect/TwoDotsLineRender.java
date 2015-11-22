@@ -10,8 +10,8 @@ import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
 public class TwoDotsLineRender extends LongAfterRenderRendererBase{
@@ -27,13 +27,13 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 	}
 	@Override
 	public void render(){
-		boolean upgraded=Util.isItemInStack(MItems.pants_42I, player.getCurrentArmor(1));
+		boolean upgraded=UtilM.isItemInStack(MItems.pants_42I, player.getCurrentArmor(1));
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		TessUtil.getNVB().cleanUp();
 		
-		int tim=(int)((Util.getTheWorld().getTotalWorldTime())%20);
-		float st=Util.calculateRenderPos(tim, tim+1)/10F;
+		int tim=(int)((UtilM.getTheWorld().getTotalWorldTime())%20);
+		float st=UtilM.calculateRenderPos(tim, tim+1)/10F;
 		for(int a=0;a<(upgraded?6:2);a++){
 			float width=1;
 			{
@@ -49,7 +49,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 				}break;
 				}
 				TessUtil.drawLine(td.x1, td.y1, td.z1, td.x2, td.y2, td.z2, width/20, true,TessUtil.getNVB(),st,1);
-				GL11.glColor4d(0.7+Util.RF()*0.2, Util.RF()*0.1, Util.RF()*0.1, (upgraded?0.14:0.09)*Util.calculateRenderPos(prevAlpha,alpha));
+				GL11.glColor4d(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*UtilM.calculateRenderPos(prevAlpha,alpha));
 				GL11.glDepthMask(false);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"textures/models/visual_connection.png"));
@@ -58,19 +58,19 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 				GL11.glDepthMask(true);
 			}
 		}
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	@Override
 	public void update(){
-		player=Util.getThePlayer();
+		player=UtilM.getThePlayer();
 		if(player==null)return;
 		
 		prevAlpha=alpha;
 		
-		alpha+=0.4*(Util.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
+		alpha+=0.4*(UtilM.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
 		
-		alpha=Util.snap(alpha, 0, 1);
+		alpha=UtilM.snap(alpha, 0, 1);
 		if(alpha<0.05)kill();
 	}
 }

@@ -8,7 +8,7 @@ import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class TileEntityFireMatrixTransferer extends TileEntityPow{
 	
@@ -28,13 +28,13 @@ public class TileEntityFireMatrixTransferer extends TileEntityPow{
 		
 		Pos+=speed;
 		for(int a=0;a<2;a++){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*6.5+p*3*Util.RF(),y()+p*6,z()+p*6.5+p*3*Util.RF(),0,0.01+0.01*Util.RF(),0,150+worldObj.rand.nextInt(10),1,2,1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.99));
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*6.5+p*3*UtilM.RF(),y()+p*6,z()+p*6.5+p*3*UtilM.RF(),0,0.01+0.01*UtilM.RF(),0,150+worldObj.rand.nextInt(10),1,2,1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.99));
 		}
 		if(worldObj.rand.nextInt(3)!=0){
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*6,y()+p*12.5,z()+p*6,0.01,0.005*Util.RF()+0.02,0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.98));
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*10,y()+p*12.5,z()+p*6,-0.01,0.005*Util.RF()+0.02,0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.98));
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*10,y()+p*12.5,z()+p*10,-0.01,0.005*Util.RF()+0.02,-0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.98));
-			Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*6,y()+p*12.5,z()+p*10,0.01,0.005*Util.RF()+0.02,-0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.98));
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*6,y()+p*12.5,z()+p*6,0.01,0.005*UtilM.RF()+0.02,0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.98));
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*10,y()+p*12.5,z()+p*6,-0.01,0.005*UtilM.RF()+0.02,0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.98));
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*10,y()+p*12.5,z()+p*10,-0.01,0.005*UtilM.RF()+0.02,-0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.98));
+			UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,x()+p*6,y()+p*12.5,z()+p*10,0.01,0.005*UtilM.RF()+0.02,-0.01,100+worldObj.rand.nextInt(10),2,-3,1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.98));
 		}
 		
 		PowerUtil.sortSides(this);

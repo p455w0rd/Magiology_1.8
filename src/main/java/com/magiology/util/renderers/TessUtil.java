@@ -26,8 +26,8 @@ import com.magiology.core.MReference;
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.AdvancedModelLoader;
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
 import com.magiology.mcobjects.effect.EntityFXM;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -42,7 +42,7 @@ public class TessUtil{
 	private static FontRendererMBase fontRendererMBase=new FontRendererMBase(new ResourceLocation("textures/font/ascii.png"));
 	public static NormalizedVertixBuffer getNVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
-	public static RenderManager getRM(){return Util.getMC().getRenderManager();}
+	public static RenderManager getRM(){return UtilM.getMC().getRenderManager();}
 	
 	
 	public static void bindTexture(ResourceLocation texture){U.getMC().getTextureManager().bindTexture(texture);}
@@ -216,7 +216,7 @@ public class TessUtil{
 		else{ 
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
-			GL11U.rotateXYZ(0, 45, 0);
+			GL11U.glRotate(0, 45, 0);
 			arrowModel.renderAll();
 			GL11.glPopMatrix();
 		}
@@ -283,7 +283,7 @@ public class TessUtil{
 	public static void drawSlotLightMapWcustomSizes(GuiContainer gui,int xPos,int yPos,int xSize,int ySize,boolean useDynamicShadow,boolean invertDepth){
 		if(xSize<2||ySize<2)return;
 		bindTexture(inventoryPict);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 //		int var2=Math.min(xSize, ySize),var1=(var2-var2%2)/2;
 		int var1=1;
 		//x
@@ -329,7 +329,7 @@ public class TessUtil{
 		}
 		if(useDynamicShadow)GL11.glColor4d(1,1,1,1);
 		GL11.glPopMatrix();
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 	}
 	static Field equippedProgress,prevEquippedProgress;
 	public static void setItemRendererEquippProgress(float From0To1,boolean isSmooth){
@@ -349,7 +349,7 @@ public class TessUtil{
 	}
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NormalizedVertixBuffer nvb,double textueOffset,double textueScale){
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
-		Util.getThePlayer();
+		UtilM.getThePlayer();
 		WorldRenderer renderer=getWR();
 		Vec3M[] points=new Vec3M[4];
 		
@@ -422,22 +422,22 @@ public class TessUtil{
 		return fontRendererMBase;
 	}
 	public static FontRenderer getFontRenderer(){
-		return Util.getMC().fontRendererObj;
+		return UtilM.getMC().fontRendererObj;
 	}
 	public static void translateByEntityPos(Entity entity){
-		GL11U.translate(TessUtil.calculateRenderPos(entity));
+		GL11U.glTranslate(TessUtil.calculateRenderPos(entity));
 	}
 	public static float calculateRenderPos(Entity entity, char xyz){
 		if((""+xyz).toLowerCase().equals("x")){
-			return Util.calculateRenderPos(entity.lastTickPosX,entity.posX);
+			return UtilM.calculateRenderPos(entity.lastTickPosX,entity.posX);
 		}
 		if((""+xyz).toLowerCase().equals("y")){
-			return Util.calculateRenderPos(entity.lastTickPosY,entity.posY);
+			return UtilM.calculateRenderPos(entity.lastTickPosY,entity.posY);
 		}
 		if((""+xyz).toLowerCase().equals("z")){
-			return Util.calculateRenderPos(entity.lastTickPosZ,entity.posZ);
+			return UtilM.calculateRenderPos(entity.lastTickPosZ,entity.posZ);
 		}
-		Util.printInln(xyz,"is not a valid key! Use x or y or z.");
+		UtilM.printInln(xyz,"is not a valid key! Use x or y or z.");
 		return -1;
 	}
 	public static Vec3M calculateRenderPosV(Entity entity){

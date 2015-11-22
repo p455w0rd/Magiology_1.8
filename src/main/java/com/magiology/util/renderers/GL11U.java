@@ -29,28 +29,28 @@ public class GL11U{
 	}}
 	/**Is blend enabled?
 	 * @param enabled*/
-	public static void rotateXYZAt(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
+	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
 		boolean WTB=true;
 		if(willTranslateBack.length==1)WTB=willTranslateBack[0];
-		glTranslated(xOffset, yOffset, zOffset);
-		rotateXYZ(xAngle, yAngle, zAngle);
-		if(WTB)glTranslated(-xOffset, -yOffset, -zOffset);
+		GL11.glTranslated(xOffset, yOffset, zOffset);
+		glRotate(xAngle, yAngle, zAngle);
+		if(WTB)GL11.glTranslated(-xOffset, -yOffset, -zOffset);
 	}
-	public static void rotateXYZ(double x,double y,double z){
+	public static void glRotate(double x,double y,double z){
 		glRotated(x,1,0,0);
 		glRotated(y,0,1,0);
 		glRotated(z,0,0,1);
 	}
-	public static void rotateXYZ(float[] float3){
-		rotateXYZ(float3[0], float3[1], float3[2]);
+	public static void glRotate(float[] float3){
+		glRotate(float3[0], float3[1], float3[2]);
 	}
-	public static void rotateXYZ(double[] double3){
-		rotateXYZ(double3[0], double3[1], double3[2]);
+	public static void glRotate(double[] double3){
+		glRotate(double3[0], double3[1], double3[2]);
 	}
-	public static void rotateXYZ(Vec3M vec){
-		rotateXYZ(vec.x, vec.y, vec.z);
+	public static void glRotate(Vec3M vec){
+		glRotate(vec.x, vec.y, vec.z);
 	}
-	public static void blend(boolean enabled){
+	public static void glBlend(boolean enabled){
 		if(enabled)glEnable(GL_BLEND);
 		else glDisable(GL_BLEND);
 	}
@@ -58,55 +58,58 @@ public class GL11U{
 	 * true  = everything
 	 * false = only 100% opaque texture rendered
 	 * @param enabled*/
-	public static void AllOpacityIs(boolean enabled){
+	public static void allOpacityIs(boolean enabled){
 		if(enabled)glAlphaFunc(GL_GREATER, 0);
 		else glAlphaFunc(GL_GREATER, 0.9999F);
 	}
 	/**Sets the texture opaque minimal limit to default MC setting.*/
-	public static void ResetOpacity(){glAlphaFunc(GL_GREATER, 0.1F);}
+	public static void resetOpacity(){glAlphaFunc(GL_GREATER, 0.1F);}
 	/**Sets the rendering mode to render opaque texture.*/
-	public static void SetUpOpaqueRendering(int ID){
+	public static void setUpOpaqueRendering(int ID){
 		glDepthMask(false);
-		blend(true);
+		glBlend(true);
 		blendFunc(ID);
-		AllOpacityIs(true);
+		allOpacityIs(true);
 		glDisable(GL_ALPHA_TEST);
 	}
 	/**Sets the rendering mode to render 100% opaque texture only.*/
-	public static void EndOpaqueRendering(){
-		blend(false);
+	public static void endOpaqueRendering(){
+		glBlend(false);
 		glEnable(GL_ALPHA_TEST);
 		glDepthMask(true);
 		blendFunc(1);
-		ResetOpacity();
+		resetOpacity();
 	}
-	public static void scaled(double scale){
+	public static void glScale(double scale){
 		glScaled(scale, scale, scale);
 	}
-	public static void translate(double[] arrayOf3D){
+	public static void glScale(float scale){
+		glScalef(scale, scale, scale);
+	}
+	public static void glTranslate(double[] arrayOf3D){
 		if(arrayOf3D.length!=3)return;
-		glTranslated(arrayOf3D[0],arrayOf3D[1],arrayOf3D[2]);
+		GL11.glTranslated(arrayOf3D[0],arrayOf3D[1],arrayOf3D[2]);
 	}
-	public static void translate(float[] arrayOf3F){
+	public static void glTranslate(float[] arrayOf3F){
 		if(arrayOf3F.length!=3)return;
-		glTranslated(arrayOf3F[0],arrayOf3F[1],arrayOf3F[2]);
+		GL11.glTranslated(arrayOf3F[0],arrayOf3F[1],arrayOf3F[2]);
 	}
-	public static void translate(Vec3M vec){
-		glTranslated(vec.x,vec.y,vec.z);
+	public static void glTranslate(Vec3M vec){
+		GL11.glTranslated(vec.x,vec.y,vec.z);
 	}
 	public static void texture(boolean enabled){
 		if(enabled)glEnable(GL_TEXTURE_2D);
 		else glDisable(GL_TEXTURE_2D);
 	}
-	public static void lighting(boolean enabled){
+	public static void glLighting(boolean enabled){
 		if(enabled)glEnable(GL_LIGHTING);
 		else glDisable(GL_LIGHTING);
 	}
-	public static void culFace(boolean enabled){
+	public static void glCulFace(boolean enabled){
 		if(enabled)glEnable(GL_CULL_FACE);
 		else glDisable(GL_CULL_FACE);
 	}
-	public static void depth(boolean enabled){
+	public static void glDepth(boolean enabled){
 		if(enabled)glEnable(GL_DEPTH_TEST);
 		else glDisable(GL_DEPTH_TEST);
 	}
@@ -150,13 +153,13 @@ public class GL11U{
 		vectorForTransformation.z=vec4.z;
 		return vectorForTransformation;
 	}
-	public static void translate(BlockPos pos){
-		translate(new float[]{pos.getX(),pos.getY(),pos.getZ()});
+	public static void glTranslatep(BlockPos pos){
+		glTranslate(new float[]{pos.getX(),pos.getY(),pos.getZ()});
 	}
 	public static void protect(){
 		glColor4f(1, 1, 1, 1);
-		lighting(true);
-		ResetOpacity();
+		glLighting(true);
+		resetOpacity();
 		glDepthMask(true);
 		glPushMatrix();
 	}
@@ -164,10 +167,10 @@ public class GL11U{
 		GL11.glColor4f(1, 1, 1, 1);
 		glPopMatrix();
 	}
-	public static void color(ColorF color){
+	public static void glColor(ColorF color){
 		GL11.glColor4f(color.r, color.g, color.b, color.a);
 	}
-	public static void color(int color){
+	public static void glColor(int color){
 		GL11.glColor4f((color>>16&255)/255.0F, (color>>8&255)/255.0F, (color & 255)/255.0F, (color>>24&255)/255.0F);
 	}
 	@Deprecated

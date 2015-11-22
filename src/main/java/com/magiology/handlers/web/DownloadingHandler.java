@@ -8,7 +8,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 
 public class DownloadingHandler{
@@ -23,7 +23,7 @@ public class DownloadingHandler{
 		new Thread(new Runnable(){@Override public void run(){
 			instance.isDownloading=instance.downloadingInvoked=true;
 			downlad(UPDATER_DIR, "http://www.mediafire.com/download/bps59al3r24tmuo/MagiologyUpdater.jar");
-			Util.sleep(100);
+			UtilM.sleep(100);
 			instance.isDownloading=false;
 		}}).start();
 	}

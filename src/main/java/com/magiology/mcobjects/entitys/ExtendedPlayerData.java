@@ -8,7 +8,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 import com.magiology.forgepowered.packets.packets.SendPlayerDataPacket;
 import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 //props to coolAlias on mc forums for teaching me this! :D
 public class ExtendedPlayerData implements IExtendedEntityProperties{
@@ -45,11 +45,11 @@ public class ExtendedPlayerData implements IExtendedEntityProperties{
 	}
 	public void sendData(){
 		if(player.worldObj.isRemote||player==null)return;
-		try{Util.sendMessage(new SendPlayerDataPacket(player));}catch(Exception e){e.printStackTrace();}
+		try{UtilM.sendMessage(new SendPlayerDataPacket(player));}catch(Exception e){e.printStackTrace();}
 	}
 	public void uploadData(){
 		if(!player.worldObj.isRemote||player==null)return;
-		try{Util.sendMessage(new UploadPlayerDataPacket(player));}catch(Exception e){e.printStackTrace();}
+		try{UtilM.sendMessage(new UploadPlayerDataPacket(player));}catch(Exception e){e.printStackTrace();}
 	}
 	
 	public boolean onJump(){

@@ -2,8 +2,8 @@ package com.magiology.mcobjects.effect;
 
 import net.minecraft.world.World;
 
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 	
@@ -51,7 +51,7 @@ public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 		opacityHandler();
 		if(type==1){
 			if(particleAge==blinktime){
-				for(int a=0;a<1+worldObj.rand.nextInt(3);a++)Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()-motionX,0.025-0.05*worldObj.rand.nextFloat()-motionY, 0.025-0.05*worldObj.rand.nextFloat()-motionZ, (int) (10+particleScale*7), 3,-10, false,1,"tx1",r_e,g_e,b_e, this.opacity_e, 0.99));
+				for(int a=0;a<1+worldObj.rand.nextInt(3);a++)UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ, 0.025-0.05*worldObj.rand.nextFloat()-motionX,0.025-0.05*worldObj.rand.nextFloat()-motionY, 0.025-0.05*worldObj.rand.nextFloat()-motionZ, (int) (10+particleScale*7), 3,-10, false,1,"tx1",r_e,g_e,b_e, this.opacity_e, 0.99));
 			}
 			if(particleAge>78&&particleScale>15){
 				particleScale/=1.2;

@@ -1,6 +1,6 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import static com.magiology.util.utilclasses.Util.*;
+import static com.magiology.util.utilclasses.UtilM.*;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -45,7 +45,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode(),maxWidth;
 	public float sliderX,prevSliderX,sliderY,prevSliderY;
 	private AdvancedPhysicsFloat sliderXCol=new AdvancedPhysicsFloat(0, 0.2F,true),sliderYCol=new AdvancedPhysicsFloat(0, 0.2F,true);
-	private static final Pattern blankSpace=Pattern.compile("^\\s*$"),notWhitespace=Pattern.compile("[^\\s]|\\s$"),word=Pattern.compile("\\b");
+	protected static final Pattern blankSpace=Pattern.compile("^\\s*$"),notWhitespace=Pattern.compile("[^\\s]|\\s$"),word=Pattern.compile("\\b");
 	
 	public boolean active=false,visible=true,insertMode=false,viewOnly=false;
 	
@@ -105,7 +105,6 @@ public class GuiTextEditor extends Gui implements Updateable{
 	public void mouseClickMove(int x, int y){
 		try{
 			if(!visible||!active)return;
-			Vec2i move=lastMouse.sub(mouse.x,mouse.y);
 			lastMouse=mouse;
 			mouse=new Vec2i(x-pos.x, y-pos.y);
 			if(handleSlider(x, y)){
@@ -120,7 +119,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	}
 	
 	public boolean keyTyped(int code, char ch){
-		if(viewOnly)return false;
+		if(code==Keyboard.KEY_ESCAPE?false:viewOnly)return false;
 		String prevText=getText();
 		try{
 			if(!visible||!active)return false;
@@ -243,12 +242,12 @@ public class GuiTextEditor extends Gui implements Updateable{
 		buff.addVertex(pos.x+size.x+3, pos.y-3, 0);
 		buff.addVertex(pos.x-3, pos.y-3, 0);
 		
-		GL11U.color(black);
+		GL11U.glColor(black);
 		buff.setClearing(false);
 		buff.draw();
 		buff.setClearing(true);
 		
-		GL11U.color(new Color(160, 160, 160, 255).hashCode());
+		GL11U.glColor(new Color(160, 160, 160, 255).hashCode());
 		buff.setDrawAsWire(true);
 		buff.draw();
 		buff.setDrawAsWire(false);
@@ -290,31 +289,31 @@ public class GuiTextEditor extends Gui implements Updateable{
 		GL11.glPopMatrix();
 		if(maxHeight>size.y){
 			GL11U.texture(false);
-			GL11U.SetUpOpaqueRendering(2);
+			GL11U.setUpOpaqueRendering(2);
 			int width=8,height=(int)Math.max(((size.y-width)*((float)size.y/(float)maxHeight)),10);
 			
-			GL11U.color(new Color(160, 160, 160, 55).hashCode());
+			GL11U.glColor(new Color(160, 160, 160, 55).hashCode());
 			drawModalRectWithCustomSizedTexture((pos.x+size.x-width)-1, pos.y-1, 0, 0, width+2, size.y-width+2, 0, 0);
 			
-			GL11U.color(new Color(160, 160, 160, (int)(75*sliderYCol.getPoint())).hashCode());
+			GL11U.glColor(new Color(160, 160, 160, (int)(75*sliderYCol.getPoint())).hashCode());
 			drawModalRectWithCustomSizedTexture(pos.x+(size.x-width), (int)(pos.y+(size.y-height)*sliderY), 0, 0, width, height-width, 0, 0);
 			
 			GL11U.texture(true);
-			GL11U.EndOpaqueRendering();
+			GL11U.endOpaqueRendering();
 		}
 		if(maxWidth>size.x){
 			GL11U.texture(false);
-			GL11U.SetUpOpaqueRendering(2);
+			GL11U.setUpOpaqueRendering(2);
 			int height=8,width=Math.max((int)((size.x-height)*((float)size.x/(float)maxWidth)),10);
 			
-			GL11U.color(new Color(160, 160, 160, 55).hashCode());
+			GL11U.glColor(new Color(160, 160, 160, 55).hashCode());
 			drawModalRectWithCustomSizedTexture((pos.x)-1, pos.y+size.y-height-1, 0, 0, size.x-height+2, height+2, 0, 0);
 			
-			GL11U.color(new Color(160, 160, 160, (int)(75*sliderXCol.getPoint())).hashCode());
+			GL11U.glColor(new Color(160, 160, 160, (int)(75*sliderXCol.getPoint())).hashCode());
 			drawModalRectWithCustomSizedTexture((int)(pos.x+(size.x-width-height)*sliderX), pos.y+size.y-height, 0, 0, width, height, 0, 0);
 			
 			GL11U.texture(true);
-			GL11U.EndOpaqueRendering();
+			GL11U.endOpaqueRendering();
 		}
 	}
 
@@ -598,11 +597,9 @@ public class GuiTextEditor extends Gui implements Updateable{
 				}
 				else if(s.contains("\n")){
 					
-					int spacesAtTheBeginning=0;
 					String spaces="";
 					for(int j=0;j<s.length();j++){
 						if(s.charAt(j)==' '){
-							spacesAtTheBeginning=j;
 							spaces+=" ";
 						}
 						else continue;

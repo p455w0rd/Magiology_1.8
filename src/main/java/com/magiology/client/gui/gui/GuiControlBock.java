@@ -19,7 +19,7 @@ import com.magiology.forgepowered.packets.packets.TileRedstone;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class GuiControlBock extends GuiContainer implements Updateable{
 	
@@ -47,7 +47,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		case 1:text1="Ignore";break;
 		case 2:text1="Turn ON";break;
 		}
-		int colorGray=Util.colorToCode(Color.GRAY);
+		int colorGray=UtilM.colorToCode(Color.GRAY);
 		int first=-1,second=-1;
 		if(tileCB.redstoneC==0)second=colorGray;
 		if(tileCB.redstoneC==1)first=colorGray;
@@ -88,9 +88,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		this.drawTexturedModalRect(guiLeft+11, guiTop+10, 206, 51, 19, 10);
 		this.drawTexturedModalRect(guiLeft+11, guiTop+24, 206, 51, 19, 10);
 		}
-		GL11U.SetUpOpaqueRendering(2);
+		GL11U.setUpOpaqueRendering(2);
 		drawSmartShit(true);
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		
 		dot1.render(guiLeft+9-6, guiTop+8-6);
 		dot2.render(guiLeft+9-6, guiTop+22-6);
@@ -109,7 +109,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	}
 	
 	public void drawSmartShit(boolean type){
-		double angle=Util.calculateRenderPos(tileCB.prevAngle,tileCB.angle);
+		double angle=UtilM.calculateRenderPos(tileCB.prevAngle,tileCB.angle);
 		switch (tileCB.redstoneC){
 		case 0:{
 			this.drawTexturedModalRect(guiLeft+12, guiTop+35, 176, 21, 16, 16);
@@ -138,7 +138,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		GL11.glRotated(-angle, 0, 0, 1);
 		GL11.glTranslated(-20.5, -4.5, 0);
 		GL11.glTranslated(-(guiLeft+31), -(guiTop+18), 0);
-		double thingyPos=Util.calculateRenderPos(tileCB.prevThingyPos, tileCB.thingyPos);
+		double thingyPos=UtilM.calculateRenderPos(tileCB.prevThingyPos, tileCB.thingyPos);
 		{
 			GL11.glTranslated(guiLeft+83, guiTop+79, 0);
 			GL11.glTranslated(-thingyPos*5, 0, 0);
@@ -175,9 +175,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 			 tileCB.redstoneC++;
 			 if(tileCB.redstoneC>2)tileCB.redstoneC=0;
 			 if(CustomButton!=null){
-				 CustomButton.rGoal=Util.RD();
-				 CustomButton.gGoal=Util.RD();
-				 CustomButton.bGoal=Util.RD();
+				 CustomButton.rGoal=UtilM.RD();
+				 CustomButton.gGoal=UtilM.RD();
+				 CustomButton.bGoal=UtilM.RD();
 			 }
 			 if(dot1!=null){
 				 dot1.glow+=20;
@@ -193,7 +193,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		 }break;
 		 
 		 }
-		 Util.sendMessage(new TileRedstone(tileCB));
+		 UtilM.sendMessage(new TileRedstone(tileCB));
 		 tileCB.getWorld().markBlockForUpdate(tileCB.getPos());
 		 
 	 }
@@ -205,9 +205,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 			dot2=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+22-6, 214-6, 67-6, 16, 16,1.5);
 			dot3=new DrawThatSexyDotHelper(guiLeft+11-6,guiTop+35-6, 214-6, 67-6, 16, 16, 1.5);
 		}
-		dotS1+=Util.CRandD(5);
-		dotS2+=Util.CRandD(5);
-		dotS3+=Util.CRandD(5);
+		dotS1+=UtilM.CRandD(5);
+		dotS2+=UtilM.CRandD(5);
+		dotS3+=UtilM.CRandD(5);
 		dotS1*=0.99;
 		dotS2*=0.99;
 		dotS3*=0.99;

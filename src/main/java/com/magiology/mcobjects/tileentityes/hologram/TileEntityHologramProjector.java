@@ -23,8 +23,8 @@ import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Plane;
 import com.magiology.util.utilobjects.vectors.Ray;
@@ -44,8 +44,8 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	
 	public TileEntityHologramProjector(){
 		size=new Vector2f(11,6);
-		offset=new Vector2f(-5, 1+Util.p*1.45F);
-		main=new ComplexCubeModel(0,0,-Util.p/2, size.x,size.y,Util.p/2);
+		offset=new Vector2f(-5, 1+UtilM.p*1.45F);
+		main=new ComplexCubeModel(0,0,-UtilM.p/2, size.x,size.y,UtilM.p/2);
 	}
 	
 	@Override
@@ -78,20 +78,20 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	
 	@Override
 	public void update(){
-		if(Util.isRemote(this)){
-			Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+		if(UtilM.isRemote(this)){
+			UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
 					x()+U.RF(), y()+U.p*11, z()+U.RF(), x()+offset.x+size.x*U.RF(), y()+offset.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			switch (U.RInt(3)){
 			case 0:{
-				Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+				UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
 						x()+offset.x+size.x*U.RF(), y()+offset.y+size.y, z()+0.5, x()+offset.x+size.x*U.RF(), y()+offset.y+size.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			}break;
 			case 1:{
-				Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+				UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
 						x()+offset.x, y()+offset.y+size.y*U.RF(), z()+0.5, x()+offset.x, y()+offset.y+size.y*U.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			}break;
 			case 2:{
-				Util.spawnEntityFX(new EntityMovingParticleFX(worldObj,
+				UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
 						x()+offset.x+size.x, y()+offset.y+size.y*U.RF(), z()+0.5, x()+offset.x+size.x, y()+offset.y+size.y*U.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			}break;
 			}
@@ -115,13 +115,13 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	}
 	public void onPressed(EntityPlayer player){
 		selectedObj=null;
-		if(Util.isRemote(player))for(int a=0;a<360;a+=30){
-			double[] b=Util.cricleXZ(a+Util.CRandF(16));
+		if(UtilM.isRemote(player))for(int a=0;a<360;a+=30){
+			double[] b=UtilM.cricleXZ(a+UtilM.CRandF(16));
 			b[0]*=0.06;
 			b[1]*=0.06;
 			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.x+x(), size.y+offset.y+point.pointedPos.y+y(), point.pointedPos.z+z()+0.5,
 					b[0], b[1], 0, 200, 0.8, 0, mainColor.x, mainColor.y, mainColor.z, 0.1);
-			Util.spawnEntityFX(part);
+			UtilM.spawnEntityFX(part);
 			part.rotation.x=180;
 		}
 		
@@ -143,7 +143,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 			}
 		}
 		if(!changed)lastPartClicked=null;
-		if(Util.isRemote(player))Util.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
+		if(UtilM.isRemote(player))UtilM.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
 	}
 	
 	
@@ -154,7 +154,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float lenght){
 		Object[][] result={{},{}};
 		try{
-	        Vec3M Vec3M=Util.getPosition(player,Render.partialTicks);
+	        Vec3M Vec3M=UtilM.getPosition(player,Render.partialTicks);
 	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(Render.partialTicks));
 	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
 			
@@ -169,7 +169,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 						min=tile.main.getPoint(false,false,false),
 						max=tile.main.getPoint(true,true,true);
 					
-					if(Util.intersectLinePlane(ray, new Plane(
+					if(UtilM.intersectLinePlane(ray, new Plane(
 							new Vec3M(
 									tile.x()+min.x+tile.offset.x,
 									tile.y()+min.y+tile.offset.y,
@@ -198,7 +198,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		Object[][] rayTraceResult=TileEntityHologramProjector.rayTraceHolograms(player, 7);
 		if(rayTraceResult[0].length>0){
 			boolean hologramCloserThanHit=false,miss=false;
-			if(Util.isRemote(player)){
+			if(UtilM.isRemote(player)){
 				float distance=0;
 				int id=0;
 				for(int i=0;i<rayTraceResult[0].length;i++){

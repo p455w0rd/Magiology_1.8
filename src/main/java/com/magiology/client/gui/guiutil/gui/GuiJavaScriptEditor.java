@@ -5,13 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
 
 import org.apache.commons.lang3.StringUtils;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.client.render.font.FontRendererMClipped;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.NormalizedVertixBufferModel;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.LogUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
@@ -24,7 +30,10 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		super(pos, size);
 	}
 	
-	List<DoubleObject<List<String>,List<Integer>>> coloredText;
+	private List<DoubleObject<List<String>,List<Integer>>> coloredText;
+	private String selectedWord="";
+	private NormalizedVertixBufferModel selection=null;
+	
 	@Override
 	protected void rednerText(FontRendererMClipped fr){
 		if(colors){
@@ -62,10 +71,87 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	
 	private void colorCode(FontRendererMClipped fr){
 		coloredText=new ArrayList<DoubleObject<List<String>,List<Integer>>>();
+		if(statics.isEmpty()){
+			statics.add("runPos");
+			classes.add("World");
+			classes.add("Math");
+			classes.add("BlockPos");
+			classes.add("EnumFacing");
+		}
 		for(int i=0;i<textBuffer.size();i++)coloredText.add(colorLine(fr,i));
+		TessUtil.getNVB().cleanUp();
+		highlightWords(fr);
+		selection=TessUtil.getNVB().exportToNoramlisedVertixBufferModel();
+		selection.setInstantNormalCalculation(false);
+		selection.translate(-0.5, 0, 0);
+		selection.setClearing(false);
 		resetColorData();
 	}
+	private void highlightWords(FontRendererMClipped fr){
+		if(!isSelected()){
+			StringBuilder line=getLine(cursorPosition.y);
+			Matcher forward=word.matcher(line),backward=word.matcher(new StringBuilder(line).reverse());
+			int next=forward.find(cursorPosition.x)?forward.start():getLength(cursorPosition.y),prev=backward.find(line.length()-cursorPosition.x)?line.length()-backward.start():0;
+			selectedWord=line.substring(prev, next);
+		}else selectedWord=getSelectedText();
+		
+		char[] chars=selectedWord.toCharArray();
+		boolean valid=true;
+	    for(char c:chars){
+	    	if(!Character.isLetterOrDigit(c)){
+		    	valid=false;
+		    	break;
+		    }
+	    }
+		if(valid){
+			int selectedWordLenght=selectedWord.length();
+			if(!selectedWord.isEmpty()){
+				for(int i=0;i<coloredText.size();i++){
+					String line=getLine(i).toString();
+					if(line.contains(selectedWord)){
+						int count=0;
+						do{
+							count++;
+							int 
+								start=line.indexOf(selectedWord),
+								end=start+selectedWordLenght;
+							if((start==0?true:!Character.isLetterOrDigit(line.charAt(start-1)))&&(end==line.length()?true:!Character.isLetterOrDigit(line.charAt(end)))){
+								int
+									offset=fr.getStringWidth(line.substring(0, start)),
+									lenght=fr.getStringWidth(line.substring(start, end)),
+									minX=pos.x+offset-1,
+									minY=pos.y+i*fr.FONT_HEIGHT-1,
+									maxX=minX+lenght+2,
+									maxY=minY+11;
+								
+								TessUtil.getNVB().addVertex(minX, maxY, 0);
+								TessUtil.getNVB().addVertex(maxX, maxY, 0);
+								TessUtil.getNVB().addVertex(maxX, minY, 0);
+								TessUtil.getNVB().addVertex(minX, minY, 0);
+							}
+							line=line.substring(end);
+						}while(line.contains(selectedWord)&&count<100);
+						if(count==100)LogUtil.error("Word highlight error!");
+					}
+				}
+			}
+		}
+	}
 	protected void rednerColoredCode(FontRendererMClipped fr){
+		if(selection!=null){
+			GL11U.texture(false);
+			
+			GL11.glColor4f(0, 0, 0, 1);
+			selection.draw();
+			
+			GL11.glColor4f(0.2F, 0.2F, 0.2F, 1);
+			selection.setDrawAsWire(true);
+			selection.draw();
+			selection.setDrawAsWire(false);
+			
+			GL11.glColor4f(1, 1, 1, 1);
+			GL11U.texture(true);
+		}
 		for(int i=0;i<coloredText.size();i++){
 			int offset=0;
 			List<String> line=coloredText.get(i).obj1;
@@ -88,6 +174,9 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		unfinishedVars=new HashMap<int[],String>();
 		statics.add("runPos");
 		classes.add("World");
+		classes.add("Math");
+		classes.add("BlockPos");
+		classes.add("EnumFacing");
 		level=0;
 	}
 	private DoubleObject<List<String>,List<Integer>> colorLine(FontRendererMClipped fr,int i){
@@ -99,8 +188,9 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		String 
 			raw=ProgramHandeler.removeSpacesFrom(textBuffer.get(i).toString(),'{','}','(',')','=',';','*','/','+','-','%','!','>','<','@','#'),
 			words[]=raw.split("((?<=\\W)|(?=\\W))");
-		boolean varFound=false;
-		for(String word:words){
+		boolean varFound=false,functionFound=false,functionStarted=false;
+		for(int k=0;k<words.length;k++){
+			String word=words[k];
 			word=word.replaceAll(" ", "");
 			if(!word.isEmpty()){
 				if(word.equals("{")){
@@ -121,7 +211,33 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 						if(level>0)unfinishedVars.put(new int[]{level,i}, word);
 						else statics.add(word);
 					}
+					if(functionStarted&&!word.contains("(")){
+						functionStarted=false;
+						
+						int level=this.level+1;
+						boolean prevValid=false;
+						while(k<words.length&&!words[k].contains(")")&&!words[k].contains("{")&&!words[k].contains("}")&&!words[k].contains("var")&&!words[k].contains("=")){
+							if(!words[k].contains(" ")){
+								boolean valid=true;
+							    for(char c:words[k].toCharArray()){
+							    	if(!Character.isLetterOrDigit(c)){
+								    	valid=false;
+								    	break;
+								    }
+							    }
+							    if(prevValid==valid)break;
+							    prevValid=valid;
+								if(valid)unfinishedVars.put(new int[]{level,i}, words[k]);
+							}
+							k++;
+						}
+					}
+					if(functionFound){
+						functionFound=false;
+						functionStarted=true;
+					}
 					if(word.equals("var"))varFound=true;
+					if(word.equals("function"))functionFound=true;
 					else{
 						try{
 							Float.parseFloat(word);
@@ -156,6 +272,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			colorKeyWord(line, colors, "for", cyan);
 			colorKeyWord(line, colors, "if", cyan);
 			colorKeyWord(line, colors, "while", cyan);
+			colorKeyWord(line, colors, "new", cyan);
 		}
 		//color words
 		ArrayList<Entry<int[], String>> vars1=new ArrayList();
@@ -171,7 +288,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 					if(level>=word.getKey()[0]&&i>=word.getKey()[1]&&(word.getKey().length>2?i<=word.getKey()[2]:true)){
 						int keyWordStart=part.indexOf(keyWord);
 						String 
-							rawLine=Util.join(line.toArray()),
+							rawLine=UtilM.join(line.toArray()),
 							beforeKeyWord=part.substring(0, keyWordStart),
 							KeyWord=part.substring(keyWordStart, keyWordStart+keyWordLenght),
 							aferKeyWord=part.substring(keyWordStart+keyWordLenght, part.length());
@@ -210,7 +327,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			String part=line.get(j);
 			boolean onlyVar=line.size()==1&&line.get(0).equals(keyWord);
 			
-			String rawLine=Util.join(line.toArray());
+			String rawLine=UtilM.join(line.toArray());
 			if(part.contains(keyWord)&&(onlyVar||!part.equals(keyWord))){
 				int keyWordStart=part.indexOf(keyWord);
 				String 

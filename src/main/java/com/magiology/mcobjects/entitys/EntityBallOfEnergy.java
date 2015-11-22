@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -45,7 +45,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
         this.renderDistanceWeight = 10.0D;
         this.shootingEntity = entity;
         this.setSize(0.5F, 0.5F);
-        for(int a=0;a<2*(time+1);a++)Util.spawnEntityFX(new EntitySmokeFXM(worldObj, posX+Util.CRandF(0.1), posY+Util.CRandF(0.1), posZ+Util.CRandF(0.1), motionX+Util.CRandF(0.5), motionY+Util.CRandF(0.5), motionZ+Util.CRandF(0.5)));
+        for(int a=0;a<2*(time+1);a++)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, posX+UtilM.CRandF(0.1), posY+UtilM.CRandF(0.1), posZ+UtilM.CRandF(0.1), motionX+UtilM.CRandF(0.5), motionY+UtilM.CRandF(0.5), motionZ+UtilM.CRandF(0.5)));
         this.time=time;
         this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
         
@@ -90,7 +90,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
         Vec3M vec31 = new Vec3M(this.posX, this.posY, this.posZ);
         Vec3M Vec3M = new Vec3M(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
         MovingObjectPosition MOP=worldObj.rayTraceBlocks(vec31.conv(), Vec3M.conv(), true,true,false);
-        block=Util.getBlock(worldObj, pos);
+        block=UtilM.getBlock(worldObj, pos);
         if(MOP!=null&&MOP.typeOfHit!=MovingObjectType.MISS){
         	
             if(MOP.hitVec!=null){
@@ -108,7 +108,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
         }else if(MOP!=null){
          	pos=MOP.getBlockPos();
         }
-        Util.spawnEntityFX(new EntitySmokeFXM(worldObj, posX, posY, posZ, 0, 0, 0));
+        UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, posX, posY, posZ, 0, 0, 0));
         motionX*=0.99;
         motionY*=0.99;
         motionZ*=0.99;
@@ -156,7 +156,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
         		I_THREW_IT_ON_THE_GROUND/=pauwa/1.5;
         		for(int b=0;b<pauwa;b++){
         			EntityBallOfEnergy entity=new EntityBallOfEnergy(worldObj, posX, posY, posZ);
-        			entity.setVelocity(Util.CRandD(0.1), Util.CRandD(0.1), Util.CRandD(0.1));
+        			entity.setVelocity(UtilM.CRandD(0.1), UtilM.CRandD(0.1), UtilM.CRandD(0.1));
         			entity.time=I_THREW_IT_ON_THE_GROUND;
         			worldObj.spawnEntityInWorld(entity);
         		}

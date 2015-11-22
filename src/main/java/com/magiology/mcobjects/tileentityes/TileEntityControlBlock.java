@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityControlBlock extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
@@ -27,7 +27,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		this.tank=nbt.getInteger("tank");
 		this.onOf=nbt.getBoolean("onOf");
 		
-		slots=Util.loadItemsFromNBT(nbt, "slots", slots);
+		slots=UtilM.loadItemsFromNBT(nbt, "slots", slots);
 
 		if(nbt.hasKey("CustomName")){
 			this.setInventoryName(nbt.getString("CustomName"));
@@ -40,7 +40,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		nbt.setInteger("tank", this.tank);
 		nbt.setBoolean("onOf", this.onOf);
 		
-		Util.saveItemsToNBT(nbt, "slots", slots);
+		UtilM.saveItemsToNBT(nbt, "slots", slots);
 		
 		if(this.hasCustomName()){
 			nbt.setString("CustomName", this.getName());
@@ -76,7 +76,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		speed*=0.8;
 		if(Math.abs(speed)<0.5)speed*=1.3;
 		
-		thingyPos=Util.slowlyEqalize(thingyPos, thingyWPos, 0.05);
+		thingyPos=UtilM.slowlyEqalize(thingyPos, thingyWPos, 0.05);
 		thingyPos=Math.round(thingyPos*2000)/2000.0;
 		
 		

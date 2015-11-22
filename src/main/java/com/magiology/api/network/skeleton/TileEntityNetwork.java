@@ -18,8 +18,8 @@ import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public abstract class TileEntityNetwork extends TileEntityM implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
@@ -91,8 +91,8 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	@Override
 	public void detectAndSendChanges(){
 		if(!U.isRemote(this))return;
-		if(Util.AxisAlignedBBEqual(pointId,prevPointId))return;
-		Util.sendMessage(new NotifyPointedBoxChangePacket(this));
+		if(UtilM.AxisAlignedBBEqual(pointId,prevPointId))return;
+		UtilM.sendMessage(new NotifyPointedBoxChangePacket(this));
 	}
 	@Override
 	public long getNetworkId(){
@@ -104,7 +104,7 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	}
 	@Override
 	public int getOrientation(){
-		return hasWorldObj()?Util.getBlockMetadata(worldObj,pos):-1;
+		return hasWorldObj()?UtilM.getBlockMetadata(worldObj,pos):-1;
 	}
 	@Override
 	public void initTheComponent(){
@@ -116,7 +116,7 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	}
 	@Override
 	public void setOrientation(int orientation){
-		Util.setMetadata(worldObj, pos, orientation);
+		UtilM.setMetadata(worldObj, pos, orientation);
 	}
 	@Override
 	public void setBrain(TileEntityNetworkController brain){

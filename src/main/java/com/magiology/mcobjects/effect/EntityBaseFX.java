@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.core.MReference;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityBaseFX extends EntityFX{
 	

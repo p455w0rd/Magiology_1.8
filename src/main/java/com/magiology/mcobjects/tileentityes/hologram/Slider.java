@@ -9,14 +9,19 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.lang.ProgramHandeler;
-import com.magiology.api.network.NetworkBaseInterface;
+import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
@@ -39,11 +44,11 @@ public class Slider extends HoloObject implements ICommandInteract{
 	@Override
 	public void render(ColorF color){
 		checkHighlight();
-		ColorF col=Util.calculateRenderColor(prevColor, this.color);
+		ColorF col=UtilM.calculateRenderColor(prevColor, this.color);
 		
 		if(scroll==null){
-			main=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y, Util.p/2);
-			scroll=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y/4, Util.p/2);
+			main=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+			scroll=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
 		}
 		col.bind();
 		main.draw();
@@ -57,20 +62,20 @@ public class Slider extends HoloObject implements ICommandInteract{
 //		Util.printInln(getActivationTarget(),Util.isRemote());
 		renderSliderPos.wantedPoint=sliderPos;
 		renderSliderPos.update();
-		if(Util.getWorldTime(host)%40==0){
-			main=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y, Util.p/2);
-			scroll=new ComplexCubeModel(0, 0, -Util.p/2, -size.x, -size.y/4, Util.p/2);
+		if(UtilM.getWorldTime(host)%40==0){
+			main=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+			scroll=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
 		}
 		size=new Vector2f(originalSize.x*scale, originalSize.y*scale);
 		prevColor=color;
 		
-		color=Util.slowlyEqalizeColor(color, setColor, 0.1F);
+		color=UtilM.slowlyEqalizeColor(color, setColor, 0.1F);
 	}
 
 	@Override
 	public void onPressed(EntityPlayer player){
 		if(moveMode||player.isSneaking())return;
-		sliderPos=Util.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
+		sliderPos=UtilM.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
 		sendCommand();
 	}
 	
@@ -97,28 +102,31 @@ public class Slider extends HoloObject implements ICommandInteract{
 		}
 	}
 	public float getSliderPrecentqage(){
-		return Util.round(sliderPos*(1F/0.75F), 6);
+		return UtilM.round(sliderPos*(1F/0.75F), 6);
 	}
 	@Override
 	public void sendCommand(){
-		if(activationTarget==null)return;
-		WorldNetworkInterface Interface=InterfaceBinder.get(host);
-		NetworkBaseInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
-		if(netInterface!=null&&netInterface.getBrain()!=null){
-			try{
-				ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-				Object[] args=ProgramHandeler.compileArgs(activationTarget.argsSrc,ErrorPos);
-				if(ErrorPos.getVar()==-1){
-					Program com=netInterface.getBrain().getCommand(activationTarget);
-					if(netInterface!=null&&com!=null){
-						com.run(args,new Object[]{host.getWorld()});
-						netInterface.onInvokedFromWorld(Interface, com.result, this,Interface,host);
+		new Thread(new Runnable(){@Override public void run(){
+			if(activationTarget==null)return;
+			WorldNetworkInterface Interface=InterfaceBinder.get(host);
+			NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
+			if(netInterface!=null&&netInterface.getBrain()!=null){
+				try{
+					ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
+					Object[] args=ProgramHandeler.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
+					if(ErrorPos.getVar()==-1){
+						DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
+						if(netInterface!=null&&com!=null){
+							com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
+							List<TileEntityNetworkRouter> routers=netInterface.getPointerContainers();
+							if(!routers.isEmpty())Interface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.result);
+						}
 					}
+				}catch(Exception e){
+					e.printStackTrace();
 				}
-			}catch(Exception e){
-				e.printStackTrace();
 			}
-		}
+		}}).start();
 	}
 	@Override
 	public Object onCommandReceive(Program command){
@@ -140,5 +148,30 @@ public class Slider extends HoloObject implements ICommandInteract{
 	@Override
 	public void setActivationTarget(Program com){
 		activationTarget=com;
+	}
+	@Override
+	public List<DoubleObject<String,Object>> getStandardVars(){
+		List<DoubleObject<String,Object>> result=super.getStandardVars();
+		result.add(new DoubleObject<String,Object>("slide", getSliderPrecentqage()));
+		return result;
+	}
+	@Override
+	public void drawHighlight(){
+		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		float offset=-renderSliderPos.getPoint()*size.y;
+		ComplexCubeModel sliderBox=new ComplexCubeModel(scroll).expand(0.002F).translate(0,offset,0);
+		
+		buff.pushMatrix();
+		buff.setDrawAsWire(true);
+		buff.cleanUp();
+		
+		buff.translate(position.x, position.y, 0);
+		
+		buff.importComplexCube(new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2).expand(0.002F),sliderBox);
+		
+		buff.draw();
+		
+		buff.setDrawAsWire(false);
+		buff.popMatrix();
 	}
 }

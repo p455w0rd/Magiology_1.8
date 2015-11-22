@@ -2,7 +2,7 @@ package com.magiology.forgepowered.proxy;
 
 public class CommonProxy{
 	
-	public void registerProxies(){
+	public void registerProxy(){
 		
 	}
 	

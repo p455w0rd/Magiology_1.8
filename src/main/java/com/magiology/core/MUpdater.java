@@ -3,8 +3,8 @@ package com.magiology.core;
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
 import com.magiology.handlers.web.DownloadingHandler;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class MUpdater{
 	private static float currentVersion=Float.parseFloat(MReference.VERSION),newestVersion=-1;
@@ -19,7 +19,7 @@ public class MUpdater{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		if(newestVersion==-1)Util.printlnEr(MReference.NAME+" has failed to check for updates");
+		if(newestVersion==-1)UtilM.printlnEr(MReference.NAME+" has failed to check for updates");
 		else extraData=U.signature(AQUA)+"Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
 	}
 	public static float getCurrentVersion(){return currentVersion;}

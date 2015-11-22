@@ -21,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.api.lang.ProgramHolder;
+import com.magiology.api.lang.ProgramDataCenter;
 import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.container.CommandCenterContainer;
@@ -40,7 +40,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.Drawer;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
@@ -139,14 +139,14 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		settings.wantedPoint=new Rectangle(pos.x+16,pos.y,16,16).contains(mouseX,mouseY)?1:0.3F;
 		log     .wantedPoint=new Rectangle(pos.x+32,pos.y,16,16).contains(mouseX,mouseY)?1:0.3F;
 		
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(pos.x, pos.y, 0);
-		GL11U.scaled(0.5F);
+		GL11U.glScale(0.5F);
 		
 		ColorF background=ColorF.convert(new Color(16,16,32,220));
 		background.a*=overallAlpha.getPoint();
-		GL11U.color(background);
+		GL11U.glColor(background);
 		GL11U.texture(false);
 		drawTexturedModalRect(0, 0, 0, 0, 96, 32);
 		GL11U.texture(true);
@@ -168,14 +168,14 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		}
 		if(!message.isEmpty()){
 			background.a=color.a*overallAlpha.getPoint();
-			GL11U.color(background);
+			GL11U.glColor(background);
 			GL11U.blendFunc(1);
-			GL11U.scaled(2);
+			GL11U.glScale(2);
 			GL11U.texture(false);
 			drawTexturedModalRect(0, -9, 0, 0, fr.getStringWidth(message)+1, 10);
 			GL11U.texture(true);
 			fr.drawString(message, 0, -8, color.toCode());
-			GL11U.scaled(0.5F);
+			GL11U.glScale(0.5F);
 		}
 		
 		if(txtId==null){
@@ -197,7 +197,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		GlStateManager.bindTexture(txtId);
 		
 		GL11.glPopMatrix();
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	}
 	@Override
@@ -208,7 +208,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 	public void initGui(){
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
-		if(firstInit)programSrc.setText(ProgramHolder.code_get(ProgramContainer.getId(stack)));
+		if(firstInit)programSrc.setText(ProgramDataCenter.code_get(ProgramContainer.getId(stack)));
 		
 		int top=width/2-60,left=height/2-50;
 		
@@ -240,7 +240,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		compileAfter.setText(compAfter.isEmpty()?"0.5":compAfter);
 		
 		GuiTextField name=new GuiTextField(1,fontRendererObj, top+3, left+72+11, 120-6, 12);
-		name.setText(Util.printlnAndReturn(ProgramContainer.getName(stack)));
+		name.setText(ProgramContainer.getName(stack));
 		textFieldList.add(name);
 		((GuiButton)buttonList.get(4)).visible=settingsActive;
 		textFieldList.get(1).setVisible(settingsActive);
@@ -255,14 +255,14 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		else if(b.id==useColors.id)settingsData.addFile("useColors", useColors.isOn()+"");
 		else if(b.id==recommendCode.id)settingsData.addFile("recommendCode", useColors.isOn()+"");
 		else if(b.id==4){
-			Util.sendMessage(new OpenProgramContainerInGui.ExitGui(slotId, programSrc.getText(), textFieldList.get(1).getText(),tilePos));
-			settingsData.saveFromWorld(Util.getTheWorld());
+			UtilM.sendMessage(new OpenProgramContainerInGui.ExitGui(slotId, programSrc.getText(), textFieldList.get(1).getText(),tilePos));
+			settingsData.saveFromWorld(UtilM.getTheWorld());
 		}
 	}
 	@Override
 	public void onGuiClosed(){
 		Keyboard.enableRepeatEvents(false);
-		if(saveOnExit.isOn())Util.sendMessage(new OpenProgramContainerInGui.ExitGui(slotId, programSrc.getText(), textFieldList.get(1).getText(),tilePos));
+		if(saveOnExit.isOn())UtilM.sendMessage(new OpenProgramContainerInGui.ExitGui(slotId, programSrc.getText(), textFieldList.get(1).getText(),tilePos));
 		super.onGuiClosed();
 	}
 	@Override
@@ -282,7 +282,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 				float time=Float.parseFloat(compileAfter.getText());
 				compileAfter.setTextColor(time==0?Color.YELLOW.hashCode():Color.WHITE.hashCode());
 				settingsData.addFile("compileAfter", compileAfter.getText());
-				settingsData.saveFromWorld(Util.getTheWorld());
+				settingsData.saveFromWorld(UtilM.getTheWorld());
 			}catch(Exception e){
 				compileAfter.setTextColor(Color.RED.hashCode());
 			}
@@ -313,15 +313,14 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		boolean compileAfterFocus=compileAfter.isFocused();
 		try{super.mouseClicked(mouseX, mouseY, mouseButton);}catch(Exception e){e.printStackTrace();}
 		Vec2i middle=getEditor().pos.add(getEditor().size.x/2,getEditor().size.y/2);
-		Vec2i pos=getEditor().pos.add(0,getEditor().size.y-16);
 		boolean selected=false;
 		for(GuiTextField textField:textFieldList)if(textField.isFocused()){
 			selected=true;
 			break;
 		}
 		if(compile.wantedPoint==1){
-			Util.sendMessage(new OpenProgramContainerInGui.ExitGui(slotId, programSrc.getText(), textFieldList.get(1).getText(),tilePos));
-			Util.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
+			UtilM.sendMessage(new OpenProgramContainerInGui.ExitGui(slotId, programSrc.getText(), textFieldList.get(1).getText(),tilePos));
+			UtilM.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
 			
 		}else if(settings.wantedPoint==1){
 			settingsActive=!settingsActive;
@@ -333,21 +332,21 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 			((GuiButton)buttonList.get(4)).visible=settingsActive;
 			textFieldList.get(1).setVisible(settingsActive);
 			
-			Util.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
+			UtilM.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
 			
 		}else if(log.wantedPoint==1){
 			logActive=!logActive;
 			
-			List<CharSequence> logData=ProgramHolder.log_get(ProgramContainer.getId(stack));
+			List<CharSequence> logData=ProgramDataCenter.log_get(ProgramContainer.getId(stack));
 			List<StringBuilder> logDataNew=new ArrayList<StringBuilder>();
 			for(int i=0;i<logData.size();i++){
 				String line=logData.get(i).toString();
-				if(line.startsWith(ProgramHolder.err))logDataNew.add(new StringBuilder(line.substring(ProgramHolder.err.length())));
+				if(line.startsWith(ProgramDataCenter.err))logDataNew.add(new StringBuilder(line.substring(ProgramDataCenter.err.length())));
 				else logDataNew.add(new StringBuilder(line));
 			}
-			programLog.setText(Util.join("\n",logDataNew.toArray()));
+			programLog.setText(UtilM.join("\n",logDataNew.toArray()));
 			programLog.sliderY=1;
-			Util.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
+			UtilM.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
 			
 		}else if(selected){
 			getEditor().active=false;
@@ -366,7 +365,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 				compileAfter.setTextColor(time==0?Color.YELLOW.hashCode():Color.WHITE.hashCode());
 				compileAfter.setText((""+time).endsWith(".0")?(""+time).substring(0, (""+time).length()-2):""+time);
 				settingsData.addFile("compileAfter", compileAfter.getText());
-				settingsData.saveFromWorld(Util.getTheWorld());
+				settingsData.saveFromWorld(UtilM.getTheWorld());
 			}catch(Exception e){
 				compileAfter.setTextColor(Color.RED.hashCode());
 			}

@@ -316,7 +316,7 @@ public class RenderBedrockBreaker extends TileEntitySpecialRendererM {
 	public void drawLaserBeam(){
 		
 		GL11.glTranslated(p*8, p*6, p*8);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 			this.bindTexture(Textures.BedrockBreakerLegLaser);
 			buf.addVertexWithUV(p*0.25,  p*-6,   p*0.25,   tW5*12, tH5*12);
 			buf.addVertexWithUV(p*0.25,  p*-6,  -p*0.25,   tW5*8,  tH5*12);
@@ -338,7 +338,7 @@ public class RenderBedrockBreaker extends TileEntitySpecialRendererM {
 			buf.addVertexWithUV(p*-0.25, p*-6,  p*0.25,   tW5*8,  tH5*28);
 			buf.addVertexWithUV(p*0.25,  p*-6,  p*0.25,   tW5*12, tH5*28);
 			buf.draw();
-			GL11U.EndOpaqueRendering();
+			GL11U.endOpaqueRendering();
 			GL11.glColor4f(1, 1, 1, 1);
 		GL11.glTranslated(-p*8, -p*6, -p*8);
 	

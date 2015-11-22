@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public interface PowerCore{
 	/**Keep it short! The shorter it is less bandwidth it takes!*/
@@ -48,10 +48,10 @@ public interface PowerCore{
 					//optional!! spawns particles from percentage of how full the power tile is
 					int ab=(int)(((float)tileMT.getEnergy()/(float)tileMT.getMaxEnergy())*10);
 					for(int a=0;a<ab*3;a++)world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0, 0);
-					for(int a=0;a<ab;a++)Util.spawnEntityFX(new EntitySmoothBubleFX(world,
-						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,Util.CRandF(0.05),Util.CRandF(0.05),Util.CRandF(0.05),
-						150,4+Util.RInt(3),3,true,2,"tx1",
-						1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1, 0.99));
+					for(int a=0;a<ab;a++)UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,
+						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,UtilM.CRandF(0.05),UtilM.CRandF(0.05),UtilM.CRandF(0.05),
+						150,4+UtilM.RInt(3),3,true,2,"tx1",
+						1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.99));
 				}
 				//important stuff-------------------------------------------------------
 				//you a survival player?
@@ -76,10 +76,10 @@ public interface PowerCore{
 //							}
 						}
 						//export to item & spawn
-						Util.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, stack);
+						UtilM.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, stack);
 					}
 					//"else" is important... it is important mister Lapis... *faceplam*
-					else Util.getBlock(world, pos).dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+					else UtilM.getBlock(world, pos).dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
 				}
 				//go away block!
 				world.setBlockToAir(pos);

@@ -7,7 +7,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerListBox*/{
 	public static final float p=1F/16F;
@@ -26,4 +26,8 @@ public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerL
     public int x(){return pos.getX();}
     public int y(){return pos.getY();}
     public int z(){return pos.getZ();}
+    @Override
+	public BlockPosM getPos(){
+    	return new BlockPosM(super.getPos());
+    }
 }

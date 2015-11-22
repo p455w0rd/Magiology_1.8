@@ -23,7 +23,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
 import com.magiology.registry.WrenchRegistry;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.ItemM;
 
 public class FireHammer extends ItemM{
@@ -76,7 +76,7 @@ public class FireHammer extends ItemM{
 //		}
 		
 		if(player.isSneaking()){
-			Util.getBlock(world, pos);
+			UtilM.getBlock(world, pos);
 			if(tile1 instanceof PowerCore){
 //				PowerCore tileMT=(PowerCore) tile1;
 //				if(world.isRemote){
@@ -149,34 +149,34 @@ public class FireHammer extends ItemM{
 		
 		if(isit==true){
 			if(side.getIndex()==0){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+Util.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,-0.02,0);
-				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+Util.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,0.02,0);
-				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+Util.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,0,0);
+				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,-0.02,0);
+				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,0.02,0);
+				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,0,0);
 			}
 			else if(side.getIndex()==1){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+Util.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0.02,0);
-				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+Util.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,-0.02,0);
-				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+Util.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0,0);
+				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0.02,0);
+				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,-0.02,0);
+				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0,0);
 			}
 			else if(side.getIndex()==2){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+Util.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,-0.02);
-				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+Util.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,0.02);
-				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+Util.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,0);
+				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,-0.02);
+				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,0.02);
+				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,0);
 			}
 			else if(side.getIndex()==3){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+Util.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0.02);
-				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+Util.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,-0.02);
-				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+Util.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0);
+				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0.02);
+				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,-0.02);
+				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0);
 			}
 			else if(side.getIndex()==4){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
-				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
-				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, 0,0,0);
+				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
+				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
+				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, 0,0,0);
 			}
 			else if(side.getIndex()==5){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
-				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
-				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+Util.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0,0,0);
+				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
+				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
+				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0,0,0);
 			}
 		}
 		

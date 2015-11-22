@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.magiology.client.render.models.ModelPants42;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class Pants_42 extends UpgradeableArmor{
 	
@@ -52,7 +52,7 @@ public class Pants_42 extends UpgradeableArmor{
 				rw[b]=stackTC.getFloat("rw"+b);
 				rs[b]=stackTC.getFloat("rs"+b);
 				{
-					if(world.rand.nextInt(10)==0)rw[b]=Util.CRandF(0.14);
+					if(world.rand.nextInt(10)==0)rw[b]=UtilM.CRandF(0.14);
 					if(r[b]>rw[b])rs[b]-=0.003;
 					else if(r[b]<rw[b])rs[b]+=0.003;
 					rs[b]*=0.7;

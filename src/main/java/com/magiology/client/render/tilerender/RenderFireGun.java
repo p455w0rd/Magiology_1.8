@@ -9,7 +9,7 @@ import com.magiology.client.render.Textures;
 import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
 public class RenderFireGun extends TileEntitySpecialRendererM {
@@ -113,7 +113,7 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		{
 			{
-			GL11.glTranslated(-Util.calculateRenderPos(isit.prevAnimation, isit.animation),0,0);
+			GL11.glTranslated(-UtilM.calculateRenderPos(isit.prevAnimation, isit.animation),0,0);
 			buf.addVertexWithUV(p*5,  p*7, p*9.5,  tW*16, tH*0);
 			buf.addVertexWithUV(p*5,  p*4, p*9.5,  tW*16, tH*24);
 			buf.addVertexWithUV(p*12, p*4, p*9.5,  tW*72, tH*24);

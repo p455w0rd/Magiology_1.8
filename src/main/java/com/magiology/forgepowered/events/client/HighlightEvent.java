@@ -19,12 +19,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.power.PowerCore;
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.client.render.aftereffect.RenderNetworkPointerContainerHighlight;
 import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
+import com.magiology.mcobjects.items.NetworkPointer;
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
@@ -34,11 +36,13 @@ import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.renderers.tessellatorscripts.Drawer;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 /**
  * ONLY CLIENT SIDE
@@ -56,7 +60,7 @@ public class HighlightEvent{
 		World world=player.worldObj;
 		if(world==null)return;
 		try{if(event.target.typeOfHit!=MovingObjectType.ENTITY){
-			Block block=Util.getBlock(world, pos);
+			Block block=UtilM.getBlock(world, pos);
 			TileEntity tileEn=player.worldObj.getTileEntity(pos);
 			
 			Object[][] rayTraceResult=TileEntityHologramProjector.rayTraceHolograms(player, 7);
@@ -111,6 +115,7 @@ public class HighlightEvent{
 //				}
 				
 				if(block==MBlocks.DontLookAtMe)onDrawHlDontLookAtMe(event);
+				if(tileEn instanceof TileEntityNetworkRouter)doNetRouterHighlight(pos, (TileEntityNetworkRouter)tileEn ,event);
 				
 				if(item!=null&&item.getItem().equals(MItems.FireHammer)){
 					if(tileEn instanceof TileEntityFireLamp){
@@ -130,7 +135,7 @@ public class HighlightEvent{
 				try{
 					if(tileEn instanceof MultiColisionProvider){
 						doMultiColision(pos, item, event);
-						if(tileEn instanceof TileEntityNetworkPointerContainer){
+						if(tileEn instanceof TileEntityNetworkRouter){
 							int curentHighlight=MultiColisionProviderRayTracer.getPointedId((MultiColisionProvider)tileEn);
 							boolean contains=false;
 							for(LongAfterRenderRenderer part:RenderLoopEvents.universalLongRender){
@@ -141,7 +146,7 @@ public class HighlightEvent{
 									}
 								}
 							}
-							if(!contains&&curentHighlight-7>=0)RenderLoopEvents.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkPointerContainer) tileEn));
+							if(!contains&&curentHighlight-7>=0)RenderLoopEvents.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkRouter) tileEn));
 						}
 					}
 				}catch(Exception e){
@@ -153,6 +158,65 @@ public class HighlightEvent{
 		}
 	}
 	
+	private void doNetRouterHighlight(BlockPos pos, TileEntityNetworkRouter tile, DrawBlockHighlightEvent event){
+		if(tile==null)return;
+		NetworkInterface boundedInterface=tile.getBoundedInterface();
+		if(boundedInterface==null)return;
+		
+		GL11.glPushMatrix();
+		GL11U.glTranslate(UtilM.getEntityPos(event.player).mul(-1));
+		World world=event.player.worldObj;
+		GL11U.texture(false);
+		GL11U.setUpOpaqueRendering(1);
+		Block sb1=tile.getBlockType();
+		sb1.setBlockBoundsBasedOnState(world, tile.getPos());
+		AxisAlignedBB source1=sb1.getSelectedBoundingBox(world, tile.getPos());
+		for(TileEntityNetworkRouter i:tile.getBoundedInterface().getPointerContainers()){
+			Block sb=i.getBlockType();
+			sb.setBlockBoundsBasedOnState(world, i.getPos());
+			AxisAlignedBB source=sb.getSelectedBoundingBox(world, i.getPos());
+			
+			if(i!=tile){
+				GL11U.glDepth(false);
+				GL11.glColor4f(1, 0, 0, 0.5F);
+				GL11.glLineWidth(3);
+				GL11U.texture(false);
+				Drawer.startDrawing(GL11.GL_LINES);
+				Drawer.addVertex((source1.minX+source1.maxX)/2, (source1.minY+source1.maxY)/2, (source1.minZ+source1.maxZ)/2);
+				Drawer.addVertex((source.minX+source.maxX)/2, (source.minY+source.maxY)/2, (source.minZ+source.maxZ)/2);
+				Drawer.draw();
+			}
+			
+			for(ItemStack j:i.slots){
+				if(j!=null&&j.hasTagCompound()){
+					if(event.player.isSneaking())for(int k=0;k<2;k++){
+						if(k==0){
+							GL11U.glDepth(false);
+							drawHighlightToBlock(i.getPos(), NetworkPointer.getTarget(j), new ColorF(0,0,0,0.6), 1);
+							GL11U.glDepth(true);
+						}
+						else drawHighlightToBlock(i.getPos(), NetworkPointer.getTarget(j), new ColorF(0,1,1,0.2), 2.5);
+					}else drawHighlightToBlock(i.getPos(), NetworkPointer.getTarget(j), new ColorF(0,0,0,0.6), 1);
+				}
+			}
+		}
+		GL11U.endOpaqueRendering();
+		GL11U.texture(true);
+		GL11U.glDepth(true);
+		GL11.glPopMatrix();
+	}
+	private void drawHighlightToBlock(BlockPos posStart,BlockPos posTarget,ColorF color, double lineWidth){
+		BlockPos targetPos=posTarget;
+		AxisAlignedBB bounds=UtilM.getBlock(UtilM.getTheWorld(),targetPos).getSelectedBoundingBox(UtilM.getTheWorld(), targetPos).expand(0.003, 0.003, 0.003);
+		AxisAlignedBB bounds2=UtilM.getBlock(UtilM.getTheWorld(),posStart).getSelectedBoundingBox(UtilM.getTheWorld(), posStart).expand(0.003, 0.003, 0.003);
+		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,color.r,color.g,color.b,lineWidth,color.a);
+		GL11U.texture(false);
+		Drawer.startDrawing(GL11.GL_LINES);
+		Drawer.addVertex((bounds.minX+bounds.maxX)/2, (bounds.minY+bounds.maxY)/2, (bounds.minZ+bounds.maxZ)/2);
+		Drawer.addVertex((bounds2.minX+bounds2.maxX)/2, (bounds2.minY+bounds2.maxY)/2, (bounds2.minZ+bounds2.maxZ)/2);
+		Drawer.draw();
+		GL11U.texture(true);
+	}
 	private void doMultiColision(BlockPos pos, ItemStack item, DrawBlockHighlightEvent event){
 		MultiColisionProvider colisionProvider=(MultiColisionProvider)event.player.worldObj.getTileEntity(pos);
 		double ex=0.002;
@@ -173,7 +237,7 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(false);
 		GL11.glDisable(GL11.GL_FOG);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		event.setCanceled(true);
 
 		double selectionAlphaHelper=(wtt%120.0)/60.0,selectionAlpha=selectionAlphaHelper>1?2-selectionAlphaHelper:selectionAlphaHelper;
@@ -181,123 +245,117 @@ public class HighlightEvent{
 		
 		AxisAlignedBB pointedBox=colisionProvider.getPointedBox();
 		
-		
-		
-//		drawBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2, 0.1, 0.1, 0.9, 0.05+0.1*selectionAlpha);
-		
-		if(Util.isItemInStack(MItems.FireHammer,item)){
+		if(UtilM.isItemInStack(MItems.FireHammer,item)){
 			drawBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2, 0.1, 0.1, 0.9, 0.1+0.2*selectionAlpha);
-			GL11U.SetUpOpaqueRendering(1);
-			drawSelectionBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2,Util.fluctuatorSmooth(11, 21)/4, Util.fluctuatorSmooth(16, 45)/4, 0.7+Util.fluctuatorSmooth(36, 74)*0.3, 2.5, 0.5);
+			GL11U.setUpOpaqueRendering(1);
+			drawSelectionBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2,UtilM.fluctuatorSmooth(11, 21)/4, UtilM.fluctuatorSmooth(16, 45)/4, 0.7+UtilM.fluctuatorSmooth(36, 74)*0.3, 2.5, 0.5);
 		}
-		else GL11U.SetUpOpaqueRendering(1);
+		else GL11U.setUpOpaqueRendering(1);
 		
-		{
-//			I am adding this to make the code much more easy to understand and to make it shorter! :)
-			List<AxisAlignedBB>
-				up=new ArrayList<AxisAlignedBB>(),down=new ArrayList<AxisAlignedBB>(),
-				east=new ArrayList<AxisAlignedBB>(),west=new ArrayList<AxisAlignedBB>(),
-				north=new ArrayList<AxisAlignedBB>(),south=new ArrayList<AxisAlignedBB>();
-			colisionProvider.getBoxesOnSide(up, 0);colisionProvider.getBoxesOnSide(down, 1);
-			colisionProvider.getBoxesOnSide(east, 3);colisionProvider.getBoxesOnSide(west, 5);
-			colisionProvider.getBoxesOnSide(north, 2);colisionProvider.getBoxesOnSide(south, 4);
-			
-			boolean upCon=!up.isEmpty(),downCon=!down.isEmpty(),
-					eastCon=!east.isEmpty(),westCon=!west.isEmpty(),
-					northCon=!north.isEmpty(),southCon=!south.isEmpty(),
-//			This are booleans that decide if a line will render so all of them merge into a dynamic multi box structure
-					centerToWestUp=(westCon==upCon),centerToEastUp=(eastCon==upCon),centerToEastSouth=(eastCon==southCon),
-					centerToWestNorth=(northCon==westCon),centerToSouthWest=(westCon==southCon),centerToEastNorth=(eastCon==northCon),
-					centerToWestDown=(westCon==downCon),centerToNorthDown=(northCon==downCon),centerToNorthUp=(northCon==upCon),
-					centerToEastDown=(eastCon==downCon),centerToSouthDown=(southCon==downCon),centerToSouthUp=(southCon==upCon);
-//			This calls drawSelectionBox or drawRawSelectionBox with booleans to decide what to render
-			boolean westConOk=false,downConOk=false,northConOk=false,eastConOk=false,upConOk=false,southConOk=false;
-			
-			if(westCon){
-				boolean[] bs={true,false,false,true,true,true,true,true,false,false,true,true};
-				for(AxisAlignedBB box:west)if(box!=null){
-					AxisAlignedBB box1=box.expand(0, ex, ex).offset(-ex, 0, 0);
-					if(box.minZ==mainBox.minZ&&box.minY==mainBox.minY&&box.maxZ==mainBox.maxZ&&box.maxY==mainBox.maxY&&box.maxX==mainBox.minX){
-						drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
-						westConOk=true;
-					}
-					else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
-					
+//		I am adding this to make the code much more easy to understand and to make it shorter! :)
+		List<AxisAlignedBB>
+		up=new ArrayList<AxisAlignedBB>(),down=new ArrayList<AxisAlignedBB>(),
+		east=new ArrayList<AxisAlignedBB>(),west=new ArrayList<AxisAlignedBB>(),
+		north=new ArrayList<AxisAlignedBB>(),south=new ArrayList<AxisAlignedBB>();
+		colisionProvider.getBoxesOnSide(up, 1);colisionProvider.getBoxesOnSide(down, 0);
+		colisionProvider.getBoxesOnSide(east, 5);colisionProvider.getBoxesOnSide(west, 4);
+		colisionProvider.getBoxesOnSide(north, 2);colisionProvider.getBoxesOnSide(south, 3);
+		
+		boolean upCon=!up.isEmpty(),downCon=!down.isEmpty(),
+				eastCon=!east.isEmpty(),westCon=!west.isEmpty(),
+				northCon=!north.isEmpty(),southCon=!south.isEmpty(),
+//				This are booleans that decide if a line will render so all of them merge into a dynamic multi box structure
+				centerToWestUp=(westCon==upCon),centerToEastUp=(eastCon==upCon),centerToEastSouth=(eastCon==southCon),
+				centerToWestNorth=(northCon==westCon),centerToSouthWest=(westCon==southCon),centerToEastNorth=(eastCon==northCon),
+				centerToWestDown=(westCon==downCon),centerToNorthDown=(northCon==downCon),centerToNorthUp=(northCon==upCon),
+				centerToEastDown=(eastCon==downCon),centerToSouthDown=(southCon==downCon),centerToSouthUp=(southCon==upCon);
+//		This calls drawSelectionBox or drawRawSelectionBox with booleans to decide what to render
+		boolean westConOk=false,downConOk=false,northConOk=false,eastConOk=false,upConOk=false,southConOk=false;
+		
+		if(westCon){
+			boolean[] bs={true,false,false,true,true,true,true,true,false,false,true,true};
+			for(AxisAlignedBB box:west)if(box!=null){
+				AxisAlignedBB box1=box.expand(0, ex, ex).offset(-ex, 0, 0);
+				if(box.minZ==mainBox.minZ&&box.minY==mainBox.minY&&box.maxZ==mainBox.maxZ&&box.maxY==mainBox.maxY&&box.maxX==mainBox.minX){
+					drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+					westConOk=true;
 				}
-			}
-			if(downCon){
-				boolean[] bs={true,true,true,true,true,false,true,false,true,false,true,false};
-				for(AxisAlignedBB box:down)if(box!=null){
-					AxisAlignedBB box1=box.expand(ex, 0, ex).offset(0, -ex, 0);
-					if(box.minX==mainBox.minX&&box.minZ==mainBox.minZ&&box.maxX==mainBox.maxX&&box.maxZ==mainBox.maxZ&&box.maxY==mainBox.minY){
-						drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
-						downConOk=true;
-					}
-					else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
-					
-				}
-			}
-			if(northCon){
-				boolean[] bs={true,true,false,false,true,true,true,true,true,true,false,false};
-				for(AxisAlignedBB box:north)if(box!=null){
-					AxisAlignedBB box1=box.expand(ex, ex, 0).offset(0, 0, -ex);
-					if(box.minX==mainBox.minX&&box.minY==mainBox.minY&&box.maxX==mainBox.maxX&&box.maxY==mainBox.maxY&&box.maxZ==mainBox.minZ){
-						drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
-						northConOk=true;
-					}
-					else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
-					
-				}
-			}
-			if(eastCon){
-				boolean[] bs={false,true,true,false,false,false,true,true,true,true,true,true};
-				for(AxisAlignedBB box:east)if(box!=null){
-					AxisAlignedBB box1=box.expand(0, ex, ex).offset(ex, 0, 0);
-					if(box.minZ==mainBox.minZ&&box.minY==mainBox.minY&&box.maxZ==mainBox.maxZ&&box.maxY==mainBox.maxY&&box.minX==mainBox.maxX){
-						drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
-						eastConOk=true;
-					}
-					else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
-					
-				}
-			}
-			if(upCon){
-				boolean[] bs={true,true,true,true,false,true,false,true,false,true,false,true};
-				for(AxisAlignedBB box:up)if(box!=null){
-					AxisAlignedBB box1=box.expand(ex, 0, ex).offset(0, ex, 0);
-					if(box.minX==mainBox.minX&&box.minZ==mainBox.minZ&&box.maxX==mainBox.maxX&&box.maxZ==mainBox.maxZ&&box.minY==mainBox.maxY){
-						drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
-						upConOk=true;
-					}
-					else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
-					
-				}
-			}
-			if(southCon){
-				boolean[] bs={false,false,true,true,true,true,false,false,true,true,true,true};
-				for(AxisAlignedBB box:south)if(box!=null){
-					AxisAlignedBB box1=box.expand(ex, ex, 0).offset(0, 0, ex);
-					if(box.minX==mainBox.minX&&box.minY==mainBox.minY&&box.maxX==mainBox.maxX&&box.maxY==mainBox.maxY&&box.minZ==mainBox.maxZ){
-						drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
-						southConOk=true;
-					}
-					else drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
-					
-				}
-			}
-			if(mainBox!=null){
-				if(!northConOk&&northCon)centerToEastNorth=centerToNorthDown=centerToNorthUp=centerToWestNorth=true;
-				if(!southConOk&&southCon)centerToEastSouth=centerToSouthDown=centerToSouthUp=centerToSouthWest=true;
-				if(!downConOk && downCon)centerToEastDown=centerToNorthDown=centerToSouthDown=centerToWestDown=true;
-				if(!westConOk && westCon)centerToSouthWest=centerToWestDown=centerToWestNorth=centerToWestUp=true;
-				if(!eastConOk && eastCon)centerToEastDown=centerToEastNorth=centerToEastSouth=centerToEastUp=true;
-				if(!upConOk   &&   upCon)centerToEastUp=centerToNorthUp=centerToSouthUp=centerToWestUp=true;
+				else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
 				
-				boolean[] bs={centerToWestNorth,centerToEastNorth,centerToEastSouth,centerToSouthWest,centerToWestDown,centerToWestUp,centerToNorthDown,centerToNorthUp,centerToEastDown,centerToEastUp,centerToSouthDown,centerToSouthUp};
-				drawSelectionBox(mainBox.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
 			}
-			GL11.glPopMatrix();
 		}
+		if(downCon){
+			boolean[] bs={true,true,true,true,true,false,true,false,true,false,true,false};
+			for(AxisAlignedBB box:down)if(box!=null){
+				AxisAlignedBB box1=box.expand(ex, 0, ex).offset(0, -ex, 0);
+				if(box.minX==mainBox.minX&&box.minZ==mainBox.minZ&&box.maxX==mainBox.maxX&&box.maxZ==mainBox.maxZ&&box.maxY==mainBox.minY){
+					drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+					downConOk=true;
+				}
+				else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
+				
+			}
+		}
+		if(northCon){
+			boolean[] bs={true,true,false,false,true,true,true,true,true,true,false,false};
+			for(AxisAlignedBB box:north)if(box!=null){
+				AxisAlignedBB box1=box.expand(ex, ex, 0).offset(0, 0, -ex);
+				if(box.minX==mainBox.minX&&box.minY==mainBox.minY&&box.maxX==mainBox.maxX&&box.maxY==mainBox.maxY&&box.maxZ==mainBox.minZ){
+					drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+					northConOk=true;
+				}
+				else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
+				
+			}
+		}
+		if(eastCon){
+			boolean[] bs={false,true,true,false,false,false,true,true,true,true,true,true};
+			for(AxisAlignedBB box:east)if(box!=null){
+				AxisAlignedBB box1=box.expand(0, ex, ex).offset(ex, 0, 0);
+				if(box.minZ==mainBox.minZ&&box.minY==mainBox.minY&&box.maxZ==mainBox.maxZ&&box.maxY==mainBox.maxY&&box.minX==mainBox.maxX){
+					drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+					eastConOk=true;
+				}
+				else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
+				
+			}
+		}
+		if(upCon){
+			boolean[] bs={true,true,true,true,false,true,false,true,false,true,false,true};
+			for(AxisAlignedBB box:up)if(box!=null){
+				AxisAlignedBB box1=box.expand(ex, 0, ex).offset(0, ex, 0);
+				if(box.minX==mainBox.minX&&box.minZ==mainBox.minZ&&box.maxX==mainBox.maxX&&box.maxZ==mainBox.maxZ&&box.minY==mainBox.maxY){
+					drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+					upConOk=true;
+				}
+				else drawSelectionBox(box.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
+				
+			}
+		}
+		if(southCon){
+			boolean[] bs={false,false,true,true,true,true,false,false,true,true,true,true};
+			for(AxisAlignedBB box:south)if(box!=null){
+				AxisAlignedBB box1=box.expand(ex, ex, 0).offset(0, 0, ex);
+				if(box.minX==mainBox.minX&&box.minY==mainBox.minY&&box.maxX==mainBox.maxX&&box.maxY==mainBox.maxY&&box.minZ==mainBox.maxZ){
+					drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+					southConOk=true;
+				}
+				else drawSelectionBox(box1, 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha);
+				
+			}
+		}
+		if(mainBox!=null){
+			if(!northConOk&&northCon)centerToEastNorth=centerToNorthDown=centerToNorthUp=centerToWestNorth=true;
+			if(!southConOk&&southCon)centerToEastSouth=centerToSouthDown=centerToSouthUp=centerToSouthWest=true;
+			if(!downConOk && downCon)centerToEastDown=centerToNorthDown=centerToSouthDown=centerToWestDown=true;
+			if(!westConOk && westCon)centerToSouthWest=centerToWestDown=centerToWestNorth=centerToWestUp=true;
+			if(!eastConOk && eastCon)centerToEastDown=centerToEastNorth=centerToEastSouth=centerToEastUp=true;
+			if(!upConOk   &&   upCon)centerToEastUp=centerToNorthUp=centerToSouthUp=centerToWestUp=true;
+			
+			boolean[] bs={centerToWestNorth,centerToEastNorth,centerToEastSouth,centerToSouthWest,centerToWestDown,centerToWestUp,centerToNorthDown,centerToNorthUp,centerToEastDown,centerToEastUp,centerToSouthDown,centerToSouthUp};
+			drawSelectionBox(mainBox.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
+		}
+		GL11.glPopMatrix();
 	}
 
 	private void doPowerCounterDisplay(BlockPos pos, ItemStack item, DrawBlockHighlightEvent event){
@@ -306,7 +364,7 @@ public class HighlightEvent{
 		boolean okBlock=true;
 		NBTTagCompound PC=item.getTagCompound();
 		TileEntity tile=event.player.worldObj.getTileEntity(pos);
-		PC.setString("block", Util.getBlock(event.player.worldObj,pos).getLocalizedName());
+		PC.setString("block", UtilM.getBlock(event.player.worldObj,pos).getLocalizedName());
 		
 		if(tile instanceof PowerCore){
 			powerBar=(float)((PowerCore)tile).getEnergy()/(float)((PowerCore)tile).getMaxEnergy();
@@ -362,17 +420,17 @@ public class HighlightEvent{
 		double x1=(event.player.lastTickPosX+(event.player.posX-event.player.lastTickPosX)*event.partialTicks);
 		double y1=(event.player.lastTickPosY+(event.player.posY-event.player.lastTickPosY)*event.partialTicks);
 		double z1=(event.player.lastTickPosZ+(event.player.posZ-event.player.lastTickPosZ)*event.partialTicks);
-		Block block=Util.getBlock(event.player.worldObj,pos);
+		Block block=UtilM.getBlock(event.player.worldObj,pos);
 		AxisAlignedBB bounds=block.getSelectedBoundingBox(event.player.worldObj, pos).expand(0.002, 0.002, 0.002).offset(-x1, -y1, -z1);
 		float[] xpoints=new float[8], ypoints=new float[8], zpoints=new float[8];
 		
 		for(int a=0;a<xpoints.length;a++){xpoints[a]=(float)((rund.nextFloat()-0.5)*0.05);ypoints[a]=(float)((rund.nextFloat()-0.5)*0.05);zpoints[a]=(float)((rund.nextFloat()-0.5)*0.05);}
 		int angle=event.player.worldObj.rand.nextInt(360);
-		double[] ab=Util.cricleXZ(angle);ab[0]/=3;ab[1]/=3;
-		double xr=pos.getX()+Util.CRandF(0.8);
-		double yr=pos.getY()+Util.CRandF(1.8)-0.6;
-		double zr=pos.getZ()+Util.CRandF(0.8);
-		Util.spawnEntityFX(new EntityFollowingBubleFX(event.player.worldObj,pos.getX()+ab[0], pos.getY()+0.3, pos.getZ()+ab[1], xr,yr,zr,event.player,angle, ab[0], 0.3, ab[1], 250, 12, Util.RF(),Util.RF(),Util.RF(),0.2));
+		double[] ab=UtilM.cricleXZ(angle);ab[0]/=3;ab[1]/=3;
+		double xr=pos.getX()+UtilM.CRandF(0.8);
+		double yr=pos.getY()+UtilM.CRandF(1.8)-0.6;
+		double zr=pos.getZ()+UtilM.CRandF(0.8);
+		UtilM.spawnEntityFX(new EntityFollowingBubleFX(event.player.worldObj,pos.getX()+ab[0], pos.getY()+0.3, pos.getZ()+ab[1], xr,yr,zr,event.player,angle, ab[0], 0.3, ab[1], 250, 12, UtilM.RF(),UtilM.RF(),UtilM.RF(),0.2));
 		
 		xpoints[0]+=bounds.minX;xpoints[1]+=bounds.minX;
 		ypoints[0]+=bounds.minY;ypoints[1]+=bounds.maxY;
@@ -394,12 +452,9 @@ public class HighlightEvent{
 	}
 	
 	public void onDrawHlFireLmap(DrawBlockHighlightEvent event,TileEntity tile,BlockPos pos){
-//		if(tile instanceof TileEntityFireLamp){
-//			System.out.println(((TileEntityFireLamp)tile).fuelTicks);
-//		}
 		
 		Vec3M off=TessUtil.calculateRenderPosV(event.player);
-		AxisAlignedBB bounds=Util.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-off.x, -off.y, -off.z);
+		AxisAlignedBB bounds=UtilM.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-off.x, -off.y, -off.z);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -415,8 +470,8 @@ public class HighlightEvent{
 		double x1=(event.player.lastTickPosX+(event.player.posX-event.player.lastTickPosX)*event.partialTicks);
 		double y1=(event.player.lastTickPosY+(event.player.posY-event.player.lastTickPosY)*event.partialTicks);
 		double z1=(event.player.lastTickPosZ+(event.player.posZ-event.player.lastTickPosZ)*event.partialTicks);
-		AxisAlignedBB bounds=Util.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-x1, -y1, -z1);
-		AxisAlignedBB bounds2=Util.getBlock(event.player.worldObj,event.target.getBlockPos()).getSelectedBoundingBox(event.player.worldObj, event.target.getBlockPos()).expand(0.003, 0.003, 0.003).offset(-x1, -y1, -z1);
+		AxisAlignedBB bounds=UtilM.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-x1, -y1, -z1);
+		AxisAlignedBB bounds2=UtilM.getBlock(event.player.worldObj,event.target.getBlockPos()).getSelectedBoundingBox(event.player.worldObj, event.target.getBlockPos()).expand(0.003, 0.003, 0.003).offset(-x1, -y1, -z1);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glLineWidth(2F);

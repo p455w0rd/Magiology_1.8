@@ -1,6 +1,6 @@
 package com.magiology.api.power;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class SixSidedBoolean{
 	public boolean[] sides=new boolean[]{false,false,false,false,false,false,false,false,false,false,false,false};
@@ -63,7 +63,7 @@ public class SixSidedBoolean{
 		for(generic modifier:modifiers){
 			if(modifier instanceof Modifier||modifier instanceof Integer);
 			else{
-				Util.printInln("An invalid input was detected!");
+				UtilM.printInln("An invalid input was detected!");
 				return null;
 			}
 		}
@@ -77,7 +77,7 @@ public class SixSidedBoolean{
 				
 				//detecting possible start input error
 				if(modifier instanceof Integer||!isAStarter(modifier)){
-					Util.println("Modifier cluster starter is invalid!");
+					UtilM.println("Modifier cluster starter is invalid!");
 					return null;
 				}else{
 					starter=(Modifier)modifiers[id];
@@ -88,7 +88,7 @@ public class SixSidedBoolean{
 				
 				//detecting possible input error after a starter modifier
 				if(isAStarter(modifier)){
-					Util.println("Invalid include/exclude input!");
+					UtilM.println("Invalid include/exclude input!");
 					return null;
 				}else{
 					includeExclude=(Modifier)modifier;
@@ -118,7 +118,7 @@ public class SixSidedBoolean{
 				
 				for(int a=0;a<6;a++){
 					result.sides[a+(starter.first6OrLast6?0:6)]=
-					(Util.isInArray(a, nots)?//{
+					(UtilM.isInArray(a, nots)?//{
 						includeExclude==Modifier.Exclude:includeExclude==Modifier.Include)?//{
 							!starter.type:starter.type;
 						//}

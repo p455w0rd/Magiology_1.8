@@ -9,7 +9,7 @@ import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.tessellatorscripts.Drawer;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
@@ -35,13 +35,13 @@ public class CleanButton extends GuiButton implements Updateable{
         this.mouseDragged(mc, mouseX, mouseY);
         this.hovered=mouseX>=this.xPosition&&mouseY>=this.yPosition&&mouseX<this.xPosition+this.width&&mouseY<this.yPosition+this.height;
         this.getHoverState(this.hovered);
-        GL11U.SetUpOpaqueRendering(1);
+        GL11U.setUpOpaqueRendering(1);
         ColorF color=U.calculateRenderColor(prevColor, this.color).mul(highlight.getPoint()+1);
         if(!enabled)color=color.mix(color.blackNWhite(),1,2);
-        GL11U.color(color);
+        GL11U.glColor(color);
         GL11U.texture(false);
         this.drawTexturedModalRect(xPosition, yPosition, 0, 0, width, height);
-        GL11U.color(color.mix(new ColorF(0,0,0,color.a), 1,1.2F));
+        GL11U.glColor(color.mix(new ColorF(0,0,0,color.a), 1,1.2F));
         Drawer.startDrawingLines();
         
         if(enabledOutline[0]){
@@ -66,7 +66,7 @@ public class CleanButton extends GuiButton implements Updateable{
         GL11U.texture(true);
         
         this.drawCenteredString(Font.FR(), this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, color.mix(ColorF.WHITE,1F,1.5F).toCode());
-        GL11U.EndOpaqueRendering();
+        GL11U.endOpaqueRendering();
     }
 	
 	@Override

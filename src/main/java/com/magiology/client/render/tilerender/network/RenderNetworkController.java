@@ -21,12 +21,12 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		new ColorF(0.6,0,0,0.5).bind();
 		GL11U.texture(false);
 		AxisAlignedBB[] cubes=((MultiColisionProvider)tile).getActiveBoxes();
-		if(((ISidedNetworkComponent)tile).getBrain()==null)GL11U.SetUpOpaqueRendering(1);
-		else GL11U.EndOpaqueRendering();
+		if(((ISidedNetworkComponent)tile).getBrain()==null)GL11U.setUpOpaqueRendering(1);
+		else GL11U.endOpaqueRendering();
 		for(AxisAlignedBB a:cubes){
 			TessUtil.drawCube(a);
 		}
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11U.texture(true);
 		GL11U.endProtection();
 	}

@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 	public EntitySubatomicWorldDeconstructorRenderer(float scale){
@@ -50,7 +50,7 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 //			}
 			
 //			GL11H.scaled(scale);
-			GL11U.rotateXYZ(Math.toDegrees(Math.atan2(entity.motionX+entity.motionZ, entity.motionY)), Math.toDegrees(Math.atan2(entity.motionX,entity.motionZ)), 0);
+			GL11U.glRotate(Math.toDegrees(Math.atan2(entity.motionX+entity.motionZ, entity.motionY)), Math.toDegrees(Math.atan2(entity.motionX,entity.motionZ)), 0);
 			TessUtil.drawCube(cube);
 			
 //			GL11H.EndOpaqueRendering();

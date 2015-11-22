@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects.vectors;
 
-import static com.magiology.util.utilclasses.Util.*;
+import static com.magiology.util.utilclasses.UtilM.*;
 
 import java.util.Objects;
 

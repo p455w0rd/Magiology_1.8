@@ -11,11 +11,11 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.magiology.api.lang.ProgramHolder;
+import com.magiology.api.lang.ProgramDataCenter;
 import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.items.ProgramContainer;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class OpenProgramContainerInGui extends AbstractToServerMessage{
@@ -87,18 +87,18 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 		public IMessage process(EntityPlayer player, Side side){
 			if(tilePos!=null){
 				TileEntity test=tilePos.getTile(player.worldObj);
-				if(test instanceof TileEntityNetworkCommandHolder){
-					TileEntityNetworkCommandHolder tile=(TileEntityNetworkCommandHolder)test;
+				if(test instanceof TileEntityNetworkProgramHolder){
+					TileEntityNetworkProgramHolder tile=(TileEntityNetworkProgramHolder)test;
 					ItemStack stack=tile.getStackInSlot(slotId);
 					if(stack!=null&&stack.hasTagCompound()){
-						ProgramHolder.code_register(ProgramContainer.getId(stack), data);
+						ProgramDataCenter.code_register(ProgramContainer.getId(stack), data);
 						ProgramContainer.setName(stack, name);
 					}
 				}
 			}else{
 				ItemStack stack=player.inventory.mainInventory[slotId];
 				if(stack!=null&&stack.hasTagCompound()){
-					ProgramHolder.code_register(ProgramContainer.getId(stack), data);
+					ProgramDataCenter.code_register(ProgramContainer.getId(stack), data);
 					ProgramContainer.setName(stack, name);
 				}
 			}

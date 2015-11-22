@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class BallOfEnergyRenderer extends Render{
 
@@ -42,28 +42,28 @@ public class BallOfEnergyRenderer extends Render{
 				(float)(entity.lastTickPosZ+(entity.posZ-entity.lastTickPosZ)*partialTicks));
 		float smoothRotation=(time360-4)+4*partialTicks,size=-(float)(0.1-entity.time/100F);
 		AxisAlignedBB cube=new AxisAlignedBB(-size,-size,-size,size,size,size);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4d(1, 0.1, 0.1, 0.2);
-		GL11U.rotateXYZ(smoothRotation, 0, 0);
+		GL11U.glRotate(smoothRotation, 0, 0);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(0, -smoothRotation+offs*many++, 0);
+		GL11U.glRotate(0, -smoothRotation+offs*many++, 0);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(0, 0, -smoothRotation+offs*many++);
+		GL11U.glRotate(0, 0, -smoothRotation+offs*many++);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(0, smoothRotation+offs*many++, 0);
+		GL11U.glRotate(0, smoothRotation+offs*many++, 0);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(smoothRotation+offs*many++, 0, 0);
+		GL11U.glRotate(smoothRotation+offs*many++, 0, 0);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(0, 0, smoothRotation+offs*many++);
+		GL11U.glRotate(0, 0, smoothRotation+offs*many++);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(-smoothRotation+offs*many++, 0, smoothRotation+offs*many++);
+		GL11U.glRotate(-smoothRotation+offs*many++, 0, smoothRotation+offs*many++);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(0, -smoothRotation+offs*many++, -smoothRotation+offs*many++);
+		GL11U.glRotate(0, -smoothRotation+offs*many++, -smoothRotation+offs*many++);
 		TessUtil.drawCube(cube);
-		GL11U.rotateXYZ(smoothRotation+offs*many++, -smoothRotation+offs*many++, 0);
+		GL11U.glRotate(smoothRotation+offs*many++, -smoothRotation+offs*many++, 0);
 		TessUtil.drawCube(cube);
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glPopMatrix();

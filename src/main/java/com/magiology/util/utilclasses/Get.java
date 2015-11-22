@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import com.magiology.client.render.font.FontRendererMBase;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public final class Get{
 	@SideOnly(value=Side.CLIENT)

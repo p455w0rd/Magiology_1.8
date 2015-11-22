@@ -18,9 +18,9 @@ import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandle
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class NetworkCommandHolder extends BlockContainerMultiColision{
 	
@@ -34,7 +34,7 @@ public class NetworkCommandHolder extends BlockContainerMultiColision{
 	
 	@Override
 	public AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos){
-		TileEntityNetworkCommandHolder tile=(TileEntityNetworkCommandHolder) world.getTileEntity(pos);
+		TileEntityNetworkProgramHolder tile=(TileEntityNetworkProgramHolder) world.getTileEntity(pos);
 		if(tile==null)return null;
     	float minX=p*6  -(tile.connections[5]!=null?(p*6):0);
     	float minY=p*6  -(tile.connections[1]!=null?(p*6):0);
@@ -59,7 +59,7 @@ public class NetworkCommandHolder extends BlockContainerMultiColision{
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
 		super.onBlockAdded(world, pos, state);
-		TileEntityNetworkCommandHolder tile=(TileEntityNetworkCommandHolder)world.getTileEntity(pos);
+		TileEntityNetworkProgramHolder tile=(TileEntityNetworkProgramHolder)world.getTileEntity(pos);
 		int side=SideUtil.convert(tile.getOrientation());
 		TileEntity test=world.getTileEntity(SideUtil.offset(side, pos));
 		
@@ -95,7 +95,7 @@ public class NetworkCommandHolder extends BlockContainerMultiColision{
 	
 	@Override
 	public TileEntity createNewTileEntity(World var0, int var1){
-		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkCommandHolder());
+		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkProgramHolder());
 	}
 	@Override 
 	protected BlockState createBlockState(){

@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 
 import com.magiology.core.MReference;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class ItemM extends Item{
 		
@@ -28,7 +28,7 @@ public class ItemM extends Item{
 				try{
 					Get.Render.RI().getItemModelMesher().register(item, 0, modelsInit.get(item));
 				} catch (Exception e){
-					Util.printInln("failed!",item,Get.Render.RI());
+					UtilM.printInln("failed!",item,Get.Render.RI());
 					e.printStackTrace();
 					U.exit(404);
 				}

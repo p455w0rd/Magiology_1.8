@@ -9,7 +9,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 
 public class TextBox extends HoloObject implements StringContainer{
@@ -24,12 +24,12 @@ public class TextBox extends HoloObject implements StringContainer{
 	}
 	@Override
 	public void render(ColorF color){
-		GL11U.color(U.calculateRenderColor(prevColor, this.color));
-		GL11U.culFace(false);
+		GL11U.glColor(U.calculateRenderColor(prevColor, this.color));
+		GL11U.glCulFace(false);
 		checkHighlight();
-		GL11U.scaled(-scale*U.p);
+		GL11U.glScale(-scale*U.p);
 		TessUtil.getFontRenderer().drawString(txt, 0, 0, this.setColor.toCode());
-		GL11U.culFace(true);
+		GL11U.glCulFace(true);
 	}
 
 	@Override

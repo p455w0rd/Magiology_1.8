@@ -18,8 +18,8 @@ import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public EnumFacing[] connections = new EnumFacing[6];
@@ -84,8 +84,8 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	@Override
 	public void detectAndSendChanges(){
 		if(!U.isRemote(this))return;
-		if(Util.AxisAlignedBBEqual(pointId,prevPointId))return;
-		Util.sendMessage(new NotifyPointedBoxChangePacket(this));
+		if(UtilM.AxisAlignedBBEqual(pointId,prevPointId))return;
+		UtilM.sendMessage(new NotifyPointedBoxChangePacket(this));
 	}
 	@Override
 	public long getNetworkId(){
@@ -110,7 +110,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 		accessibleSides[side]=accessible;}
 	@Override
 	public void setOrientation(int orientation){
-		Util.setMetadata(worldObj,pos, orientation);
+		UtilM.setMetadata(worldObj,pos, orientation);
 	}
 	@Override
 	public void setBrain(TileEntityNetworkController brain){

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.NBTUtil;
 
 public class UpgradeableArmor extends ItemArmor implements UpgItem{
@@ -67,12 +67,12 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 		if(!itemStack.hasTagCompound())return null;
 		ItemStack[] result=new ItemStack[getInventorySize()];
 		NBTTagCompound nbt=itemStack.getTagCompound();
-		result=Util.loadItemsFromNBT(nbt, slotNBT, result);
+		result=UtilM.loadItemsFromNBT(nbt, slotNBT, result);
 		return result;
 	}
 	@Override
 	public void setStacks(ItemStack itemStack,ItemStack[] itemStacks){
-		Util.saveItemsToNBT(itemStack.getTagCompound(), slotNBT, itemStacks);
+		UtilM.saveItemsToNBT(itemStack.getTagCompound(), slotNBT, itemStacks);
 	}
 	@Override
 	public int getInventorySize(){

@@ -19,7 +19,7 @@ import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionP
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;
@@ -53,7 +53,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
         currentEnergy = NBTTC.getInteger("energy");
         
         containerItems=new ItemStack[NumberOfContainerSlots];
-        containerItems=Util.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
+        containerItems=UtilM.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
     }
     
     @Override
@@ -61,7 +61,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		super.writeToNBT(NBTTC);
     	NBTTC.setInteger("energy", currentEnergy);
     	if(containerItems!=null){
-    		Util.saveItemsToNBT(NBTTC, "TEMT", containerItems);
+    		UtilM.saveItemsToNBT(NBTTC, "TEMT", containerItems);
         }
     }
     
@@ -105,7 +105,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
     @Override
 	public boolean isUpgradeInInv(Item item){
     	for(int a=0;a<NumberOfContainerSlots;a++){
-    		if(Util.isItemInStack(item, containerItems[a]))return true;
+    		if(UtilM.isItemInStack(item, containerItems[a]))return true;
     	}
     	return false;
     }

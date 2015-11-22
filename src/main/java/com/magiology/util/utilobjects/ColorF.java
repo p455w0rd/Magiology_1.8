@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class ColorF{
 	public static final ColorF 
@@ -24,10 +24,10 @@ public class ColorF{
 	public float r,g,b,a;
 	
 	public ColorF(double r, double g, double b, double a){
-		this.r=(float)Util.snap(r, 0, 1);
-		this.g=(float)Util.snap(g, 0, 1);
-		this.b=(float)Util.snap(b, 0, 1);
-		this.a=(float)Util.snap(a, 0, 1);
+		this.r=(float)UtilM.snap(r, 0, 1);
+		this.g=(float)UtilM.snap(g, 0, 1);
+		this.b=(float)UtilM.snap(b, 0, 1);
+		this.a=(float)UtilM.snap(a, 0, 1);
 	}
 	public ColorF(){
 		this(1,1,1,1);
@@ -66,7 +66,7 @@ public class ColorF{
 				);
 	}
 	public ColorF set(float modifier, char c){
-		modifier=Util.snap(modifier, 0, 1);
+		modifier=UtilM.snap(modifier, 0, 1);
 		return new ColorF(c=='r'?modifier:r, c=='g'?modifier:g, c=='b'?modifier:b, c=='a'?modifier:a);
 	}
 	public ColorF copy(){

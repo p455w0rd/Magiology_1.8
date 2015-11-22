@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public final class MediaFireDownlader{
 	
@@ -36,7 +36,7 @@ public final class MediaFireDownlader{
 	
 	
 	private static void saveToDisc(String filePath,String URL)throws Exception{
-        Util.println("Downloading "+name(filePath));
+        UtilM.println("Downloading "+name(filePath));
         BufferedInputStream in=null;
         FileOutputStream fout=null;
         try{
@@ -52,11 +52,11 @@ public final class MediaFireDownlader{
             if(in!=null)in.close();
             if (fout!=null)fout.close();
         }
-        Util.println(name(filePath)+" is successfuly downladed!");
+        UtilM.println(name(filePath)+" is successfuly downladed!");
     }
 	private static String getUrlSrc(String URL)throws Exception{
-		Util.println("Attempting to download "+name(filePathC));
-        Util.println("Connecting!");
+		UtilM.println("Attempting to download "+name(filePathC));
+        UtilM.println("Connecting!");
         URL link=new URL(URL);
         URLConnection linkCon=link.openConnection();
         BufferedReader reader=new BufferedReader(new InputStreamReader(linkCon.getInputStream(), "UTF-8"));
@@ -66,7 +66,7 @@ public final class MediaFireDownlader{
         return total;
     }
     private static String findingValidLink(String string){
-        Util.println("Fetching download link.");
+        UtilM.println("Fetching download link.");
         try{
             String code="(?=\\<)|(?<=\\>)";
             String data[]=string.split(code);

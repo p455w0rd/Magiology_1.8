@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.handlers.GenericPacketEventHandler;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class GenericServerVoidPacket extends AbstractToServerMessage{
 	

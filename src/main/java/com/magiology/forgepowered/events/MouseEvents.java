@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 @SideOnly(value=Side.CLIENT)
 public class MouseEvents{
@@ -17,7 +17,7 @@ public class MouseEvents{
 		//switch scrolling to WingModeChangerGui
 		if(direction==1)WingModeChangerHUD.instance.next();
 		else WingModeChangerHUD.instance.prev();
-		if(!(!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandler.getIsActive(Util.getThePlayer())))event.setCanceled(true);
+		if(!(!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandler.getIsActive(UtilM.getThePlayer())))event.setCanceled(true);
 //		
 //		if(H.RB(0.9))FakeMessageHUD.addMessage(new Message(new ColorF(), "such mesage"+direction, null));
 //		else FakeMessageHUD.addMessage(new Message(new ColorF(), "wow such mesage!", "some "));

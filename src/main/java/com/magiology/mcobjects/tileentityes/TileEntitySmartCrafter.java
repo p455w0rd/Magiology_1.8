@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 
 import com.magiology.client.gui.gui.CraftingGridWOutput;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
@@ -43,8 +43,8 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 		for(int id=0;id<wantedProducts.length;id++){
 			CraftingGridWOutput a=wantedProducts[id];
 			if(a!=null){
-				a.product=Util.loadItemsFromNBT(NBT, "WP"+id,a.product);
-				a.grid=Util.loadItemsFromNBT(NBT, "grid"+id, a.grid);
+				a.product=UtilM.loadItemsFromNBT(NBT, "WP"+id,a.product);
+				a.grid=UtilM.loadItemsFromNBT(NBT, "grid"+id, a.grid);
 				a.ammountWanted=NBT.getInteger("AW"+id);
 			}
 		}
@@ -58,8 +58,8 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 		for(int id=0;id<wantedProducts.length;id++){
 			CraftingGridWOutput a=wantedProducts[id];
 			if(a!=null){
-				Util.saveItemsToNBT(NBT, "WP"+id, a.product);
-				Util.saveItemsToNBT(NBT, "grid"+id, a.grid);
+				UtilM.saveItemsToNBT(NBT, "WP"+id, a.product);
+				UtilM.saveItemsToNBT(NBT, "grid"+id, a.grid);
 				NBT.setInteger("AW"+id, a.ammountWanted);
 			}
 		}
@@ -81,7 +81,7 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 			tile2=worldObj.getTileEntity(pos.add(0,1,0));
 		}break;
 		}
-		if(Util.isNull(tile1,tile2))return false;
+		if(UtilM.isNull(tile1,tile2))return false;
 		if(tile1 instanceof IInventory&&tile2 instanceof IInventory);else return false;
 		
 		return true;

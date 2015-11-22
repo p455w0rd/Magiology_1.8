@@ -4,7 +4,7 @@ import net.minecraft.client.gui.Gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class DrawThatSexyDotHelper extends Gui{
 	
@@ -20,7 +20,7 @@ public class DrawThatSexyDotHelper extends Gui{
 		this.xSize=xSize;
 		this.ySize=ySize;
 		this.trueScale=scale;
-		rotation=Util.CRandD(5);
+		rotation=UtilM.CRandD(5);
 	}
 	
 	public void update(double rot,int glow,boolean var1){
@@ -55,8 +55,8 @@ public class DrawThatSexyDotHelper extends Gui{
 		isUpdated=false;
 		x=x3;y=y3;
 		if(!isUpdated){
-			double scale=Util.calculateRenderPos(prevScale, this.scale);
-			double rotation=Util.calculateRenderPos(prevRotation, this.rotation);
+			double scale=UtilM.calculateRenderPos(prevScale, this.scale);
+			double rotation=UtilM.calculateRenderPos(prevRotation, this.rotation);
 			
 			double scal=scale-1.2;
 			double xR=x-scal*7.5,yR=y-scal*7.5;

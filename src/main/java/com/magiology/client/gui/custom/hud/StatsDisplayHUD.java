@@ -1,6 +1,6 @@
 package com.magiology.client.gui.custom.hud;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class StatsDisplayHUD extends HUD{
 	public static StatsDisplayHUD instance=new StatsDisplayHUD();
@@ -14,7 +14,7 @@ public class StatsDisplayHUD extends HUD{
 	@Override
 	public void update(){
 		prevStatsAlpha=statsAlpha;
-		statsAlpha=(float)Util.slowlyEqalize(statsAlpha, statsWantedAlpha, 0.1);
+		statsAlpha=(float)UtilM.slowlyEqalize(statsAlpha, statsWantedAlpha, 0.1);
 		statsWantedAlpha=isStatsShowed?1:0.2F;
 	}
 }

@@ -14,7 +14,7 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.vectors.Vec8F;
 
 public class ModelWingsFromTheBlackFire extends ModelBiped{
@@ -114,24 +114,24 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		CyborgWingsFromTheBlackFireData data=validateForRender(player);
 		if(data==null)return;
 		float rotation=0;
-		rotation=Util.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
+		rotation=UtilM.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
 		float[][] renderRotations=new float[7][3];
-		for(int a=0;a<data.calcRotationAnglesBase.length;a++)for(int a1=0;a1<data.calcRotationAnglesBase[a].length;a1++)renderRotations[a][a1]=Util.calculateRenderPos(data.calcPrevRotationAnglesBase[a][a1],data.calcRotationAnglesBase[a][a1]);
+		for(int a=0;a<data.calcRotationAnglesBase.length;a++)for(int a1=0;a1<data.calcRotationAnglesBase[a].length;a1++)renderRotations[a][a1]=UtilM.calculateRenderPos(data.calcPrevRotationAnglesBase[a][a1],data.calcRotationAnglesBase[a][a1]);
 		if(models==null)init(renderRotations);
 		//rendering
 		GL11U.protect();
-		GL11U.culFace(Config.isWingsThick());
+		GL11U.glCulFace(Config.isWingsThick());
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glTranslated(-p*1.5,-p*0.5,p*3.5);
-		GL11U.rotateXYZ(-rotation, 0, 0);
+		GL11U.glRotate(-rotation, 0, 0);
 		GL11.glPushMatrix();
 		GL11.glTranslated(-p*4, 0, 0);
-		GL11U.rotateXYZAt(0,-90+10, 0,  p*1.5, p*1.5,0);
+		GL11U.glRotate(0,-90+10, 0,  p*1.5, p*1.5,0);
 		renderWingBase(renderRotations,false,data);
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
 		GL11.glTranslated(p*4, 0, 0);
-		GL11U.rotateXYZAt(0, 90-10, 0, p*1.5, p*1.5,0);
+		GL11U.glRotate(0, 90-10, 0, p*1.5, p*1.5,0);
 		renderWingBase(renderRotations,true,data);
 		GL11.glPopMatrix();
 		GL11U.endProtection();
@@ -151,7 +151,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		GL11.glPushMatrix();
 		for(int a1=0;a1<models.length;a1++){
 			ComplexCubeModel a=models[a1];
-			GL11U.rotateXYZAt(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0, true);
+			GL11U.glRotate(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0, true);
 			a.draw();
 			GL11.glPushMatrix();
 			GL11.glTranslated((a.points[3].x-a.points[4].x)*(side?-1:1), 0, 0);
@@ -159,7 +159,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				ComplexCubeModel part=modelsBack[a1][l];
 				part.draw(); 
 				GL11.glTranslatef((float)(part.points[3].x-part.points[4].x)*(side?-1:1), 0, -p/2*(l*0.6F));
-				GL11U.rotateXYZ(3, 2, 0);
+				GL11U.glRotate(3, 2, 0);
 			}
 			GL11.glColor4d(1,1,1,1);
 			GL11.glPopMatrix();

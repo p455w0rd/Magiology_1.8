@@ -5,22 +5,25 @@ import java.util.List;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3i;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
 import com.magiology.api.lang.bridge.WorldWrapper;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 
 public class ProgramHandeler{
 	
-	public static Object[] compileArgs(String source, ObjectHolder<Integer>... errorPos){
+	public static Object[] compileArgs(List<DoubleObject<String,Object>> standardVars, String source, ObjectHolder<Integer>... errorPos){
 		if(errorPos.length==1)errorPos[0].setVar(-1);
 		else if(errorPos.length!=0)throw new IllegalStateException("You can't use more than 1 ObjectHolder's!");
 		if(source==null||source.isEmpty())return new Object[0];
 		List<Object> result=new ArrayList<Object>();
+		
+		for(DoubleObject<String,Object> i:standardVars)source=source.replaceAll(i.obj1, i.obj2.toString());
 		
 		String newline=System.getProperty("line.separator");
 		
@@ -60,19 +63,17 @@ public class ProgramHandeler{
 	private static String worldJSVar=loadWorld(),blockPosJSvar=loadPos();
 	public static CharSequence defultVars(Object[] environment){
 		StringBuilder result=new StringBuilder();
-		IBlockAccess world=null;
-		Vec3i runPos=null;
-		for(Object o:environment){
-			if(o instanceof IBlockAccess)world=(IBlockAccess)o;
-			if(o instanceof Vec3i)runPos=(Vec3i)o;
-		}
-		if(world!=null||runPos!=null)result.append(new DefaultJavaScriptLoader(environment).result);
+		result.append(new DefaultJavaScriptLoader(environment).result);
 		return result;
 	}
 	private static class DefaultJavaScriptLoader{
 		public String result;
 		private DefaultJavaScriptLoader(Object[] environment){
 			StringBuilder res=new StringBuilder();
+			res.append(
+					  "\nfunction run_funct(pos, name, args){"
+					+ "return Java.type('"+NetworkProgramHolderWrapper.class.getName()+"').run(pos, name, args);"
+					+ "}");
 			for(Object o:environment){
 				if(o instanceof World){
 					res.append(worldJSVar);
@@ -82,6 +83,7 @@ public class ProgramHandeler{
 					res.append(loadPos((Vec3i)o));
 				}
 			}
+			
 			result=res.toString();
 		}
 	}

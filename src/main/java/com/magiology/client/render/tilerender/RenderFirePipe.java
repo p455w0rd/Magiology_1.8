@@ -16,7 +16,7 @@ import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.NormalizedVertixBufferModel;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
 public class RenderFirePipe extends TileEntitySpecialRendererM {
@@ -34,7 +34,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		GL11U.protect();
 		TileEntityFirePipe pipe= (TileEntityFirePipe) tileentity;
-		if(Util.isItemInStack(MItems.FireHammer, Util.getThePlayer().getCurrentEquippedItem())){
+		if(UtilM.isItemInStack(MItems.FireHammer, UtilM.getThePlayer().getCurrentEquippedItem())){
 			if(pipe.hasPriorityUpg){
 				boolean var1=true;
 				for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){

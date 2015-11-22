@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class NetworkController extends BlockContainerMultiColision{
 	

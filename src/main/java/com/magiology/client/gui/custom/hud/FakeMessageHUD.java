@@ -9,8 +9,8 @@ import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
@@ -31,12 +31,12 @@ public class FakeMessageHUD extends HUD{
     	timeout=10;
     	GL11.glPushMatrix();
     	GL11.glTranslatef(xScreen-1, yScreen, 0);
-    	GL11U.SetUpOpaqueRendering(1);
+    	GL11U.setUpOpaqueRendering(1);
 		for(Message msg:messages)if(!msg.isDead()){
 			GL11.glTranslatef(0, -Font.FR().FONT_HEIGHT-1, 0);
 			msg.redner();
 		}
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glPopMatrix();
 	}
     @Override
@@ -83,13 +83,13 @@ public class FakeMessageHUD extends HUD{
 			age++;
 		}
 		public void redner(){
-			ColorF color=Util.calculateRenderColor(prevColor, this.color);
+			ColorF color=UtilM.calculateRenderColor(prevColor, this.color);
 			int sw=Font.FR().getStringWidth(text);
 			float animation=(color.a-1);
 			GL11.glPushMatrix();
 			if(animation<0){
-				GL11U.rotateXYZAt(0, animation*40,0, -sw/2F, Font.FR().FONT_HEIGHT/2F, 0);
-				GL11U.rotateXYZAt(animation*90, 0,0, -sw/2F, Font.FR().FONT_HEIGHT/2F, 0);
+				GL11U.glRotate(0, animation*40,0, -sw/2F, Font.FR().FONT_HEIGHT/2F, 0);
+				GL11U.glRotate(animation*90, 0,0, -sw/2F, Font.FR().FONT_HEIGHT/2F, 0);
 			}
 			GL11.glColor4f(0, 0, 0, 0.3F*color.a);
 			GL11U.texture(false);

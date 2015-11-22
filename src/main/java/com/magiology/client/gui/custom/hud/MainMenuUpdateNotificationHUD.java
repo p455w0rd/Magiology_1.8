@@ -20,8 +20,8 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
@@ -140,7 +140,7 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 				config.set("isDev", Magiology.IS_DEV);
 				config.writeToFile();
 				Desktop.getDesktop().open(updater);
-				Util.exitSoft();
+				UtilM.exitSoft();
 			}
 			else DownloadingHandler.downloadUpdater();
 		}catch(Exception e){e.printStackTrace();}
@@ -158,14 +158,14 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		Rectangle boundingBox=getBoundingBox(true);
 		
 		GL11U.protect();
-		GL11U.rotateXYZAt(popup.getPoint()*90-90, -popup.getPoint()*30+30, popup.getPoint()*40-40, biggest/2, FH, 0);
-		GL11U.scaled(popup.getPoint());
-		GL11U.SetUpOpaqueRendering(1);
-		GL11U.lighting(false);
-		GL11U.depth(false);
+		GL11U.glRotate(popup.getPoint()*90-90, -popup.getPoint()*30+30, popup.getPoint()*40-40, biggest/2, FH, 0);
+		GL11U.glScale(popup.getPoint());
+		GL11U.setUpOpaqueRendering(1);
+		GL11U.glLighting(false);
+		GL11U.glDepth(false);
 		GL11U.texture(false);
 		
-		GL11U.rotateXYZAt(x,y,z, biggest/2, FH, 0);
+		GL11U.glRotate(x,y,z, biggest/2, FH, 0);
 		if(button.getPoint()>0){
 			Rectangle boundingBoxClick=getBoundingBoxClick(true);
 			GL11.glColor4f(1, 0F, 0F, button.getPoint());
@@ -174,7 +174,7 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		GL11.glTranslatef(4, 4, 0);
 		backgroundColor.a=0.2F+0.3F*backgroundBlue.getPoint();
 		backgroundColor.b=backgroundBlue.getPoint();
-		GL11U.color(backgroundColor);
+		GL11U.glColor(backgroundColor);
 		//input vertices
 		buff.addVertexWithUV(0,                 0,                  0, 0, 0);
 		buff.addVertexWithUV(0,                 boundingBox.height, 0, 0, 0);
@@ -211,30 +211,30 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 			GL11.glPopMatrix();
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0, 110, 0);
-			GL11U.scaled(0.2);
-			GL11U.rotateXYZAt(-down.getPoint()*90+90, down.getPoint()*50-50, down.getPoint()*40-40, 85, 200, 0);
-			GL11U.scaled(down.getPoint());
+			GL11U.glScale(0.2);
+			GL11U.glRotate(-down.getPoint()*90+90, down.getPoint()*50-50, down.getPoint()*40-40, 85, 200, 0);
+			GL11U.glScale(down.getPoint());
 			DownloadingIcon.draw(col);
 		}
 		
 		
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		
 		//protect vanilla rendering for my stuff
-		GL11U.depth(true);
+		GL11U.glDepth(true);
 		GL11U.endProtection();
 	}
 	private Rectangle getBoundingBox(boolean hasGL11Transformation){
 		float scale=0;
-		if(hasGL11Transformation)scale=Util.getGuiScale();
-		else scale=Util.getGuiScaleRaw();
+		if(hasGL11Transformation)scale=UtilM.getGuiScale();
+		else scale=UtilM.getGuiScaleRaw();
 		int FH=Font.FR().FONT_HEIGHT;
 		return new Rectangle((int) ((4)*scale),(int) ((4)*scale),(int) ((biggest+4)*scale),(int) ((FH*2+FH*(text.length-2)*backgroundBlue.getPoint()+4)*scale));
 	}
 	private Rectangle getBoundingBoxClick(boolean hasGL11Transformation){
 		float scale=0;
-		if(hasGL11Transformation)scale=Util.getGuiScale();
-		else scale=Util.getGuiScaleRaw();
+		if(hasGL11Transformation)scale=UtilM.getGuiScale();
+		else scale=UtilM.getGuiScaleRaw();
 		int FH=Font.FR().FONT_HEIGHT;
 		return new Rectangle(
 				(int) ((4+(biggest-lenghts[2])/2+Font.FR().getStringWidth("Click "))*scale),

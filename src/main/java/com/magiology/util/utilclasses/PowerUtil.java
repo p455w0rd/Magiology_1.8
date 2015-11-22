@@ -70,7 +70,7 @@ public class PowerUtil{
 		return result;
 	}
 	public static boolean canISidedPowerSendFromTo(ISidedPower fromTile,ISidedPower toTile,int sideOfSending){
-		if(sideOfSending>=0&&sideOfSending<=6);else{Util.println("THE GIVEN SIDE IS INVALID!\nPLEASE ENTER A SIDE FROM 0-6!\n----------**********----------");return false;}
+		if(sideOfSending>=0&&sideOfSending<=6);else{UtilM.println("THE GIVEN SIDE IS INVALID!\nPLEASE ENTER A SIDE FROM 0-6!\n----------**********----------");return false;}
 		return fromTile.getOut(sideOfSending)&&toTile.getIn(SideUtil.getOppositeSide(sideOfSending));
 	}
 	public static int getMaxSpeed(Object tile1,Object tile2){
@@ -169,7 +169,7 @@ public class PowerUtil{
 		else msg();
 	}
 //	if target or sender is not PowerCore
-	private static void msg(){Util.println("YOU HAVE TO ADD 'Object' THAT IMPLEMENTS THE 'PowerCore' INTERFACE!");}
+	private static void msg(){UtilM.println("YOU HAVE TO ADD 'Object' THAT IMPLEMENTS THE 'PowerCore' INTERFACE!");}
 	
 	public static void sortSides(ISidedPower iSidedPower){
 		for(int a=0;a<6;a++){

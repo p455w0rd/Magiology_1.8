@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 @SideOnly(Side.CLIENT)
 public class CustomButton extends GuiButton{
@@ -26,9 +26,9 @@ public class CustomButton extends GuiButton{
     
     public CustomButton(int id, int x, int y,int width, int height, String text,String resouce){
     	super(id, x, y, width, height, text);
-    	rGoal=Util.RD()/1.3;
-    	gGoal=Util.RD()/1.3;
-    	bGoal=Util.RD()/1.3;
+    	rGoal=UtilM.RD()/1.3;
+    	gGoal=UtilM.RD()/1.3;
+    	bGoal=UtilM.RD()/1.3;
     	if(resouce!=null)buttonTexture=new ResourceLocation(resouce);
     }
     
@@ -55,10 +55,10 @@ public class CustomButton extends GuiButton{
     	if(b>1)b=1;
     	else if(b<0)b=0;
     	double Cspeed=0.04;
-    	r=Util.slowlyEqalize(r, rGoal, Cspeed+Util.CRandD(Cspeed/2));
-    	g=Util.slowlyEqalize(g, gGoal, Cspeed+Util.CRandD(Cspeed/2));
-    	b=Util.slowlyEqalize(b, bGoal, Cspeed+Util.CRandD(Cspeed/2));
-    	for(int a=0;a<one2.length;a++)if(Math.abs(one2[a]-one2Goal[a])>0.1)one2[a]=Util.slowlyEqalize(one2[a], one2Goal[a], Cspeed*3+Util.CRandD(Cspeed));
+    	r=UtilM.slowlyEqalize(r, rGoal, Cspeed+UtilM.CRandD(Cspeed/2));
+    	g=UtilM.slowlyEqalize(g, gGoal, Cspeed+UtilM.CRandD(Cspeed/2));
+    	b=UtilM.slowlyEqalize(b, bGoal, Cspeed+UtilM.CRandD(Cspeed/2));
+    	for(int a=0;a<one2.length;a++)if(Math.abs(one2[a]-one2Goal[a])>0.1)one2[a]=UtilM.slowlyEqalize(one2[a], one2Goal[a], Cspeed*3+UtilM.CRandD(Cspeed));
     }
     
 	@Override

@@ -26,8 +26,8 @@ import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class GuiSC extends GuiContainerAndGuiParticles{
 	
@@ -83,7 +83,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			int l=14737632;
 			if(button.mousePressed(mc,x,y))l=16777120;
 			GL11.glTranslated(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
-			GL11U.rotateXYZ(0, 0, 90);
+			GL11U.glRotate(0, 0, 90);
 			GL11.glTranslated(3, -4, 1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, l);
 			GL11.glTranslated(1, -1, -1);
@@ -95,7 +95,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			int l=14737632;
 			if(button.mousePressed(mc,x,y))l=16777120;
 			GL11.glTranslated(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
-			GL11U.rotateXYZ(0, 0, -90);
+			GL11U.glRotate(0, 0, -90);
 			GL11.glTranslated(-3, -4, 1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, l);
 			GL11.glTranslated(-1, 1, -1);
@@ -165,11 +165,11 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		{	
 			String text=txt1.getText();
 			if(!text.isEmpty()){
-				if(!Util.isInteger(text)){
+				if(!UtilM.isInteger(text)){
 					String clearedText="";
 					char[] chars=text.toCharArray();
 					boolean[] valid=new boolean[chars.length];
-					for(int a=0;a<chars.length;a++){valid[a]=Util.isInteger(chars[a]+"");}
+					for(int a=0;a<chars.length;a++){valid[a]=UtilM.isInteger(chars[a]+"");}
 					for(int a=0;a<chars.length;a++)if(valid[a])clearedText+=chars[a]+"";
 					txt1.setText(clearedText);
 				}
@@ -177,11 +177,11 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		}{
 			String text=txt2.getText();
 			if(!text.isEmpty()){
-				if(!Util.isInteger(text)){
+				if(!UtilM.isInteger(text)){
 					String clearedText="";
 					char[] chars=text.toCharArray();
 					boolean[] valid=new boolean[chars.length];
-					for(int a=0;a<chars.length;a++){valid[a]=Util.isInteger(chars[a]+"");}
+					for(int a=0;a<chars.length;a++){valid[a]=UtilM.isInteger(chars[a]+"");}
 					for(int a=0;a<chars.length;a++)if(valid[a])clearedText+=chars[a]+"";
 					txt2.setText(clearedText);
 				}
@@ -201,14 +201,14 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 				tileCB.wantedProducts[listOffset].ammountWanted=Integer.parseInt(txt1.getText());
 				txt1.setText("");
 			}else tileCB.wantedProducts[listOffset].ammountWanted=0;
-			Util.sendMessage(new GenericServerIntPacket(2, tileCB.wantedProducts[listOffset].ammountWanted));
+			UtilM.sendMessage(new GenericServerIntPacket(2, tileCB.wantedProducts[listOffset].ammountWanted));
 		}
 		if(prevTxt2State&&!txt2State){
 			if(!txt2.getText().isEmpty()){
 				tileCB.wantedProducts[listOffset+1].ammountWanted=Integer.parseInt(txt2.getText());
 				txt2.setText("");
 			}else tileCB.wantedProducts[listOffset+1].ammountWanted=0;
-			Util.sendMessage(new GenericServerIntPacket(3, tileCB.wantedProducts[listOffset+1].ammountWanted));
+			UtilM.sendMessage(new GenericServerIntPacket(3, tileCB.wantedProducts[listOffset+1].ammountWanted));
 		}
 		if(!prevTxt1State&&txt1State)if(tileCB.wantedProducts[listOffset  ].ammountWanted!=0)txt1.setText(tileCB.wantedProducts[listOffset  ].ammountWanted+"");
 		if(!prevTxt2State&&txt2State)if(tileCB.wantedProducts[listOffset+1].ammountWanted!=0)txt2.setText(tileCB.wantedProducts[listOffset+1].ammountWanted+"");
@@ -238,7 +238,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 					if(ab.age<2){
 						ab.UpdateScreenRes(width,height,guiLeft,guiTop,xSize,ySize);
 						ab.UpdateParticle();
-					}else ab.maxAge=10+Util.RInt(40);
+					}else ab.maxAge=10+UtilM.RInt(40);
 					
 				}
 			}
@@ -268,22 +268,22 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			
 		}break;
 		case 3:{
-			Util.sendMessage(new GenericServerIntPacket(1, listOffset));
+			UtilM.sendMessage(new GenericServerIntPacket(1, listOffset));
 		}break;
 		case 4:{
-			Util.sendMessage(new GenericServerIntPacket(1, listOffset+1));
+			UtilM.sendMessage(new GenericServerIntPacket(1, listOffset+1));
 		}break;
 		case 5:{
-			Util.sendMessage(new GenericServerIntPacket(0, -1));
+			UtilM.sendMessage(new GenericServerIntPacket(0, -1));
 		}break;
 		case 6:{
-			Util.sendMessage(new GenericServerIntPacket(0, 1));
+			UtilM.sendMessage(new GenericServerIntPacket(0, 1));
 		}break;
 		case 7:{
-			Util.sendMessage(new GenericServerIntPacket(0, -listOffset));
+			UtilM.sendMessage(new GenericServerIntPacket(0, -listOffset));
 		}break;
 		case 8:{
-			Util.sendMessage(new GenericServerIntPacket(0, 48-listOffset));
+			UtilM.sendMessage(new GenericServerIntPacket(0, 48-listOffset));
 		}break;
 		}
 	}

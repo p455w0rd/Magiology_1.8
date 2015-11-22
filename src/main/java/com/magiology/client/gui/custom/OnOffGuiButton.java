@@ -14,7 +14,7 @@ import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
@@ -48,32 +48,32 @@ public class OnOffGuiButton extends GuiButton implements Updateable{
 	        buff.addVertexWithUV(xPosition + width, yPosition + height, zLevel, 0,0);
 	        buff.addVertexWithUV(xPosition + width, yPosition + 0, zLevel,0,0);
 	        buff.addVertexWithUV(xPosition + 0, yPosition + 0, zLevel,0,0);
-	        ColorF color=Util.calculateRenderColor(prevColor, this.color);
+	        ColorF color=UtilM.calculateRenderColor(prevColor, this.color);
 	        GL11.glLineWidth(1);
-			GL11U.color(color.mix(ColorF.BLACK,1,0.3F));
+			GL11U.glColor(color.mix(ColorF.BLACK,1,0.3F));
 	        buff.setClearing(false);
 	        buff.draw();
 	        buff.setClearing(true);
-			GL11U.color(color);
+			GL11U.glColor(color);
 	        buff.setDrawAsWire(true);
 	        buff.draw();
 	        buff.setDrawAsWire(false);
 	        
 	        int width=this.width/2;
-	        float scale=Util.getGuiScaleRaw();
+	        float scale=UtilM.getGuiScaleRaw();
 	        buff.addVertexWithUV(xPosition + 1.1/scale, yPosition + height-1/scale, zLevel, 0,0);
 	        buff.addVertexWithUV(xPosition + width-1/scale, yPosition + height-1/scale, zLevel, 0,0);
 	        buff.addVertexWithUV(xPosition + width-1/scale, yPosition + 1.1/scale, zLevel,0,0);
 	        buff.addVertexWithUV(xPosition + 1.1/scale, yPosition + 1.1/scale, zLevel,0,0);
 	        buff.pushMatrix();
 			buff.translate(width*pos.getPoint(), 0, 0);
-			ColorF selectionColor=Util.calculateRenderColor(prevSelectionColor, this.selectionColor);
+			ColorF selectionColor=UtilM.calculateRenderColor(prevSelectionColor, this.selectionColor);
 	        GL11.glLineWidth(1);
-			GL11U.color(selectionColor.mix(ColorF.WHITE,1,0.6F));
+			GL11U.glColor(selectionColor.mix(ColorF.WHITE,1,0.6F));
 	        buff.setClearing(false);
 	        buff.draw();
 	        buff.setClearing(true);
-			GL11U.color(selectionColor.mix(ColorF.BLACK,1,0.3F));
+			GL11U.glColor(selectionColor.mix(ColorF.BLACK,1,0.3F));
 	        buff.setDrawAsWire(true);
 	        buff.draw();
 	        buff.setDrawAsWire(false);
@@ -89,14 +89,14 @@ public class OnOffGuiButton extends GuiButton implements Updateable{
 		pos.bounciness=Math.abs(pos.speed*1.5F);
 		prevSelectionColor=selectionColor.copy();
 		prevColor=color.copy();
-		int mouseX=Mouse.getX()/Util.getGuiScaleRaw(),mouseY=(-Mouse.getY()+Display.getHeight())/Util.getGuiScaleRaw(),xPosition=(int)(this.xPosition+(width/2)*pos.getPoint());
+		int mouseX=Mouse.getX()/UtilM.getGuiScaleRaw(),mouseY=(-Mouse.getY()+Display.getHeight())/UtilM.getGuiScaleRaw(),xPosition=(int)(this.xPosition+(width/2)*pos.getPoint());
         this.hovered=mouseX>=this.xPosition&&mouseY>=this.yPosition&&mouseX<this.xPosition+this.width&&mouseY<this.yPosition+this.height;
-		color=Util.slowlyEqalizeColor(color, setColor.mul(hovered?1:0.9), 0.05F);
-		if(mouseX>=xPosition&&mouseY>=this.yPosition&&mouseX<xPosition+this.width/2&&mouseY<this.yPosition+this.height)selectionColor=Util.slowlyEqalizeColor(selectionColor, color.mix(ColorF.WHITE), 0.05F);
-		else selectionColor=Util.slowlyEqalizeColor(selectionColor, color, 0.05F);
+		color=UtilM.slowlyEqalizeColor(color, setColor.mul(hovered?1:0.9), 0.05F);
+		if(mouseX>=xPosition&&mouseY>=this.yPosition&&mouseX<xPosition+this.width/2&&mouseY<this.yPosition+this.height)selectionColor=UtilM.slowlyEqalizeColor(selectionColor, color.mix(ColorF.WHITE), 0.05F);
+		else selectionColor=UtilM.slowlyEqalizeColor(selectionColor, color, 0.05F);
 	}
 	public boolean onClicked(){
-		int mouseX=Mouse.getX()/Util.getGuiScaleRaw(),mouseY=(-Mouse.getY()+Display.getHeight())/Util.getGuiScaleRaw(),xPosition=(int) (this.xPosition+(width/2)*pos.getPoint());
+		int mouseX=Mouse.getX()/UtilM.getGuiScaleRaw(),mouseY=(-Mouse.getY()+Display.getHeight())/UtilM.getGuiScaleRaw(),xPosition=(int) (this.xPosition+(width/2)*pos.getPoint());
 		boolean selected=mouseX >= xPosition&& mouseY >= this.yPosition && mouseX < xPosition + this.width/2 && mouseY < this.yPosition + this.height;
 		if(!selected)return false;
 		pos.wantedPoint=pos.wantedPoint==0?1:0;

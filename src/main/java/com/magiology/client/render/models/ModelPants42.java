@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.client.render.Textures;
 import com.magiology.core.init.MItems;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class ModelPants42 extends ModelBiped{
     ModelRenderer legFront1,legFront2,legFront3,legFront4,Base,legSideAdd11,legSideAdd12,legSideAdd21,legSideAdd22,Stick1,Stick2,Stick3,Stick4,FrontStickB1,FrontStickAdd1,FrontStickB2,FrontStickAdd2;

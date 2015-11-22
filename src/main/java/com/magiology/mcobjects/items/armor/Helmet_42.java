@@ -16,8 +16,8 @@ import com.magiology.client.render.models.ModelHelmet42;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.NBTUtil;
 
 public class Helmet_42 extends UpgradeableArmor{
@@ -48,13 +48,13 @@ public class Helmet_42 extends UpgradeableArmor{
 	public void onArmorTick(World world,EntityPlayer player,ItemStack helmet42){
 		if(helmet42.hasTagCompound()){
 			if(!player.isInvisible()){
-				double[] roundXYZ=Util.createBallXYZ(1,true);
+				double[] roundXYZ=UtilM.createBallXYZ(1,true);
 				roundXYZ[1]-=0.5;
 				roundXYZ[4]-=0.5;
-	            EntityFollowingBubleFX part=new EntityFollowingBubleFX(world, roundXYZ[0]+player.posX, roundXYZ[1]+player.posY, roundXYZ[2]+player.posZ, Util.CRandF(0.01), Util.CRandF(0.01), Util.CRandF(0.01), player, 0, roundXYZ[3], roundXYZ[4], roundXYZ[5], 300, 3+(player.isSneaking()?10:0), Util.RF(), Util.RF(), Util.RF(), 1-(player==U.getMC().thePlayer?(U.getMC().gameSettings.thirdPersonView==0?0.95:0):0));
+	            EntityFollowingBubleFX part=new EntityFollowingBubleFX(world, roundXYZ[0]+player.posX, roundXYZ[1]+player.posY, roundXYZ[2]+player.posZ, UtilM.CRandF(0.01), UtilM.CRandF(0.01), UtilM.CRandF(0.01), player, 0, roundXYZ[3], roundXYZ[4], roundXYZ[5], 300, 3+(player.isSneaking()?10:0), UtilM.RF(), UtilM.RF(), UtilM.RF(), 1-(player==U.getMC().thePlayer?(U.getMC().gameSettings.thirdPersonView==0?0.95:0):0));
 	            part.noClip=false;
 	            part.isChangingPos=false;
-	            Util.spawnEntityFX(part);
+	            UtilM.spawnEntityFX(part);
 			}
 		}else NBTUtil.createNBT(helmet42);
 	}

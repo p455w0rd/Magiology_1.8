@@ -12,9 +12,9 @@ import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.NBTUtil;
 
 public class GuiCenterContainer extends GuiContainer implements Updateable{
@@ -22,7 +22,7 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiCenterContainer.png");
 	protected static final ResourceLocation widgetsTexPath = new ResourceLocation("textures/gui/widgets.png");
 	
-	public GuiCenterContainer(EntityPlayer player,TileEntityNetworkCommandHolder tile){
+	public GuiCenterContainer(EntityPlayer player,TileEntityNetworkProgramHolder tile){
 		super(new CommandCenterContainer(player,tile));
 		this.xSize=176;
 		this.ySize=166;
@@ -52,13 +52,13 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 	protected void actionPerformed(GuiButton b){
 		switch(b.id){
 		case 0:{
-			EntityPlayer player=Util.getThePlayer();
+			EntityPlayer player=UtilM.getThePlayer();
 			if(player.openContainer instanceof CommandCenterContainer){
 				CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
 				int id=container.selectedSlotId+36;
 				ItemStack stack=((Slot)container.inventorySlots.get(id)).getStack();
 				if(stack!=null){
-					Util.sendMessage(new OpenProgramContainerInGui(id));
+					UtilM.sendMessage(new OpenProgramContainerInGui(id));
 					NBTUtil.createNBT(stack);
 				}
 			}
@@ -74,11 +74,11 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 	}
 	
 	private int getSelectedSlotId(){
-		EntityPlayer player=Util.getThePlayer();
+		EntityPlayer player=UtilM.getThePlayer();
 		if(player.openContainer instanceof CommandCenterContainer){
 			CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
 			int id=container.selectedSlotId;
-			if(!Util.isItemInStack(MItems.commandContainer, ((Slot)container.inventorySlots.get(id+36)).getStack()))return -1;
+			if(!UtilM.isItemInStack(MItems.commandContainer, ((Slot)container.inventorySlots.get(id+36)).getStack()))return -1;
 			return id;
 		}
 		return -1;

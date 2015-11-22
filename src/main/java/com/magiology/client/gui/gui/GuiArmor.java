@@ -22,8 +22,8 @@ import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	
@@ -55,11 +55,11 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		prevSliderPos=sliderPos;
 		this.updateParticles();
 		for(int a=0;a<4;a++){
-			GuiParticle part=new GuiParticle(100+Util.RInt(68)+guiLeft, 60+guiTop, 30, 0,-0.5+Util.CRandF(0.5), Util.RF()*2+2, o1/20, 1, Util.RF(),Util.RF()*0.5,Util.RF()*0.2, texture1, GuiStandardFX.CloudFX);
+			GuiParticle part=new GuiParticle(100+UtilM.RInt(68)+guiLeft, 60+guiTop, 30, 0,-0.5+UtilM.CRandF(0.5), UtilM.RF()*2+2, o1/20, 1, UtilM.RF(),UtilM.RF()*0.5,UtilM.RF()*0.2, texture1, GuiStandardFX.CloudFX);
 			part.hasMovementNoise=false;
 			GuiContainerAndGuiParticles.spawnGuiParticle(part);
 		}
-		speed+=Util.CRandD(0.15);
+		speed+=UtilM.CRandD(0.15);
 		double pos1=-guiTop-100-0.2*ySize/2.9F;
 		double pos2=-guiTop-100-0.8*ySize/2.9F;
 		if(playerYPos>pos1)speed-=0.015;
@@ -79,23 +79,23 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			if(o1>o2)o1-=0.035;
 		}
 		long WT=U.getMC().theWorld.getTotalWorldTime();
-		if(Util.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, 15, 0);
+		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, 15, 0);
 		GL11.glTranslated(0, 0, 250);
 		drawBIGRotatingItemStack(p42[pos]);
 		GL11.glTranslated(0, 0,-250);
-		if(Util.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, -15, 0);
+		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, -15, 0);
 		
 		TessUtil.bindTexture(main);
-		GL11U.SetUpOpaqueRendering(2);
+		GL11U.setUpOpaqueRendering(2);
 		double scale=0.5;
 		drawSmartShit();
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.9F);
 		GL11.glTranslated(0, 0, 1);
 		drawSmartShit();
 		GL11.glTranslated(0, 0, -1);
-		GL11U.SetUpOpaqueRendering(2);
+		GL11U.setUpOpaqueRendering(2);
 		double r1=(WT%20.0)/10.0,g1=(WT%65.0)/32.5,b1=(WT%50.0)/25.0;
 		double r=r1>1?2-r1:r1,g=g1>1?2-g1:g1,b=b1>1?2-b1:b1;
 		for(int spot=0;spot<4;spot++)if(isMouseOverFakeSlot(11, 8+spot*16, i, e)){
@@ -114,7 +114,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			GL11.glPopMatrix();
 		}
 		
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 	}
 	
 	public void drawSmartShit(){
@@ -183,7 +183,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		int pos=(int)Math.round(Math.abs(sliderPos/16));
 		TessUtil.bindTexture(main);
 		GL11.glTranslated(guiLeft, guiTop, 0);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		GL11.glColor4d(1, 1, 1, o1);
 		this.drawTexturedModalRect(60, 65, 0, 170, 100, 12);
 		this.drawTexturedModalRect(94, 61, 34, 166, 74, 4);
@@ -199,7 +199,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			}
 		}
 		GL11.glColor4d(1, 1, 1, 1);
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glTranslated(-guiLeft, -guiTop, 0);
 		
 		o2=0;
@@ -234,14 +234,14 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		 playerXPos=guiLeft-5;
 		 playerYPos=-guiTop-100-startRandom;
 		 this.buttonList.add(playerButton);
-		 startRandom=Util.RInt((int)(ySize/2.9F));
+		 startRandom=UtilM.RInt((int)(ySize/2.9F));
 	 }
 	 
 	 @Override
 	 protected void actionPerformed(GuiButton b){
 		 switch (b.id){
 		 case 5:{
-			speed+=Util.CRandD(5);
+			speed+=UtilM.CRandD(5);
 		 }break;
 		 
 		 }

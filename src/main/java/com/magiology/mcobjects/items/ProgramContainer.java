@@ -12,11 +12,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
+import com.magiology.api.lang.ProgramDataCenter;
 import com.magiology.api.lang.ProgramHandeler;
-import com.magiology.api.lang.ProgramHolder;
+import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class ProgramContainer extends Item{
@@ -27,11 +29,11 @@ public class ProgramContainer extends Item{
 		initId(stack);
 		if(player.isSneaking())GuiHandlerM.openGui(player, MGui.CommandContainerEditor, (int)player.posX, (int)player.posY, (int)player.posZ);
 		else{
-			try{
-				getProgram(stack).run(new Object[]{},new Object[]{world,pos});
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+//			try{
+//				getProgram(stack).run(new Object[]{true, world.getRedstonePower(pos, side)},new Object[]{world,pos});
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
 		}
 		return true;
     }
@@ -43,9 +45,9 @@ public class ProgramContainer extends Item{
 	}
 	public static void initId(ItemStack stack){
 		if(U.isRemote())return;
-		if(getId(stack)<1)setId(stack, ProgramHolder.code_aviableId());
+		if(getId(stack)<1)setId(stack, ProgramDataCenter.code_aviableId());
 	}
-
+	
 	public static String getName(ItemStack stack){
 		createNBT(stack);
 		initId(stack);
@@ -87,10 +89,10 @@ public class ProgramContainer extends Item{
 		initId(stack);
 		return new Program(getName(stack), getId(stack), getPos(stack));
 	}
-	public static void run(World world,ItemStack stack,Object...args){
+	public static void run(TileEntityNetworkProgramHolder holder,World world,ItemStack stack,Object...args){
 		initId(stack);
 		try{
-			getProgram(stack).run(args,new Object[]{world});
+			getProgram(stack).run(holder,args,new Object[]{world});
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -148,9 +150,12 @@ public class ProgramContainer extends Item{
 				return null;
 			}
 		}
-		public Program run(Object[] args, Object[] environment){
-			result=ProgramHolder.run(programId, args,ProgramHandeler.defultVars(environment)).toString();
-			return this;
+		public Object run(TileEntityNetworkProgramHolder holder, Object[] args, Object[] environment){
+			NetworkProgramHolderWrapper.setInstance(holder);
+			Object x=ProgramDataCenter.run(programId, args,ProgramHandeler.defultVars(environment));
+			result=x+"";
+//			Util.printInln(x);
+			return x;
 		}
 	}
 }

@@ -27,8 +27,8 @@ import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.NormalizedVertixBufferModel;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
@@ -108,7 +108,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 	protected void actionPerformed(GuiButton button)throws IOException{
 		if(button instanceof OnOffGuiButton){
 			tile.highlighs[button.id]=((OnOffGuiButton)button).isOn();
-			Util.sendMessage(new HologramProjectorUpload(tile));
+			UtilM.sendMessage(new HologramProjectorUpload(tile));
 		}else{
 			switch(button.id){
 			case 0:{
@@ -124,7 +124,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 			}break;
 			case 3:{
-				U.sendMessage(new RenderObjectUploadPacket(new Slider(tile, new Vector2f(Util.p*6, 1))));
+				U.sendMessage(new RenderObjectUploadPacket(new Slider(tile, new Vector2f(UtilM.p*6, 1))));
 				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 			}break;
 			}
@@ -210,7 +210,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		//export to model
 		arrowsModel=buffer.exportToNoramlisedVertixBufferModel();
 		arrowsModel.setDrawAsWire(true);
-		Util.printInln("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
+		UtilM.printInln("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
 	}
 	
 	@Override

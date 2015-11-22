@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class IOReadableMap{
 	
@@ -68,12 +68,12 @@ public class IOReadableMap{
 	
 	public int getI(String string, int... onNull){
 		String a=data.get(string);
-		if(Util.isInteger(a))return Integer.parseInt(a);
+		if(UtilM.isInteger(a))return Integer.parseInt(a);
 		return onNull.length==1?onNull[0]:0;
 	}
 	public boolean getB(String string, boolean... onNull){
 		String a=data.get(string);
-		if(Util.isBoolean(a))return Boolean.parseBoolean(a);
+		if(UtilM.isBoolean(a))return Boolean.parseBoolean(a);
 		return onNull.length==1?onNull[0]:false;
 	}
 	public String getS(String string, String... onNull){

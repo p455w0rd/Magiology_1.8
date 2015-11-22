@@ -1,6 +1,6 @@
 package com.magiology.client.gui;
 
-import static com.magiology.util.utilclasses.Util.*;
+import static com.magiology.util.utilclasses.UtilM.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import com.magiology.api.updateable.Updater;
 
 public class GuiUpdater{
-	static Minecraft mc=getMC();
 	private static GuiUpdater instance;
 	public static GuiUpdater GetInstace(){return instance;}
 	public GuiUpdater(){instance=this;}

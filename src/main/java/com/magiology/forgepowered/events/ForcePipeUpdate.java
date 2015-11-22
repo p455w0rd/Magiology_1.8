@@ -5,7 +5,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class ForcePipeUpdate{
 	

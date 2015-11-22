@@ -16,12 +16,12 @@ import net.minecraft.world.World;
 
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
-import com.magiology.api.network.RedstoneData;
+import com.magiology.api.network.Redstone;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class NetworkInterface extends BlockContainerMultiColision{
 	
@@ -90,24 +90,23 @@ public class NetworkInterface extends BlockContainerMultiColision{
 
 
 	@Override
-	public void getProvidingPower(World world, TileEntity t, BlockPos pos, int metadata,RedstoneData Return, EnumFacing side){
+	public void getProvidingPower(World world, TileEntity t, BlockPos pos, int metadata,Redstone Return, EnumFacing side){
 		TileEntityNetworkInterface tile=(TileEntityNetworkInterface)t;
-		if(tile.getData().get("redstone")instanceof RedstoneData){
-			RedstoneData data=(RedstoneData)tile.getData().get("redstone");
+		if(tile.getData().get("redstone")instanceof Redstone){
+			Redstone data=(Redstone)tile.getData().get("redstone");
 			
 			Return.isStrong=data.isStrong;
 			Return.on=data.on;
 			Return.strenght=0;
 			if(data.on){
 				boolean enabled=true;
-				if(data.networkData!=null)enabled=data.networkData.shouldBeOn;
 				if(enabled&&side.getIndex()==tile.getOrientation())Return.strenght=data.strenght;
 			}
 		}
 	}
 	@Override
 	public void getRedstoneConnectableSides(IBlockAccess world, TileEntity tile, BlockPos pos, List<Integer> sides){
-		if(((TileEntityNetworkInteract)tile).getData().get("redstone")instanceof RedstoneData)switch(((TileEntityNetworkInteract)tile).getOrientation()){
+		if(((TileEntityNetworkInteract)tile).getData().get("redstone")instanceof Redstone)switch(((TileEntityNetworkInteract)tile).getOrientation()){
 		case 3:sides.add(0);break;
 		case 4:sides.add(1);break;
 		case 2:sides.add(2);break;

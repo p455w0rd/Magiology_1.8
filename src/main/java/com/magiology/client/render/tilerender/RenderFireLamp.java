@@ -31,14 +31,14 @@ public class RenderFireLamp extends TileEntitySpecialRendererM {
 		else if(a<0)a=0;
 		GL11.glPushMatrix();
 		GL11.glTranslated(x,y,z);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(false);
 		TessUtil.drawBlurredCube((int)x, (int)y, (int)z, p*4.5,0.01,p*4.5,p*11.5,p*11*FP,p*11.5, 15, 0.03, 1,0.1,0.1, 0.5*a);
 		GL11.glPopMatrix();
 		GL11.glDepthMask(true);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glColor4d(1,1,1,1);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		}

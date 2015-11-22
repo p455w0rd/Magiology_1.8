@@ -5,7 +5,7 @@ package com.magiology.forgepowered.proxy;
 public class ServerProxy extends CommonProxy{
 	
 	@Override
-	public void registerProxies(){
+	public void registerProxy(){
 		
 	}
 }

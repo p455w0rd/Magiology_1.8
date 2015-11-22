@@ -26,13 +26,13 @@ import com.magiology.client.render.shaders.BlurRenderer;
 import com.magiology.client.render.shaders.ColorCutRenderer;
 import com.magiology.client.render.shaders.ColorRenderer;
 import com.magiology.core.Config;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class ShaderRunner{
 	
-	Minecraft mc=Util.getMC();
-	EntityPlayer player=Util.getThePlayer();
+	Minecraft mc=UtilM.getMC();
+	EntityPlayer player=UtilM.getThePlayer();
 	public boolean redrawShaders=false,inited=false;
 	
 	public List<ShaderAspectRenderer> handlers=new ArrayList<ShaderAspectRenderer>();
@@ -73,7 +73,7 @@ public class ShaderRunner{
 			
 			player=U.getThePlayer();
 			updateFrameBuffers();
-			World w=Util.getTheWorld();
+			World w=UtilM.getTheWorld();
 			for(int i=0;i<handlers.size();i++){
 				ShaderAspectRenderer shaderAspect=handlers.get(i);
 				shaderAspect.player=player;
@@ -106,7 +106,7 @@ public class ShaderRunner{
 		player=U.getThePlayer();
 		if(handlers.isEmpty())init();
 		Map<Integer, Boolean> enabledMap=new HashMap<Integer, Boolean>();
-		World w=Util.getTheWorld();
+		World w=UtilM.getTheWorld();
 		for(int i=0;i<handlers.size();i++){
 			ShaderAspectRenderer shaderAspect=handlers.get(i);
 			shaderAspect.player=player;

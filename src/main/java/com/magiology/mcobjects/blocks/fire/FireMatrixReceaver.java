@@ -13,13 +13,13 @@ import net.minecraft.world.World;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class FireMatrixReceaver extends BlockContainer {
 
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos){
-		Util.getBlockMetadata((World) world, pos);
+		UtilM.getBlockMetadata((World) world, pos);
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 //		float p=1F/16F;
 //		if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
@@ -32,7 +32,7 @@ public class FireMatrixReceaver extends BlockContainer {
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state){
-		Util.getBlockMetadata(world, pos);
+		UtilM.getBlockMetadata(world, pos);
 		 
 		 return new AxisAlignedBB(this.minX, this.minY, this.minZ, this.maxX, this.maxY, this.maxZ).addCoord(pos.getX(), pos.getY(), pos.getZ());
 	 }
@@ -58,7 +58,7 @@ public class FireMatrixReceaver extends BlockContainer {
 		
 		
 		
-        return world.getBlockState(pos).withProperty(Util.META, side.getIndex()+v1);
+        return world.getBlockState(pos).withProperty(UtilM.META, side.getIndex()+v1);
     }
 	
 	

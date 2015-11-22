@@ -31,12 +31,12 @@ public class SoulFlameHUD extends HUD{
 		maxSoulFlame=data.maxSoulFlame;
 		soulFlame=data.soulFlame;
 		TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/gui/fp/soulFlame.png"));
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		GL11.glTranslatef(0, 10, 0);
 		renderSlider();
 		renderMain();
 		renderFire();
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		Font.FR().drawStringWithShadow(" "+soulFlame+"/"+maxSoulFlame, 0, 90, Color.WHITE.hashCode());
 	}
 	private void renderMain(){

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 @SideOnly(Side.CLIENT)
 public class ColoredGuiButton extends GuiButton{
@@ -22,18 +22,18 @@ public class ColoredGuiButton extends GuiButton{
 	wantedR=1,wantedG=1,wantedB=1,wantedAlpha=1;
 	
 	public void update(){
-		r=Util.snap(r, 0, 1);
-		g=Util.snap(g, 0, 1);
-		b=Util.snap(b, 0, 1);
+		r=UtilM.snap(r, 0, 1);
+		g=UtilM.snap(g, 0, 1);
+		b=UtilM.snap(b, 0, 1);
 		prevR=r;
 		prevG=g;
 		prevB=b;
 		prevAlpha=alpha;
 		
-		r=(float)Util.slowlyEqalize(r, wantedR, 0.1);
-		g=(float)Util.slowlyEqalize(g, wantedG, 0.1);
-		b=(float)Util.slowlyEqalize(b, wantedB, 0.1);
-		alpha=(float)Util.slowlyEqalize(prevAlpha, wantedAlpha, 0.2);
+		r=(float)UtilM.slowlyEqalize(r, wantedR, 0.1);
+		g=(float)UtilM.slowlyEqalize(g, wantedG, 0.1);
+		b=(float)UtilM.slowlyEqalize(b, wantedB, 0.1);
+		alpha=(float)UtilM.slowlyEqalize(prevAlpha, wantedAlpha, 0.2);
 	}
 	
 	public ColoredGuiButton(int id, int x, int y,int width, int height, String txt){
@@ -43,15 +43,15 @@ public class ColoredGuiButton extends GuiButton{
 		r+=f;
 		g+=f;
 		b+=f;
-		r=Util.snap(r, 0, 1);
-		g=Util.snap(g, 0, 1);
-		b=Util.snap(b, 0, 1);
+		r=UtilM.snap(r, 0, 1);
+		g=UtilM.snap(g, 0, 1);
+		b=UtilM.snap(b, 0, 1);
 	}
 	@Override
 	public void drawButton(Minecraft v1, int v2, int v3){
 		if (this.visible)
         {
-			float r=Util.calculateRenderPos(prevR, this.r),g=Util.calculateRenderPos(prevG, this.g),b=Util.calculateRenderPos(prevB, this.b),alpha=Util.calculateRenderPos(prevAlpha, this.alpha);
+			float r=UtilM.calculateRenderPos(prevR, this.r),g=UtilM.calculateRenderPos(prevG, this.g),b=UtilM.calculateRenderPos(prevB, this.b),alpha=UtilM.calculateRenderPos(prevAlpha, this.alpha);
             FontRenderer fontrenderer = v1.fontRendererObj;
             v1.getTextureManager().bindTexture(buttonTextures);
             GL11.glColor4f(r,g,b,alpha);
@@ -78,7 +78,7 @@ public class ColoredGuiButton extends GuiButton{
                 l = 16777120;
             }
             
-            float[] rgb=Util.codeToRGBABPrecentage(l);
+            float[] rgb=UtilM.codeToRGBABPrecentage(l);
             
             rgb[0]=(rgb[0]+r)/2F;
             rgb[1]=(rgb[1]+g)/2F;

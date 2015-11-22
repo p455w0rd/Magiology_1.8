@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import com.magiology.api.network.BasicWorldNetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class InterfaceRegistration{
 	
@@ -20,7 +20,7 @@ public class InterfaceRegistration{
 	
 	public static <T extends BasicWorldNetworkInterface> T registerInterfaceToBlock(T Interface,Class<Block> marker){
 		if(blockFinder.keySet().contains(marker)){
-			Util.printInln("Block:",marker.getClass().getSimpleName(),"is already bound to an interface:",blockFinder.get(marker));
+			UtilM.printInln("Block:",marker.getClass().getSimpleName(),"is already bound to an interface:",blockFinder.get(marker));
 			return Interface;
 		}
 		blockFinder.put(marker, Interface);
@@ -29,7 +29,7 @@ public class InterfaceRegistration{
 	
 	public static <T extends BasicWorldNetworkInterface> T registerInterfaceToTileEntity(T Interface,Class<? extends TileEntity> marker){
 		if(tileFinder.keySet().contains(marker)){
-			Util.printInln("TileEntity:",marker.getClass().getSimpleName(),"is already bound to an interface:",tileFinder.get(marker));
+			UtilM.printInln("TileEntity:",marker.getClass().getSimpleName(),"is already bound to an interface:",tileFinder.get(marker));
 			return Interface;
 		}
 		tileFinder.put((Class<TileEntity>)marker, Interface);
@@ -42,7 +42,7 @@ public class InterfaceRegistration{
 			BasicWorldNetworkInterface interf=tileFinder.get(tile.getClass());
 			if(interf!=null)return interf;
 		}
-		Block block=Util.getBlock(world, pos);
+		Block block=UtilM.getBlock(world, pos);
 		if(block!=null){
 			BasicWorldNetworkInterface interf=blockFinder.get(block.getClass());
 			if(interf!=null)return interf;
@@ -61,7 +61,7 @@ public class InterfaceRegistration{
 		TileEntity tile=world.getTileEntity(pos);
 		WorldNetworkInterface inter=getInterface(tile);
 		if(inter!=null)return inter;
-		Block block=Util.getBlock(world, pos);
+		Block block=UtilM.getBlock(world, pos);
 		if(block!=null){
 			BasicWorldNetworkInterface test=blockFinder.get(block.getClass());
 			WorldNetworkInterface interf=test instanceof WorldNetworkInterface?(WorldNetworkInterface)test:null;

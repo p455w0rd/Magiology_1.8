@@ -21,7 +21,7 @@ import com.magiology.client.render.models.ModelWingsFromTheBlackFire;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.NBTUtil;
 
 public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
@@ -59,9 +59,9 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 			if(world.getTotalWorldTime()%3==0&&world.isRemote){
 				boolean bol=true;
 				float rotation=-player.rotationYaw;
-				double[] c=Util.cricleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
+				double[] c=UtilM.cricleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
 				for(int l=0;l<3;l++){
-					double[] a=Util.cricleXZ(rotation+90-10+l*10),b=Util.cricleXZ(rotation-90-10+l*10);
+					double[] a=UtilM.cricleXZ(rotation+90-10+l*10),b=UtilM.cricleXZ(rotation-90-10+l*10);
 					a[0]*=2.7;b[0]*=2.7;
 					a[1]*=2.7;b[1]*=2.7;
 					Vec3 pp=new Vec3(player.posX,player.posY,player.posZ);
@@ -74,8 +74,8 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 						continue;
 					}
 				}
-				boolean isUnderWater=Util.getBlock(world, x,y,z).getMaterial()==Material.water;
-				if((bol&&!isUnderWater)!=prevState||world.getTotalWorldTime()%20==0)Util.sendMessage(new GenericServerIntPacket(5, Util.booleanToInt(bol&&!isUnderWater||true)));
+				boolean isUnderWater=UtilM.getBlock(world, x,y,z).getMaterial()==Material.water;
+				if((bol&&!isUnderWater)!=prevState||world.getTotalWorldTime()%20==0)UtilM.sendMessage(new GenericServerIntPacket(5, UtilM.booleanToInt(bol&&!isUnderWater||true)));
 			}
 		}else NBTUtil.createNBT(TheDFWings);
 	}

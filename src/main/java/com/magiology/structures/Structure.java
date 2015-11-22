@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class Structure{
 	
@@ -44,7 +44,7 @@ public class Structure{
 		}
 		BlockAt BA=BlocksAt[nextBlock];
 		pos=pos.add(BA.pos);
-		Block block=Util.getBlock(world, pos);
+		Block block=UtilM.getBlock(world, pos);
 		isBlockInPlace[nextBlock]=(block==BA.bl);
 //		if(!isBlockInPlace[nextBlock]){
 //			Helper.spawnEntityFX(new EntityFlameFX(world, x+0.5, y+0.5, z+0.5, 0, 0.05, 0));

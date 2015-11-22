@@ -45,8 +45,8 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.EntityPosAndBB;
 
 public class RenderLoopEvents{
@@ -131,7 +131,7 @@ public class RenderLoopEvents{
 	public void renderWorldLast(RenderWorldLastEvent e){
 		Render.partialTicks=e.partialTicks;
 		TessUtil.renderParticle();
-		EntityPlayer player = Util.getThePlayer();
+		EntityPlayer player = UtilM.getThePlayer();
 		
 		if(disabledEquippItemAnimationTime>0){
 			TessUtil.setItemRendererEquippProgress(1, false);
@@ -146,14 +146,14 @@ public class RenderLoopEvents{
 		GL11.glPopMatrix();
 		
 		universalRender.clear();
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 	}
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void render2Dscreem(RenderGameOverlayEvent e){
 		if(!Minecraft.isGuiEnabled())return;
 		if(e.type!=ElementType.CHAT)return;
 		ScaledResolution res=e.resolution;
-		EntityPlayer player=Util.getThePlayer();
+		EntityPlayer player=UtilM.getThePlayer();
 		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), Render.partialTicks);
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0, -10);
@@ -165,7 +165,7 @@ public class RenderLoopEvents{
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();
-		GL11U.blend(true);
+		GL11U.glBlend(true);
 	}
 
     private float f1,f2,f3,f4,f5,f6,f7,f8;
@@ -173,15 +173,15 @@ public class RenderLoopEvents{
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event){
 		GL11.glPushMatrix();
 		EntityPlayer player=event.entityPlayer;
-		if(Util.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getPlayerModel().aimedBow=true;
+		if(UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getPlayerModel().aimedBow=true;
 		
-		if(Util.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
+		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 			float rotation=0;
-			if(data!=null)rotation=Util.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
-			GL11U.rotateXYZ(0, -player.rotationYaw, 0);
+			if(data!=null)rotation=UtilM.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
+			GL11U.glRotate(0, -player.rotationYaw, 0);
 			GL11.glTranslated(0,-player.height+player.width/2, 0);
-			GL11U.rotateXYZ(rotation,0,0);
+			GL11U.glRotate(rotation,0,0);
 			GL11.glTranslated(0, player.height-player.width/2, 0);
 			
 	        f1=player.renderYawOffset;
@@ -221,7 +221,7 @@ public class RenderLoopEvents{
 		EntityPlayer player=event.entityPlayer;
 		ComplexPlayerRenderingData data=ComplexPlayerRenderingData.get(player);
 		if(data==null)data=ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
-		if(Util.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
+		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			player.renderYawOffset=f1;
 	        player.prevRenderYawOffset=f2;
 	        

@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing;
 
 import com.magiology.api.connection.IConnectionProvider;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public interface UpdateableTile extends IConnectionProvider{
 	public void updateConnections();
@@ -42,11 +42,11 @@ public interface UpdateableTile extends IConnectionProvider{
 					boolean pass=false;
 					
 					for(int j=0;j<excluded.size();j++){
-						if(Util.Instanceof(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
+						if(UtilM.Instanceof(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
 						if(pass)j=excluded.size();
 					}
 					for(int j=0;j<included.size();j++){
-						if(Util.Instanceof(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
+						if(UtilM.Instanceof(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
 						if(pass)j=included.size();
 					}
 					if(pass)array[i]=trueValue;

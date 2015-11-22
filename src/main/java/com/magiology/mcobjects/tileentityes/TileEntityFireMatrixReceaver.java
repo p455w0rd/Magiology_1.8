@@ -11,7 +11,7 @@ import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class TileEntityFireMatrixReceaver extends TileEntityPow{
 	
@@ -114,7 +114,7 @@ public class TileEntityFireMatrixReceaver extends TileEntityPow{
 				}else l=200;}
 			
 			
-			if(sent&&worldObj.isRemote)Util.spawnEntityFX(new EntityMovingParticleFX(worldObj, transferp.getX()+0.5, transferp.getY()+((TileEntityFireMatrixTransferer) tile1).Pos+0.5, transferp.getZ()+0.5,
+			if(sent&&worldObj.isRemote)UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj, transferp.getX()+0.5, transferp.getY()+((TileEntityFireMatrixTransferer) tile1).Pos+0.5, transferp.getZ()+0.5,
 					x()+0.5, y()+0.5, z()+0.5, size/2, 1, 0.2+worldObj.rand.nextFloat()*0.5, 0.2+worldObj.rand.nextFloat()*0.2,0.5));
 		}
 	}

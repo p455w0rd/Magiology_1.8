@@ -10,8 +10,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 @SideOnly(Side.CLIENT)
 public class Textures{
@@ -39,7 +39,7 @@ public class Textures{
 	
 	public static void postInit(){
 		//---textur stands for "no texture and it should be made as soon as possible"---\\
-		Util.println("TEXTURE INIT STARTED!");
+		UtilM.println("TEXTURE INIT STARTED!");
 		if(isInit)return;isInit=true;
 		Helmet42Model=             getResource(MReference.MODID,"/models/textures/Helmet42Model.png");
 		GuiArmorEditor=            getResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
@@ -104,13 +104,13 @@ public class Textures{
 		WingColors=                getResource(MReference.MODID,"/models/textures/wingColorMap.png");
 		ProgramGui=                getResource(MReference.MODID,"/textures/gui/Program.png");
 		
-		Util.println("TEXTURE INIT ENDED!");
-		Util.println("----\n--------\n------------");
-		Util.println("Magiology error list:");
+		UtilM.println("TEXTURE INIT ENDED!");
+		UtilM.println("----\n--------\n------------");
+		UtilM.println("Magiology error list:");
 		if(failedTextures.size()>0)for(String er:failedTextures){
-			Util.println("---> "+er);
-		}else Util.println("Yay! there is no errors!");
-		Util.println("------------\n--------\n----");
+			UtilM.println("---> "+er);
+		}else UtilM.println("Yay! there is no errors!");
+		UtilM.println("------------\n--------\n----");
 	}
 	public static ResourceLocation getResource(String FolderPath){return getResource("",FolderPath);}
 	public static ResourceLocation getResource(String modID,String AfterModIDFolderPath){

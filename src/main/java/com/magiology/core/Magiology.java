@@ -1,7 +1,7 @@
 package com.magiology.core;
 
 import static com.magiology.core.MReference.*;
-import static com.magiology.util.utilclasses.Util.*;
+import static com.magiology.util.utilclasses.UtilM.*;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.api.lang.ProgramHolder;
+import com.magiology.api.lang.ProgramDataCenter;
 import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.render.Textures;
 import com.magiology.core.init.*;
@@ -25,7 +25,7 @@ import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
 import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.io.IOReadableMap;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 
@@ -66,7 +66,7 @@ public class Magiology{
 		try{
 			robotH=new EnhancedRobot();
 		}catch(Exception e){
-			throw new NullPointerException((Util.RB(0.1)?"CRAP! :(":"")+" "+NAME+" has encountered with a problem while trying to initialize the input robot! This might be the result of incompatible hardware or java version.");
+			throw new NullPointerException((UtilM.RB(0.1)?"CRAP! :(":"")+" "+NAME+" has encountered with a problem while trying to initialize the input robot! This might be the result of incompatible hardware or java version.");
 		}
 		ROBOT=robotH;
 	}
@@ -74,7 +74,7 @@ public class Magiology{
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
 		if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandler.downladAssets();
 		infoFile.readFromFile();
-		Util.printInln(infoFile.getB("GUIOpen", true));
+		UtilM.printInln(infoFile.getB("GUIOpen", true));
 		if(infoFile.getB("GUIOpen", true)){
 			Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 			modInfGUI=new ModInfoGUI((int)screenSize.getWidth(),(int)screenSize.getHeight(),-680,0);
@@ -88,7 +88,6 @@ public class Magiology{
 		
 		MCreativeTabs.preInit();
 		MGui.preInit();
-		MTileEntitys.setCustomRenderers();
 		MBlocks.preInit();
 		MItems.preInit();
 		MPackets.preInit();
@@ -96,7 +95,7 @@ public class Magiology{
 	public void init(FMLInitializationEvent event){
 		MRecepies.init();
 		MTileEntitys.init();
-		proxy.registerProxies();
+		proxy.registerProxy();
 		MEntitys.init();
 		MEvents.init();
 		MInterfaces.init();
@@ -105,7 +104,7 @@ public class Magiology{
 		if(modInfGUI!=null)modInfGUI.modStat=true;
 		Textures.postInit();
 		
-		ProgramHolder.loadClass();
+		ProgramDataCenter.loadClass();
 		GuiProgramContainerEditor.loadClass();
 	}
 	public void exit(){

@@ -20,8 +20,8 @@ import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,IUpdatePlayerListBox{
 	
@@ -119,8 +119,8 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	@Override
 	public void detectAndSendChanges(){
 		if(!U.isRemote(this))return;
-		if(Util.AxisAlignedBBEqual(pointId,prevPointId))return;
-		Util.sendMessage(new NotifyPointedBoxChangePacket(this));
+		if(UtilM.AxisAlignedBBEqual(pointId,prevPointId))return;
+		UtilM.sendMessage(new NotifyPointedBoxChangePacket(this));
 	}
 	
 	@Override

@@ -69,5 +69,10 @@ public class SoundPlayer{
 
         sourceLine.drain();
         sourceLine.close();
+        try{
+			audioStream.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
     }
 }

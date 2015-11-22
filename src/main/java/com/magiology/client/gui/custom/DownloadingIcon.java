@@ -11,7 +11,7 @@ import com.magiology.client.gui.custom.hud.HUD;
 import com.magiology.core.MReference;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 
 public class DownloadingIcon {
@@ -45,13 +45,13 @@ public class DownloadingIcon {
 			GL11.glPushMatrix();
 			GL11.glColor4f(1, 1, 1, drop.alpha);
 			GL11.glTranslated(U.calculateRenderPos(drop.prevPos.x, drop.pos.x), U.calculateRenderPos(drop.prevPos.y, drop.pos.y), 0);
-			GL11U.rotateXYZAt(0, 0, -drop.scale*drop.alpha*180, 14, 25, 0);
+			GL11U.glRotate(0, 0, -drop.scale*drop.alpha*180, 14, 25, 0);
 			
 			HUD.drawRect(1F/368, 1F/399, 0, 0, 340, 0, 28, 51);
 			
 			GL11.glPopMatrix();
 		}
-		GL11U.color(color);
+		GL11U.glColor(color);
 		HUD.drawRect(1F/368, 1F/399, 0, 0, 170, 0, 170, 399);
 		GL11.glColor4f(1, 1, 1, 1);
 		HUD.drawRect(1F/368, 1F/399, 0, 0, 0, 0, 170, 399);

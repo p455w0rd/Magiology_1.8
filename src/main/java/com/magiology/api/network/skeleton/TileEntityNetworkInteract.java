@@ -12,34 +12,30 @@ import net.minecraft.util.BlockPos;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandler;
-import com.magiology.api.network.NetworkBaseInterface;
-import com.magiology.api.network.NetworkBaseInterface.DataOutput.DataOutputDesc;
-import com.magiology.api.network.RedstoneData;
+import com.magiology.api.network.Messageable;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.Redstone;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.packets.packets.SavableDataWithKeyPacket;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
-import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
-public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkBaseInterface{
+public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkInterface,Messageable{
 	
 	private Map<String,Object> interactData=new HashMap<String,Object>();
 	
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-		int dataSize=NBT.getInteger("DS");
 
 		List<SavableData> data=SavableDataHandler.loadDataFromNBT(NBT, "ID",0);
 		getData().clear();
-		for(int i=0;i<dataSize;i++){
-			setInteractData(NBT.getString("key"+i), data.get(i));
-		}
+		for(SavableData i:data)setInteractData(NBT.getString("key"+i), i);
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
@@ -64,18 +60,9 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 		int orientation=SideUtil.getOppositeSide(getOrientation());
 		return InterfaceBinder.get(worldObj, SideUtil.offsetNew(orientation, pos));
 	}
-	private List<InteractType> interactTypes=new ArrayList<InteractType>();
-	@Override
-	public List<InteractType> getInteractTypes(){
-		return interactTypes;
-	}
 	@Override
 	public Map<String,Object> getData(){
 		return interactData;
-	}
-	@Override
-	public boolean hasInteractType(InteractType interactType){
-		return interactTypes.contains(interactType);
 	}
 	@Override
 	public long getActiveCard(){
@@ -85,23 +72,19 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 	public Object getInteractData(String string){
 		return interactData.get(string);
 	}
-	@Override
-	public void setInteractType(InteractType interactType){
-		if(interactType==null)interactTypes.remove(interactType);else if(!hasInteractType(interactType))interactTypes.add(interactType);
-	}
 	
 	@Override
 	public void setInteractData(String string,Object object){
 		
 		if(object instanceof SavableData){
 			interactData.put(string, object);
-			if(hasWorldObj()&&!U.isRemote(this))Util.sendMessage(new SavableDataWithKeyPacket(this,string, (SavableData)object));
+			if(hasWorldObj()&&!U.isRemote(this))UtilM.sendMessage(new SavableDataWithKeyPacket(this,string, (SavableData)object));
 		}else{
 			interactData.put(string, object);
 		}
 		
 		if(hasWorldObj()){
-			if(object instanceof RedstoneData){
+			if(object instanceof Redstone){
 				worldObj.notifyBlockOfStateChange(pos, blockType);
 				int side=getOrientation();
 				BlockPos pos1=SideUtil.offsetNew(side, pos);
@@ -109,50 +92,34 @@ public abstract class TileEntityNetworkInteract extends TileEntityNetwork implem
 			}
 		}
 	}
-	@Override
-	public boolean canInteractWithProvider(WorldNetworkInterface provider){
-		InteractType[] interactTypes=provider.getInteractTypes();
-		for(InteractType i:interactTypes)if(!hasInteractType(i))return false;
-		return true;
-	}
-	@Override
-	public void onInvokedFromWorld(WorldNetworkInterface interfaceProvider, String action, Object... data){
-		if(getBrain()==null)return;
-		onInvokedFromWorldInvoked(interfaceProvider, action, data.length, data);
-	}
-	public abstract void onInvokedFromWorldInvoked(WorldNetworkInterface interfaceProvider, String action, int dataSize, Object... data);
 	
 	@Override
-	public void onInvokedFromNetwork(String action, Object... data){
+	public void onMessageReceved(String action){
 		if(getBrain()==null)return;
-		onActionInvoked(action, data.length, data);
+		messageReceved(action);
 	}
-	public abstract void onActionInvoked(String action, int dataSize, Object... data);
+	public abstract void messageReceved(String action);
 	
 	@Override
-	public DoubleObject<DataOutput,Object> getInterfaceDataOutput(){
-		if(getInterfaceProvider()==null)return new DoubleObject();
-		return TileToInterfaceHelper.getDataOutput(this, getInterfaceProvider(), DataOutputDesc.Redstone);
+	public void sendMessage(){
+		
 	}
+	
 	@Override
-	public boolean isCompatabile(){
-		return true;
-	}
-	@Override
-	public List<TileEntityNetworkPointerContainer> getPointerContainers(){
-		List<TileEntityNetworkPointerContainer> result=new ArrayList<TileEntityNetworkPointerContainer>();
+	public List<TileEntityNetworkRouter> getPointerContainers(){
+		List<TileEntityNetworkRouter> result=new ArrayList<TileEntityNetworkRouter>();
 		TileEntity[] tiles=SideUtil.getTilesOnSides(this);
-		for(TileEntity a:tiles)if(a instanceof TileEntityNetworkPointerContainer)result.add((TileEntityNetworkPointerContainer)a);
+		for(TileEntity a:tiles)if(a instanceof TileEntityNetworkRouter)result.add((TileEntityNetworkRouter)a);
 		return result;
 	}
 
 	@Override
 	public List<ItemStack> getPointers(){
 		List<ItemStack> result=new ArrayList<ItemStack>();
-		List<TileEntityNetworkPointerContainer> containers=getPointerContainers();
-		for(TileEntityNetworkPointerContainer a:containers){
+		List<TileEntityNetworkRouter> containers=getPointerContainers();
+		for(TileEntityNetworkRouter a:containers){
 			for(int b=0;b<a.getSizeInventory();b++){
-				if(Util.isItemInStack(MItems.networkPointer, a.getStackInSlot(b)))result.add(a.getStackInSlot(b));
+				if(UtilM.isItemInStack(MItems.networkPointer, a.getStackInSlot(b)))result.add(a.getStackInSlot(b));
 			}
 		}
 		return result;

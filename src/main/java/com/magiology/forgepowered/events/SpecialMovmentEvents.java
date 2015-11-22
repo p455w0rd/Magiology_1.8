@@ -10,7 +10,7 @@ import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Pos
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.items.armor.Pants_42;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
 
@@ -21,7 +21,7 @@ public class SpecialMovmentEvents{
 		boolean isRemote=world.isRemote;
 		ExtendedPlayerData playerData=ExtendedPlayerData.get(player);
 		ItemStack pantsSlot=player.inventory.armorInventory[1];
-		if(!Util.isItemInStack(MItems.pants_42I, pantsSlot)||pantsSlot==null)return;
+		if(!UtilM.isItemInStack(MItems.pants_42I, pantsSlot)||pantsSlot==null)return;
 		else if(((Pants_42)pantsSlot.getItem()).hasUpgrade(pantsSlot, MItems.flightUpgrades)==-1)return;
 		if(!player.isCollidedVertically&&!player.capabilities.isFlying){
 			if(playerData.soulFlame<200)return;
@@ -39,22 +39,22 @@ public class SpecialMovmentEvents{
 					if(xRot!=0)rot=xRot;
 					if(yRot!=0)rot=yRot;
 				}
-				a=Util.cricleXZ(player.rotationYaw+rot);
+				a=UtilM.cricleXZ(player.rotationYaw+rot);
 //				Helper.printInln(rot,xRot,yRot);
 				xChange+=-a[0]*0.5;
 				zChange+=a[1]*0.5;
-			}else a=Util.cricleXZ(player.rotationYaw);
+			}else a=UtilM.cricleXZ(player.rotationYaw);
 			if(isRemote){
 				for(int a1=0;a1<15;a1++){
-					float rand=Util.CRandF(0.45);
-					double[] a2=Util.cricleXZ(player.rotationYaw+90);
+					float rand=UtilM.CRandF(0.45);
+					double[] a2=UtilM.cricleXZ(player.rotationYaw+90);
 					double xPos=player.posX-a2[0]*rand+a[0]*0.2,yPos=player.posY-0.9,zPos=player.posZ+a2[1]*rand-a[1]*0.2;
-					boolean rb=Util.RInt(20)!=0;
-					EntitySmoothBubleFX particle=new EntitySmoothBubleFX(world, xPos, yPos, zPos, Util.CRandF(0.1)-xChange/10, Util.CRandF(0.1)-yChange/10, Util.CRandF(0.1)-zChange/10,300, 1, rb?50:0, rb?1:2, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 0.8);
+					boolean rb=UtilM.RInt(20)!=0;
+					EntitySmoothBubleFX particle=new EntitySmoothBubleFX(world, xPos, yPos, zPos, UtilM.CRandF(0.1)-xChange/10, UtilM.CRandF(0.1)-yChange/10, UtilM.CRandF(0.1)-zChange/10,300, 1, rb?50:0, rb?1:2, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 0.8);
 					particle.noClip=false;
-					Util.spawnEntityFX(particle);
-					Util.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, Util.CRandF(0.1)-xChange, Util.CRandF(0.1)-yChange, Util.CRandF(0.1)-zChange));
-					Util.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, Util.CRandF(0.1)-xChange, Util.CRandF(0.1)-yChange, Util.CRandF(0.1)-zChange));
+					UtilM.spawnEntityFX(particle);
+					UtilM.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, UtilM.CRandF(0.1)-xChange, UtilM.CRandF(0.1)-yChange, UtilM.CRandF(0.1)-zChange));
+					UtilM.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, UtilM.CRandF(0.1)-xChange, UtilM.CRandF(0.1)-yChange, UtilM.CRandF(0.1)-zChange));
 				}
 			}
 			player.motionX+=xChange;
@@ -71,8 +71,8 @@ public class SpecialMovmentEvents{
 	}
 	public void handleWingPhysics(EntityPlayer player){
 		Positions position=WingsFromTheBlackFireHandler.getPos(player);
-		if(!Util.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2)))return;
-		double[] a=Util.cricleXZ(player.rotationYaw);
+		if(!UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2)))return;
+		double[] a=UtilM.cricleXZ(player.rotationYaw);
 		if(position==Positions.HoverPos||position==Positions.FlyBackvardPos||position==Positions.FlyStationarPos||position==Positions.FlyForvardPos){
 			player.motionX*=0.9;
 			player.motionY*=0.8;
@@ -100,7 +100,7 @@ public class SpecialMovmentEvents{
 			if(extendedData.soulFlame<13)return;
 			extendedData.soulFlame-=13;
 		}
-		double[] a=Util.cricleXZ(player.rotationYaw);
+		double[] a=UtilM.cricleXZ(player.rotationYaw);
 		a[0]*=0.15;a[1]*=0.15;
 		double y1=0.16;
 		if(y==1&&extendedData.soulFlame>4){

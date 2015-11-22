@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
@@ -46,7 +46,7 @@ public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlay
 		
 		}//optimizer end+
 		this.animation();
-		if(IRFA==true)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+Util.RF(), pos.getY()+Util.RF(), pos.getZ()+Util.RF(), 0, 0, 0);
+		if(IRFA==true)worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+UtilM.RF(), pos.getY()+UtilM.RF(), pos.getZ()+UtilM.RF(), 0, 0, 0);
 		
 	}
 	
@@ -95,10 +95,10 @@ public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlay
 	}
 	
 	public void action(){
-		double[] a=Util.cricleXZ(Util.RInt(360));
-		a[0]*=Util.RF()/3;
-		a[1]*=Util.RF()/3;
-		Util.spawnEntityFX(new EntityFacedFX(worldObj, pos.getX()+0.5+a[0], pos.getY()+0.101, pos.getZ()+0.5+a[1], 0, 0.001, 0, 300, 10, 0, 1, 1, 0.2+Util.RF()*0.2, 0.2+Util.RF()*0.2, 0.3));
+		double[] a=UtilM.cricleXZ(UtilM.RInt(360));
+		a[0]*=UtilM.RF()/3;
+		a[1]*=UtilM.RF()/3;
+		UtilM.spawnEntityFX(new EntityFacedFX(worldObj, pos.getX()+0.5+a[0], pos.getY()+0.101, pos.getZ()+0.5+a[1], 0, 0.001, 0, 300, 10, 0, 1, 1, 0.2+UtilM.RF()*0.2, 0.2+UtilM.RF()*0.2, 0.3));
 		progres++;
 			if(U.getBlock(worldObj, pos.add(0,-1,0))==Blocks.bedrock){
 				if(progres>=2000)

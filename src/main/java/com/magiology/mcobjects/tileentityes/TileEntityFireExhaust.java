@@ -3,7 +3,7 @@ package com.magiology.mcobjects.tileentityes;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 
 import com.magiology.core.init.MBlocks;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 

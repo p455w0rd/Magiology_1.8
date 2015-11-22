@@ -19,7 +19,7 @@ import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
 import com.magiology.util.utilclasses.FontEffectUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.NBTUtil;
 
 public class GenericItemUpgrade extends Item{
@@ -63,7 +63,7 @@ public class GenericItemUpgrade extends Item{
 		boolean result=false;
 		if(NBTUtil.createNBT(stack)!=null){
 			UpgradeType type=RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(stack.getItem()));
-			Block block=Util.getBlock(world, pos);
+			Block block=UtilM.getBlock(world, pos);
 			if(!player.isSneaking()&&type==UpgradeType.Priority){
 				double MaxX=block.getBlockBoundsMaxX(),MinX=block.getBlockBoundsMinX();
 				double MaxY=block.getBlockBoundsMaxY(),MinY=block.getBlockBoundsMinY();
@@ -80,12 +80,12 @@ public class GenericItemUpgrade extends Item{
 				}
 				
 				for(int a=0;a<20;a++)switch(side.getIndex()){
-				case 0:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY(),      pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Util.CRandF(0.5), -10+Util.CRandF(0.5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
-				case 1:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY()+MaxY, pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+Util.CRandF(0.5), 10+Util.CRandF(0.5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
-				case 2:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+MinZ, 0, 0, -0.1, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
-				case 3:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+Util.RF()*(MaxX-MinX)+MinX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+MaxZ, 0, 0, 0.1, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
-				case 4:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MinX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, -0.1, 0, 0, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
-				case 5:Util.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MaxX, pos.getY()+Util.RF()*(MaxY-MinY)+MinY, pos.getZ()+Util.RF()*(MaxZ-MinZ)+MinZ, 0.1, 0, 0, 500, 1+Util.CRandF(0.5), Util.CRandF(5), Util.RInt(10)==0?2:1, Util.RF(), Util.RF(), Util.RF(), 0.8));break;
+				case 0:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY(),      pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+UtilM.CRandF(0.5), -10+UtilM.CRandF(0.5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
+				case 1:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY()+MaxY, pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+UtilM.CRandF(0.5), 10+UtilM.CRandF(0.5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
+				case 2:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY()+UtilM.RF()*(MaxY-MinY)+MinY, pos.getZ()+MinZ, 0, 0, -0.1, 500, 1+UtilM.CRandF(0.5), UtilM.CRandF(5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
+				case 3:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY()+UtilM.RF()*(MaxY-MinY)+MinY, pos.getZ()+MaxZ, 0, 0, 0.1, 500, 1+UtilM.CRandF(0.5), UtilM.CRandF(5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
+				case 4:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MinX, pos.getY()+UtilM.RF()*(MaxY-MinY)+MinY, pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, -0.1, 0, 0, 500, 1+UtilM.CRandF(0.5), UtilM.CRandF(5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
+				case 5:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+MaxX, pos.getY()+UtilM.RF()*(MaxY-MinY)+MinY, pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, 0.1, 0, 0, 500, 1+UtilM.CRandF(0.5), UtilM.CRandF(5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
 				}
 			}
 			
@@ -108,7 +108,6 @@ public class GenericItemUpgrade extends Item{
 		int i=0;
 		if(GuiScreen.isShiftKeyDown())i++;
 		if(GuiScreen.isCtrlKeyDown()) i++;
-		new FontEffectUtil();
 		switch (UT.GetTypeID()){
 		case 0:{
 			list.add(FontEffectUtil.AQUA+"Increases range");
@@ -135,10 +134,10 @@ public class GenericItemUpgrade extends Item{
 		case 3:{
 			list.add(FontEffectUtil.BLUE+"Adds ability to "+FontEffectUtil.DARK_RED+"fly"+FontEffectUtil.BLUE+"!");
 			if(i>0){
-				if(Util.RInt(20)==0)list.add("When pigs fly");
+				if(UtilM.RInt(20)==0)list.add("When pigs fly");
 				
-				if(i==2)if(Util.RInt(80)==0){
-					String lolITrollerYou=FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+FontEffectUtil.OBFUSCATED+"aaa  "+FontEffectUtil.RESET+FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+"illuminati is"+(Util.RB()?" not":"")+" real".toUpperCase()+"!  "+FontEffectUtil.OBFUSCATED+"  aaa";
+				if(i==2)if(UtilM.RInt(80)==0){
+					String lolITrollerYou=FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+FontEffectUtil.OBFUSCATED+"aaa  "+FontEffectUtil.RESET+FontEffectUtil.RED+""+FontEffectUtil.UNDERLINE+"illuminati is"+(UtilM.RB()?" not":"")+" real".toUpperCase()+"!  "+FontEffectUtil.OBFUSCATED+"  aaa";
 					list.add(lolITrollerYou);
 					list.add(lolITrollerYou);
 				}
@@ -146,7 +145,7 @@ public class GenericItemUpgrade extends Item{
 		}break;
 		case 4:{
 			String[] side={"up","down","left","right","forward","back","nowhere","overthere","to your mama","away from me","to hell","to store","to your computer","to that upgrade overthere"};
-			int r1=Util.RInt(side.length),r2=Util.RInt(side.length);
+			int r1=UtilM.RInt(side.length),r2=UtilM.RInt(side.length);
 			list.add(FontEffectUtil.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
 			
 			if(stack.hasTagCompound()){

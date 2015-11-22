@@ -28,8 +28,8 @@ import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 public class TickEvents{
@@ -46,7 +46,7 @@ public class TickEvents{
 		if(U.getTheWorld()==null)RenderLoopEvents.universalLongRender.clear();
 		
 		if(mc.isGamePaused())return;
-		if(Util.getThePlayer()==null)return;
+		if(UtilM.getThePlayer()==null)return;
 		
 		FakeMessageHUD.get().update();
 		
@@ -59,15 +59,15 @@ public class TickEvents{
 
 		GameSettings gs=U.getMC().gameSettings;
 		boolean[] keys={Keyboard.isKeyDown(gs.keyBindForward.getKeyCode()),Keyboard.isKeyDown(gs.keyBindBack.getKeyCode()),Keyboard.isKeyDown(gs.keyBindJump.getKeyCode()),Keyboard.isKeyDown(gs.keyBindSneak.getKeyCode()),Keyboard.isKeyDown(gs.keyBindRight.getKeyCode()),Keyboard.isKeyDown(gs.keyBindLeft.getKeyCode())};
-		ExtendedPlayerData data=ExtendedPlayerData.get(Util.getThePlayer());
+		ExtendedPlayerData data=ExtendedPlayerData.get(UtilM.getThePlayer());
 		if(data!=null){
 			for(int a=0;a<keys.length;a++)if(keys[a]!=data.keys[a]){
-				Util.sendMessage(new UploadPlayerDataPacket(Util.getThePlayer()));
+				UtilM.sendMessage(new UploadPlayerDataPacket(UtilM.getThePlayer()));
 				continue;
 			}
 			data.keys=keys.clone();
-			if(Util.getTheWorld().getTotalWorldTime()%12==0){
-				Util.sendMessage(new UploadPlayerDataPacket(Util.getThePlayer()));
+			if(UtilM.getTheWorld().getTotalWorldTime()%12==0){
+				UtilM.sendMessage(new UploadPlayerDataPacket(UtilM.getThePlayer()));
 				data.keys=keys.clone();
 			}
 		}
@@ -91,7 +91,7 @@ public class TickEvents{
 		}
 		if(mc.thePlayer!=null&&mc.thePlayer.openContainer.getClass().equals(ContainerPlayer.class)&&!bufferedGui.isDone){
 			bufferedGui.isDone=true;
-			Util.sendMessage(new RightClickBlockPacket(bufferedGui.pos, (byte) 0));
+			UtilM.sendMessage(new RightClickBlockPacket(bufferedGui.pos, (byte) 0));
 		}
 		
 		if(Magiology.modInfGUI!=null&&!Magiology.modInfGUI.isExited)Magiology.modInfGUI=null;
@@ -108,7 +108,7 @@ public class TickEvents{
 	public void onWorldTick(TickEvent.WorldTickEvent event){
 		//checking if the tick should be activated: start--|
 		World world=event.world;//-------------------------|
-		if(Util.isNull(world))return;//------------------|
+		if(UtilM.isNull(world))return;//------------------|
 		if(event.phase==Phase.END)return;
 //		if(event.type!=Type.WORLD)return;
 		//checking if the tick should be activated: end----|

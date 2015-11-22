@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerUpgrades;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class GameLoopEvents{
 	
@@ -41,7 +41,7 @@ public class GameLoopEvents{
 		TileEntity tile=world.getTileEntity(pos);
 		if(tile instanceof PowerUpgrades){
 			PowerUpgrades Tile=(PowerUpgrades)tile;
-			if(Tile.getcontainerItems()!=null)for(ItemStack a:Tile.getcontainerItems())if(a!=null)return Util.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,a);
+			if(Tile.getcontainerItems()!=null)for(ItemStack a:Tile.getcontainerItems())if(a!=null)return UtilM.dropBlockAsItem(world,pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,a);
 		}
 		return null;
 	}

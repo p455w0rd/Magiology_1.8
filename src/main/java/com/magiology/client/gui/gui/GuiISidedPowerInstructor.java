@@ -28,8 +28,8 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SimpleCounter;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
@@ -51,9 +51,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		this.ySize=166;
 		renderer=TileEntityRendererDispatcher.instance.getSpecialRenderer(tile);
 		
-		xRotation=new AdvancedPhysicsFloat(Util.CRandI(100)-player.rotationPitch,2);
-		yRotation=new AdvancedPhysicsFloat(Util.CRandI(100)-player.rotationYaw,2);
-		zRotation=new AdvancedPhysicsFloat(Util.CRandI(100),2);
+		xRotation=new AdvancedPhysicsFloat(UtilM.CRandI(100)-player.rotationPitch,2);
+		yRotation=new AdvancedPhysicsFloat(UtilM.CRandI(100)-player.rotationYaw,2);
+		zRotation=new AdvancedPhysicsFloat(UtilM.CRandI(100),2);
 		xRotation.friction=yRotation.friction=zRotation.friction=0.9F;
 		xRotation.wantedPoint=-player.rotationPitch;
 		yRotation.wantedPoint=-player.rotationYaw;
@@ -143,11 +143,11 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		}
 		int side=convert(buttonId);
 		if(id==6){
-			Util.sendMessage(new GenericServerIntPacket(7, side));
+			UtilM.sendMessage(new GenericServerIntPacket(7, side));
 		}else if(id==7){
-			Util.sendMessage(new GenericServerIntPacket(8, side));
+			UtilM.sendMessage(new GenericServerIntPacket(8, side));
 		}else if(id==8){
-			Util.sendMessage(new GenericServerIntPacket(9, side));
+			UtilM.sendMessage(new GenericServerIntPacket(9, side));
 		}
 		if(b instanceof ColoredGuiButton)((ColoredGuiButton)b).blink(1);
 	}
@@ -200,8 +200,8 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			
 			GL11.glPushMatrix();
 			GL11.glTranslated(guiLeft+37, guiTop+35, 120);
-			GL11U.scaled(35);
-			GL11U.rotateXYZ(xRot,yRot,zRot);
+			GL11U.glScale(35);
+			GL11U.glRotate(xRot,yRot,zRot);
 			GL11.glScalef((-1), 1, 1);
 			if(renderer!=null){
 		        GL11.glCullFace(GL11.GL_FRONT);
@@ -247,13 +247,13 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 				GL11.glPushMatrix();
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11U.SetUpOpaqueRendering(1);
-				GL11U.scaled(1.001);
+				GL11U.setUpOpaqueRendering(1);
+				GL11U.glScale(1.001);
 				GL11.glTranslated(-0.5, -0.5, -0.5);
 				double 
-				r=Util.fluctuator(9, 0)*0.4,
-				g=0.5-Util.fluctuator(17, 0)*0.3,
-				b=1-Util.fluctuator(27, 0)*0.2;
+				r=UtilM.fluctuator(9, 0)*0.4,
+				g=0.5-UtilM.fluctuator(17, 0)*0.3,
+				b=1-UtilM.fluctuator(27, 0)*0.2;
 				GL11.glColor4d(r,g,b, 0.4);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				cube.draw();
@@ -261,7 +261,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 				GL11.glColor4d(r,g,b, 0.2);
 				cube.draw();
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
-				GL11U.EndOpaqueRendering();
+				GL11U.endOpaqueRendering();
 				GL11.glEnable(GL11.GL_CULL_FACE);
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GL11.glPopMatrix();
@@ -277,14 +277,14 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		
 		GL11.glPushMatrix();
 		GL11.glTranslated(guiLeft+82, guiTop+60, 120);
-		GL11U.SetUpOpaqueRendering(1);
+		GL11U.setUpOpaqueRendering(1);
 		
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_LIGHTING);
 		
-		GL11.glColor4d(0.65F+Util.fluctuator(41, 0)*0.1,0.65+Util.fluctuator(25, 0)*0.05,0.65+Util.fluctuator(73, 0)*0.15,1);
-		GL11U.scaled(12.9);
-		GL11U.rotateXYZ(Util.fluctuator(164, 0)*180+xRot/4, Util.fluctuator(84, 0)*60+yRot/4, Util.fluctuator(508, 0)*360+zRot/4);
+		GL11.glColor4d(0.65F+UtilM.fluctuator(41, 0)*0.1,0.65+UtilM.fluctuator(25, 0)*0.05,0.65+UtilM.fluctuator(73, 0)*0.15,1);
+		GL11U.glScale(12.9);
+		GL11U.glRotate(UtilM.fluctuator(164, 0)*180+xRot/4, UtilM.fluctuator(84, 0)*60+yRot/4, UtilM.fluctuator(508, 0)*360+zRot/4);
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		TessUtil.drawBall();
@@ -295,7 +295,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		
 		
 		GL11.glPushMatrix();
-		GL11U.rotateXYZ(xRotation.wantedPoint+180, yRotation.wantedPoint, zRotation.wantedPoint);
+		GL11U.glRotate(xRotation.wantedPoint+180, yRotation.wantedPoint, zRotation.wantedPoint);
 		GL11.glColor4f(1, 0, 0, 1F);
 		GL11.glLineWidth(2.5F);
 		Get.Render.WR().startDrawing(GL11.GL_LINES);
@@ -312,7 +312,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		
 		
 		GL11.glPushMatrix();
-		GL11U.rotateXYZ(xRot,yRot,zRot);
+		GL11U.glRotate(xRot,yRot,zRot);
 		GL11.glColor4f(0, 1, 0, 1F);
 		GL11.glLineWidth(2.5F);
 		Get.Render.WR().startDrawing(GL11.GL_LINES);
@@ -328,14 +328,14 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		GL11.glPopMatrix();
 		
 		
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		GL11.glPopMatrix();
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPushMatrix();
 		GL11.glTranslated(guiLeft+82, guiTop+35, 120);
-		GL11U.scaled(11);
-		GL11U.rotateXYZ(xRot,yRot,zRot);
+		GL11U.glScale(11);
+		GL11U.glRotate(xRot,yRot,zRot);
 		GL11.glTranslated(0.55,-0.55,-0.55);
 		
 		
@@ -351,9 +351,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		
 		GL11.glPushMatrix();
 		GL11.glTranslated(guiLeft+152, guiTop+19+buttonId*22, 120);
-		GL11U.scaled(12);
-		GL11U.rotateXYZ(0, 30, 90);
-		GL11U.rotateXYZ(0, Util.fluctuator(1600, 0)*3600,0);
+		GL11U.glScale(12);
+		GL11U.glRotate(0, 30, 90);
+		GL11U.glRotate(0, UtilM.fluctuator(1600, 0)*3600,0);
 		GL11.glTranslated(0.375,-0.375,-0.375);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -375,11 +375,11 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
 		GL11.glDisable(GL11.GL_LIGHTING);
 		TessUtil.bindTexture(Textures.ISidedIns);
-		GL11U.SetUpOpaqueRendering(2);
+		GL11U.setUpOpaqueRendering(2);
 		GL11.glColor4f(1, 1, 1, 0.9F);
 		GL11.glTranslatef(0, 0, 0);
 		this.drawTexturedModalRect(guiLeft+14, guiTop+12, xSize, 0, 46, 46);
-		GL11U.EndOpaqueRendering();
+		GL11U.endOpaqueRendering();
 		if(isShiftKeyDown()){
 			GL11.glPushMatrix();
 			GL11.glTranslated(guiLeft, guiTop+12, 0);

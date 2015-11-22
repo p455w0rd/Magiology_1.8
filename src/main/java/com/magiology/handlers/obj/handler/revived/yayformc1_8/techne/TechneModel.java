@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
 
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.ModelFormatException;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 
 /**

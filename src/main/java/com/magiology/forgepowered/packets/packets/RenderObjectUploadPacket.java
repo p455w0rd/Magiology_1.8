@@ -31,7 +31,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	private float scale;
 	private Vector2f offset,size,originalSize;
 	private ColorF color;
-	private String text;
+	private String text,name;
 	private BlockPos pos;
 	private Program command;
 	private boolean isCommand;
@@ -56,7 +56,10 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		isDead=ho.isDead;
 		if(suportsText)text=((StringContainer)ho).getString();
 		isCommand=ho instanceof ICommandInteract;
-		if(isCommand)command=((ICommandInteract)ho).getActivationTarget();
+		if(isCommand){
+			command=((ICommandInteract)ho).getActivationTarget();
+			name=((ICommandInteract)ho).getName();
+		}
 	}
 	@Override
 	public void write(PacketBuffer buffer) throws IOException{
@@ -81,6 +84,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 			buffer.writeInt(command!=null?command.programId:0);
 			writePos(buffer, command!=null?command.pos:new BlockPosM());
 			writeString(buffer, command!=null?command.argsSrc:"");
+			writeString(buffer, name);
 		}
 	}
 	@Override
@@ -104,6 +108,7 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		if(isCommand){
 			command=new Program(readString(buffer), buffer.readInt(), readPos(buffer));
 			command.argsSrc=readString(buffer);
+			name=readString(buffer);
 		}
 	}
 	@Override
@@ -129,7 +134,10 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 				tile.holoObjects.get(roId).setColor=color;
 				tile.holoObjects.get(roId).isDead=isDead;
 				if(suportsText&&tile.holoObjects.get(roId) instanceof StringContainer)((StringContainer)tile.holoObjects.get(roId)).setString(text);
-				if(isCommand&&tile.holoObjects.get(roId) instanceof ICommandInteract)((ICommandInteract)tile.holoObjects.get(roId)).setActivationTarget(command);
+				if(isCommand&&tile.holoObjects.get(roId) instanceof ICommandInteract){
+					((ICommandInteract)tile.holoObjects.get(roId)).setActivationTarget(command);
+					((ICommandInteract)tile.holoObjects.get(roId)).setName(name);
+				}
 			}else{
 				HoloObject newObject=null;
 				if(type==1)newObject=new TextBox(tile, text);
@@ -145,7 +153,10 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 					newObject.color=color;
 					newObject.isDead=isDead;
 					if(suportsText)((StringContainer)newObject).setString(text);
-					if(isCommand)((Button)newObject).setActivationTarget(command);
+					if(isCommand){
+						((ICommandInteract)newObject).setActivationTarget(command);
+						((ICommandInteract)newObject).setName(name);
+					}
 					tile.holoObjects.add(newObject);
 				}
 			}

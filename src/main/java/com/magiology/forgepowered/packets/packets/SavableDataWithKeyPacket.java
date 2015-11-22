@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
 import com.magiology.api.SavableData;
-import com.magiology.api.network.NetworkBaseInterface;
+import com.magiology.api.network.NetworkInterface;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
 
 public class SavableDataWithKeyPacket extends AbstractToClientMessage{
@@ -19,7 +19,7 @@ public class SavableDataWithKeyPacket extends AbstractToClientMessage{
 	private String key;
 	private SavableData data;
 	public SavableDataWithKeyPacket(){}
-	public SavableDataWithKeyPacket(NetworkBaseInterface tile,String key, SavableData data){
+	public SavableDataWithKeyPacket(NetworkInterface tile,String key, SavableData data){
 		super(new SendingTarget(tile.getHost().getWorld(), tile.getHost().getWorld().provider.getDimensionId()));
 		pos=tile.getHost().getPos();
 		this.key=key;
@@ -41,8 +41,8 @@ public class SavableDataWithKeyPacket extends AbstractToClientMessage{
 	public IMessage process(EntityPlayer player, Side side){
 		World world=player.worldObj;
 		TileEntity tile=world.getTileEntity(pos);
-		if(tile instanceof NetworkBaseInterface){
-			((NetworkBaseInterface)tile).setInteractData(key, data);
+		if(tile instanceof NetworkInterface){
+			((NetworkInterface)tile).setInteractData(key, data);
 			return null;
 		}
 		System.out.print("PACKET HAS FAILED TO DELIVER THE DATA!\n");

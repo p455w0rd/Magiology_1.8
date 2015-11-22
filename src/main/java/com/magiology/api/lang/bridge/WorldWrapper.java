@@ -1,13 +1,10 @@
 package com.magiology.api.lang.bridge;
 
-import java.util.Iterator;
-import java.util.Map.Entry;
-
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 
@@ -16,19 +13,36 @@ public class WorldWrapper{
 	public static void setBlockAccess(World access){
 		world=access;
 	}
-	public static Block getBlock(BlockPosM pos){
-		return pos.getBlock(world);
+	public static Block getBlock(InterfaceWrapper pos){
+		return pos.getBlock();
+	}
+	public static Object getBlockState(InterfaceWrapper pos,String stateName){
+		return pos.getBlockState(stateName);
+	}
+	public static int getRedstone(InterfaceWrapper pos, int side){
+		return pos.getRedstone(side);
+	}
+	public static int getRedstone(InterfaceWrapper pos, EnumFacing side){
+		return pos.getRedstone(side);
+	}
+	public static Object getBlock(BlockPosM pos){
+		Object tile=getInterface(pos);
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getBlock():"undefined";
 	}
 	public static Object getBlockState(BlockPosM pos,String stateName){
-		Iterator iterator=pos.getState(world).getProperties().entrySet().iterator();
-		Entry entry;
-		while(iterator.hasNext()){
-			entry=(Entry)iterator.next();
-			if(((IProperty)entry.getKey()).getName().equals(stateName))return entry.getValue();
-		}
-		return "undefined";
+		Object tile=getInterface(pos);
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getBlockState(stateName):"undefined";
 	}
-	public static int getRedstone(BlockPosM pos, int side){
-		return pos.getRedstonePower(world, EnumFacing.getFront(side));
+	public static Object getRedstone(BlockPosM pos, int side){
+		Object tile=getInterface(pos);
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getRedstone(side):"undefined";
+	}
+	public static Object getRedstone(BlockPosM pos, EnumFacing side){
+		Object tile=getInterface(pos);
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getRedstone(side):"undefined";
+	}
+	public static Object getInterface(BlockPosM pos){
+		TileEntityNetworkInteract tile=pos.getTile(world, TileEntityNetworkInteract.class);
+		return tile!=null?tile:"undefined";
 	}
 }

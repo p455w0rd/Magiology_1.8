@@ -88,6 +88,7 @@ public class ZipManager{
 			    }
 			}
 			zin.close();
+			out.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

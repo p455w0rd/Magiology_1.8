@@ -12,7 +12,7 @@ import com.magiology.client.render.Textures;
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.items.GenericItemUpgrade;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 
 public class ItemRendererGenericUpgrade implements IItemRenderer {

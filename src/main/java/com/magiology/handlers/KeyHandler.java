@@ -21,8 +21,8 @@ import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SimpleCounter;
 
 public class KeyHandler{
@@ -63,7 +63,8 @@ public class KeyHandler{
 		for(int i=0;i<keyValues.length;i++)RegKey(keys[i],new KeyBinding(keyDesc[i], keyValues[i], MReference.MODID+".key_bindings"));
 	}
 	private void RegKey(KeyBinding saver,KeyBinding New){
-		saver=New;ClientRegistry.registerKeyBinding(saver);
+		ClientRegistry.registerKeyBinding(saver);
+		saver=New;
 	}
 	// 1.
 	@SubscribeEvent
@@ -96,14 +97,14 @@ public class KeyHandler{
 				if(keys[1])x+=2;
 				if(keys[4])z=1;
 				if(keys[5])z+=2;
-				Util.sendMessage(new GenericServerStringPacket(0,x+","+z));
+				UtilM.sendMessage(new GenericServerStringPacket(0,x+","+z));
 			}
 		}
 		if(rawKey==gs.keyBindForward.getKeyCode()||rawKey==gs.keyBindBack.getKeyCode()||rawKey==gs.keyBindJump.getKeyCode()||rawKey==gs.keyBindSneak.getKeyCode()||rawKey==gs.keyBindRight.getKeyCode()||rawKey==gs.keyBindLeft.getKeyCode()){
-			ExtendedPlayerData data=ExtendedPlayerData.get(Util.getThePlayer());
+			ExtendedPlayerData data=ExtendedPlayerData.get(UtilM.getThePlayer());
 			if(data!=null){
 				data.keys=keys.clone();
-				Util.sendMessage(new UploadPlayerDataPacket(Util.getThePlayer()));
+				UtilM.sendMessage(new UploadPlayerDataPacket(UtilM.getThePlayer()));
 			}
 		}
 	}
@@ -113,14 +114,14 @@ public class KeyHandler{
 			StatsDisplayHUD.instance.isStatsShowed=!StatsDisplayHUD.instance.isStatsShowed;
 		}
 		else if(ArmorGui.check(keyId)){
-			Util.sendMessage(new OpenGuiPacket(MGui.GuiArmor));
+			UtilM.sendMessage(new OpenGuiPacket(MGui.GuiArmor));
 		}
 		else if(BusGui.check(keyId)){
 			
 		}
 		else if(HandMode.check(keyId)){
 			if(HandModeChangerHUD.instance.handAlpha>0.9){
-				Util.sendMessage(new GenericServerVoidPacket(0));
+				UtilM.sendMessage(new GenericServerVoidPacket(0));
 			}
 		}
 		

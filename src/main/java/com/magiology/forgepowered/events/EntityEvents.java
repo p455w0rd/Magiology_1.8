@@ -32,8 +32,8 @@ import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntity
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.registry.events.PlayerWrenchEvent;
 import com.magiology.util.utilclasses.SpecialPlayerUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.EntityPosAndBB;
 import com.magiology.util.utilobjects.NBTUtil;
 import com.magiology.util.utilobjects.SlowdownUtil;
@@ -53,10 +53,10 @@ public class EntityEvents{
 			Entity entity=event.entity;
 //			if(RenderLoopEvents.entitys.size()>50)RenderLoopEvents.entitys.remove(Helper.RInt(RenderLoopEvents.entitys.size()));
 			if(world.isRemote)if(entity instanceof EntityLivingBase){
-				EntityPlayer player=Util.getThePlayer();
+				EntityPlayer player=UtilM.getThePlayer();
 				if(
 				   !entity.isDead&&
-				   entity.isInRangeToRender3d(player.posX+Util.CRandI(50), player.posY+Util.CRandI(50), player.posZ+Util.CRandI(50))&&
+				   entity.isInRangeToRender3d(player.posX+UtilM.CRandI(50), player.posY+UtilM.CRandI(50), player.posZ+UtilM.CRandI(50))&&
 				   ((EntityLivingBase)entity).getCreatureAttribute()!=EnumCreatureAttribute.UNDEAD&&
 				   entity.isInRangeToRenderDist(entity.renderDistanceWeight)&&
 				   entity.getBoundingBox()!=null
@@ -65,12 +65,12 @@ public class EntityEvents{
 //					if(!contains&&RenderLoopEvents.entitys.size()<100)RenderLoopEvents.entitys.add(EPABB);
 					
 					
-					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&Util.RB()&&(Util.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1]))){
+					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&UtilM.RB()&&(UtilM.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1]))){
 						double[] l=EPABB.getRandDotInBB(1.5),k=EPABB.getMiddleOfBB();
-						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+Util.CRandF(0.4), k[1]+Util.CRandF(0.4), k[2]+Util.CRandF(0.4), 600, 4, 1,0.2+Util.RF()*0.5,0.2+Util.RF()*0.5,0.5/(entity==player?8:1));
+						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+UtilM.CRandF(0.4), k[1]+UtilM.CRandF(0.4), k[2]+UtilM.CRandF(0.4), 600, 4, 1,0.2+UtilM.RF()*0.5,0.2+UtilM.RF()*0.5,0.5/(entity==player?8:1));
 						particle.isGL_DEPTHDisabled=true;
 						particle.noClip=true;
-						Util.spawnEntityFX(particle);
+						UtilM.spawnEntityFX(particle);
 					}
 				}
 			}
@@ -116,7 +116,7 @@ public class EntityEvents{
 				InventoryPlayer inv=player.inventory;
 				
 				for(ItemStack a:inv.mainInventory){
-					if(Util.isItemInStack(MItems.PowerCounter, a)){
+					if(UtilM.isItemInStack(MItems.PowerCounter, a)){
 						NBTUtil.createNBT(a);
 						boolean state=a.getTagCompound().getBoolean("state");
 						double animation=a.getTagCompound().getDouble("anim"),prevAnimation=a.getTagCompound().getDouble("pAnim");

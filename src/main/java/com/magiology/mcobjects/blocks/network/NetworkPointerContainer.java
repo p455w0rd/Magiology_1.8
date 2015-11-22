@@ -16,14 +16,14 @@ import net.minecraft.world.World;
 
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
-import com.magiology.api.network.NetworkBaseInterface;
+import com.magiology.api.network.NetworkInterface;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class NetworkPointerContainer extends BlockContainerMultiColision{
 	
@@ -37,7 +37,7 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 	
 	@Override
 	public AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos){
-		TileEntityNetworkPointerContainer tile=(TileEntityNetworkPointerContainer) world.getTileEntity(pos);
+		TileEntityNetworkRouter tile=(TileEntityNetworkRouter) world.getTileEntity(pos);
 		if(tile==null)return null;
     	float minX=p*7  -(tile.connections[5]!=null?(p*6):0);
     	float minY=p*7  -(tile.connections[1]!=null?(p*6):0);
@@ -49,15 +49,15 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 	}
 	@Override
 	public TileEntity createNewTileEntity(World var0, int var1){
-		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkPointerContainer());
+		return NetworkBaseComponentHandler.createComponent(new TileEntityNetworkRouter());
 	}
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
 		int side=SideUtil.getOppositeSide(facing.getIndex());
 		TileEntity[] sides=SideUtil.getTilesOnSides(world,pos);
-		if(!(sides[side] instanceof NetworkBaseInterface)){
+		if(!(sides[side] instanceof NetworkInterface)){
 			for(int i=0;i<6;i++){
-				if(sides[i] instanceof NetworkBaseInterface){
+				if(sides[i] instanceof NetworkInterface){
 					side=i;
 					break;
 				}
@@ -76,21 +76,21 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
     }
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
-		TileEntityNetworkPointerContainer tile=(TileEntityNetworkPointerContainer) world.getTileEntity(pos);
+		TileEntityNetworkRouter tile=(TileEntityNetworkRouter) world.getTileEntity(pos);
 		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
 		if(id<0)return false;
 		if(tile.getStackInSlot(id)==null){
-			if(!Util.isItemInStack(MItems.networkPointer,player.getCurrentEquippedItem()))return false;
+			if(!UtilM.isItemInStack(MItems.networkPointer,player.getCurrentEquippedItem()))return false;
 			tile.setInventorySlotContents(id, player.getCurrentEquippedItem());
 			if(!player.capabilities.isCreativeMode)player.inventory.mainInventory[player.inventory.currentItem]=null;
 			return true;
 		}else{
-			EntityItem stack=Util.dropBlockAsItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, tile.getStackInSlot(id));
+			EntityItem stack=UtilM.dropBlockAsItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, tile.getStackInSlot(id));
 			if(stack!=null){
 				stack.motionX=0;
 				stack.motionY=0;
 				stack.motionZ=0;
-				Util.spawnEntity(stack);
+				UtilM.spawnEntity(stack);
 			}
 			tile.setInventorySlotContents(id, null);
 			return true;

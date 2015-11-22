@@ -27,7 +27,7 @@ import com.magiology.forgepowered.packets.core.AbstractPacket;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.util.utilclasses.FileUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 
 public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequence>{
@@ -95,12 +95,6 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	//----------------------------------------------------------------------------------------------------------------------------------
 	@SubscribeEvent
 	public void save(WorldEvent.Save e){
-//		Util.printInln("--------------------------------------------");
-//		Util.printInln(folderName,extension,worldDataName);
-//		Util.printInln(fromServer,fromClient,dimSpesific,dataStatic,usesSyncing,syncingOnLoad,syncingOnChange);
-//		Util.printInln(data);
-//		Util.printInln(worldDataName,shallRun(e.world),e.world);
-//		Util.printInln("____________________________________________");
 		try{
 			if(!shallRun(e.world))return;
 			saveFromWorld(e.world);
@@ -110,7 +104,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	}
 	@SubscribeEvent
 	public void load(WorldEvent.Load e){
-		Util.printInln(worldDataName,shallRun(e.world));
+		UtilM.printInln(worldDataName,shallRun(e.world));
 		try{
 			if(!shallRun(e.world))return;
 			loadFromWorld(e.world);
@@ -129,7 +123,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		File basePath=new File(bp);
 		//Make sure that the folder exists.
 		basePath.mkdirs();
-		if(printsActions)Util.printInln("Loading files from:",".../"+bp.substring(0, bp.length()-1));
+		if(printsActions)UtilM.printInln("Loading files from:",".../"+bp.substring(0, bp.length()-1));
 		for(File file:basePath.listFiles()){
 			try{
 				String name=file.getName().replace("."+extension, "");
@@ -149,7 +143,11 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		
 		//Mark all files to be deleted.
 		for(File file:basePath.listFiles())if(file.isFile())file.delete();
-		if(printsActions)Util.printInln("Saving files to:",".../"+bp.substring(0, bp.length()-1));
+		if(printsActions){
+			if(!UtilM.join(Thread.currentThread().getStackTrace()).contains("net.minecraft.server.MinecraftServer.tick")){
+				UtilM.printInln("Saving files to:",".../"+bp.substring(0, bp.length()-1));
+			}
+		}
 		for(Entry<KeyCast,FileContent<ValueCast>> fileWrite:data.entrySet()){
 			FileContent<ValueCast> file=fileWrite.getValue();
 			if(dimSpesific?world.provider.getDimensionId()==file.dimension:true){
@@ -164,13 +162,13 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
 	public void syncClients(){
-		if(printsActions)Util.printInln("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)UtilM.printInln("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncClientsWorldData((Map<CharSequence,FileContent<CharSequence>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToAll(packet);
 	}
 	
 	public void syncServer(){
-		if(printsActions)Util.printInln("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)UtilM.printInln("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncServerWorldData((Map<CharSequence,FileContent<CharSequence>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToServer(packet);
 	}
@@ -281,7 +279,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		StringBuilder result=new StringBuilder();
 		addDir(addDir(result, "saves"), getModName());
 		if(!dataStatic){
-			if(Util.isRemote())addDir(result, Util.getMC().getIntegratedServer().getFolderName());
+			if(UtilM.isRemote())addDir(result, UtilM.getMC().getIntegratedServer().getFolderName());
 			else addDir(result, world!=null?world.getSaveHandler().getWorldDirectory().getName():"<world name>");
 		}
 		
@@ -295,7 +293,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	
 	private boolean shallRun(World world){
 		if(world!=null)if(!dimSpesific&&world.provider.getDimensionId()!=0)return false;
-		if(world!=null?world.isRemote:Util.isRemote())return fromClient;
+		if(world!=null?world.isRemote:UtilM.isRemote())return fromClient;
 		else return fromServer;
 	}
 	/**
@@ -323,7 +321,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	private void sync(){
 		if(!usesSyncing)return;
 		if(unsyncedData.isEmpty())return;
-		boolean isRemote=Util.isRemote();
+		boolean isRemote=UtilM.isRemote();
 		if(isRemote){
 			if(fromClient)syncServer();
 		}else{

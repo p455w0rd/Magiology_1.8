@@ -30,7 +30,7 @@ public class CustomCrafterRegistry{
 			Item processingItem=GameRegistry.findItem(MReference.MODID, i.getKey());
 			Item productItem=GameRegistry.findItem(MReference.MODID, i.getValue());
 			if(processingItem!=null&&productItem!=null)data.put(processingItem, productItem);
-			else new IllegalArgumentException((processingItem==null?"processingItem: "+i.getKey()+" does not exist!":"")+(productItem==null?(processingItem==null?",":"")+" productItem: "+i.getValue()+" does not exist!":""));
+			else throw new IllegalArgumentException((processingItem==null?"processingItem: "+i.getKey()+" does not exist!":"")+(productItem==null?(processingItem==null?",":"")+" productItem: "+i.getValue()+" does not exist!":""));
 		}
 	}
 	public static ItemStack getProduct(ItemStack stack){

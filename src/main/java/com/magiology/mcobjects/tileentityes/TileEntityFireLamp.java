@@ -18,7 +18,7 @@ import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Pos;
@@ -118,19 +118,19 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		
 		if(canGeneratePower(3)||isforced){
 			if(optimizer2.isTimeWithAddProgress()){
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
-				Util.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+p*5.5, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,5,100,new Vec3M(0,0,0)));
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02));
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02));
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02));
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02));
+				UtilM.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+0.5, pos.getY()+p*5.5, pos.getZ()+0.5, 0.5F/16F, 0.1F,1,5,100,new Vec3M(0,0,0)));
 			}else{
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
-				Util.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*4, -0.02, -0.005, -0.02),16);
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*4, 0.02, -0.005, -0.02),16);
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*12, pos.getY()+p*11, pos.getZ()+p*12, 0.02, -0.005, 0.02),16);
+				UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+p*4, pos.getY()+p*11, pos.getZ()+p*12, -0.02, -0.005, 0.02),16);
 			}
-			if(Util.RB())Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+p*6+(Util.RF()*p*4), pos.getY()+p*11-Util.RF()*p*5, pos.getZ()+p*6+(Util.RF()*p*4), Util.CRandF(0.005), -0.01, Util.CRandF(0.005), 300, 2, -1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 0.7),20);
-			else Util.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+0.35+(Util.RF()*0.35), pos.getY()+Util.RF()*p*5, pos.getZ()+0.35+(Util.RF()*0.35), Util.CRandF(0.005), 0.01, Util.CRandF(0.005), 300, 2, 1, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 0.7),20);
+			if(UtilM.RB())UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+p*6+(UtilM.RF()*p*4), pos.getY()+p*11-UtilM.RF()*p*5, pos.getZ()+p*6+(UtilM.RF()*p*4), UtilM.CRandF(0.005), -0.01, UtilM.CRandF(0.005), 300, 2, -1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 0.7),20);
+			else UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj, pos.getX()+0.35+(UtilM.RF()*0.35), pos.getY()+UtilM.RF()*p*5, pos.getZ()+0.35+(UtilM.RF()*0.35), UtilM.CRandF(0.005), 0.01, UtilM.CRandF(0.005), 300, 2, 1, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 0.7),20);
 		}
 		
 		
@@ -141,9 +141,9 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		int i=getEnergy();
 		handleStandardPowerTransmission(true);
 		if(i!=getEnergy())if(worldObj.isRemote&&optimizer3.progress==0){
-			EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1);
-			if(Util.RInt(3)==0)Util.spawnEntityFX(particle);
-			else Util.spawnEntityFX(particle,20);
+			EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1);
+			if(UtilM.RInt(3)==0)UtilM.spawnEntityFX(particle);
+			else UtilM.spawnEntityFX(particle,20);
 		}
 		
 		if(isInMultiblockStructureBFCHelper==true){
@@ -167,9 +167,9 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 		if(aa instanceof TileEntityFirePipe){
 			TileEntityFirePipe pipe= (TileEntityFirePipe)aa;
 			if(PowerUtil.tryToDrainFromTo(this, pipe, PowerUtil.getHowMuchToSendFromToForDrain(this, pipe),EnumFacing.UP.getIndex()))if(worldObj.isRemote&&optimizer3.progress==0){
-				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+Util.RF()*0.5, 0.2+Util.RF()*0.2, 1);
-				if(Util.RInt(3)==0)Util.spawnEntityFX(particle);
-				else Util.spawnEntityFX(particle,20);
+				EntitySmoothBubleFX particle=new EntitySmoothBubleFX(worldObj, pos.getX()+0.5, pos.getY()+p*15, pos.getZ()+0.5, 0, 0.02, 0, 180, 2.5, 0.5, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1);
+				if(UtilM.RInt(3)==0)UtilM.spawnEntityFX(particle);
+				else UtilM.spawnEntityFX(particle,20);
 			}
 		}
 	}

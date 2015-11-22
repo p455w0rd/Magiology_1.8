@@ -14,7 +14,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class NormalizedVertixBuffer{
@@ -83,6 +83,7 @@ public class NormalizedVertixBuffer{
 	public void cleanUp(){
 		shadedTriangles.clear();
 		unfinishedTriangle.clear();
+		if(transformedBuffer!=null)transformedBuffer.cleanUp();
 	}
 	
 	protected void startRecordingTesselator(int type){
@@ -98,6 +99,7 @@ public class NormalizedVertixBuffer{
 			shadedTriangles.addAll(a.shadedTriangles);
 		}
 		subBuffers.clear();
+		if(transformedBuffer!=null)transformedBuffer.pasteToTesselator(type);
 		try {
 			for(int s=0;s<shadedTriangles.size();s++){
 				ShadedTriangle a=shadedTriangles.get(s);
@@ -197,12 +199,15 @@ public class NormalizedVertixBuffer{
 	
 	public void setInstantNormalCalculation(boolean enabled){
 		instantNormalCalculation=enabled;
+		if(transformedBuffer!=null)transformedBuffer.setInstantNormalCalculation(enabled);
 	}
 	public void setDrawAsWire(boolean wireMode){
 		willDrawAsAWireFrame=wireMode;
+		if(transformedBuffer!=null)transformedBuffer.setDrawAsWire(wireMode);
 	}
 	public void setClearing(boolean enabled){
 		willClear=enabled;
+		if(transformedBuffer!=null)transformedBuffer.setClearing(enabled);
 	}
 	public void pushMatrix(){
 		transformationStacks.add(Matrix4f.add(transformation, Matrix4f.setZero(new Matrix4f()), null));
@@ -220,23 +225,28 @@ public class NormalizedVertixBuffer{
 		rotationStacks.remove(pos);
 	}
 	public void transformAndSaveTo(NormalizedVertixBuffer buff){
-		if(buff==null||buff==this){
-			transformedBuffer.shadedTriangles.addAll(shadedTriangles);
-		}
-		else {
+		try{
+			boolean isItself=buff==null||buff==this;
+			List<ShadedTriangle> buffer=isItself?new ArrayList<ShadedTriangle>():buff.shadedTriangles;
 			for(int s=0;s<shadedTriangles.size();s++){
 				ShadedTriangle a=shadedTriangles.get(s);
 				
 				Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(0,0,0),rotation.x,rotation.y,rotation.z,1);
-				buff.shadedTriangles.add(new ShadedTriangle(
+				buffer.add(new ShadedTriangle(
 						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord), transformation),a.pos3[0].texturePositionX,a.pos3[0].texturePositionY),
 						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord), transformation),a.pos3[1].texturePositionX,a.pos3[1].texturePositionY),
 						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord), transformation),a.pos3[2].texturePositionX,a.pos3[2].texturePositionY),
 						finalNormal
 						));
 			}
+			if(isItself){
+				shadedTriangles=buffer;
+			}else{
+				if(willClear)shadedTriangles.clear();
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		if(willClear)shadedTriangles.clear();
 	}
 	public Matrix4f getTransformation(){
 		return Matrix4f.add(transformation, Matrix4f.setZero(new Matrix4f()), null);

@@ -11,26 +11,26 @@ import com.magiology.client.gui.custom.hud.HUD;
 import com.magiology.client.render.Textures;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
 	public void update(){
 		
-		r=Util.snap(r, 0, 1);
-		g=Util.snap(g, 0, 1);
-		b=Util.snap(b, 0, 1);
+		r=UtilM.snap(r, 0, 1);
+		g=UtilM.snap(g, 0, 1);
+		b=UtilM.snap(b, 0, 1);
 		prevR=r;
 		prevG=g;
 		prevB=b;
 		prevAlpha=alpha;
 		
-		r=(float)Util.slowlyEqalize(r, wantedR, 0.1);
-		g=(float)Util.slowlyEqalize(g, wantedG, 0.1);
-		b=(float)Util.slowlyEqalize(b, wantedB, 0.1);
-		wantedAlpha=Util.booleanToInt(hovered);
+		r=(float)UtilM.slowlyEqalize(r, wantedR, 0.1);
+		g=(float)UtilM.slowlyEqalize(g, wantedG, 0.1);
+		b=(float)UtilM.slowlyEqalize(b, wantedB, 0.1);
+		wantedAlpha=UtilM.booleanToInt(hovered);
 		alpha+=0.03;
-		alpha=(float)Util.slowlyEqalize(prevAlpha, wantedAlpha, 0.17);
+		alpha=(float)UtilM.slowlyEqalize(prevAlpha, wantedAlpha, 0.17);
 		
 		
 	}
@@ -41,11 +41,11 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
 	public void drawButton(Minecraft p_146112_1_, int x, int y){
         if (this.visible){
-			float r=Util.calculateRenderPos(prevR, this.r),g=Util.calculateRenderPos(prevG, this.g),b=Util.calculateRenderPos(prevB, this.b),alpha=Util.calculateRenderPos(prevAlpha, this.alpha);
+			float r=UtilM.calculateRenderPos(prevR, this.r),g=UtilM.calculateRenderPos(prevG, this.g),b=UtilM.calculateRenderPos(prevB, this.b),alpha=UtilM.calculateRenderPos(prevAlpha, this.alpha);
             FontRenderer fr = TessUtil.getFontRenderer();
             p_146112_1_.getTextureManager().bindTexture(Textures.ISidedIns);
             this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;
-            GL11U.SetUpOpaqueRendering(1);
+            GL11U.setUpOpaqueRendering(1);
 
             GL11.glColor4f(r,g,b,1);
             HUD.drawRect(1F/512F,1F/512F,this.xPosition, this.yPosition, 352, 72+20, this.width / 2, this.height);
@@ -61,14 +61,14 @@ public class TexturedColoredButton extends ColoredGuiButton{
             else if (!this.enabled)l = 10526880;
             else if (this.hovered)l = 16777120;
             
-            float[] rgb=Util.codeToRGBABPrecentage(l);
+            float[] rgb=UtilM.codeToRGBABPrecentage(l);
             
             rgb[0]=(rgb[0]+r)/2F;
             rgb[1]=(rgb[1]+g)/2F;
             rgb[2]=(rgb[2]+b)/2F;
             
             this.drawCenteredString(fr, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, new Color(r,g,b,alpha).hashCode());
-            GL11U.EndOpaqueRendering();
+            GL11U.endOpaqueRendering();
         }
     }
 }

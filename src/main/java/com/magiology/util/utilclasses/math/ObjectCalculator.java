@@ -3,7 +3,7 @@ package com.magiology.util.utilclasses.math;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class ObjectCalculator{
 	private static final char mul='*',div='/',add='+',sub='-';

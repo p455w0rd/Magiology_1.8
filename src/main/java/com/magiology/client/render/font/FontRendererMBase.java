@@ -1,6 +1,6 @@
 package com.magiology.client.render.font;
 
-import static com.magiology.util.utilclasses.Util.*;
+import static com.magiology.util.utilclasses.UtilM.*;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

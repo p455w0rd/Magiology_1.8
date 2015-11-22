@@ -23,7 +23,7 @@ import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.gui.gui.GuiControlBock;
 import com.magiology.client.gui.gui.GuiHologramProjectorMain;
 import com.magiology.client.gui.gui.GuiISidedPowerInstructor;
-import com.magiology.client.gui.gui.GuiHoloObjectCustomize;
+import com.magiology.client.gui.gui.GuiHoloObjectEditor;
 import com.magiology.client.gui.gui.GuiSC;
 import com.magiology.client.gui.gui.GuiUpgrade;
 import com.magiology.core.Magiology;
@@ -32,16 +32,16 @@ import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 public class GuiHandlerM implements IGuiHandler{
 	
 	public Container GetServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x, y, z));
-		MovingObjectPosition hit=Util.rayTrace(player,4, 1);
+		MovingObjectPosition hit=UtilM.rayTrace(player,4, 1);
 		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
@@ -62,18 +62,18 @@ public class GuiHandlerM implements IGuiHandler{
 			if(tile instanceof TileEntityHologramProjector)
 				return new ContainerEmpty();
 		case MGui.CommandCenterGui:
-			if(tile instanceof TileEntityNetworkCommandHolder)
-				return new CommandCenterContainer(player, (TileEntityNetworkCommandHolder)tile);
+			if(tile instanceof TileEntityNetworkProgramHolder)
+				return new CommandCenterContainer(player, (TileEntityNetworkProgramHolder)tile);
 		case MGui.CommandContainerEditor:
 			return new ContainerEmpty();
 		}
-		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		UtilM.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
 
 	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x,y,z));
-		MovingObjectPosition hit=Util.rayTrace(player,4, 1);
+		MovingObjectPosition hit=UtilM.rayTrace(player,4, 1);
 		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
@@ -92,17 +92,17 @@ public class GuiHandlerM implements IGuiHandler{
 			return new GuiISidedPowerInstructor(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:
 			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)
-				return new GuiHoloObjectCustomize(player, (TileEntityHologramProjector)tile,((TileEntityHologramProjector)tile).lastPartClicked);
+				return new GuiHoloObjectEditor(player, (TileEntityHologramProjector)tile,((TileEntityHologramProjector)tile).lastPartClicked);
 		case MGui.HologramProjectorMainGui:
 			if(tile instanceof TileEntityHologramProjector)
 				return new GuiHologramProjectorMain(player, (TileEntityHologramProjector)tile);
 		case MGui.CommandCenterGui:
-			if(tile instanceof TileEntityNetworkCommandHolder)
-				return new GuiCenterContainer(player, (TileEntityNetworkCommandHolder)tile);
+			if(tile instanceof TileEntityNetworkProgramHolder)
+				return new GuiCenterContainer(player, (TileEntityNetworkProgramHolder)tile);
 		case MGui.CommandContainerEditor:
 			return new GuiProgramContainerEditor(player);
 		}
-		Util.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		UtilM.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
 	

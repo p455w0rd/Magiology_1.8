@@ -16,11 +16,11 @@ import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
 import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL3;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkPointerContainer;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class MTileEntitys{
@@ -50,9 +50,9 @@ public class MTileEntitys{
 		register(TileEntityNetworkController.class);
 		register(TileEntityNetworkConductor.class);
 		register(TileEntityNetworkInterface.class);
-		register(TileEntityNetworkPointerContainer.class);
+		register(TileEntityNetworkRouter.class);
 		register(TileEntityRareSpacePipe.class);
-		register(TileEntityNetworkCommandHolder.class);
+		register(TileEntityNetworkProgramHolder.class);
 	}
 	public static void initRenders(){
 		bindTileWRender(TileEntityFireLamp.class,               new RenderFireLamp());
@@ -74,9 +74,9 @@ public class MTileEntitys{
 		bindTileWRender(TileEntityNetworkConductor.class,       new RenderNetworkConductor());
 		bindTileWRender(TileEntityNetworkController.class,      new RenderNetworkController());
 		bindTileWRender(TileEntityNetworkInterface.class,       new RenderNetworkInterface());
-		bindTileWRender(TileEntityNetworkPointerContainer.class,new RenderNetworkPointerContainer());
+		bindTileWRender(TileEntityNetworkRouter.class,new RenderNetworkPointerContainer());
 		bindTileWRender(TileEntityRareSpacePipe.class,          new RenderNetworkConductor());
-		bindTileWRender(TileEntityNetworkCommandHolder.class,   new RenderNetworkConductor());
+		bindTileWRender(TileEntityNetworkProgramHolder.class,   new RenderNetworkConductor());
 	}
 	private static<T extends TileEntityM> void register(Class<T> clazz){
 		String name=clazz.getSimpleName().substring("TileEntity".length());

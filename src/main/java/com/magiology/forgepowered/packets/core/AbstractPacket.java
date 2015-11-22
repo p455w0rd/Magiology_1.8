@@ -21,8 +21,8 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -61,8 +61,8 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	public abstract IMessage process(EntityPlayer player, Side side);
 
 	public static void registerNewMessage(Class<? extends AbstractPacket> serverMessage){
-		if(Util.Instanceof(serverMessage, AbstractToServerMessage.class))registerPacket(serverMessage, Side.SERVER);
-		else if(Util.Instanceof(serverMessage, AbstractToClientMessage.class))registerPacket(serverMessage, Side.CLIENT);
+		if(UtilM.Instanceof(serverMessage, AbstractToServerMessage.class))registerPacket(serverMessage, Side.SERVER);
+		else if(UtilM.Instanceof(serverMessage, AbstractToClientMessage.class))registerPacket(serverMessage, Side.CLIENT);
 	}
 	
 	private static <T extends IMessage & IMessageHandler<T, IMessage>> void registerPacket(Class<T> clazz, Side side){

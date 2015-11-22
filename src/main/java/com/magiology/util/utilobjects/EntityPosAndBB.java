@@ -3,8 +3,8 @@ package com.magiology.util.utilobjects;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityPosAndBB{
 	public double[] BB;
@@ -18,9 +18,9 @@ public class EntityPosAndBB{
 	
 	public double[] getRandDotInBB(double randomness){
 		double[] result={0,0,0};
-		result[0]=entity.posX+Util.CRandF(randomness);
-		result[1]=entity.posY+Util.CRandF(randomness);
-		result[2]=entity.posZ+Util.CRandF(randomness);
+		result[0]=entity.posX+UtilM.CRandF(randomness);
+		result[1]=entity.posY+UtilM.CRandF(randomness);
+		result[2]=entity.posZ+UtilM.CRandF(randomness);
 		
 		return result;
 	}

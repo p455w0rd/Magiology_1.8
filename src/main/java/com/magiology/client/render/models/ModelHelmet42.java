@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.client.render.Textures;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Util;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class ModelHelmet42 extends ModelBiped{
     ModelRenderer baseTop1,baseTop2,baseTop3,baseTop4,baseSide1,baseSide2,baseSide3,baseSide4,baseBack1,baseBack2,baseBack3,baseBack4;
@@ -156,28 +156,28 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  GL11.glDepthMask(false);
 		  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		  tess.startDrawingQuads();
-		  tess.setColorRGBA_F((float)(0.8+Util.CRandF(0.4)), (float)(0.2+Util.CRandF(0.2)), (float)(0.1+Util.CRandF(0.2)), (float)(0.7+Util.RF()*0.3));
+		  tess.setColorRGBA_F((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), (float)(0.7+UtilM.RF()*0.3));
 		  tess.setBrightness(255);
 		  for(int a=0;a<2;a++){
-			  tess.addVertex(-p*3+Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p*3+Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p  +Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p  +Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  tess.addVertex(-p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
 			  
-			  tess.addVertex( p  +Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p  +Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p*3+Util.CRandF(0.01), -p*3+Util.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p*3+Util.CRandF(0.01), -p*4+Util.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  tess.addVertex( p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
 		  }
 		  TessUtil.draw();
 		  tess.startDrawing(GL11.GL_TRIANGLES);
-		  tess.setColorRGBA_F((float)(0.8+Util.CRandF(0.4)), (float)(0.2+Util.CRandF(0.2)), (float)(0.1+Util.CRandF(0.2)), 1);
+		  tess.setColorRGBA_F((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), 1);
 		  tess.setBrightness(255);
 		  for(int l=0;l<2+(isSneak?4:0);l++){
-			  double[] criclexyz=Util.createBallXYZ(0.5+Util.RF(), false);
-			  tess.addVertex(criclexyz[0]+Util.CRandF(0.3), criclexyz[1]+Util.CRandF(0.3), criclexyz[2]+Util.CRandF(0.3));
-			  tess.addVertex(criclexyz[0]+Util.CRandF(0.3), criclexyz[1]+Util.CRandF(0.3), criclexyz[2]+Util.CRandF(0.3));
-			  tess.addVertex(criclexyz[0]+Util.CRandF(0.3), criclexyz[1]+Util.CRandF(0.3), criclexyz[2]+Util.CRandF(0.3));
+			  double[] criclexyz=UtilM.createBallXYZ(0.5+UtilM.RF(), false);
+			  tess.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
+			  tess.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
+			  tess.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
 		  }
 		  
 		  TessUtil.draw();

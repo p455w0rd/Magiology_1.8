@@ -8,6 +8,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
+
 public class NetworkPointer extends Item{
 	
 	@Override
@@ -22,5 +24,9 @@ public class NetworkPointer extends Item{
 		}
 		return false;
 	}
-	
+	public static BlockPosM getTarget(ItemStack stack){
+		NBTTagCompound nbt=stack.getTagCompound();
+		if(nbt==null)return BlockPosM.ORIGIN;
+		return new BlockPosM(nbt.getInteger("xLink"),nbt.getInteger("yLink"),nbt.getInteger("zLink"));
+	}
 }

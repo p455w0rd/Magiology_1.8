@@ -7,15 +7,15 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkCommandHolder;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilclasses.UtilM;
 
 public class CommandCenterContainer extends Container{
 	
 	public int selectedSlotId=-1;
-	public TileEntityNetworkCommandHolder tile;
+	public TileEntityNetworkProgramHolder tile;
 	
-	public CommandCenterContainer(EntityPlayer player,TileEntityNetworkCommandHolder tile){
+	public CommandCenterContainer(EntityPlayer player,TileEntityNetworkProgramHolder tile){
 		this.tile=tile;
 		for(int i=0;i<3;i++)for(int j=0;j<9;j++)addSlotToContainer(new Slot(player.inventory,9+j+9*i,8+j*18,84+18*i));
 		for(int i=0;i<9;i++)addSlotToContainer(new Slot(player.inventory,i,8+i*18,142));
@@ -32,7 +32,7 @@ public class CommandCenterContainer extends Container{
 		Slot clickedSlot=(Slot)inventorySlots.get(slotId);
 		switch (clickedButton){
 		case 0:if(selectedSlotId==slotId-36)selectedSlotId=-1;break;
-		case 1:if(Util.isItemInStack(MItems.commandContainer, clickedSlot.getStack())&&clickedSlot.inventory instanceof TileEntityNetworkCommandHolder){
+		case 1:if(UtilM.isItemInStack(MItems.commandContainer, clickedSlot.getStack())&&clickedSlot.inventory instanceof TileEntityNetworkProgramHolder){
 			selectedSlotId=slotId-36;
 			return clickedSlot.getStack();
 		}break;
@@ -47,9 +47,9 @@ public class CommandCenterContainer extends Container{
 			ItemStack itemstack=null;
 			ItemStack itemstack1=clickedSlot.getStack();
 			itemstack=itemstack1.copy();
-			if(clickedSlot.inventory instanceof TileEntityNetworkCommandHolder){
+			if(clickedSlot.inventory instanceof TileEntityNetworkProgramHolder){
 				if(!mergeItemStack(itemstack1, 27, 36, false))if(!mergeItemStack(itemstack1, 0, 27, false))return null;
-			}else if(Util.isItemInStack(MItems.commandContainer, itemstack1)){
+			}else if(UtilM.isItemInStack(MItems.commandContainer, itemstack1)){
 				if(!mergeItemStack(itemstack1, 36, inventorySlots.size(), false))return null;
 			}
 			if(itemstack1.stackSize==0)clickedSlot.putStack((ItemStack)null);
@@ -68,7 +68,7 @@ public class CommandCenterContainer extends Container{
 		}
 		@Override
 		public boolean isItemValid(ItemStack stack){
-			return Util.isItemInStack(MItems.commandContainer, stack);
+			return UtilM.isItemInStack(MItems.commandContainer, stack);
 		}
 	}
 }

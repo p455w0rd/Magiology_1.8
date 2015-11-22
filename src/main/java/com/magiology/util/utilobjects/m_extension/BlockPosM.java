@@ -11,11 +11,12 @@ import net.minecraft.util.Vec3i;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class BlockPosM extends BlockPos{
-	
+
+    public static final BlockPosM ORIGIN = new BlockPosM();
 	public BlockPosM(){
 		super(0,0,0);
 	}
@@ -49,7 +50,7 @@ public class BlockPosM extends BlockPos{
 		return world.getTileEntity(this);
 	}
 	public Block getBlock(IBlockAccess world){
-		return Util.getBlock(world, this);
+		return UtilM.getBlock(world, this);
 	}
 	public IBlockState getState(IBlockAccess world){
 		return world.getBlockState(this);
@@ -69,6 +70,14 @@ public class BlockPosM extends BlockPos{
 	
 	public BlockPos conv(){
 		return new BlockPos(getX(), getY(), getZ());
+	}
+	@Override
+	public BlockPosM offset(EnumFacing facing){
+		return offset(facing,1);
+	}
+	@Override
+	public BlockPosM offset(EnumFacing facing, int n){
+		return new BlockPosM(this.getX() + facing.getFrontOffsetX() * n, this.getY() + facing.getFrontOffsetY() * n, this.getZ() + facing.getFrontOffsetZ() * n);
 	}
 	public static BlockPosM get(BlockPos pos){
 		return new BlockPosM(pos);

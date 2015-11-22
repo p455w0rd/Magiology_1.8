@@ -13,7 +13,7 @@ import com.magiology.handlers.GenericPacketEventHandler.StringPacketEvent;
 import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 
 public class GenericPacketEvents{
 	public static GenericPacketEventHandler callerInstance;
@@ -63,7 +63,7 @@ public class GenericPacketEvents{
 			tile.setReceaveOnSide(integer, !tile.getIn(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
-		default:{Util.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
+		default:{UtilM.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	
@@ -83,7 +83,7 @@ public class GenericPacketEvents{
 		case 1:{
 			
 		}break;
-		default:{Util.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
+		default:{UtilM.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	public void voidPacketEvent(PacketEvent event){
@@ -92,7 +92,7 @@ public class GenericPacketEvents{
 		case 0:{
 			TheHandHandler.nextPosition(player);
 		}break;
-		default:{Util.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
+		default:{UtilM.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 }

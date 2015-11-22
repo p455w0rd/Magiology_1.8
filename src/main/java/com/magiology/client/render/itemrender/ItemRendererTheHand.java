@@ -14,7 +14,7 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Util;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.vectors.Vec8F;
 
 public class ItemRendererTheHand implements IItemRenderer{
@@ -55,12 +55,12 @@ public class ItemRendererTheHand implements IItemRenderer{
 			GL11.glRotated(-data.thirdPresonPosSpeed*350+20, 1, 0, 0);
 		}
 		
-		float[] handRotationRender=Util.calculateRenderPosArray(data.prevHandRotationCalc,data.handRotationCalc);
+		float[] handRotationRender=UtilM.calculateRenderPosArray(data.prevHandRotationCalc,data.handRotationCalc);
 		float x1=p*6F,y1=p*10,z1=p*2;
 		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11.glTranslated(handRotationRender[3]/30,handRotationRender[4]/30,handRotationRender[5]/30);
 		GL11.glTranslated(x1,y1,z1);
 		GL11.glRotated(-20, 0, 1, 0);
-		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11U.rotateXYZ(handRotationRender[0],handRotationRender[1],handRotationRender[2]);
+		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11U.glRotate(handRotationRender[0],handRotationRender[1],handRotationRender[2]);
 		GL11.glTranslated(-x1, -y1, -z1);
 		GL11.glRotated(20, 1, 0, 1);
 		if(type==ItemRenderType.INVENTORY)GL11.glTranslatef(0.4F, 0.7F, -0.6F);
@@ -96,8 +96,8 @@ public class ItemRendererTheHand implements IItemRenderer{
 		public void draw(PowerHandData_sub_fingerData data){
 			GL11.glPushMatrix();
 			for(int a=0;a<cubeModels.length;a++){
-				float[] rot=Util.calculateRenderPosArray(data.prevcalcXyzPosRot[a], data.calcXyzPosRot[a]);
-				GL11U.rotateXYZAt(rot[3],rot[4],rot[5],rot[0],rot[1]+
+				float[] rot=UtilM.calculateRenderPosArray(data.prevcalcXyzPosRot[a], data.calcXyzPosRot[a]);
+				GL11U.glRotate(rot[3],rot[4],rot[5],rot[0],rot[1]+
 						(cubeModels[a].points[2].y-cubeModels[a].points[4].y)/2F
 						,rot[2]);
 				GL11.glTranslated(0.0001,0,-(cubeModels[a].points[2].z-cubeModels[a].points[1].z));

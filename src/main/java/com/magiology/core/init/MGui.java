@@ -10,7 +10,7 @@ import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.handlers.GuiHandlerM;
-import com.magiology.util.utilclasses.Util.U;
+import com.magiology.util.utilclasses.UtilM.U;
 
 public class MGui{
 	public static final byte
@@ -25,6 +25,7 @@ public class MGui{
 		CommandCenterGui=8,
 		CommandContainerEditor=9;
 	
+	@SuppressWarnings("unused")
 	public static void preInit(){
 		new GuiUpdater();
 	}
