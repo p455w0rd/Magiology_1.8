@@ -5,6 +5,7 @@ import static com.magiology.io.WorldData.WorkingProtocol.*;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.api.lang.ProgramDataCenter;
+import com.magiology.api.lang.ProgramDataBase;
 import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.container.CommandCenterContainer;
@@ -35,6 +36,7 @@ import com.magiology.client.render.font.FontRendererMBase;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
 import com.magiology.io.WorldData;
+import com.magiology.io.WorldData.FileContent;
 import com.magiology.mcobjects.items.ProgramContainer;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
@@ -208,7 +210,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 	public void initGui(){
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
-		if(firstInit)programSrc.setText(ProgramDataCenter.code_get(ProgramContainer.getId(stack)));
+		if(firstInit)programSrc.setText(ProgramDataBase.code_get(ProgramContainer.getId(stack)));
 		
 		int top=width/2-60,left=height/2-50;
 		
@@ -236,7 +238,8 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		compileAfter.setMaxStringLength(7);
 		textFieldList.add(compileAfter);
 		compileAfter.setVisible(settingsActive);
-		String compAfter=settingsData.getFileContent("compileAfter").text.toString().replaceAll("\n", "");
+		FileContent<String> i=settingsData.getFileContent("compileAfter");
+		String compAfter=i==null?"":i.text.toString().replaceAll("\n", "");
 		compileAfter.setText(compAfter.isEmpty()?"0.5":compAfter);
 		
 		GuiTextField name=new GuiTextField(1,fontRendererObj, top+3, left+72+11, 120-6, 12);
@@ -337,11 +340,11 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		}else if(log.wantedPoint==1){
 			logActive=!logActive;
 			
-			List<CharSequence> logData=ProgramDataCenter.log_get(ProgramContainer.getId(stack));
+			List<CharSequence> logData=ProgramDataBase.log_get(ProgramContainer.getId(stack));
 			List<StringBuilder> logDataNew=new ArrayList<StringBuilder>();
 			for(int i=0;i<logData.size();i++){
 				String line=logData.get(i).toString();
-				if(line.startsWith(ProgramDataCenter.err))logDataNew.add(new StringBuilder(line.substring(ProgramDataCenter.err.length())));
+				if(line.startsWith(ProgramDataBase.err))logDataNew.add(new StringBuilder(line.substring(ProgramDataBase.err.length())));
 				else logDataNew.add(new StringBuilder(line));
 			}
 			programLog.setText(UtilM.join("\n",logDataNew.toArray()));

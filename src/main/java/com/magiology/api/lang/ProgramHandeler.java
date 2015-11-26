@@ -60,48 +60,12 @@ public class ProgramHandeler{
 		}
 		return result;
 	}
-	private static String worldJSVar=loadWorld(),blockPosJSvar=loadPos();
-	public static CharSequence defultVars(Object[] environment){
-		StringBuilder result=new StringBuilder();
-		result.append(new DefaultJavaScriptLoader(environment).result);
-		return result;
+	
+	public static String JSNull(){
+		return "undefined";
 	}
-	private static class DefaultJavaScriptLoader{
-		public String result;
-		private DefaultJavaScriptLoader(Object[] environment){
-			StringBuilder res=new StringBuilder();
-			res.append(
-					  "\nfunction run_funct(pos, name, args){"
-					+ "return Java.type('"+NetworkProgramHolderWrapper.class.getName()+"').run(pos, name, args);"
-					+ "}");
-			for(Object o:environment){
-				if(o instanceof World){
-					res.append(worldJSVar);
-					WorldWrapper.setBlockAccess((World)o);
-				}
-				if(o instanceof Vec3i){
-					res.append(loadPos((Vec3i)o));
-				}
-			}
-			
-			result=res.toString();
-		}
-	}
-	private static String loadWorld(){try{
-		return 
-			"World=Java.type('"+WorldWrapper.class.getName()+"');\n"+
-			"BlockPos=Java.type('"+BlockPosM.class.getName()+"');\n"+
-			"EnumFacing=Java.type('"+EnumFacing.class.getName()+"');\n";
-		}catch(Exception e){
-			e.printStackTrace();
-			return "";
-		}
-	}
-
-	private static String loadPos(Vec3i...vec3i){
-		if(vec3i.length==0)
-		return "BlockPos=Java.type('"+BlockPosM.class.getName()+"');\n"
-			 + "var runPos=new BlockPos(";
-		else return blockPosJSvar+vec3i[0].getX()+","+vec3i[0].getY()+","+vec3i[0].getZ()+");";
+	public static String JSNull(String msg){
+		if(msg==null||msg.isEmpty())return JSNull();
+		return new StringBuilder("undefined--err<").append(msg).append(">").toString();
 	}
 }

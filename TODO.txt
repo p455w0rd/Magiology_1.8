@@ -1,0 +1,27 @@
+Working on:
+	JavaScript integration
+	
+In plans:
+	Linear animation handler
+	Animated model renderer
+	json models
+	reimplement IItemRenderer (as much as possible)
+	Standardize gui style
+	Ingame mod book
+	
+Abandoned for other projects:
+	The hand functionality 
+	Rare space pipes (item pipes)
+	Ore structure crusher
+	Particle launcher
+	
+To improve:
+	The wings animation/physics
+	The hand better model
+	Power system (low priority)
+	JavaScript editor
+	text editor
+	
+For scraping and reusing:
+	Disco floor
+	Epic particle effects

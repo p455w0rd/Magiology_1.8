@@ -12,7 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
-import com.magiology.api.lang.ProgramDataCenter;
+import com.magiology.api.lang.ProgramDataBase;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.Messageable;
 import com.magiology.api.network.NetworkInterface;
@@ -233,7 +233,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		for(TileEntityNetworkProgramHolder i:commandHolders){
 			for(ItemStack j:i.slots){
 				if(j!=null){
-					String name=ProgramContainer.getName(j),code=ProgramDataCenter.code_quick(ProgramContainer.getId(j)).src;
+					String name=ProgramContainer.getName(j),code=ProgramDataBase.code_get(ProgramContainer.getId(j));
 					if(!name.isEmpty()&&!code.isEmpty()){
 						ProgramContainer.setPos(j, i.getPos());
 						result.add(ProgramContainer.getProgram(j));

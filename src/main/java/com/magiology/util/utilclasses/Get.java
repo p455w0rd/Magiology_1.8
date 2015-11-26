@@ -21,8 +21,6 @@ public final class Get{
 	@SideOnly(value=Side.CLIENT)
 	public static final class Render{
 		
-		public static float partialTicks=0;
-		
 		public static final ItemRenderer IR(){
 			return U.getMC().getItemRenderer();
 		}

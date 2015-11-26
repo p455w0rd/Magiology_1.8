@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
@@ -38,5 +39,10 @@ public class Field extends HoloObject{
 	@Override
 	public void onPressed(EntityPlayer player){
 	}
-
+	@Override
+	public void sendCommand(){}
+	@Override
+	public boolean isFullBlown(){
+		return false;
+	}
 }

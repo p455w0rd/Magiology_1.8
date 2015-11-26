@@ -1,7 +1,9 @@
 package com.magiology.forgepowered.events;
 
+import java.io.File;
 import java.util.List;
 
+import jdk.nashorn.internal.ir.LiteralNode.ArrayLiteralNode.ArrayUnit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.settings.GameSettings;
@@ -13,6 +15,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
@@ -27,7 +30,7 @@ import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.DataStalker;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.Pos;
@@ -82,7 +85,7 @@ public class TickEvents{
 	}
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event){
-		Render.partialTicks=event.renderTickTime;
+		RenderLoopEvents.partialTicks=event.renderTickTime;
 		if(event.phase!=Phase.END)return;
 		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.render(Display.getWidth(), Display.getHeight(),event.renderTickTime);
 		if(bufferedGuiFirst){

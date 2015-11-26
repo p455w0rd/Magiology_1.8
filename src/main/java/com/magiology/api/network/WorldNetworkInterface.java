@@ -2,7 +2,7 @@ package com.magiology.api.network;
 
 import java.util.List;
 
-import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
+import com.magiology.api.lang.ICommandInteract;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 
 public interface WorldNetworkInterface extends BasicWorldNetworkInterface{

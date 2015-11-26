@@ -43,7 +43,6 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
@@ -55,6 +54,8 @@ public class RenderLoopEvents{
 	public static List<EntityPosAndBB> entitys=new ArrayList<EntityPosAndBB>();
 	public static List<HUD> FPGui=new ArrayList<HUD>();
 	public static int disabledEquippItemAnimationTime=0;
+	
+	public static float partialTicks=0;
 	
 	public static void registerFirstPersonGui(HUD gui){
 		
@@ -129,7 +130,7 @@ public class RenderLoopEvents{
 	
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderWorldLast(RenderWorldLastEvent e){
-		Render.partialTicks=e.partialTicks;
+		RenderLoopEvents.partialTicks=e.partialTicks;
 		TessUtil.renderParticle();
 		EntityPlayer player = UtilM.getThePlayer();
 		
@@ -154,14 +155,14 @@ public class RenderLoopEvents{
 		if(e.type!=ElementType.CHAT)return;
 		ScaledResolution res=e.resolution;
 		EntityPlayer player=UtilM.getThePlayer();
-		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), Render.partialTicks);
+		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), RenderLoopEvents.partialTicks);
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0, -10);
 		for(int a=0;a<FPGui.size();a++){
 			HUD gui=FPGui.get(a);
 			GL11.glPushMatrix();
 			gui.player=player;
-			gui.render(res.getScaledWidth(), res.getScaledHeight(), Render.partialTicks);
+			gui.render(res.getScaledWidth(), res.getScaledHeight(), RenderLoopEvents.partialTicks);
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();

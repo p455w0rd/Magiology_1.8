@@ -79,7 +79,8 @@ public class BlockPosM extends BlockPos{
 	public BlockPosM offset(EnumFacing facing, int n){
 		return new BlockPosM(this.getX() + facing.getFrontOffsetX() * n, this.getY() + facing.getFrontOffsetY() * n, this.getZ() + facing.getFrontOffsetZ() * n);
 	}
-	public static BlockPosM get(BlockPos pos){
+	public static BlockPosM get(Vec3i pos){
+		if(pos instanceof BlockPosM)return (BlockPosM)pos;
 		return new BlockPosM(pos);
 	}
 	public int getRedstonePower(IBlockAccess world, EnumFacing side){

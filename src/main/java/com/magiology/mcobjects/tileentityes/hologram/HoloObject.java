@@ -9,18 +9,35 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
+import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.ProgramHandeler;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.items.ProgramContainer.Program.KeyWord;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.ObjectHolder;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
-public abstract class HoloObject implements SavableData{
+public abstract class HoloObject implements SavableData,ICommandInteract{
+	
+	protected StandardHoloObject standard=new StandardHoloObject();
+	
+	protected String name="";
+	
+	protected Program activationTarget;
 	
 	public TileEntityHologramProjector host;
 	public boolean isHighlighted,moveMode=false,isDead=false;
@@ -91,6 +108,17 @@ public abstract class HoloObject implements SavableData{
 		floats__.add(scale);
 		writeColorF(floats__, setColor);
 		writeVec2F(floats__, originalSize);
+		
+		
+		booleans.add(activationTarget!=null);
+		if(activationTarget!=null){
+			strings_.add(activationTarget.name);
+			integers.add(activationTarget.pos.getX());
+			integers.add(activationTarget.pos.getY());
+			integers.add(activationTarget.pos.getZ());
+		}
+		strings_.add(getName());
+		if(activationTarget!=null)strings_.add("i"+activationTarget.argsSrc);
 	}
 	@Override
 	public void readData(Iterator<Integer> integers,Iterator<Boolean> booleans,Iterator<Byte> bytes___,Iterator<Long> longs___,Iterator<Double> doubles_,Iterator<Float> floats__,Iterator<String> strings_,Iterator<Short> shorts__){
@@ -102,8 +130,14 @@ public abstract class HoloObject implements SavableData{
 			position=readVec2F(floats__);
 			id=integers.next();
 			scale=floats__.next();
-			setColor=readColorF(floats__);
+			color=setColor=readColorF(floats__);
 			originalSize=readVec2F(floats__);
+			
+			
+			boolean b=booleans.next();
+			if(b)activationTarget=new Program(strings_.next(), -1, new BlockPosM(integers.next(),integers.next(),integers.next()));
+			setName(strings_.next());
+			if(b)activationTarget.argsSrc=strings_.next().substring(1);
 		}catch(Exception e){
 		}
 	}
@@ -134,116 +168,7 @@ public abstract class HoloObject implements SavableData{
 		isDead=true;
 	}
 	
-	protected Object standardHoloObjectCommandInteract(String[] words){
-		if(words.length>1){
-			if(KeyWord.SET.match(words[0]))setWithCommand(words);
-			else if(KeyWord.GET.match(words[0]))return getWithCommand(words);
-		}
-		return null;
-	}
-	private Object getWithCommand(String[] words){
-		switch(KeyWord.getByName(words[1])){
-		case SIZE:{
-			if(words.length==2){
-				//get size --> 0.275,2.3246
-				return originalSize;
-			}
-		}break;
-		case POSITION:{
-			if(words.length==2){
-				//get position --> 0.275,2.3246
-				return position;
-			}
-		}break;
-		case SCALE:{
-			if(words.length==2){
-				//get scale --> 0.42
-				return scale;
-			}
-		}break;
-		case TEXT:{
-			//get text --> wow this actually works! lol ex di ex ex ex ex ex ex 
-			if(words.length==2&&this instanceof StringContainer)return ((StringContainer)this).getString();
-		}break;
-		case COLOR:{
-			if(words.length==2){
-				//get color --> 1,1,1,1
-				return setColor;
-			}
-		}break;
-		case NAME:{
-			//get name --> lol such doge meme! ex di double_point comma di + random emoji
-			if(words.length==2){
-				return ((ICommandInteract)this).getName();
-			}
-		}break;
-		default:break;
-		}
-		return null;
-	}
-	private void setWithCommand(String[] words){
-		switch(KeyWord.getByName(words[1])){
-		case SIZE:{
-			if(words.length==3){
-				//set size 0.275,2.3246
-				try{
-					String[] value=words[2].split(",");
-					originalSize=new Vector2f(Float.parseFloat(value[0]),Float.parseFloat(value[1]));
-				}catch(Exception e){}
-			}
-		}break;
-		case POSITION:{
-			if(words.length==3){
-				//set position 0.275,2.3246
-				try{
-					String[] value=words[2].split(",");
-					position=new Vector2f(Float.parseFloat(value[0]),Float.parseFloat(value[1]));
-				}catch(Exception e){}
-			}
-		}break;
-		case SCALE:{
-			if(words.length==3){
-				//set scale 0.42
-				try{
-					scale=Float.parseFloat(words[2]);
-				}catch(Exception e){}
-			}
-		}break;
-		case TEXT:{
-			//set text wow this actually works! lol ex di ex ex ex ex ex ex 
-			if(words.length>=3&&this instanceof StringContainer){
-				String text="";
-				for(int i=2;i<words.length;i++){
-					text+=words[i]+" ";
-				}
-				((StringContainer)this).setString(text.substring(0, text.length()-1));
-			}
-		}break;
-		case COLOR:{
-			if(words.length==3){
-				//set color r=1,g=1,b=1,a=1
-				String[] colorValues=words[2].split(",");
-				for(int i=0;i<colorValues.length;i++){
-					String[] value=colorValues[i].split("=");
-					try{
-						setColor=setColor.set(Float.parseFloat(value[1]), value[0].charAt(0));
-					}catch(Exception e){}
-				}
-			}
-		}break;
-		case NAME:{
-			//set name lol such doge meme! ex di + random emoji
-			if(words.length>=3){
-				String text="";
-				for(int i=2;i<words.length;i++){
-					text+=words[i]+" ";
-				}
-				((ICommandInteract)this).setName(text.substring(0, text.length()-1));
-			}
-		}break;
-		default:break;
-		}
-	}
+	
 	public List<DoubleObject<String,Object>> getStandardVars(){
 		List<DoubleObject<String,Object>> result=new ArrayList<DoubleObject<String,Object>>();
 		result.add(new DoubleObject("size.x", size.x));
@@ -275,5 +200,167 @@ public abstract class HoloObject implements SavableData{
 		buff.draw();
 		buff.setDrawAsWire(false);
 		buff.popMatrix();
+	}
+	@Override
+	public Object onCommandReceive(String command){
+		String[] words=command.split(" ");
+		return standard.standardHoloObjectCommandInteract(words);
+	}
+	@Override
+	public String getName(){return name;}
+	@Override
+	public void setName(String name){this.name=name;}
+	@Override
+	public Program getActivationTarget(){return activationTarget;}
+	@Override
+	public void setActivationTarget(Program com){activationTarget=com;}
+	
+	public final class StandardHoloObject{
+		private StandardHoloObject(){}
+		protected Object standardHoloObjectCommandInteract(String[] words){
+			if(words.length>1){
+				if(KeyWord.SET.match(words[0]))setWithCommand(words);
+				else if(KeyWord.GET.match(words[0]))return getWithCommand(words);
+			}
+			return null;
+		}
+		private Object getWithCommand(String[] words){
+			switch(KeyWord.getByName(words[1])){
+			case SIZE:{
+				if(words.length==2){
+					//get size --> 0.275,2.3246
+					return originalSize;
+				}
+			}break;
+			case POSITION:{
+				if(words.length==2){
+					//get position --> 0.275,2.3246
+					return position;
+				}
+			}break;
+			case SCALE:{
+				if(words.length==2){
+					//get scale --> 0.42
+					return scale;
+				}
+			}break;
+			case TEXT:{
+				//get text --> wow this actually works! lol ex di ex ex ex ex ex ex 
+				if(words.length==2&&HoloObject.this instanceof StringContainer)return ((StringContainer)HoloObject.this).getString();
+			}break;
+			case COLOR:{
+				if(words.length==2){
+					//get color --> 1,1,1,1
+					return setColor;
+				}
+			}break;
+			case NAME:{
+				//get name --> lol such doge meme! ex di double_point comma di + random emoji
+				if(words.length==2){
+					return ((ICommandInteract)HoloObject.this).getName();
+				}
+			}break;
+			default:break;
+			}
+			return null;
+		}
+		private void setWithCommand(String[] words){
+			boolean changed=false;
+			switch(KeyWord.getByName(words[1])){
+			case SIZE:{
+				if(words.length==3){
+					//set size 0.275,2.3246
+					try{
+						String[] value=words[2].split(",");
+						originalSize=new Vector2f(Float.parseFloat(value[0]),Float.parseFloat(value[1]));
+						changed=true;
+					}catch(Exception e){}
+				}
+			}break;
+			case POSITION:{
+				if(words.length==3){
+					//set position 0.275,2.3246
+					try{
+						String[] value=words[2].split(",");
+						position=new Vector2f(Float.parseFloat(value[0]),Float.parseFloat(value[1]));
+						changed=true;
+					}catch(Exception e){}
+				}
+			}break;
+			case SCALE:{
+				if(words.length==3){
+					//set scale 0.42
+					try{
+						scale=Float.parseFloat(words[2]);
+						changed=true;
+					}catch(Exception e){}
+				}
+			}break;
+			case TEXT:{
+				//set text wow this actually works! lol ex di ex ex ex ex ex ex 
+				if(words.length>=3&&HoloObject.this instanceof StringContainer){
+					String text="";
+					for(int i=2;i<words.length;i++){
+						text+=words[i]+" ";
+					}
+					((StringContainer)HoloObject.this).setString(text.substring(0, text.length()-1));
+					changed=true;
+				}
+			}break;
+			case COLOR:{
+				if(words.length==3){
+					//set color r=1,g=1,b=1,a=1
+					String[] colorValues=words[2].split(",");
+					ColorF color=setColor.copy();
+					try{
+						setColor=new ColorF();
+						for(int i=0;i<colorValues.length;i++){
+							String[] value=colorValues[i].split("=");
+							setColor=setColor.set(Float.parseFloat(value[1]), value[0].charAt(0));
+						}
+						changed=true;
+					}catch(Exception e){
+						setColor=color;
+					}
+				}
+			}break;
+			case NAME:{
+				//set name lol such doge meme! ex di + random emoji
+				if(words.length>=3){
+					String text="";
+					for(int i=2;i<words.length;i++){
+						text+=words[i]+" ";
+					}
+					((ICommandInteract)HoloObject.this).setName(text.substring(0, text.length()-1));
+					changed=true;
+				}
+			}break;
+			default:break;
+			}
+			if(changed)host.getWorld().markBlockForUpdate(host.getPos());
+		}
+		protected void sendStandardCommand(){
+			if(activationTarget==null||UtilM.getWorld(host)==null)return;
+//			new Thread((Runnable)()->{
+				WorldNetworkInterface Interface=InterfaceBinder.get(host);
+				NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
+				if(netInterface!=null&&netInterface.getBrain()!=null){
+					try{
+						ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
+						Object[] args=ProgramHandeler.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
+						if(ErrorPos.getVar()==-1){
+							DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
+							if(netInterface!=null&&com!=null){
+								com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
+								List<TileEntityNetworkRouter> routers=netInterface.getPointerContainers();
+								if(!routers.isEmpty())netInterface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.result);
+							}
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+				}
+//			}).start();
+		}
 	}
 }

@@ -47,7 +47,7 @@ public class KeyHandler{
 	}
 	private static String[] keyDesc;
 	private static int[] keyValues;
-	private final KeyBinding[] keys;
+	private KeyBinding[] keys;
 	
 	public KeyHandler(){
 		int lenght=Keys.values().length;
@@ -60,11 +60,11 @@ public class KeyHandler{
 			keyDesc[i]=a.keyDesc;
 			keyValues[i]=a.keyValue;
 		}
-		for(int i=0;i<keyValues.length;i++)RegKey(keys[i],new KeyBinding(keyDesc[i], keyValues[i], MReference.MODID+".key_bindings"));
+		for(int i=0;i<keyValues.length;i++)keys[i]=regKey(new KeyBinding(keyDesc[i], keyValues[i], MReference.MODID+".key_bindings"));
 	}
-	private void RegKey(KeyBinding saver,KeyBinding New){
-		ClientRegistry.registerKeyBinding(saver);
-		saver=New;
+	private KeyBinding regKey(KeyBinding key){
+		ClientRegistry.registerKeyBinding(key);
+		return key;
 	}
 	// 1.
 	@SubscribeEvent

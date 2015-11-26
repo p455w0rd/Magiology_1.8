@@ -1,7 +1,15 @@
 package com.magiology.core;
 
-import static com.magiology.core.MReference.*;
-import static com.magiology.util.utilclasses.UtilM.*;
+import static com.magiology.core.MReference.ACCEPTED_MC_VERSION;
+import static com.magiology.core.MReference.INFO_FILE_NAME;
+import static com.magiology.core.MReference.MC_VERSION;
+import static com.magiology.core.MReference.MODID;
+import static com.magiology.core.MReference.MODS_SUBFOLDER_WIN_GUI;
+import static com.magiology.core.MReference.NAME;
+import static com.magiology.core.MReference.VERSION;
+import static com.magiology.util.utilclasses.UtilM.RB;
+import static com.magiology.util.utilclasses.UtilM.RInt;
+import static com.magiology.util.utilclasses.UtilM.println;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,10 +25,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.api.lang.ProgramDataCenter;
+import com.magiology.api.lang.ProgramDataBase;
 import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.render.Textures;
-import com.magiology.core.init.*;
+import com.magiology.core.init.MBlocks;
+import com.magiology.core.init.MCreativeTabs;
+import com.magiology.core.init.MEntitys;
+import com.magiology.core.init.MEvents;
+import com.magiology.core.init.MGui;
+import com.magiology.core.init.MInterfaces;
+import com.magiology.core.init.MItems;
+import com.magiology.core.init.MPackets;
+import com.magiology.core.init.MRecepies;
+import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
 import com.magiology.handlers.web.DownloadingHandler;
@@ -104,7 +121,7 @@ public class Magiology{
 		if(modInfGUI!=null)modInfGUI.modStat=true;
 		Textures.postInit();
 		
-		ProgramDataCenter.loadClass();
+		ProgramDataBase.loadClass();
 		GuiProgramContainerEditor.loadClass();
 	}
 	public void exit(){

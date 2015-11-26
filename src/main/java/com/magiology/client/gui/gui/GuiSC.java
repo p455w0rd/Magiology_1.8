@@ -19,13 +19,13 @@ import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.events.TickEvents;
+import com.magiology.forgepowered.events.client.RenderLoopEvents;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -102,7 +102,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			drawCenteredStringShoadowless(fr, "<-", 0,0, Color.DARK_GRAY.hashCode());
 			GL11.glPopMatrix();
 		}
-		this.renderParticles(Render.partialTicks);
+		this.renderParticles(RenderLoopEvents.partialTicks);
 		GL11.glTranslated(guiLeft, guiTop, 0);
 		
 	}

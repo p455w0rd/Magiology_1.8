@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM.U;
@@ -67,5 +68,13 @@ public class TextBox extends HoloObject implements StringContainer{
 	public void writeData(List<Integer> integers, List<Boolean> booleans, List<Byte> bytes___, List<Long> longs___, List<Double> doubles_,List<Float> floats__, List<String> strings_, List<Short> shorts__){
 		super.writeData(integers, booleans, bytes___, longs___, doubles_, floats__, strings_, shorts__);
 		strings_.add(txt);
+	}
+	
+	@Override
+	public void sendCommand(){}
+	
+	@Override
+	public boolean isFullBlown(){
+		return false;
 	}
 }

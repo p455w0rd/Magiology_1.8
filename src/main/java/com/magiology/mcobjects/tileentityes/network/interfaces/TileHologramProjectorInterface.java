@@ -8,11 +8,11 @@ import java.util.Map;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
+import com.magiology.api.lang.ICommandInteract;
 import com.magiology.api.network.InterfaceTileEntitySaver;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.SideUtil;

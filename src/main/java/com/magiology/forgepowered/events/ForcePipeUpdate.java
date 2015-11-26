@@ -13,8 +13,10 @@ public class ForcePipeUpdate{
 		if(U.isNull(world,pos))return;
 		for(int x1=-1;x1<2;x1++)
 			for(int y1=-1;y1<2;y1++)
-				for(int z1=-1;z1<2;z1++)
-					updatePipe(world, pos.add(x1,y1,z1));
+				for(int z1=-1;z1<2;z1++){
+					BlockPos Pos=pos.add(x1,y1,z1);
+					if(!Pos.equals(pos))updatePipe(world, Pos);
+				}
 	}
 	
 	

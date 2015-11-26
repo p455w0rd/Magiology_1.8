@@ -11,12 +11,12 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import org.lwjgl.util.vector.Vector2f;
 
+import com.magiology.api.lang.ICommandInteract;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
 import com.magiology.mcobjects.tileentityes.hologram.Field;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
 import com.magiology.mcobjects.tileentityes.hologram.Slider;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TextBox;

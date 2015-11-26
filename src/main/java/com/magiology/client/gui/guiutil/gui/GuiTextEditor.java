@@ -1,6 +1,11 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import static com.magiology.util.utilclasses.UtilM.*;
+import static com.magiology.util.utilclasses.UtilM.calculateRenderPos;
+import static com.magiology.util.utilclasses.UtilM.getGuiScaleRaw;
+import static com.magiology.util.utilclasses.UtilM.getTheWorld;
+import static com.magiology.util.utilclasses.UtilM.getWorldTime;
+import static com.magiology.util.utilclasses.UtilM.snap;
+import static com.magiology.util.utilclasses.UtilM.stringNewlineSplit;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -25,6 +30,7 @@ import com.magiology.util.renderers.NormalizedVertixBuffer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.Get.Render.Font;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
@@ -562,67 +568,72 @@ public class GuiTextEditor extends Gui implements Updateable{
 	}
 	
 	protected void insertText(String text, Vec2i pos, boolean advanceCursor){
-		clearSelection();
-		if(text==null)throw new NullPointerException();
-		check(pos);
-		
-		String[] toInsert=stringNewlineSplit(text.replaceAll("\t", "    "));
-		if(text.equals("\n"))toInsert=new String[]{"\n"};
-		StringBuilder insertLine=getLine(pos.y);
-		String endOfLine=insertLine.substring(pos.x, insertLine.length());
-		insertLine.delete(pos.x, insertLine.length()); 
-		insertLine.append(toInsert[0]);
- 		
-		if(toInsert.length>1){
-			if(toInsert.length>2)for(int i=1;i<toInsert.length-1;i++)
-				addLine(new StringBuilder(toInsert[i]));
-			addLine(new StringBuilder(toInsert[toInsert.length-1]).append(endOfLine),toInsert.length-1);
+		try{
+			clearSelection();
+			if(text==null)throw new NullPointerException();
+			check(pos);
 			
-			if(advanceCursor){
-				int newCursorY=cursorPosition.y+toInsert.length-1;
-				setCursorPositionInternal(new Vec2i(Math.min(toInsert[toInsert.length-1].length(), getLength(newCursorY)), newCursorY));
-			}
-		}else{
-			if(advanceCursor)setCursorPositionInternal(new Vec2i(Math.min(cursorPosition.x+toInsert[0].length(), getLength(cursorPosition.y)), cursorPosition.y));
-			insertLine.append(endOfLine);
-		}
-//		int maxSpaces=Integer.MAX_VALUE;
-		//next line magic
-		for(int i=0;i<textBuffer.size();i++){
-			{
-				final String s=textBuffer.get(i).toString();
-				if(s.equals("\n")){
-					setLine(new StringBuilder(""),i);
-					addLine(new StringBuilder(""),i+1);
+			String[] toInsert=stringNewlineSplit(text.replaceAll("\t", "    "));
+			if(text.equals("\n"))toInsert=new String[]{"\n"};
+			StringBuilder insertLine=getLine(pos.y);
+			String endOfLine=insertLine.substring(pos.x, insertLine.length());
+			insertLine.delete(pos.x, insertLine.length()); 
+			insertLine.append(toInsert[0]);
+	 		
+			if(toInsert.length>1){
+				if(toInsert.length>2)for(int i=1;i<toInsert.length-1;i++)
+					addLine(new StringBuilder(toInsert[i]));
+				addLine(new StringBuilder(toInsert[toInsert.length-1]).append(endOfLine),toInsert.length-1);
+				
+				if(advanceCursor){
+					int newCursorY=cursorPosition.y+toInsert.length-1;
+					setCursorPositionInternal(new Vec2i(Math.min(toInsert[toInsert.length-1].length(), getLength(newCursorY)), newCursorY));
 				}
-				else if(s.contains("\n")){
-					
-					String spaces="";
-					for(int j=0;j<s.length();j++){
-						if(s.charAt(j)==' '){
-							spaces+=" ";
+			}else{
+				if(advanceCursor)setCursorPositionInternal(new Vec2i(Math.min(cursorPosition.x+toInsert[0].length(), getLength(cursorPosition.y)), cursorPosition.y));
+				insertLine.append(endOfLine);
+			}
+//			int maxSpaces=Integer.MAX_VALUE;
+			//next line magic
+			for(int i=0;i<textBuffer.size();i++){
+				{
+					final String s=textBuffer.get(i).toString();
+					if(s.equals("\n")){
+						setLine(new StringBuilder(""),i);
+						addLine(new StringBuilder(""),i+1);
+					}
+					else if(s.contains("\n")){
+						
+						String spaces="";
+						for(int j=0;j<s.length();j++){
+							if(s.charAt(j)==' '){
+								spaces+=" ";
+							}
+							else continue;
 						}
-						else continue;
+						
+						String[] lines=s.split("\n");
+						setLine(new StringBuilder(lines[0]),i);
+						for(int j=1;j<lines.length;j++)addLine(new StringBuilder(lines[j]),i+1);
+						if(s.endsWith("{\n")){
+							addLine(new StringBuilder("}"),i+1);
+							addLine(new StringBuilder("    "),i+1);
+						}
+						else if(s.endsWith("\n"))addLine(new StringBuilder(spaces),i+1);
+						cursorPosition.y++;
+						if(getCurrentLine().toString().trim().length()==0)cursorPosition.x=getCurrentLine().length();
+						else cursorPosition.x=0;
 					}
-					
-					String[] lines=s.split("\n");
-					setLine(new StringBuilder(lines[0]),i);
-					for(int j=1;j<lines.length;j++)addLine(new StringBuilder(lines[j]),i+1);
-					if(s.endsWith("{\n")){
-						addLine(new StringBuilder("}"),i+1);
-						addLine(new StringBuilder("    "),i+1);
-					}
-					else if(s.endsWith("\n"))addLine(new StringBuilder(spaces),i+1);
-					cursorPosition.y++;
-					if(getCurrentLine().toString().trim().length()==0)cursorPosition.x=getCurrentLine().length();
-					else cursorPosition.x=0;
 				}
 			}
-		}
-		refreshLine(pos.y);
-		fixWidth();
-		for(int i:cachedWidth){
-			maxWidth=Math.max(maxWidth, i);
+			refreshLine(pos.y);
+			fixWidth();
+			for(int i:cachedWidth){
+				maxWidth=Math.max(maxWidth, i);
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	

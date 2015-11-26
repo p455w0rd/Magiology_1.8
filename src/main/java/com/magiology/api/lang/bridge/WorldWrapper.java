@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
+import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
@@ -27,22 +28,22 @@ public class WorldWrapper{
 	}
 	public static Object getBlock(BlockPosM pos){
 		Object tile=getInterface(pos);
-		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getBlock():"undefined";
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getBlock():ProgramHandeler.JSNull("No interface");
 	}
 	public static Object getBlockState(BlockPosM pos,String stateName){
 		Object tile=getInterface(pos);
-		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getBlockState(stateName):"undefined";
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getBlockState(stateName):ProgramHandeler.JSNull("No interface");
 	}
 	public static Object getRedstone(BlockPosM pos, int side){
 		Object tile=getInterface(pos);
-		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getRedstone(side):"undefined";
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getRedstone(side):ProgramHandeler.JSNull("No interface");
 	}
 	public static Object getRedstone(BlockPosM pos, EnumFacing side){
 		Object tile=getInterface(pos);
-		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getRedstone(side):"undefined";
+		return tile instanceof TileEntityNetworkInteract?((InterfaceWrapper)tile).getRedstone(side):ProgramHandeler.JSNull("No interface");
 	}
 	public static Object getInterface(BlockPosM pos){
 		TileEntityNetworkInteract tile=pos.getTile(world, TileEntityNetworkInteract.class);
-		return tile!=null?tile:"undefined";
+		return InterfaceWrapper.New(tile);
 	}
 }

@@ -2,6 +2,7 @@ package com.magiology.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,7 +31,7 @@ import com.magiology.util.utilclasses.FileUtil;
 import com.magiology.util.utilclasses.UtilM;
 
 
-public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequence>{
+public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializable>{
 	
 	//edit this
 	private static final String getModName(){
@@ -44,8 +45,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	//TODO: START-----------------------------------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
-	public static List<WorldData<CharSequence,CharSequence>> worldDataList=new ArrayList<WorldData<CharSequence,CharSequence>>();
-	private static final String deleteMarker="<DO_NOT_USE_THIS_IT_WILL_DELETE_THE_FILE_THAT_IT_IS_WRITTEN_IN>";
+	public static List<WorldData<CharSequence,Serializable>> worldDataList=new ArrayList<WorldData<CharSequence,Serializable>>();
 	public static boolean printsActions=true;
 	
 	private final String folderName,extension,worldDataName;
@@ -59,7 +59,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		this.folderName=folderName;
 		this.extension=extension;
 		for(WorldData i:worldDataList)if(i.worldDataName.equals(worldDataName))throw new IllegalStateException("World data saver with "+worldDataName+" name already exists!");
-		worldDataList.add((WorldData<CharSequence,CharSequence>)this);
+		worldDataList.add((WorldData<CharSequence,Serializable>)this);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -83,8 +83,8 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	public Set<Entry<KeyCast,FileContent<ValueCast>>> entrySet(){
 		return data.entrySet();
 	}
-	public FileContent<CharSequence> getFileContent(KeyCast filePath){
-		return (FileContent<CharSequence>)data.get(filePath);
+	public FileContent<ValueCast> getFileContent(KeyCast filePath){
+		return (FileContent<ValueCast>)data.get(filePath);
 	}
 	public Set<KeyCast> getFilePaths(){
 		return data.keySet();
@@ -127,7 +127,10 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		for(File file:basePath.listFiles()){
 			try{
 				String name=file.getName().replace("."+extension, "");
-				data.put((KeyCast)name.substring(0, name.lastIndexOf("_")), new FileContent<ValueCast>((ValueCast)FileUtil.readWholeFile(file), Integer.parseInt(name.substring(name.lastIndexOf("_")+1))));
+				FileContent<ValueCast> fileCont=(FileContent<ValueCast>)FileUtil.getFileObj(file);
+				fileCont.dimension=Integer.parseInt(name.substring(name.lastIndexOf("_")+1));
+				//new FileContent<ValueCast>((ValueCast)FileUtil.getFileTxt(file), Integer.parseInt(name.substring(name.lastIndexOf("_")+1)))
+				data.put((KeyCast)name.substring(0, name.lastIndexOf("_")), fileCont);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -152,7 +155,8 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 			FileContent<ValueCast> file=fileWrite.getValue();
 			if(dimSpesific?world.provider.getDimensionId()==file.dimension:true){
 				//Clear the file and write to it.
-				FileUtil.writeToWholeFile(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension), file.text.toString());
+				UtilM.printInln(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension));
+				FileUtil.setFileObj(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension), (Serializable) file);
 			}
 		}
 	}
@@ -163,21 +167,21 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	
 	public void syncClients(){
 		if(printsActions)UtilM.printInln("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
-		AbstractPacket packet=new SyncClientsWorldData((Map<CharSequence,FileContent<CharSequence>>)(Map<?,?>)unsyncedData, worldDataName);
+		AbstractPacket packet=new SyncClientsWorldData((Map<CharSequence,FileContent<Serializable>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToAll(packet);
 	}
 	
 	public void syncServer(){
 		if(printsActions)UtilM.printInln("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
-		AbstractPacket packet=new SyncServerWorldData((Map<CharSequence,FileContent<CharSequence>>)(Map<?,?>)unsyncedData, worldDataName);
+		AbstractPacket packet=new SyncServerWorldData((Map<CharSequence,FileContent<Serializable>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToServer(packet);
 	}
 	public static class SyncServerWorldData extends AbstractToServerMessage{
 		
-		private Map<CharSequence,FileContent<CharSequence>> data;
+		private Map<CharSequence,FileContent<Serializable>> data;
 		private String worldDataName;
 		public SyncServerWorldData(){}
-		public SyncServerWorldData(Map<CharSequence,FileContent<CharSequence>> data,String worldDataName){
+		public SyncServerWorldData(Map<CharSequence,FileContent<Serializable>> data,String worldDataName){
 			this.data=data;
 			this.worldDataName=worldDataName;
 		}
@@ -185,11 +189,11 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		public void write(PacketBuffer buffer)throws IOException{
 			writeString(buffer, worldDataName);
 			buffer.writeInt(data.size());
-			Iterator<Entry<CharSequence,FileContent<CharSequence>>> dat=data.entrySet().iterator();
+			Iterator<Entry<CharSequence,FileContent<Serializable>>> dat=data.entrySet().iterator();
 			while(dat.hasNext())writeString(buffer, dat.next().getKey().toString());
 			dat=data.entrySet().iterator();
 			while(dat.hasNext()){
-				FileContent<CharSequence> file=dat.next().getValue();
+				FileContent<Serializable> file=dat.next().getValue();
 				writeString(buffer, file.text.toString());
 				buffer.writeInt(file.dimension);
 			}
@@ -198,18 +202,18 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		@Override
 		public void read(PacketBuffer buffer) throws IOException{
 			worldDataName=readString(buffer);
-			data=new HashMap<CharSequence,FileContent<CharSequence>>();
+			data=new HashMap<CharSequence,FileContent<Serializable>>();
 			List<CharSequence> keys=new ArrayList<CharSequence>();
 			int size=buffer.readInt();
 			for(int i=0;i<size;i++)keys.add(readString(buffer));
-			for(int i=0;i<size;i++)data.put(keys.get(i),new FileContent<CharSequence>(readString(buffer),buffer.readInt()));
+			for(int i=0;i<size;i++)data.put(keys.get(i),new FileContent<Serializable>(readString(buffer),buffer.readInt()));
 		}
 		
 		@Override
 		public IMessage process(EntityPlayer player, Side side){
-			for(WorldData<CharSequence,CharSequence> j:worldDataList){
+			for(WorldData<CharSequence,Serializable> j:worldDataList){
 				if(j.worldDataName.equals(worldDataName)){
-					for(Entry<CharSequence,FileContent<CharSequence>> i:data.entrySet()){
+					for(Entry<CharSequence,FileContent<Serializable>> i:data.entrySet()){
 						j.data.put(i.getKey(), i.getValue());
 					}
 					j.syncClients();
@@ -221,10 +225,10 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 	}
 	public static class SyncClientsWorldData extends AbstractToClientMessage{
 		
-		private Map<CharSequence,FileContent<CharSequence>> data;
+		private Map<CharSequence,FileContent<Serializable>> data;
 		private String worldDataName;
 		public SyncClientsWorldData(){}
-		public SyncClientsWorldData(Map<CharSequence,FileContent<CharSequence>> data,String worldDataName){
+		public SyncClientsWorldData(Map<CharSequence,FileContent<Serializable>> data,String worldDataName){
 			this.data=data;
 			this.worldDataName=worldDataName;
 		}
@@ -232,11 +236,11 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		public void write(PacketBuffer buffer)throws IOException{
 			writeString(buffer, worldDataName);
 			buffer.writeInt(data.size());
-			Iterator<Entry<CharSequence,FileContent<CharSequence>>> dat=data.entrySet().iterator();
+			Iterator<Entry<CharSequence,FileContent<Serializable>>> dat=data.entrySet().iterator();
 			while(dat.hasNext())writeString(buffer, dat.next().getKey().toString());
 			dat=data.entrySet().iterator();
 			while(dat.hasNext()){
-				FileContent<CharSequence> file=dat.next().getValue();
+				FileContent<Serializable> file=dat.next().getValue();
 				writeString(buffer, file.text.toString());
 				buffer.writeInt(file.dimension);
 			}
@@ -245,18 +249,18 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		@Override
 		public void read(PacketBuffer buffer) throws IOException{
 			worldDataName=readString(buffer);
-			data=new HashMap<CharSequence,FileContent<CharSequence>>();
+			data=new HashMap<CharSequence,FileContent<Serializable>>();
 			List<CharSequence> keys=new ArrayList<CharSequence>();
 			int size=buffer.readInt();
 			for(int i=0;i<size;i++)keys.add(readString(buffer));
-			for(int i=0;i<size;i++)data.put(keys.get(i),new FileContent<CharSequence>(readString(buffer),buffer.readInt()));
+			for(int i=0;i<size;i++)data.put(keys.get(i),new FileContent<Serializable>(readString(buffer),buffer.readInt()));
 		}
 		
 		@Override
 		public IMessage process(EntityPlayer player, Side side){
-			for(WorldData<CharSequence,CharSequence> j:worldDataList){
+			for(WorldData<CharSequence,Serializable> j:worldDataList){
 				if(j.worldDataName.equals(worldDataName)){
-					for(Entry<CharSequence,FileContent<CharSequence>> i:data.entrySet()){
+					for(Entry<CharSequence,FileContent<Serializable>> i:data.entrySet()){
 						j.data.put(i.getKey(), i.getValue());
 					}
 					return null;
@@ -337,9 +341,10 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends CharSequen
 		}
 		return result;
 	}
-	public static class FileContent<textCast extends CharSequence>{
+	public static class FileContent<textCast extends Serializable> implements Serializable{
 		public textCast text;
-		public int dimension;
+		public transient int dimension;
+		public FileContent(){}
 		public FileContent(textCast text, int dimension){
 			this.text=text;
 			this.dimension=dimension;

@@ -28,12 +28,9 @@ import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
-public class Button extends TextBox implements ICommandInteract{
+public class Button extends TextBox{
 	
 	public ComplexCubeModel body;
-	
-	private Program activationTarget;
-	private String name="";
 	
 	
 	protected ColorF inColor=new ColorF();
@@ -88,21 +85,21 @@ public class Button extends TextBox implements ICommandInteract{
 	public void onPressed(EntityPlayer player){
 		if(!moveMode&&!player.isSneaking()){
 			color=inColor;
-			color.set(1,'a');
-			boolean pasted=false;
-			if(!UtilM.isNull(host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
-				ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
-				if(!ProgramContainer.getName(s).isEmpty()){
-					pasted=true;
-					if(activationTarget==null)activationTarget=new Program(ProgramContainer.getName(s), -1, ProgramContainer.getPos(s));
-					else{
-						activationTarget.name=ProgramContainer.getName(s);
-						activationTarget.pos=ProgramContainer.getPos(s);
-					}
-				}
-			}
-			if(activationTarget.pos==null)activationTarget.pos=new BlockPosM();
-			if(!pasted&&activationTarget!=null&&!activationTarget.pos.equals(BlockPosM.ORIGIN))sendCommand();
+//			color.set(1,'a');
+//			boolean pasted=false;
+//			if(!UtilM.isNull(host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
+//				ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
+//				if(!ProgramContainer.getName(s).isEmpty()){
+//					pasted=true;
+//					if(activationTarget==null)activationTarget=new Program(ProgramContainer.getName(s), -1, ProgramContainer.getPos(s));
+//					else{
+//						activationTarget.name=ProgramContainer.getName(s);
+//						activationTarget.pos=ProgramContainer.getPos(s);
+//					}
+//				}
+//			}
+//			if(activationTarget.pos==null)activationTarget.pos=new BlockPosM();
+			if(activationTarget!=null&&!activationTarget.pos.equals(BlockPosM.ORIGIN))sendCommand();
 		}
 	}
 	@Override
@@ -110,69 +107,11 @@ public class Button extends TextBox implements ICommandInteract{
 		return true;
 	}
 	@Override
-	public void readData(Iterator<Integer> integers, Iterator<Boolean> booleans, Iterator<Byte> bytes___, Iterator<Long> longs___,Iterator<Double> doubles_, Iterator<Float> floats__, Iterator<String> strings_, Iterator<Short> shorts__){
-		super.readData(integers, booleans, bytes___, longs___, doubles_, floats__, strings_, shorts__);
-		boolean b=booleans.next();
-		if(b)activationTarget=new Program(strings_.next(), -1, new BlockPosM(integers.next(),integers.next(),integers.next()));
-		setName(strings_.next());
-		if(b)activationTarget.argsSrc=strings_.next().substring(1);
-	}
-	@Override
-	public void writeData(List<Integer> integers, List<Boolean> booleans, List<Byte> bytes___, List<Long> longs___, List<Double> doubles_,List<Float> floats__, List<String> strings_, List<Short> shorts__){
-		super.writeData(integers, booleans, bytes___, longs___, doubles_, floats__, strings_, shorts__);
-		booleans.add(activationTarget!=null);
-		if(activationTarget!=null){
-			strings_.add(activationTarget.name);
-			integers.add(activationTarget.pos.getX());
-			integers.add(activationTarget.pos.getY());
-			integers.add(activationTarget.pos.getZ());
-		}
-		strings_.add(getName());
-		if(activationTarget!=null)strings_.add("i"+activationTarget.argsSrc);
-	}
-	@Override
 	public void sendCommand(){
-		new Thread(new Runnable(){@Override public void run(){
-			if(activationTarget==null)return;
-			WorldNetworkInterface Interface=InterfaceBinder.get(host);
-			NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
-			if(netInterface!=null&&netInterface.getBrain()!=null){
-				try{
-					ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-					Object[] args=ProgramHandeler.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
-					if(ErrorPos.getVar()==-1){
-						DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
-						if(netInterface!=null&&com!=null){
-							com.obj1.run(com.obj2,args,new Object[]{host.getWorld()});
-							List<TileEntityNetworkRouter> routers=netInterface.getPointerContainers();
-							if(!routers.isEmpty())netInterface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.result);
-						}
-					}
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-			}
-		}}).start();
+		standard.sendStandardCommand();
 	}
 	@Override
-	public Object onCommandReceive(Program command){
-		String[] words=command.result.split(" ");
-		return standardHoloObjectCommandInteract(words);
-	}
-	@Override
-	public String getName(){
-		return name;
-	}
-	@Override
-	public void setName(String name){
-		this.name=name;
-	}
-	@Override
-	public Program getActivationTarget(){
-		return activationTarget;
-	}
-	@Override
-	public void setActivationTarget(Program com){
-		activationTarget=com;
+	public boolean isFullBlown(){
+		return true;
 	}
 }

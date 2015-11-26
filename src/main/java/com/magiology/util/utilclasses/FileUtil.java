@@ -2,13 +2,18 @@ package com.magiology.util.utilclasses;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 
 
 public class FileUtil{
-
-	public static StringBuilder readWholeFile(File file){
+	
+	public static StringBuilder getFileTxt(File file){
 		try{
 			BufferedReader br=new BufferedReader(new FileReader(file));
 			StringBuilder result=new StringBuilder();
@@ -22,7 +27,7 @@ public class FileUtil{
 		return null;
 	}
 	
-	public static void writeToWholeFile(File file,String content){
+	public static void setFileTxt(File file,String content){
 		try{
 			file.createNewFile();
 			PrintWriter out=new PrintWriter(file);
@@ -30,6 +35,40 @@ public class FileUtil{
 			out.flush();
 			out.close();
 		}catch(Exception e){
+			UtilM.printInln(file);
+			e.printStackTrace();
+		}
+	}
+	public static Object getFileObj(File file){
+		try{
+			ObjectInputStream in=new ObjectInputStream(new FileInputStream(file));
+			Object result=null;
+			try{
+				result=in.readObject();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			in.close();
+			return result;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static void setFileObj(File file,Serializable content){
+		try{
+			file.createNewFile();
+			ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream(file));
+			try{
+				out.writeObject(content);
+			}catch(Exception e){
+				UtilM.printInln(file);
+				e.printStackTrace();
+			}
+			out.close();
+		}catch(Exception e){
+			UtilM.printInln(file);
 			e.printStackTrace();
 		}
 	}

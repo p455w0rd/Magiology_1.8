@@ -15,7 +15,7 @@ public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerL
     @Override public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet){readFromNBT(packet.getNbtCompound());}
     
     public void sync(){
-    	if(U.isRemote(this))return;
+    	if(worldObj==null||worldObj.isRemote)return;
     	worldObj.markBlockForUpdate(pos);
     	markDirty();
     }

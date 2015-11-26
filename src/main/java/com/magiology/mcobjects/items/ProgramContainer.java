@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
-import com.magiology.api.lang.ProgramDataCenter;
+import com.magiology.api.lang.ProgramDataBase;
 import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
 import com.magiology.core.init.MGui;
@@ -45,7 +45,7 @@ public class ProgramContainer extends Item{
 	}
 	public static void initId(ItemStack stack){
 		if(U.isRemote())return;
-		if(getId(stack)<1)setId(stack, ProgramDataCenter.code_aviableId());
+		if(getId(stack)<1)setId(stack, ProgramDataBase.code_aviableId());
 	}
 	
 	public static String getName(ItemStack stack){
@@ -152,9 +152,8 @@ public class ProgramContainer extends Item{
 		}
 		public Object run(TileEntityNetworkProgramHolder holder, Object[] args, Object[] environment){
 			NetworkProgramHolderWrapper.setInstance(holder);
-			Object x=ProgramDataCenter.run(programId, args,ProgramHandeler.defultVars(environment));
+			Object x=ProgramDataBase.run(programId, args, environment);
 			result=x+"";
-//			Util.printInln(x);
 			return x;
 		}
 	}

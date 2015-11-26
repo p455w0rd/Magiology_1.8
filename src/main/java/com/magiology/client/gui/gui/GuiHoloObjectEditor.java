@@ -11,7 +11,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.api.lang.ProgramDataCenter;
+import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.ProgramDataBase;
 import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
@@ -26,7 +27,6 @@ import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.mcobjects.tileentityes.hologram.ICommandInteract;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
@@ -301,13 +301,13 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 							DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(iCommand.getActivationTarget());
 							if(com!=null){
 								Object Return=com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
-								if(Return!=null&&!Return.toString().startsWith(ProgramDataCenter.err)){
+								if(Return!=null&&!Return.toString().startsWith(ProgramDataBase.err)){
 									isCommandFound=true;
 									commandOut="The command is successfully compiled and it is ready for use!";
 								}else if(Return==null){
 									commandOut="Result is null? this should not be happening.";
 								}else{
-									commandOut="The command is given an invalid combination of arguments! All in vars have to be filled! Log: "+Return.toString().substring(ProgramDataCenter.err.length(), Return.toString().length());
+									commandOut="The command is given an invalid combination of arguments! All in vars have to be filled! Log: "+Return.toString().substring(ProgramDataBase.err.length(), Return.toString().length());
 									showOut=true;
 								}
 							}else commandOut="Can't find the command by the target name!";
