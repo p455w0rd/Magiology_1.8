@@ -38,7 +38,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		}
 		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
-		float rotation=UtilM.calculateRenderPos(tile.prevRotation,tile.rotation);
+		float rotation=UtilM.calculatePos(tile.prevRotation,tile.rotation);
 		GL11.glPushMatrix();
 		GL11.glTranslated(posX,posY,posZ);
 		GL11.glEnable(GL11.GL_CULL_FACE);

@@ -31,7 +31,7 @@ public class HandModeChangerHUD extends HUD{
 		FontRenderer fr=TessUtil.getFontRenderer();
 		if(UtilM.isNull(player,fr))return;
 		if(handAlpha>0&&UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
-			float HandAlpha=UtilM.calculateRenderPos(lastHandAlpha,handAlpha);
+			float HandAlpha=UtilM.calculatePos(lastHandAlpha,handAlpha);
 			int slot=player.inventory.currentItem;
 			GL11.glPushMatrix();
 			

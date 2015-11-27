@@ -34,9 +34,9 @@ public class ColorCutRenderer extends ShaderAspectRenderer{
 	
 	@Override
 	public void redner(){
-		ShaderUniformEditor.setUniform(uniforms.get(0), UtilM.calculateRenderPos(rPrev, r),UtilM.calculateRenderPos(gPrev, g),UtilM.calculateRenderPos(bPrev, b));
-		ShaderUniformEditor.setUniform(uniforms.get(1), UtilM.calculateRenderPos(prevTolerance, tolerance));
-		ShaderUniformEditor.setUniform(uniforms.get(2), UtilM.calculateRenderPos(prevIntensity, intensity));
+		ShaderUniformEditor.setUniform(uniforms.get(0), UtilM.calculatePos(rPrev, r),UtilM.calculatePos(gPrev, g),UtilM.calculatePos(bPrev, b));
+		ShaderUniformEditor.setUniform(uniforms.get(1), UtilM.calculatePos(prevTolerance, tolerance));
+		ShaderUniformEditor.setUniform(uniforms.get(2), UtilM.calculatePos(prevIntensity, intensity));
 	}
 	
 	@Override

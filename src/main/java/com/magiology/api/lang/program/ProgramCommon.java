@@ -1,4 +1,4 @@
-package com.magiology.api.lang;
+package com.magiology.api.lang.program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 
-public class ProgramHandeler{
+public class ProgramCommon{
 	
 	public static Object[] compileArgs(List<DoubleObject<String,Object>> standardVars, String source, ObjectHolder<Integer>... errorPos){
 		if(errorPos.length==1)errorPos[0].setVar(-1);

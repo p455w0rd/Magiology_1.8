@@ -11,7 +11,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.magiology.api.lang.ProgramDataBase;
+import com.magiology.api.lang.program.*;
 import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.items.ProgramContainer;
@@ -91,15 +91,13 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 					TileEntityNetworkProgramHolder tile=(TileEntityNetworkProgramHolder)test;
 					ItemStack stack=tile.getStackInSlot(slotId);
 					if(stack!=null&&stack.hasTagCompound()){
-						ProgramDataBase.code_set(ProgramContainer.getId(stack), data);
-						ProgramContainer.setName(stack, name);
+						ProgramDataBase.code_set(ProgramContainer.getId(stack), name, data);
 					}
 				}
 			}else{
 				ItemStack stack=player.inventory.mainInventory[slotId];
 				if(stack!=null&&stack.hasTagCompound()){
-					ProgramDataBase.code_set(ProgramContainer.getId(stack), data);
-					ProgramContainer.setName(stack, name);
+					ProgramDataBase.code_set(ProgramContainer.getId(stack), name, data);
 				}
 			}
 			return null;

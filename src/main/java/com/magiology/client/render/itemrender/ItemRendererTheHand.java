@@ -55,7 +55,7 @@ public class ItemRendererTheHand implements IItemRenderer{
 			GL11.glRotated(-data.thirdPresonPosSpeed*350+20, 1, 0, 0);
 		}
 		
-		float[] handRotationRender=UtilM.calculateRenderPosArray(data.prevHandRotationCalc,data.handRotationCalc);
+		float[] handRotationRender=UtilM.calculatePosArray(data.prevHandRotationCalc,data.handRotationCalc);
 		float x1=p*6F,y1=p*10,z1=p*2;
 		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11.glTranslated(handRotationRender[3]/30,handRotationRender[4]/30,handRotationRender[5]/30);
 		GL11.glTranslated(x1,y1,z1);
@@ -96,7 +96,7 @@ public class ItemRendererTheHand implements IItemRenderer{
 		public void draw(PowerHandData_sub_fingerData data){
 			GL11.glPushMatrix();
 			for(int a=0;a<cubeModels.length;a++){
-				float[] rot=UtilM.calculateRenderPosArray(data.prevcalcXyzPosRot[a], data.calcXyzPosRot[a]);
+				float[] rot=UtilM.calculatePosArray(data.prevcalcXyzPosRot[a], data.calcXyzPosRot[a]);
 				GL11U.glRotate(rot[3],rot[4],rot[5],rot[0],rot[1]+
 						(cubeModels[a].points[2].y-cubeModels[a].points[4].y)/2F
 						,rot[2]);

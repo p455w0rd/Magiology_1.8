@@ -179,7 +179,7 @@ public class RenderLoopEvents{
 		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 			float rotation=0;
-			if(data!=null)rotation=UtilM.calculateRenderPos(data.prevPlayerAngle, data.playerAngle);
+			if(data!=null)rotation=UtilM.calculatePos(data.prevPlayerAngle, data.playerAngle);
 			GL11U.glRotate(0, -player.rotationYaw, 0);
 			GL11.glTranslated(0,-player.height+player.width/2, 0);
 			GL11U.glRotate(rotation,0,0);

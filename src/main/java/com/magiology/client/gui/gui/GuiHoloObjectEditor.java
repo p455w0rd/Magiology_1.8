@@ -12,8 +12,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.ProgramDataBase;
-import com.magiology.api.lang.ProgramHandeler;
+import com.magiology.api.lang.program.*;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
@@ -290,7 +289,7 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 				iCommand.setActivationTarget(new Program(target, 0, new BlockPosM(x, y, z)));
 				ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
 				iCommand.getActivationTarget().argsSrc=commandIn.getText();
-				Object[] args=ProgramHandeler.compileArgs(holoObj.getStandardVars(),commandIn.getText(),ErrorPos);
+				Object[] args=ProgramCommon.compileArgs(holoObj.getStandardVars(),commandIn.getText(),ErrorPos);
 				int errorPos=ErrorPos.getVar();
 				boolean isCommandFound=false;
 				if(errorPos==-1){

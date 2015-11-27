@@ -52,7 +52,7 @@ public class WingModeChangerHUD extends HUD{
 		for(Positions poz:poss)width=Math.max(width, fr.getStringWidth(poz.name()));
 		//end
 		player=UtilM.getThePlayer();
-		float calcAlpha=UtilM.calculateRenderPos(prevAlpha, alpha);
+		float calcAlpha=UtilM.calculatePos(prevAlpha, alpha);
 		GL11U.setUpOpaqueRendering(1);
 		if(WingsFromTheBlackFireHandler.getIsActive(player)){
 			String poz=WingsFromTheBlackFireHandler.getPos(player)+"/"+Positions.get(WingsFromTheBlackFireHandler.getPosId(player));
@@ -68,7 +68,7 @@ public class WingModeChangerHUD extends HUD{
 			GL11U.endOpaqueRendering();
 			return;
 		}
-		double slide=UtilM.calculateRenderPos(prevSliderPos, sliderPos);
+		double slide=UtilM.calculatePos(prevSliderPos, sliderPos);
 		
 		float offset=calcAlpha*10-10;
 		float reducedScale=1,clipping=275-yScreen;
@@ -87,7 +87,7 @@ public class WingModeChangerHUD extends HUD{
 		GL11U.endOpaqueRendering();
 	}
 	private void renderSlider(){
-		float calcAlpha=UtilM.calculateRenderPos(prevAlpha, alpha),mainAlpha=255*calcAlpha;
+		float calcAlpha=UtilM.calculatePos(prevAlpha, alpha),mainAlpha=255*calcAlpha;
 		if(calcAlpha<=0.01)return;
 		int id=0;
 		int nextLineOffset=width/2+fr.FONT_HEIGHT/2;
@@ -97,7 +97,7 @@ public class WingModeChangerHUD extends HUD{
 			criclePoss[a][b]+=UtilM.CRandF(0.01);
 		}
 		for(int a=0;a<calcBackgroundColor.length;a++)for(int b=0;b<3;b++){
-			calcBackgroundColor[a][b]=UtilM.calculateRenderPos(backgroundColor[a][b], prevBackgroundColor[a][b]);
+			calcBackgroundColor[a][b]=UtilM.calculatePos(backgroundColor[a][b], prevBackgroundColor[a][b]);
 		}
 		for(int nj=0;nj<3;nj++)for(int pozId=0;pozId<validPoss.length;pozId++){
 			Positions poz=validPoss[pozId];

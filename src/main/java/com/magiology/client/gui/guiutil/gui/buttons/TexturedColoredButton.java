@@ -41,7 +41,7 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
 	public void drawButton(Minecraft p_146112_1_, int x, int y){
         if (this.visible){
-			float r=UtilM.calculateRenderPos(prevR, this.r),g=UtilM.calculateRenderPos(prevG, this.g),b=UtilM.calculateRenderPos(prevB, this.b),alpha=UtilM.calculateRenderPos(prevAlpha, this.alpha);
+			float r=UtilM.calculatePos(prevR, this.r),g=UtilM.calculatePos(prevG, this.g),b=UtilM.calculatePos(prevB, this.b),alpha=UtilM.calculatePos(prevAlpha, this.alpha);
             FontRenderer fr = TessUtil.getFontRenderer();
             p_146112_1_.getTextureManager().bindTexture(Textures.ISidedIns);
             this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;

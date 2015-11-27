@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.api.lang.ProgramDataBase;
+import com.magiology.api.lang.program.*;
 import com.magiology.client.gui.gui.GuiProgramContainerEditor;
 import com.magiology.client.render.Textures;
 import com.magiology.core.init.MBlocks;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.ProgramHandeler;
+import com.magiology.api.lang.program.*;
 import com.sun.org.apache.bcel.internal.generic.LAND;
 
 public class CommandInteractorList extends ArrayList<ICommandInteract>{
@@ -18,14 +18,14 @@ public class CommandInteractorList extends ArrayList<ICommandInteract>{
 	}
 	
 	public Object getByName(String name){
-		if(name==null||name.isEmpty())ProgramHandeler.JSNull("Cannot search for empty name!");
+		if(name==null||name.isEmpty())ProgramCommon.JSNull("Cannot search for empty name!");
 		for(ICommandInteract com:this)if(com!=null&&com.getName()!=null&&com.getName().equals(name))return com;
-		return ProgramHandeler.JSNull("No command interactor with name "+name);
+		return ProgramCommon.JSNull("No command interactor with name "+name);
 	}
 	public Object getByType(String type){
-		if(type==null||type.isEmpty())ProgramHandeler.JSNull("Cannot search for empty type!");
+		if(type==null||type.isEmpty())ProgramCommon.JSNull("Cannot search for empty type!");
 		for(ICommandInteract com:this)if(com!=null&&com.getClass().getSimpleName().startsWith(type))return com;
-		return ProgramHandeler.JSNull("No command interactor with type "+type);
+		return ProgramCommon.JSNull("No command interactor with type "+type);
 	}
 	
 	public CommandInteractorList extractByType(String type){

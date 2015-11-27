@@ -1,9 +1,6 @@
-package com.magiology.api.lang;
+package com.magiology.api.lang.program;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -14,18 +11,21 @@ import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import com.magiology.api.lang.*;
 import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
 import com.magiology.api.lang.bridge.WorldWrapper;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
-public class ProgramBase{
+public class ProgramUsable{
 	
-	private transient Invocable compiled;
-	private transient List<CharSequence> log=new ArrayList<CharSequence>();
-	private transient Tracker tracker=new Tracker();
-	private String programName,src;
+	private Invocable compiled;
+	private List<CharSequence> log=new ArrayList<CharSequence>();
+	private Tracker tracker=new Tracker();
+	private ProgramSerializable saveableData;
 	
-	public transient static final String jsJavaBridge;
+	public static final String jsJavaBridge;
 	static{
 		StringBuilder txt=new StringBuilder();
 		//functions
@@ -131,4 +131,11 @@ public class ProgramBase{
 	public Invocable getCompiled(){return compiled;}
 	
 	public Tracker getTracker(){return tracker;}
+	public ProgramSerializable getSaveableData(){
+		if(saveableData==null){
+			int id=UtilM.getMapKey(ProgramDataBase.useablePrograms, this);
+			ProgramDataBase.programs.getFileContent(id+"");
+		}
+		return saveableData;
+	}
 }

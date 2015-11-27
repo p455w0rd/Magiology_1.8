@@ -33,7 +33,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 		TessUtil.getNVB().cleanUp();
 		
 		int tim=(int)((UtilM.getTheWorld().getTotalWorldTime())%20);
-		float st=UtilM.calculateRenderPos(tim, tim+1)/10F;
+		float st=UtilM.calculatePos(tim, tim+1)/10F;
 		for(int a=0;a<(upgraded?6:2);a++){
 			float width=1;
 			{
@@ -49,7 +49,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 				}break;
 				}
 				TessUtil.drawLine(td.x1, td.y1, td.z1, td.x2, td.y2, td.z2, width/20, true,TessUtil.getNVB(),st,1);
-				GL11.glColor4d(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*UtilM.calculateRenderPos(prevAlpha,alpha));
+				GL11.glColor4d(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*UtilM.calculatePos(prevAlpha,alpha));
 				GL11.glDepthMask(false);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"textures/models/visual_connection.png"));

@@ -41,7 +41,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			double var1=UtilM.fluctuator(20,(pipe.x()+pipe.y()+pipe.z())*4),
 				   var2=UtilM.fluctuator(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
-			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*UtilM.calculateRenderPos(prevAlpha, alpha));
+			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*UtilM.calculatePos(prevAlpha, alpha));
 			GL11.glDepthMask(true);
 			if(!pipe.isStrate(null)){
 				for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i].getMain()&&pipe.connections[i].willRender())drawConnectorGlow(pipe.connections[i].getFaceEF());

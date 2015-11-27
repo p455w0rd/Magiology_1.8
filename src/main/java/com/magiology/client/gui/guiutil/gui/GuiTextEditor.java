@@ -1,6 +1,6 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import static com.magiology.util.utilclasses.UtilM.calculateRenderPos;
+import static com.magiology.util.utilclasses.UtilM.calculatePos;
 import static com.magiology.util.utilclasses.UtilM.getGuiScaleRaw;
 import static com.magiology.util.utilclasses.UtilM.getTheWorld;
 import static com.magiology.util.utilclasses.UtilM.getWorldTime;
@@ -232,7 +232,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 			lastMouse=mouse;
 			mouse=new Vec2i(x-pos.x, y-pos.y);
 		}
-		float sliderX=calculateRenderPos(prevSliderX,this.sliderX);
+		float sliderX=calculatePos(prevSliderX,this.sliderX);
 		FontRendererMClipped fr=FontRendererMClipped.get();
 		int maxHeight=(textBuffer.size()+1)*fr.FONT_HEIGHT;
 		if(maxHeight>size.y);else this.sliderY=0;

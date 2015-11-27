@@ -68,7 +68,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			camPich=(float)Math.toDegrees(Math.atan2(difY,Math.sqrt(difX*difX+difZ*difZ))),
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90;
 		int time360=(int)((tile.getWorld().getTotalWorldTime()+highlightedBoxId*20)%360);
-		double time=UtilM.calculateRenderPos(time360, time360+1);
+		double time=UtilM.calculatePos(time360, time360+1);
 		
 		//rotation
 		GL11U.glRotate(0                     , -camYaw-80+80*point2,                   0);

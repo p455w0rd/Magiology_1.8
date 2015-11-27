@@ -1,35 +1,28 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.api.SavableData;
-import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.ProgramHandeler;
-import com.magiology.api.network.NetworkInterface;
-import com.magiology.api.network.WorldNetworkInterface;
-import com.magiology.api.network.interfaces.registration.InterfaceBinder;
+import com.magiology.api.*;
+import com.magiology.api.lang.*;
+import com.magiology.api.lang.program.*;
+import com.magiology.api.network.*;
+import com.magiology.api.network.interfaces.registration.*;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.core.init.MGui;
-import com.magiology.handlers.GuiHandlerM;
+import com.magiology.core.init.*;
+import com.magiology.handlers.*;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.items.ProgramContainer.Program.KeyWord;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public abstract class HoloObject implements SavableData,ICommandInteract{
 	
@@ -347,7 +340,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 				if(netInterface!=null&&netInterface.getBrain()!=null){
 					try{
 						ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-						Object[] args=ProgramHandeler.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
+						Object[] args=ProgramCommon.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
 						if(ErrorPos.getVar()==-1){
 							DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
 							if(netInterface!=null&&com!=null){

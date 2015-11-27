@@ -12,9 +12,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
-import com.magiology.api.lang.ProgramDataBase;
-import com.magiology.api.lang.ProgramHandeler;
 import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
+import com.magiology.api.lang.program.*;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
@@ -51,8 +50,12 @@ public class ProgramContainer extends Item{
 	public static String getName(ItemStack stack){
 		createNBT(stack);
 		initId(stack);
-		String name=getTag(stack, "nam");
-		return name==null?"error-noName":name;
+		try{
+			return ProgramDataBase.getProgram(getId(stack)).getSaveableData().programName.toString();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "error-noName";
 	}
 	
 	public static BlockPosM getPos(ItemStack stack){

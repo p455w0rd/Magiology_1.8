@@ -429,13 +429,13 @@ public class TessUtil{
 	}
 	public static float calculateRenderPos(Entity entity, char xyz){
 		if((""+xyz).toLowerCase().equals("x")){
-			return UtilM.calculateRenderPos(entity.lastTickPosX,entity.posX);
+			return UtilM.calculatePos(entity.lastTickPosX,entity.posX);
 		}
 		if((""+xyz).toLowerCase().equals("y")){
-			return UtilM.calculateRenderPos(entity.lastTickPosY,entity.posY);
+			return UtilM.calculatePos(entity.lastTickPosY,entity.posY);
 		}
 		if((""+xyz).toLowerCase().equals("z")){
-			return UtilM.calculateRenderPos(entity.lastTickPosZ,entity.posZ);
+			return UtilM.calculatePos(entity.lastTickPosZ,entity.posZ);
 		}
 		UtilM.printInln(xyz,"is not a valid key! Use x or y or z.");
 		return -1;

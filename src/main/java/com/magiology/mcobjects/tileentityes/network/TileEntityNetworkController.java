@@ -12,7 +12,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
-import com.magiology.api.lang.ProgramDataBase;
+import com.magiology.api.lang.program.*;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.Messageable;
 import com.magiology.api.network.NetworkInterface;

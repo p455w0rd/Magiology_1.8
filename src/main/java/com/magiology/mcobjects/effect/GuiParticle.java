@@ -90,8 +90,8 @@ public class GuiParticle{
 		U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		GL11U.setUpOpaqueRendering(2);
 		double opacityF=opacity,
-				x=UtilM.calculateRenderPos(lastXPos,xPos),
-				y=UtilM.calculateRenderPos(lastYPos,yPos);
+				x=UtilM.calculatePos(lastXPos,xPos),
+				y=UtilM.calculatePos(lastYPos,yPos);
 		
 		
 		

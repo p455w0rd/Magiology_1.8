@@ -2,61 +2,46 @@ package com.magiology.util.utilclasses;
 
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
-import java.awt.Color;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Random;
+import java.awt.*;
+import java.lang.reflect.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraft.block.*;
+import net.minecraft.block.properties.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.event.entity.*;
+import net.minecraftforge.event.world.*;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.google.common.collect.ImmutableMap;
-import com.magiology.core.Config;
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.forgepowered.packets.core.AbstractPacket;
-import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
+import com.google.common.collect.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.forgepowered.packets.core.*;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.math.CricleUtil;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.Plane;
-import com.magiology.util.utilobjects.vectors.Ray;
-import com.magiology.util.utilobjects.vectors.Vec3M;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.math.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
+import com.mojang.realmsclient.gui.*;
 
 public class UtilM{
 	public class U extends UtilM{}
@@ -373,20 +358,20 @@ public class UtilM{
 			}
 		}
 	}
-	public static float[][] calculateDoubleRenderPosArray(float[][] prevPos,float[][] pos){
+	public static float[][] calculateDoublePosArray(float[][] prevPos,float[][] pos){
 		if(pos.length!=prevPos.length)return null;
 		float[][] result=null;
-		for(int a=0;a<pos.length;a++)result=ArrayUtils.add(result, calculateRenderPosArray(prevPos[a], pos[a]));
+		for(int a=0;a<pos.length;a++)result=ArrayUtils.add(result, calculatePosArray(prevPos[a], pos[a]));
 		return result;
 	}
-	public static float[] calculateRenderPosArray(final float[] prevPos,final float[] pos){
+	public static float[] calculatePosArray(final float[] prevPos,final float[] pos){
 		if(pos.length!=prevPos.length)return null;
 		float[] result=null;
-		for(int a=0;a<pos.length;a++)result=ArrayUtils.add(result, calculateRenderPos(prevPos[a], pos[a]));
+		for(int a=0;a<pos.length;a++)result=ArrayUtils.add(result, calculatePos(prevPos[a], pos[a]));
 		return result;
 	}
 
-	public static float calculateRenderPos(final double prevPos,final double pos){
+	public static float calculatePos(final double prevPos,final double pos){
 		return (float)(prevPos+(pos-prevPos)*RenderLoopEvents.partialTicks);
 	}
 	public static float[][] addToDoubleFloatArray(final float[][] array1,final float[][] array2){
@@ -462,7 +447,7 @@ public class UtilM{
 		float
 			fluctuator=fluctuator(speed, offset),
 			prevFluctuator=fluctuator(speed, offset-1);
-		return calculateRenderPos(prevFluctuator, fluctuator);
+		return calculatePos(prevFluctuator, fluctuator);
 	}
 	public static float fluctuator(double speed,double offset){
 		long wtt=(long)(getTheWorld().getTotalWorldTime()+offset);
@@ -541,10 +526,10 @@ public class UtilM{
 		return angle2.crossProduct(angle1).normalize();
     }
 	public static ColorF calculateRenderColor(ColorF prevColor, ColorF color){
-		return new ColorF(calculateRenderPos(prevColor.r, color.r),
-						  calculateRenderPos(prevColor.g, color.g),
-						  calculateRenderPos(prevColor.b, color.b),
-						  calculateRenderPos(prevColor.a, color.a));
+		return new ColorF(calculatePos(prevColor.r, color.r),
+						  calculatePos(prevColor.g, color.g),
+						  calculatePos(prevColor.b, color.b),
+						  calculatePos(prevColor.a, color.a));
 	}
 	public static ColorF slowlyEqalizeColor(ColorF variable, ColorF goal, float speed){
 		return new ColorF(slowlyEqalize(variable.r, goal.r, speed),
@@ -776,5 +761,20 @@ public class UtilM{
 	public static void printTime(){
 		println(endTime());
 	}
-	
+	public static <T, E> T getMapKey(Map<T, E> map, E value){
+	    for(Entry<T, E> entry : map.entrySet()){
+	        if(Objects.equals(value, entry.getValue())){
+	            return entry.getKey();
+	        }
+	    }
+	    return null;
+	}
+	public static <T, E> Set<T> getMapKeySet(Map<T, E> map, E value){
+		return 
+			 map.entrySet()
+			.stream()
+			.filter(entry->Objects.equals(entry.getValue(), value))
+			.map(Map.Entry::getKey)
+			.collect(Collectors.toSet());
+	}
 }

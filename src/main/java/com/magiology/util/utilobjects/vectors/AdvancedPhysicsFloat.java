@@ -56,7 +56,7 @@ public class AdvancedPhysicsFloat{
 		
 	}
 	public float getPoint(){
-		return UtilM.calculateRenderPos(prevPoint, point);
+		return UtilM.calculatePos(prevPoint, point);
 	}
 	public void bounce(float multiplyer){
 		speed*=-multiplyer;

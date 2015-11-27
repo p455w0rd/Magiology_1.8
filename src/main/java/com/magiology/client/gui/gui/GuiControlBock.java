@@ -109,7 +109,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	}
 	
 	public void drawSmartShit(boolean type){
-		double angle=UtilM.calculateRenderPos(tileCB.prevAngle,tileCB.angle);
+		double angle=UtilM.calculatePos(tileCB.prevAngle,tileCB.angle);
 		switch (tileCB.redstoneC){
 		case 0:{
 			this.drawTexturedModalRect(guiLeft+12, guiTop+35, 176, 21, 16, 16);
@@ -138,7 +138,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		GL11.glRotated(-angle, 0, 0, 1);
 		GL11.glTranslated(-20.5, -4.5, 0);
 		GL11.glTranslated(-(guiLeft+31), -(guiTop+18), 0);
-		double thingyPos=UtilM.calculateRenderPos(tileCB.prevThingyPos, tileCB.thingyPos);
+		double thingyPos=UtilM.calculatePos(tileCB.prevThingyPos, tileCB.thingyPos);
 		{
 			GL11.glTranslated(guiLeft+83, guiTop+79, 0);
 			GL11.glTranslated(-thingyPos*5, 0, 0);

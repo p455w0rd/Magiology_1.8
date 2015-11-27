@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.api.lang.ProgramHandeler;
+import com.magiology.api.lang.program.*;
 import com.magiology.client.render.font.FontRendererMClipped;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.NormalizedVertixBufferModel;
@@ -186,7 +186,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		line.add(textBuffer.get(i).toString());
 		colors.add(0xBED6FF);
 		String 
-			raw=ProgramHandeler.removeSpacesFrom(textBuffer.get(i).toString(),'{','}','(',')','=',';','*','/','+','-','%','!','>','<','@','#'),
+			raw=ProgramCommon.removeSpacesFrom(textBuffer.get(i).toString(),'{','}','(',')','=',';','*','/','+','-','%','!','>','<','@','#'),
 			words[]=raw.split("((?<=\\W)|(?=\\W))");
 		boolean varFound=false,functionFound=false,functionStarted=false;
 		for(int k=0;k<words.length;k++){

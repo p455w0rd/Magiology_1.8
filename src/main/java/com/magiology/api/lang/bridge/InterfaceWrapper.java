@@ -17,7 +17,7 @@ import scala.util.parsing.json.JSONObject;
 
 import com.google.common.collect.ImmutableSet;
 import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.ProgramHandeler;
+import com.magiology.api.lang.program.*;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
@@ -31,7 +31,7 @@ public class InterfaceWrapper{
 	private ISidedNetworkComponent comp;
 	public static Object New(Object src){
 		if(src!=null&&src instanceof NetworkInterface&&src instanceof ISidedNetworkComponent)return new InterfaceWrapper((NetworkInterface&ISidedNetworkComponent)src);
-		return ProgramHandeler.JSNull("No interface");
+		return ProgramCommon.JSNull("No interface");
 	}
 	private <T extends NetworkInterface&ISidedNetworkComponent>InterfaceWrapper(T src){
 		interf=src;
@@ -51,13 +51,13 @@ public class InterfaceWrapper{
 	public Object getBlockState(String stateName){
 		ImmutableSet set=getFacedPos().getState(getWorld()).getProperties().entrySet();
 		Iterator iterator=set.iterator();
-		if(set.size()==0)return ProgramHandeler.JSNull("No states");
+		if(set.size()==0)return ProgramCommon.JSNull("No states");
 		Entry entry;
 		while(iterator.hasNext()){
 			entry=(Entry)iterator.next();
 			if(((IProperty)entry.getKey()).getName().equals(stateName))return entry.getValue();
 		}
-		return ProgramHandeler.JSNull("State \""+stateName+"\" does not exist!");
+		return ProgramCommon.JSNull("State \""+stateName+"\" does not exist!");
 	}
 	public int getRedstone(int side){
 		return getFacedPos().getRedstonePower(getWorld(), EnumFacing.getFront(side));
@@ -68,9 +68,9 @@ public class InterfaceWrapper{
 	
 	public Object getCommandInteractors(){
 		WorldNetworkInterface Interface=interf.getInterfaceProvider();
-		if(Interface==null)return ProgramHandeler.JSNull("Block is not able to contain command interactors");
+		if(Interface==null)return ProgramCommon.JSNull("Block is not able to contain command interactors");
 		List<ICommandInteract> list=Interface.getCommandInteractors();
-		if(list==null)return ProgramHandeler.JSNull("No command interactors found");
+		if(list==null)return ProgramCommon.JSNull("No command interactors found");
 		return new CommandInteractorList(list);
 	}
 	
@@ -83,7 +83,7 @@ public class InterfaceWrapper{
 	public Object getInterfaceBlockState(String stateName){
 		ImmutableSet set=getPos().getState(getWorld()).getProperties().entrySet();
 		Iterator iterator=set.iterator();
-		if(set.size()==0)return ProgramHandeler.JSNull("No states");
+		if(set.size()==0)return ProgramCommon.JSNull("No states");
 		Entry entry;
 		while(iterator.hasNext()){
 			entry=(Entry)iterator.next();

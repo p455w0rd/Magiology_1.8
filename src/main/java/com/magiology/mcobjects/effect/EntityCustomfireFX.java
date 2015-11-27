@@ -85,7 +85,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		
 		GL11.glPushMatrix();
 		GL11.glTranslated(x,y,z);
-		GL11U.glRotate(UtilM.calculateRenderPosArray(prevRoration, roration));
+		GL11U.glRotate(UtilM.calculatePosArray(prevRoration, roration));
 		GL11.glTranslated(-x, -y, -z);
 		
 		GL11.glPushMatrix();

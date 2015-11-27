@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.api.lang.ProgramDataBase;
+import com.magiology.api.lang.program.*;
 import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.container.CommandCenterContainer;
@@ -90,7 +90,11 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		
 		getEditor().size=new Vec2i(width-20, height-20);
 		getEditor().pos=new Vec2i(10, 10);
-		((GuiJavaScriptEditor)programSrc).colors=useColors.isOn();
+		try{
+			((GuiJavaScriptEditor)programSrc).colors=useColors.isOn();
+		}catch(Exception e){
+			UtilM.printInln(programSrc,useColors);
+		}
 		getEditor().render(mouseX,mouseY);
 		FontRendererMBase fr=Get.Render.Font.FRB();
 		if(settingsActive){
@@ -218,10 +222,10 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		printCompileError=new OnOffGuiButton(1, top+98-3, left+3+26, 22, 11, new ColorF(0.2, 0.8, 0.2, 0.8));
 		useColors=new OnOffGuiButton(2, top+98-3, left+3+40, 22, 11,         new ColorF(0.2, 0.8, 0.8, 0.8));
 		recommendCode=new OnOffGuiButton(3, top+98-3, left+3+54, 22, 11,     new ColorF(0.8, 0.2, 0.2, 0.8));
-		try{saveOnExit.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("saveOnExit").text.toString().replaceAll("\n", "")));}catch(Exception e){}
-		try{printCompileError.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("printCompileError").text.toString().replaceAll("\n", "")));}catch(Exception e){}
-		try{useColors.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("useColors").text.toString().replaceAll("\n", "")));}catch(Exception e){}
-		try{recommendCode.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("recommendCode").text.toString().replaceAll("\n", "")));}catch(Exception e){}
+		try{saveOnExit.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("saveOnExit").content.toString().replaceAll("\n", "")));}catch(Exception e){}
+		try{printCompileError.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("printCompileError").content.toString().replaceAll("\n", "")));}catch(Exception e){}
+		try{useColors.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("useColors").content.toString().replaceAll("\n", "")));}catch(Exception e){}
+		try{recommendCode.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("recommendCode").content.toString().replaceAll("\n", "")));}catch(Exception e){}
 		
 		buttonList.add(saveOnExit);
 		saveOnExit.visible=settingsActive;
@@ -239,7 +243,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		textFieldList.add(compileAfter);
 		compileAfter.setVisible(settingsActive);
 		FileContent<String> i=settingsData.getFileContent("compileAfter");
-		String compAfter=i==null?"":i.text.toString().replaceAll("\n", "");
+		String compAfter=i==null?"":i.content.toString().replaceAll("\n", "");
 		compileAfter.setText(compAfter.isEmpty()?"0.5":compAfter);
 		
 		GuiTextField name=new GuiTextField(1,fontRendererObj, top+3, left+72+11, 120-6, 12);

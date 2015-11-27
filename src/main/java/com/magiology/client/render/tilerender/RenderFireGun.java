@@ -113,7 +113,7 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		{
 			{
-			GL11.glTranslated(-UtilM.calculateRenderPos(isit.prevAnimation, isit.animation),0,0);
+			GL11.glTranslated(-UtilM.calculatePos(isit.prevAnimation, isit.animation),0,0);
 			buf.addVertexWithUV(p*5,  p*7, p*9.5,  tW*16, tH*0);
 			buf.addVertexWithUV(p*5,  p*4, p*9.5,  tW*16, tH*24);
 			buf.addVertexWithUV(p*12, p*4, p*9.5,  tW*72, tH*24);

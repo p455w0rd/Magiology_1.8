@@ -21,7 +21,11 @@ java_single_line_comment=0,224,0
 java_string=220,120,220
 org.eclipse.jdt.ui.editor.tab.width=
 org.eclipse.jdt.ui.formatterprofiles.version=12
+org.eclipse.jdt.ui.ignorelowercasenames=true
+org.eclipse.jdt.ui.importorder=java;javax;org;com;
 org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.ondemandthreshold=1
+org.eclipse.jdt.ui.staticondemandthreshold=1
 org.eclipse.jdt.ui.text.code_templates_migrated=true
 org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>

@@ -104,7 +104,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 	}
 	@SubscribeEvent
 	public void load(WorldEvent.Load e){
-		UtilM.printInln(worldDataName,shallRun(e.world));
+//		UtilM.printInln(worldDataName,shallRun(e.world));
 		try{
 			if(!shallRun(e.world))return;
 			loadFromWorld(e.world);
@@ -155,7 +155,6 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			FileContent<ValueCast> file=fileWrite.getValue();
 			if(dimSpesific?world.provider.getDimensionId()==file.dimension:true){
 				//Clear the file and write to it.
-				UtilM.printInln(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension));
 				FileUtil.setFileObj(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension), (Serializable) file);
 			}
 		}
@@ -194,7 +193,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			dat=data.entrySet().iterator();
 			while(dat.hasNext()){
 				FileContent<Serializable> file=dat.next().getValue();
-				writeString(buffer, file.text.toString());
+				writeString(buffer, file.content.toString());
 				buffer.writeInt(file.dimension);
 			}
 		}
@@ -241,7 +240,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			dat=data.entrySet().iterator();
 			while(dat.hasNext()){
 				FileContent<Serializable> file=dat.next().getValue();
-				writeString(buffer, file.text.toString());
+				writeString(buffer, file.content.toString());
 				buffer.writeInt(file.dimension);
 			}
 		}
@@ -336,17 +335,17 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 	private int getDataSize(){
 		int result=0;
 		for(Entry<KeyCast,FileContent<ValueCast>> i:unsyncedData.entrySet()){
-			result+=(i.getValue().text.toString()+i.getValue().dimension).toCharArray().length;
+			result+=(i.getValue().content.toString()+i.getValue().dimension).toCharArray().length;
 			result+=i.getKey().length();
 		}
 		return result;
 	}
 	public static class FileContent<textCast extends Serializable> implements Serializable{
-		public textCast text;
+		public textCast content;
 		public transient int dimension;
 		public FileContent(){}
 		public FileContent(textCast text, int dimension){
-			this.text=text;
+			this.content=text;
 			this.dimension=dimension;
 		}
 	}

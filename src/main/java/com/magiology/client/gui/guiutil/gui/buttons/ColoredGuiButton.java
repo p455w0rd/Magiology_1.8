@@ -51,7 +51,7 @@ public class ColoredGuiButton extends GuiButton{
 	public void drawButton(Minecraft v1, int v2, int v3){
 		if (this.visible)
         {
-			float r=UtilM.calculateRenderPos(prevR, this.r),g=UtilM.calculateRenderPos(prevG, this.g),b=UtilM.calculateRenderPos(prevB, this.b),alpha=UtilM.calculateRenderPos(prevAlpha, this.alpha);
+			float r=UtilM.calculatePos(prevR, this.r),g=UtilM.calculatePos(prevG, this.g),b=UtilM.calculatePos(prevB, this.b),alpha=UtilM.calculatePos(prevAlpha, this.alpha);
             FontRenderer fontrenderer = v1.fontRendererObj;
             v1.getTextureManager().bindTexture(buttonTextures);
             GL11.glColor4f(r,g,b,alpha);

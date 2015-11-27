@@ -44,7 +44,7 @@ public class DownloadingIcon {
 		for(Drop drop:drops){
 			GL11.glPushMatrix();
 			GL11.glColor4f(1, 1, 1, drop.alpha);
-			GL11.glTranslated(U.calculateRenderPos(drop.prevPos.x, drop.pos.x), U.calculateRenderPos(drop.prevPos.y, drop.pos.y), 0);
+			GL11.glTranslated(U.calculatePos(drop.prevPos.x, drop.pos.x), U.calculatePos(drop.prevPos.y, drop.pos.y), 0);
 			GL11U.glRotate(0, 0, -drop.scale*drop.alpha*180, 14, 25, 0);
 			
 			HUD.drawRect(1F/368, 1F/399, 0, 0, 340, 0, 28, 51);
