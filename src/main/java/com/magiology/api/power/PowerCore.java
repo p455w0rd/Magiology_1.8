@@ -1,18 +1,17 @@
 package com.magiology.api.power;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.World;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.effect.*;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public interface PowerCore{
@@ -66,7 +65,7 @@ public interface PowerCore{
 						//do i save you?
 						if(tileMT.isPowerKeptOnWrench()){
 							PowerItemUtil.markWithData(stack);
-							U.printInln(tileMT.isSavingFullNBT());
+							U.println(tileMT.isSavingFullNBT());
 //							if(tileMT.isSavingFullNBT()){
 //								NBTTagCompound nbt=stack.getTagCompound();
 //								tile.writeToNBT(nbt);

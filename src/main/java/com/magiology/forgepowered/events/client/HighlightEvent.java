@@ -1,49 +1,37 @@
 package com.magiology.forgepowered.events.client;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.world.*;
+import net.minecraftforge.client.event.*;
+import net.minecraftforge.fml.common.eventhandler.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.api.network.NetworkInterface;
-import com.magiology.api.power.PowerCore;
-import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
-import com.magiology.client.render.aftereffect.RenderNetworkPointerContainerHighlight;
-import com.magiology.core.init.MBlocks;
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
-import com.magiology.mcobjects.items.NetworkPointer;
-import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
-import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
-import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
-import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
-import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.api.network.*;
+import com.magiology.api.power.*;
+import com.magiology.client.render.aftereffect.*;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.items.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.renderers.tessellatorscripts.Drawer;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 /**
  * ONLY CLIENT SIDE
  * @author LapisSea

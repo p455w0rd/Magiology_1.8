@@ -1,15 +1,14 @@
 package com.magiology.client.gui.guiutil.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
+import com.magiology.mcobjects.items.upgrades.*;
+import com.magiology.mcobjects.items.upgrades.skeleton.*;
+import com.magiology.util.utilclasses.*;
 
 public class UpgItemContainer implements IInventory{
 	
@@ -43,7 +42,7 @@ public class UpgItemContainer implements IInventory{
 
 	@Override
 	public ItemStack getStackInSlot(int v1){
-//		System.out.print("getStackInSlot was called from: "+container.getDisplayName()+"\n");
+//		UtilM.println("getStackInSlot was called from: "+container.getDisplayName()+"\n");
 		return this.slots()[v1];
 	}
 
@@ -87,12 +86,12 @@ public class UpgItemContainer implements IInventory{
 	public void setInventorySlotContents(int v1, ItemStack stack){
 		int v2=v1;
 		if(v2>this.getInventoryStackLimit()){
-			System.err.print("ERROR--> "+container.getDisplayName()+" HAS FAILED TO SET INVENTORY SLOT AT ID: "+v2+"\n");
+			UtilM.printlnEr("ERROR--> "+container.getDisplayName()+" HAS FAILED TO SET INVENTORY SLOT AT ID: "+v2+"\n");
 			return;
 		}
 		
 		
-//		System.out.print(v2+"/"+(slots.length-1)+"\n");
+//		UtilM.println(v2+"/"+(slots.length-1)+"\n");
 //		this.slots[0]=stack;
 		ItemStack[] stacks1=slots();
 		stacks1[v2]=stack;

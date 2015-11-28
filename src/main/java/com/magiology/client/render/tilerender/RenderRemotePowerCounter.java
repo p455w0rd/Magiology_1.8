@@ -1,21 +1,20 @@
 package com.magiology.client.render.tilerender;
 
-import java.text.DecimalFormat;
+import java.text.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.world.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.render.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 	

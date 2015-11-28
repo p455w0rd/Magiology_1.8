@@ -2,21 +2,17 @@ package com.magiology.api.lang.program;
 
 import java.util.*;
 
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
+import javax.script.*;
 
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.common.*;
 
-import com.magiology.api.lang.*;
-import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
-import com.magiology.api.lang.bridge.WorldWrapper;
+import com.magiology.api.lang.bridge.*;
+import com.magiology.io.WorldData.FileContent;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class ProgramUsable{
 	
@@ -102,7 +98,6 @@ public class ProgramUsable{
 			engine.eval(jsJavaBridge+src.toString());
 			return (Invocable)engine;
 		}catch(Exception e){
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -134,7 +129,8 @@ public class ProgramUsable{
 	public ProgramSerializable getSaveableData(){
 		if(saveableData==null){
 			int id=UtilM.getMapKey(ProgramDataBase.useablePrograms, this);
-			ProgramDataBase.programs.getFileContent(id+"");
+			FileContent i=ProgramDataBase.programs.getFileContent(id+"");
+			saveableData=i==null?new ProgramSerializable("", ""):(ProgramSerializable)i.content;
 		}
 		return saveableData;
 	}

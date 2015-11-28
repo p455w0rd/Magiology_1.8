@@ -1,14 +1,12 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
 
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.utilclasses.*;
 
 public class CommandCenterContainer extends Container{
 	

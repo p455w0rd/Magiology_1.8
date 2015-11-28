@@ -1,11 +1,9 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8.obj;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.*;
+import net.minecraftforge.fml.relauncher.*;
 
 
 public class GroupObject

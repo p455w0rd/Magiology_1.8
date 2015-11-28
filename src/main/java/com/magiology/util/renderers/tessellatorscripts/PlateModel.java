@@ -1,12 +1,11 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilobjects.vectors.Vec8F;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class PlateModel{
 	public float Width,Lenght,Height;

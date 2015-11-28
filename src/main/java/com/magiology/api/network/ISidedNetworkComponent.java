@@ -1,6 +1,6 @@
 package com.magiology.api.network;
 
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.*;
 
 public interface ISidedNetworkComponent extends NetworkBaseComponent{
 	public boolean getAccessibleOnSide(int side);

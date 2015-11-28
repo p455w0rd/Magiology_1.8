@@ -1,16 +1,17 @@
 package com.magiology.forgepowered.packets.packets;
-import java.io.IOException;
+import java.io.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.entity.player.*;
+import net.minecraft.network.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.forgepowered.packets.core.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.utilclasses.*;
 
 
 public class TileRedstone extends AbstractToServerMessage{
@@ -39,7 +40,7 @@ public class TileRedstone extends AbstractToServerMessage{
 			 ((TileEntityControlBlock)tile).redstoneC=id;
 			 return null;
 		 }
-		 System.out.print("PACKET HAS FAILED TO DELIVER THE DATA!\n");
+		 UtilM.println("PACKET HAS FAILED TO DELIVER THE DATA!\n");
 		return null;
 	}
 }

@@ -1,24 +1,22 @@
 package com.magiology.mcobjects.items.armor;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.model.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.client.render.models.ModelHelmet42;
-import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
+import com.magiology.client.render.models.*;
+import com.magiology.mcobjects.effect.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.items.upgrades.skeleton.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.NBTUtil;
+import com.magiology.util.utilobjects.*;
 
 public class Helmet_42 extends UpgradeableArmor{
 	

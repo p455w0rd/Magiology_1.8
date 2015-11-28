@@ -1,30 +1,21 @@
 package com.magiology.mcobjects.items;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.world.World;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.api.power.ISidedPower;
-import com.magiology.api.power.PowerCore;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
-import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
-import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
-import com.magiology.registry.WrenchRegistry;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.ItemM;
+import com.magiology.api.power.*;
+import com.magiology.forgepowered.events.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.registry.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class FireHammer extends ItemM{
 	

@@ -1,32 +1,27 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.Color;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.gui.container.SmartCrafterContainer;
-import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
-import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.events.TickEvents;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
-import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.custom.guiparticels.*;
+import com.magiology.client.gui.guiutil.gui.buttons.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.events.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.forgepowered.packets.packets.generic.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class GuiSC extends GuiContainerAndGuiParticles{

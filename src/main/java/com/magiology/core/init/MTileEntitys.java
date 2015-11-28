@@ -1,27 +1,17 @@
 package com.magiology.core.init;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.client.renderer.tileentity.*;
+import net.minecraft.tileentity.*;
+import net.minecraftforge.fml.client.registry.*;
+import net.minecraftforge.fml.common.registry.*;
 
 import com.magiology.client.render.tilerender.*;
-import com.magiology.client.render.tilerender.network.RenderNetworkConductor;
-import com.magiology.client.render.tilerender.network.RenderNetworkController;
-import com.magiology.client.render.tilerender.network.RenderNetworkInterface;
-import com.magiology.client.render.tilerender.network.RenderNetworkPointerContainer;
+import com.magiology.client.render.tilerender.network.*;
 import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL3;
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.mcobjects.tileentityes.baterys.*;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class MTileEntitys{
 

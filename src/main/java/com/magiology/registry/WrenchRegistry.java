@@ -1,10 +1,8 @@
 package com.magiology.registry;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 
 public class WrenchRegistry{
 	private static List<Item> registered=new ArrayList<Item>();

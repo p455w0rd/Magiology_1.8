@@ -1,6 +1,6 @@
 package com.magiology.mcobjects.tileentityes.baterys;
 
-import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
+import com.magiology.mcobjects.tileentityes.*;
 
 public class TileEntityBateryL1 extends TileEntityBateryGeneric {
 	public TileEntityBateryL1(){

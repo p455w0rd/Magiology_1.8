@@ -1,18 +1,16 @@
 package com.magiology.mcobjects.blocks.network;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.block.material.*;
+import net.minecraft.block.properties.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
-import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.mcobjects.blocks.*;
+import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class NetworkController extends BlockContainerMultiColision{

@@ -1,10 +1,10 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 
 public class DrawThatSexyDotHelper extends Gui{
 	

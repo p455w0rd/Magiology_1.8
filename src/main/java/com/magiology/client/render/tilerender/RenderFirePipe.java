@@ -1,23 +1,17 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
-import com.magiology.client.render.aftereffect.RenderFirePipeGlow;
-import com.magiology.client.render.aftereffect.RenderFirePipePriorityCube;
-import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.NormalizedVertixBufferModel;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.render.*;
+import com.magiology.client.render.aftereffect.*;
+import com.magiology.core.init.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class RenderFirePipe extends TileEntitySpecialRendererM {
 	private final float p= 1F/16F;

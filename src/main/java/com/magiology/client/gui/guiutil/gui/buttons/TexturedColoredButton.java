@@ -1,17 +1,16 @@
 package com.magiology.client.gui.guiutil.gui.buttons;
 
-import java.awt.Color;
+import java.awt.*;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.gui.custom.hud.HUD;
-import com.magiology.client.render.Textures;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.custom.hud.*;
+import com.magiology.client.render.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 
 public class TexturedColoredButton extends ColoredGuiButton{
 	@Override

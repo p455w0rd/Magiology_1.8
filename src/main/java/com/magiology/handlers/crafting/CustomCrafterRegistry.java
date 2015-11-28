@@ -1,15 +1,13 @@
 package com.magiology.handlers.crafting;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.item.*;
+import net.minecraftforge.fml.common.registry.*;
 
-import com.magiology.core.MReference;
-import com.magiology.io.IOReadableMap;
+import com.magiology.core.*;
+import com.magiology.io.*;
 
 
 public class CustomCrafterRegistry{

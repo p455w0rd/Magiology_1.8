@@ -1,7 +1,6 @@
 package com.magiology.util.utilobjects;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Deprecated
 public class ConvenientMap{

@@ -4,11 +4,11 @@ import static com.magiology.client.gui.custom.hud.MainMenuUpdateNotificationHUD.
 import static com.magiology.core.MReference.*;
 import static com.magiology.handlers.web.MediaFireDownlader.*;
 
-import java.io.File;
-import java.net.URL;
-import java.util.Scanner;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 
 
 public class DownloadingHandler{

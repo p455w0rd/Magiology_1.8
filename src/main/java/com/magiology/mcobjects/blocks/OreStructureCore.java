@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.world.*;
 
-import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
+import com.magiology.mcobjects.tileentityes.*;
 
 public class OreStructureCore extends BlockContainer {
 	

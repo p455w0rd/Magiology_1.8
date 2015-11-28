@@ -1,11 +1,10 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.world.World;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.world.*;
 
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.*;
 
 @Deprecated
 public abstract class EntityFXMDeprecated extends EntityFX{

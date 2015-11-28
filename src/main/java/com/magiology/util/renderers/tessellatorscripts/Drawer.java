@@ -1,12 +1,11 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class Drawer{
 	

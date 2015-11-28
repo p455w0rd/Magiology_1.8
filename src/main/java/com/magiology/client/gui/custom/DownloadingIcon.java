@@ -1,18 +1,17 @@
 package com.magiology.client.gui.custom;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.client.gui.custom.hud.HUD;
-import com.magiology.core.MReference;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.gui.custom.hud.*;
+import com.magiology.core.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.*;
 
 public class DownloadingIcon {
 	private static ResourceLocation main=new ResourceLocation(MReference.MODID,"/textures/gui/downloading.png");

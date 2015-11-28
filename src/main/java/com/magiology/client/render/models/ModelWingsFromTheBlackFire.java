@@ -1,21 +1,21 @@
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.model.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.opengl.GL11;
+import org.apache.commons.lang3.*;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.core.Config;
-import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
+import com.magiology.client.render.*;
+import com.magiology.core.*;
+import com.magiology.mcobjects.entitys.*;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.vectors.Vec8F;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static float p=1F/16F;

@@ -1,8 +1,8 @@
 package com.magiology.mcobjects.tileentityes.baterys;
 
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.utilclasses.*;
 
 public class TileEntityBateryL100 extends TileEntityBateryGeneric {
 	public TileEntityBateryL100(){

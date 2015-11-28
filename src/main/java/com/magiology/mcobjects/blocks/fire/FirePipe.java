@@ -1,25 +1,22 @@
 package com.magiology.mcobjects.blocks.fire;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.block.material.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.api.power.ISidedPower;
-import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
-import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.api.power.*;
+import com.magiology.core.init.*;
+import com.magiology.forgepowered.events.*;
+import com.magiology.mcobjects.blocks.*;
+import com.magiology.mcobjects.tileentityes.*;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class FirePipe extends BlockContainerMultiColision{
 	

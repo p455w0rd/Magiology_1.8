@@ -1,10 +1,8 @@
 package com.magiology.core.init;
 
-import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.forgepowered.packets.core.*;
 import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
+import com.magiology.forgepowered.packets.packets.generic.*;
 import com.magiology.io.WorldData.SyncClientsWorldData;
 import com.magiology.io.WorldData.SyncServerWorldData;
 

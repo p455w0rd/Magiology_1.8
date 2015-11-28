@@ -1,6 +1,6 @@
 package com.magiology.util.utilclasses;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
 public final class SpecialPlayerUtil{
 	

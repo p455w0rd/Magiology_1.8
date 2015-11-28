@@ -1,17 +1,16 @@
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.model.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.render.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class ModelHelmet42 extends ModelBiped{

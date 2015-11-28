@@ -1,9 +1,8 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8.obj;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
 public class Face
 {

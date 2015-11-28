@@ -1,14 +1,14 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.block.Block;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.block.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntityRemotePowerCounter extends TileEntityM implements IUpdatePlayerListBox{
 	

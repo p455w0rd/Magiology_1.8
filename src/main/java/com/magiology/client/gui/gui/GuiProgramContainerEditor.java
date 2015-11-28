@@ -2,51 +2,42 @@ package com.magiology.client.gui.gui;
 
 import static com.magiology.io.WorldData.WorkingProtocol.*;
 
-import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.io.Serializable;
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 import java.util.List;
 
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.audio.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
 import com.magiology.api.lang.program.*;
-import com.magiology.api.updateable.Updater;
+import com.magiology.api.updateable.*;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.CommandCenterContainer;
-import com.magiology.client.gui.container.ContainerEmpty;
-import com.magiology.client.gui.custom.OnOffGuiButton;
-import com.magiology.client.gui.guiutil.gui.GuiJavaScriptEditor;
-import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
-import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
-import com.magiology.client.render.Textures;
-import com.magiology.client.render.font.FontRendererMBase;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
-import com.magiology.io.WorldData;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.custom.*;
+import com.magiology.client.gui.guiutil.gui.*;
+import com.magiology.client.gui.guiutil.gui.buttons.*;
+import com.magiology.client.render.*;
+import com.magiology.client.render.font.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.io.*;
 import com.magiology.io.WorldData.FileContent;
-import com.magiology.mcobjects.items.ProgramContainer;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.renderers.tessellatorscripts.Drawer;
-import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.m_extension.GuiContainerM;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
-import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.mcobjects.items.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class GuiProgramContainerEditor extends GuiContainerM implements Updateable{
 	
@@ -90,11 +81,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		
 		getEditor().size=new Vec2i(width-20, height-20);
 		getEditor().pos=new Vec2i(10, 10);
-		try{
-			((GuiJavaScriptEditor)programSrc).colors=useColors.isOn();
-		}catch(Exception e){
-			UtilM.printInln(programSrc,useColors);
-		}
+		((GuiJavaScriptEditor)programSrc).colors=useColors.isOn();
 		getEditor().render(mouseX,mouseY);
 		FontRendererMBase fr=Get.Render.Font.FRB();
 		if(settingsActive){
@@ -242,7 +229,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		compileAfter.setMaxStringLength(7);
 		textFieldList.add(compileAfter);
 		compileAfter.setVisible(settingsActive);
-		FileContent<String> i=settingsData.getFileContent("compileAfter");
+		FileContent i=settingsData.getFileContent("compileAfter");
 		String compAfter=i==null?"":i.content.toString().replaceAll("\n", "");
 		compileAfter.setText(compAfter.isEmpty()?"0.5":compAfter);
 		

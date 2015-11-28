@@ -1,18 +1,14 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3i;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class BlockPosM extends BlockPos{
 

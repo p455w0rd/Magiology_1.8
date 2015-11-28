@@ -1,9 +1,8 @@
 package com.magiology.api.network;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import com.magiology.api.SavableData;
+import com.magiology.api.*;
 
 public class Redstone implements SavableData{
 	public boolean isStrong=false,on=false;

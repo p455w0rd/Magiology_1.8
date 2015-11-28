@@ -1,21 +1,21 @@
 package com.magiology.client.gui.gui;
 
-import java.io.IOException;
+import java.io.*;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.gui.container.UpgradeContainer;
-import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
-import com.magiology.core.MReference;
-import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.custom.guiparticels.*;
+import com.magiology.core.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class GuiUpgrade extends GuiContainerAndGuiParticles{

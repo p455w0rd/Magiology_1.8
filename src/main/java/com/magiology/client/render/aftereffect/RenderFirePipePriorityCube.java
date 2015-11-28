@@ -1,16 +1,14 @@
 package com.magiology.client.render.aftereffect;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
+import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{

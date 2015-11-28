@@ -1,16 +1,10 @@
 package com.magiology.windowsgui;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.*;
 
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.*;
 
 public class SoundPlayer{
 

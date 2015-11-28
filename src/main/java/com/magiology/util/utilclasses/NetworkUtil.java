@@ -1,14 +1,12 @@
 package com.magiology.util.utilclasses;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.NetworkBaseComponent;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.api.network.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 

@@ -1,20 +1,18 @@
 package com.magiology.mcobjects.items;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.api.power.ISidedPower;
-import com.magiology.core.init.MGui;
-import com.magiology.handlers.GuiHandlerM;
-import com.magiology.util.utilobjects.NBTUtil;
-import com.magiology.util.utilobjects.m_extension.ItemM;
+import com.magiology.api.power.*;
+import com.magiology.core.init.*;
+import com.magiology.handlers.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class IPowerSidenessInstructor extends ItemM{
 	

@@ -1,8 +1,7 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
 
 public class CraftingGridSlot extends Slot{
 	

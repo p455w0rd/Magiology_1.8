@@ -1,17 +1,17 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.IItemRenderer;
+import net.minecraft.client.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraftforge.client.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.core.MReference;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.client.render.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.mcobjects.items.*;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.UtilM.U;
 

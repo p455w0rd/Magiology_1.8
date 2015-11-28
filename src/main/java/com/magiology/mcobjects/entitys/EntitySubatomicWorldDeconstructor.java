@@ -1,22 +1,18 @@
 package com.magiology.mcobjects.entitys;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.block.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilclasses.math.CricleUtil;
-import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.math.*;
+import com.magiology.util.utilobjects.m_extension.effect.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class EntitySubatomicWorldDeconstructor extends Entity implements IProjectile{
     public BlockPos pos;

@@ -1,16 +1,15 @@
 package com.magiology.registry.events;
 
 import static net.minecraftforge.fml.common.eventhandler.Event.Result.*;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.common.*;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
-import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.*;
 
-import com.magiology.registry.WrenchRegistry;
+import com.magiology.registry.*;
 
 public class PlayerWrenchEvent extends Event{
 	

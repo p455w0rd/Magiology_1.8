@@ -1,13 +1,11 @@
 package com.magiology.api.network;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.*;
+import net.minecraft.tileentity.*;
 
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.mcobjects.tileentityes.network.*;
 
 public interface NetworkInterface{
 	

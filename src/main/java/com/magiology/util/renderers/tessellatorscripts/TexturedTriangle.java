@@ -1,12 +1,12 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import net.minecraft.client.model.PositionTextureVertex;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.model.*;
+import net.minecraft.client.renderer.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class TexturedTriangle{
     public PositionTextureVertex[] vertexPositions;

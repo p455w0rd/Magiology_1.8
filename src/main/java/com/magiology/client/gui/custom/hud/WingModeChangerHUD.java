@@ -1,22 +1,19 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.awt.Color;
+import java.awt.*;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.*;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.opengl.GL11;
+import org.apache.commons.lang3.*;
+import org.lwjgl.opengl.*;
 
-import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
-import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.forgepowered.packets.packets.generic.*;
+import com.magiology.handlers.animationhandlers.*;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
-import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.entitys.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 
 public class WingModeChangerHUD extends HUD{
 	public static WingModeChangerHUD instance=new WingModeChangerHUD();

@@ -1,16 +1,14 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.google.common.collect.Maps;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.obj.ObjModelLoader;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.techne.TechneModelLoader;
+import com.google.common.collect.*;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.obj.*;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.techne.*;
 
 
 /**

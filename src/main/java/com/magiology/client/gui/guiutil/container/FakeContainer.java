@@ -1,11 +1,11 @@
 package com.magiology.client.gui.guiutil.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
+import com.magiology.mcobjects.items.upgrades.*;
 
 public class FakeContainer implements IInventory{
 	

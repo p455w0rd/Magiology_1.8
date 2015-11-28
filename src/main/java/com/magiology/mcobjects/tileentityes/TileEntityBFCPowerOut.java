@@ -1,14 +1,13 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.init.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.util.*;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
-import com.magiology.util.utilobjects.vectors.Pos;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class TileEntityBFCPowerOut extends TileEntityM implements IUpdatePlayerListBox{
 	

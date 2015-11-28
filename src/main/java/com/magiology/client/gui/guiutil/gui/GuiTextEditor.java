@@ -1,39 +1,25 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import static com.magiology.util.utilclasses.UtilM.calculatePos;
-import static com.magiology.util.utilclasses.UtilM.getGuiScaleRaw;
-import static com.magiology.util.utilclasses.UtilM.getTheWorld;
-import static com.magiology.util.utilclasses.UtilM.getWorldTime;
-import static com.magiology.util.utilclasses.UtilM.snap;
-import static com.magiology.util.utilclasses.UtilM.stringNewlineSplit;
+import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.awt.Color;
-import java.awt.Rectangle;
-import java.util.ArrayList;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.render.font.FontRendererMClipped;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.Get;
+import com.magiology.client.render.font.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
-import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class GuiTextEditor extends Gui implements Updateable{
 	

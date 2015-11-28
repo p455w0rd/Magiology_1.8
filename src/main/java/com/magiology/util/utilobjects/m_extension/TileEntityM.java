@@ -1,13 +1,10 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-
-import com.magiology.util.utilclasses.UtilM.U;
+import net.minecraft.nbt.*;
+import net.minecraft.network.*;
+import net.minecraft.network.play.server.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
 public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerListBox*/{
 	public static final float p=1F/16F;

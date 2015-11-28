@@ -3,33 +3,25 @@ package com.magiology.util.renderers;
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.entity.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.font.FontRendererMBase;
-import com.magiology.core.MReference;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.AdvancedModelLoader;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
-import com.magiology.mcobjects.effect.EntityFXM;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.render.font.*;
+import com.magiology.core.*;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilclasses.math.CricleUtil;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilclasses.math.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 
 /**
@@ -437,7 +429,7 @@ public class TessUtil{
 		if((""+xyz).toLowerCase().equals("z")){
 			return UtilM.calculatePos(entity.lastTickPosZ,entity.posZ);
 		}
-		UtilM.printInln(xyz,"is not a valid key! Use x or y or z.");
+		UtilM.println(xyz,"is not a valid key! Use x or y or z.");
 		return -1;
 	}
 	public static Vec3M calculateRenderPosV(Entity entity){

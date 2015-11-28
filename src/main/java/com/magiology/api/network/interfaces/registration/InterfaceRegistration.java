@@ -1,16 +1,14 @@
 package com.magiology.api.network.interfaces.registration;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.api.network.BasicWorldNetworkInterface;
-import com.magiology.api.network.WorldNetworkInterface;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.api.network.*;
+import com.magiology.util.utilclasses.*;
 
 public class InterfaceRegistration{
 	
@@ -20,7 +18,7 @@ public class InterfaceRegistration{
 	
 	public static <T extends BasicWorldNetworkInterface> T registerInterfaceToBlock(T Interface,Class<Block> marker){
 		if(blockFinder.keySet().contains(marker)){
-			UtilM.printInln("Block:",marker.getClass().getSimpleName(),"is already bound to an interface:",blockFinder.get(marker));
+			UtilM.println("Block:",marker.getClass().getSimpleName(),"is already bound to an interface:",blockFinder.get(marker));
 			return Interface;
 		}
 		blockFinder.put(marker, Interface);
@@ -29,7 +27,7 @@ public class InterfaceRegistration{
 	
 	public static <T extends BasicWorldNetworkInterface> T registerInterfaceToTileEntity(T Interface,Class<? extends TileEntity> marker){
 		if(tileFinder.keySet().contains(marker)){
-			UtilM.printInln("TileEntity:",marker.getClass().getSimpleName(),"is already bound to an interface:",tileFinder.get(marker));
+			UtilM.println("TileEntity:",marker.getClass().getSimpleName(),"is already bound to an interface:",tileFinder.get(marker));
 			return Interface;
 		}
 		tileFinder.put((Class<TileEntity>)marker, Interface);

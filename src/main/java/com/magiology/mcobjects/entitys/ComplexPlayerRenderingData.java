@@ -1,10 +1,10 @@
 package com.magiology.mcobjects.entitys;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 

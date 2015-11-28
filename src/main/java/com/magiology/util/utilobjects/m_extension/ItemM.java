@@ -1,14 +1,12 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.item.Item;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.item.*;
 
-import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class ItemM extends Item{
@@ -28,7 +26,7 @@ public class ItemM extends Item{
 				try{
 					Get.Render.RI().getItemModelMesher().register(item, 0, modelsInit.get(item));
 				} catch (Exception e){
-					UtilM.printInln("failed!",item,Get.Render.RI());
+					UtilM.println("failed!",item,Get.Render.RI());
 					e.printStackTrace();
 					U.exit(404);
 				}

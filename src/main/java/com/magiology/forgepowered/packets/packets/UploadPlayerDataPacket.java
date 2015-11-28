@@ -1,16 +1,16 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.IOException;
+import java.io.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.entity.player.*;
+import net.minecraft.network.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.forgepowered.packets.core.*;
+import com.magiology.mcobjects.entitys.*;
 
 public class UploadPlayerDataPacket extends AbstractToServerMessage{
 	private boolean isFlap;

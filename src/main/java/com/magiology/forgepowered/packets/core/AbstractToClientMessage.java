@@ -1,7 +1,7 @@
 package com.magiology.forgepowered.packets.core;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
+import net.minecraft.entity.player.*;
+import net.minecraft.world.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public abstract class AbstractToClientMessage extends AbstractPacket{

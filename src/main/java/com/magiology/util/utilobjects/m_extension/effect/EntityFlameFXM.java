@@ -1,7 +1,7 @@
 package com.magiology.util.utilobjects.m_extension.effect;
 
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.world.World;
+import net.minecraft.client.particle.*;
+import net.minecraft.world.*;
 
 public class EntityFlameFXM extends EntityFlameFX {
 

@@ -1,16 +1,12 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
-import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL3;
+import com.magiology.mcobjects.tileentityes.baterys.*;
 
 public class BateryGeneric extends BlockContainer{
 

@@ -1,34 +1,29 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.entity.player.*;
+import net.minecraft.nbt.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.util.vector.Vector2f;
+import org.apache.commons.lang3.*;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.api.SavableData;
+import com.magiology.api.*;
 import com.magiology.api.SavableData.SavableDataHandler;
-import com.magiology.api.network.interfaces.registration.InterfaceBinder;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
-import com.magiology.mcobjects.effect.EntityFacedFX;
-import com.magiology.mcobjects.effect.EntityMovingParticleFX;
-import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.api.network.interfaces.registration.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
-import com.magiology.util.utilobjects.vectors.Plane;
-import com.magiology.util.utilobjects.vectors.Ray;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class TileEntityHologramProjector extends TileEntityM implements IUpdatePlayerListBox{
 	

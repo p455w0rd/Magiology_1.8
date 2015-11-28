@@ -1,21 +1,18 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
-import com.magiology.client.render.aftereffect.TwoDotsLineRender;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.client.render.*;
+import com.magiology.client.render.aftereffect.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
-import com.magiology.util.utilobjects.vectors.TwoDots;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 	

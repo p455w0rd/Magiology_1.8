@@ -1,10 +1,8 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8.techne;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustomLoader;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.ModelFormatException;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.*;
 
 public class TechneModelLoader implements IModelCustomLoader {
 

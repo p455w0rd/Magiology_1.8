@@ -1,27 +1,24 @@
 package com.magiology.mcobjects.items.armor;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.block.material.*;
+import net.minecraft.client.model.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.util.*;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.client.render.models.ModelWingsFromTheBlackFire;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
+import com.magiology.client.render.models.*;
+import com.magiology.forgepowered.packets.packets.generic.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.items.upgrades.skeleton.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.NBTUtil;
 
 public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{

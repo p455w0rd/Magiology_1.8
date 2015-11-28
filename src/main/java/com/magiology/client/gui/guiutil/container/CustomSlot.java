@@ -1,11 +1,10 @@
 package com.magiology.client.gui.guiutil.container;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.mcobjects.items.upgrades.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
 
 public class CustomSlot extends Slot{
 	

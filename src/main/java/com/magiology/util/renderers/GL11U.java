@@ -1,18 +1,15 @@
 package com.magiology.util.renderers;
 
 import static org.lwjgl.opengl.GL11.*;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.Vec3;
+import net.minecraft.client.renderer.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
+import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.util.utilclasses.DataStalker;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 
 /**
@@ -25,7 +22,7 @@ public class GL11U{
 		case 1:glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);return;
 		case 2:glBlendFunc(GL_SRC_ALPHA, GL_ONE);return;
 		case 3:glBlendFunc(GL_ONE, GL_ONE);return;
-		default:System.out.print(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");return;
+		default:UtilM.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");return;
 	}}
 	/**Is blend enabled?
 	 * @param enabled*/

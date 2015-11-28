@@ -1,10 +1,9 @@
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.model.*;
+import net.minecraft.entity.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
 public class ModelFirePipeConection extends ModelBase
 {

@@ -1,10 +1,10 @@
 package com.magiology.structures;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.init.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.core.init.MBlocks;
+import com.magiology.core.init.*;
 
 public class Structures{
 	

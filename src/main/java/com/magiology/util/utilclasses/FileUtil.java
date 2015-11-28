@@ -1,14 +1,6 @@
 package com.magiology.util.utilclasses;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.io.Serializable;
+import java.io.*;
 
 
 public class FileUtil{
@@ -35,7 +27,7 @@ public class FileUtil{
 			out.flush();
 			out.close();
 		}catch(Exception e){
-			UtilM.printInln(file);
+			UtilM.println(file);
 			e.printStackTrace();
 		}
 	}
@@ -63,12 +55,12 @@ public class FileUtil{
 			try{
 				out.writeObject(content);
 			}catch(Exception e){
-				UtilM.printInln(file);
+				UtilM.println(file);
 				e.printStackTrace();
 			}
 			out.close();
 		}catch(Exception e){
-			UtilM.printInln(file);
+			UtilM.println(file);
 			e.printStackTrace();
 		}
 	}

@@ -1,50 +1,27 @@
 package com.magiology.core;
 
-import static com.magiology.core.MReference.ACCEPTED_MC_VERSION;
-import static com.magiology.core.MReference.INFO_FILE_NAME;
-import static com.magiology.core.MReference.MC_VERSION;
-import static com.magiology.core.MReference.MODID;
-import static com.magiology.core.MReference.MODS_SUBFOLDER_WIN_GUI;
-import static com.magiology.core.MReference.NAME;
-import static com.magiology.core.MReference.VERSION;
-import static com.magiology.util.utilclasses.UtilM.RB;
-import static com.magiology.util.utilclasses.UtilM.RInt;
-import static com.magiology.util.utilclasses.UtilM.println;
+import static com.magiology.core.MReference.*;
+import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.io.File;
+import java.awt.*;
+import java.io.*;
 
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 
 import com.magiology.api.lang.program.*;
-import com.magiology.client.gui.gui.GuiProgramContainerEditor;
-import com.magiology.client.render.Textures;
-import com.magiology.core.init.MBlocks;
-import com.magiology.core.init.MCreativeTabs;
-import com.magiology.core.init.MEntitys;
-import com.magiology.core.init.MEvents;
-import com.magiology.core.init.MGui;
-import com.magiology.core.init.MInterfaces;
-import com.magiology.core.init.MItems;
-import com.magiology.core.init.MPackets;
-import com.magiology.core.init.MRecepies;
-import com.magiology.core.init.MTileEntitys;
-import com.magiology.forgepowered.proxy.CommonProxy;
-import com.magiology.handlers.EnhancedRobot;
-import com.magiology.handlers.web.DownloadingHandler;
-import com.magiology.io.IOReadableMap;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.windowsgui.ModInfoGUI;
-import com.magiology.windowsgui.SoundPlayer;
+import com.magiology.client.gui.gui.*;
+import com.magiology.client.render.*;
+import com.magiology.core.init.*;
+import com.magiology.forgepowered.proxy.*;
+import com.magiology.handlers.*;
+import com.magiology.handlers.web.*;
+import com.magiology.io.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.windowsgui.*;
 
 @Mod(modid=MODID,version=VERSION,name=NAME,acceptedMinecraftVersions=ACCEPTED_MC_VERSION)
 public class Magiology{
@@ -91,7 +68,7 @@ public class Magiology{
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
 		if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandler.downladAssets();
 		infoFile.readFromFile();
-		UtilM.printInln(infoFile.getB("GUIOpen", true));
+		UtilM.println(infoFile.getB("GUIOpen", true));
 		if(infoFile.getB("GUIOpen", true)){
 			Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 			modInfGUI=new ModInfoGUI((int)screenSize.getWidth(),(int)screenSize.getHeight(),-680,0);

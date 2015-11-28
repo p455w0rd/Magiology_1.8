@@ -1,6 +1,6 @@
 package com.magiology.core;
 
-import com.magiology.client.render.models.ModelWingsFromTheBlackFire;
+import com.magiology.client.render.models.*;
 
 public class Config{
 	private static boolean shadersEnabled=true;

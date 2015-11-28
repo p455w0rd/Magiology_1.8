@@ -208,11 +208,18 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 	@Override
 	public void setActivationTarget(Program com){activationTarget=com;}
 	
+	protected static final Object NOT_FOUND_COMMAND=new Object(){
+		@Override
+		public String toString(){
+			return "command not found!";
+		}
+	};
+	
 	public final class StandardHoloObject{
 		private StandardHoloObject(){}
 		protected Object standardHoloObjectCommandInteract(String[] words){
 			if(words.length>1){
-				if(KeyWord.SET.match(words[0]))setWithCommand(words);
+				if(KeyWord.SET.match(words[0]))return setWithCommand(words);
 				else if(KeyWord.GET.match(words[0]))return getWithCommand(words);
 			}
 			return null;
@@ -253,11 +260,11 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 					return ((ICommandInteract)HoloObject.this).getName();
 				}
 			}break;
-			default:break;
+			default:return NOT_FOUND_COMMAND;
 			}
 			return null;
 		}
-		private void setWithCommand(String[] words){
+		private Object setWithCommand(String[] words){
 			boolean changed=false;
 			switch(KeyWord.getByName(words[1])){
 			case SIZE:{
@@ -328,9 +335,13 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 					changed=true;
 				}
 			}break;
-			default:break;
+			default:{
+				if(changed)host.getWorld().markBlockForUpdate(host.getPos());
+				return NOT_FOUND_COMMAND;
+			}
 			}
 			if(changed)host.getWorld().markBlockForUpdate(host.getPos());
+			return null;
 		}
 		protected void sendStandardCommand(){
 			if(activationTarget==null||UtilM.getWorld(host)==null)return;

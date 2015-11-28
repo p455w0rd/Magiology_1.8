@@ -1,21 +1,19 @@
 package com.magiology.handlers.animationhandlers;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.block.material.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.Sounds;
-import com.magiology.core.Config;
-import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
-import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
+import com.magiology.*;
+import com.magiology.core.*;
+import com.magiology.core.init.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.entitys.*;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.SimpleCounter;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class WingsFromTheBlackFireHandler{
 	public static WingsFromTheBlackFireHandler instaince=new WingsFromTheBlackFireHandler();

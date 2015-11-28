@@ -1,13 +1,11 @@
 package com.magiology.client.render.shaders.core;
 
-import java.nio.FloatBuffer;
-import java.util.List;
+import java.nio.*;
+import java.util.*;
 
-import net.minecraft.client.shader.Shader;
-import net.minecraft.client.shader.ShaderGroup;
-import net.minecraft.client.shader.ShaderUniform;
+import net.minecraft.client.shader.*;
 
-import com.magiology.util.utilclasses.DataStalker;
+import com.magiology.util.utilclasses.*;
 
 public class ShaderUniformEditor{
 	public static void setUniform(ShaderGroup sg,String uniformName,float... values){

@@ -1,8 +1,8 @@
 package com.magiology.client.gui.custom.hud;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
-import com.magiology.util.renderers.tessellatorscripts.Drawer;
+import com.magiology.util.renderers.tessellatorscripts.*;
 
 public abstract class HUD{
 	public EntityPlayer player;

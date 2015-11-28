@@ -1,6 +1,6 @@
 package com.magiology.api.power;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 
 public class SixSidedBoolean{
 	public boolean[] sides=new boolean[]{false,false,false,false,false,false,false,false,false,false,false,false};
@@ -63,7 +63,7 @@ public class SixSidedBoolean{
 		for(generic modifier:modifiers){
 			if(modifier instanceof Modifier||modifier instanceof Integer);
 			else{
-				UtilM.printInln("An invalid input was detected!");
+				UtilM.println("An invalid input was detected!");
 				return null;
 			}
 		}

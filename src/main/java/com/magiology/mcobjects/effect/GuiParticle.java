@@ -1,17 +1,16 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.client.gui.custom.guiparticels.*;
 import com.magiology.client.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
-import com.magiology.client.gui.gui.GuiContainerAndGuiParticles;
-import com.magiology.client.render.Textures;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.gui.*;
+import com.magiology.client.render.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class GuiParticle{

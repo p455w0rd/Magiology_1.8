@@ -1,26 +1,22 @@
 package com.magiology.mcobjects.items;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.block.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.common.registry.*;
 
-import com.magiology.core.init.MCreativeTabs;
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.items.upgrades.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.util.utilclasses.FontEffectUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.NBTUtil;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class GenericItemUpgrade extends Item{
 	int Level;
@@ -50,7 +46,7 @@ public class GenericItemUpgrade extends Item{
 		NBTUtil.createNBT(is);
 		if(w.isRemote){
 //			int ID=RegisterUpgrades.getItemUpgradeID(is.getItem());
-//			System.out.print("ID="+ID+","+RegisterUpgrades.getItemTypeID(ID)+" level:"+RegisterUpgrades.getItemUpgradeLevel(ID)+" type: "+RegisterUpgrades.getItemUpgradeType(ID).toString()+"\n");
+//			UtilM.println("ID="+ID+","+RegisterUpgrades.getItemTypeID(ID)+" level:"+RegisterUpgrades.getItemUpgradeLevel(ID)+" type: "+RegisterUpgrades.getItemUpgradeType(ID).toString()+"\n");
 			
 		}
 		

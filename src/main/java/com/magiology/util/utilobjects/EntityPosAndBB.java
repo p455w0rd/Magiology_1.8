@@ -1,9 +1,9 @@
 package com.magiology.util.utilobjects;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityPosAndBB{

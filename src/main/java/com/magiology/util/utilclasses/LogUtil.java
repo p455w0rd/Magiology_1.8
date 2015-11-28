@@ -1,11 +1,11 @@
 package com.magiology.util.utilclasses;
 
 import static org.apache.logging.log4j.Level.*;
-import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.*;
 
-import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.*;
 
-import com.magiology.core.MReference;
+import com.magiology.core.*;
 
 public class LogUtil{
 	

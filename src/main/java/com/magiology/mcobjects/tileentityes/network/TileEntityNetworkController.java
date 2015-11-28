@@ -1,36 +1,24 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
 import com.magiology.api.lang.program.*;
-import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.Messageable;
-import com.magiology.api.network.NetworkInterface;
-import com.magiology.api.network.skeleton.TileEntityNetworkPow;
-import com.magiology.api.power.ISidedPower;
-import com.magiology.api.power.SixSidedBoolean;
+import com.magiology.api.network.*;
+import com.magiology.api.network.skeleton.*;
+import com.magiology.api.power.*;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
-import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.mcobjects.items.*;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.util.utilclasses.NetworkUtil;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.SlowdownUtil;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
 	SlowdownUtil optimizer=new SlowdownUtil(40);

@@ -1,19 +1,16 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.creativetab.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 
-import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.*;
+import com.magiology.util.utilclasses.*;
 
 public class BlockM extends Block{
 
@@ -40,7 +37,7 @@ public class BlockM extends Block{
 			try{
 				Get.Render.RI().getItemModelMesher().register(itemBlock, 0, new ModelResourceLocation(modelsInit.get(block), "inventory"));
 			} catch (Exception e){
-				UtilM.printInln("failed!",block,itemBlock,Get.Render.RI());
+				UtilM.println("failed!",block,itemBlock,Get.Render.RI());
 				e.printStackTrace();
 				UtilM.exit(404);
 			}

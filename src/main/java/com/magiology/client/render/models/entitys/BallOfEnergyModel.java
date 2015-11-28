@@ -1,8 +1,7 @@
 package com.magiology.client.render.models.entitys;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.model.*;
+import net.minecraft.entity.*;
 
 public class BallOfEnergyModel extends ModelBase{
 	

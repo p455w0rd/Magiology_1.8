@@ -1,6 +1,6 @@
 package com.magiology.api.network;
 
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.mcobjects.tileentityes.network.*;
 
 
 public interface NetworkBaseComponent{

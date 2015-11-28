@@ -1,9 +1,9 @@
 package com.magiology.api.network;
 
-import java.util.List;
+import java.util.*;
 
-import com.magiology.api.lang.ICommandInteract;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.api.lang.*;
+import com.magiology.mcobjects.tileentityes.network.*;
 
 public interface WorldNetworkInterface extends BasicWorldNetworkInterface{
 	public long getCard();

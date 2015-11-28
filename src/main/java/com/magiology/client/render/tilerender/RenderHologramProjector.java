@@ -1,20 +1,14 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.mcobjects.tileentityes.hologram.Button;
-import com.magiology.mcobjects.tileentityes.hologram.Field;
-import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.mcobjects.tileentityes.hologram.Slider;
-import com.magiology.mcobjects.tileentityes.hologram.TextBox;
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class RenderHologramProjector extends TileEntitySpecialRendererM{
 	

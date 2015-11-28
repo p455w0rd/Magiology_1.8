@@ -14,26 +14,19 @@
 :apiClasses UP-TO-DATE
 :sourceMainJava
 :compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\mcobjects\tileentityes\network\TileEntityNetworkController.java:60: error: cannot find symbol
-				if(router.willSendTo((TileEntity&NetworkInterface&Messageable)i))i.onMessageReceved(action);
-				                      ^
-  symbol:   variable TileEntity
-  location: class TileEntityNetworkController
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\mcobjects\tileentityes\network\TileEntityNetworkController.java:60: error: cannot find symbol
-				if(router.willSendTo((TileEntity&NetworkInterface&Messageable)i))i.onMessageReceved(action);
-				                                 ^
-  symbol:   variable NetworkInterface
-  location: class TileEntityNetworkController
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\mcobjects\tileentityes\network\TileEntityNetworkController.java:60: error: cannot find symbol
-				if(router.willSendTo((TileEntity&NetworkInterface&Messageable)i))i.onMessageReceved(action);
-				                                                  ^
-  symbol:   variable Messageable
-  location: class TileEntityNetworkController
-Note: Some input files use or override a deprecated API.
-Note: Recompile with -Xlint:deprecation for details.
-Note: Some input files use unchecked or unsafe operations.
-Note: Recompile with -Xlint:unchecked for details.
-3 errors
+C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:771: error: illegal start of expression
+			.filter(entry->Objects.equals(entry.getValue(), value))
+			              ^
+C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:772: error: ')' expected
+			.map(Map.Entry::getKey)
+			              ^
+C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:772: error: illegal start of expression
+			.map(Map.Entry::getKey)
+			               ^
+C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:772: error: ';' expected
+			.map(Map.Entry::getKey)
+			                      ^
+4 errors
 1 warning
  FAILED
 
@@ -48,4 +41,4 @@ Run with --stacktrace option to get the stack trace. Run with --info or --debug 
 
 BUILD FAILED
 
-Total time: 33.711 secs
+Total time: 33.163 secs

@@ -1,7 +1,6 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 public interface IModelCustom
 {

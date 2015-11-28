@@ -1,16 +1,14 @@
 package com.magiology.core.init;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.entity.*;
+import net.minecraftforge.fml.client.registry.*;
+import net.minecraftforge.fml.common.registry.*;
 
-import com.magiology.client.render.entityrender.BallOfEnergyRenderer;
-import com.magiology.client.render.entityrender.EntitySubatomicWorldDeconstructorRenderer;
-import com.magiology.client.render.models.entitys.BallOfEnergyModel;
-import com.magiology.core.Magiology;
-import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
-import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
+import com.magiology.client.render.entityrender.*;
+import com.magiology.client.render.models.entitys.*;
+import com.magiology.core.*;
+import com.magiology.mcobjects.entitys.*;
 
 public class MEntitys{
 

@@ -1,17 +1,17 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.IOException;
+import java.io.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.entity.player.*;
+import net.minecraft.network.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.forgepowered.packets.core.*;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class ClickHologramPacket extends AbstractToServerMessage{
 	

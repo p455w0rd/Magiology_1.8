@@ -1,22 +1,18 @@
 package com.magiology.mcobjects.blocks;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.block.material.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.forgepowered.events.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.util.utilobjects.m_extension.BlockContainerM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public abstract class BlockContainerMultiColision extends BlockContainerM{
 

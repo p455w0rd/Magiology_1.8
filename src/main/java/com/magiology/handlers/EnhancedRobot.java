@@ -1,7 +1,6 @@
 package com.magiology.handlers;
 
-import java.awt.AWTException;
-import java.awt.Robot;
+import java.awt.*;
 
 public class EnhancedRobot extends Robot{
 	public EnhancedRobot()throws AWTException{super();}

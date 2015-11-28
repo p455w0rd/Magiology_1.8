@@ -1,8 +1,7 @@
 package com.magiology.util.utilclasses;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
+import java.lang.reflect.*;
+import java.util.*;
 
 //NOTE: This is not a personal data Stalker! It's just a cool private marked variables or functions reader! (just so someone doesn't get the wrong idea)
 public class DataStalker{
@@ -16,12 +15,12 @@ public class DataStalker{
 	public static void printResources(){
 		if(!huntedFunctions.isEmpty()){
 			UtilM.println("Captured functions:");
-			for(Method fun:huntedFunctions)UtilM.printInln("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
+			for(Method fun:huntedFunctions)UtilM.println("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
 		}else UtilM.println("No functions has been captured. Yet...");
 		UtilM.println(" ");
 		if(!huntedVariables.isEmpty()){
 			UtilM.println("Captured variables:");
-			for(Field fun:huntedVariables)UtilM.printInln("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
+			for(Field fun:huntedVariables)UtilM.println("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
 		}else UtilM.println("No variables has been captured. Yet...");
 		UtilM.println("--------------------------");
 	}

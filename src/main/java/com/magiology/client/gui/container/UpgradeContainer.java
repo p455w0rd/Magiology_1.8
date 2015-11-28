@@ -1,16 +1,12 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
 
-import com.magiology.client.gui.guiutil.container.CustomSlot;
-import com.magiology.client.gui.guiutil.container.FakeContainer;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.client.gui.guiutil.container.*;
+import com.magiology.mcobjects.items.upgrades.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
 
 public class UpgradeContainer extends Container{
 	

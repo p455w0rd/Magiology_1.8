@@ -1,10 +1,10 @@
 package com.magiology.util.utilobjects;
 
-import java.awt.Color;
+import java.awt.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 
 public class ColorF{
 	public static final ColorF 

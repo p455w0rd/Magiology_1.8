@@ -1,16 +1,15 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.api.network.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class RenderNetworkPointerContainer extends TileEntitySpecialRendererM{
 

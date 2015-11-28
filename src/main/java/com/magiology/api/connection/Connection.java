@@ -1,11 +1,10 @@
 package com.magiology.api.connection;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.*;
 
-import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.*;
 
 //IConnection code holder
 public class Connection implements IConnection{

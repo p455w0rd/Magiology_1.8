@@ -1,15 +1,13 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.block.material.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.mcobjects.tileentityes.TileEntityRareSpacePipe;
+import com.magiology.mcobjects.tileentityes.*;
 
 public class RareSpacePipe extends BlockContainerMultiColision{
 	

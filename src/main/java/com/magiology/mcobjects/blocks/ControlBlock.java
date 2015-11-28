@@ -1,19 +1,18 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.core.Magiology;
-import com.magiology.core.init.MGui;
-import com.magiology.handlers.GuiHandlerM;
-import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.core.*;
+import com.magiology.core.init.*;
+import com.magiology.handlers.*;
+import com.magiology.mcobjects.tileentityes.*;
 
 public class ControlBlock extends BlockContainer {
 	private float p= 1F/16F;

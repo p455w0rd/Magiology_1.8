@@ -3,23 +3,13 @@ package com.magiology.windowsgui;
 import java.awt.*;
 import java.awt.event.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.io.IOReadableMap;
-import com.magiology.io.ZipManager;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.*;
+import com.magiology.io.*;
+import com.magiology.util.utilclasses.*;
 
 public class ModInfoGUI extends JFrame{
 	JTextField item1;

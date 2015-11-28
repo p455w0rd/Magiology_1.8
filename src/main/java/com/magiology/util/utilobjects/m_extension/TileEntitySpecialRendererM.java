@@ -1,7 +1,7 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.client.renderer.tileentity.*;
+import net.minecraft.tileentity.*;
 
 public abstract class TileEntitySpecialRendererM extends TileEntitySpecialRenderer{
 	public static final float p=1F/16F;

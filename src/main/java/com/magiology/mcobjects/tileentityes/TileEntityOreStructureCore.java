@@ -1,29 +1,22 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.block.*;
+import net.minecraft.entity.*;
+import net.minecraft.init.*;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.core.init.MBlocks;
-import com.magiology.mcobjects.effect.EntityCustomfireFX;
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.effect.EntitySparkFX;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.effect.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.structures.Structure;
-import com.magiology.structures.Structures;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.structures.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.SlowdownUtil;
-import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
-import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.effect.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class TileEntityOreStructureCore extends TileEntityPow{
 

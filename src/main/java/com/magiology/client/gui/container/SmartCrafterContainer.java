@@ -1,18 +1,15 @@
 package com.magiology.client.gui.container;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.guiutil.container.FakeContainer;
-import com.magiology.client.gui.guiutil.gui.CraftingGridSlot;
-import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
+import com.magiology.client.gui.guiutil.container.*;
+import com.magiology.client.gui.guiutil.gui.*;
+import com.magiology.mcobjects.tileentityes.*;
 
 public class SmartCrafterContainer extends Container implements Updateable{
 	

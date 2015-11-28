@@ -1,6 +1,6 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 
 /**
  * Instances of this class act as factories for their model type

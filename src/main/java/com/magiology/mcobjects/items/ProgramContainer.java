@@ -2,23 +2,20 @@ package com.magiology.mcobjects.items;
 
 import static com.magiology.util.utilobjects.NBTUtil.*;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
-import net.minecraft.world.World;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
+import com.magiology.api.lang.bridge.*;
 import com.magiology.api.lang.program.*;
-import com.magiology.core.init.MGui;
-import com.magiology.handlers.GuiHandlerM;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.core.init.*;
+import com.magiology.handlers.*;
+import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class ProgramContainer extends Item{
 	
@@ -38,9 +35,8 @@ public class ProgramContainer extends Item{
     }
 	
 	public static void setName(ItemStack stack, String name){
-		if(U.isRemote())return;
 		initId(stack);
-		setTag(stack, "nam", name);
+		ProgramDataBase.getProgram(getId(stack)).getSaveableData().programName=name;
 	}
 	public static void initId(ItemStack stack){
 		if(U.isRemote())return;
@@ -50,8 +46,12 @@ public class ProgramContainer extends Item{
 	public static String getName(ItemStack stack){
 		createNBT(stack);
 		initId(stack);
+//		if(getNBT(stack).hasKey("nam")){
+//			setName(stack, getTag(stack, "nam"));
+//			getNBT(stack).removeTag("nam");
+//		}
 		try{
-			return ProgramDataBase.getProgram(getId(stack)).getSaveableData().programName.toString();
+			return ProgramDataBase.getProgram(getId(stack)).getSaveableData().programName+"";
 		}catch(Exception e){
 			e.printStackTrace();
 		}

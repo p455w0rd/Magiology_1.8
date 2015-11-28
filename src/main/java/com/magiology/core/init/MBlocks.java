@@ -1,22 +1,13 @@
 package com.magiology.core.init;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraftforge.fml.common.registry.*;
 
-import com.magiology.core.MReference;
+import com.magiology.core.*;
 import com.magiology.mcobjects.blocks.*;
-import com.magiology.mcobjects.blocks.fire.FireExhaust;
-import com.magiology.mcobjects.blocks.fire.FireGun;
-import com.magiology.mcobjects.blocks.fire.FireLamp;
-import com.magiology.mcobjects.blocks.fire.FireMatrixReceaver;
-import com.magiology.mcobjects.blocks.fire.FireMatrixTransferer;
-import com.magiology.mcobjects.blocks.fire.FirePipe;
-import com.magiology.mcobjects.blocks.network.NetworkCommandHolder;
-import com.magiology.mcobjects.blocks.network.NetworkConductor;
-import com.magiology.mcobjects.blocks.network.NetworkController;
-import com.magiology.mcobjects.blocks.network.NetworkInterface;
-import com.magiology.mcobjects.blocks.network.NetworkPointerContainer;
+import com.magiology.mcobjects.blocks.fire.*;
+import com.magiology.mcobjects.blocks.network.*;
 
 public class MBlocks{
 

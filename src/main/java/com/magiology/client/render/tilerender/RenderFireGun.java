@@ -1,16 +1,16 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
+import com.magiology.client.render.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class RenderFireGun extends TileEntitySpecialRendererM {
 	

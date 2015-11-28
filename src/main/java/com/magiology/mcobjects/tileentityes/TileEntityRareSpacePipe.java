@@ -1,26 +1,20 @@
 package com.magiology.mcobjects.tileentityes;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.inventory.*;
+import net.minecraft.nbt.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.forgepowered.events.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,IUpdatePlayerListBox{

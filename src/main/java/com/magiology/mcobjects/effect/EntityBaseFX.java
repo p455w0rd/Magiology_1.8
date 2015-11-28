@@ -1,15 +1,15 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.core.MReference;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.core.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityBaseFX extends EntityFX{

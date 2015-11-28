@@ -1,14 +1,13 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.IItemRenderer;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
+import net.minecraftforge.client.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.render.*;
+import com.magiology.util.renderers.*;
 
 public class ItemRendererFirePipe implements IItemRenderer {
 	

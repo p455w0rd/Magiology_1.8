@@ -1,7 +1,7 @@
 package com.magiology.api.network;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
 
 public interface InterfaceTileEntitySaver{
 	public void readFromNBT(NBTTagCompound NBT);

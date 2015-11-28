@@ -1,18 +1,17 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.awt.Color;
+import java.awt.*;
 
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.core.init.MItems;
-import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.core.init.*;
+import com.magiology.handlers.animationhandlers.*;
 import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPositions;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.entitys.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 
 public class HandModeChangerHUD extends HUD{
 	public static HandModeChangerHUD instance=new HandModeChangerHUD();

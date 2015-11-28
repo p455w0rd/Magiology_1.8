@@ -1,10 +1,10 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class ForcePipeUpdate{

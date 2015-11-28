@@ -1,37 +1,33 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.Rectangle;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.client.renderer.tileentity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.api.power.ISidedPower;
+import com.magiology.api.power.*;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
-import com.magiology.client.gui.guiutil.gui.buttons.ColoredGuiButton;
-import com.magiology.client.gui.guiutil.gui.buttons.TexturedColoredButton;
-import com.magiology.client.render.Textures;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.guiutil.gui.buttons.*;
+import com.magiology.client.render.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.forgepowered.packets.packets.generic.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.SimpleCounter;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class GuiISidedPowerInstructor extends GuiContainer implements Updateable{
 	

@@ -1,7 +1,6 @@
 package com.magiology.handlers;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
 @Deprecated
 @SideOnly(value=Side.CLIENT)

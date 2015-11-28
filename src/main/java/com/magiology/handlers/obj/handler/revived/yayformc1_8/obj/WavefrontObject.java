@@ -1,24 +1,17 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8.obj;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
 
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.resources.IResource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.resources.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.ModelFormatException;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 /**

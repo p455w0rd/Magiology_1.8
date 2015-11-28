@@ -1,28 +1,23 @@
 package com.magiology.mcobjects.blocks.network;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.block.material.*;
+import net.minecraft.block.properties.*;
+import net.minecraft.block.state.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.*;
 import com.magiology.api.network.NetworkBaseComponent.NetworkBaseComponentHandler;
 import com.magiology.api.network.NetworkInterface;
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.blocks.*;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class NetworkPointerContainer extends BlockContainerMultiColision{

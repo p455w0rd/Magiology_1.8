@@ -2,13 +2,12 @@ package com.magiology.util.utilclasses.math;
 
 import static java.lang.Math.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.*;
 
 import com.magiology.util.utilclasses.math.ObjectCalculator.Calculator;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.vectors.*;
 
 
 public class SmartCalculator{

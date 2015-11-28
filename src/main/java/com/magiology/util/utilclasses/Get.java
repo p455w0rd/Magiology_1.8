@@ -1,20 +1,15 @@
 package com.magiology.util.utilclasses;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.client.render.font.FontRendererMBase;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.render.font.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public final class Get{

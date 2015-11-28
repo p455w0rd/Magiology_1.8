@@ -1,17 +1,17 @@
 package com.magiology.client.gui.guiutil.gui.buttons;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
 
-import org.lwjgl.input.Mouse;
+import org.lwjgl.input.*;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.tessellatorscripts.Drawer;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class CleanButton extends GuiButton implements Updateable{
 	

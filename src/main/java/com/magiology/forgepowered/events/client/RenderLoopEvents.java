@@ -3,50 +3,35 @@ package com.magiology.forgepowered.events.client;
 import static com.magiology.util.utilclasses.FontEffectUtil.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.*;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraft.block.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.tileentity.*;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.fml.common.eventhandler.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.*;
 
-import com.magiology.api.power.PowerCore;
-import com.magiology.client.gui.custom.hud.FakeMessageHUD;
-import com.magiology.client.gui.custom.hud.HUD;
-import com.magiology.client.render.aftereffect.AfterRenderRenderer;
-import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
+import com.magiology.api.power.*;
+import com.magiology.client.gui.custom.hud.*;
+import com.magiology.client.render.aftereffect.*;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.entitys.*;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.EntityPosAndBB;
+import com.magiology.util.utilobjects.*;
 
 public class RenderLoopEvents{
 	public static List<AfterRenderRenderer> universalRender=new ArrayList<AfterRenderRenderer>();
@@ -86,7 +71,7 @@ public class RenderLoopEvents{
 	
 	public static LongAfterRenderRenderer spawnLARR(Object object){
 		if(object==null){
-			System.err.print("GIVEN OBJECT IS NULL! Canceling the function!\n");
+			UtilM.printlnEr("GIVEN OBJECT IS NULL! Canceling the function!\n");
 			return null;
 		}
 		if(object instanceof LongAfterRenderRenderer){
@@ -110,12 +95,12 @@ public class RenderLoopEvents{
 			else universalLongRender.add(result);
 			return result;
 		}
-		System.err.print("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
+		UtilM.printlnEr("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
 		return null;
 	}
 	public static AfterRenderRenderer spawnARR(Object object){
 		if(object==null){
-			System.err.print("GIVEN OBJECT IS NULL! Canceling the function!\n");
+			UtilM.printlnEr("GIVEN OBJECT IS NULL! Canceling the function!\n");
 			return null;
 		}
 		if(object instanceof AfterRenderRenderer){
@@ -123,7 +108,7 @@ public class RenderLoopEvents{
 			universalRender.add(result);
 			return result;
 		}
-		System.err.print("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
+		UtilM.printlnEr("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
 		return null;
 	}
 	

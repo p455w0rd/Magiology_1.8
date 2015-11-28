@@ -1,25 +1,19 @@
 package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.api.power.ISidedPower;
-import com.magiology.api.power.PowerCore;
-import com.magiology.api.power.PowerUpgrades;
+import com.magiology.api.power.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
-import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
-import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
-import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
 
 public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;

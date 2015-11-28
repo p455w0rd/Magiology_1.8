@@ -1,31 +1,17 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.program.*;
-import com.magiology.api.network.NetworkInterface;
-import com.magiology.api.network.WorldNetworkInterface;
-import com.magiology.api.network.interfaces.registration.InterfaceBinder;
-import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class Slider extends HoloObject{
 	
@@ -123,5 +109,14 @@ public class Slider extends HoloObject{
 	@Override
 	public boolean isFullBlown(){
 		return true;
+	}
+	@Override
+	public Object onCommandReceive(String command){
+		String[] words=command.split(" ");
+		Object result=standard.standardHoloObjectCommandInteract(words);
+		if(result==NOT_FOUND_COMMAND){
+			UtilM.println("command not found!");
+		}
+		return result;
 	}
 }

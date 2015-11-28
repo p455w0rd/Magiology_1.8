@@ -1,11 +1,11 @@
 package com.magiology.client.gui.gui;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.*;
+import net.minecraft.item.*;
+import net.minecraft.util.*;
 
-import com.magiology.core.MReference;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.core.*;
+import com.magiology.util.renderers.*;
 
 public class CraftingGridWOutput{
 	public static ResourceLocation txt=new ResourceLocation(MReference.MODID,"/textures/gui/CraftingGridWproduct.png");

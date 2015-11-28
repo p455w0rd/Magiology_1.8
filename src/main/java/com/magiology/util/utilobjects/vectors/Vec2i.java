@@ -2,9 +2,9 @@ package com.magiology.util.utilobjects.vectors;
 
 import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.util.Objects;
+import java.util.*;
 
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.*;
 
 public class Vec2i{
 	public static final Vec2i zero=new Vec2i(0, 0);

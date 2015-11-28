@@ -1,30 +1,25 @@
 package com.magiology.forgepowered.packets.core;
 
-import io.netty.buffer.ByteBuf;
+import io.netty.buffer.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.entity.player.*;
+import net.minecraft.network.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.common.network.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.api.SavableData;
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.api.*;
+import com.magiology.core.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 /* Inspired by Integrated-Circuits, thanks! o/ */
 public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMessage, IMessageHandler<T, IMessage>{

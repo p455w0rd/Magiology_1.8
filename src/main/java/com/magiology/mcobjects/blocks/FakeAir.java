@@ -1,9 +1,9 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 public class FakeAir extends Block {
 

@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.items.upgrades.skeleton;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 

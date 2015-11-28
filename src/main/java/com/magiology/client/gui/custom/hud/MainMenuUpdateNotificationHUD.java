@@ -2,31 +2,23 @@ package com.magiology.client.gui.custom.hud;
 
 import static com.magiology.core.MReference.*;
 
-import java.awt.Desktop;
-import java.awt.Rectangle;
-import java.io.File;
+import java.awt.*;
+import java.io.*;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
+import org.apache.commons.lang3.*;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.gui.custom.DownloadingIcon;
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.handlers.web.DownloadingHandler;
-import com.magiology.io.IOReadableMap;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.gui.custom.*;
+import com.magiology.core.*;
+import com.magiology.handlers.web.*;
+import com.magiology.io.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsVec3F;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class MainMenuUpdateNotificationHUD extends HUD{
 	

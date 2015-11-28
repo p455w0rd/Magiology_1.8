@@ -1,7 +1,6 @@
 package com.magiology.util.renderers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.magiology.util.utilclasses.Get.Render;
 

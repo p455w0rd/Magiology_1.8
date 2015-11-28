@@ -1,17 +1,15 @@
 package com.magiology.client.gui.gui;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.inventory.*;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.util.renderers.*;
 public abstract class GuiContainerAndGuiParticles extends GuiContainer implements Updateable{
 	
 	public static List<GuiParticle> guiParticles=new ArrayList<GuiParticle>();

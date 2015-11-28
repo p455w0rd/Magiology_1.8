@@ -1,25 +1,19 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.regex.Matcher;
+import java.util.regex.*;
 
-import org.apache.commons.lang3.StringUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
+import org.apache.commons.lang3.*;
+import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
 import com.magiology.api.lang.program.*;
-import com.magiology.client.render.font.FontRendererMClipped;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.NormalizedVertixBufferModel;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.LogUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.client.render.font.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 
 public class GuiJavaScriptEditor extends GuiTextEditor{

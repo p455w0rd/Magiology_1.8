@@ -1,15 +1,14 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.awt.Color;
+import java.awt.*;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.core.MReference;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.core.*;
+import com.magiology.mcobjects.entitys.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
 
 public class SoulFlameHUD extends HUD{

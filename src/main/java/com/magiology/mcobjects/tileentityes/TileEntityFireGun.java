@@ -1,13 +1,10 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.server.gui.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListBox{
 	int optimizer=0;

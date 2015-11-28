@@ -1,16 +1,14 @@
 package com.magiology.client.render.entityrender;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.mcobjects.entitys.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntitySubatomicWorldDeconstructorRenderer extends Render{

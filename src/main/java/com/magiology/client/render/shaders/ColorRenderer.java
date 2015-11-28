@@ -1,8 +1,7 @@
 package com.magiology.client.render.shaders;
 
-import com.magiology.client.render.shaders.core.ShaderAspectRenderer;
-import com.magiology.client.render.shaders.core.ShaderUniformEditor;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.render.shaders.core.*;
+import com.magiology.util.utilclasses.*;
 
 public class ColorRenderer extends ShaderAspectRenderer{
 	public float r=1,g=1,b=1,rPrev=1,gPrev=1,bPrev=1;

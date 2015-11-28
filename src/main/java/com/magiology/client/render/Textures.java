@@ -1,16 +1,14 @@
 package com.magiology.client.render;
 
 
-import java.util.ArrayList;
+import java.util.*;
 
-import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 @SideOnly(Side.CLIENT)

@@ -1,8 +1,9 @@
 package com.magiology.structures;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
 
-import com.magiology.util.utilobjects.vectors.Pos;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class SymmetryBoot{
 	
@@ -62,7 +63,7 @@ public class SymmetryBoot{
 			default:blocksat=null;break;
 			}
 			if(blocksat!=null)for(int a=0;a<blocksat.length;a++)s.BlocksAtInit.add(blocksat[a]);
-			else System.out.print("WRONG TYPE ADDED!\nTHIS FUNCTION CANCELD ALL EFFECTS!\n");
-		}else System.out.print("YOU CAN'T ADD BLOCKS TO STRUCTURE AFTER INITIALIZING!\nFUNCTION CANCELD!\n");
+			else UtilM.println("WRONG TYPE ADDED!\nTHIS FUNCTION CANCELD ALL EFFECTS!\n");
+		}else UtilM.println("YOU CAN'T ADD BLOCKS TO STRUCTURE AFTER INITIALIZING!\nFUNCTION CANCELD!\n");
 	}
 }

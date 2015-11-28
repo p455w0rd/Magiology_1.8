@@ -1,12 +1,12 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.IItemRenderer;
+import net.minecraft.entity.*;
+import net.minecraft.item.*;
+import net.minecraftforge.client.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.models.ModelPants42;
+import com.magiology.client.render.models.*;
 
 public class ItemRendererPants42 implements IItemRenderer {
 	ModelPants42 model=new ModelPants42();

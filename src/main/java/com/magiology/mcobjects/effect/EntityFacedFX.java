@@ -1,16 +1,15 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.world.World;
+import net.minecraft.client.renderer.*;
+import net.minecraft.world.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.render.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class EntityFacedFX extends EntityFXM{
 	

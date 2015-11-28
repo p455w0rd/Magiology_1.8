@@ -1,13 +1,12 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class Field extends HoloObject{
 	

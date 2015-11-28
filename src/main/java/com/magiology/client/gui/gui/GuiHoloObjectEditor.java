@@ -1,45 +1,37 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.*;
+import net.minecraft.entity.player.*;
 
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.*;
+import org.lwjgl.opengl.*;
 
-import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.*;
 import com.magiology.api.lang.program.*;
-import com.magiology.api.network.NetworkInterface;
-import com.magiology.api.network.WorldNetworkInterface;
-import com.magiology.api.network.interfaces.registration.InterfaceBinder;
+import com.magiology.api.network.*;
+import com.magiology.api.network.interfaces.registration.*;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.api.updateable.Updater;
+import com.magiology.api.updateable.*;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.GuiObjectCustomizeContainer;
-import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
-import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.guiutil.gui.*;
+import com.magiology.client.gui.guiutil.gui.buttons.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.packets.packets.*;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.util.renderers.GL11U;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
-import com.magiology.util.utilobjects.m_extension.GuiContainerM;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
-import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 	

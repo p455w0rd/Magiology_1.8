@@ -1,7 +1,7 @@
 package com.magiology.api.connection;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
 public interface IConnectionProvider{
 	public TileEntity getHost();

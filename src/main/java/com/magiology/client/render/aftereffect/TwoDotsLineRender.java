@@ -1,18 +1,17 @@
 package com.magiology.client.render.aftereffect;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.core.MReference;
-import com.magiology.core.init.MItems;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.*;
+import com.magiology.core.init.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.vectors.TwoDots;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 

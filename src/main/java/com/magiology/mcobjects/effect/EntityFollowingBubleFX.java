@@ -1,7 +1,7 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.entity.*;
+import net.minecraft.world.*;
 
 public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 	
@@ -38,7 +38,7 @@ public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 		this.opacityHandler();
 		
 //		if(entity==H.getMC().thePlayer){
-////			System.out.println(sideOpacity[0]);
+////			UtilM.printlnln(sideOpacity[0]);
 //		}
 		
 		this.particleScale-=0.001*particleMaxAge/(length/10);

@@ -1,17 +1,16 @@
 
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.client.model.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.core.init.MItems;
+import com.magiology.client.render.*;
+import com.magiology.core.init.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class ModelPants42 extends ModelBiped{
@@ -208,7 +207,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
   			
   			for(int b=0;b<r.length;b++)r[b]=stackTC.getFloat("r"+b);
 
-//			System.out.print(r[0]+"\n");
+//			UtilM.println(r[0]+"\n");
   			legFront1.rotateAngleX+=r[0];
   			legFront2.rotateAngleX+=r[1];
   			legFront3.rotateAngleX+=r[2];

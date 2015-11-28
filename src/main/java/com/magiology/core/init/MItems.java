@@ -1,25 +1,19 @@
 package com.magiology.core.init;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.client.*;
+import net.minecraftforge.common.util.*;
+import net.minecraftforge.fml.common.registry.*;
 
-import com.magiology.client.render.itemrender.ItemRendererFirePipe;
-import com.magiology.client.render.itemrender.ItemRendererGenericUpgrade;
-import com.magiology.client.render.itemrender.ItemRendererHelmet42;
-import com.magiology.client.render.itemrender.ItemRendererPants42;
-import com.magiology.client.render.itemrender.ItemRendererPowerCounter;
-import com.magiology.core.MReference;
-import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.client.render.itemrender.*;
+import com.magiology.core.*;
+import com.magiology.handlers.animationhandlers.*;
 import com.magiology.mcobjects.items.*;
-import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
-import com.magiology.mcobjects.items.armor.Helmet_42;
-import com.magiology.mcobjects.items.armor.Pants_42;
+import com.magiology.mcobjects.items.armor.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
+import com.magiology.util.utilclasses.*;
 
 public class MItems{
 
@@ -99,7 +93,7 @@ public class MItems{
 
 	public static void setGenericUpgradeRenderer(Item item){
 		if(item instanceof GenericItemUpgrade)MinecraftForgeClient.registerItemRenderer(item, new ItemRendererGenericUpgrade());
-		else System.err.print("Item: "+item.getUnlocalizedName()+" cannot be registered as a GenericUpgrade renderer!\n");
+		else UtilM.printlnEr("Item: "+item.getUnlocalizedName()+" cannot be registered as a GenericUpgrade renderer!\n");
 	}
 
 	public static void bindItemWRender(Item item, IItemRenderer renderer){

@@ -1,36 +1,29 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.event.KeyEvent;
-import java.io.IOException;
+import java.awt.event.*;
+import java.io.*;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.entity.player.*;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
-import com.magiology.api.updateable.Updater;
+import com.magiology.api.updateable.*;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.ContainerEmpty;
-import com.magiology.client.gui.custom.OnOffGuiButton;
-import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
-import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
-import com.magiology.mcobjects.tileentityes.hologram.Button;
-import com.magiology.mcobjects.tileentityes.hologram.Field;
-import com.magiology.mcobjects.tileentityes.hologram.Slider;
-import com.magiology.mcobjects.tileentityes.hologram.TextBox;
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.NormalizedVertixBufferModel;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.custom.*;
+import com.magiology.client.gui.guiutil.gui.buttons.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class GuiHologramProjectorMain extends GuiContainer implements Updateable{
 	
@@ -210,7 +203,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		//export to model
 		arrowsModel=buffer.exportToNoramlisedVertixBufferModel();
 		arrowsModel.setDrawAsWire(true);
-		UtilM.printInln("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
+		UtilM.println("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
 	}
 	
 	@Override

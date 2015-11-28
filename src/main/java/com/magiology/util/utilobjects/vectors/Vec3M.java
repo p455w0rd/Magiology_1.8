@@ -1,19 +1,12 @@
 package com.magiology.util.utilobjects.vectors;
 
-import java.io.Serializable;
-import java.nio.FloatBuffer;
+import java.io.*;
+import java.nio.*;
 
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
-import net.minecraft.util.Vec3i;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.lwjgl.util.vector.ReadableVector;
-import org.lwjgl.util.vector.ReadableVector3f;
-import org.lwjgl.util.vector.Vector;
-import org.lwjgl.util.vector.WritableVector3f;
+import org.lwjgl.util.vector.*;
 
 /**
  *	Copy of mc Vec3M because mc didn't heard or a word called convenient 

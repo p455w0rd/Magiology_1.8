@@ -2,32 +2,23 @@ package com.magiology.client.render.font;
 
 import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.awt.image.*;
+import java.io.*;
+import java.util.*;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.client.resources.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.apache.commons.io.IOUtils;
-import org.lwjgl.opengl.GL11;
+import org.apache.commons.io.*;
+import org.lwjgl.opengl.*;
 
-import com.ibm.icu.text.ArabicShaping;
-import com.ibm.icu.text.ArabicShapingException;
-import com.ibm.icu.text.Bidi;
+import com.ibm.icu.text.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.*;
 
 @SideOnly(Side.CLIENT)
 public class FontRendererMBase extends FontRenderer{

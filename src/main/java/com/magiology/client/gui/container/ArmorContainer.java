@@ -1,22 +1,15 @@
 package com.magiology.client.gui.container;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.guiutil.container.FakeContainer;
-import com.magiology.client.gui.guiutil.container.OnlyShiftClickSlot;
-import com.magiology.client.gui.guiutil.container.UpgItemContainer;
-import com.magiology.client.gui.guiutil.container.UpgItemSlot;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.guiutil.container.*;
+import com.magiology.mcobjects.items.upgrades.skeleton.*;
+import com.magiology.util.utilclasses.*;
 
 
 public class ArmorContainer extends Container implements Updateable{
@@ -108,8 +101,8 @@ public class ArmorContainer extends Container implements Updateable{
 		if(slotid>=0&&slotid<inventoryItemStacks.size()&&inventoryItemStacks.size()==inventorySlots.size()){
 			Slot slot =(Slot)this.inventorySlots.get(slotid);
 			
-//			System.out.print("Side: "+(player.worldObj.isRemote?"CLIENT":"SERVER")+", clicked slot id: "+slotid+", "+(slot!=null?("slot number: "+slot.slotNumber+", Stack in slot: "+(slot.getStack()!=null?slot.getStack().getDisplayName():"null")+", Inventory name of the slot: "+slot.inventory.getInventoryName()):"slot is null")+"\n");
-//			if(!player.worldObj.isRemote)System.out.print("\n");
+//			UtilM.println("Side: "+(player.worldObj.isRemote?"CLIENT":"SERVER")+", clicked slot id: "+slotid+", "+(slot!=null?("slot number: "+slot.slotNumber+", Stack in slot: "+(slot.getStack()!=null?slot.getStack().getDisplayName():"null")+", Inventory name of the slot: "+slot.inventory.getInventoryName()):"slot is null")+"\n");
+//			if(!player.worldObj.isRemote)UtilM.println("\n");
 			if(slot instanceof OnlyShiftClickSlot)return null;
 			ItemStack result=super.slotClick(slotid, x, y, player);
 			
@@ -150,11 +143,11 @@ public class ArmorContainer extends Container implements Updateable{
 		inventorySlots.clear();
 		if(!inventorySlotsAllTheTime.isEmpty())for(Object slot:inventorySlotsAllTheTime){
 			if(slot!=null)addSlotToList((Slot)slot,inventorySlots);
-			else System.err.print("Slot is null! On container "+item+" This is an error!"+"\n");
+			else UtilM.printlnEr("Slot is null! On container "+item+" This is an error!");
 		}
 		if(InventoryArmorContainers[item]!=null)for(Object slot:InventorySlots[item]){
 			if(slot!=null)addSlotToList((Slot)slot,inventorySlots);
-			else System.err.print("Slot is null! On container "+item+" This is an error!"+"\n");
+			else UtilM.printlnEr("Slot is null! On container "+item+" This is an error!");
 		}
 	}
 	

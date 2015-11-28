@@ -1,19 +1,17 @@
 package com.magiology.mcobjects.tileentityes;
 
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.client.gui.gui.CraftingGridWOutput;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.client.gui.gui.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
 	

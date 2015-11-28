@@ -1,18 +1,17 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.api.connection.IConnection;
-import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.api.network.skeleton.TileEntityNetwork;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.util.utilclasses.NetworkUtil;
-import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.api.connection.*;
+import com.magiology.api.network.*;
+import com.magiology.api.network.skeleton.*;
+import com.magiology.forgepowered.events.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class TileEntityNetworkConductor extends TileEntityNetwork implements IUpdatePlayerListBox{
 	

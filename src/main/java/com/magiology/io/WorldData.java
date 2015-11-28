@@ -1,34 +1,22 @@
 package com.magiology.io;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.entity.player.*;
+import net.minecraft.network.*;
+import net.minecraft.world.*;
+import net.minecraftforge.common.*;
+import net.minecraftforge.event.world.*;
+import net.minecraftforge.fml.common.eventhandler.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 import scala.actors.threadpool.Arrays;
 
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.core.AbstractPacket;
-import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.util.utilclasses.FileUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.*;
+import com.magiology.forgepowered.packets.core.*;
+import com.magiology.util.utilclasses.*;
 
 
 public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializable>{
@@ -71,7 +59,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 	}
 	public void addFile(KeyCast filePath,ValueCast fileContent,int dimension){
 		if(!shallRun(null))return;
-		FileContent file=new FileContent<ValueCast>(fileContent, dimension);
+		FileContent<ValueCast> file=new FileContent<ValueCast>(fileContent, dimension);
 		data.put(filePath, file);
 		onChange(filePath, file);
 	}
@@ -84,7 +72,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 		return data.entrySet();
 	}
 	public FileContent<ValueCast> getFileContent(KeyCast filePath){
-		return (FileContent<ValueCast>)data.get(filePath);
+		return data.get(filePath);
 	}
 	public Set<KeyCast> getFilePaths(){
 		return data.keySet();
@@ -123,13 +111,12 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 		File basePath=new File(bp);
 		//Make sure that the folder exists.
 		basePath.mkdirs();
-		if(printsActions)UtilM.printInln("Loading files from:",".../"+bp.substring(0, bp.length()-1));
+		if(printsActions)UtilM.println("Loading files from:",".../"+bp.substring(0, bp.length()-1));
 		for(File file:basePath.listFiles()){
 			try{
 				String name=file.getName().replace("."+extension, "");
 				FileContent<ValueCast> fileCont=(FileContent<ValueCast>)FileUtil.getFileObj(file);
 				fileCont.dimension=Integer.parseInt(name.substring(name.lastIndexOf("_")+1));
-				//new FileContent<ValueCast>((ValueCast)FileUtil.getFileTxt(file), Integer.parseInt(name.substring(name.lastIndexOf("_")+1)))
 				data.put((KeyCast)name.substring(0, name.lastIndexOf("_")), fileCont);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -148,7 +135,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 		for(File file:basePath.listFiles())if(file.isFile())file.delete();
 		if(printsActions){
 			if(!UtilM.join(Thread.currentThread().getStackTrace()).contains("net.minecraft.server.MinecraftServer.tick")){
-				UtilM.printInln("Saving files to:",".../"+bp.substring(0, bp.length()-1));
+				UtilM.println("Saving files to:",".../"+bp.substring(0, bp.length()-1));
 			}
 		}
 		for(Entry<KeyCast,FileContent<ValueCast>> fileWrite:data.entrySet()){
@@ -165,13 +152,13 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
 	public void syncClients(){
-		if(printsActions)UtilM.printInln("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)UtilM.println("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncClientsWorldData((Map<CharSequence,FileContent<Serializable>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToAll(packet);
 	}
 	
 	public void syncServer(){
-		if(printsActions)UtilM.printInln("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)UtilM.println("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncServerWorldData((Map<CharSequence,FileContent<Serializable>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToServer(packet);
 	}
@@ -240,7 +227,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			dat=data.entrySet().iterator();
 			while(dat.hasNext()){
 				FileContent<Serializable> file=dat.next().getValue();
-				writeString(buffer, file.content.toString());
+				writeString(buffer, UtilM.toString(file.content));
 				buffer.writeInt(file.dimension);
 			}
 		}
@@ -252,7 +239,11 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			List<CharSequence> keys=new ArrayList<CharSequence>();
 			int size=buffer.readInt();
 			for(int i=0;i<size;i++)keys.add(readString(buffer));
-			for(int i=0;i<size;i++)data.put(keys.get(i),new FileContent<Serializable>(readString(buffer),buffer.readInt()));
+			for(int i=0;i<size;i++)try{
+					data.put(keys.get(i),new FileContent<Serializable>((Serializable)UtilM.fromString(readString(buffer)),buffer.readInt()));
+				}catch(ClassNotFoundException e){
+					e.printStackTrace();
+				}
 		}
 		
 		@Override
@@ -335,17 +326,21 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 	private int getDataSize(){
 		int result=0;
 		for(Entry<KeyCast,FileContent<ValueCast>> i:unsyncedData.entrySet()){
-			result+=(i.getValue().content.toString()+i.getValue().dimension).toCharArray().length;
+			try{
+				result+=(UtilM.toString(i.getValue().content)+i.getValue().dimension).toCharArray().length;
+			}catch(IOException e){
+				e.printStackTrace();
+			}
 			result+=i.getKey().length();
 		}
 		return result;
 	}
-	public static class FileContent<textCast extends Serializable> implements Serializable{
-		public textCast content;
+	public static class FileContent<ContentCast extends Serializable> implements Serializable{
+		public ContentCast content;
 		public transient int dimension;
 		public FileContent(){}
-		public FileContent(textCast text, int dimension){
-			this.content=text;
+		public FileContent(ContentCast content, int dimension){
+			this.content=content;
 			this.dimension=dimension;
 		}
 	}

@@ -1,24 +1,19 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.block.*;
+import net.minecraft.block.material.*;
+import net.minecraft.block.state.*;
+import net.minecraft.client.resources.model.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.api.network.Redstone;
-import com.magiology.core.MReference;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.api.network.*;
+import com.magiology.core.*;
+import com.magiology.util.utilclasses.*;
 
 public abstract class BlockContainerM extends BlockContainer{
 	public static final float p=1F/16F;
@@ -29,7 +24,7 @@ public abstract class BlockContainerM extends BlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata){
 		if(!isNullTileEntityOk){
-			UtilM.printInln(
+			UtilM.println(
 					getUnlocalizedName()+" block is a BlockContainer and it is not providing a TileEntity!",
 					"Are you sure that this is ok?",
 					"If so please add "+'"'+"isNullTileEntityOk=false;"+'"'+" for disabling this message",

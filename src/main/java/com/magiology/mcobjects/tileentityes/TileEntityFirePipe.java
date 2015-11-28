@@ -1,31 +1,26 @@
 package com.magiology.mcobjects.tileentityes;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.magiology.api.power.ISidedPower;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
+import com.magiology.api.power.*;
+import com.magiology.forgepowered.events.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.items.upgrades.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.SlowdownUtil;
-import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.effect.*;
 
 public class TileEntityFirePipe extends TileEntityPow implements MultiColisionProvider{
 	PowerUtil PH=new PowerUtil();
@@ -291,7 +286,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	@Override
 	public AxisAlignedBB[] getActiveBoxes(){
 		AxisAlignedBB[] Result={};
-//		System.out.print(collisionBoxes+" "+worldObj.isRemote+"\n");
+//		UtilM.println(collisionBoxes+" "+worldObj.isRemote+"\n");
 		if(collisionBoxes!=null)
 		for(int i=0;i<collisionBoxes.length;i++)if(collisionBoxes[i]!=null)Result=ArrayUtils.add(Result, collisionBoxes[i]);
 		return Result;

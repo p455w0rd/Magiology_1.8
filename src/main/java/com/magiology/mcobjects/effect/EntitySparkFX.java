@@ -1,20 +1,16 @@
 package com.magiology.mcobjects.effect;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.world.World;
+import net.minecraft.client.renderer.*;
+import net.minecraft.world.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.SlowdownUtil;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class EntitySparkFX extends EntityFXM{
 	

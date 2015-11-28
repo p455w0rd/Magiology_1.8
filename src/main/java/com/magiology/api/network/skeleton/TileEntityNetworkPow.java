@@ -1,24 +1,20 @@
 package com.magiology.api.network.skeleton;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.magiology.api.network.ISidedNetworkComponent;
-import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
-import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.api.network.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.blocks.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{

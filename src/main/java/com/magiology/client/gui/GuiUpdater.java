@@ -2,13 +2,11 @@ package com.magiology.client.gui;
 
 import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.*;
 
-import com.magiology.api.updateable.Updater;
+import com.magiology.api.updateable.*;
 
 public class GuiUpdater{
 	private static GuiUpdater instance;

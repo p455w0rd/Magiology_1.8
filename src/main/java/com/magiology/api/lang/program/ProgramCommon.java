@@ -1,18 +1,9 @@
 package com.magiology.api.lang.program;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
-import net.minecraft.world.World;
-
-import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
-import com.magiology.api.lang.bridge.WorldWrapper;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.util.utilobjects.*;
 
 
 public class ProgramCommon{

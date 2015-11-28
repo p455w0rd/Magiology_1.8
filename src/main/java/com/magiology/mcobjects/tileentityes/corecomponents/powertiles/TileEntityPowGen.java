@@ -1,8 +1,8 @@
 package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 
-import com.magiology.api.power.PowerProducer;
+import com.magiology.api.power.*;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 
 public abstract class TileEntityPowGen extends TileEntityPow implements PowerProducer{

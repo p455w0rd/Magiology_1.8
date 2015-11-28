@@ -1,22 +1,22 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.IOException;
+import java.io.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.network.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.*;
 
 import com.magiology.api.lang.program.*;
-import com.magiology.client.gui.container.CommandCenterContainer;
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.items.ProgramContainer;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.client.gui.container.*;
+import com.magiology.forgepowered.packets.core.*;
+import com.magiology.mcobjects.items.*;
+import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class OpenProgramContainerInGui extends AbstractToServerMessage{
 	

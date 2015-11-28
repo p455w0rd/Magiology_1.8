@@ -1,19 +1,16 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.entity.player.*;
+import net.minecraft.tileentity.*;
 
-import com.magiology.api.power.ISidedPower;
-import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
-import com.magiology.client.gui.container.SmartCrafterContainer;
-import com.magiology.handlers.GenericPacketEventHandler;
+import com.magiology.api.power.*;
+import com.magiology.client.gui.container.*;
+import com.magiology.handlers.*;
 import com.magiology.handlers.GenericPacketEventHandler.IntegerPacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.StringPacketEvent;
-import com.magiology.handlers.animationhandlers.TheHandHandler;
-import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.handlers.animationhandlers.*;
+import com.magiology.util.utilclasses.*;
 
 public class GenericPacketEvents{
 	public static GenericPacketEventHandler callerInstance;

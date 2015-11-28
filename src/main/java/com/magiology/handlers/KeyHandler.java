@@ -1,29 +1,25 @@
 package com.magiology.handlers;
 
 import static com.magiology.handlers.KeyHandler.Keys.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.settings.*;
+import net.minecraftforge.fml.client.*;
+import net.minecraftforge.fml.client.registry.*;
+import net.minecraftforge.fml.common.eventhandler.*;
+import net.minecraftforge.fml.common.gameevent.*;
 
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.*;
 
-import com.magiology.client.gui.custom.hud.HandModeChangerHUD;
-import com.magiology.client.gui.custom.hud.StatsDisplayHUD;
-import com.magiology.core.MReference;
-import com.magiology.core.init.MGui;
-import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
-import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
-import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
-import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.custom.hud.*;
+import com.magiology.core.*;
+import com.magiology.core.init.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.forgepowered.packets.packets.generic.*;
+import com.magiology.mcobjects.entitys.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.SimpleCounter;
+import com.magiology.util.utilobjects.*;
 
 public class KeyHandler{
 	Minecraft mc=U.getMC();

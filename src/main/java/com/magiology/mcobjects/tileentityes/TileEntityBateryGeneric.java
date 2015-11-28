@@ -1,10 +1,9 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.*;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.util.utilclasses.*;
 
 public class TileEntityBateryGeneric extends TileEntityPow{
 	

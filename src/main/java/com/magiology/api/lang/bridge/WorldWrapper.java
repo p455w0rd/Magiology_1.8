@@ -1,12 +1,12 @@
 package com.magiology.api.lang.bridge;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 import com.magiology.api.lang.program.*;
-import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.api.network.skeleton.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 
 public class WorldWrapper{

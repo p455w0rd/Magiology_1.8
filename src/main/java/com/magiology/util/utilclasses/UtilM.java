@@ -3,6 +3,7 @@ package com.magiology.util.utilclasses;
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
 import java.awt.*;
+import java.io.*;
 import java.lang.reflect.*;
 import java.math.*;
 import java.text.*;
@@ -64,7 +65,7 @@ public class UtilM{
 			Minecraft mc=U.getMC();
 			Entity ent=mc.getRenderViewEntity();
 			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
-				int i = mc.gameSettings.particleSetting;
+				int i=mc.gameSettings.particleSetting;
 	            double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
 	            if(i>1);else{
 	            	if (d6*d6+d7*d7+d8*d8>d9*d9);else if(RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
@@ -78,7 +79,7 @@ public class UtilM{
 			Minecraft mc=U.getMC();
 			Entity ent=mc.getRenderViewEntity();
 			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
-				int i = mc.gameSettings.particleSetting;
+				int i=mc.gameSettings.particleSetting;
 				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ;
 				if(i>1);else{
 					if (d6*d6+d7*d7+d8*d8>distance*distance);else if(RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
@@ -252,17 +253,12 @@ public class UtilM{
 		for(Object a:objs)print.append(a+" ");
 		LogUtil.info(print.toString());
 	}
-	public static void println(Object... objs){
-		StringBuilder print=new StringBuilder();
-		for(Object a:objs)print.append(a+" \n");
-		LogUtil.info(print.toString());
-	}
 	public static void printlnEr(Object... objs){
 		StringBuilder print=new StringBuilder();
 		for(Object a:objs)print.append(a+" \n");
 		LogUtil.info(print.toString());
 	}
-	public static void printInln(Object... objs){
+	public static void println(Object... objs){
 		StringBuilder print=new StringBuilder();
 		for(Object a:objs){
 			if(a!=null&&a.getClass().isArray()){
@@ -504,16 +500,16 @@ public class UtilM{
 				ray.to=helper;
 			}
 			double z=plane.q.z;
-			if(ray.from.z>z){if(printProcess)printInln("target behind");return false;}
-			if(ray.to.z<z){if(printProcess)printInln("target to far");return false;}
+			if(ray.from.z>z){if(printProcess)println("target behind");return false;}
+			if(ray.to.z<z){if(printProcess)println("target to far");return false;}
 			AxisAlignedBB Plane=new AxisAlignedBB(plane.q.x, plane.q.y, plane.q.z, plane.s.x, plane.s.y, plane.s.z+0.01);
 			MovingObjectPosition rayt=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
-			if(rayt==null||rayt.hitVec==null){if(printProcess)printInln("target clipped out");return false;}
+			if(rayt==null||rayt.hitVec==null){if(printProcess)println("target clipped out");return false;}
 			result.x=rayt.hitVec.xCoord;
 			result.y=rayt.hitVec.yCoord;
 			result.z=rayt.hitVec.zCoord;
 			
-			if(printProcess)printInln("Ray trace has resolwed a valid intersection point!");
+			if(printProcess)println("Ray trace has resolwed a valid intersection point!");
 			return true;
 		}
 		
@@ -545,9 +541,9 @@ public class UtilM{
         }
         else
         {
-            double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
-            double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * par1 + (entity.getEyeHeight());
-            double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
+            double d0=entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
+            double d1=entity.prevPosY + (entity.posY - entity.prevPosY) * par1 + (entity.getEyeHeight());
+            double d2=entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
             return new Vec3M(d0, d1, d2);
         }
     }
@@ -567,8 +563,8 @@ public class UtilM{
 		
 		StackTraceElement[] a1=Thread.currentThread().getStackTrace();
 		int lenght=0;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		Calendar cal = Calendar.getInstance();
+		DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal=Calendar.getInstance();
 		Return.append("Invoke time: "+dateFormat.format(cal.getTime())+"\n");
 		for(int i=2;i<a1.length;i++){
 			StackTraceElement a=a1[i];
@@ -776,5 +772,20 @@ public class UtilM{
 			.filter(entry->Objects.equals(entry.getValue(), value))
 			.map(Map.Entry::getKey)
 			.collect(Collectors.toSet());
+	}
+	
+	public static Object fromString(String s)throws IOException,ClassNotFoundException{
+		byte[] data=Base64.getDecoder().decode(s);
+		ObjectInputStream ois=new ObjectInputStream(new ByteArrayInputStream(data));
+		Object o=ois.readObject();
+		ois.close();
+		return o;
+	}
+	public static String toString(Serializable o)throws IOException{
+		ByteArrayOutputStream baos=new ByteArrayOutputStream();
+		ObjectOutputStream oos=new ObjectOutputStream( baos );
+		oos.writeObject(o);
+		oos.close();
+		return Base64.getEncoder().encodeToString(baos.toByteArray()); 
 	}
 }

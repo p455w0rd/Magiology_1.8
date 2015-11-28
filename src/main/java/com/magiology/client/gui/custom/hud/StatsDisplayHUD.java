@@ -1,6 +1,6 @@
 package com.magiology.client.gui.custom.hud;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 
 public class StatsDisplayHUD extends HUD{
 	public static StatsDisplayHUD instance=new StatsDisplayHUD();

@@ -1,22 +1,13 @@
 package com.magiology.io;
 
-import java.awt.Toolkit;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import java.util.zip.*;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
 public class ZipManager{
 	public static ZipManager instance=new ZipManager();

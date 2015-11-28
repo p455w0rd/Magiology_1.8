@@ -48,19 +48,23 @@ public class ProgramDataBase{
 		getProgram(programId).init(ProgramDataBase.code_get(programId));
 	}
 	
-	public static String code_remove(int programId){
+	public static FileContent code_remove(int programId){
 		useablePrograms.remove(programId);
-		return programs.removeFile(programId+"").toString();
+		return programs.removeFile(programId+"");
 	}
 	
 	public static String code_get(int programId){
-		FileContent code=programs.getFileContent(programId+"");
-		return code!=null?code.content!=null?code.content.toString():"":"";
+		FileContent<ProgramSerializable> code=programs.getFileContent(programId+"");
+		
+		String codeS=code!=null?code.content!=null?code.content.src.toString():"":"";
+		if(codeS.isEmpty())codeS="function main(value){\n    \n	 \n    \n    return \"sucess\";\n}\nfunction init(map){\n    \n}";
+		
+		return codeS;
 	}
 	
 	public static int code_aviableId(){
 		int result=1;
-		for(Entry<String, FileContent<ProgramSerializable>> i:programs.entrySet()){
+		for(Entry<String, FileContent<ProgramSerializable>>i:programs.entrySet()){
 			if(i.getKey().equals(result+""))result=Integer.parseInt(i.getKey().toString())+1;
 		}
 		return result;

@@ -1,13 +1,10 @@
 package com.magiology.api.lang.bridge;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.*;
+import java.util.function.*;
 
-import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.*;
 import com.magiology.api.lang.program.*;
-import com.sun.org.apache.bcel.internal.generic.LAND;
 
 public class CommandInteractorList extends ArrayList<ICommandInteract>{
 	private boolean ableToEdit=false;

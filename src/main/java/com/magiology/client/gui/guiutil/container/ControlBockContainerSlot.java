@@ -1,9 +1,8 @@
 package com.magiology.client.gui.guiutil.container;
 
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.tileentity.*;
 
 public class ControlBockContainerSlot extends Slot{
 	public ControlBockContainerSlot(IInventory inv, int id, int x, int y){

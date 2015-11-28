@@ -1,27 +1,22 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.api.connection.IConnection;
-import com.magiology.api.network.NetworkBaseComponent;
-import com.magiology.api.network.NetworkInterface;
-import com.magiology.api.network.skeleton.TileEntityNetwork;
-import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
-import com.magiology.util.utilclasses.NetworkUtil;
-import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.api.connection.*;
+import com.magiology.api.network.*;
+import com.magiology.api.network.skeleton.*;
+import com.magiology.core.init.*;
+import com.magiology.forgepowered.events.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class TileEntityNetworkProgramHolder extends TileEntityNetwork implements ISidedInventory,IUpdatePlayerListBox{
 	

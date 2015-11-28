@@ -1,19 +1,18 @@
 package com.magiology.client.render.itemrender;
 
-import java.text.DecimalFormat;
+import java.text.*;
 
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.client.IItemRenderer;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraftforge.client.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.Textures;
-import com.magiology.forgepowered.events.client.RenderLoopEvents;
-import com.magiology.util.renderers.NormalizedVertixBuffer;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.client.render.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.util.renderers.*;
 
 public class ItemRendererPowerCounter implements IItemRenderer {
 	WorldRenderer tess=TessUtil.getWR();

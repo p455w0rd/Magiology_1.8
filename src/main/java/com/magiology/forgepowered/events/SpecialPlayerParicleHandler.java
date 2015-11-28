@@ -1,19 +1,15 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.init.*;
+import net.minecraft.item.*;
+import net.minecraft.world.*;
 
-import com.magiology.core.init.MBlocks;
-import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.*;
 
 public class SpecialPlayerParicleHandler{
 
@@ -74,7 +70,7 @@ public class SpecialPlayerParicleHandler{
 			ItemStack itemS=player.getCurrentEquippedItem();
 			if(itemS!=null&&Block.getBlockFromItem(itemS.getItem())==Blocks.lapis_block)ammount=5;
 			if(itemS!=null&&itemS.getItem()==Items.dye&&itemS.getItemDamage()==4)ammount=2;
-//				System.out.print("\n"+BB);
+//				UtilM.println("\n"+BB);
 			for (int i=0;i<ammount;i++){
 				if(!isActive)i=ammount;
 				double xr=x+UtilM.CRandF(0.8);

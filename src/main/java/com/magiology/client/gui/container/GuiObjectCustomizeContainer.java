@@ -1,9 +1,9 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
 
-import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.hologram.*;
 
 public class GuiObjectCustomizeContainer extends Container{
 	

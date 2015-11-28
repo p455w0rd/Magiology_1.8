@@ -1,9 +1,8 @@
 package com.magiology.core.init;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.init.*;
+import net.minecraft.item.*;
+import net.minecraftforge.fml.common.registry.*;
 
 public class MRecepies{
 

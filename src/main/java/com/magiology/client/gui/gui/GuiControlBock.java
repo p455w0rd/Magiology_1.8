@@ -1,25 +1,24 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.Color;
+import java.awt.*;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.*;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.ControlBockContainer;
-import com.magiology.client.gui.guiutil.gui.DrawThatSexyDotHelper;
-import com.magiology.client.gui.guiutil.gui.buttons.CustomButton;
-import com.magiology.core.MReference;
-import com.magiology.forgepowered.packets.packets.TileRedstone;
-import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-import com.magiology.util.renderers.GL11U;
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.client.gui.container.*;
+import com.magiology.client.gui.guiutil.gui.*;
+import com.magiology.client.gui.guiutil.gui.buttons.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.utilclasses.*;
 
 public class GuiControlBock extends GuiContainer implements Updateable{
 	

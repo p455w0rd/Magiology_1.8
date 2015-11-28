@@ -1,6 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntityEnergizedLapisOre extends TileEntityM{
 	

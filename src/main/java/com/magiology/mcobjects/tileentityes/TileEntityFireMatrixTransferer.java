@@ -1,14 +1,12 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.effect.*;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.util.utilclasses.*;
 
 public class TileEntityFireMatrixTransferer extends TileEntityPow{
 	

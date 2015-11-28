@@ -1,7 +1,6 @@
 package com.magiology.util.utilclasses.math;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import com.magiology.util.utilclasses.UtilM.U;
 

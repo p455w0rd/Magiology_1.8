@@ -1,18 +1,16 @@
 package com.magiology.mcobjects.tileentityes.corecomponents;
 
-import java.util.List;
+import java.util.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
+import net.minecraft.block.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public interface MultiColisionProvider{
 	
@@ -94,8 +92,8 @@ public interface MultiColisionProvider{
 		    try{
 		    	tile.setPointedBox(selectedBoxes[id]);
 			}catch(Exception e){
-				UtilM.printInln("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
-				UtilM.printInln("selectedBoxes size",selectedBoxes.length,"results size",results.length);
+				UtilM.println("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
+				UtilM.println("selectedBoxes size",selectedBoxes.length,"results size",results.length);
 				e.printStackTrace();
 			}
 		    isRayTracing=false;

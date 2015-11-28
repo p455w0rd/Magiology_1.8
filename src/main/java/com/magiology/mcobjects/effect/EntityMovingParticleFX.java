@@ -1,8 +1,8 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityMovingParticleFX extends EntitySmoothBubleFX{

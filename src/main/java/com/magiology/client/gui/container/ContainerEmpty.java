@@ -1,7 +1,7 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
 
 public class ContainerEmpty extends Container{
 	@Override

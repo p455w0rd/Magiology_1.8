@@ -1,17 +1,15 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.block.*;
+import net.minecraft.init.*;
+import net.minecraft.util.*;
 
-import com.magiology.core.init.MBlocks;
-import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
-import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.core.init.*;
+import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.*;
 
 public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	

@@ -1,11 +1,10 @@
 package com.magiology.util.utilclasses;
 
-import java.util.Random;
+import java.util.*;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
 
 import com.magiology.util.utilclasses.UtilM.U;
 

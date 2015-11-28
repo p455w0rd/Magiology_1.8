@@ -1,16 +1,15 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.gui.IUpdatePlayerListBox;
-import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.entity.player.*;
+import net.minecraft.inventory.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.server.gui.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
 
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntityControlBlock extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
 	
@@ -80,7 +79,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		thingyPos=Math.round(thingyPos*2000)/2000.0;
 		
 		
-//		if(worldObj.isRemote)System.out.print(thingyPos+" "+thingyWPos+"\n");
+//		if(worldObj.isRemote)UtilM.println(thingyPos+" "+thingyWPos+"\n");
 		
 		{
 			for(int a=2;a>=0;a--){
