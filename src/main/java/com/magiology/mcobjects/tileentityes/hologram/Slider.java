@@ -7,6 +7,7 @@ import net.minecraft.entity.player.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.*;
 
+import com.magiology.mcobjects.tileentityes.hologram.interactions.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
@@ -111,12 +112,8 @@ public class Slider extends HoloObject{
 		return true;
 	}
 	@Override
-	public Object onCommandReceive(String command){
-		String[] words=command.split(" ");
-		Object result=standard.standardHoloObjectCommandInteract(words);
-		if(result==NOT_FOUND_COMMAND){
-			UtilM.println("command not found!");
-		}
-		return result;
+	public void getInteractions(List<AbstractInteraction<HoloObject>> interations){
+		super.getInteractions(interations);
+		interations.add(new InteractionSlide<HoloObject>());
 	}
 }

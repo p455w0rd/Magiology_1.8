@@ -8,6 +8,9 @@ In plans:
 	reimplement IItemRenderer (as much as possible)
 	Standardize gui style
 	Ingame mod book
+	repeating crossbow
+	--------> whole fudging machine system <--------
+	Config for all the things!
 	
 Abandoned for other projects:
 	The hand functionality 
@@ -21,6 +24,7 @@ To improve:
 	Power system (low priority)
 	JavaScript editor
 	text editor
+	THE PREFORMANCE OF THE MOD!! 
 	
 For scraping and reusing:
 	Disco floor

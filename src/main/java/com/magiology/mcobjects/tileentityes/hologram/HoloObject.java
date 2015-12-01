@@ -15,7 +15,7 @@ import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToI
 import com.magiology.core.init.*;
 import com.magiology.handlers.*;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.mcobjects.items.ProgramContainer.Program.KeyWord;
+import com.magiology.mcobjects.tileentityes.hologram.interactions.*;
 import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.renderers.tessellatorscripts.*;
@@ -218,129 +218,29 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 	public final class StandardHoloObject{
 		private StandardHoloObject(){}
 		protected Object standardHoloObjectCommandInteract(String[] words){
-			if(words.length>1){
-				if(KeyWord.SET.match(words[0]))return setWithCommand(words);
-				else if(KeyWord.GET.match(words[0]))return getWithCommand(words);
-			}
-			return null;
-		}
-		private Object getWithCommand(String[] words){
-			switch(KeyWord.getByName(words[1])){
-			case SIZE:{
-				if(words.length==2){
-					//get size --> 0.275,2.3246
-					return originalSize;
-				}
-			}break;
-			case POSITION:{
-				if(words.length==2){
-					//get position --> 0.275,2.3246
-					return position;
-				}
-			}break;
-			case SCALE:{
-				if(words.length==2){
-					//get scale --> 0.42
-					return scale;
-				}
-			}break;
-			case TEXT:{
-				//get text --> wow this actually works! lol ex di ex ex ex ex ex ex 
-				if(words.length==2&&HoloObject.this instanceof StringContainer)return ((StringContainer)HoloObject.this).getString();
-			}break;
-			case COLOR:{
-				if(words.length==2){
-					//get color --> 1,1,1,1
-					return setColor;
-				}
-			}break;
-			case NAME:{
-				//get name --> lol such doge meme! ex di double_point comma di + random emoji
-				if(words.length==2){
-					return ((ICommandInteract)HoloObject.this).getName();
-				}
-			}break;
-			default:return NOT_FOUND_COMMAND;
-			}
-			return null;
-		}
-		private Object setWithCommand(String[] words){
-			boolean changed=false;
-			switch(KeyWord.getByName(words[1])){
-			case SIZE:{
-				if(words.length==3){
-					//set size 0.275,2.3246
-					try{
-						String[] value=words[2].split(",");
-						originalSize=new Vector2f(Float.parseFloat(value[0]),Float.parseFloat(value[1]));
-						changed=true;
-					}catch(Exception e){}
-				}
-			}break;
-			case POSITION:{
-				if(words.length==3){
-					//set position 0.275,2.3246
-					try{
-						String[] value=words[2].split(",");
-						position=new Vector2f(Float.parseFloat(value[0]),Float.parseFloat(value[1]));
-						changed=true;
-					}catch(Exception e){}
-				}
-			}break;
-			case SCALE:{
-				if(words.length==3){
-					//set scale 0.42
-					try{
-						scale=Float.parseFloat(words[2]);
-						changed=true;
-					}catch(Exception e){}
-				}
-			}break;
-			case TEXT:{
-				//set text wow this actually works! lol ex di ex ex ex ex ex ex 
-				if(words.length>=3&&HoloObject.this instanceof StringContainer){
-					String text="";
-					for(int i=2;i<words.length;i++){
-						text+=words[i]+" ";
+			try{
+				List<AbstractInteraction<HoloObject>> interations=new ArrayList<AbstractInteraction<HoloObject>>();
+				getInteractions(interations);
+				if(words[0].toLowerCase().equals("set")){
+					ObjectHolder<Boolean> changed=new ObjectHolder<Boolean>(false);
+					boolean changedFinal=false;
+					for(AbstractInteraction<HoloObject> interaction:interations){
+						try{
+							if(interaction.correctWords(words))interaction.set(HoloObject.this, changed, interaction.parseWords(words));
+						}catch(Exception e){}
+						if(changed.getVar())changedFinal=true;
 					}
-					((StringContainer)HoloObject.this).setString(text.substring(0, text.length()-1));
-					changed=true;
-				}
-			}break;
-			case COLOR:{
-				if(words.length==3){
-					//set color r=1,g=1,b=1,a=1
-					String[] colorValues=words[2].split(",");
-					ColorF color=setColor.copy();
-					try{
-						setColor=new ColorF();
-						for(int i=0;i<colorValues.length;i++){
-							String[] value=colorValues[i].split("=");
-							setColor=setColor.set(Float.parseFloat(value[1]), value[0].charAt(0));
-						}
-						changed=true;
-					}catch(Exception e){
-						setColor=color;
+					if(changedFinal)HoloObject.this.host.sync();
+				}else{
+					for(AbstractInteraction<HoloObject> interaction:interations){
+						try{
+							if(interaction.correctWords(words))return interaction.get(HoloObject.this);
+						}catch(Exception e){}
 					}
 				}
-			}break;
-			case NAME:{
-				//set name lol such doge meme! ex di + random emoji
-				if(words.length>=3){
-					String text="";
-					for(int i=2;i<words.length;i++){
-						text+=words[i]+" ";
-					}
-					((ICommandInteract)HoloObject.this).setName(text.substring(0, text.length()-1));
-					changed=true;
-				}
-			}break;
-			default:{
-				if(changed)host.getWorld().markBlockForUpdate(host.getPos());
+			}catch(Exception e){
 				return NOT_FOUND_COMMAND;
 			}
-			}
-			if(changed)host.getWorld().markBlockForUpdate(host.getPos());
 			return null;
 		}
 		protected void sendStandardCommand(){
@@ -366,5 +266,15 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 				}
 //			}).start();
 		}
+	}
+
+	public void getInteractions(List<AbstractInteraction<HoloObject>> interations){
+		interations.add(new InteractionSize<HoloObject>());
+		interations.add(new InteractionPosition<HoloObject>());
+		interations.add(new InteractionScale<HoloObject>());
+		interations.add(new InteractionColor<HoloObject>());
+		
+		if(this instanceof StringContainer)interations.add(new InteractionText<HoloObject>());
+		if(this instanceof ICommandInteract)interations.add(new InteractionName<HoloObject>());
 	}
 }

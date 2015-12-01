@@ -126,33 +126,6 @@ public class ProgramContainer extends Item{
 		public String toString(){
 			return "Program{name: "+name+", result: "+result+", pos: "+pos+", program id: "+programId+"}";
 		}
-		public static enum KeyWord{
-			SET,
-			GET,
-			TRUE,
-			FALSE,
-			CAN_HAVE,
-			
-			REDSTONE,
-			SIZE,
-			SCALE,
-			TEXT,
-			POSITION,
-			COLOR,
-			R,
-			G,
-			B,
-			A,
-			NAME;
-			
-			public boolean match(String string){
-				return toString().equals(string.toUpperCase());
-			}
-			public static KeyWord getByName(String string){
-				for(KeyWord i:values())if(i.match(string))return i;
-				return null;
-			}
-		}
 		public Object run(TileEntityNetworkProgramHolder holder, Object[] args, Object[] environment){
 			NetworkProgramHolderWrapper.setInstance(holder);
 			Object x=ProgramDataBase.run(programId, args, environment);

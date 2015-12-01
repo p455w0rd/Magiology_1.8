@@ -744,7 +744,7 @@ public class UtilM{
 	public static String join(CharSequence splitter,Object[] args){
 		StringBuilder result=new StringBuilder();
 		for(Object o:args)result.append(o).append(splitter);
-		return result.substring(0, result.length()-splitter.length()+1);
+		return result.substring(0, result.length()-splitter.length());
 	}
 	
 	private static long startTime;
