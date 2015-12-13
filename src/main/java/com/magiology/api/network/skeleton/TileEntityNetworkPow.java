@@ -18,9 +18,7 @@ import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
-	public EnumFacing[] connections = new EnumFacing[6];
-	public EnumFacing[] strateConnection = new EnumFacing[3];
-	public boolean[] bannedConnections = new boolean[6],accessibleSides={true,true,true,true,true,true};
+	public boolean[] accessibleSides={true,true,true,true,true,true};
 	public boolean canPathFindTheBrain,didCheckSides=false;
 	
 	public AxisAlignedBB pointId,prevPointId;
@@ -49,7 +47,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	}
 	public void findBrain(){
 		int side=-1;TileEntity test=null;
-		for(int i=0;i<this.connections.length;i++)if(this.connections[i]!=null&&
+		for(int i=0;i<this.connections.length;i++)if(this.connections[i].getMain()&&
 				(test=worldObj.getTileEntity(SideUtil.offsetNew(i, pos)))instanceof ISidedNetworkComponent&&((ISidedNetworkComponent)test).getBrain()!=null){
 			side=i;i=this.connections.length;
 		}
@@ -89,7 +87,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	}
 	@Override
 	public boolean getAccessibleOnSide(int side){
-		return connections[side]!=null;
+		return connections[side].getMain();
 	}
 	@Override
 	public int getOrientation(){
@@ -143,12 +141,12 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?getExpectedColisionBoxes()[0]:null,
-				connections[1]!=null?getExpectedColisionBoxes()[1]:null,
-				connections[2]!=null?getExpectedColisionBoxes()[2]:null,
-				connections[3]!=null?getExpectedColisionBoxes()[3]:null,
-				connections[0]!=null?getExpectedColisionBoxes()[4]:null,
-				connections[4]!=null?getExpectedColisionBoxes()[5]:null,
+				connections[5].getMain()?getExpectedColisionBoxes()[0]:null,
+				connections[1].getMain()?getExpectedColisionBoxes()[1]:null,
+				connections[2].getMain()?getExpectedColisionBoxes()[2]:null,
+				connections[3].getMain()?getExpectedColisionBoxes()[3]:null,
+				connections[0].getMain()?getExpectedColisionBoxes()[4]:null,
+				connections[4].getMain()?getExpectedColisionBoxes()[5]:null,
 				                     getExpectedColisionBoxes()[6]
 		};
 	}
@@ -156,22 +154,22 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 	@Override
 	public void getBoxesOnSide(List<AxisAlignedBB> result, int side){
 		switch(side){
-		case 0:if(connections[side]!=null){
+		case 0:if(connections[side].getMain()){
 			result.add(collisionBoxes[4]);
 		}break;
-		case 1:if(connections[side]!=null){
+		case 1:if(connections[side].getMain()){
 			result.add(collisionBoxes[1]);
 		}break;
-		case 2:if(connections[side]!=null){
+		case 2:if(connections[side].getMain()){
 			result.add(collisionBoxes[2]);
 		}break;
-		case 3:if(connections[side]!=null){
+		case 3:if(connections[side].getMain()){
 			result.add(collisionBoxes[3]);
 		}break;
-		case 4:if(connections[side]!=null){
+		case 4:if(connections[side].getMain()){
 			result.add(collisionBoxes[5]);
 		}break;
-		case 5:if(connections[side]!=null){
+		case 5:if(connections[side].getMain()){
 			result.add(collisionBoxes[0]);
 		}break;
 		}

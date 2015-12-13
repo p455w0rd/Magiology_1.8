@@ -28,7 +28,12 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	
 	@Override
 	public final IMessage onMessage(T message, MessageContext ctx){
-		return message.process(ctx.side.isServer()?ctx.getServerHandler().playerEntity:U.getMC().thePlayer,ctx.side);
+		try{
+			return message.process(ctx.side.isServer()?ctx.getServerHandler().playerEntity:U.getMC().thePlayer,ctx.side);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override

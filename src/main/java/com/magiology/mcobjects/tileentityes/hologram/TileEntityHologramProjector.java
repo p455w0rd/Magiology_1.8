@@ -30,7 +30,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<TileEntityHologramProjector>();
 	public Point point=new Point();
 	public ComplexCubeModel main;
-	public ArrayList<HoloObject> holoObjects=new ArrayList<HoloObject>();
+	public final ArrayList<HoloObject> holoObjects=new ArrayList<HoloObject>();
 	public Vector2f size,offset;
 	public Vec3M mainColor=new Vec3M(0.05,0.5,0.8);
 	public HoloObject lastPartClicked;
@@ -49,9 +49,10 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		InterfaceBinder.readInterfaceFromNBT(this, NBT);
 		int dataSize=NBT.getInteger("DS");
 		List<SavableData> data=SavableDataHandler.loadDataFromNBT(NBT, "ID",false);
-		holoObjects.clear();
 		for(int i=0;i<dataSize;i++){
-			holoObjects.add((HoloObject)data.get(i));
+			HoloObject newHolo=(HoloObject)data.get(i);
+			holoObjects.removeIf(existing->existing.id==newHolo.id);
+			holoObjects.add(newHolo);
 		}
 		for(int i=0;i<3;i++)highlighs[i]=NBT.getBoolean("h"+i);
 	}
@@ -60,10 +61,9 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		super.writeToNBT(NBT);
 		InterfaceBinder.writeInterfaceToNBT(this, NBT);
 		
+		
 		List<SavableData> savableData=new ArrayList<SavableData>();
-		for(HoloObject obj:holoObjects)if(obj instanceof SavableData){
-			savableData.add(obj);
-		}
+		for(HoloObject obj:holoObjects)if(obj instanceof SavableData)savableData.add(obj);
 		
 		int dataSize=savableData.size();
 		NBT.setInteger("DS", dataSize);
@@ -139,6 +139,13 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		}
 		if(!changed)lastPartClicked=null;
 		if(UtilM.isRemote(player))UtilM.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
+		else{
+			if(!worldObj.playerEntities.isEmpty()&&worldObj.playerEntities.get(0)instanceof EntityPlayerMP){
+				((ArrayList<EntityPlayerMP>)worldObj.playerEntities).forEach(player0->{
+					player0.playerNetServerHandler.sendPacket(getDescriptionPacket());
+				});
+			}
+		}
 	}
 	
 	

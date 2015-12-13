@@ -58,7 +58,7 @@ public class UtilM{
 	
 	
 	static Random rand=new Random();
-	public  static final float p=1F/16F;
+	public static final float p=1F/16F;
 	@SideOnly(value=Side.CLIENT)
     public static void spawnEntityFX(EntityFX particleFX){
 		if(isRemote(particleFX)){

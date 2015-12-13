@@ -44,7 +44,6 @@ public class Button extends TextBox{
 		GL11.glTranslatef(-Font.FR().getStringWidth(txt)/2, -Font.FR().FONT_HEIGHT/2, 0);
 		Font.FR().drawString(txt, 0, 0, renderColor.mix(renderColor.negative(), 0.8F,1F).toCode());
 		GL11U.glCulFace(true);
-		
 	}
 
 	@Override

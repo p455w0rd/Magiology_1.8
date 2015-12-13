@@ -1,5 +1,7 @@
 package com.magiology.client.render.tilerender;
 
+import java.util.*;
+
 import net.minecraft.tileentity.*;
 
 import org.lwjgl.opengl.*;
@@ -17,6 +19,8 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 	@Override
 	public void renderTileEntityAt(TileEntity t, double x, double y, double z, float partialTicks){
 		tile=(TileEntityHologramProjector)t;
+//		tile.arraySize.updateValue(tile.holoObjects);
+		
 		GL11.glPushMatrix();
 		GL11.glTranslated(x,y,z);
 		GL11U.texture(false);
@@ -31,7 +35,9 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 		GL11.glTranslatef(tile.size.x, tile.size.y, 0);
 		boolean selected=false;
 		tile.selectedObj=null;
-		for(HoloObject ro:tile.holoObjects){
+		Iterator<HoloObject> holos=tile.holoObjects.iterator();
+		while(holos.hasNext()){
+			HoloObject ro=holos.next();
 			if(ro.host==null)ro.host=tile;
 			GL11.glPushMatrix();
 			GL11.glTranslatef(ro.position.x, ro.position.y, 0);
@@ -56,6 +62,8 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 		
 		GL11U.endOpaqueRendering();
 		GL11.glPopMatrix();
+		
+//		tile.arraySize.updateValue(tile.holoObjects);
 	}
 	
 }

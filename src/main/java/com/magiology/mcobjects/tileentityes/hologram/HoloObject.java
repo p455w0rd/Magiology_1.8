@@ -132,6 +132,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 			setName(strings_.next());
 			if(b)activationTarget.argsSrc=strings_.next().substring(1);
 		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -218,6 +219,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 	public final class StandardHoloObject{
 		private StandardHoloObject(){}
 		protected Object standardHoloObjectCommandInteract(String[] words){
+			
 			try{
 				List<AbstractInteraction<HoloObject>> interations=new ArrayList<AbstractInteraction<HoloObject>>();
 				getInteractions(interations);
@@ -228,13 +230,14 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 						try{
 							if(interaction.correctWords(words))interaction.set(HoloObject.this, changed, interaction.parseWords(words));
 						}catch(Exception e){}
-						if(changed.getVar())changedFinal=true;
 					}
 					if(changedFinal)HoloObject.this.host.sync();
 				}else{
 					for(AbstractInteraction<HoloObject> interaction:interations){
 						try{
-							if(interaction.correctWords(words))return interaction.get(HoloObject.this);
+							if(interaction.correctWords(words)){
+								return interaction.get(HoloObject.this);
+							}
 						}catch(Exception e){}
 					}
 				}
@@ -244,27 +247,25 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 			return null;
 		}
 		protected void sendStandardCommand(){
-			if(activationTarget==null||UtilM.getWorld(host)==null)return;
-//			new Thread((Runnable)()->{
-				WorldNetworkInterface Interface=InterfaceBinder.get(host);
-				NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
-				if(netInterface!=null&&netInterface.getBrain()!=null){
-					try{
-						ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-						Object[] args=ProgramCommon.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
-						if(ErrorPos.getVar()==-1){
-							DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
-							if(netInterface!=null&&com!=null){
-								com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
-								List<TileEntityNetworkRouter> routers=netInterface.getPointerContainers();
-								if(!routers.isEmpty())netInterface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.result);
-							}
+			if(activationTarget==null||!host.hasWorldObj())return;
+			WorldNetworkInterface Interface=InterfaceBinder.get(host);
+			NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
+			if(netInterface!=null&&netInterface.getBrain()!=null){
+				try{
+					ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
+					Object[] args=ProgramCommon.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
+					if(ErrorPos.getVar()==-1){
+						DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
+						if(netInterface!=null&&com!=null){
+							com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
+							List<TileEntityNetworkRouter> routers=netInterface.getPointerContainers();
+							if(!routers.isEmpty())netInterface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.result);
 						}
-					}catch(Exception e){
-						e.printStackTrace();
 					}
+				}catch(Exception e){
+					e.printStackTrace();
 				}
-//			}).start();
+			}
 		}
 	}
 

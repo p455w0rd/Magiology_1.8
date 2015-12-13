@@ -9,12 +9,11 @@ public abstract class AbstractInteraction<Host extends ICommandInteract>{
 	protected final int commandLenghtSet,commandLenghtGet,dataSize;
 	
 	public AbstractInteraction(String name,String inData){
-		wordsGet=(this.exampleGet="get "+name+" "+inData).split(" |\\,");
-		wordsSet=(this.exampleSet="set "+name           ).split(" |\\,");
+		wordsGet=(this.exampleGet="get "+name           ).split(" ");
+		wordsSet=(this.exampleSet="set "+name+" "+inData).split(" ");
 		commandLenghtSet=wordsSet.length;
 		commandLenghtGet=wordsGet.length;
 		dataSize=commandLenghtSet-commandLenghtGet;
-		if(dataSize<=0)throw new IllegalStateException("Invalid example!");
 	}
 	
 	protected boolean getOrSet(String[] wordsIn)throws Exception{
@@ -23,9 +22,11 @@ public abstract class AbstractInteraction<Host extends ICommandInteract>{
 		throw new IllegalStateException("Invalid command!");
 	}
 	public boolean correctWords(String[] wordsIn)throws Exception{
+		if(!wordsIn[1].equals(wordsGet[1]))return false;
 		boolean isGet=getOrSet(wordsIn),correctLenght;
 		if(isGet)correctLenght=commandLenghtGet==wordsIn.length;
 		else correctLenght=commandLenghtSet==wordsIn.length;
+	
 		return correctLenght;
 	}
 	

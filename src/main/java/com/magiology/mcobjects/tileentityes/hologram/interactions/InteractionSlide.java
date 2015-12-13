@@ -6,7 +6,7 @@ import com.magiology.util.utilobjects.*;
 public class InteractionSlide<Host extends HoloObject> extends AbstractInteraction<Host>{
 	
 	public InteractionSlide(){
-		super("size","0.69");
+		super("sliderPos","0.69");
 	}
 
 	@Override

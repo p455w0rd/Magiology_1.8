@@ -175,6 +175,7 @@ public class NormalizedVertixBuffer{
 	}
 	public void rotate(double x,double y,double z){
 		if(x==0&&y==0&&z==0)return;
+		
 		Vector3f.add(rotation, new Vector3f((float)x, (float)y, (float)z), rotation);
 		if(x!=0)Matrix4f.rotate((float)Math.toRadians(x), new Vector3f(1, 0, 0), transformation, transformation);
 		if(y!=0)Matrix4f.rotate((float)Math.toRadians(y), new Vector3f(0, 1, 0), transformation, transformation);
@@ -252,6 +253,11 @@ public class NormalizedVertixBuffer{
 	public Vector3f getRotation(){
 		return Vector3f.add(rotation, new Vector3f(), null);
 	}
+	
+	public ShadedTriangle getTriangle(int id){
+		return shadedTriangles.get(id);
+	}
+	
 	public void importComplexCube(ComplexCubeModel... cubeModels){
 		for(ComplexCubeModel a:cubeModels)importComplexCube(a);
 	}

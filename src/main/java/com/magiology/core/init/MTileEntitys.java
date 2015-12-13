@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.tileentity.*;
 import net.minecraft.tileentity.*;
 import net.minecraftforge.fml.client.registry.*;
 import net.minecraftforge.fml.common.registry.*;
+import net.minecraftforge.fml.relauncher.*;
 
 import com.magiology.client.render.tilerender.*;
 import com.magiology.client.render.tilerender.network.*;
@@ -44,6 +45,7 @@ public class MTileEntitys{
 		register(TileEntityRareSpacePipe.class);
 		register(TileEntityNetworkProgramHolder.class);
 	}
+	@SideOnly(Side.CLIENT)
 	public static void initRenders(){
 		bindTileWRender(TileEntityFireLamp.class,               new RenderFireLamp());
 		bindTileWRender(TileEntityOreStructureCore.class,       new RenderOreStructureCore());

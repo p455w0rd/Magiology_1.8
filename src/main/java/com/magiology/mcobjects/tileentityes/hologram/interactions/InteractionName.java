@@ -6,7 +6,7 @@ import com.magiology.util.utilobjects.*;
 public class InteractionName<Host extends HoloObject> extends AbstractInteraction<Host>{
 	
 	public InteractionName(){
-		super("size","0.69, 0.420");
+		super("name","Sample name");
 	}
 
 	@Override
@@ -19,10 +19,20 @@ public class InteractionName<Host extends HoloObject> extends AbstractInteractio
 		host.setName((String)setter);
 		changed.setVar(true);
 	}
-
+	
 	@Override
 	public Object parseWords(String[] wordsIn)throws Exception{
-		return wordsIn[2];
+		StringBuilder result=new StringBuilder();
+		for(int i=2;i<wordsIn.length;i++)result.append(wordsIn[i]+" ");
+		return result.toString();
 	}
-
+	
+	@Override
+	public boolean correctWords(String[] wordsIn) throws Exception{
+		if(!wordsIn[1].equals(wordsGet[1]))return false;
+		boolean isGet=getOrSet(wordsIn),correctLenght;
+		if(isGet)correctLenght=commandLenghtGet==wordsIn.length;
+		else correctLenght=commandLenghtSet>=wordsIn.length;
+		return correctLenght;
+	}
 }

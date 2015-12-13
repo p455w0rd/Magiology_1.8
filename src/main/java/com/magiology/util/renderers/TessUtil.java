@@ -13,11 +13,14 @@ import net.minecraft.entity.*;
 import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
+import com.magiology.client.render.*;
 import com.magiology.client.render.font.*;
 import com.magiology.core.*;
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.*;
 import com.magiology.mcobjects.effect.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.*;
@@ -341,52 +344,47 @@ public class TessUtil{
 	}
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NormalizedVertixBuffer nvb,double textueOffset,double textueScale){
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
-		UtilM.getThePlayer();
-		WorldRenderer renderer=getWR();
-		Vec3M[] points=new Vec3M[4];
+		
+		Vec3M[] points=new Vec3M[8];
 		
 //		RenderGlobal.drawOutlinedBoundingBox(p_147590_0_, p_147590_1_);
 		
 		points[0]=new Vec3M(0, -width/2, 0);
-		points[1]=new Vec3M(0, -width/2, 0);
-		points[2]=new Vec3M(0,  width/2, 0);
-		points[3]=new Vec3M(0,  width/2, 0);
-		float rotationX=-(float) Math.atan2(x1-x2, -z1+z2);
-		for(int a=0;a<4;a++){
-			points[a].rotateAroundZ((float) Math.toRadians(90));
-			points[a].rotateAroundY((rotationX));
+		points[1]=new Vec3M(0,  width/2, 0);
+		points[2]=new Vec3M(0,  width/2, lenght);
+		points[3]=new Vec3M(0, -width/2, lenght);
+		points[4]=new Vec3M(-width/2, 0, 0);
+		points[5]=new Vec3M( width/2, 0, 0);
+		points[6]=new Vec3M( width/2, 0, lenght);
+		points[7]=new Vec3M(-width/2, 0, lenght);
+		float
+			ditanceX=(float)-(x1-x2),
+			ditanceY=(float)-(y1-y2),
+			ditanceZ=(float)-(z1-z2),
+			rotationX=(float)-Math.toDegrees(Math.atan2(ditanceY,new Vec3M(x1-x2, 0, z1-z2).lengthVector())),
+			rotationY=(float)-Math.toDegrees(Math.atan2(ditanceX, -ditanceZ));
+		
+		for(int i=0;i<points.length;i++){
+			points[i]=GL11U.transformVector(points[i], new Vector3f(), rotationX, 0, 0, 1);
+			points[i]=GL11U.transformVector(points[i], new Vector3f(), 0, rotationY+180, 0, 1);
+			points[i]=GL11U.transformVector(points[i], new Vector3f((float)x1, (float)y1, (float)z1), 0, 0, 0, 1);
 		}
-		if(nvb==null){
-			renderer.startDrawingQuads();
-			renderer.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
-			renderer.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
-			renderer.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
-			renderer.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
-			for(int a=0;a<4;a++){
-				points[a].rotateAroundY((-rotationX));
-				points[a].rotateAroundZ((float) Math.toRadians(90));
-				points[a].rotateAroundY((rotationX));
-			}
-			renderer.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
-			renderer.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
-			renderer.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
-			renderer.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
-			TessUtil.draw();
-		}else{
-			nvb.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
-			nvb.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
-			nvb.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
-			nvb.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
-			for(int a=0;a<4;a++){
-				points[a].rotateAroundY((-rotationX));
-				points[a].rotateAroundZ((float) Math.toRadians(90));
-				points[a].rotateAroundY((rotationX));
-			}
-			nvb.addVertexWithUV(points[0].x+x2,points[0].y+y2,points[0].z+z2,                   textueOffset,0);
-			nvb.addVertexWithUV(points[1].x+x1,points[1].y+y1,points[1].z+z1,lenght*textueScale+textueOffset,0);
-			nvb.addVertexWithUV(points[2].x+x1,points[2].y+y1,points[2].z+z1,lenght*textueScale+textueOffset,1);
-			nvb.addVertexWithUV(points[3].x+x2,points[3].y+y2,points[3].z+z2,                   textueOffset,1);
-		}
+		
+//		Drawer.startDrawingLines();
+//		Drawer.addVertex(x1, y1, z1);
+//		Drawer.addVertex(x2, y2, z2);
+//		Drawer.addVertex(x1, y1, z1);
+//		Drawer.addVertex(x1, y1+ditanceY, z1);
+//		Drawer.addVertex(x1, y1, z1);
+//		Drawer.addVertex(x1+ditanceX, y1, z1);
+//		Drawer.addVertex(x1, y1, z1);
+//		Drawer.addVertex(x1, y1, z1+ditanceZ);
+//		Drawer.draw();
+		
+		Drawer.startDrawingQuads();
+		for(Vec3M i:points)Drawer.addVertex(i.x, i.y, i.z);
+		Drawer.draw();
+		
 	}
 	public static void renderParticle(){
 		WorldRenderer tess=TessUtil.getWR();
@@ -443,5 +441,63 @@ public class TessUtil{
 				calculateRenderPos(entity,'x'),
 				calculateRenderPos(entity,'y'),
 				calculateRenderPos(entity,'z')};
+	}
+	
+	private static ComplexCubeModel brainC1,brainC2;
+	
+	static{
+		Vec8F uv=new Vec8F(0, 0, 1, 0, 1, 1, 0, 1);
+		brainC1=new ComplexCubeModel(-UtilM.p, -UtilM.p, -UtilM.p, 0, 0, 0,new Vec8F[]{uv},new ResourceLocation[]{Textures.Brain});
+		brainC2=new ComplexCubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new Vec8F[]{uv},new ResourceLocation[]{Textures.Brain});
+	}
+	
+	public static NormalizedVertixBuffer drawBrain(Vec3M pos,double scale1,double anim){
+		anim=Math.toRadians(anim);
+		
+		TessUtil.bindTexture(Textures.Brain);
+		
+		NormalizedVertixBuffer wrapper=new NormalizedVertixBuffer();
+		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		
+		
+		buff.setInstantNormalCalculation(false);
+		buff.pushMatrix();
+		buff.translate(pos.x, pos.y, pos.z);
+		buff.scale(scale1);
+		{
+			buff.pushMatrix();
+			buff.importComplexCube(brainC1,brainC2);
+			
+			double scale=Math.sin(anim*10);
+			scale=scale*scale;
+			scale*=0.5;
+			scale+=0.5;
+			
+			buff.scale(scale);
+			buff.rotate(Math.sin(anim*4)*180,Math.sin(anim*8+235)*90,Math.sin(anim*2+859)*360);
+			
+			buff.transformAndSaveTo(wrapper);
+			buff.popMatrix();
+		}{
+			buff.pushMatrix();
+			buff.importComplexCube(brainC1,brainC2);
+			
+			double scale=Math.sin(anim*4);
+			scale=scale*scale;
+			scale*=0.5;
+			scale+=0.5;
+			
+			buff.scale(scale);
+			buff.rotate(Math.sin(anim*8)*90,Math.sin(anim*8+140)*90,-Math.sin(anim*2+90)*360);
+			
+			buff.transformAndSaveTo(wrapper);
+			buff.popMatrix();
+		}
+		buff.popMatrix();
+		
+		buff.setInstantNormalCalculation(true);
+		
+		wrapper.recalculateNormals();
+		return wrapper;
 	}
 }

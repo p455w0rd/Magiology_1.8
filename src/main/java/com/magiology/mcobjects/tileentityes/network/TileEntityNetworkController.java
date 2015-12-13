@@ -40,6 +40,15 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 				-1
 				).sides, SixSidedBoolean.lastGen.sides, 1, 20, 200, 100000);
 		this.initUpgrades(Container.FirePipe);
+		expectedBoxes=new AxisAlignedBB[]{
+				new AxisAlignedBB(0,     p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, 0,      p*6.5, p*9.5, p*5,   p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  0 ,    p*9.5, p*9.5, p*5  ),
+				new AxisAlignedBB(p*9.5, p*6.5,  p*6.5, 1,     p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, p*10.5, p*6.5, p*9.5, 1,     p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  p*9.5, p*9.5, p*9.5, 1    ),
+				new AxisAlignedBB(p*5,   p*5,    p*5, p*11, p*10.5,  p*11)
+		};
 	}
 	
 	public void broadcastWithCheck(TileEntityNetworkRouter router, String action){
@@ -55,21 +64,12 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-    	for(int i=0;i<6;i++){
-    		bannedConnections[i]=NBT.getBoolean("bannedConnections"+i);
-    		connections[i]=EnumFacing.getFront(NBT.getInteger("connections"+i));
-    		if(connections[i]==null)connections[i]=null;
-    	}
     	networkIdMap.put(this, NBT.getLong("NI"));
     }
 	
     @Override
 	public void writeToNBT(NBTTagCompound NBT){
     	super.writeToNBT(NBT);
-    	for(int i=0;i<6;i++){
-    		NBT.setBoolean("bannedConnections"+i, bannedConnections[i]);
-    		NBT.setInteger("connections"+i, SideUtil.enumFacingOrientation(connections[i]));
-    	}
     	NBT.setLong("NI", getNetworkId());
     }
 	
@@ -85,7 +85,12 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandler.setConnections(connections, this);
+		EnumFacing[] connectionsDummy=new EnumFacing[6];
+		UpdateablePipeHandler.setConnections(connectionsDummy, this);
+		for(int i=0;i<connectionsDummy.length;i++){
+			connections[i].setMain(connectionsDummy[i]!=null);
+		}
+		
 		for(int i=0;i<6;i++)setAccessibleOnSide(i, i!=SideUtil.DOWN()||i!=SideUtil.UP());
 		PowerUtil.sortSides(this);
 		setColisionBoxes();
@@ -97,13 +102,13 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?getExpectedColisionBoxes()[3]:null,
-				connections[1]!=null?getExpectedColisionBoxes()[4]:null,
-				connections[2]!=null?getExpectedColisionBoxes()[2]:null,
-				connections[3]!=null?getExpectedColisionBoxes()[5]:null,
-				connections[0]!=null?getExpectedColisionBoxes()[1]:null,
-				connections[4]!=null?getExpectedColisionBoxes()[0]:null,
-				                     getExpectedColisionBoxes()[6]
+		connections[5].getMain()?getExpectedColisionBoxes()[3]:null,
+		connections[1].getMain()?getExpectedColisionBoxes()[4]:null,
+		connections[2].getMain()?getExpectedColisionBoxes()[2]:null,
+		connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
+		connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
+		connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
+								 getExpectedColisionBoxes()[6]
 		};
 	}
 	
@@ -144,7 +149,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	private long lastRestart=0;
 	public void restartNetwork(){
 		try{
-			if(worldObj.getTotalWorldTime()!=lastRestart){
+			if(worldObj!=null&&worldObj.getTotalWorldTime()!=lastRestart){
 				lastRestart=worldObj.getTotalWorldTime();
 			}else return;
 			ISidedNetworkComponent tile=this;

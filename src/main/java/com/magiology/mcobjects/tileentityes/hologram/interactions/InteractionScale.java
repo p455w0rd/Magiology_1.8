@@ -6,7 +6,7 @@ import com.magiology.util.utilobjects.*;
 public class InteractionScale<Host extends HoloObject> extends AbstractInteraction<Host>{
 	
 	public InteractionScale(){
-		super("size","0.69");
+		super("scale","0.69");
 	}
 
 	@Override

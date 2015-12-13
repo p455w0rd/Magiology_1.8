@@ -40,6 +40,7 @@ public class Slider extends HoloObject{
 		GL11.glTranslatef(0, -renderSliderPos.getPoint()*size.y, 0);
 		col.blackNWhite().bind();
 		scroll.draw();
+		//UtilM.println(col,prevColor);
 	}
 
 	@Override
@@ -59,8 +60,12 @@ public class Slider extends HoloObject{
 
 	@Override
 	public void onPressed(EntityPlayer player){
-		if(moveMode||player.isSneaking())return;
-		sliderPos=UtilM.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
+		if(moveMode||player.isSneaking()||host==null)return;
+		try{
+			sliderPos=UtilM.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		sendCommand();
 	}
 	

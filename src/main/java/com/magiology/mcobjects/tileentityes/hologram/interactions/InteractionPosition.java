@@ -8,7 +8,7 @@ import com.magiology.util.utilobjects.*;
 public class InteractionPosition<Host extends HoloObject> extends AbstractInteraction<Host>{
 	
 	public InteractionPosition(){
-		super("size","0.69, 0.420");
+		super("pos","0.69, 0.420");
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class InteractionPosition<Host extends HoloObject> extends AbstractIntera
 
 	@Override
 	public Object parseWords(String[] wordsIn)throws Exception{
-		return new Vector2f(Float.parseFloat(wordsIn[2]), Float.parseFloat(wordsIn[3]));
+		return new Vector2f(Float.parseFloat(wordsIn[4]), Float.parseFloat(wordsIn[5]));
 	}
 
 }

@@ -21,7 +21,7 @@ public class Textures{
 	Helmet42Model,GuiArmorEditor,firePipeCore,FirePipeConection,FirePipeConectionEnd,Pants42Model,PowerCounterCore,PowerCounterFront,PowerCounterSide1,PowerCounterEnergyBar,vanillaBrick,BateryL1Core,
 	BateryL2Core,BateryL3Core,BateryL100Core,BedrockBreakerBase,BedrockBreakerLegSide,BedrockBreakerLegFront,BedrockBreakerLegBack,BedrockBreakerLegTopBottom,BedrockBreakerLegLaser,BigFurnaceOutput,
 	EnergizedLapisOre,FireExhaust,FireGunGun,FireGunGear,FireLampSide,FireLampUpNDown,FireMatrixReceaverBase,FireMatrixTransfererBase,FirePipeConectionFSL,FirePipeConectionFF,FirePipeConecterBase,
-	FirePipeConecterInMe,FirePipeConecterOutOfMe,OreStructureCore,StatsGui1,
+	FirePipeConecterInMe,FirePipeConecterOutOfMe,OreStructureCore,StatsGui1, Brain,
 	//hand
 	handBaseTop,handBaseSide,handBaseSide2,handBaseBotom,
 	handThumbTop,handThumbBottom,handThumbEnd,handThumbStart,handThumbTxtClip,handThumbSide,
@@ -37,8 +37,8 @@ public class Textures{
 	
 	public static void postInit(){
 		//---textur stands for "no texture and it should be made as soon as possible"---\\
-		UtilM.println("TEXTURE INIT STARTED!");
 		if(isInit)return;isInit=true;
+		UtilM.println("TEXTURE INIT STARTED!");
 		Helmet42Model=             getResource(MReference.MODID,"/models/textures/Helmet42Model.png");
 		GuiArmorEditor=            getResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
 		firePipeCore=              getResource(MReference.MODID,"/textures/models/firepipe/FirePipeCore.png");
@@ -101,6 +101,7 @@ public class Textures{
 		ISidedIns=                 getResource(MReference.MODID,"/textures/gui/ISidedIns.png");
 		WingColors=                getResource(MReference.MODID,"/models/textures/wingColorMap.png");
 		ProgramGui=                getResource(MReference.MODID,"/textures/gui/Program.png");
+		Brain=                     getResource(MReference.MODID,"/textures/models/brain.png");
 		
 		UtilM.println("TEXTURE INIT ENDED!");
 		UtilM.println("----\n--------\n------------");
