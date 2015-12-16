@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects.vectors;
 
-import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.*;
 
 public class QuadUV{
 	public float x1,y1,x2,y2,x3,y3,x4,y4;
