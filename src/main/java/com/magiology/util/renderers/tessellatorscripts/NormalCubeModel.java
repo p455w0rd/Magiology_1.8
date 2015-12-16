@@ -7,7 +7,7 @@ import com.magiology.util.utilobjects.vectors.*;
 public class NormalCubeModel{
 	PlateModel[] sides;
 	public float minX,minY,minZ,maxX,maxY,maxZ;
-	Vec8F[] UVs=new Vec8F[6];
+	QuadUV[] UVs=new QuadUV[6];
 	ResourceLocation[] st=new ResourceLocation[6];
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public NormalCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
@@ -15,7 +15,7 @@ public class NormalCubeModel{
 		this.maxX=maxX;this.maxY=maxY;this.maxZ=maxZ;
 		sides=genSides();
 	}
-	public NormalCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,Vec8F[] quadUVs,ResourceLocation[] sidedtextures){
+	public NormalCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,QuadUV[] quadUVs,ResourceLocation[] sidedtextures){
 		if(quadUVs.length!=6||sidedtextures.length!=6)return;
 		UVs=quadUVs;
 		st=sidedtextures;

@@ -11,8 +11,8 @@ import com.magiology.util.utilobjects.vectors.*;
 public class ComplexCubeModel{
 	private final float minX,minY,minZ,maxX,maxY,maxZ;
 	public Vec3M[] points=new Vec3M[8];
-	public Vec8F[] UVs=new Vec8F[6];
-	public Vec8F[] UVs2=new Vec8F[6];
+	public QuadUV[] UVs=new QuadUV[6];
+	public QuadUV[] UVs2=new QuadUV[6];
 	ResourceLocation[] st=new ResourceLocation[6];
 	NormalizedVertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
@@ -21,10 +21,10 @@ public class ComplexCubeModel{
 		this.maxX=maxX;this.maxY=maxY;this.maxZ=maxZ;
 		points=genPoints();
 	}
-	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,Vec8F[] quadUVs,ResourceLocation[] sidedtextures){
+	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,QuadUV[] quadUVs,ResourceLocation[] sidedtextures){
 		if(quadUVs!=null){
 			if(quadUVs.length==6)UVs=quadUVs;
-			else if(quadUVs.length==1)UVs=new Vec8F[]{quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0]};
+			else if(quadUVs.length==1)UVs=new QuadUV[]{quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0]};
 		}
 		if(sidedtextures!=null){
 			if(sidedtextures.length==6)st=sidedtextures;
@@ -51,12 +51,12 @@ public class ComplexCubeModel{
 			minY+=a;
 			maxY+=a;
 		}
-		UVs[0]=new Vec8F(maxZ, minY, maxZ, maxY, minZ, maxY, minZ, minY);
-		UVs[1]=new Vec8F(maxZ, minY, maxZ, maxY, minZ, maxY, minZ, minY);
-		UVs[2]=new Vec8F(maxX, maxZ, maxX, minZ, minX, minZ, minX, maxZ);
-		UVs[3]=new Vec8F(maxX, minZ, maxX, maxZ, minX, maxZ, minX, minZ);
-		UVs[4]=new Vec8F(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
-		UVs[5]=new Vec8F(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
+		UVs[0]=new QuadUV(maxZ, minY, maxZ, maxY, minZ, maxY, minZ, minY);
+		UVs[1]=new QuadUV(maxZ, minY, maxZ, maxY, minZ, maxY, minZ, minY);
+		UVs[2]=new QuadUV(maxX, maxZ, maxX, minZ, minX, minZ, minX, maxZ);
+		UVs[3]=new QuadUV(maxX, minZ, maxX, maxZ, minX, maxZ, minX, minZ);
+		UVs[4]=new QuadUV(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
+		UVs[5]=new QuadUV(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
 		UVs2=UVs.clone();
 	}
 	public ComplexCubeModel(final ComplexCubeModel cube){
@@ -83,7 +83,7 @@ public class ComplexCubeModel{
 	}
 	
 	public void flipUVs(){
-		Vec8F[] h=UVs2;
+		QuadUV[] h=UVs2;
 		UVs2=UVs;
 		UVs=h;
 	}

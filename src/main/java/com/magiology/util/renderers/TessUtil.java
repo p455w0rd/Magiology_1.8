@@ -343,20 +343,29 @@ public class TessUtil{
 		}
 	}
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NormalizedVertixBuffer nvb,double textueOffset,double textueScale){
+		boolean newBuff;
+		if(newBuff=(nvb==null)){
+			nvb=new NormalizedVertixBuffer();
+		}
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
 		
-		Vec3M[] points=new Vec3M[8];
-		
-//		RenderGlobal.drawOutlinedBoundingBox(p_147590_0_, p_147590_1_);
-		
-		points[0]=new Vec3M(0, -width/2, 0);
-		points[1]=new Vec3M(0,  width/2, 0);
-		points[2]=new Vec3M(0,  width/2, lenght);
-		points[3]=new Vec3M(0, -width/2, lenght);
-		points[4]=new Vec3M(-width/2, 0, 0);
-		points[5]=new Vec3M( width/2, 0, 0);
-		points[6]=new Vec3M( width/2, 0, lenght);
-		points[7]=new Vec3M(-width/2, 0, lenght);
+		QuadUV uv=new QuadUV(
+			(float)(lenght*textueScale+textueOffset),1,
+			(float)(lenght*textueScale+textueOffset),0,
+			(float)textueOffset,0,
+			(float)textueOffset,1
+		);
+
+		Vec3M[] points={
+			new Vec3M(0,        -width/2, 0     ),
+			new Vec3M(0,         width/2, 0     ),
+			new Vec3M(0,         width/2, lenght),
+			new Vec3M(0,        -width/2, lenght),
+			new Vec3M(-width/2,        0, 0     ),
+			new Vec3M( width/2,        0, 0     ),
+			new Vec3M( width/2,        0, lenght),
+			new Vec3M(-width/2,        0, lenght)
+		};
 		float
 			ditanceX=(float)-(x1-x2),
 			ditanceY=(float)-(y1-y2),
@@ -370,21 +379,9 @@ public class TessUtil{
 			points[i]=GL11U.transformVector(points[i], new Vector3f((float)x1, (float)y1, (float)z1), 0, 0, 0, 1);
 		}
 		
-//		Drawer.startDrawingLines();
-//		Drawer.addVertex(x1, y1, z1);
-//		Drawer.addVertex(x2, y2, z2);
-//		Drawer.addVertex(x1, y1, z1);
-//		Drawer.addVertex(x1, y1+ditanceY, z1);
-//		Drawer.addVertex(x1, y1, z1);
-//		Drawer.addVertex(x1+ditanceX, y1, z1);
-//		Drawer.addVertex(x1, y1, z1);
-//		Drawer.addVertex(x1, y1, z1+ditanceZ);
-//		Drawer.draw();
-		
-		Drawer.startDrawingQuads();
-		for(Vec3M i:points)Drawer.addVertex(i.x, i.y, i.z);
-		Drawer.draw();
-		
+		for(int i=0;i<points.length;i++)nvb.addVertexWithUV(points[i].x, points[i].y, points[i].z,uv.getUV(i%4).x,uv.getUV(i%4).y);
+		for(int i=points.length-1;i>=0;i--)nvb.addVertexWithUV(points[i].x, points[i].y, points[i].z,uv.getUV(i%4).x,uv.getUV(i%4).y);
+		if(newBuff)nvb.draw();
 	}
 	public static void renderParticle(){
 		WorldRenderer tess=TessUtil.getWR();
@@ -446,9 +443,9 @@ public class TessUtil{
 	private static ComplexCubeModel brainC1,brainC2;
 	
 	static{
-		Vec8F uv=new Vec8F(0, 0, 1, 0, 1, 1, 0, 1);
-		brainC1=new ComplexCubeModel(-UtilM.p, -UtilM.p, -UtilM.p, 0, 0, 0,new Vec8F[]{uv},new ResourceLocation[]{Textures.Brain});
-		brainC2=new ComplexCubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new Vec8F[]{uv},new ResourceLocation[]{Textures.Brain});
+		QuadUV uv=new QuadUV(0, 0, 1, 0, 1, 1, 0, 1);
+		brainC1=new ComplexCubeModel(-UtilM.p, -UtilM.p, -UtilM.p, 0, 0, 0,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
+		brainC2=new ComplexCubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
 	}
 	
 	public static NormalizedVertixBuffer drawBrain(Vec3M pos,double scale1,double anim){

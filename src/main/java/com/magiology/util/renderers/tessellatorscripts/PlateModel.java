@@ -9,7 +9,7 @@ import com.magiology.util.utilobjects.vectors.*;
 
 public class PlateModel{
 	public float Width,Lenght,Height;
-	public Vec8F quadUV=null;
+	public QuadUV quadUV=null;
 	ResourceLocation texture;
 	float Point1X=0,Point1Y=0,Point1Z=0;
 	float Point2X=Width,Point2Y=0,Point2Z=0;
@@ -27,7 +27,7 @@ public class PlateModel{
 		Point4X=0;Point4Y=Height;Point4Z=Lenght;
 		if(instantRender)render();
 	}
-	public PlateModel(float Width,float Height,float Lenght,Vec8F quadUV,ResourceLocation resourceLocation,boolean instantRender){
+	public PlateModel(float Width,float Height,float Lenght,QuadUV quadUV,ResourceLocation resourceLocation,boolean instantRender){
 		this.Width=Width;
 		this.Lenght=Lenght;
 		this.Height=Height;

@@ -9,36 +9,62 @@
 #################################################
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
-:compileApiJava UP-TO-DATE
-:processApiResources UP-TO-DATE
-:apiClasses UP-TO-DATE
-:sourceMainJava
-:compileJavawarning: [options] bootstrap class path not set in conjunction with -source 1.6
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:771: error: illegal start of expression
-			.filter(entry->Objects.equals(entry.getValue(), value))
-			              ^
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:772: error: ')' expected
-			.map(Map.Entry::getKey)
-			              ^
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:772: error: illegal start of expression
-			.map(Map.Entry::getKey)
-			               ^
-C:\Users\toni\Desktop\Magiology 1.8\build\sources\main\java\com\magiology\util\utilclasses\UtilM.java:772: error: ';' expected
-			.map(Map.Entry::getKey)
-			                      ^
-4 errors
-1 warning
- FAILED
+:getVersionJson
+:extractUserdev
+Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.14.4.1577/forge-1.8-11.14.4.1577.pom
+Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.14.4.1577/forge-1.8-11.14.4.1577-userdev.jar
+:extractDependencyATs SKIPPED
+:extractMcpData SKIPPED
+:extractMcpMappings SKIPPED
+:genSrgs SKIPPED
+:downloadClient SKIPPED
+:downloadServer SKIPPED
+:splitServerJar SKIPPED
+:mergeJars SKIPPED
+:deobfMcSRG
+Applying SpecialSource...
+Applying Exceptor...
+:getFernFlower SKIPPED
+:decompileMcPicked up _JAVA_OPTIONS: -Xmx1024M
 
-FAILURE: Build failed with an exception.
+:fixMcSources
+:applySourcePatches
+:remapMcSources
+:recompileMc
+[ant:javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6
+[ant:javac] Note: Some input files use or override a deprecated API.
+[ant:javac] Note: Recompile with -Xlint:deprecation for details.
+[ant:javac] Note: Some input files use unchecked or unsafe operations.
+[ant:javac] Note: Recompile with -Xlint:unchecked for details.
+[ant:javac] 1 warning
+:extractNatives SKIPPED
+:getAssetIndex UP-TO-DATE
+:getAssets
+Current status: 39/734   5%
+Current status: 98/734   13%
+Current status: 133/734   18%
+Current status: 199/734   27%
+Current status: 273/734   37%
+Current status: 308/734   41%
+Current status: 380/734   51%
+Current status: 418/734   56%
+Current status: 447/734   60%
+Current status: 498/734   67%
+Current status: 550/734   74%
+Current status: 586/734   79%
+Current status: 674/734   91%
+Current status: 719/734   97%
+:makeStart
+[ant:javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6
+[ant:javac] 1 warning
+:setupDecompWorkspace
+:eclipseClasspath
+:eclipseJdt
+:eclipseProject
+:makeEclipseCleanRunClient
+:makeEclipseCleanRunServer
+:eclipse
 
-* What went wrong:
-Execution failed for task ':compileJava'.
-> Compilation failed; see the compiler error output for details.
+BUILD SUCCESSFUL
 
-* Try:
-Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
-
-BUILD FAILED
-
-Total time: 33.163 secs
+Total time: 9 mins 0.053 secs

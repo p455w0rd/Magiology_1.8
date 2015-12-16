@@ -257,6 +257,9 @@ public class NormalizedVertixBuffer{
 	public ShadedTriangle getTriangle(int id){
 		return shadedTriangles.get(id);
 	}
+	public List<ShadedTriangle> getTriangles(){
+		return shadedTriangles;
+	}
 	
 	public void importComplexCube(ComplexCubeModel... cubeModels){
 		for(ComplexCubeModel a:cubeModels)importComplexCube(a);

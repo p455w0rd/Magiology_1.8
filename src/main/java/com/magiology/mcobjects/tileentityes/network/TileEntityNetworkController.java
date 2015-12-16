@@ -75,6 +75,17 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	
 	@Override
 	public void update(){
+		
+		expectedBoxes=new AxisAlignedBB[]{
+				new AxisAlignedBB(0,     p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, 0,      p*6.5, p*9.5, p*5,   p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  0,     p*9.5, p*9.5, p*5  ),
+				new AxisAlignedBB(p*11, p*6.5,  p*6.5, 1,     p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, p*10.5, p*6.5, p*9.5, 1,     p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  p*11, p*9.5, p*9.5, 1    ),
+				new AxisAlignedBB(p*5,   p*5,    p*5, p*11, p*10.5,  p*11)
+		};
+		
 		this.power(true);
 		canPathFindTheBrain=true;
 		if(optimizer.isTimeWithAddProgress()){
@@ -102,13 +113,13 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-		connections[5].getMain()?getExpectedColisionBoxes()[3]:null,
-		connections[1].getMain()?getExpectedColisionBoxes()[4]:null,
-		connections[2].getMain()?getExpectedColisionBoxes()[2]:null,
-		connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
-		connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
-		connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
-								 getExpectedColisionBoxes()[6]
+			connections[5].getMain()?getExpectedColisionBoxes()[3]:null,
+			connections[1].getMain()?getExpectedColisionBoxes()[4]:null,
+			connections[2].getMain()?getExpectedColisionBoxes()[2]:null,
+			connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
+			connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
+			connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
+									 getExpectedColisionBoxes()[6]
 		};
 	}
 	

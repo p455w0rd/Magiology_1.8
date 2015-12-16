@@ -27,9 +27,9 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		for(int a=0;a<models.length;a++)models[a].willSideRender=new boolean[]{bol,bol,bol,true,bol,bol};
 		for(int a=0;a<modelsBack.length;a++)for(int b=0;b<modelsBack[0].length;b++)modelsBack[a][b].willSideRender=new boolean[]{bol,bol,bol,true,bol,bol};
 	}
-	private static Vec8F[] genUV(int x1,int y1){
+	private static QuadUV[] genUV(int x1,int y1){
 		float x=(1F*x1)/7F,y=y1/6F,x2=2/14F,y2=1/6F;
-		return new Vec8F[]{new Vec8F(
+		return new QuadUV[]{new QuadUV(
 				x,    y+y2,
 				x,    y,
 				x+x2, y, 

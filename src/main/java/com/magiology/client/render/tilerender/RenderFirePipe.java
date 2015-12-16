@@ -290,7 +290,6 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	public void drawCore(int txAnim){
 		bindTexture(Textures.firePipeCore);
 		float teHC=tHC*txAnim*4;
-		buf.pushMatrix();
 		buf.cleanUp();
 		buf.addVertexWithUV(p*6, p*10, p*6, tWC*4, tHC*4-teHC);
 		buf.addVertexWithUV(p*6, p*6,  p*6, tWC*4, tHC*0-teHC);
@@ -322,7 +321,6 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		buf.addVertexWithUV(p*10, p*6, p*6, tWC*4, tHC*0-teHC);
 		buf.addVertexWithUV(p*10, p*6, p*10, tWC*4, tHC*4-teHC);
 		buf.draw();
-		buf.popMatrix();
 	}
 	public void drawConector(EnumFacing dir){
 		buf.pushMatrix();
