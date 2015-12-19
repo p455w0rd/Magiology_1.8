@@ -5,9 +5,12 @@ import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
 
+import com.magiology.client.render.*;
+import com.magiology.core.*;
 import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.renderers.NormalizedVertixBuffer.ShadedTriangle;
+import com.magiology.util.renderers.glstates.*;
 import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
@@ -20,16 +23,12 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 	private NormalizedVertixBufferModel opaqueNoTexture,noTexture,texture;
 	private static void initModels(){
 		NormalizedVertixBuffer buff=TessUtil.getNVB();
-		
+		QuadUV all=QuadUV.all().rotate();
 		ComplexCubeModel[] sideThingys={
-				new ComplexCubeModel(p*6.5F, p*6.5F, p*11F, p*7F, p*7F, p*13F),
-				new ComplexCubeModel(p*6.5F, p*6.5F, p*13F, p*7F, p*7F, 1),
-				new ComplexCubeModel(p*6.5F, p*9F, p*9.5F, p*7F, p*9.5F, p*13F),
-				new ComplexCubeModel(p*6.5F, p*9F, p*13F, p*7F, p*9.5F, 1),
-				new ComplexCubeModel(p*9F, p*6.5F, p*11F, p*9.5F, p*7F, p*13F),
-				new ComplexCubeModel(p*9F, p*6.5F, p*13F, p*9.5F, p*7F, 1),
-				new ComplexCubeModel(p*9F, p*9F, p*9.5F, p*9.5F, p*9.5F, p*13F),
-				new ComplexCubeModel(p*9F, p*9F, p*13F, p*9.5F, p*9.5F, 1)
+				new ComplexCubeModel(p*6.5F, p*6.5F, p*11F, p*7F, p*7F, p*13F, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null),
+				new ComplexCubeModel(p*6.5F, p*6.5F, p*13F, p*7F, p*7F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null),
+				new ComplexCubeModel(p*6.5F, p*9F, p*9.5F, p*7F, p*9.5F, p*13F, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null),
+				new ComplexCubeModel(p*6.5F, p*9F, p*13F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null)
 		};
 		sideThingys[0].points[0].y-=p*1.5;
 		sideThingys[0].points[1].y-=p*1.5;
@@ -41,19 +40,19 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		sideThingys[2].points[4].y-=p*3;sideThingys[2].points[4].z+=p*0.5;
 		sideThingys[2].points[5].y-=p*3.5;
 		
-		sideThingys[4].points[0].y-=p*1.5;
-		sideThingys[4].points[1].y-=p*1.5;
-		sideThingys[4].points[4].y-=p*1.5;
-		sideThingys[4].points[5].y-=p*1.5;
-		
-		sideThingys[6].points[0].y-=p*3;sideThingys[6].points[0].z+=p*0.5;
-		sideThingys[6].points[1].y-=p*3.5;
-		sideThingys[6].points[4].y-=p*3;sideThingys[6].points[4].z+=p*0.5;
-		sideThingys[6].points[5].y-=p*3.5;
-		
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].willSideRender[4]=sideThingys[i].willSideRender[5]=false;
-		
+
 		buff.importComplexCube(sideThingys);
+		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
+		buff.importComplexCube(sideThingys);
+		
+		NormalizedVertixBufferModel sideThingysModel=buff.exportToNoramlisedVertixBufferModel();
+		
+		sideThingysModel.glStateCell=new GlStateCell(
+			new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
+				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
+			})
+			, null);
 		
 		ComplexCubeModel[] cores={
 			new ComplexCubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1),
@@ -91,7 +90,35 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		NormalizedVertixBufferModel downModel=buff.exportToNoramlisedVertixBufferModel();
 		
 		
-		connections=new SidedModel(new DoubleObject<NormalizedVertixBufferModel,int[]>(horisontalModels,new int[]{2,3,4,5}),new DoubleObject<NormalizedVertixBufferModel,int[]>(upModel,new int[]{0}),new DoubleObject<NormalizedVertixBufferModel,int[]>(downModel,new int[]{1}));
+		connections=new SidedModel(
+			new DoubleObject<NormalizedVertixBufferModel[],int[]>(
+				new NormalizedVertixBufferModel[]{
+					horisontalModels,
+					sideThingysModel
+				},
+				new int[]{
+					2,
+					3,
+					4,
+					5
+				}
+			),
+			new DoubleObject<NormalizedVertixBufferModel[],int[]>(
+				new NormalizedVertixBufferModel[]{
+					upModel
+				},
+				new int[]{
+					0
+				}
+			),
+			new DoubleObject<NormalizedVertixBufferModel[],int[]>(
+				new NormalizedVertixBufferModel[]{
+					downModel
+				},
+				new int[]{
+					1
+				})
+			);
 	}
 	
 	@Override
@@ -121,14 +148,13 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		brainModel.draw();
 
-		GL11.glColor3b((byte)0, (byte)12, (byte)26);
-		
-		GL11U.texture(false);
-		
 		boolean[] sides=new boolean[6];
 		for(int i=0;i<6;i++)sides[i]=tile.connections[i].getMain();
 		
 		connections.draw(sides);
+		GL11.glColor3b((byte)0, (byte)12, (byte)26);
+		GL11U.texture(false);
+		
 		TessUtil.drawLine(minY.xCoord+UtilM.CRandF(minY.yCoord-p*6)/2, p*6,   minY.zCoord+UtilM.CRandF(minY.yCoord-p*6)/2, minY.xCoord, minY.yCoord+0.01, minY.zCoord, p/8, true, buff, 0, 10);
 		TessUtil.drawLine(maxY.xCoord+UtilM.CRandF(p*10-maxY.yCoord)/2, p*10,  maxY.zCoord+UtilM.CRandF(p*10-maxY.yCoord)/2, maxY.xCoord, maxY.yCoord-0.01, maxY.zCoord, p/8, true, buff, 0, 10);
 		

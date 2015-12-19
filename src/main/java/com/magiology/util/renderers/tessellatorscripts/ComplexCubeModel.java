@@ -19,6 +19,7 @@ public class ComplexCubeModel{
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=minX;this.minY=minY;this.minZ=minZ;
 		this.maxX=maxX;this.maxY=maxY;this.maxZ=maxZ;
+		for(int i=0;i<UVs.length;i++)UVs[i]=QuadUV.all();
 		points=genPoints();
 	}
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,QuadUV[] quadUVs,ResourceLocation[] sidedtextures){
@@ -51,12 +52,7 @@ public class ComplexCubeModel{
 			minY+=a;
 			maxY+=a;
 		}
-		UVs[0]=new QuadUV(maxZ, minY, maxZ, maxY, minZ, maxY, minZ, minY);
-		UVs[1]=new QuadUV(maxZ, minY, maxZ, maxY, minZ, maxY, minZ, minY);
-		UVs[2]=new QuadUV(maxX, maxZ, maxX, minZ, minX, minZ, minX, maxZ);
-		UVs[3]=new QuadUV(maxX, minZ, maxX, maxZ, minX, maxZ, minX, minZ);
-		UVs[4]=new QuadUV(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
-		UVs[5]=new QuadUV(maxX, minY, maxX, maxY, minX, maxY, minX, minY);
+		for(int i=0;i<UVs.length;i++)UVs[i]=QuadUV.all();
 		UVs2=UVs.clone();
 	}
 	public ComplexCubeModel(final ComplexCubeModel cube){

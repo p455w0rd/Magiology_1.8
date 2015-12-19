@@ -10,14 +10,14 @@ public class GlStateCell{
 	public GlStateCell(GlState set, GlState reset){
 		this.set=set;
 		this.reset=reset;
-		suchChangeMuchMeme=set==reset;
+		suchChangeMuchMeme=set==reset||reset==null;
 	}
 	
 	public void set(){
 		set.configureOpenGl();
 	}
 	public void reset(){
-		if(!suchChangeMuchMeme)set.configureOpenGl();
+		if(!suchChangeMuchMeme)reset.configureOpenGl();
 	}
 	
 }
