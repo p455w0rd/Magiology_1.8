@@ -4,6 +4,7 @@ import net.minecraft.entity.player.*;
 
 import org.lwjgl.util.vector.*;
 
+import com.magiology.util.renderers.*;
 import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
@@ -24,7 +25,9 @@ public class Field extends HoloObject{
 		checkHighlight();
 		if(body==null)body=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
 		UtilM.calculateRenderColor(prevColor,this.color).bind();
+		GL11U.texture(false);
 		body.draw();
+		GL11U.texture(true);
 	}
 
 	@Override

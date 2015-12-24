@@ -18,6 +18,7 @@ import com.magiology.api.network.skeleton.*;
 import com.magiology.core.init.*;
 import com.magiology.forgepowered.events.*;
 import com.magiology.mcobjects.items.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
 
@@ -73,7 +74,9 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	public void initNetworkComponent(){}
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandler.setConnections(connections, this);
+		EnumFacing[] sides=new EnumFacing[6];
+		UpdateablePipeHandler.setConnections(sides, this);
+		for(int i=0;i<sides.length;i++)connections[i].setMain(sides[i]!=null);
 		
 		int side=SideUtil.convert(getOrientation());
 		side=SideUtil.getOppositeSide(side);
@@ -91,12 +94,12 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 		}
 		
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?new AxisAlignedBB(p*11,p*6, p*6, 1,    p*10, p*10):null,
-				connections[1]!=null?new AxisAlignedBB(p*6, p*11,p*6, p*10, 1,    p*10):null,
-				connections[2]!=null?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*5 ):null,
-				connections[3]!=null?new AxisAlignedBB(p*6, p*6, p*11,p*10, p*10, 1   ):null,
-				connections[0]!=null?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*5,  p*10):null,
-				connections[4]!=null?new AxisAlignedBB(0,   p*6, p*6, p*5,  p*10, p*10):null,
+				connections[5].getMain()?new AxisAlignedBB(p*11,p*6, p*6, 1,    p*10, p*10):null,
+				connections[1].getMain()?new AxisAlignedBB(p*6, p*11,p*6, p*10, 1,    p*10):null,
+				connections[2].getMain()?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*5 ):null,
+				connections[3].getMain()?new AxisAlignedBB(p*6, p*6, p*11,p*10, p*10, 1   ):null,
+				connections[0].getMain()?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*5,  p*10):null,
+				connections[4].getMain()?new AxisAlignedBB(0,   p*6, p*6, p*5,  p*10, p*10):null,
 						new AxisAlignedBB(p*5, p*5, p*5, p*11, p*11, p*11),
 		};
 //		Helper.printInln(side);

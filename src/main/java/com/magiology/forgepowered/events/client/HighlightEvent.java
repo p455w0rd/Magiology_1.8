@@ -605,7 +605,7 @@ public class HighlightEvent{
 		GL11.glDepthMask(false);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 		GL11.glColor4d(rColor,gColor,bColor,alpha);
-		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		VertixBuffer buff=TessUtil.getVB();
 		buff.cleanUp();{
 			int a=0;
 			if(bs[a]){

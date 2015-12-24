@@ -15,7 +15,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
 	private final float p= 1F/16F;
-	NormalizedVertixBuffer buf=TessUtil.getNVB();
+	VertixBuffer buf=TessUtil.getVB();
 	public TileEntityFirePipe pipe;
 	public  double alpha=0,prevAlpha;
 	private static EntityPlayer player=U.getMC().thePlayer;
@@ -58,7 +58,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	}
 	
 
-	private static NormalizedVertixBufferModel strateCoreModel;
+	private static VertixModel strateCoreModel;
 	private void generateModelStrateCoreGlow(){
 		buf.cleanUp();
 		ComplexCubeModel
@@ -86,7 +86,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	}
 	
 	
-	private static NormalizedVertixBufferModel connectorGlowModel;
+	private static VertixModel connectorGlowModel;
 	private void generateModelConnectorGlow(){
 		buf.cleanUp();
 		ComplexCubeModel 
@@ -133,7 +133,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		}
 	}
 	
-	private static NormalizedVertixBufferModel coreGlowModel;
+	private static VertixModel coreGlowModel;
 	private void generateModelCoreGlow(){
 		buf.cleanUp();
 		ComplexCubeModel 

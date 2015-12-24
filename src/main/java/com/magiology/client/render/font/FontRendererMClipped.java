@@ -17,7 +17,7 @@ public class FontRendererMClipped extends FontRendererMBase{
 	public static FontRendererMClipped get(){
 		return instance;
 	}
-	protected static NormalizedVertixBuffer rednerer=Get.Render.NVB();
+	protected static VertixBuffer rednerer=Get.Render.NVB();
 	public Vector2f min=new Vector2f(),max=new Vector2f();
 	
 	public FontRendererMClipped(ResourceLocation res){

@@ -15,6 +15,7 @@ import com.magiology.api.network.*;
 import com.magiology.api.network.skeleton.*;
 import com.magiology.core.init.*;
 import com.magiology.forgepowered.events.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
 
@@ -49,18 +50,20 @@ public class TileEntityNetworkProgramHolder extends TileEntityNetwork implements
 	public void initNetworkComponent(){}
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandler.setConnections(connections, this);
+		EnumFacing[] sides=new EnumFacing[6];
+		UpdateablePipeHandler.setConnections(sides, this);
+		for(int i=0;i<sides.length;i++)connections[i].setMain(sides[i]!=null);
 		setColisionBoxes();
 	}
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?new AxisAlignedBB(p*13,p*6, p*6, 1,    p*10, p*10):null,
-				connections[1]!=null?new AxisAlignedBB(p*6, p*13,p*6, p*10, 1,    p*10):null,
-				connections[2]!=null?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*3 ):null,
-				connections[3]!=null?new AxisAlignedBB(p*6, p*6, p*13,p*10, p*10, 1   ):null,
-				connections[0]!=null?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*3,  p*10):null,
-				connections[4]!=null?new AxisAlignedBB(0,   p*6, p*6, p*3,  p*10, p*10):null,
+				connections[5].getMain()?new AxisAlignedBB(p*13,p*6, p*6, 1,    p*10, p*10):null,
+				connections[1].getMain()?new AxisAlignedBB(p*6, p*13,p*6, p*10, 1,    p*10):null,
+				connections[2].getMain()?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*3 ):null,
+				connections[3].getMain()?new AxisAlignedBB(p*6, p*6, p*13,p*10, p*10, 1   ):null,
+				connections[0].getMain()?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*3,  p*10):null,
+				connections[4].getMain()?new AxisAlignedBB(0,   p*6, p*6, p*3,  p*10, p*10):null,
 				new AxisAlignedBB(p*3, p*3, p*3, p*13, p*13, p*13),
 		};
 	}

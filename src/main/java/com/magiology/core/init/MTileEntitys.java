@@ -67,8 +67,8 @@ public class MTileEntitys{
 		bindTileWRender(TileEntityNetworkController.class,      new RenderNetworkController());
 		bindTileWRender(TileEntityNetworkInterface.class,       new RenderNetworkInterface());
 		bindTileWRender(TileEntityNetworkRouter.class,new RenderNetworkPointerContainer());
-		bindTileWRender(TileEntityRareSpacePipe.class,          new RenderNetworkConductor());
-		bindTileWRender(TileEntityNetworkProgramHolder.class,   new RenderNetworkConductor());
+		bindTileWRender(TileEntityRareSpacePipe.class,          new RenderMultiBox());
+		bindTileWRender(TileEntityNetworkProgramHolder.class,   new RenderMultiBox());
 	}
 	private static<T extends TileEntityM> void register(Class<T> clazz){
 		String name=clazz.getSimpleName().substring("TileEntity".length());

@@ -17,7 +17,7 @@ public class ItemRendererFirePipe implements IItemRenderer {
 	private final float tWC=1F/4F;
 	private final float tHC=1F/40F;
 	
-	NormalizedVertixBuffer buf=TessUtil.getNVB();
+	VertixBuffer buf=TessUtil.getVB();
 	
 	public ItemRendererFirePipe(){}
 	

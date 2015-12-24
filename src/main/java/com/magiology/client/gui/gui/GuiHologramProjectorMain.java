@@ -30,7 +30,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 	EntityPlayer player;
 	TileEntityHologramProjector tile;
 	AdvancedPhysicsFloat helpAlpha=new AdvancedPhysicsFloat(0, 0.1F, true);
-	static NormalizedVertixBufferModel arrowsModel;
+	static VertixModel arrowsModel;
 	
 	public GuiHologramProjectorMain(EntityPlayer player,TileEntityHologramProjector tile){
 		super(new ContainerEmpty());
@@ -129,7 +129,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		arrowX.wantedPoint=-0.05F;
 		arrowX.speed=2;
 		int arrowY=0;
-		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		VertixBuffer buff=TessUtil.getVB();
 		buff.setDrawAsWire(true);
 		while(arrowX.point>1||arrowX.speed>0){
 			arrowX.update();
@@ -149,7 +149,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		//Set up rendering for reusable line rendering
 		buff.setClearing(false);
 		buff.setInstantNormalCalculation(false);
-		NormalizedVertixBuffer buffer=new NormalizedVertixBuffer();
+		VertixBuffer buffer=new VertixBuffer();
 		//draw & transform
 		buff.pushMatrix();
 		buff.translate(140, ySize+1, 0);

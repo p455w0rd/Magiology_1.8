@@ -60,7 +60,7 @@ public class ShaderRunner{
 	
 	@SubscribeEvent
 	public void renderShaders(RenderGameOverlayEvent.Pre event){
-		if(Config.isShadersEnabled()&&event.type==ElementType.ALL&&OpenGlHelper.shadersSupported&&!shaderGroups.isEmpty()){
+		if(Config.isShadersEnabled()&&event.type==ElementType.ALL&&OpenGlHelper.shadersSupported/*&&!shaderGroups.isEmpty()*/){
 			for(ShaderAspectRenderer handler:handlers){
 				if(handler.uniforms.isEmpty())handler.init(this);
 			}

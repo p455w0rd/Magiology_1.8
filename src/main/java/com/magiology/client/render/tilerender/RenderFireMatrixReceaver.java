@@ -16,7 +16,7 @@ import com.magiology.util.utilobjects.vectors.*;
 
 public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 	
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double posX, double posY, double posZ, float partialTicks) {

@@ -14,7 +14,7 @@ public class ComplexCubeModel{
 	public QuadUV[] UVs=new QuadUV[6];
 	public QuadUV[] UVs2=new QuadUV[6];
 	ResourceLocation[] st=new ResourceLocation[6];
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=minX;this.minY=minY;this.minZ=minZ;

@@ -93,7 +93,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		GL11U.endOpaqueRendering();
 		GL11.glPopMatrix();
 		
-		NormalizedVertixBuffer a=TessUtil.getNVB();
+		VertixBuffer a=TessUtil.getVB();
 		
 		
 		a.addVertexWithUV(x-p*ps, y+p*ps, z+p*ps, 0, 1);

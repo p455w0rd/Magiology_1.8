@@ -4,6 +4,7 @@ import net.minecraft.server.gui.*;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.relauncher.*;
 
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.m_extension.*;
 
 public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListBox{

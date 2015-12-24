@@ -17,7 +17,7 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 	private final float p= 1F/16F;
 	private final float tW=1F/72F;
 	private final float tH=1F/64F;
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		TileEntityFireGun dir= (TileEntityFireGun) tileentity;

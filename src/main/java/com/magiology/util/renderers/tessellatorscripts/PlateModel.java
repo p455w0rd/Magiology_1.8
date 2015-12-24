@@ -95,7 +95,7 @@ public class PlateModel{
 		}
 		GL11.glPushMatrix();
 		GL11.glTranslatef(xPos, yPos, zPos);
-		NormalizedVertixBuffer buf=TessUtil.getNVB();
+		VertixBuffer buf=TessUtil.getVB();
 		if(quadUV==null||texture==null){
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			buf.cleanUp();

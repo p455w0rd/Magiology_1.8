@@ -29,7 +29,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 		boolean upgraded=UtilM.isItemInStack(MItems.pants_42I, player.getCurrentArmor(1));
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11U.setUpOpaqueRendering(1);
-		TessUtil.getNVB().cleanUp();
+		TessUtil.getVB().cleanUp();
 		
 		int tim=(int)((UtilM.getTheWorld().getTotalWorldTime())%20);
 		float st=UtilM.calculatePos(tim, tim+1)/10F;
@@ -47,12 +47,12 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 					if(upgraded)GL11.glDisable(GL11.GL_DEPTH_TEST);
 				}break;
 				}
-				TessUtil.drawLine(td.x1, td.y1, td.z1, td.x2, td.y2, td.z2, width/20, true,TessUtil.getNVB(),st,1);
+				TessUtil.drawLine(td.x1, td.y1, td.z1, td.x2, td.y2, td.z2, width/20, true,TessUtil.getVB(),st,1);
 				GL11.glColor4d(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*UtilM.calculatePos(prevAlpha,alpha));
 				GL11.glDepthMask(false);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"textures/models/visual_connection.png"));
-				TessUtil.getNVB().draw();
+				TessUtil.getVB().draw();
 				GL11.glEnable(GL11.GL_CULL_FACE);
 				GL11.glDepthMask(true);
 			}

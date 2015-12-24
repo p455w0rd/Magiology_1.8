@@ -22,8 +22,8 @@ public final class Get{
 		public static final RenderItem RI(){
 			return U.getMC().getRenderItem();
 		}
-		public static final NormalizedVertixBuffer NVB(){
-			return TessUtil.getNVB();
+		public static final VertixBuffer NVB(){
+			return TessUtil.getVB();
 		}
 		public static final WorldRenderer WR(){
 			return TessUtil.getWR();

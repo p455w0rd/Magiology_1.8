@@ -36,10 +36,13 @@ public class Slider extends HoloObject{
 			scroll=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
 		}
 		col.bind();
+		
+		GL11U.texture(false);
 		main.draw();
 		GL11.glTranslatef(0, -renderSliderPos.getPoint()*size.y, 0);
 		col.blackNWhite().bind();
 		scroll.draw();
+		GL11U.texture(true);
 		//UtilM.println(col,prevColor);
 	}
 
@@ -95,7 +98,7 @@ public class Slider extends HoloObject{
 	}
 	@Override
 	public void drawHighlight(){
-		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		VertixBuffer buff=TessUtil.getVB();
 		float offset=-renderSliderPos.getPoint()*size.y;
 		ComplexCubeModel sliderBox=new ComplexCubeModel(scroll).expand(0.002F).translate(0,offset,0);
 		

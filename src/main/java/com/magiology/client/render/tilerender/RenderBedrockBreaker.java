@@ -37,7 +37,7 @@ public class RenderBedrockBreaker extends TileEntitySpecialRendererM {
 	private final float tH5=1F/32F;
 	int state=0;
 	int StartStop=0;
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

@@ -5,15 +5,15 @@ import java.util.*;
 import com.magiology.util.renderers.glstates.*;
 import com.magiology.util.utilclasses.Get.Render;
 
-public class NormalizedVertixBufferModel extends NormalizedVertixBuffer{
+public class VertixModel extends VertixBuffer{
 	private boolean isInit=false;
 	
 	public GlStateCell glStateCell;
 	
-	protected static NormalizedVertixBufferModel create(){
-		return new NormalizedVertixBufferModel();
+	protected static VertixModel create(){
+		return new VertixModel();
 	}
-	private NormalizedVertixBufferModel(){
+	private VertixModel(){
 		this.renderer=Render.WR();
 		
 	}

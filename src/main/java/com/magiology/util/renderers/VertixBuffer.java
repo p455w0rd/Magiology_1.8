@@ -15,15 +15,15 @@ import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.*;
 
-public class NormalizedVertixBuffer{
+public class VertixBuffer{
 	
 	protected List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
 	protected List<PositionTextureVertex> unfinishedTriangle=new ArrayList<PositionTextureVertex>();
 	protected WorldRenderer renderer;
 	protected boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClear=true;
-	protected List<NormalizedVertixBuffer> subBuffers=new ArrayList<NormalizedVertixBuffer>();
+	protected List<VertixBuffer> subBuffers=new ArrayList<VertixBuffer>();
 	
-	protected NormalizedVertixBuffer transformedBuffer;
+	protected VertixBuffer transformedBuffer;
 	
 	protected Matrix4f transformation=new Matrix4f();
 	protected Vector3f rotation=new Vector3f();
@@ -31,16 +31,16 @@ public class NormalizedVertixBuffer{
 	protected List<Matrix4f> transformationStacks=new ArrayList<Matrix4f>();
 	protected List<Vector3f> rotationStacks=new ArrayList<Vector3f>();
 	
-	public NormalizedVertixBuffer(){
+	public VertixBuffer(){
 		this(true);
 	}
-	public NormalizedVertixBuffer(boolean hasTransformedBuffer){
+	public VertixBuffer(boolean hasTransformedBuffer){
 		this.renderer=Render.WR();
-		if(hasTransformedBuffer)transformedBuffer=new NormalizedVertixBuffer(false);
+		if(hasTransformedBuffer)transformedBuffer=new VertixBuffer(false);
 	}
 	
-	public NormalizedVertixBuffer createNewSubBuffer(){
-		NormalizedVertixBuffer result=new NormalizedVertixBuffer();
+	public VertixBuffer createNewSubBuffer(){
+		VertixBuffer result=new VertixBuffer();
 		subBuffers.add(result);
 		result.instantNormalCalculation=instantNormalCalculation;
 		result.willDrawAsAWireFrame=willDrawAsAWireFrame;
@@ -89,7 +89,7 @@ public class NormalizedVertixBuffer{
 	}
 	
 	public void pasteToTesselator(boolean type){
-		for(NormalizedVertixBuffer a:subBuffers){
+		for(VertixBuffer a:subBuffers){
 			for(ShadedTriangle b:a.shadedTriangles){
 				GL11U.transformVector(b.normal, new Vector3f(0,0,0),a.rotation.x,a.rotation.y,a.rotation.z,1);
 				for(int b1=0;b1<2;b1++)b.pos3[b1].vector3D=GL11U.transformVector(b.pos3[b1].vector3D, a.transformation);
@@ -126,8 +126,8 @@ public class NormalizedVertixBuffer{
 			e.printStackTrace();
 		}
 	}
-	public NormalizedVertixBufferModel exportToNoramlisedVertixBufferModel(){
-		NormalizedVertixBufferModel model=NormalizedVertixBufferModel.create();
+	public VertixModel exportToNoramlisedVertixBufferModel(){
+		VertixModel model=VertixModel.create();
 		model.init(shadedTriangles);
 		cleanUp();
 		return model;
@@ -223,7 +223,14 @@ public class NormalizedVertixBuffer{
 		transformationStacks.remove(pos);
 		rotationStacks.remove(pos);
 	}
-	public void transformAndSaveTo(NormalizedVertixBuffer buff){
+	public void resetTransformation(){
+		transformation=new Matrix4f();
+		rotation=new Vector3f();
+		
+		transformationStacks=new ArrayList<Matrix4f>();
+		rotationStacks=new ArrayList<Vector3f>();
+	}
+	public void transformAndSaveTo(VertixBuffer buff){
 		try{
 			boolean isItself=buff==null||buff==this;
 			List<ShadedTriangle> buffer=isItself?new ArrayList<ShadedTriangle>():buff.shadedTriangles;

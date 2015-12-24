@@ -136,8 +136,7 @@ public class RenderLoopEvents{
 	}
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void render2Dscreem(RenderGameOverlayEvent e){
-		if(!Minecraft.isGuiEnabled())return;
-		if(e.type!=ElementType.CHAT)return;
+		if(!Minecraft.isGuiEnabled()||e.type!=ElementType.CHAT)return;
 		ScaledResolution res=e.resolution;
 		EntityPlayer player=UtilM.getThePlayer();
 		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), RenderLoopEvents.partialTicks);

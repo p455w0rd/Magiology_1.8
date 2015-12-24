@@ -42,10 +42,12 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandler.setConnections(connections, this);
+		EnumFacing[] sides=new EnumFacing[6];
+		UpdateablePipeHandler.setConnections(sides, this);
+		for(int i=0;i<sides.length;i++)connections[i].setMain(sides[i]!=null);
 		for(int i=0;i<connections.length;i++){
 			int side=SideUtil.getOppositeSide(getOrientation());
-			if(connections[i]==null&&i==side)connections[i]=EnumFacing.UP;
+			if(!connections[i].getMain()&&i==side)connections[i].setMain(true);
 			setAccessibleOnSide(i, i!=side);
 		}
 		setColisionBoxes();
@@ -88,45 +90,45 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 				new AxisAlignedBB(	  conBox[0],      conBox[1], p*14-conBox[4],     conBox[2],     conBox[3],   1-conBox[4]),//12
 		};
 		collisionBoxes=new AxisAlignedBB[]{
-			connections[5]!=null?getExpectedColisionBoxes()[3 ]:null,//0
-			connections[1]!=null?getExpectedColisionBoxes()[4 ]:null,//1
-			connections[2]!=null?getExpectedColisionBoxes()[2 ]:null,//2
-			connections[3]!=null?getExpectedColisionBoxes()[5 ]:null,//3
-			connections[0]!=null?getExpectedColisionBoxes()[1 ]:null,//4
-			connections[4]!=null?getExpectedColisionBoxes()[0 ]:null,//5
-			                     getExpectedColisionBoxes()[6 ]     ,//6
-			             side==5?getExpectedColisionBoxes()[7 ]:null,//7
-		                 side==1?getExpectedColisionBoxes()[8 ]:null,//8
-			             side==3?getExpectedColisionBoxes()[9 ]:null,//9
-			             side==4?getExpectedColisionBoxes()[10]:null,//10
-			             side==0?getExpectedColisionBoxes()[11]:null,//11
-			             side==2?getExpectedColisionBoxes()[12]:null,//12
+			connections[5].getMain()?getExpectedColisionBoxes()[3 ]:null,//0
+			connections[1].getMain()?getExpectedColisionBoxes()[4 ]:null,//1
+			connections[2].getMain()?getExpectedColisionBoxes()[2 ]:null,//2
+			connections[3].getMain()?getExpectedColisionBoxes()[5 ]:null,//3
+			connections[0].getMain()?getExpectedColisionBoxes()[1 ]:null,//4
+			connections[4].getMain()?getExpectedColisionBoxes()[0 ]:null,//5
+			                         getExpectedColisionBoxes()[6 ]     ,//6
+			                 side==5?getExpectedColisionBoxes()[7 ]:null,//7
+		                     side==1?getExpectedColisionBoxes()[8 ]:null,//8
+			                 side==3?getExpectedColisionBoxes()[9 ]:null,//9
+			                 side==4?getExpectedColisionBoxes()[10]:null,//10
+			                 side==0?getExpectedColisionBoxes()[11]:null,//11
+			                 side==2?getExpectedColisionBoxes()[12]:null,//12
 		};
 	}
 	@Override
 	public void getBoxesOnSide(List<AxisAlignedBB> result, int side){
 		switch(side){
-		case 0:if(connections[side]!=null){
+		case 0:if(connections[side].getMain()){
 			result.add(collisionBoxes[4]);
 			result.add(collisionBoxes[4+7]);
 		}break;
-		case 1:if(connections[side]!=null){
+		case 1:if(connections[side].getMain()){
 			result.add(collisionBoxes[1]);
 			result.add(collisionBoxes[1+7]);
 		}break;
-		case 2:if(connections[side]!=null){
+		case 2:if(connections[side].getMain()){
 			result.add(collisionBoxes[2]);
 			result.add(collisionBoxes[2+7]);
 		}break;
-		case 3:if(connections[side]!=null){
+		case 3:if(connections[side].getMain()){
 			result.add(collisionBoxes[3]);
 			result.add(collisionBoxes[3+7]);
 		}break;
-		case 4:if(connections[side]!=null){
+		case 4:if(connections[side].getMain()){
 			result.add(collisionBoxes[5]);
 			result.add(collisionBoxes[5+7]);
 		}break;
-		case 5:if(connections[side]!=null){
+		case 5:if(connections[side].getMain()){
 			result.add(collisionBoxes[0]);
 			result.add(collisionBoxes[0+7]);
 		}break;
@@ -241,7 +243,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 
 	@Override
 	public IConnection[] getConnections(){
-		return null;
+		return connections;
 	}
 
 	@Override

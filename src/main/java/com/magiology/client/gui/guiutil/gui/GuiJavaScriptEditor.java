@@ -26,7 +26,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	
 	private List<DoubleObject<List<String>,List<Integer>>> coloredText;
 	private String selectedWord="";
-	private NormalizedVertixBufferModel selection=null;
+	private VertixModel selection=null;
 	
 	@Override
 	protected void rednerText(FontRendererMClipped fr){
@@ -73,9 +73,9 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			classes.add("EnumFacing");
 		}
 		for(int i=0;i<textBuffer.size();i++)coloredText.add(colorLine(fr,i));
-		TessUtil.getNVB().cleanUp();
+		TessUtil.getVB().cleanUp();
 		highlightWords(fr);
-		selection=TessUtil.getNVB().exportToNoramlisedVertixBufferModel();
+		selection=TessUtil.getVB().exportToNoramlisedVertixBufferModel();
 		selection.setInstantNormalCalculation(false);
 		selection.translate(-0.5, 0, 0);
 		selection.setClearing(false);
@@ -118,10 +118,10 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 									maxX=minX+lenght+2,
 									maxY=minY+11;
 								
-								TessUtil.getNVB().addVertex(minX, maxY, 0);
-								TessUtil.getNVB().addVertex(maxX, maxY, 0);
-								TessUtil.getNVB().addVertex(maxX, minY, 0);
-								TessUtil.getNVB().addVertex(minX, minY, 0);
+								TessUtil.getVB().addVertex(minX, maxY, 0);
+								TessUtil.getVB().addVertex(maxX, maxY, 0);
+								TessUtil.getVB().addVertex(maxX, minY, 0);
+								TessUtil.getVB().addVertex(minX, minY, 0);
 							}
 							line=line.substring(end);
 						}while(line.contains(selectedWord)&&count<100);

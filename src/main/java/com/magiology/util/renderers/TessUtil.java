@@ -33,9 +33,9 @@ import com.magiology.util.utilobjects.vectors.*;
  */
 public class TessUtil{
 	
-	private static NormalizedVertixBuffer buf=new NormalizedVertixBuffer();
+	private static VertixBuffer buf=new VertixBuffer();
 	private static FontRendererMBase fontRendererMBase=new FontRendererMBase(new ResourceLocation("textures/font/ascii.png"));
-	public static NormalizedVertixBuffer getNVB(){return buf;}
+	public static VertixBuffer getVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
 	public static RenderManager getRM(){return UtilM.getMC().getRenderManager();}
 	
@@ -128,7 +128,7 @@ public class TessUtil{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			NormalizedVertixBuffer r1=TessUtil.getNVB();
+			VertixBuffer r1=TessUtil.getVB();
 			r1.cleanUp();
 			int i=0;
 			while(i<xy[0].length-1){
@@ -159,7 +159,7 @@ public class TessUtil{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			NormalizedVertixBuffer r1=TessUtil.getNVB();
+			VertixBuffer r1=TessUtil.getVB();
 			r1.cleanUp();
 			int i=0;
 			while(i<xy[0].length-1){
@@ -342,10 +342,10 @@ public class TessUtil{
 			e.printStackTrace();
 		}
 	}
-	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, NormalizedVertixBuffer nvb,double textueOffset,double textueScale){
+	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, VertixBuffer nvb,double textueOffset,double textueScale){
 		boolean newBuff;
 		if(newBuff=(nvb==null)){
-			nvb=new NormalizedVertixBuffer();
+			nvb=new VertixBuffer();
 		}
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
 		
@@ -448,13 +448,13 @@ public class TessUtil{
 		brainC2=new ComplexCubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
 	}
 	
-	public static NormalizedVertixBuffer drawBrain(Vec3M pos,double scale1,double anim){
+	public static VertixBuffer drawBrain(Vec3M pos,double scale1,double anim){
 		anim=Math.toRadians(anim);
 		
 		TessUtil.bindTexture(Textures.Brain);
 		
-		NormalizedVertixBuffer wrapper=new NormalizedVertixBuffer();
-		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		VertixBuffer wrapper=new VertixBuffer();
+		VertixBuffer buff=TessUtil.getVB();
 		
 		
 		buff.setInstantNormalCalculation(false);

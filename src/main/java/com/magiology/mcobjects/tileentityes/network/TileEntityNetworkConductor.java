@@ -10,6 +10,7 @@ import com.magiology.api.connection.*;
 import com.magiology.api.network.*;
 import com.magiology.api.network.skeleton.*;
 import com.magiology.forgepowered.events.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
 
@@ -32,18 +33,20 @@ public class TileEntityNetworkConductor extends TileEntityNetwork implements IUp
 	public void initNetworkComponent(){}
 	@Override
 	public void updateConnections(){
-		UpdateablePipeHandler.setConnections(connections, this);
+		EnumFacing[] sides=new EnumFacing[6];
+		UpdateablePipeHandler.setConnections(sides, this);
+		for(int i=0;i<sides.length;i++)connections[i].setMain(sides[i]!=null);
 		setColisionBoxes();
 	}
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5]!=null?getExpectedColisionBoxes()[3]:null,
-				connections[1]!=null?getExpectedColisionBoxes()[4]:null,
-				connections[2]!=null?getExpectedColisionBoxes()[2]:null,
-				connections[3]!=null?getExpectedColisionBoxes()[5]:null,
-				connections[0]!=null?getExpectedColisionBoxes()[1]:null,
-				connections[4]!=null?getExpectedColisionBoxes()[0]:null,
+				connections[5].getMain()?getExpectedColisionBoxes()[3]:null,
+				connections[1].getMain()?getExpectedColisionBoxes()[4]:null,
+				connections[2].getMain()?getExpectedColisionBoxes()[2]:null,
+				connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
+				connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
+				connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
 				                     getExpectedColisionBoxes()[6]
 		};
 	}
@@ -57,14 +60,30 @@ public class TileEntityNetworkConductor extends TileEntityNetwork implements IUp
 	}
 
 	@Override
-	public IConnection[] getConnections() {
-		// TODO Auto-generated method stub
-		return null;
+	public IConnection[] getConnections(){
+		return connections;
 	}
 
 	@Override
-	public boolean isStrate(EnumFacing facing) {
-		// TODO Auto-generated method stub
+	public boolean isStrate(EnumFacing facing){
+		if(facing==EnumFacing.UP||facing==EnumFacing.DOWN||facing==null){
+			if(((connections[0].getMain())&&connections[1].getMain())&&(connections[2].getMain()==false&&connections[3].getMain()==false&&connections[4].getMain()==false&&connections[5].getMain()==false)){
+//				Helper.printInln("1");
+				return true;
+			}
+		}
+		if(facing==EnumFacing.WEST||facing==EnumFacing.EAST||facing==null){
+			if((connections[4].getMain()&&connections[5].getMain())&&(connections[1].getMain()==false&&(connections[0].getMain()==false)&&connections[2].getMain()==false&&connections[3].getMain()==false)){
+//				Helper.printInln("2");
+				return true;
+			}
+		}
+		if(facing==EnumFacing.SOUTH||facing==EnumFacing.NORTH||facing==null){
+			if((connections[2].getMain()&&connections[3].getMain())&&(connections[1].getMain()==false&&(connections[0].getMain()==false)&&connections[4].getMain()==false&&connections[5].getMain()==false)){
+//				Helper.printInln("3");
+				return true;
+			}
+		}
 		return false;
 	}
 }

@@ -20,22 +20,18 @@ public class ColorCutRenderer extends ShaderAspectRenderer{
 		bPrev=b;
 		prevTolerance=tolerance;
 		prevIntensity=intensity;
-		r=1F;
-		g=0F;
-		b=0F;
+		r=UtilM.fluctuator(97, 0);
+		g=UtilM.fluctuator(140, 320);
+		b=UtilM.fluctuator(203, 563);
 		tolerance=0.5F;
-		intensity=0.3F;
-		try {
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		intensity=0.8F;
 	}
 	
 	@Override
 	public void redner(){
-		ShaderUniformEditor.setUniform(uniforms.get(0), UtilM.calculatePos(rPrev, r),UtilM.calculatePos(gPrev, g),UtilM.calculatePos(bPrev, b));
-		ShaderUniformEditor.setUniform(uniforms.get(1), UtilM.calculatePos(prevTolerance, tolerance));
-		ShaderUniformEditor.setUniform(uniforms.get(2), UtilM.calculatePos(prevIntensity, intensity));
+		ShaderAspectRenderer.setUniform(uniforms.get(0), UtilM.calculatePos(rPrev, r),UtilM.calculatePos(gPrev, g),UtilM.calculatePos(bPrev, b));
+		ShaderAspectRenderer.setUniform(uniforms.get(1), UtilM.calculatePos(prevTolerance, tolerance));
+		ShaderAspectRenderer.setUniform(uniforms.get(2), UtilM.calculatePos(prevIntensity, intensity));
 	}
 	
 	@Override

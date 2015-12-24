@@ -129,7 +129,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 		double var1=powerBar;
 		double var2=p*5+p*4*var1;
 		double var3=1-var1;
-		NormalizedVertixBuffer buf=TessUtil.getNVB();
+		VertixBuffer buf=TessUtil.getVB();
 		buf.cleanUp();
 		buf.addVertexWithUV(p*4-0.0001, var2, p*11, 0, var3);
 		buf.addVertexWithUV(p*4-0.0001, p*5,  p*11, 0, 1);

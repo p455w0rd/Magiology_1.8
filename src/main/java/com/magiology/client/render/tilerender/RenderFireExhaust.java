@@ -15,7 +15,7 @@ public class RenderFireExhaust extends TileEntitySpecialRendererM {
 	private final float tW=1F/97F;
 	private final float tH=1F/90F;
 	double animation;
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

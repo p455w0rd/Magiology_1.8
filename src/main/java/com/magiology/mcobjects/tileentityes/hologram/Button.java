@@ -36,7 +36,9 @@ public class Button extends TextBox{
 		ColorF renderColor=UtilM.calculateRenderColor(prevColor,this.color);
 		renderColor.bind();
 		if(body==null)body=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+		GL11U.texture(false);
 		body.draw();
+		GL11U.texture(true);
 		GL11.glTranslatef(-size.x/2, -size.y/2, 0);
 		GL11U.glCulFace(false);
 		GL11U.glScale(-U.p);

@@ -5,6 +5,7 @@ import java.util.*;
 import net.minecraft.block.material.*;
 import net.minecraft.block.state.*;
 import net.minecraft.entity.*;
+import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 
@@ -24,7 +25,25 @@ public abstract class BlockContainerMultiColision extends BlockContainerM{
 	public int getRenderType(){return -1;}
 	@Override
 	public boolean isOpaqueCube(){return false;}
-    
+	
+    @Override
+	public boolean isFullCube(){
+        return false;
+    }
+//	@Override
+//	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos){
+//		AxisAlignedBB result=null;
+//		TileEntity tile=worldIn.getTileEntity(pos);
+//		AxisAlignedBB[] boxes=((MultiColisionProvider)tile).getActiveBoxes();
+//		for(AxisAlignedBB i:boxes){
+//			if(result==null)result=i;
+//			else result=result.union(i);
+//		}
+//		if(result!=null)setBlockBounds((float)result.minX, (float)result.minY, (float)result.minZ, (float)result.maxX, (float)result.maxY, (float)result.maxZ);
+//		else setBlockBounds(0, 0, 0, 0, 0, 0);
+//		
+//	}
+	
     @Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor){
     	ForcePipeUpdate.updatein3by3((World)world,pos);

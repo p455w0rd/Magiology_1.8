@@ -13,7 +13,7 @@ import com.magiology.util.utilobjects.m_extension.*;
 public class RenderFireMatrixTransferer extends TileEntitySpecialRendererM {
 
 	private final float p=1F/16F;
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	
 	float pos=0,ballRotation=0;
 	

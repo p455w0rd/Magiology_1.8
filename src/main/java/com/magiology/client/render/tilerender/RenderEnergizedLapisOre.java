@@ -11,7 +11,7 @@ import com.magiology.util.utilobjects.m_extension.*;
 
 public class RenderEnergizedLapisOre extends TileEntitySpecialRendererM {
 
-	NormalizedVertixBuffer buf=Render.NVB();
+	VertixBuffer buf=Render.NVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		GL11.glPushMatrix();

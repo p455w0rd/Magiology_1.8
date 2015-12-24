@@ -80,7 +80,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//draw behind block
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		TessUtil.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)*0.3).toCode());
-		NormalizedVertixBuffer buff=TessUtil.getNVB();
+		VertixBuffer buff=TessUtil.getVB();
 		float expand=-1;
 		buff.cleanUp();
 		for(int i=0;i<5;i++){

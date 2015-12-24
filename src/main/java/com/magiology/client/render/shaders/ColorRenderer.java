@@ -24,7 +24,7 @@ public class ColorRenderer extends ShaderAspectRenderer{
 	
 	@Override
 	public void redner(){
-		ShaderUniformEditor.setUniform(uniforms.get(0), UtilM.calculatePos(rPrev, r),UtilM.calculatePos(gPrev, g),UtilM.calculatePos(bPrev, b));
+		ShaderAspectRenderer.setUniform(uniforms.get(0), UtilM.calculatePos(rPrev, r),UtilM.calculatePos(gPrev, g),UtilM.calculatePos(bPrev, b));
 	}
 	
 	@Override

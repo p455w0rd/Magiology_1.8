@@ -41,6 +41,7 @@ import com.magiology.mcobjects.tileentityes.hologram.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.math.*;
 import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.effect.*;
 import com.magiology.util.utilobjects.vectors.*;
 import com.mojang.realmsclient.gui.*;
 
@@ -583,8 +584,9 @@ public class UtilM{
 		spawnEntityFX(entityFX);
 	}
 	public static EntityFlameFX marker(double x,double y,double z,double xSpeed,double ySpeed,double zSpeed){
+		
 		if(getTheWorld()==null)return null;
-		return (EntityFlameFX)new EntityFlameFX.Factory().getEntityFX(0,getTheWorld(), x+0.5, y+0.5, z+0.5, xSpeed, ySpeed, zSpeed);
+		return (EntityFlameFX)new EntityFlameFXM(getTheWorld(), x+0.5, y+0.5, z+0.5, xSpeed, ySpeed, zSpeed);
 	}
 	public static TargetPoint TargetPoint(TileEntity tile, int range){
 		return new TargetPoint(tile.getWorld().provider.getDimensionId(), x(tile), y(tile), z(tile), range);
