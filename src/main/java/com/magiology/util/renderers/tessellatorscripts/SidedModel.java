@@ -1,14 +1,15 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import java.awt.*;
-
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class SidedModel{
 	
 	public VertixModel[][] models=new VertixModel[6][0],compiledModels;
 	private boolean shouldCompile;
+	
+	public int curentSide;
 	
 	public SidedModel(DoubleObject<VertixModel[],int[]>... modelsFormat){
 		set(modelsFormat);
@@ -19,7 +20,14 @@ public class SidedModel{
 		if(shouldCompile)compile();
 		for(int i=0;i<compiledModels.length;i++){
 			VertixModel[] modelArray=compiledModels[i];
-			if(sides[i]&&modelArray!=null)for(VertixModel model:modelArray)if(model!=null)model.draw();
+			if(sides[i]&&modelArray!=null){
+				curentSide=i;
+				for(VertixModel model:modelArray){
+					if(model!=null){
+						model.draw();
+					}
+				}
+			}
 		}
 	}
 	private void compile(){
@@ -32,16 +40,17 @@ public class SidedModel{
 				
 				VertixBuffer buff=new VertixBuffer();
 				
-				compiledModels[i][j]=models[i][j].exportToNoramlisedVertixBufferModel();
+				VertixModel buffer=models[i][j].exportToNoramlisedVertixBufferModel();
 				
 				switch(i){
-				case 0:compiledModels[i][j].rotateAt(0.5, 0.5, 0.5,  90,   0, 0);break;
-				case 1:compiledModels[i][j].rotateAt(0.5, 0.5, 0.5, -90,   0, 0);break;
-				case 2:compiledModels[i][j].rotateAt(0.5, 0.5, 0.5,   0, 180, 0);break;
-				case 4:compiledModels[i][j].rotateAt(0.5, 0.5, 0.5,   0, -90, 0);break;
-				case 5:compiledModels[i][j].rotateAt(0.5, 0.5, 0.5,   0,  90, 0);break;
+				case 0:buffer.rotateAt(0.5, 0.5, 0.5,  90,   0, 0);break;
+				case 1:buffer.rotateAt(0.5, 0.5, 0.5, -90,   0, 0);break;
+				case 2:buffer.rotateAt(0.5, 0.5, 0.5,   0, 180, 0);break;
+				case 4:buffer.rotateAt(0.5, 0.5, 0.5,   0, -90, 0);break;
+				case 5:buffer.rotateAt(0.5, 0.5, 0.5,   0,  90, 0);break;
 				}
-				
+				compiledModels[i][j]=new VertixBuffer().exportToNoramlisedVertixBufferModel();
+				buffer.transformAndSaveTo(compiledModels[i][j]);
 				compiledModels[i][j].glStateCell=models[i][j].glStateCell;
 				
 			}

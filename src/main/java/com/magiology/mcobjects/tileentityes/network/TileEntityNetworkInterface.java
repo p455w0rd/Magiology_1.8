@@ -5,6 +5,7 @@ import java.util.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.block.state.*;
+import net.minecraft.client.*;
 import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
@@ -57,37 +58,29 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	public void setColisionBoxes(){
 		if(!hasWorldObj())return;
 		int side=getOrientation();
-		Block block=U.getBlock(worldObj, SideUtil.offsetNew(SideUtil.getOppositeSide(getOrientation()), pos));
 		
-		float minX,minY,minZ,maxX,maxY,maxZ;
-		minX=(float)block.getBlockBoundsMinX();minY=(float)block.getBlockBoundsMinY();
-		minZ=(float)block.getBlockBoundsMinZ();maxX=(float)block.getBlockBoundsMaxX();
-		maxY=(float)block.getBlockBoundsMaxY();maxZ=(float)block.getBlockBoundsMaxZ();
-		switch(side){
-		case 0:{conBox=new float[]{minX,minZ,maxX,maxZ,  -minY+0.001F};}break;
-		case 1:{conBox=new float[]{minX,minZ,maxX,maxZ,-1+maxY+0.001F};}break;
-		case 2:{conBox=new float[]{minX,minY,maxX,maxY,-1+maxZ+0.001F};}break;
-		case 3:{conBox=new float[]{minX,minZ,maxX,maxY,  -minX+0.001F};}break;
-		case 4:{conBox=new float[]{minX,minY,maxY,maxX,  -minZ+0.001F};}break;
-		case 5:{conBox=new float[]{minY,minZ,maxY,maxZ,-1+maxX+0.001F};}break;
-		}if(block.getMaterial()==Material.air)conBox[0]=conBox[1]=conBox[2]=conBox[3]=0.5F;
-		for(int i=0;i<2;i++){conBox[i]=Math.min(p*5, conBox[i]+p/2);conBox[i+2]=Math.max(p*11, conBox[i+2]-p/2);}
-		conBox[4]=Math.min(0,conBox[4]);
+		conBox[0]=p*2;
+		conBox[1]=p*2;
+		conBox[2]=p*14;
+		conBox[3]=p*14;
+		conBox[4]=0;
+		
+		float p2=p*2,p14=p*14,p6=p*6.5F,p10=p*9.5F;
 		
 		expectedBoxes=new AxisAlignedBB[]{
-				new AxisAlignedBB(side==5?p*2+conBox[4]:0, p*6, p*6, p*6,  p*10, p*10),//0
-				new AxisAlignedBB(p*6, side==1?p*2+conBox[4]:0, p*6, p*10, p*6,  p*10),//1
-				new AxisAlignedBB(p*6, p*6, side==3?p*2+conBox[4]:0, p*10, p*10, p*6 ),//2
-				new AxisAlignedBB(p*10,p*6, p*6, side==4?p*14-conBox[4]:1, p*10, p*10),//3
-				new AxisAlignedBB(p*6, p*10,p*6, p*10, side==0?p*14-conBox[4]:1, p*10),//4
-				new AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, side==2?p*14-conBox[4]:1),//5
-				new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),                    //6
-				new AxisAlignedBB(     conBox[4], 	  conBox[0],      conBox[1], p*2+conBox[4],     conBox[2],     conBox[3]),//7
-				new AxisAlignedBB(     conBox[0], 	  conBox[4],      conBox[1],     conBox[2], p*2+conBox[4],     conBox[3]),//8
-				new AxisAlignedBB(     conBox[0],	  conBox[1],      conBox[4],     conBox[2],     conBox[3], p*2+conBox[4]),//9
-				new AxisAlignedBB(p*14-conBox[4],      conBox[0],      conBox[1],   1-conBox[4],     conBox[2],     conBox[3]),//10
-				new AxisAlignedBB(	  conBox[0], p*14-conBox[4],      conBox[1],     conBox[2],   1-conBox[4],     conBox[3]),//11
-				new AxisAlignedBB(	  conBox[0],      conBox[1], p*14-conBox[4],     conBox[2],     conBox[3],   1-conBox[4]),//12
+				new AxisAlignedBB(side==5?p2:0, p6, p6, p6,  p10, p10),//0
+				new AxisAlignedBB(p6, side==1?p2:0, p6, p10, p6,  p10),//1
+				new AxisAlignedBB(p6, p6, side==3?p2:0, p10, p10, p6 ),//2
+				new AxisAlignedBB(p10,p6, p6, side==4?p14:1, p10, p10),//3
+				new AxisAlignedBB(p6, p10,p6, p10, side==0?p14:1, p10),//4
+				new AxisAlignedBB(p6, p6, p10,p10, p10, side==2?p14:1),//5
+				new AxisAlignedBB(p6, p6, p6, p10, p10, p10),//6
+				new AxisAlignedBB(p14,p2,p2,1,p14,p14),//7
+				new AxisAlignedBB(p2,p14,p2,p14,1,p14),//8
+				new AxisAlignedBB(p2,p2,0,p14,p14,p2 ),//9
+				new AxisAlignedBB(p2,p2,p14,p14,p14,1),//10
+				new AxisAlignedBB(p2,0,p2,p14,p2 ,p14),//11
+				new AxisAlignedBB(0,p2,p2,p2 ,p14,p14) //12
 		};
 		collisionBoxes=new AxisAlignedBB[]{
 			connections[5].getMain()?getExpectedColisionBoxes()[3 ]:null,//0
@@ -97,69 +90,57 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 			connections[0].getMain()?getExpectedColisionBoxes()[1 ]:null,//4
 			connections[4].getMain()?getExpectedColisionBoxes()[0 ]:null,//5
 			                         getExpectedColisionBoxes()[6 ]     ,//6
-			                 side==5?getExpectedColisionBoxes()[7 ]:null,//7
-		                     side==1?getExpectedColisionBoxes()[8 ]:null,//8
-			                 side==3?getExpectedColisionBoxes()[9 ]:null,//9
-			                 side==4?getExpectedColisionBoxes()[10]:null,//10
-			                 side==0?getExpectedColisionBoxes()[11]:null,//11
-			                 side==2?getExpectedColisionBoxes()[12]:null,//12
+					         side==4?getExpectedColisionBoxes()[7 ]:null,//7
+						     side==0?getExpectedColisionBoxes()[8 ]:null,//8
+							 side==3?getExpectedColisionBoxes()[9 ]:null,//9
+							 side==2?getExpectedColisionBoxes()[10]:null,//10
+							 side==1?getExpectedColisionBoxes()[11]:null,//11
+							 side==5?getExpectedColisionBoxes()[12]:null,//12
 		};
 	}
 	@Override
 	public void getBoxesOnSide(List<AxisAlignedBB> result, int side){
-		switch(side){
+		for(int i=0;i<2;i++)switch(side){
 		case 0:if(connections[side].getMain()){
-			result.add(collisionBoxes[4]);
-			result.add(collisionBoxes[4+7]);
+			result.add(collisionBoxes[4+i*7]);
 		}break;
 		case 1:if(connections[side].getMain()){
-			result.add(collisionBoxes[1]);
-			result.add(collisionBoxes[1+7]);
+			result.add(collisionBoxes[1+i*7]);
 		}break;
 		case 2:if(connections[side].getMain()){
-			result.add(collisionBoxes[2]);
-			result.add(collisionBoxes[2+7]);
+			result.add(collisionBoxes[2+i*7]);
 		}break;
 		case 3:if(connections[side].getMain()){
-			result.add(collisionBoxes[3]);
-			result.add(collisionBoxes[3+7]);
+			result.add(collisionBoxes[3+i*7]);
 		}break;
 		case 4:if(connections[side].getMain()){
-			result.add(collisionBoxes[5]);
-			result.add(collisionBoxes[5+7]);
+			result.add(collisionBoxes[5+i*7]);
 		}break;
 		case 5:if(connections[side].getMain()){
-			result.add(collisionBoxes[0]);
-			result.add(collisionBoxes[0+7]);
+			result.add(collisionBoxes[0+i*7]);
 		}break;
 		}
 	}
 	@Override
 	public void getExpectedBoxesOnSide(List<AxisAlignedBB> result, int side){
-		switch(side){
+		for(int i=0;i<2;i++)switch(side){
 		case 0:{
-			result.add(expectedBoxes[4]);
-			result.add(expectedBoxes[4+7]);
+			result.add(expectedBoxes[4+i*7]);
 		}break;
 		case 1:{
-			result.add(expectedBoxes[1]);
-			result.add(expectedBoxes[1+7]);
+			result.add(expectedBoxes[1+i*7]);
 		}break;
 		case 2:{
-			result.add(expectedBoxes[2]);
-			result.add(expectedBoxes[2+7]);
+			result.add(expectedBoxes[2+i*7]);
 		}break;
 		case 3:{
-			result.add(expectedBoxes[3]);
-			result.add(expectedBoxes[3+7]);
+			result.add(expectedBoxes[3+i*7]);
 		}break;
 		case 4:{
-			result.add(expectedBoxes[5]);
-			result.add(expectedBoxes[5+7]);
+			result.add(expectedBoxes[5+i*7]);
 		}break;
 		case 5:{
-			result.add(expectedBoxes[0]);
-			result.add(expectedBoxes[0+7]);
+			result.add(expectedBoxes[0+i*7]);
 		}break;
 		}
 	}

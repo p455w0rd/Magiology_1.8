@@ -42,6 +42,7 @@ public class HighlightEvent{
 	WorldRenderer renderer=TessUtil.getWR();
 	@SubscribeEvent
 	public void onDrawHighlight(DrawBlockHighlightEvent event){
+		
 		BlockPos pos=event.target.getBlockPos();
 		ItemStack item=event.currentItem;
 		EntityPlayer player=event.player;
@@ -213,8 +214,7 @@ public class HighlightEvent{
 		
 		Vec3M off=TessUtil.calculateRenderPosV(event.player);
 		GL11.glPushMatrix();
-		GL11.glTranslated(-off.getX(), -off.getY(), -off.getZ());
-		GL11.glTranslated(pos.getX(), pos.getY(), pos.getZ());
+		GL11.glTranslated(-off.getX()+pos.getX(), -off.getY()+pos.getY(), -off.getZ()+pos.getZ());
 		
 		
 //		Helper.printInln(((TileEntityFirePipe)tile).collisionBoxes);
@@ -229,7 +229,7 @@ public class HighlightEvent{
 		event.setCanceled(true);
 
 		double selectionAlphaHelper=(wtt%120.0)/60.0,selectionAlpha=selectionAlphaHelper>1?2-selectionAlphaHelper:selectionAlphaHelper;
-		drawBox(mainBox.minX-ex,mainBox.maxX+ex,mainBox.minY-ex,mainBox.maxY+ex,mainBox.minZ-ex,mainBox.maxZ+ex,0.9, 0.1, 0.2, 0.1+0.05*centerAlpha);
+		if(UtilM.isItemInStack(MItems.FireHammer, UtilM.getThePlayer().getCurrentEquippedItem()))drawBox(mainBox.minX-ex,mainBox.maxX+ex,mainBox.minY-ex,mainBox.maxY+ex,mainBox.minZ-ex,mainBox.maxZ+ex,0.9, 0.1, 0.2, 0.1+0.05*centerAlpha);
 		
 		AxisAlignedBB pointedBox=colisionProvider.getPointedBox();
 		

@@ -39,12 +39,29 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys);
 		
-		VertixModel sideThingysModel=buff.exportToNoramlisedVertixBufferModel();
-		sideThingysModel.glStateCell=new GlStateCell(
+		VertixModel sideThingysModel1=buff.exportToNoramlisedVertixBufferModel();
+		sideThingysModel1.glStateCell=new GlStateCell(
 			new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
 			})
 		, null);
+		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(-p*2.5F, 0, 0);
+		
+		for(int i=0;i<sideThingys.length;i++){
+			sideThingys[i].UVs[2]=sideThingys[i].UVs[2].rotate().rotate().mirror();
+			sideThingys[i].UVs[3]=sideThingys[i].UVs[3].rotate().rotate().mirror();
+		}
+		
+		buff.importComplexCube(sideThingys);
+		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
+		buff.importComplexCube(sideThingys);
+		
+		VertixModel sideThingysModel2=buff.exportToNoramlisedVertixBufferModel();
+		sideThingysModel2.glStateCell=new GlStateCell(
+				new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
+					TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
+				})
+				, null);
 		
 		
 		float w1=1F/216F;
@@ -89,7 +106,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		connections=new SidedModel(
 			new DoubleObject<VertixModel[],int[]>(
 				new VertixModel[]{
-						sideThingysModel,
+						sideThingysModel1,
 						horisontalCore1
 				},
 				new int[]{
@@ -100,7 +117,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			),
 			new DoubleObject<VertixModel[],int[]>(
 				new VertixModel[]{
-						sideThingysModel,
+						sideThingysModel2,
 						horisontalCore2
 				},
 				new int[]{

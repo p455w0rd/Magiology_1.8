@@ -91,7 +91,7 @@ public class VertixBuffer{
 	public void pasteToTesselator(boolean type){
 		for(VertixBuffer a:subBuffers){
 			for(ShadedTriangle b:a.shadedTriangles){
-				GL11U.transformVector(b.normal, new Vector3f(0,0,0),a.rotation.x,a.rotation.y,a.rotation.z,1);
+				GL11U.transformVector(b.normal, new Vector3f(),a.rotation.x,a.rotation.y,a.rotation.z,1);
 				for(int b1=0;b1<2;b1++)b.pos3[b1].vector3D=GL11U.transformVector(b.pos3[b1].vector3D, a.transformation);
 			}
 			shadedTriangles.addAll(a.shadedTriangles);
@@ -102,7 +102,7 @@ public class VertixBuffer{
 			for(int s=0;s<shadedTriangles.size();s++){
 				ShadedTriangle a=shadedTriangles.get(s);
 				if(type){
-					Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(0,0,0),rotation.x,rotation.y,rotation.z,1);
+					Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
 					renderer.setNormal((float)finalNormal.x, (float)finalNormal.y, (float)finalNormal.z);
 					for(int b=0;b<a.pos3.length;b++){
 						Vec3M finalVec=GL11U.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);

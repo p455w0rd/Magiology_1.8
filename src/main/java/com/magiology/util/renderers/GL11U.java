@@ -47,6 +47,9 @@ public class GL11U{
 	public static void glRotate(Vec3M vec){
 		glRotate(vec.x, vec.y, vec.z);
 	}
+	public static void glRotate(Vector3f vec){
+		glRotate(vec.x, vec.y, vec.z);
+	}
 	public static void glBlend(boolean enabled){
 		if(enabled)glEnable(GL_BLEND);
 		else glDisable(GL_BLEND);

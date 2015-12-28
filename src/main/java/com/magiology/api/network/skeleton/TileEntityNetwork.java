@@ -158,13 +158,13 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 		};
 	}
 	protected AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-			new AxisAlignedBB(0,   p*6, p*6, p*6,  p*10, p*10),
-			new AxisAlignedBB(p*6, 0,   p*6, p*10, p*6,  p*10),
-			new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*6 ),
-			new AxisAlignedBB(p*10,p*6, p*6, 1,    p*10, p*10),
-			new AxisAlignedBB(p*6, p*10,p*6, p*10, 1,    p*10),
-			new AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, 1   ),
-			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10)
+		new AxisAlignedBB(0,      p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F),
+		new AxisAlignedBB(p*6.5F, 0,      p*6.5F, p*9.5F, p*6.5F, p*9.5F),
+		new AxisAlignedBB(p*6.5F, p*6.5F, 0,      p*9.5F, p*9.5F, p*6.5F),
+		new AxisAlignedBB(p*9.5F, p*6.5F, p*6.5F, 1,      p*9.5F, p*9.5F),
+		new AxisAlignedBB(p*6.5F, p*9.5F, p*6.5F, p*9.5F, 1,      p*9.5F),
+		new AxisAlignedBB(p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F, 1     ),
+		new AxisAlignedBB(p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F)
 	};
 	@Override
 	public AxisAlignedBB[] getExpectedColisionBoxes(){
