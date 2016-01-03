@@ -163,6 +163,9 @@ public class UtilM{
 		return result;
 	}
 	public static double slowlyEqalize(double variable,double goal,double speed){
+		return slowlyEqalize((float)variable, (float)goal, (float)speed);
+	}
+	public static float slowlyEqalize(float variable,float goal,float speed){
 		if(speed==0)return variable;
 		speed=Math.abs(speed);
 		if(variable+speed>goal&&(Math.abs((variable+speed)-goal)<speed*1.001))return goal;
@@ -369,7 +372,7 @@ public class UtilM{
 	}
 
 	public static float calculatePos(final double prevPos,final double pos){
-		return (float)(prevPos+(pos-prevPos)*RenderLoopEvents.partialTicks);
+		return (float)(prevPos+(pos-prevPos)*RenderEvents.partialTicks);
 	}
 	public static float[][] addToDoubleFloatArray(final float[][] array1,final float[][] array2){
 		float[][] result=array1.clone();
@@ -613,7 +616,7 @@ public class UtilM{
 	    if(!world.isRemote&&world.getGameRules().getGameRuleBooleanValue("doTileDrops")&&!world.restoringBlockSnapshots){
 	        EntityItem entity=new EntityItem(world,x,y,z,stack);
 	        entity.setPickupDelay(0);
-	        world.spawnEntityInWorld(entity);
+	        spawnEntity(entity);
 	        return entity;
 	    }
 		return null;

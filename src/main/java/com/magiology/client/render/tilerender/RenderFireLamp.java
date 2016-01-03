@@ -19,11 +19,11 @@ public class RenderFireLamp extends TileEntitySpecialRendererM {
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f){
 		TileEntityFireLamp tileFL=(TileEntityFireLamp) tile;
 		boolean var1=true;
-		for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){
-			LongAfterRenderRenderer ab=RenderLoopEvents.universalLongRender.get(a);
+		for(int a=0;a<RenderEvents.universalLongRender.size();a++){
+			LongAfterRenderRenderer ab=RenderEvents.universalLongRender.get(a);
 			if(ab instanceof TwoDotsLineRender&&!((TwoDotsLineRender)ab).isDead())if(((TwoDotsLineRender)ab).tile==tileFL)var1=false;
 		}
-		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tileFL.x()+0.5, tileFL.y()+0.5, tileFL.z()+0.5, tileFL.control.getX()+0.5, tileFL.control.getY()+0.5, tileFL.control.getZ()+0.5),tileFL));
+		if(var1)RenderEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tileFL.x()+0.5, tileFL.y()+0.5, tileFL.z()+0.5, tileFL.control.getX()+0.5, tileFL.control.getY()+0.5, tileFL.control.getZ()+0.5),tileFL));
 		float FP=PowerUtil.getFuelPrecentage(tileFL),a=FP*10-1;
 		if(a>1)a=1;
 		else if(a<0)a=0;

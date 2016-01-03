@@ -40,7 +40,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     }
 
     public Vec3M subtract(Vec3M vec){
-        return this.subtract(vec.x, vec.x, vec.x);
+        return this.subtract(vec.x, vec.y, vec.z);
     }
 
     public Vec3M subtract(double x, double y, double z){
@@ -48,7 +48,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     }
 
     public Vec3M addVector(Vec3M vec){
-        return this.addVector(vec.x, vec.x, vec.x);
+        return this.addVector(vec.x, vec.y, vec.z);
     }
     public Vec3M addVector(double x, double y, double z){
         return new Vec3M(this.x + x, this.y + y, this.z + z);

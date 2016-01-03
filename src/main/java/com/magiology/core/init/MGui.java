@@ -29,10 +29,10 @@ public class MGui{
 	public static void registerGuis(){
 		NetworkRegistry.INSTANCE.registerGuiHandler(Magiology.getMagiology(), new GuiHandlerM());
 		try{
-			RenderLoopEvents.registerFirstPersonGui(SoulFlameHUD.instance);
-			RenderLoopEvents.registerFirstPersonGui(WingModeChangerHUD.instance);
-			RenderLoopEvents.registerFirstPersonGui(StatsDisplayHUD.instance);
-			RenderLoopEvents.registerFirstPersonGui(HandModeChangerHUD.instance);
+			RenderEvents.registerFirstPersonGui(SoulFlameHUD.instance);
+			RenderEvents.registerFirstPersonGui(WingModeChangerHUD.instance);
+			RenderEvents.registerFirstPersonGui(StatsDisplayHUD.instance);
+			RenderEvents.registerFirstPersonGui(HandModeChangerHUD.instance);
 		}catch(Exception e){
 			e.printStackTrace();
 			U.exit(404);

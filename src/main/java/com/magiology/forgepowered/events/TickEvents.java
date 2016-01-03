@@ -38,7 +38,7 @@ public class TickEvents{
 		
 		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.update();
 		DownloadingIcon.update();
-		if(U.getTheWorld()==null)RenderLoopEvents.universalLongRender.clear();
+		if(U.getTheWorld()==null)RenderEvents.universalLongRender.clear();
 		
 		if(mc.isGamePaused())return;
 		if(UtilM.getThePlayer()==null)return;
@@ -46,11 +46,11 @@ public class TickEvents{
 		FakeMessageHUD.get().update();
 		
 		/**RenderLoopEvents sync**/{
-			List<LongAfterRenderRenderer> render=RenderLoopEvents.universalLongRender;
+			List<LongAfterRenderRenderer> render=RenderEvents.universalLongRender;
 			if(!render.isEmpty())for(LongAfterRenderRenderer a:render)if(a!=null&&!a.isDead())a.update();
 		}
-		if(RenderLoopEvents.disabledEquippItemAnimationTime>0)RenderLoopEvents.disabledEquippItemAnimationTime--;
-		else if(RenderLoopEvents.disabledEquippItemAnimationTime<0)RenderLoopEvents.disabledEquippItemAnimationTime=0;
+		if(RenderEvents.disabledEquippItemAnimationTime>0)RenderEvents.disabledEquippItemAnimationTime--;
+		else if(RenderEvents.disabledEquippItemAnimationTime<0)RenderEvents.disabledEquippItemAnimationTime=0;
 
 		GameSettings gs=U.getMC().gameSettings;
 		boolean[] keys={Keyboard.isKeyDown(gs.keyBindForward.getKeyCode()),Keyboard.isKeyDown(gs.keyBindBack.getKeyCode()),Keyboard.isKeyDown(gs.keyBindJump.getKeyCode()),Keyboard.isKeyDown(gs.keyBindSneak.getKeyCode()),Keyboard.isKeyDown(gs.keyBindRight.getKeyCode()),Keyboard.isKeyDown(gs.keyBindLeft.getKeyCode())};
@@ -66,8 +66,8 @@ public class TickEvents{
 				data.keys=keys.clone();
 			}
 		}
-		for(int a=0;a<RenderLoopEvents.FPGui.size();a++){
-			HUD gui=RenderLoopEvents.FPGui.get(a);
+		for(int a=0;a<RenderEvents.FPGui.size();a++){
+			HUD gui=RenderEvents.FPGui.get(a);
 			gui.update();
 		}
 	}
@@ -77,7 +77,7 @@ public class TickEvents{
 	}
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event){
-		RenderLoopEvents.partialTicks=event.renderTickTime;
+		RenderEvents.partialTicks=event.renderTickTime;
 		if(event.phase!=Phase.END)return;
 		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.render(Display.getWidth(), Display.getHeight(),event.renderTickTime);
 		if(bufferedGuiFirst){

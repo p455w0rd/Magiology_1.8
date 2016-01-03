@@ -33,7 +33,7 @@ public class ItemRendererPowerCounter implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		if(item.getTagCompound()!=null){
 			NBTTagCompound PC= item.getTagCompound();
-			anim=PC.getDouble("pAnim")+(PC.getDouble("pAnim")-PC.getDouble("anim"))*RenderLoopEvents.partialTicks;
+			anim=PC.getDouble("pAnim")+(PC.getDouble("pAnim")-PC.getDouble("anim"))*RenderEvents.partialTicks;
 			powerBar=PC.getDouble("powerBar");
 			maxPB=PC.getInteger("maxEn");
 			currentP=PC.getInteger("currentEn");

@@ -33,7 +33,7 @@ import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.*;
 
-public class RenderLoopEvents{
+public class RenderEvents{
 	public static List<AfterRenderRenderer> universalRender=new ArrayList<AfterRenderRenderer>();
 	public static List<LongAfterRenderRenderer> universalLongRender=new ArrayList<LongAfterRenderRenderer>();
 	public static List<EntityPosAndBB> entitys=new ArrayList<EntityPosAndBB>();
@@ -115,7 +115,7 @@ public class RenderLoopEvents{
 	
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderWorldLast(RenderWorldLastEvent e){
-		RenderLoopEvents.partialTicks=e.partialTicks;
+		RenderEvents.partialTicks=e.partialTicks;
 		TessUtil.renderParticle();
 		EntityPlayer player = UtilM.getThePlayer();
 		
@@ -139,14 +139,14 @@ public class RenderLoopEvents{
 		if(!Minecraft.isGuiEnabled()||e.type!=ElementType.CHAT)return;
 		ScaledResolution res=e.resolution;
 		EntityPlayer player=UtilM.getThePlayer();
-		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), RenderLoopEvents.partialTicks);
+		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), RenderEvents.partialTicks);
 		GL11.glPushMatrix();
 		GL11.glTranslated(0, 0, -10);
 		for(int a=0;a<FPGui.size();a++){
 			HUD gui=FPGui.get(a);
 			GL11.glPushMatrix();
 			gui.player=player;
-			gui.render(res.getScaledWidth(), res.getScaledHeight(), RenderLoopEvents.partialTicks);
+			gui.render(res.getScaledWidth(), res.getScaledHeight(), RenderEvents.partialTicks);
 			GL11.glPopMatrix();
 		}
 		GL11.glPopMatrix();

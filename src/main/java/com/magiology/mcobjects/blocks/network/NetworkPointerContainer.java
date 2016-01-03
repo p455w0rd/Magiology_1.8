@@ -85,7 +85,6 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 				stack.motionX=0;
 				stack.motionY=0;
 				stack.motionZ=0;
-				UtilM.spawnEntity(stack);
 			}
 			tile.setInventorySlotContents(id, null);
 			return true;

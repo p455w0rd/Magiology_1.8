@@ -118,7 +118,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	public void drawSmartShit(){
 		GL11.glPushMatrix();
-		GL11.glTranslated(0, prevSliderPos+(sliderPos-prevSliderPos)*RenderLoopEvents.partialTicks, 0);
+		GL11.glTranslated(0, prevSliderPos+(sliderPos-prevSliderPos)*RenderEvents.partialTicks, 0);
 		double scale=0.5;
 		int x=6,y=6+48;
 		GL11.glTranslated(x, y, 0);
@@ -210,7 +210,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		playerButton.xPosition=(int)playerXPos-10;
 		playerButton.yPosition=(int)-playerYPos-26;
 		GL11.glPushMatrix();
-		float posY=(float)(prevPlayerYPos+(playerYPos-prevPlayerYPos)*RenderLoopEvents.partialTicks);
+		float posY=(float)(prevPlayerYPos+(playerYPos-prevPlayerYPos)*RenderEvents.partialTicks);
 //		posY=(float)playerYPos;
 		GL11.glTranslated(playerXPos,-posY, 0);
 		TessUtil.drawPlayerIntoGUI(0, 0, 11, (float)playerXPos-v2 , (-posY)-v3, this.mc.thePlayer);

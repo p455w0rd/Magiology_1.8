@@ -30,7 +30,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 	EntityPlayer player;
 	TileEntityHologramProjector tile;
 	AdvancedPhysicsFloat helpAlpha=new AdvancedPhysicsFloat(0, 0.1F, true);
-	static VertixModel arrowsModel;
+	static VertexModel arrowsModel;
 	
 	public GuiHologramProjectorMain(EntityPlayer player,TileEntityHologramProjector tile){
 		super(new ContainerEmpty());

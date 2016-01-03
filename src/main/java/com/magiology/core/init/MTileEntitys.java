@@ -66,7 +66,7 @@ public class MTileEntitys{
 		bindTileWRender(TileEntityNetworkConductor.class,       new RenderNetworkConductor());
 		bindTileWRender(TileEntityNetworkController.class,      new RenderNetworkController());
 		bindTileWRender(TileEntityNetworkInterface.class,       new RenderNetworkInterface());
-		bindTileWRender(TileEntityNetworkRouter.class,new RenderNetworkPointerContainer());
+		bindTileWRender(TileEntityNetworkRouter.class,new RenderNetworkRouter());
 		bindTileWRender(TileEntityRareSpacePipe.class,          new RenderMultiBox());
 		bindTileWRender(TileEntityNetworkProgramHolder.class,   new RenderMultiBox());
 	}

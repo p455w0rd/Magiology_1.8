@@ -3,6 +3,7 @@ package com.magiology.util.renderers.tessellatorscripts;
 import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
+import org.lwjgl.util.vector.*;
 
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;
@@ -17,8 +18,12 @@ public class ComplexCubeModel{
 	VertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
-		this.minX=minX;this.minY=minY;this.minZ=minZ;
-		this.maxX=maxX;this.maxY=maxY;this.maxZ=maxZ;
+		this.minX=Math.min(minX, maxX);
+		this.minY=Math.min(minY, maxY);
+		this.minZ=Math.min(minZ, maxZ);
+		this.maxX=Math.max(minX, maxX);
+		this.maxY=Math.max(minY, maxY);
+		this.maxZ=Math.max(minZ, maxZ);
 		for(int i=0;i<UVs.length;i++)UVs[i]=QuadUV.all();
 		points=genPoints();
 	}
@@ -215,14 +220,11 @@ public class ComplexCubeModel{
 		return this;
 	}
 	public ComplexCubeModel translate(float x, float y, float z){
-		points[0]=points[0].addVector(x,y,z);
-		points[1]=points[1].addVector(x,y,z);
-		points[2]=points[2].addVector(x,y,z);
-		points[3]=points[3].addVector(x,y,z);
-		points[4]=points[4].addVector(x,y,z);
-		points[5]=points[5].addVector(x,y,z);
-		points[6]=points[6].addVector(x,y,z);
-		points[7]=points[7].addVector(x,y,z);
+		for(int i=0;i<points.length;i++)points[i]=points[i].addVector(x,y,z);
+		return this;
+	}
+	public ComplexCubeModel transform(Matrix4f matrix){
+		for(int i=0;i<points.length;i++)points[i]=GL11U.transformVector(points[i], matrix);
 		return this;
 	}
 }

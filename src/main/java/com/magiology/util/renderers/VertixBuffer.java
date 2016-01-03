@@ -126,8 +126,8 @@ public class VertixBuffer{
 			e.printStackTrace();
 		}
 	}
-	public VertixModel exportToNoramlisedVertixBufferModel(){
-		VertixModel model=VertixModel.create();
+	public VertexModel exportToNoramlisedVertixBufferModel(){
+		VertexModel model=VertexModel.create();
 		model.init(shadedTriangles);
 		cleanUp();
 		return model;

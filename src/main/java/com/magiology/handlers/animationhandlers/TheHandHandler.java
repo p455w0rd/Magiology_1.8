@@ -206,7 +206,7 @@ public class TheHandHandler{
 		if(!UtilM.isRemote(player))return;
 		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
 		if(data==null)return;
-		RenderLoopEvents.disabledEquippItemAnimationTime=2;
+		RenderEvents.disabledEquippItemAnimationTime=2;
 		boolean bol1=getActivePosition(player).equals(HandComonPositions.ReadyForAction)||getActivePosition(player).equals(HandComonPositions.NaturalPosition);
 		for(int finger=0;finger<data.fingerData.length;finger++){
 			PowerHandData_sub_fingerData a1=data.fingerData[finger];

@@ -9,23 +9,36 @@ import net.minecraft.nbt.*;
 import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
+import net.minecraftforge.fml.relauncher.*;
 
 import org.apache.commons.lang3.*;
+import org.lwjgl.*;
 
 import com.magiology.api.connection.*;
 import com.magiology.api.network.*;
 import com.magiology.api.network.skeleton.*;
 import com.magiology.core.init.*;
 import com.magiology.forgepowered.events.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.mcobjects.effect.*;
 import com.magiology.mcobjects.items.*;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class TileEntityNetworkRouter extends TileEntityNetwork implements ISidedInventory,IUpdatePlayerListBox{
 	
 	private SlowdownUtil optimizer=new SlowdownUtil(40);
 	public ItemStack[] slots=new ItemStack[10];
+	
+	@SideOnly(Side.CLIENT)
+	public PartialTicks1F[] animationos={
+		new PartialTicks1F(),new PartialTicks1F(),new PartialTicks1F(),
+		new PartialTicks1F(),new PartialTicks1F(),new PartialTicks1F(),
+		new PartialTicks1F(),new PartialTicks1F(),new PartialTicks1F()
+	};
 	
 	public TileEntityNetworkRouter(){}
 	
@@ -45,6 +58,9 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 		if(getBrain()==null){
 			findBrain();
 			ForcePipeUpdate.updatePipe(worldObj, pos);
+		}
+		for(int i=0;i<animationos.length;i++){
+			animationos[i].update(UtilM.slowlyEqalize(animationos[i].value, slots[i]!=null?1:0, 0.03F));
 		}
 		checkBrainConnection();
 		if(optimizer.isTimeWithAddProgress())updateConnections();
@@ -78,8 +94,7 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 		UpdateablePipeHandler.setConnections(sides, this);
 		for(int i=0;i<sides.length;i++)connections[i].setMain(sides[i]!=null);
 		
-		int side=SideUtil.convert(getOrientation());
-		side=SideUtil.getOppositeSide(side);
+		int side=SideUtil.getOppositeSide(getOrientation());
 		for(int i=0;i<6;i++)setAccessibleOnSide(i, i==side);
 		setColisionBoxes();
 	}
@@ -102,36 +117,38 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 				connections[4].getMain()?new AxisAlignedBB(0,   p*6, p*6, p*5,  p*10, p*10):null,
 						new AxisAlignedBB(p*5, p*5, p*5, p*11, p*11, p*11),
 		};
-//		Helper.printInln(side);
-		for(int i=0;i<3;i++){
-			for(int j=0;j<3;j++){
-				switch(side){
-				case 4:{
-					collisionBoxes=ArrayUtils.add(collisionBoxes,
-							new AxisAlignedBB(p*9.5-i*p*2, p*9.5-j*p*2, p*4.8, p*10.5-i*p*2, p*10.5-j*p*2, p*10));
-				}break;
-				case 2:{
-					collisionBoxes=ArrayUtils.add(collisionBoxes,
-							new AxisAlignedBB(p*9.5-i*p*2, p*9.5-j*p*2, p*6, p*10.5-i*p*2, p*10.5-j*p*2, p*11.2));
-				}break;
-				case 3:{
-					collisionBoxes=ArrayUtils.add(collisionBoxes,
-							new AxisAlignedBB(p*4.8, p*9.5-j*p*2, p*9.5-i*p*2, p*10, p*10.5-j*p*2, p*10.5-i*p*2));
-				}break;
-				case 5:{
-					collisionBoxes=ArrayUtils.add(collisionBoxes,
-							new AxisAlignedBB(p*6, p*9.5-j*p*2, p*9.5-i*p*2, p*11.2, p*10.5-j*p*2, p*10.5-i*p*2));
-				}break;
-				case 0:{
-					collisionBoxes=ArrayUtils.add(collisionBoxes,
-							new AxisAlignedBB(p*9.5-i*p*2, p*4.8, p*9.5-j*p*2, p*10.5-i*p*2, p*10, p*10.5-j*p*2));
-				}break;
-				case 1:{
-					collisionBoxes=ArrayUtils.add(collisionBoxes,
-							new AxisAlignedBB(p*9.5-i*p*2, p*6, p*9.5-j*p*2, p*10.5-i*p*2, p*11.2, p*10.5-j*p*2));
-				}break;
-				}
-			}
+//		if(getPos().equals(UtilM.getMC().objectMouseOver.getBlockPos()))UtilM.println(side);
+		switch(side){
+		case 4:{
+			for(int i=0;i<3;i++)for(int j=0;j<3;j++)
+				collisionBoxes=ArrayUtils.add(collisionBoxes,
+					new AxisAlignedBB(p*9.5-i*p*2, p*9.5-j*p*2, p*4.8, p*10.5-i*p*2, p*10.5-j*p*2, p*9));
+		}break;
+		case 2:{
+			for(int i=0;i<3;i++)for(int j=0;j<3;j++)
+				collisionBoxes=ArrayUtils.add(collisionBoxes,
+						new AxisAlignedBB(p*9.5-i*p*2, p*9.5-j*p*2, p*7, p*10.5-i*p*2, p*10.5-j*p*2, p*11.2));
+		}break;
+		case 3:{
+			for(int i=0;i<3;i++)for(int j=0;j<3;j++)
+				collisionBoxes=ArrayUtils.add(collisionBoxes,
+					new AxisAlignedBB(p*4.8, p*9.5-j*p*2, p*9.5-i*p*2, p*9, p*10.5-j*p*2, p*10.5-i*p*2));
+		}break;
+		case 5:{
+			for(int i=0;i<3;i++)for(int j=0;j<3;j++)
+				collisionBoxes=ArrayUtils.add(collisionBoxes,
+					new AxisAlignedBB(p*7, p*9.5-j*p*2, p*9.5-i*p*2, p*11.2, p*10.5-j*p*2, p*10.5-i*p*2));
+		}break;
+		case 0:{
+			for(int i=0;i<3;i++)for(int j=0;j<3;j++)
+				collisionBoxes=ArrayUtils.add(collisionBoxes,
+					new AxisAlignedBB(p*9.5-i*p*2, p*4.8, p*9.5-j*p*2, p*10.5-i*p*2, p*9, p*10.5-j*p*2));
+		}break;
+		case 1:{
+			for(int i=0;i<3;i++)for(int j=0;j<3;j++)
+				collisionBoxes=ArrayUtils.add(collisionBoxes,
+					new AxisAlignedBB(p*9.5-i*p*2, p*7, p*9.5-j*p*2, p*10.5-i*p*2, p*11.2, p*10.5-j*p*2));
+		}break;
 		}
 	}
 	@Override
@@ -249,13 +266,13 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 
 	@Override
 	public int[] getSlotsForFace(EnumFacing side){
-		if(side.getIndex()==SideUtil.convert(getOrientation()))return new int[]{0,1,2,3,4,5,6,7,8};
+		if(side.getIndex()==SideUtil.getOppositeSide(getOrientation()))return new int[]{0,1,2,3,4,5,6,7,8};
 		return null;
 	}
 
 	@Override
 	public boolean canInsertItem(int index, ItemStack itemStackIn,EnumFacing side){
-		return side.getIndex()==SideUtil.convert(getOrientation());
+		return side.getIndex()==SideUtil.getOppositeSide(getOrientation());
 	}
 
 	@Override
@@ -265,11 +282,25 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 
 	@Override
 	public IConnection[] getConnections(){
-		return null;
+		return connections;
 	}
 
 	@Override
 	public boolean isStrate(EnumFacing facing){
+		if(facing==EnumFacing.UP||facing==EnumFacing.DOWN||facing==null){
+			if((connections[0].getMain()&&connections[1].getMain())&&(connections[2].getMain()==false&&connections[3].getMain()==false&&connections[4].getMain()==false&&connections[5].getMain()==false))return true;
+		}
+		if(facing==EnumFacing.WEST||facing==null){
+			if((connections[4].getMain()&&connections[5].getMain())&&(connections[1].getMain()==false&&connections[0].getMain()==false&&connections[2].getMain()==false&&connections[3].getMain()==false))return true;
+		}
+		if(facing==EnumFacing.SOUTH||facing==null){
+			if((connections[2].getMain()&&connections[3].getMain())&&(connections[1].getMain()==false&&connections[0].getMain()==false&&connections[4].getMain()==false&&connections[5].getMain()==false))return true;
+		}
 		return false;
+	}
+	@Override
+	public void getBoxesOnSide(List<AxisAlignedBB> result, int side){
+		super.getBoxesOnSide(result, side);
+		if(SideUtil.getOppositeSide(getOrientation())==side)for(int i=7;i<collisionBoxes.length;i++)result.add(collisionBoxes[i]);
 	}
 }

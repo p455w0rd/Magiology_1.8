@@ -18,7 +18,7 @@ public class PowerCounter extends ItemM{
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
 		boolean state=itemstack.getTagCompound().getBoolean("state");
 		boolean notDone=true;
-		RenderLoopEvents.disabledEquippItemAnimationTime=2;
+		RenderEvents.disabledEquippItemAnimationTime=2;
 		if(player.isSneaking()&&world.isRemote){
 			if(state==false&&notDone==true){
 				state=true;

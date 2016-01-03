@@ -97,17 +97,4 @@ public class SideUtil{
 		if(!U.isNull(world,pos))for(int i=0;i<6;i++)result[i]=world.getTileEntity(offsetNew(i, pos));
 		return result;
 	}
-	
-	public static int convert(int side){
-		return side;
-//		switch(side){
-//		case 0:return 0;
-//		case 1:return 1;
-//		case 2:return 4;
-//		case 3:return 2;
-//		case 4:return 3;
-//		case 5:return 5;
-//		}
-//		return -1;
-	}
 }

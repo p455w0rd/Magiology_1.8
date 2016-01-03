@@ -19,6 +19,7 @@ import com.magiology.core.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.*;
 import com.magiology.util.utilobjects.vectors.*;
 
 /* Inspired by Integrated-Circuits, thanks! o/ */
@@ -66,7 +67,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	}
 	
 	private static <T extends IMessage & IMessageHandler<T, IMessage>> void registerPacket(Class<T> clazz, Side side){
-		if(Magiology.NETWORK_CHANNEL==null)Magiology.NETWORK_CHANNEL=NetworkRegistry.INSTANCE.newSimpleChannel(MReference.CHANNEL_NAME);
+		if(Magiology.NETWORK_CHANNEL==null)Magiology.NETWORK_CHANNEL=new SimpleNetworkWrapperM(MReference.CHANNEL_NAME);
 		if(side==Side.CLIENT)Magiology.NETWORK_CHANNEL.registerMessage(clazz, clazz, registrationId, Side.CLIENT);
 		else if(side==Side.SERVER)Magiology.NETWORK_CHANNEL.registerMessage(clazz, clazz, registrationId, Side.SERVER);
 		registrationId++;

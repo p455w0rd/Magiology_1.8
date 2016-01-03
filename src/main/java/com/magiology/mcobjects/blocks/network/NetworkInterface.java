@@ -50,7 +50,7 @@ public class NetworkInterface extends BlockContainerMultiColision{
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
 		super.onBlockAdded(world, pos, state);
 		TileEntityNetworkInterface tile=(TileEntityNetworkInterface)world.getTileEntity(pos);
-		int side=SideUtil.convert(tile.getOrientation());
+		int side=tile.getOrientation();
 		TileEntity test=world.getTileEntity(SideUtil.offset(side, pos));
 		
 		if(!(test instanceof ISidedNetworkComponent)){

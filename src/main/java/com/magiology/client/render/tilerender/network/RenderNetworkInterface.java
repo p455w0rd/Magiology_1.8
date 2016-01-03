@@ -34,7 +34,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 		VertixBuffer buff=TessUtil.getVB();
 		
 		buff.importComplexCube(new ComplexCubeModel(p*6,p*6,0,p*10,p*10,p*2));
-		VertixModel centerCube=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel centerCube=buff.exportToNoramlisedVertixBufferModel();
 		centerCube.glStateCell=new GlStateCell(new GlState(new int[]{}, new int[]{GL11.GL_TEXTURE_2D},()->{GL11.glColor3f(0.1F, 0.1F, 0.1F);}), null);
 		
 		
@@ -76,18 +76,18 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 			buff.addVertex(xIn2,  yIn2,  p/2);
 			buff.addVertex(xIn1,  yIn1,  p/2);
 		};
-		VertixModel plate=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel plate=buff.exportToNoramlisedVertixBufferModel();
 		plate.glStateCell=new GlStateCell(new GlState(()->{
 
 			long offset=curentTile.x()*7-curentTile.y()*15+curentTile.z()*9;
 			GL11.glColor3f(UtilM.fluctuatorSmooth(80, offset), UtilM.fluctuatorSmooth(134, 40+offset), UtilM.fluctuatorSmooth(156, 56+offset));
 			
 			if(curentTile.getBrain()!=null){
-				VertixModel model=interfacePlate.compiledModels[interfacePlate.curentSide][1];
+				OpenGlModel model=interfacePlate.compiledModels[interfacePlate.getCurentSide()][1];
 				GL11.glPushMatrix();
 				Vec3M rotation=null,translation=null;
 				
-				switch (interfacePlate.curentSide){
+				switch (interfacePlate.getCurentSide()){
 				case 0:rotation=new Vec3M( 90,   0, 0);translation=new Vec3M( 0.5,  0.5, 0.5);break;
 				case 1:rotation=new Vec3M(-90,   0, 0);translation=new Vec3M( 0.5, -0.5, 0.5);break;
 				case 2:rotation=new Vec3M(  0, 180, 0);translation=new Vec3M(-0.5,  0.5, 0.5);break;
@@ -98,9 +98,9 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 				
 				GL11U.glRotate(rotation);
 				GL11.glTranslated(translation.x,translation.y,translation.z);
-				GL11U.glRotate(0,0,UtilM.getTheWorld().getTotalWorldTime()+RenderLoopEvents.partialTicks);
+				GL11U.glRotate(0,0,UtilM.getTheWorld().getTotalWorldTime()+RenderEvents.partialTicks);
 				GL11.glTranslated(-translation.x,-translation.y,-translation.z);
-				GL11.glTranslatef(0, 0, (float) (Math.sin((UtilM.getTheWorld().getTotalWorldTime()+RenderLoopEvents.partialTicks)/10+offset)*p/2+p/2));
+				GL11.glTranslatef(0, 0, (float) (Math.sin((UtilM.getTheWorld().getTotalWorldTime()+RenderEvents.partialTicks)/10+offset)*p/2+p/2));
 				GL11U.glRotate((Vec3M)rotation.negate());
 			}
 			
@@ -108,8 +108,8 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 			if(curentTile.getBrain()!=null)GL11.glPopMatrix();
 		}));
 		
-		interfacePlate=new SidedModel(new DoubleObject<VertixModel[], int[]>(
-			new VertixModel[]{
+		interfacePlate=new SidedModel(new DoubleObject<VertexModel[], int[]>(
+			new VertexModel[]{
 					centerCube,
 					plate
 			},
@@ -127,7 +127,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
 		curentTile=(TileEntityNetworkInterface)tile;
-//		initModels();
+//		if(UtilM.getThePlayer().isSneaking())initModels();
 		rednerNetworkPipe(curentTile, x, y, z);
 		
 	}

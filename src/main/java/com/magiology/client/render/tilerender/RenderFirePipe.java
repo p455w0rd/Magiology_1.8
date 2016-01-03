@@ -31,8 +31,8 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		if(UtilM.isItemInStack(MItems.FireHammer, UtilM.getThePlayer().getCurrentEquippedItem())){
 			if(pipe.hasPriorityUpg){
 				boolean var1=true;
-				for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){
-					LongAfterRenderRenderer ab=RenderLoopEvents.universalLongRender.get(a);
+				for(int a=0;a<RenderEvents.universalLongRender.size();a++){
+					LongAfterRenderRenderer ab=RenderEvents.universalLongRender.get(a);
 					if(ab instanceof RenderFirePipePriorityCube&&!((RenderFirePipePriorityCube)ab).isDead())if(((RenderFirePipePriorityCube)ab).pipe==pipe)var1=false;
 				}
 				if(var1&&pipe.FirstSide>=0){
@@ -46,15 +46,15 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 					case 5:a=0;break;
 					}
 					AxisAlignedBB b=pipe.collisionBoxes[a];
-					RenderLoopEvents.spawnLARR(new RenderFirePipePriorityCube(pipe, pipe.getPos(), b));
+					RenderEvents.spawnLARR(new RenderFirePipePriorityCube(pipe, pipe.getPos(), b));
 				}
 			}
 			boolean var2=true;
-			for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){
-				LongAfterRenderRenderer ab=RenderLoopEvents.universalLongRender.get(a);
+			for(int a=0;a<RenderEvents.universalLongRender.size();a++){
+				LongAfterRenderRenderer ab=RenderEvents.universalLongRender.get(a);
 				if(ab instanceof RenderFirePipeGlow&&!((RenderFirePipeGlow)ab).isDead()&&((RenderFirePipeGlow)ab).pipe==pipe)var2=false;
 			}
-			if(var2)RenderLoopEvents.spawnLARR(new RenderFirePipeGlow(pipe));
+			if(var2)RenderEvents.spawnLARR(new RenderFirePipeGlow(pipe));
 		}
 		Render.WR().setTranslation(x,y,z);
 		if(pipe.DCFFL)drawConectorFFL();
@@ -83,7 +83,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	}
 	
 	
-	private VertixModel modelStand;
+	private VertexModel modelStand;
 	private void generateModelStand(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*7.5,  p*6, p*8.5,  tWS*0, tHS*0);
@@ -201,7 +201,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	
 	
 	
-	private VertixModel[] conectionToObjModel=new VertixModel[2];
+	private VertexModel[] conectionToObjModel=new VertexModel[2];
 	private void generateModelConectionToObj(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*0,   p*10, p*10,1, 0);
@@ -252,7 +252,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		conectionToObjModel[0].popMatrix();
 		conectionToObjModel[1].popMatrix();
 	}
-	private VertixModel strateCoreModel;
+	private VertexModel strateCoreModel;
 	private void generateModelStrateCore(){
 		buf.cleanUp();
 		buf.addVertexWithUV(0, p*9.5, p*9.5,tW*103, tH*0);
@@ -367,7 +367,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		buf.draw();
 		buf.popMatrix();
 	}
-	private VertixModel conectorFFLModel;
+	private VertexModel conectorFFLModel;
 	private void generateModelConectorFFL(){
 		buf.cleanUp();
 		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*0, 0);

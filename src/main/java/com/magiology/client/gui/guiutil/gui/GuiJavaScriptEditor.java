@@ -26,7 +26,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	
 	private List<DoubleObject<List<String>,List<Integer>>> coloredText;
 	private String selectedWord="";
-	private VertixModel selection=null;
+	private VertexModel selection=null;
 	
 	@Override
 	protected void rednerText(FontRendererMClipped fr){

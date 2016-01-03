@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.*;
 import com.magiology.api.power.*;
 import com.magiology.util.utilclasses.*;
 
-public class GameLoopEvents{
+public class GameEvents{
 	
 	@SubscribeEvent
 	public void onBlockPlace(BlockEvent.PlaceEvent e){

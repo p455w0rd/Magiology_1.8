@@ -56,7 +56,7 @@ public class ItemRendererGenericUpgrade implements IItemRenderer {
 			GL11.glRotated(yr, 0, 1, 0);
 			GL11.glRotated(zr, 0, 0, 1);
 			GL11.glTranslated(x,y,z);
-			double time=U.getMC().theWorld.getTotalWorldTime()%180,angle=((time)*2-2)+(2)*RenderLoopEvents.partialTicks;
+			double time=U.getMC().theWorld.getTotalWorldTime()%180,angle=((time)*2-2)+(2)*RenderEvents.partialTicks;
 			GL11.glTranslated(0.5, 0, 0);
 			GL11.glRotated(angle, 0, 1, 0);
 			GL11.glTranslated(-0.5, 0, 0);

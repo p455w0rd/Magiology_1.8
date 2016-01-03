@@ -25,7 +25,7 @@ import com.magiology.util.utilobjects.vectors.*;
 public class RenderNetworkController extends TileEntitySpecialRendererM{
 	
 	private static SidedModel connections;
-	private static VertixModel body1,body2;
+	private static VertexModel body1,body2;
 	private static ColorF glassColor=new ColorF(0.6,0,0,0.1);
 	
 	public RenderNetworkController(){
@@ -60,7 +60,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys);
 		
-		VertixModel sideThingysModel=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModel=buff.exportToNoramlisedVertixBufferModel();
 		sideThingysModel.glStateCell=new GlStateCell(
 			new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -124,7 +124,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		buff.importComplexCube(cores);
 		
-		VertixModel horisontalConnectionToBrain=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalConnectionToBrain=buff.exportToNoramlisedVertixBufferModel();
 		horisontalConnectionToBrain.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe_brain_con.png"));
@@ -144,7 +144,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		buff.importComplexCube(core);
 		
-		VertixModel horisontalCore1=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalCore1=buff.exportToNoramlisedVertixBufferModel();
 		horisontalCore1.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -152,7 +152,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		, null);
 		for(int i=0;i<core.willSideRender.length;i++)core.willSideRender[i]=i==4;
 		buff.importComplexCube(core);
-		VertixModel horisontalCore2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalCore2=buff.exportToNoramlisedVertixBufferModel();
 		horisontalCore2.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe_end.png"));
@@ -162,7 +162,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 				
 		};
 		buff.importComplexCube(upConsCubes);
-		VertixModel upCons=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel upCons=buff.exportToNoramlisedVertixBufferModel();
 		horisontalCore2.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -206,7 +206,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		sideThingys[2].points[4].x-=p;
 		sideThingys[2].points[5].x-=p;
 		buff.importComplexCube(sideThingys);
-		VertixModel sideThingysModel2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModel2=buff.exportToNoramlisedVertixBufferModel();
 		sideThingysModel2.glStateCell=new GlStateCell(
 			new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -222,23 +222,23 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		core1.willSideRender[5]=core1.willSideRender[4]=false;
 		buff.importComplexCube(core1);
-		VertixModel upModelCore1=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel upModelCore1=buff.exportToNoramlisedVertixBufferModel();
 		upModelCore1.glStateCell=new GlStateCell(new GlState(()->{TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));}), null);
 		
 		for(int i=0;i<core1.willSideRender.length;i++)core1.willSideRender[i]=i==4;
 		buff.importComplexCube(core1);
-		VertixModel upModelCore2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel upModelCore2=buff.exportToNoramlisedVertixBufferModel();
 		upModelCore2.glStateCell=new GlStateCell(new GlState(()->{TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe_end.png"));}), null);
 		
 		
 		
 		buff.importComplexCube(new ComplexCubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1));
-		VertixModel downModel=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel downModel=buff.exportToNoramlisedVertixBufferModel();
 		
 		
 		connections=new SidedModel(
-			new DoubleObject<VertixModel[],int[]>(
-				new VertixModel[]{
+			new DoubleObject<VertexModel[],int[]>(
+				new VertexModel[]{
 					horisontalConnectionToBrain,
 					sideThingysModel,
 					horisontalCore1,
@@ -251,8 +251,8 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 					5
 				}
 			),
-			new DoubleObject<VertixModel[],int[]>(
-				new VertixModel[]{
+			new DoubleObject<VertexModel[],int[]>(
+				new VertexModel[]{
 						upModelCore1,
 						upModelCore2,
 						sideThingysModel2,

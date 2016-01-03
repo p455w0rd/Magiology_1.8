@@ -24,14 +24,22 @@ public class GL11U{
 		case 3:glBlendFunc(GL_ONE, GL_ONE);return;
 		default:UtilM.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");return;
 	}}
-	/**Is blend enabled?
-	 * @param enabled*/
-	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
-		boolean WTB=true;
-		if(willTranslateBack.length==1)WTB=willTranslateBack[0];
-		GL11.glTranslated(xOffset, yOffset, zOffset);
+//	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
+		
+//	}
+	public static void glRotate(Vec3M angle,Vec3M offset){
+		glRotate(angle.x, angle.y, angle.z, offset);
+	}
+	public static void glRotate(Vec3M angle,double xOffset,double yOffset,double zOffset){
+		glRotate(angle.x, angle.y, angle.z, xOffset, yOffset, zOffset);
+	}
+	public static void glRotate(double xAngle,double yAngle,double zAngle,Vec3M offset){
+		glRotate(xAngle, yAngle, zAngle, offset.x, offset.y, offset.z);
+	}
+	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset){
+		glTranslated(xOffset, yOffset, zOffset);
 		glRotate(xAngle, yAngle, zAngle);
-		if(WTB)GL11.glTranslated(-xOffset, -yOffset, -zOffset);
+		glTranslated(-xOffset, -yOffset, -zOffset);
 	}
 	public static void glRotate(double x,double y,double z){
 		glRotated(x,1,0,0);

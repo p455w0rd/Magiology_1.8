@@ -23,8 +23,8 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		TileEntityFireMatrixReceaver tile=(TileEntityFireMatrixReceaver) tileEntity;
 		
 		boolean var1=true;
-		for(int a=0;a<RenderLoopEvents.universalLongRender.size();a++){
-			LongAfterRenderRenderer ab=RenderLoopEvents.universalLongRender.get(a);
+		for(int a=0;a<RenderEvents.universalLongRender.size();a++){
+			LongAfterRenderRenderer ab=RenderEvents.universalLongRender.get(a);
 			if(ab instanceof TwoDotsLineRender&&!((TwoDotsLineRender)ab).isDead())if(((TwoDotsLineRender)ab).tile==tile){
 				if(tile.hasTransferPoint){
 					var1=false;
@@ -33,7 +33,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 				}
 			}
 		}
-		if(var1)RenderLoopEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
+		if(var1)RenderEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
 		float rotation=UtilM.calculatePos(tile.prevRotation,tile.rotation);
 		GL11.glPushMatrix();

@@ -127,7 +127,7 @@ public class HighlightEvent{
 						if(tileEn instanceof TileEntityNetworkRouter){
 							int curentHighlight=MultiColisionProviderRayTracer.getPointedId((MultiColisionProvider)tileEn);
 							boolean contains=false;
-							for(LongAfterRenderRenderer part:RenderLoopEvents.universalLongRender){
+							for(LongAfterRenderRenderer part:RenderEvents.universalLongRender){
 								if(part instanceof RenderNetworkPointerContainerHighlight){
 									RenderNetworkPointerContainerHighlight Part=(RenderNetworkPointerContainerHighlight) part;
 									if(!Part.isDead()&&Part.tile.getPos().equals(pos)&&Part.highlightedBoxId==curentHighlight){
@@ -135,7 +135,7 @@ public class HighlightEvent{
 									}
 								}
 							}
-							if(!contains&&curentHighlight-7>=0)RenderLoopEvents.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkRouter) tileEn));
+							if(!contains&&curentHighlight-7>=0)RenderEvents.spawnLARR(new RenderNetworkPointerContainerHighlight((TileEntityNetworkRouter) tileEn));
 						}
 					}
 				}catch(Exception e){

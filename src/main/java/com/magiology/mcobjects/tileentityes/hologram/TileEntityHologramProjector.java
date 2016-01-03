@@ -156,8 +156,8 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float lenght){
 		Object[][] result={{},{}};
 		try{
-	        Vec3M Vec3M=UtilM.getPosition(player,RenderLoopEvents.partialTicks);
-	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderLoopEvents.partialTicks));
+	        Vec3M Vec3M=UtilM.getPosition(player,RenderEvents.partialTicks);
+	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderEvents.partialTicks));
 	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
 			
 			Ray ray=new Ray(Vec3M, vec32);

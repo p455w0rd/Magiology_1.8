@@ -19,8 +19,8 @@ import com.magiology.util.utilobjects.vectors.*;
 
 public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 	
-	private static SidedModel connections,strateConnections;
-	private static VertixModel body1,body2[]=new VertixModel[8];
+	protected static SidedModel connections,strateConnections;
+	protected static VertexModel body1,body2[]=new VertexModel[8];
 	
 	public RenderNetworkConductor(){
 		initModels();
@@ -39,7 +39,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys);
 		
-		VertixModel sideThingysModel1=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModel1=buff.exportToNoramlisedVertixBufferModel();
 		sideThingysModel1.glStateCell=new GlStateCell(
 			new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -56,7 +56,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys);
 		
-		VertixModel sideThingysModel2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModel2=buff.exportToNoramlisedVertixBufferModel();
 		sideThingysModel2.glStateCell=new GlStateCell(
 				new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 					TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -78,7 +78,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		
 		buff.importComplexCube(core);
 		
-		VertixModel horisontalCore1=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalCore1=buff.exportToNoramlisedVertixBufferModel();
 		horisontalCore1.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -97,15 +97,15 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		buff.importComplexCube(core);
 		
-		VertixModel horisontalCore2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalCore2=buff.exportToNoramlisedVertixBufferModel();
 		horisontalCore2.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
 			})
 		, null);
 		connections=new SidedModel(
-			new DoubleObject<VertixModel[],int[]>(
-				new VertixModel[]{
+			new DoubleObject<VertexModel[],int[]>(
+				new VertexModel[]{
 						sideThingysModel1,
 						horisontalCore1
 				},
@@ -115,8 +115,8 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 					5
 				}
 			),
-			new DoubleObject<VertixModel[],int[]>(
-				new VertixModel[]{
+			new DoubleObject<VertexModel[],int[]>(
+				new VertexModel[]{
 						sideThingysModel2,
 						horisontalCore2
 				},
@@ -142,7 +142,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		buff.importComplexCube(core);
 		
-		VertixModel coreLong=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel coreLong=buff.exportToNoramlisedVertixBufferModel();
 		coreLong.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -159,7 +159,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys1.length;i++)sideThingys1[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys1);
 		
-		VertixModel sideThingysModelLong=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModelLong=buff.exportToNoramlisedVertixBufferModel();
 		sideThingysModelLong.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -168,8 +168,8 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		
 		
 		strateConnections=new SidedModel(
-				new DoubleObject<VertixModel[],int[]>(
-					new VertixModel[]{
+				new DoubleObject<VertexModel[],int[]>(
+					new VertexModel[]{
 							sideThingysModelLong,
 							coreLong
 					},

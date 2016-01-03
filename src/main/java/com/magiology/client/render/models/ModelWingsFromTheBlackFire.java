@@ -151,7 +151,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		GL11.glPushMatrix();
 		for(int a1=0;a1<models.length;a1++){
 			ComplexCubeModel a=models[a1];
-			GL11U.glRotate(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0, true);
+			GL11U.glRotate(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0);
 			a.draw();
 			GL11.glPushMatrix();
 			GL11.glTranslated((a.points[3].x-a.points[4].x)*(side?-1:1), 0, 0);

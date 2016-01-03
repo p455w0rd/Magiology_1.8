@@ -97,7 +97,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			drawCenteredStringShoadowless(fr, "<-", 0,0, Color.DARK_GRAY.hashCode());
 			GL11.glPopMatrix();
 		}
-		this.renderParticles(RenderLoopEvents.partialTicks);
+		this.renderParticles(RenderEvents.partialTicks);
 		GL11.glTranslated(guiLeft, guiTop, 0);
 		
 	}

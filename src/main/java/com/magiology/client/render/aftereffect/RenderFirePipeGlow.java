@@ -58,7 +58,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	}
 	
 
-	private static VertixModel strateCoreModel;
+	private static VertexModel strateCoreModel;
 	private void generateModelStrateCoreGlow(){
 		buf.cleanUp();
 		ComplexCubeModel
@@ -86,7 +86,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	}
 	
 	
-	private static VertixModel connectorGlowModel;
+	private static VertexModel connectorGlowModel;
 	private void generateModelConnectorGlow(){
 		buf.cleanUp();
 		ComplexCubeModel 
@@ -133,7 +133,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		}
 	}
 	
-	private static VertixModel coreGlowModel;
+	private static VertexModel coreGlowModel;
 	private void generateModelCoreGlow(){
 		buf.cleanUp();
 		ComplexCubeModel 

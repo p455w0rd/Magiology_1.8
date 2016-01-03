@@ -1,7 +1,10 @@
 package com.magiology.core.init;
 
+import org.lwjgl.util.mapped.*;
+
 import net.minecraftforge.common.*;
 import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.relauncher.*;
 
 import com.magiology.client.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
 import com.magiology.client.render.shaders.core.*;
@@ -11,35 +14,57 @@ import com.magiology.util.utilclasses.*;
 
 public class MEvents{
 	
-	public static RenderLoopEvents RenderLoopInstance;
-	public static HighlightEvent HighlightInstance;
-	public static GameLoopEvents GameLoopInstance;
-	public static EntityEvents EntityInstance;
-	public static MouseEvents MouseInstance;
+	@SideOnly(Side.CLIENT)
+	public static RenderEvents renderEvents;
+	@SideOnly(Side.CLIENT)
+	public static HighlightEvent highlightEvent;
+	@SideOnly(Side.CLIENT)
+	public static MouseEvents mouseEvents;
+	@SideOnly(Side.CLIENT)
 	public static ShaderRunner shaderHandler;
 	
+	public static GameEvents gameEvents;
+	public static EntityEvents entityEvents;
+	
+	
 	public static void init(){
-		EventRegister(0,
-			HighlightInstance=new HighlightEvent(),
-			EntityInstance=new EntityEvents(),
-			RenderLoopInstance=new RenderLoopEvents(),
-			MouseInstance=new MouseEvents(),
-			GameLoopInstance=new GameLoopEvents(),
-			shaderHandler=new ShaderRunner(),
-			GuiButtonClickEvent.get()
-		);
-		EventRegister(1,
-			TickEvents.instance
-		);
+		common();
+		if(UtilM.isRemote())client();
+		else server();
 	}
-	public static void EventRegister(int RegisterId,Object... classes){
-		if(classes.length>0)switch(RegisterId){
-		case 0:for(int a=0;a<classes.length;a++)MinecraftForge.EVENT_BUS.register(classes[a]);break;
-		case 1:for(int a=0;a<classes.length;a++)FMLCommonHandler.instance().bus().register(classes[a]);break;
-		case 2:for(int a=0;a<classes.length;a++)MinecraftForge.TERRAIN_GEN_BUS.register(classes[a]);break;
-		case 3:for(int a=0;a<classes.length;a++)MinecraftForge.ORE_GEN_BUS.register(classes[a]);break;
-		default:for(int a=0;a<classes.length;a++)UtilM.printlnEr("EVENT FAILED TO REGISTER! "+RegisterId+" IS A WRONG REGISTRATION ID!"+"\n");break;
-		}else if(classes.length>0&&RegisterId>3&&RegisterId<0)UtilM.printlnEr("AAAND YOU FAILED...\n");
-		else UtilM.printlnEr("NO EVENTS ADDED FOR REGISTRATION!\n");
+	
+	public static void common(){
+		entityEvents=new EntityEvents();
+		gameEvents=new GameEvents();
+		
+		MinecraftForge.EVENT_BUS.register(gameEvents);
+		MinecraftForge.EVENT_BUS.register(entityEvents);
+		FMLCommonHandler.instance().bus().register(TickEvents.instance);
 	}
+	
+	public static void client(){
+		highlightEvent=new HighlightEvent();
+		renderEvents=new RenderEvents();
+		mouseEvents=new MouseEvents();
+		shaderHandler=new ShaderRunner();
+		
+		MinecraftForge.EVENT_BUS.register(renderEvents);
+		MinecraftForge.EVENT_BUS.register(mouseEvents);
+		MinecraftForge.EVENT_BUS.register(highlightEvent);
+		MinecraftForge.EVENT_BUS.register(shaderHandler);
+		MinecraftForge.EVENT_BUS.register(GuiButtonClickEvent.get());
+	}
+	
+	public static void server(){
+		
+	}
+	
+//	public static void EventRegister(int RegisterId,Object... classes){
+//		if(classes.length>0)switch(RegisterId){
+//		case 0:for(int a=0;a<classes.length;a++)MinecraftForge.EVENT_BUS.register(classes[a]);break;
+//		case 1:for(int a=0;a<classes.length;a++)FMLCommonHandler.instance().bus().register(classes[a]);break;
+//		case 2:for(int a=0;a<classes.length;a++)MinecraftForge.TERRAIN_GEN_BUS.register(classes[a]);break;
+//		case 3:for(int a=0;a<classes.length;a++)MinecraftForge.ORE_GEN_BUS.register(classes[a]);break;
+//		}
+//	}
 }

@@ -149,7 +149,7 @@ public class TileEntityNetworkProgramHolder extends TileEntityNetwork implements
 		return UtilM.isItemInStack(MItems.networkPointer, stack);
 	}
 	public NetworkInterface getBoundedBaseInterface(){
-		int side=SideUtil.convert(getOrientation());
+		int side=getOrientation();
 		TileEntity test=worldObj.getTileEntity(SideUtil.offset(side, pos));
 		if(test instanceof NetworkInterface)return (NetworkInterface)test;
 		return null;

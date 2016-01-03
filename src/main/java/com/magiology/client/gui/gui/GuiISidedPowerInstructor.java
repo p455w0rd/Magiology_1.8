@@ -201,9 +201,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			GL11.glScalef((-1), 1, 1);
 			if(renderer!=null){
 		        GL11.glCullFace(GL11.GL_FRONT);
-				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderLoopEvents.partialTicks,0);
+				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderEvents.partialTicks,0);
 				GL11.glCullFace(GL11.GL_BACK);
-				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderLoopEvents.partialTicks,0);
+				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderEvents.partialTicks,0);
 			}
 			Block block=U.getBlock(tile.getWorld(), tile.getPos());
 			if(block!=null){
