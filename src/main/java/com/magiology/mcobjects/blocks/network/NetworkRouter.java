@@ -4,8 +4,8 @@ import net.minecraft.block.material.*;
 import net.minecraft.block.properties.*;
 import net.minecraft.block.state.*;
 import net.minecraft.entity.*;
-import net.minecraft.entity.item.*;
 import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -19,10 +19,11 @@ import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider
 import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilobjects.m_extension.*;
 
-public class NetworkPointerContainer extends BlockContainerMultiColision{
+public class NetworkRouter extends BlockContainerMultiColision{
 	
-	public NetworkPointerContainer(){
+	public NetworkRouter(){
 		super(Material.iron);
 		this.setHardness(10F).setHarvestLevel("pickaxe", 1);
 		this.setBlockBounds(p*5, p*5, p*5, p*11, p*11, p*11);
@@ -74,22 +75,29 @@ public class NetworkPointerContainer extends BlockContainerMultiColision{
 		TileEntityNetworkRouter tile=(TileEntityNetworkRouter) world.getTileEntity(pos);
 		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
 		if(id<0)return false;
+		tile.extractionActivated[id]=!tile.extractionActivated[id];
 		if(tile.getStackInSlot(id)==null){
 			if(!UtilM.isItemInStack(MItems.networkPointer,player.getCurrentEquippedItem()))return false;
 			tile.setInventorySlotContents(id, player.getCurrentEquippedItem());
-			if(!player.capabilities.isCreativeMode)player.inventory.mainInventory[player.inventory.currentItem]=null;
+			player.inventory.mainInventory[player.inventory.currentItem]=null;
 			return true;
 		}else{
-			EntityItem stack=UtilM.dropBlockAsItem(world, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, tile.getStackInSlot(id));
-			if(stack!=null){
-				stack.motionX=0;
-				stack.motionY=0;
-				stack.motionZ=0;
-			}
-			tile.setInventorySlotContents(id, null);
 			return true;
 		}
 	}
+	
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPosM pos, EntityPlayer player){
+		TileEntityNetworkRouter tile=pos.getTile(world, TileEntityNetworkRouter.class);
+		if(tile==null)return super.getPickBlock(target, world, pos, player);
+		
+		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
+		if(id<0)return super.getPickBlock(target, world, pos, player);
+		
+		return tile.getStackInSlot(id);
+	}
+	
+	
 	@Override 
 	protected BlockState createBlockState(){
 		return new BlockState(this,new IProperty[]{U.META});

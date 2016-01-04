@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="net.minecraft.client.renderer.GlStateManager"/>
-<fullyQualifiedTypeName name="java.lang.Runnable"/>
 <fullyQualifiedTypeName name="net.minecraft.util.ResourceLocation"/>
 <fullyQualifiedTypeName name="com.magiology.client.render.Textures"/>
 <fullyQualifiedTypeName name="com.magiology.core.Config"/>
@@ -53,11 +51,13 @@
 <fullyQualifiedTypeName name="com.magiology.mcobjects.effect.EntitySmoothBubleFX"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.LinearAnimation"/>
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.DoubleObject"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilobjects.vectors.Vec3M"/>
-<fullyQualifiedTypeName name="net.minecraftforge.fml.relauncher.SideOnly"/>
 <fullyQualifiedTypeName name="com.magiology.util.renderers.PartialTicks1F"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.UtilM"/>
 <fullyQualifiedTypeName name="com.magiology.util.renderers.tessellatorscripts.ComplexCubeModel"/>
+<fullyQualifiedTypeName name="org.lwjgl.util.mapped.CacheLinePad"/>
+<fullyQualifiedTypeName name="net.minecraftforge.fml.relauncher.SideOnly"/>
+<fullyQualifiedTypeName name="scala.tools.nsc.transform.patmat.MatchCodeGen.CodegenCore.CommonCodegen"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilobjects.vectors.Vec3M"/>
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="com.magiology.util.renderers.GL11U"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.UtilM"/>
 </qualifiedTypeNameHistroy>

@@ -47,6 +47,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		GL11U.glTranslate(off);
 		//set up openGl opaque
 		GL11U.setUpOpaqueRendering(3);
+		GL11U.glScale(0.5F);
 		GL11U.glScale(-U.p/4);
 		
 		//calculation of rotation
@@ -154,13 +155,13 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
 			width=TessUtil.getFontRenderer().getStringWidth(text)*U.p/4;
 		TessUtil.getFontRenderer();
-		float leftX=CricleUtil.sin(-camYaw+90)*width/2, leftZ=CricleUtil.cos(-camYaw+90)*width/2, rand=UtilM.CRandF(2);
+		float leftX=CricleUtil.sin(-camYaw+90)*width/2, leftZ=CricleUtil.cos(-camYaw+90)*width/2, rand=UtilM.CRandF(1);
 		
 		
 		float r=0.8F,g=UtilM.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;
 		UtilM.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
 				tile.x()+0.5+off.x+leftX*rand+UtilM.CRandF(0.1), tile.y()+0.5+off.y+UtilM.CRandF(0.1), tile.z()+0.5+off.z+leftZ*rand+UtilM.CRandF(0.1),
-				UtilM.CRandF(0.01), 0.005+UtilM.CRandF(0.01), UtilM.CRandF(0.01), 200, 5, U.RB()?-0.5:0.1, r,g,b,0.1*point));
+				UtilM.CRandF(0.01), UtilM.CRandF(0.01), UtilM.CRandF(0.01), 100, 25, -UtilM.RF(0.1), r,g,b,0.05*point));
 	}
 	private Vec3M getOffset(){
 		float x=0,y=0,z=0;

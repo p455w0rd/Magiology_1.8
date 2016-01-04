@@ -4,13 +4,9 @@ import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 
 
-
-
 import org.apache.commons.lang3.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.*;
-
-
 
 
 import com.magiology.api.network.*;
@@ -34,8 +30,8 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 	protected static TileEntityNetworkRouter curentTile;
 	protected static LinearAnimation insertionAnimation=new LinearAnimation(
 		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8,1,0)},0F),
-		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M( 0,1,0)},0.4F),
-		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M( 0,0,0)},1F)
+		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8,0,0)},0.4F),
+		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M( 0,0,1)},1F)
 	);
 	
 	
@@ -185,18 +181,35 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 			
 			for(int i=0;i<3;i++)for(int j=0;j<3;j++){
 				Vec3M rots=insertionAnimation.get(curentTile.animationos[j+i*3].get())[0];
+				
 				GL11.glPushMatrix();
 				Vec3M rot=this.core.rotations[this.core.getCurentSide()];
 				GL11U.glRotate(rot,0.5F,0.5F,0.5F);
 				GL11.glTranslatef(-i*p*2, -j*p*2, 0);
 				
-				GL11.glPushMatrix();
-				GL11U.glRotate(0, rots.y*90, 0);
-				GL11.glColor3f(0, 0.125F, 0.125F);
-				usb.draw();
-				GL11.glColor3f(0, 0, 0.125F);
+				insertionAnimation=new LinearAnimation(
+						new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8, 1, 0)},0F),
+						new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8, 0, 1)},0.4F),
+						new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-0, 0, 1)},1F)
+					);
 				
-				GL11.glPopMatrix();
+				if(rots.z>0){
+					Vec3M salePos=new Vec3M(p*10, p*10, p*6.9);
+					
+					GL11.glPushMatrix();
+					GL11.glColor3f(0, 0.125F, 0);
+					
+					GL11U.glTranslate(salePos);
+					GL11.glTranslated(0,rots.y*p*3,-rots.y*p*3);
+					GL11U.glRotate(rots.y*40, 0, 0,0,0,-p*4);
+					GL11U.glScale(rots.z);
+					GL11U.glTranslate(salePos.mul(-1));
+					
+					usb.draw();
+					GL11.glPopMatrix();
+				}
+					
+				GL11.glColor3f(0, 0, 0.125F);
 				
 				GL11U.glRotate(rots.x,0,0, p*10.125F, p*9.75F, p*10F);
 				lever.draw();

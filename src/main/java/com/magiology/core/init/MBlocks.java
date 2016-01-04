@@ -58,7 +58,7 @@ public class MBlocks{
 		networkController=init(new NetworkController().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkController"));
 		networkConductor=init(new NetworkConductor().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkConductor"));
 		networkInterface=init(new NetworkInterface().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkInterface"));
-		networkPointerContainer=init(new NetworkPointerContainer().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkPointerContainer"));
+		networkPointerContainer=init(new NetworkRouter().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkPointerContainer"));
 		rareSpacePipe=init(new RareSpacePipe().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("rareSpacePipe"));
 		networkCommandCenter=init(new NetworkCommandHolder().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkCommandCenter"));
 	}

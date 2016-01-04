@@ -2,6 +2,7 @@ package com.magiology.mcobjects.tileentityes.network;
 
 import java.util.*;
 
+import net.minecraft.entity.item.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
@@ -22,6 +23,7 @@ import com.magiology.forgepowered.events.*;
 import com.magiology.forgepowered.events.client.*;
 import com.magiology.mcobjects.effect.*;
 import com.magiology.mcobjects.items.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.*;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.*;
@@ -33,12 +35,12 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	private SlowdownUtil optimizer=new SlowdownUtil(40);
 	public ItemStack[] slots=new ItemStack[10];
 	
-	@SideOnly(Side.CLIENT)
 	public PartialTicks1F[] animationos={
 		new PartialTicks1F(),new PartialTicks1F(),new PartialTicks1F(),
 		new PartialTicks1F(),new PartialTicks1F(),new PartialTicks1F(),
 		new PartialTicks1F(),new PartialTicks1F(),new PartialTicks1F()
 	};
+	public boolean[] extractionActivated=new boolean[9];
 	
 	public TileEntityNetworkRouter(){}
 	
@@ -51,6 +53,9 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
 		slots=UtilM.loadItemsFromNBT(NBT, "inventory", slots);
+		for(int i=0;i<animationos.length;i++)if(slots[i]!=null){
+			extractionActivated[i]=true;
+		}
 	}
 	
 	@Override
@@ -59,8 +64,22 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 			findBrain();
 			ForcePipeUpdate.updatePipe(worldObj, pos);
 		}
+		
 		for(int i=0;i<animationos.length;i++){
-			animationos[i].update(UtilM.slowlyEqalize(animationos[i].value, slots[i]!=null?1:0, 0.03F));
+			boolean stackNull=getStackInSlot(i)==null;
+			
+			if(stackNull)extractionActivated[i]=false;
+			
+			animationos[i].update(UtilM.slowlyEqalize(animationos[i].value, extractionActivated[i]?1:0, 0.03F));
+			if(!stackNull&&animationos[i].prevValue>animationos[i].value&&animationos[i].value==0){
+				EntityItem stack=UtilM.dropBlockAsItem(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, getStackInSlot(i));
+				if(stack!=null){
+					stack.motionX=0;
+					stack.motionY=0;
+					stack.motionZ=0;
+				}
+				setInventorySlotContents(i, null);
+			}
 		}
 		checkBrainConnection();
 		if(optimizer.isTimeWithAddProgress())updateConnections();
@@ -76,9 +95,6 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 		NetworkInterface caller=getBoundedInterface();
 		if(caller!=null){
 			List<ItemStack> pointers=caller.getPointers();
-//			if(pointers.isEmpty()){
-//				
-//			}
 			for(ItemStack i:pointers){
 				if(NetworkPointer.getTarget(i).equals(target.getPos()))return true;
 			}

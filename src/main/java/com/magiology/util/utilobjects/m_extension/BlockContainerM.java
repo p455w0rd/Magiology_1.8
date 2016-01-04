@@ -6,6 +6,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.*;
 import net.minecraft.block.state.*;
 import net.minecraft.client.resources.model.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -62,6 +64,13 @@ public abstract class BlockContainerM extends BlockContainer{
 	}
 	public void getRedstoneConnectableSides(IBlockAccess world, TileEntity tile, BlockPos pos, List<Integer> sides){}
 	
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world,BlockPos pos, EntityPlayer player){
+		return getPickBlock(target, world, new BlockPosM(pos), player);
+	}
+	public ItemStack getPickBlock(MovingObjectPosition target, World world,BlockPosM pos, EntityPlayer player){
+		return super.getPickBlock(target, world, pos, player);
+	}
 	
 	//#fucka youuu json models!
 	@SideOnly(value=Side.CLIENT)
