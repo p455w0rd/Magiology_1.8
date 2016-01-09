@@ -1,32 +1,46 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.player.PlayerFlyableFallEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
-import net.minecraftforge.fml.common.eventhandler.*;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.magiology.api.power.*;
-import com.magiology.client.gui.*;
-import com.magiology.core.*;
-import com.magiology.core.init.*;
-import com.magiology.handlers.*;
-import com.magiology.handlers.animationhandlers.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.registry.events.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.api.power.PowerCore;
+import com.magiology.client.gui.GuiUpdater;
+import com.magiology.core.Magiology;
+import com.magiology.core.init.MGui;
+import com.magiology.core.init.MItems;
+import com.magiology.handlers.GuiHandlerM;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
+import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.registry.events.PlayerWrenchEvent;
+import com.magiology.util.utilclasses.SpecialPlayerUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.EntityPosAndBB;
+import com.magiology.util.utilobjects.NBTUtil;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
 public class EntityEvents{
 //	ResourceLocation lol = new ResourceLocation(Magiology.MODID+":"+"/textures/blocks/background orginal.png");
@@ -125,8 +139,10 @@ public class EntityEvents{
 					
 					}
 				}
-				
 			}
+			
+			
+			
 			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
 				isFP=U.getMC().gameSettings.thirdPersonView!=0;
 				if(player.isCollidedVertically)yv=0;

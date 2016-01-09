@@ -62,6 +62,7 @@ public class UtilM{
 	public static final float p=1F/16F;
 	@SideOnly(value=Side.CLIENT)
     public static void spawnEntityFX(EntityFX particleFX){
+		
 		if(isRemote(particleFX)){
 			Minecraft mc=U.getMC();
 			Entity ent=mc.getRenderViewEntity();

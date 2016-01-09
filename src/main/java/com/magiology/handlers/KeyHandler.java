@@ -3,6 +3,7 @@ package com.magiology.handlers;
 import static com.magiology.handlers.KeyHandler.Keys.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.settings.*;
 import net.minecraftforge.fml.client.*;
 import net.minecraftforge.fml.client.registry.*;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.gameevent.*;
 
 import org.lwjgl.input.*;
 
+import com.magiology.client.gui.container.*;
 import com.magiology.client.gui.custom.hud.*;
 import com.magiology.core.*;
 import com.magiology.core.init.*;
@@ -28,7 +30,8 @@ public class KeyHandler{
 		StatsGui("key.stats",Keyboard.KEY_B),
 		ArmorGui("key.armor",Keyboard.KEY_V),
   		BusGui("key.bus",Keyboard.KEY_I),
-		HandMode("key.bus",Keyboard.KEY_F)
+		HandMode("key.bus",Keyboard.KEY_F),
+//		test("key.bus",Keyboard.KEY_L)
 		;
 		public final String  keyDesc;
 		public final int keyValue,id;
@@ -120,6 +123,17 @@ public class KeyHandler{
 				UtilM.sendMessage(new GenericServerVoidPacket(0));
 			}
 		}
+//		else if(test.check(keyId)){
+//			FMLClientHandler.instance().showGuiScreen(new GuiContainer(new ContainerEmpty()){
+//				
+//				@Override
+//				protected void drawGuiContainerBackgroundLayer(float partialTicks,
+//						int mouseX, int mouseY) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//		}
 		
 	}
 }

@@ -96,11 +96,13 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 				case 5:rotation=new Vec3M(  0,  90, 0);translation=new Vec3M(-0.5,  0.5, 0.5);break;
 				}
 				
+				double tim=UtilM.getWorldTime(getWorld())+RenderEvents.partialTicks;
+				
 				GL11U.glRotate(rotation);
 				GL11.glTranslated(translation.x,translation.y,translation.z);
-				GL11U.glRotate(0,0,UtilM.getTheWorld().getTotalWorldTime()+RenderEvents.partialTicks);
+				GL11U.glRotate(0,0,tim);
 				GL11.glTranslated(-translation.x,-translation.y,-translation.z);
-				GL11.glTranslatef(0, 0, (float) (Math.sin((UtilM.getTheWorld().getTotalWorldTime()+RenderEvents.partialTicks)/10+offset)*p/2+p/2));
+				GL11.glTranslatef(0, 0, (float) (Math.sin(tim/10+offset)*p/2+p/2));
 				GL11U.glRotate((Vec3M)rotation.negate());
 			}
 			

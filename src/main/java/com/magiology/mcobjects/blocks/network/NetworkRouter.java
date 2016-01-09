@@ -94,7 +94,8 @@ public class NetworkRouter extends BlockContainerMultiColision{
 		int id=MultiColisionProviderRayTracer.getPointedId(tile)-7;
 		if(id<0)return super.getPickBlock(target, world, pos, player);
 		
-		return tile.getStackInSlot(id);
+		ItemStack stack=tile.getStackInSlot(id);
+		return stack!=null?stack:super.getPickBlock(target, world, pos, player);
 	}
 	
 	

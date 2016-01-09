@@ -1,10 +1,23 @@
 package com.magiology.client.render.shaders;
 
-import com.magiology.client.render.shaders.core.*;
-import com.magiology.util.utilclasses.*;
+import java.awt.Color;
+import java.nio.IntBuffer;
+
+import javax.vecmath.Color3f;
+
+import net.minecraft.client.shader.Framebuffer;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import com.magiology.client.render.shaders.core.ShaderAspectRenderer;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
 
 public class ColorCutRenderer extends ShaderAspectRenderer{
 	public static ColorCutRenderer instance;
+	private IntBuffer pixels=BufferUtils.createIntBuffer(1);
 	
 	public float r=1,g=1,b=1,rPrev=1,gPrev=1,bPrev=1,tolerance=0.3F,intensity=0.9F,prevTolerance=0.3F,prevIntensity=0.9F;
 	
@@ -15,16 +28,23 @@ public class ColorCutRenderer extends ShaderAspectRenderer{
 	
 	@Override
 	public void update(){
+		prevTolerance=tolerance;
+		prevIntensity=intensity;
 		rPrev=r;
 		gPrev=g;
 		bPrev=b;
-		prevTolerance=tolerance;
-		prevIntensity=intensity;
-		r=UtilM.fluctuator(97, 0);
-		g=UtilM.fluctuator(140, 320);
-		b=UtilM.fluctuator(203, 563);
-		tolerance=0.5F;
-		intensity=0.8F;
+		
+		Framebuffer fb=UtilM.getMC().getFramebuffer();
+		pixels.clear();
+		GL11.glReadPixels(fb.framebufferWidth/2, fb.framebufferHeight/2, 1, 1, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, pixels);
+		
+		Color center=new Color(pixels.get());
+		r=1-(center.getRed()/256F);
+		g=1-(center.getGreen()/256F);
+		b=1-(center.getBlue()/256F);
+		
+		tolerance=0.3F;
+		intensity=0.15F;
 	}
 	
 	@Override

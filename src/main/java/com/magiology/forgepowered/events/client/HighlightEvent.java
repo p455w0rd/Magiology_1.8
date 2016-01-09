@@ -3,6 +3,7 @@ package com.magiology.forgepowered.events.client;
 import java.util.*;
 
 import net.minecraft.block.*;
+import net.minecraft.client.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
@@ -142,6 +143,8 @@ public class HighlightEvent{
 					e.printStackTrace();
 				}
 			}
+		}else{
+			
 		}}catch(Exception e){
 			e.printStackTrace();
 		}

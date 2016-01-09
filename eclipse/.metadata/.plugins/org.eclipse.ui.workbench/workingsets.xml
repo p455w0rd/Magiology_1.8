@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
-<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1450711636799_1" label="Magi" name="Magi">
-<item elementID="=Magiology_1.8/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1452179828004_1" label="Magiology" name="Magiology">
+<item elementID="=MDKExample/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
-<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1450012469688_0" label="Window Working Set" name="Aggregate for window 1450012469687"/>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1452375943630_2" label="all" name="all">
+<item elementID="=MDKExample/C:\/Users\/toni\/.gradle\/caches\/minecraft\/net\/minecraftforge\/forge\/1.8-11.14.4.1577\/snapshot\/20141130\/forgeSrc-1.8-11.14.4.1577.jar" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=MDKExample/C:\/Users\/toni\/.gradle\/caches\/modules-2\/files-2.1\/com.mojang\/authlib\/1.5.17\/893a8c553c0cfc9b6fbdff023747e30152ab09ec\/authlib-1.5.17.jar" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=MDKExample/src\/main\/java" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1452078667125_0" label="Window Working Set" name="Aggregate for window 1452078667124"/>
+<mruList name="Magiology"/>
 </workingSetManager>

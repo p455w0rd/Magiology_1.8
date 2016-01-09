@@ -1,13 +1,12 @@
 package com.magiology.client.render.tilerender.network;
 
+import net.minecraft.client.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
-
 
 import org.apache.commons.lang3.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.*;
-
 
 import com.magiology.api.network.*;
 import com.magiology.core.*;
@@ -40,13 +39,14 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 	}
 	
 	protected void initModels(){
+		float w=1F/256,h=1F/214;
 		VertixBuffer buff=TessUtil.getVB();
 		
-		QuadUV all=QuadUV.all().rotate();
+		QuadUV all=QuadUV.all().rotate1();
 		{
 			ComplexCubeModel[] sideThingys={
-					new ComplexCubeModel(p*6.5F, p*6.5F, p*11F, p*7F, p*7F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null),
-					new ComplexCubeModel(p*6.5F, p*9F, p*11F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null)
+					new ComplexCubeModel(p*6.5F, p*6.5F, p*11F, p*7F, p*7F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+					new ComplexCubeModel(p*6.5F, p*9F, p*11F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
 			};
 			for(int i=0;i<sideThingys.length;i++)sideThingys[i].willSideRender[4]=sideThingys[i].willSideRender[5]=false;
 			buff.importComplexCube(sideThingys);
@@ -62,8 +62,8 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 			for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(-p*2.5F, 0, 0);
 			
 			for(int i=0;i<sideThingys.length;i++){
-				sideThingys[i].UVs[2]=sideThingys[i].UVs[2].rotate().rotate().mirror();
-				sideThingys[i].UVs[3]=sideThingys[i].UVs[3].rotate().rotate().mirror();
+				sideThingys[i].UVs[2]=sideThingys[i].UVs[2].rotate1().rotate1().mirror1();
+				sideThingys[i].UVs[3]=sideThingys[i].UVs[3].rotate1().rotate1().mirror1();
 			}
 			
 			buff.importComplexCube(sideThingys);
@@ -84,9 +84,9 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 					w1*24,0,
 					w1*84,0,
 					w1*84,1
-				).rotate();
+				).rotate1();
 			ComplexCubeModel core=new ComplexCubeModel(p*7F, p*7F, p*11F, p*9F, p*9F, 1,new QuadUV[]{
-				coreUV.rotate(),coreUV.mirror().rotate(),coreUV,coreUV,QuadUV.all(),coreUV
+				coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 			},null);
 			core.willSideRender[5]=core.willSideRender[4]=false;
 			
@@ -104,9 +104,9 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 				w1*156,0,
 				1,0,
 				1,1
-			).rotate().mirror();
+			).rotate1().mirror1();
 			core.UVs=new QuadUV[]{
-				coreUV.rotate(),coreUV.mirror().rotate(),coreUV,coreUV,QuadUV.all(),coreUV
+				coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 			};
 			core.willSideRender[5]=core.willSideRender[4]=false;
 			buff.importComplexCube(core);
@@ -148,7 +148,7 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 					new ComplexCubeModel(p*5.5F, p*5.5F, p*10.5F, p*10.5F, p*10.5F, p*11F)
 			},
 			leverBoxes[]={
-					new ComplexCubeModel(p*9.75F, p*9.25F, p*6F, p*10.25F, p*9.5F, p*6.75F),
+					new ComplexCubeModel(p*9.75F, p*9.25F, p*6F, p*10.25F, p*9.625F, p*6.75F),
 					new ComplexCubeModel(p*9.875F, p*9F, p*6.25F, p*10.125F, p*9.25F, p*8.5F),
 					new ComplexCubeModel(p*9.875F, p*9F, p*8.5F, p*10.125F, p*9.25F, p*10F)
 			},
@@ -164,11 +164,27 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		leverBoxes[2].willSideRender[5]=
 		leverBoxes[2].willSideRender[4]=
 		plug.willSideRender[5]=false;
-		int id=7;
 		leverBoxes[2].points[2]=leverBoxes[2].points[2].addVector(0,p/2,0);
 		leverBoxes[2].points[3]=leverBoxes[2].points[3].addVector(0,p/2,0);
 		leverBoxes[2].points[6]=leverBoxes[2].points[6].addVector(0,p/2,0);
-		leverBoxes[2].points[id]=leverBoxes[2].points[id].addVector(0,p/2,0);
+		leverBoxes[2].points[7]=leverBoxes[2].points[7].addVector(0,p/2,0);
+		
+		plug.UVs[0]=new QuadUV(
+			w*75,0,
+			w*75,h*8,
+			w*91,h*8,
+			w*91,0
+		);
+		plug.UVs[2]=plug.UVs[3]=plug.UVs[0].rotate1().mirror1();
+		plug.UVs[1]=plug.UVs[0].rotate1().mirror1();
+		plug.UVs[4]=new QuadUV(
+				w*67,0,
+				w*67,h*8,
+				w*75,h*8,
+				w*75,0
+			);
+		
+//		plug.translate(0, 1, 0);
 		
 		for(int i=0;i<3;i++)for(int j=0;j<3;j++){
 			plug.translate(-i*p*2, -j*p*2, 0);
@@ -177,10 +193,16 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		}
 		
 		VertexModel core=buff.exportToNoramlisedVertixBufferModel();
-		core.glStateCell=new GlStateCell(new GlState(new int[]{}, new int[]{GL11.GL_TEXTURE_2D},()->{
+		core.glStateCell=new GlStateCell(new GlState(()->{
 			
+			GL11U.texture(true);
+			GL11.glColor3f(1,1,1);
+			TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"textures/models/network_router.png"));
 			for(int i=0;i<3;i++)for(int j=0;j<3;j++){
 				Vec3M rots=insertionAnimation.get(curentTile.animationos[j+i*3].get())[0];
+				
+				rots.y*=rots.y;
+				
 				
 				GL11.glPushMatrix();
 				Vec3M rot=this.core.rotations[this.core.getCurentSide()];
@@ -194,41 +216,159 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 					);
 				
 				if(rots.z>0){
-					Vec3M salePos=new Vec3M(p*10, p*10, p*6.9);
 					
 					GL11.glPushMatrix();
-					GL11.glColor3f(0, 0.125F, 0);
 					
-					GL11U.glTranslate(salePos);
+					GL11.glTranslatef(p*10, p*10, p*6.9F);
 					GL11.glTranslated(0,rots.y*p*3,-rots.y*p*3);
 					GL11U.glRotate(rots.y*40, 0, 0,0,0,-p*4);
 					GL11U.glScale(rots.z);
-					GL11U.glTranslate(salePos.mul(-1));
+					GL11.glTranslatef(-p*10, -p*10, -p*6.9F);
 					
 					usb.draw();
 					GL11.glPopMatrix();
 				}
 					
-				GL11.glColor3f(0, 0, 0.125F);
-				
 				GL11U.glRotate(rots.x,0,0, p*10.125F, p*9.75F, p*10F);
 				lever.draw();
 				GL11.glPopMatrix();
 			}
-			GL11.glColor3f(0.125F, 0.125F, 0.125F);
-		}),new GlState(new int[]{GL11.GL_TEXTURE_2D},new int[]{},()->{GL11.glColor3f(1,1,1);}));
+		}),new GlState(new int[]{GL11.GL_TEXTURE_2D},new int[]{}));
 		
 		buff.importComplexCube(leverBoxes);
 		lever=new OpenGlModel(buff.exportToNoramlisedVertixBufferModel());
 		
+		
 		ComplexCubeModel[] usbModel={
-				new ComplexCubeModel(p*9.5F, p*9.5F, p*4.8F, p*10.5F, p*10.5F, p*9)
+				new ComplexCubeModel(p*9.5F, p*9.5F, p*4.8F, p*10.5F, p*10.5F, p*8),
+				new ComplexCubeModel(p*9.5F, p*9.5F, p*8F, p*10.5F, p*10.5F, p*9),
+				
+				new ComplexCubeModel(p*9.25F, p*9.25F, p*4.8F, p*9.5F, p*9.5F, p*8),
+				new ComplexCubeModel(p*10.75F, p*10.75F, p*4.8F, p*10.5F, p*10.5F, p*8),
+				
+				new ComplexCubeModel(p*9.25F, p*9.25F, p*8F, p*9.5F, p*9.5F, p*9),
+				new ComplexCubeModel(p*10.75F, p*10.75F, p*8F, p*10.5F, p*10.5F, p*9)
 		};
+		usbModel[0].UVs[2]=new QuadUV(
+			w*51.2F,h*16,
+			w*51.2F,0,
+			0,      0,
+			0,      h*16
+		).mirror1().rotate1();
+		usbModel[0].UVs[0]=usbModel[0].UVs[2].rotate1().mirror1();		
+		usbModel[0].UVs[1]=new QuadUV(
+			w*51.2F,h*32,
+			w*51.2F,h*16,
+			0,      h*16,
+			0,      h*32
+		).mirror1();
+		usbModel[0].UVs[3]=usbModel[0].UVs[1].mirror1().rotate1();
+		
+		usbModel[0].UVs[4]=new QuadUV(
+			w*16,h*56,
+			w*16,h*40,
+			0,   h*40,
+			0,   h*56
+		).mirror1();
+		
+		
+		usbModel[1].UVs[2]=new QuadUV(
+			w*67,   h*12,
+			w*67,   h*4,
+			w*51.2F,0,
+			w*51.2F,h*16
+		).mirror1().rotate1();
+		usbModel[1].UVs[0]=usbModel[1].UVs[2].rotate1().mirror1();		
+		usbModel[1].UVs[1]=new QuadUV(
+			w*67,   h*28,
+			w*67,   h*20,
+			w*51.2F,h*16,
+			w*51.2F,h*32
+		).mirror1();
+		usbModel[1].UVs[3]=usbModel[1].UVs[1].mirror1().rotate1();
+		usbModel[1].UVs[5]=new QuadUV(
+			w*24,h*40,
+			w*24,h*48,
+			w*16,h*48,
+			w*16,h*40
+		);
+		
+		
+		usbModel[2].UVs[2]=new QuadUV(
+			w*51.2F,h*36,
+			w*51.2F,h*32,
+			0,      h*32,
+			0,      h*36
+		).mirror1().rotate1();
+		usbModel[2].UVs[0]=usbModel[2].UVs[2].rotate1().mirror1();		
+		usbModel[2].UVs[1]=new QuadUV(
+			w*51.2F,h*40,
+			w*51.2F,h*36,
+			0,      h*36,
+			0,      h*40
+		).mirror1();
+		usbModel[2].UVs[3]=usbModel[2].UVs[1].mirror1().rotate1();
+		
+		usbModel[2].UVs[4]=new QuadUV(
+			w*28,h*40,
+			w*28,h*44,
+			w*24,h*44,
+			w*24,h*40
+		).mirror1();
+		
+		usbModel[3].UVs=usbModel[2].UVs;
+		
+		
+		usbModel[4].UVs[2]=new QuadUV(
+			w*67,    h*32.8F,
+			w*67,    h*32,
+			w*51.2F, h*32,
+			w*51.2F, h*36
+		).mirror1().rotate1();
+		usbModel[4].UVs[0]=usbModel[4].UVs[2].rotate1().mirror1();		
+		usbModel[4].UVs[1]=new QuadUV(
+			w*67,    h*36.8F,
+			w*67,    h*36,
+			w*51.2F, h*36,
+			w*51.2F, h*40
+		).mirror1();
+		usbModel[4].UVs[3]=usbModel[4].UVs[1].mirror1().rotate1();
+		
+		usbModel[5].UVs=usbModel[4].UVs;
+		
+		
+		usbModel[0].willSideRender[5]=usbModel[1].willSideRender[4]=false;
+		
+		usbModel[1].points[2]=usbModel[1].points[2].addVector(-p/4, -p/4, 0);
+		usbModel[1].points[3]=usbModel[1].points[3].addVector(-p/4, p/4, 0);
+		usbModel[1].points[6]=usbModel[1].points[6].addVector(p/4, -p/4, 0);
+		usbModel[1].points[7]=usbModel[1].points[7].addVector(p/4, p/4, 0);
+		
+		
+		usbModel[4].points[2]=usbModel[1].points[7];
+		usbModel[4].points[3]=usbModel[4].points[2].addVector(
+				usbModel[1].points[7].subtract(usbModel[4].points[3]).mul(-0.05, -0.05, 0));
+		usbModel[4].points[6]=usbModel[4].points[2].addVector(
+				usbModel[1].points[7].subtract(usbModel[4].points[6]).mul(-0.05, -0.05, 0));
+		usbModel[4].points[7]=usbModel[4].points[2].addVector(
+				usbModel[1].points[7].subtract(usbModel[4].points[7]).mul(-0.05, -0.05, 0));
+		
+		float mul=-0.1F;
+		usbModel[5].points[7]=usbModel[1].points[2];
+		usbModel[5].points[3]=usbModel[5].points[7].addVector(
+				usbModel[1].points[2].subtract(usbModel[5].points[3]).mul(mul, mul, 0));
+		usbModel[5].points[6]=usbModel[5].points[7].addVector(
+				usbModel[1].points[2].subtract(usbModel[5].points[6]).mul(mul, mul, 0));
+		usbModel[5].points[2]=usbModel[5].points[7].addVector(
+				usbModel[1].points[2].subtract(usbModel[5].points[2]).mul(mul, mul, 0));
+		
+		
+		
+		usbModel[4].willSideRender[4]=usbModel[5].willSideRender[4]=usbModel[4].willSideRender[5]=usbModel[5].willSideRender[5]=false;
+		usbModel[2].willSideRender[5]=usbModel[3].willSideRender[5]=false;
 		
 		buff.importComplexCube(usbModel);
-		
 		usb=new OpenGlModel(buff.exportToNoramlisedVertixBufferModel());
-		
 		
 		
 		this.core=new SidedModel(
@@ -265,12 +405,9 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		GL11.glTranslated(x,y,z);
 		
 		
-		GL11U.texture(false);
-		
 		connections.draw(connectionsSides);
 		core.draw(coreSides);
 		
-		GL11U.texture(true);
 		
 		GL11.glPopMatrix();
 	}

@@ -22,6 +22,7 @@ import com.magiology.client.render.aftereffect.*;
 import com.magiology.core.*;
 import com.magiology.forgepowered.events.client.*;
 import com.magiology.forgepowered.packets.packets.*;
+import com.magiology.handlers.CameraHandeler;
 import com.magiology.mcobjects.entitys.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
@@ -78,7 +79,9 @@ public class TickEvents{
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event){
 		RenderEvents.partialTicks=event.renderTickTime;
+		
 		if(event.phase!=Phase.END)return;
+		
 		if(MUpdater.getFoundNew()&&U.getMC().currentScreen instanceof GuiMainMenu)MainMenuUpdateNotificationHUD.instance.render(Display.getWidth(), Display.getHeight(),event.renderTickTime);
 		if(bufferedGuiFirst){
 			bufferedGuiFirst=false;

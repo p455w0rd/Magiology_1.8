@@ -34,7 +34,7 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				x,    y,
 				x+x2, y, 
 				x+x2, y+y2
-				).rotate().mirror()};
+				).rotate1().mirror1()};
 	}
 	
 	private static void init(float[][] renderRotations){
@@ -53,8 +53,8 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		
 		for(int a=0;a<modelsBack.length;a++){
 			for(int b=0;b<modelsBack[a].length;b++)for(int c=0;c<models[a].UVs.length;c++){
-				if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate();
-				else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror().rotate();
+				if(c==0)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].rotate1();
+				else if(c==1)modelsBack[a][b].UVs[c]=genUV(a, b+1)[0].mirror1().rotate1();
 				else if(c==4){
 					modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
 					modelsBack[a][b].UVs[c].x2=modelsBack[a][b].UVs[c].x4;
@@ -62,25 +62,25 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				}
 				else modelsBack[a][b].UVs[c]=genUV(a, b+1)[0];
 				
-				if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate();
-				else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror().rotate();
+				if(c==0)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate1();
+				else if(c==1)modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].mirror1().rotate1();
 				else if(c==4){
 					modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0];
 					modelsBack[a][b].UVs2[c].x2=modelsBack[a][b].UVs[c].x4;
 					modelsBack[a][b].UVs2[c].x3=modelsBack[a][b].UVs[c].x1;
-					modelsBack[a][b].UVs2[c]=modelsBack[a][b].UVs2[c].rotate().mirror().rotate().rotate().rotate();
+					modelsBack[a][b].UVs2[c]=modelsBack[a][b].UVs2[c].rotate1().mirror1().rotate1().rotate1().rotate1();
 				}
-				else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate().mirror().rotate().rotate().rotate();
+				else modelsBack[a][b].UVs2[c]=genUV(a, b+1)[0].rotate1().mirror1().rotate1().rotate1().rotate1();
 			}
 			for(int c=0;c<models[a].UVs.length;c++){
 				//uv 1
 				if(c==0){
-					models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
+					models[a].UVs[c]=genUV(a, 0)[0].mirror1().rotate1();
 					models[a].UVs[c].y2=models[a].UVs[c].y4;
 					models[a].UVs[c].y3=models[a].UVs[c].y1;
-					models[a].UVs[c]=models[a].UVs[c].rotate().mirror().rotate().rotate().rotate();
+					models[a].UVs[c]=models[a].UVs[c].rotate1().mirror1().rotate1().rotate1().rotate1();
 				}
-				else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror().rotate();
+				else if(c==1)models[a].UVs[c]=genUV(a, 0)[0].mirror1().rotate1();
 				else if(c==4){
 					models[a].UVs[c]=genUV(a, 0)[0];
 					models[a].UVs[c].x2=models[a].UVs[c].x4;
@@ -88,9 +88,9 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				}
 				else models[a].UVs[c]=genUV(a, 0)[0];
 				//uv 2
-				if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate();
+				if(c==0)models[a].UVs2[c]=genUV(a, 0)[0].rotate1();
 				else if(c==1){
-					models[a].UVs2[c]=genUV(a, 0)[0].mirror().rotate();
+					models[a].UVs2[c]=genUV(a, 0)[0].mirror1().rotate1();
 					models[a].UVs2[c].y2=models[a].UVs[c].y4;
 					models[a].UVs2[c].y3=models[a].UVs[c].y1;
 				}
@@ -98,9 +98,9 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 					models[a].UVs2[c]=genUV(a, 0)[0];
 					models[a].UVs2[c].x2=models[a].UVs[c].x4;
 					models[a].UVs2[c].x3=models[a].UVs[c].x1;
-					models[a].UVs2[c]=models[a].UVs2[c].rotate().mirror().rotate().rotate().rotate();
+					models[a].UVs2[c]=models[a].UVs2[c].rotate1().mirror1().rotate1().rotate1().rotate1();
 				}
-				else models[a].UVs2[c]=genUV(a, 0)[0] .rotate().mirror().rotate().rotate().rotate();
+				else models[a].UVs2[c]=genUV(a, 0)[0] .rotate1().mirror1().rotate1().rotate1().rotate1();
 			}
 		}
 	}

@@ -29,10 +29,10 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 	protected void initModels(){
 		VertixBuffer buff=TessUtil.getVB();
 		
-		QuadUV all=QuadUV.all().rotate();
+		QuadUV all=QuadUV.all().rotate1();
 		ComplexCubeModel[] sideThingys={
-				new ComplexCubeModel(p*6.5F, p*6.5F, p*9F, p*7F, p*7F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*9F, p*9F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null)
+				new ComplexCubeModel(p*6.5F, p*6.5F, p*9F, p*7F, p*7F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new ComplexCubeModel(p*6.5F, p*9F, p*9F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
 		};
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].willSideRender[4]=sideThingys[i].willSideRender[5]=false;
 		buff.importComplexCube(sideThingys);
@@ -48,8 +48,8 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(-p*2.5F, 0, 0);
 		
 		for(int i=0;i<sideThingys.length;i++){
-			sideThingys[i].UVs[2]=sideThingys[i].UVs[2].rotate().rotate().mirror();
-			sideThingys[i].UVs[3]=sideThingys[i].UVs[3].rotate().rotate().mirror();
+			sideThingys[i].UVs[2]=sideThingys[i].UVs[2].rotate1().rotate1().mirror1();
+			sideThingys[i].UVs[3]=sideThingys[i].UVs[3].rotate1().rotate1().mirror1();
 		}
 		
 		buff.importComplexCube(sideThingys);
@@ -70,9 +70,9 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 				w1*24,0,
 				w1*108,0,
 				w1*108,1
-			).rotate();
+			).rotate1();
 		ComplexCubeModel core=new ComplexCubeModel(p*7F, p*7F, p*9F, p*9F, p*9F, 1,new QuadUV[]{
-			coreUV.rotate(),coreUV.mirror().rotate(),coreUV,coreUV,QuadUV.all(),coreUV
+			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		
@@ -90,9 +90,9 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			w1*132,0,
 			1,0,
 			1,1
-		).rotate().mirror();
+		).rotate1().mirror1();
 		core=new ComplexCubeModel(p*7F, p*7F, p*9F, p*9F, p*9F, 1,new QuadUV[]{
-			coreUV.rotate(),coreUV.mirror().rotate(),coreUV,coreUV,QuadUV.all(),coreUV
+			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		buff.importComplexCube(core);
@@ -135,9 +135,9 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			w1*24,0,
 			1,0,
 			1,1
-		).rotate();
+		).rotate1();
 		core=new ComplexCubeModel(p*7F, p*7F, 0, p*9F, p*9F, 1,new QuadUV[]{
-			coreUV.rotate(),coreUV.mirror().rotate(),coreUV,coreUV,QuadUV.all(),coreUV
+			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		buff.importComplexCube(core);
@@ -151,8 +151,8 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		
 		
 		ComplexCubeModel[] sideThingys1={
-				new ComplexCubeModel(p*6.5F, p*6.5F, 0, p*7F, p*7F,   1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*9F,   0, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate(),all.rotate(),all,all,all,all},null)
+				new ComplexCubeModel(p*6.5F, p*6.5F, 0, p*7F, p*7F,   1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new ComplexCubeModel(p*6.5F, p*9F,   0, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
 		};
 		for(int i=0;i<sideThingys1.length;i++)sideThingys1[i].willSideRender[4]=sideThingys1[i].willSideRender[5]=false;
 		buff.importComplexCube(sideThingys1);

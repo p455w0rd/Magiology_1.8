@@ -107,7 +107,7 @@ public class ItemRendererTheHand implements IItemRenderer{
 		}
 	}
 	public void init(){
-		base=new ComplexCubeModel(0, 0, 0, p*7, p*2.5F, p*9,new QuadUV[]{QuadUV.all().rotate().mirror(),QuadUV.all().rotate().mirror(),QuadUV.all().mirror(),QuadUV.all().mirror(),QuadUV.all().mirror(),QuadUV.all().mirror()}, new ResourceLocation[]{Textures.handBaseSide,Textures.handBaseSide,Textures.handBaseTop,Textures.handBaseBotom,Textures.handBaseSide2,Textures.handBaseSide2});
+		base=new ComplexCubeModel(0, 0, 0, p*7, p*2.5F, p*9,new QuadUV[]{QuadUV.all().rotate1().mirror1(),QuadUV.all().rotate1().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1()}, new ResourceLocation[]{Textures.handBaseSide,Textures.handBaseSide,Textures.handBaseTop,Textures.handBaseBotom,Textures.handBaseSide2,Textures.handBaseSide2});
 		fingers=new FingerModel[]{
 				//#thumb
 				new FingerModel(
@@ -118,8 +118,8 @@ public class ItemRendererTheHand implements IItemRenderer{
 						{0,0,0,p*1.8F,p*1.799F,p*2.5F},
 						{0,0,0,0,0,0}},
 						new QuadUV[][]{
-								{QuadUV.all().rotate().mirror().edit(0,-0.27F,0,-0.27F,0,0,0,0),QuadUV.all().rotate().mirror().edit(0,0,0,0,0,0.27F,0,0.27F),QuadUV.all().mirror().edit(0,0.27F,0,0,0,0,0,0.27F),QuadUV.all().edit(0,-0.27F,0,0,0,0,0,-0.27F),QuadUV.all(),QuadUV.all(),},{
-								 QuadUV.all().rotate().mirror().edit(0,0,0,0,0,0.73F,0,0.73F),QuadUV.all().rotate().mirror().edit(0,-0.73F,0,-0.73F,0,0,0,0),QuadUV.all().mirror().edit(0,0,0,-0.73F,0,-0.73F,0,0),QuadUV.all().edit(0,0,0,0.73F,0,0.73F,0,0),QuadUV.all(),QuadUV.all(),},{QuadUV.all()}},
+								{QuadUV.all().rotate1().mirror1().edit(0,-0.27F,0,-0.27F,0,0,0,0),QuadUV.all().rotate1().mirror1().edit(0,0,0,0,0,0.27F,0,0.27F),QuadUV.all().mirror1().edit(0,0.27F,0,0,0,0,0,0.27F),QuadUV.all().edit(0,-0.27F,0,0,0,0,0,-0.27F),QuadUV.all(),QuadUV.all(),},{
+								 QuadUV.all().rotate1().mirror1().edit(0,0,0,0,0,0.73F,0,0.73F),QuadUV.all().rotate1().mirror1().edit(0,-0.73F,0,-0.73F,0,0,0,0),QuadUV.all().mirror1().edit(0,0,0,-0.73F,0,-0.73F,0,0),QuadUV.all().edit(0,0,0,0.73F,0,0.73F,0,0),QuadUV.all(),QuadUV.all(),},{QuadUV.all()}},
 						new ResourceLocation[][]{
 							  	  new ResourceLocation[]{Textures.handThumbSide,Textures.handThumbSide,Textures.handThumbTop,Textures.handThumbBottom,Textures.handThumbTxtClip,Textures.handThumbEnd
 								},new ResourceLocation[]{Textures.handThumbSide,Textures.handThumbSide,Textures.handThumbTop,Textures.handThumbBottom,Textures.handThumbTxtClip,Textures.handThumbEnd},blank1}),
@@ -130,9 +130,9 @@ public class ItemRendererTheHand implements IItemRenderer{
 						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
 						{0,0,0,p*1.5F,p*1.5F,p*2F}},
 						new QuadUV[][]{{
-							   QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
+							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
 						new ResourceLocation[][]{
 						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
 						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
@@ -143,9 +143,9 @@ public class ItemRendererTheHand implements IItemRenderer{
 						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
 						{0,0,0,p*1.5F,p*1.5F,p*2F}},
 						new QuadUV[][]{{
-							   QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
+							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
 						new ResourceLocation[][]{
 						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
 						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
@@ -156,9 +156,9 @@ public class ItemRendererTheHand implements IItemRenderer{
 						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
 						{0,0,0,p*1.5F,p*1.5F,p*2F}},
 						new QuadUV[][]{{
-							   QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
+							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
 						new ResourceLocation[][]{
 						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
 						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
@@ -169,9 +169,9 @@ public class ItemRendererTheHand implements IItemRenderer{
 						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
 						{0,0,0,p*1.5F,p*1.5F,p*2F}},
 						new QuadUV[][]{{
-							   QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate().mirror().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate().mirror().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-							},{QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate().mirror().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
+							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
+							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
 						new ResourceLocation[][]{
 						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
 						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip

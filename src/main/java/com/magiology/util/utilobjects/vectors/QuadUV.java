@@ -1,5 +1,7 @@
 package com.magiology.util.utilobjects.vectors;
 
+import net.minecraft.client.gui.ScaledResolution;
+
 import org.lwjgl.util.vector.*;
 
 public class QuadUV{
@@ -7,12 +9,31 @@ public class QuadUV{
 	public QuadUV(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4){
 		this.x1=x1;this.x2=x2;this.x3=x3;this.x4=x4;this.y1=y1;this.y2=y2;this.y3=y3;this.y4=y4;
 	}
-	public QuadUV mirror(){
+	public QuadUV mirror1(){
 		return new QuadUV(x2, y2, x1, y1, x4, y4, x3, y3);
 	}
-	public QuadUV rotate(){
+	public QuadUV rotate1(){
 		return new QuadUV(x4, y4, x1, y1, x2, y2, x3, y3);
 	}
+	public QuadUV mirror2(){
+		return new QuadUV(x4, y4, x3, y3, x2, y2, x1, y1);
+	}
+	public QuadUV rotate2(){
+		return new QuadUV(x2, y2, x3, y3, x4, y4, x1, y1);
+	}
+	private QuadUV transate(float x,float y){
+		return new QuadUV(x1+x, y1+y, x2+x, y2+y, x3+x, y3+y, x4+x, y4+y);
+	}
+	private QuadUV transate(int id,float x,float y){
+		switch(id){
+		case 0:return new QuadUV(x1+x, y1+y, x2, y2,     x3, y3,     x4, y4    );
+		case 1:return new QuadUV(x1, y1,     x2+x, y2+y, x3, y3,     x4, y4    );
+		case 2:return new QuadUV(x1, y1,     x2, y2,     x3+x, y3+y, x4, y4    );
+		case 3:return new QuadUV(x1, y1,     x2, y2,     x3, y3,     x4+x, y4+y);
+		}
+		return this;
+	}
+	
 	public QuadUV copy(){
 		return new QuadUV(x1, y1, x2, y2, x3, y3, x4, y4);
 	}

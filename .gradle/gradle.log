@@ -11,8 +11,6 @@
 :deobfProvidedDummyTask
 :getVersionJson
 :extractUserdev
-Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.14.4.1577/forge-1.8-11.14.4.1577.pom
-Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.14.4.1577/forge-1.8-11.14.4.1577-userdev.jar
 :extractDependencyATs SKIPPED
 :extractMcpData SKIPPED
 :extractMcpMappings SKIPPED
@@ -21,39 +19,29 @@ Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8-11.1
 :downloadServer SKIPPED
 :splitServerJar SKIPPED
 :mergeJars SKIPPED
-:deobfMcSRG
-Applying SpecialSource...
-Applying Exceptor...
+:deobfMcSRG SKIPPED
 :getFernFlower SKIPPED
-:decompileMcPicked up _JAVA_OPTIONS: -Xmx1024M
-
-:fixMcSources
+:decompileMc SKIPPED
+:fixMcSources SKIPPED
 :applySourcePatches
-:remapMcSources
-:recompileMc
-[ant:javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6
-[ant:javac] Note: Some input files use or override a deprecated API.
-[ant:javac] Note: Recompile with -Xlint:deprecation for details.
-[ant:javac] Note: Some input files use unchecked or unsafe operations.
-[ant:javac] Note: Recompile with -Xlint:unchecked for details.
-[ant:javac] 1 warning
+:remapMcSources SKIPPED
+:recompileMc SKIPPED
 :extractNatives SKIPPED
 :getAssetIndex UP-TO-DATE
 :getAssets
-Current status: 39/734   5%
-Current status: 98/734   13%
-Current status: 133/734   18%
-Current status: 199/734   27%
-Current status: 273/734   37%
-Current status: 308/734   41%
-Current status: 380/734   51%
-Current status: 418/734   56%
-Current status: 447/734   60%
-Current status: 498/734   67%
-Current status: 550/734   74%
-Current status: 586/734   79%
-Current status: 674/734   91%
-Current status: 719/734   97%
+Current status: 42/734   5%
+Current status: 99/734   13%
+Current status: 148/734   20%
+Current status: 251/734   34%
+Current status: 312/734   42%
+Current status: 386/734   52%
+Current status: 425/734   57%
+Current status: 465/734   63%
+Current status: 513/734   69%
+Current status: 557/734   75%
+Current status: 594/734   80%
+Current status: 675/734   91%
+Current status: 726/734   98%
 :makeStart
 [ant:javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6
 [ant:javac] 1 warning
@@ -67,4 +55,4 @@ Current status: 719/734   97%
 
 BUILD SUCCESSFUL
 
-Total time: 9 mins 0.053 secs
+Total time: 2 mins 27.3 secs
