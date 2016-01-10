@@ -142,7 +142,7 @@ public class EntityEvents{
 				}
 			}
 			
-			UtilM.println(PremiumHandeler.toString(player));
+			UtilM.println(PremiumHandeler.getAll());
 			
 			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
 				isFP=U.getMC().gameSettings.thirdPersonView!=0;

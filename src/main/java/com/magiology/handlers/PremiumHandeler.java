@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Map.Entry;
 
 import scala.collection.mutable.StringBuilder;
@@ -16,14 +17,19 @@ public class PremiumHandeler{
 	
 	private static Map<String, PlayerPremiumData> data=new HashMap<String, PlayerPremiumData>();
 	
+	private static final boolean canAccesInternet=testInternet();
+	
+	public static final PremiumHandeler instance=new PremiumHandeler();
+	private PremiumHandeler(){}
+	
 	
 	
 	public static boolean isPremium(EntityPlayer player){
 		return get(player).isPremium;
 	}
 	
-	public static boolean hasInternetConnection(EntityPlayer player){
-		return get(player).canAccesInternet;
+	public static boolean canAccesInternet(){
+		return canAccesInternet;
 	}
 	
 	public static boolean hasOfflineUUID(EntityPlayer player){
@@ -32,6 +38,12 @@ public class PremiumHandeler{
 	
 	public static String toString(EntityPlayer player){
 		return get(player).toString();
+	}
+	
+	public static Map<String, PlayerPremiumData> getAll(){
+		final Map<String, PlayerPremiumData> result=new HashMap<String, PlayerPremiumData>();
+		data.entrySet().forEach(entry->result.put(entry.getKey(), entry.getValue().copy()));
+		return result;
 	}
 	
 	
@@ -50,31 +62,48 @@ public class PremiumHandeler{
 		data.put(name(player), generateData(player));
 	}
 	
-	private static PlayerPremiumData generateData(EntityPlayer player){
-		
-		boolean isOfflineUUID=player.getGameProfile().getId().equals(player.getOfflineUUID(player.getGameProfile().getName())),canAccesInternet=false;
+	private static boolean testInternet(){
+		boolean result=false;
 		try{
-			if(InetAddress.getByName("minecraft.net")!=null)canAccesInternet=true;
-        }catch(Exception e){}
-		
-		boolean isPremium=canAccesInternet?!isOfflineUUID:false;
-		PlayerPremiumData result=new PlayerPremiumData(isOfflineUUID,canAccesInternet,isPremium);
-		UtilM.println("Player:",name(player),"has been checked for premium!\nThe results are:\n",result);
+			if(InetAddress.getByName("minecraft.net")!=null)result=true;
+		}catch(UnknownHostException e){}
 		return result;
 	}
-	
 	private static String name(EntityPlayer player){
 		return player.getGameProfile().getName();
 	}
 	
-	private static class PlayerPremiumData{
-		private boolean isOfflineUUID,canAccesInternet,isPremium;
+	private static PlayerPremiumData generateData(EntityPlayer player){
 		
-		public PlayerPremiumData(boolean isOfflineUUID, boolean canAccesInternet, boolean isPremium){
+		UUID
+			premiumUUID=player.getGameProfile().getId(),
+			offlineUUID=player.getOfflineUUID(player.getGameProfile().getName());
+		
+		boolean isOfflineUUID=premiumUUID.equals(offlineUUID);
+		
+		boolean isPremium=canAccesInternet?!isOfflineUUID:false;
+		
+		PlayerPremiumData result=instance.new PlayerPremiumData(isOfflineUUID,isPremium);
+		
+		UtilM.println("Player:",name(player),"has been checked for premium!\nThe results are:\n",result);
+		return result;
+	}
+	
+	
+	
+	
+	public class PlayerPremiumData{
+		private boolean isOfflineUUID,isPremium;
+		
+		private PlayerPremiumData(boolean isOfflineUUID, boolean isPremium){
 			this.isOfflineUUID=isOfflineUUID;
-			this.canAccesInternet=canAccesInternet;
 			this.isPremium=isPremium;
 		}
+		
+		private PlayerPremiumData copy(){
+			return instance.new PlayerPremiumData(isOfflineUUID, isPremium);
+		}
+		
 		@Override
 		public String toString(){
 			StringBuilder result=new StringBuilder();
