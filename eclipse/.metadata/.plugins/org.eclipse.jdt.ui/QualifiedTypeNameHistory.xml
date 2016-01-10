@@ -25,13 +25,14 @@
 <fullyQualifiedTypeName name="com.magiology.util.utilobjects.vectors.QuadUV"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="net.minecraft.client.gui.ScaledResolution"/>
-<fullyQualifiedTypeName name="com.magiology.util.utilclasses.UtilM"/>
 <fullyQualifiedTypeName name="net.minecraft.client.Minecraft"/>
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
 <fullyQualifiedTypeName name="java.net.UnknownHostException"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
 <fullyQualifiedTypeName name="java.util.Map.Entry"/>
 <fullyQualifiedTypeName name="scala.collection.mutable.StringBuilder"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
+<fullyQualifiedTypeName name="com.magiology.handlers.PremiumHandeler"/>
+<fullyQualifiedTypeName name="com.magiology.util.utilclasses.UtilM"/>
 </qualifiedTypeNameHistroy>

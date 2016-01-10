@@ -14,66 +14,76 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class PremiumHandeler{
 	
-	private static Map<EntityPlayer, boolean[]> data=new HashMap<EntityPlayer, boolean[]>();
+	private static Map<String, PlayerPremiumData> data=new HashMap<String, PlayerPremiumData>();
+	
+	
 	
 	public static boolean isPremium(EntityPlayer player){
-		player=check(player);
-		return data.get(player)[2];
+		return get(player).isPremium;
 	}
 	
 	public static boolean hasInternetConnection(EntityPlayer player){
-		player=check(player);
-		return data.get(player)[1];
+		return get(player).canAccesInternet;
 	}
 	
 	public static boolean hasOfflineUUID(EntityPlayer player){
-		player=check(player);
-		return data.get(player)[0];
+		return get(player).isOfflineUUID;
 	}
 	
 	public static String toString(EntityPlayer player){
-		player=check(player);
-		StringBuilder result=new StringBuilder();
-		result.append("Is unique id generated from username: ").append(hasOfflineUUID(player)+"\n");
-		result.append("Can access internet: ").append(hasInternetConnection(player)+"\n");
-		result.append("Is premium: ").append(isPremium(player)+"\n");
-		return result.toString();
+		return get(player).toString();
 	}
 	
-	private static EntityPlayer check(EntityPlayer player){
-		EntityPlayer player0=find(player);
-		if(player0==null){
-			fill(player);
-			return player;
-		}
-		return player0;
+	
+	
+	private static PlayerPremiumData get(EntityPlayer player){
+		check(player);
+		return data.get(name(player));
 	}
 	
-	private static EntityPlayer find(EntityPlayer player){
-		if(data.containsKey(player))return player;
-		for(Entry<EntityPlayer, boolean[]> data:data.entrySet())if(player.getGameProfile().getName()==data.getKey().getGameProfile().getName())return data.getKey();
-		return null;
+	private static void check(EntityPlayer player){
+		if(!data.containsKey(name(player)))fill(player);
 	}
+	
 	
 	private static void fill(EntityPlayer player){
-		data.put(player, generateData(player));
+		data.put(name(player), generateData(player));
 	}
 	
-	private static boolean[] generateData(EntityPlayer player){
+	private static PlayerPremiumData generateData(EntityPlayer player){
 		
 		boolean isOfflineUUID=player.getGameProfile().getId().equals(player.getOfflineUUID(player.getGameProfile().getName())),canAccesInternet=false;
-//		UtilM.println("",isOfflineUUID+", :",canAccesInternet+", :",isPremium);
 		try{
 			if(InetAddress.getByName("minecraft.net")!=null)canAccesInternet=true;
         }catch(Exception e){}
 		
 		boolean isPremium=canAccesInternet?!isOfflineUUID:false;
-		
-		return new boolean[]{
-			isOfflineUUID,
-			canAccesInternet,
-			isPremium
-		};
+		PlayerPremiumData result=new PlayerPremiumData(isOfflineUUID,canAccesInternet,isPremium);
+		UtilM.println("Player:",name(player),"has been checked for premium!\nThe results are:\n",result);
+		return result;
 	}
 	
+	private static String name(EntityPlayer player){
+		return player.getGameProfile().getName();
+	}
+	
+	private static class PlayerPremiumData{
+		private boolean isOfflineUUID,canAccesInternet,isPremium;
+		
+		public PlayerPremiumData(boolean isOfflineUUID, boolean canAccesInternet, boolean isPremium){
+			this.isOfflineUUID=isOfflineUUID;
+			this.canAccesInternet=canAccesInternet;
+			this.isPremium=isPremium;
+		}
+		@Override
+		public String toString(){
+			StringBuilder result=new StringBuilder();
+			result.append("PlayerPremiumData(").append("\n");
+			result.append("\t").append("Is unique id generated from username: ").append(isOfflineUUID).append("\n");
+			result.append("\t").append("Can access internet: ").append(canAccesInternet).append("\n");
+			result.append("\t").append("Is premium: ").append(isPremium).append("\n");
+			result.append(")");
+			return result.toString();
+		}
+	}
 }

@@ -27,6 +27,7 @@ import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
 import com.magiology.handlers.GuiHandlerM;
+import com.magiology.handlers.PremiumHandeler;
 import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
@@ -141,7 +142,7 @@ public class EntityEvents{
 				}
 			}
 			
-			
+			UtilM.println(PremiumHandeler.toString(player));
 			
 			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
 				isFP=U.getMC().gameSettings.thirdPersonView!=0;
