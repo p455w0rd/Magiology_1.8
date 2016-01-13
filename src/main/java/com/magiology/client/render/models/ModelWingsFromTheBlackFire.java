@@ -19,8 +19,8 @@ import com.magiology.util.utilobjects.vectors.*;
 
 public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static float p=1F/16F;
-	private static ComplexCubeModel[] models;
-	private static ComplexCubeModel[][] modelsBack;
+	private static CubeModel[] models;
+	private static CubeModel[][] modelsBack;
 	
 	public static void wings3D(boolean bol){
 		if(models==null)return;
@@ -41,11 +41,11 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		for(int a=0;a<renderRotations.length;a++){
 			float thickness=0;
 			if(a>0)thickness=(((float)a)/((float)renderRotations.length))*p;
-			models=ArrayUtils.add(models, new ComplexCubeModel(thickness, thickness, 0, p*3-thickness, p*3-thickness, p*7,genUV(a, 0),new ResourceLocation[]{Textures.WingColors}));
-			ComplexCubeModel[] WingPart={};
+			models=ArrayUtils.add(models, new CubeModel(thickness, thickness, 0, p*3-thickness, p*3-thickness, p*7,genUV(a, 0),new ResourceLocation[]{Textures.WingColors}));
+			CubeModel[] WingPart={};
 			for(int b=0;b<5;b++){
 				float njnj=(float)(renderRotations.length-a)/(float)renderRotations.length;
-				WingPart=ArrayUtils.add(WingPart, new ComplexCubeModel(thickness, thickness+njnj*(b*0.02F), thickness/2, p*3-thickness, p*3-thickness-njnj*(b*0.02F), p*8-thickness,genUV(a, b),new ResourceLocation[]{Textures.WingColors}));
+				WingPart=ArrayUtils.add(WingPart, new CubeModel(thickness, thickness+njnj*(b*0.02F), thickness/2, p*3-thickness, p*3-thickness-njnj*(b*0.02F), p*8-thickness,genUV(a, b),new ResourceLocation[]{Textures.WingColors}));
 			}
 			modelsBack=ArrayUtils.add(modelsBack, WingPart);
 			wings3D(Config.isWingsThick());
@@ -150,13 +150,13 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		}
 		GL11.glPushMatrix();
 		for(int a1=0;a1<models.length;a1++){
-			ComplexCubeModel a=models[a1];
+			CubeModel a=models[a1];
 			GL11U.glRotate(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0);
 			a.draw();
 			GL11.glPushMatrix();
 			GL11.glTranslated((a.points[3].x-a.points[4].x)*(side?-1:1), 0, 0);
 			for(int l=0;l<modelsBack[a1].length;l++){
-				ComplexCubeModel part=modelsBack[a1][l];
+				CubeModel part=modelsBack[a1][l];
 				part.draw(); 
 				GL11.glTranslatef((float)(part.points[3].x-part.points[4].x)*(side?-1:1), 0, -p/2*(l*0.6F));
 				GL11U.glRotate(3, 2, 0);

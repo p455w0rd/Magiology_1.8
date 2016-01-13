@@ -51,7 +51,7 @@ public class GuiHandlerM implements IGuiHandler{
 		case MGui.CommandContainerEditor:
 			return new ContainerEmpty();
 		}
-		UtilM.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		PrintUtil.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
 
@@ -86,7 +86,7 @@ public class GuiHandlerM implements IGuiHandler{
 		case MGui.CommandContainerEditor:
 			return new GuiProgramContainerEditor(player);
 		}
-		UtilM.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
+		PrintUtil.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;
 	}
 	

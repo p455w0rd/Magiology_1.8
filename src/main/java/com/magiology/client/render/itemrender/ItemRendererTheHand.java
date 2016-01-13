@@ -20,7 +20,7 @@ import com.magiology.util.utilobjects.vectors.*;
 public class ItemRendererTheHand implements IItemRenderer{
 	private final float p=1F/16F;
 	public ResourceLocation[] blank1={new ResourceLocation("noTexture")};
-	public ComplexCubeModel base;
+	public CubeModel base;
 	float g=1F/3F;
 	public FingerModel[] fingers;
 	public ItemRendererTheHand(){}
@@ -86,12 +86,12 @@ public class ItemRendererTheHand implements IItemRenderer{
 		GL11.glPopMatrix();
 	}
 	public class FingerModel{
-		public ComplexCubeModel[]cubeModels;
+		public CubeModel[]cubeModels;
 		public FingerModel(float[] xyzPosRot1,float[] xyzPosRot2,float[] xyzPosRot3,float[][] boxes,QuadUV[][] txtpoints,ResourceLocation[][] sidedtextures){
-			cubeModels=new ComplexCubeModel[]{
-					new ComplexCubeModel(boxes[0][0],boxes[0][1],boxes[0][2], boxes[0][3], boxes[0][4], boxes[0][5],txtpoints[0], sidedtextures[0]),
-					new ComplexCubeModel(boxes[1][0],boxes[1][1],boxes[1][2], boxes[1][3], boxes[1][4], boxes[1][5],txtpoints[1], sidedtextures[1]),
-					new ComplexCubeModel(boxes[2][0],boxes[2][1],boxes[2][2], boxes[2][3], boxes[2][4], boxes[2][5],txtpoints[2], sidedtextures[2])};
+			cubeModels=new CubeModel[]{
+					new CubeModel(boxes[0][0],boxes[0][1],boxes[0][2], boxes[0][3], boxes[0][4], boxes[0][5],txtpoints[0], sidedtextures[0]),
+					new CubeModel(boxes[1][0],boxes[1][1],boxes[1][2], boxes[1][3], boxes[1][4], boxes[1][5],txtpoints[1], sidedtextures[1]),
+					new CubeModel(boxes[2][0],boxes[2][1],boxes[2][2], boxes[2][3], boxes[2][4], boxes[2][5],txtpoints[2], sidedtextures[2])};
 		}
 		public void draw(PowerHandData_sub_fingerData data){
 			GL11.glPushMatrix();
@@ -107,7 +107,7 @@ public class ItemRendererTheHand implements IItemRenderer{
 		}
 	}
 	public void init(){
-		base=new ComplexCubeModel(0, 0, 0, p*7, p*2.5F, p*9,new QuadUV[]{QuadUV.all().rotate1().mirror1(),QuadUV.all().rotate1().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1()}, new ResourceLocation[]{Textures.handBaseSide,Textures.handBaseSide,Textures.handBaseTop,Textures.handBaseBotom,Textures.handBaseSide2,Textures.handBaseSide2});
+		base=new CubeModel(0, 0, 0, p*7, p*2.5F, p*9,new QuadUV[]{QuadUV.all().rotate1().mirror1(),QuadUV.all().rotate1().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1()}, new ResourceLocation[]{Textures.handBaseSide,Textures.handBaseSide,Textures.handBaseTop,Textures.handBaseBotom,Textures.handBaseSide2,Textures.handBaseSide2});
 		fingers=new FingerModel[]{
 				//#thumb
 				new FingerModel(

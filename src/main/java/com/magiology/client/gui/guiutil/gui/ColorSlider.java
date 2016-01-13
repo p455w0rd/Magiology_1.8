@@ -13,7 +13,7 @@ public class ColorSlider{
 	public static ColorF getColor(int a){
 		if(a>=image.length){
 			a=0;
-			UtilM.println("Invalid color id!");
+			PrintUtil.println("Invalid color id!");
 		}
 		return image[a];
 	}

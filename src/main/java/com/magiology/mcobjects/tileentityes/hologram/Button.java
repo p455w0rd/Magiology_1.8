@@ -17,7 +17,7 @@ import com.magiology.util.utilobjects.m_extension.*;
 
 public class Button extends TextBox{
 	
-	public ComplexCubeModel body;
+	public CubeModel body;
 	
 	
 	protected ColorF inColor=new ColorF();
@@ -26,7 +26,7 @@ public class Button extends TextBox{
 		super(host,"");
 		this.originalSize=size;
 		scale=1;
-		body=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+		body=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
 	}
 	
 	@Override
@@ -35,7 +35,7 @@ public class Button extends TextBox{
 		checkHighlight();
 		ColorF renderColor=UtilM.calculateRenderColor(prevColor,this.color);
 		renderColor.bind();
-		if(body==null)body=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+		if(body==null)body=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
 		GL11U.texture(false);
 		body.draw();
 		GL11U.texture(true);
@@ -50,7 +50,7 @@ public class Button extends TextBox{
 
 	@Override
 	public void update(){
-		if(U.isRemote(host)&&host.getWorld().getTotalWorldTime()%40==0)body=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+		if(U.isRemote(host)&&host.getWorld().getTotalWorldTime()%40==0)body=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
 		
 		if(originalSize.y<9*U.p)originalSize.y=9*U.p;
 		

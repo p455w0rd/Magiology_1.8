@@ -19,6 +19,8 @@ import com.magiology.forgepowered.packets.packets.*;
 import com.magiology.mcobjects.tileentityes.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.Get.Render.Font;
+import com.magiology.util.utilobjects.vectors.Vec2i;
 
 public class GuiControlBock extends GuiContainer implements Updateable{
 	
@@ -40,6 +42,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	}
 	@Override
 	public void drawGuiContainerForegroundLayer(int a,int b){
+		
 		String text1="null",text2="Redstone ctrl";
 		switch (tileCB.redstoneC){
 		case 0:text1="Turn OFF";break;
@@ -69,6 +72,8 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	}
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float v1, int v2, int v3){
+		
+		
 		if(dot1==null){
 			dot1=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+8-6,  214-6, 67-6, 16, 16, 1.5);
 			dot2=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+22-6, 214-6, 67-6, 16, 16,1.5);

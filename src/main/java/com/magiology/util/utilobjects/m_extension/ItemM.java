@@ -26,7 +26,7 @@ public class ItemM extends Item{
 				try{
 					Get.Render.RI().getItemModelMesher().register(item, 0, modelsInit.get(item));
 				} catch (Exception e){
-					UtilM.println("failed!",item,Get.Render.RI());
+					PrintUtil.println("failed!",item,Get.Render.RI());
 					e.printStackTrace();
 					U.exit(404);
 				}

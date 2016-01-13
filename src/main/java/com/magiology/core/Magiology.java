@@ -69,7 +69,7 @@ public class Magiology{
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
 		if(!new File(MODS_SUBFOLDER_WIN_GUI+"/MagiZip.zip").exists())DownloadingHandler.downladAssets();
 		infoFile.readFromFile();
-		UtilM.println(infoFile.getB("GUIOpen", true));
+		PrintUtil.println(infoFile.getB("GUIOpen", true));
 		if(infoFile.getB("GUIOpen", true)){
 			Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 			modInfGUI=new ModInfoGUI((int)screenSize.getWidth(),(int)screenSize.getHeight(),-680,0);
@@ -224,15 +224,15 @@ public class Magiology{
     	case -3:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization started!");break;
     	case  3:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization compleate!");break;
     	case 4:{
-    		println(NAME+" master AI has been initialized and it has something to tell you...");
+    		PrintUtil.println(NAME+" master AI has been initialized and it has something to tell you...");
     		String message=derpyMessagesWithNoPortalReferencesAtAll[RInt(derpyMessagesWithNoPortalReferencesAtAll.length-1)];
     		if(message.equals("do the harlem shake!")){
     			String[] harlem={"tue","de","de","do","taa","taa","ta","your","harlem","shake","tui","ti","to","to","ti","ti"};
     			message+="\n";
     			for(int i=0;i<250;i++)message+=" "+harlem[RInt(harlem.length-1)]+(RB(0.05)?"\n":"");
     		}
-    		println(message);
-    		println(NAME+" master AI has been terminated because "+(RB(0.8)?"of profound reasons!":
+    		PrintUtil.println(message);
+    		PrintUtil.println(NAME+" master AI has been terminated because "+(RB(0.8)?"of profound reasons!":
     			"FML has detected traces of Genetic Lifeform and Disk Operating System!!"
     			+ "\nIf your computer is talking to you and it calling itself Caroline and you don't see this messages sometimes than type in your windows search bar a puzzle that is a paradox!"
     			+ " The paradox will effectively crash the Genetic Lifeform and Disk Operating System. Do not listen to it! It may quote Moby Dick! #ReferenceInception"));
@@ -249,7 +249,7 @@ public class Magiology{
 			if(i<size-1)s2+="-";
 			else s2+="|";
 		}
-		println(s1,s2,message);
+		PrintUtil.println(s1,s2,message);
 	}
 	private final void printEnd(String message){
 		String[] smyleys={":D",";D",":O","XD",":P",":)",";)","/D"};
@@ -260,6 +260,6 @@ public class Magiology{
 			if(i<size-1)s1+="-";
 			else s1+="|";
 		}
-		println(message,s1);
+		PrintUtil.println(message,s1);
 	}
 }

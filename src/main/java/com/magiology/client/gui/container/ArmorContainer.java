@@ -90,7 +90,7 @@ public class ArmorContainer extends Container implements Updateable{
 	
 	@Override
 	public ItemStack slotClick(int slotid, int x, int y, EntityPlayer player){
-		UtilM.println(slotid);
+		PrintUtil.println(slotid);
 		int id=slotid-36;
 		if(id>=0&&id<=3)sliderVantedPos=-id*16;
 		while(inventorySlots.size()>inventoryItemStacks.size()){
@@ -143,11 +143,11 @@ public class ArmorContainer extends Container implements Updateable{
 		inventorySlots.clear();
 		if(!inventorySlotsAllTheTime.isEmpty())for(Object slot:inventorySlotsAllTheTime){
 			if(slot!=null)addSlotToList((Slot)slot,inventorySlots);
-			else UtilM.printlnEr("Slot is null! On container "+item+" This is an error!");
+			else PrintUtil.printlnEr("Slot is null! On container "+item+" This is an error!");
 		}
 		if(InventoryArmorContainers[item]!=null)for(Object slot:InventorySlots[item]){
 			if(slot!=null)addSlotToList((Slot)slot,inventorySlots);
-			else UtilM.printlnEr("Slot is null! On container "+item+" This is an error!");
+			else PrintUtil.printlnEr("Slot is null! On container "+item+" This is an error!");
 		}
 	}
 	

@@ -47,7 +47,7 @@ public class SimpleNetworkWrapperM extends SimpleNetworkWrapper{
 	
 	public void onMessage(IMessage message){
 		if(!willPrint)return;
-		UtilM.println(message);
+		PrintUtil.println(message);
 		
 		
 	}

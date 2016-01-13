@@ -14,23 +14,23 @@ public class DataStalker{
 	
 	public static void printResources(){
 		if(!huntedFunctions.isEmpty()){
-			UtilM.println("Captured functions:");
-			for(Method fun:huntedFunctions)UtilM.println("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
-		}else UtilM.println("No functions has been captured. Yet...");
-		UtilM.println(" ");
+			PrintUtil.println("Captured functions:");
+			for(Method fun:huntedFunctions)PrintUtil.println("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
+		}else PrintUtil.println("No functions has been captured. Yet...");
+		PrintUtil.println(" ");
 		if(!huntedVariables.isEmpty()){
-			UtilM.println("Captured variables:");
-			for(Field fun:huntedVariables)UtilM.println("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
-		}else UtilM.println("No variables has been captured. Yet...");
-		UtilM.println("--------------------------");
+			PrintUtil.println("Captured variables:");
+			for(Field fun:huntedVariables)PrintUtil.println("function:",fun.getName(),"\tclass:"+fun.getClass().getName());
+		}else PrintUtil.println("No variables has been captured. Yet...");
+		PrintUtil.println("--------------------------");
 	}
 	public static void callAShakedowForAClass(Class clazz){
-		UtilM.println("Warning! DataStalker has called a shakedow for a class!");
+		PrintUtil.println("Warning! DataStalker has called a shakedow for a class!");
 		colecterMode=true;
 		huntVariable(clazz, "SomerandomName");
 		huntFunction(clazz, "SomerandomName");
 		colecterMode=false;
-		UtilM.println("Info: DataStalker has finished a shakedow for a class!");
+		PrintUtil.println("Info: DataStalker has finished a shakedow for a class!");
 	}
 	
 	public static<T> T getVariable(Class clazz,String name,Object objectForExtractingData){
@@ -44,13 +44,13 @@ public class DataStalker{
 	public static Field getVariable(Class clazz,String name){
 		for(Field a:huntedVariables)if(a.getName().equals(name))return a;
 		Field hunted=huntVariable(clazz, name);
-		if(hunted!=null)UtilM.println("Info: Variable with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
+		if(hunted!=null)PrintUtil.println("Info: Variable with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
 		return hunted;
 	}
 	public static Method getFunction(Class clazz,String name){
 		for(Method a:huntedFunctions)if(a.getName().equals(name))return a;
 		Method hunted=huntFunction(clazz, name);
-		if(hunted!=null)UtilM.println("Info: Function with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
+		if(hunted!=null)PrintUtil.println("Info: Function with name: "+hunted.getName()+" in class: "+clazz.getName()+" has been captured.");
 		return hunted;
 	}
 	

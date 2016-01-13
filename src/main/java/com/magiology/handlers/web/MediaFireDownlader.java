@@ -31,7 +31,7 @@ public final class MediaFireDownlader{
 	
 	
 	private static void saveToDisc(String filePath,String URL)throws Exception{
-        UtilM.println("Downloading "+name(filePath));
+        PrintUtil.println("Downloading "+name(filePath));
         BufferedInputStream in=null;
         FileOutputStream fout=null;
         try{
@@ -47,11 +47,11 @@ public final class MediaFireDownlader{
             if(in!=null)in.close();
             if (fout!=null)fout.close();
         }
-        UtilM.println(name(filePath)+" is successfuly downladed!");
+        PrintUtil.println(name(filePath)+" is successfuly downladed!");
     }
 	private static String getUrlSrc(String URL)throws Exception{
-		UtilM.println("Attempting to download "+name(filePathC));
-        UtilM.println("Connecting!");
+		PrintUtil.println("Attempting to download "+name(filePathC));
+        PrintUtil.println("Connecting!");
         URL link=new URL(URL);
         URLConnection linkCon=link.openConnection();
         BufferedReader reader=new BufferedReader(new InputStreamReader(linkCon.getInputStream(), "UTF-8"));
@@ -61,7 +61,7 @@ public final class MediaFireDownlader{
         return total;
     }
     private static String findingValidLink(String string){
-        UtilM.println("Fetching download link.");
+        PrintUtil.println("Fetching download link.");
         try{
             String code="(?=\\<)|(?<=\\>)";
             String data[]=string.split(code);

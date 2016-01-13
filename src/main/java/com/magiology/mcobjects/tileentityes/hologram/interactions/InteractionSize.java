@@ -22,7 +22,7 @@ public class InteractionSize<Host extends HoloObject> extends AbstractInteractio
 	public void set(Host host, ObjectHolder<Boolean> changed, Object setter){
 		host.originalSize=(Vector2f)setter;
 		host.size=new Vector2f(host.originalSize.x*host.scale, host.originalSize.y*host.scale);
-		if(host instanceof Button)((Button)host).body=new ComplexCubeModel(0, 0, -UtilM.p/2, -host.size.x, -host.size.y, UtilM.p/2);
+		if(host instanceof Button)((Button)host).body=new CubeModel(0, 0, -UtilM.p/2, -host.size.x, -host.size.y, UtilM.p/2);
 		changed.setVar(true);
 	}
 

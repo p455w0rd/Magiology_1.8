@@ -142,8 +142,6 @@ public class EntityEvents{
 				}
 			}
 			
-			UtilM.println(PremiumHandeler.getAll());
-			
 			if(SpecialPlayerUtil.getPlayerRank(player)!=-1){
 				isFP=U.getMC().gameSettings.thirdPersonView!=0;
 				if(player.isCollidedVertically)yv=0;

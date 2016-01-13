@@ -1,49 +1,78 @@
 package com.magiology.util.utilclasses;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
+import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
 
-import java.awt.*;
-import java.io.*;
-import java.lang.reflect.*;
-import java.math.*;
-import java.text.*;
-import java.util.*;
+import java.awt.Color;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.*;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import net.minecraft.block.*;
-import net.minecraft.block.properties.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraftforge.event.entity.*;
-import net.minecraftforge.event.world.*;
-import net.minecraftforge.fml.common.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.collect.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.forgepowered.packets.core.*;
+import com.google.common.collect.ImmutableMap;
+import com.magiology.core.Config;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.math.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.effect.*;
-import com.magiology.util.utilobjects.vectors.*;
-import com.mojang.realmsclient.gui.*;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Get.Render.Font;
+import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
+import com.magiology.util.utilobjects.vectors.Plane;
+import com.magiology.util.utilobjects.vectors.Ray;
+import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.mojang.realmsclient.gui.ChatFormatting;
 
 public class UtilM{
 	public class U extends UtilM{}
@@ -252,63 +281,6 @@ public class UtilM{
 		}
 		NBTTC.setTag(baseName+"Slots", list);
 	}
-	//Print cluster----------------------------------------
-	public static void print(Object... objs){
-		StringBuilder print=new StringBuilder();
-		for(Object a:objs)print.append(a+" ");
-		LogUtil.info(print.toString());
-	}
-	public static void printlnEr(Object... objs){
-		StringBuilder print=new StringBuilder();
-		for(Object a:objs)print.append(a+" \n");
-		LogUtil.info(print.toString());
-	}
-	public static void println(Object... objs){
-		StringBuilder print=new StringBuilder();
-		for(Object a:objs){
-			if(a!=null&&a.getClass().isArray()){
-				if(a instanceof boolean[]){
-					boolean[] b=(boolean[])a;
-					for(boolean c:b)print.append(c+" ");
-				}
-				else if(a instanceof float[]){
-					float[] b=(float[])a;
-					for(float c:b)print.append(c+" ");
-				}
-				else if(a instanceof int[]){
-					int[] b=(int[])a;
-					for(int c:b)print.append(c+" ");
-				}
-				else if(a instanceof double[]){
-					double[] b=(double[])a;
-					for(double c:b)print.append(c+" ");
-				}
-				else if(a instanceof Object[]){
-					Object[] b=(Object[])a;
-					for(Object c:b)print.append(c+" ");
-				}
-			}
-			else print.append(a+" ");
-		}
-		LogUtil.info(print.toString());
-	}
-	public static<T> T printlnAndReturn(T obj){
-		println(obj);
-		return obj;
-	}
-	public static<T> T printAndReturn(T obj){
-		print(obj);
-		return obj;
-	}
-	
-	public static Object callMethod(Method method,Object objFromWhereFunctionIsCalled,Object...argsOfTheCalledFunction){
-		try{
-			return method.invoke(objFromWhereFunctionIsCalled, argsOfTheCalledFunction);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return null;
-	}
 	public static boolean isInteger(String str){
 		if(str==null)return false;
 		int length=str.length();
@@ -408,7 +380,7 @@ public class UtilM{
 		if(object instanceof EntityEvent)return((EntityEvent)object).entity.worldObj;
 		if(object instanceof BlockEvent)return((BlockEvent)object).world;
 		if(object instanceof HoloObject)return ((HoloObject)object).host.getWorld();
-		println("Given object has no data reference to world!");
+		PrintUtil.println("Given object has no data reference to world!");
 		return null;
 	}
 	public static boolean isRemote(Object object){
@@ -484,7 +456,7 @@ public class UtilM{
 	}
 	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3M result){
 		if(result==null){
-			println("Result is null!\nResult can't be set if it is null!\nInitialize it!\n------------");
+			PrintUtil.println("Result is null!\nResult can't be set if it is null!\nInitialize it!\n------------");
 			return false;
 		}
 		
@@ -505,16 +477,16 @@ public class UtilM{
 				ray.to=helper;
 			}
 			double z=plane.q.z;
-			if(ray.from.z>z){if(printProcess)println("target behind");return false;}
-			if(ray.to.z<z){if(printProcess)println("target to far");return false;}
+			if(ray.from.z>z){if(printProcess)PrintUtil.println("target behind");return false;}
+			if(ray.to.z<z){if(printProcess)PrintUtil.println("target to far");return false;}
 			AxisAlignedBB Plane=new AxisAlignedBB(plane.q.x, plane.q.y, plane.q.z, plane.s.x, plane.s.y, plane.s.z+0.01);
 			MovingObjectPosition rayt=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
-			if(rayt==null||rayt.hitVec==null){if(printProcess)println("target clipped out");return false;}
+			if(rayt==null||rayt.hitVec==null){if(printProcess)PrintUtil.println("target clipped out");return false;}
 			result.x=rayt.hitVec.xCoord;
 			result.y=rayt.hitVec.yCoord;
 			result.z=rayt.hitVec.zCoord;
 			
-			if(printProcess)println("Ray trace has resolwed a valid intersection point!");
+			if(printProcess)PrintUtil.println("Ray trace has resolwed a valid intersection point!");
 			return true;
 		}
 		
@@ -560,9 +532,6 @@ public class UtilM{
 		}
 		return Return;
 	}
-	public static void printStackTrace(){
-		print(getStackTrace());
-	}
 	public static String getStackTrace(){
 		StringBuilder Return=new StringBuilder();
 		
@@ -607,11 +576,6 @@ public class UtilM{
 			return true;
 		}catch(Exception e){}
 		return false;
-	}
-	@Deprecated
-	public static void breakBlock(World world,BlockPos pos){
-//		world.playSoundEffect(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5, Helper.getBlock(world, pos)., 1.0F, RF() * 0.4F + 0.8F);
-		//TODO
 	}
 	public static EntityItem dropBlockAsItem(World world, double x, double y, double z, ItemStack stack){
 	    if(!world.isRemote&&world.getGameRules().getGameRuleBooleanValue("doTileDrops")&&!world.restoringBlockSnapshots){
@@ -683,9 +647,6 @@ public class UtilM{
 		BlockPos[] result=new BlockPos[0];
 		for(int i=0;i<pos1.length;i++)result=ArrayUtils.add(result, new BlockPos(pos1[i],pos2[i],pos3[i]));
 		return result;
-	}
-	public static void printIsRemote(Object worldContainer){
-		println(isRemote(worldContainer));
 	}
 	public static boolean TRUE(){
 		return true;
@@ -761,7 +722,7 @@ public class UtilM{
 		return System.currentTimeMillis()-startTime;
 	}
 	public static void printTime(){
-		println(endTime());
+		PrintUtil.println(endTime());
 	}
 	public static <T, E> T getMapKey(Map<T, E> map, E value){
 	    for(Entry<T, E> entry : map.entrySet()){
@@ -793,5 +754,29 @@ public class UtilM{
 		oos.writeObject(o);
 		oos.close();
 		return Base64.getEncoder().encodeToString(baos.toByteArray()); 
+	}
+	public static Vec2i[] arrangeStrings(final String[]strings,int lines,int marginX,int marginY){
+		FontRenderer fr=Font.FR();
+		Vec2i[] result=new Vec2i[strings.length];
+		int colums=(int)Math.floor(strings.length/(float)lines)+1;
+		String[][] formatedStrings=new String[colums][lines];
+		
+		
+		int[] longestInColum=new int[colums],columOffsets=new int[colums];
+		for(int i=0;i<colums;i++){
+			for(int j=0;j<lines;j++){
+				int id=i*(colums+1)+j;
+				if(id<strings.length)formatedStrings[i][j]=strings[id];
+			}
+		}
+		for(int i=0;i<formatedStrings.length;i++)while(ArrayUtils.contains(formatedStrings[i], null))formatedStrings[i]=ArrayUtils.removeElement(formatedStrings[i], null);
+		for(int i=0;i<colums;i++)for(int j=0;j<formatedStrings[i].length;j++)longestInColum[i]=Math.max(longestInColum[i], fr.getStringWidth(formatedStrings[i][j]));
+		for(int i=0;i<colums;i++){
+			columOffsets[i]=marginX;
+			for(int j=0;j<i;j++)columOffsets[i]+=longestInColum[j]+marginX;
+		}
+		
+		for(int i=0;i<strings.length;i++)result[i]=new Vec2i(columOffsets[(i/lines)%colums], (i%lines)*(fr.FONT_HEIGHT+marginY)+marginY);
+		return result;
 	}
 }

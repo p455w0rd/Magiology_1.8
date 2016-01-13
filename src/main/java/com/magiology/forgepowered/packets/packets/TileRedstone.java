@@ -40,7 +40,7 @@ public class TileRedstone extends AbstractToServerMessage{
 			 ((TileEntityControlBlock)tile).redstoneC=id;
 			 return null;
 		 }
-		 UtilM.println("PACKET HAS FAILED TO DELIVER THE DATA!\n");
+		 PrintUtil.println("PACKET HAS FAILED TO DELIVER THE DATA!\n");
 		return null;
 	}
 }

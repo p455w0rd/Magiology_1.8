@@ -424,7 +424,7 @@ public class TessUtil{
 		if((""+xyz).toLowerCase().equals("z")){
 			return UtilM.calculatePos(entity.lastTickPosZ,entity.posZ);
 		}
-		UtilM.println(xyz,"is not a valid key! Use x or y or z.");
+		PrintUtil.println(xyz,"is not a valid key! Use x or y or z.");
 		return -1;
 	}
 	public static Vec3M calculateRenderPosV(Entity entity){
@@ -440,12 +440,12 @@ public class TessUtil{
 				calculateRenderPos(entity,'z')};
 	}
 	
-	private static ComplexCubeModel brainC1,brainC2;
+	private static CubeModel brainC1,brainC2;
 	
 	static{
 		QuadUV uv=new QuadUV(0, 0, 1, 0, 1, 1, 0, 1);
-		brainC1=new ComplexCubeModel(-UtilM.p, -UtilM.p, -UtilM.p, 0, 0, 0,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
-		brainC2=new ComplexCubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
+		brainC1=new CubeModel(-UtilM.p, -UtilM.p, -UtilM.p, 0, 0, 0,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
+		brainC2=new CubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
 	}
 	
 	public static VertixBuffer drawBrain(Vec3M pos,double scale1,double anim){

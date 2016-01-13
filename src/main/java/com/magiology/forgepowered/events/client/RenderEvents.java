@@ -71,7 +71,7 @@ public class RenderEvents{
 	
 	public static LongAfterRenderRenderer spawnLARR(Object object){
 		if(object==null){
-			UtilM.printlnEr("GIVEN OBJECT IS NULL! Canceling the function!\n");
+			PrintUtil.printlnEr("GIVEN OBJECT IS NULL! Canceling the function!\n");
 			return null;
 		}
 		if(object instanceof LongAfterRenderRenderer){
@@ -95,12 +95,12 @@ public class RenderEvents{
 			else universalLongRender.add(result);
 			return result;
 		}
-		UtilM.printlnEr("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
+		PrintUtil.printlnEr("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
 		return null;
 	}
 	public static AfterRenderRenderer spawnARR(Object object){
 		if(object==null){
-			UtilM.printlnEr("GIVEN OBJECT IS NULL! Canceling the function!\n");
+			PrintUtil.printlnEr("GIVEN OBJECT IS NULL! Canceling the function!\n");
 			return null;
 		}
 		if(object instanceof AfterRenderRenderer){
@@ -108,7 +108,7 @@ public class RenderEvents{
 			universalRender.add(result);
 			return result;
 		}
-		UtilM.printlnEr("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
+		PrintUtil.printlnEr("GIVEN OBJECT IS NOT VALID! Canceling the function!\n");
 		return null;
 	}
 	

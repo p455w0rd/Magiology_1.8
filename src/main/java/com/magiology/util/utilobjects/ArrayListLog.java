@@ -8,8 +8,8 @@ import com.magiology.util.utilclasses.*;
 public class ArrayListLog<T> extends ArrayList<HoloObject> {
 	@Override
 	public void clear(){
-		UtilM.printStackTrace();
-		UtilM.println(this);
+		PrintUtil.printStackTrace();
+		PrintUtil.println(this);
 		super.clear();
 	}
 }

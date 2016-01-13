@@ -28,7 +28,7 @@ public class TileHologramProjectorInterface implements WorldNetworkInterface,Int
 
 	@Override
 	public void onNetworkActionInvoked(NetworkInterface Interface, String action, Object... data){
-		UtilM.println("hi");
+		PrintUtil.println("hi");
 	}
 	
 	@Override

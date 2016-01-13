@@ -27,7 +27,7 @@ public class FileUtil{
 			out.flush();
 			out.close();
 		}catch(Exception e){
-			UtilM.println(file);
+			PrintUtil.println(file);
 			e.printStackTrace();
 		}
 	}
@@ -55,12 +55,12 @@ public class FileUtil{
 			try{
 				out.writeObject(content);
 			}catch(Exception e){
-				UtilM.println(file);
+				PrintUtil.println(file);
 				e.printStackTrace();
 			}
 			out.close();
 		}catch(Exception e){
-			UtilM.println(file);
+			PrintUtil.println(file);
 			e.printStackTrace();
 		}
 	}

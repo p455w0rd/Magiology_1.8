@@ -93,7 +93,7 @@ public class MItems{
 
 	public static void setGenericUpgradeRenderer(Item item){
 		if(item instanceof GenericItemUpgrade)MinecraftForgeClient.registerItemRenderer(item, new ItemRendererGenericUpgrade());
-		else UtilM.printlnEr("Item: "+item.getUnlocalizedName()+" cannot be registered as a GenericUpgrade renderer!\n");
+		else PrintUtil.printlnEr("Item: "+item.getUnlocalizedName()+" cannot be registered as a GenericUpgrade renderer!\n");
 	}
 
 	public static void bindItemWRender(Item item, IItemRenderer renderer){

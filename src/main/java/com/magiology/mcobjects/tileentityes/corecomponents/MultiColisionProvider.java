@@ -41,7 +41,7 @@ public interface MultiColisionProvider{
 		public static int getRayTracedBoxId(World world, BlockPos pos, Vec3M startVec, Vec3M endVec,AxisAlignedBB resetBoundsOptional){
 			TileEntity tester=world.getTileEntity(pos);
 			if(!(tester instanceof MultiColisionProvider)){
-				UtilM.println("There is no instance of ISidedColisionProvider at"+"("+pos.toString()+")!",UtilM.getStackTrace());
+				PrintUtil.println("There is no instance of ISidedColisionProvider at"+"("+pos.toString()+")!",UtilM.getStackTrace());
 				return -1;
 			}
 	    	results=new MovingObjectPosition[0];
@@ -54,7 +54,7 @@ public interface MultiColisionProvider{
 	    	AxisAlignedBB[] aciveBoxes=tile.getActiveBoxes();
 	    	if(aciveBoxes==null||aciveBoxes.length==0){
 	    		//fail switch
-				UtilM.println("ISidedColisionProviderRayTracer could not resolve a valid box!",UtilM.getStackTrace());
+				PrintUtil.println("ISidedColisionProviderRayTracer could not resolve a valid box!",UtilM.getStackTrace());
 				isRayTracing=false;
 				return -1;
 	    	}
@@ -92,8 +92,8 @@ public interface MultiColisionProvider{
 		    try{
 		    	tile.setPointedBox(selectedBoxes[id]);
 			}catch(Exception e){
-				UtilM.println("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
-				UtilM.println("selectedBoxes size",selectedBoxes.length,"results size",results.length);
+				PrintUtil.println("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
+				PrintUtil.println("selectedBoxes size",selectedBoxes.length,"results size",results.length);
 				e.printStackTrace();
 			}
 		    isRayTracing=false;

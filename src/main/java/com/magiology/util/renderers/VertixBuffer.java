@@ -12,6 +12,7 @@ import org.lwjgl.util.vector.*;
 
 import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.*;
 
@@ -214,7 +215,7 @@ public class VertixBuffer{
 	}
 	public void popMatrix(){
 		if(transformationStacks.isEmpty()){
-			U.println("Buffer is out of stacks to pop! You need to push before popping!\nFunction aborted.",U.getStackTrace());
+			PrintUtil.println("Buffer is out of stacks to pop! You need to push before popping!\nFunction aborted.",U.getStackTrace());
 			return;
 		}
 		int pos=transformationStacks.size()-1;
@@ -268,10 +269,10 @@ public class VertixBuffer{
 		return shadedTriangles;
 	}
 	
-	public void importComplexCube(ComplexCubeModel... cubeModels){
-		for(ComplexCubeModel a:cubeModels)importComplexCube(a);
+	public void importComplexCube(CubeModel... cubeModels){
+		for(CubeModel a:cubeModels)importComplexCube(a);
 	}
-	public void importComplexCube(ComplexCubeModel cubeModel){
+	public void importComplexCube(CubeModel cubeModel){
 		try{
 			if(cubeModel.willSideRender[0])try{
 				addVertexWithUV(cubeModel.points[0].x,cubeModel.points[0].y,cubeModel.points[0].z,cubeModel.UVs[0].x2,cubeModel.UVs[0].y2);

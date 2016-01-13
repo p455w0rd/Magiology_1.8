@@ -189,7 +189,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 		buff.translate(position.x, position.y, 0);
 		buff.cleanUp();
 		
-		buff.importComplexCube(new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2).expand(0.002F));
+		buff.importComplexCube(new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2).expand(0.002F));
 		buff.setDrawAsWire(true);
 		buff.draw();
 		buff.setDrawAsWire(false);

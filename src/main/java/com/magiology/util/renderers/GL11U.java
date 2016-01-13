@@ -22,7 +22,7 @@ public class GL11U{
 		case 1:glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);return;
 		case 2:glBlendFunc(GL_SRC_ALPHA, GL_ONE);return;
 		case 3:glBlendFunc(GL_ONE, GL_ONE);return;
-		default:UtilM.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");return;
+		default:PrintUtil.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");return;
 	}}
 //	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
 		

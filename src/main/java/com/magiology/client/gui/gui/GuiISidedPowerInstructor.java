@@ -38,7 +38,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 	private final TileEntity tile;
 	TileEntitySpecialRenderer renderer;
 	
-	private ComplexCubeModel cube;
+	private CubeModel cube;
 	
 	public GuiISidedPowerInstructor(EntityPlayer player,TileEntity tile){
 		super(new ISidedPowerInstructorContainer(player, tile));
@@ -56,7 +56,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		zRotation.wantedPoint=0;
 		
 		Block aa=U.getBlock(player.worldObj,tile.getPos());
-		cube=new ComplexCubeModel((float)aa.getBlockBoundsMinX(), (float)aa.getBlockBoundsMinY(), (float)aa.getBlockBoundsMinZ(), (float)aa.getBlockBoundsMaxX(), (float)aa.getBlockBoundsMaxY(), (float)aa.getBlockBoundsMaxZ());
+		cube=new CubeModel((float)aa.getBlockBoundsMinX(), (float)aa.getBlockBoundsMinY(), (float)aa.getBlockBoundsMinZ(), (float)aa.getBlockBoundsMaxX(), (float)aa.getBlockBoundsMaxY(), (float)aa.getBlockBoundsMaxZ());
 	}
 	@Override
 	public void drawGuiContainerForegroundLayer(int x,int y){

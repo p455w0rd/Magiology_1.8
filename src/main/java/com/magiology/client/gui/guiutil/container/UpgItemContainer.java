@@ -86,7 +86,7 @@ public class UpgItemContainer implements IInventory{
 	public void setInventorySlotContents(int v1, ItemStack stack){
 		int v2=v1;
 		if(v2>this.getInventoryStackLimit()){
-			UtilM.printlnEr("ERROR--> "+container.getDisplayName()+" HAS FAILED TO SET INVENTORY SLOT AT ID: "+v2+"\n");
+			PrintUtil.printlnEr("ERROR--> "+container.getDisplayName()+" HAS FAILED TO SET INVENTORY SLOT AT ID: "+v2+"\n");
 			return;
 		}
 		

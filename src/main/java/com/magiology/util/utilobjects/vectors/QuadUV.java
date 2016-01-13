@@ -21,10 +21,10 @@ public class QuadUV{
 	public QuadUV rotate2(){
 		return new QuadUV(x2, y2, x3, y3, x4, y4, x1, y1);
 	}
-	private QuadUV transate(float x,float y){
+	public QuadUV translate(float x,float y){
 		return new QuadUV(x1+x, y1+y, x2+x, y2+y, x3+x, y3+y, x4+x, y4+y);
 	}
-	private QuadUV transate(int id,float x,float y){
+	public QuadUV translate(int id,float x,float y){
 		switch(id){
 		case 0:return new QuadUV(x1+x, y1+y, x2, y2,     x3, y3,     x4, y4    );
 		case 1:return new QuadUV(x1, y1,     x2+x, y2+y, x3, y3,     x4, y4    );

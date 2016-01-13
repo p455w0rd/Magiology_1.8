@@ -63,7 +63,7 @@ public class SixSidedBoolean{
 		for(generic modifier:modifiers){
 			if(modifier instanceof Modifier||modifier instanceof Integer);
 			else{
-				UtilM.println("An invalid input was detected!");
+				PrintUtil.println("An invalid input was detected!");
 				return null;
 			}
 		}
@@ -77,7 +77,7 @@ public class SixSidedBoolean{
 				
 				//detecting possible start input error
 				if(modifier instanceof Integer||!isAStarter(modifier)){
-					UtilM.println("Modifier cluster starter is invalid!");
+					PrintUtil.println("Modifier cluster starter is invalid!");
 					return null;
 				}else{
 					starter=(Modifier)modifiers[id];
@@ -88,7 +88,7 @@ public class SixSidedBoolean{
 				
 				//detecting possible input error after a starter modifier
 				if(isAStarter(modifier)){
-					UtilM.println("Invalid include/exclude input!");
+					PrintUtil.println("Invalid include/exclude input!");
 					return null;
 				}else{
 					includeExclude=(Modifier)modifier;

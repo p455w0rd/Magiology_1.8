@@ -19,7 +19,7 @@ public class MUpdater{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		if(newestVersion==-1)UtilM.printlnEr(MReference.NAME+" has failed to check for updates");
+		if(newestVersion==-1)PrintUtil.printlnEr(MReference.NAME+" has failed to check for updates");
 		else extraData=U.signature(AQUA)+"Latest version is: "+GOLD+newestVersion+AQUA+", and you are using version: "+GOLD+currentVersion;
 	}
 	public static float getCurrentVersion(){return currentVersion;}

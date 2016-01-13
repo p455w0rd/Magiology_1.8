@@ -41,7 +41,7 @@ public class HologramProjectorUpload extends AbstractToServerMessage{
 			 ((TileEntityHologramProjector)tile).highlighs=highlights;
 			 return null;
 		 }
-		 UtilM.println("PACKET HAS FAILED TO DELIVER THE DATA!");
+		 PrintUtil.println("PACKET HAS FAILED TO DELIVER THE DATA!");
 		return null;
 	}
 }

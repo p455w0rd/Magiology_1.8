@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 
 import scala.collection.mutable.StringBuilder;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.PrintUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -19,7 +19,9 @@ public class PremiumHandeler{
 	
 	private static final boolean canAccesInternet=testInternet();
 	
-	public static final PremiumHandeler instance=new PremiumHandeler();
+	private static boolean printOutDetection=true;
+	
+	private static final PremiumHandeler instance=new PremiumHandeler();
 	private PremiumHandeler(){}
 	
 	
@@ -33,7 +35,7 @@ public class PremiumHandeler{
 	}
 	
 	public static boolean hasOfflineUUID(EntityPlayer player){
-		return get(player).isOfflineUUID;
+		return get(player).hasOfflineUUID;
 	}
 	
 	public static String toString(EntityPlayer player){
@@ -45,6 +47,15 @@ public class PremiumHandeler{
 		data.entrySet().forEach(entry->result.put(entry.getKey(), entry.getValue().copy()));
 		return result;
 	}
+	public static PremiumHandeler get(){
+		return instance;
+	}
+	public static PlayerPremiumData remove(EntityPlayer player){
+		return data.remove(name(player));
+	}
+	public static boolean isMissing(EntityPlayer player){
+		return !data.containsKey(name(player));
+	}
 	
 	
 	
@@ -54,9 +65,8 @@ public class PremiumHandeler{
 	}
 	
 	private static void check(EntityPlayer player){
-		if(!data.containsKey(name(player)))fill(player);
+		if(isMissing(player))fill(player);
 	}
-	
 	
 	private static void fill(EntityPlayer player){
 		data.put(name(player), generateData(player));
@@ -65,7 +75,7 @@ public class PremiumHandeler{
 	private static boolean testInternet(){
 		boolean result=false;
 		try{
-			if(InetAddress.getByName("minecraft.net")!=null)result=true;
+			result=InetAddress.getByName("minecraft.net")!=null;
 		}catch(UnknownHostException e){}
 		return result;
 	}
@@ -79,13 +89,14 @@ public class PremiumHandeler{
 			premiumUUID=player.getGameProfile().getId(),
 			offlineUUID=player.getOfflineUUID(player.getGameProfile().getName());
 		
-		boolean isOfflineUUID=premiumUUID.equals(offlineUUID);
+		boolean 
+			hasOfflineUUID=premiumUUID.equals(offlineUUID),
+			isPremium=canAccesInternet?!hasOfflineUUID:false;
 		
-		boolean isPremium=canAccesInternet?!isOfflineUUID:false;
+		PlayerPremiumData result=instance.new PlayerPremiumData(hasOfflineUUID,isPremium);
 		
-		PlayerPremiumData result=instance.new PlayerPremiumData(isOfflineUUID,isPremium);
+		PrintUtil.println("Player:",name(player),"has been checked for premium!\nThe results are:\n",result);
 		
-		UtilM.println("Player:",name(player),"has been checked for premium!\nThe results are:\n",result);
 		return result;
 	}
 	
@@ -93,22 +104,30 @@ public class PremiumHandeler{
 	
 	
 	public class PlayerPremiumData{
-		private boolean isOfflineUUID,isPremium;
+		private boolean hasOfflineUUID,isPremium;
 		
-		private PlayerPremiumData(boolean isOfflineUUID, boolean isPremium){
-			this.isOfflineUUID=isOfflineUUID;
+		private PlayerPremiumData(boolean hasOfflineUUID, boolean isPremium){
+			this.hasOfflineUUID=hasOfflineUUID;
 			this.isPremium=isPremium;
 		}
 		
 		private PlayerPremiumData copy(){
-			return instance.new PlayerPremiumData(isOfflineUUID, isPremium);
+			return instance.new PlayerPremiumData(hasOfflineUUID, isPremium);
 		}
 		
+		public boolean isHasOfflineUUID(){
+			return hasOfflineUUID;
+		}
+
+		public boolean isPremium(){
+			return isPremium;
+		}
+
 		@Override
 		public String toString(){
 			StringBuilder result=new StringBuilder();
 			result.append("PlayerPremiumData(").append("\n");
-			result.append("\t").append("Is unique id generated from username: ").append(isOfflineUUID).append("\n");
+			result.append("\t").append("Has offline UUID: ").append(hasOfflineUUID).append("\n");
 			result.append("\t").append("Can access internet: ").append(canAccesInternet).append("\n");
 			result.append("\t").append("Is premium: ").append(isPremium).append("\n");
 			result.append(")");

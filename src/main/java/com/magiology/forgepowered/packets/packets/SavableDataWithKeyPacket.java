@@ -46,7 +46,7 @@ public class SavableDataWithKeyPacket extends AbstractToClientMessage{
 			((NetworkInterface)tile).setInteractData(key, data);
 			return null;
 		}
-		UtilM.println("PACKET HAS FAILED TO DELIVER THE DATA!\n");
+		PrintUtil.println("PACKET HAS FAILED TO DELIVER THE DATA!\n");
 		return null;
 	}
 }

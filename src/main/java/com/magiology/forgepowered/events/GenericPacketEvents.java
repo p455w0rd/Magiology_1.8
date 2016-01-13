@@ -60,7 +60,7 @@ public class GenericPacketEvents{
 			tile.setReceaveOnSide(integer, !tile.getIn(integer));
 			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
-		default:{UtilM.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
+		default:{PrintUtil.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	
@@ -80,7 +80,7 @@ public class GenericPacketEvents{
 		case 1:{
 			
 		}break;
-		default:{UtilM.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
+		default:{PrintUtil.println("ERROR! EVENT StringPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 	public void voidPacketEvent(PacketEvent event){
@@ -89,7 +89,7 @@ public class GenericPacketEvents{
 		case 0:{
 			TheHandHandler.nextPosition(player);
 		}break;
-		default:{UtilM.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
+		default:{PrintUtil.println("ERROR! EVENT voidPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}
 	}
 }

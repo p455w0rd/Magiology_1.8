@@ -63,7 +63,7 @@ public class SymmetryBoot{
 			default:blocksat=null;break;
 			}
 			if(blocksat!=null)for(int a=0;a<blocksat.length;a++)s.BlocksAtInit.add(blocksat[a]);
-			else UtilM.println("WRONG TYPE ADDED!\nTHIS FUNCTION CANCELD ALL EFFECTS!\n");
-		}else UtilM.println("YOU CAN'T ADD BLOCKS TO STRUCTURE AFTER INITIALIZING!\nFUNCTION CANCELD!\n");
+			else PrintUtil.println("WRONG TYPE ADDED!\nTHIS FUNCTION CANCELD ALL EFFECTS!\n");
+		}else PrintUtil.println("YOU CAN'T ADD BLOCKS TO STRUCTURE AFTER INITIALIZING!\nFUNCTION CANCELD!\n");
 	}
 }

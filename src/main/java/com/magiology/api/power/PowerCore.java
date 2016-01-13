@@ -12,7 +12,6 @@ import net.minecraft.world.*;
 import com.magiology.mcobjects.effect.*;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilclasses.UtilM.U;
 
 public interface PowerCore{
 	/**Keep it short! The shorter it is less bandwidth it takes!*/
@@ -65,7 +64,7 @@ public interface PowerCore{
 						//do i save you?
 						if(tileMT.isPowerKeptOnWrench()){
 							PowerItemUtil.markWithData(stack);
-							U.println(tileMT.isSavingFullNBT());
+							PrintUtil.println(tileMT.isSavingFullNBT());
 //							if(tileMT.isSavingFullNBT()){
 //								NBTTagCompound nbt=stack.getTagCompound();
 //								tile.writeToNBT(nbt);

@@ -26,7 +26,7 @@ public abstract class BlockContainerM extends BlockContainer{
 	@Override
 	public TileEntity createNewTileEntity(World world, int metadata){
 		if(!isNullTileEntityOk){
-			UtilM.println(
+			PrintUtil.println(
 					getUnlocalizedName()+" block is a BlockContainer and it is not providing a TileEntity!",
 					"Are you sure that this is ok?",
 					"If so please add "+'"'+"isNullTileEntityOk=false;"+'"'+" for disabling this message",

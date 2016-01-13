@@ -33,7 +33,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 		super.initModels();
 		VertixBuffer buff=TessUtil.getVB();
 		
-		buff.importComplexCube(new ComplexCubeModel(p*6,p*6,0,p*10,p*10,p*2));
+		buff.importComplexCube(new CubeModel(p*6,p*6,0,p*10,p*10,p*2));
 		VertexModel centerCube=buff.exportToNoramlisedVertixBufferModel();
 		centerCube.glStateCell=new GlStateCell(new GlState(new int[]{}, new int[]{GL11.GL_TEXTURE_2D},()->{GL11.glColor3f(0.1F, 0.1F, 0.1F);}), null);
 		

@@ -18,7 +18,7 @@ public class InterfaceRegistration{
 	
 	public static <T extends BasicWorldNetworkInterface> T registerInterfaceToBlock(T Interface,Class<Block> marker){
 		if(blockFinder.keySet().contains(marker)){
-			UtilM.println("Block:",marker.getClass().getSimpleName(),"is already bound to an interface:",blockFinder.get(marker));
+			PrintUtil.println("Block:",marker.getClass().getSimpleName(),"is already bound to an interface:",blockFinder.get(marker));
 			return Interface;
 		}
 		blockFinder.put(marker, Interface);
@@ -27,7 +27,7 @@ public class InterfaceRegistration{
 	
 	public static <T extends BasicWorldNetworkInterface> T registerInterfaceToTileEntity(T Interface,Class<? extends TileEntity> marker){
 		if(tileFinder.keySet().contains(marker)){
-			UtilM.println("TileEntity:",marker.getClass().getSimpleName(),"is already bound to an interface:",tileFinder.get(marker));
+			PrintUtil.println("TileEntity:",marker.getClass().getSimpleName(),"is already bound to an interface:",tileFinder.get(marker));
 			return Interface;
 		}
 		tileFinder.put((Class<TileEntity>)marker, Interface);

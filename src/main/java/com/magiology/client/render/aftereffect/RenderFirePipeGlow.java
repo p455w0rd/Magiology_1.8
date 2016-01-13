@@ -61,11 +61,11 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	private static VertexModel strateCoreModel;
 	private void generateModelStrateCoreGlow(){
 		buf.cleanUp();
-		ComplexCubeModel
-		c5=new ComplexCubeModel(0,   p*9.5F,  p*9.5F, 1,   p*10F,  p*10F),
-		c6=new ComplexCubeModel(0,   p*9.5F,  p*6F,   1,   p*10,   p*6.5F),
-		c7=new ComplexCubeModel(0,   p*6,     p*9.5F, 1,   p*6.5F,  p*10F),
-		c8=new ComplexCubeModel(0,   p*6,     p*6F,   1,   p*6.5F,   p*6.5F);
+		CubeModel
+		c5=new CubeModel(0,   p*9.5F,  p*9.5F, 1,   p*10F,  p*10F),
+		c6=new CubeModel(0,   p*9.5F,  p*6F,   1,   p*10,   p*6.5F),
+		c7=new CubeModel(0,   p*6,     p*9.5F, 1,   p*6.5F,  p*10F),
+		c8=new CubeModel(0,   p*6,     p*6F,   1,   p*6.5F,   p*6.5F);
 		c5.willSideRender[0]=c5.willSideRender[1]=
 		c6.willSideRender[0]=c6.willSideRender[1]=
 		c7.willSideRender[0]=c7.willSideRender[1]=
@@ -89,15 +89,15 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	private static VertexModel connectorGlowModel;
 	private void generateModelConnectorGlow(){
 		buf.cleanUp();
-		ComplexCubeModel 
-		c1=new ComplexCubeModel(p*3, p*10.5F, p*10.5F,p*5.5F,p*10,   p*10),
-		c2=new ComplexCubeModel(p*3, p*10.5F, p*6F,   p*5.5F,p*10,   p*5.5F),
-		c3=new ComplexCubeModel(p*3, p*6F,    p*10.5F,p*5.5F,p*5.5F, p*10),
-		c4=new ComplexCubeModel(p*3, p*6F,    p*6F,   p*5.5F,p*5.5F, p*5.5F),
-		c5=new ComplexCubeModel(0,   p*9.5F,  p*9.5F, p*3,   p*10F,  p*10F),
-		c6=new ComplexCubeModel(0,   p*9.5F,  p*6F,   p*3,   p*10,   p*6.5F),
-		c7=new ComplexCubeModel(0,   p*6,  p*9.5F, p*3,   p*6.5F,  p*10F),
-		c8=new ComplexCubeModel(0,   p*6,  p*6F,   p*3,   p*6.5F,   p*6.5F);
+		CubeModel 
+		c1=new CubeModel(p*3, p*10.5F, p*10.5F,p*5.5F,p*10,   p*10),
+		c2=new CubeModel(p*3, p*10.5F, p*6F,   p*5.5F,p*10,   p*5.5F),
+		c3=new CubeModel(p*3, p*6F,    p*10.5F,p*5.5F,p*5.5F, p*10),
+		c4=new CubeModel(p*3, p*6F,    p*6F,   p*5.5F,p*5.5F, p*5.5F),
+		c5=new CubeModel(0,   p*9.5F,  p*9.5F, p*3,   p*10F,  p*10F),
+		c6=new CubeModel(0,   p*9.5F,  p*6F,   p*3,   p*10,   p*6.5F),
+		c7=new CubeModel(0,   p*6,  p*9.5F, p*3,   p*6.5F,  p*10F),
+		c8=new CubeModel(0,   p*6,  p*6F,   p*3,   p*6.5F,   p*6.5F);
 		c1.willSideRender[0]=c1.willSideRender[1]=
 		c2.willSideRender[0]=c2.willSideRender[1]=
 		c3.willSideRender[0]=c3.willSideRender[1]=
@@ -136,31 +136,31 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	private static VertexModel coreGlowModel;
 	private void generateModelCoreGlow(){
 		buf.cleanUp();
-		ComplexCubeModel 
-		c1=new ComplexCubeModel(p*10,   p*10,   p*6,p*10.5F, p*10.5F, p*10),
-		c2=new ComplexCubeModel(p*10,   p*5.5F, p*6,p*10.5F, p*6F,    p*10),
-		c3=new ComplexCubeModel(p*5.5F, p*10,   p*6,p*6,     p*10.5F, p*10),
-		c4=new ComplexCubeModel(p*5.5F, p*5.5F, p*6,p*6,     p*6F,    p*10),
+		CubeModel 
+		c1=new CubeModel(p*10,   p*10,   p*6,p*10.5F, p*10.5F, p*10),
+		c2=new CubeModel(p*10,   p*5.5F, p*6,p*10.5F, p*6F,    p*10),
+		c3=new CubeModel(p*5.5F, p*10,   p*6,p*6,     p*10.5F, p*10),
+		c4=new CubeModel(p*5.5F, p*5.5F, p*6,p*6,     p*6F,    p*10),
 		
-		c5=new ComplexCubeModel(p*6F, p*10F,  p*5.5F, p*10F, p*10.5F, p*6F),
-		c6=new ComplexCubeModel(p*6F, p*5.5F, p*5.5F, p*10F, p*6F,    p*6F),
-		c7=new ComplexCubeModel(p*6F, p*10F,  p*10F,  p*10F, p*10.5F, p*10.5F),
-		c8=new ComplexCubeModel(p*6F, p*5.5F, p*10F,  p*10F, p*6F,    p*10.5F),
+		c5=new CubeModel(p*6F, p*10F,  p*5.5F, p*10F, p*10.5F, p*6F),
+		c6=new CubeModel(p*6F, p*5.5F, p*5.5F, p*10F, p*6F,    p*6F),
+		c7=new CubeModel(p*6F, p*10F,  p*10F,  p*10F, p*10.5F, p*10.5F),
+		c8=new CubeModel(p*6F, p*5.5F, p*10F,  p*10F, p*6F,    p*10.5F),
 		
-		c9 =new ComplexCubeModel(p*10.5F,p*10F, p*10F, p*10F,  p*6F, p*10.5F),
-		c10=new ComplexCubeModel(p*6F,   p*10F, p*10F, p*5.5F, p*6F, p*10.5F),
-		c11=new ComplexCubeModel(p*10.5F,p*10F, p*5.5F, p*10F,  p*6F, p*6),
-		c12=new ComplexCubeModel(p*6F,   p*10F, p*5.5F, p*5.5F, p*6F, p*6),
+		c9 =new CubeModel(p*10.5F,p*10F, p*10F, p*10F,  p*6F, p*10.5F),
+		c10=new CubeModel(p*6F,   p*10F, p*10F, p*5.5F, p*6F, p*10.5F),
+		c11=new CubeModel(p*10.5F,p*10F, p*5.5F, p*10F,  p*6F, p*6),
+		c12=new CubeModel(p*6F,   p*10F, p*5.5F, p*5.5F, p*6F, p*6),
 		
-		c13=new ComplexCubeModel(p*10F,  p*10, p*10,   p*10.5F,p*10.5F, p*10.5F),
-		c14=new ComplexCubeModel(p*5.5F, p*10, p*10,   p*6,    p*10.5F, p*10.5F),
-		c15=new ComplexCubeModel(p*5.5F, p*10, p*5.5F, p*6,    p*10.5F, p*6),
-		c16=new ComplexCubeModel(p*10,   p*10, p*5.5F, p*10.5F,p*10.5F, p*6),
+		c13=new CubeModel(p*10F,  p*10, p*10,   p*10.5F,p*10.5F, p*10.5F),
+		c14=new CubeModel(p*5.5F, p*10, p*10,   p*6,    p*10.5F, p*10.5F),
+		c15=new CubeModel(p*5.5F, p*10, p*5.5F, p*6,    p*10.5F, p*6),
+		c16=new CubeModel(p*10,   p*10, p*5.5F, p*10.5F,p*10.5F, p*6),
 		
-		c17=new ComplexCubeModel(p*10F,  p*5.5F, p*10,   p*10.5F,p*6, p*10.5F),
-		c18=new ComplexCubeModel(p*5.5F, p*5.5F, p*10,   p*6,    p*6, p*10.5F),
-		c19=new ComplexCubeModel(p*5.5F, p*5.5F, p*5.5F, p*6,    p*6, p*6),
-		c20=new ComplexCubeModel(p*10,   p*5.5F, p*5.5F, p*10.5F,p*6, p*6);
+		c17=new CubeModel(p*10F,  p*5.5F, p*10,   p*10.5F,p*6, p*10.5F),
+		c18=new CubeModel(p*5.5F, p*5.5F, p*10,   p*6,    p*6, p*10.5F),
+		c19=new CubeModel(p*5.5F, p*5.5F, p*5.5F, p*6,    p*6, p*6),
+		c20=new CubeModel(p*10,   p*5.5F, p*5.5F, p*10.5F,p*6, p*6);
 		c1.willSideRender[4]=c1.willSideRender[5]=
 		c2.willSideRender[4]=c2.willSideRender[5]=
 		c3.willSideRender[4]=c3.willSideRender[5]=

@@ -38,11 +38,11 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		QuadUV all=QuadUV.all().rotate1();
-		ComplexCubeModel[] sideThingys={
-				new ComplexCubeModel(p*6.5F, p*6.5F, p*11F, p*7F, p*7F, p*13F, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*6.5F, p*13F, p*7F, p*7F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*9F, p*9.5F, p*7F, p*9.5F, p*13F, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*9F, p*13F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
+		CubeModel[] sideThingys={
+				new CubeModel(p*6.5F, p*6.5F, p*11F, p*7F, p*7F, p*13F, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new CubeModel(p*6.5F, p*6.5F, p*13F, p*7F, p*7F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new CubeModel(p*6.5F, p*9F, p*9.5F, p*7F, p*9.5F, p*13F, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new CubeModel(p*6.5F, p*9F, p*13F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
 		};
 		sideThingys[0].points[0].y-=p*1.5;
 		sideThingys[0].points[1].y-=p*1.5;
@@ -93,18 +93,18 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 				0,height*8
 			).rotate1().mirror1();
 		
-		ComplexCubeModel[] cores={
-			new ComplexCubeModel(p*7.75F, p*7.75F, p*12F, p*8.25F, p*8.25F, p*13, new QuadUV[]{
+		CubeModel[] cores={
+			new CubeModel(p*7.75F, p*7.75F, p*12F, p*8.25F, p*8.25F, p*13, new QuadUV[]{
 					sideCon3.rotate1(),sideCon3.mirror1().rotate1(),sideCon3,sideCon3,front,all},null),
 					
-			new ComplexCubeModel(p*7.75F, p*8.75F, p*12F, p*8.25F, p*9.25F, p*13, new QuadUV[]{
+			new CubeModel(p*7.75F, p*8.75F, p*12F, p*8.25F, p*9.25F, p*13, new QuadUV[]{
 					sideCon1.mirror1().rotate1(),sideCon1.rotate1(),sideCon3,sideCon3,front,all},null),
-			new ComplexCubeModel(p*7.75F, p*6.75F, p*12F, p*8.25F, p*7.25F, p*13, new QuadUV[]{
+			new CubeModel(p*7.75F, p*6.75F, p*12F, p*8.25F, p*7.25F, p*13, new QuadUV[]{
 					sideCon2.mirror1().rotate1(),sideCon2.rotate1(),sideCon3,sideCon3,front,all},null),
 					
-			new ComplexCubeModel(p*8.75F, p*7.75F, p*12F, p*9.25F, p*8.25F, p*13, new QuadUV[]{
+			new CubeModel(p*8.75F, p*7.75F, p*12F, p*9.25F, p*8.25F, p*13, new QuadUV[]{
 					sideCon3.rotate1(),sideCon3.mirror1().rotate1(),sideCon2.mirror1(),sideCon1.mirror1(),front,all},null),
-			new ComplexCubeModel(p*6.75F, p*7.75F, p*12F, p*7.25F, p*8.25F, p*13, new QuadUV[]{
+			new CubeModel(p*6.75F, p*7.75F, p*12F, p*7.25F, p*8.25F, p*13, new QuadUV[]{
 					sideCon3.rotate1(),sideCon3.mirror1().rotate1(),sideCon1.mirror1(),sideCon2.mirror1(),front,all},null)
 		};
 		for(int i=0;i<cores.length;i++)cores[i].willSideRender[5]=false;
@@ -137,7 +137,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 				w1*24,0,
 				w1*24,1
 			).rotate1().mirror1();
-		ComplexCubeModel core=new ComplexCubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1,new QuadUV[]{
+		CubeModel core=new CubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1,new QuadUV[]{
 			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
@@ -158,7 +158,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe_end.png"));
 			})
 		, null);
-		ComplexCubeModel[] upConsCubes={
+		CubeModel[] upConsCubes={
 				
 		};
 		buff.importComplexCube(upConsCubes);
@@ -216,7 +216,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		
 		
-		ComplexCubeModel core1=new ComplexCubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1,new QuadUV[]{
+		CubeModel core1=new CubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1,new QuadUV[]{
 			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		
@@ -232,7 +232,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		
 		
-		buff.importComplexCube(new ComplexCubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1));
+		buff.importComplexCube(new CubeModel(p*7F, p*7F, p*13F, p*9F, p*9F, 1));
 		VertexModel downModel=buff.exportToNoramlisedVertixBufferModel();
 		
 		
@@ -283,7 +283,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		TessUtil.drawLine(p*5.05, p*6,p*10.95, p*6.05, p*10, p*9.95, p/4, false, buff, 0, 10);
 		TessUtil.drawLine(p*10.95,p*6,p*10.95, p*9.95, p*10, p*9.95, p/4, false, buff, 0, 10);
 		
-		buff.importComplexCube(new ComplexCubeModel(p*5, p*5, p*5, p*11, p*6, p*11),new ComplexCubeModel(p*6, p*10, p*6, p*10, p*10.5F, p*10));
+		buff.importComplexCube(new CubeModel(p*5, p*5, p*5, p*11, p*6, p*11),new CubeModel(p*6, p*10, p*6, p*10, p*10.5F, p*10));
 		
 		body1=buff.exportToNoramlisedVertixBufferModel();
 		body1.glStateCell=new GlStateCell(new GlState(()->{
@@ -294,7 +294,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 			ColorF.WHITE.bind();
 		}));
 		
-		ComplexCubeModel glass=new ComplexCubeModel(p*6.5F, p*6, p*6.5F, p*9.5F, p*10, p*9.5F);
+		CubeModel glass=new CubeModel(p*6.5F, p*6, p*6.5F, p*9.5F, p*10, p*9.5F);
 		glass.willSideRender[2]=false;
 		glass.willSideRender[3]=false;
 		for(int i=0;i<5;i++){

@@ -29,7 +29,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	
 	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<TileEntityHologramProjector>();
 	public Point point=new Point();
-	public ComplexCubeModel main;
+	public CubeModel main;
 	public final ArrayList<HoloObject> holoObjects=new ArrayList<HoloObject>();
 	public Vector2f size,offset;
 	public Vec3M mainColor=new Vec3M(0.05,0.5,0.8);
@@ -40,7 +40,7 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 	public TileEntityHologramProjector(){
 		size=new Vector2f(11,6);
 		offset=new Vector2f(-5, 1+UtilM.p*1.45F);
-		main=new ComplexCubeModel(0,0,-UtilM.p/2, size.x,size.y,UtilM.p/2);
+		main=new CubeModel(0,0,-UtilM.p/2, size.x,size.y,UtilM.p/2);
 	}
 	
 	@Override

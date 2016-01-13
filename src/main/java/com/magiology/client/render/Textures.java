@@ -38,7 +38,7 @@ public class Textures{
 	public static void postInit(){
 		//---textur stands for "no texture and it should be made as soon as possible"---\\
 		if(isInit)return;isInit=true;
-		UtilM.println("TEXTURE INIT STARTED!");
+		PrintUtil.println("TEXTURE INIT STARTED!");
 		Helmet42Model=             getResource(MReference.MODID,"/models/textures/Helmet42Model.png");
 		GuiArmorEditor=            getResource(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
 		firePipeCore=              getResource(MReference.MODID,"/textures/models/firepipe/FirePipeCore.png");
@@ -103,13 +103,13 @@ public class Textures{
 		ProgramGui=                getResource(MReference.MODID,"/textures/gui/Program.png");
 		Brain=                     getResource(MReference.MODID,"/textures/models/brain.png");
 		
-		UtilM.println("TEXTURE INIT ENDED!");
-		UtilM.println("----\n--------\n------------");
-		UtilM.println("Magiology error list:");
+		PrintUtil.println("TEXTURE INIT ENDED!");
+		PrintUtil.println("----\n--------\n------------");
+		PrintUtil.println("Magiology error list:");
 		if(failedTextures.size()>0)for(String er:failedTextures){
-			UtilM.println("---> "+er);
-		}else UtilM.println("Yay! there is no errors!");
-		UtilM.println("------------\n--------\n----");
+			PrintUtil.println("---> "+er);
+		}else PrintUtil.println("Yay! there is no errors!");
+		PrintUtil.println("------------\n--------\n----");
 	}
 	public static ResourceLocation getResource(String FolderPath){return getResource("",FolderPath);}
 	public static ResourceLocation getResource(String modID,String AfterModIDFolderPath){

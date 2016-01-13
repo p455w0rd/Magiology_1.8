@@ -436,7 +436,7 @@ public class ModInfoGUI extends JFrame{
 					}else if(dropDownID==6){printValues();
 					}else{
 						addLine(newLine(dropDownID+" is an invalid dropbox command!", new Font(Font.SANS_SERIF, Font.BOLD,15), Color.RED, true));
-						UtilM.println("what?");
+						PrintUtil.println("what?");
 					}
 					Update();
 				}

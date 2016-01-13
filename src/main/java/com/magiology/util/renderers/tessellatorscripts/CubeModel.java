@@ -9,7 +9,7 @@ import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilobjects.vectors.*;
 
-public class ComplexCubeModel{
+public class CubeModel{
 	private final float minX,minY,minZ,maxX,maxY,maxZ;
 	public Vec3M[] points=new Vec3M[8];
 	public QuadUV[] UVs=new QuadUV[6];
@@ -17,7 +17,7 @@ public class ComplexCubeModel{
 	ResourceLocation[] st=new ResourceLocation[6];
 	VertixBuffer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
-	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
+	public CubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=Math.min(minX, maxX);
 		this.minY=Math.min(minY, maxY);
 		this.minZ=Math.min(minZ, maxZ);
@@ -27,7 +27,7 @@ public class ComplexCubeModel{
 		for(int i=0;i<UVs.length;i++)UVs[i]=QuadUV.all();
 		points=genPoints();
 	}
-	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,QuadUV[] quadUVs,ResourceLocation[] sidedtextures){
+	public CubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,QuadUV[] quadUVs,ResourceLocation[] sidedtextures){
 		if(quadUVs!=null){
 			if(quadUVs.length==6)UVs=quadUVs;
 			else if(quadUVs.length==1)UVs=new QuadUV[]{quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0],quadUVs[0]};
@@ -44,7 +44,7 @@ public class ComplexCubeModel{
 		this.maxX=maxX;this.maxY=maxY;this.maxZ=maxZ;
 		points=genPoints();
 	}
-	public ComplexCubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,ResourceLocation[] sidedtextures){
+	public CubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ,ResourceLocation[] sidedtextures){
 		if(sidedtextures!=null){
 			if(sidedtextures.length==6)st=sidedtextures;
 			else if(sidedtextures.length==1)st=new ResourceLocation[]{sidedtextures[0],sidedtextures[0],sidedtextures[0],sidedtextures[0],sidedtextures[0],sidedtextures[0]};
@@ -60,7 +60,7 @@ public class ComplexCubeModel{
 		for(int i=0;i<UVs.length;i++)UVs[i]=QuadUV.all();
 		UVs2=UVs.clone();
 	}
-	public ComplexCubeModel(final ComplexCubeModel cube){
+	public CubeModel(final CubeModel cube){
 		st=cube.st;
 		this.minX=cube.minX;this.minY=cube.minY;this.minZ=cube.minZ;
 		this.maxX=cube.maxX;this.maxY=cube.maxY;this.maxZ=cube.maxZ;
@@ -205,10 +205,10 @@ public class ComplexCubeModel{
 		return null;
 	}
 	
-	public ComplexCubeModel expand(float var){
+	public CubeModel expand(float var){
 		return expand(var, var, var);
 	}
-	public ComplexCubeModel expand(float x,float y,float z){
+	public CubeModel expand(float x,float y,float z){
 		points[0]=points[0].addVector(-x, y,-z);
 		points[1]=points[1].addVector(-x,-y,-z);
 		points[2]=points[2].addVector(-x,-y, z);
@@ -219,11 +219,11 @@ public class ComplexCubeModel{
 		points[7]=points[7].addVector( x, y, z);
 		return this;
 	}
-	public ComplexCubeModel translate(float x, float y, float z){
+	public CubeModel translate(float x, float y, float z){
 		for(int i=0;i<points.length;i++)points[i]=points[i].addVector(x,y,z);
 		return this;
 	}
-	public ComplexCubeModel transform(Matrix4f matrix){
+	public CubeModel transform(Matrix4f matrix){
 		for(int i=0;i<points.length;i++)points[i]=GL11U.transformVector(points[i], matrix);
 		return this;
 	}

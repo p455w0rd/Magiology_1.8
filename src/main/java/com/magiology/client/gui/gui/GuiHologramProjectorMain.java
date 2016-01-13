@@ -203,7 +203,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		//export to model
 		arrowsModel=buffer.exportToNoramlisedVertixBufferModel();
 		arrowsModel.setDrawAsWire(true);
-		UtilM.println("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
+		PrintUtil.println("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
 	}
 	
 	@Override

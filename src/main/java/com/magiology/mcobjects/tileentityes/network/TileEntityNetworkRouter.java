@@ -42,7 +42,17 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	};
 	public boolean[] extractionActivated=new boolean[9];
 	
-	public TileEntityNetworkRouter(){}
+	public TileEntityNetworkRouter(){
+		expectedBoxes=new AxisAlignedBB[]{
+				new AxisAlignedBB(0,      p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F),
+				new AxisAlignedBB(p*6.5F, 0,      p*6.5F, p*9.5F, p*6.5F, p*9.5F),
+				new AxisAlignedBB(p*6.5F, p*6.5F, 0,      p*9.5F, p*9.5F, p*6.5F),
+				new AxisAlignedBB(p*9.5F, p*6.5F, p*6.5F, 1,      p*9.5F, p*9.5F),
+				new AxisAlignedBB(p*6.5F, p*9.5F, p*6.5F, p*9.5F, 1,      p*9.5F),
+				new AxisAlignedBB(p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F, 1     ),
+				new AxisAlignedBB(p*5, p*5, p*5, p*11, p*11, p*11)
+			}; 
+	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
@@ -125,13 +135,13 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 		}
 		
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5].getMain()?new AxisAlignedBB(p*11,p*6, p*6, 1,    p*10, p*10):null,
-				connections[1].getMain()?new AxisAlignedBB(p*6, p*11,p*6, p*10, 1,    p*10):null,
-				connections[2].getMain()?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*5 ):null,
-				connections[3].getMain()?new AxisAlignedBB(p*6, p*6, p*11,p*10, p*10, 1   ):null,
-				connections[0].getMain()?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*5,  p*10):null,
-				connections[4].getMain()?new AxisAlignedBB(0,   p*6, p*6, p*5,  p*10, p*10):null,
-						new AxisAlignedBB(p*5, p*5, p*5, p*11, p*11, p*11),
+				connections[5].getMain()?getExpectedColisionBoxes()[3]:null,
+				connections[1].getMain()?getExpectedColisionBoxes()[4]:null,
+				connections[2].getMain()?getExpectedColisionBoxes()[2]:null,
+				connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
+				connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
+				connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
+				getExpectedColisionBoxes()[6]
 		};
 //		if(getPos().equals(UtilM.getMC().objectMouseOver.getBlockPos()))UtilM.println(side);
 		switch(side){

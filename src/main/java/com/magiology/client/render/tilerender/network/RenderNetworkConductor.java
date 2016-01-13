@@ -30,9 +30,9 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		VertixBuffer buff=TessUtil.getVB();
 		
 		QuadUV all=QuadUV.all().rotate1();
-		ComplexCubeModel[] sideThingys={
-				new ComplexCubeModel(p*6.5F, p*6.5F, p*9F, p*7F, p*7F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*9F, p*9F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
+		CubeModel[] sideThingys={
+				new CubeModel(p*6.5F, p*6.5F, p*9F, p*7F, p*7F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new CubeModel(p*6.5F, p*9F, p*9F, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
 		};
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].willSideRender[4]=sideThingys[i].willSideRender[5]=false;
 		buff.importComplexCube(sideThingys);
@@ -71,7 +71,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 				w1*108,0,
 				w1*108,1
 			).rotate1();
-		ComplexCubeModel core=new ComplexCubeModel(p*7F, p*7F, p*9F, p*9F, p*9F, 1,new QuadUV[]{
+		CubeModel core=new CubeModel(p*7F, p*7F, p*9F, p*9F, p*9F, 1,new QuadUV[]{
 			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
@@ -91,7 +91,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			1,0,
 			1,1
 		).rotate1().mirror1();
-		core=new ComplexCubeModel(p*7F, p*7F, p*9F, p*9F, p*9F, 1,new QuadUV[]{
+		core=new CubeModel(p*7F, p*7F, p*9F, p*9F, p*9F, 1,new QuadUV[]{
 			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
@@ -136,7 +136,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			1,0,
 			1,1
 		).rotate1();
-		core=new ComplexCubeModel(p*7F, p*7F, 0, p*9F, p*9F, 1,new QuadUV[]{
+		core=new CubeModel(p*7F, p*7F, 0, p*9F, p*9F, 1,new QuadUV[]{
 			coreUV.rotate1(),coreUV.mirror1().rotate1(),coreUV,coreUV,QuadUV.all(),coreUV
 		},null);
 		core.willSideRender[5]=core.willSideRender[4]=false;
@@ -150,9 +150,9 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		, null);
 		
 		
-		ComplexCubeModel[] sideThingys1={
-				new ComplexCubeModel(p*6.5F, p*6.5F, 0, p*7F, p*7F,   1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
-				new ComplexCubeModel(p*6.5F, p*9F,   0, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
+		CubeModel[] sideThingys1={
+				new CubeModel(p*6.5F, p*6.5F, 0, p*7F, p*7F,   1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null),
+				new CubeModel(p*6.5F, p*9F,   0, p*7F, p*9.5F, 1, new QuadUV[]{all.rotate1(),all.rotate1(),all,all,all,all},null)
 		};
 		for(int i=0;i<sideThingys1.length;i++)sideThingys1[i].willSideRender[4]=sideThingys1[i].willSideRender[5]=false;
 		buff.importComplexCube(sideThingys1);
@@ -184,7 +184,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		
 		
 		
-		ComplexCubeModel cube=new ComplexCubeModel(p*7F, p*7F, p*7F, p*9F, p*9F, p*9F,new QuadUV[]{new QuadUV(
+		CubeModel cube=new CubeModel(p*7F, p*7F, p*7F, p*9F, p*9F, p*9F,new QuadUV[]{new QuadUV(
 				w1*24,1,
 				w1*24,0,
 				0,0,
@@ -200,7 +200,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		, null);
 		
 		int i=0;
-		ComplexCubeModel cube1=new ComplexCubeModel(p*8.99F, p*8.99F, p*8.99F, p*9.51F, p*9.51F, p*9.51F,new QuadUV[]{QuadUV.all()},null);
+		CubeModel cube1=new CubeModel(p*8.99F, p*8.99F, p*8.99F, p*9.51F, p*9.51F, p*9.51F,new QuadUV[]{QuadUV.all()},null);
 		
 		buff.importComplexCube(cube1);
 		body2[i++]=buff.exportToNoramlisedVertixBufferModel();

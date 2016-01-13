@@ -16,7 +16,7 @@ import com.magiology.util.utilobjects.vectors.*;
 
 public class Slider extends HoloObject{
 	
-	public ComplexCubeModel main, scroll;
+	public CubeModel main, scroll;
 	public float sliderPos;
 	public AdvancedPhysicsFloat renderSliderPos=new AdvancedPhysicsFloat(0, 0.2F, true);
 	
@@ -32,8 +32,8 @@ public class Slider extends HoloObject{
 		ColorF col=UtilM.calculateRenderColor(prevColor, this.color);
 		
 		if(scroll==null){
-			main=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
-			scroll=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
+			main=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+			scroll=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
 		}
 		col.bind();
 		
@@ -52,8 +52,8 @@ public class Slider extends HoloObject{
 		renderSliderPos.wantedPoint=sliderPos;
 		renderSliderPos.update();
 		if(UtilM.getWorldTime(host)%40==0){
-			main=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
-			scroll=new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
+			main=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2);
+			scroll=new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y/4, UtilM.p/2);
 		}
 		size=new Vector2f(originalSize.x*scale, originalSize.y*scale);
 		prevColor=color;
@@ -100,7 +100,7 @@ public class Slider extends HoloObject{
 	public void drawHighlight(){
 		VertixBuffer buff=TessUtil.getVB();
 		float offset=-renderSliderPos.getPoint()*size.y;
-		ComplexCubeModel sliderBox=new ComplexCubeModel(scroll).expand(0.002F).translate(0,offset,0);
+		CubeModel sliderBox=new CubeModel(scroll).expand(0.002F).translate(0,offset,0);
 		
 		buff.pushMatrix();
 		buff.setDrawAsWire(true);
@@ -108,7 +108,7 @@ public class Slider extends HoloObject{
 		
 		buff.translate(position.x, position.y, 0);
 		
-		buff.importComplexCube(new ComplexCubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2).expand(0.002F),sliderBox);
+		buff.importComplexCube(new CubeModel(0, 0, -UtilM.p/2, -size.x, -size.y, UtilM.p/2).expand(0.002F),sliderBox);
 		
 		buff.draw();
 		

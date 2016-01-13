@@ -111,7 +111,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 		File basePath=new File(bp);
 		//Make sure that the folder exists.
 		basePath.mkdirs();
-		if(printsActions)UtilM.println("Loading files from:",".../"+bp.substring(0, bp.length()-1));
+		if(printsActions)PrintUtil.println("Loading files from:",".../"+bp.substring(0, bp.length()-1));
 		for(File file:basePath.listFiles()){
 			try{
 				String name=file.getName().replace("."+extension, "");
@@ -135,7 +135,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 		for(File file:basePath.listFiles())if(file.isFile())file.delete();
 		if(printsActions){
 			if(!UtilM.join(Thread.currentThread().getStackTrace()).contains("net.minecraft.server.MinecraftServer.tick")){
-				UtilM.println("Saving files to:",".../"+bp.substring(0, bp.length()-1));
+				PrintUtil.println("Saving files to:",".../"+bp.substring(0, bp.length()-1));
 			}
 		}
 		for(Entry<KeyCast,FileContent<ValueCast>> fileWrite:data.entrySet()){
@@ -152,13 +152,13 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 	//----------------------------------------------------------------------------------------------------------------------------------
 	
 	public void syncClients(){
-		if(printsActions)UtilM.println("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)PrintUtil.println("Pushing data to clients! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncClientsWorldData((Map<CharSequence,FileContent<Serializable>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToAll(packet);
 	}
 	
 	public void syncServer(){
-		if(printsActions)UtilM.println("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
+		if(printsActions)PrintUtil.println("Pushing data to server! Bytes sent:",getDataSize(),"Files sent:",unsyncedData.size());
 		AbstractPacket packet=new SyncServerWorldData((Map<CharSequence,FileContent<Serializable>>)(Map<?,?>)unsyncedData, worldDataName);
 		getPacketPipeline().sendToServer(packet);
 	}
