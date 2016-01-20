@@ -33,7 +33,7 @@ public abstract class EntityFXMDeprecated extends EntityFX{
         float f11 = (float)(prevPosX + (posX - prevPosX) * p_70539_2_ - interpPosX);
         float f12 = (float)(prevPosY + (posY - prevPosY) * p_70539_2_ - interpPosY);
         float f13 = (float)(prevPosZ + (posZ - prevPosZ) * p_70539_2_ - interpPosZ);
-        tess.setColorRGBA_F(particleRed, particleGreen, particleBlue, particleAlpha);
+        tess.color(particleRed, particleGreen, particleBlue, particleAlpha);
         buf.addVertexWithUV(f11 - p_70539_3_ * f10 - p_70539_6_ * f10, f12 - p_70539_4_ * f10, f13 - p_70539_5_ * f10 - p_70539_7_ * f10, f7, f9);
         buf.addVertexWithUV(f11 - p_70539_3_ * f10 + p_70539_6_ * f10, f12 + p_70539_4_ * f10, f13 - p_70539_5_ * f10 + p_70539_7_ * f10, f7, f8);
         buf.addVertexWithUV(f11 + p_70539_3_ * f10 + p_70539_6_ * f10, f12 + p_70539_4_ * f10, f13 + p_70539_5_ * f10 + p_70539_7_ * f10, f6, f8);

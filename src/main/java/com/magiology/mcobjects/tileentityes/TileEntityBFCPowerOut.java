@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.init.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.util.*;
 
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
@@ -9,7 +8,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.*;
 import com.magiology.util.utilobjects.vectors.*;
 
-public class TileEntityBFCPowerOut extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityBFCPowerOut extends TileEntityM implements ITickable{
 	
 	public EnumFacing[] CallDir = new EnumFacing[4];
 	public EnumFacing[] PallDir = new EnumFacing[4];

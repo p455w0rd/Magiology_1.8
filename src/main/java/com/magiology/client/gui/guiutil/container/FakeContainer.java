@@ -51,7 +51,7 @@ public class FakeContainer implements IInventory{
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int v1) {
+	public ItemStack removeStackFromSlot(int v1){
 		if(this.slots[v1]!=null){
 			ItemStack ItemS=this.slots[v1];	
 			this.slots[v1]=null;

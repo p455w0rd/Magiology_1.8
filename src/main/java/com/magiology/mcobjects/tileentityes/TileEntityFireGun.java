@@ -1,13 +1,16 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.server.gui.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
-public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityFireGun extends TileEntityM implements ITickable{
 	int optimizer=0;
 	
 	public double animation,prevAnimation,speed;
@@ -23,6 +26,7 @@ public class TileEntityFireGun extends TileEntityM implements IUpdatePlayerListB
 	
 	@Override
 	public void update(){
+		
 		detectIfTimeForAnimation();
 		animationF();
 		optimizer++;

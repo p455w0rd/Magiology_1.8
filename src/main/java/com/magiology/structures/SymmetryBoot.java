@@ -1,6 +1,7 @@
 package com.magiology.structures;
 
 import net.minecraft.block.*;
+import net.minecraft.util.*;
 
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.vectors.*;
@@ -28,7 +29,7 @@ public class SymmetryBoot{
 				}else{
 					blocksat=new BlockAt[2];
 					blocksat[0]=new BlockAt(block, blockat.pos);
-					blocksat[1]=new BlockAt(block, blockat.pos.multiply(-1));
+					blocksat[1]=new BlockAt(block, new BlockPos(-blockat.pos.getX(), -blockat.pos.getY(), -blockat.pos.getZ()));
 				}
 			break;
 			case 2://----------------------------
@@ -55,7 +56,7 @@ public class SymmetryBoot{
 				}else{
 					blocksat=new BlockAt[4];
 					blocksat[0]=new BlockAt(block, blockat.pos);
-					blocksat[1]=new BlockAt(block, blockat.pos.multiply(-1));
+					blocksat[1]=new BlockAt(block, new BlockPos(-blockat.pos.getX(), -blockat.pos.getY(), -blockat.pos.getZ()));
 					blocksat[2]=new BlockAt(block,  x, y,-z);
 					blocksat[3]=new BlockAt(block, -x, y,-z);
 				}

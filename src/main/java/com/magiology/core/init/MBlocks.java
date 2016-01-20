@@ -31,7 +31,6 @@ public class MBlocks{
 	}
 
 	public static void blocksInit(){
-		
 		smartCrafter=init(new SmartCrafter().setUnlocalizedName("smartCrafter").setCreativeTab(MCreativeTabs.Whwmmt_core).setStepSound(Block.soundTypeMetal));
 		FireMatrixTransferer=init(new FireMatrixTransferer().setUnlocalizedName("FireMatrixTransferer").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeStone));
 		FireMatrixReceaver=init(new FireMatrixReceaver().setUnlocalizedName("FireMatrixReceaver").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeStone));

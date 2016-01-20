@@ -5,6 +5,7 @@ import java.awt.*;
 import net.minecraft.util.*;
 
 import org.lwjgl.util.vector.*;
+import org.lwjgl.util.vector.Matrix4f;
 
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.*;

@@ -9,10 +9,11 @@ import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.*;
+import org.lwjgl.util.vector.Matrix4f;
 
 import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.*;
 
@@ -20,7 +21,6 @@ public class VertixBuffer{
 	
 	protected List<ShadedTriangle> shadedTriangles=new ArrayList<ShadedTriangle>();
 	protected List<PositionTextureVertex> unfinishedTriangle=new ArrayList<PositionTextureVertex>();
-	protected WorldRenderer renderer;
 	protected boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClear=true;
 	protected List<VertixBuffer> subBuffers=new ArrayList<VertixBuffer>();
 	
@@ -36,7 +36,6 @@ public class VertixBuffer{
 		this(true);
 	}
 	public VertixBuffer(boolean hasTransformedBuffer){
-		this.renderer=Render.WR();
 		if(hasTransformedBuffer)transformedBuffer=new VertixBuffer(false);
 	}
 	
@@ -86,7 +85,7 @@ public class VertixBuffer{
 	}
 	
 	protected void startRecordingTesselator(int type){
-		renderer.startDrawing(type);
+		Renderer.begin(type);
 	}
 	
 	public void pasteToTesselator(boolean type){
@@ -103,12 +102,10 @@ public class VertixBuffer{
 			for(int s=0;s<shadedTriangles.size();s++){
 				ShadedTriangle a=shadedTriangles.get(s);
 				if(type){
-					Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1);
-					renderer.setNormal((float)finalNormal.x, (float)finalNormal.y, (float)finalNormal.z);
+					Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
 					for(int b=0;b<a.pos3.length;b++){
 						Vec3M finalVec=GL11U.transformVector(new Vec3M(a.pos3[b].vector3D.xCoord, a.pos3[b].vector3D.yCoord, a.pos3[b].vector3D.zCoord), transformation);
-						if(NULL_UV_ID==a.pos3[b].texturePositionX&&NULL_UV_ID==a.pos3[b].texturePositionY)renderer.addVertex(finalVec.x, finalVec.y, finalVec.z);
-						else renderer.addVertexWithUV(finalVec.x, finalVec.y, finalVec.z, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY);
+						Renderer.addVertexData(finalVec, a.pos3[b].texturePositionX, a.pos3[b].texturePositionY,finalNormal);
 					}
 				}else{
 					Vec3M finalVects[]={
@@ -116,11 +113,11 @@ public class VertixBuffer{
 							GL11U.transformVector(Vec3M.conv(a.pos3[1].vector3D), transformation),
 							GL11U.transformVector(Vec3M.conv(a.pos3[2].vector3D), transformation)
 						};
-					renderer.addVertexWithUV(finalVects[0].x, finalVects[0].y, finalVects[0].z, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY);
-					renderer.addVertexWithUV(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
+					Renderer.addVertexData(finalVects[0].x, finalVects[0].y, finalVects[0].z, a.pos3[0].texturePositionX, a.pos3[0].texturePositionY).endVertex();
+					Renderer.addVertexData(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY).endVertex();
 					
-					renderer.addVertexWithUV(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY);
-					renderer.addVertexWithUV(finalVects[2].x, finalVects[2].y, finalVects[2].z, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY);
+					Renderer.addVertexData(finalVects[1].x, finalVects[1].y, finalVects[1].z, a.pos3[1].texturePositionX, a.pos3[1].texturePositionY).endVertex();
+					Renderer.addVertexData(finalVects[2].x, finalVects[2].y, finalVects[2].z, a.pos3[2].texturePositionX, a.pos3[2].texturePositionY).endVertex();
 				}
 			}
 		}catch(Exception e){

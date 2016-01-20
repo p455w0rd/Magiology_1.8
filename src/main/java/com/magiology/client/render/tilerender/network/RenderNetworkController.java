@@ -1,17 +1,11 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.client.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.*;
 
 import org.lwjgl.opengl.*;
 
-import com.magiology.client.render.*;
-import com.magiology.client.render.shaders.*;
 import com.magiology.core.*;
-import com.magiology.core.init.*;
 import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.renderers.VertixBuffer.ShadedTriangle;

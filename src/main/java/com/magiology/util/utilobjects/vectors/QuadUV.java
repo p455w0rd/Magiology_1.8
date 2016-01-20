@@ -1,7 +1,5 @@
 package com.magiology.util.utilobjects.vectors;
 
-import net.minecraft.client.gui.ScaledResolution;
-
 import org.lwjgl.util.vector.*;
 
 public class QuadUV{

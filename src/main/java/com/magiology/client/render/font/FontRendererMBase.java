@@ -17,6 +17,8 @@ import org.apache.commons.io.*;
 import org.lwjgl.opengl.*;
 
 import com.ibm.icu.text.*;
+import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilobjects.*;
 
@@ -348,38 +350,28 @@ public class FontRendererMBase extends FontRenderer{
 
 	@Override
 	protected void doDraw(float f){
-		{
-			{
-				Tessellator tessellator;
-				WorldRenderer worldrenderer;
-				if(strikethroughStyle){
-					tessellator=Tessellator.getInstance();
-					worldrenderer=tessellator.getWorldRenderer();
-					GlStateManager.disableTexture2D();
-					worldrenderer.startDrawingQuads();
-					worldrenderer.addVertex(posX, posY+FONT_HEIGHT/2, 0.0D);
-					worldrenderer.addVertex(posX+f, posY+FONT_HEIGHT/2, 0.0D);
-					worldrenderer.addVertex(posX+f, posY+FONT_HEIGHT/2-1.0F, 0.0D);
-					worldrenderer.addVertex(posX, posY+FONT_HEIGHT/2-1.0F, 0.0D);
-					tessellator.draw();
-					GlStateManager.enableTexture2D();
-				}
-				if(underlineStyle){
-					tessellator=Tessellator.getInstance();
-					worldrenderer=tessellator.getWorldRenderer();
-					GlStateManager.disableTexture2D();
-					worldrenderer.startDrawingQuads();
-					int l=underlineStyle?-1:0;
-					worldrenderer.addVertex(posX+l, posY+FONT_HEIGHT, 0.0D);
-					worldrenderer.addVertex(posX+f, posY+FONT_HEIGHT, 0.0D);
-					worldrenderer.addVertex(posX+f, posY+FONT_HEIGHT-1.0F, 0.0D);
-					worldrenderer.addVertex(posX+l, posY+FONT_HEIGHT-1.0F, 0.0D);
-					tessellator.draw();
-					GlStateManager.enableTexture2D();
-				}
-				posX+=((int)f);
-			}
+		if(strikethroughStyle){
+			GlStateManager.disableTexture2D();
+			Renderer.beginQuads();
+			Renderer.addPos(posX, posY+FONT_HEIGHT/2, 0.0D).endVertex();
+			Renderer.addPos(posX+f, posY+FONT_HEIGHT/2, 0.0D).endVertex();
+			Renderer.addPos(posX+f, posY+FONT_HEIGHT/2-1.0F, 0.0D).endVertex();
+			Renderer.addPos(posX, posY+FONT_HEIGHT/2-1.0F, 0.0D).endVertex();
+			Renderer.draw();
+			GlStateManager.enableTexture2D();
 		}
+		if(underlineStyle){
+			GlStateManager.disableTexture2D();
+			Renderer.beginQuads();
+			int l=underlineStyle?-1:0;
+			Renderer.addPos(posX+l, posY+FONT_HEIGHT, 0.0D).endVertex();
+			Renderer.addPos(posX+f, posY+FONT_HEIGHT, 0.0D).endVertex();
+			Renderer.addPos(posX+f, posY+FONT_HEIGHT-1.0F, 0.0D).endVertex();
+			Renderer.addPos(posX+l, posY+FONT_HEIGHT-1.0F, 0.0D).endVertex();
+			Renderer.draw();
+			GlStateManager.enableTexture2D();
+		}
+		posX+=((int)f);
 	}
 
 	/**

@@ -18,8 +18,8 @@ public class TheHandHandler{
 	static float p=1F/16F;
 	static ArrayList<BufferedEvent>events=new ArrayList(); 
 	public static TheHandHandler instance=new TheHandHandler();
-	public static ItemRendererTheHand getRenderer(){return renderer;}
-	static ItemRendererTheHand renderer=new ItemRendererTheHand();
+//	public static ItemRendererTheHand getRenderer(){return renderer;}
+//	static ItemRendererTheHand renderer=new ItemRendererTheHand();
 	public static enum HandComonPositions{
 		ErrorPos(new float[]{0,0,0,0,0,0},
 				new float[][]{{0,0,0},{0,0,0}},new float[][][]{
@@ -124,82 +124,82 @@ public class TheHandHandler{
 	}
 	@SideOnly(Side.CLIENT)
 	public static void animate(EntityPlayer player, PowerHandData data){
-		if(!UtilM.isRemote(player))return;
-		if(renderer.base==null||renderer.fingers==null)renderer.init();
-		HandComonPositions pos=getActivePosition(player);
-		data.prevHandRotationCalc=data.handRotationCalc.clone();
-		
-		long wTime=UtilM.getTheWorld().getTotalWorldTime();
-		if(wTime%5==0)generateNewNoiseValue();
-		
-		//updates the bobbing of the 3.camPos render
-		if(data.thirdPresonPos<p*10)data.thirdPresonPosSpeed+=0.0015;
-		else if(data.thirdPresonPos>p*10)data.thirdPresonPosSpeed-=0.0015;
-		data.thirdPresonPos+=data.thirdPresonPosSpeed;
-		
-		//for every finger
-		for(int finger=0;finger<renderer.fingers.length;finger++){
-			PowerHandData_sub_fingerData a1=data.fingerData[finger];
-			a1.prevcalcXyzPosRot=a1.calcXyzPosRot.clone();
-			
-			float[][][] rotations2=pos.otherFingersRotations;
-			if(finger==0){
-				float[][] rotations1=pos.thumbRotations;
-				for(int a11=0;a11<2;a11++)for(int a12=0;a12<3;a12++){
-					a1.xyzPosRot[a11][3+a12]+=a1.xyzPosRotSpeed[a11][3+a12];
-					a1.xyzPosRot[a11][3+a12]=(float)UtilM.slowlyEqalize(a1.xyzPosRot[a11][3+a12], rotations1[a11][a12], 2);
-					a1.xyzPosRotSpeed[a11][3+a12]*=0.8;
-				}
-				a1.xyzPosRotNoise[1][4]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
-				a1.xyzPosRotNoise[0][4]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
-				a1.xyzPosRot[0][4]=UtilM.snap(a1.xyzPosRot[0][4], -4, 65);
-				a1.xyzPosRot[1][4]=UtilM.snap(a1.xyzPosRot[1][4], -80, 2);
-				a1.xyzPosRot[0][3]=UtilM.snap(a1.xyzPosRot[0][3], -45, 5);
-			}else{
-				//for every box in the finger
-				for(int b=0;b<a1.xyzPosRot.length;b++){
-					float[][] rotations=rotations2[finger-1];
-					for(int a11=0;a11<3;a11++){
-						a1.xyzPosRot[b][3+a11]+=a1.xyzPosRotSpeed[b][3+a11];
-						a1.xyzPosRotSpeed[b][3+a11]*=0.8;
-						a1.xyzPosRot[b][3+a11]=(float)UtilM.slowlyEqalize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
-					}
-					a1.xyzPosRotNoise[b][3]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
-					a1.xyzPosRot[b][3]=UtilM.snap(a1.xyzPosRot[b][3], -90, 5);
-				}
-			}
-			a1.calcXyzPosRot=UtilM.addToDoubleFloatArray(a1.xyzPosRot,a1.xyzPosRotNoise);
-		}
-		//updates noise of hand
-		for(int g=0;g<2;g++)for(int h=0;h<data.noiserHandSpeed.length;h++){
-			if(data.handRotationSpeed[h]>noiser[5][0][h])data.noiserHandSpeed[h]-=0.002;
-			else data.noiserHandSpeed[h]+=0.002;
-			data.noiserHandSpeed[h]*=0.9;
-			
-			data.handRotationSpeed[h]+=data.noiserHandSpeed[h];
-		}
-		//updates hand rotations
-		for(int g=0;g<10;g++)for(int h=0;h<data.handRotation.length;h++){
-			float speed=Math.abs(pos.handRotations[h]-getLastActivePosition(player).handRotations[h]);
-			if(speed<=0)speed=1;
-			data.handRotation[h]=(float)UtilM.slowlyEqalize(data.handRotation[h],pos.handRotations[h], (0.05*(UtilM.RF()*0.5+0.5)*speed/8));
-		}
-		//makes the holding animation
-		if(player.isUsingItem()){
-			boolean bol1=pos.equals(HandComonPositions.ReadyForAction)||pos.equals(HandComonPositions.NaturalPosition);
-			for(int finger=0;finger<renderer.fingers.length;finger++){
-				PowerHandData_sub_fingerData a1=data.fingerData[finger];
-				if(finger==0){
-					for(int a11=0;a11<2;a11++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[a11][4])<0.8)a1.xyzPosRotSpeed[a11][4]-=1.3+UtilM.RF()*2;
-				}else{
-					for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[b][3])<0.8)a1.xyzPosRotSpeed[b][3]-=1.3+UtilM.RF()*2;
-				}
-			}
-		}
-		data.handRotationCalc=UtilM.addToFloatArray(data.handRotation,data.handRotationSpeed);
-		//updates speed of the noise
-		for(int a1=0;a1<noiser.length;a1++)for(int a2=0;a2<noiser[a1].length;a2++)for(int a3=0;a3<noiser[a1][a2].length;a3++)
-			noiserSpeed[a1][a2][a3]=(float)UtilM.slowlyEqalize(noiserSpeed[a1][a2][a3], noiser[a1][a2][a3], 0.05);
+//		if(!UtilM.isRemote(player))return;
+//		if(renderer.base==null||renderer.fingers==null)renderer.init();
+//		HandComonPositions pos=getActivePosition(player);
+//		data.prevHandRotationCalc=data.handRotationCalc.clone();
+//		
+//		long wTime=UtilM.getTheWorld().getTotalWorldTime();
+//		if(wTime%5==0)generateNewNoiseValue();
+//		
+//		//updates the bobbing of the 3.camPos render
+//		if(data.thirdPresonPos<p*10)data.thirdPresonPosSpeed+=0.0015;
+//		else if(data.thirdPresonPos>p*10)data.thirdPresonPosSpeed-=0.0015;
+//		data.thirdPresonPos+=data.thirdPresonPosSpeed;
+//		
+//		//for every finger
+//		for(int finger=0;finger<renderer.fingers.length;finger++){
+//			PowerHandData_sub_fingerData a1=data.fingerData[finger];
+//			a1.prevcalcXyzPosRot=a1.calcXyzPosRot.clone();
+//			
+//			float[][][] rotations2=pos.otherFingersRotations;
+//			if(finger==0){
+//				float[][] rotations1=pos.thumbRotations;
+//				for(int a11=0;a11<2;a11++)for(int a12=0;a12<3;a12++){
+//					a1.xyzPosRot[a11][3+a12]+=a1.xyzPosRotSpeed[a11][3+a12];
+//					a1.xyzPosRot[a11][3+a12]=(float)UtilM.slowlyEqalize(a1.xyzPosRot[a11][3+a12], rotations1[a11][a12], 2);
+//					a1.xyzPosRotSpeed[a11][3+a12]*=0.8;
+//				}
+//				a1.xyzPosRotNoise[1][4]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
+//				a1.xyzPosRotNoise[0][4]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
+//				a1.xyzPosRot[0][4]=UtilM.snap(a1.xyzPosRot[0][4], -4, 65);
+//				a1.xyzPosRot[1][4]=UtilM.snap(a1.xyzPosRot[1][4], -80, 2);
+//				a1.xyzPosRot[0][3]=UtilM.snap(a1.xyzPosRot[0][3], -45, 5);
+//			}else{
+//				//for every box in the finger
+//				for(int b=0;b<a1.xyzPosRot.length;b++){
+//					float[][] rotations=rotations2[finger-1];
+//					for(int a11=0;a11<3;a11++){
+//						a1.xyzPosRot[b][3+a11]+=a1.xyzPosRotSpeed[b][3+a11];
+//						a1.xyzPosRotSpeed[b][3+a11]*=0.8;
+//						a1.xyzPosRot[b][3+a11]=(float)UtilM.slowlyEqalize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
+//					}
+//					a1.xyzPosRotNoise[b][3]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
+//					a1.xyzPosRot[b][3]=UtilM.snap(a1.xyzPosRot[b][3], -90, 5);
+//				}
+//			}
+//			a1.calcXyzPosRot=UtilM.addToDoubleFloatArray(a1.xyzPosRot,a1.xyzPosRotNoise);
+//		}
+//		//updates noise of hand
+//		for(int g=0;g<2;g++)for(int h=0;h<data.noiserHandSpeed.length;h++){
+//			if(data.handRotationSpeed[h]>noiser[5][0][h])data.noiserHandSpeed[h]-=0.002;
+//			else data.noiserHandSpeed[h]+=0.002;
+//			data.noiserHandSpeed[h]*=0.9;
+//			
+//			data.handRotationSpeed[h]+=data.noiserHandSpeed[h];
+//		}
+//		//updates hand rotations
+//		for(int g=0;g<10;g++)for(int h=0;h<data.handRotation.length;h++){
+//			float speed=Math.abs(pos.handRotations[h]-getLastActivePosition(player).handRotations[h]);
+//			if(speed<=0)speed=1;
+//			data.handRotation[h]=(float)UtilM.slowlyEqalize(data.handRotation[h],pos.handRotations[h], (0.05*(UtilM.RF()*0.5+0.5)*speed/8));
+//		}
+//		//makes the holding animation
+//		if(player.isUsingItem()){
+//			boolean bol1=pos.equals(HandComonPositions.ReadyForAction)||pos.equals(HandComonPositions.NaturalPosition);
+//			for(int finger=0;finger<renderer.fingers.length;finger++){
+//				PowerHandData_sub_fingerData a1=data.fingerData[finger];
+//				if(finger==0){
+//					for(int a11=0;a11<2;a11++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[a11][4])<0.8)a1.xyzPosRotSpeed[a11][4]-=1.3+UtilM.RF()*2;
+//				}else{
+//					for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)if(Math.abs(a1.xyzPosRotSpeed[b][3])<0.8)a1.xyzPosRotSpeed[b][3]-=1.3+UtilM.RF()*2;
+//				}
+//			}
+//		}
+//		data.handRotationCalc=UtilM.addToFloatArray(data.handRotation,data.handRotationSpeed);
+//		//updates speed of the noise
+//		for(int a1=0;a1<noiser.length;a1++)for(int a2=0;a2<noiser[a1].length;a2++)for(int a3=0;a3<noiser[a1][a2].length;a3++)
+//			noiserSpeed[a1][a2][a3]=(float)UtilM.slowlyEqalize(noiserSpeed[a1][a2][a3], noiser[a1][a2][a3], 0.05);
 	}
 	@SideOnly(Side.CLIENT)
 	public static void handUseAnimation(EntityPlayer player){
@@ -221,46 +221,46 @@ public class TheHandHandler{
 	}
 	@SideOnly(Side.CLIENT)
 	public static void actionAnimation(EntityPlayer player){
-		if(!UtilM.isRemote(player))return;
-		handUseAnimation(player);
-		long tim=UtilM.getTheWorld().getTotalWorldTime();
-
-		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
-		if(data==null)return;
-		boolean bol1=getActivePosition(player).equals(HandComonPositions.ReadyForAction)||getActivePosition(player).equals(HandComonPositions.NaturalPosition);
-		for(int finger=0;finger<data.fingerData.length;finger++){
-			PowerHandData_sub_fingerData a1=data.fingerData[finger];
-			if(finger==0){
-				for(int a11=0;a11<2;a11++){
-					if(bol1)a1.xyzPosRotSpeed[a11][4]=-6F;
-				}
-			}else{
-				for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)a1.xyzPosRotSpeed[b][3]=-6;
-			}
-		}
-		
-		for(int a11=0;a11<3;a11++){
-			for(int finger=0;finger<renderer.fingers.length-1;finger++){
-				addANewEvent(player,tim+6,
-						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
-						BufferedEventVariableEnum.X_ROTATION, 6.4F*(UtilM.RF()*0.3F+0.7F), true);
-				addANewEvent(player,tim+8,
-						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
-						BufferedEventVariableEnum.X_ROTATION, 6F  *(UtilM.RF()*0.3F+0.7F), true);
-				addANewEvent(player,tim,
-						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
-						BufferedEventVariableEnum.X_ROTATION, -1  *(UtilM.RF()*0.3F+0.7F), true);
-			}
-			addANewEvent(player,tim+6,
-					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
-					BufferedEventVariableEnum.Y_ROTATION, 4.4F*(UtilM.RF()*0.3F+0.7F), true);
-			addANewEvent(player,tim+8,
-					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
-					BufferedEventVariableEnum.Y_ROTATION, 4F  *(UtilM.RF()*0.3F+0.7F), true);
-			addANewEvent(player,tim,
-					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
-					BufferedEventVariableEnum.Y_ROTATION, -1  *(UtilM.RF()*0.3F+0.7F), true);
-		}
+//		if(!UtilM.isRemote(player))return;
+//		handUseAnimation(player);
+//		long tim=UtilM.getTheWorld().getTotalWorldTime();
+//
+//		PowerHandData data=ComplexPlayerRenderingData.getFastPowerHandData(player);
+//		if(data==null)return;
+//		boolean bol1=getActivePosition(player).equals(HandComonPositions.ReadyForAction)||getActivePosition(player).equals(HandComonPositions.NaturalPosition);
+//		for(int finger=0;finger<data.fingerData.length;finger++){
+//			PowerHandData_sub_fingerData a1=data.fingerData[finger];
+//			if(finger==0){
+//				for(int a11=0;a11<2;a11++){
+//					if(bol1)a1.xyzPosRotSpeed[a11][4]=-6F;
+//				}
+//			}else{
+//				for(int b=0;b<a1.xyzPosRot.length;b++)if(bol1)a1.xyzPosRotSpeed[b][3]=-6;
+//			}
+//		}
+//		
+//		for(int a11=0;a11<3;a11++){
+//			for(int finger=0;finger<renderer.fingers.length-1;finger++){
+//				addANewEvent(player,tim+6,
+//						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
+//						BufferedEventVariableEnum.X_ROTATION, 6.4F*(UtilM.RF()*0.3F+0.7F), true);
+//				addANewEvent(player,tim+8,
+//						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
+//						BufferedEventVariableEnum.X_ROTATION, 6F  *(UtilM.RF()*0.3F+0.7F), true);
+//				addANewEvent(player,tim,
+//						BufferedEventTargetEnum.FINGER, new int[]{finger+1,a11}, BufferedEventVariableEnum.SPEED, 
+//						BufferedEventVariableEnum.X_ROTATION, -1  *(UtilM.RF()*0.3F+0.7F), true);
+//			}
+//			addANewEvent(player,tim+6,
+//					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
+//					BufferedEventVariableEnum.Y_ROTATION, 4.4F*(UtilM.RF()*0.3F+0.7F), true);
+//			addANewEvent(player,tim+8,
+//					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
+//					BufferedEventVariableEnum.Y_ROTATION, 4F  *(UtilM.RF()*0.3F+0.7F), true);
+//			addANewEvent(player,tim,
+//					BufferedEventTargetEnum.FINGER, new int[]{0,a11}, BufferedEventVariableEnum.SPEED, 
+//					BufferedEventVariableEnum.Y_ROTATION, -1  *(UtilM.RF()*0.3F+0.7F), true);
+//		}
 	}
 	@SideOnly(Side.CLIENT)
 	public class BufferedEvent{

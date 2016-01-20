@@ -15,7 +15,7 @@ public class SmartCrafterContainer extends Container implements Updateable{
 	
 	public final TileEntitySmartCrafter tileSC;
 	public int side,listOffset,lastListOffset;
-	List constantSlots=new ArrayList(),addedSlots=new ArrayList();
+	List<Slot> constantSlots=new ArrayList(),addedSlots=new ArrayList();
 	EntityPlayer player;
 	public SmartCrafterContainer(EntityPlayer player,TileEntitySmartCrafter tileSC2, int side){
 		tileSC=tileSC2;

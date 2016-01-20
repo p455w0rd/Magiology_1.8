@@ -3,6 +3,7 @@ package com.magiology.handlers.obj.handler.revived.yayformc1_8.obj;
 import java.util.*;
 
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.*;
 import net.minecraftforge.fml.relauncher.*;
 
 
@@ -35,7 +36,7 @@ public class GroupObject
     {
       Tessellator tessellator = Tessellator.getInstance();
       WorldRenderer worldRenderer = tessellator.getWorldRenderer();
-      worldRenderer.startDrawing(glDrawingMode);
+      worldRenderer.begin(glDrawingMode, DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
       render(worldRenderer);
       tessellator.draw();
     }

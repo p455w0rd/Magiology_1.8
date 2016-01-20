@@ -4,14 +4,13 @@ import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.m_extension.*;
 
-public class TileEntityControlBlock extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
+public class TileEntityControlBlock extends TileEntityM implements ISidedInventory,ITickable{
 	
 	public ItemStack[] slots=new ItemStack[4];
 	public boolean onOf=true;
@@ -145,7 +144,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int v1){
+	public ItemStack removeStackFromSlot(int v1){
 		if(this.slots[v1]!=null){
 			ItemStack ItemS=this.slots[v1];
 			this.slots[v1]=null;

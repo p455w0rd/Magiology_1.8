@@ -21,7 +21,6 @@ import com.magiology.handlers.*;
 import com.magiology.handlers.web.*;
 import com.magiology.io.*;
 import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
 import com.magiology.windowsgui.*;
 
 @Mod(modid=MODID,version=VERSION,name=NAME,acceptedMinecraftVersions=ACCEPTED_MC_VERSION)

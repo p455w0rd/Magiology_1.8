@@ -1,10 +1,10 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import com.magiology.util.utilclasses.*;
-
 import net.minecraft.entity.player.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry.*;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.*;
+
+import com.magiology.util.utilclasses.*;
 
 public class SimpleNetworkWrapperM extends SimpleNetworkWrapper{
 	

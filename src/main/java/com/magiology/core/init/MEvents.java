@@ -1,7 +1,5 @@
 package com.magiology.core.init;
 
-import org.lwjgl.util.mapped.*;
-
 import net.minecraftforge.common.*;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.relauncher.*;

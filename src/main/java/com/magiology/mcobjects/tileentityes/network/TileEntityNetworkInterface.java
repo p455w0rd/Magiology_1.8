@@ -3,10 +3,7 @@ package com.magiology.mcobjects.tileentityes.network;
 import java.util.*;
 
 import net.minecraft.block.*;
-import net.minecraft.block.material.*;
 import net.minecraft.block.state.*;
-import net.minecraft.client.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 
@@ -18,7 +15,7 @@ import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.*;
 
-public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements IUpdatePlayerListBox{
+public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements ITickable{
 	
 	SlowdownUtil optimizer=new SlowdownUtil(40);
 	private float[] conBox=new float[5];
@@ -211,7 +208,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 							
 							setInteractData("redstone", redstoneData);
 							IBlockState state=worldObj.getBlockState(pos1);
-							if(!U.getBlock(worldObj, pos1).isSolidFullCube())worldObj.notifyBlockOfStateChange(pos1, state.getBlock());
+							if(!U.getBlock(worldObj, pos1).isFullCube())worldObj.notifyBlockOfStateChange(pos1, state.getBlock());
 							else if(!U.isNull(pos1,worldObj))for(int i=0;i<6;i++)worldObj.notifyBlockOfStateChange(pos1.offset(EnumFacing.getFront(i)), U.getBlock(worldObj, pos1.offset(EnumFacing.getFront(i))));
 						}
 					}

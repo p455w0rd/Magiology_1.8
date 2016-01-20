@@ -8,6 +8,7 @@ import org.lwjgl.opengl.*;
 import com.magiology.core.init.*;
 import com.magiology.mcobjects.tileentityes.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -65,37 +66,36 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	@Override
 	public void kill(){isDead=true;}
 	public void drawCube(double minx,double miny,double minz,double maxx,double maxy,double maxz){
-		tess.startDrawingQuads();
-		tess.setNormal(0.0F, -1F, 0.0F);
-		tess.addVertex(minx, miny, maxz);
-		tess.addVertex(minx, miny, minz);
-		tess.addVertex(maxx, miny, minz);
-		tess.addVertex(maxx, miny, maxz);
-		tess.setNormal(0.0F, 1.0F, 0.0F);
-		tess.addVertex(maxx, maxy, maxz);
-		tess.addVertex(maxx, maxy, minz);
-		tess.addVertex(minx, maxy, minz);
-		tess.addVertex(minx, maxy, maxz);
-		tess.setNormal(0.0F, 0.0F, -1F);
-		tess.addVertex(maxx, maxy, minz);
-		tess.addVertex(maxx, miny, minz);
-		tess.addVertex(minx, miny , minz);
-		tess.addVertex(minx, maxy, minz);
-		tess.setNormal(0.0F, 0.0F, 1.0F);
-		tess.addVertex(minx, maxy, maxz);
-		tess.addVertex(minx, miny , maxz);
-		tess.addVertex(maxx, miny, maxz);
-		tess.addVertex(maxx, maxy, maxz);
-		tess.setNormal(-1F, 0.0F, 0.0F);
-		tess.addVertex(minx, maxy, minz);
-		tess.addVertex(minx, miny, minz);
-		tess.addVertex(minx, miny, maxz);
-		tess.addVertex(minx, maxy, maxz);
-		tess.setNormal(1.0F, 0.0F, 0.0F);
-		tess.addVertex(maxx, maxy, maxz);
-		tess.addVertex(maxx, miny,  maxz);
-		tess.addVertex(maxx, miny,  minz);
-		tess.addVertex(maxx, maxy, minz);
+		Renderer.beginQuads();
+		Renderer.addPos(minx, miny, maxz).endVertex();
+		Renderer.addPos(minx, miny, minz).endVertex();
+		Renderer.addPos(maxx, miny, minz).endVertex();
+		Renderer.addPos(maxx, miny, maxz).endVertex();
+
+		Renderer.addPos(maxx, maxy, maxz).endVertex();
+		Renderer.addPos(maxx, maxy, minz).endVertex();
+		Renderer.addPos(minx, maxy, minz).endVertex();
+		Renderer.addPos(minx, maxy, maxz).endVertex();
+
+		Renderer.addPos(maxx, maxy, minz).endVertex();
+		Renderer.addPos(maxx, miny, minz).endVertex();
+		Renderer.addPos(minx, miny , minz).endVertex();
+		Renderer.addPos(minx, maxy, minz).endVertex();
+
+		Renderer.addPos(minx, maxy, maxz).endVertex();
+		Renderer.addPos(minx, miny , maxz).endVertex();
+		Renderer.addPos(maxx, miny, maxz).endVertex();
+		Renderer.addPos(maxx, maxy, maxz).endVertex();
+
+		Renderer.addPos(minx, maxy, minz).endVertex();
+		Renderer.addPos(minx, miny, minz).endVertex();
+		Renderer.addPos(minx, miny, maxz).endVertex();
+		Renderer.addPos(minx, maxy, maxz).endVertex();
+
+		Renderer.addPos(maxx, maxy, maxz).endVertex();
+		Renderer.addPos(maxx, miny,  maxz).endVertex();
+		Renderer.addPos(maxx, miny,  minz).endVertex();
+		Renderer.addPos(maxx, maxy, minz).endVertex();
 		TessUtil.draw();
 	}
 }

@@ -1,13 +1,13 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.server.gui.*;
+import net.minecraft.util.*;
 
 import com.magiology.core.init.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.*;
 import com.magiology.util.utilobjects.m_extension.*;
 
-public class TileEntityFireExhaust extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityFireExhaust extends TileEntityM implements ITickable{
 	
 	
 	SlowdownUtil optimizer=new SlowdownUtil(5);

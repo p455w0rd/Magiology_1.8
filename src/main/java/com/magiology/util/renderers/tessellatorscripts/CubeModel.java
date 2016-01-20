@@ -3,7 +3,7 @@ package com.magiology.util.renderers.tessellatorscripts;
 import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
+import org.lwjgl.util.vector.Matrix4f;
 
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render;

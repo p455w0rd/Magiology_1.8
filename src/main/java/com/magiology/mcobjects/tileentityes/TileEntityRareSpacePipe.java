@@ -4,7 +4,6 @@ import java.util.*;
 
 import net.minecraft.inventory.*;
 import net.minecraft.nbt.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.relauncher.*;
@@ -17,7 +16,7 @@ import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
-public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,IUpdatePlayerListBox{
+public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,ITickable{
 	
 	public EnumFacing connections[] = new EnumFacing[6],
 		connectionsToObjInMe[] = new EnumFacing[6],

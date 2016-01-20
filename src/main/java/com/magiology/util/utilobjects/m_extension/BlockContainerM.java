@@ -36,14 +36,14 @@ public abstract class BlockContainerM extends BlockContainer{
 		return null;
 	}
 	@Override
-	public int isProvidingStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
+	public int getStrongPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
 		Redstone data=new Redstone();
 		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, UtilM.getBlockMetadata((World)worldIn, pos), data,side);
 		if(!data.isStrong)return 0;
         return data.strenght;
     }
 	@Override
-	public int isProvidingWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
+	public int getWeakPower(IBlockAccess worldIn, BlockPos pos, IBlockState state, EnumFacing side){
 		Redstone data=new Redstone();
 		getProvidingPower((World)worldIn, worldIn.getTileEntity(pos), pos, UtilM.getBlockMetadata((World)worldIn, pos), data,side);
         return data.strenght;

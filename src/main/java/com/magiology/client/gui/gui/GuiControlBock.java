@@ -4,7 +4,6 @@ import java.awt.*;
 
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.util.*;
 
@@ -18,9 +17,8 @@ import com.magiology.core.*;
 import com.magiology.forgepowered.packets.packets.*;
 import com.magiology.mcobjects.tileentityes.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilobjects.vectors.Vec2i;
 
 public class GuiControlBock extends GuiContainer implements Updateable{
 	
@@ -226,12 +224,11 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	 protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 0.00390625F;
 	     float f1 = 0.00390625F;
-	     WorldRenderer renderer = TessUtil.getWR();
-	     renderer.startDrawingQuads();
-	     renderer.addVertexWithUV(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
-	     renderer.addVertexWithUV(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
-	     renderer.addVertexWithUV(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
-	     renderer.addVertexWithUV(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
+	     Renderer.beginQuads();
+	     Renderer.addVertexData(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1).endVertex();
+	     Renderer.addVertexData(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1).endVertex();
+	     Renderer.addVertexData(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1).endVertex();
+	     Renderer.addVertexData(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1).endVertex();
 	     TessUtil.draw();
 	}
 }

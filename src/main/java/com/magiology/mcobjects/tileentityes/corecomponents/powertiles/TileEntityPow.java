@@ -4,7 +4,6 @@ import java.util.*;
 
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 
@@ -15,7 +14,7 @@ import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 
-public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,IUpdatePlayerListBox{
+public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,ITickable{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;
 	public boolean
 		keepsPropertiesOnPickup=false,

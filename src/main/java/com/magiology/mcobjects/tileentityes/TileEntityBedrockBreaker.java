@@ -2,7 +2,6 @@ package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.client.particle.*;
 import net.minecraft.init.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.relauncher.*;
 
@@ -12,7 +11,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.*;
 import com.magiology.util.utilobjects.m_extension.*;
 
-public class TileEntityBedrockBreaker extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityBedrockBreaker extends TileEntityM implements ITickable{
 	EffectRenderer efrenderer = Get.Render.ER();
 	public double animation=40,speed=0,positionForLaser=0;
 	public float p=1F/16F;

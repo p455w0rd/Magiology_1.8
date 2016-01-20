@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.init.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.util.*;
 
 import com.magiology.mcobjects.effect.*;
@@ -11,7 +10,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.*;
 import com.magiology.util.utilobjects.m_extension.*;
 
-public class TileEntityPLauncher extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityPLauncher extends TileEntityM implements ITickable{
 	
 	SlowdownUtil optimizer=new SlowdownUtil(100);
 	Structure MultiBlock=null;

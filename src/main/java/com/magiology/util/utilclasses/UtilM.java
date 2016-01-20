@@ -1,78 +1,49 @@
 package com.magiology.util.utilclasses;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
-import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
-import java.awt.Color;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Base64;
-import java.util.Calendar;
-import java.util.Map;
+import java.awt.*;
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.stream.*;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntityFlameFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraft.block.*;
+import net.minecraft.block.properties.*;
+import net.minecraft.client.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.particle.*;
+import net.minecraft.entity.*;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.player.*;
+import net.minecraft.item.*;
+import net.minecraft.nbt.*;
+import net.minecraft.tileentity.*;
+import net.minecraft.util.*;
+import net.minecraft.world.*;
+import net.minecraftforge.event.entity.*;
+import net.minecraftforge.event.world.*;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.*;
 
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.*;
 
-import com.google.common.collect.ImmutableMap;
-import com.magiology.core.Config;
-import com.magiology.core.MReference;
-import com.magiology.core.Magiology;
-import com.magiology.forgepowered.events.client.RenderEvents;
-import com.magiology.forgepowered.packets.core.AbstractPacket;
-import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
+import com.google.common.collect.*;
+import com.magiology.core.*;
+import com.magiology.forgepowered.events.client.*;
+import com.magiology.forgepowered.packets.core.*;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
-import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
-import com.magiology.util.renderers.TessUtil;
+import com.magiology.mcobjects.tileentityes.hologram.*;
+import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.math.CricleUtil;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
-import com.magiology.util.utilobjects.vectors.Plane;
-import com.magiology.util.utilobjects.vectors.Ray;
-import com.magiology.util.utilobjects.vectors.Vec2i;
-import com.magiology.util.utilobjects.vectors.Vec3M;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import com.magiology.util.utilclasses.math.*;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.m_extension.effect.*;
+import com.magiology.util.utilobjects.vectors.*;
+import com.mojang.realmsclient.gui.*;
 
 public class UtilM{
 	public class U extends UtilM{}
@@ -578,7 +549,7 @@ public class UtilM{
 		return false;
 	}
 	public static EntityItem dropBlockAsItem(World world, double x, double y, double z, ItemStack stack){
-	    if(!world.isRemote&&world.getGameRules().getGameRuleBooleanValue("doTileDrops")&&!world.restoringBlockSnapshots){
+	    if(!world.isRemote&&!world.restoringBlockSnapshots){
 	        EntityItem entity=new EntityItem(world,x,y,z,stack);
 	        entity.setPickupDelay(0);
 	        spawnEntity(entity);
@@ -668,7 +639,7 @@ public class UtilM{
 	}
 	@SideOnly(value=Side.CLIENT)
 	public static int getGuiScaleRaw(){
-		return new ScaledResolution(getMC(), getMC().displayWidth, getMC().displayHeight).getScaleFactor();
+		return new ScaledResolution(getMC()).getScaleFactor();
 	}
 	public static void sleep(int time){
 		try{

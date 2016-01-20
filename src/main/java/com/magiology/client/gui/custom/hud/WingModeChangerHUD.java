@@ -3,7 +3,6 @@ package com.magiology.client.gui.custom.hud;
 import java.awt.*;
 
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
 
 import org.apache.commons.lang3.*;
 import org.lwjgl.opengl.*;
@@ -13,6 +12,7 @@ import com.magiology.handlers.animationhandlers.*;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 import com.magiology.mcobjects.entitys.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 
 public class WingModeChangerHUD extends HUD{
@@ -88,7 +88,7 @@ public class WingModeChangerHUD extends HUD{
 		if(calcAlpha<=0.01)return;
 		int id=0;
 		int nextLineOffset=width/2+fr.FONT_HEIGHT/2;
-		WorldRenderer tess=TessUtil.getWR();
+		
 		float[][] calcBackgroundColor=backgroundColor.clone();
 		if(player.fallDistance>4)for(int a=0;a<criclePoss.length;a++)for(int b=0;b<2;b++){
 			criclePoss[a][b]+=UtilM.CRandF(0.01);
@@ -107,19 +107,19 @@ public class WingModeChangerHUD extends HUD{
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glColor4d(
 				nj==1?calcBackgroundColor[pozId][0]:1,nj==1?calcBackgroundColor[pozId][1]:0.7,nj==1?calcBackgroundColor[pozId][2]:0.7,0.4*calcAlpha*((color.getAlpha())/255F));
-				tess.startDrawing(GL11.GL_TRIANGLES);
+				Renderer.begin(GL11.GL_TRIANGLES);
 				for(int l=0;l<criclePoss.length-1;l++){
-						tess.addVertex(0, 0, 0);
-						tess.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
-						tess.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
+						Renderer.addPos(0, 0, 0).endVertex();
+						Renderer.addPos(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
+						Renderer.addPos(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
 				}
 				TessUtil.draw();
 				GL11.glColor4d(0.8,0.8,0.8,calcAlpha*((color.getAlpha())/255F));
 				GL11.glLineWidth(1.5F);
-				tess.startDrawing(GL11.GL_LINES);
+				Renderer.begin(GL11.GL_LINES);
 				for(int l=0;l<criclePoss.length-1;l++){
-					tess.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
-					tess.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
+					Renderer.addPos(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
+					Renderer.addPos(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
 				}
 				TessUtil.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);

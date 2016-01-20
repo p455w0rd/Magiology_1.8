@@ -2,6 +2,7 @@ package com.magiology.client.render.models;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.tileentity.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
@@ -10,6 +11,7 @@ import org.lwjgl.opengl.*;
 
 import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -134,7 +136,6 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  GL11.glRotated(rotationX, 1.0F, 0.0F, 0.0F);
 	  {
 		  float p=1F/16F;
-		  WorldRenderer tess=TessUtil.getWR();
 		  GL11.glColor4f(color, color, color, 1);
 		  baseTop1.render(f5);
 		  baseTop2.render(f5);
@@ -154,29 +155,27 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  GL11.glDisable(GL11.GL_LIGHTING);
 		  GL11.glDepthMask(false);
 		  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		  tess.startDrawingQuads();
-		  tess.setColorRGBA_F((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), (float)(0.7+UtilM.RF()*0.3));
-		  tess.setBrightness(255);
+		  Renderer.beginQuads();
+		  GL11.glColor4f((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), (float)(0.7+UtilM.RF()*0.3));
 		  for(int a=0;a<2;a++){
-			  tess.addVertex(-p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
-			  tess.addVertex(-p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.addPos(-p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.addPos(-p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.addPos(-p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.addPos(-p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
 			  
-			  tess.addVertex( p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
-			  tess.addVertex( p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.addPos( p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.addPos( p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.addPos( p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.addPos( p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
 		  }
 		  TessUtil.draw();
-		  tess.startDrawing(GL11.GL_TRIANGLES);
-		  tess.setColorRGBA_F((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), 1);
-		  tess.setBrightness(255);
+		  Renderer.begin(GL11.GL_TRIANGLES);
+		  GL11.glColor4f((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), 1);
 		  for(int l=0;l<2+(isSneak?4:0);l++){
 			  double[] criclexyz=UtilM.createBallXYZ(0.5+UtilM.RF(), false);
-			  tess.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
-			  tess.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
-			  tess.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
+			  Renderer.addPos(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3)).endVertex();
+			  Renderer.addPos(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3)).endVertex();
+			  Renderer.addPos(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3)).endVertex();
 		  }
 		  
 		  TessUtil.draw();

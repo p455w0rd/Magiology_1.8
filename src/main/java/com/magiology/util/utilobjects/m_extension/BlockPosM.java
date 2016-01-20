@@ -83,7 +83,7 @@ public class BlockPosM extends BlockPos{
 		if(world instanceof World)((World)world).getRedstonePower(this, side);
         IBlockState iblockstate = world.getBlockState(this);
         Block block = iblockstate.getBlock();
-        return block.shouldCheckWeakPower(world, this, side)?getStrongPower(world):block.isProvidingWeakPower(world, this, iblockstate, side);
+        return block.shouldCheckWeakPower(world, this, side)?getStrongPower(world):block.getWeakPower(world, this, iblockstate, side);
 	}
 	private int getStrongPower(IBlockAccess world){
 		byte b0=0;

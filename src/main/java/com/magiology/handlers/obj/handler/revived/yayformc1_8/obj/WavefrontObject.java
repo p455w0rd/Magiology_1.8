@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.regex.*;
 
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.client.resources.*;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.relauncher.*;
@@ -172,11 +173,11 @@ public class WavefrontObject implements IModelCustom
     WorldRenderer worldRenderer = tessellator.getWorldRenderer();
     if (currentGroupObject != null)
     {
-      worldRenderer.startDrawing(currentGroupObject.glDrawingMode);
+      worldRenderer.begin(currentGroupObject.glDrawingMode, DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
     }
     else
     {
-      worldRenderer.startDrawing(GL11.GL_TRIANGLES);
+      worldRenderer.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
     }
     tessellateAll(worldRenderer);
 

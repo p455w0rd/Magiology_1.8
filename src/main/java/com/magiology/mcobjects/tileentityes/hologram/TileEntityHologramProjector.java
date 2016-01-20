@@ -4,7 +4,6 @@ import java.util.*;
 
 import net.minecraft.entity.player.*;
 import net.minecraft.nbt.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
@@ -25,7 +24,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.*;
 import com.magiology.util.utilobjects.vectors.*;
 
-public class TileEntityHologramProjector extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityHologramProjector extends TileEntityM implements ITickable{
 	
 	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<TileEntityHologramProjector>();
 	public Point point=new Point();
@@ -141,8 +140,8 @@ public class TileEntityHologramProjector extends TileEntityM implements IUpdateP
 		if(UtilM.isRemote(player))UtilM.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
 		else{
 			if(!worldObj.playerEntities.isEmpty()&&worldObj.playerEntities.get(0)instanceof EntityPlayerMP){
-				((ArrayList<EntityPlayerMP>)worldObj.playerEntities).forEach(player0->{
-					player0.playerNetServerHandler.sendPacket(getDescriptionPacket());
+				(worldObj.playerEntities).forEach(player0->{
+					((EntityPlayerMP)player0).playerNetServerHandler.sendPacket(getDescriptionPacket());
 				});
 			}
 		}

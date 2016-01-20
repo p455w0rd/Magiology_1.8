@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.renderer.*;
 import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
@@ -10,6 +9,7 @@ import com.magiology.client.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
 import com.magiology.client.gui.gui.*;
 import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -84,7 +84,7 @@ public class GuiParticle{
 	}
 	
 	private void setDead(){this.isDead=true;}
-	public void renderParticle(WorldRenderer tess,float partialTicks){
+	public void renderParticle(float partialTicks){
 		GL11.glPushMatrix();
 		U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		GL11U.setUpOpaqueRendering(2);
@@ -95,11 +95,11 @@ public class GuiParticle{
 		
 		
 		GL11.glColor4d(r, g, b, opacityF);
-		tess.startDrawingQuads();
-		tess.addVertexWithUV(-boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 0, 0);
-		tess.addVertexWithUV(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1);
-		tess.addVertexWithUV( boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 1, 1);
-		tess.addVertexWithUV( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0);
+		Renderer.beginQuads();
+		Renderer.addVertexData(-boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 0, 0).endVertex();
+		Renderer.addVertexData(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1).endVertex();
+		Renderer.addVertexData( boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 1, 1).endVertex();
+		Renderer.addVertexData( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0).endVertex();
 		TessUtil.draw();
 		GL11U.endOpaqueRendering();
 		GL11.glColor4d(1, 1, 1, 1);

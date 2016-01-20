@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
 import net.minecraft.block.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 
@@ -10,7 +9,7 @@ import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.*;
 
-public class TileEntityRemotePowerCounter extends TileEntityM implements IUpdatePlayerListBox{
+public class TileEntityRemotePowerCounter extends TileEntityM implements ITickable{
 	
 	public Block block;
 	public TileEntity tile1;

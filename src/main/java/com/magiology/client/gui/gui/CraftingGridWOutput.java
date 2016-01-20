@@ -6,6 +6,7 @@ import net.minecraft.util.*;
 
 import com.magiology.core.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 
 public class CraftingGridWOutput{
 	public static ResourceLocation txt=new ResourceLocation(MReference.MODID,"/textures/gui/CraftingGridWproduct.png");
@@ -25,12 +26,11 @@ public class CraftingGridWOutput{
 	protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 1F/102F;
 	     float f1 = 1F/56F;
-	     WorldRenderer renderer = TessUtil.getWR();
-	     renderer.startDrawingQuads();
-	     renderer.addVertexWithUV((x+0),(y+yp),0,((tx+0)*f),((yt+yp)*f1));
-	     renderer.addVertexWithUV((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1));
-	     renderer.addVertexWithUV((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1));
-	     renderer.addVertexWithUV((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1));
+	     Renderer.beginQuads();
+	     Renderer.addVertexData((x+0),(y+yp),0,((tx+0)*f),((yt+yp)*f1)).endVertex();
+	     Renderer.addVertexData((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1)).endVertex();
+	     Renderer.addVertexData((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1)).endVertex();
+	     Renderer.addVertexData((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1)).endVertex();
 	     TessUtil.draw();
 	}
 	public void clear(){

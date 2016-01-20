@@ -8,6 +8,7 @@ import org.lwjgl.opengl.*;
 
 import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.m_extension.effect.*;
@@ -35,7 +36,7 @@ public class EntityCustomfireFX extends EntityFXM{
 	
 	
 	@Override
-	public void render(WorldRenderer tess){
+	public void render(){
 		GL11.glDisable(GL11.GL_LIGHTING);
 //		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
@@ -49,12 +50,12 @@ public class EntityCustomfireFX extends EntityFXM{
 		U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		
 		GL11U.setUpOpaqueRendering(2);
-		tess.startDrawingQuads();
-		tess.setColorRGBA_F(1, 0, 0, 0.5F);
-		tess.addVertexWithUV((x-par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z-par5*ps/1.5-par7*ps/1.5), 0, 0);
-		tess.addVertexWithUV((x-par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z-par5*ps/1.5+par7*ps/1.5), 1, 0);
-		tess.addVertexWithUV((x+par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z+par5*ps/1.5+par7*ps/1.5), 1, 1);
-		tess.addVertexWithUV((x+par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z+par5*ps/1.5-par7*ps/1.5), 0, 1);
+		Renderer.beginQuads();
+		GL11.glColor4f(1, 0, 0, 0.5F);
+		Renderer.addVertexData((x-par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z-par5*ps/1.5-par7*ps/1.5), 0, 0).endVertex();
+		Renderer.addVertexData((x-par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z-par5*ps/1.5+par7*ps/1.5), 1, 0).endVertex();
+		Renderer.addVertexData((x+par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z+par5*ps/1.5+par7*ps/1.5), 1, 1).endVertex();
+		Renderer.addVertexData((x+par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z+par5*ps/1.5-par7*ps/1.5), 0, 1).endVertex();
 		
 		
 		GL11.glDisable(GL11.GL_BLEND);
@@ -72,8 +73,6 @@ public class EntityCustomfireFX extends EntityFXM{
 //
 //		cube.render(this, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 //		GL11.glPopMatrix();
-
-		tess.setBrightness(240);
 		
         RenderHelper.enableStandardItemLighting();
 		

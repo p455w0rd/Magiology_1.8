@@ -1,23 +1,20 @@
 package com.magiology.client.render.tilerender.network;
 
+import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
 
 import com.magiology.api.connection.*;
 import com.magiology.api.network.*;
 import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
 import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.renderers.glstates.*;
 import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilclasses.math.*;
 import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 
 public class RenderNetworkInterface extends RenderNetworkConductor{
@@ -83,7 +80,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 			GL11.glColor3f(UtilM.fluctuatorSmooth(80, offset), UtilM.fluctuatorSmooth(134, 40+offset), UtilM.fluctuatorSmooth(156, 56+offset));
 			
 			if(curentTile.getBrain()!=null){
-				OpenGlModel model=interfacePlate.compiledModels[interfacePlate.getCurentSide()][1];
+				VertexModel model=interfacePlate.compiledModels[interfacePlate.getCurentSide()][1];
 				GL11.glPushMatrix();
 				Vec3M rotation=null,translation=null;
 				

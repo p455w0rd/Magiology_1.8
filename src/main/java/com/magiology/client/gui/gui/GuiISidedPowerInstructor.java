@@ -211,7 +211,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 				GL11.glPushMatrix();
 				try{
 					TessUtil.bindTexture(TextureMap.locationBlocksTexture);
-					Get.Render.WR().startDrawingQuads();
+					Renderer.beginQuads();
 					//TODO: BlockRendererDispatcher#renderBlock may be able to do what you want. Look at RenderChunk#rebuildChunk to see how it's used.
 //					Helper.getRenderBlocks().renderBlockByRenderType(block, tile.getPos());
 					GL11.glTranslated(-tile.getPos().getX()-0.5, -tile.getPos().getY()-0.5, -tile.getPos().getZ()-0.5);
@@ -294,15 +294,15 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		GL11U.glRotate(xRotation.wantedPoint+180, yRotation.wantedPoint, zRotation.wantedPoint);
 		GL11.glColor4f(1, 0, 0, 1F);
 		GL11.glLineWidth(2.5F);
-		Get.Render.WR().startDrawing(GL11.GL_LINES);
-		Get.Render.WR().addVertex(0,0,0);
-		Get.Render.WR().addVertex(13,0,0);
+		Renderer.begin(GL11.GL_LINES);
+		Renderer.addPos(0,0,0).endVertex();
+		Renderer.addPos(13,0,0).endVertex();
 		TessUtil.draw();
 		GL11.glColor4f(1, 0, 0, 0.3F);
 		GL11.glLineWidth(5F);
-		Get.Render.WR().startDrawing(GL11.GL_LINES);
-		Get.Render.WR().addVertex(0,0,0);
-		Get.Render.WR().addVertex(13,0,0);
+		Renderer.begin(GL11.GL_LINES);
+		Renderer.addPos(0,0,0).endVertex();
+		Renderer.addPos(13,0,0).endVertex();
 		TessUtil.draw();
 		GL11.glPopMatrix();
 		
@@ -311,15 +311,15 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		GL11U.glRotate(xRot,yRot,zRot);
 		GL11.glColor4f(0, 1, 0, 1F);
 		GL11.glLineWidth(2.5F);
-		Get.Render.WR().startDrawing(GL11.GL_LINES);
-		Get.Render.WR().addVertex(0,0,0);
-		Get.Render.WR().addVertex(13,0,0);
+		Renderer.begin(GL11.GL_LINES);
+		Renderer.addPos(0,0,0).endVertex();
+		Renderer.addPos(13,0,0).endVertex();
 		TessUtil.draw();
 		GL11.glColor4f(0, 1, 0, 0.3F);
 		GL11.glLineWidth(5F);
-		Get.Render.WR().startDrawing(GL11.GL_LINES);
-		Get.Render.WR().addVertex(0,0,0);
-		Get.Render.WR().addVertex(13,0,0);
+		Renderer.begin(GL11.GL_LINES);
+		Renderer.addPos(0,0,0).endVertex();
+		Renderer.addPos(13,0,0).endVertex();
 		TessUtil.draw();
 		GL11.glPopMatrix();
 		
@@ -381,11 +381,11 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			GL11.glTranslated(guiLeft, guiTop+12, 0);
 			GL11.glColor4f(1, 0.6F, 0.6F, 1F);
 			GL11.glLineWidth(1F);
-			Get.Render.WR().startDrawing(GL11.GL_LINES);
-			Get.Render.WR().addVertex(20,0,0);
-			Get.Render.WR().addVertex(20,46,0);
-			Get.Render.WR().addVertex(52,0,0);
-			Get.Render.WR().addVertex(52,46,0);
+			Renderer.begin(GL11.GL_LINES);
+			Renderer.addPos(20,0,0).endVertex();
+			Renderer.addPos(20,46,0).endVertex();
+			Renderer.addPos(52,0,0).endVertex();
+			Renderer.addPos(52,46,0).endVertex();
 			TessUtil.draw();
 			GL11.glPopMatrix();
 		}

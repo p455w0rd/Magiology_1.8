@@ -1,8 +1,10 @@
+This set of MCP mappings was designed for MC 1.8.8. Use at your own peril.This set of MCP mappings was designed for MC 1.8.8. Use at your own peril.
+
 #################################################
-         ForgeGradle 2.0-SNAPSHOT        
+         ForgeGradle 2.1-SNAPSHOT-b9904dd        
   https://github.com/MinecraftForge/ForgeGradle  
 #################################################
-               Powered by MCP 9.10               
+               Powered by MCP unknown               
              http://modcoderpack.com             
          by: Searge, ProfMobius, Fesh0r,         
          R4wk, ZeuX, IngisKahn, bspkrs           
@@ -20,31 +22,24 @@
 :splitServerJar SKIPPED
 :mergeJars SKIPPED
 :deobfMcSRG SKIPPED
-:getFernFlower SKIPPED
 :decompileMc SKIPPED
 :fixMcSources SKIPPED
-:applySourcePatches
+:applySourcePatches SKIPPED
 :remapMcSources SKIPPED
 :recompileMc SKIPPED
 :extractNatives SKIPPED
 :getAssetIndex UP-TO-DATE
 :getAssets
-Current status: 42/734   5%
-Current status: 99/734   13%
-Current status: 148/734   20%
-Current status: 251/734   34%
-Current status: 312/734   42%
-Current status: 386/734   52%
-Current status: 425/734   57%
-Current status: 465/734   63%
-Current status: 513/734   69%
-Current status: 557/734   75%
-Current status: 594/734   80%
-Current status: 675/734   91%
-Current status: 726/734   98%
+Current status: 65/734   8%
+Current status: 127/734   17%
+Current status: 196/734   26%
+Current status: 282/734   38%
+Current status: 358/734   48%
+Current status: 410/734   55%
+Current status: 458/734   62%
+Current status: 504/734   68%
+Current status: 677/734   92%
 :makeStart
-[ant:javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6
-[ant:javac] 1 warning
 :setupDecompWorkspace
 :eclipseClasspath
 :eclipseJdt
@@ -55,4 +50,4 @@ Current status: 726/734   98%
 
 BUILD SUCCESSFUL
 
-Total time: 2 mins 27.3 secs
+Total time: 2 mins 1.294 secs

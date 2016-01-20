@@ -7,7 +7,6 @@ import org.lwjgl.opengl.*;
 
 import com.magiology.api.connection.*;
 import com.magiology.api.network.*;
-import com.magiology.api.network.skeleton.*;
 import com.magiology.core.*;
 import com.magiology.mcobjects.tileentityes.network.*;
 import com.magiology.util.renderers.*;

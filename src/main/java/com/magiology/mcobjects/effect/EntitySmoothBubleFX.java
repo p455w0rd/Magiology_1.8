@@ -1,6 +1,6 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.world.*;
 
 import org.lwjgl.opengl.*;
@@ -58,7 +58,10 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	}
 	
 	@Override
-	public void render(WorldRenderer tess){
+	public void render(){
+        int i = this.getBrightnessForRender(par2);
+        int j = i >> 16 & 65535;
+        int k = i & 65535;
 		GL11.glDisable(GL11.GL_FOG);
 		GL11U.setUpOpaqueRendering(2);
         
@@ -68,87 +71,63 @@ public class EntitySmoothBubleFX extends EntityFXM{
     	float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
     	float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
     	{
-    		if(texture=="tx1")     U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
-    		else if(texture=="tx2")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble2);
-    		else if(texture=="tx3")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble3);
-    		tess.startDrawingQuads();
-    		tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    		tess.setBrightness(240);
-    		tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0);
-    		tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
-    		tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
-    		tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
+    		if(texture=="tx1")     TessUtil.bindTexture(Textures.SmoothBuble1);
+    		else if(texture=="tx2")TessUtil.bindTexture(Textures.SmoothBuble2);
+    		else if(texture=="tx3")TessUtil.bindTexture(Textures.SmoothBuble3);
+    		Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+    		Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+    		Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+    		Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+    		Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
     		TessUtil.draw();
     	}
 		
 		if(texture=="tx1"){
-			U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add1);
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[0]);
-        	tess.setBrightness(240);
-	        tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0);
-	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
-	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
-	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			TessUtil.draw();
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[1]);
-			tess.setBrightness(240);
-			tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 0);
-			tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
-			tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 1);
-			tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
-			TessUtil.draw();
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[2]);
-        	tess.setBrightness(240);
-	        tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 1);
-	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
-	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0);
-	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			TessUtil.draw();
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[3]);
-			tess.setBrightness(240);
-			tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1);
-			tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
-			tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
-			tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
+			TessUtil.bindTexture(Textures.SmoothBuble1Add1);
+			Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			
+			Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			
+	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			
+			Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
 			TessUtil.draw();
 			
 			
-			U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1Add2);
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[4]);
-        	tess.setBrightness(240);
-	        tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0);
-	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0);
-	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1);
-	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1);
-			TessUtil.draw();
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[5]);
-        	tess.setBrightness(240);
-	        tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1);
-	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 1);
-	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
-	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 0);
-			TessUtil.draw();
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[6]);
-        	tess.setBrightness(240);
-	        tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 1);
-	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 1);
-	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0);
-	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 0);
-			TessUtil.draw();
-			tess.startDrawingQuads();
-			tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)sideOpacity[7]);
-        	tess.setBrightness(240);
-	        tess.addVertexWithUV((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1);
-	        tess.addVertexWithUV((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0);
-	        tess.addVertexWithUV((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0);
-	        tess.addVertexWithUV((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1);
+			TessUtil.bindTexture(Textures.SmoothBuble1Add2);
+			Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			
+	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			
+	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			
+	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
 			TessUtil.draw();
 		}
 

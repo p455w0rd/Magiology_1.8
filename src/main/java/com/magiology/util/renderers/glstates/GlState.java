@@ -4,8 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.*;
 
-import com.magiology.util.renderers.*;
-
 public class GlState{
 	
 	public static final GlState 

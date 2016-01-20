@@ -1,6 +1,5 @@
 package com.magiology.util.renderers.glstates;
 
-import com.magiology.util.renderers.glstates.*;
 
 public class GlStateCell{
 	

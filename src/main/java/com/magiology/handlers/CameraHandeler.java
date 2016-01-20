@@ -1,9 +1,8 @@
 package com.magiology.handlers;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.*;
 
-import com.magiology.mcobjects.entitys.ClientFakePlayer;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.*;
 
 public class CameraHandeler{
 	

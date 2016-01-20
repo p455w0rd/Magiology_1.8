@@ -5,7 +5,6 @@ import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 
@@ -13,7 +12,7 @@ import com.magiology.client.gui.gui.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.m_extension.*;
 
-public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory,IUpdatePlayerListBox{
+public class TileEntitySmartCrafter extends TileEntityM implements ISidedInventory,ITickable{
 	
 	public boolean isActive=false;
 	public int rotation=-1;
@@ -103,7 +102,7 @@ public class TileEntitySmartCrafter extends TileEntityM implements ISidedInvento
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int v1) {
+	public ItemStack removeStackFromSlot(int v1) {
 		return null;
 	}
 

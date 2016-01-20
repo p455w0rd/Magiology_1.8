@@ -10,6 +10,7 @@ import org.lwjgl.opengl.*;
 
 import com.magiology.core.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class EntityBaseFX extends EntityFX{
@@ -54,10 +55,10 @@ public class EntityBaseFX extends EntityFX{
 		super(w, xp, yp, zp);
 	}
 	@Override
-	public void func_180434_a(WorldRenderer renderer, Entity entitiy, float par2, float par3, float par4, float par5, float par6, float par7){
+	public void renderParticle(WorldRenderer renderer, Entity entitiy, float par2, float par3, float par4, float par5, float par6, float par7){
 		
 	}
-	public void renderParticle(WorldRenderer renderer, float par2, float par3, float par4, float par5, float par6, float par7){
+	public void renderParticle(float par2, float par3, float par4, float par5, float par6, float par7){
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -68,13 +69,12 @@ public class EntityBaseFX extends EntityFX{
     	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
     	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
         U.getMC().renderEngine.bindTexture(texture1);
-        renderer.startDrawingQuads();
-		renderer.setColorRGBA_F((float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
-    	renderer.setBrightness(240);
-        renderer.addVertexWithUV(x-par3*PScale-par6*PScale, y-par4*PScale, z-par5*PScale-par7*PScale, 0, 0);
-        renderer.addVertexWithUV(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0);
-        renderer.addVertexWithUV(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1);
-        renderer.addVertexWithUV(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1);
+        Renderer.beginQuads();
+        GL11.glColor4f((float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
+        Renderer.addVertexData(x-par3*PScale-par6*PScale, y-par4*PScale, z-par5*PScale-par7*PScale, 0, 0).endVertex();
+        Renderer.addVertexData(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0).endVertex();
+        Renderer.addVertexData(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1).endVertex();
+        Renderer.addVertexData(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1).endVertex();
 		TessUtil.draw();
 		GL11.glDisable(GL11.GL_BLEND);
 		GL11.glDepthMask(true);

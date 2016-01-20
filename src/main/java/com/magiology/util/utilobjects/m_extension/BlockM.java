@@ -20,7 +20,6 @@ public class BlockM extends Block{
 	
 	//#fucka youuu json models!
 	public static Map<Block, ResourceLocation> modelsInit=new HashMap<Block, ResourceLocation>();
-	public static IBakedModel[] models,invmodels;
 	
 	
 	public BlockM setBlockTextureName(String name){

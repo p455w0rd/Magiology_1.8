@@ -3,7 +3,6 @@ package com.magiology.handlers;
 import static com.magiology.handlers.KeyHandler.Keys.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.settings.*;
 import net.minecraftforge.fml.client.*;
 import net.minecraftforge.fml.client.registry.*;
@@ -12,7 +11,6 @@ import net.minecraftforge.fml.common.gameevent.*;
 
 import org.lwjgl.input.*;
 
-import com.magiology.client.gui.container.*;
 import com.magiology.client.gui.custom.hud.*;
 import com.magiology.core.*;
 import com.magiology.core.init.*;

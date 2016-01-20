@@ -71,7 +71,7 @@ public class UpgItemContainer implements IInventory{
 	}
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int v1){
+	public ItemStack removeStackFromSlot(int v1){
 		ItemStack[] a=slots();
 		if(a[v1]!=null){
 			ItemStack ItemS=a[v1];	

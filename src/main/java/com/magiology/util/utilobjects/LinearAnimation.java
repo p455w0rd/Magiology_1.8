@@ -2,7 +2,6 @@ package com.magiology.util.utilobjects;
 
 import java.util.*;
 
-import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.vectors.*;
 
 public class LinearAnimation{

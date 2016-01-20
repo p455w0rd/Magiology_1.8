@@ -1,17 +1,14 @@
 package com.magiology.handlers;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.*;
+import java.util.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-import java.util.Map.Entry;
 
+import net.minecraft.entity.player.*;
 import scala.collection.mutable.StringBuilder;
 
-import com.magiology.util.utilclasses.PrintUtil;
-
-import net.minecraft.entity.player.EntityPlayer;
+import com.magiology.util.utilclasses.*;
 
 public class PremiumHandeler{
 	

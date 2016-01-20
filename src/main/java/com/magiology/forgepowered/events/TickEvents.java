@@ -22,7 +22,6 @@ import com.magiology.client.render.aftereffect.*;
 import com.magiology.core.*;
 import com.magiology.forgepowered.events.client.*;
 import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.handlers.CameraHandeler;
 import com.magiology.mcobjects.entitys.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;

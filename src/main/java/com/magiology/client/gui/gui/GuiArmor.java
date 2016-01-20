@@ -1,6 +1,5 @@
 package com.magiology.client.gui.gui;
 
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.entity.player.*;
@@ -26,7 +25,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	
-	private ItemRendererHelmet42 IRH42 = new ItemRendererHelmet42();
+//	private ItemRendererHelmet42 IRH42 = new ItemRendererHelmet42();
 	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
     protected static ItemRenderer itemRenderer = new ItemRenderer(U.getMC());
 	ResourceLocation texture1=new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
@@ -149,27 +148,27 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		GL11.glPushMatrix();
 		GL11.glTranslated( x, y, 0);
 		GL11.glScaled(scale,scale,scale);
-		IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, EQUIPPED);
-		if(customRenderer!=null){
-			GL11.glPushMatrix();
-			GL11.glRotated(180,0,0,0);
-			GL11.glTranslated(-0.5, -0.5, 0);
-			GL11.glDepthMask(true);
-            if(customRenderer instanceof ItemRendererHelmet42){
-            	IRH42.model.shouldFollowThePlayerMaster=false;
-            	IRH42.model.shouldFollowThePlayerHasAMaster=true;
-            	IRH42.renderItem(EQUIPPED, stack);
-            }
-            else customRenderer.renderItem(EQUIPPED, stack);
-			GL11.glPopMatrix();
-		}else{
-//			TessHelper.bindTexture(TextureMap.locationItemsTexture);
-//            IIcon iicon = stack.getItem().getIcon(stack, 0);
-//			GL11.glDisable(GL11.GL_LIGHTING);
-//			ItemRenderer.renderItemIn2D(Tessellator.instance, iicon.getMaxU(), iicon.getMaxV(), iicon.getMinU(), iicon.getMinV(), iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
-//			GL11.glEnable(GL11.GL_LIGHTING);
-			Render.RI().renderItemModel(stack);
-		}
+//		IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, EQUIPPED);
+//		if(customRenderer!=null){
+//			GL11.glPushMatrix();
+//			GL11.glRotated(180,0,0,0);
+//			GL11.glTranslated(-0.5, -0.5, 0);
+//			GL11.glDepthMask(true);
+//            if(customRenderer instanceof ItemRendererHelmet42){
+//            	IRH42.model.shouldFollowThePlayerMaster=false;
+//            	IRH42.model.shouldFollowThePlayerHasAMaster=true;
+//            	IRH42.renderItem(EQUIPPED, stack);
+//            }
+//            else customRenderer.renderItem(EQUIPPED, stack);
+//			GL11.glPopMatrix();
+//		}else{
+////			TessHelper.bindTexture(TextureMap.locationItemsTexture);
+////            IIcon iicon = stack.getItem().getIcon(stack, 0);
+////			GL11.glDisable(GL11.GL_LIGHTING);
+////			ItemRenderer.renderItemIn2D(Tessellator.instance, iicon.getMaxU(), iicon.getMaxV(), iicon.getMinU(), iicon.getMinV(), iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
+////			GL11.glEnable(GL11.GL_LIGHTING);
+//			Render.RI().renderItemModel(stack);
+//		}
 		GL11.glPopMatrix();
 	}
 	

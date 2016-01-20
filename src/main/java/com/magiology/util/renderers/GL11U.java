@@ -6,6 +6,7 @@ import net.minecraft.util.*;
 
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.*;
+import org.lwjgl.util.vector.Matrix4f;
 
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;

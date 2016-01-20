@@ -1,19 +1,15 @@
 package com.magiology.client.render.shaders;
 
-import java.awt.Color;
-import java.nio.IntBuffer;
+import java.awt.*;
+import java.nio.*;
 
-import javax.vecmath.Color3f;
+import net.minecraft.client.shader.*;
 
-import net.minecraft.client.shader.Framebuffer;
+import org.lwjgl.*;
+import org.lwjgl.opengl.*;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import com.magiology.client.render.shaders.core.ShaderAspectRenderer;
-import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
+import com.magiology.client.render.shaders.core.*;
+import com.magiology.util.utilclasses.*;
 
 public class ColorCutRenderer extends ShaderAspectRenderer{
 	public static ColorCutRenderer instance;

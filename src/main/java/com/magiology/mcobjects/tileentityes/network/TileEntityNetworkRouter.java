@@ -7,30 +7,22 @@ import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
-import net.minecraft.server.gui.*;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
 
 import org.apache.commons.lang3.*;
-import org.lwjgl.*;
 
 import com.magiology.api.connection.*;
 import com.magiology.api.network.*;
 import com.magiology.api.network.skeleton.*;
 import com.magiology.core.init.*;
 import com.magiology.forgepowered.events.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.effect.*;
 import com.magiology.mcobjects.items.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
 
-public class TileEntityNetworkRouter extends TileEntityNetwork implements ISidedInventory,IUpdatePlayerListBox{
+public class TileEntityNetworkRouter extends TileEntityNetwork implements ISidedInventory,ITickable{
 	
 	private SlowdownUtil optimizer=new SlowdownUtil(40);
 	public ItemStack[] slots=new ItemStack[10];
@@ -215,7 +207,7 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 		return null;
 	}
 	@Override
-	public ItemStack getStackInSlotOnClosing(int v1){
+	public ItemStack removeStackFromSlot(int v1){
 		if(this.slots[v1]!=null){
 			ItemStack ItemS=this.slots[v1];
 			this.slots[v1]=null;

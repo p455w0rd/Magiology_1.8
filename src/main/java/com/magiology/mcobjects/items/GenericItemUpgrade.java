@@ -38,7 +38,7 @@ public class GenericItemUpgrade extends Item{
 	public void registerItemUpgrade(){
 		RegisterItemUpgrades.registerItemUpgrades(this,Level,UT);
 		GameRegistry.registerItem(this, this.getUnlocalizedName());
-		MItems.setGenericUpgradeRenderer(this);
+//		MItems.setGenericUpgradeRenderer(this);
 	}
 	
 	@Override

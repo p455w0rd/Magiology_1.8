@@ -54,7 +54,7 @@ public abstract class GuiContainerAndGuiParticles extends GuiContainer implement
 		WorldRenderer tess=TessUtil.getWR();
 		if(!guiParticles.isEmpty())for(int c=0;c<guiParticles.size();c++){
 			GuiParticle ab=guiParticles.get(c);
-			if(ab!=null&&!ab.isDead)ab.renderParticle(tess, partialTicks);
+			if(ab!=null&&!ab.isDead)ab.renderParticle(partialTicks);
 		}
 	}
 	public boolean isMouseOverObj(Object obj,int x,int y){

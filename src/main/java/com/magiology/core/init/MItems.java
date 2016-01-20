@@ -74,11 +74,11 @@ public class MItems{
 	}
 	
 	public static void initRenders(){
-		bindItemWRender(Item.getItemFromBlock(MBlocks.FirePipe), new ItemRendererFirePipe());
-		bindItemWRender(PowerCounter, new ItemRendererPowerCounter());
-		bindItemWRender(pants_42I, new ItemRendererPants42());
-		bindItemWRender(helmet_42I, new ItemRendererHelmet42());
-		bindItemWRender(TheHand, TheHandHandler.getRenderer());
+//		bindItemWRender(Item.getItemFromBlock(MBlocks.FirePipe), new ItemRendererFirePipe());
+//		bindItemWRender(PowerCounter, new ItemRendererPowerCounter());
+//		bindItemWRender(pants_42I, new ItemRendererPants42());
+//		bindItemWRender(helmet_42I, new ItemRendererHelmet42());
+//		bindItemWRender(TheHand, TheHandHandler.getRenderer());
 //		bindItemWRender(Magiology., new ItemRenderer);
 	}
 	
@@ -91,12 +91,12 @@ public class MItems{
 		return item;
 	}
 
-	public static void setGenericUpgradeRenderer(Item item){
-		if(item instanceof GenericItemUpgrade)MinecraftForgeClient.registerItemRenderer(item, new ItemRendererGenericUpgrade());
-		else PrintUtil.printlnEr("Item: "+item.getUnlocalizedName()+" cannot be registered as a GenericUpgrade renderer!\n");
-	}
+//	public static void setGenericUpgradeRenderer(Item item){
+//		if(item instanceof GenericItemUpgrade)MinecraftForgeClient.registerItemRenderer(item, new ItemRendererGenericUpgrade());
+//		else PrintUtil.printlnEr("Item: "+item.getUnlocalizedName()+" cannot be registered as a GenericUpgrade renderer!\n");
+//	}
 
-	public static void bindItemWRender(Item item, IItemRenderer renderer){
-		MinecraftForgeClient.registerItemRenderer(item,renderer);
-	}
+//	public static void bindItemWRender(Item item, IItemRenderer renderer){
+//		MinecraftForgeClient.registerItemRenderer(item,renderer);
+//	}
 }

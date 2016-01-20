@@ -13,7 +13,7 @@ public class EntityPosAndBB{
 	
 	public EntityPosAndBB(Entity entity){
 		this.entity=entity;
-		this.BB=new double[]{entity.getBoundingBox().minX,entity.getBoundingBox().minY,entity.getBoundingBox().minZ,entity.getBoundingBox().maxX,entity.getBoundingBox().maxY,entity.getBoundingBox().maxZ};
+		this.BB=new double[]{entity.getEntityBoundingBox().minX,entity.getEntityBoundingBox().minY,entity.getEntityBoundingBox().minZ,entity.getEntityBoundingBox().maxX,entity.getEntityBoundingBox().maxY,entity.getEntityBoundingBox().maxZ};
 	}
 	
 	public double[] getRandDotInBB(double randomness){

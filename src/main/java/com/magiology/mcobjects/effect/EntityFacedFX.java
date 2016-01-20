@@ -7,6 +7,7 @@ import org.lwjgl.opengl.*;
 
 import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.*;
@@ -59,7 +60,7 @@ public class EntityFacedFX extends EntityFXM{
 	}
 	
 	@Override
-	public void render(WorldRenderer tess){
+	public void render(){
 		GL11.glDisable(GL11.GL_FOG);
 		GL11U.setUpOpaqueRendering(2);
         
@@ -79,13 +80,12 @@ public class EntityFacedFX extends EntityFXM{
     	GL11U.glRotate(rotation.x, rotation.y, rotation.z);
 //    	GL11.glScaled(1, 1.3, 1);
     	GL11U.glCulFace(false);
-    	tess.startDrawingQuads();
-    	tess.setColorRGBA_F((float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    	tess.setBrightness(240);
-    	tess.addVertexWithUV( PScale, PScale,0, 0, 0);
-    	tess.addVertexWithUV(-PScale, PScale,0, 1, 0);
-    	tess.addVertexWithUV(-PScale,-PScale,0, 1, 1);
-    	tess.addVertexWithUV( PScale,-PScale,0, 0, 1);
+    	Renderer.beginQuads();
+    	Renderer.setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+    	Renderer.addVertexData( PScale, PScale,0, 0, 0).endVertex();
+    	Renderer.addVertexData(-PScale, PScale,0, 1, 0).endVertex();
+    	Renderer.addVertexData(-PScale,-PScale,0, 1, 1).endVertex();
+    	Renderer.addVertexData( PScale,-PScale,0, 0, 1).endVertex();
     	TessUtil.draw();
     	GL11U.glCulFace(true);
     	

@@ -38,6 +38,7 @@ public class TessUtil{
 	public static VertixBuffer getVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
 	public static RenderManager getRM(){return UtilM.getMC().getRenderManager();}
+	public static Tessellator getT(){return Tessellator.getInstance();}
 	
 	
 	public static void bindTexture(ResourceLocation texture){U.getMC().getTextureManager().bindTexture(texture);}
@@ -188,16 +189,15 @@ public class TessUtil{
 		}
 		GL11.glColor4d(r, g, b, alpha);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		WorldRenderer renderer=getWR();
 		GL11.glPushMatrix();
-		renderer.startDrawing(GL11.GL_TRIANGLES);
+		Renderer.begin(GL11.GL_TRIANGLES);
 		{
 			int i=0;
 			while(i<xy[0].length-1){
-				renderer.addVertex(0, 0, 0);
-				renderer.addVertex(xy[0][i], xy[1][i], 0);
+				Renderer.addPos(0, 0, 0).endVertex();
+				Renderer.addPos(xy[0][i], xy[1][i], 0).endVertex();
 				if(i<xy[0].length)i++;
-				renderer.addVertex(xy[0][i], xy[1][i], 0);
+				Renderer.addPos(xy[0][i], xy[1][i], 0).endVertex();
 			}
 		}
 		TessUtil.draw();
@@ -384,7 +384,6 @@ public class TessUtil{
 		if(newBuff)nvb.draw();
 	}
 	public static void renderParticle(){
-		WorldRenderer tess=TessUtil.getWR();
 		boolean isFP=U.getMC().gameSettings.thirdPersonView==2;
 		GL11.glDepthMask(false);
 		GL11.glEnable(GL11.GL_BLEND);
@@ -392,7 +391,7 @@ public class TessUtil{
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
 		
-		EntityFXM.renderBufferedParticle(tess);
+		EntityFXM.renderBufferedParticle();
 		
 		
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);

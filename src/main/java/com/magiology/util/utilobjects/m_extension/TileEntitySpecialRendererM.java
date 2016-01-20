@@ -1,7 +1,5 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import com.magiology.util.utilclasses.*;
-
 import net.minecraft.client.renderer.tileentity.*;
 import net.minecraft.tileentity.*;
 

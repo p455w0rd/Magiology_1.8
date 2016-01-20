@@ -13,10 +13,6 @@ public class VertexModel extends VertixBuffer{
 	protected static VertexModel create(){
 		return new VertexModel();
 	}
-	public VertexModel(){
-		this.renderer=Render.WR();
-		
-	}
 	protected void init(List<ShadedTriangle> shadedTriangles){
 		if(isInit)return;isInit=true;
 		this.shadedTriangles=new ArrayList<ShadedTriangle>();

@@ -5,7 +5,6 @@ import java.util.*;
 import net.minecraft.block.material.*;
 import net.minecraft.block.state.*;
 import net.minecraft.entity.*;
-import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 
@@ -78,5 +77,4 @@ public abstract class BlockContainerMultiColision extends BlockContainerM{
 			super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
 		}
     }
-    
 }
