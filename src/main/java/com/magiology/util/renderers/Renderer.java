@@ -1,119 +1,248 @@
 package com.magiology.util.renderers;
 
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.vertex.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.vertex.VertexFormat;
+import org.lwjgl.opengl.GL11;
 
 public class Renderer{
 	
-	private static Renderer instance=new Renderer();
-	public static final PosRenderer POS=instance.new PosRenderer();
+	private static final Renderer instance=new Renderer();
+	
+	public static final PosRenderer POS=new PosRenderer();
+	public static final PosUVNormalRenderer POS_UV_NORMAL=new PosUVNormalRenderer();
+	public static final PosUVRenderer POS_UV=new PosUVRenderer();
+	public static final ParticleRenderer PARTICLE=new ParticleRenderer();
+	public static final PosUVColorRenderer POS_UV_COLOR=new PosUVColorRenderer();
+	public static final PosColorRenderer POS_COLOR=new PosColorRenderer();
+	public static final LineRenderer LINES=new LineRenderer();
+	public static final PosUVNormalColorRenderer POS_UV_NORMAL_COLOR=new PosUVNormalColorRenderer();
+
 	
 	private static WorldRenderer renderer=TessUtil.getWR();
 	private static Tessellator tessellator=TessUtil.getT();
 	
 	private Renderer(){}
 	
-	public static void draw(){
-		tessellator.draw();
-	}
 	
-	public static void begin(int type, VertexFormat format){
-		renderer.begin(type, format);
-	}
-	public static void begin(int type){
-		begin(type, DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
-	}
 	
-	public static void beginLines(){
-		renderer.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION);
-	}
-	
-	public static void beginQuads(){
-		renderer.begin(7, DefaultVertexFormats.OLDMODEL_POSITION_TEX_NORMAL);
-	}
-	
-	public static void addVertexWithData(PositionTextureVertex vertex, float xNormal, float yNormal, float zNormal){
-		addVertexData(vertex.vector3D,vertex.texturePositionX, vertex.texturePositionY, xNormal, yNormal, zNormal);
-	}
-	
-	public static void addVertexData(Vec3 pos,double u,double v,float xNormal,float yNormal,float zNormal){
-		addVertexData(pos.xCoord, pos.yCoord, pos.zCoord, u, v, xNormal, yNormal, zNormal);
-	}
-	public static void addVertexData(Vec3M pos,double u,double v,Vec3M normal){
-		addVertexData(pos.x, pos.y, pos.z, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
-	}
-	public static void addVertexData(Vec3M pos,double u,double v,float xNormal,float yNormal,float zNormal){
-		addVertexData(pos.x, pos.y, pos.z, u, v, xNormal, yNormal, zNormal);
-	}
-	public static void addVertexData(double xPos,double yPos,double zPos,double u,double v,float xNormal,float yNormal,float zNormal){
+	private static void addVertexData(double xPos,double yPos,double zPos,double u,double v,float xNormal,float yNormal,float zNormal){
 		addPos(xPos, yPos, zPos).addUV(u, v).addNormal(xNormal, yNormal, zNormal).endVertex();
 	}
-	public static Renderer addVertexData(double x,double y,double z,double u,double v){
-		addPos(x, y, z).addUV(u, v);
+	private static Renderer addVertexData(double xPos,double yPos,double zPos,double u,double v){
+		addPos(xPos, yPos, zPos).addUV(u, v);
 		return instance;
 	}
 	
 	
-	public static Renderer addNormal(float x, float y, float z){
+	private static Renderer addNormal(float x, float y, float z){
 		renderer.normal(x, y, z);
 		return instance;
 	}
-	public static Renderer addNormal(Vec3M normal){
-		return addNormal(normal.getX(), normal.getY(), normal.getZ());
-	}
-	public static Renderer addUV(double u,double v){
+	private static Renderer addUV(double u,double v){
 		renderer.tex(u, v);
 		return instance;
 	}
-	public static Renderer addPos(double x,double y,double z){
-		renderer.pos(x, y, z);
+	private static Renderer addPos(double xPos,double yPos,double zPos){
+		renderer.pos(xPos, yPos, zPos);
 		return instance;
 	}
 	
-	
-	public static Renderer setTranslation(double x, double y, double z){
-		renderer.setTranslation(x, y, z);
-		return instance;
-	}
-	
-	public static Renderer setColor(float r, float g, float b, float a){
+	private static Renderer addColor(float r, float g, float b, float a){
 		renderer.color(r, g, b, a);
 		return instance;
 	}
-	public static Renderer setColor(float r, float g, float b){
-		setColor(r, g, b, 1);
+	private static Renderer addColor(float r, float g, float b){
+		addColor(r, g, b, 1);
 		return instance;
 	}
 	
-	public static void endVertex(){
+	private static void endVertex(){
 		renderer.endVertex();
 	}
 
-	public Renderer lightmap(int j, int k){
+	private Renderer lightmap(int j, int k){
 		renderer.lightmap(j, k);
 		return instance;
 	}
-	public static void setWorldRederer(WorldRenderer renderer){
-		Renderer.renderer=renderer;
+	
+	public static abstract class RendererBase{
+		private RendererBase(){}
+		
+		public static Renderer setTranslation(double x, double y, double z){
+			renderer.setTranslation(x, y, z);
+			return instance;
+		}
+		
+		
+		
+		public void begin(int type){
+			renderer.begin(type, getVertexFormat());
+		}
+		public abstract VertexFormat getVertexFormat();
+		
+		public void beginQuads(){
+			renderer.begin(7, getVertexFormat());
+		}
+		
+		public final void draw(){
+			tessellator.draw();
+		}
+		
+	}
+	
+	public static class PosRenderer extends RendererBase{
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION;
+		}
+		
+		public void addVertex(Vec3M pos){
+			addPos(pos.x, pos.y, pos.z);
+		}
+		
+		public void addVertex(double xPos, double yPos, double zPos){
+			addPos(xPos, yPos, zPos).endVertex();
+		}
+	}
+	public static class LineRenderer extends RendererBase{
+
+		@Deprecated
+		public void beginQuads(){
+			begin();
+		}
+		public void begin(){
+			begin(GL11.GL_LINES);
+		}
+		@Override
+		@Deprecated
+		public void begin(int type){
+			super.begin(type);
+		}
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION;
+		}
+		
+		public void addVertex(Vec3M pos){
+			addPos(pos.x, pos.y, pos.z);
+		}
+		
+		public void addVertex(double xPos, double yPos, double zPos){
+			addPos(xPos, yPos, zPos).endVertex();
+		}
 	}
 	
 	
-	private static class PosRenderer{
-		public static void begin(int type){
-			renderer.begin(type, DefaultVertexFormats.POSITION);
+	public static class PosUVNormalRenderer extends RendererBase{
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION_TEX_NORMAL;
 		}
-		public static void addVertex(Vec3M pos){
-			addPos(pos.x, pos.y, pos.z);
+		
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, Vec3M normal){
+			addVertexData(xPos, yPos, zPos, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
 		}
-		public static void addVertex(double x, double y, double z){
-			addPos(x, y, z);
+		public void addVertex(Vec3M pos, float u, float v, float xNormal, float yNormal, float zNormal){
+			addVertexData(pos.x, pos.y, pos.z, u, v, xNormal, yNormal, zNormal);
 		}
+		public void addVertex(Vec3M pos, float u, float v, Vec3M normal){
+			addVertexData(pos.x, pos.y, pos.z, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
+		}
+		
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal){
+			addVertexData(xPos, yPos, zPos, u, v, xNormal, yNormal, zNormal);
+		}
+	}
+	public static class PosUVNormalColorRenderer extends RendererBase{
+
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION_TEX_NORMAL;
+		}
+		public void addVertex(Vec3M pos, float u, float v, Vec3M normal, ColorF color){
+			addVertexData(pos.x, pos.y, pos.z, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal, float r, float g, float b, float a){
+			addVertexData(xPos, yPos, zPos, u, v).addNormal(xNormal, yNormal, zNormal).addColor(r,g,b,a).endVertex();
+		}
+	}
+	public static class PosUVRenderer extends RendererBase{
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION_TEX_NORMAL;
+		}
+		
+		public void addVertex(Vec3M pos, float u, float v){
+			addVertexData(pos.x, pos.y, pos.z, u, v).endVertex();
+		}
+		
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v){
+			addVertexData(xPos, yPos, zPos, u, v).endVertex();
+		}
+	}
+	public static class PosUVColorRenderer extends RendererBase{
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION_TEX_COLOR;
+		}
+		
+		public void addVertex(Vec3M pos, float u, float v, ColorF color){
+			addVertexData(pos.x, pos.y, pos.z, u, v).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		
+		public void addVertex(Vec3M pos, float u, float v, float r, float g, float b, float a){
+			addVertexData(pos.x, pos.y, pos.z, u, v).addColor(r, g, b, a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, ColorF color){
+			addVertexData(xPos, yPos, zPos, u, v).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float r, float g, float b, float a){
+			addVertexData(xPos, yPos, zPos, u, v).addColor(r, g, b, a).endVertex();
+		}
+	}
+	public static class PosColorRenderer extends RendererBase{
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.POSITION_TEX_COLOR;
+		}
+		
+		public void addVertex(Vec3M pos, ColorF color){
+			addPos(pos.x, pos.y, pos.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		public void addVertex(Vec3M pos, float r, float g, float b, float a){
+			addPos(pos.x, pos.y, pos.z).addColor(r, g, b, a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, ColorF color){
+			addPos(xPos, yPos, zPos).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float r, float g, float b, float a){
+			addPos(xPos, yPos, zPos).addColor(r, g, b, a).endVertex();
+		}
+	}
+	
+	
+	public static class ParticleRenderer extends RendererBase{
+		
+		public VertexFormat getVertexFormat(){
+			return DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP;
+		}
+		
+		public void addVertex(Vec3M pos, float u, float v, ColorF color, int xLight, int yLight){
+			addVertex(pos.x, pos.y, pos.z, u, v, color.r, color.g, color.b, color.a, xLight, yLight);
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, ColorF color, int xLight, int yLight){
+			addVertex(xPos, yPos, zPos, u, v, color.r, color.g, color.b, color.a, xLight, yLight);
+		}
+		public void addVertex(Vec3M pos, float u, float v, float red, float green, float blue, float alpha, int xLight, int yLight){
+			addVertex(pos.x, pos.y, pos.z, u, v, red, green, blue, alpha, xLight, yLight);
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float red, float green, float blue, float alpha, int xLight, int yLight){
+			addVertexData(xPos, yPos, zPos, u, v).addColor(red, green, blue, alpha).lightmap(xLight, yLight).endVertex();
+		}
+		
 	}
 }

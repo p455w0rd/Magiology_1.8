@@ -107,21 +107,21 @@ public class WingModeChangerHUD extends HUD{
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
 				GL11.glColor4d(
 				nj==1?calcBackgroundColor[pozId][0]:1,nj==1?calcBackgroundColor[pozId][1]:0.7,nj==1?calcBackgroundColor[pozId][2]:0.7,0.4*calcAlpha*((color.getAlpha())/255F));
-				Renderer.begin(GL11.GL_TRIANGLES);
+				Renderer.POS.begin(GL11.GL_TRIANGLES);
 				for(int l=0;l<criclePoss.length-1;l++){
-						Renderer.addPos(0, 0, 0).endVertex();
-						Renderer.addPos(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
-						Renderer.addPos(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
+					Renderer.POS.addVertex(0, 0, 0);
+					Renderer.POS.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
+					Renderer.POS.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 				}
-				TessUtil.draw();
+				Renderer.POS.draw();
 				GL11.glColor4d(0.8,0.8,0.8,calcAlpha*((color.getAlpha())/255F));
 				GL11.glLineWidth(1.5F);
-				Renderer.begin(GL11.GL_LINES);
+				Renderer.LINES.begin();
 				for(int l=0;l<criclePoss.length-1;l++){
-					Renderer.addPos(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
-					Renderer.addPos(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0).endVertex();
+					Renderer.LINES.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
+					Renderer.LINES.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 				}
-				TessUtil.draw();
+				Renderer.LINES.draw();
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				
 				String waring=player.motionY<-0.2&&(poz==Positions.NormalPos||poz==Positions.ProtectivePos)?"!! ":"";

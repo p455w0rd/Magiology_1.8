@@ -171,10 +171,10 @@ public class HighlightEvent{
 				GL11.glColor4f(1, 0, 0, 0.5F);
 				GL11.glLineWidth(3);
 				GL11U.texture(false);
-				Renderer.begin(GL11.GL_LINES);
-				Renderer.addPos((source1.minX+source1.maxX)/2, (source1.minY+source1.maxY)/2, (source1.minZ+source1.maxZ)/2).endVertex();
-				Renderer.addPos((source.minX+source.maxX)/2, (source.minY+source.maxY)/2, (source.minZ+source.maxZ)/2).endVertex();
-				Renderer.draw();
+				Renderer.LINES.begin();
+				Renderer.LINES.addVertex((source1.minX+source1.maxX)/2, (source1.minY+source1.maxY)/2, (source1.minZ+source1.maxZ)/2);
+				Renderer.LINES.addVertex((source.minX+source.maxX)/2, (source.minY+source.maxY)/2, (source.minZ+source.maxZ)/2);
+				Renderer.LINES.draw();
 			}
 			
 			for(ItemStack j:i.slots){
@@ -201,10 +201,10 @@ public class HighlightEvent{
 		AxisAlignedBB bounds2=UtilM.getBlock(UtilM.getTheWorld(),posStart).getSelectedBoundingBox(UtilM.getTheWorld(), posStart).expand(0.003, 0.003, 0.003);
 		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,color.r,color.g,color.b,lineWidth,color.a);
 		GL11U.texture(false);
-		Renderer.begin(GL11.GL_LINES);
-		Renderer.addPos((bounds.minX+bounds.maxX)/2, (bounds.minY+bounds.maxY)/2, (bounds.minZ+bounds.maxZ)/2).endVertex();
-		Renderer.addPos((bounds2.minX+bounds2.maxX)/2, (bounds2.minY+bounds2.maxY)/2, (bounds2.minZ+bounds2.maxZ)/2).endVertex();
-		Renderer.draw();
+		Renderer.LINES.begin();
+		Renderer.LINES.addVertex((bounds.minX+bounds.maxX)/2, (bounds.minY+bounds.maxY)/2, (bounds.minZ+bounds.maxZ)/2);
+		Renderer.LINES.addVertex((bounds2.minX+bounds2.maxX)/2, (bounds2.minY+bounds2.maxY)/2, (bounds2.minZ+bounds2.maxZ)/2);
+		Renderer.LINES.draw();
 		GL11U.texture(true);
 	}
 	private void doMultiColision(BlockPos pos, ItemStack item, DrawBlockHighlightEvent event){
@@ -216,9 +216,6 @@ public class HighlightEvent{
 		Vec3M off=TessUtil.calculateRenderPosV(event.player);
 		GL11.glPushMatrix();
 		GL11.glTranslated(-off.getX()+pos.getX(), -off.getY()+pos.getY(), -off.getZ()+pos.getZ());
-		
-		
-//		Helper.printInln(((TileEntityFirePipe)tile).collisionBoxes);
 		
 		AxisAlignedBB mainBox=colisionProvider.getMainBox();
 		long wtt=event.player.worldObj.getTotalWorldTime();
@@ -465,18 +462,18 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glLineWidth(2F);
 		GL11.glColor4f(0F, 0F, 1F, 1F);
-		Renderer.begin(GL11.GL_LINES);{
-			float[] xpoints=new float[8];float[] ypoints=new float[8];float[] zpoints=new float[8];
-			
-			for(int a=0;a<xpoints.length;a++){xpoints[a]=0;ypoints[a]=0;zpoints[a]=0;}
-			
-			xpoints[0]+=bounds.minX;
-			ypoints[0]+=bounds.minY;
-			zpoints[0]+=bounds.minZ;
-			
-			Renderer.addVertexData(xpoints[0]+0.5, ypoints[0]+0.5, zpoints[0]+0.5, 0, 1).endVertex();
-			Renderer.addVertexData(bounds2.minX+0.5, bounds2.minY+0.5, bounds2.minZ+0.5, 0, 1).endVertex();
-		}TessUtil.draw();
+		Renderer.LINES.begin();
+		float[] xpoints=new float[8];float[] ypoints=new float[8];float[] zpoints=new float[8];
+		
+		for(int a=0;a<xpoints.length;a++){xpoints[a]=0;ypoints[a]=0;zpoints[a]=0;}
+		
+		xpoints[0]+=bounds.minX;
+		ypoints[0]+=bounds.minY;
+		zpoints[0]+=bounds.minZ;
+		
+		Renderer.LINES.addVertex(xpoints[0]+0.5, ypoints[0]+0.5, zpoints[0]+0.5);
+		Renderer.LINES.addVertex(bounds2.minX+0.5, bounds2.minY+0.5, bounds2.minZ+0.5);
+		Renderer.LINES.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,0,0,1,2,1);
 	}
@@ -520,58 +517,58 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4d(rColor,gColor,bColor,alpha);
 		GL11.glLineWidth((float)thickens);
-		Renderer.beginLines();
+		Renderer.LINES.begin();
 		{
 			int a=0;
 			if(bs[a]){
-				Renderer.addPos(xpoints[0], ypoints[0], zpoints[0]).endVertex();
-				Renderer.addPos(xpoints[1], ypoints[1], zpoints[1]).endVertex();
+				Renderer.LINES.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+				Renderer.LINES.addVertex(xpoints[1], ypoints[1], zpoints[1]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[2], ypoints[2], zpoints[2]).endVertex();
-				Renderer.addPos(xpoints[3], ypoints[3], zpoints[3]).endVertex();
+				Renderer.LINES.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+				Renderer.LINES.addVertex(xpoints[3], ypoints[3], zpoints[3]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[4], ypoints[4], zpoints[4]).endVertex();
-				Renderer.addPos(xpoints[5], ypoints[5], zpoints[5]).endVertex();
+				Renderer.LINES.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+				Renderer.LINES.addVertex(xpoints[5], ypoints[5], zpoints[5]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[6], ypoints[6], zpoints[6]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[7], zpoints[7]).endVertex();
+				Renderer.LINES.addVertex(xpoints[6], ypoints[6], zpoints[6]);
+				Renderer.LINES.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[0], ypoints[0], zpoints[0]).endVertex();
-				Renderer.addPos(xpoints[6], ypoints[6], zpoints[6]).endVertex();
+				Renderer.LINES.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+				Renderer.LINES.addVertex(xpoints[6], ypoints[6], zpoints[6]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[1], ypoints[1], zpoints[1]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[7], zpoints[7]).endVertex();
+				Renderer.LINES.addVertex(xpoints[1], ypoints[1], zpoints[1]);
+				Renderer.LINES.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[0], ypoints[0], zpoints[0]).endVertex();
-				Renderer.addPos(xpoints[2], ypoints[2], zpoints[2]).endVertex();
+				Renderer.LINES.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+				Renderer.LINES.addVertex(xpoints[2], ypoints[2], zpoints[2]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[1], ypoints[1], zpoints[1]).endVertex();
-				Renderer.addPos(xpoints[3], ypoints[3], zpoints[3]).endVertex();
+				Renderer.LINES.addVertex(xpoints[1], ypoints[1], zpoints[1]);
+				Renderer.LINES.addVertex(xpoints[3], ypoints[3], zpoints[3]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[2], ypoints[2], zpoints[2]).endVertex();
-				Renderer.addPos(xpoints[4], ypoints[4], zpoints[4]).endVertex();
+				Renderer.LINES.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+				Renderer.LINES.addVertex(xpoints[4], ypoints[4], zpoints[4]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[3], ypoints[3], zpoints[3]).endVertex();
-				Renderer.addPos(xpoints[5], ypoints[5], zpoints[5]).endVertex();
+				Renderer.LINES.addVertex(xpoints[3], ypoints[3], zpoints[3]);
+				Renderer.LINES.addVertex(xpoints[5], ypoints[5], zpoints[5]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[4], ypoints[4], zpoints[4]).endVertex();
-				Renderer.addPos(xpoints[6], ypoints[6], zpoints[6]).endVertex();
+				Renderer.LINES.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+				Renderer.LINES.addVertex(xpoints[6], ypoints[6], zpoints[6]);
 			}a++;
 			if(bs[a]){
-				Renderer.addPos(xpoints[5], ypoints[5], zpoints[5]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[7], zpoints[7]).endVertex();
+				Renderer.LINES.addVertex(xpoints[5], ypoints[5], zpoints[5]);
+				Renderer.LINES.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}
-		}TessUtil.draw();
+		}Renderer.LINES.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
 	
@@ -606,48 +603,48 @@ public class HighlightEvent{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(false);
 		GL11.glDisable(GL11.GL_CULL_FACE);
+		
 		GL11.glColor4d(rColor,gColor,bColor,alpha);
-		Renderer.begin(7, DefaultVertexFormats.POSITION);
-		{
-			int a=0;
-			if(bs[a]){
-				Renderer.addPos(xpoints[0], ypoints[0], zpoints[0]).endVertex();
-				Renderer.addPos(xpoints[1], ypoints[1], zpoints[1]).endVertex();
-				Renderer.addPos(xpoints[3], ypoints[3], zpoints[3]).endVertex();
-				Renderer.addPos(xpoints[2], ypoints[2], zpoints[2]).endVertex();
-			}a++;
-			if(bs[a]){
-				Renderer.addPos(xpoints[2], ypoints[2], zpoints[2]).endVertex();
-				Renderer.addPos(xpoints[3], ypoints[3], zpoints[3]).endVertex();
-				Renderer.addPos(xpoints[5], ypoints[5], zpoints[5]).endVertex();
-				Renderer.addPos(xpoints[4], ypoints[4], zpoints[4]).endVertex();
-			}a++;
-			if(bs[a]){
-				Renderer.addPos(xpoints[4], ypoints[4], zpoints[4]).endVertex();
-				Renderer.addPos(xpoints[5], ypoints[5], zpoints[5]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[7], zpoints[7]).endVertex();
-				Renderer.addPos(xpoints[6], ypoints[6], zpoints[6]).endVertex();
-			}a++;
-			if(bs[a]){
-				Renderer.addPos(xpoints[6], ypoints[6], zpoints[6]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[7], zpoints[7]).endVertex();
-				Renderer.addPos(xpoints[6], ypoints[7], zpoints[0]).endVertex();
-				Renderer.addPos(xpoints[0], ypoints[0], zpoints[0]).endVertex();
-			}a++;
-			if(bs[a]){
-				Renderer.addPos(xpoints[1], ypoints[7], zpoints[1]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[7], zpoints[7]).endVertex();
-				Renderer.addPos(xpoints[2], ypoints[7], zpoints[7]).endVertex();
-				Renderer.addPos(xpoints[2], ypoints[7], zpoints[2]).endVertex();
-			}a++;
-			if(bs[a]){
-				Renderer.addPos(xpoints[1], ypoints[6], zpoints[1]).endVertex();
-				Renderer.addPos(xpoints[7], ypoints[6], zpoints[7]).endVertex();
-				Renderer.addPos(xpoints[2], ypoints[6], zpoints[7]).endVertex();
-				Renderer.addPos(xpoints[2], ypoints[6], zpoints[2]).endVertex();
-			}
+		Renderer.POS.beginQuads();
+		
+		int a=0;
+		if(bs[a]){
+			Renderer.POS.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+			Renderer.POS.addVertex(xpoints[1], ypoints[1], zpoints[1]);
+			Renderer.POS.addVertex(xpoints[3], ypoints[3], zpoints[3]);
+			Renderer.POS.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+		}a++;
+		if(bs[a]){
+			Renderer.POS.addVertex(xpoints[2], ypoints[2], zpoints[2]);
+			Renderer.POS.addVertex(xpoints[3], ypoints[3], zpoints[3]);
+			Renderer.POS.addVertex(xpoints[5], ypoints[5], zpoints[5]);
+			Renderer.POS.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+		}a++;
+		if(bs[a]){
+			Renderer.POS.addVertex(xpoints[4], ypoints[4], zpoints[4]);
+			Renderer.POS.addVertex(xpoints[5], ypoints[5], zpoints[5]);
+			Renderer.POS.addVertex(xpoints[7], ypoints[7], zpoints[7]);
+			Renderer.POS.addVertex(xpoints[6], ypoints[6], zpoints[6]);
+		}a++;
+		if(bs[a]){
+			Renderer.POS.addVertex(xpoints[6], ypoints[6], zpoints[6]);
+			Renderer.POS.addVertex(xpoints[7], ypoints[7], zpoints[7]);
+			Renderer.POS.addVertex(xpoints[6], ypoints[7], zpoints[0]);
+			Renderer.POS.addVertex(xpoints[0], ypoints[0], zpoints[0]);
+		}a++;
+		if(bs[a]){
+			Renderer.POS.addVertex(xpoints[1], ypoints[7], zpoints[1]);
+			Renderer.POS.addVertex(xpoints[7], ypoints[7], zpoints[7]);
+			Renderer.POS.addVertex(xpoints[2], ypoints[7], zpoints[7]);
+			Renderer.POS.addVertex(xpoints[2], ypoints[7], zpoints[2]);
+		}a++;
+		if(bs[a]){
+			Renderer.POS.addVertex(xpoints[1], ypoints[6], zpoints[1]);
+			Renderer.POS.addVertex(xpoints[7], ypoints[6], zpoints[7]);
+			Renderer.POS.addVertex(xpoints[2], ypoints[6], zpoints[7]);
+			Renderer.POS.addVertex(xpoints[2], ypoints[6], zpoints[2]);
 		}
-		Renderer.draw();
+		Renderer.POS.draw();
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glDepthMask(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);

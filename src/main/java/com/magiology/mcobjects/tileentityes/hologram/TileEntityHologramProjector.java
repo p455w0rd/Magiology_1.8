@@ -1,39 +1,45 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import java.util.*;
-
-import net.minecraft.entity.player.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraftforge.event.entity.player.*;
-
-import org.apache.commons.lang3.*;
-import org.lwjgl.util.vector.*;
-
-import com.magiology.api.*;
+import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandler;
-import com.magiology.api.network.interfaces.registration.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
+import com.magiology.mcobjects.effect.EntityFacedFX;
+import com.magiology.mcobjects.effect.EntityMovingParticleFX;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+import com.magiology.util.utilobjects.vectors.Plane;
+import com.magiology.util.utilobjects.vectors.Ray;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.util.vector.Vector2f;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TileEntityHologramProjector extends TileEntityM implements ITickable{
 	
-	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<TileEntityHologramProjector>();
+	public static List<TileEntityHologramProjector> hologramProjectors=new ArrayList<>();
 	public Point point=new Point();
 	public CubeModel main;
-	public final ArrayList<HoloObject> holoObjects=new ArrayList<HoloObject>();
+	public final ArrayList<HoloObject> holoObjects=new ArrayList<>();
 	public Vector2f size,offset;
 	public Vec3M mainColor=new Vec3M(0.05,0.5,0.8);
 	public HoloObject lastPartClicked;
-	public boolean[] highlighs=new boolean[4];
+	public boolean[] highlights=new boolean[4];
 	public HoloObject selectedObj;
 	
 	public TileEntityHologramProjector(){
@@ -53,7 +59,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 			holoObjects.removeIf(existing->existing.id==newHolo.id);
 			holoObjects.add(newHolo);
 		}
-		for(int i=0;i<3;i++)highlighs[i]=NBT.getBoolean("h"+i);
+		for(int i=0;i<3;i++) highlights[i]=NBT.getBoolean("h"+i);
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
@@ -61,13 +67,12 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 		InterfaceBinder.writeInterfaceToNBT(this, NBT);
 		
 		
-		List<SavableData> savableData=new ArrayList<SavableData>();
-		for(HoloObject obj:holoObjects)if(obj instanceof SavableData)savableData.add(obj);
-		
+		List<SavableData> savableData=holoObjects.stream().filter(obj->obj!=null).collect(Collectors.toList());
+
 		int dataSize=savableData.size();
 		NBT.setInteger("DS", dataSize);
 		SavableDataHandler.saveDataToNBT(savableData, NBT, "ID");
-		for(int i=0;i<3;i++)NBT.setBoolean("h"+i,highlighs[i]);
+		for(int i=0;i<3;i++)NBT.setBoolean("h"+i, highlights[i]);
 	}
 	
 	@Override
@@ -94,7 +99,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 		for(TileEntityHologramProjector a:hologramProjectors){
 			if(a==this){
 				contains=true;
-				continue;
+				break;
 			}
 		}
 		if(!contains)hologramProjectors.add(this);
@@ -121,10 +126,10 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 		
 		boolean changed=false;
 		for(HoloObject ro:holoObjects){
-			if(ro.getClass()==Field.class?highlighs[2]:true){
+			if(ro.getClass()!=Field.class||highlights[2]){
 				ro.checkHighlight();
 				if(ro.isHighlighted){
-					if(!changed&&ro.isHighlighted){
+					if(!changed){
 						changed=true;
 						lastPartClicked=ro;
 					}
@@ -140,9 +145,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 		if(UtilM.isRemote(player))UtilM.sendMessage(new ClickHologramPacket(point.pointedPos,pos));
 		else{
 			if(!worldObj.playerEntities.isEmpty()&&worldObj.playerEntities.get(0)instanceof EntityPlayerMP){
-				(worldObj.playerEntities).forEach(player0->{
-					((EntityPlayerMP)player0).playerNetServerHandler.sendPacket(getDescriptionPacket());
-				});
+				(worldObj.playerEntities).forEach(player0->((EntityPlayerMP)player0).playerNetServerHandler.sendPacket(getDescriptionPacket()));
 			}
 		}
 	}
@@ -152,12 +155,12 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	
 	
 	
-	public static Object[][] rayTraceHolograms(EntityPlayer player,float lenght){
+	public static Object[][] rayTraceHolograms(EntityPlayer player,float length){
 		Object[][] result={{},{}};
 		try{
 	        Vec3M Vec3M=UtilM.getPosition(player,RenderEvents.partialTicks);
 	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderEvents.partialTicks));
-	        Vec3M vec32=Vec3M.addVector(vec31.x * lenght, vec31.y * lenght, vec31.z * lenght);
+	        Vec3M vec32=Vec3M.addVector(vec31.x * length, vec31.y * length, vec31.z * length);
 			
 			Ray ray=new Ray(Vec3M, vec32);
 			for(int a=0;a<hologramProjectors.size();a++){
@@ -169,7 +172,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 					Vec3M
 						min=tile.main.getPoint(false,false,false),
 						max=tile.main.getPoint(true,true,true);
-					
+
 					if(UtilM.intersectLinePlane(ray, new Plane(
 							new Vec3M(
 									tile.x()+min.x+tile.offset.x,

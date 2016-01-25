@@ -25,7 +25,7 @@ public class RenderRemotePowerCounter extends TileEntitySpecialRendererM {
 	double powerBar;
 	int maxPB,currentP;
 	float p=1F/16F;
-	VertixBuffer buf=Render.NVB();
+	VertexRenderer buf=Render.NVB();
 	FontRenderer fr=TessUtil.getFontRenderer();
 	
 	@Override

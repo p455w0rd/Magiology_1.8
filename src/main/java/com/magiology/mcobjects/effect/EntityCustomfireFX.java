@@ -50,12 +50,11 @@ public class EntityCustomfireFX extends EntityFXM{
 		U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		
 		GL11U.setUpOpaqueRendering(2);
-		Renderer.beginQuads();
-		GL11.glColor4f(1, 0, 0, 0.5F);
-		Renderer.addVertexData((x-par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z-par5*ps/1.5-par7*ps/1.5), 0, 0).endVertex();
-		Renderer.addVertexData((x-par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z-par5*ps/1.5+par7*ps/1.5), 1, 0).endVertex();
-		Renderer.addVertexData((x+par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z+par5*ps/1.5+par7*ps/1.5), 1, 1).endVertex();
-		Renderer.addVertexData((x+par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z+par5*ps/1.5-par7*ps/1.5), 0, 1).endVertex();
+		Renderer.POS_UV_COLOR.beginQuads();
+		Renderer.POS_UV_COLOR.addVertex((x-par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z-par5*ps/1.5-par7*ps/1.5), 0, 0,  1, 0, 0, 0.5F);
+		Renderer.POS_UV_COLOR.addVertex((x-par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z-par5*ps/1.5+par7*ps/1.5), 1, 0,  1, 0, 0, 0.5F);
+		Renderer.POS_UV_COLOR.addVertex((x+par3*ps/1.5+par6*ps/1.5), (y+par4*ps/1.5), (z+par5*ps/1.5+par7*ps/1.5), 1, 1,  1, 0, 0, 0.5F);
+		Renderer.POS_UV_COLOR.addVertex((x+par3*ps/1.5-par6*ps/1.5), (y-par4*ps/1.5), (z+par5*ps/1.5-par7*ps/1.5), 0, 1,  1, 0, 0, 0.5F);
 		
 		
 		GL11.glDisable(GL11.GL_BLEND);
@@ -92,7 +91,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		GL11U.endOpaqueRendering();
 		GL11.glPopMatrix();
 		
-		VertixBuffer a=TessUtil.getVB();
+		VertexRenderer a=TessUtil.getVB();
 		
 		
 		a.addVertexWithUV(x-p*ps, y+p*ps, z+p*ps, 0, 1);

@@ -22,7 +22,7 @@ public final class Get{
 		public static final RenderItem RI(){
 			return U.getMC().getRenderItem();
 		}
-		public static final VertixBuffer NVB(){
+		public static final VertexRenderer NVB(){
 			return TessUtil.getVB();
 		}
 		public static final WorldRenderer WR(){

@@ -50,11 +50,16 @@ public class SidedModel{
 				
 				VertexModel buff=new VertexModel();
 				
-				VertexModel buffer=models[i][j].exportToNoramlisedVertixBufferModel();
+				VertexModel buffer=models[i][j].exportToNormalisedVertexBufferModel();
 				
 				buffer.rotateAt(0.5, 0.5, 0.5, rotations[i].x, rotations[i].y, rotations[i].z);
 				buffer.transformAndSaveTo(buff);
+//				buff.recalculateNormals();
 				compiledModels[i][j]=buff;
+				compiledModels[i][j].setRenderer(models[i][j].getRenderer());
+				
+				
+				
 				compiledModels[i][j].glStateCell=models[i][j].glStateCell;
 				
 			}

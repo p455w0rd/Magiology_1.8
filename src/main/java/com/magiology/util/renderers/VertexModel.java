@@ -1,11 +1,11 @@
 package com.magiology.util.renderers;
 
-import java.util.*;
+import com.magiology.util.renderers.glstates.GlStateCell;
 
-import com.magiology.util.renderers.glstates.*;
-import com.magiology.util.utilclasses.Get.Render;
+import java.util.ArrayList;
+import java.util.List;
 
-public class VertexModel extends VertixBuffer{
+public class VertexModel extends VertexRenderer{
 	private boolean isInit=false;
 	
 	public GlStateCell glStateCell;

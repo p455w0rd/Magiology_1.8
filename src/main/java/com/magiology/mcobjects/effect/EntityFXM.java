@@ -58,12 +58,21 @@ public class EntityFXM extends EntityFX{
         int i = this.getBrightnessForRender(par2);
         int j = i >> 16 & 65535;
         int k = i & 65535;
-    	if(draw)Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-    	Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-    	Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-    	Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-    	Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-    	if(draw)Renderer.draw();
+        
+        ColorF color=this.color==null?new ColorF(particleRed, particleGreen, particleBlue, particleAlpha):this.color;
+        if(draw){
+        	Renderer.PARTICLE.beginQuads();
+        	Renderer.PARTICLE.addVertex((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0, color, j, k);
+        	Renderer.PARTICLE.addVertex((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0, color, j, k);
+        	Renderer.PARTICLE.addVertex((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1, color, j, k);
+        	Renderer.PARTICLE.addVertex((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1, color, j, k);
+        	Renderer.PARTICLE.draw();
+        }else{
+        	Renderer.PARTICLE.addVertex((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0, color, j, k);
+        	Renderer.PARTICLE.addVertex((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0, color, j, k);
+        	Renderer.PARTICLE.addVertex((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1, color, j, k);
+        	Renderer.PARTICLE.addVertex((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1, color, j, k);
+        }
 	}
 	@Override
 	public int getFXLayer(){return 3;}

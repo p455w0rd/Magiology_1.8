@@ -1,19 +1,16 @@
 package com.magiology.core.init;
 
-import net.minecraft.item.*;
-import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraftforge.client.*;
-import net.minecraftforge.common.util.*;
-import net.minecraftforge.fml.common.registry.*;
-
-import com.magiology.client.render.itemrender.*;
-import com.magiology.core.*;
-import com.magiology.handlers.animationhandlers.*;
+import com.magiology.core.MReference;
 import com.magiology.mcobjects.items.*;
-import com.magiology.mcobjects.items.armor.*;
+import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
+import com.magiology.mcobjects.items.armor.Helmet_42;
+import com.magiology.mcobjects.items.armor.Pants_42;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class MItems{
 

@@ -228,7 +228,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 		GL11U.texture(false);
 		GL11.glLineWidth(guiScale);
 		
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer buff=TessUtil.getVB();
 		buff.addVertex(pos.x-3, pos.y+size.y+3, 0);
 		buff.addVertex(pos.x+size.x+3, pos.y+size.y+3, 0);
 		buff.addVertex(pos.x+size.x+3, pos.y-3, 0);

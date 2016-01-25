@@ -98,7 +98,7 @@ public class Slider extends HoloObject{
 	}
 	@Override
 	public void drawHighlight(){
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer buff=TessUtil.getVB();
 		float offset=-renderSliderPos.getPoint()*size.y;
 		CubeModel sliderBox=new CubeModel(scroll).expand(0.002F).translate(0,offset,0);
 		

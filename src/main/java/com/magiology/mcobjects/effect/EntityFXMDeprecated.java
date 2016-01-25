@@ -14,7 +14,7 @@ public abstract class EntityFXMDeprecated extends EntityFX{
 		super(world, x,y,z, xSpeed, ySpeed, zSpeed);
 	}
 	
-	public void renderParticle(VertixBuffer buf, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
+	public void renderParticle(VertexRenderer buf, float p_70539_2_, float p_70539_3_, float p_70539_4_, float p_70539_5_, float p_70539_6_, float p_70539_7_)
     {
         float f6 = particleTextureIndexX / 16.0F;
         float f7 = f6 + 0.0624375F;

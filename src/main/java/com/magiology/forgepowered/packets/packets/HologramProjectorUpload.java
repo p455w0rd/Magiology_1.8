@@ -19,7 +19,7 @@ public class HologramProjectorUpload extends AbstractToServerMessage{
 	 public HologramProjectorUpload(){}
 	 public HologramProjectorUpload(TileEntityHologramProjector tile){
 		 pos=new BlockPosM(tile.getPos());
-		 highlights=tile.highlighs;
+		 highlights=tile.highlights;
 	 }
 	@Override
 	public void write(PacketBuffer buffer)throws IOException{
@@ -38,7 +38,7 @@ public class HologramProjectorUpload extends AbstractToServerMessage{
 	public IMessage process(EntityPlayer player, Side side){
 		 TileEntity tile=pos.getTile(player.worldObj);
 		 if(tile instanceof TileEntityHologramProjector){
-			 ((TileEntityHologramProjector)tile).highlighs=highlights;
+			 ((TileEntityHologramProjector)tile).highlights=highlights;
 			 return null;
 		 }
 		 PrintUtil.println("PACKET HAS FAILED TO DELIVER THE DATA!");

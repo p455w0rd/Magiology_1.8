@@ -1,7 +1,7 @@
 This set of MCP mappings was designed for MC 1.8.8. Use at your own peril.This set of MCP mappings was designed for MC 1.8.8. Use at your own peril.
 
 #################################################
-         ForgeGradle 2.1-SNAPSHOT-b9904dd        
+         ForgeGradle 2.1-SNAPSHOT-8267717        
   https://github.com/MinecraftForge/ForgeGradle  
 #################################################
                Powered by MCP unknown               
@@ -13,6 +13,8 @@ This set of MCP mappings was designed for MC 1.8.8. Use at your own peril.This s
 :deobfProvidedDummyTask
 :getVersionJson
 :extractUserdev
+Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8.9-11.15.1.1723/forge-1.8.9-11.15.1.1723.pom
+Download http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.8.9-11.15.1.1723/forge-1.8.9-11.15.1.1723-userdev.jar
 :extractDependencyATs SKIPPED
 :extractMcpData SKIPPED
 :extractMcpMappings SKIPPED
@@ -21,33 +23,39 @@ This set of MCP mappings was designed for MC 1.8.8. Use at your own peril.This s
 :downloadServer SKIPPED
 :splitServerJar SKIPPED
 :mergeJars SKIPPED
-:deobfMcSRG SKIPPED
-:decompileMc SKIPPED
-:fixMcSources SKIPPED
-:applySourcePatches SKIPPED
-:remapMcSources SKIPPED
-:recompileMc SKIPPED
+:deobfMcSRG
+Applying SpecialSource...
+Applying Exceptor...
+:decompileMc
+Download https://libraries.minecraft.net/com/mojang/realms/1.7.57/realms-1.7.57.pom
+Download https://libraries.minecraft.net/com/mojang/realms/1.7.57/realms-1.7.57.jar
+:fixMcSources
+:applySourcePatches
+:remapMcSources
+:recompileMc
 :extractNatives SKIPPED
 :getAssetIndex UP-TO-DATE
 :getAssets
-Current status: 65/734   8%
-Current status: 127/734   17%
-Current status: 196/734   26%
-Current status: 282/734   38%
-Current status: 358/734   48%
-Current status: 410/734   55%
-Current status: 458/734   62%
-Current status: 504/734   68%
-Current status: 677/734   92%
+Current status: 39/734   5%
+Current status: 75/734   10%
+Current status: 125/734   17%
+Current status: 166/734   22%
+Current status: 241/734   32%
+Current status: 301/734   41%
+Current status: 377/734   51%
+Current status: 423/734   57%
+Current status: 491/734   66%
+Current status: 532/734   72%
+Current status: 568/734   77%
+Current status: 625/734   85%
+Current status: 687/734   93%
 :makeStart
 :setupDecompWorkspace
-:eclipseClasspath
-:eclipseJdt
-:eclipseProject
-:makeEclipseCleanRunClient
-:makeEclipseCleanRunServer
-:eclipse
+:ideaModule
+:ideaProject
+:ideaWorkspace
+:idea
 
 BUILD SUCCESSFUL
 
-Total time: 2 mins 1.294 secs
+Total time: 6 mins 41.958 secs

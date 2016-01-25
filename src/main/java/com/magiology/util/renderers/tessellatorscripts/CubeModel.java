@@ -15,7 +15,7 @@ public class CubeModel{
 	public QuadUV[] UVs=new QuadUV[6];
 	public QuadUV[] UVs2=new QuadUV[6];
 	ResourceLocation[] st=new ResourceLocation[6];
-	VertixBuffer buf=Render.NVB();
+	VertexRenderer buf=Render.NVB();
 	public boolean[] willSideRender={true,true,true,true,true,true};
 	public CubeModel(float minX,float minY,float minZ,float maxX,float maxY,float maxZ){
 		this.minX=Math.min(minX, maxX);

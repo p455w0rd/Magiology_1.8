@@ -184,7 +184,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 		return "undefined";
 	}
 	public void drawHighlight(){
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer buff=TessUtil.getVB();
 		buff.pushMatrix();
 		buff.translate(position.x, position.y, 0);
 		buff.cleanUp();

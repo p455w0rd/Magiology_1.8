@@ -1,5 +1,7 @@
 package com.magiology.mcobjects.effect;
 
+import java.awt.*;
+
 import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.world.*;
 
@@ -9,6 +11,8 @@ import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.vectors.*;
 
 public class EntitySmoothBubleFX extends EntityFXM{
 	
@@ -60,8 +64,9 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	@Override
 	public void render(){
         int i = this.getBrightnessForRender(par2);
-        int j = i >> 16 & 65535;
-        int k = i & 65535;
+        int xLight = i >> 16 & 65535;
+        int yLight = i & 65535;
+        
 		GL11.glDisable(GL11.GL_FOG);
 		GL11U.setUpOpaqueRendering(2);
         
@@ -70,65 +75,72 @@ public class EntitySmoothBubleFX extends EntityFXM{
     	float x=(float)(prevPosX+(posX-prevPosX)*par2-interpPosX);
     	float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
     	float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
-    	{
-    		if(texture=="tx1")     TessUtil.bindTexture(Textures.SmoothBuble1);
-    		else if(texture=="tx2")TessUtil.bindTexture(Textures.SmoothBuble2);
-    		else if(texture=="tx3")TessUtil.bindTexture(Textures.SmoothBuble3);
-    		Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-    		Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-    		Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-    		Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-    		Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-    		TessUtil.draw();
-    	}
+    	
+    	Vec3M[] vertex={
+        	new Vec3M((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale)),
+        	new Vec3M((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale)),
+        	new Vec3M((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale)),
+        	new Vec3M((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale))
+    	};
+    	ColorF color=new ColorF(r_e, g_e, b_e, opacity_e);
+    	
+    	if(texture=="tx1")     TessUtil.bindTexture(Textures.SmoothBuble1);
+    	else if(texture=="tx2")TessUtil.bindTexture(Textures.SmoothBuble2);
+    	else if(texture=="tx3")TessUtil.bindTexture(Textures.SmoothBuble3);
+    	Renderer.PARTICLE.beginQuads();
+    	Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
+    	Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+    	Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
+    	Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
+    	Renderer.PARTICLE.draw();
 		
 		if(texture=="tx1"){
 			TessUtil.bindTexture(Textures.SmoothBuble1Add1);
-			Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+    		Renderer.PARTICLE.beginQuads();
+	        Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
 			
-			Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.PARTICLE.addVertex(vertex[0], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 1, 1, color, xLight, yLight);
 			
-	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.PARTICLE.addVertex(vertex[0], 1, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[2], 0, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
 			
-			Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			TessUtil.draw();
+			Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.draw();
 			
 			
 			TessUtil.bindTexture(Textures.SmoothBuble1Add2);
-			Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+			Renderer.PARTICLE.beginQuads();
+	        Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
 			
-	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[1], 1, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[3], 0, 0, color, xLight, yLight);
 			
-	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
+	        Renderer.PARTICLE.addVertex(vertex[0], 1, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[1], 0, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[2], 0, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[3], 1, 0, color, xLight, yLight);
 			
-	        Renderer.addVertexData((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 0, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 0).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-	        Renderer.addVertexData((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 1, 1).setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e).lightmap(j, k).endVertex();
-			TessUtil.draw();
+	        Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
+	        Renderer.PARTICLE.addVertex(vertex[3], 1, 1, color, xLight, yLight);
+	        Renderer.PARTICLE.draw();
 		}
 
 		GL11U.endOpaqueRendering();

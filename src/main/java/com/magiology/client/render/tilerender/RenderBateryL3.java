@@ -20,7 +20,7 @@ public class RenderBateryL3 extends TileEntitySpecialRendererM {
 	
 	public EnumFacing[] connections = new EnumFacing[6];
 	
-	VertixBuffer buf=Render.NVB();
+	VertexRenderer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

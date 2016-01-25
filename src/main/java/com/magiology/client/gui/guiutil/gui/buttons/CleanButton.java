@@ -42,26 +42,26 @@ public class CleanButton extends GuiButton implements Updateable{
         GL11U.texture(false);
         this.drawTexturedModalRect(xPosition, yPosition, 0, 0, width, height);
         GL11U.glColor(color.mix(new ColorF(0,0,0,color.a), 1,1.2F));
-        Renderer.beginLines();
+        Renderer.LINES.begin();
         
         if(enabledOutline[0]){
-        	Renderer.addPos(xPosition,       yPosition, 0).endVertex();
-        	Renderer.addPos(xPosition+width, yPosition, 0).endVertex();
+        	Renderer.LINES.addVertex(xPosition,       yPosition, 0);
+        	Renderer.LINES.addVertex(xPosition+width, yPosition, 0);
         }
         if(enabledOutline[1]){
-        	Renderer.addPos(xPosition, yPosition,        0).endVertex();
-        	Renderer.addPos(xPosition, yPosition+height, 0).endVertex();
+        	Renderer.LINES.addVertex(xPosition, yPosition,        0);
+        	Renderer.LINES.addVertex(xPosition, yPosition+height, 0);
         }
         if(enabledOutline[2]){
-        	Renderer.addPos(xPosition+width, yPosition,        0).endVertex();
-        	Renderer.addPos(xPosition+width, yPosition+height, 0).endVertex();
+        	Renderer.LINES.addVertex(xPosition+width, yPosition,        0);
+        	Renderer.LINES.addVertex(xPosition+width, yPosition+height, 0);
         }
         if(enabledOutline[3]){
-        	Renderer.addPos(xPosition,       yPosition+height, 0).endVertex();
-        	Renderer.addPos(xPosition+width, yPosition+height, 0).endVertex();
+        	Renderer.LINES.addVertex(xPosition,       yPosition+height, 0);
+        	Renderer.LINES.addVertex(xPosition+width, yPosition+height, 0);
         }
         
-        Renderer.draw();
+        Renderer.LINES.draw();
         
         GL11U.texture(true);
         

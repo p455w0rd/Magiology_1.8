@@ -155,30 +155,30 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  GL11.glDisable(GL11.GL_LIGHTING);
 		  GL11.glDepthMask(false);
 		  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		  Renderer.beginQuads();
+		  Renderer.POS.beginQuads();
 		  GL11.glColor4f((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), (float)(0.7+UtilM.RF()*0.3));
 		  for(int a=0;a<2;a++){
-			  Renderer.addPos(-p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
-			  Renderer.addPos(-p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
-			  Renderer.addPos(-p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
-			  Renderer.addPos(-p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.POS.addVertex(-p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.POS.addVertex(-p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.POS.addVertex(-p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.POS.addVertex(-p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
 			  
-			  Renderer.addPos( p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
-			  Renderer.addPos( p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
-			  Renderer.addPos( p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005).endVertex();
-			  Renderer.addPos( p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005).endVertex();
+			  Renderer.POS.addVertex( p  +UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.POS.addVertex( p  +UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.POS.addVertex( p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
+			  Renderer.POS.addVertex( p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
 		  }
-		  TessUtil.draw();
-		  Renderer.begin(GL11.GL_TRIANGLES);
+		  Renderer.POS.draw();
+		  Renderer.POS.begin(GL11.GL_TRIANGLES);
 		  GL11.glColor4f((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), 1);
 		  for(int l=0;l<2+(isSneak?4:0);l++){
 			  double[] criclexyz=UtilM.createBallXYZ(0.5+UtilM.RF(), false);
-			  Renderer.addPos(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3)).endVertex();
-			  Renderer.addPos(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3)).endVertex();
-			  Renderer.addPos(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3)).endVertex();
+			  Renderer.POS.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
+			  Renderer.POS.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
+			  Renderer.POS.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
 		  }
 		  
-		  TessUtil.draw();
+		  Renderer.POS.draw();
 		  GL11.glEnable(GL11.GL_TEXTURE_2D);
 		  GL11.glEnable(GL11.GL_LIGHTING);
 		  GL11.glDisable(GL11.GL_BLEND);

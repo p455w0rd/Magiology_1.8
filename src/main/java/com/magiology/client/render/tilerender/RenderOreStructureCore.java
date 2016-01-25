@@ -14,7 +14,7 @@ public class RenderOreStructureCore extends TileEntitySpecialRendererM{
 	private final float p= 1F/16F;
 	private final float tW=1F/96F;
 	private final float tH=1F/80F;
-	VertixBuffer buf=Render.NVB();
+	VertexRenderer buf=Render.NVB();
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){

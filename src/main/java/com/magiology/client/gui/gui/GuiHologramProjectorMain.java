@@ -53,7 +53,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		}
 		if(helpAlpha>0.03){
 			int color=new ColorF(1, 1, 1, helpAlpha).toCode();
-			String ish="Is highlight™ going to be be applied";
+			String ish="Is highlightï¿½ going to be be applied";
 			Font.FR().drawStringWithShadow(ish, 150-Font.FR().getStringWidth(ish), ySize+2, color);
 			Font.FR().drawStringWithShadow("Spawn new component", -10, -9, color);
 			
@@ -79,10 +79,10 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 			b2=new OnOffGuiButton(1, guiLeft+xSize+1, guiTop+ys+3, 24, 12, new ColorF(0.2, 0.8, 0.2, 0.8)),
 			b3=new OnOffGuiButton(2, guiLeft+xSize+1, guiTop+ys*2+4, 24, 12, new ColorF(0.2, 0.2, 0.8, 0.8)),
 			b4=new OnOffGuiButton(3, guiLeft+xSize+1, guiTop+ys*3+5, 24, 12, new ColorF(0.2, 0.8, 0.8, 0.8));
-		b1.forceIsOn(tile.highlighs[0]);
-		b2.forceIsOn(tile.highlighs[1]);
-		b3.forceIsOn(tile.highlighs[2]);
-		b4.forceIsOn(tile.highlighs[3]);
+		b1.forceIsOn(tile.highlights[0]);
+		b2.forceIsOn(tile.highlights[1]);
+		b3.forceIsOn(tile.highlights[2]);
+		b4.forceIsOn(tile.highlights[3]);
 		buttonList.add(b1);
 		buttonList.add(b2);
 		buttonList.add(b3);
@@ -100,7 +100,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 	@Override
 	protected void actionPerformed(GuiButton button)throws IOException{
 		if(button instanceof OnOffGuiButton){
-			tile.highlighs[button.id]=((OnOffGuiButton)button).isOn();
+			tile.highlights[button.id]=((OnOffGuiButton)button).isOn();
 			UtilM.sendMessage(new HologramProjectorUpload(tile));
 		}else{
 			switch(button.id){
@@ -129,7 +129,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		arrowX.wantedPoint=-0.05F;
 		arrowX.speed=2;
 		int arrowY=0;
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer buff=TessUtil.getVB();
 		buff.setDrawAsWire(true);
 		while(arrowX.point>1||arrowX.speed>0){
 			arrowX.update();
@@ -149,7 +149,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		//Set up rendering for reusable line rendering
 		buff.setClearing(false);
 		buff.setInstantNormalCalculation(false);
-		VertixBuffer buffer=new VertixBuffer();
+		VertexRenderer buffer=new VertexRenderer();
 		//draw & transform
 		buff.pushMatrix();
 		buff.translate(140, ySize+1, 0);
@@ -201,7 +201,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		//clear curve vertices
 		buff.cleanUp();
 		//export to model
-		arrowsModel=buffer.exportToNoramlisedVertixBufferModel();
+		arrowsModel=buffer.exportToNormalisedVertexBufferModel();
 		arrowsModel.setDrawAsWire(true);
 		PrintUtil.println("Info: "+getClass().getSimpleName()+" has initialized a model. This may cause a FPS dorp for a second.");
 	}

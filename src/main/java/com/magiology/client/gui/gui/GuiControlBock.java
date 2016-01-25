@@ -224,11 +224,11 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	 protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 0.00390625F;
 	     float f1 = 0.00390625F;
-	     Renderer.beginQuads();
-	     Renderer.addVertexData(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1).endVertex();
-	     Renderer.addVertexData(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1).endVertex();
-	     Renderer.addVertexData(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1).endVertex();
-	     Renderer.addVertexData(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1).endVertex();
-	     TessUtil.draw();
+	     Renderer.POS_UV.beginQuads();
+	     Renderer.POS_UV.addVertex(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
+	     Renderer.POS_UV.addVertex(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
+	     Renderer.POS_UV.addVertex(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
+	     Renderer.POS_UV.addVertex(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
+	     Renderer.POS_UV.draw();
 	}
 }

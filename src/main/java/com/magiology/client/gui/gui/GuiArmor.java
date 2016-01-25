@@ -1,27 +1,23 @@
 package com.magiology.client.gui.gui;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraftforge.client.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.custom.guiparticels.*;
-import com.magiology.client.gui.guiutil.gui.buttons.*;
-import com.magiology.client.render.itemrender.*;
-import com.magiology.core.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.container.ArmorContainer;
+import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
+import com.magiology.core.MReference;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.mcobjects.effect.GuiParticle;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	

@@ -1,16 +1,18 @@
 package com.magiology.util.renderers;
 
-import static org.lwjgl.opengl.GL11.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
+import com.magiology.util.utilclasses.DataStalker;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import static org.lwjgl.opengl.GL11.*;
 
 
 /**
@@ -23,7 +25,7 @@ public class GL11U{
 		case 1:glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);return;
 		case 2:glBlendFunc(GL_SRC_ALPHA, GL_ONE);return;
 		case 3:glBlendFunc(GL_ONE, GL_ONE);return;
-		default:PrintUtil.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");return;
+		default:PrintUtil.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");
 	}}
 //	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
 		
@@ -66,7 +68,8 @@ public class GL11U{
 	/**Is all opaque texture accepted to be rendered.
 	 * true  = everything
 	 * false = only 100% opaque texture rendered
-	 * @param enabled*/
+	 * @param enabled is opacity enabled
+	 * */
 	public static void allOpacityIs(boolean enabled){
 		if(enabled)glAlphaFunc(GL_GREATER, 0);
 		else glAlphaFunc(GL_GREATER, 0.9999F);
@@ -189,8 +192,8 @@ public class GL11U{
 		try{
 			Integer id=(Integer)DataStalker.getVariable(GlStateManager.class, "activeTextureUnit").get(null);
 			Object texture=((Object[])DataStalker.getVariable(GlStateManager.class, "textureState").get(null))[id];
-			textureId=(Integer)DataStalker.getVariable(texture.getClass(), "textureName", texture);
-		}catch(Exception e){}
+			if(texture!=null)textureId=DataStalker.getVariable(texture.getClass(), "textureName", texture);
+		}catch(Exception ignored){}
 	}
 	@Deprecated
 	public static void setTexture(){

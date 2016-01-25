@@ -350,27 +350,25 @@ public class FontRendererMBase extends FontRenderer{
 
 	@Override
 	protected void doDraw(float f){
+		GlStateManager.disableTexture2D();
 		if(strikethroughStyle){
-			GlStateManager.disableTexture2D();
-			Renderer.beginQuads();
-			Renderer.addPos(posX, posY+FONT_HEIGHT/2, 0.0D).endVertex();
-			Renderer.addPos(posX+f, posY+FONT_HEIGHT/2, 0.0D).endVertex();
-			Renderer.addPos(posX+f, posY+FONT_HEIGHT/2-1.0F, 0.0D).endVertex();
-			Renderer.addPos(posX, posY+FONT_HEIGHT/2-1.0F, 0.0D).endVertex();
-			Renderer.draw();
-			GlStateManager.enableTexture2D();
+			Renderer.POS.beginQuads();
+			Renderer.POS.addVertex(posX, posY+FONT_HEIGHT/2, 0.0D);
+			Renderer.POS.addVertex(posX+f, posY+FONT_HEIGHT/2, 0.0D);
+			Renderer.POS.addVertex(posX+f, posY+FONT_HEIGHT/2-1.0F, 0.0D);
+			Renderer.POS.addVertex(posX, posY+FONT_HEIGHT/2-1.0F, 0.0D);
+			Renderer.POS.draw();
 		}
 		if(underlineStyle){
-			GlStateManager.disableTexture2D();
-			Renderer.beginQuads();
+			Renderer.POS.beginQuads();
 			int l=underlineStyle?-1:0;
-			Renderer.addPos(posX+l, posY+FONT_HEIGHT, 0.0D).endVertex();
-			Renderer.addPos(posX+f, posY+FONT_HEIGHT, 0.0D).endVertex();
-			Renderer.addPos(posX+f, posY+FONT_HEIGHT-1.0F, 0.0D).endVertex();
-			Renderer.addPos(posX+l, posY+FONT_HEIGHT-1.0F, 0.0D).endVertex();
-			Renderer.draw();
-			GlStateManager.enableTexture2D();
+			Renderer.POS.addVertex(posX+l, posY+FONT_HEIGHT, 0.0D);
+			Renderer.POS.addVertex(posX+f, posY+FONT_HEIGHT, 0.0D);
+			Renderer.POS.addVertex(posX+f, posY+FONT_HEIGHT-1.0F, 0.0D);
+			Renderer.POS.addVertex(posX+l, posY+FONT_HEIGHT-1.0F, 0.0D);
+			Renderer.POS.draw();
 		}
+		GlStateManager.enableTexture2D();
 		posX+=((int)f);
 	}
 

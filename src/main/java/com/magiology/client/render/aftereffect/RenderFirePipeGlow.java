@@ -15,7 +15,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
 	private final float p= 1F/16F;
-	VertixBuffer buf=TessUtil.getVB();
+	VertexRenderer buf=TessUtil.getVB();
 	public TileEntityFirePipe pipe;
 	public  double alpha=0,prevAlpha;
 	private static EntityPlayer player=U.getMC().thePlayer;
@@ -72,7 +72,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		c8.willSideRender[0]=c8.willSideRender[1]=
 		false;
 		buf.importComplexCube(c5,c6,c7,c8);
-		strateCoreModel=buf.exportToNoramlisedVertixBufferModel();
+		strateCoreModel=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawStrateCoreGlow(EnumFacing dir){
 		GL11.glPushMatrix();
@@ -111,7 +111,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		c3.points[4].y+=p*0.5;c3.points[5].y+=p*0.5;c3.points[6].y+=p*0.5;c3.points[7].y+=p*0.5;c3.points[4].z-=p*0.5;c3.points[5].z-=p*0.5;c3.points[6].z-=p*0.5;c3.points[7].z-=p*0.5;
 		c4.points[4].y+=p*0.5;c4.points[5].y+=p*0.5;c4.points[6].y+=p*0.5;c4.points[7].y+=p*0.5;c4.points[4].z+=p*0.5;c4.points[5].z+=p*0.5;c4.points[6].z+=p*0.5;c4.points[7].z+=p*0.5;
 		buf.importComplexCube(c1,c2,c3,c4,c5,c6,c7,c8);
-		connectorGlowModel=buf.exportToNoramlisedVertixBufferModel();
+		connectorGlowModel=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawConnectorGlow(EnumFacing dir){
 		if(connectorGlowModel==null)generateModelConnectorGlow();
@@ -186,7 +186,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		c20.willSideRender[2]=c20.willSideRender[1]=c20.willSideRender[5]=
 		false;
 		buf.importComplexCube(c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20);
-		coreGlowModel=buf.exportToNoramlisedVertixBufferModel();
+		coreGlowModel=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawCoreGlow(){
 		if(coreGlowModel==null)generateModelCoreGlow();

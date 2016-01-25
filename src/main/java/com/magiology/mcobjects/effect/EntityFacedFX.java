@@ -80,13 +80,12 @@ public class EntityFacedFX extends EntityFXM{
     	GL11U.glRotate(rotation.x, rotation.y, rotation.z);
 //    	GL11.glScaled(1, 1.3, 1);
     	GL11U.glCulFace(false);
-    	Renderer.beginQuads();
-    	Renderer.setColor((float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    	Renderer.addVertexData( PScale, PScale,0, 0, 0).endVertex();
-    	Renderer.addVertexData(-PScale, PScale,0, 1, 0).endVertex();
-    	Renderer.addVertexData(-PScale,-PScale,0, 1, 1).endVertex();
-    	Renderer.addVertexData( PScale,-PScale,0, 0, 1).endVertex();
-    	TessUtil.draw();
+    	Renderer.POS_UV_COLOR.beginQuads();
+    	Renderer.POS_UV_COLOR.addVertex( PScale, PScale,0, 0, 0, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+    	Renderer.POS_UV_COLOR.addVertex(-PScale, PScale,0, 1, 0, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+    	Renderer.POS_UV_COLOR.addVertex(-PScale,-PScale,0, 1, 1, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+    	Renderer.POS_UV_COLOR.addVertex( PScale,-PScale,0, 0, 1, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+    	Renderer.POS_UV_COLOR.draw();
     	GL11U.glCulFace(true);
     	
 		

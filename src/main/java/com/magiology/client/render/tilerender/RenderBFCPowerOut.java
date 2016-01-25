@@ -17,7 +17,7 @@ public class RenderBFCPowerOut extends TileEntitySpecialRendererM {
 	private final float p= 1F/16F;
 	private final float tWC=1F/4F;
 	private final float tHC=1F/40F;
-	VertixBuffer buf=Render.NVB();
+	VertexRenderer buf=Render.NVB();
 	
 @Override
 public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

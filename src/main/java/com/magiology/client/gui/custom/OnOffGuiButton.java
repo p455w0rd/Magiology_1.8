@@ -34,7 +34,7 @@ public class OnOffGuiButton extends GuiButton implements Updateable{
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY){
 		if(this.visible){
-	        VertixBuffer buff=TessUtil.getVB();
+	        VertexRenderer buff=TessUtil.getVB();
 	        buff.setInstantNormalCalculation(false);
 			GL11U.texture(false);
 	        GlStateManager.enableBlend();

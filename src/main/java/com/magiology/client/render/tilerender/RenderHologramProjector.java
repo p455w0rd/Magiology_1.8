@@ -44,10 +44,10 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 			ro.render(color);
 			GL11.glPopMatrix();
 			if((
-				(ro.getClass()==TextBox.class&&tile.highlighs[0])||
-				(ro.getClass()==Button.class&&tile.highlighs[1])||
-				(ro.getClass()==Slider.class&&tile.highlighs[3])||
-				(ro.getClass()==Field.class&&tile.highlighs[2])
+				(ro.getClass()==TextBox.class&&tile.highlights[0])||
+				(ro.getClass()==Button.class&&tile.highlights[1])||
+				(ro.getClass()==Slider.class&&tile.highlights[3])||
+				(ro.getClass()==Field.class&&tile.highlights[2])
 				)&&!selected&&(ro.isHighlighted||ro.moveMode)){
 				selected=true;
 				GL11.glColor4f(0,0,0,0.4F);

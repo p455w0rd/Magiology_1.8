@@ -30,7 +30,7 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		popup=new AdvancedPhysicsFloat(-0.5F,0.05F),
 		down=new AdvancedPhysicsFloat(0,0.05F),
 		button=new AdvancedPhysicsFloat(0,0.3F,true);
-	private VertixBuffer buff=TessUtil.getVB();
+	private VertexRenderer buff=TessUtil.getVB();
 	private DoubleObject<Integer, Boolean> mousePrev;
 	public boolean isClicked,selected,isDownloading=false,downloadingInvoked=false;
 	public ColorF backgroundColor=new ColorF(0, 0, 0, 0.2F);

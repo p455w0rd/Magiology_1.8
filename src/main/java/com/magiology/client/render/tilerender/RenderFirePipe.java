@@ -23,7 +23,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	private final float tHFSL=1F/38F;
 	private final float tWS=1F/16F;
 	private final float tHS=1F/32F;
-	VertixBuffer buf=TessUtil.getVB();
+	VertexRenderer buf=TessUtil.getVB();
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		GL11U.protect();
@@ -188,7 +188,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		buf.addVertexWithUV(p*10.5, p*0, p*7.5,  tWS*8, tHS*32);
 		buf.addVertexWithUV(p*9.5,  p*0, p*7.5,  tWS*16, tHS*32);
 		buf.addVertexWithUV(p*7.5,  p*3, p*7.5,  tWS*16, tHS*0);
-		modelStand=buf.exportToNoramlisedVertixBufferModel();
+		modelStand=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawStand(EnumFacing dir){
 		if(modelStand==null)generateModelStand();
@@ -223,13 +223,13 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		buf.addVertexWithUV(p*1.5, p*6,  p*10,0, 1);
 		buf.addVertexWithUV(p*0,   p*6,  p*10,1, 1);
 		buf.addVertexWithUV(p*0,   p*6,  p*6,1, 0);
-		conectionToObjModel[0]=buf.exportToNoramlisedVertixBufferModel();
+		conectionToObjModel[0]=buf.exportToNormalisedVertexBufferModel();
 		
 		buf.addVertexWithUV(p*1.5, p*10, p*10, 1, 1);
 		buf.addVertexWithUV(p*1.5, p*6,  p*10, 1, 0);
 		buf.addVertexWithUV(p*1.5, p*6,  p*6,  0, 0);
 		buf.addVertexWithUV(p*1.5, p*10, p*6,  0, 1);
-		conectionToObjModel[1]=buf.exportToNoramlisedVertixBufferModel();
+		conectionToObjModel[1]=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawConectionToObj(EnumFacing dir, String type){
 		if(conectionToObjModel[0]==null)generateModelConectionToObj();
@@ -274,7 +274,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		buf.addVertexWithUV(1, p*6.5, p*9.5,tW*28, tH*16);
 		buf.addVertexWithUV(0, p*6.5, p*9.5,tW*103, tH*16);
 		buf.addVertexWithUV(0, p*6.5, p*6.5,tW*103, tH*0);
-		strateCoreModel=buf.exportToNoramlisedVertixBufferModel();
+		strateCoreModel=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawStrateCore(EnumFacing dir){
 		if(strateCoreModel==null)generateModelStrateCore();
@@ -484,7 +484,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		buf.addVertexWithUV(p*10.5, -p*0.78, p*10.5,tWFSL*29, tHFSL*38);
 		buf.addVertexWithUV(p*5.5, -p*0.78,  p*10.5,tWFSL*9, tHFSL*38);
 		buf.addVertexWithUV(p*5.5, -p*0.78,  p*5.5,tWFSL*9, tHFSL*18);
-		conectorFFLModel=buf.exportToNoramlisedVertixBufferModel();
+		conectorFFLModel=buf.exportToNormalisedVertexBufferModel();
 	}
 	public void drawConectorFFL(){
 		bindTexture(Textures.FirePipeConectionFSL);

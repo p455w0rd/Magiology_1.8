@@ -17,7 +17,7 @@ public class RenderBateryL100 extends TileEntitySpecialRendererM {
 	private final float tH=1F/64F;
 	private final float tWC=1F/112F;
 	private final float tHC=1F/16F;
-	VertixBuffer buf=Render.NVB();
+	VertexRenderer buf=Render.NVB();
 	
 	public EnumFacing[] connections = new EnumFacing[6];
 	

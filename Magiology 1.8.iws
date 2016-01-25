@@ -1,0 +1,968 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1467473b-5aeb-49a2-a3ba-04cf326b792c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.classpath" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.project" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/blockstates/IronLevel3.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/lang/en_US.lang" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/arrow.obj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/ball.obj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/block/IronLevel3.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/item/FireHammer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/item/IronLevel3.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/stick.obj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/textures/helmet42model.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/textures/pants42model.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/textures/wingColorMap.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/models/untitled.obj" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/sounds.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/sounds/poop.ogg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/sounds/swing1.ogg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/sounds/swing2.ogg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/sounds/weird.ogg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/sounds/wind.ogg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/BedrockBreakerBase.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/CoalLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/CoalLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/CoalLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/CoalLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/DiamondLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/DiamondLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/DiamondLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/DiamondLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/DiscoFlor.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/EmeraldLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/EmeraldLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/EmeraldLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/EmeraldLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/FireLamp.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/FireLampTop.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/FirePipeIcon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/GoldLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/GoldLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/GoldLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/GoldLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/IronLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/IronLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/IronLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/IronLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/LapisLazuliLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/LapisLazuliLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/LapisLazuliLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/LapisLazuliLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/NetherQuartzLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/NetherQuartzLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/NetherQuartzLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/NetherQuartzLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/OreStructureCore.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/RedstoneLevel2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/RedstoneLevel3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/RedstoneLevel4.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/RedstoneLevel5.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperCoal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperDiamond.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperEmerald.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperGold.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperIron.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperLapisLazuli.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperNetherQuartz.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/SuperDuperRedstone.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/background orginal.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/blocks/nista16x16.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/CraftingGridWproduct.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/GuiArmorEditor.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/GuiControlBock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/GuiPants42.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/ISidedIns.pdn" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/ISidedIns.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/SCGui.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/UpgradeGui.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/downloading.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/fp/soulFlame.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/gui/statsgui/statsGui1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/BedrockDust.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/CapacityUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/ControlUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/DiscoFlorPlacer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/EquivalentRightClickWandOfMagic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/FireBarrel.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/FireHammer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/FlightUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/PowerCounter.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/PriorityUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/RangeUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/SpeedUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/ThermalVisionUpgrades.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/baseBotom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/baseSide.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/baseSide2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/baseTop.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/normalFingerBotom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/normalFingerEnd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/normalFingerSide.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/normalFingerStart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/normalFingerTextureClip.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/normalFingerTop.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/thumbBotom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/thumbEnd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/thumbSide.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/thumbStart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/thumbTextureClip.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/items/thehand/thumbTop.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/bedrock_breaker_base.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/bedrock_breaker_leg_back.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/bedrock_breaker_leg_front.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/bedrock_breaker_leg_laser.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/bedrock_breaker_leg_side.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/bedrock_breaker_leg_top_bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/energized_lapis_ore.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/fire_exhaust.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/fire_matrix_receaver_base.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConecter.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConecterIn.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConecterOut.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConection.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConectionEnd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConectionFF.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeConectionFSL.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/firepipe/FirePipeCore.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/gear.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/gun.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/ore_structure_core.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/powercounter/EnergyBar.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/powercounter/PowerCounter1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/powercounter/PowerCounter2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/models/visual_connection.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/particle/fire_hd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/particle/smooth_buble1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/particle/smooth_buble1_add1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/particle/smooth_buble1_add2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/particle/smooth_buble2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/magiology/textures/particle/smooth_buble3.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/shaders/post/blurM.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/shaders/post/colorCutM.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/shaders/program/blurM.fsh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/shaders/program/blurM.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/shaders/program/colorCutM.fsh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/shaders/program/colorCutM.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/textures/gui/container/creative_inventory/tab_custom_gui.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/assets/minecraft/textures/gui/widgetsAdd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/Sounds.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/SavableData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/connection/Connection.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/connection/ConnectionType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/connection/IConnection.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/connection/IConnectionFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/connection/IConnectionProvider.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/ISidedNetworkComponent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/InterfaceTileEntitySaver.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/NetworkBaseComponent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/NetworkInteractBaseComponent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/interfaces/registration/DefaultInterface.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/interfaces/registration/InterfaceBinder$TileToInterfaceHelper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/interfaces/registration/InterfaceBinder.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/interfaces/registration/InterfaceRegistration.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/skeleton/TileEntityNetwork.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/skeleton/TileEntityNetworkInteract.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/network/skeleton/TileEntityNetworkPow.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/ISidedPower.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/PowerCore$SavePowerToItemEvents.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/PowerCore.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/PowerProducer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/PowerUpgrades.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/SixSidedBoolean$Modifier.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/power/SixSidedBoolean.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/api/updateable/Updater.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/Config.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/MReference.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/Magiology$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/Magiology.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MBlocks.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MCreativeTabs$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MCreativeTabs$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MCreativeTabs$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MCreativeTabs$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MCreativeTabs.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MEntitys.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MEvents.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MGui.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MInterfaces.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MItems.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MPackets.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MRecepies.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/core/init/MTileEntitys.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/core/AbstractPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/core/AbstractToClientMessage$SendingTarget$TypeOfSending.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/core/AbstractToClientMessage$SendingTarget.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/core/AbstractToClientMessage.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/core/AbstractToServerMessage.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/ClickHologramPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/NotifyPointedBoxChangePacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/OpenGuiPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/RenderObjectUploadPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/RightClickBlockPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/SavableDataWithKeyPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/SendPlayerDataPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/TileRedstone.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/UploadPlayerDataPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/generic/GenericServerIntPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/generic/GenericServerStringPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/packets/packets/generic/GenericServerVoidPacket.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/proxy/ClientProxy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/forgepowered/proxy/CommonProxy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/io/IOReadableMap.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/io/ZipManager.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/BFCPowerOut.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/BateryGeneric.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/BedrockBreaker.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/BigFurnaceCore.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/BlockContainerMultiColision.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/ControlBlock.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/DontLookAtMe.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/FakeAir.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/HologramProjector.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/OreLevelX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/OreStructureCore.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/ParticleLauncher.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/PileODust.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/RareSpacePipe.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/RemotePowerCounter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/SmartCrafter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/energizedLapisOre.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/fire/FireExhaust.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/fire/FireGun.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/fire/FireLamp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/fire/FireMatrixReceaver.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/fire/FireMatrixTransferer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/fire/FirePipe.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/network/NetworkConductor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/network/NetworkController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/blocks/network/NetworkInterface.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityBaseFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityCustomfireFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityFXM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityFXMDeprecated.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityFacedFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityFollowingBubleFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntityMovingParticleFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntitySmoothBubleFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntitySparkFX$Fragment.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/EntitySparkFX.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/effect/GuiParticle.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/ComplexPlayerRenderingData$CyborgWingsFromTheBlackFireData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/ComplexPlayerRenderingData$PowerHandData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/ComplexPlayerRenderingData$PowerHandData_sub_fingerData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/ComplexPlayerRenderingData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/EntityBallOfEnergy.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/EntitySubatomicWorldDeconstructor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/entitys/ExtendedPlayerData.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/BedrockDust.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/EquivalentRightClickWandOfMagic.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/FireBarrel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/FireHammer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/GenericItemUpgrade.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/IPowerSidenessInstructor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/ItemContainer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/NetworkPointer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/PowerCounter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/TheHand.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/armor/CyborgWingsFromTheBlackFireItem.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/armor/Helmet_42.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/armor/Pants_42.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/RegisterItemUpgrades$Container.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/RegisterItemUpgrades$UpgradeType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/RegisterItemUpgrades.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/UpgradeMain.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/skeleton/UpgItem.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/skeleton/UpgradeableArmor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/items/upgrades/skeleton/UpgradeableItem.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityBFCPowerOut.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityBateryGeneric.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityBedrockBreaker.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityBigFurnaceCore.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityControlBlock.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityDontLookAtMe.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityEnergizedLapisOre.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityFireExhaust.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityFireGun.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityFireLamp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityFireMatrixReceaver.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityFireMatrixTransferer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityFirePipe.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityOreStructureCore.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityPLauncher.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityRareSpacePipe.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntityRemotePowerCounter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/TileEntitySmartCrafter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/baterys/TileEntityBateryL1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/baterys/TileEntityBateryL100.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/baterys/TileEntityBateryL2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/baterys/TileEntityBateryL3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/corecomponents/MultiColisionProvider$MultiColisionProviderRayTracer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/corecomponents/MultiColisionProvider.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/corecomponents/TileEntityConnectionProvider.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/corecomponents/UpdateableTile.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/corecomponents/powertiles/TileEntityPow.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/corecomponents/powertiles/TileEntityPowGen.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/hologram/Button.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/hologram/HoloObject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/hologram/Point.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/hologram/StringContainer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/hologram/TextBox.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkConductor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkInterface.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/mcobjects/tileentityes/network/interfaces/TileHologramProjectorInterface.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/registry/WrenchRegistry.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/registry/events/PlayerWrenchEvent.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/structures/BlockAt.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/structures/Structure.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/structures/Structures.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/structures/SymmetryBoot.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/renderers/GL11U.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/renderers/TessUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/renderers/tessellatorscripts/NormalCubeModel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/renderers/tessellatorscripts/PlateModel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/renderers/tessellatorscripts/TexturedTriangle.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/DataStalker.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/FontEffectUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/Get$Client.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/Get$Render.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/Get.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/NetworkUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/PowerUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/SideUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/SpecialPlayerUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/ArrayMath.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/CricleUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/ObjectCalculator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/SmartCalculator$CalcObj.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/SmartCalculator$CalculationFormat$Operator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/SmartCalculator$CalculationFormat$Variable.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/SmartCalculator$CalculationFormat.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilclasses/math/SmartCalculator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/ColorF.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/ConvenientMap.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/DoubleObject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/EntityPosAndBB.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/NBTUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/SimpleCounter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/SlowdownUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/BlockContainerM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/BlockM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/BlockPosM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/ItemM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/TileEntityM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/TileEntitySpecialRendererM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/effect/EntityCloudFXM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/effect/EntityFlameFXM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/effect/EntityLavaFXM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/m_extension/effect/EntitySmokeFXM.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/AdvancedPhysicsFloat.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/AdvancedPhysicsVec3F.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/Plane.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/Pos.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/Ray.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/TwoDots.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/Vec3M.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/util/utilobjects/vectors/X1y1z1x2y2z2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$Line.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$Renderer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$TheHandler1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$TheHandler2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$TheHandler3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI$TheHandler4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/ModInfoGUI.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/com/magiology/windowsgui/SoundPlayer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/mcmod.info" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.mylyn/.taskListIndex/segments.gen" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.mylyn/.tasks.xml.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.mylyn/repositories.xml.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.mylyn/tasks.xml.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.resources/.projects/.org.eclipse.jdt.core.external.folders/.location" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/history.version" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.resources/.root/.indexes/properties.version" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/ccw.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexide.as.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexide.css.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.adobe.flexide.mxml.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.dubture.twig.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.github.eclipsecolortheme.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.palantir.typescript.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.powerflasher.fdt.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.puppetlabs.geppetto.module.dsl.Module.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.puppetlabs.geppetto.pp.dsl.PP.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.spket.js.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/com.spket.xml.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/de.walware.statet.base.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/de.walware.statet.r.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/eclihx.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/goclipse.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/jp.gr.java_conf.ussiy.app.propedit.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/jsonedit-core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/net.sf.eclipsefp.haskell.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/net.sourceforge.texlipse.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/net.vtst.ow.eclipse.less.Less.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.cfeclipse.cfml.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.chromium.debug.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.cloudsmith.geppetto.pp.dsl.PP.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.codehaus.groovy.eclipse.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.dadacoalition.yedit.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.angularjs.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ant.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.cdt.make.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.cdt.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.datatools.sqltools.sqleditor.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.dltk.ruby.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.dltk.tcl.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.e4.CSS.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.launching.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jst.jsp.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.mylyn.context.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.mylyn.monitor.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.mylyn.tasks.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.pde.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.php.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.team.cvs.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.team.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.workbench.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.css.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.dtd.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.html.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.jsdt.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.xml.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.wst.xsl.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.xtend.core.Xtend.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.epic.perleditor.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.erlide.ui.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.jboss.ide.eclipse.freemarker.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.nodeclipse.enide.editors.gradle.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.nodeclipse.enide.editors.jade.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.python.pydev.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.scala-ide.play2.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.scala-ide.sdt.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.sourceforge.jsonedit.core.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.sweetlemonade.eclipse.json.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/winterwell.markdown.prefs" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.ui/dialog_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/.org.eclipse.jdt.core.external.folders/.project" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1188181502.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1218456441.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1227950781.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1282818381.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/129756897.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1359953740.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1383343684.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1430429413.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1461599360.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1471326715.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1767929124.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1874161663.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/19181377.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1924053807.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1972892346.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/1987832751.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2186375778.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2187835193.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2209626737.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2315206761.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2417430979.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2574630238.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2755887725.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2810492855.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/281803862.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/2867132134.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3025223745.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3225521671.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3287424502.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3308959198.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3320687123.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3332035454.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3384376093.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3416048081.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/34796689.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3663398869.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/3682114032.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/382260617.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/4023462050.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/406982386.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/424964818.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/500733922.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/566554614.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/663236413.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/888034928.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/921319315.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/93521013.index" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/externalFilesCache" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/externalLibsTimeStamps" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/invalidArchivesCache" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/javaLikeNames.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.core/variablesAndContainers.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.launching/.install.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.launching/libraryInfos.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.ui/OpenTypeHistory.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.ui/QualifiedTypeNameHistory.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.m2e.logback.configuration/logback.1.5.1.20150109-1820.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/eclipse/.metadata/version.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertixBuffer.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/gradle.log" afterPath="$PROJECT_DIR$/.gradle/gradle.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.debug.ui.prefs" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.debug.ui.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.jdt.core.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.editors.prefs" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.editors.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.ide.prefs" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.ide.prefs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.core/.launches/Client.launch" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.core/.launches/Client.launch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.core/.launches/Server.launch" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.core/.launches/Server.launch" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" afterPath="$PROJECT_DIR$/eclipse/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/OnOffGuiButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/OnOffGuiButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/HUD.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/HUD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/MainMenuUpdateNotificationHUD.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/MainMenuUpdateNotificationHUD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/WingModeChangerHUD.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/WingModeChangerHUD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/CraftingGridWOutput.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/CraftingGridWOutput.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiArmor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiArmor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiControlBock.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiControlBock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiHologramProjectorMain.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiHologramProjectorMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiISidedPowerInstructor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiISidedPowerInstructor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiProgramContainerEditor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiProgramContainerEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/GuiJavaScriptEditor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/GuiJavaScriptEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/GuiTextEditor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/GuiTextEditor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/CleanButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/CleanButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderFirePipeGlow.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderFirePipeGlow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderFirePipePriorityCube.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderFirePipePriorityCube.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderNetworkPointerContainerHighlight.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderNetworkPointerContainerHighlight.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/font/FontRendererMBase.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/font/FontRendererMBase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/font/FontRendererMClipped.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/font/FontRendererMClipped.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/models/ModelHelmet42.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/models/ModelHelmet42.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBFCPowerOut.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBFCPowerOut.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL100.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL100.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL2.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL3.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL3.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBedrockBreaker.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBedrockBreaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderEnergizedLapisOre.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderEnergizedLapisOre.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireExhaust.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireExhaust.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireGun.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireGun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireMatrixReceaver.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireMatrixReceaver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireMatrixTransferer.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFireMatrixTransferer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFirePipe.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderFirePipe.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderHologramProjector.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderHologramProjector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderOreStructureCore.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderOreStructureCore.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderRemotePowerCounter.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderRemotePowerCounter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkController.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkInterface.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkRouter.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkRouter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/core/init/MItems.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/core/init/MItems.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/client/HighlightEvent.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/client/HighlightEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/packets/packets/HologramProjectorUpload.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/packets/packets/HologramProjectorUpload.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/TheHandHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/TheHandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityBaseFX.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityBaseFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityCustomfireFX.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityCustomfireFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFXM.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFXM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFXMDeprecated.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFXMDeprecated.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFacedFX.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFacedFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntitySmoothBubleFX.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntitySmoothBubleFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/GuiParticle.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/GuiParticle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/HoloObject.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/HoloObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/Slider.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/Slider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/GL11U.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/GL11U.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/TessUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/TessUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/CubeModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/CubeModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/PlateModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/PlateModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/SidedModel.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/SidedModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/TexturedTriangle.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/tessellatorscripts/TexturedTriangle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/Get.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/Get.java" />
+    </list>
+    <ignored path="Magiology 1.8.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/.gradle/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any converted="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <breakpoint_rules converted="true" />
+    <ui_properties converted="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Magiology 1.8" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="TileEntityHologramProjector.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8401977">
+              <caret line="58" column="44" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="ModuleEditorState">
+    <option name="LAST_EDITED_MODULE_NAME" />
+    <option name="LAST_EDITED_TAB_NAME" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state />
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="show.inlinked.gradle.project.popup" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="Application.Minecraft Client">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Minecraft Client" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="GradleStart" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../Magiology 1.8\run" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Magiology 1.8" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Minecraft Server" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="GradleStartServer" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../Magiology 1.8\run" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Magiology 1.8" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Application.Minecraft Client" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Minecraft Server" />
+    </list>
+    <configuration default="true" name="&lt;template&gt;" selected="false" type="WebApp">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1467473b-5aeb-49a2-a3ba-04cf326b792c" name="Default" comment="" />
+      <created>1453765097661</created>
+      <option name="number" value="Default" />
+      <updated>1453765097661</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8401977">
+          <caret line="58" column="44" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI" />
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Magiology 1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI" />
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI" />
+    </states>
+  </component>
+</project>

@@ -29,12 +29,12 @@ public class TexturedTriangle{
         Vec3M vec32=vec31.crossProduct(Vec3).normalize();
         if(invertNormal)vec32=vec32.mul(-1);
         
-        Renderer.begin(GL11.GL_TRIANGLES);
+        Renderer.POS_UV_NORMAL.begin(GL11.GL_TRIANGLES);
         
         for(int i=0;i<3;++i){
-            PositionTextureVertex PTV=vertexPositions[i];
-            Renderer.addVertexData(((float)PTV.vector3D.xCoord), ((float)PTV.vector3D.yCoord), ((float)PTV.vector3D.zCoord), PTV.texturePositionX, PTV.texturePositionY,(float)vec32.x,(float)vec32.y,(float)vec32.z);
+            PositionTextureVertex vp=vertexPositions[i];
+            Renderer.POS_UV_NORMAL.addVertex(((float)vp.vector3D.xCoord), ((float)vp.vector3D.yCoord), ((float)vp.vector3D.zCoord), vp.texturePositionX, vp.texturePositionY,(float)vec32.x,(float)vec32.y,(float)vec32.z);
         }
-        TessUtil.draw();
+        Renderer.POS_UV_NORMAL.draw();
     }
 }

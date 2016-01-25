@@ -95,12 +95,12 @@ public class GuiParticle{
 		
 		
 		GL11.glColor4d(r, g, b, opacityF);
-		Renderer.beginQuads();
-		Renderer.addVertexData(-boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 0, 0).endVertex();
-		Renderer.addVertexData(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1).endVertex();
-		Renderer.addVertexData( boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 1, 1).endVertex();
-		Renderer.addVertexData( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0).endVertex();
-		TessUtil.draw();
+		Renderer.POS_UV.beginQuads();
+		Renderer.POS_UV.addVertex(-boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 0, 0);
+		Renderer.POS_UV.addVertex(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1);
+		Renderer.POS_UV.addVertex( boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 1, 1);
+		Renderer.POS_UV.addVertex( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0);
+		Renderer.POS_UV.draw();
 		GL11U.endOpaqueRendering();
 		GL11.glColor4d(1, 1, 1, 1);
 		GL11.glPopMatrix();

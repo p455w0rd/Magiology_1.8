@@ -91,27 +91,27 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 			GL11U.texture(false);
 			
 			ColorF.convert(new Color(16,16,32,220)).mul(1.5).bind();
-			Renderer.beginQuads();
-			Renderer.addPos(-60, -50, 0).endVertex();
-			Renderer.addPos(-60,  50, 0).endVertex();
-			Renderer.addPos( 60,  50, 0).endVertex();
-			Renderer.addPos( 60, -50, 0).endVertex();
-			Renderer.draw();
+			Renderer.POS.beginQuads();
+			Renderer.POS.addVertex(-60, -50, 0);
+			Renderer.POS.addVertex(-60,  50, 0);
+			Renderer.POS.addVertex( 60,  50, 0);
+			Renderer.POS.addVertex( 60, -50, 0);
+			Renderer.POS.draw();
 			
 			ColorF.convert(new Color(16,16,32,220)).mul(3).bind();
-			Renderer.beginLines();
-			Renderer.addPos(-60, -50, 0).endVertex();
-			Renderer.addPos(-60,  50, 0).endVertex();
+			Renderer.LINES.begin();
+			Renderer.LINES.addVertex(-60, -50, 0);
+			Renderer.LINES.addVertex(-60,  50, 0);
 			
-			Renderer.addPos(-60,  50, 0).endVertex();
-			Renderer.addPos( 60,  50, 0).endVertex();
+			Renderer.LINES.addVertex(-60,  50, 0);
+			Renderer.LINES.addVertex( 60,  50, 0);
 			
-			Renderer.addPos( 60,  50, 0).endVertex();
-			Renderer.addPos( 60, -50, 0).endVertex();
+			Renderer.LINES.addVertex( 60,  50, 0);
+			Renderer.LINES.addVertex( 60, -50, 0);
 			
-			Renderer.addPos( 60, -50, 0).endVertex();
-			Renderer.addPos(-60, -50, 0).endVertex();
-			Renderer.draw();
+			Renderer.LINES.addVertex( 60, -50, 0);
+			Renderer.LINES.addVertex(-60, -50, 0);
+			Renderer.LINES.draw();
 			
 			GL11U.texture(true);
 			int color=compileAfter.getText().length()==1&&compileAfter.getText().equals("0")?Color.YELLOW.hashCode():Color.WHITE.hashCode();

@@ -1,6 +1,5 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.tileentity.*;
 
 import org.lwjgl.opengl.*;
@@ -28,10 +27,10 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 	@Override
 	protected void initModels(){
 		super.initModels();
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer buff=TessUtil.getVB();
 		
 		buff.importComplexCube(new CubeModel(p*6,p*6,0,p*10,p*10,p*2));
-		VertexModel centerCube=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel centerCube=buff.exportToNormalisedVertexBufferModel();
 		centerCube.glStateCell=new GlStateCell(new GlState(new int[]{}, new int[]{GL11.GL_TEXTURE_2D},()->{GL11.glColor3f(0.1F, 0.1F, 0.1F);}), null);
 		
 		
@@ -73,34 +72,36 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 			buff.addVertex(xIn2,  yIn2,  p/2);
 			buff.addVertex(xIn1,  yIn1,  p/2);
 		};
-		VertexModel plate=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel plate=buff.exportToNormalisedVertexBufferModel();
 		plate.glStateCell=new GlStateCell(new GlState(()->{
 
 			long offset=curentTile.x()*7-curentTile.y()*15+curentTile.z()*9;
 			GL11.glColor3f(UtilM.fluctuatorSmooth(80, offset), UtilM.fluctuatorSmooth(134, 40+offset), UtilM.fluctuatorSmooth(156, 56+offset));
 			
 			if(curentTile.getBrain()!=null){
-				VertexModel model=interfacePlate.compiledModels[interfacePlate.getCurentSide()][1];
 				GL11.glPushMatrix();
 				Vec3M rotation=null,translation=null;
 				
 				switch (interfacePlate.getCurentSide()){
-				case 0:rotation=new Vec3M( 90,   0, 0);translation=new Vec3M( 0.5,  0.5, 0.5);break;
-				case 1:rotation=new Vec3M(-90,   0, 0);translation=new Vec3M( 0.5, -0.5, 0.5);break;
-				case 2:rotation=new Vec3M(  0, 180, 0);translation=new Vec3M(-0.5,  0.5, 0.5);break;
-				case 3:rotation=new Vec3M(  0,   0, 0);translation=new Vec3M( 0.5,  0.5, 0.5);break;
-				case 4:rotation=new Vec3M(  0, -90, 0);translation=new Vec3M( 0.5,  0.5, 0.5);break;
-				case 5:rotation=new Vec3M(  0,  90, 0);translation=new Vec3M(-0.5,  0.5, 0.5);break;
+				case 0:rotation=new Vec3M( 90,   0, 0);translation=new Vec3M( 0.5,  0.5,  -1);break;
+				case 1:rotation=new Vec3M(-90,   0, 0);translation=new Vec3M( 0.5, -0.5,   0);break;
+				case 2:rotation=new Vec3M(  0, 180, 0);translation=new Vec3M(-0.5,  0.5, -1);break;
+				case 3:rotation=new Vec3M(  0,   0, 0);translation=new Vec3M( 0.5,  0.5,   0);break;
+				case 4:rotation=new Vec3M(  0, -90, 0);translation=new Vec3M( 0.5,  0.5,  -1);break;
+				case 5:rotation=new Vec3M(  0,  90, 0);translation=new Vec3M(-0.5,  0.5,   0);break;
 				}
-				
 				double tim=UtilM.getWorldTime(getWorld())+RenderEvents.partialTicks;
 				
+				float bob1=(float)Math.sin(tim/10+offset);
+				float bob2=(float)Math.cos(tim/13+offset);
+				
 				GL11U.glRotate(rotation);
-				GL11.glTranslated(translation.x,translation.y,translation.z);
-				GL11U.glRotate(0,0,tim);
-				GL11.glTranslated(-translation.x,-translation.y,-translation.z);
-				GL11.glTranslatef(0, 0, (float) (Math.sin(tim/10+offset)*p/2+p/2));
-				GL11U.glRotate((Vec3M)rotation.negate());
+				GL11.glTranslatef(0, 0, bob1*p/2+p/2);
+				GL11U.glTranslate(translation);
+				GL11U.glRotate(0, 0, 90);
+				GL11U.glScale(0.9-bob2*0.2);
+				GL11U.glTranslate(translation.mul(-1));
+				GL11U.glRotate(rotation.mul(-1));
 			}
 			
 		}), new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{},()->{
@@ -121,14 +122,15 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 				5
 			}
 		));
+		plate.setRenderer(Renderer.POS_UV);
 	}
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
 		curentTile=(TileEntityNetworkInterface)tile;
-//		if(UtilM.getThePlayer().isSneaking())initModels();
+//		if(UtilM.getThePlayer().isSneaking())
+			initModels();
 		rednerNetworkPipe(curentTile, x, y, z);
-		
 	}
 	@Override
 	protected <NetworkComponent extends IConnectionProvider & NetworkBaseComponent> void rednerNetworkPipe(NetworkComponent networkComponent, double x, double y, double z) {

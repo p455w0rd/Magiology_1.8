@@ -75,7 +75,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		for(int i=0;i<textBuffer.size();i++)coloredText.add(colorLine(fr,i));
 		TessUtil.getVB().cleanUp();
 		highlightWords(fr);
-		selection=TessUtil.getVB().exportToNoramlisedVertixBufferModel();
+		selection=TessUtil.getVB().exportToNormalisedVertexBufferModel();
 		selection.setInstantNormalCalculation(false);
 		selection.translate(-0.5, 0, 0);
 		selection.setClearing(false);

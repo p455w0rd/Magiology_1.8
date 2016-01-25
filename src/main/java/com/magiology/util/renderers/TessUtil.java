@@ -33,9 +33,9 @@ import com.magiology.util.utilobjects.vectors.*;
  */
 public class TessUtil{
 	
-	private static VertixBuffer buf=new VertixBuffer();
+	private static VertexRenderer buf=new VertexRenderer();
 	private static FontRendererMBase fontRendererMBase=new FontRendererMBase(new ResourceLocation("textures/font/ascii.png"));
-	public static VertixBuffer getVB(){return buf;}
+	public static VertexRenderer getVB(){return buf;}
 	public static WorldRenderer getWR(){return Tessellator.getInstance().getWorldRenderer();}
 	public static RenderManager getRM(){return UtilM.getMC().getRenderManager();}
 	public static Tessellator getT(){return Tessellator.getInstance();}
@@ -129,7 +129,7 @@ public class TessUtil{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			VertixBuffer r1=TessUtil.getVB();
+			VertexRenderer r1=TessUtil.getVB();
 			r1.cleanUp();
 			int i=0;
 			while(i<xy[0].length-1){
@@ -160,7 +160,7 @@ public class TessUtil{
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		{
-			VertixBuffer r1=TessUtil.getVB();
+			VertexRenderer r1=TessUtil.getVB();
 			r1.cleanUp();
 			int i=0;
 			while(i<xy[0].length-1){
@@ -190,17 +190,17 @@ public class TessUtil{
 		GL11.glColor4d(r, g, b, alpha);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
-		Renderer.begin(GL11.GL_TRIANGLES);
+		Renderer.POS.begin(GL11.GL_TRIANGLES);
 		{
 			int i=0;
 			while(i<xy[0].length-1){
-				Renderer.addPos(0, 0, 0).endVertex();
-				Renderer.addPos(xy[0][i], xy[1][i], 0).endVertex();
+				Renderer.POS.addVertex(0, 0, 0);
+				Renderer.POS.addVertex(xy[0][i], xy[1][i], 0);
 				if(i<xy[0].length)i++;
-				Renderer.addPos(xy[0][i], xy[1][i], 0).endVertex();
+				Renderer.POS.addVertex(xy[0][i], xy[1][i], 0);
 			}
 		}
-		TessUtil.draw();
+		Renderer.POS.draw();
 		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 	}
@@ -342,10 +342,10 @@ public class TessUtil{
 			e.printStackTrace();
 		}
 	}
-	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, VertixBuffer nvb,double textueOffset,double textueScale){
+	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, VertexRenderer nvb,double textueOffset,double textueScale){
 		boolean newBuff;
 		if(newBuff=(nvb==null)){
-			nvb=new VertixBuffer();
+			nvb=new VertexRenderer();
 		}
 		double lenght=new Vec3M(x1-x2, y1-y2, z1-z2).lengthVector();
 		
@@ -400,10 +400,6 @@ public class TessUtil{
 		GL11.glDepthMask(true);
 		
 	}
-	public static void draw(){
-		Tessellator.getInstance().draw();
-	}
-	
 	public static FontRendererMBase getCustomFontRednerer(){
 		return fontRendererMBase;
 	}
@@ -447,13 +443,13 @@ public class TessUtil{
 		brainC2=new CubeModel(0, 0, 0 , UtilM.p, UtilM.p, UtilM.p,new QuadUV[]{uv},new ResourceLocation[]{Textures.Brain});
 	}
 	
-	public static VertixBuffer drawBrain(Vec3M pos,double scale1,double anim){
+	public static VertexRenderer drawBrain(Vec3M pos,double scale1,double anim){
 		anim=Math.toRadians(anim);
 		
 		TessUtil.bindTexture(Textures.Brain);
 		
-		VertixBuffer wrapper=new VertixBuffer();
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer wrapper=new VertexRenderer();
+		VertexRenderer buff=TessUtil.getVB();
 		
 		
 		buff.setInstantNormalCalculation(false);

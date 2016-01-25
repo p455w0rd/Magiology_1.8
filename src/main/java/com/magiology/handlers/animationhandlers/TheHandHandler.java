@@ -1,18 +1,19 @@
 package com.magiology.handlers.animationhandlers;
 
-import java.util.*;
-
-import net.minecraft.entity.player.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.client.render.itemrender.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.entitys.*;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
+import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
 
 public class TheHandHandler{
 	static float p=1F/16F;

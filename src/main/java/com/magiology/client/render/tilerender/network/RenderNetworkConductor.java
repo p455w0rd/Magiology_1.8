@@ -26,7 +26,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 	}
 	
 	protected void initModels(){
-		VertixBuffer buff=TessUtil.getVB();
+		VertexRenderer buff=TessUtil.getVB();
 		
 		QuadUV all=QuadUV.all().rotate1();
 		CubeModel[] sideThingys={
@@ -38,7 +38,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys);
 		
-		VertexModel sideThingysModel1=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModel1=buff.exportToNormalisedVertexBufferModel();
 		sideThingysModel1.glStateCell=new GlStateCell(
 			new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -55,7 +55,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys.length;i++)sideThingys[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys);
 		
-		VertexModel sideThingysModel2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModel2=buff.exportToNormalisedVertexBufferModel();
 		sideThingysModel2.glStateCell=new GlStateCell(
 				new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{}, ()->{
 					TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -77,7 +77,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		
 		buff.importComplexCube(core);
 		
-		VertexModel horisontalCore1=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalCore1=buff.exportToNormalisedVertexBufferModel();
 		horisontalCore1.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -96,7 +96,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		buff.importComplexCube(core);
 		
-		VertexModel horisontalCore2=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel horisontalCore2=buff.exportToNormalisedVertexBufferModel();
 		horisontalCore2.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -141,7 +141,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		core.willSideRender[5]=core.willSideRender[4]=false;
 		buff.importComplexCube(core);
 		
-		VertexModel coreLong=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel coreLong=buff.exportToNormalisedVertexBufferModel();
 		coreLong.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -158,7 +158,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		for(int i=0;i<sideThingys1.length;i++)sideThingys1[i].translate(p*2.5F, 0, 0);
 		buff.importComplexCube(sideThingys1);
 		
-		VertexModel sideThingysModelLong=buff.exportToNoramlisedVertixBufferModel();
+		VertexModel sideThingysModelLong=buff.exportToNormalisedVertexBufferModel();
 		sideThingysModelLong.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip.png"));
@@ -191,7 +191,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			)},null);
 		buff.importComplexCube(cube);
 
-		body1=buff.exportToNoramlisedVertixBufferModel();
+		body1=buff.exportToNormalisedVertexBufferModel();
 		body1.glStateCell=new GlStateCell(
 			new GlState(()->{
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/network_pipe.png"));
@@ -202,28 +202,28 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		CubeModel cube1=new CubeModel(p*8.99F, p*8.99F, p*8.99F, p*9.51F, p*9.51F, p*9.51F,new QuadUV[]{QuadUV.all()},null);
 		
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(-p*2.5F, 0, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(0, -p*2.5F, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(p*2.5F, 0, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(0, 0, -p*2.5F);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(-p*2.5F, 0, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(0, p*2.5F, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(p*2.5F, 0, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNoramlisedVertixBufferModel();
+		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		
 	}
 	
