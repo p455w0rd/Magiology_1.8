@@ -1,8 +1,7 @@
 Working on:
-	JavaScript integration
+	Fancy rendering
 	
 In plans:
-	Linear animation handler
 	Animated model renderer
 	json models
 	reimplement IItemRenderer (as much as possible)
