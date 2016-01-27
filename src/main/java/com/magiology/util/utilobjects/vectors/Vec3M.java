@@ -282,7 +282,8 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
     public Vec3M reflect(Vec3M normal){
         Vec3M norm = normal.normalize();
         Vec3M base=normalize();
-        Vec3M difference=
+        Vec3M difference=norm.subtract(base);
+
         return norm.mul(dot_product * 2);
     }
 }
