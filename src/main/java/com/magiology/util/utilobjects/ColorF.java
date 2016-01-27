@@ -1,10 +1,9 @@
 package com.magiology.util.utilobjects;
 
+import com.magiology.util.utilclasses.UtilM;
+import org.lwjgl.opengl.GL11;
+
 import java.awt.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.util.utilclasses.*;
 
 public class ColorF{
 	public static final ColorF 
@@ -84,5 +83,9 @@ public class ColorF{
 	}
 	public ColorF mul(double var){
 		return new ColorF(r*var, g*var, b*var, a*var);
+	}
+
+	public ColorF add(ColorF color){
+		return new ColorF(color.r+r,color.g+g,color.b+b,color.a+a);
 	}
 }

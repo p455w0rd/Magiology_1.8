@@ -40,11 +40,11 @@ public interface UpdateableTile extends IConnectionProvider{
 					boolean pass=false;
 					
 					for(int j=0;j<excluded.size();j++){
-						if(UtilM.Instanceof(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
+						if(UtilM.instanceOf(possibleConector,excluded.get(j)))pass=tile.getExtraClassCheck(excluded.get(j), possibleConector,array, j);
 						if(pass)j=excluded.size();
 					}
 					for(int j=0;j<included.size();j++){
-						if(UtilM.Instanceof(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
+						if(UtilM.instanceOf(possibleConector,included.get(j)))pass=tile.getExtraClassCheck(included.get(j), possibleConector,array, j);
 						if(pass)j=included.size();
 					}
 					if(pass)array[i]=trueValue;

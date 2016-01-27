@@ -1,61 +1,70 @@
 package com.magiology.util.utilclasses;
 
-import static com.mojang.realmsclient.gui.ChatFormatting.*;
+import com.google.common.collect.ImmutableMap;
+import com.magiology.core.Config;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
+import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Get.Render.Font;
+import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
+import com.magiology.util.utilobjects.vectors.Plane;
+import com.magiology.util.utilobjects.vectors.Ray;
+import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntityFlameFX;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.awt.*;
 import java.io.*;
-import java.math.*;
-import java.text.*;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
-import net.minecraft.block.*;
-import net.minecraft.block.properties.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraftforge.event.entity.*;
-import net.minecraftforge.event.world.*;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.relauncher.*;
-
-import org.apache.commons.lang3.*;
-
-import com.google.common.collect.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.forgepowered.packets.core.*;
-import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.math.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.effect.*;
-import com.magiology.util.utilobjects.vectors.*;
-import com.mojang.realmsclient.gui.*;
+import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
+import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
 
 public class UtilM{
 	public class U extends UtilM{}
-	private static boolean inited=false;
-	public static void initHelper(){
-		if(inited)return;
-		inited=true;
-//		MEvents.EventRegister(0, new Helper());
-	}
-	
-	
-	
+
 	
 	
 	static Random rand=new Random();
@@ -66,12 +75,10 @@ public class UtilM{
 		if(isRemote(particleFX)){
 			Minecraft mc=U.getMC();
 			Entity ent=mc.getRenderViewEntity();
-			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
+			if(ent!=null&&mc.effectRenderer!=null){
 				int i=mc.gameSettings.particleSetting;
 	            double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
-	            if(i>1);else{
-	            	if (d6*d6+d7*d7+d8*d8>d9*d9);else if(RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
-	            }
+	            if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>d9*d9)&&RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 			}
 		}
 	}
@@ -80,12 +87,10 @@ public class UtilM{
 		if(particleFX.worldObj.isRemote){
 			Minecraft mc=U.getMC();
 			Entity ent=mc.getRenderViewEntity();
-			if(mc!=null&&ent!=null&&mc.effectRenderer!=null){
+			if(ent!=null&&mc.effectRenderer!=null){
 				int i=mc.gameSettings.particleSetting;
 				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ;
-				if(i>1);else{
-					if (d6*d6+d7*d7+d8*d8>distance*distance);else if(RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
-				}
+				if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>distance*distance)&&RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 			}
 		}
 	}
@@ -114,59 +119,57 @@ public class UtilM{
 	 * this method returns a random boolean with a custom chance of getting true.
 	 * The higher the number is the higher chance will be for getting a true return.
 	 * Type in a number higher or equal to 0 and lower or equal to 1.
-	 * @param precentage
-	 * @return
+	 * @param percentage s
+	 * @return s
 	 */
-	public static boolean RB(double precentage){
-		precentage=snap(precentage, 0, 1);
-		if(precentage==0)return false;
-		if(precentage==1)return true;
-		return RF()<precentage;
+	public static boolean RB(double percentage){
+		percentage=snap(percentage, 0, 1);
+		return percentage!=0&&(percentage==1||RF()<percentage);
 	}
 	/**
 	 * this method returns a random boolean with a custom chance of getting true.
 	 * The higher the number is the lower chance will be for getting a true return.
 	 * Type in a number higher or equal to 1.
-	 * @param precentage
+	 * @param percentage s
 	 * @return
 	 */
-	public static boolean RB(int precentage){
-		precentage=Math.max(precentage, 1);
-		if(precentage==1)return true;
-		return RInt(precentage)==0;
+	public static boolean RB(int percentage){
+		percentage=Math.max(percentage, 1);
+		if(percentage==1)return true;
+		return RInt(percentage)==0;
 	}
-	public static double[] cricleXZ(double angle){
+	public static double[] circleXZ(double angle){
 		double[] result={0,0};
 		int intAngle=(int)angle;
 		result[0]=CricleUtil.sin(intAngle);//-X-
 		result[1]=CricleUtil.cos(intAngle);//-Z-
 		return result;
 	}
-	public static double[] cricleXZForce(double angle,double ofset){
+	public static double[] cricleXZForce(double angle,double offset){
 		double[] result={0,0};
-		angle+=ofset;
+		angle+=offset;
 		int intAngle=(int)angle;
 		result[0]=CricleUtil.sin(intAngle);//-X-
 		result[1]=CricleUtil.cos(intAngle);//-Z-
 		return result;
 	}
-	public static double[] cricleXZwSpeed(double angle,double ofset){
+	public static double[] cricleXZwSpeed(double angle,double offset){
 		double[] result={0,0,0,0};
 		{
 			int intAngle=(int)angle;
 			result[0]=CricleUtil.sin(intAngle);//-X-
 			result[1]=CricleUtil.cos(intAngle);//-Z-
-			angle+=ofset;}{
+			angle+=offset;}{
 			int intAngle=(int)angle;
 			result[0]=CricleUtil.sin(intAngle);//-X-
 			result[1]=CricleUtil.cos(intAngle);//-Z-
 		}
 		return result;
 	}
-	public static double slowlyEqalize(double variable,double goal,double speed){
-		return slowlyEqalize((float)variable, (float)goal, (float)speed);
+	public static double slowlyEqualize(double variable, double goal, double speed){
+		return slowlyEqualize((float)variable, (float)goal, (float)speed);
 	}
-	public static float slowlyEqalize(float variable,float goal,float speed){
+	public static float slowlyEqualize(float variable, float goal, float speed){
 		if(speed==0)return variable;
 		speed=Math.abs(speed);
 		if(variable+speed>goal&&(Math.abs((variable+speed)-goal)<speed*1.001))return goal;
@@ -179,36 +182,34 @@ public class UtilM{
 	public static boolean isEqualInBouds(double variable,double wantedVariable,double bounds){
 		//10.02==10? 0.5
 		//10.52>10 9.52<10
-		if(variable+bounds>wantedVariable&&variable-bounds<wantedVariable)return true;
-		return false;
+		return variable+bounds>wantedVariable&&variable-bounds<wantedVariable;
 	}
 	/**
 	 * Returns false if all objects are not null and it returns true if any of object/s are true
 	 * Note: you'll might need to add "!" on using it
-	 * @param objects
-	 * @return
+	 * @param objects a
+	 * @return a
 	 */
 	public static boolean isNull(Object...objects){
-		for(int a=0;a<objects.length;a++)if(objects[a]==null)return true;
+		for(Object object:objects)if(object==null)return true;
 		return false;
 	}
 	/**
 	 * Returns if stack contains a specific item
 	 * Note: no danger of null pointer exception!
-	 * @param item
-	 * @param stack
-	 * @return
+	 * @param item a
+	 * @param stack a
+	 * @return a
 	 */
 	public static boolean isItemInStack(Item item,ItemStack stack){
-		if(stack!=null&&stack.getItem()==item)return true;
-		return false;
+		return stack!=null&&stack.getItem()==item;
 	}
 	/**
      * Creates a x,y,z offset coordinate of a ball. (can create 2 coordinates)
      * Args:x,y,z particle speed, size
-	 * @param ballSize
-	 * @param hasSecondPos
-	 * @return
+	 * @param ballSize a
+	 * @param hasSecondPos a
+	 * @return a
 	 */
 	public static double[] createBallXYZ(double ballSize, boolean hasSecondPos){
 		int xRot=RInt(360),yRot=RInt(360);
@@ -266,8 +267,7 @@ public class UtilM{
 		}return true;
 	}
 	public static boolean isBoolean(String str){
-		if(str==null)return false;
-		return str.equals("true")||str.equals("false");
+		return str!=null&&(str.equals("true")||str.equals("false"));
 	}
 	public static double snap(double value,double min,double max){
 		if(min>=max)return value;
@@ -384,16 +384,16 @@ public class UtilM{
 		getMC().shutdown();
 	}
 	public static boolean isAny(Object tester,Object... objects){
-		for(int a=0;a<objects.length;a++)if(tester==objects[a])return true;
+		for(Object object:objects)if(tester==object)return true;
 		return false;
 	}
-	public static float fluctuatorSmooth(double speed,double offset){
+	public static float fluctuateSmooth(double speed, double offset){
 		float
-			fluctuator=fluctuator(speed, offset),
-			prevFluctuator=fluctuator(speed, offset-1);
-		return calculatePos(prevFluctuator, fluctuator);
+			fluctuate=fluctuate(speed, offset),
+			prevFluctuate=fluctuate(speed, offset-1);
+		return calculatePos(prevFluctuate, fluctuate);
 	}
-	public static float fluctuator(double speed,double offset){
+	public static float fluctuate(double speed, double offset){
 		long wtt=(long)(getTheWorld().getTotalWorldTime()+offset);
 		double helper=(wtt%speed)/(speed/2F);
 		return (float) (helper>1?2-helper:helper);
@@ -404,7 +404,7 @@ public class UtilM{
 	public static int rgbByteToCode(int r,int g,int b,int alpha){
 		return colorToCode(new Color(r, g, b, alpha));
 	}
-	public static int rgbPrecentageToCode(double r,double g,double b,double alpha){
+	public static int rgbPercentageToCode(double r, double g, double b, double alpha){
 		int r1=(int)(255*r), g1=(int)(255*g), b1=(int)(255*b), alpha1=(int)(255*alpha);
 		return rgbByteToCode(r1, g1, b1, alpha1);
 	}
@@ -414,15 +414,15 @@ public class UtilM{
 	public static int[] codeToRGBABByte(int code){
 		return colorToRGBABByte(new Color(code));
 	}
-	public static float[] colorToRGBABPrecentage(Color color){
+	public static float[] colorToRGBABPercentage(Color color){
 		int[] data=colorToRGBABByte(color);
 		return new float[]{(data[0])/255F,(data[1])/255F,(data[2])/255F,(data[3])/255F};
 	}
-	public static float[] codeToRGBABPrecentage(int code){
-		return colorToRGBABPrecentage(new Color(code,true));
+	public static float[] codeToRGBABPercentage(int code){
+		return colorToRGBABPercentage(new Color(code,true));
 	}
 	public static ColorF codeToColorF(int code){
-		float[] data=codeToRGBABPrecentage(code);
+		float[] data=codeToRGBABPercentage(code);
 		return new ColorF(data[0],data[1],data[2],data[3]);
 	}
 	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3M result){
@@ -431,16 +431,14 @@ public class UtilM{
 			return false;
 		}
 		
-		boolean printProcess=false;
+		boolean printProcess=FALSE();
 		
 		
 		boolean xz=
 				plane.q.x==plane.r.x&&
 				plane.r.x==plane.s.x&&
 				plane.r.x==plane.s.x;
-		if(xz){
-			
-		}else{
+		if(!xz){
 			
 			if(ray.from.z>ray.to.z){
 				Vec3M helper=ray.from;
@@ -451,11 +449,11 @@ public class UtilM{
 			if(ray.from.z>z){if(printProcess)PrintUtil.println("target behind");return false;}
 			if(ray.to.z<z){if(printProcess)PrintUtil.println("target to far");return false;}
 			AxisAlignedBB Plane=new AxisAlignedBB(plane.q.x, plane.q.y, plane.q.z, plane.s.x, plane.s.y, plane.s.z+0.01);
-			MovingObjectPosition rayt=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
-			if(rayt==null||rayt.hitVec==null){if(printProcess)PrintUtil.println("target clipped out");return false;}
-			result.x=rayt.hitVec.xCoord;
-			result.y=rayt.hitVec.yCoord;
-			result.z=rayt.hitVec.zCoord;
+			MovingObjectPosition rayTrace=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
+			if(rayTrace==null||rayTrace.hitVec==null){if(printProcess)PrintUtil.println("target clipped out");return false;}
+			result.x=rayTrace.hitVec.xCoord;
+			result.y=rayTrace.hitVec.yCoord;
+			result.z=rayTrace.hitVec.zCoord;
 			
 			if(printProcess)PrintUtil.println("Ray trace has resolwed a valid intersection point!");
 			return true;
@@ -476,10 +474,10 @@ public class UtilM{
 						  calculatePos(prevColor.a, color.a));
 	}
 	public static ColorF slowlyEqalizeColor(ColorF variable, ColorF goal, float speed){
-		return new ColorF(slowlyEqalize(variable.r, goal.r, speed),
-						  slowlyEqalize(variable.g, goal.g, speed),
-						  slowlyEqalize(variable.b, goal.b, speed),
-						  slowlyEqalize(variable.a, goal.a, speed));
+		return new ColorF(slowlyEqualize(variable.r, goal.r, speed),
+						  slowlyEqualize(variable.g, goal.g, speed),
+						  slowlyEqualize(variable.b, goal.b, speed),
+						  slowlyEqualize(variable.a, goal.a, speed));
 	}
     public static Vec3M getPosition(EntityPlayer entity,float par1)
     {
@@ -507,17 +505,17 @@ public class UtilM{
 		StringBuilder Return=new StringBuilder();
 		
 		StackTraceElement[] a1=Thread.currentThread().getStackTrace();
-		int lenght=0;
+		int length=0;
 		DateFormat dateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal=Calendar.getInstance();
-		Return.append("Invoke time: "+dateFormat.format(cal.getTime())+"\n");
+		Return.append("Invoke time: ").append(dateFormat.format(cal.getTime())).append("\n");
 		for(int i=2;i<a1.length;i++){
 			StackTraceElement a=a1[i];
 			String s=a.toString();
-			Return.append(s+"\n");
-			lenght=Math.max(s.length(),lenght);
+			Return.append(s).append("\n");
+			length=Math.max(s.length(),length);
 		}
-		for(int b=0;b<lenght/4;b++)Return.append("_/\\_");
+		for(int b=0;b<length/4;b++)Return.append("_/\\_");
 		
 		return Return.toString();
 	}
@@ -530,22 +528,22 @@ public class UtilM{
 	public static EntityFlameFX marker(double x,double y,double z,double xSpeed,double ySpeed,double zSpeed){
 		
 		if(getTheWorld()==null)return null;
-		return (EntityFlameFX)new EntityFlameFXM(getTheWorld(), x+0.5, y+0.5, z+0.5, xSpeed, ySpeed, zSpeed);
+		return new EntityFlameFXM(getTheWorld(), x+0.5, y+0.5, z+0.5, xSpeed, ySpeed, zSpeed);
 	}
 	public static TargetPoint TargetPoint(TileEntity tile, int range){
 		return new TargetPoint(tile.getWorld().provider.getDimensionId(), x(tile), y(tile), z(tile), range);
 	}
-	public static boolean Instanceof(Object tester,Object instace){
-		return Instanceof(tester.getClass(), instace.getClass());
+	public static boolean instanceOf(Object tester, Object instance){
+		return instanceOf(tester.getClass(), instance.getClass());
 	}
-	public static boolean Instanceof(Object tester,Class instace){
-		return Instanceof(tester.getClass(), instace);
+	public static boolean instanceOf(Object tester, Class instance){
+		return instanceOf(tester.getClass(), instance);
 	}
-	public static boolean Instanceof(Class tester,Class instace){
+	public static boolean instanceOf(Class tester, Class instance){
 		try{
-			tester.asSubclass(instace);
+			tester.asSubclass(instance);
 			return true;
-		}catch(Exception e){}
+		}catch(Exception ignored){}
 		return false;
 	}
 	public static EntityItem dropBlockAsItem(World world, double x, double y, double z, ItemStack stack){
@@ -558,9 +556,8 @@ public class UtilM{
 		return null;
 	}
 	public static boolean AxisAlignedBBEqual(AxisAlignedBB box1, AxisAlignedBB box2){
-		if(box1==box2)return true;
-		if(isNull(box1,box2))return false;
-		return box1.minX==box2.minX&&box1.minY==box2.minY&&box1.minZ==box2.minZ&&box1.maxX==box2.maxX&&box1.maxY==box2.maxY&&box1.maxZ==box2.maxZ;
+		if(box1==box2) return true;
+		return !isNull(box1, box2)&&box1.minX==box2.minX&&box1.minY==box2.minY&&box1.minZ==box2.minZ&&box1.maxX==box2.maxX&&box1.maxY==box2.maxY&&box1.maxZ==box2.maxZ;
 	}
 	//yay for 1.8 code changes
 	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
@@ -729,25 +726,25 @@ public class UtilM{
 	public static Vec2i[] arrangeStrings(final String[]strings,int lines,int marginX,int marginY){
 		FontRenderer fr=Font.FR();
 		Vec2i[] result=new Vec2i[strings.length];
-		int colums=(int)Math.floor(strings.length/(float)lines)+1;
-		String[][] formatedStrings=new String[colums][lines];
+		int columns=(int)Math.floor(strings.length/(float)lines)+1;
+		String[][] formattedStrings=new String[columns][lines];
 		
 		
-		int[] longestInColum=new int[colums],columOffsets=new int[colums];
-		for(int i=0;i<colums;i++){
+		int[] longestInColumn=new int[columns],columnOffsets=new int[columns];
+		for(int i=0;i<columns;i++){
 			for(int j=0;j<lines;j++){
-				int id=i*(colums+1)+j;
-				if(id<strings.length)formatedStrings[i][j]=strings[id];
+				int id=i*(columns+1)+j;
+				if(id<strings.length)formattedStrings[i][j]=strings[id];
 			}
 		}
-		for(int i=0;i<formatedStrings.length;i++)while(ArrayUtils.contains(formatedStrings[i], null))formatedStrings[i]=ArrayUtils.removeElement(formatedStrings[i], null);
-		for(int i=0;i<colums;i++)for(int j=0;j<formatedStrings[i].length;j++)longestInColum[i]=Math.max(longestInColum[i], fr.getStringWidth(formatedStrings[i][j]));
-		for(int i=0;i<colums;i++){
-			columOffsets[i]=marginX;
-			for(int j=0;j<i;j++)columOffsets[i]+=longestInColum[j]+marginX;
+		for(int i=0;i<formattedStrings.length;i++)while(ArrayUtils.contains(formattedStrings[i], null))formattedStrings[i]=ArrayUtils.removeElement(formattedStrings[i], null);
+		for(int i=0;i<columns;i++)for(int j=0;j<formattedStrings[i].length;j++)longestInColumn[i]=Math.max(longestInColumn[i], fr.getStringWidth(formattedStrings[i][j]));
+		for(int i=0;i<columns;i++){
+			columnOffsets[i]=marginX;
+			for(int j=0;j<i;j++)columnOffsets[i]+=longestInColumn[j]+marginX;
 		}
 		
-		for(int i=0;i<strings.length;i++)result[i]=new Vec2i(columOffsets[(i/lines)%colums], (i%lines)*(fr.FONT_HEIGHT+marginY)+marginY);
+		for(int i=0;i<strings.length;i++)result[i]=new Vec2i(columnOffsets[(i/lines)%columns], (i%lines)*(fr.FONT_HEIGHT+marginY)+marginY);
 		return result;
 	}
 }

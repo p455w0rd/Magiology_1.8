@@ -2,29 +2,125 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1467473b-5aeb-49a2-a3ba-04cf326b792c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/villages_nether.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/forcedchunks.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/data/villages_end.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/forcedchunks.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/data/Village.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/data/villages.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/forcedchunks.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_mcr" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/210893c2-ab0c-3341-8a41-02d79e29f9a4.dat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World/stats/210893c2-ab0c-3341-8a41-02d79e29f9a4.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/level.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/level.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/level.dat_old" afterPath="$PROJECT_DIR$/run/saves/New World--/level.dat_old" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World--/level.dat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/run/saves/New World--/level.dat_old" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/custom/hud/StatsDisplayHUD.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/custom/hud/StatsDisplayHUD.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/custom/hud/WingModeChangerHUD.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/custom/hud/WingModeChangerHUD.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/gui/GuiISidedPowerInstructor.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/gui/GuiISidedPowerInstructor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/gui/GuiUpgrade.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/gui/GuiUpgrade.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/guiutil/gui/buttons/ColoredGuiButton.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/guiutil/gui/buttons/ColoredGuiButton.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/guiutil/gui/buttons/CustomButton.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/guiutil/gui/buttons/CustomButton.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/guiutil/gui/buttons/TexturedColoredButton.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/gui/guiutil/gui/buttons/TexturedColoredButton.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/aftereffect/RenderFirePipeGlow.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/aftereffect/RenderFirePipeGlow.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/aftereffect/RenderNetworkPointerContainerHighlight.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/aftereffect/RenderNetworkPointerContainerHighlight.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/shaders/ColorRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/shaders/ColorRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/RenderHologramProjector.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/RenderHologramProjector.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/network/RenderNetworkConductor.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/network/RenderNetworkConductor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/network/RenderNetworkInterface.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/network/RenderNetworkInterface.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/network/RenderNetworkRouter.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/client/render/tilerender/network/RenderNetworkRouter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/events/SpecialMovmentEvents.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/events/SpecialMovmentEvents.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/events/SpecialPlayerParicleHandler.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/events/SpecialPlayerParicleHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/events/client/HighlightEvent.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/events/client/HighlightEvent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/packets/core/AbstractPacket.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/forgepowered/packets/core/AbstractPacket.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/handlers/animationhandlers/WingsFromTheBlackFireHandler.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/handlers/animationhandlers/WingsFromTheBlackFireHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/blocks/BlockContainerMultiColision.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/blocks/BlockContainerMultiColision.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/effect/EntityFacedFX.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/effect/EntityFacedFX.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/effect/EntitySmoothBubleFX.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/effect/EntitySmoothBubleFX.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/effect/GuiParticle.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/effect/GuiParticle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/items/armor/CyborgWingsFromTheBlackFireItem.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/items/armor/CyborgWingsFromTheBlackFireItem.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/TileEntityBedrockBreaker.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/TileEntityBedrockBreaker.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/TileEntityControlBlock.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/TileEntityControlBlock.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/corecomponents/UpdateableTile$UpdateablePipeHandler.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/corecomponents/UpdateableTile$UpdateablePipeHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkRouter.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkRouter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$LineRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$LineRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$ParticleRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$ParticleRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosColorRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosColorRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVColorRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVColorRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVNormalColorRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVNormalColorRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVNormalRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVNormalRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer$PosUVRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/Renderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/ShinySurfaceRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/ShinySurfaceRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/VertexRenderer$ShadedTriangle.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/VertexRenderer$ShadedTriangle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/VertexRenderer.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/renderers/VertexRenderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilclasses/NetworkUtil.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilclasses/NetworkUtil.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilclasses/UtilM$U.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilclasses/UtilM$U.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilclasses/UtilM.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilclasses/UtilM.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/ColorF.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/ColorF.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/vectors/AdvancedPhysicsFloat.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/vectors/AdvancedPhysicsFloat.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/vectors/Vec2i.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/vectors/Vec2i.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/vectors/Vec3M.class" afterPath="$PROJECT_DIR$/out/production/Magiology 1.8/com/magiology/util/utilobjects/vectors/Vec3M.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/logs/2016-01-26-1.log.gz" afterPath="$PROJECT_DIR$/run/logs/2016-01-26-1.log.gz" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/DIM-1/data/villages_nether.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/DIM-1/data/villages_nether.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/DIM1/data/villages_end.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/DIM1/data/villages_end.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/data/Village.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/data/Village.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/data/villages.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/data/villages.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/playerdata/21aef119-186c-31d8-89d6-c507e23ea041.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/playerdata/21aef119-186c-31d8-89d6-c507e23ea041.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/playerdata/5606c356-f83a-3346-9cfd-7a4fa8e27776.dat" afterPath="$PROJECT_DIR$/run/saves/New World--/playerdata/5606c356-f83a-3346-9cfd-7a4fa8e27776.dat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/region/r.-1.1.mca" afterPath="$PROJECT_DIR$/run/saves/New World--/region/r.-1.1.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/region/r.-1.2.mca" afterPath="$PROJECT_DIR$/run/saves/New World--/region/r.-1.2.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/region/r.0.1.mca" afterPath="$PROJECT_DIR$/run/saves/New World--/region/r.0.1.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/region/r.0.2.mca" afterPath="$PROJECT_DIR$/run/saves/New World--/region/r.0.2.mca" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/session.lock" afterPath="$PROJECT_DIR$/run/saves/New World--/session.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/DIM-1/data/villages_nether.dat" afterPath="$PROJECT_DIR$/run/saves/World/DIM-1/data/villages_nether.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/DIM1/data/villages_end.dat" afterPath="$PROJECT_DIR$/run/saves/World/DIM1/data/villages_end.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/data/villages.dat" afterPath="$PROJECT_DIR$/run/saves/World/data/villages.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/level.dat" afterPath="$PROJECT_DIR$/run/saves/World/level.dat" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/level.dat_old" afterPath="$PROJECT_DIR$/run/saves/World/level.dat_old" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/region/r.-1.-1.mca" afterPath="$PROJECT_DIR$/run/saves/World/region/r.-1.-1.mca" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/region/r.-1.0.mca" afterPath="$PROJECT_DIR$/run/saves/World/region/r.-1.0.mca" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/region/r.0.-1.mca" afterPath="$PROJECT_DIR$/run/saves/World/region/r.0.-1.mca" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/region/r.0.0.mca" afterPath="$PROJECT_DIR$/run/saves/World/region/r.0.0.mca" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/World/session.lock" afterPath="$PROJECT_DIR$/run/saves/World/session.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Magiology 1.8.ipr" afterPath="$PROJECT_DIR$/Magiology 1.8.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Magiology 1.8.iws" afterPath="$PROJECT_DIR$/Magiology 1.8.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/config/splash.properties" afterPath="$PROJECT_DIR$/run/config/splash.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/logs/latest.log" afterPath="$PROJECT_DIR$/run/logs/latest.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/options.txt" afterPath="$PROJECT_DIR$/run/options.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/stats/21aef119-186c-31d8-89d6-c507e23ea041.json" afterPath="$PROJECT_DIR$/run/saves/New World--/stats/21aef119-186c-31d8-89d6-c507e23ea041.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/saves/New World--/stats/5606c356-f83a-3346-9cfd-7a4fa8e27776.json" afterPath="$PROJECT_DIR$/run/saves/New World--/stats/5606c356-f83a-3346-9cfd-7a4fa8e27776.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/usercache.json" afterPath="$PROJECT_DIR$/run/usercache.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run/usernamecache.json" afterPath="$PROJECT_DIR$/run/usernamecache.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/StatsDisplayHUD.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/StatsDisplayHUD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/WingModeChangerHUD.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/custom/hud/WingModeChangerHUD.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiISidedPowerInstructor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiISidedPowerInstructor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiUpgrade.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiUpgrade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/ColoredGuiButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/ColoredGuiButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/CustomButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/CustomButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/TexturedColoredButton.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/guiutil/gui/buttons/TexturedColoredButton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderFirePipeGlow.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderFirePipeGlow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderNetworkPointerContainerHighlight.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/aftereffect/RenderNetworkPointerContainerHighlight.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/shaders/ColorRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/shaders/ColorRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderHologramProjector.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderHologramProjector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkInterface.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkInterface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/SpecialMovmentEvents.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/SpecialMovmentEvents.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/SpecialPlayerParicleHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/SpecialPlayerParicleHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/client/HighlightEvent.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/client/HighlightEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/packets/core/AbstractPacket.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/packets/core/AbstractPacket.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/TheHandHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/TheHandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/WingsFromTheBlackFireHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/WingsFromTheBlackFireHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/blocks/BlockContainerMultiColision.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/blocks/BlockContainerMultiColision.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFacedFX.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntityFacedFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntitySmoothBubleFX.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/EntitySmoothBubleFX.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/GuiParticle.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/effect/GuiParticle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/items/armor/CyborgWingsFromTheBlackFireItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/items/armor/CyborgWingsFromTheBlackFireItem.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/TileEntityBedrockBreaker.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/TileEntityBedrockBreaker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/TileEntityControlBlock.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/TileEntityControlBlock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/corecomponents/UpdateableTile.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/corecomponents/UpdateableTile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkRouter.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/network/TileEntityNetworkRouter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/NetworkUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/NetworkUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/UtilM.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/UtilM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/ColorF.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/ColorF.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/AdvancedPhysicsFloat.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/AdvancedPhysicsFloat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec2i.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec2i.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java" afterPath="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java" />
     </list>
     <ignored path="Magiology 1.8.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,11 +180,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TileEntityHologramProjector.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
+      <file leaf-file-name="RenderBateryL1.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8682043">
-              <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RenderNetworkConductor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="269" column="155" selection-start-line="269" selection-start-column="155" selection-end-line="269" selection-end-column="155" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorldRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.8.9-11.15.1.1723/stable/20/forgeSrc-1.8.9-11.15.1.1723-sources.jar!/net/minecraft/client/renderer/WorldRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GuiUpgrade.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiUpgrade.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="54" selection-start-line="39" selection-start-column="54" selection-end-line="39" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+              <folding>
+                <element signature="e#2679#2680#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ShinySurfaceRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TessUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/TessUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="373" column="78" selection-start-line="368" selection-start-column="8" selection-end-line="373" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vec3M.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7706147">
+              <caret line="284" column="25" selection-start-line="284" selection-start-column="25" selection-end-line="284" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -104,15 +272,30 @@
       <projects_view />
     </option>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/ColorF.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/TheHandHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/UtilM.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiUpgrade.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/blocks/BlockContainerMultiColision.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java" />
+      </list>
+    </option>
+  </component>
   <component name="ModuleEditorState">
     <option name="LAST_EDITED_MODULE_NAME" />
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1932" />
-    <option name="height" value="1056" />
+    <option name="width" value="1039" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -132,6 +315,22 @@
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes />
+  </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -143,8 +342,69 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.Minecraft Client">
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module />
       <option name="HTML_USED" value="false" />
@@ -169,6 +429,22 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" runner="idea" />
       <module name="" />
@@ -190,12 +466,135 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="SCRATCH_FILE_ID" value="0" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Magiology 1.8" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <configuration default="false" name="Minecraft Client" type="Application" factoryName="Application">
@@ -255,31 +654,31 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
+    <frame x="0" y="0" width="1039" height="1040" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25349087" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -297,7 +696,9 @@
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -305,7 +706,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -313,10 +714,249 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="259" column="0" selection-start-line="259" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiUpgrade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="54" selection-start-line="39" selection-start-column="54" selection-end-line="39" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+          <folding>
+            <element signature="e#2679#2680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="18" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/client/HighlightEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8682043">
-          <caret line="59" column="37" selection-start-line="59" selection-start-column="37" selection-end-line="59" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/ColorF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85201305">
+          <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8705114">
+          <caret line="278" column="4" selection-start-line="278" selection-start-column="4" selection-end-line="278" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/handlers/animationhandlers/TheHandHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21980414">
+          <caret line="150" column="58" selection-start-line="150" selection-start-column="58" selection-end-line="150" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilclasses/UtilM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14907508">
+          <caret line="710" column="4" selection-start-line="710" selection-start-column="4" selection-end-line="710" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/tileentityes/hologram/TileEntityHologramProjector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35146898">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/forgepowered/events/client/HighlightEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="443" column="18" selection-start-line="443" selection-start-column="18" selection-end-line="443" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/mcobjects/blocks/BlockContainerMultiColision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58770615">
+          <caret line="60" column="32" selection-start-line="60" selection-start-column="32" selection-end-line="60" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.8.9-11.15.1.1723/stable/20/forgeSrc-1.8.9-11.15.1.1723-sources.jar!/net/minecraft/client/renderer/vertex/DefaultVertexFormats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.018826135">
+          <caret line="21" column="44" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/ColorF.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="90" column="1" selection-start-line="90" selection-start-column="1" selection-end-line="90" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/VertexRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="170" column="34" selection-start-line="170" selection-start-column="34" selection-end-line="170" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/RenderBateryL1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/render/tilerender/network/RenderNetworkConductor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="269" column="155" selection-start-line="269" selection-start-column="155" selection-end-line="269" selection-end-column="155" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.8.9-11.15.1.1723/stable/20/forgeSrc-1.8.9-11.15.1.1723-sources.jar!/net/minecraft/client/renderer/WorldRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/client/gui/gui/GuiUpgrade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="54" selection-start-line="39" selection-start-column="54" selection-end-line="39" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+          <folding>
+            <element signature="e#2679#2680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/ShinySurfaceRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/renderers/TessUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="373" column="78" selection-start-line="368" selection-start-column="8" selection-end-line="373" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/magiology/util/utilobjects/vectors/Vec3M.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7706147">
+          <caret line="284" column="25" selection-start-line="284" selection-start-column="25" selection-end-line="284" selection-end-column="25" />
           <folding />
         </state>
       </provider>

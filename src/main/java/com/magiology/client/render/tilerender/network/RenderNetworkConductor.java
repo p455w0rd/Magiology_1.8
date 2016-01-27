@@ -1,20 +1,25 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.core.*;
-import com.magiology.mcobjects.tileentityes.network.*;
+import com.magiology.api.connection.IConnectionProvider;
+import com.magiology.api.network.NetworkBaseComponent;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
 import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.glstates.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.renderers.glstates.GlState;
+import com.magiology.util.renderers.glstates.GlStateCell;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.renderers.tessellatorscripts.SidedModel;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilobjects.vectors.QuadUV;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
 public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 	
@@ -167,7 +172,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		
 		
 		strateConnections=new SidedModel(
-				new DoubleObject<VertexModel[],int[]>(
+				new DoubleObject<>(
 					new VertexModel[]{
 							sideThingysModelLong,
 							coreLong
@@ -223,19 +228,58 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		body2[i++]=buff.exportToNormalisedVertexBufferModel();
 		cube1.translate(p*2.5F, 0, 0);
 		buff.importComplexCube(cube1);
-		body2[i++]=buff.exportToNormalisedVertexBufferModel();
+		body2[i]=buff.exportToNormalisedVertexBufferModel();
 		
 	}
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks){
-		rednerNetworkPipe((TileEntityNetworkConductor)tile, x, y, z);
+		renderNetworkPipe((TileEntityNetworkConductor)tile, x, y, z);
 	}
-	protected <NetworkComponent extends IConnectionProvider&NetworkBaseComponent> void rednerNetworkPipe(NetworkComponent networkComponent, double x, double y, double z){
+	protected <NetworkComponent extends IConnectionProvider&NetworkBaseComponent> void renderNetworkPipe(NetworkComponent networkComponent, double x, double y, double z){
 		GL11U.protect();
 		GL11U.texture(true);
 		GL11.glTranslated(x,y,z);
-		
+
+		GL11U.texture(false);
+		ColorF.BLACK.bind();
+		/*
+		GlStateManager.shadeModel(GL11.GL_SMOOTH);
+		ShinySurfaceRenderer renderer=new ShinySurfaceRenderer();
+
+		renderer.setBaseColor(new ColorF(0,1,0,1));
+
+		renderer.importComplexCube(new CubeModel(0,1,0,0.5F,1.5F,0.5F));
+		renderer.draw();
+
+
+		WorldRenderer wr=TessUtil.getWR();
+		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+
+		wr.pos(0,1,1).color(1F, 0F, 0F, 1F).endVertex();
+		wr.pos(1,1,1).color(0F, 1F, 0F, 1F).endVertex();
+		wr.pos(1,1,0).color(1F, 1F, 0F, 1F).endVertex();
+		wr.pos(0,1,0).color(0F, 0F, 1F, 1F).endVertex();
+
+		Tessellator.getInstance().draw();
+		*/
+		GlStateManager.shadeModel(GL11.GL_FLAT);
+
+
+
+		Vec3M normal=new Vec3M(1,0,0),vec=new Vec3M(UtilM.fluctuateSmooth(20,0),UtilM.fluctuateSmooth(42,0),UtilM.fluctuateSmooth(34,0)),reflected=vec.reflect(normal).normalize();
+
+
+
+		TessUtil.drawLine(-normal.x,1-normal.y,-normal.z, normal.x,1+normal.y,normal.z,p,false,null,0,0);
+
+
+		TessUtil.drawLine(0,1,0, 0+vec.x,1+vec.y,0+vec.z,p,false,null,0,0);
+		TessUtil.drawLine(0,1,0, 0+reflected.x,1+reflected.y,0+reflected.z,p,false,null,0,0);
+
+		GL11U.texture(true);
+
+
 		boolean[] strateSides=new boolean[6];
 		strateSides[1]=networkComponent.isStrate(EnumFacing.UP);
 		strateSides[3]=networkComponent.isStrate(EnumFacing.SOUTH);

@@ -22,7 +22,7 @@ public class AdvancedPhysicsFloat{
 	public void update(){
 		prevPoint=point;
 		if(simpleVersion){
-			point=(float)UtilM.slowlyEqalize(point, wantedPoint, acceleration);
+			point=(float)UtilM.slowlyEqualize(point, wantedPoint, acceleration);
 		}else{
 			speed=UtilM.handleSpeedFolower(speed, point, wantedPoint, acceleration);
 			speed*=friction;

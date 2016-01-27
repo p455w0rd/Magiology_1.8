@@ -33,7 +33,7 @@ public class Vec2i{
 	public boolean equals(Object obj){
 		if(this==obj)return true;
 		if(obj==null)return false;
-		if(!Instanceof(this, obj))return false;
+		if(!instanceOf(this, obj))return false;
 		Vec2i other=(Vec2i)obj;
 		return x==other.x&&y==other.y;
 	}

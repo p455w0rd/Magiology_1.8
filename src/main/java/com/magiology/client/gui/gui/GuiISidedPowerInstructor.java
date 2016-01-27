@@ -247,9 +247,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 				GL11U.glScale(1.001);
 				GL11.glTranslated(-0.5, -0.5, -0.5);
 				double 
-				r=UtilM.fluctuator(9, 0)*0.4,
-				g=0.5-UtilM.fluctuator(17, 0)*0.3,
-				b=1-UtilM.fluctuator(27, 0)*0.2;
+				r=UtilM.fluctuate(9, 0)*0.4,
+				g=0.5-UtilM.fluctuate(17, 0)*0.3,
+				b=1-UtilM.fluctuate(27, 0)*0.2;
 				GL11.glColor4d(r,g,b, 0.4);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				cube.draw();
@@ -278,9 +278,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_LIGHTING);
 		
-		GL11.glColor4d(0.65F+UtilM.fluctuator(41, 0)*0.1,0.65+UtilM.fluctuator(25, 0)*0.05,0.65+UtilM.fluctuator(73, 0)*0.15,1);
+		GL11.glColor4d(0.65F+UtilM.fluctuate(41, 0)*0.1,0.65+UtilM.fluctuate(25, 0)*0.05,0.65+UtilM.fluctuate(73, 0)*0.15,1);
 		GL11U.glScale(12.9);
-		GL11U.glRotate(UtilM.fluctuator(164, 0)*180+xRot/4, UtilM.fluctuator(84, 0)*60+yRot/4, UtilM.fluctuator(508, 0)*360+zRot/4);
+		GL11U.glRotate(UtilM.fluctuate(164, 0)*180+xRot/4, UtilM.fluctuate(84, 0)*60+yRot/4, UtilM.fluctuate(508, 0)*360+zRot/4);
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		TessUtil.drawBall();
@@ -349,7 +349,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		GL11.glTranslated(guiLeft+152, guiTop+19+buttonId*22, 120);
 		GL11U.glScale(12);
 		GL11U.glRotate(0, 30, 90);
-		GL11U.glRotate(0, UtilM.fluctuator(1600, 0)*3600,0);
+		GL11U.glRotate(0, UtilM.fluctuate(1600, 0)*3600,0);
 		GL11.glTranslated(0.375,-0.375,-0.375);
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);

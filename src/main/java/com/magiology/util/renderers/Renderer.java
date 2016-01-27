@@ -29,38 +29,38 @@ public class Renderer{
 	
 	
 	
-	private static void addVertexData(double xPos,double yPos,double zPos,double u,double v,float xNormal,float yNormal,float zNormal){
+	private void addVertexData(double xPos,double yPos,double zPos,double u,double v,float xNormal,float yNormal,float zNormal){
 		addPos(xPos, yPos, zPos).addUV(u, v).addNormal(xNormal, yNormal, zNormal).endVertex();
 	}
-	private static Renderer addVertexData(double xPos,double yPos,double zPos,double u,double v){
+	private Renderer addVertexData(double xPos,double yPos,double zPos,double u,double v){
 		addPos(xPos, yPos, zPos).addUV(u, v);
 		return instance;
 	}
 	
 	
-	private static Renderer addNormal(float x, float y, float z){
+	private Renderer addNormal(float x, float y, float z){
 		renderer.normal(x, y, z);
 		return instance;
 	}
-	private static Renderer addUV(double u,double v){
+	private Renderer addUV(double u,double v){
 		renderer.tex(u, v);
 		return instance;
 	}
-	private static Renderer addPos(double xPos,double yPos,double zPos){
+	private Renderer addPos(double xPos,double yPos,double zPos){
 		renderer.pos(xPos, yPos, zPos);
 		return instance;
 	}
 	
-	private static Renderer addColor(float r, float g, float b, float a){
+	private Renderer addColor(float r, float g, float b, float a){
 		renderer.color(r, g, b, a);
 		return instance;
 	}
-	private static Renderer addColor(float r, float g, float b){
-		addColor(r, g, b, 1);
+	private Renderer addColor(float r, float g, float b){
+		addColor(r, g, b, 1F);
 		return instance;
 	}
 	
-	private static void endVertex(){
+	private void endVertex(){
 		renderer.endVertex();
 	}
 
@@ -101,11 +101,11 @@ public class Renderer{
 		}
 		
 		public void addVertex(Vec3M pos){
-			addPos(pos.x, pos.y, pos.z);
+			instance.addPos(pos.x, pos.y, pos.z);
 		}
 		
 		public void addVertex(double xPos, double yPos, double zPos){
-			addPos(xPos, yPos, zPos).endVertex();
+			instance.addPos(xPos, yPos, zPos).endVertex();
 		}
 	}
 	public static class LineRenderer extends RendererBase{
@@ -128,11 +128,11 @@ public class Renderer{
 		}
 		
 		public void addVertex(Vec3M pos){
-			addPos(pos.x, pos.y, pos.z);
+			instance.addPos(pos.x, pos.y, pos.z);
 		}
 		
 		public void addVertex(double xPos, double yPos, double zPos){
-			addPos(xPos, yPos, zPos).endVertex();
+			instance.addPos(xPos, yPos, zPos).endVertex();
 		}
 	}
 	
@@ -144,17 +144,17 @@ public class Renderer{
 		}
 		
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v, Vec3M normal){
-			addVertexData(xPos, yPos, zPos, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
+			instance.addVertexData(xPos, yPos, zPos, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
 		}
 		public void addVertex(Vec3M pos, float u, float v, float xNormal, float yNormal, float zNormal){
-			addVertexData(pos.x, pos.y, pos.z, u, v, xNormal, yNormal, zNormal);
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v, xNormal, yNormal, zNormal);
 		}
 		public void addVertex(Vec3M pos, float u, float v, Vec3M normal){
-			addVertexData(pos.x, pos.y, pos.z, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v, (float)normal.x, (float)normal.y, (float)normal.z);
 		}
 		
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal){
-			addVertexData(xPos, yPos, zPos, u, v, xNormal, yNormal, zNormal);
+			instance.addVertexData(xPos, yPos, zPos, u, v, xNormal, yNormal, zNormal);
 		}
 	}
 	public static class PosUVNormalColorRenderer extends RendererBase{
@@ -162,11 +162,30 @@ public class Renderer{
 		public VertexFormat getVertexFormat(){
 			return DefaultVertexFormats.POSITION_TEX_NORMAL;
 		}
+
+		public void addVertex(Vec3M pos, float u, float v, float xNormal, float yNormal, float zNormal, float r, float g, float b, float a){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal(xNormal, yNormal, zNormal).addColor(r,g,b,a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, Vec3M normal, float r, float g, float b, float a){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(r,g,b,a).endVertex();
+		}
+		public void addVertex(Vec3M pos, float u, float v, Vec3M normal, float r, float g, float b, float a){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(r,g,b,a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal, ColorF color){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal(xNormal, yNormal, zNormal).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		public void addVertex(Vec3M pos, float u, float v, float xNormal, float yNormal, float zNormal, ColorF color){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal(xNormal, yNormal, zNormal).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, Vec3M normal, ColorF color){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+		}
 		public void addVertex(Vec3M pos, float u, float v, Vec3M normal, ColorF color){
-			addVertexData(pos.x, pos.y, pos.z, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(color.r, color.g, color.b, color.a).endVertex();
 		}
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal, float r, float g, float b, float a){
-			addVertexData(xPos, yPos, zPos, u, v).addNormal(xNormal, yNormal, zNormal).addColor(r,g,b,a).endVertex();
+			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal(xNormal, yNormal, zNormal).addColor(r,g,b,a).endVertex();
 		}
 	}
 	public static class PosUVRenderer extends RendererBase{
@@ -176,11 +195,11 @@ public class Renderer{
 		}
 		
 		public void addVertex(Vec3M pos, float u, float v){
-			addVertexData(pos.x, pos.y, pos.z, u, v).endVertex();
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).endVertex();
 		}
 		
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v){
-			addVertexData(xPos, yPos, zPos, u, v).endVertex();
+			instance.addVertexData(xPos, yPos, zPos, u, v).endVertex();
 		}
 	}
 	public static class PosUVColorRenderer extends RendererBase{
@@ -190,18 +209,18 @@ public class Renderer{
 		}
 		
 		public void addVertex(Vec3M pos, float u, float v, ColorF color){
-			addVertexData(pos.x, pos.y, pos.z, u, v).addColor(color.r, color.g, color.b, color.a).endVertex();
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addColor(color.r, color.g, color.b, color.a).endVertex();
 		}
 		
 		public void addVertex(Vec3M pos, float u, float v, float r, float g, float b, float a){
-			addVertexData(pos.x, pos.y, pos.z, u, v).addColor(r, g, b, a).endVertex();
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addColor(r, g, b, a).endVertex();
 		}
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v, ColorF color){
-			addVertexData(xPos, yPos, zPos, u, v).addColor(color.r, color.g, color.b, color.a).endVertex();
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(color.r, color.g, color.b, color.a).endVertex();
 		}
 		
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float r, float g, float b, float a){
-			addVertexData(xPos, yPos, zPos, u, v).addColor(r, g, b, a).endVertex();
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(r, g, b, a).endVertex();
 		}
 	}
 	public static class PosColorRenderer extends RendererBase{
@@ -211,16 +230,16 @@ public class Renderer{
 		}
 		
 		public void addVertex(Vec3M pos, ColorF color){
-			addPos(pos.x, pos.y, pos.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+			instance.addPos(pos.x, pos.y, pos.z).addColor(color.r, color.g, color.b, color.a).endVertex();
 		}
 		public void addVertex(Vec3M pos, float r, float g, float b, float a){
-			addPos(pos.x, pos.y, pos.z).addColor(r, g, b, a).endVertex();
+			instance.addPos(pos.x, pos.y, pos.z).addColor(r, g, b, a).endVertex();
 		}
 		public void addVertex(double xPos, double yPos, double zPos, ColorF color){
-			addPos(xPos, yPos, zPos).addColor(color.r, color.g, color.b, color.a).endVertex();
+			instance.addPos(xPos, yPos, zPos).addColor(color.r, color.g, color.b, color.a).endVertex();
 		}
 		public void addVertex(double xPos, double yPos, double zPos, float r, float g, float b, float a){
-			addPos(xPos, yPos, zPos).addColor(r, g, b, a).endVertex();
+			instance.addPos(xPos, yPos, zPos).addColor(r, g, b, a).endVertex();
 		}
 	}
 	
@@ -241,7 +260,7 @@ public class Renderer{
 			addVertex(pos.x, pos.y, pos.z, u, v, red, green, blue, alpha, xLight, yLight);
 		}
 		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float red, float green, float blue, float alpha, int xLight, int yLight){
-			addVertexData(xPos, yPos, zPos, u, v).addColor(red, green, blue, alpha).lightmap(xLight, yLight).endVertex();
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(red, green, blue, alpha).lightmap(xLight, yLight).endVertex();
 		}
 		
 	}

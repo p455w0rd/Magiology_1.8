@@ -17,9 +17,9 @@ public class ColorRenderer extends ShaderAspectRenderer{
 		rPrev=r;
 		gPrev=g;
 		bPrev=b;
-		r=UtilM.fluctuator(30, 78)*0.5F+0.5F;
-		g=UtilM.fluctuator(74, 752)*0.5F+0.5F;
-		b=UtilM.fluctuator(50, 0)*0.5F+0.5F;
+		r=UtilM.fluctuate(30, 78)*0.5F+0.5F;
+		g=UtilM.fluctuate(74, 752)*0.5F+0.5F;
+		b=UtilM.fluctuate(50, 0)*0.5F+0.5F;
 	}
 	
 	@Override

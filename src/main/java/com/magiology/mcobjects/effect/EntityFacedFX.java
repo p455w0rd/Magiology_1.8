@@ -1,13 +1,11 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.renderer.*;
 import net.minecraft.world.*;
 
 import org.lwjgl.opengl.*;
 
 import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.*;
@@ -203,7 +201,7 @@ public class EntityFacedFX extends EntityFXM{
 			}
 			else {
 				for(int e=0;e<3;e++){
-					double[] AB=UtilM.cricleXZ((particleAge/4.0)+(e>=1?180*e:0));
+					double[] AB=UtilM.circleXZ((particleAge/4.0)+(e>=1?180*e:0));
 					
 					
 					UtilM.spawnEntityFX(new EntityFacedFX(worldObj,posX, posY, posZ,

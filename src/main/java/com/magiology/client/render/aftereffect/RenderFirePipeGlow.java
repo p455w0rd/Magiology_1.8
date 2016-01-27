@@ -34,8 +34,8 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11U.setUpOpaqueRendering(1);
 			
-			double var1=UtilM.fluctuator(20,(pipe.x()+pipe.y()+pipe.z())*4),
-				   var2=UtilM.fluctuator(47,(pipe.x()+pipe.y()+pipe.z())*4);
+			double var1=UtilM.fluctuate(20,(pipe.x()+pipe.y()+pipe.z())*4),
+				   var2=UtilM.fluctuate(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
 			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*UtilM.calculatePos(prevAlpha, alpha));
 			GL11.glDepthMask(true);

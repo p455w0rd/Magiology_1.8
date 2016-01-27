@@ -56,9 +56,9 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 			if(world.getTotalWorldTime()%3==0&&world.isRemote){
 				boolean bol=true;
 				float rotation=-player.rotationYaw;
-				double[] c=UtilM.cricleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
+				double[] c=UtilM.circleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
 				for(int l=0;l<3;l++){
-					double[] a=UtilM.cricleXZ(rotation+90-10+l*10),b=UtilM.cricleXZ(rotation-90-10+l*10);
+					double[] a=UtilM.circleXZ(rotation+90-10+l*10),b=UtilM.circleXZ(rotation-90-10+l*10);
 					a[0]*=2.7;b[0]*=2.7;
 					a[1]*=2.7;b[1]*=2.7;
 					Vec3 pp=new Vec3(player.posX,player.posY,player.posZ);

@@ -52,10 +52,10 @@ public class CustomButton extends GuiButton{
     	if(b>1)b=1;
     	else if(b<0)b=0;
     	double Cspeed=0.04;
-    	r=UtilM.slowlyEqalize(r, rGoal, Cspeed+UtilM.CRandD(Cspeed/2));
-    	g=UtilM.slowlyEqalize(g, gGoal, Cspeed+UtilM.CRandD(Cspeed/2));
-    	b=UtilM.slowlyEqalize(b, bGoal, Cspeed+UtilM.CRandD(Cspeed/2));
-    	for(int a=0;a<one2.length;a++)if(Math.abs(one2[a]-one2Goal[a])>0.1)one2[a]=UtilM.slowlyEqalize(one2[a], one2Goal[a], Cspeed*3+UtilM.CRandD(Cspeed));
+    	r=UtilM.slowlyEqualize(r, rGoal, Cspeed+UtilM.CRandD(Cspeed/2));
+    	g=UtilM.slowlyEqualize(g, gGoal, Cspeed+UtilM.CRandD(Cspeed/2));
+    	b=UtilM.slowlyEqualize(b, bGoal, Cspeed+UtilM.CRandD(Cspeed/2));
+    	for(int a=0;a<one2.length;a++)if(Math.abs(one2[a]-one2Goal[a])>0.1)one2[a]=UtilM.slowlyEqualize(one2[a], one2Goal[a], Cspeed*3+UtilM.CRandD(Cspeed));
     }
     
 	@Override

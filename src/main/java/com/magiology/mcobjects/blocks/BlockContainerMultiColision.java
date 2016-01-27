@@ -1,18 +1,21 @@
 package com.magiology.mcobjects.blocks;
 
-import java.util.*;
-
-import net.minecraft.block.material.*;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-
-import com.magiology.forgepowered.events.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 public abstract class BlockContainerMultiColision extends BlockContainerM{
 
@@ -72,8 +75,8 @@ public abstract class BlockContainerMultiColision extends BlockContainerM{
     @Override
     public void addCollisionBoxesToList(World world, BlockPos pos, IBlockState state, AxisAlignedBB mask, List list, Entity collidingEntity){
 		AxisAlignedBB[] a=((MultiColisionProvider)world.getTileEntity(pos)).getActiveBoxes();
-		for(int i=0;i<a.length;i++){
-			this.setBlockBounds((float)a[i].minX,(float)a[i].minY,(float)a[i].minZ,(float)a[i].maxX,(float)a[i].maxY,(float)a[i].maxZ);
+		for(AxisAlignedBB anA:a){
+			this.setBlockBounds((float)anA.minX, (float)anA.minY, (float)anA.minZ, (float)anA.maxX, (float)anA.maxY, (float)anA.maxZ);
 			super.addCollisionBoxesToList(world, pos, state, mask, list, collidingEntity);
 		}
     }

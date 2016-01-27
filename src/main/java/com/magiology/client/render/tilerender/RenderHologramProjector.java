@@ -28,7 +28,7 @@ public class RenderHologramProjector extends TileEntitySpecialRendererM{
 		TessUtil.drawCube(t.getBlockType().getBlockBoundsMinX(),t.getBlockType().getBlockBoundsMinY(),t.getBlockType().getBlockBoundsMinZ(),t.getBlockType().getBlockBoundsMaxX(),t.getBlockType().getBlockBoundsMaxY(),t.getBlockType().getBlockBoundsMaxZ());
 		GL11U.setUpOpaqueRendering(1);
 		GL11U.glScale(0.99999);
-		ColorF color=new ColorF(UtilM.fluctuatorSmooth(10, 0)*0.2+tile.mainColor.x,UtilM.fluctuatorSmooth(35, 0)*0.2+tile.mainColor.y,UtilM.fluctuatorSmooth(16, 0)*0.2+tile.mainColor.z,0.2);
+		ColorF color=new ColorF(UtilM.fluctuateSmooth(10, 0)*0.2+tile.mainColor.x,UtilM.fluctuateSmooth(35, 0)*0.2+tile.mainColor.y,UtilM.fluctuateSmooth(16, 0)*0.2+tile.mainColor.z,0.2);
 		color.bind();
 		GL11.glTranslatef(tile.offset.x, tile.offset.y-UtilM.p*1.45F, 0.5F);
 		tile.main.draw();

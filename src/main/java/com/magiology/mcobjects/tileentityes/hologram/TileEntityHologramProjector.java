@@ -115,7 +115,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public void onPressed(EntityPlayer player){
 		selectedObj=null;
 		if(UtilM.isRemote(player))for(int a=0;a<360;a+=30){
-			double[] b=UtilM.cricleXZ(a+UtilM.CRandF(16));
+			double[] b=UtilM.circleXZ(a+UtilM.CRandF(16));
 			b[0]*=0.06;
 			b[1]*=0.06;
 			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.x+x(), size.y+offset.y+point.pointedPos.y+y(), point.pointedPos.z+z()+0.5,

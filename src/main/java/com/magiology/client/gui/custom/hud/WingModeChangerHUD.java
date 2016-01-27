@@ -12,7 +12,6 @@ import com.magiology.handlers.animationhandlers.*;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 import com.magiology.mcobjects.entitys.*;
 import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 
 public class WingModeChangerHUD extends HUD{
@@ -22,7 +21,7 @@ public class WingModeChangerHUD extends HUD{
 	private int selectionId;
 	Positions[] validPoss;
 	Positions curentPoss;
-	double[][] criclePoss={UtilM.cricleXZ(0),UtilM.cricleXZ(60),UtilM.cricleXZ(120),UtilM.cricleXZ(180),UtilM.cricleXZ(240),UtilM.cricleXZ(300),UtilM.cricleXZ(0)};
+	double[][] criclePoss={UtilM.circleXZ(0),UtilM.circleXZ(60),UtilM.circleXZ(120),UtilM.circleXZ(180),UtilM.circleXZ(240),UtilM.circleXZ(300),UtilM.circleXZ(0)};
 	private float sliderPos,prevSliderPos,sliderSpeed,sliderWantedPos,alpha,prevAlpha;
 	private boolean isExited=true;
 	float[][] backgroundColor,prevBackgroundColor;
@@ -134,7 +133,7 @@ public class WingModeChangerHUD extends HUD{
 			id++;
 		}
 		if(player.fallDistance>4)for(int a=0;a<criclePoss.length;a++)for(int b=0;b<2;b++){
-			criclePoss=new double[][]{UtilM.cricleXZ(0),UtilM.cricleXZ(60),UtilM.cricleXZ(120),UtilM.cricleXZ(180),UtilM.cricleXZ(240),UtilM.cricleXZ(300),UtilM.cricleXZ(0)};
+			criclePoss=new double[][]{UtilM.circleXZ(0),UtilM.circleXZ(60),UtilM.circleXZ(120),UtilM.circleXZ(180),UtilM.circleXZ(240),UtilM.circleXZ(300),UtilM.circleXZ(0)};
 		}
 	}
 	private void onExit(){
@@ -164,13 +163,13 @@ public class WingModeChangerHUD extends HUD{
 		double noise=0.05,speed=0.15;
 		for(int a=0;a<backgroundColor.length;a++){
 			if(a==selectionId){
-				backgroundColor[a][0]=(float)UtilM.slowlyEqalize(backgroundColor[a][0], 1+UtilM.CRandF(noise),speed);
-				backgroundColor[a][1]=(float)UtilM.slowlyEqalize(backgroundColor[a][1], 0.2+UtilM.CRandF(noise),speed);
-				backgroundColor[a][2]=(float)UtilM.slowlyEqalize(backgroundColor[a][2], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][0]=(float)UtilM.slowlyEqualize(backgroundColor[a][0], 1+UtilM.CRandF(noise),speed);
+				backgroundColor[a][1]=(float)UtilM.slowlyEqualize(backgroundColor[a][1], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+UtilM.CRandF(noise),speed);
 			}else{
-				backgroundColor[a][0]=(float)UtilM.slowlyEqalize(backgroundColor[a][0], 0.2+UtilM.CRandF(noise),speed);
-				backgroundColor[a][1]=(float)UtilM.slowlyEqalize(backgroundColor[a][1], 0.2+UtilM.CRandF(noise),speed);
-				backgroundColor[a][2]=(float)UtilM.slowlyEqalize(backgroundColor[a][2], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][0]=(float)UtilM.slowlyEqualize(backgroundColor[a][0], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][1]=(float)UtilM.slowlyEqualize(backgroundColor[a][1], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+UtilM.CRandF(noise),speed);
 			}
 			
 			backgroundColor[a][0]=UtilM.snap(backgroundColor[a][0], 0, 1);

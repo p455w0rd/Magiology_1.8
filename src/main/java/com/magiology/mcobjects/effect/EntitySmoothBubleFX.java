@@ -1,8 +1,5 @@
 package com.magiology.mcobjects.effect;
 
-import java.awt.*;
-
-import net.minecraft.client.renderer.vertex.*;
 import net.minecraft.world.*;
 
 import org.lwjgl.opengl.*;
@@ -255,7 +252,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			}
 			else {
 				for(int e=0;e<3;e++){
-					double[] AB=UtilM.cricleXZ((particleAge/4.0)+(e>=1?180*e:0));
+					double[] AB=UtilM.circleXZ((particleAge/4.0)+(e>=1?180*e:0));
 					
 					
 					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,

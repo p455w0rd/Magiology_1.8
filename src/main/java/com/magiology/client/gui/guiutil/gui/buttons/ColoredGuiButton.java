@@ -28,10 +28,10 @@ public class ColoredGuiButton extends GuiButton{
 		prevB=b;
 		prevAlpha=alpha;
 		
-		r=(float)UtilM.slowlyEqalize(r, wantedR, 0.1);
-		g=(float)UtilM.slowlyEqalize(g, wantedG, 0.1);
-		b=(float)UtilM.slowlyEqalize(b, wantedB, 0.1);
-		alpha=(float)UtilM.slowlyEqalize(prevAlpha, wantedAlpha, 0.2);
+		r=(float)UtilM.slowlyEqualize(r, wantedR, 0.1);
+		g=(float)UtilM.slowlyEqualize(g, wantedG, 0.1);
+		b=(float)UtilM.slowlyEqualize(b, wantedB, 0.1);
+		alpha=(float)UtilM.slowlyEqualize(prevAlpha, wantedAlpha, 0.2);
 	}
 	
 	public ColoredGuiButton(int id, int x, int y,int width, int height, String txt){
@@ -76,7 +76,7 @@ public class ColoredGuiButton extends GuiButton{
                 l = 16777120;
             }
             
-            float[] rgb=UtilM.codeToRGBABPrecentage(l);
+            float[] rgb=UtilM.codeToRGBABPercentage(l);
             
             rgb[0]=(rgb[0]+r)/2F;
             rgb[1]=(rgb[1]+g)/2F;

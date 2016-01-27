@@ -1,12 +1,15 @@
 package com.magiology.util.utilobjects.vectors;
 
-import java.io.*;
-import java.nio.*;
-
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
-
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.*;
+
+import java.io.Serializable;
+import java.nio.FloatBuffer;
 
 /**
  *	Copy of mc Vec3M because mc didn't heard or a word called convenient 
@@ -275,4 +278,11 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	public Vec3M mul(Vec3M vec){
 		return new Vec3M(getX()*vec.getX(), getY()*vec.getY(), getZ()*vec.getZ());
 	}
+
+    public Vec3M reflect(Vec3M normal){
+        Vec3M norm = normal.normalize();
+        Vec3M base=normalize();
+        Vec3M difference=
+        return norm.mul(dot_product * 2);
+    }
 }

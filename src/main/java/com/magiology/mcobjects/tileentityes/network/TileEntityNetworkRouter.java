@@ -72,7 +72,7 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 			
 			if(stackNull)extractionActivated[i]=false;
 			
-			animationos[i].update(UtilM.slowlyEqalize(animationos[i].value, extractionActivated[i]?1:0, 0.03F));
+			animationos[i].update(UtilM.slowlyEqualize(animationos[i].value, extractionActivated[i]?1:0, 0.03F));
 			if(!stackNull&&animationos[i].prevValue>animationos[i].value&&animationos[i].value==0){
 				EntityItem stack=UtilM.dropBlockAsItem(worldObj, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, getStackInSlot(i));
 				if(stack!=null){

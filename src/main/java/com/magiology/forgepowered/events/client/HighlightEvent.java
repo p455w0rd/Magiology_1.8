@@ -1,38 +1,40 @@
 package com.magiology.forgepowered.events.client;
 
-import java.util.*;
-
-import net.minecraft.block.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.vertex.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
-import net.minecraft.world.*;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.fml.common.eventhandler.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.network.*;
-import com.magiology.api.power.*;
-import com.magiology.client.render.aftereffect.*;
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.items.*;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.power.PowerCore;
+import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.client.render.aftereffect.RenderNetworkPointerContainerHighlight;
+import com.magiology.core.init.MBlocks;
+import com.magiology.core.init.MItems;
+import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
+import com.magiology.mcobjects.items.NetworkPointer;
 import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 /**
  * ONLY CLIENT SIDE
  * @author LapisSea
@@ -234,7 +236,7 @@ public class HighlightEvent{
 		if(UtilM.isItemInStack(MItems.FireHammer,item)){
 			drawBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2, 0.1, 0.1, 0.9, 0.1+0.2*selectionAlpha);
 			GL11U.setUpOpaqueRendering(1);
-			drawSelectionBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2,UtilM.fluctuatorSmooth(11, 21)/4, UtilM.fluctuatorSmooth(16, 45)/4, 0.7+UtilM.fluctuatorSmooth(36, 74)*0.3, 2.5, 0.5);
+			drawSelectionBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2,UtilM.fluctuateSmooth(11, 21)/4, UtilM.fluctuateSmooth(16, 45)/4, 0.7+UtilM.fluctuateSmooth(36, 74)*0.3, 2.5, 0.5);
 		}
 		else GL11U.setUpOpaqueRendering(1);
 		
@@ -412,7 +414,7 @@ public class HighlightEvent{
 		
 		for(int a=0;a<xpoints.length;a++){xpoints[a]=(float)((rund.nextFloat()-0.5)*0.05);ypoints[a]=(float)((rund.nextFloat()-0.5)*0.05);zpoints[a]=(float)((rund.nextFloat()-0.5)*0.05);}
 		int angle=event.player.worldObj.rand.nextInt(360);
-		double[] ab=UtilM.cricleXZ(angle);ab[0]/=3;ab[1]/=3;
+		double[] ab=UtilM.circleXZ(angle);ab[0]/=3;ab[1]/=3;
 		double xr=pos.getX()+UtilM.CRandF(0.8);
 		double yr=pos.getY()+UtilM.CRandF(1.8)-0.6;
 		double zr=pos.getZ()+UtilM.CRandF(0.8);

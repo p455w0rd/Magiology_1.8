@@ -111,13 +111,11 @@ public class VertexRenderer{
 	}
 
 	protected void triangleToTesselatorQuads(ShadedTriangle triangle){
-
 		Vec3M finalNormal=GL11U.transformVector(triangle.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
 		for(int b=0;b<2;b++){
 			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos3[b].vector3D.xCoord, triangle.pos3[b].vector3D.yCoord, triangle.pos3[b].vector3D.zCoord), transformation);
 			Renderer.POS_UV_NORMAL.addVertex(finalVec, triangle.pos3[b].texturePositionX, triangle.pos3[b].texturePositionY,finalNormal);
 		}
-
 	}
 
 	protected void triangleToTesselatorLines(ShadedTriangle triangle){

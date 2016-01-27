@@ -1,22 +1,20 @@
 package com.magiology.client.gui.gui;
 
-import java.io.*;
-
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.custom.guiparticels.*;
-import com.magiology.core.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.container.UpgradeContainer;
+import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.effect.GuiParticle;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	
@@ -39,7 +37,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		GL11.glScaled(0.7,0.7,0.7);
 		int result=guiParticles.size();
 		for(GuiParticle as:guiParticles)if(as.isDead)result--;
-		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.    Number of GUI particles: "+result, 3, -11, UtilM.rgbPrecentageToCode(1, 1, 1, 1));
+		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.    Number of GUI particles: "+result, 3, -11, UtilM.rgbPercentageToCode(1, 1, 1, 1));
 		
 		GL11.glPopMatrix();
 		
@@ -73,7 +71,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 			guiAlpha+=0.06+UtilM.CRandF(0.05);
 			if(guiAlpha>1)guiAlpha=1;
 		}
-		for(int ad=0;ad<30;ad++)guiAlpha=UtilM.slowlyEqalize(guiAlpha, GL11alpha, 0.001);
+		for(int ad=0;ad<30;ad++)guiAlpha=UtilM.slowlyEqualize(guiAlpha, GL11alpha, 0.001);
 		if(guiAlpha<1){
 			GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -120,7 +118,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		mouseStartY=y;
 		if(isCtrlKeyDown()){
 			if((x<guiLeft||y<guiTop)||(x>guiLeft+xSize||y>guiTop+ySize)){
-				double[] ab=UtilM.cricleXZ(UtilM.RInt(360));
+				double[] ab=UtilM.circleXZ(UtilM.RInt(360));
 				spawnGuiParticle(new GuiParticle(x,y,100, ab[0]*20, ab[1]*20,1,0.7,0.7,UtilM.RF(),UtilM.RF(), UtilM.RF(),texture1,GuiStandardFX.SummonedFX));
 			}
 		}
@@ -139,7 +137,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		this.updateParticles();
 		int amount=10+UtilM.RInt(10);
 		while(guiParticles.size()<amount){
-			double[] ab=UtilM.cricleXZ(UtilM.RInt(360));
+			double[] ab=UtilM.circleXZ(UtilM.RInt(360));
 			spawnGuiParticle(new GuiParticle(width/2, height/2,0, ab[0], ab[1],1.3,0.7,0.7,1,0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2,texture1,GuiStandardFX.StarterFX));
 		}
 		if(Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){

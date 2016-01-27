@@ -9,7 +9,6 @@ import com.magiology.client.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
 import com.magiology.client.gui.gui.*;
 import com.magiology.client.render.*;
 import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
 import com.magiology.util.utilclasses.*;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -62,7 +61,7 @@ public class GuiParticle{
 			if((xPos<guiLeft||yPos<guiTop)||(xPos>guiLeft+xSize||yPos>guiTop+ySize));else lesstiplyer/=4.0;
 			
 		}
-		double[] ab=UtilM.cricleXZ(UtilM.RInt(360));
+		double[] ab=UtilM.circleXZ(UtilM.RInt(360));
 		if(hasMovementNoise){
 			xSpeed+=ab[0]/lesstiplyer;
 			ySpeed+=ab[1]/lesstiplyer;

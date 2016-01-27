@@ -34,10 +34,10 @@ public class NetworkUtil{
 				((UpdateableTile)Tile2).getValidTileEntitys(included, excluded);
 				boolean con=true;
 				for(int j=0;j<excluded.size();j++){
-					if(UtilM.Instanceof(tile1,excluded.get(j)))con=false;
+					if(UtilM.instanceOf(tile1,excluded.get(j)))con=false;
 				}
 				for(int j=0;j<included.size();j++){
-					if(UtilM.Instanceof(tile1,included.get(j)))con=true;
+					if(UtilM.instanceOf(tile1,included.get(j)))con=true;
 				}
 				if(!con)return false;
 			}

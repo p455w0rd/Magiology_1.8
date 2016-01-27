@@ -148,11 +148,11 @@ public class TheHandHandler{
 //				float[][] rotations1=pos.thumbRotations;
 //				for(int a11=0;a11<2;a11++)for(int a12=0;a12<3;a12++){
 //					a1.xyzPosRot[a11][3+a12]+=a1.xyzPosRotSpeed[a11][3+a12];
-//					a1.xyzPosRot[a11][3+a12]=(float)UtilM.slowlyEqalize(a1.xyzPosRot[a11][3+a12], rotations1[a11][a12], 2);
+//					a1.xyzPosRot[a11][3+a12]=(float)UtilM.slowlyEqualize(a1.xyzPosRot[a11][3+a12], rotations1[a11][a12], 2);
 //					a1.xyzPosRotSpeed[a11][3+a12]*=0.8;
 //				}
-//				a1.xyzPosRotNoise[1][4]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
-//				a1.xyzPosRotNoise[0][4]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
+//				a1.xyzPosRotNoise[1][4]=(float)UtilM.slowlyEqualize(a1.xyzPosRotNoise[1][4], noiserSpeed[finger][0][1], 1);
+//				a1.xyzPosRotNoise[0][4]=(float)UtilM.slowlyEqualize(a1.xyzPosRotNoise[0][4], noiserSpeed[finger][1][1], 1);
 //				a1.xyzPosRot[0][4]=UtilM.snap(a1.xyzPosRot[0][4], -4, 65);
 //				a1.xyzPosRot[1][4]=UtilM.snap(a1.xyzPosRot[1][4], -80, 2);
 //				a1.xyzPosRot[0][3]=UtilM.snap(a1.xyzPosRot[0][3], -45, 5);
@@ -163,9 +163,9 @@ public class TheHandHandler{
 //					for(int a11=0;a11<3;a11++){
 //						a1.xyzPosRot[b][3+a11]+=a1.xyzPosRotSpeed[b][3+a11];
 //						a1.xyzPosRotSpeed[b][3+a11]*=0.8;
-//						a1.xyzPosRot[b][3+a11]=(float)UtilM.slowlyEqalize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
+//						a1.xyzPosRot[b][3+a11]=(float)UtilM.slowlyEqualize(a1.xyzPosRot[b][3+a11], rotations[b][a11], 2);
 //					}
-//					a1.xyzPosRotNoise[b][3]=(float)UtilM.slowlyEqalize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
+//					a1.xyzPosRotNoise[b][3]=(float)UtilM.slowlyEqualize(a1.xyzPosRotNoise[b][3], noiserSpeed[finger][b][0], 2);
 //					a1.xyzPosRot[b][3]=UtilM.snap(a1.xyzPosRot[b][3], -90, 5);
 //				}
 //			}
@@ -183,7 +183,7 @@ public class TheHandHandler{
 //		for(int g=0;g<10;g++)for(int h=0;h<data.handRotation.length;h++){
 //			float speed=Math.abs(pos.handRotations[h]-getLastActivePosition(player).handRotations[h]);
 //			if(speed<=0)speed=1;
-//			data.handRotation[h]=(float)UtilM.slowlyEqalize(data.handRotation[h],pos.handRotations[h], (0.05*(UtilM.RF()*0.5+0.5)*speed/8));
+//			data.handRotation[h]=(float)UtilM.slowlyEqualize(data.handRotation[h],pos.handRotations[h], (0.05*(UtilM.RF()*0.5+0.5)*speed/8));
 //		}
 //		//makes the holding animation
 //		if(player.isUsingItem()){
@@ -200,7 +200,7 @@ public class TheHandHandler{
 //		data.handRotationCalc=UtilM.addToFloatArray(data.handRotation,data.handRotationSpeed);
 //		//updates speed of the noise
 //		for(int a1=0;a1<noiser.length;a1++)for(int a2=0;a2<noiser[a1].length;a2++)for(int a3=0;a3<noiser[a1][a2].length;a3++)
-//			noiserSpeed[a1][a2][a3]=(float)UtilM.slowlyEqalize(noiserSpeed[a1][a2][a3], noiser[a1][a2][a3], 0.05);
+//			noiserSpeed[a1][a2][a3]=(float)UtilM.slowlyEqualize(noiserSpeed[a1][a2][a3], noiser[a1][a2][a3], 0.05);
 	}
 	@SideOnly(Side.CLIENT)
 	public static void handUseAnimation(EntityPlayer player){

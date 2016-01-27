@@ -24,12 +24,12 @@ public class TexturedColoredButton extends ColoredGuiButton{
 		prevB=b;
 		prevAlpha=alpha;
 		
-		r=(float)UtilM.slowlyEqalize(r, wantedR, 0.1);
-		g=(float)UtilM.slowlyEqalize(g, wantedG, 0.1);
-		b=(float)UtilM.slowlyEqalize(b, wantedB, 0.1);
+		r=(float)UtilM.slowlyEqualize(r, wantedR, 0.1);
+		g=(float)UtilM.slowlyEqualize(g, wantedG, 0.1);
+		b=(float)UtilM.slowlyEqualize(b, wantedB, 0.1);
 		wantedAlpha=UtilM.booleanToInt(hovered);
 		alpha+=0.03;
-		alpha=(float)UtilM.slowlyEqalize(prevAlpha, wantedAlpha, 0.17);
+		alpha=(float)UtilM.slowlyEqualize(prevAlpha, wantedAlpha, 0.17);
 		
 		
 	}
@@ -60,7 +60,7 @@ public class TexturedColoredButton extends ColoredGuiButton{
             else if (!this.enabled)l = 10526880;
             else if (this.hovered)l = 16777120;
             
-            float[] rgb=UtilM.codeToRGBABPrecentage(l);
+            float[] rgb=UtilM.codeToRGBABPercentage(l);
             
             rgb[0]=(rgb[0]+r)/2F;
             rgb[1]=(rgb[1]+g)/2F;

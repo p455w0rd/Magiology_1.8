@@ -62,8 +62,8 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	public abstract IMessage process(EntityPlayer player, Side side);
 
 	public static void registerNewMessage(Class<? extends AbstractPacket> serverMessage){
-		if(UtilM.Instanceof(serverMessage, AbstractToServerMessage.class))registerPacket(serverMessage, Side.SERVER);
-		else if(UtilM.Instanceof(serverMessage, AbstractToClientMessage.class))registerPacket(serverMessage, Side.CLIENT);
+		if(UtilM.instanceOf(serverMessage, AbstractToServerMessage.class))registerPacket(serverMessage, Side.SERVER);
+		else if(UtilM.instanceOf(serverMessage, AbstractToClientMessage.class))registerPacket(serverMessage, Side.CLIENT);
 	}
 	
 	private static <T extends IMessage & IMessageHandler<T, IMessage>> void registerPacket(Class<T> clazz, Side side){

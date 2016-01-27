@@ -76,7 +76,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 		plate.glStateCell=new GlStateCell(new GlState(()->{
 
 			long offset=curentTile.x()*7-curentTile.y()*15+curentTile.z()*9;
-			GL11.glColor3f(UtilM.fluctuatorSmooth(80, offset), UtilM.fluctuatorSmooth(134, 40+offset), UtilM.fluctuatorSmooth(156, 56+offset));
+			GL11.glColor3f(UtilM.fluctuateSmooth(80, offset), UtilM.fluctuateSmooth(134, 40+offset), UtilM.fluctuateSmooth(156, 56+offset));
 			
 			if(curentTile.getBrain()!=null){
 				GL11.glPushMatrix();
@@ -130,11 +130,11 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 		curentTile=(TileEntityNetworkInterface)tile;
 //		if(UtilM.getThePlayer().isSneaking())
 			initModels();
-		rednerNetworkPipe(curentTile, x, y, z);
+		renderNetworkPipe(curentTile, x, y, z);
 	}
 	@Override
-	protected <NetworkComponent extends IConnectionProvider & NetworkBaseComponent> void rednerNetworkPipe(NetworkComponent networkComponent, double x, double y, double z) {
-		super.rednerNetworkPipe(networkComponent, x, y, z);
+	protected <NetworkComponent extends IConnectionProvider & NetworkBaseComponent> void renderNetworkPipe(NetworkComponent networkComponent, double x, double y, double z) {
+		super.renderNetworkPipe(networkComponent, x, y, z);
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		int side=((TileEntityNetworkInterface)networkComponent).getOrientation();

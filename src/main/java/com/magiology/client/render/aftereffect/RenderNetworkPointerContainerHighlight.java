@@ -75,7 +75,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//center string
 		GL11.glTranslatef(-TessUtil.getFontRenderer().getStringWidth(text)/2, -TessUtil.getFontRenderer().FONT_HEIGHT/2, 0);
 		
-		float r=0.8F,g=UtilM.fluctuatorSmooth(20, 0)*0.15F+0.15F,b=0.1F;
+		float r=0.8F,g=UtilM.fluctuateSmooth(20, 0)*0.15F+0.15F,b=0.1F;
 		//draw in front
 		TessUtil.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)).toCode());
 		//draw behind block
@@ -98,7 +98,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		buff.setDrawAsWire(true);
 		buff.draw();
 		buff.setDrawAsWire(false);
-		GL11.glColor4f(0, 0.4F+U.fluctuatorSmooth(50, 0)*0.6F, 0.6F+U.fluctuatorSmooth(97, 61)*0.4F, 0.01F);
+		GL11.glColor4f(0, 0.4F+U.fluctuateSmooth(50, 0)*0.6F, 0.6F+U.fluctuateSmooth(97, 61)*0.4F, 0.01F);
 		buff.draw();
 		buff.setClearing(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -158,7 +158,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		float leftX=CricleUtil.sin(-camYaw+90)*width/2, leftZ=CricleUtil.cos(-camYaw+90)*width/2, rand=UtilM.CRandF(1);
 		
 		
-		float r=0.8F,g=UtilM.fluctuator(20, 0)*0.15F+0.15F,b=0.1F;
+		float r=0.8F,g=UtilM.fluctuate(20, 0)*0.15F+0.15F,b=0.1F;
 		UtilM.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
 				tile.x()+0.5+off.x+leftX*rand+UtilM.CRandF(0.1), tile.y()+0.5+off.y+UtilM.CRandF(0.1), tile.z()+0.5+off.z+leftZ*rand+UtilM.CRandF(0.1),
 				UtilM.CRandF(0.01), UtilM.CRandF(0.01), UtilM.CRandF(0.01), 100, 25, -UtilM.RF(0.1), r,g,b,0.05*point));

@@ -90,7 +90,7 @@ public class TileEntityBedrockBreaker extends TileEntityM implements ITickable{
 	}
 	
 	public void action(){
-		double[] a=UtilM.cricleXZ(UtilM.RInt(360));
+		double[] a=UtilM.circleXZ(UtilM.RInt(360));
 		a[0]*=UtilM.RF()/3;
 		a[1]*=UtilM.RF()/3;
 		UtilM.spawnEntityFX(new EntityFacedFX(worldObj, pos.getX()+0.5+a[0], pos.getY()+0.101, pos.getZ()+0.5+a[1], 0, 0.001, 0, 300, 10, 0, 1, 1, 0.2+UtilM.RF()*0.2, 0.2+UtilM.RF()*0.2, 0.3));

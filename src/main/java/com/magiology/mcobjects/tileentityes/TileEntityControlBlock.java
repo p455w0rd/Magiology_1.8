@@ -74,7 +74,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		speed*=0.8;
 		if(Math.abs(speed)<0.5)speed*=1.3;
 		
-		thingyPos=UtilM.slowlyEqalize(thingyPos, thingyWPos, 0.05);
+		thingyPos=UtilM.slowlyEqualize(thingyPos, thingyWPos, 0.05);
 		thingyPos=Math.round(thingyPos*2000)/2000.0;
 		
 		
