@@ -1,25 +1,27 @@
 package com.magiology.util.renderers;
 
 
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.magiology.util.renderers.Renderer.RendererBase;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.Vec3M;
+
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.Vec3;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
 
 public class VertexRenderer{
 	
-	protected List<ShadedTriangle> shadedTriangles=new ArrayList<>();
+	protected List<ShadedQuad> shadedTriangles=new ArrayList<>();
 	protected List<PositionTextureVertex> unfinishedTriangle=new ArrayList<>();
 	protected boolean instantNormalCalculation=true,willDrawAsAWireFrame=false,willClear=true;
 	protected List<VertexRenderer> subBuffers=new ArrayList<>();
@@ -66,18 +68,17 @@ public class VertexRenderer{
 	}
 	
 	private void process(){
-		shadedTriangles.add(generateShadedTriangle(unfinishedTriangle.get(0), unfinishedTriangle.get(1), unfinishedTriangle.get(2),true));
-		shadedTriangles.add(generateShadedTriangle(unfinishedTriangle.get(2), unfinishedTriangle.get(3), unfinishedTriangle.get(0),true));
+		shadedTriangles.add(generateShadedQuad(unfinishedTriangle.get(0), unfinishedTriangle.get(1), unfinishedTriangle.get(2), unfinishedTriangle.get(3),true));
 		unfinishedTriangle.clear();
 	}
-	private ShadedTriangle generateShadedTriangle(PositionTextureVertex pos0,PositionTextureVertex pos1,PositionTextureVertex pos2,boolean hasNormal){
+	private ShadedQuad generateShadedQuad(PositionTextureVertex pos0,PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3,boolean hasNormal){
 		Vec3M normal;
 		if(hasNormal&&instantNormalCalculation){
 			Vec3 vec3  = pos1.vector3D.subtractReverse(pos0.vector3D);
-	        Vec3 vec31 = pos1.vector3D.subtractReverse(pos2.vector3D);
-	        normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
+			Vec3 vec31 = pos1.vector3D.subtractReverse(pos2.vector3D);
+			normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
 		}else normal=new Vec3M(0, 1, 0);
-		return new ShadedTriangle(pos0,pos1,pos2, normal);
+		return new ShadedQuad(pos0,pos1,pos2,pos3, normal);
 	}
 	
 	public void cleanUp(){
@@ -89,16 +90,16 @@ public class VertexRenderer{
 	public void pasteToTesselator(boolean type){
 
 		for(VertexRenderer a:subBuffers){
-			for(ShadedTriangle b:a.shadedTriangles){
+			for(ShadedQuad b:a.shadedTriangles){
 				GL11U.transformVector(b.normal, new Vector3f(),a.rotation.x,a.rotation.y,a.rotation.z,1);
-				for(int b1=0;b1<2;b1++)b.pos3[b1].vector3D=GL11U.transformVector(b.pos3[b1].vector3D, a.transformation);
+				for(int b1=0;b1<4;b1++)b.pos4[b1].vector3D=GL11U.transformVector(b.pos4[b1].vector3D, a.transformation);
 			}
 			shadedTriangles.addAll(a.shadedTriangles);
 		}
 		subBuffers.clear();
 		if(transformedBuffer!=null)transformedBuffer.pasteToTesselator(type);
 		try {
-			for(ShadedTriangle a:shadedTriangles){
+			for(ShadedQuad a:shadedTriangles){
 				if(type){
 					triangleToTesselatorQuads(a);
 				}else{
@@ -110,25 +111,32 @@ public class VertexRenderer{
 		}
 	}
 
-	protected void triangleToTesselatorQuads(ShadedTriangle triangle){
+	protected void triangleToTesselatorQuads(ShadedQuad triangle){
 		Vec3M finalNormal=GL11U.transformVector(triangle.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
-		for(int b=0;b<2;b++){
-			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos3[b].vector3D.xCoord, triangle.pos3[b].vector3D.yCoord, triangle.pos3[b].vector3D.zCoord), transformation);
-			Renderer.POS_UV_NORMAL.addVertex(finalVec, triangle.pos3[b].texturePositionX, triangle.pos3[b].texturePositionY,finalNormal);
+		for(int b=0;b<4;b++){
+			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
+			Renderer.POS_UV_NORMAL.addVertex(finalVec, triangle.pos4[b].texturePositionX, triangle.pos4[b].texturePositionY,finalNormal);
 		}
 	}
 
-	protected void triangleToTesselatorLines(ShadedTriangle triangle){
+	protected void triangleToTesselatorLines(ShadedQuad triangle){
 		Vec3M finalVectors[]={
-				GL11U.transformVector(Vec3M.conv(triangle.pos3[0].vector3D), transformation),
-				GL11U.transformVector(Vec3M.conv(triangle.pos3[1].vector3D), transformation),
-				GL11U.transformVector(Vec3M.conv(triangle.pos3[2].vector3D), transformation)
+				GL11U.transformVector(Vec3M.conv(triangle.pos4[0].vector3D), transformation),
+				GL11U.transformVector(Vec3M.conv(triangle.pos4[1].vector3D), transformation),
+				GL11U.transformVector(Vec3M.conv(triangle.pos4[2].vector3D), transformation),
+				GL11U.transformVector(Vec3M.conv(triangle.pos4[3].vector3D), transformation)
 		};
 		Renderer.POS.addVertex(finalVectors[0].x, finalVectors[0].y, finalVectors[0].z);
 		Renderer.POS.addVertex(finalVectors[1].x, finalVectors[1].y, finalVectors[1].z);
 
 		Renderer.POS.addVertex(finalVectors[1].x, finalVectors[1].y, finalVectors[1].z);
 		Renderer.POS.addVertex(finalVectors[2].x, finalVectors[2].y, finalVectors[2].z);
+		
+		Renderer.POS.addVertex(finalVectors[2].x, finalVectors[2].y, finalVectors[2].z);
+		Renderer.POS.addVertex(finalVectors[3].x, finalVectors[3].y, finalVectors[3].z);
+		
+		Renderer.POS.addVertex(finalVectors[3].x, finalVectors[3].y, finalVectors[3].z);
+		Renderer.POS.addVertex(finalVectors[0].x, finalVectors[0].y, finalVectors[0].z);
 	}
 
 	public VertexModel exportToNormalisedVertexBufferModel(){
@@ -171,21 +179,21 @@ public class VertexRenderer{
 		return wr.getByteBuffer();
 	}
 	
-	public static class ShadedTriangle{
-		public PositionTextureVertex[] pos3=null;
+	public static class ShadedQuad{
+		public PositionTextureVertex[] pos4=null;
 		public Vec3M normal=null;
-		public ShadedTriangle(PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3, Vec3M normal) {
-			this.pos3=new PositionTextureVertex[]{pos1,pos2,pos3};
+		public ShadedQuad(PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3, PositionTextureVertex pos4, Vec3M normal) {
+			this.pos4=new PositionTextureVertex[]{pos1,pos2,pos3,pos4};
 			this.normal=normal;
 		}
 		public void recalculateNormal(){
-			Vec3 vec3  = this.pos3[1].vector3D.subtractReverse(this.pos3[0].vector3D);
-	        Vec3 vec31 = this.pos3[1].vector3D.subtractReverse(this.pos3[2].vector3D);
-	        normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
+			Vec3 vec3 =this.pos4[1].vector3D.subtractReverse(this.pos4[0].vector3D);
+			Vec3 vec31=this.pos4[1].vector3D.subtractReverse(this.pos4[2].vector3D);
+			normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
 		}
 	}
 	public void recalculateNormals(){
-		shadedTriangles.forEach(ShadedTriangle::recalculateNormal);
+		shadedTriangles.forEach(ShadedQuad::recalculateNormal);
 	}
 	public void translate(double x,double y,double z){
 		if(x==0&&y==0&&z==0)return;
@@ -254,13 +262,14 @@ public class VertexRenderer{
 	public void transformAndSaveTo(VertexRenderer buff){
 		try{
 			boolean isItself=buff==null||buff==this;
-			List<ShadedTriangle> buffer=isItself?new ArrayList<>():buff.shadedTriangles;
-			for(ShadedTriangle a:shadedTriangles){
+			List<ShadedQuad> buffer=isItself?new ArrayList<>():buff.shadedTriangles;
+			for(ShadedQuad a:shadedTriangles){
 				Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0, 0, 0), new Vector3f(0, 0, 0), rotation.x, rotation.y, rotation.z, 1);
-				buffer.add(new ShadedTriangle(
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[0].vector3D.xCoord, a.pos3[0].vector3D.yCoord, a.pos3[0].vector3D.zCoord), transformation), a.pos3[0].texturePositionX, a.pos3[0].texturePositionY),
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[1].vector3D.xCoord, a.pos3[1].vector3D.yCoord, a.pos3[1].vector3D.zCoord), transformation), a.pos3[1].texturePositionX, a.pos3[1].texturePositionY),
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos3[2].vector3D.xCoord, a.pos3[2].vector3D.yCoord, a.pos3[2].vector3D.zCoord), transformation), a.pos3[2].texturePositionX, a.pos3[2].texturePositionY),
+				buffer.add(new ShadedQuad(
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[0].vector3D.xCoord, a.pos4[0].vector3D.yCoord, a.pos4[0].vector3D.zCoord), transformation), a.pos4[0].texturePositionX, a.pos4[0].texturePositionY),
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[1].vector3D.xCoord, a.pos4[1].vector3D.yCoord, a.pos4[1].vector3D.zCoord), transformation), a.pos4[1].texturePositionX, a.pos4[1].texturePositionY),
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[2].vector3D.xCoord, a.pos4[2].vector3D.yCoord, a.pos4[2].vector3D.zCoord), transformation), a.pos4[2].texturePositionX, a.pos4[2].texturePositionY),
+						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[3].vector3D.xCoord, a.pos4[3].vector3D.yCoord, a.pos4[3].vector3D.zCoord), transformation), a.pos4[3].texturePositionX, a.pos4[3].texturePositionY),
 						finalNormal
 				));
 			}
@@ -280,10 +289,10 @@ public class VertexRenderer{
 		return Vector3f.add(rotation, new Vector3f(), null);
 	}
 	
-	public ShadedTriangle getTriangle(int id){
+	public ShadedQuad getTriangle(int id){
 		return shadedTriangles.get(id);
 	}
-	public List<ShadedTriangle> getTriangles(){
+	public List<ShadedQuad> getTriangles(){
 		return shadedTriangles;
 	}
 	public void unbindOverrideFormat(){

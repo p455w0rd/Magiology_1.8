@@ -1,11 +1,11 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import net.minecraft.util.*;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.utilobjects.vectors.QuadUV;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.util.ResourceLocation;
 
 public class PlateModel{
 	public float Width,Lenght,Height;
@@ -93,18 +93,18 @@ public class PlateModel{
 			Point3X=Width;Point3Y=Height;Point3Z=Lenght;
 			Point4X=Width;Point4Y=Height;Point4Z=0;
 		}
-		GL11.glPushMatrix();
-		GL11.glTranslatef(xPos, yPos, zPos);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(xPos, yPos, zPos);
 		VertexRenderer buf=TessUtil.getVB();
 		if(quadUV==null||texture==null){
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			OpenGLM.disableTexture2D();
 			buf.cleanUp();
 			buf.addVertexWithUV(Point4X, Point4Y, Point4Z,0,0);
 			buf.addVertexWithUV(Point3X, Point3Y, Point3Z,0,0);
 			buf.addVertexWithUV(Point2X, Point2Y, Point2Z,0,0);
 			buf.addVertexWithUV(Point1X, Point1Y, Point1Z,0,0);
 			buf.draw();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			OpenGLM.enableTexture2D();
 		}else{
 //			Helper.println(texture);
 			TessUtil.bindTexture(texture);
@@ -115,6 +115,6 @@ public class PlateModel{
 			buf.addVertexWithUV(Point1X, Point1Y, Point1Z,quadUV.x1,quadUV.y1);
 			buf.draw();
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 }

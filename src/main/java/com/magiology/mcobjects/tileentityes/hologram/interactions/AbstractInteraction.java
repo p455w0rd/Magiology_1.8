@@ -1,7 +1,7 @@
 package com.magiology.mcobjects.tileentityes.hologram.interactions;
 
-import com.magiology.api.lang.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.api.lang.ICommandInteract;
+import com.magiology.util.utilobjects.ObjectHolder;
 
 public abstract class AbstractInteraction<Host extends ICommandInteract>{
 	
@@ -9,7 +9,7 @@ public abstract class AbstractInteraction<Host extends ICommandInteract>{
 	protected final int commandLenghtSet,commandLenghtGet,dataSize;
 	
 	public AbstractInteraction(String name,String inData){
-		wordsGet=(this.exampleGet="get "+name           ).split(" ");
+		wordsGet=(this.exampleGet="get "+name		   ).split(" ");
 		wordsSet=(this.exampleSet="set "+name+" "+inData).split(" ");
 		commandLenghtSet=wordsSet.length;
 		commandLenghtGet=wordsGet.length;

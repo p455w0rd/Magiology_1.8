@@ -1,18 +1,23 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
-import net.minecraft.entity.player.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
+import com.magiology.mcobjects.tileentityes.hologram.interactions.AbstractInteraction;
+import com.magiology.mcobjects.tileentityes.hologram.interactions.InteractionSlide;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
-import com.magiology.mcobjects.tileentityes.hologram.interactions.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class Slider extends HoloObject{
 	
@@ -39,7 +44,7 @@ public class Slider extends HoloObject{
 		
 		GL11U.texture(false);
 		main.draw();
-		GL11.glTranslatef(0, -renderSliderPos.getPoint()*size.y, 0);
+		OpenGLM.translate(0, -renderSliderPos.getPoint()*size.y, 0);
 		col.blackNWhite().bind();
 		scroll.draw();
 		GL11U.texture(true);

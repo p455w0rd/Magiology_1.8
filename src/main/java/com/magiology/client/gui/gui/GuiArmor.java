@@ -9,21 +9,22 @@ import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 //	private ItemRendererHelmet42 IRH42 = new ItemRendererHelmet42();
 	ResourceLocation main= new ResourceLocation(MReference.MODID,"/textures/gui/GuiArmorEditor.png");
-    protected static ItemRenderer itemRenderer = new ItemRenderer(U.getMC());
+	protected static ItemRenderer itemRenderer = new ItemRenderer(U.getMC());
 	ResourceLocation texture1=new ResourceLocation(MReference.MODID+":/textures/particle/SmoothBuble1.png");
 	ItemStack[] p42;
 	EntityPlayer player;
@@ -73,53 +74,53 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			if(o1>o2)o1-=0.035;
 		}
 		long WT=U.getMC().theWorld.getTotalWorldTime();
-		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, 15, 0);
-		GL11.glTranslated(0, 0, 250);
+		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))OpenGLM.translate(0, 15, 0);
+		OpenGLM.translate(0, 0, 250);
 		drawBIGRotatingItemStack(p42[pos]);
-		GL11.glTranslated(0, 0,-250);
-		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))GL11.glTranslated(0, -15, 0);
+		OpenGLM.translate(0, 0,-250);
+		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))OpenGLM.translate(0, -15, 0);
 		
 		TessUtil.bindTexture(main);
 		GL11U.setUpOpaqueRendering(2);
 		double scale=0.5;
 		drawSmartShit();
 		GL11U.endOpaqueRendering();
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.9F);
-		GL11.glTranslated(0, 0, 1);
+		OpenGLM.disableLighting();
+		GL11U.allOpacityIs(false);
+		OpenGLM.translate(0, 0, 1);
 		drawSmartShit();
-		GL11.glTranslated(0, 0, -1);
+		OpenGLM.translate(0, 0, -1);
 		GL11U.setUpOpaqueRendering(2);
 		double r1=(WT%20.0)/10.0,g1=(WT%65.0)/32.5,b1=(WT%50.0)/25.0;
 		double r=r1>1?2-r1:r1,g=g1>1?2-g1:g1,b=b1>1?2-b1:b1;
 		for(int spot=0;spot<4;spot++)if(isMouseOverFakeSlot(11, 8+spot*16, i, e)){
 			int x=11,y=7+spot*16;
-			GL11.glColor4d(r, g, b, 0.3);
-			GL11.glPushMatrix();
-			GL11.glTranslated(x, y, 0);
-			GL11.glScaled(scale,scale,scale);
-			GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glColorMask(true, true, true, false);
+			OpenGLM.color(r, g, b, 0.3);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(x, y, 0);
+			OpenGLM.scale(scale,scale,scale);
+			OpenGLM.disableLighting();
+			OpenGLM.disableDepth();
+			OpenGLM.colorMask(true, true, true, false);
 			this.drawTexturedModalRect(0, 0, 180, 40, 32, 32);
-            GL11.glColorMask(true, true, true, true);
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-			GL11.glPopMatrix();
+			OpenGLM.colorMask(true, true, true, true);
+			OpenGLM.enableLighting();
+			OpenGLM.enableDepth();
+			OpenGLM.popMatrix();
 		}
 		
 		GL11U.endOpaqueRendering();
 	}
 	
 	public void drawSmartShit(){
-		GL11.glPushMatrix();
-		GL11.glTranslated(0, prevSliderPos+(sliderPos-prevSliderPos)*RenderEvents.partialTicks, 0);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(0, prevSliderPos+(sliderPos-prevSliderPos)*RenderEvents.partialTicks, 0);
 		double scale=0.5;
 		int x=6,y=6+48;
-		GL11.glTranslated(x, y, 0);
-		GL11.glScaled(scale,scale,scale);
+		OpenGLM.translate(x, y, 0);
+		OpenGLM.scale(scale,scale,scale);
 		this.drawTexturedModalRect(0, 0, 180, 3, 10, 32);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	
 	public void drawBIGRotatingItemStack(ItemStack stack){
@@ -127,45 +128,45 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		int angleX=(int)(WT%360),rotatePosX=37+8*3;
 		double angleY2=500,angleY1=(int)(WT%angleY2),angleY3=(angleY1>angleY2/2?angleY2-angleY1:angleY1),
 				angleY=(angleY3-angleY2/4)/(angleY2/25),rotateYOffset=36;
-		GL11.glPushMatrix();
-		GL11.glTranslated(rotatePosX, 0, 0);
-		GL11.glRotated(angleX, 0, 1, 0);
-		GL11.glTranslated(0,  rotateYOffset, 0);
-		GL11.glRotated(angleY, 1, 0, 0);
-		GL11.glTranslated(0, -rotateYOffset, 0);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(rotatePosX, 0, 0);
+		OpenGLM.rotate(angleX, 0, 1, 0);
+		OpenGLM.translate(0,  rotateYOffset, 0);
+		OpenGLM.rotate(angleY, 1, 0, 0);
+		OpenGLM.translate(0, -rotateYOffset, 0);
 		double offset=(1F/16F)*15*1.5;
-		GL11.glTranslated(-8*3+offset, 0, offset);
+		OpenGLM.translate(-8*3+offset, 0, offset);
 		drawBIGItemStackAt(stack, 0, 15, 3);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	public void drawBIGItemStackAt(ItemStack stack,int x,int y,double scale){
 		scale*=15;
 		if(stack==null)return;
-		GL11.glPushMatrix();
-		GL11.glTranslated( x, y, 0);
-		GL11.glScaled(scale,scale,scale);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate( x, y, 0);
+		OpenGLM.scale(scale,scale,scale);
 //		IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(stack, EQUIPPED);
 //		if(customRenderer!=null){
-//			GL11.glPushMatrix();
-//			GL11.glRotated(180,0,0,0);
-//			GL11.glTranslated(-0.5, -0.5, 0);
-//			GL11.glDepthMask(true);
-//            if(customRenderer instanceof ItemRendererHelmet42){
-//            	IRH42.model.shouldFollowThePlayerMaster=false;
-//            	IRH42.model.shouldFollowThePlayerHasAMaster=true;
-//            	IRH42.renderItem(EQUIPPED, stack);
-//            }
-//            else customRenderer.renderItem(EQUIPPED, stack);
-//			GL11.glPopMatrix();
+//			OpenGLM.pushMatrix();
+//			OpenGLM.rotate(180,0,0,0);
+//			OpenGLM.translate(-0.5, -0.5, 0);
+//			OpenGLM.depthMask(true);
+//			if(customRenderer instanceof ItemRendererHelmet42){
+//				IRH42.model.shouldFollowThePlayerMaster=false;
+//				IRH42.model.shouldFollowThePlayerHasAMaster=true;
+//				IRH42.renderItem(EQUIPPED, stack);
+//			}
+//			else customRenderer.renderItem(EQUIPPED, stack);
+//			OpenGLM.popMatrix();
 //		}else{
 ////			TessHelper.bindTexture(TextureMap.locationItemsTexture);
-////            IIcon iicon = stack.getItem().getIcon(stack, 0);
-////			GL11.glDisable(GL11.GL_LIGHTING);
+////			IIcon iicon = stack.getItem().getIcon(stack, 0);
+////			OpenGLM.disableLighting();
 ////			ItemRenderer.renderItemIn2D(Tessellator.instance, iicon.getMaxU(), iicon.getMaxV(), iicon.getMinU(), iicon.getMinV(), iicon.getIconWidth(), iicon.getIconHeight(), 0.0625F);
-////			GL11.glEnable(GL11.GL_LIGHTING);
+////			OpenGLM.enableLighting();
 //			Render.RI().renderItemModel(stack);
 //		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	
 	
@@ -176,9 +177,9 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		this.renderParticles(v1);
 		int pos=(int)Math.round(Math.abs(sliderPos/16));
 		TessUtil.bindTexture(main);
-		GL11.glTranslated(guiLeft, guiTop, 0);
+		OpenGLM.translate(guiLeft, guiTop, 0);
 		GL11U.setUpOpaqueRendering(1);
-		GL11.glColor4d(1, 1, 1, o1);
+		OpenGLM.color(1, 1, 1, o1);
 		this.drawTexturedModalRect(60, 65, 0, 170, 100, 12);
 		this.drawTexturedModalRect(94, 61, 34, 166, 74, 4);
 		if(p42[pos]!=null&&p42[pos].getItem() instanceof UpgItem){
@@ -192,9 +193,9 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 				this.drawTexturedModalRect(122, 29, 7, 83, 18, 18);
 			}
 		}
-		GL11.glColor4d(1, 1, 1, 1);
+		OpenGLM.color(1, 1, 1, 1);
 		GL11U.endOpaqueRendering();
-		GL11.glTranslated(-guiLeft, -guiTop, 0);
+		OpenGLM.translate(-guiLeft, -guiTop, 0);
 		
 		o2=0;
 		if(p42[pos]!=null&&p42[pos].getItem() instanceof UpgItem)o2=1;
@@ -204,10 +205,10 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		}
 		playerButton.xPosition=(int)playerXPos-10;
 		playerButton.yPosition=(int)-playerYPos-26;
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		float posY=(float)(prevPlayerYPos+(playerYPos-prevPlayerYPos)*RenderEvents.partialTicks);
 //		posY=(float)playerYPos;
-		GL11.glTranslated(playerXPos,-posY, 0);
+		OpenGLM.translate(playerXPos,-posY, 0);
 		TessUtil.drawPlayerIntoGUI(0, 0, 11, (float)playerXPos-v2 , (-posY)-v3, this.mc.thePlayer);
 		TessUtil.drawSlotLightMapWcustomSizes(this, -10, -26, 18, 32,false,true);
 		TessUtil.drawSlotLightMapWcustomSizes(this, -8, -24, 17, 28,false,false);
@@ -215,7 +216,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		this.drawTexturedModalRect(6, 5, 7, 2, 2, 1);
 		this.drawTexturedModalRect(6, -25, 4, 100, 3, 1);
 		this.drawTexturedModalRect(6, -26, 7, 2, 2, 1);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	
 	 @Override

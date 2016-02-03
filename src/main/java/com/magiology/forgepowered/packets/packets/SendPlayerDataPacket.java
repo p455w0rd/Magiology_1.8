@@ -1,14 +1,14 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.*;
+import java.io.IOException;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 
-import com.magiology.forgepowered.packets.core.*;
-import com.magiology.mcobjects.entitys.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class SendPlayerDataPacket extends AbstractToClientMessage{
 	private int now,max,count;

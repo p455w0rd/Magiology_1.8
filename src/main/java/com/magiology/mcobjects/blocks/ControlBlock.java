@@ -1,18 +1,19 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.core.Magiology;
+import com.magiology.core.init.MGui;
+import com.magiology.handlers.GuiHandlerM;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 
-import com.magiology.core.*;
-import com.magiology.core.init.*;
-import com.magiology.handlers.*;
-import com.magiology.mcobjects.tileentityes.*;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 
 public class ControlBlock extends BlockContainer {
 	private float p= 1F/16F;
@@ -39,20 +40,20 @@ public class ControlBlock extends BlockContainer {
 	@Override
 	public boolean hasComparatorInputOverride(){return true;}
 	
-    @Override
+	@Override
 	public int getComparatorInputOverride(World w, BlockPos pos){
-    	int result=0;
-    	TileEntityControlBlock tile=(TileEntityControlBlock)w.getTileEntity(pos);
-    	ItemStack[] slots=tile.slots;
-    	
-    	if(slots[3]!=null&&slots[3].stackSize>0)result=1;
-    	
-        return result;
-    }
+		int result=0;
+		TileEntityControlBlock tile=(TileEntityControlBlock)w.getTileEntity(pos);
+		ItemStack[] slots=tile.slots;
+		
+		if(slots[3]!=null&&slots[3].stackSize>0)result=1;
+		
+		return result;
+	}
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
-        
+		
 		if(!world.isRemote){
 			GuiHandlerM.openGui(player, Magiology.getMagiology(), MGui.GuiControlBock, pos);
 		}else{
@@ -60,6 +61,6 @@ public class ControlBlock extends BlockContainer {
 		}
 		
 		return true;
-    }
+	}
 	
 }

@@ -1,16 +1,19 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.client.resources.model.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
+import com.magiology.core.MReference;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.core.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 public class BlockM extends Block{
 

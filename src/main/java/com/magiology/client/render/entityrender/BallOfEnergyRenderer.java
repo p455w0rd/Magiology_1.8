@@ -1,16 +1,17 @@
 package com.magiology.client.render.entityrender;
 
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.util.renderers.*;
+import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 
 public class BallOfEnergyRenderer extends Render{
 
@@ -30,19 +31,19 @@ public class BallOfEnergyRenderer extends Render{
 		EntityBallOfEnergy entity=(EntityBallOfEnergy)en;
 		EntityPlayer player=U.getMC().thePlayer;
 		int time360=entity.age%90*4,offs=25,many=1;
-		GL11.glPushMatrix();
-		GL11.glTranslatef(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),
 				-(float)(player.lastTickPosY+(player.posY-player.lastTickPosY)*partialTicks), 
 				-(float)(player.lastTickPosZ+(player.posZ-player.lastTickPosZ)*partialTicks));
-//		GL11.glTranslated(entity.posX, entity.posY, entity.posZ);
-		GL11.glTranslatef((float)(entity.lastTickPosX+(entity.posX-entity.lastTickPosX)*partialTicks),
+//		OpenGLM.translate(entity.posX, entity.posY, entity.posZ);
+		OpenGLM.translate((float)(entity.lastTickPosX+(entity.posX-entity.lastTickPosX)*partialTicks),
 				(float)(entity.lastTickPosY+(entity.posY-entity.lastTickPosY)*partialTicks), 
 				(float)(entity.lastTickPosZ+(entity.posZ-entity.lastTickPosZ)*partialTicks));
 		float smoothRotation=(time360-4)+4*partialTicks,size=-(float)(0.1-entity.time/100F);
 		AxisAlignedBB cube=new AxisAlignedBB(-size,-size,-size,size,size,size);
 		GL11U.setUpOpaqueRendering(1);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glColor4d(1, 0.1, 0.1, 0.2);
+		OpenGLM.disableTexture2D();
+		OpenGLM.color(1, 0.1, 0.1, 0.2);
 		GL11U.glRotate(smoothRotation, 0, 0);
 		TessUtil.drawCube(cube);
 		GL11U.glRotate(0, -smoothRotation+offs*many++, 0);
@@ -62,9 +63,9 @@ public class BallOfEnergyRenderer extends Render{
 		GL11U.glRotate(smoothRotation+offs*many++, -smoothRotation+offs*many++, 0);
 		TessUtil.drawCube(cube);
 		GL11U.endOpaqueRendering();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableTexture2D();
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	
 	
 	}

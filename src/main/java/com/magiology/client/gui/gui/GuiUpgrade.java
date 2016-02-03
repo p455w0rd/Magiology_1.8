@@ -1,20 +1,23 @@
 package com.magiology.client.gui.gui;
 
+import java.io.IOException;
+
+import org.lwjgl.input.Mouse;
+
 import com.magiology.client.gui.container.UpgradeContainer;
 import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
-import java.io.IOException;
 
 public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	
@@ -33,13 +36,13 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 	}
 	@Override
 	public void drawGuiContainerForegroundLayer(int x,int y){
-		GL11.glPushMatrix();
-		GL11.glScaled(0.7,0.7,0.7);
+		OpenGLM.pushMatrix();
+		OpenGLM.scale(0.7,0.7,0.7);
 		int result=guiParticles.size();
 		for(GuiParticle as:guiParticles)if(as.isDead)result--;
-		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.    Number of GUI particles: "+result, 3, -11, UtilM.rgbPercentageToCode(1, 1, 1, 1));
+		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.	Number of GUI particles: "+result, 3, -11, UtilM.rgbPercentageToCode(1, 1, 1, 1));
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
 	}
 	@Override
@@ -73,22 +76,22 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		}
 		for(int ad=0;ad<30;ad++)guiAlpha=UtilM.slowlyEqualize(guiAlpha, GL11alpha, 0.001);
 		if(guiAlpha<1){
-			GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			OpenGLM.enableBlend();
+			GL11U.blendFunc(1);
 		}
-		GL11.glColor4d(1, 1, 1, guiAlpha);
+		OpenGLM.color(1, 1, 1, guiAlpha);
 		U.getMC().getTextureManager().bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, 6);
 		this.drawTexturedModalRect(guiLeft, guiTop+6, 0, 7, xSize, 17);
 		this.drawTexturedModalRect(guiLeft, guiTop+23, 0, 25, xSize, ySize);
 		int number=tileCB.containerItems.length,offsetx=xSize/2-number*9,offsety=6;
-		GL11.glColor4d(1, 1, 1, guiAlpha/2);
+		OpenGLM.color(1, 1, 1, guiAlpha/2);
 		for(int a=0;a<number;a++){
 			this.drawTexturedModalRect(guiLeft+offsetx, guiTop+offsety, 176, 0, 18, 18);
 			offsetx+=18;
 		}
-		GL11.glColor4f(1, 1, 1, 1);
-		GL11.glDisable(GL11.GL_BLEND);
+		OpenGLM.color(1, 1, 1, 1);
+		OpenGLM.disableBlend();
 		TessUtil.drawSlotLightMapWcustomSizes(this, 7+guiLeft, 7+guiTop, 16, 27,false,false);
 		TessUtil.drawPlayerIntoGUI(15+guiLeft, 30+guiTop, 10, guiLeft-x+16 , guiTop-y+25, mc.thePlayer);
 	}
@@ -122,12 +125,12 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 				spawnGuiParticle(new GuiParticle(x,y,100, ab[0]*20, ab[1]*20,1,0.7,0.7,UtilM.RF(),UtilM.RF(), UtilM.RF(),texture1,GuiStandardFX.SummonedFX));
 			}
 		}
-    }
+	}
 	
 	@Override
 	protected void mouseClickMove(int x1, int y1, int lastButtonClicked, long totalMoved){
 		super.mouseClickMove(x1, y1, lastButtonClicked, totalMoved);
-    }
+	}
 	
 	@Override
 	public void update(){
@@ -165,7 +168,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 					}
 				}
 			}
-	    }
+		}
 	}
 	@Override
 	public void onGuiClosed(){

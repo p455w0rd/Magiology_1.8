@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects.vectors;
 
-import org.lwjgl.util.vector.*;
+import org.lwjgl.util.vector.Vector2f;
 
 public class QuadUV{
 	public float x1,y1,x2,y2,x3,y3,x4,y4;
@@ -24,10 +24,10 @@ public class QuadUV{
 	}
 	public QuadUV translate(int id,float x,float y){
 		switch(id){
-		case 0:return new QuadUV(x1+x, y1+y, x2, y2,     x3, y3,     x4, y4    );
-		case 1:return new QuadUV(x1, y1,     x2+x, y2+y, x3, y3,     x4, y4    );
-		case 2:return new QuadUV(x1, y1,     x2, y2,     x3+x, y3+y, x4, y4    );
-		case 3:return new QuadUV(x1, y1,     x2, y2,     x3, y3,     x4+x, y4+y);
+		case 0:return new QuadUV(x1+x, y1+y, x2, y2,	 x3, y3,	 x4, y4	);
+		case 1:return new QuadUV(x1, y1,	 x2+x, y2+y, x3, y3,	 x4, y4	);
+		case 2:return new QuadUV(x1, y1,	 x2, y2,	 x3+x, y3+y, x4, y4	);
+		case 3:return new QuadUV(x1, y1,	 x2, y2,	 x3, y3,	 x4+x, y4+y);
 		}
 		return this;
 	}

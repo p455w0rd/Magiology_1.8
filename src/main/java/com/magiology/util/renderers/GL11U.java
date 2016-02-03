@@ -1,18 +1,19 @@
 package com.magiology.util.renderers;
 
-import com.magiology.util.utilclasses.DataStalker;
-import com.magiology.util.utilclasses.PrintUtil;
-import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.Vec3M;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.Vec3;
-import org.lwjgl.opengl.GL11;
+
+import static org.lwjgl.opengl.GL11.*;
+
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
 
-import static org.lwjgl.opengl.GL11.*;
+import com.magiology.util.utilclasses.DataStalker;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3;
 
 
 /**
@@ -25,6 +26,7 @@ public class GL11U{
 		case 1:glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);return;
 		case 2:glBlendFunc(GL_SRC_ALPHA, GL_ONE);return;
 		case 3:glBlendFunc(GL_ONE, GL_ONE);return;
+		case 4:glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);return;
 		default:PrintUtil.println(">>>WARNING!!<<<\nGL11Helper failed to get glBlendFunc from chosen ID!\n--------------------------\n");
 	}}
 //	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset,boolean... willTranslateBack){
@@ -40,14 +42,14 @@ public class GL11U{
 		glRotate(xAngle, yAngle, zAngle, offset.x, offset.y, offset.z);
 	}
 	public static void glRotate(double xAngle,double yAngle,double zAngle,double xOffset,double yOffset,double zOffset){
-		glTranslated(xOffset, yOffset, zOffset);
+		OpenGLM.translate(xOffset, yOffset, zOffset);
 		glRotate(xAngle, yAngle, zAngle);
-		glTranslated(-xOffset, -yOffset, -zOffset);
+		OpenGLM.translate(-xOffset, -yOffset, -zOffset);
 	}
 	public static void glRotate(double x,double y,double z){
-		glRotated(x,1,0,0);
-		glRotated(y,0,1,0);
-		glRotated(z,0,0,1);
+		OpenGLM.rotate((float)x,1,0,0);
+		OpenGLM.rotate((float)y,0,1,0);
+		OpenGLM.rotate((float)z,0,0,1);
 	}
 	public static void glRotate(float[] float3){
 		glRotate(float3[0], float3[1], float3[2]);
@@ -72,42 +74,42 @@ public class GL11U{
 	 * */
 	public static void allOpacityIs(boolean enabled){
 		if(enabled)glAlphaFunc(GL_GREATER, 0);
-		else glAlphaFunc(GL_GREATER, 0.9999F);
+		else glAlphaFunc(GL_GREATER, 0.99F);
 	}
 	/**Sets the texture opaque minimal limit to default MC setting.*/
 	public static void resetOpacity(){glAlphaFunc(GL_GREATER, 0.1F);}
 	/**Sets the rendering mode to render opaque texture.*/
 	public static void setUpOpaqueRendering(int ID){
-		glDepthMask(false);
+		OpenGLM.depthMask(false);
 		glBlend(true);
 		blendFunc(ID);
 		allOpacityIs(true);
-		glDisable(GL_ALPHA_TEST);
+		OpenGLM.disableAlphaTest();
 	}
 	/**Sets the rendering mode to render 100% opaque texture only.*/
 	public static void endOpaqueRendering(){
 		glBlend(false);
 		glEnable(GL_ALPHA_TEST);
-		glDepthMask(true);
+		OpenGLM.depthMask(true);
 		blendFunc(1);
 		resetOpacity();
 	}
 	public static void glScale(double scale){
-		glScaled(scale, scale, scale);
+		OpenGLM.scale(scale, scale, scale);
 	}
 	public static void glScale(float scale){
-		glScalef(scale, scale, scale);
+		OpenGLM.scale(scale, scale, scale);
 	}
 	public static void glTranslate(double[] arrayOf3D){
 		if(arrayOf3D.length!=3)return;
-		GL11.glTranslated(arrayOf3D[0],arrayOf3D[1],arrayOf3D[2]);
+		OpenGLM.translate(arrayOf3D[0],arrayOf3D[1],arrayOf3D[2]);
 	}
 	public static void glTranslate(float[] arrayOf3F){
 		if(arrayOf3F.length!=3)return;
-		GL11.glTranslated(arrayOf3F[0],arrayOf3F[1],arrayOf3F[2]);
+		OpenGLM.translate(arrayOf3F[0],arrayOf3F[1],arrayOf3F[2]);
 	}
 	public static void glTranslate(Vec3M vec){
-		GL11.glTranslated(vec.x,vec.y,vec.z);
+		OpenGLM.translate(vec.x,vec.y,vec.z);
 	}
 	public static void texture(boolean enabled){
 		if(enabled)glEnable(GL_TEXTURE_2D);
@@ -169,34 +171,34 @@ public class GL11U{
 		glTranslate(new float[]{pos.getX(),pos.getY(),pos.getZ()});
 	}
 	public static void protect(){
-		glColor4f(1, 1, 1, 1);
+		OpenGLM.color(1, 1, 1, 1);
 		glLighting(true);
 		resetOpacity();
-		glDepthMask(true);
-		glPushMatrix();
+		OpenGLM.depthMask(true);
+		OpenGLM.pushMatrix();
 	}
 	public static void endProtection(){
-		GL11.glColor4f(1, 1, 1, 1);
-		glPopMatrix();
+		OpenGLM.color(1, 1, 1, 1);
+		OpenGLM.popMatrix();
 	}
 	public static void glColor(ColorF color){
-		GL11.glColor4f(color.r, color.g, color.b, color.a);
+		OpenGLM.color(color.r, color.g, color.b, color.a);
 	}
 	public static void glColor(int color){
-		GL11.glColor4f((color>>16&255)/255.0F, (color>>8&255)/255.0F, (color & 255)/255.0F, (color>>24&255)/255.0F);
+		OpenGLM.color((color>>16&255)/255.0F, (color>>8&255)/255.0F, (color & 255)/255.0F, (color>>24&255)/255.0F);
 	}
 	@Deprecated
 	public static int textureId;
 	@Deprecated
 	public static void captureTexture(){
 		try{
-			Integer id=(Integer)DataStalker.getVariable(GlStateManager.class, "activeTextureUnit").get(null);
-			Object texture=((Object[])DataStalker.getVariable(GlStateManager.class, "textureState").get(null))[id];
+			Integer id=(Integer)DataStalker.getVariable(OpenGLM.class, "activeTextureUnit").get(null);
+			Object texture=((Object[])DataStalker.getVariable(OpenGLM.class, "textureState").get(null))[id];
 			if(texture!=null)textureId=DataStalker.getVariable(texture.getClass(), "textureName", texture);
 		}catch(Exception ignored){}
 	}
 	@Deprecated
 	public static void setTexture(){
-		GlStateManager.bindTexture(textureId);
+		OpenGLM.bindTexture(textureId);
 	}
 }

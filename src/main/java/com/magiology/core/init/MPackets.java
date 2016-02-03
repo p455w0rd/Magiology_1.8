@@ -1,8 +1,20 @@
 package com.magiology.core.init;
 
-import com.magiology.forgepowered.packets.core.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.forgepowered.packets.packets.generic.*;
+import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
+import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
+import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
+import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
+import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
+import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
+import com.magiology.forgepowered.packets.packets.SavableDataWithKeyPacket;
+import com.magiology.forgepowered.packets.packets.SendPlayerDataPacket;
+import com.magiology.forgepowered.packets.packets.TileRedstone;
+import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerStringPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerVoidPacket;
 import com.magiology.io.WorldData.SyncClientsWorldData;
 import com.magiology.io.WorldData.SyncServerWorldData;
 

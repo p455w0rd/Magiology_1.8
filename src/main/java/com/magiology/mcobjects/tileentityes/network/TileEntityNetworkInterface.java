@@ -1,19 +1,25 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.block.*;
-import net.minecraft.block.state.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.api.network.skeleton.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.api.connection.IConnection;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.Redstone;
+import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.SlowdownUtil;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
 public class TileEntityNetworkInterface extends TileEntityNetworkInteract implements ITickable{
 	
@@ -86,9 +92,9 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 			connections[3].getMain()?getExpectedColisionBoxes()[5 ]:null,//3
 			connections[0].getMain()?getExpectedColisionBoxes()[1 ]:null,//4
 			connections[4].getMain()?getExpectedColisionBoxes()[0 ]:null,//5
-			                         getExpectedColisionBoxes()[6 ]     ,//6
-					         side==4?getExpectedColisionBoxes()[7 ]:null,//7
-						     side==0?getExpectedColisionBoxes()[8 ]:null,//8
+									 getExpectedColisionBoxes()[6 ]	 ,//6
+							 side==4?getExpectedColisionBoxes()[7 ]:null,//7
+							 side==0?getExpectedColisionBoxes()[8 ]:null,//8
 							 side==3?getExpectedColisionBoxes()[9 ]:null,//9
 							 side==2?getExpectedColisionBoxes()[10]:null,//10
 							 side==1?getExpectedColisionBoxes()[11]:null,//11

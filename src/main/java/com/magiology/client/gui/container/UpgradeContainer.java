@@ -1,12 +1,16 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+import com.magiology.client.gui.guiutil.container.CustomSlot;
+import com.magiology.client.gui.guiutil.container.FakeContainer;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 
-import com.magiology.client.gui.guiutil.container.*;
-import com.magiology.mcobjects.items.upgrades.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class UpgradeContainer extends Container{
 	
@@ -36,7 +40,7 @@ public class UpgradeContainer extends Container{
 	@Override
 	public void onContainerClosed(EntityPlayer p_75134_1_){
 		 super.onContainerClosed(p_75134_1_);
-	    }
+		}
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber){
 		ItemStack itemstack=null;
@@ -65,13 +69,13 @@ public class UpgradeContainer extends Container{
 					
 				}
 				if(itemstack1.stackSize==0)slot.putStack((ItemStack)null);
-				else                       slot.onSlotChanged();
+				else					   slot.onSlotChanged();
 				if(itemstack1.stackSize==itemstack.stackSize)return null;
 				slot.onPickupFromSlot(player, itemstack1);
 			}
 		}
-        
-        return itemstack;
-        
-    }
+		
+		return itemstack;
+		
+	}
 }

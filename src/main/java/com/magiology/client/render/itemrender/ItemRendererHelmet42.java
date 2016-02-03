@@ -1,12 +1,5 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.entity.*;
-import net.minecraft.item.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.models.*;
-
 //public class ItemRendererHelmet42 implements IItemRenderer{
 //	public ModelHelmet42 model=new ModelHelmet42();
 //
@@ -36,19 +29,19 @@ import com.magiology.client.render.models.*;
 //		}else if (type==ItemRenderType.INVENTORY){
 //			yRotation=80;
 //		}
-//		GL11.glPushMatrix();
-//		GL11.glTranslated( xoffset,  yoffset,  zoffset);
-//		GL11.glRotated(180, 1, 0, 0);
+//		OpenGLM.pushMatrix();
+//		OpenGLM.translate( xoffset,  yoffset,  zoffset);
+//		OpenGLM.rotate(180, 1, 0, 0);
 //		double scale=0.7;
-//		GL11.glScaled(scale,scale,scale);
+//		OpenGLM.scale(scale,scale,scale);
 //		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON||type==ItemRenderType.INVENTORY)model.shouldFollowThePlayer=false;
 //		else model.shouldFollowThePlayer=true;
 //		
-//		GL11.glRotated(xRotation,1,0,0);
-//		GL11.glRotated(yRotation,0,1,0);
-//		GL11.glRotated(zRotation,0,0,1);
+//		OpenGLM.rotate(xRotation,1,0,0);
+//		OpenGLM.rotate(yRotation,0,1,0);
+//		OpenGLM.rotate(zRotation,0,0,1);
 //		model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-//		GL11.glPopMatrix();
+//		OpenGLM.popMatrix();
 //	}
 //	
 //	

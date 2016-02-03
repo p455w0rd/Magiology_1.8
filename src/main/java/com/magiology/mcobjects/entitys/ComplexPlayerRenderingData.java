@@ -1,12 +1,12 @@
 package com.magiology.mcobjects.entitys;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import net.minecraft.entity.player.*;
-
-import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 public class ComplexPlayerRenderingData{
 	// init section
@@ -62,7 +62,7 @@ public class ComplexPlayerRenderingData{
 		return result;
 	}
 	private static ArrayList<ComplexPlayerRenderingData> RenderedPlayesList=new ArrayList<ComplexPlayerRenderingData>();
-	//get subSection                                         |
+	//get subSection										 |
 	public static CyborgWingsFromTheBlackFireData getFastCyborgWingsFromTheBlackFireData(EntityPlayer player){
 		ComplexPlayerRenderingData data=get(player);
 		return data!=null?data.getCyborgWingsFromTheBlackFireData():null;

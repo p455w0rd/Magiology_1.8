@@ -1,15 +1,18 @@
 package com.magiology.client.gui.container;
 
-import java.util.*;
-
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.guiutil.container.*;
-import com.magiology.client.gui.guiutil.gui.*;
-import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.client.gui.guiutil.container.FakeContainer;
+import com.magiology.client.gui.guiutil.gui.CraftingGridSlot;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class SmartCrafterContainer extends Container implements Updateable{
 	
@@ -37,10 +40,10 @@ public class SmartCrafterContainer extends Container implements Updateable{
 		}
 	}
 	public Slot addSlotToList(List list,Slot slot){
-        slot.slotNumber=constantSlots.size()+addedSlots.size();
-        list.add(slot);
-        return slot;
-    }
+		slot.slotNumber=constantSlots.size()+addedSlots.size();
+		list.add(slot);
+		return slot;
+	}
 	public void updateSlots(){
 		inventorySlots.clear();
 		for(int a=0;a<constantSlots.size();a++)inventorySlots.add(constantSlots.get(a));
@@ -61,9 +64,9 @@ public class SmartCrafterContainer extends Container implements Updateable{
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber){
 		ItemStack itemstack=null;
-        
-        return itemstack;
-    }
+		
+		return itemstack;
+	}
 	@Override
 	public ItemStack slotClick(int slotId, int var1, int var2, EntityPlayer player){
 		ItemStack result=null;
@@ -83,7 +86,7 @@ public class SmartCrafterContainer extends Container implements Updateable{
 		}
 //		Helper.println("no mod:"+noMod+"\t"+result);
 		return result;
-    }
+	}
 	@Override
 	public void update(){
 		if(listOffset!=lastListOffset){

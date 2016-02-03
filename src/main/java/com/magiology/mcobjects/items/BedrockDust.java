@@ -1,13 +1,14 @@
 package com.magiology.mcobjects.items;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 public class BedrockDust extends ItemM{
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){

@@ -1,18 +1,61 @@
 package com.magiology.core.init;
 
-import net.minecraft.client.renderer.tileentity.*;
-import net.minecraft.tileentity.*;
-import net.minecraftforge.fml.client.registry.*;
-import net.minecraftforge.fml.common.registry.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.client.render.tilerender.RenderBFCPowerOut;
+import com.magiology.client.render.tilerender.RenderBateryL1;
+import com.magiology.client.render.tilerender.RenderBateryL100;
+import com.magiology.client.render.tilerender.RenderBateryL2;
+import com.magiology.client.render.tilerender.RenderBateryL3;
+import com.magiology.client.render.tilerender.RenderBedrockBreaker;
+import com.magiology.client.render.tilerender.RenderEnergizedLapisOre;
+import com.magiology.client.render.tilerender.RenderFireExhaust;
+import com.magiology.client.render.tilerender.RenderFireGun;
+import com.magiology.client.render.tilerender.RenderFireLamp;
+import com.magiology.client.render.tilerender.RenderFireMatrixReceaver;
+import com.magiology.client.render.tilerender.RenderFireMatrixTransferer;
+import com.magiology.client.render.tilerender.RenderFirePipe;
+import com.magiology.client.render.tilerender.RenderHologramProjector;
+import com.magiology.client.render.tilerender.RenderMultiBox;
+import com.magiology.client.render.tilerender.RenderOreStructureCore;
+import com.magiology.client.render.tilerender.RenderRemotePowerCounter;
+import com.magiology.client.render.tilerender.network.RenderNetworkConductor;
+import com.magiology.client.render.tilerender.network.RenderNetworkController;
+import com.magiology.client.render.tilerender.network.RenderNetworkInterface;
+import com.magiology.client.render.tilerender.network.RenderNetworkRouter;
+import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
+import com.magiology.mcobjects.tileentityes.TileEntityBedrockBreaker;
+import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.mcobjects.tileentityes.TileEntityDontLookAtMe;
+import com.magiology.mcobjects.tileentityes.TileEntityEnergizedLapisOre;
+import com.magiology.mcobjects.tileentityes.TileEntityFireExhaust;
+import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
+import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
+import com.magiology.mcobjects.tileentityes.TileEntityPLauncher;
+import com.magiology.mcobjects.tileentityes.TileEntityRareSpacePipe;
+import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
+import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL1;
+import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL100;
+import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL2;
+import com.magiology.mcobjects.tileentityes.baterys.TileEntityBateryL3;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
-import com.magiology.client.render.tilerender.*;
-import com.magiology.client.render.tilerender.network.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.mcobjects.tileentityes.baterys.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MTileEntitys{
 
@@ -47,27 +90,27 @@ public class MTileEntitys{
 	}
 	@SideOnly(Side.CLIENT)
 	public static void initRenders(){
-		bindTileWRender(TileEntityFireLamp.class,               new RenderFireLamp());
-		bindTileWRender(TileEntityOreStructureCore.class,       new RenderOreStructureCore());
-		bindTileWRender(TileEntityFirePipe.class,               new RenderFirePipe());
-		bindTileWRender(TileEntityFireGun.class,                new RenderFireGun());
-		bindTileWRender(TileEntityFireExhaust.class,            new RenderFireExhaust());
-		bindTileWRender(TileEntityBedrockBreaker.class,         new RenderBedrockBreaker());
-		bindTileWRender(TileEntityBateryL1.class,               new RenderBateryL1());
-		bindTileWRender(TileEntityBateryL2.class,               new RenderBateryL2());
-		bindTileWRender(TileEntityBateryL3.class,               new RenderBateryL3());
-		bindTileWRender(TileEntityBateryL100.class,             new RenderBateryL100());
-		bindTileWRender(TileEntityBFCPowerOut.class,            new RenderBFCPowerOut());
-		bindTileWRender(TileEntityEnergizedLapisOre.class,      new RenderEnergizedLapisOre());
-		bindTileWRender(TileEntityRemotePowerCounter.class,     new RenderRemotePowerCounter());
+		bindTileWRender(TileEntityFireLamp.class,			   new RenderFireLamp());
+		bindTileWRender(TileEntityOreStructureCore.class,	   new RenderOreStructureCore());
+		bindTileWRender(TileEntityFirePipe.class,			   new RenderFirePipe());
+		bindTileWRender(TileEntityFireGun.class,				new RenderFireGun());
+		bindTileWRender(TileEntityFireExhaust.class,			new RenderFireExhaust());
+		bindTileWRender(TileEntityBedrockBreaker.class,		 new RenderBedrockBreaker());
+		bindTileWRender(TileEntityBateryL1.class,			   new RenderBateryL1());
+		bindTileWRender(TileEntityBateryL2.class,			   new RenderBateryL2());
+		bindTileWRender(TileEntityBateryL3.class,			   new RenderBateryL3());
+		bindTileWRender(TileEntityBateryL100.class,			 new RenderBateryL100());
+		bindTileWRender(TileEntityBFCPowerOut.class,			new RenderBFCPowerOut());
+		bindTileWRender(TileEntityEnergizedLapisOre.class,	  new RenderEnergizedLapisOre());
+		bindTileWRender(TileEntityRemotePowerCounter.class,	 new RenderRemotePowerCounter());
 		bindTileWRender(TileEntityFireMatrixTransferer.class,   new RenderFireMatrixTransferer());
-		bindTileWRender(TileEntityFireMatrixReceaver.class,     new RenderFireMatrixReceaver());
-		bindTileWRender(TileEntityHologramProjector.class,      new RenderHologramProjector());
-		bindTileWRender(TileEntityNetworkConductor.class,       new RenderNetworkConductor());
-		bindTileWRender(TileEntityNetworkController.class,      new RenderNetworkController());
-		bindTileWRender(TileEntityNetworkInterface.class,       new RenderNetworkInterface());
+		bindTileWRender(TileEntityFireMatrixReceaver.class,	 new RenderFireMatrixReceaver());
+		bindTileWRender(TileEntityHologramProjector.class,	  new RenderHologramProjector());
+		bindTileWRender(TileEntityNetworkConductor.class,	   new RenderNetworkConductor());
+		bindTileWRender(TileEntityNetworkController.class,	  new RenderNetworkController());
+		bindTileWRender(TileEntityNetworkInterface.class,	   new RenderNetworkInterface());
 		bindTileWRender(TileEntityNetworkRouter.class,new RenderNetworkRouter());
-		bindTileWRender(TileEntityRareSpacePipe.class,          new RenderMultiBox());
+		bindTileWRender(TileEntityRareSpacePipe.class,		  new RenderMultiBox());
 		bindTileWRender(TileEntityNetworkProgramHolder.class,   new RenderMultiBox());
 	}
 	private static<T extends TileEntityM> void register(Class<T> clazz){

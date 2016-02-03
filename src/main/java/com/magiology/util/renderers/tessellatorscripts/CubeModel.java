@@ -1,13 +1,16 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.Matrix4f;
 
-import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.vectors.QuadUV;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.util.ResourceLocation;
 
 public class CubeModel{
 	private final float minX,minY,minZ,maxX,maxY,maxZ;
@@ -99,13 +102,13 @@ public class CubeModel{
 				buf.addVertexWithUV(points[3],UVs[0].x3,UVs[0].y3);
 				buf.draw();
 			}catch(Exception exception){
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.disableTexture2D();
 				buf.addVertexWithUV(points[0],0,0);
 				buf.addVertexWithUV(points[1],0,0);
 				buf.addVertexWithUV(points[2],0,0);
 				buf.addVertexWithUV(points[3],0,0);
 				buf.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				OpenGLM.enableTexture2D();
 			}
 			if(willSideRender[1])try{
 				if(st[1]!=null)TessUtil.bindTexture(st[1]);
@@ -115,13 +118,13 @@ public class CubeModel{
 				buf.addVertexWithUV(points[4],UVs[1].x3,UVs[1].y3);
 				buf.draw();
 			}catch(Exception exception){
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.disableTexture2D();
 				buf.addVertexWithUV(points[7],0,0);
 				buf.addVertexWithUV(points[6],0,0);
 				buf.addVertexWithUV(points[5],0,0);
 				buf.addVertexWithUV(points[4],0,0);
 				buf.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				OpenGLM.enableTexture2D();
 			}
 			if(willSideRender[2])try{
 				if(st[2]!=null)TessUtil.bindTexture(st[2]);
@@ -131,13 +134,13 @@ public class CubeModel{
 				buf.addVertexWithUV(points[6],UVs[2].x3,UVs[2].y3);
 				buf.draw();
 			}catch(Exception exception){
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.disableTexture2D();
 				buf.addVertexWithUV(points[2],0,0);
 				buf.addVertexWithUV(points[1],0,0);
 				buf.addVertexWithUV(points[5],0,0);
 				buf.addVertexWithUV(points[6],0,0);
 				buf.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				OpenGLM.enableTexture2D();
 			}
 			if(willSideRender[3])try{
 				if(st[3]!=null)TessUtil.bindTexture(st[3]);
@@ -147,13 +150,13 @@ public class CubeModel{
 				buf.addVertexWithUV(points[3],UVs[3].x3,UVs[3].y3);
 				buf.draw();
 			}catch(Exception exception){
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.disableTexture2D();
 				buf.addVertexWithUV(points[7],0,0);
 				buf.addVertexWithUV(points[4],0,0);
 				buf.addVertexWithUV(points[0],0,0);
 				buf.addVertexWithUV(points[3],0,0);
 				buf.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				OpenGLM.enableTexture2D();
 			}
 			if(willSideRender[4])try{
 				if(st[4]!=null)TessUtil.bindTexture(st[4]);
@@ -163,13 +166,13 @@ public class CubeModel{
 				buf.addVertexWithUV(points[0],UVs[4].x3,UVs[4].y3);
 				buf.draw();
 			}catch(Exception exception){
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.disableTexture2D();
 				buf.addVertexWithUV(points[4],0,0);
 				buf.addVertexWithUV(points[5],0,0);
 				buf.addVertexWithUV(points[1],0,0);
 				buf.addVertexWithUV(points[0],0,0);
 				buf.draw();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			OpenGLM.enableTexture2D();
 			}
 			if(willSideRender[5])try{
 				if(st[5]!=null)TessUtil.bindTexture(st[5]);
@@ -179,13 +182,13 @@ public class CubeModel{
 				buf.addVertexWithUV(points[7],UVs[5].x3,UVs[5].y3);
 				buf.draw();
 			}catch(Exception exception){
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.disableTexture2D();
 				buf.addVertexWithUV(points[3],0,0);
 				buf.addVertexWithUV(points[2],0,0);
 				buf.addVertexWithUV(points[6],0,0);
 				buf.addVertexWithUV(points[7],0,0);
 				buf.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				OpenGLM.enableTexture2D();
 			}
 			
 		}catch(Exception exception){
@@ -194,7 +197,7 @@ public class CubeModel{
 	}
 	/**true = max, false = min*/
 	public Vec3M getPoint(boolean x,boolean y,boolean z){
-		     if( x&&!y&&!z)return points[0];
+			 if( x&&!y&&!z)return points[0];
 		else if( x&& y&&!z)return points[1];
 		else if( x&& y&& z)return points[2];
 		else if( x&&!y&& z)return points[3];

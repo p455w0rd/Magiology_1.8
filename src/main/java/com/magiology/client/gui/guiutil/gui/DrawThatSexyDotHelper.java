@@ -1,10 +1,10 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import net.minecraft.client.gui.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.utilclasses.UtilM;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.util.utilclasses.*;
+import net.minecraft.client.gui.Gui;
 
 public class DrawThatSexyDotHelper extends Gui{
 	
@@ -61,35 +61,34 @@ public class DrawThatSexyDotHelper extends Gui{
 			double scal=scale-1.2;
 			double xR=x-scal*7.5,yR=y-scal*7.5;
 			double xof=9+scal*7.5,yof=9+scal*7.5;
-			GL11.glTranslated(xR, yR, 40);
+			OpenGLM.translate(xR, yR, 40);
 			//......................................
-			GL11.glTranslated(xof, yof, 0);
-			GL11.glRotated(rotation, 0, 0, 1);
-			GL11.glTranslated(-xof, -yof, 0);
-			GL11.glScaled(scale, scale, scale);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.99F);
-			GL11.glTranslated(0, 0, 1);
+			OpenGLM.translate(xof, yof, 0);
+			OpenGLM.rotate(rotation, 0, 0, 1);
+			OpenGLM.translate(-xof, -yof, 0);
+			OpenGLM.scale(scale, scale, scale);
+			GL11U.allOpacityIs(false);
+			OpenGLM.translate(0, 0, 1);
 			
 			drawTexturedModalRect(0,0,xTexture,yTexture,xSize,ySize);
-
-			GL11.glDepthMask(false);
-			GL11.glTranslated(0, 0, -1);
+			OpenGLM.depthMask(false);
+			OpenGLM.translate(0, 0, -1);
 			//---------------------------------------------
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
-			GL11.glEnable(GL11.GL_BLEND);
-	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-	        
+			GL11U.allOpacityIs(true);
+			OpenGLM.enableBlend();
+			GL11U.blendFunc(2);
+			
 			for(int a=0;a<this.glow/11;a++)drawTexturedModalRect(0,0,xTexture,yTexture,xSize,ySize);
 			
-			GL11.glDisable(GL11.GL_BLEND);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-			GL11.glScaled(1/scale, 1/scale, 1/scale);
-			GL11.glTranslated(xof, yof, 0);
-			GL11.glRotated(-rotation, 0, 0, 1);
-			GL11.glTranslated(-xof, -yof, 0);
+			OpenGLM.disableBlend();
+			GL11U.allOpacityIs(true);
+			OpenGLM.scale(1/scale, 1/scale, 1/scale);
+			OpenGLM.translate(xof, yof, 0);
+			OpenGLM.rotate(-rotation, 0, 0, 1);
+			OpenGLM.translate(-xof, -yof, 0);
 			//......................................
-			GL11.glTranslated(-xR, -yR, -40);
-			GL11.glDepthMask(true);
+			OpenGLM.translate(-xR, -yR, -40);
+			OpenGLM.depthMask(true);
 			
 		}
 	}

@@ -1,14 +1,19 @@
 package com.magiology.core.init;
 
-import net.minecraftforge.common.*;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.relauncher.*;
-
 import com.magiology.client.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
-import com.magiology.client.render.shaders.core.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.render.shaders.core.ShaderRunner;
+import com.magiology.forgepowered.events.EntityEvents;
+import com.magiology.forgepowered.events.GameEvents;
+import com.magiology.forgepowered.events.MouseEvents;
+import com.magiology.forgepowered.events.TickEvents;
+import com.magiology.forgepowered.events.client.HighlightEvent;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MEvents{
 	

@@ -1,16 +1,19 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.tileentity.*;
-
-import com.magiology.api.power.*;
-import com.magiology.client.gui.container.*;
-import com.magiology.handlers.*;
+import com.magiology.api.power.ISidedPower;
+import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
+import com.magiology.client.gui.container.SmartCrafterContainer;
+import com.magiology.handlers.GenericPacketEventHandler;
 import com.magiology.handlers.GenericPacketEventHandler.IntegerPacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.StringPacketEvent;
-import com.magiology.handlers.animationhandlers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.PrintUtil;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 
 public class GenericPacketEvents{
 	public static GenericPacketEventHandler callerInstance;
@@ -24,7 +27,7 @@ public class GenericPacketEvents{
 			int listOffset=((SmartCrafterContainer)player.openContainer).listOffset;
 			if(integer<0){if(listOffset+integer<0)doIt=false;}
 			else{if(listOffset+integer>((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts.length-2)doIt=false;}
-	        if(doIt)((SmartCrafterContainer)player.openContainer).listOffset+=integer;
+			if(doIt)((SmartCrafterContainer)player.openContainer).listOffset+=integer;
 		}break;
 		case 1:{
 			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[integer].clear();

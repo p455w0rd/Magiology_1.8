@@ -1,13 +1,14 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.client.gui.*;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.fml.common.eventhandler.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.client.gui.custom.hud.*;
-import com.magiology.handlers.animationhandlers.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.client.event.MouseEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(value=Side.CLIENT)
 public class MouseEvents{

@@ -1,14 +1,16 @@
 package com.magiology.client.gui.guiutil.container;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.util.*;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
+import com.magiology.util.utilclasses.PrintUtil;
 
-import com.magiology.mcobjects.items.upgrades.*;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 
 public class UpgItemContainer implements IInventory{
 	

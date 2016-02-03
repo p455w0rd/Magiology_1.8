@@ -1,7 +1,8 @@
 package com.magiology.mcobjects.tileentityes.hologram.interactions;
 
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.ObjectHolder;
 
 public class InteractionColor<Host extends HoloObject> extends AbstractInteraction<Host>{
 	

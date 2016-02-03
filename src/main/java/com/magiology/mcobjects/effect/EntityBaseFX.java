@@ -1,17 +1,16 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.entity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.core.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.core.MReference;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class EntityBaseFX extends EntityFX{
 	
@@ -21,19 +20,19 @@ public class EntityBaseFX extends EntityFX{
 	
 	public EntityBaseFX(World w, double xp, double yp, double zp, double xs, double ys, double zs, int siz, int lengt,double gravit, double Ra,double Ga,double Ba,double opacita,double frictio){
 //		delete double Ra,double Ga,double Ba, and set r_e,g_e,b_e to 1 if you want to have a multicolored texture
-        super(w, xp, yp, zp, xs, ys, zs);
-        this.motionX =xs;
-        this.motionY =ys;
-        this.motionZ =zs;
-        this.friction=frictio;
-        this.particleMaxAge=lengt;
-        this.particleScale=siz/10;
-        this.gravity=gravit*0.001;
-        this.r_e=Ra;
-        this.g_e=Ga;
-        this.b_e=Ba;
-        this.opacity_e=opacita;
-    }
+		super(w, xp, yp, zp, xs, ys, zs);
+		this.motionX =xs;
+		this.motionY =ys;
+		this.motionZ =zs;
+		this.friction=frictio;
+		this.particleMaxAge=lengt;
+		this.particleScale=siz/10;
+		this.gravity=gravit*0.001;
+		this.r_e=Ra;
+		this.g_e=Ga;
+		this.b_e=Ba;
+		this.opacity_e=opacita;
+	}
 	public EntityBaseFX(World w, double xp, double yp, double zp, double xs, double ys, double zs, int siz, int lengt){
 //		use this if you want to use less customization
 		super(w, xp, yp, zp, xs, ys, zs);
@@ -59,26 +58,26 @@ public class EntityBaseFX extends EntityFX{
 		
 	}
 	public void renderParticle(float par2, float par3, float par4, float par5, float par6, float par7){
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-    	float PScale = 0.01F*this.particleScale;
-    	float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
-    	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
-    	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-        U.getMC().renderEngine.bindTexture(texture1);
-        Renderer.POS_UV_COLOR.beginQuads();
-        Renderer.POS_UV_COLOR.addVertex(x-par3*PScale-par6*PScale, y-par4*PScale, z-par5*PScale-par7*PScale, 0, 0, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
-        Renderer.POS_UV_COLOR.addVertex(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
-        Renderer.POS_UV_COLOR.addVertex(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
-        Renderer.POS_UV_COLOR.addVertex(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
-        Renderer.POS_UV_COLOR.draw();
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glDepthMask(true);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		GL11.glEnable(GL11.GL_LIGHTING);
+		OpenGLM.disableLighting();
+		OpenGLM.depthMask(false);
+		OpenGLM.enableBlend();
+		GL11U.allOpacityIs(true);
+		GL11U.blendFunc(2);
+		float PScale = 0.01F*this.particleScale;
+		float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
+		float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
+		float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
+		U.getMC().renderEngine.bindTexture(texture1);
+		Renderer.POS_UV_COLOR.beginQuads();
+		Renderer.POS_UV_COLOR.addVertex(x-par3*PScale-par6*PScale, y-par4*PScale, z-par5*PScale-par7*PScale, 0, 0, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
+		Renderer.POS_UV_COLOR.addVertex(x-par3*PScale+par6*PScale, y+par4*PScale, z-par5*PScale+par7*PScale, 1, 0, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
+		Renderer.POS_UV_COLOR.addVertex(x+par3*PScale+par6*PScale, y+par4*PScale, z+par5*PScale+par7*PScale, 1, 1, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
+		Renderer.POS_UV_COLOR.addVertex(x+par3*PScale-par6*PScale, y-par4*PScale, z+par5*PScale-par7*PScale, 0, 1, (float)this.r_e, (float)this.g_e, (float)this.b_e, (float)this.opacity_e);
+		Renderer.POS_UV_COLOR.draw();
+		OpenGLM.disableBlend();
+		OpenGLM.depthMask(true);
+		GL11U.allOpacityIs(true);
+		OpenGLM.enableLighting();
 	}
 	
 	@Override

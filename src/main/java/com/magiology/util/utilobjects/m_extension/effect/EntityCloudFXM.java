@@ -1,7 +1,7 @@
 package com.magiology.util.utilobjects.m_extension.effect;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.world.*;
+import net.minecraft.client.particle.EntityCloudFX;
+import net.minecraft.world.World;
 
 public class EntityCloudFXM extends EntityCloudFX{
 

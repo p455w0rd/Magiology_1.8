@@ -1,8 +1,9 @@
 package com.magiology.api.power;
 
-import net.minecraft.item.*;
-
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public interface PowerUpgrades{
 	//getters

@@ -1,6 +1,6 @@
 package com.magiology.util.utilclasses;
 
-import net.minecraft.util.*;
+import net.minecraft.util.EnumChatFormatting;
 /**
  * FontEffectHelper
  * */

@@ -1,17 +1,23 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.client.render.*;
-import com.magiology.client.render.aftereffect.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.render.Textures;
+import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.client.render.aftereffect.RenderFirePipeGlow;
+import com.magiology.client.render.aftereffect.RenderFirePipePriorityCube;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
 
 public class RenderFirePipe extends TileEntitySpecialRendererM {
 	private final float p= 1F/16F;
@@ -235,7 +241,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 		if(conectionToObjModel[0]==null)generateModelConectionToObj();
 		for(int i=0;i<2;i++){
 			conectionToObjModel[i].pushMatrix();
-			     if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
+				 if(dir.equals(EnumFacing.UP))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, -90);
 			else if(dir.equals(EnumFacing.DOWN))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 0, 90);
 			else if(dir.equals(EnumFacing.EAST))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, 180, 0);
 			else if(dir.equals(EnumFacing.NORTH))conectionToObjModel[i].rotateAt(0.5, 0.5, 0.5, 0, -90, 0);
@@ -370,45 +376,45 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	private VertexModel conectorFFLModel;
 	private void generateModelConectorFFL(){
 		buf.cleanUp();
-		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*9.5,tWFSL*0, 0);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*9.5,tWFSL*0, tHFSL*24);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*9.5,tWFSL*8, tHFSL*24);
-		buf.addVertexWithUV(p*9.5,  p*6,     p*9.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*9.5,tWFSL*8, 0);
 
-		buf.addVertexWithUV(p*9.5,  p*6,     p*6.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*6.5,tWFSL*0, 0);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*6.5,tWFSL*0, tHFSL*24);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*6.5,tWFSL*8, tHFSL*24);
-		buf.addVertexWithUV(p*6.5,  p*6,     p*6.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*6.5,tWFSL*8, 0);
 
-		buf.addVertexWithUV(p*6.5,  p*6,     p*6.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*6.5,tWFSL*0, 0);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*6.5,tWFSL*0, tHFSL*24);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*9.5,tWFSL*8, tHFSL*24);
-		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*9.5,tWFSL*8, 0);
 
-		buf.addVertexWithUV(p*9.5,  p*6,     p*9.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*9.5,tWFSL*8, 0);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*9.5,tWFSL*8, tHFSL*24);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*6.5,tWFSL*0, tHFSL*24);
-		buf.addVertexWithUV(p*9.5,  p*6,     p*6.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*6.5,tWFSL*0, 0);
 
-		buf.addVertexWithUV(p*9.5,  p*6,     p*9.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*9.5,tWFSL*8, 0);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*9.5,tWFSL*8, tHFSL*24);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*9.5,tWFSL*0, tHFSL*24);
-		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*9.5,tWFSL*0, 0);
 
-		buf.addVertexWithUV(p*6.5,  p*6,     p*6.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*6.5,tWFSL*8, 0);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*6.5,tWFSL*8, tHFSL*24);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*6.5,tWFSL*0, tHFSL*24);
-		buf.addVertexWithUV(p*9.5,  p*6,     p*6.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*6.5,tWFSL*0, 0);
 
-		buf.addVertexWithUV(p*6.5,  p*6,     p*9.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*9.5,tWFSL*8, 0);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*9.5,tWFSL*8, tHFSL*24);
 		buf.addVertexWithUV(p*6.5, -p*0.78,  p*6.5,tWFSL*0, tHFSL*24);
-		buf.addVertexWithUV(p*6.5,  p*6,     p*6.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*6.5,  p*6,	 p*6.5,tWFSL*0, 0);
 
-		buf.addVertexWithUV(p*9.5,  p*6,     p*6.5,tWFSL*0, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*6.5,tWFSL*0, 0);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*6.5,tWFSL*0, tHFSL*24);
 		buf.addVertexWithUV(p*9.5, -p*0.78,  p*9.5,tWFSL*8, tHFSL*24);
-		buf.addVertexWithUV(p*9.5,  p*6,     p*9.5,tWFSL*8, 0);
+		buf.addVertexWithUV(p*9.5,  p*6,	 p*9.5,tWFSL*8, 0);
 		
 		buf.addVertexWithUV(p*4.5, -p*2.78,  p*11.5,tWFSL*9, tHFSL*0);
 		buf.addVertexWithUV(p*4.5, -p*4.78,  p*11.5,tWFSL*9, tHFSL*8);

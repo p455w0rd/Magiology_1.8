@@ -1,8 +1,8 @@
 package com.magiology.util.utilobjects;
 
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
 
 public class NBTUtil{
 	public static boolean hasKey(ItemStack stack, String key){

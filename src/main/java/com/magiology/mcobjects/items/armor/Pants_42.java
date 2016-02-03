@@ -1,20 +1,22 @@
 package com.magiology.mcobjects.items.armor;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.client.model.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.client.render.models.*;
+import com.magiology.client.render.models.ModelPants42;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Pants_42 extends UpgradeableArmor{
 	
@@ -22,18 +24,18 @@ public class Pants_42 extends UpgradeableArmor{
 	
 
 	public Pants_42(String unlocalizedName, ArmorMaterial material, String textureName, int type,CreativeTabs creativeTab){
-	    super(material, 0, type);
-	    this.textureName = textureName;
-	    this.setUnlocalizedName(unlocalizedName);
-//	    this.setTextureName(MReference.MODID + ":" + unlocalizedName);
-	    this.setCreativeTab(creativeTab);
-	    this.setMaxDamage(25);
-	    initUpgrade(Container.Pants42);
+		super(material, 0, type);
+		this.textureName = textureName;
+		this.setUnlocalizedName(unlocalizedName);
+//		this.setTextureName(MReference.MODID + ":" + unlocalizedName);
+		this.setCreativeTab(creativeTab);
+		this.setMaxDamage(25);
+		initUpgrade(Container.Pants42);
 	}
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type){
-	    return null;
+		return null;
 	}
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){

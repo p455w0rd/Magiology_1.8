@@ -1,12 +1,14 @@
 package com.magiology.mcobjects.tileentityes.corecomponents;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import com.magiology.api.connection.IConnectionProvider;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.api.connection.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 public interface UpdateableTile extends IConnectionProvider{
 	public void updateConnections();
@@ -48,8 +50,8 @@ public interface UpdateableTile extends IConnectionProvider{
 						if(pass)j=included.size();
 					}
 					if(pass)array[i]=trueValue;
-					else    array[i]=falseValue;
-				}else       array[i]=falseValue;
+					else	array[i]=falseValue;
+				}else	   array[i]=falseValue;
 			}
 		}
 	}

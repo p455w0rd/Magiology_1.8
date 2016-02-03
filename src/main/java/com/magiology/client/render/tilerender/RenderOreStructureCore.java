@@ -1,14 +1,13 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.render.Textures;
+import com.magiology.mcobjects.tileentityes.TileEntityOreStructureCore;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+
+import net.minecraft.tileentity.TileEntity;
 
 public class RenderOreStructureCore extends TileEntitySpecialRendererM{
 	private final float p= 1F/16F;
@@ -19,71 +18,71 @@ public class RenderOreStructureCore extends TileEntitySpecialRendererM{
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		TileEntityOreStructureCore core= (TileEntityOreStructureCore) tileentity;
-		GL11.glTranslated(x,y,z);
-		GL11.glTranslated(0.5, 1, 0.5);
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		OpenGLM.translate(x,y,z);
+		OpenGLM.translate(0.5, 1, 0.5);
+		OpenGLM.enableLighting();
+		OpenGLM.enableCull();
 		
 		if(core.updateStructureHelper==true)renderTop();
 		
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glTranslated(-0.5, -1, -0.5);
-		GL11.glTranslated(-x, -y, -z);
+		OpenGLM.enableLighting();
+		OpenGLM.translate(-0.5, -1, -0.5);
+		OpenGLM.translate(-x, -y, -z);
 	}
 
 	public void renderTop(){
-		GL11.glEnable(GL11.GL_LIGHTING);
+		OpenGLM.enableLighting();
 		this.bindTexture(Textures.OreStructureCore);
-			buf.addVertexWithUV(-p*10, p*0, -p*10,        tW*88, tH*0);
-			buf.addVertexWithUV(-p*10, p*0,  p*10,        tW*88, tH*80);
-			buf.addVertexWithUV(-p*10, p*2,  p*10,        tW*96, tH*80);
-			buf.addVertexWithUV(-p*10, p*2, -p*10,        tW*96, tH*0);
+			buf.addVertexWithUV(-p*10, p*0, -p*10,		tW*88, tH*0);
+			buf.addVertexWithUV(-p*10, p*0,  p*10,		tW*88, tH*80);
+			buf.addVertexWithUV(-p*10, p*2,  p*10,		tW*96, tH*80);
+			buf.addVertexWithUV(-p*10, p*2, -p*10,		tW*96, tH*0);
 			
-			buf.addVertexWithUV(-p*8, p*2, -p*8,          tW*80, tH*0);
-			buf.addVertexWithUV(-p*8, p*2,  p*8,          tW*80, tH*72);
-			buf.addVertexWithUV(-p*8, p*0,  p*8,          tW*88, tH*72);
-			buf.addVertexWithUV(-p*8, p*0, -p*8,          tW*88, tH*0);
-			
-
-			buf.addVertexWithUV(p*10, p*2, -p*10,         tW*88, tH*0);
-			buf.addVertexWithUV(p*10, p*2,  p*10,         tW*88, tH*80);
-			buf.addVertexWithUV(p*10, p*0,  p*10,         tW*96, tH*80);
-			buf.addVertexWithUV(p*10, p*0, -p*10,         tW*96, tH*0);
-
-			buf.addVertexWithUV(p*8, p*0, -p*8,           tW*80, tH*0);
-			buf.addVertexWithUV(p*8, p*0,  p*8,           tW*80, tH*72);
-			buf.addVertexWithUV(p*8, p*2,  p*8,           tW*88, tH*72);
-			buf.addVertexWithUV(p*8, p*2, -p*8,           tW*88, tH*0);
-			
-			
-			buf.addVertexWithUV( p*10, p*2, p*10,         tW*88, tH*0);
-			buf.addVertexWithUV(-p*10, p*2, p*10,         tW*88, tH*80);
-			buf.addVertexWithUV(-p*10, p*0, p*10,         tW*96, tH*80);
-			buf.addVertexWithUV( p*10, p*0, p*10,         tW*96, tH*0);
-			
-			buf.addVertexWithUV( p*8, p*0, p*8,           tW*80, tH*0);
-			buf.addVertexWithUV(-p*8, p*0, p*8,           tW*80, tH*72);
-			buf.addVertexWithUV(-p*8, p*2, p*8,           tW*88, tH*72);
-			buf.addVertexWithUV( p*8, p*2, p*8,           tW*88, tH*0);
+			buf.addVertexWithUV(-p*8, p*2, -p*8,		  tW*80, tH*0);
+			buf.addVertexWithUV(-p*8, p*2,  p*8,		  tW*80, tH*72);
+			buf.addVertexWithUV(-p*8, p*0,  p*8,		  tW*88, tH*72);
+			buf.addVertexWithUV(-p*8, p*0, -p*8,		  tW*88, tH*0);
 			
 
-			buf.addVertexWithUV( p*10, p*0, -p*10,        tW*88, tH*0);
-			buf.addVertexWithUV(-p*10, p*0, -p*10,        tW*88, tH*80);
-			buf.addVertexWithUV(-p*10, p*2, -p*10,        tW*96, tH*80);
-			buf.addVertexWithUV( p*10, p*2, -p*10,        tW*96, tH*0);
+			buf.addVertexWithUV(p*10, p*2, -p*10,		 tW*88, tH*0);
+			buf.addVertexWithUV(p*10, p*2,  p*10,		 tW*88, tH*80);
+			buf.addVertexWithUV(p*10, p*0,  p*10,		 tW*96, tH*80);
+			buf.addVertexWithUV(p*10, p*0, -p*10,		 tW*96, tH*0);
 
-			buf.addVertexWithUV( p*8, p*2, -p*8,          tW*80, tH*0);
-			buf.addVertexWithUV(-p*8, p*2, -p*8,          tW*80, tH*72);
-			buf.addVertexWithUV(-p*8, p*0, -p*8,          tW*88, tH*72);
-			buf.addVertexWithUV( p*8, p*0, -p*8,          tW*88, tH*0);
+			buf.addVertexWithUV(p*8, p*0, -p*8,		   tW*80, tH*0);
+			buf.addVertexWithUV(p*8, p*0,  p*8,		   tW*80, tH*72);
+			buf.addVertexWithUV(p*8, p*2,  p*8,		   tW*88, tH*72);
+			buf.addVertexWithUV(p*8, p*2, -p*8,		   tW*88, tH*0);
+			
+			
+			buf.addVertexWithUV( p*10, p*2, p*10,		 tW*88, tH*0);
+			buf.addVertexWithUV(-p*10, p*2, p*10,		 tW*88, tH*80);
+			buf.addVertexWithUV(-p*10, p*0, p*10,		 tW*96, tH*80);
+			buf.addVertexWithUV( p*10, p*0, p*10,		 tW*96, tH*0);
+			
+			buf.addVertexWithUV( p*8, p*0, p*8,		   tW*80, tH*0);
+			buf.addVertexWithUV(-p*8, p*0, p*8,		   tW*80, tH*72);
+			buf.addVertexWithUV(-p*8, p*2, p*8,		   tW*88, tH*72);
+			buf.addVertexWithUV( p*8, p*2, p*8,		   tW*88, tH*0);
+			
+
+			buf.addVertexWithUV( p*10, p*0, -p*10,		tW*88, tH*0);
+			buf.addVertexWithUV(-p*10, p*0, -p*10,		tW*88, tH*80);
+			buf.addVertexWithUV(-p*10, p*2, -p*10,		tW*96, tH*80);
+			buf.addVertexWithUV( p*10, p*2, -p*10,		tW*96, tH*0);
+
+			buf.addVertexWithUV( p*8, p*2, -p*8,		  tW*80, tH*0);
+			buf.addVertexWithUV(-p*8, p*2, -p*8,		  tW*80, tH*72);
+			buf.addVertexWithUV(-p*8, p*0, -p*8,		  tW*88, tH*72);
+			buf.addVertexWithUV( p*8, p*0, -p*8,		  tW*88, tH*0);
 			
 			
 			
-			buf.addVertexWithUV(-p*10, p*2, -p*10,        tW*0,  tH*0);
-			buf.addVertexWithUV(-p*10, p*2,  p*10,        tW*80, tH*0);
-			buf.addVertexWithUV(p*10,  p*2,  p*10,        tW*80, tH*80);
-			buf.addVertexWithUV(p*10,  p*2, -p*10,        tW*0,  tH*80);
+			buf.addVertexWithUV(-p*10, p*2, -p*10,		tW*0,  tH*0);
+			buf.addVertexWithUV(-p*10, p*2,  p*10,		tW*80, tH*0);
+			buf.addVertexWithUV(p*10,  p*2,  p*10,		tW*80, tH*80);
+			buf.addVertexWithUV(p*10,  p*2, -p*10,		tW*0,  tH*80);
 			buf.draw();
-		GL11.glEnable(GL11.GL_LIGHTING);
+		OpenGLM.enableLighting();
 	}
 }

@@ -1,17 +1,17 @@
 package com.magiology.forgepowered.events;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.world.*;
-
-import com.magiology.core.init.*;
-import com.magiology.handlers.animationhandlers.*;
+import com.magiology.core.init.MItems;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.mcobjects.items.armor.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.effect.*;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.mcobjects.items.armor.Pants_42;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 
 public class SpecialMovmentEvents{

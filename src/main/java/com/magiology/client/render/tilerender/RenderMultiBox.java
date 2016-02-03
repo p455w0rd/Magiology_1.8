@@ -1,22 +1,22 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.network.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 
 public class RenderMultiBox extends TileEntitySpecialRendererM{
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float pt){
 		GL11U.protect();
-		GL11.glTranslated(x,y,z);
+		OpenGLM.translate(x,y,z);
 		new ColorF(0.6,0.6,0.6,0.5).bind();
 		GL11U.texture(false);
 		AxisAlignedBB[] cubes=((MultiColisionProvider)tile).getActiveBoxes();

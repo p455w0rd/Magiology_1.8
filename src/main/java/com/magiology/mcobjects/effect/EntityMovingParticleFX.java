@@ -1,9 +1,9 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.world.*;
-
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.world.World;
 
 public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 	
@@ -15,27 +15,27 @@ public class EntityMovingParticleFX extends EntitySmoothBubleFX{
 	int[] sideOpacityChange=new int[8];
 	
 	public EntityMovingParticleFX(World w, double xp1, double yp1, double zp1, double xp2, double yp2, double zp2, int siz, double Ra,double Ga,double Ba,double opacita){
-        super(w, xp1, yp1, zp1, 0, 0, 0, 0, 0, 1, Ra, Ga, Ba, opacita);
-        
-        for(int a=0;a<sideOpacity.length;a++){
+		super(w, xp1, yp1, zp1, 0, 0, 0, 0, 0, 1, Ra, Ga, Ba, opacita);
+		
+		for(int a=0;a<sideOpacity.length;a++){
 			sideOpacityChange[a]=worldObj.rand.nextInt(3)-1;
 			sideOpacity[a]=worldObj.rand.nextDouble();
 		}
-        particleMaxAge=84;
-        blinktime=1+worldObj.rand.nextInt(84);
-        particleScale=siz/10;
-        r_e=Ra;
-        g_e=Ga;
-        b_e=Ba;
-        opacity_e=opacita;
-        xf=(int) xp1;
-        yf=(int) yp1;
-        zf=(int) zp1;
-        x1=xp2-xp1;
-        y1=yp2-yp1;
-        z1=zp2-zp1;
-        noClip=true;
-    }
+		particleMaxAge=84;
+		blinktime=1+worldObj.rand.nextInt(84);
+		particleScale=siz/10;
+		r_e=Ra;
+		g_e=Ga;
+		b_e=Ba;
+		opacity_e=opacita;
+		xf=(int) xp1;
+		yf=(int) yp1;
+		zf=(int) zp1;
+		x1=xp2-xp1;
+		y1=yp2-yp1;
+		z1=zp2-zp1;
+		noClip=true;
+	}
 	
 	@Override
 	public void onUpdate(){

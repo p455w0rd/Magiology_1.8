@@ -1,16 +1,15 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.render.Textures;
+import com.magiology.mcobjects.tileentityes.TileEntityFireGun;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 public class RenderFireGun extends TileEntitySpecialRendererM {
 	
@@ -22,9 +21,9 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
 		TileEntityFireGun dir= (TileEntityFireGun) tileentity;
 		buf.cleanUp();
-		GL11.glTranslated(x,y,z);
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		OpenGLM.translate(x,y,z);
+		OpenGLM.enableLighting();
+		OpenGLM.enableCull();
 		
 		for(int i=0; i<dir.rotation.length; i++){
 			if(dir.rotation[i] != null){
@@ -37,26 +36,26 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 			drawGunStand(EnumFacing.SOUTH, tileentity,x,y,z,f);
 		}
 		
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glTranslated(-x, -y, -z);
+		OpenGLM.enableLighting();
+		OpenGLM.translate(-x, -y, -z);
 	}
 	
 	public void drawGunStand(EnumFacing dir, TileEntity tileentity, double x, double y, double z, float f){
 		this.bindTexture(Textures.FireGunGun);
 
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		OpenGLM.translate(0.5F, 0.5F, 0.5F);
 		if(dir.equals(EnumFacing.WEST)){
-			GL11.glRotatef(180, 0, 1, 0);
+			OpenGLM.rotate(180, 0, 1, 0);
 		}
 		else if (dir.equals(EnumFacing.SOUTH)){
-			GL11.glRotatef(-90, 0, 1, 0);
+			OpenGLM.rotate(-90, 0, 1, 0);
 		}
 		else if (dir.equals(EnumFacing.EAST)){
 		}
 		else if (dir.equals(EnumFacing.NORTH)){
-			GL11.glRotatef(90, 0, 1, 0);
+			OpenGLM.rotate(90, 0, 1, 0);
 		}
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 		{
 		buf.addVertexWithUV(p*8, p*4, p*9, tW*0, tH*0);
 		buf.addVertexWithUV(p*8, p*0, p*9, tW*0, tH*32);
@@ -79,41 +78,41 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 		buf.addVertexWithUV(p*10, p*4, p*7, tW*16,tH*0);
 		buf.draw();
 		}
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		OpenGLM.translate(0.5F, 0.5F, 0.5F);
 		if(dir.equals(EnumFacing.WEST)){
-			GL11.glRotatef(-180, 0, 1, 0);
+			OpenGLM.rotate(-180, 0, 1, 0);
 		}
 		else if (dir.equals(EnumFacing.SOUTH)){
-			GL11.glRotatef(90, 0, 1, 0);
+			OpenGLM.rotate(90, 0, 1, 0);
 		}
 		else if (dir.equals(EnumFacing.EAST)){
 		}
 		else if (dir.equals(EnumFacing.NORTH)){
-			GL11.glRotatef(-90, 0, 1, 0);
+			OpenGLM.rotate(-90, 0, 1, 0);
 		}
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 	}
 	public void drawGun(EnumFacing dir, TileEntity tileentity, double x, double y, double z, float f){
 		TileEntityFireGun isit= (TileEntityFireGun) tileentity;
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		this.bindTexture(Textures.FireGunGun);
 
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+		OpenGLM.translate(0.5F, 0.5F, 0.5F);
 		if(dir.equals(EnumFacing.WEST)){
-			GL11.glRotatef(180, 0, 1, 0);
+			OpenGLM.rotate(180, 0, 1, 0);
 		}
 		else if (dir.equals(EnumFacing.SOUTH)){
-			GL11.glRotatef(-90, 0, 1, 0);
+			OpenGLM.rotate(-90, 0, 1, 0);
 		}
 		else if (dir.equals(EnumFacing.EAST)){
 		}
 		else if (dir.equals(EnumFacing.NORTH)){
-			GL11.glRotatef(90, 0, 1, 0);
+			OpenGLM.rotate(90, 0, 1, 0);
 		}
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 		{
 			{
-			GL11.glTranslated(-UtilM.calculatePos(isit.prevAnimation, isit.animation),0,0);
+			OpenGLM.translate(-UtilM.calculatePos(isit.prevAnimation, isit.animation),0,0);
 			buf.addVertexWithUV(p*5,  p*7, p*9.5,  tW*16, tH*0);
 			buf.addVertexWithUV(p*5,  p*4, p*9.5,  tW*16, tH*24);
 			buf.addVertexWithUV(p*12, p*4, p*9.5,  tW*72, tH*24);
@@ -185,6 +184,6 @@ public class RenderFireGun extends TileEntitySpecialRendererM {
 			}
 			buf.draw();
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 }

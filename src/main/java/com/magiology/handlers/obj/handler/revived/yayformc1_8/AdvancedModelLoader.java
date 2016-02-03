@@ -1,14 +1,16 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
 
-import net.minecraft.util.*;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.google.common.collect.Maps;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.obj.ObjModelLoader;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.techne.TechneModelLoader;
 
-import com.google.common.collect.*;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.obj.*;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.techne.*;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 /**
@@ -29,10 +31,10 @@ public class AdvancedModelLoader {
    */
   public static void registerModelHandler(IModelCustomLoader modelHandler)
   {
-    for (String suffix : modelHandler.getSuffixes())
-    {
-      instances.put(suffix, modelHandler);
-    }
+	for (String suffix : modelHandler.getSuffixes())
+	{
+	  instances.put(suffix, modelHandler);
+	}
   }
 
   /**
@@ -44,33 +46,33 @@ public class AdvancedModelLoader {
    */
   public static IModelCustom loadModel(ResourceLocation resource) throws IllegalArgumentException, ModelFormatException
   {
-    String name = resource.getResourcePath();
-    int i = name.lastIndexOf('.');
-    if (i == -1)
-    {
-      FMLLog.severe("The resource name %s is not valid", resource);
-      throw new IllegalArgumentException("The resource name is not valid");
-    }
-    String suffix = name.substring(i+1);
-    IModelCustomLoader loader = instances.get(suffix);
-    if (loader == null)
-    {
-      FMLLog.severe("The resource name %s is not supported", resource);
-      throw new IllegalArgumentException("The resource name is not supported");
-    }
+	String name = resource.getResourcePath();
+	int i = name.lastIndexOf('.');
+	if (i == -1)
+	{
+	  FMLLog.severe("The resource name %s is not valid", resource);
+	  throw new IllegalArgumentException("The resource name is not valid");
+	}
+	String suffix = name.substring(i+1);
+	IModelCustomLoader loader = instances.get(suffix);
+	if (loader == null)
+	{
+	  FMLLog.severe("The resource name %s is not supported", resource);
+	  throw new IllegalArgumentException("The resource name is not supported");
+	}
 
-    return loader.loadInstance(resource);
+	return loader.loadInstance(resource);
   }
 
   public static Collection<String> getSupportedSuffixes()
   {
-    return instances.keySet();
+	return instances.keySet();
   }
 
 
   static
   {
-    registerModelHandler(new ObjModelLoader());
-    registerModelHandler(new TechneModelLoader());
+	registerModelHandler(new ObjModelLoader());
+	registerModelHandler(new TechneModelLoader());
   }
 }

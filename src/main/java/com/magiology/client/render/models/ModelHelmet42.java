@@ -1,99 +1,99 @@
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.tileentity.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
+import org.lwjgl.opengl.GL11;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.render.Textures;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+
 public class ModelHelmet42 extends ModelBiped{
-    ModelRenderer baseTop1,baseTop2,baseTop3,baseTop4,baseSide1,baseSide2,baseSide3,baseSide4,baseBack1,baseBack2,baseBack3,baseBack4;
-    public boolean shouldFollowThePlayer=false,shouldFollowThePlayerMaster=false,shouldFollowThePlayerHasAMaster=false;
-    public ModelHelmet42(){
-    	textureWidth = 38;
-    	textureHeight = 12;
-    	
-    	baseTop1 = new ModelRenderer(this, 0, 0);
-	    baseTop1.addBox(-1.5F, -8.5F, -4.5F, 3, 1, 4);
-	    baseTop1.setRotationPoint(0F, 0F, 0F);
-	    baseTop1.setTextureSize(64, 32);
-	    baseTop1.mirror = true;
-	    setRotation(baseTop1, 0F, 0F, 0F);
-	    baseTop2 = new ModelRenderer(this, 16, 6);
-	    baseTop2.addBox(-4.5F, -8.5F, -4.5F, 3, 1, 1);
-	    baseTop2.setRotationPoint(0F, 0F, 0F);
-	    baseTop2.setTextureSize(64, 32);
-	    baseTop2.mirror = true;
-	    setRotation(baseTop2, 0F, 0F, 0F);
-	    baseTop3 = new ModelRenderer(this, 16, 6);
-	    baseTop3.addBox(1.5F, -8.5F, -4.5F, 3, 1, 1);
-	    baseTop3.setRotationPoint(0F, 0F, 0F);
-	    baseTop3.setTextureSize(64, 32);
-	    baseTop3.mirror = true;
-	    setRotation(baseTop3, 0F, 0F, 0F);
-	    baseTop4 = new ModelRenderer(this, 14, 0);
-	    baseTop4.addBox(-0.5F, -8.4F, -1.5F, 1, 1, 4);
-	    baseTop4.setRotationPoint(0F, 0F, 0F);
-	    baseTop4.setTextureSize(64, 32);
-	    baseTop4.mirror = true;
-	    setRotation(baseTop4, -0.122173F, 0F, 0F);
-	    baseSide1 = new ModelRenderer(this, 14, 0);
-	    baseSide1.addBox(-4.5F, -3.5F, -8.366667F, 1, 1, 11);
-	    baseSide1.setRotationPoint(0F, 0F, 0F);
-	    baseSide1.setTextureSize(64, 32);
-	    baseSide1.mirror = true;
-	    setRotation(baseSide1, -0.7853982F, 0F, 0F);
-	    baseSide2 = new ModelRenderer(this, 14, 0);
-	    baseSide2.addBox(3.5F, -3.5F, -8.366667F, 1, 1, 11);
-	    baseSide2.setRotationPoint(0F, 0F, 0F);
-	    baseSide2.setTextureSize(64, 32);
-	    baseSide2.mirror = true;
-	    setRotation(baseSide2, -0.7853982F, 0F, 0F);
-	    baseSide3 = new ModelRenderer(this, 1, 6);
-	    baseSide3.addBox(-4.4F, -3.4F, 3.4F, 1, 1, 5);
-	    baseSide3.setRotationPoint(0F, 0F, 0F);
-	    baseSide3.setTextureSize(64, 32);
-	    baseSide3.mirror = true;
-	    setRotation(baseSide3, 0.7853982F, 0F, 0F);
-	    baseSide4 = new ModelRenderer(this, 1, 6);
-	    baseSide4.addBox(3.4F, -3.4F, 3.4F, 1, 1, 5);
-	    baseSide4.setRotationPoint(0F, 0F, 0F);
-	    baseSide4.setTextureSize(64, 32);
-	    baseSide4.mirror = true;
-	    setRotation(baseSide4, 0.7853982F, 0F, 0F);
-	    baseBack1 = new ModelRenderer(this, 9, 7);
-	    baseBack1.addBox(2.6F, -1F, 3.5F, 2, 1, 1);
-	    baseBack1.setRotationPoint(0F, 0F, 0F);
-	    baseBack1.setTextureSize(64, 32);
-	    baseBack1.mirror = true;
-	    setRotation(baseBack1, 0F, 0F, 0F);
-	    baseBack2 = new ModelRenderer(this, 9, 7);
-	    baseBack2.addBox(-4.6F, -1F, 3.5F, 2, 1, 1);
-	    baseBack2.setRotationPoint(0F, 0F, 0F);
-	    baseBack2.setTextureSize(64, 32);
-	    baseBack2.mirror = true;
-	    setRotation(baseBack2, 0F, 0F, 0F);
-	    baseBack3 = new ModelRenderer(this, 28, 0);
-	    baseBack3.addBox(2.4F, -6.7F, 3.5F, 1, 8, 1);
-	    baseBack3.setRotationPoint(0F, 0F, 0F);
-	    baseBack3.setTextureSize(64, 32);
-	    baseBack3.mirror = false;
-	    setRotation(baseBack3, 0.0698132F, 0F, -0.4014257F);
-	    baseBack4 = new ModelRenderer(this, 28, 0);
-	    baseBack4.addBox(-3.4F, -6.7F, 3.5F, 1, 8, 1);
-	    baseBack4.setRotationPoint(0F, 0F, 0F);
-	    baseBack4.setTextureSize(64, 32);
-	    baseBack4.mirror = false;
-	    setRotation(baseBack4, 0.0698132F, 0F, 0.4014257F);
+	ModelRenderer baseTop1,baseTop2,baseTop3,baseTop4,baseSide1,baseSide2,baseSide3,baseSide4,baseBack1,baseBack2,baseBack3,baseBack4;
+	public boolean shouldFollowThePlayer=false,shouldFollowThePlayerMaster=false,shouldFollowThePlayerHasAMaster=false;
+	public ModelHelmet42(){
+		textureWidth = 38;
+		textureHeight = 12;
+		
+		baseTop1 = new ModelRenderer(this, 0, 0);
+		baseTop1.addBox(-1.5F, -8.5F, -4.5F, 3, 1, 4);
+		baseTop1.setRotationPoint(0F, 0F, 0F);
+		baseTop1.setTextureSize(64, 32);
+		baseTop1.mirror = true;
+		setRotation(baseTop1, 0F, 0F, 0F);
+		baseTop2 = new ModelRenderer(this, 16, 6);
+		baseTop2.addBox(-4.5F, -8.5F, -4.5F, 3, 1, 1);
+		baseTop2.setRotationPoint(0F, 0F, 0F);
+		baseTop2.setTextureSize(64, 32);
+		baseTop2.mirror = true;
+		setRotation(baseTop2, 0F, 0F, 0F);
+		baseTop3 = new ModelRenderer(this, 16, 6);
+		baseTop3.addBox(1.5F, -8.5F, -4.5F, 3, 1, 1);
+		baseTop3.setRotationPoint(0F, 0F, 0F);
+		baseTop3.setTextureSize(64, 32);
+		baseTop3.mirror = true;
+		setRotation(baseTop3, 0F, 0F, 0F);
+		baseTop4 = new ModelRenderer(this, 14, 0);
+		baseTop4.addBox(-0.5F, -8.4F, -1.5F, 1, 1, 4);
+		baseTop4.setRotationPoint(0F, 0F, 0F);
+		baseTop4.setTextureSize(64, 32);
+		baseTop4.mirror = true;
+		setRotation(baseTop4, -0.122173F, 0F, 0F);
+		baseSide1 = new ModelRenderer(this, 14, 0);
+		baseSide1.addBox(-4.5F, -3.5F, -8.366667F, 1, 1, 11);
+		baseSide1.setRotationPoint(0F, 0F, 0F);
+		baseSide1.setTextureSize(64, 32);
+		baseSide1.mirror = true;
+		setRotation(baseSide1, -0.7853982F, 0F, 0F);
+		baseSide2 = new ModelRenderer(this, 14, 0);
+		baseSide2.addBox(3.5F, -3.5F, -8.366667F, 1, 1, 11);
+		baseSide2.setRotationPoint(0F, 0F, 0F);
+		baseSide2.setTextureSize(64, 32);
+		baseSide2.mirror = true;
+		setRotation(baseSide2, -0.7853982F, 0F, 0F);
+		baseSide3 = new ModelRenderer(this, 1, 6);
+		baseSide3.addBox(-4.4F, -3.4F, 3.4F, 1, 1, 5);
+		baseSide3.setRotationPoint(0F, 0F, 0F);
+		baseSide3.setTextureSize(64, 32);
+		baseSide3.mirror = true;
+		setRotation(baseSide3, 0.7853982F, 0F, 0F);
+		baseSide4 = new ModelRenderer(this, 1, 6);
+		baseSide4.addBox(3.4F, -3.4F, 3.4F, 1, 1, 5);
+		baseSide4.setRotationPoint(0F, 0F, 0F);
+		baseSide4.setTextureSize(64, 32);
+		baseSide4.mirror = true;
+		setRotation(baseSide4, 0.7853982F, 0F, 0F);
+		baseBack1 = new ModelRenderer(this, 9, 7);
+		baseBack1.addBox(2.6F, -1F, 3.5F, 2, 1, 1);
+		baseBack1.setRotationPoint(0F, 0F, 0F);
+		baseBack1.setTextureSize(64, 32);
+		baseBack1.mirror = true;
+		setRotation(baseBack1, 0F, 0F, 0F);
+		baseBack2 = new ModelRenderer(this, 9, 7);
+		baseBack2.addBox(-4.6F, -1F, 3.5F, 2, 1, 1);
+		baseBack2.setRotationPoint(0F, 0F, 0F);
+		baseBack2.setTextureSize(64, 32);
+		baseBack2.mirror = true;
+		setRotation(baseBack2, 0F, 0F, 0F);
+		baseBack3 = new ModelRenderer(this, 28, 0);
+		baseBack3.addBox(2.4F, -6.7F, 3.5F, 1, 8, 1);
+		baseBack3.setRotationPoint(0F, 0F, 0F);
+		baseBack3.setTextureSize(64, 32);
+		baseBack3.mirror = false;
+		setRotation(baseBack3, 0.0698132F, 0F, -0.4014257F);
+		baseBack4 = new ModelRenderer(this, 28, 0);
+		baseBack4.addBox(-3.4F, -6.7F, 3.5F, 1, 8, 1);
+		baseBack4.setRotationPoint(0F, 0F, 0F);
+		baseBack4.setTextureSize(64, 32);
+		baseBack4.mirror = false;
+		setRotation(baseBack4, 0.0698132F, 0F, 0.4014257F);
   }
   @Override
 public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5){
@@ -130,13 +130,13 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  }
 	  
 	  if(isSneak)yt = 1.0/16.0;
-	  GL11.glTranslated(0, yt, 0);
-	  GL11.glRotated(rotationZ, 0.0F, 0.0F, 1.0F);
-	  GL11.glRotated(rotationY, 0.0F, 1.0F, 0.0F);
-	  GL11.glRotated(rotationX, 1.0F, 0.0F, 0.0F);
+	  OpenGLM.translate(0, yt, 0);
+	  OpenGLM.rotate(rotationZ, 0.0F, 0.0F, 1.0F);
+	  OpenGLM.rotate(rotationY, 0.0F, 1.0F, 0.0F);
+	  OpenGLM.rotate(rotationX, 1.0F, 0.0F, 0.0F);
 	  {
 		  float p=1F/16F;
-		  GL11.glColor4f(color, color, color, 1);
+		  OpenGLM.color(color, color, color, 1);
 		  baseTop1.render(f5);
 		  baseTop2.render(f5);
 		  baseTop3.render(f5);
@@ -149,14 +149,14 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  baseBack2.render(f5);
 		  baseBack3.render(f5);
 		  baseBack4.render(f5);
-		  GL11.glColor4f(1, 1, 1, 1);
-		  GL11.glEnable(GL11.GL_BLEND);
-		  GL11.glDisable(GL11.GL_TEXTURE_2D);
-		  GL11.glDisable(GL11.GL_LIGHTING);
-		  GL11.glDepthMask(false);
-		  GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+		  OpenGLM.color(1, 1, 1, 1);
+		  OpenGLM.enableBlend();
+		  OpenGLM.disableTexture2D();
+		  OpenGLM.disableLighting();
+		  OpenGLM.depthMask(false);
+		  GL11U.blendFunc(2);
 		  Renderer.POS.beginQuads();
-		  GL11.glColor4f((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), (float)(0.7+UtilM.RF()*0.3));
+		  OpenGLM.color((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), (float)(0.7+UtilM.RF()*0.3));
 		  for(int a=0;a<2;a++){
 			  Renderer.POS.addVertex(-p*3+UtilM.CRandF(0.01), -p*4+UtilM.CRandF(0.01), -p*4.005);
 			  Renderer.POS.addVertex(-p*3+UtilM.CRandF(0.01), -p*3+UtilM.CRandF(0.01), -p*4.005);
@@ -170,7 +170,7 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  }
 		  Renderer.POS.draw();
 		  Renderer.POS.begin(GL11.GL_TRIANGLES);
-		  GL11.glColor4f((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), 1);
+		  OpenGLM.color((float)(0.8+UtilM.CRandF(0.4)), (float)(0.2+UtilM.CRandF(0.2)), (float)(0.1+UtilM.CRandF(0.2)), 1);
 		  for(int l=0;l<2+(isSneak?4:0);l++){
 			  double[] criclexyz=UtilM.createBallXYZ(0.5+UtilM.RF(), false);
 			  Renderer.POS.addVertex(criclexyz[0]+UtilM.CRandF(0.3), criclexyz[1]+UtilM.CRandF(0.3), criclexyz[2]+UtilM.CRandF(0.3));
@@ -179,15 +179,15 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  }
 		  
 		  Renderer.POS.draw();
-		  GL11.glEnable(GL11.GL_TEXTURE_2D);
-		  GL11.glEnable(GL11.GL_LIGHTING);
-		  GL11.glDisable(GL11.GL_BLEND);
-		  GL11.glDepthMask(true);
+		  OpenGLM.enableTexture2D();
+		  OpenGLM.enableLighting();
+		  OpenGLM.disableBlend();
+		  OpenGLM.depthMask(true);
 	  }
-	  GL11.glRotated(-rotationX, 1.0F, 0.0F, 0.0F);
-	  GL11.glRotated(-rotationY, 0.0F, 1.0F, 0.0F);
-	  GL11.glRotated(-rotationZ, 0.0F, 0.0F, 1.0F);
-	  GL11.glTranslated(0, -yt, 0);
+	  OpenGLM.rotate(-rotationX, 1.0F, 0.0F, 0.0F);
+	  OpenGLM.rotate(-rotationY, 0.0F, 1.0F, 0.0F);
+	  OpenGLM.rotate(-rotationZ, 0.0F, 0.0F, 1.0F);
+	  OpenGLM.translate(0, -yt, 0);
   }	
   
   private void setRotation(ModelRenderer model, float x, float y, float z){

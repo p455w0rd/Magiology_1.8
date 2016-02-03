@@ -4,17 +4,17 @@ import static com.magiology.client.gui.custom.hud.MainMenuUpdateNotificationHUD.
 import static com.magiology.core.MReference.*;
 import static com.magiology.handlers.web.MediaFireDownlader.*;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.File;
+import java.net.URL;
+import java.util.Scanner;
 
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 
 
 public class DownloadingHandler{
 	public static void downladAssets(){
 		new File(MODS_SUBFOLDER_WIN_GUI).mkdir();
-		downladAndName(MODS_SUBFOLDER_WIN_GUI,    "http://www.mediafire.com/listen/5psc9ipik0uk96y/Close.wav");
+		downladAndName(MODS_SUBFOLDER_WIN_GUI,	"http://www.mediafire.com/listen/5psc9ipik0uk96y/Close.wav");
 		downladAndName(MODS_SUBFOLDER_WIN_GUI,   "http://www.mediafire.com/listen/1u2c4h3sc5s9258/Loaded.wav");
 		downladAndName(MODS_SUBFOLDER_WIN_GUI,"http://www.mediafire.com/download/1cyu902d1kqb517/MagiZip.zip");
 		downladAndName(MODS_SUBFOLDER_WIN_GUI,   "http://www.mediafire.com/listen/azulbuu0x71gadg/OpenUp.wav");

@@ -1,15 +1,19 @@
 package com.magiology.mcobjects.blocks.fire;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class FireMatrixReceaver extends BlockContainer {
 
@@ -18,7 +22,7 @@ public class FireMatrixReceaver extends BlockContainer {
 		UtilM.getBlockMetadata((World) world, pos);
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 //		float p=1F/16F;
-//		if(BM==0)     setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
+//		if(BM==0)	 setBlockBounds(p*5, p*14,p*2, p*11, 1,   p*14);
 //		else if(BM==1)setBlockBounds(p*5, 0F,  p*2, p*11, p*2, p*14);
 //		else if(BM==2)setBlockBounds(p*2, p*5, p*14, p*14, 0.7F, 1);
 //		else if(BM==3)setBlockBounds(p*2, p*5, 0, p*14, 0.7F, p*2);
@@ -54,8 +58,8 @@ public class FireMatrixReceaver extends BlockContainer {
 		
 		
 		
-        return world.getBlockState(pos).withProperty(UtilM.META, side.getIndex()+v1);
-    }
+		return world.getBlockState(pos).withProperty(UtilM.META, side.getIndex()+v1);
+	}
 	
 	
 	@Override

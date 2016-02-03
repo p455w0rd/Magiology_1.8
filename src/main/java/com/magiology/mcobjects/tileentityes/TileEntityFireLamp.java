@@ -2,20 +2,28 @@ package com.magiology.mcobjects.tileentityes;
 
 import static com.magiology.api.power.SixSidedBoolean.Modifier.*;
 import static com.magiology.util.utilclasses.SideUtil.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
 
-import com.magiology.api.power.*;
-import com.magiology.mcobjects.effect.*;
+import com.magiology.api.power.SixSidedBoolean;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.effect.EntitySparkFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.effect.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
+import com.magiology.util.utilobjects.vectors.Pos;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityFireLamp extends TileEntityPowGen{
 	EffectRenderer efr=Get.Render.ER();

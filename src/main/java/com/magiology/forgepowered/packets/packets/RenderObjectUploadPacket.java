@@ -1,22 +1,28 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.*;
+import java.io.IOException;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import org.lwjgl.util.vector.*;
-
-import com.magiology.api.lang.*;
-import com.magiology.forgepowered.packets.core.*;
+import com.magiology.api.lang.ICommandInteract;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.mcobjects.tileentityes.hologram.Button;
+import com.magiology.mcobjects.tileentityes.hologram.Field;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.mcobjects.tileentityes.hologram.Slider;
+import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
+import com.magiology.mcobjects.tileentityes.hologram.TextBox;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class RenderObjectUploadPacket extends AbstractToServerMessage{
 	

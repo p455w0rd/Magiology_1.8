@@ -1,12 +1,11 @@
 package com.magiology.client.gui.gui;
 
-import net.minecraft.client.renderer.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
+import com.magiology.core.MReference;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
 
-import com.magiology.core.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class CraftingGridWOutput{
 	public static ResourceLocation txt=new ResourceLocation(MReference.MODID,"/textures/gui/CraftingGridWproduct.png");
@@ -25,13 +24,13 @@ public class CraftingGridWOutput{
 	}
 	protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 1F/102F;
-	     float f1 = 1F/56F;
-	     Renderer.POS_UV.beginQuads();
-	     Renderer.POS_UV.addVertex((x+0),(y+yp),0,((tx+0)*f),((yt+yp)*f1));
-	     Renderer.POS_UV.addVertex((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1));
-	     Renderer.POS_UV.addVertex((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1));
-	     Renderer.POS_UV.addVertex((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1));
-	     Renderer.POS_UV.draw();
+		 float f1 = 1F/56F;
+		 Renderer.POS_UV.beginQuads();
+		 Renderer.POS_UV.addVertex((x+0),(y+yp),0,((tx+0)*f),((yt+yp)*f1));
+		 Renderer.POS_UV.addVertex((x+xp),(y+yp),0,((tx+xp)*f),((yt+yp)*f1));
+		 Renderer.POS_UV.addVertex((x+xp),(y+0),0,((tx+xp)*f),((yt+0)*f1));
+		 Renderer.POS_UV.addVertex((x+0),(y+0),0,((tx+0)*f),((yt+0)*f1));
+		 Renderer.POS_UV.draw();
 	}
 	public void clear(){
 		product[0]=null;

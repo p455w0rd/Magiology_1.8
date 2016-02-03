@@ -1,18 +1,5 @@
 package com.magiology.client.render.itemrender;
 
-import java.text.*;
-
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.util.renderers.*;
-
 //public class ItemRendererPowerCounter implements IItemRenderer {
 //	WorldRenderer tess=TessUtil.getWR();
 //	FontRenderer fr=TessUtil.getFontRenderer();
@@ -83,18 +70,18 @@ import com.magiology.util.renderers.*;
 //			z+=1*(float)anim;
 //			scale=1.4F;
 //		}
-//		GL11.glPushMatrix();
-//		GL11.glEnable(GL11.GL_LIGHTING);
-//		GL11.glEnable(GL11.GL_CULL_FACE);
-//	    GL11.glTranslatef(x,y,z);
-//	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
-//	    GL11.glScalef(scale, scale, scale);
-//	    
+//		OpenGLM.pushMatrix();
+//		OpenGLM.enableLighting();
+//		OpenGLM.enableCull();
+//		OpenGLM.translate(x,y,z);
+//		OpenGLM.rotate(-xr, 1, 0, 0);OpenGLM.rotate(-yr, 0, 1, 0);OpenGLM.rotate(-zr, 0, 0, 1);
+//		OpenGLM.scale(scale, scale, scale);
+//		
 //		drawCore();
-//		GL11.glEnable(GL11.GL_LIGHTING);
+//		OpenGLM.enableLighting();
 //		drawText();
-//		GL11.glEnable(GL11.GL_LIGHTING);
-//		GL11.glPopMatrix();
+//		OpenGLM.enableLighting();
+//		OpenGLM.popMatrix();
 //	}
 //	public void drawText(){
 //		float x=p*4-0.0001F;
@@ -105,22 +92,22 @@ import com.magiology.util.renderers.*;
 //		float zr=90;
 //		float scale=0.0049F;
 //		
-//		GL11.glTranslatef(x,y,z);
-//	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
-//	    GL11.glScalef(scale, scale, scale);
+//		OpenGLM.translate(x,y,z);
+//		OpenGLM.rotate(-xr, 1, 0, 0);OpenGLM.rotate(-yr, 0, 1, 0);OpenGLM.rotate(-zr, 0, 0, 1);
+//		OpenGLM.scale(scale, scale, scale);
 //		
-//        GL11.glEnable(GL11.GL_TEXTURE_2D);
-//        String pauwa=Integer.toString(maxPB)+"/"+Integer.toString(currentP);
-//        double Precent=currentP!=maxPB?(powerBar*100>0?powerBar*100:0):100;
-//        DecimalFormat df = new DecimalFormat("###.##");
-//        String PrecentS=Precent<=0?(currentP>0?"Almost empty":"Empty"):(df.format(Precent)+"%");
-//        
-//        fr.drawString(pauwa, 0, 0, 11111);
-//        fr.drawString(PrecentS, 0, 10, 11111);
-//        fr.drawString(block, 0, 20, 11111);
-//        
-//        GL11.glRotatef(xr, 1, 0, 0);GL11.glRotatef(yr, 0, 1, 0);GL11.glRotatef(zr, 0, 0, 1);
-//	    GL11.glTranslatef(-x, -y, -z);
+//		OpenGLM.enableTexture2D();
+//		String pauwa=Integer.toString(maxPB)+"/"+Integer.toString(currentP);
+//		double Precent=currentP!=maxPB?(powerBar*100>0?powerBar*100:0):100;
+//		DecimalFormat df = new DecimalFormat("###.##");
+//		String PrecentS=Precent<=0?(currentP>0?"Almost empty":"Empty"):(df.format(Precent)+"%");
+//		
+//		fr.drawString(pauwa, 0, 0, 11111);
+//		fr.drawString(PrecentS, 0, 10, 11111);
+//		fr.drawString(block, 0, 20, 11111);
+//		
+//		OpenGLM.rotate(xr, 1, 0, 0);OpenGLM.rotate(yr, 0, 1, 0);OpenGLM.rotate(zr, 0, 0, 1);
+//		OpenGLM.translate(-x, -y, -z);
 //	}
 //
 //	public void drawCore(){

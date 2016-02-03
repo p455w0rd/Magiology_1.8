@@ -1,13 +1,15 @@
 package com.magiology.mcobjects.items;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.util.*;
-import net.minecraftforge.common.util.*;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 
-import com.magiology.mcobjects.items.upgrades.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.IChatComponent;
+import net.minecraftforge.common.util.Constants;
 
 public class ItemContainer extends Item implements IInventory{
 	

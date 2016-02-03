@@ -1,17 +1,17 @@
 package com.magiology.client.gui.guiutil.gui.buttons;
 
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-
-import org.lwjgl.input.*;
+import org.lwjgl.input.Mouse;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 
 public class CleanButton extends GuiButton implements Updateable{
 	
@@ -31,43 +31,43 @@ public class CleanButton extends GuiButton implements Updateable{
 	
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY){
-        if(!this.visible)return;
-        this.mouseDragged(mc, mouseX, mouseY);
-        this.hovered=mouseX>=this.xPosition&&mouseY>=this.yPosition&&mouseX<this.xPosition+this.width&&mouseY<this.yPosition+this.height;
-        this.getHoverState(this.hovered);
-        GL11U.setUpOpaqueRendering(1);
-        ColorF color=U.calculateRenderColor(prevColor, this.color).mul(highlight.getPoint()+1);
-        if(!enabled)color=color.mix(color.blackNWhite(),1,2);
-        GL11U.glColor(color);
-        GL11U.texture(false);
-        this.drawTexturedModalRect(xPosition, yPosition, 0, 0, width, height);
-        GL11U.glColor(color.mix(new ColorF(0,0,0,color.a), 1,1.2F));
-        Renderer.LINES.begin();
-        
-        if(enabledOutline[0]){
-        	Renderer.LINES.addVertex(xPosition,       yPosition, 0);
-        	Renderer.LINES.addVertex(xPosition+width, yPosition, 0);
-        }
-        if(enabledOutline[1]){
-        	Renderer.LINES.addVertex(xPosition, yPosition,        0);
-        	Renderer.LINES.addVertex(xPosition, yPosition+height, 0);
-        }
-        if(enabledOutline[2]){
-        	Renderer.LINES.addVertex(xPosition+width, yPosition,        0);
-        	Renderer.LINES.addVertex(xPosition+width, yPosition+height, 0);
-        }
-        if(enabledOutline[3]){
-        	Renderer.LINES.addVertex(xPosition,       yPosition+height, 0);
-        	Renderer.LINES.addVertex(xPosition+width, yPosition+height, 0);
-        }
-        
-        Renderer.LINES.draw();
-        
-        GL11U.texture(true);
-        
-        this.drawCenteredString(Font.FR(), this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, color.mix(ColorF.WHITE,1F,1.5F).toCode());
-        GL11U.endOpaqueRendering();
-    }
+		if(!this.visible)return;
+		this.mouseDragged(mc, mouseX, mouseY);
+		this.hovered=mouseX>=this.xPosition&&mouseY>=this.yPosition&&mouseX<this.xPosition+this.width&&mouseY<this.yPosition+this.height;
+		this.getHoverState(this.hovered);
+		GL11U.setUpOpaqueRendering(1);
+		ColorF color=U.calculateRenderColor(prevColor, this.color).mul(highlight.getPoint()+1);
+		if(!enabled)color=color.mix(color.blackNWhite(),1,2);
+		GL11U.glColor(color);
+		GL11U.texture(false);
+		this.drawTexturedModalRect(xPosition, yPosition, 0, 0, width, height);
+		GL11U.glColor(color.mix(new ColorF(0,0,0,color.a), 1,1.2F));
+		Renderer.LINES.begin();
+		
+		if(enabledOutline[0]){
+			Renderer.LINES.addVertex(xPosition,	   yPosition, 0);
+			Renderer.LINES.addVertex(xPosition+width, yPosition, 0);
+		}
+		if(enabledOutline[1]){
+			Renderer.LINES.addVertex(xPosition, yPosition,		0);
+			Renderer.LINES.addVertex(xPosition, yPosition+height, 0);
+		}
+		if(enabledOutline[2]){
+			Renderer.LINES.addVertex(xPosition+width, yPosition,		0);
+			Renderer.LINES.addVertex(xPosition+width, yPosition+height, 0);
+		}
+		if(enabledOutline[3]){
+			Renderer.LINES.addVertex(xPosition,	   yPosition+height, 0);
+			Renderer.LINES.addVertex(xPosition+width, yPosition+height, 0);
+		}
+		
+		Renderer.LINES.draw();
+		
+		GL11U.texture(true);
+		
+		this.drawCenteredString(Font.FR(), this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, color.mix(ColorF.WHITE,1F,1.5F).toCode());
+		GL11U.endOpaqueRendering();
+	}
 	
 	@Override
 	public void update(){

@@ -1,15 +1,47 @@
 package com.magiology.windowsgui;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
-import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.core.*;
-import com.magiology.io.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.io.IOReadableMap;
+import com.magiology.io.ZipManager;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 
 public class ModInfoGUI extends JFrame{
 	JTextField item1;
@@ -61,12 +93,12 @@ public class ModInfoGUI extends JFrame{
 		setContentPane(visual);
 		//right
 		layout.setAlignment(FlowLayout.RIGHT);
-	    setLayout(layout);
-	    up=new JButton("",imageIcons[3]);
-	    down=new JButton("",imageIcons[5]);
+		setLayout(layout);
+		up=new JButton("",imageIcons[3]);
+		down=new JButton("",imageIcons[5]);
 		//left
 		layout.setAlignment(FlowLayout.LEFT);
-	    setLayout(layout);
+		setLayout(layout);
 		setResizable(false);
 		addLine(newLine("STARTED LOADING "+MReference.MODID.toUpperCase(), new Font(Font.SANS_SERIF, Font.BOLD+Font.ITALIC,15),Color.RED));
 		

@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects.vectors;
 
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 
 public class Plane{
 	public Vec3M q,r,s,normal;
@@ -10,5 +10,5 @@ public class Plane{
 		this.r=r;
 		this.s=s;
 		normal=UtilM.getNormal(q, r, s);
-    }
+	}
 }

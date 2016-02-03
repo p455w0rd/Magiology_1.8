@@ -1,28 +1,33 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Color;
+import java.io.IOException;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.custom.guiparticels.*;
-import com.magiology.client.gui.guiutil.gui.buttons.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.forgepowered.packets.packets.generic.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.container.SmartCrafterContainer;
+import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
+import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.events.TickEvents;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
+import com.magiology.mcobjects.effect.GuiParticle;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiSC extends GuiContainerAndGuiParticles{
 	
@@ -32,7 +37,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	public int listOffset;
 	public final TileEntitySmartCrafter tileCB;
 	EntityPlayer player;
-    GuiTextField txt1,txt2;
+	GuiTextField txt1,txt2;
 	int side=0;
 	public GuiSC(EntityPlayer player,TileEntitySmartCrafter tileCB,int side){
 		super(new SmartCrafterContainer(player,tileCB,side));
@@ -69,36 +74,36 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		prevMouseX=mouseX;
 		prevMouseY=mouseY;
 		FontRenderer fr=TessUtil.getFontRenderer();
-		GL11.glTranslated(-guiLeft, -guiTop, 0);
+		OpenGLM.translate(-guiLeft, -guiTop, 0);
 		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(addButton.xPosition, addButton.yPosition, 93, 167, 9, 9);
 		{
-			GL11.glPushMatrix();
+			OpenGLM.pushMatrix();
 			GuiButton button=(GuiButton)buttonList.get(5);
 			int l=14737632;
 			if(button.mousePressed(mc,x,y))l=16777120;
-			GL11.glTranslated(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
+			OpenGLM.translate(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
 			GL11U.glRotate(0, 0, 90);
-			GL11.glTranslated(3, -4, 1);
+			OpenGLM.translate(3, -4, 1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, l);
-			GL11.glTranslated(1, -1, -1);
+			OpenGLM.translate(1, -1, -1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, Color.DARK_GRAY.hashCode());
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}{
-			GL11.glPushMatrix();
+			OpenGLM.pushMatrix();
 			GuiButton button=(GuiButton)buttonList.get(6);
 			int l=14737632;
 			if(button.mousePressed(mc,x,y))l=16777120;
-			GL11.glTranslated(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
+			OpenGLM.translate(button.xPosition+button.width/2, button.yPosition+(button.height-8)/2, 0);
 			GL11U.glRotate(0, 0, -90);
-			GL11.glTranslated(-3, -4, 1);
+			OpenGLM.translate(-3, -4, 1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, l);
-			GL11.glTranslated(-1, 1, -1);
+			OpenGLM.translate(-1, 1, -1);
 			drawCenteredStringShoadowless(fr, "<-", 0,0, Color.DARK_GRAY.hashCode());
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		this.renderParticles(RenderEvents.partialTicks);
-		GL11.glTranslated(guiLeft, guiTop, 0);
+		OpenGLM.translate(guiLeft, guiTop, 0);
 		
 	}
 	@Override
@@ -107,17 +112,17 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 //		this.drawTexturedModalRect(guiLeft, guiTop-66, 0, -32, xSize, 100);
-		GL11.glPushMatrix();
-		GL11.glTranslated(guiLeft, guiTop, 0);
-		GL11.glTranslatef(40, 10, 0);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(guiLeft, guiTop, 0);
+		OpenGLM.translate(40, 10, 0);
 		tileCB.wantedProducts[listOffset].render();
 		if(!txt1.isFocused())fontRendererObj.drawStringWithShadow(tileCB.wantedProducts[listOffset].ammountWanted+"", -15, 8, Color.WHITE.hashCode());
-		GL11.glColor4d(1, 1, 1, 1);
-		GL11.glTranslatef(0, 57, 0);
+		OpenGLM.color(1, 1, 1, 1);
+		OpenGLM.translate(0, 57, 0);
 		tileCB.wantedProducts[listOffset+1].render();
 		if(!txt2.isFocused())fontRendererObj.drawStringWithShadow(tileCB.wantedProducts[listOffset+1].ammountWanted+"", -15, 8, Color.WHITE.hashCode());
-		GL11.glColor4d(1, 1, 1, 1);
-		GL11.glPopMatrix();
+		OpenGLM.color(1, 1, 1, 1);
+		OpenGLM.popMatrix();
 		txt1.drawTextBox();
 		txt2.drawTextBox();
 	}
@@ -136,16 +141,16 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		buttonList.add(new GuiButton(7, guiLeft+152, guiTop+56-10, 20, 10, ""));
 		buttonList.add(new GuiButton(8, guiLeft+152, guiTop+81+20, 20, 10, ""));
 		
-        Keyboard.enableRepeatEvents(true);
+		Keyboard.enableRepeatEvents(true);
 		txt1 = new GuiTextField(0,fontRendererObj,  guiLeft+25,  guiTop+18, 56, 10);
 		txt1.setFocused(false);
-        txt1.setMaxStringLength(8);
-        txt1.setTextColor(Color.WHITE.hashCode());
+		txt1.setMaxStringLength(8);
+		txt1.setTextColor(Color.WHITE.hashCode());
 		txt1.setEnableBackgroundDrawing(false);
-        txt2 = new GuiTextField(0,fontRendererObj,  guiLeft+25,  guiTop+75, 56, 10);
-        txt2.setFocused(false);
-        txt2.setMaxStringLength(8);
-        txt2.setTextColor(Color.WHITE.hashCode());
+		txt2 = new GuiTextField(0,fontRendererObj,  guiLeft+25,  guiTop+75, 56, 10);
+		txt2.setFocused(false);
+		txt2.setMaxStringLength(8);
+		txt2.setTextColor(Color.WHITE.hashCode());
 		txt2.setEnableBackgroundDrawing(false);
 	}
 	
@@ -183,7 +188,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 			}
 		}
 		
-    }
+	}
 	@Override
 	protected void mouseClicked(int x, int y, int id) throws IOException{
 		boolean prevTxt1State=txt1.isFocused(),prevTxt2State=txt2.isFocused();
@@ -207,7 +212,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		}
 		if(!prevTxt1State&&txt1State)if(tileCB.wantedProducts[listOffset  ].ammountWanted!=0)txt1.setText(tileCB.wantedProducts[listOffset  ].ammountWanted+"");
 		if(!prevTxt2State&&txt2State)if(tileCB.wantedProducts[listOffset+1].ammountWanted!=0)txt2.setText(tileCB.wantedProducts[listOffset+1].ammountWanted+"");
-    }
+	}
 	
 	@Override
 	public void update(){
@@ -241,8 +246,8 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 	}
 	@Override
 	public void onGuiClosed(){
-        super.onGuiClosed();
-        Keyboard.enableRepeatEvents(false);
+		super.onGuiClosed();
+		Keyboard.enableRepeatEvents(false);
 	}
 	@Override
 	protected void actionPerformed(GuiButton b){
@@ -283,7 +288,7 @@ public class GuiSC extends GuiContainerAndGuiParticles{
 		}
 	}
 	public void drawCenteredStringShoadowless(FontRenderer p_73732_1_, String p_73732_2_, int p_73732_3_, int p_73732_4_, int p_73732_5_)
-    {
-        p_73732_1_.drawString(p_73732_2_, p_73732_3_ - p_73732_1_.getStringWidth(p_73732_2_) / 2, p_73732_4_, p_73732_5_);
-    }
+	{
+		p_73732_1_.drawString(p_73732_2_, p_73732_3_ - p_73732_1_.getStringWidth(p_73732_2_) / 2, p_73732_4_, p_73732_5_);
+	}
 }

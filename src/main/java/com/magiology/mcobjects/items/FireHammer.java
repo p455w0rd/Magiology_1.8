@@ -1,21 +1,30 @@
 package com.magiology.mcobjects.items;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.api.power.ISidedPower;
+import com.magiology.api.power.PowerCore;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
+import com.magiology.registry.WrenchRegistry;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 
-import com.magiology.api.power.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.registry.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.World;
 
 public class FireHammer extends ItemM{
 	
@@ -25,7 +34,7 @@ public class FireHammer extends ItemM{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-	    itemStack.setTagCompound(new NBTTagCompound());
+		itemStack.setTagCompound(new NBTTagCompound());
 	}
 	
 	@Override
@@ -36,7 +45,7 @@ public class FireHammer extends ItemM{
 					 EnumChatFormatting.BLUE+" pos.getZ()="+EnumChatFormatting.AQUA+Integer.toString(itemStack.getTagCompound().getInteger("zC"))
 					 );
 		}
-    	
+		
 	}
 	
 	@Override
@@ -140,32 +149,32 @@ public class FireHammer extends ItemM{
 		
 		if(isit==true){
 			if(side.getIndex()==0){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,-0.02,0);
+				if(inorout==1)	 world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,-0.02,0);
 				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,0.02,0);
 				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMinY(),pos.getZ()+0.5, 0,0,0);
 			}
 			else if(side.getIndex()==1){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0.02,0);
+				if(inorout==1)	 world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0.02,0);
 				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,-0.02,0);
 				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+UtilM.getBlock(world, pos).getBlockBoundsMaxY(),pos.getZ()+0.5, 0,0,0);
 			}
 			else if(side.getIndex()==2){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,-0.02);
+				if(inorout==1)	 world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,-0.02);
 				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,0.02);
 				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMinZ(), 0,0,0);
 			}
 			else if(side.getIndex()==3){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0.02);
+				if(inorout==1)	 world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0.02);
 				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,-0.02);
 				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+UtilM.getBlock(world, pos).getBlockBoundsMaxZ(), 0,0,0);
 			}
 			else if(side.getIndex()==4){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
+				if(inorout==1)	 world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
 				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
 				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMinX(),pos.getY()+0.5,pos.getZ()+0.5, 0,0,0);
 			}
 			else if(side.getIndex()==5){
-				if(inorout==1)     world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
+				if(inorout==1)	 world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0.02,0,0);
 				else if(inorout==0)world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, -0.02,0,0);
 				else world.spawnParticle(EnumParticleTypes.FLAME, pos.getX()+UtilM.getBlock(world, pos).getBlockBoundsMaxX(),pos.getY()+0.5,pos.getZ()+0.5, 0,0,0);
 			}

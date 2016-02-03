@@ -1,18 +1,22 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import net.minecraft.block.*;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3;
+import net.minecraft.util.Vec3i;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockPosM extends BlockPos{
 
-    public static final BlockPosM ORIGIN = new BlockPosM();
+	public static final BlockPosM ORIGIN = new BlockPosM();
 	public BlockPosM(){
 		super(0,0,0);
 	}
@@ -81,9 +85,9 @@ public class BlockPosM extends BlockPos{
 	}
 	public int getRedstonePower(IBlockAccess world, EnumFacing side){
 		if(world instanceof World)((World)world).getRedstonePower(this, side);
-        IBlockState iblockstate = world.getBlockState(this);
-        Block block = iblockstate.getBlock();
-        return block.shouldCheckWeakPower(world, this, side)?getStrongPower(world):block.getWeakPower(world, this, iblockstate, side);
+		IBlockState iblockstate = world.getBlockState(this);
+		Block block = iblockstate.getBlock();
+		return block.shouldCheckWeakPower(world, this, side)?getStrongPower(world):block.getWeakPower(world, this, iblockstate, side);
 	}
 	private int getStrongPower(IBlockAccess world){
 		byte b0=0;

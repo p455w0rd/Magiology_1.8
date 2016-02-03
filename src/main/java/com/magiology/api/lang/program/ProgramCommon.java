@@ -1,9 +1,11 @@
 package com.magiology.api.lang.program;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.ObjectHolder;
 
 
 public class ProgramCommon{

@@ -1,16 +1,17 @@
 package com.magiology.mcobjects.items;
 
-import java.util.*;
-
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.potion.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import java.util.List;
 
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableItem;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 public class FireBarrel extends UpgradeableItem{
 	
 	public FireBarrel(Container container){
@@ -64,8 +65,8 @@ public class FireBarrel extends UpgradeableItem{
 		
 		
 		
-        return result;
-    }
+		return result;
+	}
 	
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean is){

@@ -1,12 +1,13 @@
 package com.magiology.util.utilclasses;
 
-import java.util.*;
-
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import java.util.Random;
 
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 
 public class SideUtil{
 	
@@ -60,7 +61,7 @@ public class SideUtil{
 										||side[4]==side[3]);
 		do{side[5]=rand.nextInt(6);}while(side[5]==side[0]
 										||side[5]==side[1]
-									    ||side[5]==side[2]
+										||side[5]==side[2]
 										||side[5]==side[3]
 										||side[5]==side[4]);
 		return side;

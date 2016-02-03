@@ -1,13 +1,12 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.render.Textures;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+
+import net.minecraft.tileentity.TileEntity;
 
 public class RenderFireExhaust extends TileEntitySpecialRendererM {
 	
@@ -19,14 +18,14 @@ public class RenderFireExhaust extends TileEntitySpecialRendererM {
 	
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-		GL11.glTranslated(x,y,z);
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		OpenGLM.translate(x,y,z);
+		OpenGLM.enableLighting();
+		OpenGLM.enableCull();
 
 				drawFireExhaust();
 				
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glTranslated(-x, -y, -z);
+		OpenGLM.enableLighting();
+		OpenGLM.translate(-x, -y, -z);
 	}
 	
 	public void drawFireExhaust(){

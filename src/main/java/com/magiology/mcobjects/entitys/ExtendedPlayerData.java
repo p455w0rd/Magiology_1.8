@@ -1,13 +1,14 @@
 package com.magiology.mcobjects.entitys;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.*;
-import net.minecraftforge.common.*;
+import com.magiology.forgepowered.packets.packets.SendPlayerDataPacket;
+import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraftforge.common.IExtendedEntityProperties;
 
 //props to coolAlias on mc forums for teaching me this! :D
 public class ExtendedPlayerData implements IExtendedEntityProperties{

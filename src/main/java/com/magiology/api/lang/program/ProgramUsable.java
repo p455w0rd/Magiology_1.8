@@ -1,18 +1,25 @@
 package com.magiology.api.lang.program;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.script.*;
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraftforge.fml.common.*;
-
-import com.magiology.api.lang.bridge.*;
+import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
+import com.magiology.api.lang.bridge.WorldWrapper;
 import com.magiology.io.WorldData.FileContent;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.Tracker;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
+
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Vec3i;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ProgramUsable{
 	

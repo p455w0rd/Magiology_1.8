@@ -1,19 +1,19 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
-
-import com.magiology.mcobjects.items.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
+import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class Button extends TextBox{
 	
@@ -39,11 +39,11 @@ public class Button extends TextBox{
 		GL11U.texture(false);
 		body.draw();
 		GL11U.texture(true);
-		GL11.glTranslatef(-size.x/2, -size.y/2, 0);
+		OpenGLM.translate(-size.x/2, -size.y/2, 0);
 		GL11U.glCulFace(false);
 		GL11U.glScale(-U.p);
 		GL11U.glScale(scale);
-		GL11.glTranslatef(-Font.FR().getStringWidth(txt)/2, -Font.FR().FONT_HEIGHT/2, 0);
+		OpenGLM.translate(-Font.FR().getStringWidth(txt)/2, -Font.FR().FONT_HEIGHT/2, 0);
 		Font.FR().drawString(txt, 0, 0, renderColor.mix(renderColor.negative(), 0.8F,1F).toCode());
 		GL11U.glCulFace(true);
 	}

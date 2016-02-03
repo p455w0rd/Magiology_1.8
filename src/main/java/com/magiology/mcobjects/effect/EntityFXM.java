@@ -1,18 +1,17 @@
 package com.magiology.mcobjects.effect;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Queue;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.vertex.*;
-import net.minecraft.entity.*;
-import net.minecraft.world.*;
-
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.ColorF;
+
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
 
 public class EntityFXM extends EntityFX{
 	
@@ -26,7 +25,7 @@ public class EntityFXM extends EntityFX{
 		this.motionX =xs;
 		this.motionY =ys;
 		this.motionZ =zs;
-    }
+	}
 	public EntityFXM(World w, double xp, double yp, double zp){
 		super(w, xp, yp, zp);
 	}
@@ -35,12 +34,12 @@ public class EntityFXM extends EntityFX{
 		par2=pa2;par3=pa3;par4=pa4;par5=pa5;par6=pa6;par7=pa7;
 		queuedRenders.add(this);
 
-//        Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
-//        Renderer.addVertexData((double)(f5 - p_180434_4_ * f4 - p_180434_7_ * f4), (double)(f6 - p_180434_5_ * f4), (double)(f7 - p_180434_6_ * f4 - p_180434_8_ * f4), (double)f1, (double)f3).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-//        Renderer.addVertexData((double)(f5 - p_180434_4_ * f4 + p_180434_7_ * f4), (double)(f6 + p_180434_5_ * f4), (double)(f7 - p_180434_6_ * f4 + p_180434_8_ * f4), (double)f1, (double)f2).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-//        Renderer.addVertexData((double)(f5 + p_180434_4_ * f4 + p_180434_7_ * f4), (double)(f6 + p_180434_5_ * f4), (double)(f7 + p_180434_6_ * f4 + p_180434_8_ * f4), (double)f, (double)f2).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-//        Renderer.addVertexData((double)(f5 + p_180434_4_ * f4 - p_180434_7_ * f4), (double)(f6 - p_180434_5_ * f4), (double)(f7 + p_180434_6_ * f4 - p_180434_8_ * f4), (double)f, (double)f3).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
-//        Renderer.draw();
+//		Renderer.begin(7,DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+//		Renderer.addVertexData((double)(f5 - p_180434_4_ * f4 - p_180434_7_ * f4), (double)(f6 - p_180434_5_ * f4), (double)(f7 - p_180434_6_ * f4 - p_180434_8_ * f4), (double)f1, (double)f3).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+//		Renderer.addVertexData((double)(f5 - p_180434_4_ * f4 + p_180434_7_ * f4), (double)(f6 + p_180434_5_ * f4), (double)(f7 - p_180434_6_ * f4 + p_180434_8_ * f4), (double)f1, (double)f2).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+//		Renderer.addVertexData((double)(f5 + p_180434_4_ * f4 + p_180434_7_ * f4), (double)(f6 + p_180434_5_ * f4), (double)(f7 + p_180434_6_ * f4 + p_180434_8_ * f4), (double)f, (double)f2).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+//		Renderer.addVertexData((double)(f5 + p_180434_4_ * f4 - p_180434_7_ * f4), (double)(f6 - p_180434_5_ * f4), (double)(f7 + p_180434_6_ * f4 - p_180434_8_ * f4), (double)f, (double)f3).setColor(this.particleRed, this.particleGreen, this.particleBlue, this.particleAlpha).lightmap(j, k).endVertex();
+//		Renderer.draw();
 	}
 	public static void renderBufferedParticle(){
 		for(EntityFXM particle:queuedRenders)particle.render();
@@ -51,28 +50,28 @@ public class EntityFXM extends EntityFX{
 	}
 	public void renderStandardParticle(float par2, float par3, float par4, float par5, float par6, float par7, float Scale,boolean draw){
 		
-    	float PScale = 0.01F*this.particleScale;
-    	float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
-    	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
-    	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-        int i = this.getBrightnessForRender(par2);
-        int j = i >> 16 & 65535;
-        int k = i & 65535;
-        
-        ColorF color=this.color==null?new ColorF(particleRed, particleGreen, particleBlue, particleAlpha):this.color;
-        if(draw){
-        	Renderer.PARTICLE.beginQuads();
-        	Renderer.PARTICLE.addVertex((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0, color, j, k);
-        	Renderer.PARTICLE.addVertex((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0, color, j, k);
-        	Renderer.PARTICLE.addVertex((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1, color, j, k);
-        	Renderer.PARTICLE.addVertex((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1, color, j, k);
-        	Renderer.PARTICLE.draw();
-        }else{
-        	Renderer.PARTICLE.addVertex((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0, color, j, k);
-        	Renderer.PARTICLE.addVertex((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0, color, j, k);
-        	Renderer.PARTICLE.addVertex((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1, color, j, k);
-        	Renderer.PARTICLE.addVertex((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1, color, j, k);
-        }
+		float PScale = 0.01F*this.particleScale;
+		float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
+		float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
+		float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
+		int i = this.getBrightnessForRender(par2);
+		int j = i >> 16 & 65535;
+		int k = i & 65535;
+		
+		ColorF color=this.color==null?new ColorF(particleRed, particleGreen, particleBlue, particleAlpha):this.color;
+		if(draw){
+			Renderer.PARTICLE.beginQuads();
+			Renderer.PARTICLE.addVertex((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0, color, j, k);
+			Renderer.PARTICLE.addVertex((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0, color, j, k);
+			Renderer.PARTICLE.addVertex((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1, color, j, k);
+			Renderer.PARTICLE.addVertex((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1, color, j, k);
+			Renderer.PARTICLE.draw();
+		}else{
+			Renderer.PARTICLE.addVertex((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale), 0, 0, color, j, k);
+			Renderer.PARTICLE.addVertex((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale), 1, 0, color, j, k);
+			Renderer.PARTICLE.addVertex((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale), 1, 1, color, j, k);
+			Renderer.PARTICLE.addVertex((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale), 0, 1, color, j, k);
+		}
 	}
 	@Override
 	public int getFXLayer(){return 3;}

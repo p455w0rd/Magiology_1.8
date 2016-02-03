@@ -1,15 +1,15 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.awt.*;
+import java.awt.Color;
 
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.core.*;
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.util.renderers.*;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
+
+import net.minecraft.util.ResourceLocation;
 
 public class SoulFlameHUD extends HUD{
 	public static SoulFlameHUD instance=new SoulFlameHUD();
@@ -31,7 +31,7 @@ public class SoulFlameHUD extends HUD{
 		soulFlame=data.soulFlame;
 		TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/gui/fp/soulFlame.png"));
 		GL11U.setUpOpaqueRendering(1);
-		GL11.glTranslatef(0, 10, 0);
+		OpenGLM.translate(0, 10, 0);
 		renderSlider();
 		renderMain();
 		renderFire();
@@ -43,18 +43,18 @@ public class SoulFlameHUD extends HUD{
 	}
 	private void renderSlider(){
 		float buffer=(float)soulFlame/(float)maxSoulFlame,alpha=(float)(soulFlame+maxSoulFlame*0.3)/maxSoulFlame;
-		GL11.glColor4d(1, 1, 1, 0.7*alpha);
+		OpenGLM.color(1, 1, 1, 0.7*alpha);
 		drawRect(pngW, pngH, 10, 1+44-44*buffer, 28, 44-44*buffer, 13, 44*buffer+1);
-		GL11.glColor4d(1, 1, 1, 1);
+		OpenGLM.color(1, 1, 1, 1);
 	}
 	private void renderFire(){
 		long time=player.worldObj.getTotalWorldTime();
 		int speed=120,cut=(int)(time%speed);
 		if(cut>speed/2)cut=speed-cut;
 		float yellow=((float)cut/(float)speed)*2;
-		GL11.glColor4d(1, yellow, 0.4, 1);
+		OpenGLM.color(1, yellow, 0.4, 1);
 		drawRect(pngW, pngH, 13, 48, 29, 45+fireId*7, 7, 6);
-		GL11.glColor4d(1, 1, 1, 1);
+		OpenGLM.color(1, 1, 1, 1);
 	}
 	@Override
 	public void update(){

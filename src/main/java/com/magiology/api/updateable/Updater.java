@@ -1,6 +1,6 @@
 package com.magiology.api.updateable;
 
-import java.util.*;
+import java.util.Collection;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
 

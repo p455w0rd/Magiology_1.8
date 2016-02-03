@@ -1,19 +1,21 @@
 package com.magiology.client.render.aftereffect;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.nbt.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilclasses.math.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRendererBase{
 	private static EntityPlayer player=U.getMC().thePlayer;
@@ -36,10 +38,10 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 	public void render(){
 		if(progress.getPoint()<0.01)return;
 		//setup openGl
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		GL11U.glLighting(false);
 		//move to block
-		GL11.glTranslated(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5);
+		OpenGLM.translate(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5);
 		//move to side
 		
 		Vec3M off=getOffset();
@@ -69,17 +71,17 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		double time=UtilM.calculatePos(time360, time360+1);
 		
 		//rotation
-		GL11U.glRotate(0                     , -camYaw-80+80*point2,                   0);
-		GL11U.glRotate(camPich+120-120*point2, 0                   , Math.sin(time/20)*2);
+		GL11U.glRotate(0					 , -camYaw-80+80*point2,				   0);
+		GL11U.glRotate(camPich+120-120*point2, 0				   , Math.sin(time/20)*2);
 		GL11U.glScale(point2);
 		//center string
-		GL11.glTranslatef(-TessUtil.getFontRenderer().getStringWidth(text)/2, -TessUtil.getFontRenderer().FONT_HEIGHT/2, 0);
+		OpenGLM.translate(-TessUtil.getFontRenderer().getStringWidth(text)/2, -TessUtil.getFontRenderer().FONT_HEIGHT/2, 0);
 		
 		float r=0.8F,g=UtilM.fluctuateSmooth(20, 0)*0.15F+0.15F,b=0.1F;
 		//draw in front
 		TessUtil.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)).toCode());
 		//draw behind block
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		OpenGLM.disableDepth();
 		TessUtil.getFontRenderer().drawString(text, 0, 0, new ColorF(r,g,b,(point-0.4)*0.3).toCode());
 		VertexRenderer buff=TessUtil.getVB();
 		float expand=-1;
@@ -91,23 +93,23 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			buff.addVertexWithUV(expand+TessUtil.getFontRenderer().getStringWidth(text), -expand, -0.001, 0, 0);
 			expand++;
 		}
-		GL11.glColor4f(0, 0, 0, 0.06F);
+		OpenGLM.color(0, 0, 0, 0.06F);
 		GL11U.texture(false);
 		GL11U.blendFunc(1);
 		buff.setClearing(false);
 		buff.setDrawAsWire(true);
 		buff.draw();
 		buff.setDrawAsWire(false);
-		GL11.glColor4f(0, 0.4F+U.fluctuateSmooth(50, 0)*0.6F, 0.6F+U.fluctuateSmooth(97, 61)*0.4F, 0.01F);
+		OpenGLM.color(0, 0.4F+U.fluctuateSmooth(50, 0)*0.6F, 0.6F+U.fluctuateSmooth(97, 61)*0.4F, 0.01F);
 		buff.draw();
 		buff.setClearing(true);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		OpenGLM.enableDepth();
 		buff.draw();
 		GL11U.texture(true);
 		//reset openGl
 		GL11U.endOpaqueRendering();
 		GL11U.glLighting(true);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	
 	@Override

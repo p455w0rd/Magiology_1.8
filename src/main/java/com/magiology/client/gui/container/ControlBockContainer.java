@@ -1,11 +1,13 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+import com.magiology.client.gui.guiutil.container.ControlBockContainerSlot;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 
-import com.magiology.client.gui.guiutil.container.*;
-import com.magiology.mcobjects.tileentityes.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ControlBockContainer extends Container{
 	
@@ -47,13 +49,13 @@ public class ControlBockContainer extends Container{
 					slot.onSlotChange(itemstack1, itemstack);
 				}
 				if(itemstack1.stackSize==0)slot.putStack((ItemStack)null);
-				else                       slot.onSlotChanged();
+				else					   slot.onSlotChanged();
 				if(itemstack1.stackSize==itemstack.stackSize)return null;
 				slot.onPickupFromSlot(player, itemstack1);
 			}
 		}
-        
-        return itemstack;
-        
-    }
+		
+		return itemstack;
+		
+	}
 }

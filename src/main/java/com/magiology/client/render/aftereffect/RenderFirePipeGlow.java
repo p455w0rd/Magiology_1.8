@@ -1,16 +1,19 @@
 package com.magiology.client.render.aftereffect;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.core.init.MItems;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 
 public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	
@@ -29,16 +32,16 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 	public void render(){
 		float fc=UtilM.snap(PowerUtil.getPowerPrecentage(pipe), 0, 1);
 		if(fc>0.01){
-			GL11.glPushMatrix();
-			GL11.glTranslated(pipe.x(), pipe.y(), pipe.z());
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(pipe.x(), pipe.y(), pipe.z());
+			OpenGLM.disableTexture2D();
 			GL11U.setUpOpaqueRendering(1);
 			
 			double var1=UtilM.fluctuate(20,(pipe.x()+pipe.y()+pipe.z())*4),
 				   var2=UtilM.fluctuate(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
-			GL11.glColor4d(0.9, 0.1*var1, 0.15*var2, 0.6*fc*UtilM.calculatePos(prevAlpha, alpha));
-			GL11.glDepthMask(true);
+			OpenGLM.color(0.9, 0.1*var1, 0.15*var2, 0.6*fc*UtilM.calculatePos(prevAlpha, alpha));
+			OpenGLM.depthMask(true);
 			if(!pipe.isStrate(null)){
 				for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i].getMain()&&pipe.connections[i].willRender())drawConnectorGlow(pipe.connections[i].getFaceEF());
 				drawCoreGlow();
@@ -51,9 +54,9 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			}
 			
 			GL11U.endOpaqueRendering();
-			GL11.glColor4d(1,1,1,1);
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
-			GL11.glPopMatrix();
+			OpenGLM.color(1,1,1,1);
+			OpenGLM.enableTexture2D();
+			OpenGLM.popMatrix();
 		}
 	}
 	
@@ -64,8 +67,8 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		CubeModel
 		c5=new CubeModel(0,   p*9.5F,  p*9.5F, 1,   p*10F,  p*10F),
 		c6=new CubeModel(0,   p*9.5F,  p*6F,   1,   p*10,   p*6.5F),
-		c7=new CubeModel(0,   p*6,     p*9.5F, 1,   p*6.5F,  p*10F),
-		c8=new CubeModel(0,   p*6,     p*6F,   1,   p*6.5F,   p*6.5F);
+		c7=new CubeModel(0,   p*6,	 p*9.5F, 1,   p*6.5F,  p*10F),
+		c8=new CubeModel(0,   p*6,	 p*6F,   1,   p*6.5F,   p*6.5F);
 		c5.willSideRender[0]=c5.willSideRender[1]=
 		c6.willSideRender[0]=c6.willSideRender[1]=
 		c7.willSideRender[0]=c7.willSideRender[1]=
@@ -75,14 +78,14 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		strateCoreModel=buf.exportToNormalisedVertexBufferModel();
 	}
 	private void drawStrateCoreGlow(EnumFacing dir){
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if (dir.equals(EnumFacing.UP))GL11.glRotatef(-90, 0, 0, 1);
-		else if (dir.equals(EnumFacing.SOUTH))GL11.glRotatef(90, 0, 1, 0);
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(0.5F, 0.5F, 0.5F);
+		if (dir.equals(EnumFacing.UP))OpenGLM.rotate(-90, 0, 0, 1);
+		else if (dir.equals(EnumFacing.SOUTH))OpenGLM.rotate(90, 0, 1, 0);
+		OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 		if(strateCoreModel==null)generateModelStrateCoreGlow();
 		else strateCoreModel.draw();
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	
 	
@@ -92,8 +95,8 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		CubeModel 
 		c1=new CubeModel(p*3, p*10.5F, p*10.5F,p*5.5F,p*10,   p*10),
 		c2=new CubeModel(p*3, p*10.5F, p*6F,   p*5.5F,p*10,   p*5.5F),
-		c3=new CubeModel(p*3, p*6F,    p*10.5F,p*5.5F,p*5.5F, p*10),
-		c4=new CubeModel(p*3, p*6F,    p*6F,   p*5.5F,p*5.5F, p*5.5F),
+		c3=new CubeModel(p*3, p*6F,	p*10.5F,p*5.5F,p*5.5F, p*10),
+		c4=new CubeModel(p*3, p*6F,	p*6F,   p*5.5F,p*5.5F, p*5.5F),
 		c5=new CubeModel(0,   p*9.5F,  p*9.5F, p*3,   p*10F,  p*10F),
 		c6=new CubeModel(0,   p*9.5F,  p*6F,   p*3,   p*10,   p*6.5F),
 		c7=new CubeModel(0,   p*6,  p*9.5F, p*3,   p*6.5F,  p*10F),
@@ -124,12 +127,12 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			else if (dir.equals(EnumFacing.EAST)){rY=-180;}
 			else if (dir.equals(EnumFacing.NORTH)){rY=-90;}
 			
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(0.5F, 0.5F, 0.5F);
 			GL11U.glRotate(rX, rY, rZ);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+			OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 			connectorGlowModel.draw();
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 	}
 	
@@ -138,14 +141,14 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		buf.cleanUp();
 		CubeModel 
 		c1=new CubeModel(p*10,   p*10,   p*6,p*10.5F, p*10.5F, p*10),
-		c2=new CubeModel(p*10,   p*5.5F, p*6,p*10.5F, p*6F,    p*10),
-		c3=new CubeModel(p*5.5F, p*10,   p*6,p*6,     p*10.5F, p*10),
-		c4=new CubeModel(p*5.5F, p*5.5F, p*6,p*6,     p*6F,    p*10),
+		c2=new CubeModel(p*10,   p*5.5F, p*6,p*10.5F, p*6F,	p*10),
+		c3=new CubeModel(p*5.5F, p*10,   p*6,p*6,	 p*10.5F, p*10),
+		c4=new CubeModel(p*5.5F, p*5.5F, p*6,p*6,	 p*6F,	p*10),
 		
 		c5=new CubeModel(p*6F, p*10F,  p*5.5F, p*10F, p*10.5F, p*6F),
-		c6=new CubeModel(p*6F, p*5.5F, p*5.5F, p*10F, p*6F,    p*6F),
+		c6=new CubeModel(p*6F, p*5.5F, p*5.5F, p*10F, p*6F,	p*6F),
 		c7=new CubeModel(p*6F, p*10F,  p*10F,  p*10F, p*10.5F, p*10.5F),
-		c8=new CubeModel(p*6F, p*5.5F, p*10F,  p*10F, p*6F,    p*10.5F),
+		c8=new CubeModel(p*6F, p*5.5F, p*10F,  p*10F, p*6F,	p*10.5F),
 		
 		c9 =new CubeModel(p*10.5F,p*10F, p*10F, p*10F,  p*6F, p*10.5F),
 		c10=new CubeModel(p*6F,   p*10F, p*10F, p*5.5F, p*6F, p*10.5F),
@@ -153,13 +156,13 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		c12=new CubeModel(p*6F,   p*10F, p*5.5F, p*5.5F, p*6F, p*6),
 		
 		c13=new CubeModel(p*10F,  p*10, p*10,   p*10.5F,p*10.5F, p*10.5F),
-		c14=new CubeModel(p*5.5F, p*10, p*10,   p*6,    p*10.5F, p*10.5F),
-		c15=new CubeModel(p*5.5F, p*10, p*5.5F, p*6,    p*10.5F, p*6),
+		c14=new CubeModel(p*5.5F, p*10, p*10,   p*6,	p*10.5F, p*10.5F),
+		c15=new CubeModel(p*5.5F, p*10, p*5.5F, p*6,	p*10.5F, p*6),
 		c16=new CubeModel(p*10,   p*10, p*5.5F, p*10.5F,p*10.5F, p*6),
 		
 		c17=new CubeModel(p*10F,  p*5.5F, p*10,   p*10.5F,p*6, p*10.5F),
-		c18=new CubeModel(p*5.5F, p*5.5F, p*10,   p*6,    p*6, p*10.5F),
-		c19=new CubeModel(p*5.5F, p*5.5F, p*5.5F, p*6,    p*6, p*6),
+		c18=new CubeModel(p*5.5F, p*5.5F, p*10,   p*6,	p*6, p*10.5F),
+		c19=new CubeModel(p*5.5F, p*5.5F, p*5.5F, p*6,	p*6, p*6),
 		c20=new CubeModel(p*10,   p*5.5F, p*5.5F, p*10.5F,p*6, p*6);
 		c1.willSideRender[4]=c1.willSideRender[5]=
 		c2.willSideRender[4]=c2.willSideRender[5]=

@@ -1,6 +1,7 @@
 package com.magiology.util.utilclasses.math;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -488,9 +489,9 @@ public class ObjectCalculator{
 	static{
 		SupportedTypes=new HashSet<Class>();
 		SupportedTypes.add(Boolean.class);
-//      SupportedTypes.add(Character.class);
-//      SupportedTypes.add(Byte.class);
-//      SupportedTypes.add(Short.class);
+//	  SupportedTypes.add(Character.class);
+//	  SupportedTypes.add(Byte.class);
+//	  SupportedTypes.add(Short.class);
 		SupportedTypes.add(Integer.class);
 		SupportedTypes.add(Long.class);
 		SupportedTypes.add(Float.class);
@@ -501,10 +502,10 @@ public class ObjectCalculator{
 		SupportedTypes.add(new float[0].getClass());
 		SupportedTypes.add(new double[0].getClass());
 		SupportedTypes.add(new String[0].getClass());
-//      SupportedTypes.add(Void.class);
+//	  SupportedTypes.add(Void.class);
 	}
 	
 	private static boolean isSupported(Class clazz){
-        return SupportedTypes.contains(clazz);
-    }
+		return SupportedTypes.contains(clazz);
+	}
 }

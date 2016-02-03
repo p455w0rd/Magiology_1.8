@@ -1,9 +1,9 @@
 package com.magiology.handlers;
 
-import net.minecraft.entity.player.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.forgepowered.events.GenericPacketEvents;
 
-import com.magiology.forgepowered.events.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class GenericPacketEventHandler{
 	public static GenericPacketEventHandler instance=new GenericPacketEventHandler();

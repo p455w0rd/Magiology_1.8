@@ -1,13 +1,13 @@
 package com.magiology.mcobjects.entitys;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 
-import net.minecraft.entity.player.*;
-import net.minecraftforge.common.util.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.util.utilclasses.UtilM;
+import com.mojang.authlib.GameProfile;
 
-import com.magiology.util.utilclasses.*;
-import com.mojang.authlib.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class ClientFakePlayer extends EntityPlayer {
 	

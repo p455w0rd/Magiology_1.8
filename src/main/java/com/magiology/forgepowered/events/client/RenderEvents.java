@@ -3,35 +3,51 @@ package com.magiology.forgepowered.events.client;
 import static com.magiology.util.utilclasses.FontEffectUtil.*;
 import static org.lwjgl.opengl.GL11.*;
 
-import java.text.*;
-import java.util.*;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import net.minecraft.block.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.tileentity.*;
-import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
-import net.minecraftforge.event.entity.player.*;
-import net.minecraftforge.fml.common.eventhandler.*;
+import org.lwjgl.opengl.GL12;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.power.*;
-import com.magiology.client.gui.custom.hud.*;
-import com.magiology.client.render.aftereffect.*;
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.entitys.*;
+import com.magiology.api.power.PowerCore;
+import com.magiology.client.gui.custom.hud.FakeMessageHUD;
+import com.magiology.client.gui.custom.hud.HUD;
+import com.magiology.client.render.aftereffect.AfterRenderRenderer;
+import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.core.init.MItems;
+import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.EntityPosAndBB;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderHandEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RenderEvents{
 	public static List<AfterRenderRenderer> universalRender=new ArrayList<AfterRenderRenderer>();
@@ -47,9 +63,9 @@ public class RenderEvents{
 		FPGui.add(gui);
 	}
 	public void renderEffects(){
-        glEnable(GL_COLOR_MATERIAL);
-        RenderHelper.enableStandardItemLighting();
-        //------------------
+		glEnable(GL_COLOR_MATERIAL);
+		RenderHelper.enableStandardItemLighting();
+		//------------------
 		AfterRenderRenderer currentRender;
 		for(int i=0;i<universalRender.size();i++){
 			currentRender=universalRender.get(i);
@@ -62,11 +78,11 @@ public class RenderEvents{
 			}
 		}
 		//------------------
-        RenderHelper.disableStandardItemLighting();
-        glDisable(GL12.GL_RESCALE_NORMAL);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        glDisable(GL_TEXTURE_2D);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+		RenderHelper.disableStandardItemLighting();
+		glDisable(GL12.GL_RESCALE_NORMAL);
+		OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+		glDisable(GL_TEXTURE_2D);
+		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
 	}
 	
 	public static LongAfterRenderRenderer spawnLARR(Object object){
@@ -125,11 +141,11 @@ public class RenderEvents{
 		}
 		
 		float playerOffsetX=-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*e.partialTicks),playerOffsetY=-(float)(player.lastTickPosY+(player.posY-player.lastTickPosY)*e.partialTicks),playerOffsetZ=-(float)(player.lastTickPosZ+(player.posZ-player.lastTickPosZ)*e.partialTicks);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(playerOffsetX, playerOffsetY, playerOffsetZ);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(playerOffsetX, playerOffsetY, playerOffsetZ);
 		
 		this.renderEffects();
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
 		universalRender.clear();
 		GL11U.endOpaqueRendering();
@@ -140,23 +156,23 @@ public class RenderEvents{
 		ScaledResolution res=e.resolution;
 		EntityPlayer player=UtilM.getThePlayer();
 		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), RenderEvents.partialTicks);
-		GL11.glPushMatrix();
-		GL11.glTranslated(0, 0, -10);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(0, 0, -10);
 		for(int a=0;a<FPGui.size();a++){
 			HUD gui=FPGui.get(a);
-			GL11.glPushMatrix();
+			OpenGLM.pushMatrix();
 			gui.player=player;
 			gui.render(res.getScaledWidth(), res.getScaledHeight(), RenderEvents.partialTicks);
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		GL11U.glBlend(true);
 	}
 
-    private float f1,f2,f3,f4,f5,f6,f7,f8;
+	private float f1,f2,f3,f4,f5,f6,f7,f8;
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event){
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		EntityPlayer player=event.entityPlayer;
 		if(UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getMainModel().aimedBow=true;
 		
@@ -165,33 +181,33 @@ public class RenderEvents{
 			float rotation=0;
 			if(data!=null)rotation=UtilM.calculatePos(data.prevPlayerAngle, data.playerAngle);
 			GL11U.glRotate(0, -player.rotationYaw, 0);
-			GL11.glTranslated(0,-player.height+player.width/2, 0);
+			OpenGLM.translate(0,-player.height+player.width/2, 0);
 			GL11U.glRotate(rotation,0,0);
-			GL11.glTranslated(0, player.height-player.width/2, 0);
+			OpenGLM.translate(0, player.height-player.width/2, 0);
 			
-	        f1=player.renderYawOffset;
-	        f2=player.prevRenderYawOffset;
-	        
-	        f3=player.rotationYaw;
-	        f4=player.prevRotationYaw;
-	        
-	        f5=player.rotationPitch;
-	        f6=player.prevRotationPitch;
-	        
-	        f7=player.rotationYawHead;
-	        f8=player.prevRotationYawHead;
-	        
-	        player.renderYawOffset=0;
-	        player.prevRenderYawOffset=0;
-	        
-	        player.rotationYaw=0;
-	        player.prevRotationYaw=0;
-	        
-	        player.rotationPitch-=rotation;
-	        player.prevRotationPitch-=rotation;
-	        
-	        player.rotationYawHead=0;
-	        player.prevRotationYawHead=0;
+			f1=player.renderYawOffset;
+			f2=player.prevRenderYawOffset;
+			
+			f3=player.rotationYaw;
+			f4=player.prevRotationYaw;
+			
+			f5=player.rotationPitch;
+			f6=player.prevRotationPitch;
+			
+			f7=player.rotationYawHead;
+			f8=player.prevRotationYawHead;
+			
+			player.renderYawOffset=0;
+			player.prevRenderYawOffset=0;
+			
+			player.rotationYaw=0;
+			player.prevRotationYaw=0;
+			
+			player.rotationPitch-=rotation;
+			player.prevRotationPitch-=rotation;
+			
+			player.rotationYawHead=0;
+			player.prevRotationYawHead=0;
 		}
 		
 //		event.setCanceled(true);
@@ -208,18 +224,18 @@ public class RenderEvents{
 		if(data==null)data=ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
 		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			player.renderYawOffset=f1;
-	        player.prevRenderYawOffset=f2;
-	        
-	        player.rotationYaw=f3;
-	        player.prevRotationYaw=f4;
-	        
-	        player.rotationPitch=f5;
-	        player.prevRotationPitch=f6;
-	        
-	        player.rotationYawHead=f7;
-	        player.prevRotationYawHead=f8;
-        }
-		GL11.glPopMatrix();
+			player.prevRenderYawOffset=f2;
+			
+			player.rotationYaw=f3;
+			player.prevRotationYaw=f4;
+			
+			player.rotationPitch=f5;
+			player.prevRotationPitch=f6;
+			
+			player.rotationYawHead=f7;
+			player.prevRotationYawHead=f8;
+		}
+		OpenGLM.popMatrix();
 	}
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderHand(RenderHandEvent e){

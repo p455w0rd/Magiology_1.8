@@ -1,19 +1,25 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.regex.*;
+import java.util.regex.Matcher;
 
-import org.apache.commons.lang3.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
+import org.apache.commons.lang3.StringUtils;
+import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.api.lang.program.*;
-import com.magiology.client.render.font.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.api.lang.program.ProgramCommon;
+import com.magiology.client.render.font.FontRendererMClipped;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.utilclasses.LogUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.Vec2i;
 
 
 public class GuiJavaScriptEditor extends GuiTextEditor{
@@ -91,12 +97,12 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		
 		char[] chars=selectedWord.toCharArray();
 		boolean valid=true;
-	    for(char c:chars){
-	    	if(!Character.isLetterOrDigit(c)){
-		    	valid=false;
-		    	break;
-		    }
-	    }
+		for(char c:chars){
+			if(!Character.isLetterOrDigit(c)){
+				valid=false;
+				break;
+			}
+		}
 		if(valid){
 			int selectedWordLenght=selectedWord.length();
 			if(!selectedWord.isEmpty()){
@@ -135,15 +141,15 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		if(selection!=null){
 			GL11U.texture(false);
 			
-			GL11.glColor4f(0, 0, 0, 1);
+			OpenGLM.color(0, 0, 0, 1);
 			selection.draw();
 			
-			GL11.glColor4f(0.2F, 0.2F, 0.2F, 1);
+			OpenGLM.color(0.2F, 0.2F, 0.2F, 1);
 			selection.setDrawAsWire(true);
 			selection.draw();
 			selection.setDrawAsWire(false);
 			
-			GL11.glColor4f(1, 1, 1, 1);
+			OpenGLM.color(1, 1, 1, 1);
 			GL11U.texture(true);
 		}
 		for(int i=0;i<coloredText.size();i++){
@@ -213,14 +219,14 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 						while(k<words.length&&!words[k].contains(")")&&!words[k].contains("{")&&!words[k].contains("}")&&!words[k].contains("var")&&!words[k].contains("=")){
 							if(!words[k].contains(" ")){
 								boolean valid=true;
-							    for(char c:words[k].toCharArray()){
-							    	if(!Character.isLetterOrDigit(c)){
-								    	valid=false;
-								    	break;
-								    }
-							    }
-							    if(prevValid==valid)break;
-							    prevValid=valid;
+								for(char c:words[k].toCharArray()){
+									if(!Character.isLetterOrDigit(c)){
+										valid=false;
+										break;
+									}
+								}
+								if(prevValid==valid)break;
+								prevValid=valid;
 								if(valid)unfinishedVars.put(new int[]{level,i}, words[k]);
 							}
 							k++;

@@ -1,6 +1,7 @@
 package com.magiology.util.utilobjects;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tracker{
 		private Map<String, DoubleObject<Float, Integer>> data=new HashMap<String, DoubleObject<Float, Integer>>();

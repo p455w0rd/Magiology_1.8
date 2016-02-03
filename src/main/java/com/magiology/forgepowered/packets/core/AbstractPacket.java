@@ -1,26 +1,29 @@
 package com.magiology.forgepowered.packets.core;
 
-import io.netty.buffer.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.io.*;
-import java.util.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.common.network.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import org.lwjgl.util.vector.*;
-
-import com.magiology.api.*;
-import com.magiology.core.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.api.SavableData;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.SimpleNetworkWrapperM;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 /* Inspired by Integrated-Circuits, thanks! o/ */
 public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMessage, IMessageHandler<T, IMessage>{
@@ -124,7 +127,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 		int floS=buffer.readInt();
 		int strS=buffer.readInt();
 		int shoS=buffer.readInt();
-		for(int i=0;i<intS;i++)integers.add(buffer.readInt    ());
+		for(int i=0;i<intS;i++)integers.add(buffer.readInt	());
 		for(int i=0;i<bolS;i++)booleans.add(buffer.readBoolean());
 		for(int i=0;i<bytS;i++)bytes___.add(buffer.readByte   ());
 		for(int i=0;i<lonS;i++)longs___.add(buffer.readLong   ());
@@ -138,8 +141,8 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 	public void writeSavableData(PacketBuffer buffer, SavableData data){
 		List<Integer> integers=new ArrayList<Integer>();
 		List<Boolean> booleans=new ArrayList<Boolean>();
-		List<Byte>    bytes___=new ArrayList<Byte>();
-		List<Long>    longs___=new ArrayList<Long>();
+		List<Byte>	bytes___=new ArrayList<Byte>();
+		List<Long>	longs___=new ArrayList<Long>();
 		List<Double>  doubles_=new ArrayList<Double>();
 		List<Float>   floats__=new ArrayList<Float>();
 		List<String>  strings_=new ArrayList<String>();
@@ -154,7 +157,7 @@ public abstract class AbstractPacket<T extends AbstractPacket<T>> implements IMe
 		buffer.writeInt(floats__.size());
 		buffer.writeInt(strings_.size());
 		buffer.writeInt(shorts__.size());
-		for(int i=0;i<integers.size();i++)buffer.writeInt    (integers.get(i));
+		for(int i=0;i<integers.size();i++)buffer.writeInt	(integers.get(i));
 		for(int i=0;i<booleans.size();i++)buffer.writeBoolean(booleans.get(i));
 		for(int i=0;i<bytes___.size();i++)buffer.writeByte   (bytes___.get(i));
 		for(int i=0;i<longs___.size();i++)buffer.writeLong   (longs___.get(i));

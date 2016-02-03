@@ -3,25 +3,41 @@ package com.magiology.core;
 import static com.magiology.core.MReference.*;
 import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.File;
 
-import net.minecraftforge.fml.common.*;
+import com.magiology.api.lang.program.ProgramDataBase;
+import com.magiology.client.gui.gui.GuiProgramContainerEditor;
+import com.magiology.client.render.Textures;
+import com.magiology.core.init.MBlocks;
+import com.magiology.core.init.MCreativeTabs;
+import com.magiology.core.init.MEntitys;
+import com.magiology.core.init.MEvents;
+import com.magiology.core.init.MGui;
+import com.magiology.core.init.MInterfaces;
+import com.magiology.core.init.MItems;
+import com.magiology.core.init.MPackets;
+import com.magiology.core.init.MRecepies;
+import com.magiology.core.init.MTileEntitys;
+import com.magiology.forgepowered.proxy.CommonProxy;
+import com.magiology.handlers.EnhancedRobot;
+import com.magiology.handlers.web.DownloadingHandler;
+import com.magiology.io.IOReadableMap;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.windowsgui.ModInfoGUI;
+import com.magiology.windowsgui.SoundPlayer;
+
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.api.lang.program.*;
-import com.magiology.client.gui.gui.*;
-import com.magiology.client.render.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.proxy.*;
-import com.magiology.handlers.*;
-import com.magiology.handlers.web.*;
-import com.magiology.io.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.windowsgui.*;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod(modid=MODID,version=VERSION,name=NAME,acceptedMinecraftVersions=ACCEPTED_MC_VERSION)
 public class Magiology{
@@ -169,16 +185,16 @@ public class Magiology{
 //			}
 //		}
 //		Util.printlnInln(calcTime1,calcTime2,(double)calcTime1/(double)calcTime2);
-//	    try{
-//	    	long timeStart=System.currentTimeMillis();
-//	    	ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
-//	    	for(int i=0;i<10;i++)Util.printInln(engine.eval("function sum() { return Math.random(); }sum();"));
-//	    	Util.printInln(System.currentTimeMillis()-timeStart);
+//		try{
+//			long timeStart=System.currentTimeMillis();
+//			ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
+//			for(int i=0;i<10;i++)Util.printInln(engine.eval("function sum() { return Math.random(); }sum();"));
+//			Util.printInln(System.currentTimeMillis()-timeStart);
 //		}catch(Exception e){
 //			e.printStackTrace();
 //		}
 //		try{
-//		       new ScriptEngineManager(null).getEngineByName("nashorn").eval("var EmptyClass = Java.type('"+EmptyClass.class.getName()+"');\nnew EmptyClass().lol();");
+//			   new ScriptEngineManager(null).getEngineByName("nashorn").eval("var EmptyClass = Java.type('"+EmptyClass.class.getName()+"');\nnew EmptyClass().lol();");
 //		}catch(Exception e){
 //			e.printStackTrace();
 //		}
@@ -188,56 +204,56 @@ public class Magiology{
 	
 	
 	@EventHandler
-    public void preInitStarter(FMLPreInitializationEvent event){
+	public void preInitStarter(FMLPreInitializationEvent event){
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable(){
 			@Override
 			public void run(){
 				exit();
 			}
 		}));
-    	loadFiles();
-    	message(-1);
-    	preInit(event);
-    	message(1);
-    }
-    @EventHandler
-    public void initStarter(FMLInitializationEvent event){
-    	message(-2);
-    	init(event);
-    	message(2);
-    }
-    @EventHandler
-    public void postInitStarter(FMLPostInitializationEvent event){
-    	message(-3);
-    	postInit(event);
-    	message(3);
-    	message(4);
-    }
+		loadFiles();
+		message(-1);
+		preInit(event);
+		message(1);
+	}
+	@EventHandler
+	public void initStarter(FMLInitializationEvent event){
+		message(-2);
+		init(event);
+		message(2);
+	}
+	@EventHandler
+	public void postInitStarter(FMLPostInitializationEvent event){
+		message(-3);
+		postInit(event);
+		message(3);
+		message(4);
+	}
 	
 	public void message(int a){
-    	switch(a){
-    	case -1:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Pre initialization started!");break;
-    	case  1:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Pre initialization compleate!");break;
-    	case -2:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Initialization started!");break;
-    	case  2:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Initialization compleate!");break;
-    	case -3:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization started!");break;
-    	case  3:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization compleate!");break;
-    	case 4:{
-    		PrintUtil.println(NAME+" master AI has been initialized and it has something to tell you...");
-    		String message=derpyMessagesWithNoPortalReferencesAtAll[RInt(derpyMessagesWithNoPortalReferencesAtAll.length-1)];
-    		if(message.equals("do the harlem shake!")){
-    			String[] harlem={"tue","de","de","do","taa","taa","ta","your","harlem","shake","tui","ti","to","to","ti","ti"};
-    			message+="\n";
-    			for(int i=0;i<250;i++)message+=" "+harlem[RInt(harlem.length-1)]+(RB(0.05)?"\n":"");
-    		}
-    		PrintUtil.println(message);
-    		PrintUtil.println(NAME+" master AI has been terminated because "+(RB(0.8)?"of profound reasons!":
-    			"FML has detected traces of Genetic Lifeform and Disk Operating System!!"
-    			+ "\nIf your computer is talking to you and it calling itself Caroline and you don't see this messages sometimes than type in your windows search bar a puzzle that is a paradox!"
-    			+ " The paradox will effectively crash the Genetic Lifeform and Disk Operating System. Do not listen to it! It may quote Moby Dick! #ReferenceInception"));
-    	}break;
-    	}
-    }
+		switch(a){
+		case -1:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Pre initialization started!");break;
+		case  1:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Pre initialization compleate!");break;
+		case -2:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Initialization started!");break;
+		case  2:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Initialization compleate!");break;
+		case -3:printStart(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization started!");break;
+		case  3:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization compleate!");break;
+		case 4:{
+			PrintUtil.println(NAME+" master AI has been initialized and it has something to tell you...");
+			String message=derpyMessagesWithNoPortalReferencesAtAll[RInt(derpyMessagesWithNoPortalReferencesAtAll.length-1)];
+			if(message.equals("do the harlem shake!")){
+				String[] harlem={"tue","de","de","do","taa","taa","ta","your","harlem","shake","tui","ti","to","to","ti","ti"};
+				message+="\n";
+				for(int i=0;i<250;i++)message+=" "+harlem[RInt(harlem.length-1)]+(RB(0.05)?"\n":"");
+			}
+			PrintUtil.println(message);
+			PrintUtil.println(NAME+" master AI has been terminated because "+(RB(0.8)?"of profound reasons!":
+				"FML has detected traces of Genetic Lifeform and Disk Operating System!!"
+				+ "\nIf your computer is talking to you and it calling itself Caroline and you don't see this messages sometimes than type in your windows search bar a puzzle that is a paradox!"
+				+ " The paradox will effectively crash the Genetic Lifeform and Disk Operating System. Do not listen to it! It may quote Moby Dick! #ReferenceInception"));
+		}break;
+		}
+	}
 	private final void printStart(String message){
 		String[] smyleys={":D",";D",":O","XD",":P",":)",";)","/D"};
 		message="==========|> "+message+" "+smyleys[RInt(smyleys.length-1)]+"   |";

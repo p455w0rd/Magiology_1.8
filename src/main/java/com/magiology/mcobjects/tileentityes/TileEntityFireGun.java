@@ -1,14 +1,13 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.tileentity.TileEntityFurnace;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 public class TileEntityFireGun extends TileEntityM implements ITickable{
 	int optimizer=0;
@@ -53,7 +52,7 @@ public class TileEntityFireGun extends TileEntityM implements ITickable{
 	}
 	
 	public void detectIfTimeForAnimation(){
-		if(rotation[0]!=null)     {pos.add(0,-1,-3);}
+		if(rotation[0]!=null)	 {pos.add(0,-1,-3);}
 		else if(rotation[1]!=null){pos.add(3,-1,0);}
 		else if(rotation[2]!=null){pos.add(0,-1,3);}
 		else if(rotation[3]!=null){pos.add(-3,-1,0);}
@@ -95,8 +94,8 @@ public class TileEntityFireGun extends TileEntityM implements ITickable{
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox(){
-        return new AxisAlignedBB(pos.add(-0.5,-0.5,-0.5), pos.add(1.5,1.5,1.5));
-    }
+	public AxisAlignedBB getRenderBoundingBox(){
+		return new AxisAlignedBB(pos.add(-0.5,-0.5,-0.5), pos.add(1.5,1.5,1.5));
+	}
 	
 }

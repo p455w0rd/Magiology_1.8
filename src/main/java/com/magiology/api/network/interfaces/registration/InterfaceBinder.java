@@ -1,12 +1,14 @@
 package com.magiology.api.network.interfaces.registration;
 
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.api.network.InterfaceTileEntitySaver;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 
-import com.magiology.api.network.*;
-import com.magiology.mcobjects.tileentityes.network.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 public class InterfaceBinder{
 	

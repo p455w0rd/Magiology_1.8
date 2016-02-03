@@ -1,8 +1,9 @@
 package com.magiology.handlers;
 
-import net.minecraft.nbt.*;
-import net.minecraft.world.*;
-import net.minecraft.world.storage.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldSavedData;
+import net.minecraft.world.storage.MapStorage;
 
 public class MyWorldData extends WorldSavedData{
 
@@ -14,7 +15,7 @@ public class MyWorldData extends WorldSavedData{
 	// Fields containing your data here
 	
 	public static MyWorldData forWorld(World world){
-                // Retrieves the MyWorldData instance for the given world, creating it if necessary
+				// Retrieves the MyWorldData instance for the given world, creating it if necessary
 		MapStorage storage = world.getPerWorldStorage();
 		MyWorldData result = (MyWorldData)storage.loadData(MyWorldData.class, key);
 		if (result == null) {

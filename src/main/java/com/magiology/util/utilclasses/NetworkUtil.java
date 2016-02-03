@@ -1,13 +1,15 @@
 package com.magiology.util.utilclasses;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.api.network.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.NetworkBaseComponent;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 
 public class NetworkUtil{

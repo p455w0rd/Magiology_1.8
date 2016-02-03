@@ -1,15 +1,19 @@
 package com.magiology.client.render.shaders.core;
 
-import java.nio.*;
-import java.util.*;
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.client.*;
-import net.minecraft.client.shader.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.util.utilclasses.DataStalker;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.util.utilclasses.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.shader.Shader;
+import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.client.shader.ShaderUniform;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public abstract class ShaderAspectRenderer{
 	

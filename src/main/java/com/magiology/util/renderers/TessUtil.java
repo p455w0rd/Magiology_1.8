@@ -1,30 +1,38 @@
 package com.magiology.util.renderers;
 
 import static java.lang.Math.*;
-import static org.lwjgl.opengl.GL11.*;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.entity.*;
-import net.minecraft.util.*;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
-
-import com.magiology.client.render.*;
-import com.magiology.client.render.font.*;
-import com.magiology.core.*;
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.render.Textures;
+import com.magiology.client.render.font.FontRendererMBase;
+import com.magiology.core.MReference;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.AdvancedModelLoader;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
+import com.magiology.mcobjects.effect.EntityFXM;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilclasses.math.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilobjects.vectors.QuadUV;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 
 
 /**
@@ -69,17 +77,17 @@ public class TessUtil{
 	public static void drawBlurredCube(int x,int y,int z,AxisAlignedBB cube,int blurQuality,double resolution,double r,double g,double b,double alpha){
 		if(blurQuality<1||cube==null)return;
 		alpha=alpha/blurQuality;
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		
-		GL11.glColor4d(r, g, b, alpha);
+		OpenGLM.color(r, g, b, alpha);
 		for(int size=0;size<blurQuality;size++){
-			GL11.glTranslated((cube.maxX-cube.minX)/2+cube.minX, (cube.maxY-cube.minY)/2+cube.minY, (cube.maxZ-cube.minZ)/2+cube.minZ);
-			GL11.glScaled(-resolution+1, -resolution+1, -resolution+1);
-			GL11.glTranslated(-((cube.maxX-cube.minX)/2+cube.minX), -((cube.maxY-cube.minY)/2+cube.minY), -((cube.maxZ-cube.minZ)/2+cube.minZ));
+			OpenGLM.translate((cube.maxX-cube.minX)/2+cube.minX, (cube.maxY-cube.minY)/2+cube.minY, (cube.maxZ-cube.minZ)/2+cube.minZ);
+			OpenGLM.scale(-resolution+1, -resolution+1, -resolution+1);
+			OpenGLM.translate(-((cube.maxX-cube.minX)/2+cube.minX), -((cube.maxY-cube.minY)/2+cube.minY), -((cube.maxZ-cube.minZ)/2+cube.minZ));
 			drawCube(cube);
 		}
-		GL11.glColor4d(1,1,1,1);
-		GL11.glPopMatrix();
+		OpenGLM.color(1,1,1,1);
+		OpenGLM.popMatrix();
 	}
 	public static void drawCube(AxisAlignedBB a){drawCube(a.minX,a.minY,a.minZ,a.maxX,a.maxY,a.maxZ);}
 	public static void drawCube(double minX,double minY,double minZ,double maxX,double maxy,double maxZ){
@@ -125,9 +133,9 @@ public class TessUtil{
 				xy[xory][index]*=scale;
 			}
 		}
-		GL11.glColor4d(r, g, b, alpha);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glPushMatrix();
+		OpenGLM.color(r, g, b, alpha);
+		OpenGLM.disableTexture2D();
+		OpenGLM.pushMatrix();
 		{
 			VertexRenderer r1=TessUtil.getVB();
 			r1.cleanUp();
@@ -141,8 +149,8 @@ public class TessUtil{
 			}
 			r1.draw();
 		}
-		GL11.glPopMatrix();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.popMatrix();
+		OpenGLM.enableTexture2D();
 	}
 	public static void drawCircleRes90(double r,double g,double b,double alpha,double scale,int startAngle,int endAngle){
 		if(startAngle%90!=0)startAngle=startAngle%90;
@@ -156,9 +164,9 @@ public class TessUtil{
 				xy[xory][index]*=scale;
 			}
 		}
-		GL11.glColor4d(r, g, b, alpha);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glPushMatrix();
+		OpenGLM.color(r, g, b, alpha);
+		OpenGLM.disableTexture2D();
+		OpenGLM.pushMatrix();
 		{
 			VertexRenderer r1=TessUtil.getVB();
 			r1.cleanUp();
@@ -172,8 +180,8 @@ public class TessUtil{
 			}
 			r1.draw();
 		}
-		GL11.glPopMatrix();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.popMatrix();
+		OpenGLM.enableTexture2D();
 	}
 	public static void drawCircleRes180(double r,double g,double b,double alpha,double scale,int startAngle,int endAngle){
 		if(startAngle%180!=0)startAngle=startAngle%180;
@@ -187,9 +195,9 @@ public class TessUtil{
 				xy[xory][index]*=scale;
 			}
 		}
-		GL11.glColor4d(r, g, b, alpha);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glPushMatrix();
+		OpenGLM.color(r, g, b, alpha);
+		OpenGLM.disableTexture2D();
+		OpenGLM.pushMatrix();
 		Renderer.POS.begin(GL11.GL_TRIANGLES);
 		{
 			int i=0;
@@ -201,19 +209,19 @@ public class TessUtil{
 			}
 		}
 		Renderer.POS.draw();
-		GL11.glPopMatrix();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.popMatrix();
+		OpenGLM.enableTexture2D();
 	}
 
 	private static IModelCustom arrowModel;
 	public static void drawArrow(){
 		if(arrowModel==null)arrowModel=AdvancedModelLoader.loadModel(new ResourceLocation(MReference.MODID,"/models/arrow.obj"));
 		else{ 
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0.6F, -0.03F, 0.52F);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(0.6F, -0.03F, 0.52F);
 			GL11U.glRotate(0, 45, 0);
 			arrowModel.renderAll();
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 	}
 	private static IModelCustom ballModel;
@@ -238,42 +246,42 @@ public class TessUtil{
 			if(WillRotate.length!=1)return;
 			willRotate=WillRotate[0];
 		}
-		glPushMatrix();
-        glEnable(GL_COLOR_MATERIAL);
-        glTranslatef(x, y, 50.0F);
-        glScalef((-scale), scale, scale);
-        glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        float f2 = player.renderYawOffset;
-        float f3 = player.rotationYaw;
-        float f4 = player.rotationPitch;
-        float f5 = player.prevRotationYawHead;
-        float f6 = player.rotationYawHead;
-        glRotatef(135.0F, 0.0F, 1.0F, 0.0F);
-        RenderHelper.enableStandardItemLighting();
-        glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-        glRotatef(-((float)Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
-        if(!willRotate){
-            player.renderYawOffset = (float)Math.atan(mouseX / 40.0F) * 20.0F;
-            player.rotationYaw = (float)Math.atan(mouseX / 40.0F) * 40.0F;
-            player.rotationPitch = -((float)Math.atan(mouseY / 40.0F)) * 20.0F;
-            player.rotationYawHead = player.rotationYaw;
-            player.prevRotationYawHead = player.rotationYaw;
-        }
-        glTranslatef(0.0F, (float)player.getYOffset(), 0.0F);
-        getRM().playerViewY = 180.0F;
-        getRM().renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-        player.renderYawOffset = f2;
-        player.rotationYaw = f3;
-        player.rotationPitch = f4;
-        player.prevRotationYawHead = f5;
-        player.rotationYawHead = f6;
-        RenderHelper.disableStandardItemLighting();
-        glDisable(GL12.GL_RESCALE_NORMAL);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        glDisable(GL_TEXTURE_2D);
-        OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
-        glPopMatrix();
-    }
+		OpenGLM.pushMatrix();
+		OpenGLM.enableColorMaterial();
+		OpenGLM.translate(x, y, 50.0F);
+		OpenGLM.scale((-scale), scale, scale);
+		OpenGLM.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+		float f2 = player.renderYawOffset;
+		float f3 = player.rotationYaw;
+		float f4 = player.rotationPitch;
+		float f5 = player.prevRotationYawHead;
+		float f6 = player.rotationYawHead;
+		OpenGLM.rotate(135.0F, 0.0F, 1.0F, 0.0F);
+		RenderHelper.enableStandardItemLighting();
+		OpenGLM.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
+		OpenGLM.rotate(-((float)Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+		if(!willRotate){
+			player.renderYawOffset = (float)Math.atan(mouseX / 40.0F) * 20.0F;
+			player.rotationYaw = (float)Math.atan(mouseX / 40.0F) * 40.0F;
+			player.rotationPitch = -((float)Math.atan(mouseY / 40.0F)) * 20.0F;
+			player.rotationYawHead = player.rotationYaw;
+			player.prevRotationYawHead = player.rotationYaw;
+		}
+		OpenGLM.translate(0.0F, (float)player.getYOffset(), 0.0F);
+		getRM().playerViewY = 180.0F;
+		getRM().renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
+		player.renderYawOffset = f2;
+		player.rotationYaw = f3;
+		player.rotationPitch = f4;
+		player.prevRotationYawHead = f5;
+		player.rotationYawHead = f6;
+		RenderHelper.disableStandardItemLighting();
+		OpenGLM.disableRescaleNormal();
+		OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+		OpenGLM.disableTexture2D();
+		OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
+		OpenGLM.popMatrix();
+	}
 	static final ResourceLocation inventoryPict = new ResourceLocation("textures/gui/container/inventory.png");
 	public static void drawSlotLightMapWcustomSizes(GuiContainer gui,int xPos,int yPos,int xSize,int ySize,boolean useDynamicShadow,boolean invertDepth){
 		if(xSize<2||ySize<2)return;
@@ -282,48 +290,48 @@ public class TessUtil{
 //		int var2=Math.min(xSize, ySize),var1=(var2-var2%2)/2;
 		int var1=1;
 		//x
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		for(int xProgress=0;xProgress<xSize;xProgress++){
 			gui.drawTexturedModalRect(xPos, yPos, 10, invertDepth?119-var1:101, 1, var1);
-			GL11.glTranslatef(1, 0, 0);
+			OpenGLM.translate(1, 0, 0);
 		}
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
+		OpenGLM.popMatrix();
+		OpenGLM.pushMatrix();
 		for(int xProgress=0;xProgress<xSize;xProgress++){
 			gui.drawTexturedModalRect(xPos, yPos+ySize-var1, 10, invertDepth?7:119-var1, 1, var1);
-			GL11.glTranslatef(1, 0, 0);
+			OpenGLM.translate(1, 0, 0);
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		//y
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		for(int yProgress=0;yProgress<ySize-var1;yProgress++){
-			if(yProgress==0)GL11.glTranslatef(0, 1, 0);
+			if(yProgress==0)OpenGLM.translate(0, 1, 0);
 			gui.drawTexturedModalRect(xPos, yPos, invertDepth?25-var1:7, 102, var1, 1);
-			GL11.glTranslatef(0, 1, 0);
+			OpenGLM.translate(0, 1, 0);
 		}
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
+		OpenGLM.popMatrix();
+		OpenGLM.pushMatrix();
 		for(int yProgress=0;yProgress<ySize-var1;yProgress++){
-			if(yProgress==0)GL11.glTranslatef(0, 1, 0);
+			if(yProgress==0)OpenGLM.translate(0, 1, 0);
 			gui.drawTexturedModalRect(xPos+xSize-var1, yPos, invertDepth?7:25-var1, 102, var1, 1);
-			GL11.glTranslatef(0, 1, 0);
+			OpenGLM.translate(0, 1, 0);
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		gui.drawTexturedModalRect(xPos+xSize-1, yPos, 42, 101, 1, 1);
 		gui.drawTexturedModalRect(xPos, yPos+ySize-1, 42, 101, 1, 1);
-		GL11.glPushMatrix();
-		if(useDynamicShadow)GL11.glColor4d(0, 0, 0, 77F/255F);
+		OpenGLM.pushMatrix();
+		if(useDynamicShadow)OpenGLM.color(0, 0, 0, 77F/255F);
 		for(int xProgress=0;xProgress<xSize-2;xProgress++){
-			GL11.glTranslatef(1, 0, 0);
-			GL11.glPushMatrix();
+			OpenGLM.translate(1, 0, 0);
+			OpenGLM.pushMatrix();
 			for(int yProgress=0;yProgress<ySize-2;yProgress++){
-				GL11.glTranslatef(0, 1, 0);
+				OpenGLM.translate(0, 1, 0);
 				gui.drawTexturedModalRect(xPos, yPos, invertDepth?4:26, invertDepth?10:102, 1, 1);
 			}
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
-		if(useDynamicShadow)GL11.glColor4d(1,1,1,1);
-		GL11.glPopMatrix();
+		if(useDynamicShadow)OpenGLM.color(1,1,1,1);
+		OpenGLM.popMatrix();
 		GL11U.endOpaqueRendering();
 	}
 	static Field equippedProgress,prevEquippedProgress;
@@ -336,8 +344,8 @@ public class TessUtil{
 				prevEquippedProgress.setFloat(IR,From0To1);
 			}
 			if(equippedProgress==null)equippedProgress = ItemRenderer.class.getDeclaredField("equippedProgress");
-		    equippedProgress.setAccessible(true);
-		    equippedProgress.setFloat(IR,From0To1);
+			equippedProgress.setAccessible(true);
+			equippedProgress.setFloat(IR,From0To1);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -357,14 +365,14 @@ public class TessUtil{
 		);
 
 		Vec3M[] points={
-			new Vec3M(0,        -width/2, 0     ),
-			new Vec3M(0,         width/2, 0     ),
-			new Vec3M(0,         width/2, lenght),
-			new Vec3M(0,        -width/2, lenght),
-			new Vec3M(-width/2,        0, 0     ),
-			new Vec3M( width/2,        0, 0     ),
-			new Vec3M( width/2,        0, lenght),
-			new Vec3M(-width/2,        0, lenght)
+			new Vec3M(0,		-width/2, 0	 ),
+			new Vec3M(0,		 width/2, 0	 ),
+			new Vec3M(0,		 width/2, lenght),
+			new Vec3M(0,		-width/2, lenght),
+			new Vec3M(-width/2,		0, 0	 ),
+			new Vec3M( width/2,		0, 0	 ),
+			new Vec3M( width/2,		0, lenght),
+			new Vec3M(-width/2,		0, lenght)
 		};
 		float
 			ditanceX=(float)-(x1-x2),
@@ -385,19 +393,19 @@ public class TessUtil{
 	}
 	public static void renderParticle(){
 		boolean isFP=U.getMC().gameSettings.thirdPersonView==2;
-		GL11.glDepthMask(false);
-		GL11.glEnable(GL11.GL_BLEND);
-		if(isFP)GL11.glDisable(GL11.GL_CULL_FACE);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.003921569F);
+		OpenGLM.depthMask(false);
+		OpenGLM.enableBlend();
+		if(isFP)OpenGLM.disableCull();
+		GL11U.blendFunc(2);
+		OpenGLM.alphaFunc(GL11.GL_GREATER, 0.003921569F);
 		
 		EntityFXM.renderBufferedParticle();
 		
 		
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		GL11.glDisable(GL11.GL_BLEND);
-		if(isFP)GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glDepthMask(true);
+		GL11U.allOpacityIs(true);
+		OpenGLM.disableBlend();
+		if(isFP)OpenGLM.enableCull();
+		OpenGLM.depthMask(true);
 		
 	}
 	public static FontRendererMBase getCustomFontRednerer(){

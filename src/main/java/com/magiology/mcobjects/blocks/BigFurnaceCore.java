@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.material.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.world.*;
+import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BigFurnaceCore extends BlockContainerM{
 	
@@ -18,5 +18,5 @@ public class BigFurnaceCore extends BlockContainerM{
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityBigFurnaceCore();
 	}
-    
+	
 }

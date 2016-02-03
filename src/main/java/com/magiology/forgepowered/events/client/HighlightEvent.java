@@ -1,5 +1,9 @@
 package com.magiology.forgepowered.events.client;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.power.PowerCore;
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
@@ -8,17 +12,24 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.items.NetworkPointer;
-import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
+import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
+import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
+import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -30,11 +41,6 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 /**
  * ONLY CLIENT SIDE
  * @author LapisSea
@@ -155,7 +161,7 @@ public class HighlightEvent{
 		NetworkInterface boundedInterface=tile.getBoundedInterface();
 		if(boundedInterface==null)return;
 		
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		GL11U.glTranslate(UtilM.getEntityPos(event.player).mul(-1));
 		World world=event.player.worldObj;
 		GL11U.texture(false);
@@ -170,8 +176,8 @@ public class HighlightEvent{
 			
 			if(i!=tile){
 				GL11U.glDepth(false);
-				GL11.glColor4f(1, 0, 0, 0.5F);
-				GL11.glLineWidth(3);
+				OpenGLM.color(1, 0, 0, 0.5F);
+				OpenGLM.lineWidth(3);
 				GL11U.texture(false);
 				Renderer.LINES.begin();
 				Renderer.LINES.addVertex((source1.minX+source1.maxX)/2, (source1.minY+source1.maxY)/2, (source1.minZ+source1.maxZ)/2);
@@ -195,7 +201,7 @@ public class HighlightEvent{
 		GL11U.endOpaqueRendering();
 		GL11U.texture(true);
 		GL11U.glDepth(true);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	private void drawHighlightToBlock(BlockPos posStart,BlockPos posTarget,ColorF color, double lineWidth){
 		BlockPos targetPos=posTarget;
@@ -216,15 +222,15 @@ public class HighlightEvent{
 		double DFPBBalpha=0.6;
 		
 		Vec3M off=TessUtil.calculateRenderPosV(event.player);
-		GL11.glPushMatrix();
-		GL11.glTranslated(-off.getX()+pos.getX(), -off.getY()+pos.getY(), -off.getZ()+pos.getZ());
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(-off.getX()+pos.getX(), -off.getY()+pos.getY(), -off.getZ()+pos.getZ());
 		
 		AxisAlignedBB mainBox=colisionProvider.getMainBox();
 		long wtt=event.player.worldObj.getTotalWorldTime();
 		double centerAlphaHelper=(wtt%80.0)/40.0,centerAlpha=centerAlphaHelper>1?2-centerAlphaHelper:centerAlphaHelper;
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDepthMask(false);
-		GL11.glDisable(GL11.GL_FOG);
+		OpenGLM.disableLighting();
+		OpenGLM.depthMask(false);
+		OpenGLM.disableFog();
 		GL11U.setUpOpaqueRendering(1);
 		event.setCanceled(true);
 
@@ -343,7 +349,7 @@ public class HighlightEvent{
 			boolean[] bs={centerToWestNorth,centerToEastNorth,centerToEastSouth,centerToSouthWest,centerToWestDown,centerToWestUp,centerToNorthDown,centerToNorthUp,centerToEastDown,centerToEastUp,centerToSouthDown,centerToSouthUp};
 			drawSelectionBox(mainBox.expand(ex, ex, ex), 0.1, 0.1, 0.1, DFPBBwidth,DFPBBalpha,bs);
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 
 	private void doPowerCounterDisplay(BlockPos pos, ItemStack item, DrawBlockHighlightEvent event){
@@ -366,7 +372,7 @@ public class HighlightEvent{
 		}else if(tile instanceof TileEntityBFCPowerOut){
 			int x1=0;int y1=1000;int z1=0;
 				
-			     if(((TileEntityBFCPowerOut)tile).CallDir[0]!=null){x1=pos.getX()-2;y1=pos.getY()-1;z1=pos.getZ();}
+				 if(((TileEntityBFCPowerOut)tile).CallDir[0]!=null){x1=pos.getX()-2;y1=pos.getY()-1;z1=pos.getZ();}
 			else if(((TileEntityBFCPowerOut)tile).CallDir[1]!=null){x1=pos.getX()+2;y1=pos.getY()-1;z1=pos.getZ();}
 			else if(((TileEntityBFCPowerOut)tile).CallDir[2]!=null){x1=pos.getX();y1=pos.getY()-1;z1=pos.getZ()-2;}
 			else if(((TileEntityBFCPowerOut)tile).CallDir[3]!=null){x1=pos.getX();y1=pos.getY()-1;z1=pos.getZ()+2;}
@@ -444,14 +450,14 @@ public class HighlightEvent{
 		Vec3M off=TessUtil.calculateRenderPosV(event.player);
 		AxisAlignedBB bounds=UtilM.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-off.x, -off.y, -off.z);
 		
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glLineWidth(2F);
-		GL11.glColor4f(0F, 0F, 1F, 1F);
+		OpenGLM.disableTexture2D();
+		OpenGLM.disableDepth();
+		OpenGLM.lineWidth(2F);
+		OpenGLM.color(0F, 0F, 1F, 1F);
 		
 		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,0,0,1,2,1);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		OpenGLM.enableTexture2D();
+		OpenGLM.enableDepth();
 	}
 	
 	public void onDrawHFireReceaver(DrawBlockHighlightEvent event,TileEntity tile,BlockPos pos){
@@ -461,9 +467,9 @@ public class HighlightEvent{
 		AxisAlignedBB bounds=UtilM.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-x1, -y1, -z1);
 		AxisAlignedBB bounds2=UtilM.getBlock(event.player.worldObj,event.target.getBlockPos()).getSelectedBoundingBox(event.player.worldObj, event.target.getBlockPos()).expand(0.003, 0.003, 0.003).offset(-x1, -y1, -z1);
 		
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glLineWidth(2F);
-		GL11.glColor4f(0F, 0F, 1F, 1F);
+		OpenGLM.disableTexture2D();
+		OpenGLM.lineWidth(2F);
+		OpenGLM.color(0F, 0F, 1F, 1F);
 		Renderer.LINES.begin();
 		float[] xpoints=new float[8];float[] ypoints=new float[8];float[] zpoints=new float[8];
 		
@@ -476,7 +482,7 @@ public class HighlightEvent{
 		Renderer.LINES.addVertex(xpoints[0]+0.5, ypoints[0]+0.5, zpoints[0]+0.5);
 		Renderer.LINES.addVertex(bounds2.minX+0.5, bounds2.minY+0.5, bounds2.minZ+0.5);
 		Renderer.LINES.draw();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableTexture2D();
 		drawSelectionBox(bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.minZ, bounds.maxZ,0,0,1,2,1);
 	}
 	
@@ -516,9 +522,9 @@ public class HighlightEvent{
 	 * */
 	public void drawRawSelectionBox(float[] xpoints,float[] ypoints,float[] zpoints,double rColor,double gColor,double bColor,double thickens,double alpha,boolean[] bs){
 		if(bs.length!=12)return;
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glColor4d(rColor,gColor,bColor,alpha);
-		GL11.glLineWidth((float)thickens);
+		OpenGLM.disableTexture2D();
+		OpenGLM.color(rColor,gColor,bColor,alpha);
+		OpenGLM.lineWidth((float)thickens);
 		Renderer.LINES.begin();
 		{
 			int a=0;
@@ -571,7 +577,7 @@ public class HighlightEvent{
 				Renderer.LINES.addVertex(xpoints[7], ypoints[7], zpoints[7]);
 			}
 		}Renderer.LINES.draw();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableTexture2D();
 	}
 	
 	
@@ -602,11 +608,11 @@ public class HighlightEvent{
 	
 	public void drawRawBox(float[] xpoints,float[] ypoints,float[] zpoints,double rColor,double gColor,double bColor,double alpha,boolean[] bs){
 		if(bs.length!=6)return;
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDepthMask(false);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		OpenGLM.disableTexture2D();
+		OpenGLM.depthMask(false);
+		OpenGLM.disableCull();
 		
-		GL11.glColor4d(rColor,gColor,bColor,alpha);
+		OpenGLM.color(rColor,gColor,bColor,alpha);
 		Renderer.POS.beginQuads();
 		
 		int a=0;
@@ -647,8 +653,8 @@ public class HighlightEvent{
 			Renderer.POS.addVertex(xpoints[2], ypoints[6], zpoints[2]);
 		}
 		Renderer.POS.draw();
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glDepthMask(true);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		OpenGLM.enableCull();
+		OpenGLM.depthMask(true);
+		OpenGLM.enableDepth();
 	}
 }

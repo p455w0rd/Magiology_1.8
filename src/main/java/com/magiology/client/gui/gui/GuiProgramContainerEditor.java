@@ -2,42 +2,49 @@ package com.magiology.client.gui.gui;
 
 import static com.magiology.io.WorldData.WorkingProtocol.*;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.audio.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
+import org.lwjgl.input.Keyboard;
 
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.lang.program.*;
-import com.magiology.api.updateable.*;
+import com.magiology.api.lang.program.ProgramDataBase;
+import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.custom.*;
-import com.magiology.client.gui.guiutil.gui.*;
-import com.magiology.client.gui.guiutil.gui.buttons.*;
-import com.magiology.client.render.*;
-import com.magiology.client.render.font.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.io.*;
+import com.magiology.client.gui.container.CommandCenterContainer;
+import com.magiology.client.gui.container.ContainerEmpty;
+import com.magiology.client.gui.custom.OnOffGuiButton;
+import com.magiology.client.gui.guiutil.gui.GuiJavaScriptEditor;
+import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
+import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
+import com.magiology.client.render.Textures;
+import com.magiology.client.render.font.FontRendererMBase;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
+import com.magiology.io.WorldData;
 import com.magiology.io.WorldData.FileContent;
-import com.magiology.mcobjects.items.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.GuiContainerM;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.Vec2i;
+
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiProgramContainerEditor extends GuiContainerM implements Updateable{
 	
@@ -85,9 +92,9 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		getEditor().render(mouseX,mouseY);
 		FontRendererMBase fr=Get.Render.Font.FRB();
 		if(settingsActive){
-			GL11.glPushMatrix();
+			OpenGLM.pushMatrix();
 			Vec2i middle=getEditor().pos.add(getEditor().size.x/2,getEditor().size.y/2);
-			GL11.glTranslatef(middle.x, middle.y, 0);
+			OpenGLM.translate(middle.x, middle.y, 0);
 			GL11U.texture(false);
 			
 			ColorF.convert(new Color(16,16,32,220)).mul(1.5).bind();
@@ -123,18 +130,18 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 			fr.drawString("Use colors:", -57, -46+40, new ColorF(1-useColors.pos.getPoint(),useColors.pos.getPoint(),0,1).mix(ColorF.WHITE).toCode());
 			fr.drawString("Recommend code:", -57, -46+54, new ColorF(1-recommendCode.pos.getPoint(),recommendCode.pos.getPoint(),0,1).mix(ColorF.WHITE).toCode());
 			fr.drawString("Command name", -57, -46+68, ColorF.WHITE.toCode());
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		
 		Vec2i pos=getEditor().pos.add(0,getEditor().size.y-16-(int)(buttonY.getPoint()*10));
 		
 		compile .wantedPoint=new Rectangle(pos.x+ 0,pos.y,16,16).contains(mouseX,mouseY)?1:0.3F;
 		settings.wantedPoint=new Rectangle(pos.x+16,pos.y,16,16).contains(mouseX,mouseY)?1:0.3F;
-		log     .wantedPoint=new Rectangle(pos.x+32,pos.y,16,16).contains(mouseX,mouseY)?1:0.3F;
+		log	 .wantedPoint=new Rectangle(pos.x+32,pos.y,16,16).contains(mouseX,mouseY)?1:0.3F;
 		
 		GL11U.setUpOpaqueRendering(1);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(pos.x, pos.y, 0);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(pos.x, pos.y, 0);
 		GL11U.glScale(0.5F);
 		
 		ColorF background=ColorF.convert(new Color(16,16,32,220));
@@ -187,9 +194,9 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		color.a=log.getPoint()*overallAlpha.getPoint();
 		color.bind();
 		drawModalRectWithCustomSizedTexture(64,0, 0, 32, 32, 32, 64, 64);
-		GlStateManager.bindTexture(txtId);
+		OpenGLM.bindTexture(txtId);
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		GL11U.endOpaqueRendering();
 		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	}
@@ -205,10 +212,10 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		
 		int top=width/2-60,left=height/2-50;
 		
-		saveOnExit=new OnOffGuiButton(0, top+98-3, left+3, 22, 11,           new ColorF(0.2, 0.2, 0.8, 0.8));
+		saveOnExit=new OnOffGuiButton(0, top+98-3, left+3, 22, 11,		   new ColorF(0.2, 0.2, 0.8, 0.8));
 		printCompileError=new OnOffGuiButton(1, top+98-3, left+3+26, 22, 11, new ColorF(0.2, 0.8, 0.2, 0.8));
-		useColors=new OnOffGuiButton(2, top+98-3, left+3+40, 22, 11,         new ColorF(0.2, 0.8, 0.8, 0.8));
-		recommendCode=new OnOffGuiButton(3, top+98-3, left+3+54, 22, 11,     new ColorF(0.8, 0.2, 0.2, 0.8));
+		useColors=new OnOffGuiButton(2, top+98-3, left+3+40, 22, 11,		 new ColorF(0.2, 0.8, 0.8, 0.8));
+		recommendCode=new OnOffGuiButton(3, top+98-3, left+3+54, 22, 11,	 new ColorF(0.8, 0.2, 0.2, 0.8));
 		try{saveOnExit.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("saveOnExit").content.toString().replaceAll("\n", "")));}catch(Exception e){}
 		try{printCompileError.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("printCompileError").content.toString().replaceAll("\n", "")));}catch(Exception e){}
 		try{useColors.forceIsOn(Boolean.parseBoolean(settingsData.getFileContent("useColors").content.toString().replaceAll("\n", "")));}catch(Exception e){}

@@ -1,20 +1,29 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
-import com.magiology.core.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.glstates.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.renderers.glstates.GlState;
+import com.magiology.util.renderers.glstates.GlStateCell;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.renderers.tessellatorscripts.SidedModel;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.LinearAnimation;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilobjects.vectors.QuadUV;
+import com.magiology.util.utilobjects.vectors.QuadUVGenerator;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 	
@@ -277,10 +286,10 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 				rots.y*=rots.y;
 				
 				
-				GL11.glPushMatrix();
+				OpenGLM.pushMatrix();
 				Vec3M rot=this.core.rotations[this.core.getCurentSide()];
 				GL11U.glRotate(rot,0.5F,0.5F,0.5F);
-				GL11.glTranslatef(-i*p*2, -j*p*2, 0);
+				OpenGLM.translate(-i*p*2, -j*p*2, 0);
 				
 				insertionAnimation=new LinearAnimation(
 						new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8, 1, 0)},0F),
@@ -290,21 +299,21 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 				
 				if(rots.z>0){
 					
-					GL11.glPushMatrix();
+					OpenGLM.pushMatrix();
 					
-					GL11.glTranslatef(p*10, p*10, p*6.9F);
-					GL11.glTranslated(0,rots.y*p*3,-rots.y*p*3);
+					OpenGLM.translate(p*10, p*10, p*6.9F);
+					OpenGLM.translate(0,rots.y*p*3,-rots.y*p*3);
 					GL11U.glRotate(rots.y*40, 0, 0,0,0,-p*4);
 					GL11U.glScale(rots.z);
-					GL11.glTranslatef(-p*10, -p*10, -p*6.9F);
+					OpenGLM.translate(-p*10, -p*10, -p*6.9F);
 					
 					usb.draw();
-					GL11.glPopMatrix();
+					OpenGLM.popMatrix();
 				}
 					
 				GL11U.glRotate(rots.x,0,0, p*10.125F, p*9.75F, p*10F);
 				lever.draw();
-				GL11.glPopMatrix();
+				OpenGLM.popMatrix();
 			}
 		}),new GlState(new int[]{GL11.GL_TEXTURE_2D},new int[]{}));
 		
@@ -325,15 +334,15 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		usbModel[0].UVs[2]=new QuadUV(
 			w*51.2F,h*16,
 			w*51.2F,0,
-			0,      0,
-			0,      h*16
+			0,	  0,
+			0,	  h*16
 		).mirror1().rotate1();
 		usbModel[0].UVs[0]=usbModel[0].UVs[2].rotate1().mirror1();		
 		usbModel[0].UVs[1]=new QuadUV(
 			w*51.2F,h*32,
 			w*51.2F,h*16,
-			0,      h*16,
-			0,      h*32
+			0,	  h*16,
+			0,	  h*32
 		).mirror1();
 		usbModel[0].UVs[3]=usbModel[0].UVs[1].mirror1().rotate1();
 		
@@ -370,15 +379,15 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		usbModel[2].UVs[2]=new QuadUV(
 			w*51.2F,h*36,
 			w*51.2F,h*32,
-			0,      h*32,
-			0,      h*36
+			0,	  h*32,
+			0,	  h*36
 		).mirror1().rotate1();
 		usbModel[2].UVs[0]=usbModel[2].UVs[2].rotate1().mirror1();		
 		usbModel[2].UVs[1]=new QuadUV(
 			w*51.2F,h*40,
 			w*51.2F,h*36,
-			0,      h*36,
-			0,      h*40
+			0,	  h*36,
+			0,	  h*40
 		).mirror1();
 		usbModel[2].UVs[3]=usbModel[2].UVs[1].mirror1().rotate1();
 		
@@ -393,15 +402,15 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		
 		
 		usbModel[4].UVs[2]=new QuadUV(
-			w*67,    h*32.8F,
-			w*67,    h*32,
+			w*67,	h*32.8F,
+			w*67,	h*32,
 			w*51.2F, h*32,
 			w*51.2F, h*36
 		).mirror1().rotate1();
 		usbModel[4].UVs[0]=usbModel[4].UVs[2].rotate1().mirror1();		
 		usbModel[4].UVs[1]=new QuadUV(
-			w*67,    h*36.8F,
-			w*67,    h*36,
+			w*67,	h*36.8F,
+			w*67,	h*36,
 			w*51.2F, h*36,
 			w*51.2F, h*40
 		).mirror1();
@@ -474,14 +483,14 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		for(int i=0;i<6;i++)connectionsSides[i]=(coreSides[i]=i==or)&&tile.getConnections()[i].getMain();
 		
 		
-		GL11.glPushMatrix();
-		GL11.glTranslated(x,y,z);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(x,y,z);
 		
 		core.draw(coreSides);
 		connections.draw(connectionsSides);
 		
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 
 }

@@ -1,18 +1,23 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.awt.*;
+import java.awt.Color;
 
-import net.minecraft.client.gui.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.opengl.GL11;
 
-import org.apache.commons.lang3.*;
-import org.lwjgl.opengl.*;
-
-import com.magiology.forgepowered.packets.packets.generic.*;
-import com.magiology.handlers.animationhandlers.*;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
+import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 
 public class WingModeChangerHUD extends HUD{
 	public static WingModeChangerHUD instance=new WingModeChangerHUD();
@@ -52,12 +57,12 @@ public class WingModeChangerHUD extends HUD{
 		GL11U.setUpOpaqueRendering(1);
 		if(WingsFromTheBlackFireHandler.getIsActive(player)){
 			String poz=WingsFromTheBlackFireHandler.getPos(player)+"/"+Positions.get(WingsFromTheBlackFireHandler.getPosId(player));
-			GL11.glPushMatrix();
-			GL11.glTranslated(xScreen-fr.getStringWidth(poz)*0.7, yScreen-fr.FONT_HEIGHT*0.7,0);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(xScreen-fr.getStringWidth(poz)*0.7, yScreen-fr.FONT_HEIGHT*0.7,0);
 			GL11U.glScale(0.7);
 			Color c=new Color(255,255,255,(int)(255*UtilM.snap(calcAlpha+0.25, 0, 1)));
 			fr.drawStringWithShadow(poz, -1,-1, c.hashCode());
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		
 		if(calcAlpha<0.01){
@@ -72,12 +77,12 @@ public class WingModeChangerHUD extends HUD{
 			clipping=(float)((clipping*4.5)/Math.sqrt(clipping));
 			reducedScale-=clipping/200;
 		}
-		GL11.glTranslated(xScreen-width/2, -(validPoss.length)*(width/4), 0);
+		OpenGLM.translate(xScreen-width/2, -(validPoss.length)*(width/4), 0);
 		GL11U.glRotate(offset*6,-offset*9, 0);
-		GL11.glTranslated(-offset, -slide, 0);
+		OpenGLM.translate(-offset, -slide, 0);
 		if(clipping>0){
 			GL11U.glScale(reducedScale);
-			GL11.glTranslated(0, clipping/2F, 0);
+			OpenGLM.translate(0, clipping/2F, 0);
 		}
 		renderSlider();
 		GL11U.endOpaqueRendering();
@@ -103,8 +108,8 @@ public class WingModeChangerHUD extends HUD{
 				if(nj!=1)color=new Color(255,155,155,(int)(mainAlpha*(var==0?1:var==1?0.5:var==2?0.2:0.025)));
 				if(var==0)color=new Color(125,125,255);
 				
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				GL11.glColor4d(
+				OpenGLM.disableTexture2D();
+				OpenGLM.color(
 				nj==1?calcBackgroundColor[pozId][0]:1,nj==1?calcBackgroundColor[pozId][1]:0.7,nj==1?calcBackgroundColor[pozId][2]:0.7,0.4*calcAlpha*((color.getAlpha())/255F));
 				Renderer.POS.begin(GL11.GL_TRIANGLES);
 				for(int l=0;l<criclePoss.length-1;l++){
@@ -113,23 +118,23 @@ public class WingModeChangerHUD extends HUD{
 					Renderer.POS.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 				}
 				Renderer.POS.draw();
-				GL11.glColor4d(0.8,0.8,0.8,calcAlpha*((color.getAlpha())/255F));
-				GL11.glLineWidth(1.5F);
+				OpenGLM.color(0.8,0.8,0.8,calcAlpha*((color.getAlpha())/255F));
+				OpenGLM.lineWidth(1.5F);
 				Renderer.LINES.begin();
 				for(int l=0;l<criclePoss.length-1;l++){
 					Renderer.LINES.addVertex(criclePoss[l][0]*nextLineOffset, criclePoss[l][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 					Renderer.LINES.addVertex(criclePoss[l+1][0]*nextLineOffset, criclePoss[l+1][1]*nextLineOffset/2+fr.FONT_HEIGHT/2, 0);
 				}
 				Renderer.LINES.draw();
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
+				OpenGLM.enableTexture2D();
 				
 				String waring=player.motionY<-0.2&&(poz==Positions.NormalPos||poz==Positions.ProtectivePos)?"!! ":"";
-				GL11.glPushMatrix();
-				GL11.glTranslated(-fr.getStringWidth(poz.name())/2-fr.getStringWidth(waring), 0, 0);
+				OpenGLM.pushMatrix();
+				OpenGLM.translate(-fr.getStringWidth(poz.name())/2-fr.getStringWidth(waring), 0, 0);
 				fr.drawStringWithShadow(waring+poz.name(), 0,0, color.hashCode());
-				GL11.glPopMatrix();
+				OpenGLM.popMatrix();
 			}
-			GL11.glTranslated(0, nextLineOffset+2, 0);
+			OpenGLM.translate(0, nextLineOffset+2, 0);
 			id++;
 		}
 		if(player.fallDistance>4)for(int a=0;a<criclePoss.length;a++)for(int b=0;b<2;b++){

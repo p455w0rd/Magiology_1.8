@@ -1,5 +1,28 @@
 package com.magiology.util.utilclasses;
 
+import static com.mojang.realmsclient.gui.ChatFormatting.*;
+
+import java.awt.Color;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.google.common.collect.ImmutableMap;
 import com.magiology.core.Config;
 import com.magiology.core.MReference;
@@ -20,6 +43,7 @@ import com.magiology.util.utilobjects.vectors.Ray;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 import com.mojang.realmsclient.gui.ChatFormatting;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.client.Minecraft;
@@ -39,6 +63,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -48,21 +73,9 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.awt.*;
-import java.io.*;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
-import static com.mojang.realmsclient.gui.ChatFormatting.GOLD;
-import static com.mojang.realmsclient.gui.ChatFormatting.RESET;
 
 public class UtilM{
+
 	public class U extends UtilM{}
 
 	
@@ -70,15 +83,15 @@ public class UtilM{
 	static Random rand=new Random();
 	public static final float p=1F/16F;
 	@SideOnly(value=Side.CLIENT)
-    public static void spawnEntityFX(EntityFX particleFX){
+	public static void spawnEntityFX(EntityFX particleFX){
 		
 		if(isRemote(particleFX)){
 			Minecraft mc=U.getMC();
 			Entity ent=mc.getRenderViewEntity();
 			if(ent!=null&&mc.effectRenderer!=null){
 				int i=mc.gameSettings.particleSetting;
-	            double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
-	            if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>d9*d9)&&RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
+				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
+				if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>d9*d9)&&RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 			}
 		}
 	}
@@ -205,8 +218,8 @@ public class UtilM{
 		return stack!=null&&stack.getItem()==item;
 	}
 	/**
-     * Creates a x,y,z offset coordinate of a ball. (can create 2 coordinates)
-     * Args:x,y,z particle speed, size
+	 * Creates a x,y,z offset coordinate of a ball. (can create 2 coordinates)
+	 * Args:x,y,z particle speed, size
 	 * @param ballSize a
 	 * @param hasSecondPos a
 	 * @return a
@@ -225,20 +238,20 @@ public class UtilM{
 			result[5]=CricleUtil.cos(xRot)*CricleUtil.cos(yRot);//-Z-
 		}
 		for(int a=0;a<result.length;a++)result[a]*=ballSize;
-    	return result;
-    }
+		return result;
+	}
 	
 	public static ItemStack[] loadItemsFromNBT(NBTTagCompound NBTTC,String baseName,ItemStack[] stacks){
 		int NumberOfSlots=stacks.length;
 		NBTTagList list= NBTTC.getTagList(baseName+"Slots", 10);
 		stacks=new ItemStack[NumberOfSlots];
-    	for(int i=0;i<list.tagCount();i++){
-    		NBTTagCompound item=list.getCompoundTagAt(i);
-    		byte b=item.getByte(baseName);
-    		if(b>=0&&b<stacks.length){
-    			stacks[b]=ItemStack.loadItemStackFromNBT(item);
-    		}
-    	}
+		for(int i=0;i<list.tagCount();i++){
+			NBTTagCompound item=list.getCompoundTagAt(i);
+			byte b=item.getByte(baseName);
+			if(b>=0&&b<stacks.length){
+				stacks[b]=ItemStack.loadItemStackFromNBT(item);
+			}
+		}
 		return stacks;
 	}
 	public static void saveItemsToNBT(NBTTagCompound NBTTC,String baseName,ItemStack[] stacks){
@@ -295,7 +308,7 @@ public class UtilM{
 		else if(message instanceof AbstractToClientMessage){
 			AbstractToClientMessage msg=(AbstractToClientMessage)message;
 			if(msg.target!=null&&!msg.target.world.isRemote){
-				     if(msg.target.typeOfSending==TypeOfSending.ToPlayer)Magiology.NETWORK_CHANNEL.sendTo(message,(EntityPlayerMP)msg.target.player);
+					 if(msg.target.typeOfSending==TypeOfSending.ToPlayer)Magiology.NETWORK_CHANNEL.sendTo(message,(EntityPlayerMP)msg.target.player);
 				else if(msg.target.typeOfSending==TypeOfSending.ToAll)Magiology.NETWORK_CHANNEL.sendToAll(message);
 				else if(msg.target.typeOfSending==TypeOfSending.AroundPoint)Magiology.NETWORK_CHANNEL.sendToAllAround(msg, msg.target.point);
 				else if(msg.target.typeOfSending==TypeOfSending.ToDimension)Magiology.NETWORK_CHANNEL.sendToDimension(msg, msg.target.world.provider.getDimensionId());
@@ -338,7 +351,7 @@ public class UtilM{
 	}
 	public static void playSoundAtEntity(Object name,Entity entity,double volume,double pitch){
 		if(entity.worldObj.isRemote)return;
-        entity.worldObj.playSoundAtEntity(entity,(MReference.MODID+":"+name.toString()),(float)volume,(float)pitch);
+		entity.worldObj.playSoundAtEntity(entity,(MReference.MODID+":"+name.toString()),(float)volume,(float)pitch);
 	}
 	@SideOnly(value=Side.CLIENT)
 	public static int getFPS(){
@@ -463,10 +476,10 @@ public class UtilM{
 	}
 	
 	public static Vec3M getNormal(Vec3M point1,Vec3M point2,Vec3M point3){
-    	Vec3M angle1=point2.subtract(point1);
+		Vec3M angle1=point2.subtract(point1);
 		Vec3M angle2=point2.subtract(point3);
 		return angle2.crossProduct(angle1).normalize();
-    }
+	}
 	public static ColorF calculateRenderColor(ColorF prevColor, ColorF color){
 		return new ColorF(calculatePos(prevColor.r, color.r),
 						  calculatePos(prevColor.g, color.g),
@@ -479,20 +492,20 @@ public class UtilM{
 						  slowlyEqualize(variable.b, goal.b, speed),
 						  slowlyEqualize(variable.a, goal.a, speed));
 	}
-    public static Vec3M getPosition(EntityPlayer entity,float par1)
-    {
-        if (par1 == 1.0F)
-        {
-            return new Vec3M(entity.posX, entity.posY + (entity.getEyeHeight()), entity.posZ);
-        }
-        else
-        {
-            double d0=entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
-            double d1=entity.prevPosY + (entity.posY - entity.prevPosY) * par1 + (entity.getEyeHeight());
-            double d2=entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
-            return new Vec3M(d0, d1, d2);
-        }
-    }
+	public static Vec3M getPosition(EntityPlayer entity,float par1)
+	{
+		if (par1 == 1.0F)
+		{
+			return new Vec3M(entity.posX, entity.posY + (entity.getEyeHeight()), entity.posZ);
+		}
+		else
+		{
+			double d0=entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
+			double d1=entity.prevPosY + (entity.posY - entity.prevPosY) * par1 + (entity.getEyeHeight());
+			double d2=entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
+			return new Vec3M(d0, d1, d2);
+		}
+	}
 	public static String getStringForSize(String text, float allowedWidth){
 		if(text.isEmpty())return text;
 		String Return=""+text;
@@ -547,12 +560,12 @@ public class UtilM{
 		return false;
 	}
 	public static EntityItem dropBlockAsItem(World world, double x, double y, double z, ItemStack stack){
-	    if(!world.isRemote&&!world.restoringBlockSnapshots){
-	        EntityItem entity=new EntityItem(world,x,y,z,stack);
-	        entity.setPickupDelay(0);
-	        spawnEntity(entity);
-	        return entity;
-	    }
+		if(!world.isRemote&&!world.restoringBlockSnapshots){
+			EntityItem entity=new EntityItem(world,x,y,z,stack);
+			entity.setPickupDelay(0);
+			spawnEntity(entity);
+			return entity;
+		}
 		return null;
 	}
 	public static boolean AxisAlignedBBEqual(AxisAlignedBB box1, AxisAlignedBB box2){
@@ -693,12 +706,12 @@ public class UtilM{
 		PrintUtil.println(endTime());
 	}
 	public static <T, E> T getMapKey(Map<T, E> map, E value){
-	    for(Entry<T, E> entry : map.entrySet()){
-	        if(Objects.equals(value, entry.getValue())){
-	            return entry.getKey();
-	        }
-	    }
-	    return null;
+		for(Entry<T, E> entry : map.entrySet()){
+			if(Objects.equals(value, entry.getValue())){
+				return entry.getKey();
+			}
+		}
+		return null;
 	}
 	public static <T, E> Set<T> getMapKeySet(Map<T, E> map, E value){
 		return 
@@ -746,5 +759,25 @@ public class UtilM{
 		
 		for(int i=0;i<strings.length;i++)result[i]=new Vec2i(columnOffsets[(i/lines)%columns], (i%lines)*(fr.FONT_HEIGHT+marginY)+marginY);
 		return result;
+	}
+
+	public static float sin(float a){
+		return (float)Math.toDegrees(Math.sin(a));
+	}
+	public static double cos(double a){
+		return Math.toDegrees(MathHelper.cos((float)a));
+	}
+
+	public static float normaliseDegrees(float angle){
+		boolean isNegative=angle<0;
+		int negative=isNegative?-1:1;
+		float positiveAngle=angle*negative;
+		if(positiveAngle<360)return angle;
+		if(isNegative){
+			while(angle<360)angle+=360;
+		}else{
+			while(angle>=360)angle-=360;
+		}
+		return angle;
 	}
 }

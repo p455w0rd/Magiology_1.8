@@ -1,16 +1,18 @@
 package com.magiology.mcobjects.effect;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.client.renderer.*;
-import net.minecraft.world.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.world.World;
 
 public class EntitySparkFX extends EntityFXM{
 	
@@ -39,21 +41,21 @@ public class EntitySparkFX extends EntityFXM{
 	
 	@Override
 	public void render(){
-		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDisable(GL11.GL_CULL_FACE);
+		OpenGLM.pushMatrix();
+		OpenGLM.disableTexture2D();
+		OpenGLM.disableCull();
 		GL11U.setUpOpaqueRendering(1);
 		float x=(float)(this.prevPosX+(this.posX-this.prevPosX)*par2-interpPosX);
-    	float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
-    	float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
-    	GL11.glTranslatef(x,y,z);
+		float y=(float)(this.prevPosY+(this.posY-this.prevPosY)*par2-interpPosY);
+		float z=(float)(this.prevPosZ+(this.posZ-this.prevPosZ)*par2-interpPosZ);
+		OpenGLM.translate(x,y,z);
 		
 		for(Fragment fragment:fragments)fragment.render();
 		
 		
-		GL11.glPopMatrix();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		OpenGLM.popMatrix();
+		OpenGLM.enableTexture2D();
+		OpenGLM.enableCull();
 		GL11U.endOpaqueRendering();
 	}
 	@Override
@@ -160,7 +162,7 @@ public class EntitySparkFX extends EntityFXM{
 		}
 		public void render(){
 			float[] root=getRootOffset(),end=UtilM.addToFloatArray(root,new float[]{-xOffset,-yOffset,-zOffset});
-			GL11.glColor4f(r.getPoint(),g.getPoint(),b.getPoint(),a.getPoint());
+			OpenGLM.color(r.getPoint(),g.getPoint(),b.getPoint(),a.getPoint());
 			TessUtil.drawLine(root[0],root[1],root[2], end[0],end[1],end[2], fragmentWidth, false, null, 0, 0);
 		}
 	}

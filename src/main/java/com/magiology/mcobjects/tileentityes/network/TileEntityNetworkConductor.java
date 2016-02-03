@@ -1,16 +1,18 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import com.magiology.api.connection.IConnection;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.skeleton.TileEntityNetwork;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.api.network.skeleton.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 
 public class TileEntityNetworkConductor extends TileEntityNetwork implements ITickable{
 	
@@ -45,7 +47,7 @@ public class TileEntityNetworkConductor extends TileEntityNetwork implements ITi
 				connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
 				connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
 				connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
-				                     getExpectedColisionBoxes()[6]
+									 getExpectedColisionBoxes()[6]
 		};
 	}
 	@Override

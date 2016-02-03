@@ -1,18 +1,25 @@
 package com.magiology.mcobjects.tileentityes.corecomponents.powertiles;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.api.power.*;
+import com.magiology.api.power.ISidedPower;
+import com.magiology.api.power.PowerCore;
+import com.magiology.api.power.PowerUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
+import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 
 public abstract class TileEntityPow extends TileEntityConnectionProvider implements ISidedPower,PowerUpgrades,ITickable{
 	public int currentEnergy=0,maxTSpeed=0,middleTSpeed=0,minTSpeed=1,maxEnergyBuffer=0;
@@ -40,36 +47,36 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		this.maxEnergyBuffer=maxEnergyBuffer;
 	}
 	
-    @Override
+	@Override
 	public void readFromNBT(NBTTagCompound NBTTC){
 		super.readFromNBT(NBTTC);
-        currentEnergy = NBTTC.getInteger("energy");
-        
-        containerItems=new ItemStack[NumberOfContainerSlots];
-        containerItems=UtilM.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
-    }
-    
-    @Override
+		currentEnergy = NBTTC.getInteger("energy");
+		
+		containerItems=new ItemStack[NumberOfContainerSlots];
+		containerItems=UtilM.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
+	}
+	
+	@Override
 	public void writeToNBT(NBTTagCompound NBTTC){
 		super.writeToNBT(NBTTC);
-    	NBTTC.setInteger("energy", currentEnergy);
-    	if(containerItems!=null){
-    		UtilM.saveItemsToNBT(NBTTC, "TEMT", containerItems);
-        }
-    }
-    
-    
-    @Override
+		NBTTC.setInteger("energy", currentEnergy);
+		if(containerItems!=null){
+			UtilM.saveItemsToNBT(NBTTC, "TEMT", containerItems);
+		}
+	}
+	
+	
+	@Override
 	public void initUpgrades(Container containe){
-    	container=containe;
+		container=containe;
 		NumberOfContainerSlots=container.getNumberOfTypes();
 		setUpgradeSlots();
-    }
-    
-    public void setUpgradeSlots(){
-    	if(NumberOfContainerSlots>0)containerItems=new ItemStack[NumberOfContainerSlots];
-    }
-    
+	}
+	
+	public void setUpgradeSlots(){
+		if(NumberOfContainerSlots>0)containerItems=new ItemStack[NumberOfContainerSlots];
+	}
+	
 	public boolean isTPipe(BlockPos pos){
 		return worldObj.getTileEntity(pos)instanceof TileEntityFirePipe;
 	}
@@ -94,14 +101,14 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 	public void addEnergy(int amount){currentEnergy+=amount;}
 	@Override
 	public void subtractEnergy(int amount){currentEnergy-=amount;}
-    
-    @Override
+	
+	@Override
 	public boolean isUpgradeInInv(Item item){
-    	for(int a=0;a<NumberOfContainerSlots;a++){
-    		if(UtilM.isItemInStack(item, containerItems[a]))return true;
-    	}
-    	return false;
-    }
+		for(int a=0;a<NumberOfContainerSlots;a++){
+			if(UtilM.isItemInStack(item, containerItems[a]))return true;
+		}
+		return false;
+	}
 	@Override
 	public Container getContainer(){
 		return container;

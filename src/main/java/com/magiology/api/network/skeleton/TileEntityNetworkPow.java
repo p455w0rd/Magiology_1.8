@@ -1,21 +1,24 @@
 package com.magiology.api.network.skeleton;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
-
-import com.magiology.api.network.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.blocks.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
+import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 
 public abstract class TileEntityNetworkPow extends TileEntityPow implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public boolean[] accessibleSides={true,true,true,true,true,true};
@@ -147,7 +150,7 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 				connections[3].getMain()?getExpectedColisionBoxes()[3]:null,
 				connections[0].getMain()?getExpectedColisionBoxes()[4]:null,
 				connections[4].getMain()?getExpectedColisionBoxes()[5]:null,
-				                     getExpectedColisionBoxes()[6]
+									 getExpectedColisionBoxes()[6]
 		};
 	}
 	
@@ -189,8 +192,8 @@ public abstract class TileEntityNetworkPow extends TileEntityPow implements Mult
 			new AxisAlignedBB(0,   p*6, p*6, p*6,  p*10, p*10),
 			new AxisAlignedBB(p*6, 0,   p*6, p*10, p*6,  p*10),
 			new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*6 ),
-			new AxisAlignedBB(p*10,p*6, p*6, 1,    p*10, p*10),
-			new AxisAlignedBB(p*6, p*10,p*6, p*10, 1,    p*10),
+			new AxisAlignedBB(p*10,p*6, p*6, 1,	p*10, p*10),
+			new AxisAlignedBB(p*6, p*10,p*6, p*10, 1,	p*10),
 			new AxisAlignedBB(p*6, p*6, p*10,p*10, p*10, 1   ),
 			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10)
 	};

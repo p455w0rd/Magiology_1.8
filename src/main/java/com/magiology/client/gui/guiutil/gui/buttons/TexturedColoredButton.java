@@ -1,16 +1,16 @@
 package com.magiology.client.gui.guiutil.gui.buttons;
 
-import java.awt.*;
+import java.awt.Color;
 
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
+import com.magiology.client.gui.custom.hud.HUD;
+import com.magiology.client.render.Textures;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.gui.custom.hud.*;
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 
 public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
@@ -39,35 +39,35 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	}
 	@Override
 	public void drawButton(Minecraft p_146112_1_, int x, int y){
-        if (this.visible){
+		if (this.visible){
 			float r=UtilM.calculatePos(prevR, this.r),g=UtilM.calculatePos(prevG, this.g),b=UtilM.calculatePos(prevB, this.b),alpha=UtilM.calculatePos(prevAlpha, this.alpha);
-            FontRenderer fr = TessUtil.getFontRenderer();
-            p_146112_1_.getTextureManager().bindTexture(Textures.ISidedIns);
-            this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;
-            GL11U.setUpOpaqueRendering(1);
+			FontRenderer fr = TessUtil.getFontRenderer();
+			p_146112_1_.getTextureManager().bindTexture(Textures.ISidedIns);
+			this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;
+			GL11U.setUpOpaqueRendering(1);
 
-            GL11.glColor4f(r,g,b,1);
-            HUD.drawRect(1F/512F,1F/512F,this.xPosition, this.yPosition, 352, 72+20, this.width / 2, this.height);
-	        HUD.drawRect(1F/512F,1F/512F,this.xPosition + this.width / 2, this.yPosition, 424-width/2, 72+20, this.width / 2, this.height);
+			OpenGLM.color(r,g,b,1);
+			HUD.drawRect(1F/512F,1F/512F,this.xPosition, this.yPosition, 352, 72+20, this.width / 2, this.height);
+			HUD.drawRect(1F/512F,1F/512F,this.xPosition + this.width / 2, this.yPosition, 424-width/2, 72+20, this.width / 2, this.height);
 
-            GL11.glColor4f(r,g,b,alpha);
-	        HUD.drawRect(1F/512F,1F/512F,this.xPosition, this.yPosition, 352, 72 + 40, this.width / 2, this.height);
-	        HUD.drawRect(1F/512F,1F/512F,this.xPosition + this.width / 2, this.yPosition, 424-width/2, 72+  40, this.width / 2, this.height);
-            
-            this.mouseDragged(p_146112_1_, x, y);
-            int l = 14737632;
-            if (packedFGColour != 0)l = packedFGColour;
-            else if (!this.enabled)l = 10526880;
-            else if (this.hovered)l = 16777120;
-            
-            float[] rgb=UtilM.codeToRGBABPercentage(l);
-            
-            rgb[0]=(rgb[0]+r)/2F;
-            rgb[1]=(rgb[1]+g)/2F;
-            rgb[2]=(rgb[2]+b)/2F;
-            
-            this.drawCenteredString(fr, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, new Color(r,g,b,alpha).hashCode());
-            GL11U.endOpaqueRendering();
-        }
-    }
+			OpenGLM.color(r,g,b,alpha);
+			HUD.drawRect(1F/512F,1F/512F,this.xPosition, this.yPosition, 352, 72 + 40, this.width / 2, this.height);
+			HUD.drawRect(1F/512F,1F/512F,this.xPosition + this.width / 2, this.yPosition, 424-width/2, 72+  40, this.width / 2, this.height);
+			
+			this.mouseDragged(p_146112_1_, x, y);
+			int l = 14737632;
+			if (packedFGColour != 0)l = packedFGColour;
+			else if (!this.enabled)l = 10526880;
+			else if (this.hovered)l = 16777120;
+			
+			float[] rgb=UtilM.codeToRGBABPercentage(l);
+			
+			rgb[0]=(rgb[0]+r)/2F;
+			rgb[1]=(rgb[1]+g)/2F;
+			rgb[2]=(rgb[2]+b)/2F;
+			
+			this.drawCenteredString(fr, this.displayString, this.xPosition + this.width / 2, this.yPosition + (this.height - 8) / 2, new Color(r,g,b,alpha).hashCode());
+			GL11U.endOpaqueRendering();
+		}
+	}
 }

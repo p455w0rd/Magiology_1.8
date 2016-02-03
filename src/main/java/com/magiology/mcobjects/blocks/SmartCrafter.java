@@ -1,17 +1,20 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-
-import com.magiology.core.init.*;
-import com.magiology.handlers.*;
-import com.magiology.mcobjects.tileentityes.*;
+import com.magiology.core.init.MGui;
+import com.magiology.handlers.GuiHandlerM;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class SmartCrafter extends BlockContainer {
 //	implements ISimpleBlockRenderingHandler
@@ -30,7 +33,7 @@ public class SmartCrafter extends BlockContainer {
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
-        
+		
 		if(!world.isRemote){
 			GuiHandlerM.openGui(player, MGui.GuiSC, pos);
 		}else{
@@ -38,7 +41,7 @@ public class SmartCrafter extends BlockContainer {
 		}
 		
 		return true;
-    }
+	}
 	
 	 @Override
 	 public AxisAlignedBB getCollisionBoundingBox(World world, BlockPos pos, IBlockState state){

@@ -1,15 +1,18 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import net.minecraft.client.resources.model.*;
-import net.minecraft.item.*;
-import net.minecraftforge.client.model.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.core.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.core.MReference;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemM extends Item{
 

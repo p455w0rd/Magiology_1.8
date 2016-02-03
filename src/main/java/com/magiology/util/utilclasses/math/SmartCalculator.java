@@ -2,12 +2,13 @@ package com.magiology.util.utilclasses.math;
 
 import static java.lang.Math.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.lang3.*;
+import org.apache.commons.lang3.StringUtils;
 
 import com.magiology.util.utilclasses.math.ObjectCalculator.Calculator;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 
 public class SmartCalculator{
@@ -166,11 +167,9 @@ public class SmartCalculator{
 			if(format.contains(sub+""))varLenght=min(varLenght, format.indexOf(sub));
 			if(format.contains(")"))varLenght=min(varLenght, format.indexOf(")"));
 			if(varLenght==9999999)varLenght=format.length();
-			if(varLenght!=normalLenght&&varLenght!=arrayLenght)throw new IllegalStateException("Invalid variable! "+format+" lenght "+varLenght);
-			
-			Variable result=new Variable(format.substring(0,varLenght));
-			
-			return result;
+			if(varLenght!=normalLenght&&varLenght!=arrayLenght)throw new IllegalStateException("Invalid variable! "+format+" length "+varLenght);
+
+			return new Variable(format.substring(0,varLenght));
 		}
 		@Override
 		public String toString(){

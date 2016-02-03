@@ -1,9 +1,8 @@
 package com.magiology.client.gui.custom.hud;
 
-import net.minecraft.entity.player.*;
+import com.magiology.util.renderers.Renderer;
 
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
+import net.minecraft.entity.player.EntityPlayer;
 
 public abstract class HUD{
 	public EntityPlayer player;
@@ -12,9 +11,9 @@ public abstract class HUD{
 		Renderer.POS_UV.beginQuads();
 		Renderer.POS_UV.addVertex(xPos + 0, yPos + ySize, 0, (float)(xTextureOffset + 0) * xPngSize, (float)(yTextureOffset + ySize) * yPngSize);
 		Renderer.POS_UV.addVertex(xPos + xSize, yPos + ySize, 0, (float)(xTextureOffset + xSize) * xPngSize, (float)(yTextureOffset + ySize) * yPngSize);
-        Renderer.POS_UV.addVertex(xPos + xSize, yPos + 0, 0, (float)(xTextureOffset + xSize) * xPngSize, (float)(yTextureOffset + 0) * yPngSize);
-        Renderer.POS_UV.addVertex(xPos + 0, yPos + 0, 0, (float)(xTextureOffset + 0) * xPngSize, (float)(yTextureOffset + 0) * yPngSize);
-        Renderer.POS_UV.draw();
+		Renderer.POS_UV.addVertex(xPos + xSize, yPos + 0, 0, (float)(xTextureOffset + xSize) * xPngSize, (float)(yTextureOffset + 0) * yPngSize);
+		Renderer.POS_UV.addVertex(xPos + 0, yPos + 0, 0, (float)(xTextureOffset + 0) * xPngSize, (float)(yTextureOffset + 0) * yPngSize);
+		Renderer.POS_UV.draw();
 	}
 	public void update(){}
 }

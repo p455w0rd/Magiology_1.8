@@ -1,7 +1,8 @@
 package com.magiology.mcobjects.tileentityes.hologram.interactions;
 
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.mcobjects.tileentityes.hologram.Slider;
+import com.magiology.util.utilobjects.ObjectHolder;
 
 public class InteractionSlide<Host extends HoloObject> extends AbstractInteraction<Host>{
 	

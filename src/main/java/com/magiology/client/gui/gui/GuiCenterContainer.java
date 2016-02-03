@@ -1,21 +1,21 @@
 package com.magiology.client.gui.gui;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.*;
-import com.magiology.core.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.client.gui.container.CommandCenterContainer;
+import com.magiology.core.MReference;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.NBTUtil;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiCenterContainer extends GuiContainer implements Updateable{
 	

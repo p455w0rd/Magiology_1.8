@@ -1,14 +1,17 @@
 package com.magiology.api.network.interfaces.registration;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import net.minecraft.block.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.api.network.BasicWorldNetworkInterface;
+import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.api.network.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 public class InterfaceRegistration{
 	

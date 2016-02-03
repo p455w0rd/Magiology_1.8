@@ -1,14 +1,14 @@
 package com.magiology.mcobjects.items;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.world.*;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 public class PowerCounter extends ItemM{
 	public PowerCounter(){
 		   super();

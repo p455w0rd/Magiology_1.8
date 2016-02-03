@@ -1,15 +1,16 @@
 package com.magiology.client.render.entityrender;
 
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.util.renderers.*;
+import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
 
 public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 	public EntitySubatomicWorldDeconstructorRenderer(float scale){
@@ -26,19 +27,19 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 		try{
 			EntitySubatomicWorldDeconstructor entity=(EntitySubatomicWorldDeconstructor)en;
 			EntityPlayer player=U.getMC().thePlayer;
-			GL11.glPushMatrix();
-			GL11.glTranslatef(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*partialTicks),
 					-(float)(player.lastTickPosY+(player.posY-player.lastTickPosY)*partialTicks), 
 					-(float)(player.lastTickPosZ+(player.posZ-player.lastTickPosZ)*partialTicks));
-//			GL11.glTranslated(entity.posX, entity.posY, entity.posZ);
-			GL11.glTranslatef((float)(entity.lastTickPosX+(entity.posX-entity.lastTickPosX)*partialTicks),
+//			OpenGLM.translate(entity.posX, entity.posY, entity.posZ);
+			OpenGLM.translate((float)(entity.lastTickPosX+(entity.posX-entity.lastTickPosX)*partialTicks),
 					(float)(entity.lastTickPosY+(entity.posY-entity.lastTickPosY)*partialTicks), 
 					(float)(entity.lastTickPosZ+(entity.posZ-entity.lastTickPosZ)*partialTicks));
 			float size=0.1F;
 			AxisAlignedBB cube=new AxisAlignedBB(-size,-size,-size,size,size,size+1);
 //			GL11H.SetUpOpaqueRendering(1);
-			GL11.glDisable(GL11.GL_TEXTURE_2D);
-			GL11.glColor4d(0.5, 0.5,1,1);
+			OpenGLM.disableTexture2D();
+			OpenGLM.color(0.5, 0.5,1,1);
 			
 //			if(entity.targetHit){
 //				for(int a=0;a<15;a++){
@@ -52,9 +53,9 @@ public class EntitySubatomicWorldDeconstructorRenderer extends Render{
 			TessUtil.drawCube(cube);
 			
 //			GL11H.EndOpaqueRendering();
-			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			OpenGLM.enableTexture2D();
 			
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}catch(Exception e){
 			
 		}

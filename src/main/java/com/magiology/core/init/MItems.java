@@ -1,12 +1,22 @@
 package com.magiology.core.init;
 
 import com.magiology.core.MReference;
-import com.magiology.mcobjects.items.*;
+import com.magiology.mcobjects.items.BedrockDust;
+import com.magiology.mcobjects.items.EquivalentRightClickWandOfMagic;
+import com.magiology.mcobjects.items.FireBarrel;
+import com.magiology.mcobjects.items.FireHammer;
+import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.mcobjects.items.IPowerSidenessInstructor;
+import com.magiology.mcobjects.items.NetworkPointer;
+import com.magiology.mcobjects.items.PowerCounter;
+import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.mcobjects.items.TheHand;
 import com.magiology.mcobjects.items.armor.CyborgWingsFromTheBlackFireItem;
 import com.magiology.mcobjects.items.armor.Helmet_42;
 import com.magiology.mcobjects.items.armor.Pants_42;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraftforge.common.util.EnumHelper;
@@ -28,7 +38,7 @@ public class MItems{
 	
 	//armor Item/Material references
 	public static ArmorMaterial pants_42A,helmet_42A,WingsFTBFA;
-	public static Item          pants_42I,helmet_42I,WingsFTBFI;
+	public static Item		  pants_42I,helmet_42I,WingsFTBFI;
 	
 	public static void preInit(){
 		register();

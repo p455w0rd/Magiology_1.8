@@ -1,27 +1,34 @@
 package com.magiology.client.render.shaders.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.shader.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraftforge.client.event.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
+
+import com.magiology.client.render.shaders.BlurRenderer;
+import com.magiology.client.render.shaders.ColorCutRenderer;
+import com.magiology.client.render.shaders.ColorRenderer;
+import com.magiology.core.Config;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.fml.common.eventhandler.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import org.apache.commons.lang3.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
-
-import com.magiology.client.render.shaders.*;
-import com.magiology.core.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilclasses.UtilM.U;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ShaderRunner{
 	
@@ -78,9 +85,9 @@ public class ShaderRunner{
 			GL11.glMatrixMode(5890);
 			GL11.glLoadIdentity();
 			for(ShaderGroup sg:shaderGroups.values()){
-				GL11.glPushMatrix();
+				OpenGLM.pushMatrix();
 				try{sg.loadShaderGroup(event.partialTicks);}catch(Exception e){e.printStackTrace();}
-				GL11.glPopMatrix();
+				OpenGLM.popMatrix();
 			}
 			mc.getFramebuffer().bindFramebuffer(true);
 		}

@@ -1,14 +1,14 @@
 package com.magiology.util.utilobjects;
 
-import com.magiology.util.utilclasses.UtilM;
-import org.lwjgl.opengl.GL11;
+import java.awt.Color;
 
-import java.awt.*;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.utilclasses.UtilM;
 
 public class ColorF{
 	public static final ColorF 
-		BLACK     =ColorF.convert(Color.BLACK),
-		BLUE      =ColorF.convert(Color.BLUE),
+		BLACK	 =ColorF.convert(Color.BLACK),
+		BLUE	  =ColorF.convert(Color.BLUE),
 		CYAN	  =ColorF.convert(Color.CYAN),
 		DARK_GRAY =ColorF.convert(Color.DARK_GRAY),
 		GRAY	  =ColorF.convert(Color.GRAY),
@@ -42,7 +42,7 @@ public class ColorF{
 		return new ColorF(r,g,b,1);
 	}
 	public void bind(){
-		GL11.glColor4f(r,g,b,a);
+		OpenGLM.color(r,g,b,a);
 	}
 	public int toCode(){
 		return new Color(r,g,b,a).hashCode();

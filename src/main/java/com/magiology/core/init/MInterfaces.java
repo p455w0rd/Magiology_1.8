@@ -1,8 +1,8 @@
 package com.magiology.core.init;
 
-import com.magiology.api.network.interfaces.registration.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.mcobjects.tileentityes.network.interfaces.*;
+import com.magiology.api.network.interfaces.registration.InterfaceRegistration;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.network.interfaces.TileHologramProjectorInterface;
 
 public class MInterfaces{
 	public static void init(){

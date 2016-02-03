@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.world.*;
+import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
 
-import com.magiology.mcobjects.tileentityes.*;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BFCPowerOut extends BlockContainer {
 	

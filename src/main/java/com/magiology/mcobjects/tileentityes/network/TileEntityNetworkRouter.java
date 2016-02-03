@@ -1,26 +1,33 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
+import com.magiology.api.connection.IConnection;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.Messageable;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.skeleton.TileEntityNetwork;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.mcobjects.items.NetworkPointer;
+import com.magiology.util.renderers.PartialTicks1F;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.api.network.skeleton.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.mcobjects.items.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 
 public class TileEntityNetworkRouter extends TileEntityNetwork implements ISidedInventory,ITickable{
 	
@@ -36,12 +43,12 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	
 	public TileEntityNetworkRouter(){
 		expectedBoxes=new AxisAlignedBB[]{
-				new AxisAlignedBB(0,      p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F),
-				new AxisAlignedBB(p*6.5F, 0,      p*6.5F, p*9.5F, p*6.5F, p*9.5F),
-				new AxisAlignedBB(p*6.5F, p*6.5F, 0,      p*9.5F, p*9.5F, p*6.5F),
-				new AxisAlignedBB(p*9.5F, p*6.5F, p*6.5F, 1,      p*9.5F, p*9.5F),
-				new AxisAlignedBB(p*6.5F, p*9.5F, p*6.5F, p*9.5F, 1,      p*9.5F),
-				new AxisAlignedBB(p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F, 1     ),
+				new AxisAlignedBB(0,	  p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F),
+				new AxisAlignedBB(p*6.5F, 0,	  p*6.5F, p*9.5F, p*6.5F, p*9.5F),
+				new AxisAlignedBB(p*6.5F, p*6.5F, 0,	  p*9.5F, p*9.5F, p*6.5F),
+				new AxisAlignedBB(p*9.5F, p*6.5F, p*6.5F, 1,	  p*9.5F, p*9.5F),
+				new AxisAlignedBB(p*6.5F, p*9.5F, p*6.5F, p*9.5F, 1,	  p*9.5F),
+				new AxisAlignedBB(p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F, 1	 ),
 				new AxisAlignedBB(p*5, p*5, p*5, p*11, p*11, p*11)
 			}; 
 	}

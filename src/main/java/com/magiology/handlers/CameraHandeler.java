@@ -1,8 +1,8 @@
 package com.magiology.handlers;
 
-import net.minecraft.entity.*;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.util.utilclasses.*;
+import net.minecraft.entity.EntityLivingBase;
 
 public class CameraHandeler{
 	

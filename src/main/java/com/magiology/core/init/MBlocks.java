@@ -1,13 +1,37 @@
 package com.magiology.core.init;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.*;
-import net.minecraftforge.fml.common.registry.*;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.blocks.BFCPowerOut;
+import com.magiology.mcobjects.blocks.BateryGeneric;
+import com.magiology.mcobjects.blocks.BedrockBreaker;
+import com.magiology.mcobjects.blocks.BigFurnaceCore;
+import com.magiology.mcobjects.blocks.ControlBlock;
+import com.magiology.mcobjects.blocks.DontLookAtMe;
+import com.magiology.mcobjects.blocks.EnergizedLapisOre;
+import com.magiology.mcobjects.blocks.FakeAir;
+import com.magiology.mcobjects.blocks.HologramProjector;
+import com.magiology.mcobjects.blocks.OreLevelX;
+import com.magiology.mcobjects.blocks.OreStructureCore;
+import com.magiology.mcobjects.blocks.ParticleLauncher;
+import com.magiology.mcobjects.blocks.PileODust;
+import com.magiology.mcobjects.blocks.RareSpacePipe;
+import com.magiology.mcobjects.blocks.RemotePowerCounter;
+import com.magiology.mcobjects.blocks.SmartCrafter;
+import com.magiology.mcobjects.blocks.fire.FireExhaust;
+import com.magiology.mcobjects.blocks.fire.FireGun;
+import com.magiology.mcobjects.blocks.fire.FireLamp;
+import com.magiology.mcobjects.blocks.fire.FireMatrixReceaver;
+import com.magiology.mcobjects.blocks.fire.FireMatrixTransferer;
+import com.magiology.mcobjects.blocks.fire.FirePipe;
+import com.magiology.mcobjects.blocks.network.NetworkCommandHolder;
+import com.magiology.mcobjects.blocks.network.NetworkConductor;
+import com.magiology.mcobjects.blocks.network.NetworkController;
+import com.magiology.mcobjects.blocks.network.NetworkInterface;
+import com.magiology.mcobjects.blocks.network.NetworkRouter;
 
-import com.magiology.core.*;
-import com.magiology.mcobjects.blocks.*;
-import com.magiology.mcobjects.blocks.fire.*;
-import com.magiology.mcobjects.blocks.network.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class MBlocks{
 

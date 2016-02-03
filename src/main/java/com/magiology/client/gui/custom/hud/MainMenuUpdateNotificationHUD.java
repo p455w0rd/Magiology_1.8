@@ -2,23 +2,31 @@ package com.magiology.client.gui.custom.hud;
 
 import static com.magiology.core.MReference.*;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Desktop;
+import java.awt.Rectangle;
+import java.io.File;
 
-import org.apache.commons.lang3.*;
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 
-import com.magiology.client.gui.custom.*;
-import com.magiology.core.*;
-import com.magiology.handlers.web.*;
-import com.magiology.io.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.gui.custom.DownloadingIcon;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.handlers.web.DownloadingHandler;
+import com.magiology.io.IOReadableMap;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsVec3F;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class MainMenuUpdateNotificationHUD extends HUD{
 	
@@ -160,18 +168,18 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		GL11U.glRotate(x,y,z, biggest/2, FH, 0);
 		if(button.getPoint()>0){
 			Rectangle boundingBoxClick=getBoundingBoxClick(true);
-			GL11.glColor4f(1, 0F, 0F, button.getPoint());
+			OpenGLM.color(1, 0F, 0F, button.getPoint());
 			drawRect(1, 1, boundingBoxClick.getMinX(), boundingBoxClick.getMinY(), 0, 0, boundingBoxClick.getWidth(), boundingBoxClick.getHeight());
 		}
-		GL11.glTranslatef(4, 4, 0);
+		OpenGLM.translate(4, 4, 0);
 		backgroundColor.a=0.2F+0.3F*backgroundBlue.getPoint();
 		backgroundColor.b=backgroundBlue.getPoint();
 		GL11U.glColor(backgroundColor);
 		//input vertices
-		buff.addVertexWithUV(0,                 0,                  0, 0, 0);
-		buff.addVertexWithUV(0,                 boundingBox.height, 0, 0, 0);
+		buff.addVertexWithUV(0,				 0,				  0, 0, 0);
+		buff.addVertexWithUV(0,				 boundingBox.height, 0, 0, 0);
 		buff.addVertexWithUV(boundingBox.width, boundingBox.height, 0, 0, 0);
-		buff.addVertexWithUV(boundingBox.width, 0,                  0, 0, 0);
+		buff.addVertexWithUV(boundingBox.width, 0,				  0, 0, 0);
 		//do not kill them
 		buff.setClearing(false);
 		//draw the quad
@@ -180,17 +188,17 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		buff.setClearing(true);
 		buff.setDrawAsWire(true);
 		//and color them
-		GL11.glColor4f(0, 0, 0, 0.4F+backgroundBlue.getPoint()*0.6F);
+		OpenGLM.color(0, 0, 0, 0.4F+backgroundBlue.getPoint()*0.6F);
 		//JUST DO IT!!
 		buff.draw();
 		//dam that was messed up
 		buff.setDrawAsWire(false);
-		GL11.glColor4f(1,1,1,1);
+		OpenGLM.color(1,1,1,1);
 		//reset stuff for font rendering
 		GL11U.texture(true);
 		//move text get out of the way. Get out of the way text get out of the way.
 		
-		GL11.glTranslatef(2, 2, 0);
+		OpenGLM.translate(2, 2, 0);
 		
 		//draw text
 		for(int i=0;i<text.length;i++){
@@ -200,9 +208,9 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 			}
 		}
 		if(down.point>-0.1){
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0, 110, 0);
+			OpenGLM.popMatrix();
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(0, 110, 0);
 			GL11U.glScale(0.2);
 			GL11U.glRotate(-down.getPoint()*90+90, down.getPoint()*50-50, down.getPoint()*40-40, 85, 200, 0);
 			GL11U.glScale(down.getPoint());

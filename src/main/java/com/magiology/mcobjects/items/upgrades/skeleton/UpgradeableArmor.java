@@ -2,20 +2,22 @@ package com.magiology.mcobjects.items.upgrades.skeleton;
 
 import static com.magiology.util.utilclasses.FontEffectUtil.*;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.*;
-
-import com.magiology.mcobjects.items.*;
-import com.magiology.mcobjects.items.upgrades.*;
+import com.magiology.mcobjects.items.GenericItemUpgrade;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.NBTUtil;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	public static String slotNBT="someSlot";
@@ -52,9 +54,9 @@ public class UpgradeableArmor extends ItemArmor implements UpgItem{
 	
 	@Override
 	public void initUpgrade(Container containe){
-    	container=containe;
+		container=containe;
 		NumberOfContainerSlots=container.getNumberOfTypes();
-    }
+	}
 
 	@Override
 	public Container getContainer(){

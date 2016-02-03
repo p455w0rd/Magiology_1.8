@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.util.*;
-
-import com.magiology.core.init.*;
+import com.magiology.core.init.MBlocks;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.util.ITickable;
 
 public class TileEntityFireExhaust extends TileEntityM implements ITickable{
 	

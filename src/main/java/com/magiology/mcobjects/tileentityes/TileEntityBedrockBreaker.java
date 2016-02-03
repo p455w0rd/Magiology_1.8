@@ -1,15 +1,20 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.init.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.mcobjects.effect.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.effect.EntityFacedFX;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityBedrockBreaker extends TileEntityM implements ITickable{
 	EffectRenderer efrenderer = Get.Render.ER();
@@ -116,10 +121,10 @@ public class TileEntityBedrockBreaker extends TileEntityM implements ITickable{
 
 	@Override
 	@SideOnly(Side.CLIENT)
-    public double getMaxRenderDistanceSquared()
-    {
-        return 4096.0D;
-    }
+	public double getMaxRenderDistanceSquared()
+	{
+		return 4096.0D;
+	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)public AxisAlignedBB getRenderBoundingBox(){return new AxisAlignedBB(pos.add(-0.1,0,-0.1), pos.add(1.1,1,1.1));}

@@ -1,15 +1,23 @@
 package com.magiology.mcobjects.tileentityes.network.interfaces;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
+import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.network.InterfaceTileEntitySaver;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.api.lang.*;
-import com.magiology.api.network.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileHologramProjectorInterface implements WorldNetworkInterface,InterfaceTileEntitySaver{
 	@Override public TileEntity getBoundTile(){return tile;}

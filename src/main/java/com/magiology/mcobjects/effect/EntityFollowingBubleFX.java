@@ -1,7 +1,7 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.entity.*;
-import net.minecraft.world.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
 
 public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 	
@@ -10,27 +10,27 @@ public class EntityFollowingBubleFX extends EntitySmoothBubleFX{
 	public boolean isGL_DEPTHDisabled=false,isChangingPos=true;
 	
 	public EntityFollowingBubleFX(World w,double xp, double yp, double zp, double xs, double ys, double zs,Entity entity1,double sAngle, double sX, double sY, double sZ, int siz, double lengt, double Ra,double Ga,double Ba,double opacita){
-        super(w,xp, yp, zp, xs, ys, zs, siz, lengt, 0, false,1,"tx1" ,Ra,Ga,Ba,opacita,0.99);
-        this.motionX =xs;
-        this.motionY =ys;
-        this.motionZ =zs;
-        for(int a=0;a<sideOpacity.length;a++){
+		super(w,xp, yp, zp, xs, ys, zs, siz, lengt, 0, false,1,"tx1" ,Ra,Ga,Ba,opacita,0.99);
+		this.motionX =xs;
+		this.motionY =ys;
+		this.motionZ =zs;
+		for(int a=0;a<sideOpacity.length;a++){
 			sideOpacityChange[a]=worldObj.rand.nextInt(3)-1;
 			sideOpacity[a]=worldObj.rand.nextDouble();
 		}
-        this.particleMaxAge=siz;
-        this.particleScale=siz/10;
-        this.length=lengt;
-        this.r_e=Ra;
-        this.g_e=Ga;
-        this.b_e=Ba;
-        this.opacity_e=opacita;
-        spotX=sX;
-        spotY=sY;
-        spotZ=sZ;
-        entity=entity1;
-        startAngle=sAngle;
-    }
+		this.particleMaxAge=siz;
+		this.particleScale=siz/10;
+		this.length=lengt;
+		this.r_e=Ra;
+		this.g_e=Ga;
+		this.b_e=Ba;
+		this.opacity_e=opacita;
+		spotX=sX;
+		spotY=sY;
+		spotZ=sZ;
+		entity=entity1;
+		startAngle=sAngle;
+	}
 	
 	@Override
 	public void onUpdate(){

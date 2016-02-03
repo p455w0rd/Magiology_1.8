@@ -1,26 +1,31 @@
 package com.magiology.mcobjects.tileentityes;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
-
-import com.magiology.api.power.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.items.upgrades.*;
+import com.magiology.api.power.ISidedPower;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.effect.*;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityFirePipe extends TileEntityPow implements MultiColisionProvider{
 	PowerUtil PH=new PowerUtil();
@@ -48,13 +53,13 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	@Override
 	public void readFromNBT(NBTTagCompound NBTTC){
 		super.readFromNBT(NBTTC);
-    	ForcePipeUpdate.updatein3by3(worldObj, pos);
-    }
+		ForcePipeUpdate.updatein3by3(worldObj, pos);
+	}
 	
-    @Override
+	@Override
 	public void writeToNBT(NBTTagCompound NBTTC){
-    	super.writeToNBT(NBTTC);
-    }
+		super.writeToNBT(NBTTC);
+	}
 	
 	@Override
 	public void update(){
@@ -232,11 +237,11 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox()
-    {
-        AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY()-(DCFFL?0.5:0), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
-        return bb;
-    }
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY()-(DCFFL?0.5:0), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
+		return bb;
+	}
 	
 	@Override
 	public void setColisionBoxes(){
@@ -247,18 +252,18 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 				connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
 				connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
 				connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
-						    			 getExpectedColisionBoxes()[6],
-				DCFFL?    			     getExpectedColisionBoxes()[7]:null,
-				DCFFL?   			     getExpectedColisionBoxes()[8]:null,
+										 getExpectedColisionBoxes()[6],
+				DCFFL?					 getExpectedColisionBoxes()[7]:null,
+				DCFFL?   				 getExpectedColisionBoxes()[8]:null,
 		};
 	}
 	private AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-			new AxisAlignedBB(0      ,p*6,p*6,p*6,p*10,p*10),
-			new AxisAlignedBB(p*6,0      ,p*6,p*10,p*6,p*10),
-			new AxisAlignedBB(p*6,p*6,0      ,p*10,p*10,p*6),
-			new AxisAlignedBB(p*10,p*6,p*6,1      ,p*10,p*10),
-			new AxisAlignedBB(p*6,p*10,p*6,p*10,1      ,p*10),
-			new AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1      ),
+			new AxisAlignedBB(0	  ,p*6,p*6,p*6,p*10,p*10),
+			new AxisAlignedBB(p*6,0	  ,p*6,p*10,p*6,p*10),
+			new AxisAlignedBB(p*6,p*6,0	  ,p*10,p*10,p*6),
+			new AxisAlignedBB(p*10,p*6,p*6,1	  ,p*10,p*10),
+			new AxisAlignedBB(p*6,p*10,p*6,p*10,1	  ,p*10),
+			new AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1	  ),
 			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),
 			new AxisAlignedBB(p*4.5F,-p*4.7F,p*4.5F,p*11.5F,p*0.1F,p*11.5F),
 			new AxisAlignedBB(p*6,0 ,p*6,p*10,p*6F,p*10),

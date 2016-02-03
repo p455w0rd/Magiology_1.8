@@ -1,8 +1,8 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import net.minecraft.entity.player.*;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class Point{
 	public Vec3M pointedPos=new Vec3M();

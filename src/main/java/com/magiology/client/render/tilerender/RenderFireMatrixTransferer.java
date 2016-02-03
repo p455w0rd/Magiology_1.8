@@ -1,14 +1,14 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.render.Textures;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+
+import net.minecraft.tileentity.TileEntity;
 
 public class RenderFireMatrixTransferer extends TileEntitySpecialRendererM {
 
@@ -28,100 +28,100 @@ public class RenderFireMatrixTransferer extends TileEntitySpecialRendererM {
 			this.ballRotation=((TileEntityFireMatrixTransferer)tileentity).ballRotation;
 		}
 		this.bindTexture(Textures.FireMatrixTransfererBase);
-		GL11.glTranslated(x,y,z);
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glEnable(GL11.GL_LIGHTING);
+		OpenGLM.translate(x,y,z);
+		OpenGLM.enableCull();
+		OpenGLM.enableLighting();
 		
 		for(int i=0;i<4;i++){
-			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			GL11.glRotatef(-i*90, 0, 1, 0);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+			OpenGLM.translate(0.5F, 0.5F, 0.5F);
+			OpenGLM.rotate(-i*90, 0, 1, 0);
+			OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 			
-			GL11.glTranslatef(p*5.5F, -p*3, p*1.5F);
+			OpenGLM.translate(p*5.5F, -p*3, p*1.5F);
 
-			GL11.glRotated(-45, 0, 1, 0);
-			GL11.glRotated(30, 0, 0, 1);
+			OpenGLM.rotate(-45, 0, 1, 0);
+			OpenGLM.rotate(30, 0, 0, 1);
 			drawWhaterThatIs();
-			GL11.glRotated(-30, 0, 0, 1);
-			GL11.glRotated(45, 0, 1, 0);
+			OpenGLM.rotate(-30, 0, 0, 1);
+			OpenGLM.rotate(45, 0, 1, 0);
 			
-			GL11.glTranslatef(-p*5.5F, p*3, -p*1.5F);
+			OpenGLM.translate(-p*5.5F, p*3, -p*1.5F);
 			
 
-			GL11.glTranslatef(p*1F, -p*2, -p*3F);
-			GL11.glRotated(-45, 0, 1, 0);
-			GL11.glRotated(-15, 0, 0, 1);
+			OpenGLM.translate(p*1F, -p*2, -p*3F);
+			OpenGLM.rotate(-45, 0, 1, 0);
+			OpenGLM.rotate(-15, 0, 0, 1);
 			drawWhaterThatIs2();
-			GL11.glRotated(15, 0, 0, 1);
-			GL11.glRotated(45, 0, 1, 0);
-			GL11.glTranslatef(-p*1F, p*2, p*3F);
+			OpenGLM.rotate(15, 0, 0, 1);
+			OpenGLM.rotate(45, 0, 1, 0);
+			OpenGLM.translate(-p*1F, p*2, p*3F);
 			
-			GL11.glTranslatef(-p*5, p*10.5F,-p*9);
-			GL11.glRotated(-45, 0, 1, 0);
-			GL11.glRotated(-75, 0, 0, 1);
+			OpenGLM.translate(-p*5, p*10.5F,-p*9);
+			OpenGLM.rotate(-45, 0, 1, 0);
+			OpenGLM.rotate(-75, 0, 0, 1);
 			drawWhaterThatIs3();
-			GL11.glRotated(75, 0, 0, 1);
-			GL11.glRotated(45, 0, 1, 0);
-			GL11.glTranslatef(p*5, -p*10.5F, p*9);
+			OpenGLM.rotate(75, 0, 0, 1);
+			OpenGLM.rotate(45, 0, 1, 0);
+			OpenGLM.translate(p*5, -p*10.5F, p*9);
 			
-			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			GL11.glRotatef(i*90, 0, 1, 0);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+			OpenGLM.translate(0.5F, 0.5F, 0.5F);
+			OpenGLM.rotate(i*90, 0, 1, 0);
+			OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 			
 		}
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableLighting();
+		OpenGLM.disableTexture2D();
 		GL11U.setUpOpaqueRendering(1);
-		GL11.glColor4d(1, 0.01, 0.01, 0.2);
+		OpenGLM.color(1, 0.01, 0.01, 0.2);
 		
-		GL11.glTranslatef(0.5F, p*9+pos,0.5F);
+		OpenGLM.translate(0.5F, p*9+pos,0.5F);
 
-		GL11.glRotated(ballRotation, 0, 1, 0);
-		GL11.glRotated(ballRotation+20, 0, 0, 1);
+		OpenGLM.rotate(ballRotation, 0, 1, 0);
+		OpenGLM.rotate(ballRotation+20, 0, 0, 1);
 		
 		
 		drawBall();
 		
-		GL11.glRotated(ballRotation+90, 0, -2, 0);
+		OpenGLM.rotate(ballRotation+90, 0, -2, 0);
 		drawBall();
-		GL11.glRotated(-ballRotation-90, 0, -2, 0);
+		OpenGLM.rotate(-ballRotation-90, 0, -2, 0);
 		
-		GL11.glRotated(ballRotation+72, 1, 1, 0);
+		OpenGLM.rotate(ballRotation+72, 1, 1, 0);
 		drawBall();
-		GL11.glRotated(-ballRotation-72, 1, 1, 0);
+		OpenGLM.rotate(-ballRotation-72, 1, 1, 0);
 		
-		GL11.glRotated(ballRotation+64, 0, 1, 1);
+		OpenGLM.rotate(ballRotation+64, 0, 1, 1);
 		drawBall();
-		GL11.glRotated(-ballRotation-64, 0, 1, 1);
+		OpenGLM.rotate(-ballRotation-64, 0, 1, 1);
 		
-		GL11.glRotated(ballRotation+170, 1, 0, 1);
+		OpenGLM.rotate(ballRotation+170, 1, 0, 1);
 		drawBall();
-		GL11.glRotated(-ballRotation-170, 1, 0, 1);
+		OpenGLM.rotate(-ballRotation-170, 1, 0, 1);
 		
 
-		GL11.glRotated(-ballRotation-231, 1, 1, 0);
+		OpenGLM.rotate(-ballRotation-231, 1, 1, 0);
 		drawBall();
-		GL11.glRotated(ballRotation+231, 1, 1, 0);
+		OpenGLM.rotate(ballRotation+231, 1, 1, 0);
 		
-		GL11.glRotated(-ballRotation-267, 0, 1, 1);
+		OpenGLM.rotate(-ballRotation-267, 0, 1, 1);
 		drawBall();
-		GL11.glRotated(ballRotation+267, 0, 1, 1);
+		OpenGLM.rotate(ballRotation+267, 0, 1, 1);
 		
-		GL11.glRotated(-ballRotation-192, 1, 0, 1);
+		OpenGLM.rotate(-ballRotation-192, 1, 0, 1);
 		drawBall();
-		GL11.glRotated(ballRotation+192, 1, 0, 1);
+		OpenGLM.rotate(ballRotation+192, 1, 0, 1);
 		
 		
-		GL11.glRotated(-ballRotation-20, 0, 0, 1);
-		GL11.glRotated(-ballRotation, 0, 1, 0);
-		GL11.glTranslatef(-0.5F, -p*9-pos, -0.5F);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.rotate(-ballRotation-20, 0, 0, 1);
+		OpenGLM.rotate(-ballRotation, 0, 1, 0);
+		OpenGLM.translate(-0.5F, -p*9-pos, -0.5F);
+		OpenGLM.enableTexture2D();
 		GL11U.endOpaqueRendering();
 		 
 		drawBase();
 		
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glTranslated(-x, -y, -z);
+		OpenGLM.enableLighting();
+		OpenGLM.translate(-x, -y, -z);
 	}
 	
 	public void drawBase() {

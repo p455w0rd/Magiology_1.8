@@ -1,6 +1,7 @@
 package com.magiology.api.power;
 
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 
 public class SixSidedBoolean{
 	public boolean[] sides=new boolean[]{false,false,false,false,false,false,false,false,false,false,false,false};
@@ -145,8 +146,8 @@ public class SixSidedBoolean{
 		First6False(true, false,true ),
 		Last6True  (true, true, false),
 		Last6False (true, false,false),
-		Exclude    (false,false,false),
-		Include    (false,false,false)
+		Exclude	(false,false,false),
+		Include	(false,false,false)
 		;
 		public final boolean isAStarter,type,first6OrLast6;
 		private Modifier(boolean isAStarter,boolean type,boolean first6OrLast6){

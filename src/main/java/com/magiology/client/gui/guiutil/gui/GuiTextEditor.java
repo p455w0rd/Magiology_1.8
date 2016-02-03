@@ -2,24 +2,32 @@ package com.magiology.client.gui.guiutil.gui;
 
 import static com.magiology.util.utilclasses.UtilM.*;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import net.minecraft.client.gui.*;
-
-import org.lwjgl.input.*;
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.render.font.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.render.font.FontRendererMClipped;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.Vec2i;
+
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
 
 public class GuiTextEditor extends Gui implements Updateable{
 	
@@ -226,7 +234,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 		
 		int guiScale=getGuiScaleRaw();
 		GL11U.texture(false);
-		GL11.glLineWidth(guiScale);
+		OpenGLM.lineWidth(guiScale);
 		
 		VertexRenderer buff=TessUtil.getVB();
 		buff.addVertex(pos.x-3, pos.y+size.y+3, 0);
@@ -244,27 +252,27 @@ public class GuiTextEditor extends Gui implements Updateable{
 		buff.draw();
 		buff.setDrawAsWire(false);
 		
-		GL11.glLineWidth(1);
+		OpenGLM.lineWidth(1);
 		GL11U.texture(true);
 		
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		float xOffset=-sliderX*(maxWidth-size.x),yOffset=-sliderY*(maxHeight-size.y);
-		GL11.glTranslated(xOffset, yOffset, 0);
+		OpenGLM.translate(xOffset, yOffset, 0);
 		if(active&&isSelected()){
 			renderSelection(0xFFDFB578);
 		}
 		
-		GL11.glTranslated(-xOffset, -yOffset, 0);
+		OpenGLM.translate(-xOffset, -yOffset, 0);
 		buff.pushMatrix();
 		buff.translate(xOffset, yOffset, 0);
 		rednerText(fr);
 		buff.popMatrix();
-		GL11.glTranslated(xOffset, yOffset, 0);
+		OpenGLM.translate(xOffset, yOffset, 0);
 		
 		if(active&&isSelected()){
-			GL11.glBlendFunc(GL11.GL_ONE_MINUS_DST_COLOR, GL11.GL_ZERO);
+			GL11U.blendFunc(4);
 			renderSelection(0xFFFFFFFF);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11U.blendFunc(1);
 		}
 		
 		if(active&&getWorldTime(getTheWorld())/6%2==0){
@@ -278,7 +286,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 				else drawRect(cursorX, cursorY+8, cursorX+5, cursorY+7, white);
 			}
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		if(maxHeight>size.y){
 			GL11U.texture(false);
 			GL11U.setUpOpaqueRendering(2);
@@ -407,7 +415,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 
 	private void tab(){
 		if(cursorPosition.y==selectionStart.y){
-			if(cursorPosition.x % 2==0)replace("    ");
+			if(cursorPosition.x % 2==0)replace("	");
 			else replace(" ");
 			
 			if(blankSpace.matcher(getCurrentLine().toString().substring(0, cursorPosition.x)).matches()){
@@ -419,7 +427,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 		}else{
 			DoubleObject<Vec2i, Vec2i> selection=selection();
 			for(int i=selection.obj1.y;i <= selection().obj2.y;i++){
-				getLine(i).insert(0, "    ");
+				getLine(i).insert(0, "	");
 				refreshLine(i);
 			}
 			doTab(selection);
@@ -559,7 +567,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 			if(text==null)throw new NullPointerException();
 			check(pos);
 			
-			String[] toInsert=stringNewlineSplit(text.replaceAll("\t", "    "));
+			String[] toInsert=stringNewlineSplit(text.replaceAll("\t", "	"));
 			if(text.equals("\n"))toInsert=new String[]{"\n"};
 			StringBuilder insertLine=getLine(pos.y);
 			String endOfLine=insertLine.substring(pos.x, insertLine.length());
@@ -603,7 +611,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 						for(int j=1;j<lines.length;j++)addLine(new StringBuilder(lines[j]),i+1);
 						if(s.endsWith("{\n")){
 							addLine(new StringBuilder("}"),i+1);
-							addLine(new StringBuilder("    "),i+1);
+							addLine(new StringBuilder("	"),i+1);
 						}
 						else if(s.endsWith("\n"))addLine(new StringBuilder(spaces),i+1);
 						cursorPosition.y++;

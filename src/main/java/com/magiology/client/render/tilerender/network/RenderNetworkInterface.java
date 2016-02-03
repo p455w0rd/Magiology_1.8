@@ -1,19 +1,27 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.tileentity.*;
+import org.lwjgl.opengl.GL11;
 
-import org.lwjgl.opengl.*;
+import com.magiology.api.connection.IConnectionProvider;
+import com.magiology.api.network.NetworkBaseComponent;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.renderers.glstates.GlState;
+import com.magiology.util.renderers.glstates.GlStateCell;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.renderers.tessellatorscripts.SidedModel;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.glstates.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.tileentity.TileEntity;
 
 
 public class RenderNetworkInterface extends RenderNetworkConductor{
@@ -79,7 +87,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 			GL11.glColor3f(UtilM.fluctuateSmooth(80, offset), UtilM.fluctuateSmooth(134, 40+offset), UtilM.fluctuateSmooth(156, 56+offset));
 			
 			if(curentTile.getBrain()!=null){
-				GL11.glPushMatrix();
+				OpenGLM.pushMatrix();
 				Vec3M rotation=null,translation=null;
 				
 				switch (interfacePlate.getCurentSide()){
@@ -96,7 +104,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 				float bob2=(float)Math.cos(tim/13+offset);
 				
 				GL11U.glRotate(rotation);
-				GL11.glTranslatef(0, 0, bob1*p/2+p/2);
+				OpenGLM.translate(0, 0, bob1*p/2+p/2);
 				GL11U.glTranslate(translation);
 				GL11U.glRotate(0, 0, 90);
 				GL11U.glScale(0.9-bob2*0.2);
@@ -105,7 +113,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 			}
 			
 		}), new GlState(new int[]{GL11.GL_TEXTURE_2D}, new int[]{},()->{
-			if(curentTile.getBrain()!=null)GL11.glPopMatrix();
+			if(curentTile.getBrain()!=null)OpenGLM.popMatrix();
 		}));
 		
 		interfacePlate=new SidedModel(new DoubleObject<VertexModel[], int[]>(
@@ -135,13 +143,13 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 	@Override
 	protected <NetworkComponent extends IConnectionProvider & NetworkBaseComponent> void renderNetworkPipe(NetworkComponent networkComponent, double x, double y, double z) {
 		super.renderNetworkPipe(networkComponent, x, y, z);
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(x, y, z);
 		int side=((TileEntityNetworkInterface)networkComponent).getOrientation();
 		boolean[] sides=new boolean[6];
 		for(int i=0;i<6;i++)sides[i]=side==i;
 		interfacePlate.draw(sides);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		GL11U.glColor(ColorF.WHITE);
 	}
 }

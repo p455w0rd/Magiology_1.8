@@ -1,11 +1,13 @@
 package com.magiology.client.gui.guiutil.container;
 
 import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
 
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
+
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class UpgItemSlot extends Slot{
 	

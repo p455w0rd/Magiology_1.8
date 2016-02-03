@@ -1,17 +1,17 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.updateable.*;
+import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 
 public class FakeMessageHUD extends HUD{
 	
@@ -25,42 +25,42 @@ public class FakeMessageHUD extends HUD{
 	}
 	private FakeMessageHUD(){}
 	
-    @Override
+	@Override
 	public void render(int xScreen, int yScreen, float partialTicks){
-    	timeout=10;
-    	GL11.glPushMatrix();
-    	GL11.glTranslatef(xScreen-1, yScreen, 0);
-    	GL11U.setUpOpaqueRendering(1);
+		timeout=10;
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(xScreen-1, yScreen, 0);
+		GL11U.setUpOpaqueRendering(1);
 		for(Message msg:messages)if(!msg.isDead()){
-			GL11.glTranslatef(0, -Font.FR().FONT_HEIGHT-1, 0);
+			OpenGLM.translate(0, -Font.FR().FONT_HEIGHT-1, 0);
 			msg.redner();
 		}
 		GL11U.endOpaqueRendering();
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
-    @Override
+	@Override
 	public void update(){
-    	if(timeout>0)timeout--;
-    	else return;
-    	for(int i=0;i<messages.size();i++){
-    		if(messages.get(i).isDead())messages.remove(i);
-    	}
-    	Updater.update(messages);
-    }
-    
-    public static void addMessage(Message msg){
-    	int mach=-1;
-    	for(int i=0;i<messages.size();i++){
+		if(timeout>0)timeout--;
+		else return;
+		for(int i=0;i<messages.size();i++){
+			if(messages.get(i).isDead())messages.remove(i);
+		}
+		Updater.update(messages);
+	}
+	
+	public static void addMessage(Message msg){
+		int mach=-1;
+		for(int i=0;i<messages.size();i++){
 			if(messages.get(i).isSameId(msg)){
 				mach=i;
 				break;
 			}
 		}
-    	if(mach!=-1){
-    		messages.get(mach).age=80;
-    	}
-    	messages.add(0, msg);
-    }
+		if(mach!=-1){
+			messages.get(mach).age=80;
+		}
+		messages.add(0, msg);
+	}
 	public static class Message implements Updateable{
 		private ColorF color,prevColor;
 		private String text,id;
@@ -85,17 +85,17 @@ public class FakeMessageHUD extends HUD{
 			ColorF color=UtilM.calculateRenderColor(prevColor, this.color);
 			int sw=Font.FR().getStringWidth(text);
 			float animation=(color.a-1);
-			GL11.glPushMatrix();
+			OpenGLM.pushMatrix();
 			if(animation<0){
 				GL11U.glRotate(0, animation*40,0, -sw/2F, Font.FR().FONT_HEIGHT/2F, 0);
 				GL11U.glRotate(animation*90, 0,0, -sw/2F, Font.FR().FONT_HEIGHT/2F, 0);
 			}
-			GL11.glColor4f(0, 0, 0, 0.3F*color.a);
+			OpenGLM.color(0, 0, 0, 0.3F*color.a);
 			GL11U.texture(false);
 			drawRect(1, 1, -sw-1, -1, 0, 0, sw+2, Font.FR().FONT_HEIGHT+1);
 			GL11U.texture(true);
 			Font.FR().drawStringWithShadow(text, -sw, 0, color.toCode());
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		public boolean isSameId(Message msg){
 			if(id==null)return false;

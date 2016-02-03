@@ -11,15 +11,15 @@ package com.magiology.client.render.tilerender.isbhrrender;
 //	@Override
 //	public void renderItem(ItemRenderType type, ItemStack item, Object... data){
 //		ItemRenderer
-//		GL11.glPushMatrix();
+//		OpenGLM.pushMatrix();
 //		renderItemInW(type, item, data);
-//		GL11.glPopMatrix();
+//		OpenGLM.popMatrix();
 //	}
 //	@Override
 //	public boolean renderWorldBlock(IBlockAccess world, BlockPos pos,Block block, int modelId, RenderBlocks renderer){
-//		GL11.glPushMatrix();
+//		OpenGLM.pushMatrix();
 //		boolean result=renderBlockInW(world, pos, block, modelId, renderer);
-//		GL11.glPopMatrix();
+//		OpenGLM.popMatrix();
 //		return result;
 //	}
 //	public static void registerBlockRender(Block block,ISBRH renderer){

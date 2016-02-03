@@ -1,16 +1,18 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.material.*;
-import net.minecraft.block.state.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.core.init.MGui;
+import com.magiology.handlers.GuiHandlerM;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
-import com.magiology.core.init.*;
-import com.magiology.handlers.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class HologramProjector extends BlockContainerM{
 	private float p=1F/16F;

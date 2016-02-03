@@ -1,8 +1,10 @@
 package com.magiology.handlers.obj.handler.revived.yayformc1_8.obj;
 
-import net.minecraft.util.*;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustomLoader;
+import com.magiology.handlers.obj.handler.revived.yayformc1_8.ModelFormatException;
 
-import com.magiology.handlers.obj.handler.revived.yayformc1_8.*;
+import net.minecraft.util.ResourceLocation;
 
 public class ObjModelLoader implements IModelCustomLoader
 {
@@ -10,19 +12,19 @@ public class ObjModelLoader implements IModelCustomLoader
   @Override
   public String getType()
   {
-    return "OBJ model";
+	return "OBJ model";
   }
 
   private static final String[] types = { "obj" };
   @Override
   public String[] getSuffixes()
   {
-    return types;
+	return types;
   }
 
   @Override
   public IModelCustom loadInstance(ResourceLocation resource) throws ModelFormatException
   {
-    return new WavefrontObject(resource);
+	return new WavefrontObject(resource);
   }
 }

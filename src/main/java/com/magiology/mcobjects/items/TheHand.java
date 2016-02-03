@@ -1,22 +1,24 @@
 package com.magiology.mcobjects.items;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-
-import com.magiology.handlers.animationhandlers.*;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPositions;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.NBTUtil;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 
 public class TheHand extends Item{
 	
 	@Override
 	public void onCreated(ItemStack itemStack, World world, EntityPlayer player){
-	    NBTUtil.createNBT(itemStack);
+		NBTUtil.createNBT(itemStack);
 	}
 	
 	@Override
@@ -37,8 +39,8 @@ public class TheHand extends Item{
 			player.worldObj.createExplosion(player, entity.posX, entity.posY-0.0005, entity.posZ, 0.01F, false);
 			return true;
 		}
-        return false;
-    }
+		return false;
+	}
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeHeld){
@@ -51,7 +53,7 @@ public class TheHand extends Item{
 			else if(ap==HandComonPositions.WeaponHolder)TheHandHandler.addANewEvent(player, player.worldObj.getTotalWorldTime()+5, "spawnEntitySubatomicWorldDeconstructor", timeHeld);
 		}
 		else TheHandHandler.actionAnimation(player);
-    }
+	}
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
@@ -77,8 +79,8 @@ public class TheHand extends Item{
 			world.setBlockToAir(pos);
 			
 		}
-        return false;
-    }
+		return false;
+	}
 	
 	@Override
 	public void onUpdate(ItemStack itemstack, World world, Entity entity, int par4, boolean par5){

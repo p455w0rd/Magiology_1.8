@@ -1,6 +1,6 @@
 package com.magiology.api.lang.program;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class ProgramSerializable implements Serializable{
 	

@@ -1,13 +1,14 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.block.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 
 public class TileEntityRemotePowerCounter extends TileEntityM implements ITickable{
 	
@@ -40,7 +41,7 @@ public class TileEntityRemotePowerCounter extends TileEntityM implements ITickab
 			}else if(tile1 instanceof TileEntityBFCPowerOut){
 				BlockPos pos1=pos.add(0, 10000, 0);
 					
-				     if(((TileEntityBFCPowerOut)tile1).CallDir[0]!=null)pos1.add(-2,-1, 0);
+					 if(((TileEntityBFCPowerOut)tile1).CallDir[0]!=null)pos1.add(-2,-1, 0);
 				else if(((TileEntityBFCPowerOut)tile1).CallDir[1]!=null)pos1.add( 2,-1, 0);
 				else if(((TileEntityBFCPowerOut)tile1).CallDir[2]!=null)pos1.add( 0,-1,-2);
 				else if(((TileEntityBFCPowerOut)tile1).CallDir[3]!=null)pos1.add( 0,-1, 2);

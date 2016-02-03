@@ -1,14 +1,16 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 
 public class TileEntityControlBlock extends TileEntityM implements ISidedInventory,ITickable{
 	
@@ -16,7 +18,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 	public boolean onOf=true;
 	public int redstoneC=1,tank,maxT=1000000;
 	public double angle=0,prevAngle=0,speed=0,thingyPos,prevThingyPos,thingyWPos;
-    
+	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);

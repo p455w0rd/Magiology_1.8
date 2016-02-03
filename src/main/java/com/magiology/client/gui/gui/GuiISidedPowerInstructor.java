@@ -1,33 +1,38 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Rectangle;
+import java.io.IOException;
 
-import net.minecraft.block.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.client.renderer.tileentity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import org.lwjgl.opengl.GL11;
 
-import org.lwjgl.opengl.*;
-
-import com.magiology.api.power.*;
+import com.magiology.api.power.ISidedPower;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.guiutil.gui.buttons.*;
-import com.magiology.client.render.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.forgepowered.packets.packets.generic.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
+import com.magiology.client.gui.guiutil.gui.buttons.ColoredGuiButton;
+import com.magiology.client.gui.guiutil.gui.buttons.TexturedColoredButton;
+import com.magiology.client.render.Textures;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.SimpleCounter;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 public class GuiISidedPowerInstructor extends GuiContainer implements Updateable{
 	
@@ -129,7 +134,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			else if(x>guiLeft+52)zRotation.wantedPoint-=(y-mouseStartY)*2;
 			else xRotation.wantedPoint-=(y-mouseStartY)*2;
 		}
-    }
+	}
 	
 	@Override
 	protected void actionPerformed(GuiButton b){
@@ -177,8 +182,8 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			  yRot=yRotation.getPoint(),
 			  zRot=zRotation.getPoint();
 		
-		GL11.glPushMatrix();
-		GL11.glDisable(GL11.GL_LIGHTING);
+		OpenGLM.pushMatrix();
+		OpenGLM.disableLighting();
 		super.drawScreen(x, y, partialTicks);
 		RenderHelper.enableGUIStandardItemLighting();
 		
@@ -194,30 +199,30 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			
 			
 			
-			GL11.glPushMatrix();
-			GL11.glTranslated(guiLeft+37, guiTop+35, 120);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(guiLeft+37, guiTop+35, 120);
 			GL11U.glScale(35);
 			GL11U.glRotate(xRot,yRot,zRot);
-			GL11.glScalef((-1), 1, 1);
+			OpenGLM.scale((-1), 1, 1);
 			if(renderer!=null){
-		        GL11.glCullFace(GL11.GL_FRONT);
+				OpenGLM.cullFace(GL11.GL_FRONT);
 				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderEvents.partialTicks,0);
-				GL11.glCullFace(GL11.GL_BACK);
+				OpenGLM.cullFace(GL11.GL_BACK);
 				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderEvents.partialTicks,0);
 			}
 			Block block=U.getBlock(tile.getWorld(), tile.getPos());
 			if(block!=null){
 				block.getRenderType();
-				GL11.glPushMatrix();
+				OpenGLM.pushMatrix();
 				try{
 					TessUtil.bindTexture(TextureMap.locationBlocksTexture);
 //					Renderer.beginQuads();
 					//TODO: BlockRendererDispatcher#renderBlock may be able to do what you want. Look at RenderChunk#rebuildChunk to see how it's used.
 //					Helper.getRenderBlocks().renderBlockByRenderType(block, tile.getPos());
-//					GL11.glTranslated(-tile.getPos().getX()-0.5, -tile.getPos().getY()-0.5, -tile.getPos().getZ()-0.5);
+//					OpenGLM.translate(-tile.getPos().getX()-0.5, -tile.getPos().getY()-0.5, -tile.getPos().getZ()-0.5);
 //					Renderer.LINES.draw();
 				}catch(Exception e){e.printStackTrace();}
-				GL11.glPopMatrix();
+				OpenGLM.popMatrix();
 			}
 			int id=-1;
 			for(int a=0;a<cube.willSideRender.length;a++){
@@ -240,154 +245,154 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 				
 				
 				
-				GL11.glPushMatrix();
-				GL11.glDisable(GL11.GL_CULL_FACE);
-				GL11.glDisable(GL11.GL_TEXTURE_2D);
+				OpenGLM.pushMatrix();
+				OpenGLM.disableCull();
+				OpenGLM.disableTexture2D();
 				GL11U.setUpOpaqueRendering(1);
 				GL11U.glScale(1.001);
-				GL11.glTranslated(-0.5, -0.5, -0.5);
+				OpenGLM.translate(-0.5, -0.5, -0.5);
 				double 
 				r=UtilM.fluctuate(9, 0)*0.4,
 				g=0.5-UtilM.fluctuate(17, 0)*0.3,
 				b=1-UtilM.fluctuate(27, 0)*0.2;
-				GL11.glColor4d(r,g,b, 0.4);
-				GL11.glDisable(GL11.GL_LIGHTING);
+				OpenGLM.color(r,g,b, 0.4);
+				OpenGLM.disableLighting();
 				cube.draw();
-				GL11.glDisable(GL11.GL_DEPTH_TEST);
-				GL11.glColor4d(r,g,b, 0.2);
+				OpenGLM.disableDepth();
+				OpenGLM.color(r,g,b, 0.2);
 				cube.draw();
-				GL11.glEnable(GL11.GL_DEPTH_TEST);
+				OpenGLM.enableDepth();
 				GL11U.endOpaqueRendering();
-				GL11.glEnable(GL11.GL_CULL_FACE);
-				GL11.glEnable(GL11.GL_TEXTURE_2D);
-				GL11.glPopMatrix();
+				OpenGLM.enableCull();
+				OpenGLM.enableTexture2D();
+				OpenGLM.popMatrix();
 			}
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}catch(Exception e){e.printStackTrace();}
-		GL11.glDisable(GL11.GL_LIGHTING);
+		OpenGLM.disableLighting();
 		
 		TessUtil.bindTexture(Textures.ISidedIns);
-		GL11.glColor4f(1, 1, 1, 1);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
+		OpenGLM.color(1, 1, 1, 1);
+		OpenGLM.disableDepth();
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		
-		GL11.glPushMatrix();
-		GL11.glTranslated(guiLeft+82, guiTop+60, 120);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(guiLeft+82, guiTop+60, 120);
 		GL11U.setUpOpaqueRendering(1);
 		
-		GL11.glPushMatrix();
-		GL11.glEnable(GL11.GL_LIGHTING);
+		OpenGLM.pushMatrix();
+		OpenGLM.enableLighting();
 		
-		GL11.glColor4d(0.65F+UtilM.fluctuate(41, 0)*0.1,0.65+UtilM.fluctuate(25, 0)*0.05,0.65+UtilM.fluctuate(73, 0)*0.15,1);
+		OpenGLM.color(0.65F+UtilM.fluctuate(41, 0)*0.1,0.65+UtilM.fluctuate(25, 0)*0.05,0.65+UtilM.fluctuate(73, 0)*0.15,1);
 		GL11U.glScale(12.9);
 		GL11U.glRotate(UtilM.fluctuate(164, 0)*180+xRot/4, UtilM.fluctuate(84, 0)*60+yRot/4, UtilM.fluctuate(508, 0)*360+zRot/4);
 
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		OpenGLM.enableDepth();
 		TessUtil.drawBall();
-		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glDisable(GL11.GL_LIGHTING);
+		OpenGLM.enableCull();
+		OpenGLM.disableLighting();
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
 		
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		GL11U.glRotate(xRotation.wantedPoint+180, yRotation.wantedPoint, zRotation.wantedPoint);
-		GL11.glColor4f(1, 0, 0, 1F);
-		GL11.glLineWidth(2.5F);
+		OpenGLM.color(1, 0, 0, 1F);
+		OpenGLM.lineWidth(2.5F);
 		Renderer.LINES.begin();
 		Renderer.LINES.addVertex(0,0,0);
 		Renderer.LINES.addVertex(13,0,0);
 		Renderer.LINES.draw();
-		GL11.glColor4f(1, 0, 0, 0.3F);
-		GL11.glLineWidth(5F);
+		OpenGLM.color(1, 0, 0, 0.3F);
+		OpenGLM.lineWidth(5F);
 		Renderer.LINES.begin();
 		Renderer.LINES.addVertex(0,0,0);
 		Renderer.LINES.addVertex(13,0,0);
 		Renderer.LINES.draw();
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
 		
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		GL11U.glRotate(xRot,yRot,zRot);
-		GL11.glColor4f(0, 1, 0, 1F);
-		GL11.glLineWidth(2.5F);
+		OpenGLM.color(0, 1, 0, 1F);
+		OpenGLM.lineWidth(2.5F);
 		Renderer.LINES.begin();
 		Renderer.LINES.addVertex(0,0,0);
 		Renderer.LINES.addVertex(13,0,0);
 		Renderer.LINES.draw();
-		GL11.glColor4f(0, 1, 0, 0.3F);
-		GL11.glLineWidth(5F);
+		OpenGLM.color(0, 1, 0, 0.3F);
+		OpenGLM.lineWidth(5F);
 		Renderer.LINES.begin();
 		Renderer.LINES.addVertex(0,0,0);
 		Renderer.LINES.addVertex(13,0,0);
 		Renderer.LINES.draw();
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
 		
 		GL11U.endOpaqueRendering();
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glPushMatrix();
-		GL11.glTranslated(guiLeft+82, guiTop+35, 120);
+		OpenGLM.enableLighting();
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(guiLeft+82, guiTop+35, 120);
 		GL11U.glScale(11);
 		GL11U.glRotate(xRot,yRot,zRot);
-		GL11.glTranslated(0.55,-0.55,-0.55);
+		OpenGLM.translate(0.55,-0.55,-0.55);
 		
 		
 		
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glScalef((-1), 1, 1);
-		GL11.glColor4f(0.2F, 0.1F, 1, 1);
+		OpenGLM.disableTexture2D();
+		OpenGLM.scale((-1), 1, 1);
+		OpenGLM.color(0.2F, 0.1F, 1, 1);
 		TessUtil.drawArrow();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableTexture2D();
 		
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
-		GL11.glPushMatrix();
-		GL11.glTranslated(guiLeft+152, guiTop+19+buttonId*22, 120);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(guiLeft+152, guiTop+19+buttonId*22, 120);
 		GL11U.glScale(12);
 		GL11U.glRotate(0, 30, 90);
 		GL11U.glRotate(0, UtilM.fluctuate(1600, 0)*3600,0);
-		GL11.glTranslated(0.375,-0.375,-0.375);
+		OpenGLM.translate(0.375,-0.375,-0.375);
 		
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glScalef(-0.75F, 1, 0.75F);
-		GL11.glColor4f(0.5F, 0.4F, 1, 1);
+		OpenGLM.disableTexture2D();
+		OpenGLM.scale(-0.75F, 1, 0.75F);
+		OpenGLM.color(0.5F, 0.4F, 1, 1);
 		TessUtil.drawArrow();
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableTexture2D();
 		
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
-		GL11.glDisable(GL11.GL_LIGHTING);
+		OpenGLM.disableLighting();
 		
 		for(int k=0;k<buttonList.size();++k){((GuiButton)this.buttonList.get(k)).drawButton(mc, x, y);}
 
-		GL11.glPopMatrix();
-    }
+		OpenGLM.popMatrix();
+	}
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float v1, int x, int y){
-		GL11.glDisable(GL11.GL_LIGHTING);
+		OpenGLM.disableLighting();
 		TessUtil.bindTexture(Textures.ISidedIns);
 		GL11U.setUpOpaqueRendering(2);
-		GL11.glColor4f(1, 1, 1, 0.9F);
-		GL11.glTranslatef(0, 0, 0);
+		OpenGLM.color(1, 1, 1, 0.9F);
+		OpenGLM.translate(0, 0, 0);
 		this.drawTexturedModalRect(guiLeft+14, guiTop+12, xSize, 0, 46, 46);
 		GL11U.endOpaqueRendering();
 		if(isShiftKeyDown()){
-			GL11.glPushMatrix();
-			GL11.glTranslated(guiLeft, guiTop+12, 0);
-			GL11.glColor4f(1, 0.6F, 0.6F, 1F);
-			GL11.glLineWidth(1F);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(guiLeft, guiTop+12, 0);
+			OpenGLM.color(1, 0.6F, 0.6F, 1F);
+			OpenGLM.lineWidth(1F);
 			Renderer.LINES.begin();
 			Renderer.LINES.addVertex(20,0,0);
 			Renderer.LINES.addVertex(20,46,0);
 			Renderer.LINES.addVertex(52,0,0);
 			Renderer.LINES.addVertex(52,46,0);
 			Renderer.LINES.draw();
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 	}
 }

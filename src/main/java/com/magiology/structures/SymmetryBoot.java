@@ -1,10 +1,10 @@
 package com.magiology.structures;
 
-import net.minecraft.block.*;
-import net.minecraft.util.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilobjects.vectors.Pos;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.block.Block;
+import net.minecraft.util.BlockPos;
 
 public class SymmetryBoot{
 	

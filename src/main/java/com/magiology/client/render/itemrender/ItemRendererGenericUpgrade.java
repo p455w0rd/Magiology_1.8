@@ -1,20 +1,5 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.items.*;
-import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.UtilM.U;
-
-
 //public class ItemRendererGenericUpgrade implements IItemRenderer {
 //	Minecraft mc=U.getMC();
 //	ResourceLocation texture=null;
@@ -51,57 +36,57 @@ import com.magiology.util.utilclasses.UtilM.U;
 //				y=0.5;
 //				z=0.6;
 //			}
-//			GL11.glRotated(xr, 1, 0, 0);
-//			GL11.glRotated(yr, 0, 1, 0);
-//			GL11.glRotated(zr, 0, 0, 1);
-//			GL11.glTranslated(x,y,z);
+//			OpenGLM.rotate(xr, 1, 0, 0);
+//			OpenGLM.rotate(yr, 0, 1, 0);
+//			OpenGLM.rotate(zr, 0, 0, 1);
+//			OpenGLM.translate(x,y,z);
 //			double time=U.getMC().theWorld.getTotalWorldTime()%180,angle=((time)*2-2)+(2)*RenderEvents.partialTicks;
-//			GL11.glTranslated(0.5, 0, 0);
-//			GL11.glRotated(angle, 0, 1, 0);
-//			GL11.glTranslated(-0.5, 0, 0);
+//			OpenGLM.translate(0.5, 0, 0);
+//			OpenGLM.rotate(angle, 0, 1, 0);
+//			OpenGLM.translate(-0.5, 0, 0);
 //			render(is);
-//			GL11.glTranslated(0.5, 0, 0);
-//			GL11.glRotated(-angle, 0, 1, 0);
-//			GL11.glTranslated(-0.5, 0, 0);
-//			GL11.glTranslated(x, -y, z);
-//			GL11.glRotated(zr, 0, 0, 1);
-//			GL11.glRotated(yr, 0, 1, 0);
-//			GL11.glRotated(xr, 1, 0, 0);
+//			OpenGLM.translate(0.5, 0, 0);
+//			OpenGLM.rotate(-angle, 0, 1, 0);
+//			OpenGLM.translate(-0.5, 0, 0);
+//			OpenGLM.translate(x, -y, z);
+//			OpenGLM.rotate(zr, 0, 0, 1);
+//			OpenGLM.rotate(yr, 0, 1, 0);
+//			OpenGLM.rotate(xr, 1, 0, 0);
 //		}else if(type==ItemRenderType.ENTITY){
 //			double p=1.0/16.0;
 //			double transx=p*8,transy=0.2,transz=-p/2;
 //			
-//			GL11.glTranslated(-transx, -transy, -transz);
+//			OpenGLM.translate(-transx, -transy, -transz);
 //			render(is);
-//			GL11.glTranslated(transx, transy, transz);
+//			OpenGLM.translate(transx, transy, transz);
 //		}
 //	}
 //	public void render(ItemStack is){
-//		GL11.glDepthMask(true);
-//		GL11.glDisable(GL11.GL_BLEND);
-//		GL11.glAlphaFunc(GL11.GL_GREATER, 0.99F);
+//		OpenGLM.depthMask(true);
+//		OpenGLM.disableBlend();
+//		GL11U.allOpacityIs(false);
 //		float width=0.0625F;
-//		GL11.glPushMatrix();
+//		OpenGLM.pushMatrix();
 //		if(((GenericItemUpgrade)is.getItem()).UT.toString().equals("Speed")){
 //			width*=0.5;
-//			GL11.glTranslated(0, 0, -width/2);
+//			OpenGLM.translate(0, 0, -width/2);
 //		}
 //		Render.RI().renderItemModel(is);
-//		GL11.glPopMatrix();
-//		GL11.glDepthMask(false);
-//		GL11.glEnable(GL11.GL_BLEND);
-//        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-//		GL11.glAlphaFunc(GL11.GL_GREATER, 0.99F);
+//		OpenGLM.popMatrix();
+//		OpenGLM.depthMask(false);
+//		OpenGLM.enableBlend();
+//		GL11U.blendFunc(2);
+//		GL11U.allOpacityIs(false);
 //		GL11.glDisable(GL11.GL_ALPHA_TEST);
-//		GL11.glDisable(GL11.GL_CULL_FACE);
-//		GL11.glColor4d(1, 1, 1, 0.2);
+//		OpenGLM.disableCull();
+//		OpenGLM.color(1, 1, 1, 0.2);
 //		Render.RI().renderItemModel(is);
-//		GL11.glColor4d(1, 1, 1, 1);
-//		GL11.glDisable(GL11.GL_BLEND);
+//		OpenGLM.color(1, 1, 1, 1);
+//		OpenGLM.disableBlend();
 //		GL11.glEnable(GL11.GL_ALPHA_TEST);
-//		GL11.glEnable(GL11.GL_CULL_FACE);
-//		GL11.glDepthMask(true);
-//		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
+//		OpenGLM.enableCull();
+//		OpenGLM.depthMask(true);
+//		GL11U.allOpacityIs(true);
 //	}
 //	
 //	

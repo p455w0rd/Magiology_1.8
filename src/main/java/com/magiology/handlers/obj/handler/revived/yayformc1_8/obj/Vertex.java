@@ -6,13 +6,13 @@ public class Vertex
 
   public Vertex(float x, float y)
   {
-    this(x, y, 0F);
+	this(x, y, 0F);
   }
 
   public Vertex(float x, float y, float z)
   {
-    this.x = x;
-    this.y = y;
-    this.z = z;
+	this.x = x;
+	this.y = y;
+	this.z = z;
   }
 }

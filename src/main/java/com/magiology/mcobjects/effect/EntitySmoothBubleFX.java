@@ -1,15 +1,16 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.world.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.render.Textures;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.world.World;
 
 public class EntitySmoothBubleFX extends EntityFXM{
 	
@@ -24,30 +25,30 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	String texture;
 	
 	public EntitySmoothBubleFX(World w,double xp, double yp, double zp, double xs, double ys, double zs, int siz, double lengt,double gravit, boolean activ,int typ,String textur ,double Ra,double Ga,double Ba,double opacita,double frictio){
-        super(w, xp, yp, zp, xs, ys, zs);
-        motionX =xs;
-        motionY =ys;
-        motionZ =zs;
-        friction=frictio;
-        if(texture=="tx1"){
-        	for(int a=0;a<sideOpacity.length;a++){
+		super(w, xp, yp, zp, xs, ys, zs);
+		motionX =xs;
+		motionY =ys;
+		motionZ =zs;
+		friction=frictio;
+		if(texture=="tx1"){
+			for(int a=0;a<sideOpacity.length;a++){
 				sideOpacityChange[a]=worldObj.rand.nextInt(3)-1;
 				sideOpacity[a]=worldObj.rand.nextDouble();
 			}
-        }
-        type=typ;
-        if(type==1){particleMaxAge=siz;particleScale=siz/10;}
-        if(type==2){particleMaxAge=siz;particleScale=0;state=1;}
-        else if(type>=3&&type<=10){particleMaxAge=siz;particleScale=siz/10;}
-        gravity=gravit*0.001;
-        length=lengt;
-        active=activ;
-        r_e=Ra;
-        g_e=Ga;
-        b_e=Ba;
-        opacity_e=opacita;
-        texture=textur;
-    }
+		}
+		type=typ;
+		if(type==1){particleMaxAge=siz;particleScale=siz/10;}
+		if(type==2){particleMaxAge=siz;particleScale=0;state=1;}
+		else if(type>=3&&type<=10){particleMaxAge=siz;particleScale=siz/10;}
+		gravity=gravit*0.001;
+		length=lengt;
+		active=activ;
+		r_e=Ra;
+		g_e=Ga;
+		b_e=Ba;
+		opacity_e=opacita;
+		texture=textur;
+	}
 	public EntitySmoothBubleFX(World w,double xp, double yp, double zp, double xs, double ys, double zs, int siz, double lengt,double gravit,int typ ,double Ra,double Ga,double Ba,double opacita,double frictio){
 		this(w,xp, yp, zp, xs, ys, zs, siz, lengt, gravit, false, typ, "tx1", Ra, Ga, Ba, opacita, frictio);
 	}
@@ -60,54 +61,54 @@ public class EntitySmoothBubleFX extends EntityFXM{
 	
 	@Override
 	public void render(){
-        int i = this.getBrightnessForRender(par2);
-        int xLight = i >> 16 & 65535;
-        int yLight = i & 65535;
-        
-		GL11.glDisable(GL11.GL_FOG);
-		GL11U.setUpOpaqueRendering(2);
-        
+		int i = this.getBrightnessForRender(par2);
+		int xLight = i >> 16 & 65535;
+		int yLight = i & 65535;
 		
-    	float PScale = 0.01F*particleScale;
-    	float x=(float)(prevPosX+(posX-prevPosX)*par2-interpPosX);
-    	float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
-    	float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
-    	
-    	Vec3M[] vertex={
-        	new Vec3M((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale)),
-        	new Vec3M((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale)),
-        	new Vec3M((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale)),
-        	new Vec3M((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale))
-    	};
-    	ColorF color=new ColorF(r_e, g_e, b_e, opacity_e);
-    	
-    	if(texture=="tx1")     TessUtil.bindTexture(Textures.SmoothBuble1);
-    	else if(texture=="tx2")TessUtil.bindTexture(Textures.SmoothBuble2);
-    	else if(texture=="tx3")TessUtil.bindTexture(Textures.SmoothBuble3);
-    	Renderer.PARTICLE.beginQuads();
-    	Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
-    	Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
-    	Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
-    	Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
-    	Renderer.PARTICLE.draw();
+		OpenGLM.disableFog();
+		GL11U.setUpOpaqueRendering(2);
+		
+		
+		float PScale = 0.01F*particleScale;
+		float x=(float)(prevPosX+(posX-prevPosX)*par2-interpPosX);
+		float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
+		float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
+		
+		Vec3M[] vertex={
+			new Vec3M((x-par3*PScale-par6*PScale), (y-par4*PScale), (z-par5*PScale-par7*PScale)),
+			new Vec3M((x-par3*PScale+par6*PScale), (y+par4*PScale), (z-par5*PScale+par7*PScale)),
+			new Vec3M((x+par3*PScale+par6*PScale), (y+par4*PScale), (z+par5*PScale+par7*PScale)),
+			new Vec3M((x+par3*PScale-par6*PScale), (y-par4*PScale), (z+par5*PScale-par7*PScale))
+		};
+		ColorF color=new ColorF(r_e, g_e, b_e, opacity_e);
+		
+		if(texture=="tx1")	 TessUtil.bindTexture(Textures.SmoothBuble1);
+		else if(texture=="tx2")TessUtil.bindTexture(Textures.SmoothBuble2);
+		else if(texture=="tx3")TessUtil.bindTexture(Textures.SmoothBuble3);
+		Renderer.PARTICLE.beginQuads();
+		Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
+		Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+		Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
+		Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
+		Renderer.PARTICLE.draw();
 		
 		if(texture=="tx1"){
 			TessUtil.bindTexture(Textures.SmoothBuble1Add1);
-    		Renderer.PARTICLE.beginQuads();
-	        Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.beginQuads();
+			Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
 			
 			Renderer.PARTICLE.addVertex(vertex[0], 1, 0, color, xLight, yLight);
 			Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
 			Renderer.PARTICLE.addVertex(vertex[2], 0, 1, color, xLight, yLight);
 			Renderer.PARTICLE.addVertex(vertex[3], 1, 1, color, xLight, yLight);
 			
-	        Renderer.PARTICLE.addVertex(vertex[0], 1, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[2], 0, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[0], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
 			
 			Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
 			Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
@@ -118,26 +119,26 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			
 			TessUtil.bindTexture(Textures.SmoothBuble1Add2);
 			Renderer.PARTICLE.beginQuads();
-	        Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[0], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 0, 1, color, xLight, yLight);
 			
-	        Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[1], 1, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[3], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 0, 0, color, xLight, yLight);
 			
-	        Renderer.PARTICLE.addVertex(vertex[0], 1, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[1], 0, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[2], 0, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[3], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[0], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 1, 0, color, xLight, yLight);
 			
-	        Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
-	        Renderer.PARTICLE.addVertex(vertex[3], 1, 1, color, xLight, yLight);
-	        Renderer.PARTICLE.draw();
+			Renderer.PARTICLE.addVertex(vertex[0], 0, 1, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[1], 0, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[2], 1, 0, color, xLight, yLight);
+			Renderer.PARTICLE.addVertex(vertex[3], 1, 1, color, xLight, yLight);
+			Renderer.PARTICLE.draw();
 		}
 
 		GL11U.endOpaqueRendering();

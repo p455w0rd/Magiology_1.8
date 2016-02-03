@@ -1,6 +1,6 @@
 package com.magiology.api.connection;
 
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
 
 public final class IConnectionFactory{
 	private IConnectionFactory(){}

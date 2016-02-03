@@ -1,7 +1,8 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
 
 public class CraftingGridSlot extends Slot{
 	
@@ -10,6 +11,6 @@ public class CraftingGridSlot extends Slot{
 	}
 	@Override
 	public boolean canTakeStack(EntityPlayer p_82869_1_){
-        return false;
-    }
+		return false;
+	}
 }

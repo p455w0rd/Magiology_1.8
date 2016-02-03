@@ -1,12 +1,15 @@
 package com.magiology.util.renderers;
 
+import org.lwjgl.opengl.GL11;
+
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import org.lwjgl.opengl.GL11;
 
 public class Renderer{
 	
@@ -19,7 +22,7 @@ public class Renderer{
 	public static final PosUVColorRenderer POS_UV_COLOR=new PosUVColorRenderer();
 	public static final PosColorRenderer POS_COLOR=new PosColorRenderer();
 	public static final LineRenderer LINES=new LineRenderer();
-	public static final PosUVNormalColorRenderer POS_UV_NORMAL_COLOR=new PosUVNormalColorRenderer();
+	public static final PosUVColorNormalRenderer POS_UV_COLOR_NORMAL=new PosUVColorNormalRenderer();
 
 	
 	private static WorldRenderer renderer=TessUtil.getWR();
@@ -52,7 +55,7 @@ public class Renderer{
 	}
 	
 	private Renderer addColor(float r, float g, float b, float a){
-		renderer.color(r, g, b, a);
+		renderer.color(UtilM.snap(r,0,1), UtilM.snap(g,0,1), UtilM.snap(b,0,1), UtilM.snap(a,0,1));
 		return instance;
 	}
 	private Renderer addColor(float r, float g, float b){
@@ -157,35 +160,35 @@ public class Renderer{
 			instance.addVertexData(xPos, yPos, zPos, u, v, xNormal, yNormal, zNormal);
 		}
 	}
-	public static class PosUVNormalColorRenderer extends RendererBase{
+	public static class PosUVColorNormalRenderer extends RendererBase{
 
 		public VertexFormat getVertexFormat(){
-			return DefaultVertexFormats.POSITION_TEX_NORMAL;
+			return DefaultVertexFormats.POSITION_TEX_COLOR_NORMAL;
 		}
 
-		public void addVertex(Vec3M pos, float u, float v, float xNormal, float yNormal, float zNormal, float r, float g, float b, float a){
-			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal(xNormal, yNormal, zNormal).addColor(r,g,b,a).endVertex();
+		public void addVertex(Vec3M pos, float u, float v, float r, float g, float b, float a, float xNormal, float yNormal, float zNormal){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addColor(r,g,b,a).addNormal(xNormal, yNormal, zNormal).endVertex();
 		}
-		public void addVertex(double xPos, double yPos, double zPos, float u, float v, Vec3M normal, float r, float g, float b, float a){
-			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(r,g,b,a).endVertex();
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float r, float g, float b, float a, Vec3M normal){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(r,g,b,a).addNormal((float)normal.x, (float)normal.y, (float)normal.z).endVertex();
 		}
-		public void addVertex(Vec3M pos, float u, float v, Vec3M normal, float r, float g, float b, float a){
-			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(r,g,b,a).endVertex();
+		public void addVertex(Vec3M pos, float u, float v, float r, float g, float b, float a, Vec3M normal){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addColor(r,g,b,a).addNormal((float)normal.x, (float)normal.y, (float)normal.z).endVertex();
 		}
-		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal, ColorF color){
-			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal(xNormal, yNormal, zNormal).addColor(color.r, color.g, color.b, color.a).endVertex();
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, ColorF color, float xNormal, float yNormal, float zNormal){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(color.r, color.g, color.b, color.a).addNormal(xNormal, yNormal, zNormal).endVertex();
 		}
-		public void addVertex(Vec3M pos, float u, float v, float xNormal, float yNormal, float zNormal, ColorF color){
-			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal(xNormal, yNormal, zNormal).addColor(color.r, color.g, color.b, color.a).endVertex();
+		public void addVertex(Vec3M pos, float u, float v, ColorF color, float xNormal, float yNormal, float zNormal){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addColor(color.r, color.g, color.b, color.a).addNormal(xNormal, yNormal, zNormal).endVertex();
 		}
-		public void addVertex(double xPos, double yPos, double zPos, float u, float v, Vec3M normal, ColorF color){
-			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, ColorF color, Vec3M normal){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(color.r, color.g, color.b, color.a).addNormal((float)normal.x, (float)normal.y, (float)normal.z).endVertex();
 		}
-		public void addVertex(Vec3M pos, float u, float v, Vec3M normal, ColorF color){
-			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addNormal((float)normal.x, (float)normal.y, (float)normal.z).addColor(color.r, color.g, color.b, color.a).endVertex();
+		public void addVertex(Vec3M pos, float u, float v, ColorF color, Vec3M normal){
+			instance.addVertexData(pos.x, pos.y, pos.z, u, v).addColor(color.r, color.g, color.b, color.a).addNormal((float)normal.x, (float)normal.y, (float)normal.z).endVertex();
 		}
-		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float xNormal, float yNormal, float zNormal, float r, float g, float b, float a){
-			instance.addVertexData(xPos, yPos, zPos, u, v).addNormal(xNormal, yNormal, zNormal).addColor(r,g,b,a).endVertex();
+		public void addVertex(double xPos, double yPos, double zPos, float u, float v, float r, float g, float b, float a, float xNormal, float yNormal, float zNormal){
+			instance.addVertexData(xPos, yPos, zPos, u, v).addColor(r,g,b,a).addNormal(xNormal, yNormal, zNormal).endVertex();
 		}
 	}
 	public static class PosUVRenderer extends RendererBase{

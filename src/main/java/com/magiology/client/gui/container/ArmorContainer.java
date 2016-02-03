@@ -1,15 +1,22 @@
 package com.magiology.client.gui.container;
 
-import java.util.*;
-
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.guiutil.container.*;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.guiutil.container.FakeContainer;
+import com.magiology.client.gui.guiutil.container.OnlyShiftClickSlot;
+import com.magiology.client.gui.guiutil.container.UpgItemContainer;
+import com.magiology.client.gui.guiutil.container.UpgItemSlot;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
+import com.magiology.util.utilclasses.PrintUtil;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 
 public class ArmorContainer extends Container implements Updateable{
@@ -19,11 +26,11 @@ public class ArmorContainer extends Container implements Updateable{
 	InventoryPlayer pInventory;
 	EntityPlayer player;
 	boolean firstUpdate=false;
-    public List inventorySlotsAllTheTime = new ArrayList();
-    public UpgItemContainer[] InventoryArmorContainers=new UpgItemContainer[4];
-    public List[] InventorySlots = {new ArrayList(),new ArrayList(),new ArrayList(),new ArrayList()};
-    int lastPos=-100;
-    
+	public List inventorySlotsAllTheTime = new ArrayList();
+	public UpgItemContainer[] InventoryArmorContainers=new UpgItemContainer[4];
+	public List[] InventorySlots = {new ArrayList(),new ArrayList(),new ArrayList(),new ArrayList()};
+	int lastPos=-100;
+	
 	public double sliderPos,sliderSpeed,sliderVantedPos;
 	public int sliderPosId=0,lastSliderPosId=0;
 	
@@ -112,14 +119,14 @@ public class ArmorContainer extends Container implements Updateable{
 		}
 		
 		return null;
-    }
+	}
 	
 	@Override
 	public void putStackInSlot(int id, ItemStack stack){
-        refreshSlotLists();
-        this.getSlot(id).putStack(stack);
-        refreshSlotLists();
-    }
+		refreshSlotLists();
+		this.getSlot(id).putStack(stack);
+		refreshSlotLists();
+	}
 	
 	public void refreshSlotLists(){
 		reformatSlots(sliderPosId);
@@ -136,8 +143,8 @@ public class ArmorContainer extends Container implements Updateable{
 	protected Slot addSlotToList(Slot slot,List list){
 		slot.slotNumber=list.size();
 		list.add(slot);
-        return slot;
-    }
+		return slot;
+	}
 	
 	public void reformatSlots(int item){
 		inventorySlots.clear();
@@ -200,15 +207,15 @@ public class ArmorContainer extends Container implements Updateable{
 				}
 				slot.onSlotChange(itemstack1, itemstack);
 				if(itemstack1.stackSize==0)slot.putStack((ItemStack)null);
-				else                       slot.onSlotChanged();
+				else					   slot.onSlotChanged();
 				if(itemstack1.stackSize==itemstack.stackSize)return null;
 				slot.onPickupFromSlot(player, itemstack1);
 			}
 		}
-        
-        return itemstack;
-        
-    }
+		
+		return itemstack;
+		
+	}
 	
 	
 }

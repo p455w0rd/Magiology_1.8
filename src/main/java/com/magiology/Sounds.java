@@ -1,6 +1,6 @@
 package com.magiology;
 
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 
 public enum Sounds{
 	WingSwingFX("swing1","swing2"),

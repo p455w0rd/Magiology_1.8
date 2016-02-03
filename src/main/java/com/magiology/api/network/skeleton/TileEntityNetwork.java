@@ -1,22 +1,28 @@
 package com.magiology.api.network.skeleton;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
-
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.blocks.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.api.connection.ConnectionType;
+import com.magiology.api.connection.IConnection;
+import com.magiology.api.connection.IConnectionFactory;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
+import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.Vec3;
 
 public abstract class TileEntityNetwork extends TileEntityM implements MultiColisionProvider,ISidedNetworkComponent,UpdateableTile{
 	public boolean[] accessibleSides={true,true,true,true,true,true};
@@ -154,16 +160,16 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 				connections[3].getMain()?getExpectedColisionBoxes()[5]:null,
 				connections[0].getMain()?getExpectedColisionBoxes()[1]:null,
 				connections[4].getMain()?getExpectedColisionBoxes()[0]:null,
-				                     getExpectedColisionBoxes()[6]
+									 getExpectedColisionBoxes()[6]
 		};
 	}
 	protected AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-		new AxisAlignedBB(0,      p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F),
-		new AxisAlignedBB(p*6.5F, 0,      p*6.5F, p*9.5F, p*6.5F, p*9.5F),
-		new AxisAlignedBB(p*6.5F, p*6.5F, 0,      p*9.5F, p*9.5F, p*6.5F),
-		new AxisAlignedBB(p*9.5F, p*6.5F, p*6.5F, 1,      p*9.5F, p*9.5F),
-		new AxisAlignedBB(p*6.5F, p*9.5F, p*6.5F, p*9.5F, 1,      p*9.5F),
-		new AxisAlignedBB(p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F, 1     ),
+		new AxisAlignedBB(0,	  p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F),
+		new AxisAlignedBB(p*6.5F, 0,	  p*6.5F, p*9.5F, p*6.5F, p*9.5F),
+		new AxisAlignedBB(p*6.5F, p*6.5F, 0,	  p*9.5F, p*9.5F, p*6.5F),
+		new AxisAlignedBB(p*9.5F, p*6.5F, p*6.5F, 1,	  p*9.5F, p*9.5F),
+		new AxisAlignedBB(p*6.5F, p*9.5F, p*6.5F, p*9.5F, 1,	  p*9.5F),
+		new AxisAlignedBB(p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F, 1	 ),
 		new AxisAlignedBB(p*6.5F, p*6.5F, p*6.5F, p*9.5F, p*9.5F, p*9.5F)
 	};
 	@Override

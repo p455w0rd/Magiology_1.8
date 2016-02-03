@@ -1,12 +1,12 @@
 package com.magiology.structures;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import net.minecraft.block.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.util.utilclasses.*;
+import net.minecraft.block.Block;
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 
 public class Structure{
 	

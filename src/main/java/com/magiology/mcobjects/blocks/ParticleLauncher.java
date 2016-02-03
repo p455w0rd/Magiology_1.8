@@ -1,11 +1,11 @@
 package com.magiology.mcobjects.blocks;
 
-import net.minecraft.block.material.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.world.*;
+import com.magiology.mcobjects.tileentityes.TileEntityPLauncher;
+import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class ParticleLauncher extends BlockContainerM {
 
@@ -13,7 +13,7 @@ public class ParticleLauncher extends BlockContainerM {
 	
 	@Override
 	public boolean isOpaqueCube() {return false;}
-    
+	
 	public ParticleLauncher() {
 		super(Material.iron);
 		this.setHardness(20F).setHarvestLevel("pickaxe", 1);

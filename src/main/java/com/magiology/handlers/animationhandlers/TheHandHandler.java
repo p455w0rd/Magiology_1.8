@@ -1,5 +1,7 @@
 package com.magiology.handlers.animationhandlers;
 
+import java.util.ArrayList;
+
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
@@ -9,11 +11,10 @@ import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
 import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
 
 public class TheHandHandler{
 	static float p=1F/16F;
@@ -69,7 +70,7 @@ public class TheHandHandler{
 		}
 	}
 	public static float[][][] 
-			     noiser=new float[][][]{{{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0,0,0,0}}},
+				 noiser=new float[][][]{{{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0,0,0,0}}},
 			noiserSpeed=new float[][][]{{{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0},{0,0,0},{0,0,0}},{{0,0,0,0,0,0}}};
 	
 	
@@ -300,18 +301,18 @@ public class TheHandHandler{
 				if(id.length!=2)return;
 				if(variable==BufferedEventVariableEnum.SPEED){
 					if(isAdding)data.fingerData[id[0]].xyzPosRotSpeed[id[1]][xyz.id]+=action;
-					else        data.fingerData[id[0]].xyzPosRotSpeed[id[1]][xyz.id] =action;
+					else		data.fingerData[id[0]].xyzPosRotSpeed[id[1]][xyz.id] =action;
 				}else if(variable==BufferedEventVariableEnum.POSITION){
 					if(isAdding)data.fingerData[id[0]].xyzPosRot[id[1]][xyz.id]+=action;
-					else        data.fingerData[id[0]].xyzPosRot[id[1]][xyz.id] =action;
+					else		data.fingerData[id[0]].xyzPosRot[id[1]][xyz.id] =action;
 				}
 			}else if(target==BufferedEventTargetEnum.HAND){
 				if(variable==BufferedEventVariableEnum.SPEED){
 					if(isAdding)data.handRotationSpeed[xyz.id]+=action;
-					else        data.handRotationSpeed[xyz.id] =action;
+					else		data.handRotationSpeed[xyz.id] =action;
 				}else if(variable==BufferedEventVariableEnum.POSITION){
 					if(isAdding)data.handRotation[xyz.id]+=action;
-					else        data.handRotation[xyz.id] =action;
+					else		data.handRotation[xyz.id] =action;
 				}
 			}
 		}
@@ -336,7 +337,7 @@ public class TheHandHandler{
 			boolean isAdding=event.objects.length>1?UtilM.isBoolean(event.objects[1].toString())?Boolean.parseBoolean(event.objects[1].toString()):false:false;
 			if(name.equals("noiserHandSpeed")){
 				if(isAdding)data.noiserHandSpeed[Integer.parseInt(event.objects[2].toString())]+=action;
-				else        data.noiserHandSpeed[Integer.parseInt(event.objects[2].toString())] =action;
+				else		data.noiserHandSpeed[Integer.parseInt(event.objects[2].toString())] =action;
 			}else if(name.equals("spawnProjectile")){
 				int timeHeld=(Integer)event.objects[0];
 				EntityBallOfEnergy entity=new EntityBallOfEnergy(player.worldObj, player, 2F+timeHeld/300F,timeHeld);

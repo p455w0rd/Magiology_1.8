@@ -1,6 +1,6 @@
 package com.magiology.util.renderers;
 
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 
 public class PartialTicks1F{
 	

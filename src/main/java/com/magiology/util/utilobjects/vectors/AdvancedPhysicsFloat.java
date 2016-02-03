@@ -1,8 +1,10 @@
 package com.magiology.util.utilobjects.vectors;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.UtilM;
 
 public class AdvancedPhysicsFloat{
 	

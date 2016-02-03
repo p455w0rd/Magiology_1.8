@@ -1,8 +1,8 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import net.minecraft.util.*;
+import com.magiology.util.utilobjects.vectors.QuadUV;
 
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.util.ResourceLocation;
 
 public class NormalCubeModel{
 	PlateModel[] sides;

@@ -1,131 +1,131 @@
 
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.core.init.*;
+import com.magiology.client.render.Textures;
+import com.magiology.core.init.MItems;
+import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.utilclasses.UtilM.U;
 
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 public class ModelPants42 extends ModelBiped{
-    ModelRenderer legFront1,legFront2,legFront3,legFront4,Base,legSideAdd11,legSideAdd12,legSideAdd21,legSideAdd22,Stick1,Stick2,Stick3,Stick4,FrontStickB1,FrontStickAdd1,FrontStickB2,FrontStickAdd2;
-    double leftLegRx,rightLegRx;
+	ModelRenderer legFront1,legFront2,legFront3,legFront4,Base,legSideAdd11,legSideAdd12,legSideAdd21,legSideAdd22,Stick1,Stick2,Stick3,Stick4,FrontStickB1,FrontStickAdd1,FrontStickB2,FrontStickAdd2;
+	double leftLegRx,rightLegRx;
   
   public ModelPants42(){
-    textureWidth = 32;
-    textureHeight = 18;
-    
-      legFront1 = new ModelRenderer(this, 8, 11);
-      legFront1.addBox(-2F, 1F, -1.7F, 4, 2, 1);
-      legFront1.setRotationPoint(2F, 12F, 0F);
-      legFront1.setTextureSize(64, 32);
-      legFront1.mirror = true;
-      setRotation(legFront1, -0.6108652F, 0F, 0F);
-      legFront2 = new ModelRenderer(this, 8, 11);
-      legFront2.addBox(-2F, 2.4F, -0.7F, 4, 2, 1);
-      legFront2.setRotationPoint(2F, 12F, 0F);
-      legFront2.setTextureSize(64, 32);
-      legFront2.mirror = true;
-      setRotation(legFront2, -0.6108652F, 0F, 0F);
-      legFront3 = new ModelRenderer(this, 8, 11);
-      legFront3.addBox(-2F, 4F, 0.3F, 4, 2, 1);
-      legFront3.setRotationPoint(2F, 12F, 0F);
-      legFront3.setTextureSize(64, 32);
-      legFront3.mirror = true;
-      setRotation(legFront3, -0.6108652F, 0F, 0F);
-      legFront4 = new ModelRenderer(this, 8, 11);
-      legFront4.addBox(-2F, 5.3F, 1.3F, 4, 2, 1);
-      legFront4.setRotationPoint(2F, 12F, 0F);
-      legFront4.setTextureSize(64, 32);
-      legFront4.mirror = true;
-      setRotation(legFront4, -0.6108652F, 0F, 0F);
-      Base = new ModelRenderer(this, 0, 0);
-      Base.addBox(-4.5F, 9.3F, -2.5F, 9, 3, 5);
-      Base.setRotationPoint(0F, 0F, 0F);
-      Base.setTextureSize(64, 32);
-      Base.mirror = true;
-      setRotation(Base, 0F, 0F, 0F);
-      
-      legSideAdd11 = new ModelRenderer(this, 28, 9);
-      legSideAdd11.addBox(1.8F, 0F, 0F, 1, 8, 1);
-      legSideAdd11.setRotationPoint(2F, 12F, 0F);
-      legSideAdd11.setTextureSize(64, 32);
-      legSideAdd11.mirror = true;
-      setRotation(legSideAdd11, 0F, 0F, 0.0174533F);
-      legSideAdd12 = new ModelRenderer(this, 28, 9);
-      legSideAdd12.addBox(1.8F, 0F, -1F, 1, 8, 1);
-      legSideAdd12.setRotationPoint(2F, 12F, 0F);
-      legSideAdd12.setTextureSize(64, 32);
-      legSideAdd12.mirror = true;
-      setRotation(legSideAdd12, 0F, 0F, 0.0174533F);
-      
-      legSideAdd21 = new ModelRenderer(this, 28, 0);
-      legSideAdd21.addBox(-6.8F, 0F, 0F, 1, 8, 1);
-      legSideAdd21.setRotationPoint(2F, 12F, 0F);
-      legSideAdd21.setTextureSize(64, 32);
-      legSideAdd21.mirror = true;
-      setRotation(legSideAdd21, 0F, 0F, 0.0174533F);
-      legSideAdd22 = new ModelRenderer(this, 28, 0);
-      legSideAdd22.addBox(-6.8F, 0F, -1F, 1, 8, 1);
-      legSideAdd22.setRotationPoint(2F, 12F, 0F);
-      legSideAdd22.setTextureSize(64, 32);
-      legSideAdd22.mirror = true;
-      setRotation(legSideAdd22, 0F, 0F, 0.0174533F);
-      
-      Stick1 = new ModelRenderer(this, 24, 11);
-      Stick1.addBox(-0.5F, 2.9F, 7.5F, 1, 5, 1);
-      Stick1.setRotationPoint(0F, 0F, 0F);
-      Stick1.setTextureSize(64, 32);
-      Stick1.mirror = true;
-      setRotation(Stick1, -0.6108652F, 0F, 0F);
-      Stick2 = new ModelRenderer(this, 20, 8);
-      Stick2.addBox(-0.5F, 2.5F, 6.1F, 1, 3, 1);
-      Stick2.setRotationPoint(0F, 0F, 0F);
-      Stick2.setTextureSize(64, 32);
-      Stick2.mirror = true;
-      setRotation(Stick2, -0.2792527F, 0F, 0F);
-      Stick3 = new ModelRenderer(this, 24, 8);
-      Stick3.addBox(-0.5F, 4.2F, 3.3F, 1, 2, 1);
-      Stick3.setRotationPoint(0F, 0F, 0F);
-      Stick3.setTextureSize(64, 32);
-      Stick3.mirror = true;
-      setRotation(Stick3, 0.3490659F, 0F, 0F);
-      Stick4 = new ModelRenderer(this, 0, 8);
-      Stick4.addBox(-0.5F, -2.2F, 0.6F, 1, 8, 1);
-      Stick4.setRotationPoint(0F, 0F, 0F);
-      Stick4.setTextureSize(64, 32);
-      Stick4.mirror = true;
-      setRotation(Stick4, 0.8726646F, 0F, 0F);
-      FrontStickB1 = new ModelRenderer(this, 4, 8);
-      FrontStickB1.addBox(1.5F, 5.4F, -1.2F, 1, 5, 1);
-      FrontStickB1.setRotationPoint(0F, 0F, 0F);
-      FrontStickB1.setTextureSize(64, 32);
-      FrontStickB1.mirror = true;
-      setRotation(FrontStickB1, -0.122173F, -0.122173F, 0.4363323F);
-      FrontStickAdd1 = new ModelRenderer(this, 8, 8);
-      FrontStickAdd1.addBox(0.6F, 10.3F, 0.4F, 2, 1, 2);
-      FrontStickAdd1.setRotationPoint(0F, 0F, 0F);
-      FrontStickAdd1.setTextureSize(64, 32);
-      FrontStickAdd1.mirror = true;
-      setRotation(FrontStickAdd1, -0.122173F, -0.7853982F, 0.4363323F);
-      FrontStickB2 = new ModelRenderer(this, 4, 8);
-      FrontStickB2.addBox(-2.5F, 5.4F, -1.1F, 1, 5, 1);
-      FrontStickB2.setRotationPoint(0F, 0F, 0F);
-      FrontStickB2.setTextureSize(64, 32);
-      FrontStickB2.mirror = true;
-      setRotation(FrontStickB2, -0.1396263F, 0.1396263F, -0.4363323F);
-      FrontStickAdd2 = new ModelRenderer(this, 8, 8);
-      FrontStickAdd2.addBox(-2.6F, 10.4F, 0.5F, 2, 1, 2);
-      FrontStickAdd2.setRotationPoint(0F, 0F, 0F);
-      FrontStickAdd2.setTextureSize(64, 32);
-      FrontStickAdd2.mirror = true;
-      setRotation(FrontStickAdd2, -0.1396263F, 0.7853982F, -0.4363323F);
+	textureWidth = 32;
+	textureHeight = 18;
+	
+	  legFront1 = new ModelRenderer(this, 8, 11);
+	  legFront1.addBox(-2F, 1F, -1.7F, 4, 2, 1);
+	  legFront1.setRotationPoint(2F, 12F, 0F);
+	  legFront1.setTextureSize(64, 32);
+	  legFront1.mirror = true;
+	  setRotation(legFront1, -0.6108652F, 0F, 0F);
+	  legFront2 = new ModelRenderer(this, 8, 11);
+	  legFront2.addBox(-2F, 2.4F, -0.7F, 4, 2, 1);
+	  legFront2.setRotationPoint(2F, 12F, 0F);
+	  legFront2.setTextureSize(64, 32);
+	  legFront2.mirror = true;
+	  setRotation(legFront2, -0.6108652F, 0F, 0F);
+	  legFront3 = new ModelRenderer(this, 8, 11);
+	  legFront3.addBox(-2F, 4F, 0.3F, 4, 2, 1);
+	  legFront3.setRotationPoint(2F, 12F, 0F);
+	  legFront3.setTextureSize(64, 32);
+	  legFront3.mirror = true;
+	  setRotation(legFront3, -0.6108652F, 0F, 0F);
+	  legFront4 = new ModelRenderer(this, 8, 11);
+	  legFront4.addBox(-2F, 5.3F, 1.3F, 4, 2, 1);
+	  legFront4.setRotationPoint(2F, 12F, 0F);
+	  legFront4.setTextureSize(64, 32);
+	  legFront4.mirror = true;
+	  setRotation(legFront4, -0.6108652F, 0F, 0F);
+	  Base = new ModelRenderer(this, 0, 0);
+	  Base.addBox(-4.5F, 9.3F, -2.5F, 9, 3, 5);
+	  Base.setRotationPoint(0F, 0F, 0F);
+	  Base.setTextureSize(64, 32);
+	  Base.mirror = true;
+	  setRotation(Base, 0F, 0F, 0F);
+	  
+	  legSideAdd11 = new ModelRenderer(this, 28, 9);
+	  legSideAdd11.addBox(1.8F, 0F, 0F, 1, 8, 1);
+	  legSideAdd11.setRotationPoint(2F, 12F, 0F);
+	  legSideAdd11.setTextureSize(64, 32);
+	  legSideAdd11.mirror = true;
+	  setRotation(legSideAdd11, 0F, 0F, 0.0174533F);
+	  legSideAdd12 = new ModelRenderer(this, 28, 9);
+	  legSideAdd12.addBox(1.8F, 0F, -1F, 1, 8, 1);
+	  legSideAdd12.setRotationPoint(2F, 12F, 0F);
+	  legSideAdd12.setTextureSize(64, 32);
+	  legSideAdd12.mirror = true;
+	  setRotation(legSideAdd12, 0F, 0F, 0.0174533F);
+	  
+	  legSideAdd21 = new ModelRenderer(this, 28, 0);
+	  legSideAdd21.addBox(-6.8F, 0F, 0F, 1, 8, 1);
+	  legSideAdd21.setRotationPoint(2F, 12F, 0F);
+	  legSideAdd21.setTextureSize(64, 32);
+	  legSideAdd21.mirror = true;
+	  setRotation(legSideAdd21, 0F, 0F, 0.0174533F);
+	  legSideAdd22 = new ModelRenderer(this, 28, 0);
+	  legSideAdd22.addBox(-6.8F, 0F, -1F, 1, 8, 1);
+	  legSideAdd22.setRotationPoint(2F, 12F, 0F);
+	  legSideAdd22.setTextureSize(64, 32);
+	  legSideAdd22.mirror = true;
+	  setRotation(legSideAdd22, 0F, 0F, 0.0174533F);
+	  
+	  Stick1 = new ModelRenderer(this, 24, 11);
+	  Stick1.addBox(-0.5F, 2.9F, 7.5F, 1, 5, 1);
+	  Stick1.setRotationPoint(0F, 0F, 0F);
+	  Stick1.setTextureSize(64, 32);
+	  Stick1.mirror = true;
+	  setRotation(Stick1, -0.6108652F, 0F, 0F);
+	  Stick2 = new ModelRenderer(this, 20, 8);
+	  Stick2.addBox(-0.5F, 2.5F, 6.1F, 1, 3, 1);
+	  Stick2.setRotationPoint(0F, 0F, 0F);
+	  Stick2.setTextureSize(64, 32);
+	  Stick2.mirror = true;
+	  setRotation(Stick2, -0.2792527F, 0F, 0F);
+	  Stick3 = new ModelRenderer(this, 24, 8);
+	  Stick3.addBox(-0.5F, 4.2F, 3.3F, 1, 2, 1);
+	  Stick3.setRotationPoint(0F, 0F, 0F);
+	  Stick3.setTextureSize(64, 32);
+	  Stick3.mirror = true;
+	  setRotation(Stick3, 0.3490659F, 0F, 0F);
+	  Stick4 = new ModelRenderer(this, 0, 8);
+	  Stick4.addBox(-0.5F, -2.2F, 0.6F, 1, 8, 1);
+	  Stick4.setRotationPoint(0F, 0F, 0F);
+	  Stick4.setTextureSize(64, 32);
+	  Stick4.mirror = true;
+	  setRotation(Stick4, 0.8726646F, 0F, 0F);
+	  FrontStickB1 = new ModelRenderer(this, 4, 8);
+	  FrontStickB1.addBox(1.5F, 5.4F, -1.2F, 1, 5, 1);
+	  FrontStickB1.setRotationPoint(0F, 0F, 0F);
+	  FrontStickB1.setTextureSize(64, 32);
+	  FrontStickB1.mirror = true;
+	  setRotation(FrontStickB1, -0.122173F, -0.122173F, 0.4363323F);
+	  FrontStickAdd1 = new ModelRenderer(this, 8, 8);
+	  FrontStickAdd1.addBox(0.6F, 10.3F, 0.4F, 2, 1, 2);
+	  FrontStickAdd1.setRotationPoint(0F, 0F, 0F);
+	  FrontStickAdd1.setTextureSize(64, 32);
+	  FrontStickAdd1.mirror = true;
+	  setRotation(FrontStickAdd1, -0.122173F, -0.7853982F, 0.4363323F);
+	  FrontStickB2 = new ModelRenderer(this, 4, 8);
+	  FrontStickB2.addBox(-2.5F, 5.4F, -1.1F, 1, 5, 1);
+	  FrontStickB2.setRotationPoint(0F, 0F, 0F);
+	  FrontStickB2.setTextureSize(64, 32);
+	  FrontStickB2.mirror = true;
+	  setRotation(FrontStickB2, -0.1396263F, 0.1396263F, -0.4363323F);
+	  FrontStickAdd2 = new ModelRenderer(this, 8, 8);
+	  FrontStickAdd2.addBox(-2.6F, 10.4F, 0.5F, 2, 1, 2);
+	  FrontStickAdd2.setRotationPoint(0F, 0F, 0F);
+	  FrontStickAdd2.setTextureSize(64, 32);
+	  FrontStickAdd2.mirror = true;
+	  setRotation(FrontStickAdd2, -0.1396263F, 0.7853982F, -0.4363323F);
   }
   
   @Override
@@ -143,13 +143,13 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 	  U.getMC().renderEngine.bindTexture(Textures.Pants42Model);
 	  setRotationAngles(f, f1, f2, f3, f4, f5,entity);
 	  
-      GL11.glColor4f(color, color, color, 1);
+	  OpenGLM.color(color, color, color, 1);
 	  legSideAdd11.render(f5);
 	  legSideAdd12.render(f5);
 	  legSideAdd21.render(f5);
 	  legSideAdd22.render(f5);
 	  
-	  GL11.glTranslated(0, 0, 0.005);
+	  OpenGLM.translate(0, 0, 0.005);
 	  legFront1.render(f5);
 	  legFront2.render(f5);
 	  legFront3.render(f5);
@@ -165,13 +165,13 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
 		  legFront4.rotateAngleX+=(float)rightLegRx;
 	  }
 	  
-	  GL11.glTranslated(-(1.0/16.0)*4, 0, 0);
+	  OpenGLM.translate(-(1.0/16.0)*4, 0, 0);
 	  legFront1.render(f5);
 	  legFront2.render(f5);
 	  legFront3.render(f5);
 	  legFront4.render(f5);
-	  GL11.glTranslated((1.0/16.0)*4, 0, 0);
-	  GL11.glTranslated(0, 0,  -0.005);
+	  OpenGLM.translate((1.0/16.0)*4, 0, 0);
+	  OpenGLM.translate(0, 0,  -0.005);
 	  
 	  
 	  
@@ -180,13 +180,13 @@ public void render(Entity entity, float f, float f1, float f2, float f3, float f
  	  Stick2.render(f5);
  	  Stick3.render(f5);
  	  Stick4.render(f5);
-      GL11.glColor4f(1, 1, 1, 1);
+	  OpenGLM.color(1, 1, 1, 1);
   }
   
   private void setRotation(ModelRenderer model, float x, float y, float z){
-    model.rotateAngleX = x;
-    model.rotateAngleY = y;
-    model.rotateAngleZ = z;
+	model.rotateAngleX = x;
+	model.rotateAngleY = y;
+	model.rotateAngleZ = z;
   }
   
   	@Override

@@ -1,8 +1,8 @@
 package com.magiology.util.renderers;
 
-import com.magiology.util.renderers.glstates.*;
+import com.magiology.util.renderers.glstates.GlStateCell;
 
-import net.minecraft.client.renderer.vertex.*;
+import net.minecraft.client.renderer.vertex.VertexBuffer;
 
 @Deprecated
 public class VertexBufferM{

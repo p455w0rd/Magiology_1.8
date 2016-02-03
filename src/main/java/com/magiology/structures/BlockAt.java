@@ -1,7 +1,7 @@
 package com.magiology.structures;
 
-import net.minecraft.block.*;
-import net.minecraft.util.*;
+import net.minecraft.block.Block;
+import net.minecraft.util.BlockPos;
 
 public class BlockAt{
 	public Block bl;

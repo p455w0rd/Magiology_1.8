@@ -1,7 +1,7 @@
 package com.magiology.util.utilobjects.m_extension.effect;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.world.*;
+import net.minecraft.client.particle.EntitySmokeFX;
+import net.minecraft.world.World;
 
 public class EntitySmokeFXM extends EntitySmokeFX{
 

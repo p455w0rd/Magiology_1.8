@@ -1,21 +1,21 @@
 package com.magiology.client.render.models;
 
-import net.minecraft.client.model.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.core.*;
-import com.magiology.mcobjects.entitys.*;
+import com.magiology.client.render.Textures;
+import com.magiology.core.Config;
+import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.vectors.QuadUV;
+
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static float p=1F/16F;
@@ -30,8 +30,8 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 	private static QuadUV[] genUV(int x1,int y1){
 		float x=(1F*x1)/7F,y=y1/6F,x2=2/14F,y2=1/6F;
 		return new QuadUV[]{new QuadUV(
-				x,    y+y2,
-				x,    y,
+				x,	y+y2,
+				x,	y,
 				x+x2, y, 
 				x+x2, y+y2
 				).rotate1().mirror1()};
@@ -121,19 +121,19 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		//rendering
 		GL11U.protect();
 		GL11U.glCulFace(Config.isWingsThick());
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glTranslated(-p*1.5,-p*0.5,p*3.5);
+		OpenGLM.enableDepth();
+		OpenGLM.translate(-p*1.5,-p*0.5,p*3.5);
 		GL11U.glRotate(-rotation, 0, 0);
-		GL11.glPushMatrix();
-		GL11.glTranslated(-p*4, 0, 0);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(-p*4, 0, 0);
 		GL11U.glRotate(0,-90+10, 0,  p*1.5, p*1.5,0);
 		renderWingBase(renderRotations,false,data);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glTranslated(p*4, 0, 0);
+		OpenGLM.popMatrix();
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(p*4, 0, 0);
 		GL11U.glRotate(0, 90-10, 0, p*1.5, p*1.5,0);
 		renderWingBase(renderRotations,true,data);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		GL11U.endProtection();
 //		Config.setWingsThick(true);
 	}
@@ -148,24 +148,24 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 				models[a].flipUVs();
 			}
 		}
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		for(int a1=0;a1<models.length;a1++){
 			CubeModel a=models[a1];
 			GL11U.glRotate(renderRotations[a1][0],renderRotations[a1][1],renderRotations[a1][2], a.points[0].x/2, a.points[0].y/2, 0);
 			a.draw();
-			GL11.glPushMatrix();
-			GL11.glTranslated((a.points[3].x-a.points[4].x)*(side?-1:1), 0, 0);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate((a.points[3].x-a.points[4].x)*(side?-1:1), 0, 0);
 			for(int l=0;l<modelsBack[a1].length;l++){
 				CubeModel part=modelsBack[a1][l];
 				part.draw(); 
-				GL11.glTranslatef((float)(part.points[3].x-part.points[4].x)*(side?-1:1), 0, -p/2*(l*0.6F));
+				OpenGLM.translate((float)(part.points[3].x-part.points[4].x)*(side?-1:1), 0, -p/2*(l*0.6F));
 				GL11U.glRotate(3, 2, 0);
 			}
-			GL11.glColor4d(1,1,1,1);
-			GL11.glPopMatrix();
-			GL11.glTranslatef(0, 0, a.points[3].getZ());
+			OpenGLM.color(1,1,1,1);
+			OpenGLM.popMatrix();
+			OpenGLM.translate(0, 0, a.points[3].getZ());
 		}
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		if(!side){
 			for(int a=0;a<modelsBack.length;a++){
 				for(int b=0;b<modelsBack[a].length;b++)modelsBack[a][b].flipUVs();

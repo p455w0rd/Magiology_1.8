@@ -1,17 +1,19 @@
 package com.magiology.api.power;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.block.state.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-
-import com.magiology.mcobjects.effect.*;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.World;
 
 public interface PowerCore{
 	/**Keep it short! The shorter it is less bandwidth it takes!*/

@@ -2,22 +2,25 @@ package com.magiology.util.renderers.glstates;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL11;
+
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
 
 public class GlState{
 	
 	public static final GlState 
 		NORMAL=new GlState(new int[]{GL11.GL_DEPTH, GL11.GL_TEXTURE_2D, GL11.GL_CULL_FACE, GL11.GL_LIGHTING}, new int[]{GL11.GL_BLEND}, ()->{
-			GL11.glLineWidth(1);
-			GL11.glColor4f(1, 1, 1, 1);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.99F);
-			GL11.glDepthMask(false);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			OpenGLM.lineWidth(1);
+			OpenGLM.color(1, 1, 1, 1);
+			GL11U.allOpacityIs(false);
+			OpenGLM.depthMask(false);
+			OpenGLM.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		}),
 		STANDARD_OPAQUE=new GlState(new int[]{GL11.GL_BLEND}, new int[]{GL11.GL_ALPHA_TEST}, ()->{
 			glDepthMask(false);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0F);
+			OpenGLM.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11U.allOpacityIs(true);
 		});
 	
 	

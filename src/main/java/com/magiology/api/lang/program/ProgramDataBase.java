@@ -2,10 +2,13 @@ package com.magiology.api.lang.program;
 
 import static com.magiology.io.WorldData.WorkingProtocol.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
-import com.magiology.io.*;
+import com.magiology.io.WorldData;
 import com.magiology.io.WorldData.FileContent;
 
 
@@ -23,7 +26,7 @@ public class ProgramDataBase{
 		Object result=null;
 		try{
 			ProgramUsable program=getProgram(programId);
-    		result=program.run("main", args, environment);
+			result=program.run("main", args, environment);
 		}catch(Exception e){
 			result=err+e.getMessage();
 		}
@@ -57,7 +60,7 @@ public class ProgramDataBase{
 		FileContent<ProgramSerializable> code=programs.getFileContent(programId+"");
 		
 		String codeS=code!=null?code.content!=null?code.content.src.toString():"":"";
-		if(codeS.isEmpty())codeS="function main(value){\n    \n	 \n    \n    return \"sucess\";\n}\nfunction init(map){\n    \n}";
+		if(codeS.isEmpty())codeS="function main(value){\n	\n	 \n	\n	return \"sucess\";\n}\nfunction init(map){\n	\n}";
 		
 		return codeS;
 	}

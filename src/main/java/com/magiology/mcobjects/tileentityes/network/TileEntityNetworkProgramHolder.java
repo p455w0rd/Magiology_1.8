@@ -1,21 +1,27 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import com.magiology.api.connection.IConnection;
+import com.magiology.api.network.NetworkBaseComponent;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.skeleton.TileEntityNetwork;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.SlowdownUtil;
 
-import com.magiology.api.connection.*;
-import com.magiology.api.network.*;
-import com.magiology.api.network.skeleton.*;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.events.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 
 public class TileEntityNetworkProgramHolder extends TileEntityNetwork implements ISidedInventory,ITickable{
 	
@@ -56,8 +62,8 @@ public class TileEntityNetworkProgramHolder extends TileEntityNetwork implements
 	@Override
 	public void setColisionBoxes(){
 		collisionBoxes=new AxisAlignedBB[]{
-				connections[5].getMain()?new AxisAlignedBB(p*13,p*6, p*6, 1,    p*10, p*10):null,
-				connections[1].getMain()?new AxisAlignedBB(p*6, p*13,p*6, p*10, 1,    p*10):null,
+				connections[5].getMain()?new AxisAlignedBB(p*13,p*6, p*6, 1,	p*10, p*10):null,
+				connections[1].getMain()?new AxisAlignedBB(p*6, p*13,p*6, p*10, 1,	p*10):null,
 				connections[2].getMain()?new AxisAlignedBB(p*6, p*6, 0,   p*10, p*10, p*3 ):null,
 				connections[3].getMain()?new AxisAlignedBB(p*6, p*6, p*13,p*10, p*10, 1   ):null,
 				connections[0].getMain()?new AxisAlignedBB(p*6, 0,   p*6, p*10, p*3,  p*10):null,

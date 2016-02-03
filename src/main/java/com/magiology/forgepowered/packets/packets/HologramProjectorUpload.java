@@ -1,16 +1,16 @@
 package com.magiology.forgepowered.packets.packets;
-import java.io.*;
+import java.io.IOException;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraft.tileentity.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
-import com.magiology.forgepowered.packets.core.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
 
 
 public class HologramProjectorUpload extends AbstractToServerMessage{

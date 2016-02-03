@@ -1,22 +1,25 @@
 package com.magiology.mcobjects.items;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.block.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraftforge.fml.common.registry.*;
-
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.effect.*;
-import com.magiology.mcobjects.items.upgrades.*;
+import com.magiology.core.init.MCreativeTabs;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilclasses.FontEffectUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.NBTUtil;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GenericItemUpgrade extends Item{
 	int Level;
@@ -51,8 +54,8 @@ public class GenericItemUpgrade extends Item{
 		}
 		
 		
-        return is;
-    }
+		return is;
+	}
 	
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
@@ -76,7 +79,7 @@ public class GenericItemUpgrade extends Item{
 				}
 				
 				for(int a=0;a<20;a++)switch(side.getIndex()){
-				case 0:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY(),      pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+UtilM.CRandF(0.5), -10+UtilM.CRandF(0.5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
+				case 0:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY(),	  pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+UtilM.CRandF(0.5), -10+UtilM.CRandF(0.5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
 				case 1:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY()+MaxY, pos.getZ()+UtilM.RF()*(MaxZ-MinZ)+MinZ, 0, 0, 0, 500, 1+UtilM.CRandF(0.5), 10+UtilM.CRandF(0.5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
 				case 2:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY()+UtilM.RF()*(MaxY-MinY)+MinY, pos.getZ()+MinZ, 0, 0, -0.1, 500, 1+UtilM.CRandF(0.5), UtilM.CRandF(5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
 				case 3:UtilM.spawnEntityFX(new EntitySmoothBubleFX(world, pos.getX()+UtilM.RF()*(MaxX-MinX)+MinX, pos.getY()+UtilM.RF()*(MaxY-MinY)+MinY, pos.getZ()+MaxZ, 0, 0, 0.1, 500, 1+UtilM.CRandF(0.5), UtilM.CRandF(5), UtilM.RInt(10)==0?2:1, UtilM.RF(), UtilM.RF(), UtilM.RF(), 0.8));break;
@@ -87,8 +90,8 @@ public class GenericItemUpgrade extends Item{
 			
 		}
 		
-        return result;
-    }
+		return result;
+	}
 	@Override
 	public void onUpdate(ItemStack is, World w, Entity entity, int var1, boolean b1){
 		if(NBTUtil.createNBT(is)!=null){
@@ -142,7 +145,7 @@ public class GenericItemUpgrade extends Item{
 		case 4:{
 			String[] side={"up","down","left","right","forward","back","nowhere","overthere","to your mama","away from me","to hell","to store","to your computer","to that upgrade overthere"};
 			int r1=UtilM.RInt(side.length),r2=UtilM.RInt(side.length);
-			list.add(FontEffectUtil.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"              ":""));
+			list.add(FontEffectUtil.BLUE+"Adds priority to a specific side."+(i==1&&i==2?"			  ":""));
 			
 			if(stack.hasTagCompound()){
 				int id=stack.getTagCompound().getInteger("side");

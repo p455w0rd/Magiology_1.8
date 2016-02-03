@@ -1,7 +1,8 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
 
 public class ColorSlider{
 	private static ColorF[] image;

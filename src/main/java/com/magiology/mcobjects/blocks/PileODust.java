@@ -1,14 +1,14 @@
 package com.magiology.mcobjects.blocks;
 
 
-import java.util.*;
+import java.util.Random;
 
-import net.minecraft.block.material.*;
-import net.minecraft.block.state.*;
-import net.minecraft.item.*;
+import com.magiology.core.init.MItems;
+import com.magiology.util.utilobjects.m_extension.BlockM;
 
-import com.magiology.core.init.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 
 public class PileODust extends BlockM {
 	
@@ -17,11 +17,11 @@ public class PileODust extends BlockM {
 	@Override
 	public boolean isOpaqueCube() {return false;}
 	
-    @Override
+	@Override
 	public int getRenderType(){
-    	return 0;
-    }
-    
+		return 0;
+	}
+	
 	public PileODust()
 	{
 		super(Material.ground);

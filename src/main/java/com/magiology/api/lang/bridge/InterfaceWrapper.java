@@ -1,18 +1,21 @@
 package com.magiology.api.lang.bridge;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
-import net.minecraft.block.*;
-import net.minecraft.block.properties.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import com.google.common.collect.ImmutableSet;
+import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.program.ProgramCommon;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
-import com.google.common.collect.*;
-import com.magiology.api.lang.*;
-import com.magiology.api.lang.program.*;
-import com.magiology.api.network.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 
 
 public class InterfaceWrapper{

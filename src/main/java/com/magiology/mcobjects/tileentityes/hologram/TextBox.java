@@ -1,14 +1,16 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
-import net.minecraft.entity.player.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import org.lwjgl.util.vector.*;
-
-import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.ColorF;
+
+import net.minecraft.entity.player.EntityPlayer;
 
 public class TextBox extends HoloObject implements StringContainer{
 	

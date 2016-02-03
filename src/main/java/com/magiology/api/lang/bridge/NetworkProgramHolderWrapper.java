@@ -1,11 +1,14 @@
 package com.magiology.api.lang.bridge;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 public class NetworkProgramHolderWrapper{
 	private static TileEntityNetworkProgramHolder instance;

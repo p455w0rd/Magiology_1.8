@@ -1,10 +1,20 @@
 package com.magiology.client.render.tilerender.network;
 
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
 import com.magiology.api.connection.IConnectionProvider;
 import com.magiology.api.network.NetworkBaseComponent;
 import com.magiology.core.MReference;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkConductor;
-import com.magiology.util.renderers.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.ShinySurfaceRenderer;
+import com.magiology.util.renderers.ShinySurfaceRenderer.SpecularLight;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.renderers.glstates.GlState;
 import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
@@ -15,11 +25,10 @@ import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.QuadUV;
 import com.magiology.util.utilobjects.vectors.Vec3M;
-import net.minecraft.client.renderer.GlStateManager;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 	
@@ -239,43 +248,35 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 	protected <NetworkComponent extends IConnectionProvider&NetworkBaseComponent> void renderNetworkPipe(NetworkComponent networkComponent, double x, double y, double z){
 		GL11U.protect();
 		GL11U.texture(true);
-		GL11.glTranslated(x,y,z);
+		OpenGLM.translate(x,y,z);
 
-		GL11U.texture(false);
-		ColorF.BLACK.bind();
-		/*
-		GlStateManager.shadeModel(GL11.GL_SMOOTH);
+//		GL11U.texture(false);
+		ColorF.WHITE.bind();
+		OpenGLM.shadeModel(GL11.GL_SMOOTH);
 		ShinySurfaceRenderer renderer=new ShinySurfaceRenderer();
+		renderer.setModelOriginPos(new Vec3M().add(networkComponent.getHost().getPos()));
+		renderer.setBaseColor(new ColorF(0.3,0.6,0,1));
 
-		renderer.setBaseColor(new ColorF(0,1,0,1));
-
-		renderer.importComplexCube(new CubeModel(0,1,0,0.5F,1.5F,0.5F));
+		renderer.addLight(new SpecularLight(new Vec3M(0,-1,0), new ColorF(0.9,0.9,1,1),6));
+		renderer.addLight(new SpecularLight(new Vec3M(UtilM.fluctuateSmooth(50, 0),-1,0.5), new ColorF(1,0.2,0.8,1),6));
+		
+		
+		CubeModel cube=new CubeModel(0,1,0,1F,2.001F,1F);
+		Matrix4f rot=new Matrix4f();
+		
+		rot.translate(new Vector3f(0,1,0));
+		rot.rotate((float)Math.toRadians(40),new Vector3f(0,0,1));
+		rot.translate(new Vector3f(0,-1,0));
+		
+//		cube.transform(rot);
+		renderer.modelTransf=rot;
+		renderer.importComplexCube(cube);
+		OpenGLM.translate(0, 1, 0);
+		GL11U.glRotate(0, 0, 40);
+		OpenGLM.translate(0, -1, 0);
 		renderer.draw();
+		OpenGLM.shadeModel(GL11.GL_FLAT);
 
-
-		WorldRenderer wr=TessUtil.getWR();
-		wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-
-		wr.pos(0,1,1).color(1F, 0F, 0F, 1F).endVertex();
-		wr.pos(1,1,1).color(0F, 1F, 0F, 1F).endVertex();
-		wr.pos(1,1,0).color(1F, 1F, 0F, 1F).endVertex();
-		wr.pos(0,1,0).color(0F, 0F, 1F, 1F).endVertex();
-
-		Tessellator.getInstance().draw();
-		*/
-		GlStateManager.shadeModel(GL11.GL_FLAT);
-
-
-
-		Vec3M normal=new Vec3M(1,0,0),vec=new Vec3M(UtilM.fluctuateSmooth(20,0),UtilM.fluctuateSmooth(42,0),UtilM.fluctuateSmooth(34,0)),reflected=vec.reflect(normal).normalize();
-
-
-
-		TessUtil.drawLine(-normal.x,1-normal.y,-normal.z, normal.x,1+normal.y,normal.z,p,false,null,0,0);
-
-
-		TessUtil.drawLine(0,1,0, 0+vec.x,1+vec.y,0+vec.z,p,false,null,0,0);
-		TessUtil.drawLine(0,1,0, 0+reflected.x,1+reflected.y,0+reflected.z,p,false,null,0,0);
 
 		GL11U.texture(true);
 
@@ -297,14 +298,14 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 			
 			TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"/textures/models/iron_strip_end.png"));
 			for(int i=0;i<body2.length;i++)switch(i){
-			case 0:if(          sides[1]          ||sides[3]          ||sides[5])body2[i].draw();break;
-			case 1:if(          sides[1]          ||sides[3]||sides[4]          )body2[i].draw();break;
-			case 2:if(sides[0]                    ||sides[3]||sides[4]          )body2[i].draw();break;
-			case 3:if(sides[0]                    ||sides[3]          ||sides[5])body2[i].draw();break;
-			case 4:if(sides[0]          ||sides[2]                    ||sides[5])body2[i].draw();break;
-			case 5:if(sides[0]          ||sides[2]          ||sides[4]          )body2[i].draw();break;
-			case 6:if(          sides[1]||sides[2]          ||sides[4]          )body2[i].draw();break;
-			case 7:if(          sides[1]||sides[2]                    ||sides[5])body2[i].draw();break;
+			case 0:if(		  sides[1]		  ||sides[3]		  ||sides[5])body2[i].draw();break;
+			case 1:if(		  sides[1]		  ||sides[3]||sides[4]		  )body2[i].draw();break;
+			case 2:if(sides[0]					||sides[3]||sides[4]		  )body2[i].draw();break;
+			case 3:if(sides[0]					||sides[3]		  ||sides[5])body2[i].draw();break;
+			case 4:if(sides[0]		  ||sides[2]					||sides[5])body2[i].draw();break;
+			case 5:if(sides[0]		  ||sides[2]		  ||sides[4]		  )body2[i].draw();break;
+			case 6:if(		  sides[1]||sides[2]		  ||sides[4]		  )body2[i].draw();break;
+			case 7:if(		  sides[1]||sides[2]					||sides[5])body2[i].draw();break;
 			}
 		}
 		

@@ -1,12 +1,14 @@
 package com.magiology.client.gui.container;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.item.*;
+import com.magiology.core.init.MItems;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilclasses.UtilM;
 
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilclasses.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class CommandCenterContainer extends Container{
 	
@@ -51,15 +53,15 @@ public class CommandCenterContainer extends Container{
 				if(!mergeItemStack(itemstack1, 36, inventorySlots.size(), false))return null;
 			}
 			if(itemstack1.stackSize==0)clickedSlot.putStack((ItemStack)null);
-			else                       clickedSlot.onSlotChanged();
+			else					   clickedSlot.onSlotChanged();
 			if(itemstack1.stackSize==itemstack.stackSize)return null;
 			clickedSlot.onPickupFromSlot(player, itemstack1);
-	        return itemstack;
+			return itemstack;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
 		}
-    }
+	}
 	public static class CommandCenterContainerSlot extends Slot{
 		public CommandCenterContainerSlot(IInventory inventoryIn, int index, int xPosition, int yPosition){
 			super(inventoryIn, index, xPosition, yPosition);

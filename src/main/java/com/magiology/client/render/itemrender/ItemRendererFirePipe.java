@@ -1,13 +1,5 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
-
 //public class ItemRendererFirePipe implements IItemRenderer {
 //	
 //	private final float p= 1F/16F;
@@ -32,7 +24,7 @@ import com.magiology.util.renderers.*;
 //	
 //	@Override
 //	public void renderItem(ItemRenderType type, ItemStack is, Object... data){
-//		GL11.glPushMatrix();
+//		OpenGLM.pushMatrix();
 //		float x=0;
 //		float y=0;
 //		float z=0;
@@ -69,17 +61,17 @@ import com.magiology.util.renderers.*;
 //			scale=1.4F;
 //		}
 //		
-//		GL11.glEnable(GL11.GL_LIGHTING);
-//		GL11.glEnable(GL11.GL_CULL_FACE);
-//	    GL11.glTranslatef(x,y,z);
-//	    GL11.glRotatef(-xr, 1, 0, 0);GL11.glRotatef(-yr, 0, 1, 0);GL11.glRotatef(-zr, 0, 0, 1);
-//	    GL11.glScalef(scale, scale, scale);
-//	    
+//		OpenGLM.enableLighting();
+//		OpenGLM.enableCull();
+//		OpenGLM.translate(x,y,z);
+//		OpenGLM.rotate(-xr, 1, 0, 0);OpenGLM.rotate(-yr, 0, 1, 0);OpenGLM.rotate(-zr, 0, 0, 1);
+//		OpenGLM.scale(scale, scale, scale);
+//		
 //		drawConector(EnumFacing.DOWN);
 //		drawConector(EnumFacing.UP);
 //		drawCore();
 //		
-//		GL11.glPopMatrix();
+//		OpenGLM.popMatrix();
 //	}
 //	
 //	public void drawCore(){
@@ -117,22 +109,22 @@ import com.magiology.util.renderers.*;
 //	}
 //	
 //	public void drawConector(EnumFacing dir){
-//		GL11.glPushMatrix();
+//		OpenGLM.pushMatrix();
 //		TessUtil.bindTexture(Textures.FirePipeConection);
 //		
-//		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+//		OpenGLM.translate(0.5F, 0.5F, 0.5F);
 //		if(dir.equals(EnumFacing.WEST)){}
-//		else if (dir.equals(EnumFacing.UP)){GL11.glRotatef(-90, 0, 0, 1);}
-//		else if (dir.equals(EnumFacing.DOWN)){GL11.glRotatef(90, 0, 0, 1);}
-//		else if (dir.equals(EnumFacing.SOUTH)){GL11.glRotatef(90, 0, 1, 0);}
-//		else if (dir.equals(EnumFacing.EAST)){GL11.glRotatef(-180, 0, 1, 0);}
-//		else if (dir.equals(EnumFacing.NORTH)){GL11.glRotatef(-90, 0, 1, 0);}
-//		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+//		else if (dir.equals(EnumFacing.UP)){OpenGLM.rotate(-90, 0, 0, 1);}
+//		else if (dir.equals(EnumFacing.DOWN)){OpenGLM.rotate(90, 0, 0, 1);}
+//		else if (dir.equals(EnumFacing.SOUTH)){OpenGLM.rotate(90, 0, 1, 0);}
+//		else if (dir.equals(EnumFacing.EAST)){OpenGLM.rotate(-180, 0, 1, 0);}
+//		else if (dir.equals(EnumFacing.NORTH)){OpenGLM.rotate(-90, 0, 1, 0);}
+//		OpenGLM.translate(-0.5F, -0.5F, -0.5F);
 //
 //		buf.addVertexWithUV(p*0, p*9.5,  p*9.5,tW*24.5, tH*16);
 //		buf.addVertexWithUV(p*0, p*6.5,  p*9.5,tW*24.5, tH*0);
-//		buf.addVertexWithUV(p*6, p*6.5,  p*9.5,tW*0,    tH*0);
-//		buf.addVertexWithUV(p*6, p*9.5,  p*9.5,tW*0,    tH*16);
+//		buf.addVertexWithUV(p*6, p*6.5,  p*9.5,tW*0,	tH*0);
+//		buf.addVertexWithUV(p*6, p*9.5,  p*9.5,tW*0,	tH*16);
 //
 //		buf.addVertexWithUV(p*6, p*9, p*9  ,tW*0,   tH*0);
 //		buf.addVertexWithUV(p*6, p*7, p*9 ,tW*0,   tH*16);
@@ -147,28 +139,28 @@ import com.magiology.util.renderers.*;
 //		
 //		buf.addVertexWithUV(p*0, p*9,  p*7,tW*24.5, tH*16);
 //		buf.addVertexWithUV(p*0, p*7,  p*7,tW*24.5, tH*0);
-//		buf.addVertexWithUV(p*6, p*7,  p*7,tW*0,    tH*0);
-//		buf.addVertexWithUV(p*6, p*9,  p*7,tW*0,    tH*16);
+//		buf.addVertexWithUV(p*6, p*7,  p*7,tW*0,	tH*0);
+//		buf.addVertexWithUV(p*6, p*9,  p*7,tW*0,	tH*16);
 //		
 //		
-//		buf.addVertexWithUV(p*6, p*9.5, p*9.5, tW*0,    tH*16);
-//		buf.addVertexWithUV(p*6, p*9.5, p*6.5, tW*0,    tH*0);
+//		buf.addVertexWithUV(p*6, p*9.5, p*9.5, tW*0,	tH*16);
+//		buf.addVertexWithUV(p*6, p*9.5, p*6.5, tW*0,	tH*0);
 //		buf.addVertexWithUV(p*0, p*9.5, p*6.5, tW*24.5, tH*0);
 //		buf.addVertexWithUV(p*0, p*9.5, p*9.5, tW*24.5, tH*16);
 //
 //		buf.addVertexWithUV(p*0, p*9, p*9, tW*24.5, tH*16);
 //		buf.addVertexWithUV(p*0, p*9, p*7, tW*24.5, tH*0);
-//		buf.addVertexWithUV(p*6, p*9, p*7, tW*0,    tH*0);
-//		buf.addVertexWithUV(p*6, p*9, p*9, tW*0,    tH*16);
+//		buf.addVertexWithUV(p*6, p*9, p*7, tW*0,	tH*0);
+//		buf.addVertexWithUV(p*6, p*9, p*9, tW*0,	tH*16);
 //		
 //
 //		buf.addVertexWithUV(p*0, p*6.5, p*9.5, tW*24.5, tH*16);
 //		buf.addVertexWithUV(p*0, p*6.5, p*6.5, tW*24.5, tH*0);
-//		buf.addVertexWithUV(p*6, p*6.5, p*6.5, tW*0,    tH*0);
-//		buf.addVertexWithUV(p*6, p*6.5, p*9.5, tW*0,    tH*16);
+//		buf.addVertexWithUV(p*6, p*6.5, p*6.5, tW*0,	tH*0);
+//		buf.addVertexWithUV(p*6, p*6.5, p*9.5, tW*0,	tH*16);
 //
-//		buf.addVertexWithUV(p*6, p*7, p*9, tW*0,    tH*16);
-//		buf.addVertexWithUV(p*6, p*7, p*7, tW*0,    tH*0);
+//		buf.addVertexWithUV(p*6, p*7, p*9, tW*0,	tH*16);
+//		buf.addVertexWithUV(p*6, p*7, p*7, tW*0,	tH*0);
 //		buf.addVertexWithUV(p*0, p*7, p*7, tW*24.5, tH*0);
 //		buf.addVertexWithUV(p*0, p*7, p*9, tW*24.5, tH*16);
 //		buf.draw();
@@ -180,7 +172,7 @@ import com.magiology.util.renderers.*;
 //		buf.addVertexWithUV(p*0, p*6.5, p*6.5, 0, 0);
 //		buf.addVertexWithUV(p*0, p*6.5, p*9.5, 0, 1);
 //		buf.draw();
-//		GL11.glPopMatrix();
+//		OpenGLM.popMatrix();
 //	}
 //
 //}

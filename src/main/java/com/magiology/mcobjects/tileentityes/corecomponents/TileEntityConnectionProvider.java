@@ -1,16 +1,21 @@
 package com.magiology.mcobjects.tileentityes.corecomponents;
 
 import java.util.Map.Entry;
-import java.util.*;
+import java.util.Set;
 
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
+import com.magiology.api.connection.Connection;
+import com.magiology.api.connection.ConnectionType;
+import com.magiology.api.connection.IConnection;
+import com.magiology.api.connection.IConnectionFactory;
+import com.magiology.api.connection.IConnectionProvider;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
-import com.magiology.api.connection.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 
 public abstract class TileEntityConnectionProvider extends TileEntityM implements UpdateableTile{
 	
@@ -21,13 +26,13 @@ public abstract class TileEntityConnectionProvider extends TileEntityM implement
 			super.readFromNBT(NBTTC);
 			IConnection[] a=readIConnections(this,NBTTC,"conData");
 			if(ArrayUtils.indexOf(a, null)==-1)connections=a;
-	    }
-	    
-	    @Override
+		}
+		
+		@Override
 		public void writeToNBT(NBTTagCompound NBTTC){
 			super.writeToNBT(NBTTC);
-	    	writeIConnections(getConnections(), NBTTC, "conData");
-	    }
+			writeIConnections(getConnections(), NBTTC, "conData");
+		}
 	
 	@Override
 	public TileEntity getHost(){
@@ -80,19 +85,19 @@ public abstract class TileEntityConnectionProvider extends TileEntityM implement
 		IConnection[] result=new IConnection[6]; 
 		NBTTagList list= NBT.getTagList(tag+"Slots", 10);
 		for(int i=0;i<list.tagCount();i++){
-    		NBTTagCompound connection=list.getCompoundTagAt(i);
+			NBTTagCompound connection=list.getCompoundTagAt(i);
 			result[i]=new Connection(host, 
 			ConnectionType.values()[connection.getByte("type")], 
 			EnumFacing.getFront(connection.getByte("face")));
 			IConnection con=result[i];
 			con.setMain(connection.getBoolean("main"));
-    		con.setIn(connection.getBoolean("in"));
-    		con.setOut(connection.getBoolean("out"));
-    		con.setBanned(connection.getBoolean("banned"));
-    		con.setWillRender(connection.getBoolean("render"));
-    		int extraSize=connection.getInteger("extraSize");
-    		for(int j=0;j<extraSize;j++)con.setExtra(connection.getString("k"+j), connection.getString("v"+j));
-    	}
+			con.setIn(connection.getBoolean("in"));
+			con.setOut(connection.getBoolean("out"));
+			con.setBanned(connection.getBoolean("banned"));
+			con.setWillRender(connection.getBoolean("render"));
+			int extraSize=connection.getInteger("extraSize");
+			for(int j=0;j<extraSize;j++)con.setExtra(connection.getString("k"+j), connection.getString("v"+j));
+		}
 		return result;
 	}
 }

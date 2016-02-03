@@ -1,17 +1,18 @@
 package com.magiology.client.gui.custom;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import net.minecraft.util.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
-
-import com.magiology.client.gui.custom.hud.*;
-import com.magiology.core.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.gui.custom.hud.HUD;
+import com.magiology.core.MReference;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.ColorF;
+
+import net.minecraft.util.ResourceLocation;
 
 public class DownloadingIcon {
 	private static ResourceLocation main=new ResourceLocation(MReference.MODID,"/textures/gui/downloading.png");
@@ -37,24 +38,24 @@ public class DownloadingIcon {
 	}
 	public static void draw(ColorF color){
 		timeout=40;
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		TessUtil.bindTexture(main);
 		
 		for(Drop drop:drops){
-			GL11.glPushMatrix();
-			GL11.glColor4f(1, 1, 1, drop.alpha);
-			GL11.glTranslated(U.calculatePos(drop.prevPos.x, drop.pos.x), U.calculatePos(drop.prevPos.y, drop.pos.y), 0);
+			OpenGLM.pushMatrix();
+			OpenGLM.color(1, 1, 1, drop.alpha);
+			OpenGLM.translate(U.calculatePos(drop.prevPos.x, drop.pos.x), U.calculatePos(drop.prevPos.y, drop.pos.y), 0);
 			GL11U.glRotate(0, 0, -drop.scale*drop.alpha*180, 14, 25, 0);
 			
 			HUD.drawRect(1F/368, 1F/399, 0, 0, 340, 0, 28, 51);
 			
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		GL11U.glColor(color);
 		HUD.drawRect(1F/368, 1F/399, 0, 0, 170, 0, 170, 399);
-		GL11.glColor4f(1, 1, 1, 1);
+		OpenGLM.color(1, 1, 1, 1);
 		HUD.drawRect(1F/368, 1F/399, 0, 0, 0, 0, 170, 399);
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 	}
 	private static class Drop{
 		public boolean dead=false;

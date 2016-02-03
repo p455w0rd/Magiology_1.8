@@ -1,24 +1,26 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.*;
+import java.awt.Color;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.GL11;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.guiutil.gui.*;
-import com.magiology.client.gui.guiutil.gui.buttons.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.container.ControlBockContainer;
+import com.magiology.client.gui.guiutil.gui.DrawThatSexyDotHelper;
+import com.magiology.client.gui.guiutil.gui.buttons.CustomButton;
+import com.magiology.core.MReference;
+import com.magiology.forgepowered.packets.packets.TileRedstone;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiControlBock extends GuiContainer implements Updateable{
 	
@@ -53,16 +55,16 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		if(tileCB.redstoneC==1)first=colorGray;
 		if(tileCB.redstoneC==2){
 			second=first=colorGray;
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.0F);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			OpenGLM.enableBlend();
+			GL11U.allOpacityIs(true);
+			GL11U.blendFunc(2);
 		}
 		this.drawString(fontRendererObj,"ON", 14, 11, first);
 		this.drawString(fontRendererObj,"OFF",12, 25, second);
 		if(tileCB.redstoneC==2){
-			GL11.glColor4d(1, 1, 1, 1);
-			GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-			GL11.glDisable(GL11.GL_BLEND);
+			OpenGLM.color(1, 1, 1, 1);
+			GL11U.allOpacityIs(true);
+			OpenGLM.disableBlend();
 		}
 		
 		this.drawString(fontRendererObj, text1, 5, 64, -1);
@@ -82,10 +84,10 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		}
 		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		GL11.glAlphaFunc(GL11.GL_GREATER, 0.9F);
-		GL11.glTranslated(0, 0, 1);
+		OpenGLM.alphaFunc(GL11.GL_GREATER, 0.9F);
+		OpenGLM.translate(0, 0, 1);
 		drawSmartShit(false);
-		GL11.glTranslated(0, 0, -1);
+		OpenGLM.translate(0, 0, -1);
 		if(tileCB.redstoneC==2){
 		this.drawTexturedModalRect(guiLeft+11, guiTop+10, 206, 51, 19, 10);
 		this.drawTexturedModalRect(guiLeft+11, guiTop+24, 206, 51, 19, 10);
@@ -102,11 +104,11 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		double scale=((float)(tileCB.tank)/(float)(tileCB.maxT))*100.0;
 		if(scale>1)scale=1;
 		
-		GL11.glTranslated(guiLeft+142-6, guiTop+43-12.5, 0);
-		GL11.glScaled(0.1, 0.1, 1);
+		OpenGLM.translate(guiLeft+142-6, guiTop+43-12.5, 0);
+		OpenGLM.scale(0.1, 0.1, 1);
 		this.drawRect(0,(float)(256-(256*scale)), 0, (float)(256-(256*scale)), 128, (float)(256*scale));
-		GL11.glScaled(10, 10, 1);
-		GL11.glTranslated(-guiLeft-142+6, -guiTop-43+12.5, 0);
+		OpenGLM.scale(10, 10, 1);
+		OpenGLM.translate(-guiLeft-142+6, -guiTop-43+12.5, 0);
 		
 	}
 	
@@ -129,34 +131,34 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		}break;
 		}
 		this.drawTexturedModalRect(guiLeft+48, guiTop+60, 176, 38+17, 16, 16);
-		GL11.glTranslated(guiLeft+31, guiTop+18, 0);
-		GL11.glTranslated(20.5, 4.5, 0);
-		GL11.glRotated(angle, 0, 0, 1);
-		GL11.glTranslated(-20.5, -4.5, 0);
+		OpenGLM.translate(guiLeft+31, guiTop+18, 0);
+		OpenGLM.translate(20.5, 4.5, 0);
+		OpenGLM.rotate(angle, 0, 0, 1);
+		OpenGLM.translate(-20.5, -4.5, 0);
 		int glowSize=6;
 		this.drawTexturedModalRect(-glowSize+1, -glowSize, 202-glowSize, 30-glowSize, 25+glowSize*2, 9+glowSize*2);
 		if(type)this.drawTexturedModalRect(-glowSize+1, -glowSize, 202-glowSize, 30-glowSize, 25+glowSize*2, 9+glowSize*2);
-		GL11.glTranslated(20.5, 4.5, 0);
-		GL11.glRotated(-angle, 0, 0, 1);
-		GL11.glTranslated(-20.5, -4.5, 0);
-		GL11.glTranslated(-(guiLeft+31), -(guiTop+18), 0);
+		OpenGLM.translate(20.5, 4.5, 0);
+		OpenGLM.rotate(-angle, 0, 0, 1);
+		OpenGLM.translate(-20.5, -4.5, 0);
+		OpenGLM.translate(-(guiLeft+31), -(guiTop+18), 0);
 		double thingyPos=UtilM.calculatePos(tileCB.prevThingyPos, tileCB.thingyPos);
 		{
-			GL11.glTranslated(guiLeft+83, guiTop+79, 0);
-			GL11.glTranslated(-thingyPos*5, 0, 0);
+			OpenGLM.translate(guiLeft+83, guiTop+79, 0);
+			OpenGLM.translate(-thingyPos*5, 0, 0);
 			this.drawTexturedModalRect(0, 0, 204, 0, 19, 10);
 			
-			GL11.glTranslated(2*thingyPos*5, 0, 0);
-			GL11.glTranslated(10, 0, 0);
-			GL11.glRotated(180, 0, 1, 0);
-			GL11.glDisable(GL11.GL_CULL_FACE);
+			OpenGLM.translate(2*thingyPos*5, 0, 0);
+			OpenGLM.translate(10, 0, 0);
+			OpenGLM.rotate(180, 0, 1, 0);
+			OpenGLM.disableCull();
 			this.drawTexturedModalRect(0, 0, 204, 0, 19, 10);
-			GL11.glEnable(GL11.GL_CULL_FACE);
-			GL11.glRotated(180, 0,-1, 0);
-			GL11.glTranslated(-10, 0, 0);
-			GL11.glTranslated(-(guiLeft+83), -(guiTop+79), 0);
+			OpenGLM.enableCull();
+			OpenGLM.rotate(180, 0,-1, 0);
+			OpenGLM.translate(-10, 0, 0);
+			OpenGLM.translate(-(guiLeft+83), -(guiTop+79), 0);
 		}
-		GL11.glTranslated(-thingyPos*5, 0, 0);
+		OpenGLM.translate(-thingyPos*5, 0, 0);
 		
 	}
 	
@@ -223,12 +225,12 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	 
 	 protected void drawRect(float x, float y,float tx, float yt, float xp, float yp){
 		 float f = 0.00390625F;
-	     float f1 = 0.00390625F;
-	     Renderer.POS_UV.beginQuads();
-	     Renderer.POS_UV.addVertex(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
-	     Renderer.POS_UV.addVertex(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
-	     Renderer.POS_UV.addVertex(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
-	     Renderer.POS_UV.addVertex(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
-	     Renderer.POS_UV.draw();
+		 float f1 = 0.00390625F;
+		 Renderer.POS_UV.beginQuads();
+		 Renderer.POS_UV.addVertex(x + 0, y + yp, this.zLevel, (tx + 0) * f, (yt + yp) * f1);
+		 Renderer.POS_UV.addVertex(x + xp, y + yp, this.zLevel, (tx+ xp) * f, (yt + yp) * f1);
+		 Renderer.POS_UV.addVertex(x + xp, y + 0, this.zLevel, (tx + xp) * f, (yt + 0) * f1);
+		 Renderer.POS_UV.addVertex(x + 0, y + 0, this.zLevel, (tx + 0) * f, (yt + 0) * f1);
+		 Renderer.POS_UV.draw();
 	}
 }

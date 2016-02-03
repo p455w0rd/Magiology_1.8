@@ -2,8 +2,8 @@ package com.magiology.core;
 
 import static com.mojang.realmsclient.gui.ChatFormatting.*;
 
-import com.magiology.handlers.web.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.handlers.web.DownloadingHandler;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM.U;
 
 public class MUpdater{

@@ -1,9 +1,9 @@
 package com.magiology.mcobjects.tileentityes.hologram.interactions;
 
-import org.lwjgl.util.vector.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.utilobjects.*;
+import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
+import com.magiology.util.utilobjects.ObjectHolder;
 
 public class InteractionPosition<Host extends HoloObject> extends AbstractInteraction<Host>{
 	

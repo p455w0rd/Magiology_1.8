@@ -1,14 +1,16 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.init.*;
-import net.minecraft.util.*;
-
-import com.magiology.mcobjects.effect.*;
-import com.magiology.structures.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.structures.Structure;
+import com.magiology.structures.Structures;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ITickable;
 
 public class TileEntityPLauncher extends TileEntityM implements ITickable{
 	

@@ -1,16 +1,16 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.gui.custom.guiparticels.*;
+import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.client.gui.custom.guiparticels.GuiStandardFX.GuiFXProp;
-import com.magiology.client.gui.gui.*;
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.gui.GuiContainerAndGuiParticles;
+import com.magiology.client.render.Textures;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.util.ResourceLocation;
 
 public class GuiParticle{
 	
@@ -84,7 +84,7 @@ public class GuiParticle{
 	
 	private void setDead(){this.isDead=true;}
 	public void renderParticle(float partialTicks){
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		GL11U.setUpOpaqueRendering(2);
 		double opacityF=opacity,
@@ -93,7 +93,7 @@ public class GuiParticle{
 		
 		
 		
-		GL11.glColor4d(r, g, b, opacityF);
+		OpenGLM.color(r, g, b, opacityF);
 		Renderer.POS_UV.beginQuads();
 		Renderer.POS_UV.addVertex(-boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 0, 0);
 		Renderer.POS_UV.addVertex(-boundingBoxXY/2+x,  boundingBoxXY/2+y, 0, 0, 1);
@@ -101,8 +101,8 @@ public class GuiParticle{
 		Renderer.POS_UV.addVertex( boundingBoxXY/2+x, -boundingBoxXY/2+y, 0, 1, 0);
 		Renderer.POS_UV.draw();
 		GL11U.endOpaqueRendering();
-		GL11.glColor4d(1, 1, 1, 1);
-		GL11.glPopMatrix();
+		OpenGLM.color(1, 1, 1, 1);
+		OpenGLM.popMatrix();
 	}
 	
 	public void MoveParticle(double xSpeed,double ySpeed){
@@ -157,9 +157,9 @@ public class GuiParticle{
 	
 	public boolean[] getScreenColision(int scale){
 		boolean[] result=new boolean[4];
-		if(xPos<boundingBoxXY/2+scale)                result[0]=true;
+		if(xPos<boundingBoxXY/2+scale)				result[0]=true;
 		else if(xPos>screenResX-boundingBoxXY/2-scale)result[1]=true;
-		if(yPos<scale+boundingBoxXY/2)                result[2]=true;
+		if(yPos<scale+boundingBoxXY/2)				result[2]=true;
 		else if(yPos>screenResY-boundingBoxXY/2-scale)result[3]=true;
 		return result;
 	}

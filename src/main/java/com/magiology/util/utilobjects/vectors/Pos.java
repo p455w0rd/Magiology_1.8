@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects.vectors;
 
-import net.minecraft.util.*;
+import net.minecraft.util.BlockPos;
 
 public class Pos extends BlockPos{
 	public Pos(int x, int y, int z){

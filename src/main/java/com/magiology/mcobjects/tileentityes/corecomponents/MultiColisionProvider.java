@@ -1,16 +1,19 @@
 package com.magiology.mcobjects.tileentityes.corecomponents;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.block.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 
 public interface MultiColisionProvider{
 	
@@ -36,34 +39,34 @@ public interface MultiColisionProvider{
 		private MultiColisionProviderRayTracer(){}
 		public static boolean isRayTracing=false;
 		
-    	public static MovingObjectPosition[] results={};
-    	public static AxisAlignedBB[] selectedBoxes={};
+		public static MovingObjectPosition[] results={};
+		public static AxisAlignedBB[] selectedBoxes={};
 		public static int getRayTracedBoxId(World world, BlockPos pos, Vec3M startVec, Vec3M endVec,AxisAlignedBB resetBoundsOptional){
 			TileEntity tester=world.getTileEntity(pos);
 			if(!(tester instanceof MultiColisionProvider)){
 				PrintUtil.println("There is no instance of ISidedColisionProvider at"+"("+pos.toString()+")!",UtilM.getStackTrace());
 				return -1;
 			}
-	    	results=new MovingObjectPosition[0];
-	    	selectedBoxes=new AxisAlignedBB[0];
-	    	isRayTracing=true;
+			results=new MovingObjectPosition[0];
+			selectedBoxes=new AxisAlignedBB[0];
+			isRayTracing=true;
 			//start
 			MultiColisionProvider tile=(MultiColisionProvider)tester;
 			Block block=UtilM.getBlock(world, pos);
 			
-	    	AxisAlignedBB[] aciveBoxes=tile.getActiveBoxes();
-	    	if(aciveBoxes==null||aciveBoxes.length==0){
-	    		//fail switch
+			AxisAlignedBB[] aciveBoxes=tile.getActiveBoxes();
+			if(aciveBoxes==null||aciveBoxes.length==0){
+				//fail switch
 				PrintUtil.println("ISidedColisionProviderRayTracer could not resolve a valid box!",UtilM.getStackTrace());
 				isRayTracing=false;
 				return -1;
-	    	}
-	    	
+			}
+			
 			for(int i=0;i<aciveBoxes.length;i++){
 				block.setBlockBounds((float)aciveBoxes[i].minX,(float)aciveBoxes[i].minY,(float)aciveBoxes[i].minZ,(float)aciveBoxes[i].maxX,(float)aciveBoxes[i].maxY,(float)aciveBoxes[i].maxZ);
-	       		results=ArrayUtils.add(results, block.collisionRayTrace(world, pos, startVec.conv(), endVec.conv()));
-	    		selectedBoxes=ArrayUtils.add(selectedBoxes,aciveBoxes[i]);
-	    		
+		   		results=ArrayUtils.add(results, block.collisionRayTrace(world, pos, startVec.conv(), endVec.conv()));
+				selectedBoxes=ArrayUtils.add(selectedBoxes,aciveBoxes[i]);
+				
 			}
 			
 			if(results.length==0){
@@ -74,7 +77,7 @@ public interface MultiColisionProvider{
 			}
 			
 			double smallest=10000;
-		    int id=0;
+			int id=0;
 			if(results.length>0){
 				for(int id1=0;id1<results.length;id1++){
 					MovingObjectPosition result1=results[id1];
@@ -87,17 +90,17 @@ public interface MultiColisionProvider{
 					}
 				}
 			}
-		    if(resetBoundsOptional!=null)block.setBlockBounds((float)resetBoundsOptional.minX,(float)resetBoundsOptional.minY,(float)resetBoundsOptional.minZ,(float)resetBoundsOptional.maxX,(float)resetBoundsOptional.maxY,(float)resetBoundsOptional.maxZ);
-		    else if(selectedBoxes.length>0)block.setBlockBounds((float)selectedBoxes[id].minX,(float)selectedBoxes[id].minY,(float)selectedBoxes[id].minZ,(float)selectedBoxes[id].maxX,(float)selectedBoxes[id].maxY,(float)selectedBoxes[id].maxZ);
-		    try{
-		    	tile.setPointedBox(selectedBoxes[id]);
+			if(resetBoundsOptional!=null)block.setBlockBounds((float)resetBoundsOptional.minX,(float)resetBoundsOptional.minY,(float)resetBoundsOptional.minZ,(float)resetBoundsOptional.maxX,(float)resetBoundsOptional.maxY,(float)resetBoundsOptional.maxZ);
+			else if(selectedBoxes.length>0)block.setBlockBounds((float)selectedBoxes[id].minX,(float)selectedBoxes[id].minY,(float)selectedBoxes[id].minZ,(float)selectedBoxes[id].maxX,(float)selectedBoxes[id].maxY,(float)selectedBoxes[id].maxZ);
+			try{
+				tile.setPointedBox(selectedBoxes[id]);
 			}catch(Exception e){
 				PrintUtil.println("Error: max value without crash",selectedBoxes.length-1," and the used value is",id);
 				PrintUtil.println("selectedBoxes size",selectedBoxes.length,"results size",results.length);
 				e.printStackTrace();
 			}
-		    isRayTracing=false;
-		    return id;
+			isRayTracing=false;
+			return id;
 		}
 		public static int getPointedId(MultiColisionProvider provider){
 			if(provider.getPointedBox()!=null){

@@ -1,14 +1,14 @@
 package com.magiology.mcobjects.effect;
 
-import net.minecraft.world.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.render.Textures;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.world.World;
 
 public class EntityFacedFX extends EntityFXM{
 	
@@ -23,30 +23,30 @@ public class EntityFacedFX extends EntityFXM{
 	public Vec3M rotation=new Vec3M();
 	
 	public EntityFacedFX(World w,double xp, double yp, double zp, double xs, double ys, double zs, int siz, double lengt,double gravit, boolean activ,int typ,String textur ,double Ra,double Ga,double Ba,double opacita,double frictio){
-        super(w, xp, yp, zp, xs, ys, zs);
-        motionX =xs;
-        motionY =ys;
-        motionZ =zs;
-        friction=frictio;
-        if(texture=="tx1"){
-        	for(int a=0;a<sideOpacity.length;a++){
+		super(w, xp, yp, zp, xs, ys, zs);
+		motionX =xs;
+		motionY =ys;
+		motionZ =zs;
+		friction=frictio;
+		if(texture=="tx1"){
+			for(int a=0;a<sideOpacity.length;a++){
 				sideOpacityChange[a]=worldObj.rand.nextInt(3)-1;
 				sideOpacity[a]=worldObj.rand.nextDouble();
 			}
-        }
-        type=typ;
-        if(type==1){particleMaxAge=siz;particleScale=siz/10;}
-        if(type==2){particleMaxAge=siz;particleScale=0;state=1;}
-        else if(type>=3&&type<=10){particleMaxAge=siz;particleScale=siz/10;}
-        gravity=gravit*0.001;
-        length=lengt;
-        active=activ;
-        r_e=Ra;
-        g_e=Ga;
-        b_e=Ba;
-        opacity_e=opacita;
-        texture=textur;
-    }
+		}
+		type=typ;
+		if(type==1){particleMaxAge=siz;particleScale=siz/10;}
+		if(type==2){particleMaxAge=siz;particleScale=0;state=1;}
+		else if(type>=3&&type<=10){particleMaxAge=siz;particleScale=siz/10;}
+		gravity=gravit*0.001;
+		length=lengt;
+		active=activ;
+		r_e=Ra;
+		g_e=Ga;
+		b_e=Ba;
+		opacity_e=opacita;
+		texture=textur;
+	}
 	public EntityFacedFX(World w,double xp, double yp, double zp, double xs, double ys, double zs, int siz, double lengt,double gravit,int typ ,double Ra,double Ga,double Ba,double opacita,double frictio){
 		this(w,xp, yp, zp, xs, ys, zs, siz, lengt, gravit, false, typ, "tx1", Ra, Ga, Ba, opacita, frictio);
 	}
@@ -59,35 +59,35 @@ public class EntityFacedFX extends EntityFXM{
 	
 	@Override
 	public void render(){
-		GL11.glDisable(GL11.GL_FOG);
+		OpenGLM.disableFog();
 		GL11U.setUpOpaqueRendering(2);
-        
 		
-    	float PScale = 0.01F*particleScale;
-    	float x=(float)(prevPosX+(posX-prevPosX)*par2-interpPosX);
-    	float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
-    	float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
-    	
-    	
-    	if(texture=="tx1")     U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
-    	else if(texture=="tx2")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble2);
-    	else if(texture=="tx3")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble3);
-    	GL11.glPushMatrix();
-    	GL11.glTranslated(x,y,z);
-    	GL11.glTranslated(0, -0.095, 0);
-    	GL11U.glRotate(rotation.x, rotation.y, rotation.z);
-//    	GL11.glScaled(1, 1.3, 1);
-    	GL11U.glCulFace(false);
-    	Renderer.POS_UV_COLOR.beginQuads();
-    	Renderer.POS_UV_COLOR.addVertex( PScale, PScale,0, 0, 0, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    	Renderer.POS_UV_COLOR.addVertex(-PScale, PScale,0, 1, 0, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    	Renderer.POS_UV_COLOR.addVertex(-PScale,-PScale,0, 1, 1, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    	Renderer.POS_UV_COLOR.addVertex( PScale,-PScale,0, 0, 1, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
-    	Renderer.POS_UV_COLOR.draw();
-    	GL11U.glCulFace(true);
-    	
 		
-    	GL11.glPopMatrix();
+		float PScale = 0.01F*particleScale;
+		float x=(float)(prevPosX+(posX-prevPosX)*par2-interpPosX);
+		float y=(float)(prevPosY+(posY-prevPosY)*par2-interpPosY);
+		float z=(float)(prevPosZ+(posZ-prevPosZ)*par2-interpPosZ);
+		
+		
+		if(texture=="tx1")	 U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
+		else if(texture=="tx2")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble2);
+		else if(texture=="tx3")U.getMC().renderEngine.bindTexture(Textures.SmoothBuble3);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(x,y,z);
+		OpenGLM.translate(0, -0.095, 0);
+		GL11U.glRotate(rotation.x, rotation.y, rotation.z);
+//		OpenGLM.scale(1, 1.3, 1);
+		GL11U.glCulFace(false);
+		Renderer.POS_UV_COLOR.beginQuads();
+		Renderer.POS_UV_COLOR.addVertex( PScale, PScale,0, 0, 0, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+		Renderer.POS_UV_COLOR.addVertex(-PScale, PScale,0, 1, 0, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+		Renderer.POS_UV_COLOR.addVertex(-PScale,-PScale,0, 1, 1, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+		Renderer.POS_UV_COLOR.addVertex( PScale,-PScale,0, 0, 1, (float)r_e, (float)g_e, (float)b_e, (float)opacity_e);
+		Renderer.POS_UV_COLOR.draw();
+		GL11U.glCulFace(true);
+		
+		
+		OpenGLM.popMatrix();
 
 		GL11U.endOpaqueRendering();
 	}

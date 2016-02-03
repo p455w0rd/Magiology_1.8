@@ -1,8 +1,8 @@
 package com.magiology.api.connection;
 
-import java.util.*;
+import java.util.Map;
 
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
 
 public interface IConnection{
 	public boolean getMain();

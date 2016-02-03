@@ -1,22 +1,29 @@
 package com.magiology.mcobjects.tileentityes;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.*;
-import net.minecraft.init.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.effect.*;
+import com.magiology.core.init.MBlocks;
+import com.magiology.mcobjects.effect.EntityCustomfireFX;
+import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.mcobjects.effect.EntitySparkFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.structures.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.structures.Structure;
+import com.magiology.structures.Structures;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.effect.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
+import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
 
 public class TileEntityOreStructureCore extends TileEntityPow{
 
@@ -49,17 +56,17 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
-	    super.readFromNBT(nbt);
-	    updateStructureHelper=nbt.getBoolean("USH");
-	    for(int a=0;a<structureUpg.length;a++)structureUpg[a]=nbt.getBoolean("HP"+a);
-	    level=nbt.getInteger("LVL");
+		super.readFromNBT(nbt);
+		updateStructureHelper=nbt.getBoolean("USH");
+		for(int a=0;a<structureUpg.length;a++)structureUpg[a]=nbt.getBoolean("HP"+a);
+		level=nbt.getInteger("LVL");
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbt){
-	    super.writeToNBT(nbt);
-	    nbt.setBoolean("USH", updateStructureHelper);
-	    for(int a=0;a<structureUpg.length;a++)nbt.setBoolean("HP"+a, structureUpg[a]);
-	    nbt.setInteger("LVL", level);
+		super.writeToNBT(nbt);
+		nbt.setBoolean("USH", updateStructureHelper);
+		for(int a=0;a<structureUpg.length;a++)nbt.setBoolean("HP"+a, structureUpg[a]);
+		nbt.setInteger("LVL", level);
 	}
 	
 	@Override
@@ -161,7 +168,7 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 		if(go>set)go=go-set;
 		checkForValidOre();
 		if(go==6){
-	        if(mainMultiBlock.isStructureCompleate()){
+			if(mainMultiBlock.isStructureCompleate()){
 				set=yes;
 				U.setMetadata(worldObj, pos, 1);
 				updateStructureHelper=true;
@@ -278,20 +285,20 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 	}
 	public void processingParticelsEnding2(){
 		for(int l=0; l<3;l++){
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+1.08,                          pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(), 0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+UtilM.RF(), pos.getY()+1+UtilM.RF(), pos.getZ()+1.08,                          0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+UtilM.RF(), pos.getY()+1+UtilM.RF(), pos.getZ()-0.08,                          0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()-0.08,                          pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(), 0, 0, 0);
-			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+UtilM.RF(), pos.getY()+2,                               pos.getZ()+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+1.08,						  pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+UtilM.RF(), pos.getY()+1+UtilM.RF(), pos.getZ()+1.08,						  0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+UtilM.RF(), pos.getY()+1+UtilM.RF(), pos.getZ()-0.08,						  0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()-0.08,						  pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.CLOUD, pos.getX()+UtilM.RF(), pos.getY()+2,							   pos.getZ()+UtilM.RF(), 0, 0, 0);
 		}
 		
 		for(int l=0; l<4;l++)worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-2.5+UtilM.RF(5), pos.getY()+1.21, pos.getZ()-2.5+UtilM.RF(5), 0, 0.1*UtilM.RF(2), 0);
 	
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+1.58,                          pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(2), 0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+UtilM.RF(2), pos.getY()+1+UtilM.RF(), pos.getZ()+1.58,                          0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+UtilM.RF(2), pos.getY()+1+UtilM.RF(), pos.getZ()-0.58,                          0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()-0.58,                          pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(2), 0, 0, 0);
-		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+UtilM.RF(2), pos.getY()+2.5,                             pos.getZ()+UtilM.RF(2), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+1.58,						  pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(2), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+UtilM.RF(2), pos.getY()+1+UtilM.RF(), pos.getZ()+1.58,						  0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+UtilM.RF(2), pos.getY()+1+UtilM.RF(), pos.getZ()-0.58,						  0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()-0.58,						  pos.getY()+1+UtilM.RF(), pos.getZ()+UtilM.RF(2), 0, 0, 0);
+		worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX()+UtilM.RF(2), pos.getY()+2.5,							 pos.getZ()+UtilM.RF(2), 0, 0, 0);
 		UtilM.spawnEntityFX(new EntitySparkFX(worldObj, pos.getX()+UtilM.RF()*5-2, pos.getY()+1, pos.getZ()+UtilM.RF()*5-2, 0.5F/16F, 0.1F,1,4,40, new Vec3M(0,0.03F,0)));
 	}
 	public void spawnCustomFire(){
@@ -353,18 +360,18 @@ public class TileEntityOreStructureCore extends TileEntityPow{
 			double v0=UtilM.CRandD(3);
 			double v2=UtilM.CRandD(3);
 			double v1=UtilM.CRandD(1);
-	        if(UtilM.RB(5))worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18);
-	        else UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18));
-	        }
+			if(UtilM.RB(5))worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18);
+			else UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5F+v0, pos.getY() + 1.1F, pos.getZ()+0.5F+v2, -v0/18, v1/2, -v2/18));
+			}
 		 	if(this.optimizer2.progress==1){
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+UtilM.RF(), pos.getY()+1, pos.getZ()-3+UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+UtilM.RF(), pos.getY()+1, pos.getZ()+3+UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+UtilM.RF(), pos.getY()+1, pos.getZ()-3+UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+UtilM.RF(), pos.getY()+1, pos.getZ()+3+UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+UtilM.RF(), pos.getY()+1, pos.getZ()-7+UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+ 3F + UtilM.RF(), pos.getY() + 1, pos.getZ()- 7 + UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+UtilM.RF(), pos.getY()+1, pos.getZ()+7 + UtilM.RF(), 0, 0, 0);
-	        worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+3+UtilM.RF(), pos.getY()+1, pos.getZ()+7+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+UtilM.RF(), pos.getY()+1, pos.getZ()-3+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-7+UtilM.RF(), pos.getY()+1, pos.getZ()+3+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+UtilM.RF(), pos.getY()+1, pos.getZ()-3+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+7+UtilM.RF(), pos.getY()+1, pos.getZ()+3+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+UtilM.RF(), pos.getY()+1, pos.getZ()-7+UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+ 3F + UtilM.RF(), pos.getY() + 1, pos.getZ()- 7 + UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()-3+UtilM.RF(), pos.getY()+1, pos.getZ()+7 + UtilM.RF(), 0, 0, 0);
+			worldObj.spawnParticle(EnumParticleTypes.LAVA, pos.getX()+3+UtilM.RF(), pos.getY()+1, pos.getZ()+7+UtilM.RF(), 0, 0, 0);
 			}
 		}
 	public void spawnParticleNe(){

@@ -1,13 +1,17 @@
 package com.magiology.util.utilclasses;
 
 import static com.magiology.api.power.PowerCore.*;
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
 
-import com.magiology.api.power.*;
-import com.magiology.forgepowered.events.*;
+import com.magiology.api.power.ISidedPower;
+import com.magiology.api.power.PowerCore;
+import com.magiology.api.power.PowerProducer;
+import com.magiology.api.power.PowerUpgrades;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilobjects.NBTUtil;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 
 public class PowerUtil{
@@ -149,8 +153,8 @@ public class PowerUtil{
 		//-----------------------------------------------------------------------------------------
 		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
 			subtract(amount,fromTile);
-		         add(amount,toTile);
-		    return true;
+				 add(amount,toTile);
+			return true;
 		}
 		else msg();
 		return false;

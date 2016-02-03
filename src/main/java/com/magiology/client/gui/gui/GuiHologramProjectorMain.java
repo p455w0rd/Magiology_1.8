@@ -1,29 +1,37 @@
 package com.magiology.client.gui.gui;
 
-import java.awt.event.*;
-import java.io.*;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.entity.player.*;
+import org.lwjgl.util.vector.Vector2f;
 
-import org.lwjgl.opengl.*;
-import org.lwjgl.util.vector.*;
-
-import com.magiology.api.updateable.*;
+import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.custom.*;
-import com.magiology.client.gui.guiutil.gui.buttons.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.gui.container.ContainerEmpty;
+import com.magiology.client.gui.custom.OnOffGuiButton;
+import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
+import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
+import com.magiology.mcobjects.tileentityes.hologram.Button;
+import com.magiology.mcobjects.tileentityes.hologram.Field;
+import com.magiology.mcobjects.tileentityes.hologram.Slider;
+import com.magiology.mcobjects.tileentityes.hologram.TextBox;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.*;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiHologramProjectorMain extends GuiContainer implements Updateable{
 	
@@ -44,12 +52,12 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		float helpAlpha=this.helpAlpha.getPoint();
 		if(helpAlpha<0.97){
 			String s="Hold <Ctrl> to show help";
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0, -5, 0);
-			GL11.glScalef(0.5F, 0.5F, 0.5F);
-			GL11.glTranslatef((-Font.FR().getStringWidth(s)/4+xSize)/2, 0, 0);
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(0, -5, 0);
+			OpenGLM.scale(0.5F, 0.5F, 0.5F);
+			OpenGLM.translate((-Font.FR().getStringWidth(s)/4+xSize)/2, 0, 0);
 			Font.FR().drawStringWithShadow(s, 0, 0, new ColorF(1,1,1,0.5F*(1-helpAlpha)).toCode());
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		if(helpAlpha>0.03){
 			int color=new ColorF(1, 1, 1, helpAlpha).toCode();
@@ -59,9 +67,9 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 			
 			if(arrowsModel==null)
 				initModels();
-			GL11.glLineWidth(1);
+			OpenGLM.lineWidth(1);
 			arrowsModel.draw();
-			GL11.glColor4f(1, 1, 1, 1);
+			OpenGLM.color(1, 1, 1, 1);
 		}
 	}
 	@Override
@@ -69,7 +77,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		super.initGui();
 		
 		int ys=ySize/4;
-		buttonList.add(new CleanButton(0, guiLeft, guiTop,      xSize, ys, "Text Box", new ColorF(0.8, 0.2, 0.2, 0.8)));
+		buttonList.add(new CleanButton(0, guiLeft, guiTop,	  xSize, ys, "Text Box", new ColorF(0.8, 0.2, 0.2, 0.8)));
 		buttonList.add(new CleanButton(1, guiLeft, guiTop+ys+1,   xSize, ys, "Button", new ColorF(0.2, 0.8, 0.2, 0.8)));
 		buttonList.add(new CleanButton(2, guiLeft, guiTop+ys*2+2, xSize, ys, "Field", new ColorF(0.2, 0.2, 0.8, 0.8)));
 		buttonList.add(new CleanButton(3, guiLeft, guiTop+ys*3+3, xSize, ys, "Slider", new ColorF(0.2, 0.8, 0.8, 0.8)));

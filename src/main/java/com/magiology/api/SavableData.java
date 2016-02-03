@@ -1,10 +1,13 @@
 package com.magiology.api;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import net.minecraft.nbt.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
 public interface SavableData{
 	
@@ -40,21 +43,21 @@ public interface SavableData{
 			NBTTagList list=NBT.getTagList(baseName+"Data", 10);
 			int size=list.tagCount();
 			SavableData[] data=new SavableData[size];
-	    	for(int i=0;i<size;i++){
-	    		NBTTagCompound savable=list.getCompoundTagAt(i);
-	    		byte b=savable.getByte(baseName);
-	    		if(b>=0&&b<data.length){
-	    			data[b]=loadFromNBT(savable);
-	    		}
-	    	}
+			for(int i=0;i<size;i++){
+				NBTTagCompound savable=list.getCompoundTagAt(i);
+				byte b=savable.getByte(baseName);
+				if(b>=0&&b<data.length){
+					data[b]=loadFromNBT(savable);
+				}
+			}
 			return data;
 		}
 		
 		public static void saveToNBT(SavableData data,NBTTagCompound NBT){
 			List<Integer> integers=new ArrayList<Integer>();
 			List<Boolean> booleans=new ArrayList<Boolean>();
-			List<Byte>    bytes___=new ArrayList<Byte>();
-			List<Long>    longs___=new ArrayList<Long>();
+			List<Byte>	bytes___=new ArrayList<Byte>();
+			List<Long>	longs___=new ArrayList<Long>();
 			List<Double>  doubles_=new ArrayList<Double>();
 			List<Float>   floats__=new ArrayList<Float>();
 			List<String>  strings_=new ArrayList<String>();

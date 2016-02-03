@@ -1,5 +1,12 @@
 package com.magiology.mcobjects.tileentityes.hologram;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.util.vector.Vector2f;
+
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandler;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
@@ -14,6 +21,7 @@ import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Plane;
 import com.magiology.util.utilobjects.vectors.Ray;
 import com.magiology.util.utilobjects.vectors.Vec3M;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,12 +31,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.util.vector.Vector2f;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class TileEntityHologramProjector extends TileEntityM implements ITickable{
 	
@@ -158,9 +160,9 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float length){
 		Object[][] result={{},{}};
 		try{
-	        Vec3M Vec3M=UtilM.getPosition(player,RenderEvents.partialTicks);
-	        Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderEvents.partialTicks));
-	        Vec3M vec32=Vec3M.addVector(vec31.x * length, vec31.y * length, vec31.z * length);
+			Vec3M Vec3M=UtilM.getPosition(player,RenderEvents.partialTicks);
+			Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderEvents.partialTicks));
+			Vec3M vec32=Vec3M.addVector(vec31.x * length, vec31.y * length, vec31.z * length);
 			
 			Ray ray=new Ray(Vec3M, vec32);
 			for(int a=0;a<hologramProjectors.size();a++){

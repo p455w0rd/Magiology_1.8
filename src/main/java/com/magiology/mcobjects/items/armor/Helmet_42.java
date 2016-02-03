@@ -1,22 +1,24 @@
 package com.magiology.mcobjects.items.armor;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.client.model.*;
-import net.minecraft.creativetab.*;
-import net.minecraft.entity.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.world.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.client.render.models.*;
-import com.magiology.mcobjects.effect.*;
+import com.magiology.client.render.models.ModelHelmet42;
+import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.skeleton.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.*;
+import com.magiology.util.utilobjects.NBTUtil;
+
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Helmet_42 extends UpgradeableArmor{
 	
@@ -24,18 +26,18 @@ public class Helmet_42 extends UpgradeableArmor{
 	
 	
 	public Helmet_42(String unlocalizedName, ArmorMaterial material, String textureName, int type,CreativeTabs creativeTab){
-	    super(material, 0, type);
-	    this.textureName = textureName;
-	    this.setUnlocalizedName(unlocalizedName);
-//	    this.setTextureName(MReference.MODID + ":" + unlocalizedName);
-	    this.setCreativeTab(creativeTab);
-	    this.setMaxDamage(25);
-	    initUpgrade(Container.Helmet42);
+		super(material, 0, type);
+		this.textureName = textureName;
+		this.setUnlocalizedName(unlocalizedName);
+//		this.setTextureName(MReference.MODID + ":" + unlocalizedName);
+		this.setCreativeTab(creativeTab);
+		this.setMaxDamage(25);
+		initUpgrade(Container.Helmet42);
 	}
 	
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type){
-	    return null;
+		return null;
 	}
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player,List list, boolean par4){
@@ -49,10 +51,10 @@ public class Helmet_42 extends UpgradeableArmor{
 				double[] roundXYZ=UtilM.createBallXYZ(1,true);
 				roundXYZ[1]-=0.5;
 				roundXYZ[4]-=0.5;
-	            EntityFollowingBubleFX part=new EntityFollowingBubleFX(world, roundXYZ[0]+player.posX, roundXYZ[1]+player.posY, roundXYZ[2]+player.posZ, UtilM.CRandF(0.01), UtilM.CRandF(0.01), UtilM.CRandF(0.01), player, 0, roundXYZ[3], roundXYZ[4], roundXYZ[5], 300, 3+(player.isSneaking()?10:0), UtilM.RF(), UtilM.RF(), UtilM.RF(), 1-(player==U.getMC().thePlayer?(U.getMC().gameSettings.thirdPersonView==0?0.95:0):0));
-	            part.noClip=false;
-	            part.isChangingPos=false;
-	            UtilM.spawnEntityFX(part);
+				EntityFollowingBubleFX part=new EntityFollowingBubleFX(world, roundXYZ[0]+player.posX, roundXYZ[1]+player.posY, roundXYZ[2]+player.posZ, UtilM.CRandF(0.01), UtilM.CRandF(0.01), UtilM.CRandF(0.01), player, 0, roundXYZ[3], roundXYZ[4], roundXYZ[5], 300, 3+(player.isSneaking()?10:0), UtilM.RF(), UtilM.RF(), UtilM.RF(), 1-(player==U.getMC().thePlayer?(U.getMC().gameSettings.thirdPersonView==0?0.95:0):0));
+				part.noClip=false;
+				part.isChangingPos=false;
+				UtilM.spawnEntityFX(part);
 			}
 		}else NBTUtil.createNBT(helmet42);
 	}

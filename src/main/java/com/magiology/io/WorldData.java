@@ -1,22 +1,35 @@
 package com.magiology.io;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraft.world.*;
-import net.minecraftforge.common.*;
-import net.minecraftforge.event.world.*;
-import net.minecraftforge.fml.common.eventhandler.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.core.MReference;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.util.utilclasses.FileUtil;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 import scala.actors.threadpool.Arrays;
-
-import com.magiology.core.*;
-import com.magiology.forgepowered.packets.core.*;
-import com.magiology.util.utilclasses.*;
 
 
 public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializable>{

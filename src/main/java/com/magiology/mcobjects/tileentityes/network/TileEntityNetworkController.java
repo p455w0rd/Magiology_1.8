@@ -1,24 +1,36 @@
 package com.magiology.mcobjects.tileentityes.network;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.api.lang.program.*;
-import com.magiology.api.network.*;
-import com.magiology.api.network.skeleton.*;
-import com.magiology.api.power.*;
+import com.magiology.api.lang.program.ProgramDataBase;
+import com.magiology.api.network.ISidedNetworkComponent;
+import com.magiology.api.network.Messageable;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.skeleton.TileEntityNetworkPow;
+import com.magiology.api.power.ISidedPower;
+import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
-import com.magiology.mcobjects.items.*;
+import com.magiology.mcobjects.items.ProgramContainer;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.util.utilclasses.NetworkUtil;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.SlowdownUtil;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
 	SlowdownUtil optimizer=new SlowdownUtil(40);
@@ -41,13 +53,13 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 				).sides, SixSidedBoolean.lastGen.sides, 1, 20, 200, 100000);
 		this.initUpgrades(Container.FirePipe);
 		expectedBoxes=new AxisAlignedBB[]{
-				new AxisAlignedBB(0,     p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
-				new AxisAlignedBB(p*6.5, 0,      p*6.5, p*9.5, p*5,   p*9.5),
-				new AxisAlignedBB(p*6.5, p*6.5,  0 ,    p*9.5, p*9.5, p*5  ),
-				new AxisAlignedBB(p*9.5, p*6.5,  p*6.5, 1,     p*9.5, p*9.5),
-				new AxisAlignedBB(p*6.5, p*10.5, p*6.5, p*9.5, 1,     p*9.5),
-				new AxisAlignedBB(p*6.5, p*6.5,  p*9.5, p*9.5, p*9.5, 1    ),
-				new AxisAlignedBB(p*5,   p*5,    p*5, p*11, p*10.5,  p*11)
+				new AxisAlignedBB(0,	 p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, 0,	  p*6.5, p*9.5, p*5,   p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  0 ,	p*9.5, p*9.5, p*5  ),
+				new AxisAlignedBB(p*9.5, p*6.5,  p*6.5, 1,	 p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, p*10.5, p*6.5, p*9.5, 1,	 p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  p*9.5, p*9.5, p*9.5, 1	),
+				new AxisAlignedBB(p*5,   p*5,	p*5, p*11, p*10.5,  p*11)
 		};
 	}
 	
@@ -64,26 +76,26 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-    	networkIdMap.put(this, NBT.getLong("NI"));
-    }
+		networkIdMap.put(this, NBT.getLong("NI"));
+	}
 	
-    @Override
+	@Override
 	public void writeToNBT(NBTTagCompound NBT){
-    	super.writeToNBT(NBT);
-    	NBT.setLong("NI", getNetworkId());
-    }
+		super.writeToNBT(NBT);
+		NBT.setLong("NI", getNetworkId());
+	}
 	
 	@Override
 	public void update(){
 		
 		expectedBoxes=new AxisAlignedBB[]{
-				new AxisAlignedBB(0,     p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
-				new AxisAlignedBB(p*6.5, 0,      p*6.5, p*9.5, p*5,   p*9.5),
-				new AxisAlignedBB(p*6.5, p*6.5,  0,     p*9.5, p*9.5, p*5  ),
-				new AxisAlignedBB(p*11, p*6.5,  p*6.5, 1,     p*9.5, p*9.5),
-				new AxisAlignedBB(p*6.5, p*10.5, p*6.5, p*9.5, 1,     p*9.5),
-				new AxisAlignedBB(p*6.5, p*6.5,  p*11, p*9.5, p*9.5, 1    ),
-				new AxisAlignedBB(p*5,   p*5,    p*5, p*11, p*10.5,  p*11)
+				new AxisAlignedBB(0,	 p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, 0,	  p*6.5, p*9.5, p*5,   p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  0,	 p*9.5, p*9.5, p*5  ),
+				new AxisAlignedBB(p*11, p*6.5,  p*6.5, 1,	 p*9.5, p*9.5),
+				new AxisAlignedBB(p*6.5, p*10.5, p*6.5, p*9.5, 1,	 p*9.5),
+				new AxisAlignedBB(p*6.5, p*6.5,  p*11, p*9.5, p*9.5, 1	),
+				new AxisAlignedBB(p*5,   p*5,	p*5, p*11, p*10.5,  p*11)
 		};
 		
 		this.power(true);

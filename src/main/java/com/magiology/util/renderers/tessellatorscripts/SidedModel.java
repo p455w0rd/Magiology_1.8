@@ -1,8 +1,8 @@
 package com.magiology.util.renderers.tessellatorscripts;
 
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class SidedModel{
 	

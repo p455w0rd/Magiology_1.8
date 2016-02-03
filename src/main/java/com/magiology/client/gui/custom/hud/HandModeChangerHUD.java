@@ -1,17 +1,17 @@
 package com.magiology.client.gui.custom.hud;
 
-import java.awt.*;
+import java.awt.Color;
 
-import net.minecraft.client.gui.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.core.init.*;
-import com.magiology.handlers.animationhandlers.*;
+import com.magiology.core.init.MItems;
+import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPositions;
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.UtilM;
+
+import net.minecraft.client.gui.FontRenderer;
 
 public class HandModeChangerHUD extends HUD{
 	public static HandModeChangerHUD instance=new HandModeChangerHUD();
@@ -32,7 +32,7 @@ public class HandModeChangerHUD extends HUD{
 		if(handAlpha>0&&UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
 			float HandAlpha=UtilM.calculatePos(lastHandAlpha,handAlpha);
 			int slot=player.inventory.currentItem;
-			GL11.glPushMatrix();
+			OpenGLM.pushMatrix();
 			
 			int posId=0;
 			for(int b=0;b<HandComonPositions.values().length;b++){
@@ -58,24 +58,24 @@ public class HandModeChangerHUD extends HUD{
 			String up="string "+a1,now="string "+a2,down="string "+a3;
 			
 			GL11U.setUpOpaqueRendering(1);
-			GL11.glTranslated(slot*20+xScreen/2-95, yScreen-38, 0);
+			OpenGLM.translate(slot*20+xScreen/2-95, yScreen-38, 0);
 			
-			GL11.glTranslated(0, -HandAlpha*20+20, 0);
-			GL11.glTranslated(13, 0, 0);
-			GL11.glScaled(HandAlpha, HandAlpha, HandAlpha);
-			GL11.glRotatef(HandAlpha*90-90, 0, 0, 1);
-			GL11.glTranslated(-13, 0, 0);
+			OpenGLM.translate(0, -HandAlpha*20+20, 0);
+			OpenGLM.translate(13, 0, 0);
+			OpenGLM.scale(HandAlpha, HandAlpha, HandAlpha);
+			OpenGLM.rotate(HandAlpha*90-90, 0, 0, 1);
+			OpenGLM.translate(-13, 0, 0);
 			
-			GL11.glTranslated(-10+HandAlpha*10, 0, 0);
+			OpenGLM.translate(-10+HandAlpha*10, 0, 0);
 			fr.drawStringWithShadow(up, 0,-9, Color.WHITE.hashCode());
-			GL11.glTranslated(10-HandAlpha*10, 0, 0);
+			OpenGLM.translate(10-HandAlpha*10, 0, 0);
 			fr.drawStringWithShadow(now, 0, 0, Color.WHITE.hashCode());
-			GL11.glTranslated(10-HandAlpha*10, 0, 0);
+			OpenGLM.translate(10-HandAlpha*10, 0, 0);
 			fr.drawStringWithShadow(down, 0, 9, Color.WHITE.hashCode());
 			
 			
 			GL11U.endOpaqueRendering();
-			GL11.glPopMatrix();
+			OpenGLM.popMatrix();
 		}
 		
 	}

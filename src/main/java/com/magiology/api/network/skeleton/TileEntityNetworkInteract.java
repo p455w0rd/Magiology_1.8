@@ -1,22 +1,29 @@
 package com.magiology.api.network.skeleton;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import net.minecraft.item.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-
-import com.magiology.api.*;
+import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandler;
-import com.magiology.api.network.*;
-import com.magiology.api.network.interfaces.registration.*;
+import com.magiology.api.network.Messageable;
+import com.magiology.api.network.NetworkInterface;
+import com.magiology.api.network.Redstone;
+import com.magiology.api.network.WorldNetworkInterface;
+import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
-import com.magiology.core.init.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.core.init.MItems;
+import com.magiology.forgepowered.packets.packets.SavableDataWithKeyPacket;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 
 public abstract class TileEntityNetworkInteract extends TileEntityNetwork implements NetworkInterface,Messageable{
 	

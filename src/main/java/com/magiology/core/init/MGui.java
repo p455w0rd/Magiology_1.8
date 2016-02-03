@@ -1,13 +1,16 @@
 package com.magiology.core.init;
 
-import net.minecraftforge.fml.common.network.*;
-
-import com.magiology.client.gui.*;
-import com.magiology.client.gui.custom.hud.*;
-import com.magiology.core.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.handlers.*;
+import com.magiology.client.gui.GuiUpdater;
+import com.magiology.client.gui.custom.hud.HandModeChangerHUD;
+import com.magiology.client.gui.custom.hud.SoulFlameHUD;
+import com.magiology.client.gui.custom.hud.StatsDisplayHUD;
+import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.handlers.GuiHandlerM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class MGui{
 	public static final byte

@@ -1,25 +1,42 @@
 package com.magiology.handlers;
 
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.inventory.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraftforge.fml.common.network.*;
-import net.minecraftforge.fml.common.network.internal.*;
-
-import com.magiology.client.gui.container.*;
-import com.magiology.client.gui.gui.*;
-import com.magiology.core.*;
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
-import com.magiology.mcobjects.tileentityes.hologram.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.client.gui.container.ArmorContainer;
+import com.magiology.client.gui.container.CommandCenterContainer;
+import com.magiology.client.gui.container.ContainerEmpty;
+import com.magiology.client.gui.container.ControlBockContainer;
+import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
+import com.magiology.client.gui.container.SmartCrafterContainer;
+import com.magiology.client.gui.container.UpgradeContainer;
+import com.magiology.client.gui.gui.GuiArmor;
+import com.magiology.client.gui.gui.GuiCenterContainer;
+import com.magiology.client.gui.gui.GuiControlBock;
+import com.magiology.client.gui.gui.GuiHoloObjectEditor;
+import com.magiology.client.gui.gui.GuiHologramProjectorMain;
+import com.magiology.client.gui.gui.GuiISidedPowerInstructor;
+import com.magiology.client.gui.gui.GuiProgramContainerEditor;
+import com.magiology.client.gui.gui.GuiSC;
+import com.magiology.client.gui.gui.GuiUpgrade;
+import com.magiology.core.Magiology;
+import com.magiology.core.init.MGui;
+import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
+import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
+import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilobjects.vectors.Pos;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
 
 public class GuiHandlerM implements IGuiHandler{
 	
@@ -29,15 +46,15 @@ public class GuiHandlerM implements IGuiHandler{
 		int side=hit!=null?hit.sideHit.getIndex():-1;
 		
 		switch (ID){
-		case MGui.GuiUpgrade:              if(tile instanceof TileEntityPow)         
+		case MGui.GuiUpgrade:			  if(tile instanceof TileEntityPow)		 
 			return new UpgradeContainer(player.inventory, (TileEntityPow)tile);
-		case MGui.GuiControlBock:          if(tile instanceof TileEntityControlBlock)
+		case MGui.GuiControlBock:		  if(tile instanceof TileEntityControlBlock)
 			return new ControlBockContainer(player.inventory, (TileEntityControlBlock)tile);
-		case MGui.GuiArmor:                                                          
+		case MGui.GuiArmor:														  
 			return new ArmorContainer(player, player.inventory.armorInventory);
-		case MGui.GuiSC:                   if(tile instanceof TileEntitySmartCrafter)
+		case MGui.GuiSC:				   if(tile instanceof TileEntitySmartCrafter)
 			return new SmartCrafterContainer(player, (TileEntitySmartCrafter)tile,side);
-		case MGui.GuiISidedPowerInstructor:                                          
+		case MGui.GuiISidedPowerInstructor:										  
 			return new ISidedPowerInstructorContainer(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:
 			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)
@@ -62,7 +79,7 @@ public class GuiHandlerM implements IGuiHandler{
 		
 		switch (ID){
 		case MGui.GuiUpgrade:
-			if(tile instanceof TileEntityPow)         
+			if(tile instanceof TileEntityPow)		 
 				return new GuiUpgrade(player.inventory, (TileEntityPow)tile);
 		case MGui.GuiControlBock:
 			if(tile instanceof TileEntityControlBlock)
@@ -72,7 +89,7 @@ public class GuiHandlerM implements IGuiHandler{
 		case MGui.GuiSC:
 			if(tile instanceof TileEntitySmartCrafter)
 				return new GuiSC(player, (TileEntitySmartCrafter)tile,side);
-		case MGui.GuiISidedPowerInstructor:                                          
+		case MGui.GuiISidedPowerInstructor:										  
 			return new GuiISidedPowerInstructor(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:
 			if(tile instanceof TileEntityHologramProjector&&((TileEntityHologramProjector)tile).lastPartClicked!=null)

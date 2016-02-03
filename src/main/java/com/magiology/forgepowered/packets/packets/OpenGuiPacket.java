@@ -1,15 +1,15 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.*;
+import java.io.IOException;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraftforge.fml.common.network.internal.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
+import com.magiology.core.Magiology;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 
-import com.magiology.core.*;
-import com.magiology.forgepowered.packets.core.*;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.common.network.internal.FMLNetworkHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class OpenGuiPacket extends AbstractToServerMessage{
 	protected int id;

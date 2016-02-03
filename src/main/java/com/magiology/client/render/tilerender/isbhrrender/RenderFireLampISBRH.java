@@ -10,21 +10,21 @@ package com.magiology.client.render.tilerender.isbhrrender;
 //	@Override
 //	public boolean renderBlockInW(IBlockAccess world, BlockPos pos,Block bleck, int modelId, RenderBlocks renderer){
 //		FireLamp block=(FireLamp)bleck;
-//        Tessellator tessellator=Tessellator.instance;
-//        
-//        tessellator.setColorOpaque_F(1F, 1F, 1F);
-//        tessellator.
-//        setBrightness(
-//        		block.
-//        		getMixedBrightnessForBlock(
-//        				world, pos));
-//        
-//        renderer.renderFromInside=true;
-//        renderer.renderStandardBlock(block, pos);
-//        
-//        renderer.renderFromInside=false;
-//        renderer.renderStandardBlock(block, pos);
-//        return false;
+//		Tessellator tessellator=Tessellator.instance;
+//		
+//		tessellator.setColorOpaque_F(1F, 1F, 1F);
+//		tessellator.
+//		setBrightness(
+//				block.
+//				getMixedBrightnessForBlock(
+//						world, pos));
+//		
+//		renderer.renderFromInside=true;
+//		renderer.renderStandardBlock(block, pos);
+//		
+//		renderer.renderFromInside=false;
+//		renderer.renderStandardBlock(block, pos);
+//		return false;
 //	}
 //	@Override
 //	public void renderItemInW(ItemRenderType type, ItemStack item,Object... data){

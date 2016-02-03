@@ -1,20 +1,29 @@
 package com.magiology.client.render.tilerender.network;
 
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
+import org.lwjgl.opengl.GL11;
 
-import org.lwjgl.opengl.*;
+import com.magiology.core.MReference;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.renderers.VertexRenderer.ShadedQuad;
+import com.magiology.util.renderers.glstates.GlState;
+import com.magiology.util.renderers.glstates.GlStateCell;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.renderers.tessellatorscripts.SidedModel;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilobjects.vectors.QuadUV;
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import com.magiology.core.*;
-import com.magiology.mcobjects.tileentityes.network.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.VertexRenderer.ShadedTriangle;
-import com.magiology.util.renderers.glstates.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.*;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Vec3;
 
 public class RenderNetworkController extends TileEntitySpecialRendererM{
 	
@@ -313,7 +322,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 	public void renderTileEntityAt(TileEntity tile0, double x, double y, double z, float pt){
 //		initModels();
 		GL11U.protect();
-		GL11.glTranslated(x,y,z);
+		OpenGLM.translate(x,y,z);
 		
 		
 		boolean[] sides=new boolean[6];
@@ -334,11 +343,11 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		VertexRenderer brainModel=TessUtil.drawBrain(new Vec3M(0.5, 0.5+upDown, 0.5), 1, anim);
 		
-		Vec3 middle=brainModel.getTriangle(0).pos3[2].vector3D, minY=middle,maxY=middle;
+		Vec3 middle=brainModel.getTriangle(0).pos4[2].vector3D, minY=middle,maxY=middle;
 		
 		
-		for(ShadedTriangle tri:brainModel.getTriangles())for(int i=0;i<3;i++){
-			Vec3 newPos=tri.pos3[i].vector3D;
+		for(ShadedQuad tri:brainModel.getTriangles())for(int i=0;i<3;i++){
+			Vec3 newPos=tri.pos4[i].vector3D;
 			if(newPos.yCoord>maxY.yCoord)maxY=newPos;
 			if(newPos.yCoord<minY.yCoord)minY=newPos;
 		}

@@ -1,18 +1,20 @@
 package com.magiology.client.render.tilerender;
 
-import net.minecraft.tileentity.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.client.render.aftereffect.*;
-import com.magiology.forgepowered.events.client.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
+import com.magiology.client.render.Textures;
+import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.client.render.aftereffect.TwoDotsLineRender;
+import com.magiology.forgepowered.events.client.RenderEvents;
+import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.m_extension.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
+import com.magiology.util.utilobjects.vectors.TwoDots;
+
+import net.minecraft.tileentity.TileEntity;
 
 public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 	
@@ -36,59 +38,59 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		if(var1)RenderEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
 		float rotation=UtilM.calculatePos(tile.prevRotation,tile.rotation);
-		GL11.glPushMatrix();
-		GL11.glTranslated(posX,posY,posZ);
-		GL11.glEnable(GL11.GL_CULL_FACE);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(posX,posY,posZ);
+		OpenGLM.enableCull();
 		
 		this.bindTexture(Textures.FireMatrixReceaverBase);
 		
 
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableLighting();
+		OpenGLM.disableTexture2D();
 		GL11U.setUpOpaqueRendering(1);
-		GL11.glColor4d(1, 0.01, 0.01, 0.2);
+		OpenGLM.color(1, 0.01, 0.01, 0.2);
 		
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		GL11.glRotated(rotation, 0, 1, 0);
-		GL11.glRotated(rotation+20, 0, 0, 1);
+		OpenGLM.pushMatrix();
+		OpenGLM.translate(0.5F, 0.5F, 0.5F);
+		OpenGLM.rotate(rotation, 0, 1, 0);
+		OpenGLM.rotate(rotation+20, 0, 0, 1);
 		
 		float noise=PowerUtil.getPowerPrecentage(tile)/50.0F;
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
 		
-		GL11.glRotated(rotation+90, 0, -2, 0);
+		OpenGLM.rotate(rotation+90, 0, -2, 0);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(-rotation-90, 0, -2, 0);
+		OpenGLM.rotate(-rotation-90, 0, -2, 0);
 		
-		GL11.glRotated(rotation+72, 1, 1, 0);
+		OpenGLM.rotate(rotation+72, 1, 1, 0);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(-rotation-72, 1, 1, 0);
+		OpenGLM.rotate(-rotation-72, 1, 1, 0);
 		
-		GL11.glRotated(rotation+64, 0, 1, 1);
+		OpenGLM.rotate(rotation+64, 0, 1, 1);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(-rotation-64, 0, 1, 1);
+		OpenGLM.rotate(-rotation-64, 0, 1, 1);
 		
-		GL11.glRotated(rotation+170, 1, 0, 1);
+		OpenGLM.rotate(rotation+170, 1, 0, 1);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(-rotation-170, 1, 0, 1);
+		OpenGLM.rotate(-rotation-170, 1, 0, 1);
 		
 
-		GL11.glRotated(-rotation-231, 1, 1, 0);
+		OpenGLM.rotate(-rotation-231, 1, 1, 0);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(rotation+231, 1, 1, 0);
+		OpenGLM.rotate(rotation+231, 1, 1, 0);
 		
-		GL11.glRotated(-rotation-267, 0, 1, 1);
+		OpenGLM.rotate(-rotation-267, 0, 1, 1);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(rotation+267, 0, 1, 1);
+		OpenGLM.rotate(rotation+267, 0, 1, 1);
 		
-		GL11.glRotated(-rotation-192, 1, 0, 1);
+		OpenGLM.rotate(-rotation-192, 1, 0, 1);
 		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
-		GL11.glRotated(rotation+192, 1, 0, 1);
+		OpenGLM.rotate(rotation+192, 1, 0, 1);
 		
-		GL11.glPopMatrix();
+		OpenGLM.popMatrix();
 		
 		
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.enableTexture2D();
 		GL11U.endOpaqueRendering();
 		
 		this.drawCube(0.25, 0.25, 0.25, 0.75, 0.75, 0.75);
@@ -96,8 +98,8 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		
 		
 		
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glPopMatrix();
+		OpenGLM.enableLighting();
+		OpenGLM.popMatrix();
 	}
 
 	

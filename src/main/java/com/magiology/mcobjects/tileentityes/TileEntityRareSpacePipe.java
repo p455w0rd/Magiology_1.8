@@ -1,20 +1,27 @@
 package com.magiology.mcobjects.tileentityes;
 
-import java.util.*;
+import java.util.List;
 
-import net.minecraft.inventory.*;
-import net.minecraft.nbt.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.relauncher.*;
+import org.apache.commons.lang3.ArrayUtils;
 
-import org.apache.commons.lang3.*;
-
-import com.magiology.forgepowered.events.*;
-import com.magiology.forgepowered.packets.packets.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
+import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implements MultiColisionProvider,ITickable{
 	
@@ -35,23 +42,23 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	@Override
 	public void readFromNBT(NBTTagCompound NBTTC){
 		
-    	for(int i=0;i<6;i++){
-    		bannedConnections[i]=NBTTC.getBoolean("bannedConnections"+i);
-    		int con=NBTTC.getInteger("connections"+i);
-    		if(con<6&&con>-1)connections[i]=EnumFacing.getFront(con);
-    		else connections[i]=null;
-    	}
+		for(int i=0;i<6;i++){
+			bannedConnections[i]=NBTTC.getBoolean("bannedConnections"+i);
+			int con=NBTTC.getInteger("connections"+i);
+			if(con<6&&con>-1)connections[i]=EnumFacing.getFront(con);
+			else connections[i]=null;
+		}
 		setColisionBoxes();
-    	ForcePipeUpdate.updatein3by3(worldObj, pos);
-    }
+		ForcePipeUpdate.updatein3by3(worldObj, pos);
+	}
 	
-    @Override
+	@Override
 	public void writeToNBT(NBTTagCompound NBTTC){
-    	for (int i=0;i<6;i++){
-    		NBTTC.setBoolean("bannedConnections"+i, bannedConnections[i]);
-    		NBTTC.setInteger("connections"+i, SideUtil.enumFacingOrientation(connections[i]));
-    	}
-    }
+		for (int i=0;i<6;i++){
+			NBTTC.setBoolean("bannedConnections"+i, bannedConnections[i]);
+			NBTTC.setInteger("connections"+i, SideUtil.enumFacingOrientation(connections[i]));
+		}
+	}
 	
 	@Override
 	public void update(){
@@ -67,11 +74,11 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public AxisAlignedBB getRenderBoundingBox()
-    {
-        AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
-        return bb;
-    }
+	public AxisAlignedBB getRenderBoundingBox()
+	{
+		AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1);
+		return bb;
+	}
 	
 	@Override
 	public void setColisionBoxes(){
@@ -86,12 +93,12 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 		};
 	}
 	private AxisAlignedBB[] expectedBoxes=new AxisAlignedBB[]{
-			new AxisAlignedBB(0      ,p*6,p*6,p*6,p*10,p*10),
-			new AxisAlignedBB(p*6,0      ,p*6,p*10,p*6,p*10),
-			new AxisAlignedBB(p*6,p*6,0      ,p*10,p*10,p*6),
-			new AxisAlignedBB(p*10,p*6,p*6,1      ,p*10,p*10),
-			new AxisAlignedBB(p*6,p*10,p*6,p*10,1      ,p*10),
-			new AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1      ),
+			new AxisAlignedBB(0	  ,p*6,p*6,p*6,p*10,p*10),
+			new AxisAlignedBB(p*6,0	  ,p*6,p*10,p*6,p*10),
+			new AxisAlignedBB(p*6,p*6,0	  ,p*10,p*10,p*6),
+			new AxisAlignedBB(p*10,p*6,p*6,1	  ,p*10,p*10),
+			new AxisAlignedBB(p*6,p*10,p*6,p*10,1	  ,p*10),
+			new AxisAlignedBB(p*6,p*6,p*10,p*10,p*10,1	  ),
 			new AxisAlignedBB(p*6, p*6, p*6, p*10, p*10, p*10),
 			new AxisAlignedBB(p*4.5F,-p*4.7F,p*4.5F,p*11.5F,p*0.1F,p*11.5F),
 			new AxisAlignedBB(p*6,0 ,p*6,p*10,p*6F,p*10),

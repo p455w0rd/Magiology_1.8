@@ -1,21 +1,5 @@
 package com.magiology.client.render.itemrender;
 
-import net.minecraft.client.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.client.render.*;
-import com.magiology.mcobjects.entitys.*;
-import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
-import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
-import com.magiology.util.renderers.*;
-import com.magiology.util.renderers.tessellatorscripts.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
-
 //public class ItemRendererTheHand implements IItemRenderer{
 //	private final float p=1F/16F;
 //	public ResourceLocation[] blank1={new ResourceLocation("noTexture")};
@@ -41,48 +25,48 @@ import com.magiology.util.utilobjects.vectors.*;
 //		data=ComplexPlayerRenderingData.getFastPowerHandData(player);
 //		if(data==null)return;
 //		
-//		GL11.glPushMatrix();
+//		OpenGLM.pushMatrix();
 //		if(type==ItemRenderType.ENTITY){
-//			GL11.glTranslatef(-0.7F, -0.9F,-0.1F);
+//			OpenGLM.translate(-0.7F, -0.9F,-0.1F);
 //		}else if(type==ItemRenderType.EQUIPPED){
 //			
-//			GL11.glRotated(-110, 1, -0.4, -0.2);
-//			GL11.glTranslated(-0.6, -2.2,-1.5);
-//			GL11.glScaled(1.2, 1.2, 1.2);
+//			OpenGLM.rotate(-110, 1, -0.4, -0.2);
+//			OpenGLM.translate(-0.6, -2.2,-1.5);
+//			OpenGLM.scale(1.2, 1.2, 1.2);
 //			Minecraft.getSystemTime();
-//			GL11.glTranslated(0, data.thirdPresonPos, 0);
-//			GL11.glRotated(-data.thirdPresonPosSpeed*350+20, 1, 0, 0);
+//			OpenGLM.translate(0, data.thirdPresonPos, 0);
+//			OpenGLM.rotate(-data.thirdPresonPosSpeed*350+20, 1, 0, 0);
 //		}
 //		
 //		float[] handRotationRender=UtilM.calculatePosArray(data.prevHandRotationCalc,data.handRotationCalc);
 //		float x1=p*6F,y1=p*10,z1=p*2;
-//		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11.glTranslated(handRotationRender[3]/30,handRotationRender[4]/30,handRotationRender[5]/30);
-//		GL11.glTranslated(x1,y1,z1);
-//		GL11.glRotated(-20, 0, 1, 0);
+//		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)OpenGLM.translate(handRotationRender[3]/30,handRotationRender[4]/30,handRotationRender[5]/30);
+//		OpenGLM.translate(x1,y1,z1);
+//		OpenGLM.rotate(-20, 0, 1, 0);
 //		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11U.glRotate(handRotationRender[0],handRotationRender[1],handRotationRender[2]);
-//		GL11.glTranslated(-x1, -y1, -z1);
-//		GL11.glRotated(20, 1, 0, 1);
-//		if(type==ItemRenderType.INVENTORY)GL11.glTranslatef(0.4F, 0.7F, -0.6F);
-//		else GL11.glTranslatef(0.6F, 0.7F, -0.3F);
+//		OpenGLM.translate(-x1, -y1, -z1);
+//		OpenGLM.rotate(20, 1, 0, 1);
+//		if(type==ItemRenderType.INVENTORY)OpenGLM.translate(0.4F, 0.7F, -0.6F);
+//		else OpenGLM.translate(0.6F, 0.7F, -0.3F);
 //		
 //		base.draw();
 //		boolean first=true;
 //		float x=-p*0.9F,y=-p*0.4F,z=p*5.5F;
-//		GL11.glTranslatef(x,y,z);
+//		OpenGLM.translate(x,y,z);
 //		for(int a=0;a<fingers.length;a++){
 //			FingerModel a1=fingers[a];
 //			a1.draw(data.fingerData[a]);
 //			if(first){
-//				GL11.glTranslatef(-x,-y,-z);
-//				GL11.glTranslatef(0.002F, p,0.03F);
-//				GL11.glRotated(10, 0, 1, 0);
+//				OpenGLM.translate(-x,-y,-z);
+//				OpenGLM.translate(0.002F, p,0.03F);
+//				OpenGLM.rotate(10, 0, 1, 0);
 //				first=false;
 //			}else{
-//				GL11.glTranslatef(p*1.8F, 0,0);
-//				GL11.glRotated(-10.0/2.0, 0, 1, 0);
+//				OpenGLM.translate(p*1.8F, 0,0);
+//				OpenGLM.rotate(-10.0/2.0, 0, 1, 0);
 //			}
 //		}
-//		GL11.glPopMatrix();
+//		OpenGLM.popMatrix();
 //	}
 //	public class FingerModel{
 //		public CubeModel[]cubeModels;
@@ -93,16 +77,16 @@ import com.magiology.util.utilobjects.vectors.*;
 //					new CubeModel(boxes[2][0],boxes[2][1],boxes[2][2], boxes[2][3], boxes[2][4], boxes[2][5],txtpoints[2], sidedtextures[2])};
 //		}
 //		public void draw(PowerHandData_sub_fingerData data){
-//			GL11.glPushMatrix();
+//			OpenGLM.pushMatrix();
 //			for(int a=0;a<cubeModels.length;a++){
 //				float[] rot=UtilM.calculatePosArray(data.prevcalcXyzPosRot[a], data.calcXyzPosRot[a]);
 //				GL11U.glRotate(rot[3],rot[4],rot[5],rot[0],rot[1]+
 //						(cubeModels[a].points[2].y-cubeModels[a].points[4].y)/2F
 //						,rot[2]);
-//				GL11.glTranslated(0.0001,0,-(cubeModels[a].points[2].z-cubeModels[a].points[1].z));
+//				OpenGLM.translate(0.0001,0,-(cubeModels[a].points[2].z-cubeModels[a].points[1].z));
 //				cubeModels[a].draw();
 //			}
-//			GL11.glPopMatrix();
+//			OpenGLM.popMatrix();
 //		}
 //	}
 //	public void init(){

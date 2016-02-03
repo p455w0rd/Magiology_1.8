@@ -1,17 +1,17 @@
 package com.magiology.forgepowered.packets.packets;
 
-import java.io.*;
+import java.io.IOException;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import net.minecraftforge.fml.relauncher.*;
-
-import com.magiology.forgepowered.packets.core.*;
-import com.magiology.mcobjects.tileentityes.corecomponents.*;
+import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
+import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class NotifyPointedBoxChangePacket extends AbstractToServerMessage{
 	BlockPos pos;

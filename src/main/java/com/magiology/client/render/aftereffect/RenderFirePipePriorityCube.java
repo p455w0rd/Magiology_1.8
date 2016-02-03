@@ -1,15 +1,16 @@
 package com.magiology.client.render.aftereffect;
 
-import net.minecraft.entity.player.*;
-import net.minecraft.util.*;
-
-import org.lwjgl.opengl.*;
-
-import com.magiology.core.init.*;
-import com.magiology.mcobjects.tileentityes.*;
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
+import com.magiology.core.init.MItems;
+import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 
 public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	
@@ -31,23 +32,23 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	
 	@Override
 	public void render(){
-		GL11.glPushMatrix();
+		OpenGLM.pushMatrix();
 		GL11U.setUpOpaqueRendering(2);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-//		GL11.glDisable(GL11.GL_CULL_FACE);
-//		GL11.glDisable(GL11.GL_FOG);
+		OpenGLM.disableTexture2D();
+//		OpenGLM.disableCull();
+//		OpenGLM.disableFog();
 		GL11U.glTranslatep(pos);
-		GL11.glDepthMask(false);
-		GL11.glColor4d(1, 0.1, 0.1, alpha/5);
+		OpenGLM.depthMask(false);
+		OpenGLM.color(1, 0.1, 0.1, alpha/5);
 		if(box!=null)for(int a=0;a<5;a++)drawCube(box.minX-a*0.01+UtilM.CRandF(0.005), box.minY-a*0.01+UtilM.CRandF(0.005), box.minZ-a*0.01+UtilM.CRandF(0.005), box.maxX+a*0.01+UtilM.CRandF(0.005), box.maxY+a*0.01+UtilM.CRandF(0.005), box.maxZ+a*0.01+UtilM.CRandF(0.005));
-		GL11.glColor4d(0.1, 0.1, 1, alpha*2/5);
+		OpenGLM.color(0.1, 0.1, 1, alpha*2/5);
 		for(int a=0;a<5;a++)drawCube(pipe.collisionBoxes[6].minX-0.001-a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].minY-0.001-a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].minZ-0.001-a*0.01+(a==0?0:UtilM.CRandF(0.005)),pipe.collisionBoxes[6].maxX+0.001+a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].maxY+0.001+a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].maxZ+0.001+a*0.01+(a==0?0:UtilM.CRandF(0.005)));
-		GL11.glPopMatrix();
-		GL11.glDepthMask(true);
-//		GL11.glEnable(GL11.GL_CULL_FACE);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		OpenGLM.popMatrix();
+		OpenGLM.depthMask(true);
+//		OpenGLM.enableCull();
+		OpenGLM.enableTexture2D();
 		GL11U.endOpaqueRendering();
-		GL11.glColor4d(1,1,1,1);
+		OpenGLM.color(1,1,1,1);
 	}
 	
 	@Override

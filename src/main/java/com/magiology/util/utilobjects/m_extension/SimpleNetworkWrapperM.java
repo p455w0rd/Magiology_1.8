@@ -1,10 +1,11 @@
 package com.magiology.util.utilobjects.m_extension;
 
-import net.minecraft.entity.player.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
+import com.magiology.util.utilclasses.PrintUtil;
 
-import com.magiology.util.utilclasses.*;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class SimpleNetworkWrapperM extends SimpleNetworkWrapper{
 	

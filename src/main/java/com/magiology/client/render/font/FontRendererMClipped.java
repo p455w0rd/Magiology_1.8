@@ -1,15 +1,16 @@
 package com.magiology.client.render.font;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
-import net.minecraft.util.*;
-
-import org.lwjgl.util.vector.*;
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.util.renderers.*;
-import com.magiology.util.utilclasses.*;
-import com.magiology.util.utilobjects.vectors.*;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.util.ResourceLocation;
 
 
 public class FontRendererMClipped extends FontRendererMBase{

@@ -1,11 +1,12 @@
 package com.magiology.mcobjects.items.upgrades;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import net.minecraft.item.*;
-import net.minecraft.tileentity.*;
+import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 
-import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 public class RegisterItemUpgrades{
 	
@@ -45,7 +46,7 @@ public class RegisterItemUpgrades{
 	
 	//items
 	/**saves Item for easy data referencing (go to getItemUpgradeID())*/
-	private static ArrayList<Item>    regItems=new ArrayList<Item>();
+	private static ArrayList<Item>	regItems=new ArrayList<Item>();
 	/**Item type id (type speed,type power...)*/
 	private static ArrayList<Integer> itemUpgradeTypeID=new ArrayList<Integer>();
 	/**Item Upgrade Level (1 slow, 2 faster, 3 more speed, 4 ULTIMATE PAUWA, 5 I's over 9000!,...)*/
