@@ -2,7 +2,6 @@ package com.magiology.forgepowered.events;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
-import com.magiology.client.gui.container.SmartCrafterContainer;
 import com.magiology.handlers.GenericPacketEventHandler;
 import com.magiology.handlers.GenericPacketEventHandler.IntegerPacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;
@@ -21,24 +20,6 @@ public class GenericPacketEvents{
 		EntityPlayer player=event.player;
 		int integer=event.integer;
 		try{switch (event.eventId){
-		case 0:{
-			if(!(player.openContainer instanceof SmartCrafterContainer))break;
-			boolean doIt=true;
-			int listOffset=((SmartCrafterContainer)player.openContainer).listOffset;
-			if(integer<0){if(listOffset+integer<0)doIt=false;}
-			else{if(listOffset+integer>((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts.length-2)doIt=false;}
-			if(doIt)((SmartCrafterContainer)player.openContainer).listOffset+=integer;
-		}break;
-		case 1:{
-			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[integer].clear();
-			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[integer].ammountWanted=0;
-		}break;
-		case 2:{
-			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[((SmartCrafterContainer)player.openContainer).listOffset].ammountWanted=integer;
-		}break;
-		case 3:{
-			((SmartCrafterContainer)player.openContainer).tileSC.wantedProducts[((SmartCrafterContainer)player.openContainer).listOffset+1].ammountWanted=integer;
-		}break;
 		case 5:{
 			//wings has space update
 			if(WingsFromTheBlackFireHandler.getIsActive(player))player.getCurrentArmor(2).getTagCompound().setBoolean("HS", integer==1);

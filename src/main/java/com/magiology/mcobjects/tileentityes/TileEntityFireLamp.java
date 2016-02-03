@@ -202,8 +202,8 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	public void updateControlBlock(){
 		TileEntity tileTest=worldObj.getTileEntity(control);
-		if(IsControlledByOSC&&tileTest instanceof TileEntityOreStructureCore)return;
-		else IsControlledByOSC=false;
+		//if(IsControlledByOSC&&tileTest instanceof TileEntityOreStructureCore)return;
+		IsControlledByOSC=false;
 		
 		if(tileTest instanceof TileEntityControlBlock)return;
 		else control=pos.add(0,0,0);

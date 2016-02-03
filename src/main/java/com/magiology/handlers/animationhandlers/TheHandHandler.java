@@ -8,7 +8,6 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.PowerHandData_sub_fingerData;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
-import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -341,12 +340,6 @@ public class TheHandHandler{
 			}else if(name.equals("spawnProjectile")){
 				int timeHeld=(Integer)event.objects[0];
 				EntityBallOfEnergy entity=new EntityBallOfEnergy(player.worldObj, player, 2F+timeHeld/300F,timeHeld);
-				UtilM.spawnEntity(entity);
-				entity.motionX+=player.motionX*0.8;
-				entity.motionY+=player.motionY*0.8;
-				entity.motionZ+=player.motionZ*0.8;
-			}else if(name.equals("spawnEntitySubatomicWorldDeconstructor")){
-				EntitySubatomicWorldDeconstructor entity=new EntitySubatomicWorldDeconstructor(player.worldObj, player, 1);
 				UtilM.spawnEntity(entity);
 				entity.motionX+=player.motionX*0.8;
 				entity.motionY+=player.motionY*0.8;

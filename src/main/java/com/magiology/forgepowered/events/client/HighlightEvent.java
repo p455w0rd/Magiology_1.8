@@ -17,7 +17,6 @@ import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityBigFurnaceCore;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
@@ -110,7 +109,6 @@ public class HighlightEvent{
 //					
 //				}
 				
-				if(block==MBlocks.DontLookAtMe)onDrawHlDontLookAtMe(event);
 				if(tileEn instanceof TileEntityNetworkRouter)doNetRouterHighlight(pos, (TileEntityNetworkRouter)tileEn ,event);
 				
 				if(item!=null&&item.getItem().equals(MItems.FireHammer)){
@@ -392,10 +390,6 @@ public class HighlightEvent{
 			powerBar=(float)((TileEntityFireLamp)tile).getEnergy()/(float)((TileEntityFireLamp)tile).getMaxEnergy();
 			currentEn=((TileEntityFireLamp)tile).getEnergy();
 			maxEn=((TileEntityFireLamp)tile).getMaxEnergy();
-		}else if(tile instanceof TileEntityRemotePowerCounter){
-			powerBar=(float)((TileEntityRemotePowerCounter)tile).powerBar;
-			currentEn=((TileEntityRemotePowerCounter)tile).currentP;
-			maxEn=((TileEntityRemotePowerCounter)tile).maxPB;
 		}else okBlock=false;
 		
 		if(okBlock==false){currentEn=0;maxEn=0;}
@@ -404,45 +398,6 @@ public class HighlightEvent{
 		PC.setDouble("powerBar", powerBar);
 		PC.setInteger("currentEn", currentEn);
 		PC.setInteger("maxEn", maxEn);
-	}
-	
-	public void onDrawHlDontLookAtMe(DrawBlockHighlightEvent event){
-		event.setCanceled(true);
-		Random rund=event.player.worldObj.rand;
-		event.player.cameraPitch=50*(rund.nextBoolean()?-1:1);
-		BlockPos pos=event.target.getBlockPos();
-		double x1=(event.player.lastTickPosX+(event.player.posX-event.player.lastTickPosX)*event.partialTicks);
-		double y1=(event.player.lastTickPosY+(event.player.posY-event.player.lastTickPosY)*event.partialTicks);
-		double z1=(event.player.lastTickPosZ+(event.player.posZ-event.player.lastTickPosZ)*event.partialTicks);
-		Block block=UtilM.getBlock(event.player.worldObj,pos);
-		AxisAlignedBB bounds=block.getSelectedBoundingBox(event.player.worldObj, pos).expand(0.002, 0.002, 0.002).offset(-x1, -y1, -z1);
-		float[] xpoints=new float[8], ypoints=new float[8], zpoints=new float[8];
-		
-		for(int a=0;a<xpoints.length;a++){xpoints[a]=(float)((rund.nextFloat()-0.5)*0.05);ypoints[a]=(float)((rund.nextFloat()-0.5)*0.05);zpoints[a]=(float)((rund.nextFloat()-0.5)*0.05);}
-		int angle=event.player.worldObj.rand.nextInt(360);
-		double[] ab=UtilM.circleXZ(angle);ab[0]/=3;ab[1]/=3;
-		double xr=pos.getX()+UtilM.CRandF(0.8);
-		double yr=pos.getY()+UtilM.CRandF(1.8)-0.6;
-		double zr=pos.getZ()+UtilM.CRandF(0.8);
-		UtilM.spawnEntityFX(new EntityFollowingBubleFX(event.player.worldObj,pos.getX()+ab[0], pos.getY()+0.3, pos.getZ()+ab[1], xr,yr,zr,event.player,angle, ab[0], 0.3, ab[1], 250, 12, UtilM.RF(),UtilM.RF(),UtilM.RF(),0.2));
-		
-		xpoints[0]+=bounds.minX;xpoints[1]+=bounds.minX;
-		ypoints[0]+=bounds.minY;ypoints[1]+=bounds.maxY;
-		zpoints[0]+=bounds.minZ;zpoints[1]+=bounds.minZ;
-		
-		xpoints[2]+=bounds.maxX;xpoints[3]+=bounds.maxX;
-		ypoints[2]+=bounds.minY;ypoints[3]+=bounds.maxY;
-		zpoints[2]+=bounds.minZ;zpoints[3]+=bounds.minZ;
-		
-		xpoints[4]+=bounds.maxX;xpoints[5]+=bounds.maxX;
-		ypoints[4]+=bounds.minY;ypoints[5]+=bounds.maxY;
-		zpoints[4]+=bounds.maxZ;zpoints[5]+=bounds.maxZ;
-		
-		xpoints[6]+=bounds.minX;xpoints[7]+=bounds.minX;
-		ypoints[6]+=bounds.minY;ypoints[7]+=bounds.maxY;
-		zpoints[6]+=bounds.maxZ;zpoints[7]+=bounds.maxZ;
-		
-		drawRawSelectionBox(xpoints, ypoints, zpoints, rund.nextFloat(), rund.nextFloat(), rund.nextFloat(), 0.7,1,new boolean[12]);
 	}
 	
 	public void onDrawHlFireLmap(DrawBlockHighlightEvent event,TileEntity tile,BlockPos pos){

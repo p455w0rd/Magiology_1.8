@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.util.utilclasses.UtilM;
 
 import net.minecraft.block.BlockContainer;

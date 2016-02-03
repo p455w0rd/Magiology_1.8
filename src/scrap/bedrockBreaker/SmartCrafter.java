@@ -2,7 +2,6 @@ package com.magiology.mcobjects.blocks;
 
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
-import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.util.utilclasses.UtilM.U;
 
 import net.minecraft.block.BlockContainer;

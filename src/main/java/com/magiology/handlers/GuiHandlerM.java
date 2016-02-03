@@ -5,7 +5,6 @@ import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.client.gui.container.ContainerEmpty;
 import com.magiology.client.gui.container.ControlBockContainer;
 import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
-import com.magiology.client.gui.container.SmartCrafterContainer;
 import com.magiology.client.gui.container.UpgradeContainer;
 import com.magiology.client.gui.gui.GuiArmor;
 import com.magiology.client.gui.gui.GuiCenterContainer;
@@ -14,12 +13,10 @@ import com.magiology.client.gui.gui.GuiHoloObjectEditor;
 import com.magiology.client.gui.gui.GuiHologramProjectorMain;
 import com.magiology.client.gui.gui.GuiISidedPowerInstructor;
 import com.magiology.client.gui.gui.GuiProgramContainerEditor;
-import com.magiology.client.gui.gui.GuiSC;
 import com.magiology.client.gui.gui.GuiUpgrade;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
-import com.magiology.mcobjects.tileentityes.TileEntitySmartCrafter;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
@@ -52,8 +49,6 @@ public class GuiHandlerM implements IGuiHandler{
 			return new ControlBockContainer(player.inventory, (TileEntityControlBlock)tile);
 		case MGui.GuiArmor:														  
 			return new ArmorContainer(player, player.inventory.armorInventory);
-		case MGui.GuiSC:				   if(tile instanceof TileEntitySmartCrafter)
-			return new SmartCrafterContainer(player, (TileEntitySmartCrafter)tile,side);
 		case MGui.GuiISidedPowerInstructor:										  
 			return new ISidedPowerInstructorContainer(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:
@@ -86,9 +81,6 @@ public class GuiHandlerM implements IGuiHandler{
 				return new GuiControlBock(player.inventory, (TileEntityControlBlock)tile);
 		case MGui.GuiArmor:
 			return new GuiArmor(player, player.inventory.armorInventory);
-		case MGui.GuiSC:
-			if(tile instanceof TileEntitySmartCrafter)
-				return new GuiSC(player, (TileEntitySmartCrafter)tile,side);
 		case MGui.GuiISidedPowerInstructor:										  
 			return new GuiISidedPowerInstructor(player, tile);
 		case MGui.HologramProjectorObjectCustomGui:

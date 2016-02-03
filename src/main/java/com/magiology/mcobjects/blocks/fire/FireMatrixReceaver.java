@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.blocks.fire;
 
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
-import com.magiology.mcobjects.tileentityes.TileEntityRemotePowerCounter;
 import com.magiology.util.utilclasses.UtilM;
 
 import net.minecraft.block.BlockContainer;
@@ -46,12 +45,6 @@ public class FireMatrixReceaver extends BlockContainer {
 	public FireMatrixReceaver(){
 		super(Material.gourd);
 		this.setHardness(0.2F).setHarvestLevel("pickaxe", 1);
-	}
-	
-	@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
-		if(world.getTileEntity(pos)instanceof TileEntityRemotePowerCounter){
-		}
 	}
 	@Override
 	public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, int v1, EntityLivingBase placer){

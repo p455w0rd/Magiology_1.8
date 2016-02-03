@@ -1,11 +1,9 @@
 package com.magiology.core.init;
 
 import com.magiology.client.render.entityrender.BallOfEnergyRenderer;
-import com.magiology.client.render.entityrender.EntitySubatomicWorldDeconstructorRenderer;
 import com.magiology.client.render.models.entitys.BallOfEnergyModel;
 import com.magiology.core.Magiology;
 import com.magiology.mcobjects.entitys.EntityBallOfEnergy;
-import com.magiology.mcobjects.entitys.EntitySubatomicWorldDeconstructor;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -18,7 +16,6 @@ public class MEntitys{
 
 	public static void init(){
 		reg(EntityBallOfEnergy.class, 100, 1, true,new BallOfEnergyRenderer(new BallOfEnergyModel(),1));
-		reg(EntitySubatomicWorldDeconstructor.class, 100, 1, true,new EntitySubatomicWorldDeconstructorRenderer(10));
 	}
 
 	public static void reg(Class<? extends Entity> entityClass, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates,Render model){

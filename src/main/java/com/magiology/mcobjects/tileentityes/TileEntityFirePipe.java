@@ -139,7 +139,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		}
 		
 		connections[0].setMain(isTPipe(0)||isTRand(SideUtil.offsetNew(0, pos)));
-		connections[1].setMain(isTPipe(1)||isTRand(SideUtil.offsetNew(1, pos))||(worldObj.getTileEntity(SideUtil.offsetNew(1, pos)))instanceof TileEntityFireExhaust);
+		connections[1].setMain(isTPipe(1)||isTRand(SideUtil.offsetNew(1, pos)));
 		connections[2].setMain(isTPipe(2)||isTRand(SideUtil.offsetNew(2, pos)));
 		connections[3].setMain(isTPipe(3)||isTRand(SideUtil.offsetNew(3, pos)));
 		connections[4].setMain(isTPipe(4)||isTRand(SideUtil.offsetNew(4, pos)));
@@ -195,10 +195,6 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 		if(inOut&&!in&&!out)return true;
 		if(out)return true;
 		return false;
-	}
-	
-	public boolean isTOSO(BlockPos pos){
-		return worldObj.getTileEntity(pos)instanceof TileEntityOreStructureCore;
 	}
 	
 	public boolean isTPipe(int side){

@@ -1,7 +1,5 @@
 package com.magiology.mcobjects.blocks.fire;
 
-import com.magiology.mcobjects.tileentityes.TileEntityFireExhaust;
-
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

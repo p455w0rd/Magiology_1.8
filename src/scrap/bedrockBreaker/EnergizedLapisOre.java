@@ -1,6 +1,5 @@
 package com.magiology.mcobjects.blocks;
 
-import com.magiology.mcobjects.tileentityes.TileEntityEnergizedLapisOre;
 import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 
 import net.minecraft.block.material.Material;
