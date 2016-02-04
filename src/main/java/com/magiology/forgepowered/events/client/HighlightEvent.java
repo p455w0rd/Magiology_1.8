@@ -2,15 +2,12 @@ package com.magiology.forgepowered.events.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.power.PowerCore;
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.client.render.aftereffect.RenderNetworkPointerContainerHighlight;
-import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MItems;
-import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.items.NetworkPointer;
 import com.magiology.mcobjects.tileentityes.TileEntityBFCPowerOut;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;

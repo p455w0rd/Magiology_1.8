@@ -48,10 +48,10 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 		if(optimizer.isTimeWithAddProgress()){
 			this.isMultiblock();
 			if(isMultiblockHelper){
-				this.detectAndReplace(pos.add(2,1,0), Blocks.nether_brick, MBlocks.BFCPowerOut);
-				this.detectAndReplace(pos.add(-2,1,0), Blocks.nether_brick, MBlocks.BFCPowerOut);
-				this.detectAndReplace(pos.add(0,1,2), Blocks.nether_brick, MBlocks.BFCPowerOut);
-				this.detectAndReplace(pos.add(0,1,-2), Blocks.nether_brick, MBlocks.BFCPowerOut);
+				this.detectAndReplace(pos.add(2,1,0), Blocks.nether_brick, MBlocks.bigFurnacePowerOut);
+				this.detectAndReplace(pos.add(-2,1,0), Blocks.nether_brick, MBlocks.bigFurnacePowerOut);
+				this.detectAndReplace(pos.add(0,1,2), Blocks.nether_brick, MBlocks.bigFurnacePowerOut);
+				this.detectAndReplace(pos.add(0,1,-2), Blocks.nether_brick, MBlocks.bigFurnacePowerOut);
 			}
 			
 		}
@@ -99,7 +99,7 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 	public void isMultiblock(){
 		c1=0;
 		for(int x1=-1;x1<=1;x1++){for(int y1=1;y1<=2;y1++){for(int z1=-1;z1<=1;z1++){
-			if(U.getBlock(worldObj,pos.add(x1,y1,z1))==MBlocks.FireLamp)c1+=1;
+			if(U.getBlock(worldObj,pos.add(x1,y1,z1))==MBlocks.fireLamp)c1+=1;
 		}}}
 		for(int x1=-1;x1<=1;x1+=2){
 			if(
@@ -135,14 +135,14 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 			   
 			   U.getBlock(worldObj,pos.add(2*x1, 1, 1))==Blocks.nether_brick&&
 			  (U.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==Blocks.nether_brick||
-			   U.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==MBlocks.BFCPowerOut)&&
+			   U.getBlock(worldObj,pos.add(2*x1, 1, 0  ))==MBlocks.bigFurnacePowerOut)&&
 			   U.getBlock(worldObj,pos.add(2*x1, 0  , 0  ))==Blocks.nether_brick&&
 			   U.getBlock(worldObj,pos.add(2*x1, 3, 0  ))==Blocks.nether_brick&&
 			   U.getBlock(worldObj,pos.add(2*x1, 1, -1))==Blocks.nether_brick&&
 			   
 			   U.getBlock(worldObj,pos.add(1, 1, 2*x1))==Blocks.nether_brick&&
 			  (U.getBlock(worldObj,pos.add(0  , 1, 2*x1))==Blocks.nether_brick||
-			   U.getBlock(worldObj,pos.add(0  , 1, 2*x1))==MBlocks.BFCPowerOut)&&
+			   U.getBlock(worldObj,pos.add(0  , 1, 2*x1))==MBlocks.bigFurnacePowerOut)&&
 			   U.getBlock(worldObj,pos.add(0  , 0  , 2*x1))==Blocks.nether_brick&&
 			   U.getBlock(worldObj,pos.add(0  , 3, 2*x1))==Blocks.nether_brick&&
 			   U.getBlock(worldObj,pos.add(-1, 1, 2*x1))==Blocks.nether_brick

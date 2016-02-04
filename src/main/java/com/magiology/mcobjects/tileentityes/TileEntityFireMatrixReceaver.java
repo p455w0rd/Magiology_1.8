@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
@@ -23,7 +22,6 @@ public class TileEntityFireMatrixReceaver extends TileEntityPow{
 	
 	public TileEntityFireMatrixReceaver(){
 		super(new boolean[]{false,false,false,false,false,false,true,true,true,true,true,true}, null, 1, 2, 10, 1500);
-		this.initUpgrades(Container.TeleTransfer);
 	}
 	
 	@Override

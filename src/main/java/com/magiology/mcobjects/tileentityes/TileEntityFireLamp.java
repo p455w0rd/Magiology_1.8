@@ -6,7 +6,6 @@ import static com.magiology.util.utilclasses.SideUtil.*;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.EntitySparkFX;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.PowerUtil;
@@ -40,7 +39,6 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	public TileEntityFireLamp(){
 		super(SixSidedBoolean.create(First6True,Include,DOWN(),Last6True,Include,UP()).sides,SixSidedBoolean.lastGen.sides.clone(), 1, 2, 5, 115, 100);
-		initUpgrades(Container.FireGen);
 	}
 	
 	@Override

@@ -26,7 +26,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 	}
 	@Override
 	public void render(){
-		boolean upgraded=UtilM.isItemInStack(MItems.pants_42I, player.getCurrentArmor(1));
+		boolean upgraded=true;//UtilM.isItemInStack(MItems.pants_42I, player.getCurrentArmor(1));
 		OpenGLM.enableTexture2D();
 		GL11U.setUpOpaqueRendering(1);
 		TessUtil.getVB().cleanUp();

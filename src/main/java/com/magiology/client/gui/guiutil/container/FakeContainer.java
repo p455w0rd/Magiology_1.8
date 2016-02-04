@@ -1,7 +1,5 @@
 package com.magiology.client.gui.guiutil.container;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -98,7 +96,7 @@ public class FakeContainer implements IInventory{
 	@Override
 	public boolean isItemValidForSlot(int v1, ItemStack stack) {
 		boolean reurn1=false;
-		if(RegisterItemUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
+		//if(RegisterItemUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
 		return reurn1;
 	}
 	

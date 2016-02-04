@@ -5,7 +5,6 @@ import java.util.List;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerUpgrades;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
@@ -28,7 +27,6 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		hasPriorityUpg=false;
 	public int FirstSide=-1;
 	
-	public Container container=null;
 	public int NumberOfContainerSlots=0;
 	public ItemStack[] containerItems=null;
 	
@@ -45,6 +43,9 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		this.middleTSpeed=middleTSpeed;
 		this.maxTSpeed=maxTSpeed;
 		this.maxEnergyBuffer=maxEnergyBuffer;
+		
+		NumberOfContainerSlots=5;
+		setUpgradeSlots();
 	}
 	
 	@Override
@@ -65,13 +66,6 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		}
 	}
 	
-	
-	@Override
-	public void initUpgrades(Container containe){
-		container=containe;
-		NumberOfContainerSlots=container.getNumberOfTypes();
-		setUpgradeSlots();
-	}
 	
 	public void setUpgradeSlots(){
 		if(NumberOfContainerSlots>0)containerItems=new ItemStack[NumberOfContainerSlots];
@@ -110,20 +104,12 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		return false;
 	}
 	@Override
-	public Container getContainer(){
-		return container;
-	}
-	@Override
 	public int getNumberOfContainerSlots(){
 		return NumberOfContainerSlots;
 	}
 	@Override
 	public ItemStack[] getcontainerItems(){
 		return containerItems;
-	}
-	@Override
-	public void setContainer(Container container){
-		this.container=container;
 	}
 	@Override
 	public void setNumberOfContainerSlots(int Int){

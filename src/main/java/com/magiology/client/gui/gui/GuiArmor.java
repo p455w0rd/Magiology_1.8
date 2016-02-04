@@ -7,7 +7,6 @@ import com.magiology.core.MReference;
 import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
@@ -74,11 +73,9 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 			if(o1>o2)o1-=0.035;
 		}
 		long WT=U.getMC().theWorld.getTotalWorldTime();
-		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))OpenGLM.translate(0, 15, 0);
 		OpenGLM.translate(0, 0, 250);
 		drawBIGRotatingItemStack(p42[pos]);
 		OpenGLM.translate(0, 0,-250);
-		if(UtilM.isItemInStack(MItems.pants_42I, p42[pos]))OpenGLM.translate(0, -15, 0);
 		
 		TessUtil.bindTexture(main);
 		GL11U.setUpOpaqueRendering(2);
@@ -182,9 +179,9 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		OpenGLM.color(1, 1, 1, o1);
 		this.drawTexturedModalRect(60, 65, 0, 170, 100, 12);
 		this.drawTexturedModalRect(94, 61, 34, 166, 74, 4);
-		if(p42[pos]!=null&&p42[pos].getItem() instanceof UpgItem){
-			numberOfSlots=((UpgItem)p42[pos].getItem()).getInventorySize();
-		}
+//		if(p42[pos]!=null&&p42[pos].getItem() instanceof UpgItem){
+//			numberOfSlots=((UpgItem)p42[pos].getItem()).getInventorySize();
+//		}
 		for(int a=0;a<numberOfSlots;a++){
 			int overrideNumberOfSlots=numberOfSlots;
 			if(overrideNumberOfSlots>4)overrideNumberOfSlots=4;
@@ -198,7 +195,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		OpenGLM.translate(-guiLeft, -guiTop, 0);
 		
 		o2=0;
-		if(p42[pos]!=null&&p42[pos].getItem() instanceof UpgItem)o2=1;
+//		if(p42[pos]!=null&&p42[pos].getItem() instanceof UpgItem)o2=1;
 		if(playerXPos!=guiLeft-5){
 			playerXPos=guiLeft-5;
 			playerYPos=-guiTop-100-startRandom;

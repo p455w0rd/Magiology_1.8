@@ -2,7 +2,6 @@ package com.magiology.client.gui.container;
 
 import com.magiology.client.gui.guiutil.container.CustomSlot;
 import com.magiology.client.gui.guiutil.container.FakeContainer;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,7 +53,7 @@ public class UpgradeContainer extends Container{
 						if(!mergeItemStack(itemstack1, 0, 27, false))return null;
 					slot.onSlotChange(itemstack1, itemstack);
 					
-				}else if(RegisterItemUpgrades.isItemUpgrade(slot.getStack().getItem())&&RegisterItemUpgrades.isUpgradeValid(RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(slot.getStack().getItem())),tileCB.container)){
+				}else if(true){//if(RegisterItemUpgrades.isItemUpgrade(slot.getStack().getItem())&&RegisterItemUpgrades.isUpgradeValid(RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(slot.getStack().getItem())),tileCB.container)){
 					
 					if(!mergeItemStack(itemstack1, 36, 36+tileCB.containerItems.length, false)){
 						if(slotNumber>=36&&slotNumber<=36+tileCB.containerItems.length){

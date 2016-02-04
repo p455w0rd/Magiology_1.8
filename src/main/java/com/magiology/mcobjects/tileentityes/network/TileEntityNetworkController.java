@@ -15,7 +15,6 @@ import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
 import com.magiology.mcobjects.items.ProgramContainer;
 import com.magiology.mcobjects.items.ProgramContainer.Program;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.PowerUtil;
@@ -51,7 +50,6 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 				Modifier.Last6False,Modifier.Exclude,
 				-1
 				).sides, SixSidedBoolean.lastGen.sides, 1, 20, 200, 100000);
-		this.initUpgrades(Container.FirePipe);
 		expectedBoxes=new AxisAlignedBB[]{
 				new AxisAlignedBB(0,	 p*6.5,  p*6.5, p*5,   p*9.5, p*9.5),
 				new AxisAlignedBB(p*6.5, 0,	  p*6.5, p*9.5, p*5,   p*9.5),

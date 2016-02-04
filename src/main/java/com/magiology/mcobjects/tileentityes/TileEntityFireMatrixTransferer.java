@@ -1,7 +1,6 @@
 package com.magiology.mcobjects.tileentityes;
 
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
@@ -16,7 +15,6 @@ public class TileEntityFireMatrixTransferer extends TileEntityPow{
 	
 	public TileEntityFireMatrixTransferer(){
 		super(new boolean[]{true,false,true,true,true,true,false,false,false,false,false,false}, null, 1, 2, 10, 5500);
-		this.initUpgrades(Container.TeleTransfer);
 	}
 	
 	@Override

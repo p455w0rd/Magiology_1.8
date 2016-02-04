@@ -1,10 +1,5 @@
 package com.magiology.client.gui.guiutil.container;
 
-import static com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.*;
-
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
-
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,15 +19,16 @@ public class UpgItemSlot extends Slot{
 
 	@Override
 	public boolean isItemValid(ItemStack itemstack){
-		boolean isItemUpgrade=isItemUpgrade(itemstack.getItem());
-		UpgradeType stackType=null;
-		if(isItemUpgrade)stackType=getItemUpgradeType(getItemUpgradeID(itemstack.getItem()));
-		else return false;
-		for(int a=0;a<IInv.getSizeInventory();a++){
-			ItemStack itemstack1=IInv.getStackInSlot(a);
-			if(itemstack1!=null)if(stackType.GetTypeID()==getItemUpgradeType(getItemUpgradeID(itemstack1.getItem())).GetTypeID())return false;
-		}
-		if(itemstack.stackSize!=1)return false;
-		return isUpgradeValid(stackType,((UpgItem)Citem).getContainer());
+//		boolean isItemUpgrade=isItemUpgrade(itemstack.getItem());
+//		UpgradeType stackType=null;
+//		if(isItemUpgrade)stackType=getItemUpgradeType(getItemUpgradeID(itemstack.getItem()));
+//		else return false;
+//		for(int a=0;a<IInv.getSizeInventory();a++){
+//			ItemStack itemstack1=IInv.getStackInSlot(a);
+//			if(itemstack1!=null)if(stackType.GetTypeID()==getItemUpgradeType(getItemUpgradeID(itemstack1.getItem())).GetTypeID())return false;
+//		}
+//		if(itemstack.stackSize!=1)return false;
+//		return isUpgradeValid(stackType,((UpgItem)Citem).getContainer());
+		return true;
 	}
 }

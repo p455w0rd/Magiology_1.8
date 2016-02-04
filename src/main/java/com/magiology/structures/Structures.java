@@ -71,9 +71,9 @@ public class Structures{
 			sb.symmetryBoot(new BlockAt(Blocks.vine, 4, 2, 3),3,OreStructureCore);
 			sb.symmetryBoot(new BlockAt(Blocks.vine, 3, 2, 4),3,OreStructureCore);
 			
-			sb.symmetryBoot(new BlockAt(MBlocks.FireLamp, 3, 3, 3),3,OreStructureCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FireLamp, 3, 4, 2),3,OreStructureCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FireLamp, 2, 4, 3),3,OreStructureCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.fireLamp, 3, 3, 3),3,OreStructureCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.fireLamp, 3, 4, 2),3,OreStructureCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.fireLamp, 2, 4, 3),3,OreStructureCore);
 			
 			sb.symmetryBoot(new BlockAt(Blocks.stonebrick, 3, 3, 2),3,OreStructureCore);
 			sb.symmetryBoot(new BlockAt(Blocks.stonebrick, 2, 3, 3),3,OreStructureCore);
@@ -181,27 +181,27 @@ public class Structures{
 		}
 		if(id==6){
 			Structure pipeCore=new Structure();
-			pipeCore.BlocksAtInit.add(new BlockAt(MBlocks.FirePipe, 0, 5, 0));
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,3, 5, 2),3,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,3, 5, 3),3,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,2, 5, 3),3,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,3, 4, 3),3,pipeCore);
+			pipeCore.BlocksAtInit.add(new BlockAt(MBlocks.firePipe, 0, 5, 0));
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,3, 5, 2),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,3, 5, 3),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,2, 5, 3),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,3, 4, 3),3,pipeCore);
 			return pipeCore.initializeStructure();
 		}
 		if(id==7){
 			Structure pipeCore=new Structure();
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,1, 5, 0),2,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,2, 5, 0),2,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,2, 5, 1),3,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,3, 5, 1),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,1, 5, 0),2,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,2, 5, 0),2,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,2, 5, 1),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,3, 5, 1),3,pipeCore);
 			return pipeCore.initializeStructure();
 		}
 		if(id==8){
 			Structure pipeCore=new Structure();
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,0, 5, 1),2,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,0, 5, 2),2,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,1, 5, 2),3,pipeCore);
-			sb.symmetryBoot(new BlockAt(MBlocks.FirePipe,1, 5, 3),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,0, 5, 1),2,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,0, 5, 2),2,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,1, 5, 2),3,pipeCore);
+			sb.symmetryBoot(new BlockAt(MBlocks.firePipe,1, 5, 3),3,pipeCore);
 			return pipeCore.initializeStructure();
 		}
 		throw new IllegalStateException("WRONG ID INPUT");

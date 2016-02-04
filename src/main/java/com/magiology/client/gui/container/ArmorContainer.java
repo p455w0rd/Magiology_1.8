@@ -8,7 +8,6 @@ import com.magiology.client.gui.guiutil.container.FakeContainer;
 import com.magiology.client.gui.guiutil.container.OnlyShiftClickSlot;
 import com.magiology.client.gui.guiutil.container.UpgItemContainer;
 import com.magiology.client.gui.guiutil.container.UpgItemSlot;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.util.utilclasses.PrintUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,24 +45,24 @@ public class ArmorContainer extends Container implements Updateable{
 		for(int a=0;a<armorInventory.length;a++){
 			Item item=armorInventory[a]!=null?armorInventory[a].getItem():null;
 			ItemStack stackMain=armorInventory[a];
-			if(item!=null&&item instanceof UpgItem){
-				UpgItem upgItem=(UpgItem)item;
-				int numberOfSlots=upgItem.getInventorySize();
-				InventoryArmorContainers[a]=new UpgItemContainer(stackMain);
-				// this is a not so necessary steep to automatically set slider to a valid item
-				{
-					sliderPos=-a*16;
-					sliderVantedPos=sliderPos;
-				}
-				for(int b=0;b<numberOfSlots;b++){
-					int overrideNumberOfSlots=numberOfSlots;
-					if(overrideNumberOfSlots>4)overrideNumberOfSlots=4;
-					if(b<=3)this.addSlotToList(new UpgItemSlot(InventoryArmorContainers[a],b,132+b*18-(overrideNumberOfSlots*9), 21-(numberOfSlots>overrideNumberOfSlots?9:0)),InventorySlots[a]);
-					if(b>=4&&numberOfSlots>overrideNumberOfSlots){
-						this.addSlotToList(new UpgItemSlot(InventoryArmorContainers[a],b, 123, 30),InventorySlots[a]);
-					}
-				}
-			}
+//			if(item!=null&&item instanceof UpgItem){
+//				UpgItem upgItem=(UpgItem)item;
+//				int numberOfSlots=upgItem.getInventorySize();
+//				InventoryArmorContainers[a]=new UpgItemContainer(stackMain);
+//				// this is a not so necessary steep to automatically set slider to a valid item
+//				{
+//					sliderPos=-a*16;
+//					sliderVantedPos=sliderPos;
+//				}
+//				for(int b=0;b<numberOfSlots;b++){
+//					int overrideNumberOfSlots=numberOfSlots;
+//					if(overrideNumberOfSlots>4)overrideNumberOfSlots=4;
+//					if(b<=3)this.addSlotToList(new UpgItemSlot(InventoryArmorContainers[a],b,132+b*18-(overrideNumberOfSlots*9), 21-(numberOfSlots>overrideNumberOfSlots?9:0)),InventorySlots[a]);
+//					if(b>=4&&numberOfSlots>overrideNumberOfSlots){
+//						this.addSlotToList(new UpgItemSlot(InventoryArmorContainers[a],b, 123, 30),InventorySlots[a]);
+//					}
+//				}
+//			}
 		}
 		reformatSlots(0);
 		refreshStacksList();
@@ -181,19 +180,19 @@ public class ArmorContainer extends Container implements Updateable{
 				}else if(slotID<armorEndWOptionalInvStart){
 					boolean isAviable=false;
 					{//fix if isItemValid()-----
-						ItemStack container1=this.p42[sliderPosId];
-						UpgItem item1=null;
-						if(container1!=null&&container1.getItem() instanceof UpgItem)item1=((UpgItem)container1.getItem());
-						//if selected item by slider is UpgItem than run this code
-						if(item1!=null){
-							int posId=0;
-							ItemStack[] inv=item1.getStacks(container1);
-							for(int i=0;i<item1.getInventorySize();i++)if(inv[i]==null){posId=i;i=item1.getInventorySize();}
-							//ok now the slot is/isn't found and we are double checking for null so we prevent errors if none of the stacks are null
-							if(inv[posId]==null){
-								if(InventoryArmorContainers[sliderPosId]!=null&&((UpgItemSlot)inventorySlots.get(posId+40)).isItemValid(itemstack.copy()))isAviable=true;
-							}
-						}
+//						ItemStack container1=this.p42[sliderPosId];
+//						UpgItem item1=null;
+//						if(container1!=null&&container1.getItem() instanceof UpgItem)item1=((UpgItem)container1.getItem());
+//						//if selected item by slider is UpgItem than run this code
+//						if(item1!=null){
+//							int posId=0;
+//							ItemStack[] inv=item1.getStacks(container1);
+//							for(int i=0;i<item1.getInventorySize();i++)if(inv[i]==null){posId=i;i=item1.getInventorySize();}
+//							//ok now the slot is/isn't found and we are double checking for null so we prevent errors if none of the stacks are null
+//							if(inv[posId]==null){
+//								if(InventoryArmorContainers[sliderPosId]!=null&&((UpgItemSlot)inventorySlots.get(posId+40)).isItemValid(itemstack.copy()))isAviable=true;
+//							}
+//						}
 					}//-------------------------
 					if(isAviable?!mergeItemStack(itemstack1, armorEndWOptionalInvStart, optionalInvEnd, false):true){
 						if(slotID>=player1EndW2Start&&slotID<=player2EndWArmorStart){

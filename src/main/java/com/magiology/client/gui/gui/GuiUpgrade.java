@@ -40,7 +40,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		OpenGLM.scale(0.7,0.7,0.7);
 		int result=guiParticles.size();
 		for(GuiParticle as:guiParticles)if(as.isDead)result--;
-		if(tileCB.container!=null)this.drawString(fontRendererObj,tileCB.container.toString()+" upgrade.	Number of GUI particles: "+result, 3, -11, UtilM.rgbPercentageToCode(1, 1, 1, 1));
+		this.drawString(fontRendererObj," upgrade. Number of GUI particles: "+result, 3, -11, UtilM.rgbPercentageToCode(1, 1, 1, 1));
 		
 		OpenGLM.popMatrix();
 		

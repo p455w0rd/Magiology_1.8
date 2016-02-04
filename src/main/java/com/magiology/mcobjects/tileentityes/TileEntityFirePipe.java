@@ -7,9 +7,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.UpgradeType;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.util.utilclasses.PowerUtil;
@@ -45,7 +42,6 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	
 	public TileEntityFirePipe(){
 		super(null, null, 1, 5, 50, 3000);
-		initUpgrades(Container.FirePipe);
 		setColisionBoxes();
 	}
 	
@@ -65,16 +61,16 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	public void update(){
 		power(true);
 		
-		//Get if/what side is first
-		hasPriorityUpg=false;
-		for(int i=0;i<containerItems.length;i++)if(containerItems[i]!=null&&containerItems[i].hasTagCompound()){
-			UpgradeType type=RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(containerItems[i].getItem()));
-			if(type==UpgradeType.Priority){
-				hasPriorityUpg=true;
-				FirstSide=containerItems[i].getTagCompound().getInteger("side");
-				continue;
-			}
-		}
+//		//Get if/what side is first
+//		hasPriorityUpg=false;
+//		for(int i=0;i<containerItems.length;i++)if(containerItems[i]!=null&&containerItems[i].hasTagCompound()){
+//			UpgradeType type=RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(containerItems[i].getItem()));
+//			if(type==UpgradeType.Priority){
+//				hasPriorityUpg=true;
+//				FirstSide=containerItems[i].getTagCompound().getInteger("side");
+//				continue;
+//			}
+//		}
 		
 		texAnimation();
 		

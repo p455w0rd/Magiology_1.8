@@ -1,7 +1,5 @@
 package com.magiology.mcobjects.items;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -98,7 +96,7 @@ public class ItemContainer extends Item implements IInventory{
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack){
-		return !(RegisterItemUpgrades.isItemUpgrade(itemstack.getItem()));
+		return true;//!(RegisterItemUpgrades.isItemUpgrade(itemstack.getItem()));
 	}
 	
 	public void readFromNBT(NBTTagCompound tagcompound){

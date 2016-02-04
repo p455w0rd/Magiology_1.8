@@ -5,7 +5,6 @@ import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
-import com.magiology.mcobjects.items.armor.Pants_42;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
@@ -21,8 +20,8 @@ public class SpecialMovmentEvents{
 		boolean isRemote=world.isRemote;
 		ExtendedPlayerData playerData=ExtendedPlayerData.get(player);
 		ItemStack pantsSlot=player.inventory.armorInventory[1];
-		if(!UtilM.isItemInStack(MItems.pants_42I, pantsSlot)||pantsSlot==null)return;
-		else if(((Pants_42)pantsSlot.getItem()).hasUpgrade(pantsSlot, MItems.flightUpgrades)==-1)return;
+		if(UtilM.TRUE()/*!UtilM.isItemInStack(MItems.pants_42I, pantsSlot)||pantsSlot==null*/)return;
+//		else if(((Pants_42)pantsSlot.getItem()).hasUpgrade(pantsSlot, MItems.flightUpgrades)==-1)return;
 		if(!player.isCollidedVertically&&!player.capabilities.isFlying){
 			if(playerData.soulFlame<200)return;
 			if(playerData.getJupmCount()>1)return;

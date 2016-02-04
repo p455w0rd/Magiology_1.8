@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.magiology.client.render.models.ModelWingsFromTheBlackFire;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades.Container;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgradeableArmor;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.NBTUtil;
 
@@ -15,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
@@ -24,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
+public class CyborgWingsFromTheBlackFireItem extends ItemArmor{
 
 
 	public String textureName;
@@ -36,7 +35,6 @@ public class CyborgWingsFromTheBlackFireItem extends UpgradeableArmor{
 //		this.setTextureName(MReference.MODID + ":" + unlocalizedName);
 		this.setCreativeTab(creativeTab);
 		this.setMaxDamage(25);
-		initUpgrade(Container.Helmet42);
 	}
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type){

@@ -6,7 +6,6 @@ import com.magiology.mcobjects.blocks.BateryGeneric;
 import com.magiology.mcobjects.blocks.BigFurnaceCore;
 import com.magiology.mcobjects.blocks.ControlBlock;
 import com.magiology.mcobjects.blocks.HologramProjector;
-import com.magiology.mcobjects.blocks.PileODust;
 import com.magiology.mcobjects.blocks.RareSpacePipe;
 import com.magiology.mcobjects.blocks.fire.FireLamp;
 import com.magiology.mcobjects.blocks.fire.FireMatrixReceaver;
@@ -25,10 +24,10 @@ public class MBlocks{
 
 	//block references
 	public static Block
-		FireLamp,DiscoFlor,DiscoFlorPlatform,FirePipe,
-		PileODust,BigFurnaceCore,BFCPowerOut,BatteryL1,BatteryL2,BatteryL3,
-		BateryL100,ControlBlock,
-		FireMatrixTransferer,FireMatrixReceaver,hologramProjector,rareSpacePipe,
+		fireLamp,firePipe,
+		bigFurnaceCore,bigFurnacePowerOut,batteryL1,batteryL2,batteryL3,
+		bateryL100,controlBlock,
+		fireMatrixTransferer,fireMatrixReceaver,hologramProjector,rareSpacePipe,
 		networkController,networkConductor,networkPointerContainer,networkInterface,networkCommandCenter;
 
 	public static void preInit(){
@@ -36,18 +35,17 @@ public class MBlocks{
 	}
 
 	public static void blocksInit(){
-		FireMatrixTransferer=init(new FireMatrixTransferer().setUnlocalizedName("FireMatrixTransferer").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeStone));
-		FireMatrixReceaver=init(new FireMatrixReceaver().setUnlocalizedName("FireMatrixReceaver").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeStone));
-		FireLamp=init(new FireLamp().setUnlocalizedName("FireLamp").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeGlass));
-		ControlBlock=init(new ControlBlock().setUnlocalizedName("ControlBlock").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeGlass));
-		FirePipe=init(new FirePipe().setBlockTextureName(MReference.MODID + ":" + "FirePipeIcon").setUnlocalizedName("FirePipe").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
-		BigFurnaceCore=init(new BigFurnaceCore().setBlockTextureName("stonebrick").setStepSound(Block.soundTypeMetal).setUnlocalizedName("BigFurnaceCore").setCreativeTab(MCreativeTabs.Whwmmt_power));
-		BatteryL1=init(new BateryGeneric(1).setUnlocalizedName("BatteryL1").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
-		BatteryL2=init(new BateryGeneric(2).setUnlocalizedName("BatteryL2").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
-		BatteryL3=init(new BateryGeneric(3).setUnlocalizedName("BatteryL3").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
-		BateryL100=init(new BateryGeneric(100).setUnlocalizedName("BateryL100").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
-		BFCPowerOut=init(new BFCPowerOut().setUnlocalizedName("BFCPowerOut").setStepSound(Block.soundTypeMetal));
-		PileODust=init(new PileODust().setBlockTextureName(MReference.MODID + ":" + "IronLevel2").setUnlocalizedName("PileODust").setCreativeTab(MCreativeTabs.Whwmmt_core).setStepSound(Block.soundTypeMetal));
+		fireMatrixTransferer=init(new FireMatrixTransferer().setUnlocalizedName("FireMatrixTransferer").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeStone));
+		fireMatrixReceaver=init(new FireMatrixReceaver().setUnlocalizedName("FireMatrixReceaver").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeStone));
+		fireLamp=init(new FireLamp().setUnlocalizedName("FireLamp").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeGlass));
+		controlBlock=init(new ControlBlock().setUnlocalizedName("ControlBlock").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeGlass));
+		firePipe=init(new FirePipe().setBlockTextureName(MReference.MODID + ":" + "FirePipeIcon").setUnlocalizedName("FirePipe").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
+		bigFurnaceCore=init(new BigFurnaceCore().setBlockTextureName("stonebrick").setStepSound(Block.soundTypeMetal).setUnlocalizedName("BigFurnaceCore").setCreativeTab(MCreativeTabs.Whwmmt_power));
+		batteryL1=init(new BateryGeneric(1).setUnlocalizedName("BatteryL1").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
+		batteryL2=init(new BateryGeneric(2).setUnlocalizedName("BatteryL2").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
+		batteryL3=init(new BateryGeneric(3).setUnlocalizedName("BatteryL3").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
+		bateryL100=init(new BateryGeneric(100).setUnlocalizedName("BateryL100").setCreativeTab(MCreativeTabs.Whwmmt_power).setStepSound(Block.soundTypeMetal));
+		bigFurnacePowerOut=init(new BFCPowerOut().setUnlocalizedName("BFCPowerOut").setStepSound(Block.soundTypeMetal));
 		hologramProjector=init(new HologramProjector().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("hologramProjector"));
 		networkController=init(new NetworkController().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkController"));
 		networkConductor=init(new NetworkConductor().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkConductor"));

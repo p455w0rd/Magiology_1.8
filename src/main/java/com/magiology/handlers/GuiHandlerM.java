@@ -105,11 +105,11 @@ public class GuiHandlerM implements IGuiHandler{
 	}
 	
 	public static void openGui(EntityPlayer player, Object mainModClassInstance, int modGuiId, BlockPos pos){
-		GuiHandlerM.openGui(player, mainModClassInstance, modGuiId, pos.getX(),pos.getY(),pos.getZ());
+		openGui(player, mainModClassInstance, modGuiId, pos.getX(),pos.getY(),pos.getZ());
 	}
 	
 	public static void openGui(EntityPlayer player, int modGuiId, BlockPos pos){
-		GuiHandlerM.openGui(player, Magiology.getMagiology(), modGuiId, pos);
+		openGui(player, Magiology.getMagiology(), modGuiId, pos);
 	}
 	public static void openGui(EntityPlayer player, int modGuiId, int x, int y, int z){
 		openGui(player, Magiology.getMagiology(), modGuiId, x,y,z);

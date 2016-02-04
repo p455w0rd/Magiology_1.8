@@ -1,6 +1,5 @@
 package com.magiology.client.gui.guiutil.container;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 
 import net.minecraft.inventory.IInventory;
@@ -18,6 +17,6 @@ public class CustomSlot extends Slot{
 	
 	@Override
 	public boolean isItemValid(ItemStack itemstack){
-		return RegisterItemUpgrades.isItemUpgrade(itemstack.getItem())&&RegisterItemUpgrades.isUpgradeValid(RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(itemstack.getItem())),tile.container);
+		return true;//RegisterItemUpgrades.isItemUpgrade(itemstack.getItem())&&RegisterItemUpgrades.isUpgradeValid(RegisterItemUpgrades.getItemUpgradeType(RegisterItemUpgrades.getItemUpgradeID(itemstack.getItem())),tile.container);
 	}
 }

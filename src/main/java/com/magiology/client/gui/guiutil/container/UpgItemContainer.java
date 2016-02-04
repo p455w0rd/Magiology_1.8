@@ -1,7 +1,5 @@
 package com.magiology.client.gui.guiutil.container;
 
-import com.magiology.mcobjects.items.upgrades.RegisterItemUpgrades;
-import com.magiology.mcobjects.items.upgrades.skeleton.UpgItem;
 import com.magiology.util.utilclasses.PrintUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +20,7 @@ public class UpgItemContainer implements IInventory{
 	
 	public UpgItemContainer(ItemStack container){
 		this.container=container;
-		if(container.getItem() instanceof UpgItem){
+		if(container.getItem() instanceof Item){
 			invSS=64;
 			NBT=container.getTagCompound();
 			Citem=container.getItem();
@@ -35,11 +33,13 @@ public class UpgItemContainer implements IInventory{
 	
 	@Override
 	public int getSizeInventory(){
-		return ((UpgItem)Citem).getInventorySize();
+//		return ((UpgItem)Citem).getInventorySize();
+		return 5;
 	}
 	
 	public ItemStack[] slots(){
-		return ((UpgItem)Citem).getStacks(container);
+//		return ((UpgItem)Citem).getStacks(container);
+		return new ItemStack[0]; 
 	}
 
 	@Override
@@ -57,16 +57,16 @@ public class UpgItemContainer implements IInventory{
 			if(stacks1[v1].stackSize<=v2){
 				ItemS=stacks1[v1];
 				stacks1[v1]=null;
-				((UpgItem)Citem).setStacks(container, stacks1);
+//				((UpgItem)Citem).setStacks(container, stacks1);
 				return ItemS;
 			}else{
 				ItemS=stacks1[v1].splitStack(v2);
 				if(stacks1[v1].stackSize==0){
 					stacks1[v1]=null;
-					((UpgItem)Citem).setStacks(container, stacks1);
+//					((UpgItem)Citem).setStacks(container, stacks1);
 				}
 			}
-			((UpgItem)Citem).setStacks(container, stacks1);
+//			((UpgItem)Citem).setStacks(container, stacks1);
 			return ItemS;
 		}
 		return null;
@@ -78,7 +78,7 @@ public class UpgItemContainer implements IInventory{
 		if(a[v1]!=null){
 			ItemStack ItemS=a[v1];	
 			a[v1]=null;
-			((UpgItem)Citem).setStacks(container, a);
+			//((UpgItem)Citem).setStacks(container, a);
 			return ItemS;
 		}
 		return null;
@@ -97,7 +97,7 @@ public class UpgItemContainer implements IInventory{
 //		this.slots[0]=stack;
 		ItemStack[] stacks1=slots();
 		stacks1[v2]=stack;
-		((UpgItem)Citem).setStacks(container, stacks1);
+		//((UpgItem)Citem).setStacks(container, stacks1);
 	}
 
 	@Override
@@ -136,13 +136,13 @@ public class UpgItemContainer implements IInventory{
 	@Override
 	public boolean isItemValidForSlot(int v1, ItemStack stack) {
 		boolean reurn1=false;
-		if(RegisterItemUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
+//		if(RegisterItemUpgrades.isItemUpgrade(stack.getItem()))reurn1=true;
 		return reurn1;
 	}
 
 	@Override
 	public void markDirty(){
-		((UpgItem)Citem).setStacks(container, ((UpgItem)Citem).getStacks(container));
+//		((UpgItem)Citem).setStacks(container, ((UpgItem)Citem).getStacks(container));
 	}
 
 	@Override
