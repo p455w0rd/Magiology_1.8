@@ -34,7 +34,7 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 	}
 
 	@Override
-	protected void triangleToTesselatorQuads(ShadedQuad triangle){
+	protected void tesselateQuads(ShadedQuad triangle){
 		if(lights.isEmpty()){
 			for(int b=0;b<4;b++){
 				Vec3M

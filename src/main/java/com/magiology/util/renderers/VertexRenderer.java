@@ -101,9 +101,9 @@ public class VertexRenderer{
 		try {
 			for(ShadedQuad a:shadedTriangles){
 				if(type){
-					triangleToTesselatorQuads(a);
+					tesselateQuads(a);
 				}else{
-					triangleToTesselatorLines(a);
+					tesselateLines(a);
 				}
 			}
 		}catch(Exception e){
@@ -111,7 +111,7 @@ public class VertexRenderer{
 		}
 	}
 
-	protected void triangleToTesselatorQuads(ShadedQuad triangle){
+	protected void tesselateQuads(ShadedQuad triangle){
 		Vec3M finalNormal=GL11U.transformVector(triangle.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
 		for(int b=0;b<4;b++){
 			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
@@ -119,7 +119,7 @@ public class VertexRenderer{
 		}
 	}
 
-	protected void triangleToTesselatorLines(ShadedQuad triangle){
+	protected void tesselateLines(ShadedQuad triangle){
 		Vec3M finalVectors[]={
 				GL11U.transformVector(Vec3M.conv(triangle.pos4[0].vector3D), transformation),
 				GL11U.transformVector(Vec3M.conv(triangle.pos4[1].vector3D), transformation),
