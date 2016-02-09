@@ -7,6 +7,7 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 
 import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramCommon;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.network.NetworkInterface;
@@ -20,7 +21,6 @@ import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
 import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
-import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;

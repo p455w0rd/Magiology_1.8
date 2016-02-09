@@ -6,6 +6,7 @@ import com.magiology.mcobjects.blocks.BateryGeneric;
 import com.magiology.mcobjects.blocks.BigFurnaceCore;
 import com.magiology.mcobjects.blocks.ControlBlock;
 import com.magiology.mcobjects.blocks.HologramProjector;
+import com.magiology.mcobjects.blocks.JSProgrammer;
 import com.magiology.mcobjects.blocks.RareSpacePipe;
 import com.magiology.mcobjects.blocks.fire.FireLamp;
 import com.magiology.mcobjects.blocks.fire.FireMatrixReceaver;
@@ -28,7 +29,8 @@ public class MBlocks{
 		bigFurnaceCore,bigFurnacePowerOut,batteryL1,batteryL2,batteryL3,
 		bateryL100,controlBlock,
 		fireMatrixTransferer,fireMatrixReceaver,hologramProjector,rareSpacePipe,
-		networkController,networkConductor,networkPointerContainer,networkInterface,networkCommandCenter;
+		networkController,networkConductor,networkPointerContainer,networkInterface,networkCommandCenter,
+		jSProgrammer;
 
 	public static void preInit(){
 		blocksInit();
@@ -53,6 +55,7 @@ public class MBlocks{
 		networkPointerContainer=init(new NetworkRouter().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkPointerContainer"));
 		rareSpacePipe=init(new RareSpacePipe().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("rareSpacePipe"));
 		networkCommandCenter=init(new NetworkCommandHolder().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("networkCommandCenter"));
+		jSProgrammer=init(new JSProgrammer().setCreativeTab(MCreativeTabs.Whwmmt_core));
 	}
 
 	static Block init(Block block){

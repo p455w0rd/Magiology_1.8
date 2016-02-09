@@ -49,7 +49,7 @@ public class SpecialPlayerParicleHandler{
 					double yr=y+UtilM.CRandF(1.8)-0.6;
 					double zr=z+UtilM.CRandF(0.8);
 					R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
-					if(itemS!=null&&(itemS.getItem()==MItems.FireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
+					if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 						R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
 					}
 					UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr,yr,zr, xv*1.1,yv*1.1,zv*1.1, size, 2+world.rand.nextInt(2), 0,1, R,G,B, 1, 0.98));
@@ -81,7 +81,7 @@ public class SpecialPlayerParicleHandler{
 				double yr=y+UtilM.CRandF(1.8)-0.6;
 				double zr=z+UtilM.CRandF(0.8);
 				R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
-				if(itemS!=null&&(itemS.getItem()==MItems.FireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
+				if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 					R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
 				}
 				if(player.isSneaking()){
@@ -107,7 +107,7 @@ public class SpecialPlayerParicleHandler{
 				zr=z+UtilM.CRandF(0.8);
 				scale=world.rand.nextDouble()*0.4;
 				R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
-				if(itemS!=null&&(itemS.getItem()==MItems.FireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
+				if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 					R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
 				}
 				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  UtilM.CRandF(0.1+scale), UtilM.CRandF(0.1+scale)+0.5, UtilM.CRandF(0.1+scale), (int)(300+world.rand.nextInt(300)*(player.isSneaking()?0.1:1)), 3+world.rand.nextInt(2), -20,true,player.isSneaking()?2:1,"tx1", R,G,B, 1, 0.95));
@@ -117,7 +117,7 @@ public class SpecialPlayerParicleHandler{
 				yr=y-1.5;
 				zr=z+UtilM.CRandF(0.8);
 				R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
-				if(itemS!=null&&(itemS.getItem()==MItems.FireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
+				if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 					R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
 				}
 				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  UtilM.CRandF(0.1+scale), UtilM.CRandF(0.4+scale)+1, UtilM.CRandF(0.1+scale), 300+world.rand.nextInt(300), 3+world.rand.nextInt(2), -20,1, R,G,B, 1, 1));

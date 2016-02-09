@@ -7,24 +7,40 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
+import javax.script.Invocable;
+import javax.script.ScriptException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.lang.program.ProgramCommon;
+import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.client.render.font.FontRendererMClipped;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexModel;
 import com.magiology.util.utilclasses.LogUtil;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
 
 public class GuiJavaScriptEditor extends GuiTextEditor{
 	
 	public boolean colors=false;
+	
+	protected int noChangeCompileTime=0,comileWaitAmmount=20;
+	
+	protected List<ErrorMarker> errors=new ArrayList<>();
+	
+	public BlockPosM runPos;
+	
+	public Object[] runArgs={};
 	
 	public GuiJavaScriptEditor(Vec2i pos, Vec2i size){
 		super(pos, size);
@@ -33,14 +49,18 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	private List<DoubleObject<List<String>,List<Integer>>> coloredText;
 	private String selectedWord="";
 	private VertexModel selection=null;
+	protected float xOffset, yOffset;
 	
 	@Override
 	protected void rednerText(FontRendererMClipped fr){
+		xOffset=-sliderX*(maxWidth-size.x);
+		yOffset=-sliderY*((textBuffer.size()+1)*fr.FONT_HEIGHT-size.y);
 		if(colors){
 			if(coloredText==null)colorCode(fr);
 			rednerColoredCode(fr);
 		}
 		else super.rednerText(fr);
+		errors.forEach(error->error.draw(mouse.x, mouse.y));
 	}
 	@Override
 	public boolean keyTyped(int code, char ch){
@@ -58,14 +78,141 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		super.mouseClickMove(x, y);
 		colorCode(FontRendererMClipped.get());
 	}
+	@Override
+	public void update(){
+		super.update();
+		if(noChangeCompileTime>0){
+			noChangeCompileTime--;
+			if(noChangeCompileTime==0){
+				compile();
+			}
+		}
+	}
+	public void compile(){
+		noChangeCompileTime=comileWaitAmmount;
+		errors.clear();
+		
+		try{
+			Invocable program=ProgramUsable.compile(getText());
+			List<CharSequence> log=new ArrayList<>();
+			ProgramUsable.run(program, log, "main", runArgs==null||runArgs.length==0?new Object[]{"undefined"}:runArgs, new Object[]{UtilM.getTheWorld(),runPos});
+		}catch(ScriptException e){
+			try{
+				readExceptions(e);
+			}catch(Exception e2){
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	private void readExceptions(Exception e){
+		String s=e.getMessage();
+		
+		if(s.startsWith("ReferenceError: ")){
+			String invalidReference=s.substring("ReferenceError: \"".length(), s.length());
+			invalidReference=invalidReference.substring(0, invalidReference.indexOf('"'));
+			
+			int line=Integer.parseInt(s.substring(s.indexOf("line number ")+"line number ".length()))-ProgramUsable.jsJavaBridgeLines-1;
+			int colum=0;
+			
+			StringBuilder word=new StringBuilder();
+			for(char c:getLine(line).toString().toCharArray()){
+				if(Character.isJavaIdentifierPart(c))word.append(c);
+				else{
+					int lenght=word.length();
+					if(lenght>0){
+						if(word.toString().equals(invalidReference))break;
+						else colum+=lenght;
+						word=new StringBuilder();
+					}
+					colum++;
+				}
+			}
+			
+			errors.add(new ErrorMarker(new Vec2i(colum, line), invalidReference.length(),s));
+			return;
+		}
+		
+		if(s.startsWith("<eval>:")){
+			s=s.substring("<eval>:".length(),s.indexOf('\n')-1);
+			
+			int line=Integer.parseInt(s.substring(0,s.indexOf(":")))-ProgramUsable.jsJavaBridgeLines-1;
+			int colum=Integer.parseInt(s.substring(s.indexOf(":")+1,s.indexOf(" Exp")));
+			String found=s.substring(s.indexOf("but found ")+"but found ".length());
+			
+			errors.add(new ErrorMarker(new Vec2i(colum, line), found.length(),s.substring(s.indexOf("Expe"))));
+			return;
+		}
+		if(s.startsWith("No such function")){
+			errors.add(new ErrorMarker(new Vec2i(0, textBuffer.size()-1), 1,s));
+			return;
+		}
+		PrintUtil.println(s);
+	}
+	
+	protected class ErrorMarker{
+		public final Vec2i errorPos;
+		public final int errorLenght;
+		public final String message;
+		public int timeSelected;
+		
+		public ErrorMarker(Vec2i pos, int lenght, String message){
+			Vec2i errorPos=new Vec2i(0, (pos.y+1)*9-1);
+			int errorLenght=1;
+			try{
+				String line=getLine(pos.y).toString();
+				
+				errorPos.x=FontRendererMClipped.get().getStringWidth(line.substring(0, pos.x))-1;
+				errorLenght=FontRendererMClipped.get().getStringWidth(line.substring(pos.x,pos.x+lenght))+2;
+			}catch(Exception e){
+				errorLenght=Math.max(FontRendererMClipped.get().getStringWidth(getLine(pos.y).toString())+2,10);
+			}
+			
+			this.errorPos=errorPos.add(GuiJavaScriptEditor.this.pos);
+			this.errorLenght=errorLenght;
+			this.message=message;
+		}
+		
+		public void draw(int x, int y){
+			
+			Vector2f 
+				pos1=new Vector2f(xOffset+errorPos.x,yOffset+errorPos.y),
+				pos2=new Vector2f(xOffset+errorPos.x+errorLenght,yOffset+errorPos.y);
+			
+			if(pos1.y<pos.y-3||pos1.y>pos.y+3+size.y)return;
+			
+			float minX=pos.x-3,maxX=pos.x+3+size.x;
+			pos1.x=UtilM.snap(pos1.x, minX, maxX);
+			pos2.x=UtilM.snap(pos2.x, minX, maxX);
+			if(pos1.x==pos2.x)return;
+			
+			OpenGLM.disableTexture2D();
+			ColorF.RED.bind();
+			Renderer.LINES.begin();
+			Renderer.LINES.addVertex(pos1.x+UtilM.CRandF(1),pos1.y+UtilM.CRandF(1),0);
+			Renderer.LINES.addVertex(pos2.x+UtilM.CRandF(1),pos2.y+UtilM.CRandF(1),0);
+			Renderer.LINES.draw();
+			ColorF.WHITE.bind();
+			OpenGLM.enableTexture2D();
+		}
+		
+		public boolean isSelected(int x, int y){
+			return false;
+		}
+		
+		@Override
+		public String toString(){
+			return new StringBuilder().append("ErrorMarker[errorPos = ").append(errorPos).append(", errorLenght = ").append(errorLenght).append(", message = \"").append(message).append('"').append("]").toString();
+		}
+	}
 	
 	private int level=0;
-	List<String> 
+	protected List<String> 
 		strings=new ArrayList<String>(),
 		statics=new ArrayList<String>(),
 		classes=new ArrayList<String>(),
 		nubers=new ArrayList<String>();
-	Map<int[],String> 
+	protected Map<int[],String> 
 		vars=new HashMap<int[],String>(),
 		unfinishedVars=new HashMap<int[],String>();
 	
@@ -86,19 +233,29 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		selection.translate(-0.5, 0, 0);
 		selection.setClearing(false);
 		resetColorData();
+		noChangeCompileTime=comileWaitAmmount;
 	}
 	private void highlightWords(FontRendererMClipped fr){
 		if(!isSelected()){
-			StringBuilder line=getLine(cursorPosition.y);
-			Matcher forward=word.matcher(line),backward=word.matcher(new StringBuilder(line).reverse());
-			int next=forward.find(cursorPosition.x)?forward.start():getLength(cursorPosition.y),prev=backward.find(line.length()-cursorPosition.x)?line.length()-backward.start():0;
-			selectedWord=line.substring(prev, next);
+			StringBuilder line=getLine(getCursorPosition().y);
+			if(line.length()>0){
+				Matcher 
+					forward=word.matcher(line),
+					backward=word.matcher(new StringBuilder(line).reverse());
+				
+				selectedWord=line.substring(
+					backward.find(line.length()-getCursorPosition().x)?line.length()-backward.start():0, 
+					forward.find(getCursorPosition().x)?forward.start():getLength(getCursorPosition().y)
+				);
+			}
 		}else selectedWord=getSelectedText();
 		
+		
 		char[] chars=selectedWord.toCharArray();
-		boolean valid=true;
-		for(char c:chars){
-			if(!Character.isLetterOrDigit(c)){
+		boolean valid=vars.containsValue(selectedWord)||statics.contains(selectedWord);
+		
+		if(valid)for(char c:chars){
+			if(!Character.isJavaIdentifierPart(c)){
 				valid=false;
 				break;
 			}
@@ -115,7 +272,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 							int 
 								start=line.indexOf(selectedWord),
 								end=start+selectedWordLenght;
-							if((start==0?true:!Character.isLetterOrDigit(line.charAt(start-1)))&&(end==line.length()?true:!Character.isLetterOrDigit(line.charAt(end)))){
+							if((start==0?true:!Character.isJavaIdentifierPart(line.charAt(start-1)))&&(end==line.length()?true:!Character.isJavaIdentifierPart(line.charAt(end)))){
 								int
 									offset=fr.getStringWidth(line.substring(0, start)),
 									lenght=fr.getStringWidth(line.substring(start, end)),
@@ -140,7 +297,8 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	protected void rednerColoredCode(FontRendererMClipped fr){
 		if(selection!=null){
 			GL11U.texture(false);
-			
+			selection.pushMatrix();
+			selection.translate(xOffset, yOffset, 0);
 			OpenGLM.color(0, 0, 0, 1);
 			selection.draw();
 			
@@ -150,6 +308,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			selection.setDrawAsWire(false);
 			
 			OpenGLM.color(1, 1, 1, 1);
+			selection.popMatrix();
 			GL11U.texture(true);
 		}
 		for(int i=0;i<coloredText.size();i++){
@@ -220,7 +379,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 							if(!words[k].contains(" ")){
 								boolean valid=true;
 								for(char c:words[k].toCharArray()){
-									if(!Character.isLetterOrDigit(c)){
+									if(!Character.isJavaIdentifierPart(c)){
 										valid=false;
 										break;
 									}

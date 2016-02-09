@@ -108,7 +108,7 @@ public class HighlightEvent{
 				
 				if(tileEn instanceof TileEntityNetworkRouter)doNetRouterHighlight(pos, (TileEntityNetworkRouter)tileEn ,event);
 				
-				if(item!=null&&item.getItem().equals(MItems.FireHammer)){
+				if(item!=null&&item.getItem().equals(MItems.fireHammer)){
 					if(tileEn instanceof TileEntityFireLamp){
 						TileEntityFireLamp tile=(TileEntityFireLamp)tileEn;
 						onDrawHlFireLmap(event,tile,tile.getPos());
@@ -122,7 +122,7 @@ public class HighlightEvent{
 						}
 					}
 				}
-				if(item!=null&&item.getTagCompound()!=null&&item.getItem().equals(MItems.PowerCounter))doPowerCounterDisplay(pos,item,event);
+				if(item!=null&&item.getTagCompound()!=null&&item.getItem().equals(MItems.powerCounter))doPowerCounterDisplay(pos,item,event);
 				try{
 					if(tileEn instanceof MultiColisionProvider){
 						doMultiColision(pos, item, event);
@@ -230,11 +230,11 @@ public class HighlightEvent{
 		event.setCanceled(true);
 
 		double selectionAlphaHelper=(wtt%120.0)/60.0,selectionAlpha=selectionAlphaHelper>1?2-selectionAlphaHelper:selectionAlphaHelper;
-		if(UtilM.isItemInStack(MItems.FireHammer, UtilM.getThePlayer().getCurrentEquippedItem()))drawBox(mainBox.minX-ex,mainBox.maxX+ex,mainBox.minY-ex,mainBox.maxY+ex,mainBox.minZ-ex,mainBox.maxZ+ex,0.9, 0.1, 0.2, 0.1+0.05*centerAlpha);
+		if(UtilM.isItemInStack(MItems.fireHammer, UtilM.getThePlayer().getCurrentEquippedItem()))drawBox(mainBox.minX-ex,mainBox.maxX+ex,mainBox.minY-ex,mainBox.maxY+ex,mainBox.minZ-ex,mainBox.maxZ+ex,0.9, 0.1, 0.2, 0.1+0.05*centerAlpha);
 		
 		AxisAlignedBB pointedBox=colisionProvider.getPointedBox();
 		
-		if(UtilM.isItemInStack(MItems.FireHammer,item)){
+		if(UtilM.isItemInStack(MItems.fireHammer,item)){
 			drawBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2, 0.1, 0.1, 0.9, 0.1+0.2*selectionAlpha);
 			GL11U.setUpOpaqueRendering(1);
 			drawSelectionBox(pointedBox.minX-ex*2,pointedBox.maxX+ex*2,pointedBox.minY-ex*2,pointedBox.maxY+ex*2,pointedBox.minZ-ex*2,pointedBox.maxZ+ex*2,UtilM.fluctuateSmooth(11, 21)/4, UtilM.fluctuateSmooth(16, 45)/4, 0.7+UtilM.fluctuateSmooth(36, 74)*0.3, 2.5, 0.5);

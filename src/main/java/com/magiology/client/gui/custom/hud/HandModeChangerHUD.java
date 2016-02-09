@@ -29,7 +29,7 @@ public class HandModeChangerHUD extends HUD{
 		}if(data==null)return;
 		FontRenderer fr=TessUtil.getFontRenderer();
 		if(UtilM.isNull(player,fr))return;
-		if(handAlpha>0&&UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem())){
+		if(handAlpha>0&&UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem())){
 			float HandAlpha=UtilM.calculatePos(lastHandAlpha,handAlpha);
 			int slot=player.inventory.currentItem;
 			OpenGLM.pushMatrix();

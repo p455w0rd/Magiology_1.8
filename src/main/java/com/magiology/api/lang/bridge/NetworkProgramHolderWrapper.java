@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.magiology.mcobjects.items.ProgramContainer.Program;
+import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.utilobjects.DoubleObject;

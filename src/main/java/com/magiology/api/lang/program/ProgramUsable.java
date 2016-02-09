@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
 import com.magiology.api.lang.bridge.WorldWrapper;
 import com.magiology.io.WorldData.FileContent;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.Tracker;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
@@ -25,11 +26,9 @@ public class ProgramUsable{
 	
 	private Invocable compiled;
 	private List<CharSequence> log=new ArrayList<CharSequence>();
-	private Tracker tracker=new Tracker();
 	private ProgramSerializable saveableData;
 	
-	public static final String jsJavaBridge;
-	static{
+	public static final String jsJavaBridge=new Object(){public String toString(){
 		StringBuilder txt=new StringBuilder();
 		//functions
 		add(txt,"function run_funct(pos, name, args){");
@@ -49,20 +48,20 @@ public class ProgramUsable{
 		
 //		add(txt,"");
 		
-		
-		jsJavaBridge=txt.toString();
-	}
+		return txt.toString();
+	}}.toString();
+	public static final int jsJavaBridgeLines=jsJavaBridge.split("\n").length;
+	
+	
 	private static void add(StringBuilder txt, String line){
 		txt.append(line).append("\n");
 	}
 	
 	public Object run(String mainFuncName, Object[] args, Object[] environment){
-		tracker.start("run");
-		Object result=Run(mainFuncName, args, environment);
-		tracker.end("run");
+		Object result=run(compiled, getLog(), mainFuncName, args, environment);
 		return result;
 	}
-	private Object Run(String mainFuncName, Object[] args, Object[] environment){
+	public static Object run(Invocable program, List<CharSequence> log, String mainFuncName, Object[] args, Object[] environment){
 		try{
 			Map<String, Object> map=new HashMap<String, Object>();
 			boolean hasRunPos=false,hasWorld=false;
@@ -78,9 +77,9 @@ public class ProgramUsable{
 							map.put("runPos", o);
 							hasRunPos=true;
 							try{
-								compiled.invokeFunction("setRunPos", o);
+								program.invokeFunction("setRunPos", o);
 							}catch(Exception e){
-								log(ProgramDataBase.err+e.getMessage());
+								log(ProgramDataBase.err+e.getMessage(),log);
 							}
 						}
 					}
@@ -88,40 +87,41 @@ public class ProgramUsable{
 			}
 			if(!hasWorld)throw new IllegalStateException("There is no world instance! This is a bug!");
 			try{
-				compiled.invokeFunction("init", map);
+				program.invokeFunction("init", map);
 			}catch(Exception e){
-				log(ProgramDataBase.err+e.getMessage());
+				log(ProgramDataBase.err+e.getMessage(),log);
 			}
 			
-			return compiled.invokeFunction(mainFuncName, args);
+			return program.invokeFunction(mainFuncName, args);
 		}catch(Exception e){
 			return ProgramDataBase.err+e.getMessage();
 		}
 	}
 	
-	private Invocable compile(CharSequence src){
-		try{
-			ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
-			engine.eval(jsJavaBridge+src.toString());
-			return (Invocable)engine;
-		}catch(Exception e){
-			return null;
-		}
+	public static Invocable compile(CharSequence src) throws ScriptException{
+		ScriptEngine engine=new ScriptEngineManager(null).getEngineByName("nashorn");
+		engine.eval(jsJavaBridge+src.toString());
+		return (Invocable)engine;
+		
 	}
 	public void init(CharSequence src){
-		tracker.start("comp");
-		compiled=compile(src);
-		tracker.end("comp");
+		try{
+			compiled=compile(src);
+		}catch(ScriptException e){
+		}
 	}
 
 	public void log(String newLog){
+		log(newLog, getLog());
+	}
+	public static void log(String newLog, List<CharSequence> log){
 		String side=FMLCommonHandler.instance().getEffectiveSide().toString();
 		String[] Log=newLog.split("\n");
 		for(String line:Log){
-			getLog().add("["+side+"]: "+line);
+			log.add("["+side+"]: "+line);
 		}
-		while(getLog().size()>100){
-			getLog().remove(getLog().size()-1);
+		while(log.size()>100){
+			log.remove(log.size()-1);
 		}
 	}
 	
@@ -132,7 +132,6 @@ public class ProgramUsable{
 	
 	public Invocable getCompiled(){return compiled;}
 	
-	public Tracker getTracker(){return tracker;}
 	public ProgramSerializable getSaveableData(){
 		if(saveableData==null){
 			int id=UtilM.getMapKey(ProgramDataBase.useablePrograms, this);

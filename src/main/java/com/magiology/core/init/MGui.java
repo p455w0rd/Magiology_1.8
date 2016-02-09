@@ -23,7 +23,7 @@ public class MGui{
 		HologramProjectorObjectCustomGui=6,
 		HologramProjectorMainGui=7,
 		CommandCenterGui=8,
-		CommandContainerEditor=9;
+		JSProgramEditor=9;
 	
 	public static void preInit(){
 		new GuiUpdater();

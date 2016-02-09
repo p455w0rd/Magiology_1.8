@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.lwjgl.input.Keyboard;
 
+import com.magiology.api.lang.JSProgramContainer;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.updateable.Updater;
 import com.magiology.client.gui.GuiUpdater.Updateable;
-import com.magiology.client.gui.container.CommandCenterContainer;
 import com.magiology.client.gui.container.ContainerEmpty;
 import com.magiology.client.gui.custom.OnOffGuiButton;
 import com.magiology.client.gui.guiutil.gui.GuiJavaScriptEditor;
@@ -25,7 +25,6 @@ import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
 import com.magiology.io.WorldData;
 import com.magiology.io.WorldData.FileContent;
-import com.magiology.mcobjects.items.ProgramContainer;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
@@ -33,6 +32,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
 import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
@@ -41,17 +41,19 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiProgramContainerEditor extends GuiContainerM implements Updateable{
+public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 	
 	private static WorldData<String,String> settingsData=new WorldData<String,String>("jsEditorSettings","dat","jsEdit",FROM_CLIENT);
 	public static void loadClass(){settingsData.getFileContent("");}
 	
 	private ItemStack stack;
+	
+	private JSProgramContainer program;
+	
 	private int slotId;
 	private BlockPos tilePos;
 	private GuiTextEditor 
@@ -68,24 +70,27 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 	private Integer txtId=null;
 	GuiTextField compileAfter;
 	
-	public GuiProgramContainerEditor(EntityPlayer player){
-		super(new ContainerEmpty());
-		
-		if(player.openContainer instanceof CommandCenterContainer){
-			CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
-			stack=((Slot)container.inventorySlots.get(slotId=container.selectedSlotId+36)).getStack();
-			tilePos=container.tile.getPos();
-		}else{
-			stack=player.inventory.mainInventory[slotId=player.inventory.currentItem];
+	public static GuiJSProgramEditor New(EntityPlayer player, BlockPosM pos){
+		try{
+			return new GuiJSProgramEditor(player, pos);
+		}catch(Exception e){
+			return null;
 		}
+	}
+	
+	private GuiJSProgramEditor(EntityPlayer player, BlockPosM pos){
+		super(new ContainerEmpty());
+		stack=player.inventory.mainInventory[slotId=player.inventory.currentItem];
+		program=(JSProgramContainer)stack.getItem();
 		xSize=200;
 		ySize=166;
 		programLog.viewOnly=true;
+		tilePos=pos;
+		((GuiJavaScriptEditor)programSrc).runPos=pos;
 	}
 	
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
-		
 		getEditor().size=new Vec2i(width-20, height-20);
 		getEditor().pos=new Vec2i(10, 10);
 		((GuiJavaScriptEditor)programSrc).colors=useColors.isOn();
@@ -208,7 +213,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 	public void initGui(){
 		super.initGui();
 		Keyboard.enableRepeatEvents(true);
-		if(firstInit)programSrc.setText(ProgramDataBase.code_get(ProgramContainer.getId(stack)));
+		if(firstInit)programSrc.setText(ProgramDataBase.code_get(program.getId(stack)));
 		
 		int top=width/2-60,left=height/2-50;
 		
@@ -241,7 +246,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		compileAfter.setText(compAfter.isEmpty()?"0.5":compAfter);
 		
 		GuiTextField name=new GuiTextField(1,fontRendererObj, top+3, left+72+11, 120-6, 12);
-		name.setText(ProgramContainer.getName(stack));
+		name.setText(program.getName(stack));
 		textFieldList.add(name);
 		((GuiButton)buttonList.get(4)).visible=settingsActive;
 		textFieldList.get(1).setVisible(settingsActive);
@@ -338,7 +343,7 @@ public class GuiProgramContainerEditor extends GuiContainerM implements Updateab
 		}else if(log.wantedPoint==1){
 			logActive=!logActive;
 			
-			List<CharSequence> logData=ProgramDataBase.log_get(ProgramContainer.getId(stack));
+			List<CharSequence> logData=ProgramDataBase.log_get(program.getId(stack));
 			List<StringBuilder> logDataNew=new ArrayList<StringBuilder>();
 			for(int i=0;i<logData.size();i++){
 				String line=logData.get(i).toString();

@@ -1,30 +1,18 @@
 package com.magiology.forgepowered.events.client;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Project;
 
-import com.magiology.util.utilclasses.DataStalker;
 import com.magiology.util.utilclasses.UtilM;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class FirstPersonItemRederer{

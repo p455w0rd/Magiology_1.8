@@ -7,7 +7,6 @@ import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.client.gui.guiutil.container.FakeContainer;
 import com.magiology.client.gui.guiutil.container.OnlyShiftClickSlot;
 import com.magiology.client.gui.guiutil.container.UpgItemContainer;
-import com.magiology.client.gui.guiutil.container.UpgItemSlot;
 import com.magiology.util.utilclasses.PrintUtil;
 
 import net.minecraft.entity.player.EntityPlayer;

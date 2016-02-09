@@ -204,7 +204,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		
 		prevAlpha=alpha;
 		
-		alpha+=0.4*(UtilM.isItemInStack(MItems.FireHammer, player.getCurrentEquippedItem())?1:-1);
+		alpha+=0.4*(UtilM.isItemInStack(MItems.fireHammer, player.getCurrentEquippedItem())?1:-1);
 		
 		if(!(player.worldObj.getTileEntity(pipe.getPos())instanceof TileEntityFirePipe))kill();
 		

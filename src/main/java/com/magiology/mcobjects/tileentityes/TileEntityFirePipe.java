@@ -95,8 +95,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	}
 	
 	public void spawnParticles(){
-		if(UtilM.RB(0.2)&&currentEnergy+100>maxEnergyBuffer)
-		{
+		if(UtilM.RB(0.2)&&currentEnergy+100>maxEnergyBuffer){
 			if(!connections[0].hasOpposite()&&!connections[2].hasOpposite()&&!connections[4].hasOpposite()){
 				if(UtilM.RB(0.33)&&isSolidDown==false&&connections[1]==null)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5-p*2, pos.getZ()+0.5, 0, -0.1, 0));
 				if(UtilM.RB(0.33)&&isSolidUp==false&&connections[0]==null)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, pos.getX()+0.5, pos.getY()+0.5+p*2, pos.getZ()+0.5, 0, 0.05, 0));

@@ -243,7 +243,7 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 		GL11U.protect();
 		GL11U.texture(true);
 		OpenGLM.translate(x,y,z);
-
+		
 //		GL11U.texture(false);
 //		ColorF.WHITE.bind();
 //		OpenGLM.shadeModel(GL11.GL_SMOOTH);
@@ -265,16 +265,16 @@ public class RenderNetworkConductor extends TileEntitySpecialRendererM{
 ////		cube.transform(rot);
 //		renderer.modelTransf=rot;
 //		renderer.importComplexCube(cube);
-//		OpenGLM.translate(0, 1, 0);
-//		GL11U.glRotate(0, 0, 40);
-//		OpenGLM.translate(0, -1, 0);
+////		OpenGLM.translate(0, 1, 0);
+////		GL11U.glRotate(0, 0, 40);
+////		OpenGLM.translate(0, -1, 0);
 //		renderer.draw();
 //		OpenGLM.shadeModel(GL11.GL_FLAT);
-
-
-		GL11U.texture(true);
-
-
+//
+//		
+//		GL11U.texture(true);
+		
+		
 		boolean[] strateSides=new boolean[6];
 		strateSides[1]=networkComponent.isStrate(EnumFacing.UP);
 		strateSides[3]=networkComponent.isStrate(EnumFacing.SOUTH);

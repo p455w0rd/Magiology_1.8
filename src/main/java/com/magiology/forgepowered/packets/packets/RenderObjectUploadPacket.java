@@ -5,8 +5,8 @@ import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
-import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
 import com.magiology.mcobjects.tileentityes.hologram.Field;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;

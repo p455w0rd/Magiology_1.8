@@ -2,7 +2,7 @@ package com.magiology.mcobjects.tileentityes.hologram;
 
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.mcobjects.items.ProgramContainer;
+import com.magiology.api.lang.JSProgramContainer;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
@@ -62,7 +62,7 @@ public class Button extends TextBox{
 			try{
 				if(!UtilM.isNull(host,host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
 					ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
-					if(!ProgramContainer.getName(s).isEmpty())color1=new ColorF(1, 0.2, 0.2, 0.8);
+					if(!((JSProgramContainer)s.getItem()).getName(s).isEmpty())color1=new ColorF(1, 0.2, 0.2, 0.8);
 				}
 			}catch(Exception e){}
 			color=UtilM.slowlyEqalizeColor(color, color1, 0.2F);

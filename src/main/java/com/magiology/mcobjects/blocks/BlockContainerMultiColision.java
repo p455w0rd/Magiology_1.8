@@ -23,6 +23,7 @@ public abstract class BlockContainerMultiColision extends BlockContainerM{
 	protected BlockContainerMultiColision(Material material){
 		super(material);
 		if(!(createNewTileEntity(null, 0) instanceof MultiColisionProvider))throw new IllegalStateException("BlockContainerMultiColision has to be provided with a TileEntity that implements MultiColisionProvider class!");
+		setUnlocalizedName(getClass().getSimpleName());
 	}
 	@Override
 	public int getRenderType(){return -1;}

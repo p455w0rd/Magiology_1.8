@@ -116,7 +116,7 @@ public class EntityEvents{
 				InventoryPlayer inv=player.inventory;
 				
 				for(ItemStack a:inv.mainInventory){
-					if(UtilM.isItemInStack(MItems.PowerCounter, a)){
+					if(UtilM.isItemInStack(MItems.powerCounter, a)){
 						NBTUtil.createNBT(a);
 						boolean state=a.getTagCompound().getBoolean("state");
 						double animation=a.getTagCompound().getDouble("anim"),prevAnimation=a.getTagCompound().getDouble("pAnim");
@@ -156,7 +156,7 @@ public class EntityEvents{
 		ItemStack equippedItemStack=player.getCurrentEquippedItem();
 		if(TileEntityHologramProjector.invokeRayTrace(event, player))return;
 		PlayerWrenchEvent.create(player, event.action, pos, event.face);
-		if((equippedItemStack==null?true:equippedItemStack.getItem()!=MItems.FireHammer)&&event.action==Action.RIGHT_CLICK_BLOCK&&player.isSneaking()){
+		if((equippedItemStack==null?true:equippedItemStack.getItem()!=MItems.fireHammer)&&event.action==Action.RIGHT_CLICK_BLOCK&&player.isSneaking()){
 			TileEntity tile=world.getTileEntity(pos);
 			if(tile instanceof TileEntityPow){
 				if(!world.isRemote){

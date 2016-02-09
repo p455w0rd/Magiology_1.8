@@ -53,7 +53,7 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 	
 	@Override
 	public void update(){
-		if(UtilM.isItemInStack(MItems.FireHammer, player.inventory.mainInventory[player.inventory.currentItem]))
+		if(UtilM.isItemInStack(MItems.fireHammer, player.inventory.mainInventory[player.inventory.currentItem]))
 			 alpha+=speed;
 		else alpha-=speed;
 		double maxAlpha=0.3;

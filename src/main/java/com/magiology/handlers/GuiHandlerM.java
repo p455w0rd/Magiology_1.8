@@ -12,7 +12,7 @@ import com.magiology.client.gui.gui.GuiControlBock;
 import com.magiology.client.gui.gui.GuiHoloObjectEditor;
 import com.magiology.client.gui.gui.GuiHologramProjectorMain;
 import com.magiology.client.gui.gui.GuiISidedPowerInstructor;
-import com.magiology.client.gui.gui.GuiProgramContainerEditor;
+import com.magiology.client.gui.gui.GuiJSProgramEditor;
 import com.magiology.client.gui.gui.GuiUpgrade;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
@@ -60,7 +60,7 @@ public class GuiHandlerM implements IGuiHandler{
 		case MGui.CommandCenterGui:
 			if(tile instanceof TileEntityNetworkProgramHolder)
 				return new CommandCenterContainer(player, (TileEntityNetworkProgramHolder)tile);
-		case MGui.CommandContainerEditor:
+		case MGui.JSProgramEditor:
 			return new ContainerEmpty();
 		}
 		PrintUtil.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
@@ -92,8 +92,8 @@ public class GuiHandlerM implements IGuiHandler{
 		case MGui.CommandCenterGui:
 			if(tile instanceof TileEntityNetworkProgramHolder)
 				return new GuiCenterContainer(player, (TileEntityNetworkProgramHolder)tile);
-		case MGui.CommandContainerEditor:
-			return new GuiProgramContainerEditor(player);
+		case MGui.JSProgramEditor:
+			return GuiJSProgramEditor.New(player,new Pos(x,y,z));
 		}
 		PrintUtil.println("[WARNING] Gui on "+(world.isRemote?"client":"server")+"\tat X= "+x+"\tY= "+y+"\tZ= "+z+"\t has failed to open!");
 		return null;

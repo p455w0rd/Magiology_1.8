@@ -390,7 +390,7 @@ public class TheHandHandler{
 		else events.add(event);
 	}
 	public static boolean isActive(EntityPlayer player){
-		if(!UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))return false;
+		if(!UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem()))return false;
 		return player.getCurrentEquippedItem().hasTagCompound();
 	}
 	@SideOnly(Side.CLIENT)

@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.lang.ICommandInteract;
+import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramCommon;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
@@ -15,7 +16,6 @@ import com.magiology.api.network.interfaces.registration.InterfaceBinder;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder.TileToInterfaceHelper;
 import com.magiology.core.init.MGui;
 import com.magiology.handlers.GuiHandlerM;
-import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.hologram.interactions.AbstractInteraction;
 import com.magiology.mcobjects.tileentityes.hologram.interactions.InteractionColor;
 import com.magiology.mcobjects.tileentityes.hologram.interactions.InteractionName;

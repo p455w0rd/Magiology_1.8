@@ -1,6 +1,6 @@
 package com.magiology.api.lang;
 
-import com.magiology.mcobjects.items.ProgramContainer.Program;
+import com.magiology.api.lang.JSProgramContainer.Program;
 
 
 public interface ICommandInteract{

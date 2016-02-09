@@ -4,7 +4,6 @@ import com.magiology.client.gui.container.ArmorContainer;
 import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.core.MReference;
-import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.util.renderers.GL11U;

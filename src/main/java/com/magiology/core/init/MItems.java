@@ -18,7 +18,7 @@ public class MItems{
 
 	//normal Item references
 	public static Item
-		PowerCounter,FireHammer,TheHand,IPowerSidenessInstructor,
+		powerCounter,fireHammer,theHand,iPowerSidenessInstructor,
 		networkPointer,commandContainer;
 	
 	//armor Item/Material references
@@ -32,12 +32,12 @@ public class MItems{
 	
 	public static void register(){
 		//Random items
-		PowerCounter=init(new PowerCounter().setTextureName(MReference.MODID + ":" + "PowerCounter").setUnlocalizedName("PowerCounter").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
-		IPowerSidenessInstructor=init(new IPowerSidenessInstructor().setTextureName(MReference.MODID + ":" + "PowerCounter").setUnlocalizedName("IPowerSidenessInstructor").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
-		FireHammer=init(new FireHammer().setTextureName(MReference.MODID + ":" + "FireHammer").setUnlocalizedName("FireHammer").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
-		TheHand=init(new TheHand().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("TheHand").setMaxStackSize(1));
+		powerCounter=init(new PowerCounter().setTextureName(MReference.MODID + ":" + "PowerCounter").setUnlocalizedName("PowerCounter").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		iPowerSidenessInstructor=init(new IPowerSidenessInstructor().setTextureName(MReference.MODID + ":" + "PowerCounter").setUnlocalizedName("IPowerSidenessInstructor").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		fireHammer=init(new FireHammer().setTextureName(MReference.MODID + ":" + "FireHammer").setUnlocalizedName("FireHammer").setCreativeTab(MCreativeTabs.Whwmmt_power).setMaxStackSize(1));
+		theHand=init(new TheHand().setCreativeTab(MCreativeTabs.Whwmmt_core).setUnlocalizedName("TheHand").setMaxStackSize(1));
 		networkPointer=init(new NetworkPointer().setUnlocalizedName("NetworkPointer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
-		commandContainer=init(new ProgramContainer().setUnlocalizedName("CommandContainer").setCreativeTab(MCreativeTabs.Whwmmt_core).setMaxStackSize(1));
+		commandContainer=init(new ProgramContainer());
 	}
 
 	public static void armorRegister(){

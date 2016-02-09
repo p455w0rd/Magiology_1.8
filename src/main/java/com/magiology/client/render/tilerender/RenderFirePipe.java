@@ -34,7 +34,7 @@ public class RenderFirePipe extends TileEntitySpecialRendererM {
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f){
 		GL11U.protect();
 		TileEntityFirePipe pipe= (TileEntityFirePipe) tileentity;
-		if(UtilM.isItemInStack(MItems.FireHammer, UtilM.getThePlayer().getCurrentEquippedItem())){
+		if(UtilM.isItemInStack(MItems.fireHammer, UtilM.getThePlayer().getCurrentEquippedItem())){
 			if(pipe.hasPriorityUpg){
 				boolean var1=true;
 				for(int a=0;a<RenderEvents.universalLongRender.size();a++){

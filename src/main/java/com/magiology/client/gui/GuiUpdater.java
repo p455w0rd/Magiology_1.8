@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.magiology.api.updateable.Updater;
+import com.magiology.util.utilobjects.vectors.Vec2i;
 
 import net.minecraft.entity.player.EntityPlayer;
 
 public class GuiUpdater{
+	
 	private static GuiUpdater instance;
 	public static GuiUpdater GetInstace(){return instance;}
 	public GuiUpdater(){instance=this;}

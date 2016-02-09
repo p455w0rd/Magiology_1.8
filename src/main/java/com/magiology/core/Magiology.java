@@ -8,7 +8,7 @@ import java.awt.Toolkit;
 import java.io.File;
 
 import com.magiology.api.lang.program.ProgramDataBase;
-import com.magiology.client.gui.gui.GuiProgramContainerEditor;
+import com.magiology.client.gui.gui.GuiJSProgramEditor;
 import com.magiology.client.render.Textures;
 import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MCreativeTabs;
@@ -115,7 +115,7 @@ public class Magiology{
 		Textures.postInit();
 		
 		ProgramDataBase.loadClass();
-		GuiProgramContainerEditor.loadClass();
+		GuiJSProgramEditor.loadClass();
 	}
 	public void exit(){
 		if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");

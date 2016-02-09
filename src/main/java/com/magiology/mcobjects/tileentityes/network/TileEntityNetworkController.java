@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.magiology.api.lang.JSProgramContainer;
+import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.Messageable;
@@ -13,8 +15,6 @@ import com.magiology.api.network.skeleton.TileEntityNetworkPow;
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.api.power.SixSidedBoolean.Modifier;
-import com.magiology.mcobjects.items.ProgramContainer;
-import com.magiology.mcobjects.items.ProgramContainer.Program;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.PowerUtil;
@@ -32,7 +32,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
-	SlowdownUtil optimizer=new SlowdownUtil(40);
+	SlowdownUtil optimizer=new SlowdownUtil(40); 
 	private List<NetworkInterface> interfaces=new ArrayList<NetworkInterface>();
 	private List<ISidedNetworkComponent> network=new ArrayList<ISidedNetworkComponent>();
 	private List<TileEntityNetworkProgramHolder> commandHolders=new ArrayList<TileEntityNetworkProgramHolder>();
@@ -233,8 +233,11 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 			if(!(tile instanceof TileEntityNetworkProgramHolder))return null;
 			if(((TileEntityNetworkProgramHolder)tile).getBrain()!=this)return null;
 			for(ItemStack j:((TileEntityNetworkProgramHolder)tile).slots){
-				if(j!=null&&ProgramContainer.getName(j).equals(name)){
-					return new DoubleObject<Program,TileEntityNetworkProgramHolder>(ProgramContainer.getProgram(j), (TileEntityNetworkProgramHolder)tile);
+				if(j!=null){
+					JSProgramContainer program=(JSProgramContainer) j.getItem();
+					if(program.getName(j).equals(name)){
+						return new DoubleObject<Program,TileEntityNetworkProgramHolder>(program.getProgram(j), (TileEntityNetworkProgramHolder)tile);
+					}
 				}
 			}
 		}catch(Exception e){
@@ -247,10 +250,11 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		for(TileEntityNetworkProgramHolder i:commandHolders){
 			for(ItemStack j:i.slots){
 				if(j!=null){
-					String name=ProgramContainer.getName(j),code=ProgramDataBase.code_get(ProgramContainer.getId(j));
+					JSProgramContainer program=(JSProgramContainer) j.getItem();
+					String name=program.getName(j),code=ProgramDataBase.code_get(program.getId(j));
 					if(!name.isEmpty()&&!code.isEmpty()){
-						ProgramContainer.setPos(j, i.getPos());
-						result.add(ProgramContainer.getProgram(j));
+						program.setPos(j, i.getPos());
+						result.add(program.getProgram(j));
 					}
 				}
 			}

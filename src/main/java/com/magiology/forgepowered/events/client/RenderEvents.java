@@ -174,7 +174,7 @@ public class RenderEvents{
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event){
 		OpenGLM.pushMatrix();
 		EntityPlayer player=event.entityPlayer;
-		if(UtilM.isItemInStack(MItems.TheHand, player.getCurrentEquippedItem()))event.renderer.getMainModel().aimedBow=true;
+		if(UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem()))event.renderer.getMainModel().aimedBow=true;
 		
 		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
@@ -241,7 +241,7 @@ public class RenderEvents{
 	public void renderHand(RenderHandEvent e){
 //		ItemStack e1=UtilM.getThePlayer().getCurrentEquippedItem();
 //		if(e1==null)return;
-		e.setCanceled(FirstPersonItemRederer.render(e));
+//		e.setCanceled(FirstPersonItemRederer.render(e));
 	}
 	
 	private static Map<Block, TileEntity> registerdTiles=new HashMap<Block, TileEntity>();
