@@ -1,18 +1,18 @@
 package com.magiology.util.utilobjects.vectors;
 
-public class AdvancedPhysicsVec3F{
+public class PhysicsVec3F{
 	
-	public AdvancedPhysicsFloat x,y,z;
+	public PhysicsFloat x,y,z;
 	
-	public AdvancedPhysicsVec3F(Vec3M startingPoint,Vec3M acceleration, boolean[] simple){
-		x=new AdvancedPhysicsFloat(startingPoint.getX(), acceleration.getX(),simple[0]);
-		y=new AdvancedPhysicsFloat(startingPoint.getY(), acceleration.getY(),simple[1]);
-		z=new AdvancedPhysicsFloat(startingPoint.getZ(), acceleration.getZ(),simple[2]);
+	public PhysicsVec3F(Vec3M startingPoint,Vec3M acceleration, boolean[] simple){
+		x=new PhysicsFloat(startingPoint.getX(), acceleration.getX(),simple[0]);
+		y=new PhysicsFloat(startingPoint.getY(), acceleration.getY(),simple[1]);
+		z=new PhysicsFloat(startingPoint.getZ(), acceleration.getZ(),simple[2]);
 	}
-	public AdvancedPhysicsVec3F(Vec3M startingPoint,Vec3M acceleration){
-		x=new AdvancedPhysicsFloat(startingPoint.getX(), acceleration.getX());
-		y=new AdvancedPhysicsFloat(startingPoint.getY(), acceleration.getY());
-		z=new AdvancedPhysicsFloat(startingPoint.getZ(), acceleration.getZ());
+	public PhysicsVec3F(Vec3M startingPoint,Vec3M acceleration){
+		x=new PhysicsFloat(startingPoint.getX(), acceleration.getX());
+		y=new PhysicsFloat(startingPoint.getY(), acceleration.getY());
+		z=new PhysicsFloat(startingPoint.getZ(), acceleration.getZ());
 	}
 	public void update(){
 		x.update();

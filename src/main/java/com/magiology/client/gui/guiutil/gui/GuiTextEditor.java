@@ -21,11 +21,12 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
 import net.minecraft.client.gui.Gui;
@@ -41,6 +42,8 @@ public class GuiTextEditor extends Gui implements Updateable{
 	private int undoPos,prevXPos,clickCount=0;
 	private long lastClickTime=Long.MAX_VALUE;
 	private static final int CLICK_TIME=200;
+	
+	protected int xMouseArrow, yMouseArrow;
 	
 	private Vec2i cursorPosition=Vec2i.zero,selectionStart=Vec2i.zero;
 	
@@ -63,7 +66,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	public Vec2i pos, size,mouse=Vec2i.zero,lastMouse=Vec2i.zero,mouseClick=Vec2i.zero;
 	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode(),maxWidth;
 	public float sliderX,prevSliderX,sliderY,prevSliderY;
-	private AdvancedPhysicsFloat sliderXCol=new AdvancedPhysicsFloat(0, 0.2F,true),sliderYCol=new AdvancedPhysicsFloat(0, 0.2F,true);
+	private PhysicsFloat sliderXCol=new PhysicsFloat(0, 0.2F,true),sliderYCol=new PhysicsFloat(0, 0.2F,true);
 	protected static final Pattern blankSpace=Pattern.compile("^\\s*$"),notWhitespace=Pattern.compile("[^\\s]|\\s$"),word=Pattern.compile("\\b");
 	
 	public boolean active=false,visible=true,insertMode=false,viewOnly=false;
@@ -79,6 +82,8 @@ public class GuiTextEditor extends Gui implements Updateable{
 	//TODO: user control------------------------------------------------------
 	
 	public void mouseClicked(int x, int y, int button){
+		xMouseArrow=x;
+		yMouseArrow=y;
 		try{
 			if(!visible||button!=0)return;
 			lastMouse=mouse;
@@ -259,6 +264,8 @@ public class GuiTextEditor extends Gui implements Updateable{
 	
 	//TODO: rendering-------------------------------------------------------------------------
 	public void render(int x, int y){
+		xMouseArrow=x;
+		yMouseArrow=y;
 		if(!visible)return;
 		if(!Mouse.isButtonDown(0)){
 			lastMouse=mouse;
@@ -428,9 +435,10 @@ public class GuiTextEditor extends Gui implements Updateable{
 			setCursorPositionInternal(newCursorPosition);
 			fixWidth();
 		}else{
+			boolean isOnEnd=getCurrentLine().length()==getCursorPosition().x;
 			getCurrentLine().deleteCharAt(getCursorPosition().x-1);
 			refreshLine(getCursorPosition().y);
-			setCursorPositionInternal(new Vec2i(getCursorPosition().x-1, getCursorPosition().y));
+			if(!isOnEnd)setCursorPositionInternal(new Vec2i(getCursorPosition().x-1, getCursorPosition().y));
 			fixWidth();
 		}
 	}
@@ -775,7 +783,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	
 	//TODO: util----------------------------------------------------------------
 	
-	private StringBuilder getStartWhiteSpace(String s){
+	protected StringBuilder getStartWhiteSpace(String s){
 		StringBuilder spaces=new StringBuilder();
 		int spaceCount=0;
 		for(int j=0;j<s.length();j++){

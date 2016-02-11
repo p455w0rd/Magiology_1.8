@@ -21,7 +21,7 @@ import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SimpleCounter;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;
@@ -38,7 +38,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 	
 	
 	int mouseX,mouseY,buttonId=0;
-	AdvancedPhysicsFloat xRotation,yRotation,zRotation;
+	PhysicsFloat xRotation,yRotation,zRotation;
 	
 	private final TileEntity tile;
 	TileEntitySpecialRenderer renderer;
@@ -52,9 +52,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		this.ySize=166;
 		renderer=TileEntityRendererDispatcher.instance.getSpecialRenderer(tile);
 		
-		xRotation=new AdvancedPhysicsFloat(UtilM.CRandI(100)-player.rotationPitch,2);
-		yRotation=new AdvancedPhysicsFloat(UtilM.CRandI(100)-player.rotationYaw,2);
-		zRotation=new AdvancedPhysicsFloat(UtilM.CRandI(100),2);
+		xRotation=new PhysicsFloat(UtilM.CRandI(100)-player.rotationPitch,2);
+		yRotation=new PhysicsFloat(UtilM.CRandI(100)-player.rotationYaw,2);
+		zRotation=new PhysicsFloat(UtilM.CRandI(100),2);
 		xRotation.friction=yRotation.friction=zRotation.friction=0.9F;
 		xRotation.wantedPoint=-player.rotationPitch;
 		yRotation.wantedPoint=-player.rotationYaw;

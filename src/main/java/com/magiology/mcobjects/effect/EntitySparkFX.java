@@ -9,7 +9,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.SlowdownUtil;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.world.World;
@@ -113,7 +113,7 @@ public class EntitySparkFX extends EntityFXM{
 		public float xOffset,yOffset,zOffset;
 		public Fragment bindedFragment,nextFragment;
 		
-		public AdvancedPhysicsFloat r,g,b,a;
+		public PhysicsFloat r,g,b,a;
 		
 		public Fragment(float xOffset,float yOffset,float zOffset,Fragment bindedFragment,float r,float g,float b,float a,float rWanted,float gWanted,float bWanted,float aWanted,float colorSpeed){
 			this.bindedFragment=bindedFragment;
@@ -121,10 +121,10 @@ public class EntitySparkFX extends EntityFXM{
 			this.yOffset=yOffset;
 			this.zOffset=zOffset;
 			float sp=(colorSpeed*numberOfSplitsPerUpdate)/slowdown.lenght;
-			this.r=new AdvancedPhysicsFloat(r, sp);
-			this.g=new AdvancedPhysicsFloat(g, sp);
-			this.b=new AdvancedPhysicsFloat(b, sp);
-			this.a=new AdvancedPhysicsFloat(a, sp);
+			this.r=new PhysicsFloat(r, sp);
+			this.g=new PhysicsFloat(g, sp);
+			this.b=new PhysicsFloat(b, sp);
+			this.a=new PhysicsFloat(a, sp);
 			
 			this.r.simpleVersion=
 			this.g.simpleVersion=

@@ -10,7 +10,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class OnOffGuiButton extends GuiButton implements Updateable{
 	
-	public AdvancedPhysicsFloat pos=new AdvancedPhysicsFloat(0, 0.1F);
+	public PhysicsFloat pos=new PhysicsFloat(0, 0.1F);
 	public ColorF setColor,color,prevColor,selectionColor,prevSelectionColor;
 	protected boolean isOn;
 	

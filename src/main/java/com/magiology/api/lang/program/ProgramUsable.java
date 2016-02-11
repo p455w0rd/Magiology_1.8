@@ -35,8 +35,11 @@ public class ProgramUsable{
 		add(txt,"return Java.type('"+NetworkProgramHolderWrapper.class.getName()+"').run(pos, name, args);");
 		add(txt,"}");
 		
-		add(txt,"function setRunPos(pos){");
-		add(txt,"runPos=pos;");
+		add(txt,"function print(value){");
+		add(txt,"return Java.type('"+NetworkProgramHolderWrapper.class.getName()+"').print(value);");
+		add(txt,"}");
+		add(txt,"function println(value){");
+		add(txt,"return Java.type('"+NetworkProgramHolderWrapper.class.getName()+"').println(value);");
 		add(txt,"}");
 		
 		//classes
@@ -77,7 +80,8 @@ public class ProgramUsable{
 							map.put("runPos", o);
 							hasRunPos=true;
 							try{
-								program.invokeFunction("setRunPos", o);
+//								program.invokeFunction("setRunPos", o);
+								((ScriptEngine)program).put("runPos", o);
 							}catch(Exception e){
 								log(ProgramDataBase.err+e.getMessage(),log);
 							}
@@ -121,7 +125,7 @@ public class ProgramUsable{
 			log.add("["+side+"]: "+line);
 		}
 		while(log.size()>100){
-			log.remove(log.size()-1);
+			log.remove(0);
 		}
 	}
 	

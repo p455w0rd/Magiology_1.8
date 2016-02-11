@@ -8,7 +8,7 @@ import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -16,7 +16,7 @@ import net.minecraft.client.gui.GuiButton;
 public class CleanButton extends GuiButton implements Updateable{
 	
 	public ColorF color,prevColor;
-	public AdvancedPhysicsFloat highlight=new AdvancedPhysicsFloat(0, 0.1F,true);
+	public PhysicsFloat highlight=new PhysicsFloat(0, 0.1F,true);
 	public boolean[] enabledOutline={true,true,true,true};
 	
 	public CleanButton(int buttonId, int x, int y, String buttonText, ColorF color){

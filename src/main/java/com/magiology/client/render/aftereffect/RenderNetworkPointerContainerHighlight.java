@@ -11,7 +11,7 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +21,13 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 	private static EntityPlayer player=U.getMC().thePlayer;
 	private static final float p= 1F/16F;
 	public TileEntityNetworkRouter tile;
-	public AdvancedPhysicsFloat progress;
+	public PhysicsFloat progress;
 	public int highlightedBoxId;
 	public String text;
 	
 	public RenderNetworkPointerContainerHighlight(TileEntityNetworkRouter tile){
 		this.tile=tile;
-		progress=new AdvancedPhysicsFloat(0.01F, 0.06F);
+		progress=new PhysicsFloat(0.01F, 0.06F);
 		progress.friction=0.9F;
 		progress.addWall("zero", 0, false);
 		progress.addWall("one", 1, true);

@@ -10,6 +10,7 @@ import com.magiology.api.lang.ICommandInteract;
 import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramCommon;
 import com.magiology.api.lang.program.ProgramDataBase;
+import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
@@ -35,7 +36,7 @@ import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectHolder;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
 import net.minecraft.client.gui.GuiButton;
@@ -47,7 +48,7 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 	private TileEntityHologramProjector hologramProjector;
 	private GuiTextField txt,red,green,blue,alpha,scale,size,comName,comPos,obectName;
 	private boolean suportsText,suportsCommand,textLimitedToObj,deleteStarted=false,showOut;
-	private AdvancedPhysicsFloat redF,greenF,blueF,alphaF;
+	private PhysicsFloat redF,greenF,blueF,alphaF;
 	private String commandOut="";
 	private GuiTextEditor commandIn=new GuiTextEditor(new Vec2i(0, 0),new Vec2i(0, 0));
 	
@@ -193,10 +194,10 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 			blue.setMaxStringLength(7);
 			alpha.setMaxStringLength(7);
 			scale.setMaxStringLength(7);
-			redF  =new AdvancedPhysicsFloat(holoObj.setColor.r, 0.1F,true);
-			greenF=new AdvancedPhysicsFloat(holoObj.setColor.g, 0.1F,true);
-			blueF =new AdvancedPhysicsFloat(holoObj.setColor.b, 0.1F,true);
-			alphaF=new AdvancedPhysicsFloat(holoObj.setColor.a, 0.1F,true);
+			redF  =new PhysicsFloat(holoObj.setColor.r, 0.1F,true);
+			greenF=new PhysicsFloat(holoObj.setColor.g, 0.1F,true);
+			blueF =new PhysicsFloat(holoObj.setColor.b, 0.1F,true);
+			alphaF=new PhysicsFloat(holoObj.setColor.a, 0.1F,true);
 			
 			buttonList.add(new CleanButton(0, guiLeft+xSize/2+5, guiTop+35, 30, 18, "Move", new ColorF(0.1, 0.2, 1, 0.6)));
 			buttonList.add(new CleanButton(1, guiLeft+xSize/2-35, guiTop+35, 40, 18, "Delete", new ColorF(1, 0.1, 0.2, 0.6)));
@@ -298,7 +299,7 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 						WorldNetworkInterface Interface=InterfaceBinder.get(holoObj.host);
 						NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(holoObj.host,Interface);
 						if(netInterface!=null&&netInterface.getBrain()!=null){
-							DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(iCommand.getActivationTarget());
+							DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(iCommand.getActivationTarget());
 							if(com!=null){
 								Object Return=com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
 								if(Return!=null&&!Return.toString().startsWith(ProgramDataBase.err)){

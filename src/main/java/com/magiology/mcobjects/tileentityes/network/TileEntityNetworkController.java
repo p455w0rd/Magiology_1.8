@@ -8,6 +8,7 @@ import java.util.Map;
 import com.magiology.api.lang.JSProgramContainer;
 import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramDataBase;
+import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.Messageable;
 import com.magiology.api.network.NetworkInterface;
@@ -224,10 +225,10 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 			e.printStackTrace();
 		}
 	}
-	public DoubleObject<Program,TileEntityNetworkProgramHolder> getProgram(Program command){
+	public DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> getProgram(Program command){
 		return getProgram(command.pos, command.name);
 	}
-	public DoubleObject<Program,TileEntityNetworkProgramHolder> getProgram(BlockPos pos, String name){
+	public DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> getProgram(BlockPos pos, String name){
 		try{
 			TileEntity tile=worldObj.getTileEntity(pos);
 			if(!(tile instanceof TileEntityNetworkProgramHolder))return null;
@@ -236,7 +237,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 				if(j!=null){
 					JSProgramContainer program=(JSProgramContainer) j.getItem();
 					if(program.getName(j).equals(name)){
-						return new DoubleObject<Program,TileEntityNetworkProgramHolder>(program.getProgram(j), (TileEntityNetworkProgramHolder)tile);
+						return new DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder>(ProgramDataBase.getProgram(program.getId(j)), (TileEntityNetworkProgramHolder)tile);
 					}
 				}
 			}

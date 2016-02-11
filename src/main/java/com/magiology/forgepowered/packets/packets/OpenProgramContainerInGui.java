@@ -5,9 +5,12 @@ import java.io.IOException;
 import com.magiology.api.lang.JSProgramContainer;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.client.gui.container.CommandCenterContainer;
+import com.magiology.core.init.MItems;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.util.utilobjects.m_extension.ItemM;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
@@ -86,22 +89,10 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 		@Override
 		public IMessage process(EntityPlayer player, Side side){
 			JSProgramContainer program;
-			if(tilePos!=null){
-				TileEntity test=tilePos.getTile(player.worldObj);
-				if(test instanceof TileEntityNetworkProgramHolder){
-					TileEntityNetworkProgramHolder tile=(TileEntityNetworkProgramHolder)test;
-					ItemStack stack=tile.getStackInSlot(slotId);
-					program=(JSProgramContainer) stack.getItem();
-					if(stack!=null&&stack.hasTagCompound()){
-						ProgramDataBase.code_set(program.getId(stack), name, data);
-					}
-				}
-			}else{
-				ItemStack stack=player.inventory.mainInventory[slotId];
-				if(stack!=null&&stack.hasTagCompound()){
-					program=(JSProgramContainer)stack.getItem();
-					ProgramDataBase.code_set(program.getId(stack), name, data);
-				}
+			ItemStack stack=player.inventory.mainInventory[slotId];
+			if(UtilM.isItemInStack(MItems.commandContainer, stack)&&stack.hasTagCompound()){
+				program=(JSProgramContainer)stack.getItem();
+				ProgramDataBase.code_set(program.getId(stack), name, data);
 			}
 			return null;
 		}

@@ -24,20 +24,20 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsVec3F;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsVec3F;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class MainMenuUpdateNotificationHUD extends HUD{
 	
 	public static MainMenuUpdateNotificationHUD instance=new MainMenuUpdateNotificationHUD();
-	public AdvancedPhysicsVec3F rotation=new AdvancedPhysicsVec3F(new Vec3M(), new Vec3M(0.2,0.2,0.2));
-	public  AdvancedPhysicsFloat 
-		backgroundBlue=new AdvancedPhysicsFloat(0,0.01F),
-		textTransition=new AdvancedPhysicsFloat(0,0.3F,true),
-		popup=new AdvancedPhysicsFloat(-0.5F,0.05F),
-		down=new AdvancedPhysicsFloat(0,0.05F),
-		button=new AdvancedPhysicsFloat(0,0.3F,true);
+	public PhysicsVec3F rotation=new PhysicsVec3F(new Vec3M(), new Vec3M(0.2,0.2,0.2));
+	public  PhysicsFloat 
+		backgroundBlue=new PhysicsFloat(0,0.01F),
+		textTransition=new PhysicsFloat(0,0.3F,true),
+		popup=new PhysicsFloat(-0.5F,0.05F),
+		down=new PhysicsFloat(0,0.05F),
+		button=new PhysicsFloat(0,0.3F,true);
 	private VertexRenderer buff=TessUtil.getVB();
 	private DoubleObject<Integer, Boolean> mousePrev;
 	public boolean isClicked,selected,isDownloading=false,downloadingInvoked=false;

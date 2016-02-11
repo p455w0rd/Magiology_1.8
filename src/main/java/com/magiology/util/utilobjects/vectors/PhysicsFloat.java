@@ -6,18 +6,18 @@ import java.util.Map;
 
 import com.magiology.util.utilclasses.UtilM;
 
-public class AdvancedPhysicsFloat{
+public class PhysicsFloat{
 	
 	private Map<String, Float>   wallsF=new HashMap<String, Float>();
 	private Map<String, Boolean> wallsB=new HashMap<String, Boolean>();
 	public boolean simpleVersion=false;
 	public float point,prevPoint,wantedPoint,speed,friction=1,acceleration,bounciness;
 	
-	public AdvancedPhysicsFloat(float startingPoint,float acceleration, boolean simple){
+	public PhysicsFloat(float startingPoint,float acceleration, boolean simple){
 		this(startingPoint, acceleration);
 		simpleVersion=simple;
 	}
-	public AdvancedPhysicsFloat(float startingPoint,float acceleration){
+	public PhysicsFloat(float startingPoint,float acceleration){
 		prevPoint=point=wantedPoint=startingPoint;
 		this.acceleration=acceleration;
 	}

@@ -11,7 +11,7 @@ import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 public class FakeMessageHUD extends HUD{
 	
@@ -64,7 +64,7 @@ public class FakeMessageHUD extends HUD{
 	public static class Message implements Updateable{
 		private ColorF color,prevColor;
 		private String text,id;
-		protected AdvancedPhysicsFloat pos;
+		protected PhysicsFloat pos;
 		private int age;
 		private boolean isDead=false;
 		public Message(ColorF color, String text, String id){

@@ -34,7 +34,7 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -60,12 +60,12 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 		programSrc=new GuiJavaScriptEditor(new Vec2i(0, 50),new Vec2i(300, 600)),
 		programLog=new GuiTextEditor(new Vec2i(0, 50),new Vec2i(300, 600));
 	private boolean firstInit=true,logActive=false,settingsActive=false;
-	private AdvancedPhysicsFloat 
-		compile=new AdvancedPhysicsFloat(0.3F, 0.3F, true),
-		settings=new AdvancedPhysicsFloat(0.3F, 0.3F, true),
-		log=new AdvancedPhysicsFloat(0.3F, 0.3F, true),
-		buttonY=new AdvancedPhysicsFloat(0, 0.3F, true),
-		overallAlpha=new AdvancedPhysicsFloat(0, 0.2F, true);
+	private PhysicsFloat 
+		compile=new PhysicsFloat(0.3F, 0.3F, true),
+		settings=new PhysicsFloat(0.3F, 0.3F, true),
+		log=new PhysicsFloat(0.3F, 0.3F, true),
+		buttonY=new PhysicsFloat(0, 0.3F, true),
+		overallAlpha=new PhysicsFloat(0, 0.2F, true);
 	private OnOffGuiButton saveOnExit,printCompileError,useColors,recommendCode;
 	private Integer txtId=null;
 	GuiTextField compileAfter;

@@ -1,5 +1,7 @@
 package com.magiology.client.gui.guiutil.gui;
 
+import java.awt.Color;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,7 @@ import javax.script.Invocable;
 import javax.script.ScriptException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.lang.program.ProgramCommon;
@@ -21,12 +24,17 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.utilclasses.FontEffectUtil;
+import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.LogUtil;
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.ObjectProcessor;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
 
@@ -37,6 +45,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	protected int noChangeCompileTime=0,comileWaitAmmount=20;
 	
 	protected List<ErrorMarker> errors=new ArrayList<>();
+	List<CharSequence> log=new ArrayList<>();
 	
 	public BlockPosM runPos;
 	
@@ -64,13 +73,22 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	}
 	@Override
 	public boolean keyTyped(int code, char ch){
+		errors.clear();
 		boolean result=super.keyTyped(code, ch);
 		colorCode(FontRendererMClipped.get());
 		return result;
 	}
 	@Override
 	public void mouseClicked(int x, int y, int button){
-		super.mouseClicked(x, y, button);
+		boolean errorHover=false;
+		for(ErrorMarker errorMarker:errors){
+			if(errorMarker.selected){
+				if(errorMarker.timeSelected>20)errorHover=true;
+				errorMarker.click(x, y);
+				break;
+			}
+		}
+		if(!errorHover)super.mouseClicked(x, y, button);
 		colorCode(FontRendererMClipped.get());
 	}
 	@Override
@@ -87,15 +105,16 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 				compile();
 			}
 		}
+		errors.forEach(err->err.update(xMouseArrow, yMouseArrow));
 	}
 	public void compile(){
 		noChangeCompileTime=comileWaitAmmount;
-		errors.clear();
 		
 		try{
 			Invocable program=ProgramUsable.compile(getText());
-			List<CharSequence> log=new ArrayList<>();
+			log=new ArrayList<>();
 			ProgramUsable.run(program, log, "main", runArgs==null||runArgs.length==0?new Object[]{"undefined"}:runArgs, new Object[]{UtilM.getTheWorld(),runPos});
+			errors.clear();
 		}catch(ScriptException e){
 			try{
 				readExceptions(e);
@@ -106,6 +125,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	}
 	
 	private void readExceptions(Exception e){
+//		if(!errors.isEmpty())return;
 		String s=e.getMessage();
 		
 		if(s.startsWith("ReferenceError: ")){
@@ -129,7 +149,8 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 				}
 			}
 			
-			errors.add(new ErrorMarker(new Vec2i(colum, line), invalidReference.length(),s));
+			ErrorMarker error=addError(new ErrorMarker(new Vec2i(colum, line), invalidReference.length(),s));
+			
 			return;
 		}
 		
@@ -138,9 +159,46 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			
 			int line=Integer.parseInt(s.substring(0,s.indexOf(":")))-ProgramUsable.jsJavaBridgeLines-1;
 			int colum=Integer.parseInt(s.substring(s.indexOf(":")+1,s.indexOf(" Exp")));
-			String found=s.substring(s.indexOf("but found ")+"but found ".length());
+			String 
+				found=s.substring(s.indexOf("but found ")+"but found ".length()),
+				bracket1=FontEffectUtil.RED+"<"+FontEffectUtil.DARK_BLUE,
+				bracket2=FontEffectUtil.RED+">"+FontEffectUtil.RESET;
 			
-			errors.add(new ErrorMarker(new Vec2i(colum, line), found.length(),s.substring(s.indexOf("Expe"))));
+			
+			ErrorMarker error=addError(new ErrorMarker(new Vec2i(colum, line), found.length(),
+					new StringBuilder()
+						.append("Expected ")
+						.append(bracket1)
+						.append(s.substring(s.indexOf("Expe")+"Expected ".length(),s.indexOf(" but found ")))
+						.append(bracket2)
+						.append(" but found ")
+						.append(bracket1)
+						.append(found)
+						.append(bracket2)
+					.toString()));
+			
+			if(error!=null){
+				error.addQuickFix("Replace with expected.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error){
+					Vec2i pos=error.physicalPos;
+					getLine(pos.y).replace(pos.x, pos.x+error.physicalLenght, error.message.subSequence(error.message.indexOf('<')+3, error.message.indexOf('>')-2).toString());
+					return null;
+				}});
+				error.addQuickFix("Create local variable.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error){
+					Vec2i pos=error.physicalPos;
+					addLine(
+						new StringBuilder()
+						.append(getStartWhiteSpace(getLine(pos.y).toString()))
+						.append("var ")
+						.append(error.message.subSequence(error.message.lastIndexOf('<')+3, error.message.lastIndexOf('>')-2))
+						.append("=\"undefined\";"),
+					pos.y);
+					return null;
+				}});
+				error.addQuickFix("Create global variable.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error){
+					addLine(new StringBuilder("var ").append(error.message.subSequence(error.message.lastIndexOf('<')+3, error.message.lastIndexOf('>')-2)).append("=\"undefined\";"), 0);
+					return null;
+				}});
+			}
 			return;
 		}
 		if(s.startsWith("No such function")){
@@ -151,10 +209,13 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	}
 	
 	protected class ErrorMarker{
-		public final Vec2i errorPos;
-		public final int errorLenght;
+		public final Vec2i errorPos,physicalPos;
+		public final int errorLenght,physicalLenght;
 		public final String message;
 		public int timeSelected;
+		private boolean selected;
+		public List<QuickFix> quickFix=new ArrayList<>();
+		
 		
 		public ErrorMarker(Vec2i pos, int lenght, String message){
 			Vec2i errorPos=new Vec2i(0, (pos.y+1)*9-1);
@@ -165,16 +226,17 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 				errorPos.x=FontRendererMClipped.get().getStringWidth(line.substring(0, pos.x))-1;
 				errorLenght=FontRendererMClipped.get().getStringWidth(line.substring(pos.x,pos.x+lenght))+2;
 			}catch(Exception e){
-				errorLenght=Math.max(FontRendererMClipped.get().getStringWidth(getLine(pos.y).toString())+2,10);
+				errorLenght=Math.max(Font.FRB().getStringWidth(getLine(pos.y).toString())+2,10);
 			}
 			
 			this.errorPos=errorPos.add(GuiJavaScriptEditor.this.pos);
 			this.errorLenght=errorLenght;
 			this.message=message;
+			this.physicalLenght=lenght;
+			this.physicalPos=pos;
 		}
 		
 		public void draw(int x, int y){
-			
 			Vector2f 
 				pos1=new Vector2f(xOffset+errorPos.x,yOffset+errorPos.y),
 				pos2=new Vector2f(xOffset+errorPos.x+errorLenght,yOffset+errorPos.y);
@@ -193,17 +255,138 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			Renderer.LINES.addVertex(pos2.x+UtilM.CRandF(1),pos2.y+UtilM.CRandF(1),0);
 			Renderer.LINES.draw();
 			ColorF.WHITE.bind();
-			OpenGLM.enableTexture2D();
+			pos1.y+=1;
+			
+			int width=Font.FRB().getStringWidth(message), height=15+Math.max(1, quickFix.size())*10;
+			List<String> fixText=new ArrayList<>();
+			for(QuickFix fix:quickFix){
+				width=Math.max(width, Font.FRB().getStringWidth(fix.description));
+				fixText.add(fix.description);
+			}
+			float down=y-(yOffset+errorPos.y)-13+10;
+			for(int i=0;i<quickFix.size();i++){
+				int distance=(int)(down-i*10);
+				quickFix.get(i).highlighted=distance>0&&distance<8;
+			}
+			width+=6;
+			
+			
+			
+			
+			selected=isSelected(pos1, pos2, x, y)||(timeSelected>20?new Rectangle((int)pos1.x-9,(int)pos1.y-9, width, height).contains(x, y):false);
+			if(timeSelected>20){
+				VertexRenderer buff=TessUtil.getVB();
+				
+				buff.addVertex(pos1.x,       pos1.y, 1);
+				buff.addVertex(pos1.x,       pos1.y+height, 1);
+				buff.addVertex(pos1.x+width, pos1.y+height, 1);
+				buff.addVertex(pos1.x+width, pos1.y, 1);
+				
+				buff.setClearing(false);
+				GL11.glColor3b((byte)100, (byte)100, (byte)100);
+				buff.draw();
+				GL11.glColor3b((byte)255, (byte)255, (byte)225);
+				buff.setClearing(true);
+				buff.setDrawAsWire(true);
+				buff.draw();
+				buff.setDrawAsWire(false);
+				
+				OpenGLM.enableTexture2D();
+				GL11.glTranslatef(0, 0, 2);
+				Font.FR().drawString(message, (int)pos1.x+3, (int)pos1.y+3, Color.BLACK.hashCode());
+				if(fixText.size()>0){
+					OpenGLM.pushMatrix();
+					OpenGLM.translate(pos1.x+3, pos1.y+3, 0);
+					quickFix.forEach(fix->{
+						OpenGLM.translate(0, 10, 0);
+						fix.render();
+					});
+					OpenGLM.popMatrix();
+				}else{
+					Font.FR().drawString("No suggested quick fixes. :(", (int)pos1.x+3, (int)pos1.y+13, Color.BLACK.hashCode());
+				}
+				
+				GL11.glTranslatef(0, 0, -2);
+			}else OpenGLM.enableTexture2D();
+		}
+		
+		public void update(int x, int y){
+			if(selected){
+				if(timeSelected<30)timeSelected++;
+			}else{
+				if(timeSelected>0)timeSelected--;
+				if(timeSelected<20)timeSelected=0;
+			}
+			quickFix.forEach(fix->fix.update());
+		}
+		
+		public void click(int x, int y){
+			float down=y-(yOffset+errorPos.y)-13;
+			
+			for(int i=0;i<quickFix.size();i++){
+				int distance=(int)(down-i*10);
+				QuickFix fix=quickFix.get(i);
+				if(fix.highlighted=(distance>0&&distance<8))fix.click();
+			}
 		}
 		
 		public boolean isSelected(int x, int y){
-			return false;
+			return isSelected(new Vector2f(xOffset+errorPos.x,yOffset+errorPos.y), new Vector2f(xOffset+errorPos.x+errorLenght,yOffset+errorPos.y), x, y);
 		}
-		
+		public boolean isSelected(Vector2f pos1,Vector2f pos2,int x, int y){
+			Rectangle boundingBox=new Rectangle((int)pos1.x-9, (int)pos1.y-18,(int)(pos2.x-pos1.x),9);
+			return boundingBox.contains(x, y);
+		}
+		public void addQuickFix(String description, ObjectProcessor<ErrorMarker> action){
+			quickFix.add(new QuickFix(description, action));
+		}
 		@Override
 		public String toString(){
 			return new StringBuilder().append("ErrorMarker[errorPos = ").append(errorPos).append(", errorLenght = ").append(errorLenght).append(", message = \"").append(message).append('"').append("]").toString();
 		}
+		@Override
+		public boolean equals(Object obj){
+			if(!(obj instanceof ErrorMarker))return false;
+			ErrorMarker obj0=(ErrorMarker)obj;
+			return errorPos.equals(obj0.errorPos)&&errorLenght==obj0.errorLenght&&message.equals(obj0.message);
+		}
+		public class QuickFix{
+			public String description;
+			public ObjectProcessor<ErrorMarker> action;
+			private boolean highlighted;
+			private PhysicsFloat colorAnim=new PhysicsFloat(0, 0.25F,true);
+			
+			public QuickFix(String description, ObjectProcessor<ErrorMarker> action){
+				this.description=description;
+				this.action=action;
+			}
+			public void click(){
+				action.pocess(ErrorMarker.this);
+				timeSelected=0;
+			}
+			public void update(){
+				colorAnim.update();
+				colorAnim.wantedPoint=highlighted&&ErrorMarker.this.selected?2:0F;
+			}
+			public void render(){
+				float anim=colorAnim.getPoint();
+				Font.FR().drawString(description, 0, 0, new ColorF(anim*0.2,anim*0.5,anim*0.8,1).toCode());
+			}
+		}
+	}
+	public ErrorMarker addError(ErrorMarker error){
+		boolean same=false;
+		for(ErrorMarker error0:errors){
+			if(error0.equals(error)){
+				same=true;
+				break;
+			}
+		}
+		if(!same){
+			errors.add(error);
+			return error;
+		}
+		return null;
 	}
 	
 	private int level=0;

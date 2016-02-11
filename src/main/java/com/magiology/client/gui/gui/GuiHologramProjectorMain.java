@@ -27,7 +27,7 @@ import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -37,7 +37,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 	
 	EntityPlayer player;
 	TileEntityHologramProjector tile;
-	AdvancedPhysicsFloat helpAlpha=new AdvancedPhysicsFloat(0, 0.1F, true);
+	PhysicsFloat helpAlpha=new PhysicsFloat(0, 0.1F, true);
 	static VertexModel arrowsModel;
 	
 	public GuiHologramProjectorMain(EntityPlayer player,TileEntityHologramProjector tile){
@@ -133,7 +133,7 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 	}
 	private void initModels(){
 		//generate curve vertices
-		AdvancedPhysicsFloat arrowX=new AdvancedPhysicsFloat(0.001F, 0.1F);
+		PhysicsFloat arrowX=new PhysicsFloat(0.001F, 0.1F);
 		arrowX.wantedPoint=-0.05F;
 		arrowX.speed=2;
 		int arrowY=0;

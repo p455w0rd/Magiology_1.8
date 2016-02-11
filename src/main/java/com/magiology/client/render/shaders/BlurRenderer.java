@@ -3,14 +3,14 @@ package com.magiology.client.render.shaders;
 import com.magiology.client.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.CricleUtil;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 public class BlurRenderer extends ShaderAspectRenderer{
 	public static BlurRenderer instance;
 	
 	public boolean shouldRender=false;
 	
-	public AdvancedPhysicsFloat x=new AdvancedPhysicsFloat(1, 0.08F),y=new AdvancedPhysicsFloat(1, 0.08F);
+	public PhysicsFloat x=new PhysicsFloat(1, 0.08F),y=new PhysicsFloat(1, 0.08F);
 	
 	public BlurRenderer(){
 		super("blurM",0,"BlurDir");

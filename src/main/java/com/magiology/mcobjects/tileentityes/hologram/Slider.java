@@ -15,7 +15,7 @@ import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.AdvancedPhysicsFloat;
+import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -23,7 +23,7 @@ public class Slider extends HoloObject{
 	
 	public CubeModel main, scroll;
 	public float sliderPos;
-	public AdvancedPhysicsFloat renderSliderPos=new AdvancedPhysicsFloat(0, 0.2F, true);
+	public PhysicsFloat renderSliderPos=new PhysicsFloat(0, 0.2F, true);
 	
 	public Slider(){}
 	public Slider(TileEntityHologramProjector tile, Vector2f siz){
