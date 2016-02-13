@@ -12,7 +12,7 @@ import com.magiology.client.gui.custom.OnOffGuiButton;
 import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
 import com.magiology.core.Magiology;
 import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
-import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
+import com.magiology.forgepowered.packets.packets.HoloObjectUploadPacket;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
 import com.magiology.mcobjects.tileentityes.hologram.Field;
 import com.magiology.mcobjects.tileentityes.hologram.Slider;
@@ -113,19 +113,19 @@ public class GuiHologramProjectorMain extends GuiContainer implements Updateable
 		}else{
 			switch(button.id){
 			case 0:{
-				U.sendMessage(new RenderObjectUploadPacket(new TextBox(tile, "<empty>")));
+				U.sendMessage(new HoloObjectUploadPacket(new TextBox(tile, "<empty>")));
 				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 			}break;
 			case 1:{
-				U.sendMessage(new RenderObjectUploadPacket(new Button(tile, new Vector2f(3, 1))));
+				U.sendMessage(new HoloObjectUploadPacket(new Button(tile, new Vector2f(3, 1))));
 				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 			}break;
 			case 2:{
-				U.sendMessage(new RenderObjectUploadPacket(new Field(tile, new Vector2f(1, 1))));
+				U.sendMessage(new HoloObjectUploadPacket(new Field(tile, new Vector2f(1, 1))));
 				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 			}break;
 			case 3:{
-				U.sendMessage(new RenderObjectUploadPacket(new Slider(tile, new Vector2f(UtilM.p*6, 1))));
+				U.sendMessage(new HoloObjectUploadPacket(new Slider(tile, new Vector2f(UtilM.p*6, 1))));
 				Magiology.ROBOT.clickKeyKeyboard(KeyEvent.VK_ESCAPE);
 			}break;
 			}

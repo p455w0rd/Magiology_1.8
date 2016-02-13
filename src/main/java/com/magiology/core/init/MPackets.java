@@ -6,7 +6,7 @@ import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
 import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
-import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
+import com.magiology.forgepowered.packets.packets.HoloObjectUploadPacket;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.SavableDataWithKeyPacket;
 import com.magiology.forgepowered.packets.packets.SendPlayerDataPacket;
@@ -29,7 +29,7 @@ public class MPackets{
 		AbstractPacket.registerNewMessage(GenericServerStringPacket.class);
 		AbstractPacket.registerNewMessage(UploadPlayerDataPacket.class);
 		AbstractPacket.registerNewMessage(ClickHologramPacket.class);
-		AbstractPacket.registerNewMessage(RenderObjectUploadPacket.class);
+		AbstractPacket.registerNewMessage(HoloObjectUploadPacket.class);
 		AbstractPacket.registerNewMessage(NotifyPointedBoxChangePacket.class);
 		AbstractPacket.registerNewMessage(OpenProgramContainerInGui.class);
 		AbstractPacket.registerNewMessage(OpenProgramContainerInGui.ExitGui.class);

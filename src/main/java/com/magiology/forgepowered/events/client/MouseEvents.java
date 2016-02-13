@@ -1,4 +1,4 @@
-package com.magiology.forgepowered.events;
+package com.magiology.forgepowered.events.client;
 
 import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;

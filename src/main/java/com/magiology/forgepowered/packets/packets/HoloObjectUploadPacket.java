@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
 import com.magiology.mcobjects.tileentityes.hologram.Field;
@@ -15,7 +14,6 @@ import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TextBox;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -24,20 +22,19 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class RenderObjectUploadPacket extends AbstractToServerMessage{
+public class HoloObjectUploadPacket extends AbstractToServerMessage{
 	
 	private int id,type;
 	private boolean moveMode,suportsText,isDead;
 	private float scale;
 	private Vector2f offset,size,originalSize;
 	private ColorF color;
-	private String text,name;
+	private String text,name,programName,args;
 	private BlockPos pos;
-	private Program command;
 	private boolean isCommand;
 	
-	public RenderObjectUploadPacket(){}
-	public RenderObjectUploadPacket(HoloObject ho){
+	public HoloObjectUploadPacket(){}
+	public HoloObjectUploadPacket(HoloObject ho){
 		pos=ho.host.getPos();
 		id=ho.id;
 		
@@ -57,8 +54,9 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		if(suportsText)text=((StringContainer)ho).getString();
 		isCommand=ho instanceof ICommandInteract;
 		if(isCommand){
-			command=((ICommandInteract)ho).getActivationTarget();
 			name=((ICommandInteract)ho).getName();
+			programName=((ICommandInteract)ho).getProgramName();
+			args=((ICommandInteract)ho).getArgs();
 		}
 	}
 	@Override
@@ -80,10 +78,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		}
 		buffer.writeBoolean(isCommand);
 		if(isCommand){
-			writeString(buffer, command!=null?command.name:"");
-			buffer.writeInt(command!=null?command.programId:0);
-			writePos(buffer, command!=null?command.pos:new BlockPosM());
-			writeString(buffer, command!=null?command.argsSrc:"");
+			writeString(buffer, programName);
+			writeString(buffer, args);
 			writeString(buffer, name);
 		}
 	}
@@ -106,8 +102,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 		}
 		isCommand=buffer.readBoolean();
 		if(isCommand){
-			command=new Program(readString(buffer), buffer.readInt(), readPos(buffer));
-			command.argsSrc=readString(buffer);
+			programName=readString(buffer);
+			args=readString(buffer);
 			name=readString(buffer);
 		}
 	}
@@ -135,7 +131,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 				tile.holoObjects.get(roId).isDead=isDead;
 				if(suportsText&&tile.holoObjects.get(roId) instanceof StringContainer)((StringContainer)tile.holoObjects.get(roId)).setString(text);
 				if(isCommand&&tile.holoObjects.get(roId) instanceof ICommandInteract){
-					((ICommandInteract)tile.holoObjects.get(roId)).setActivationTarget(command);
+					((ICommandInteract)tile.holoObjects.get(roId)).setProgramName(programName);
+					((ICommandInteract)tile.holoObjects.get(roId)).setArgs(args);
 					((ICommandInteract)tile.holoObjects.get(roId)).setName(name);
 				}
 			}else{
@@ -154,7 +151,8 @@ public class RenderObjectUploadPacket extends AbstractToServerMessage{
 					newObject.isDead=isDead;
 					if(suportsText)((StringContainer)newObject).setString(text);
 					if(isCommand){
-						((ICommandInteract)newObject).setActivationTarget(command);
+						((ICommandInteract)tile.holoObjects.get(roId)).setProgramName(programName);
+						((ICommandInteract)tile.holoObjects.get(roId)).setArgs(args);
 						((ICommandInteract)newObject).setName(name);
 					}
 					tile.holoObjects.add(newObject);

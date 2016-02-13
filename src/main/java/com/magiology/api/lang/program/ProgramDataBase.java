@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import com.magiology.io.WorldData;
 import com.magiology.io.WorldData.FileContent;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 
 
 public class ProgramDataBase{
@@ -22,11 +23,11 @@ public class ProgramDataBase{
 	public static void loadClass(){programs.getFileContent("");}
 	
 	//TODO: run-------------------------------------------------------------------------------------------
-	public static Object run(int programId,Object[] args, Object[] environment){
+	public static Object run(int programId,Object[] args, TileEntityNetworkProgramHolder holder){
 		Object result=null;
 		try{
 			ProgramUsable program=getProgram(programId);
-			result=program.run("main", args, environment);
+			result=program.run("main", args, holder);
 		}catch(Exception e){
 			result=err+e.getMessage();
 		}

@@ -19,6 +19,7 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.lang.program.ProgramCommon;
 import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.client.render.font.FontRendererMClipped;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
@@ -47,9 +48,10 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	protected List<ErrorMarker> errors=new ArrayList<>();
 	List<CharSequence> log=new ArrayList<>();
 	
-	public BlockPosM runPos;
+	//public BlockPosM runPos;
 	
-	public Object[] runArgs={};
+	//public Object[] runArgs={};
+	protected ProgramUsable program;
 	
 	public GuiJavaScriptEditor(Vec2i pos, Vec2i size){
 		super(pos, size);
@@ -110,24 +112,13 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	public void compile(){
 		noChangeCompileTime=comileWaitAmmount;
 		
-		try{
-			Invocable program=ProgramUsable.compile(getText());
-			log=new ArrayList<>();
-			ProgramUsable.run(program, log, "main", runArgs==null||runArgs.length==0?new Object[]{"undefined"}:runArgs, new Object[]{UtilM.getTheWorld(),runPos});
-			errors.clear();
-		}catch(ScriptException e){
-			try{
-				readExceptions(e);
-			}catch(Exception e2){
-				e2.printStackTrace();
-			}
-		}
+		program=new ProgramUsable();
+		program.init(getText());
+		if(program.lastResult instanceof Exception)readExceptions((Exception)program.lastResult);
 	}
 	
 	private void readExceptions(Exception e){
-//		if(!errors.isEmpty())return;
 		String s=e.getMessage();
-		
 		if(s.startsWith("ReferenceError: ")){
 			String invalidReference=s.substring("ReferenceError: \"".length(), s.length());
 			invalidReference=invalidReference.substring(0, invalidReference.indexOf('"'));

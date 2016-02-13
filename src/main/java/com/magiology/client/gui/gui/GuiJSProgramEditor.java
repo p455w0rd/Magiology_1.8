@@ -246,7 +246,7 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 		compileAfter.setText(compAfter.isEmpty()?"0.5":compAfter);
 		
 		GuiTextField name=new GuiTextField(1,fontRendererObj, top+3, left+72+11, 120-6, 12);
-		name.setText(program.getName(stack));
+		name.setText(program.getProgram(stack).getSaveableData().programName.toString());
 		textFieldList.add(name);
 		((GuiButton)buttonList.get(4)).visible=settingsActive;
 		textFieldList.get(1).setVisible(settingsActive);

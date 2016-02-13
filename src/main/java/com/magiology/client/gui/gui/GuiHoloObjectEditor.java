@@ -7,7 +7,6 @@ import java.io.IOException;
 import org.lwjgl.input.Keyboard;
 
 import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramCommon;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.lang.program.ProgramUsable;
@@ -21,7 +20,7 @@ import com.magiology.client.gui.container.GuiObjectCustomizeContainer;
 import com.magiology.client.gui.guiutil.gui.GuiTextEditor;
 import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.packets.RenderObjectUploadPacket;
+import com.magiology.forgepowered.packets.packets.HoloObjectUploadPacket;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.mcobjects.tileentityes.hologram.StringContainer;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
@@ -46,7 +45,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 	
 	private TileEntityHologramProjector hologramProjector;
-	private GuiTextField txt,red,green,blue,alpha,scale,size,comName,comPos,obectName;
+	private GuiTextField txt,red,green,blue,alpha,scale,size,comName,obectName;
 	private boolean suportsText,suportsCommand,textLimitedToObj,deleteStarted=false,showOut;
 	private PhysicsFloat redF,greenF,blueF,alphaF;
 	private String commandOut="";
@@ -154,14 +153,13 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 			textFieldList.add(scale=new GuiTextField(0,fontRendererObj, start-50*5, guiTop+17, 100, 14));
 			textFieldList.add(size=new GuiTextField(0,fontRendererObj, start-50*1, guiTop+17, 100, 14));
 			textFieldList.add(comName=new GuiTextField(0,fontRendererObj, start-50*1, guiTop+44, 100, 14));
-			textFieldList.add(comPos=new GuiTextField(0,fontRendererObj, start-50*1, guiTop+61, 100, 14));
 			textFieldList.add(obectName=new GuiTextField(0,fontRendererObj, start-50*1, guiTop+78, 100, 14));
 			
 			String commandInTxt=commandIn.getText();
 			commandIn=new GuiTextEditor(new Vec2i(guiLeft+xSize-102, guiTop+100),new Vec2i(100, 50));
 			if(suportsCommand){
 				if(commandInTxt!=null&&!commandInTxt.isEmpty())commandIn.setText(commandInTxt);
-				else if(iCommand.getActivationTarget()!=null)commandIn.setText(iCommand.getActivationTarget().argsSrc);
+				else commandIn.setText(iCommand.getArgs());
 			}else commandIn.viewOnly=true;
 			
 			for(int i=0;i<textFieldList.size();i++)textFieldList.get(i).setMaxStringLength(100);
@@ -177,15 +175,10 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 			size.setText(U.round(holoObj.originalSize.x, 3)+", "+U.round(holoObj.originalSize.y, 3));
 			
 			if(suportsCommand){
-				Program command=iCommand.getActivationTarget();
-				if(command!=null){
-					comName.setText(command.name);
-					if(command.pos!=null)comPos.setText(command.pos.getX()+", "+command.pos.getY()+", "+command.pos.getZ());
-				}
+				comName.setText(iCommand.getProgramName());
 				obectName.setText(iCommand.getName());
 			}else{
 				comName.setEnabled(false);
-				comPos.setEnabled(false);
 				obectName.setEnabled(false);
 			}
 			if(suportsText)size.setEnabled(((StringContainer)holoObj).isTextLimitedToObj());
@@ -276,21 +269,9 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 			if(suportsCommand){
 				iCommand.setName(obectName.getText().trim());
 				String target=comName.getText();
-				int x=0,y=0,z=0;
-				boolean coolPos;
-				try{
-					String[] xyz=comPos.getText().replaceAll("\\s","").split(",");
-					if(xyz.length!=3)throw new IllegalStateException("Wrong string!");
-					x=Integer.parseInt(xyz[0]);
-					y=Integer.parseInt(xyz[1]);
-					z=Integer.parseInt(xyz[2]);
-					coolPos=true;
-				}catch(Exception e){
-					coolPos=false;
-				}
-				iCommand.setActivationTarget(new Program(target, 0, new BlockPosM(x, y, z)));
+				
 				ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-				iCommand.getActivationTarget().argsSrc=commandIn.getText();
+				iCommand.setArgs(commandIn.getText());
 				Object[] args=ProgramCommon.compileArgs(holoObj.getStandardVars(),commandIn.getText(),ErrorPos);
 				int errorPos=ErrorPos.getVar();
 				boolean isCommandFound=false;
@@ -299,9 +280,9 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 						WorldNetworkInterface Interface=InterfaceBinder.get(holoObj.host);
 						NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(holoObj.host,Interface);
 						if(netInterface!=null&&netInterface.getBrain()!=null){
-							DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(iCommand.getActivationTarget());
+							DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(iCommand.getName());
 							if(com!=null){
-								Object Return=com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
+								Object Return=com.obj1.run(args, com.obj2);
 								if(Return!=null&&!Return.toString().startsWith(ProgramDataBase.err)){
 									isCommandFound=true;
 									commandOut="The command is successfully compiled and it is ready for use!";
@@ -316,7 +297,6 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 					}else commandOut="Can't find the host! This is a mod error!";
 				}else commandOut="Command arguments contain a syntax error on argument "+errorPos+".";
 				
-				comPos.setTextColor(!coolPos?RED:isCommandFound?WHITE:Color.YELLOW.hashCode());
 				comName.setTextColor(target.isEmpty()?RED:isCommandFound?WHITE:Color.YELLOW.hashCode());
 			}
 			if(suportsText&&!holoText.isTextLimitedToObj()){
@@ -351,13 +331,9 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 		}catch(Exception e){}
 		if(suportsCommand)try{
 			iCommand.setName(obectName.getText().trim());
-			String[] xyz=size.getText().split(",");
-			if(xyz.length!=3)throw new IllegalStateException("Wrong string!");
-			float x=Float.parseFloat(xyz[0]),y=Float.parseFloat(xyz[1]),z=Float.parseFloat(xyz[2]);
-			iCommand.setActivationTarget(new Program(comName.getText(), 0, new BlockPosM(x, y, z)));
 		}catch(Exception e){}
 		
-		UtilM.sendMessage(new RenderObjectUploadPacket(holoObj));
+		UtilM.sendMessage(new HoloObjectUploadPacket(holoObj));
 		textFieldList.clear();
 	}
 	@Override

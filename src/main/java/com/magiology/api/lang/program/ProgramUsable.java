@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -12,9 +13,8 @@ import javax.script.ScriptException;
 import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
 import com.magiology.api.lang.bridge.WorldWrapper;
 import com.magiology.io.WorldData.FileContent;
-import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.Tracker;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.util.EnumFacing;
@@ -26,7 +26,12 @@ public class ProgramUsable{
 	
 	private Invocable compiled;
 	private List<CharSequence> log=new ArrayList<CharSequence>();
+	private int programId;
+	
 	private ProgramSerializable saveableData;
+	
+	public Object lastResult;
+	
 	
 	public static final String jsJavaBridge=new Object(){public String toString(){
 		StringBuilder txt=new StringBuilder();
@@ -60,45 +65,42 @@ public class ProgramUsable{
 		txt.append(line).append("\n");
 	}
 	
-	public Object run(String mainFuncName, Object[] args, Object[] environment){
-		Object result=run(compiled, getLog(), mainFuncName, args, environment);
+	public Object run(Object[] args, TileEntityNetworkProgramHolder holder){
+		Object result=run("main", args, holder);
 		return result;
 	}
-	public static Object run(Invocable program, List<CharSequence> log, String mainFuncName, Object[] args, Object[] environment){
+	public Object run(String mainFuncName, Object[] args, TileEntityNetworkProgramHolder holder){
 		try{
-			Map<String, Object> map=new HashMap<String, Object>();
-			boolean hasRunPos=false,hasWorld=false;
-			int posId=0;
-			for(Object o:environment){
-				if(o instanceof World){
-					WorldWrapper.setBlockAccess((World)o);
-					hasWorld=true;
-				}else{
-					if(o instanceof Vec3i){
-						if(hasRunPos)map.put("blockPos-"+(posId++), o);
-						else{
-							map.put("runPos", o);
-							hasRunPos=true;
-							try{
-//								program.invokeFunction("setRunPos", o);
-								((ScriptEngine)program).put("runPos", o);
-							}catch(Exception e){
-								log(ProgramDataBase.err+e.getMessage(),log);
-							}
-						}
-					}
-				}
-			}
-			if(!hasWorld)throw new IllegalStateException("There is no world instance! This is a bug!");
-			try{
-				program.invokeFunction("init", map);
-			}catch(Exception e){
-				log(ProgramDataBase.err+e.getMessage(),log);
-			}
-			
-			return program.invokeFunction(mainFuncName, args);
+			return run(this, mainFuncName, args, holder);
 		}catch(Exception e){
-			return ProgramDataBase.err+e.getMessage();
+			return e;
+		}
+	}
+	public static Object run(ProgramUsable program, String mainFuncName, Object[] args, TileEntityNetworkProgramHolder holder) throws NoSuchMethodException, ScriptException{
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		map.put("runPos", holder.getPos());
+		((ScriptEngine)program.getCompiled()).put("runPos", holder.getPos());
+		WorldWrapper.setBlockAccess((World)holder.getWorld());
+		NetworkProgramHolderWrapper.setInstance(holder);
+		
+		try{
+			program.getCompiled().invokeFunction("init", map);
+		}catch(Exception e){
+			log(ProgramDataBase.err+e.getMessage(),program.getLog());
+		}
+		
+		return runProgram(program, mainFuncName, args);
+	}
+	
+	private static Object runProgram(ProgramUsable program, String mainFuncName, Object[] args) throws NoSuchMethodException, ScriptException{
+		try{
+			Object o=program.lastResult=program.compiled.invokeFunction(mainFuncName, args);
+			program.lastResult=o;
+			return o;
+		} catch (NoSuchMethodException|ScriptException e){
+			program.lastResult=e;
+			throw e;
 		}
 	}
 	
@@ -112,6 +114,7 @@ public class ProgramUsable{
 		try{
 			compiled=compile(src);
 		}catch(ScriptException e){
+			lastResult=e;
 		}
 	}
 
@@ -143,5 +146,8 @@ public class ProgramUsable{
 			saveableData=i==null?new ProgramSerializable("", ""):(ProgramSerializable)i.content;
 		}
 		return saveableData;
+	}
+	public int getProgramId(){
+		return programId;
 	}
 }

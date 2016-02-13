@@ -47,22 +47,6 @@ public class GuiTextEditor extends Gui implements Updateable{
 	
 	private Vec2i cursorPosition=Vec2i.zero,selectionStart=Vec2i.zero;
 	
-	public Vec2i getCursorPosition(){
-		fixCursor();
-		return cursorPosition;
-	}
-
-	public void setCursorPosition(Vec2i cursorPosition){
-		this.cursorPosition=cursorPosition;
-		fixCursor();
-	}
-	
-	protected void fixCursor(){
-		cursorPosition.y=snap(cursorPosition.y, 0, Math.max(0, textBuffer.size()-1));
-		cursorPosition.x=snap(cursorPosition.x, 0, Math.max(0, getLength(cursorPosition.y)));
-	}
-	
-	
 	public Vec2i pos, size,mouse=Vec2i.zero,lastMouse=Vec2i.zero,mouseClick=Vec2i.zero;
 	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode(),maxWidth;
 	public float sliderX,prevSliderX,sliderY,prevSliderY;
@@ -954,5 +938,19 @@ public class GuiTextEditor extends Gui implements Updateable{
 		else sliderYCol.wantedPoint=0.2F;
 		sliderXCol.update();
 		sliderYCol.update();
+	}
+	public Vec2i getCursorPosition(){
+		fixCursor();
+		return cursorPosition;
+	}
+
+	public void setCursorPosition(Vec2i cursorPosition){
+		this.cursorPosition=cursorPosition;
+		fixCursor();
+	}
+	
+	protected void fixCursor(){
+		cursorPosition.y=snap(cursorPosition.y, 0, Math.max(0, textBuffer.size()-1));
+		cursorPosition.x=snap(cursorPosition.x, 0, Math.max(0, getLength(cursorPosition.y)));
 	}
 }

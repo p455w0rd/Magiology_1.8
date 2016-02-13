@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.magiology.api.lang.JSProgramContainer;
-import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.api.network.ISidedNetworkComponent;
@@ -29,7 +28,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
@@ -225,10 +223,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 			e.printStackTrace();
 		}
 	}
-	public DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> getProgram(Program command){
-		return getProgram(command.pos, command.name);
-	}
-	public DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> getProgram(BlockPos pos, String name){
+	public DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> getProgram(String name){
 		try{
 			TileEntity tile=worldObj.getTileEntity(pos);
 			if(!(tile instanceof TileEntityNetworkProgramHolder))return null;
@@ -236,7 +231,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 			for(ItemStack j:((TileEntityNetworkProgramHolder)tile).slots){
 				if(j!=null){
 					JSProgramContainer program=(JSProgramContainer) j.getItem();
-					if(program.getName(j).equals(name)){
+					if(program.getProgram(j).getSaveableData().programName.equals(name)){
 						return new DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder>(ProgramDataBase.getProgram(program.getId(j)), (TileEntityNetworkProgramHolder)tile);
 					}
 				}
@@ -246,17 +241,14 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		}
 		return null;
 	}
-	public List<Program> getProgram(){
-		List<Program> result=new ArrayList<Program>();
+	public List<ProgramUsable> getProgram(){
+		List<ProgramUsable> result=new ArrayList<ProgramUsable>();
 		for(TileEntityNetworkProgramHolder i:commandHolders){
 			for(ItemStack j:i.slots){
 				if(j!=null){
 					JSProgramContainer program=(JSProgramContainer) j.getItem();
-					String name=program.getName(j),code=ProgramDataBase.code_get(program.getId(j));
-					if(!name.isEmpty()&&!code.isEmpty()){
-						program.setPos(j, i.getPos());
-						result.add(program.getProgram(j));
-					}
+					String name=program.getProgram(j).getSaveableData().programName.toString(),code=ProgramDataBase.code_get(program.getId(j));
+					if(!name.isEmpty()&&!code.isEmpty())result.add(program.getProgram(j));
 				}
 			}
 		}

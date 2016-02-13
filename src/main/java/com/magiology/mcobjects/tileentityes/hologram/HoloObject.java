@@ -8,8 +8,8 @@ import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.api.SavableData;
 import com.magiology.api.lang.ICommandInteract;
-import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramCommon;
+import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.WorldNetworkInterface;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
@@ -32,7 +32,6 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,9 +40,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 	
 	protected StandardHoloObject standard=new StandardHoloObject();
 	
-	protected String name="";
-	
-	protected Program activationTarget;
+	protected String name="",programName="",args="";
 	
 	public TileEntityHologramProjector host;
 	public boolean isHighlighted,moveMode=false,isDead=false;
@@ -116,15 +113,8 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 		writeVec2F(floats__, originalSize);
 		
 		
-		booleans.add(activationTarget!=null);
-		if(activationTarget!=null){
-			strings_.add(activationTarget.name);
-			integers.add(activationTarget.pos.getX());
-			integers.add(activationTarget.pos.getY());
-			integers.add(activationTarget.pos.getZ());
-		}
 		strings_.add(getName());
-		if(activationTarget!=null)strings_.add("i"+activationTarget.argsSrc);
+		strings_.add("i"+getProgramName());
 	}
 	@Override
 	public void readData(Iterator<Integer> integers,Iterator<Boolean> booleans,Iterator<Byte> bytes___,Iterator<Long> longs___,Iterator<Double> doubles_,Iterator<Float> floats__,Iterator<String> strings_,Iterator<Short> shorts__){
@@ -140,10 +130,8 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 			originalSize=readVec2F(floats__);
 			
 			
-			boolean b=booleans.next();
-			if(b)activationTarget=new Program(strings_.next(), -1, new BlockPosM(integers.next(),integers.next(),integers.next()));
 			setName(strings_.next());
-			if(b)activationTarget.argsSrc=strings_.next().substring(1);
+			setProgramName(strings_.next().substring(1));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -217,10 +205,6 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 	public String getName(){return name;}
 	@Override
 	public void setName(String name){this.name=name;}
-	@Override
-	public Program getActivationTarget(){return activationTarget;}
-	@Override
-	public void setActivationTarget(Program com){activationTarget=com;}
 	
 	protected static final Object NOT_FOUND_COMMAND=new Object(){
 		@Override
@@ -260,19 +244,19 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 			return null;
 		}
 		protected void sendStandardCommand(){
-			if(activationTarget==null||!host.hasWorldObj())return;
+			if(!host.hasWorldObj())return;
 			WorldNetworkInterface Interface=InterfaceBinder.get(host);
 			NetworkInterface netInterface=TileToInterfaceHelper.getConnectedInterface(host,Interface);
 			if(netInterface!=null&&netInterface.getBrain()!=null){
 				try{
 					ObjectHolder<Integer> ErrorPos=new ObjectHolder<Integer>();
-					Object[] args=ProgramCommon.compileArgs(getStandardVars(),activationTarget.argsSrc,ErrorPos);
+					Object[] args=ProgramCommon.compileArgs(getStandardVars(),getArgs(),ErrorPos);
 					if(ErrorPos.getVar()==-1){
-						DoubleObject<Program,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(activationTarget);
+						DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> com=netInterface.getBrain().getProgram(getProgramName());
 						if(netInterface!=null&&com!=null){
-							com.obj1.run(com.obj2,args,new Object[]{com.obj2.getWorld(),com.obj2.getPos()});
+							com.obj1.run(args,com.obj2);
 							List<TileEntityNetworkRouter> routers=netInterface.getPointerContainers();
-							if(!routers.isEmpty())netInterface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.result);
+							if(!routers.isEmpty()&&!(com.obj1.lastResult instanceof Exception))netInterface.getBrain().broadcastWithCheck(routers.get(0), com.obj1.lastResult.toString());
 						}
 					}
 				}catch(Exception e){
@@ -290,5 +274,22 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 		
 		if(this instanceof StringContainer)interations.add(new InteractionText<HoloObject>());
 		if(this instanceof ICommandInteract)interations.add(new InteractionName<HoloObject>());
+	}
+	
+	@Override
+	public String getProgramName(){
+		return programName;
+	}
+	@Override
+	public void setProgramName(String name){
+		programName=name;
+	}
+	@Override
+	public void setArgs(String args){
+		this.args=args;
+	}
+	@Override
+	public String getArgs(){
+		return args;
 	}
 }

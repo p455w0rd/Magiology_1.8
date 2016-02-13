@@ -62,7 +62,7 @@ public class Button extends TextBox{
 			try{
 				if(!UtilM.isNull(host,host.point,host.point.pointingPlayer,host.point.pointingPlayer.getCurrentEquippedItem())){
 					ItemStack s=host.point.pointingPlayer.getCurrentEquippedItem();
-					if(!((JSProgramContainer)s.getItem()).getName(s).isEmpty())color1=new ColorF(1, 0.2, 0.2, 0.8);
+					if(!((JSProgramContainer)s.getItem()).getProgram(s).getSaveableData().programName.toString().isEmpty())color1=new ColorF(1, 0.2, 0.2, 0.8);
 				}
 			}catch(Exception e){}
 			color=UtilM.slowlyEqalizeColor(color, color1, 0.2F);
@@ -87,7 +87,6 @@ public class Button extends TextBox{
 //				}
 //			}
 //			if(activationTarget.pos==null)activationTarget.pos=new BlockPosM();
-			if(activationTarget!=null&&!activationTarget.pos.equals(BlockPosM.ORIGIN))sendCommand();
 		}
 	}
 	@Override

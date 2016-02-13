@@ -4,9 +4,9 @@ import com.magiology.client.gui.custom.OnOffGuiButton.GuiButtonClickEvent;
 import com.magiology.client.render.shaders.core.ShaderRunner;
 import com.magiology.forgepowered.events.EntityEvents;
 import com.magiology.forgepowered.events.GameEvents;
-import com.magiology.forgepowered.events.MouseEvents;
 import com.magiology.forgepowered.events.TickEvents;
 import com.magiology.forgepowered.events.client.HighlightEvent;
+import com.magiology.forgepowered.events.client.MouseEvents;
 import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.util.utilclasses.UtilM;
 

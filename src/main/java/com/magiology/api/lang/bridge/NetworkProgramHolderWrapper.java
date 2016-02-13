@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.magiology.api.lang.JSProgramContainer.Program;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
@@ -22,7 +21,7 @@ public class NetworkProgramHolderWrapper{
 			if(instance==null)return "There is no program container! This is an error! Report it to the developer!";
 			TileEntityNetworkController brain=instance.getBrain();
 			if(brain==null)return "The program container is not connected to a controller!";
-			DoubleObject<Program,TileEntityNetworkProgramHolder> program=brain.getProgram(pos, name);
+			DoubleObject<ProgramUsable,TileEntityNetworkProgramHolder> program=brain.getProgram(name);
 			if(program==null)return "Can't find function at: "+pos+"with name: "+name;
 			
 			List<Object> argsList=new ArrayList<Object>();
@@ -31,10 +30,10 @@ public class NetworkProgramHolderWrapper{
 			TileEntityNetworkProgramHolder instance2=instance;
 			List<CharSequence> log2=log;
 			
-			log=ProgramDataBase.getProgram(program.obj1.programId).getLog();
+			log=ProgramDataBase.getProgram(program.obj1.getProgramId()).getLog();
 			
 			
-			Object result=program.obj1.run(program.obj2,argsList.toArray(), new Object[]{program.obj2.getWorld(),pos});
+			Object result=program.obj1.run(argsList.toArray(),program.obj2);
 			
 			
 			log=log2;
