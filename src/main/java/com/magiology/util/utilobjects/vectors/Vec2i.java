@@ -7,7 +7,7 @@ import java.util.Objects;
 import net.minecraft.util.EnumFacing;
 
 public class Vec2i{
-	public static final Vec2i zero=new Vec2i(0, 0);
+	private static final Vec2i zero=new Vec2i(0, 0);
 
 	public int x, y;
 
@@ -60,5 +60,21 @@ public class Vec2i{
 	}
 	public Vec2i sub(int x1, int y1){
 		return new Vec2i(x-x1, y-y1);
+	}
+
+	public Vec2i mul(float var){
+		return mul(var,var);
+	}
+
+	public Vec2i mul(float x, float y){
+		return new Vec2i((int)(this.x*x), (int)(this.y*y));
+	}
+	
+	public Vec2i copy(){
+		return new Vec2i(x, y);
+	}
+	
+	public static Vec2i zero(){
+		return zero.copy();
 	}
 }

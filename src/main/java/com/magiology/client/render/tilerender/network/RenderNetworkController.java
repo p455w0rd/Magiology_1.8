@@ -15,6 +15,7 @@ import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.renderers.tessellatorscripts.SidedModel;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
@@ -337,7 +338,7 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 	private void animate(TileEntity tile0, double x, double y, double z){
 		TileEntityNetworkController tile=(TileEntityNetworkController)tile0;
 		double tim=tile.getWorld().getTotalWorldTime()+(x+y+z)*30;
-		float anim=(UtilM.calculatePos(tim-1, tim)/3)%360;
+		float anim=(PartialTicksUtil.calculatePos(tim-1, tim)/3)%360;
 		
 		double upDown=Math.sin(Math.toRadians(anim)*4)*UtilM.p/2;
 		

@@ -11,6 +11,7 @@ import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -40,7 +41,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 			double var1=UtilM.fluctuate(20,(pipe.x()+pipe.y()+pipe.z())*4),
 				   var2=UtilM.fluctuate(47,(pipe.x()+pipe.y()+pipe.z())*4);
 			
-			OpenGLM.color(0.9, 0.1*var1, 0.15*var2, 0.6*fc*UtilM.calculatePos(prevAlpha, alpha));
+			OpenGLM.color(0.9, 0.1*var1, 0.15*var2, 0.6*fc*PartialTicksUtil.calculatePos(prevAlpha, alpha));
 			OpenGLM.depthMask(true);
 			if(!pipe.isStrate(null)){
 				for(int i=0; i< pipe.connections.length; i++)if(pipe.connections[i].getMain()&&pipe.connections[i].willRender())drawConnectorGlow(pipe.connections[i].getFaceEF());

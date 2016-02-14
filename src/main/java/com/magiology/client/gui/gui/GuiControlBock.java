@@ -16,6 +16,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -113,7 +114,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 	}
 	
 	public void drawSmartShit(boolean type){
-		double angle=UtilM.calculatePos(tileCB.prevAngle,tileCB.angle);
+		double angle=PartialTicksUtil.calculatePos(tileCB.prevAngle,tileCB.angle);
 		switch (tileCB.redstoneC){
 		case 0:{
 			this.drawTexturedModalRect(guiLeft+12, guiTop+35, 176, 21, 16, 16);
@@ -142,7 +143,7 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 		OpenGLM.rotate(-angle, 0, 0, 1);
 		OpenGLM.translate(-20.5, -4.5, 0);
 		OpenGLM.translate(-(guiLeft+31), -(guiTop+18), 0);
-		double thingyPos=UtilM.calculatePos(tileCB.prevThingyPos, tileCB.thingyPos);
+		double thingyPos=PartialTicksUtil.calculatePos(tileCB.prevThingyPos, tileCB.thingyPos);
 		{
 			OpenGLM.translate(guiLeft+83, guiTop+79, 0);
 			OpenGLM.translate(-thingyPos*5, 0, 0);

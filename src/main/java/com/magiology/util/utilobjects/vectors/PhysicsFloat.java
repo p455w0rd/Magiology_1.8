@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 public class PhysicsFloat{
 	
@@ -56,7 +57,7 @@ public class PhysicsFloat{
 		
 	}
 	public float getPoint(){
-		return UtilM.calculatePos(prevPoint, point);
+		return PartialTicksUtil.calculatePos(prevPoint, point);
 	}
 	public void bounce(float multiplyer){
 		speed*=-multiplyer;

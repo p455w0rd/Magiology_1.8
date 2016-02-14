@@ -11,7 +11,6 @@ import com.magiology.client.gui.container.ISidedPowerInstructorContainer;
 import com.magiology.client.gui.guiutil.gui.buttons.ColoredGuiButton;
 import com.magiology.client.gui.guiutil.gui.buttons.TexturedColoredButton;
 import com.magiology.client.render.Textures;
-import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
@@ -20,6 +19,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.SimpleCounter;
 import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 
@@ -206,9 +206,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			OpenGLM.scale((-1), 1, 1);
 			if(renderer!=null){
 				OpenGLM.cullFace(GL11.GL_FRONT);
-				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderEvents.partialTicks,0);
+				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, PartialTicksUtil.partialTicks,0);
 				OpenGLM.cullFace(GL11.GL_BACK);
-				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, RenderEvents.partialTicks,0);
+				renderer.renderTileEntityAt(tile, -0.5, -0.5, -0.5, PartialTicksUtil.partialTicks,0);
 			}
 			Block block=U.getBlock(tile.getWorld(), tile.getPos());
 			if(block!=null){

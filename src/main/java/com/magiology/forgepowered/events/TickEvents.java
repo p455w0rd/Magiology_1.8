@@ -18,6 +18,7 @@ import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 import net.minecraft.client.Minecraft;
@@ -81,7 +82,7 @@ public class TickEvents{
 	}
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event){
-		RenderEvents.partialTicks=event.renderTickTime;
+		PartialTicksUtil.partialTicks=event.renderTickTime;
 		
 		if(event.phase!=Phase.END)return;
 		

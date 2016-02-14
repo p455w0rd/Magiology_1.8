@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL12;
 
 import com.magiology.client.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.shader.Framebuffer;
 
@@ -46,9 +47,9 @@ public class ColorCutRenderer extends ShaderAspectRenderer{
 	
 	@Override
 	public void redner(){
-		ShaderAspectRenderer.setUniform(uniforms.get(0), UtilM.calculatePos(rPrev, r),UtilM.calculatePos(gPrev, g),UtilM.calculatePos(bPrev, b));
-		ShaderAspectRenderer.setUniform(uniforms.get(1), UtilM.calculatePos(prevTolerance, tolerance));
-		ShaderAspectRenderer.setUniform(uniforms.get(2), UtilM.calculatePos(prevIntensity, intensity));
+		ShaderAspectRenderer.setUniform(uniforms.get(0), PartialTicksUtil.calculatePos(rPrev, r),PartialTicksUtil.calculatePos(gPrev, g),PartialTicksUtil.calculatePos(bPrev, b));
+		ShaderAspectRenderer.setUniform(uniforms.get(1), PartialTicksUtil.calculatePos(prevTolerance, tolerance));
+		ShaderAspectRenderer.setUniform(uniforms.get(2), PartialTicksUtil.calculatePos(prevIntensity, intensity));
 	}
 	
 	@Override

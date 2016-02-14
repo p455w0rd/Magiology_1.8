@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.magiology.api.connection.IConnectionProvider;
 import com.magiology.api.network.NetworkBaseComponent;
-import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkInterface;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
@@ -17,6 +16,7 @@ import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.renderers.tessellatorscripts.SidedModel;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -98,7 +98,7 @@ public class RenderNetworkInterface extends RenderNetworkConductor{
 				case 4:rotation=new Vec3M(  0, -90, 0);translation=new Vec3M( 0.5,  0.5,  -1);break;
 				case 5:rotation=new Vec3M(  0,  90, 0);translation=new Vec3M(-0.5,  0.5,   0);break;
 				}
-				double tim=UtilM.getWorldTime(getWorld())+RenderEvents.partialTicks;
+				double tim=UtilM.getWorldTime(getWorld())+PartialTicksUtil.partialTicks;
 				
 				float bob1=(float)Math.sin(tim/10+offset);
 				float bob2=(float)Math.cos(tim/13+offset);

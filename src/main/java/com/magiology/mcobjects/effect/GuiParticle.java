@@ -9,6 +9,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.util.ResourceLocation;
 
@@ -88,8 +89,8 @@ public class GuiParticle{
 		U.getMC().renderEngine.bindTexture(Textures.SmoothBuble1);
 		GL11U.setUpOpaqueRendering(2);
 		double opacityF=opacity,
-				x=UtilM.calculatePos(lastXPos,xPos),
-				y=UtilM.calculatePos(lastYPos,yPos);
+				x=PartialTicksUtil.calculatePos(lastXPos,xPos),
+				y=PartialTicksUtil.calculatePos(lastYPos,yPos);
 		
 		
 		

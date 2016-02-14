@@ -60,12 +60,9 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 	private List<DoubleObject<List<String>,List<Integer>>> coloredText;
 	private String selectedWord="";
 	private VertexModel selection=null;
-	protected float xOffset, yOffset;
 	
 	@Override
 	protected void rednerText(FontRendererMClipped fr){
-		xOffset=-sliderX*(maxWidth-size.x);
-		yOffset=-sliderY*((textBuffer.size()+1)*fr.FONT_HEIGHT-size.y);
 		if(colors){
 			if(coloredText==null)colorCode(fr);
 			rednerColoredCode(fr);
@@ -114,7 +111,12 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		
 		program=new ProgramUsable();
 		program.init(getText());
-		if(program.lastResult instanceof Exception)readExceptions((Exception)program.lastResult);
+		if(program.lastResult instanceof Exception)try{
+			readExceptions((Exception)program.lastResult);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private void readExceptions(Exception e){
@@ -169,12 +171,12 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 					.toString()));
 			
 			if(error!=null){
-				error.addQuickFix("Replace with expected.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error){
+				error.addQuickFix("Replace with expected.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error, Object...objects){
 					Vec2i pos=error.physicalPos;
 					getLine(pos.y).replace(pos.x, pos.x+error.physicalLenght, error.message.subSequence(error.message.indexOf('<')+3, error.message.indexOf('>')-2).toString());
 					return null;
 				}});
-				error.addQuickFix("Create local variable.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error){
+				error.addQuickFix("Create local variable.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error, Object...objects){
 					Vec2i pos=error.physicalPos;
 					addLine(
 						new StringBuilder()
@@ -185,7 +187,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 					pos.y);
 					return null;
 				}});
-				error.addQuickFix("Create global variable.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error){
+				error.addQuickFix("Create global variable.", new ObjectProcessor<ErrorMarker>(){@Override public ErrorMarker pocess(ErrorMarker error, Object...objects){
 					addLine(new StringBuilder("var ").append(error.message.subSequence(error.message.lastIndexOf('<')+3, error.message.lastIndexOf('>')-2)).append("=\"undefined\";"), 0);
 					return null;
 				}});
@@ -229,8 +231,8 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		
 		public void draw(int x, int y){
 			Vector2f 
-				pos1=new Vector2f(xOffset+errorPos.x,yOffset+errorPos.y),
-				pos2=new Vector2f(xOffset+errorPos.x+errorLenght,yOffset+errorPos.y);
+				pos1=new Vector2f(getSlideableOffset().x+errorPos.x,getSlideableOffset().y+errorPos.y),
+				pos2=new Vector2f(getSlideableOffset().x+errorPos.x+errorLenght,getSlideableOffset().y+errorPos.y);
 			
 			if(pos1.y<pos.y-3||pos1.y>pos.y+3+size.y)return;
 			
@@ -254,7 +256,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 				width=Math.max(width, Font.FRB().getStringWidth(fix.description));
 				fixText.add(fix.description);
 			}
-			float down=y-(yOffset+errorPos.y)-13+10;
+			float down=y-(getSlideableOffset().y+errorPos.y)-13+10;
 			for(int i=0;i<quickFix.size();i++){
 				int distance=(int)(down-i*10);
 				quickFix.get(i).highlighted=distance>0&&distance<8;
@@ -312,7 +314,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		}
 		
 		public void click(int x, int y){
-			float down=y-(yOffset+errorPos.y)-13;
+			float down=y-(getSlideableOffset().y+errorPos.y)-13;
 			
 			for(int i=0;i<quickFix.size();i++){
 				int distance=(int)(down-i*10);
@@ -322,7 +324,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		}
 		
 		public boolean isSelected(int x, int y){
-			return isSelected(new Vector2f(xOffset+errorPos.x,yOffset+errorPos.y), new Vector2f(xOffset+errorPos.x+errorLenght,yOffset+errorPos.y), x, y);
+			return isSelected(new Vector2f(getSlideableOffset().x+errorPos.x,getSlideableOffset().y+errorPos.y), new Vector2f(getSlideableOffset().x+errorPos.x+errorLenght,getSlideableOffset().y+errorPos.y), x, y);
 		}
 		public boolean isSelected(Vector2f pos1,Vector2f pos2,int x, int y){
 			Rectangle boundingBox=new Rectangle((int)pos1.x-9, (int)pos1.y-18,(int)(pos2.x-pos1.x),9);
@@ -472,7 +474,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 		if(selection!=null){
 			GL11U.texture(false);
 			selection.pushMatrix();
-			selection.translate(xOffset, yOffset, 0);
+			selection.translate(getSlideableOffset().x, getSlideableOffset().y, 0);
 			OpenGLM.color(0, 0, 0, 1);
 			selection.draw();
 			

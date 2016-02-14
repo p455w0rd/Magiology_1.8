@@ -14,6 +14,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
+import com.magiology.client.gui.guiutil.gui.GuiSlider.SliderParent;
 import com.magiology.client.render.font.FontRendererMBase;
 import com.magiology.client.render.font.FontRendererMClipped;
 import com.magiology.util.renderers.GL11U;
@@ -32,7 +33,7 @@ import com.magiology.util.utilobjects.vectors.Vec2i;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 
-public class GuiTextEditor extends Gui implements Updateable{
+public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 	
 	private static String newline=System.getProperty("line.separator");
 	public List<StringBuilder> textBuffer=new ArrayList<StringBuilder>();
@@ -45,13 +46,15 @@ public class GuiTextEditor extends Gui implements Updateable{
 	
 	protected int xMouseArrow, yMouseArrow;
 	
-	private Vec2i cursorPosition=Vec2i.zero,selectionStart=Vec2i.zero;
+	private Vec2i cursorPosition=Vec2i.zero(),selectionStart=Vec2i.zero();
 	
-	public Vec2i pos, size,mouse=Vec2i.zero,lastMouse=Vec2i.zero,mouseClick=Vec2i.zero;
+	public Vec2i pos, size,mouse=Vec2i.zero(),lastMouse=Vec2i.zero(),mouseClick=Vec2i.zero();
 	public int width,white=Color.WHITE.hashCode(),black=new Color(16,16,32,255).hashCode(),maxWidth;
-	public float sliderX,prevSliderX,sliderY,prevSliderY;
-	private PhysicsFloat sliderXCol=new PhysicsFloat(0, 0.2F,true),sliderYCol=new PhysicsFloat(0, 0.2F,true);
 	protected static final Pattern blankSpace=Pattern.compile("^\\s*$"),notWhitespace=Pattern.compile("[^\\s]|\\s$"),word=Pattern.compile("\\b");
+	
+	protected GuiSlider xSlider,ySlider;
+	protected Vector2f textOffset=new Vector2f(),prevTextOffset=new Vector2f();
+	
 	
 	public boolean active=false,visible=true,insertMode=false,viewOnly=false;
 	
@@ -61,6 +64,9 @@ public class GuiTextEditor extends Gui implements Updateable{
 		cachedWidth.add(0);
 		this.pos=pos;
 		this.size=size;
+		xSlider=new GuiSlider(this, "0 10px", 10, true, true, true);
+		ySlider=new GuiSlider(this, "0 10px", 10, true, true, false);
+		active=true;
 	}
 	
 	//TODO: user control------------------------------------------------------
@@ -80,7 +86,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 				return;
 			}
 			
-			if(handleSlider(x, y)){
+			if(!xSlider.mouseClicked()&&!ySlider.mouseClicked()){
 				Vec2i intersection=findCharAtPos(x, y);
 				if(intersection==null){
 					active=false;
@@ -92,8 +98,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 					clickCount=0;
 				}
 				lastClickTime=time;
-
-				active=true;
+				
 
 				if(clickCount==0){
 					setCursorPositionInternal(intersection);
@@ -115,7 +120,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 			if(!visible||!active)return;
 			lastMouse=mouse;
 			mouse=new Vec2i(x-pos.x, y-pos.y);
-			if(handleSlider(x, y)){
+			if(!xSlider.mouseDragged()&&!ySlider.mouseDragged()){
 				Vec2i intersection=findCharAtPos(x, y);
 				if(intersection!=null){
 					setCursorPosition(intersection);
@@ -225,25 +230,6 @@ public class GuiTextEditor extends Gui implements Updateable{
 		return true;
 	}
 	
-	private boolean handleSlider(int x, int y){
-		if(size.y-mouseClick.y<=8){
-			if(maxWidth>size.x){
-				int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
-				sliderX=snap(((float)(mouse.x-width/2)/(float)(size.x-width)), 0, 1);
-				return false;
-			}
-		}
-		if(size.x-mouseClick.x<=8){
-			if((textBuffer.size()+1)*FontRendererMClipped.get().FONT_HEIGHT>size.y){
-				FontRendererMClipped fr=FontRendererMClipped.get();
-				int maxHeight=textBuffer.size()*fr.FONT_HEIGHT;
-				int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
-				sliderY=snap((float)(mouse.y-height/2)/(float)(size.y-height), 0, 1);
-				return false;
-			}
-		}
-		return true;
-	}
 	//end-------------------------------------------------------------------------------
 	
 	//TODO: rendering-------------------------------------------------------------------------
@@ -255,11 +241,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 			lastMouse=mouse;
 			mouse=new Vec2i(x-pos.x, y-pos.y);
 		}
-		float sliderX=calculatePos(prevSliderX,this.sliderX);
 		FontRendererMClipped fr=FontRendererMClipped.get();
-		int maxHeight=(textBuffer.size()+1)*fr.FONT_HEIGHT;
-		if(maxHeight>size.y);else this.sliderY=0;
-		if(maxWidth>size.x);else this.sliderX=0;
 		
 		int guiScale=getGuiScaleRaw();
 		GL11U.texture(false);
@@ -285,7 +267,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 		GL11U.texture(true);
 		
 		OpenGLM.pushMatrix();
-		float xOffset=-sliderX*(maxWidth-size.x),yOffset=-sliderY*(maxHeight-size.y);
+		float xOffset=-getSlideableOffset().x,yOffset=-getSlideableOffset().y;
 		OpenGLM.translate(xOffset, yOffset, 0);
 		if(active&&isSelected()){
 			renderSelection(0xFFDFB578);
@@ -324,34 +306,36 @@ public class GuiTextEditor extends Gui implements Updateable{
 			if(minY!=maxY)drawRect(pos.x-2, minY, size.x+12, maxY, new ColorF(1, 1, 1, 0.1).toCode());
 		}
 		OpenGLM.popMatrix();
-		if(maxHeight>size.y){
-			GL11U.texture(false);
-			GL11U.setUpOpaqueRendering(2);
-			int width=8,height=(int)Math.max(((size.y-width)*((float)size.y/(float)maxHeight)),10);
-			
-			GL11U.glColor(new Color(160, 160, 160, 55).hashCode());
-			drawModalRectWithCustomSizedTexture((pos.x+size.x-width)-1, pos.y-1, 0, 0, width+2, size.y-width+2, 0, 0);
-			
-			GL11U.glColor(new Color(160, 160, 160, (int)(75*sliderYCol.getPoint())).hashCode());
-			drawModalRectWithCustomSizedTexture(pos.x+(size.x-width), (int)(pos.y+(size.y-height)*sliderY), 0, 0, width, height-width, 0, 0);
-			
-			GL11U.texture(true);
-			GL11U.endOpaqueRendering();
-		}
-		if(maxWidth>size.x){
-			GL11U.texture(false);
-			GL11U.setUpOpaqueRendering(2);
-			int height=8,width=Math.max((int)((size.x-height)*((float)size.x/(float)maxWidth)),10);
-			
-			GL11U.glColor(new Color(160, 160, 160, 55).hashCode());
-			drawModalRectWithCustomSizedTexture((pos.x)-1, pos.y+size.y-height-1, 0, 0, size.x-height+2, height+2, 0, 0);
-			
-			GL11U.glColor(new Color(160, 160, 160, (int)(75*sliderXCol.getPoint())).hashCode());
-			drawModalRectWithCustomSizedTexture((int)(pos.x+(size.x-width-height)*sliderX), pos.y+size.y-height, 0, 0, width, height, 0, 0);
-			
-			GL11U.texture(true);
-			GL11U.endOpaqueRendering();
-		}
+//		if(maxHeight>size.y){
+//			GL11U.texture(false);
+//			GL11U.setUpOpaqueRendering(2);
+//			int width=8,height=(int)Math.max(((size.y-width)*((float)size.y/(float)maxHeight)),10);
+//			
+//			GL11U.glColor(new Color(160, 160, 160, 55).hashCode());
+//			drawModalRectWithCustomSizedTexture((pos.x+size.x-width)-1, pos.y-1, 0, 0, width+2, size.y-width+2, 0, 0);
+//			
+//			GL11U.glColor(new Color(160, 160, 160, (int)(75*sliderYCol.getPoint())).hashCode());
+//			drawModalRectWithCustomSizedTexture(pos.x+(size.x-width), (int)(pos.y+(size.y-height)*sliderY), 0, 0, width, height-width, 0, 0);
+//			
+//			GL11U.texture(true);
+//			GL11U.endOpaqueRendering();
+//		}
+//		if(maxWidth>size.x){
+//			GL11U.texture(false);
+//			GL11U.setUpOpaqueRendering(2);
+//			int height=8,width=Math.max((int)((size.x-height)*((float)size.x/(float)maxWidth)),10);
+//			
+//			GL11U.glColor(new Color(160, 160, 160, 55).hashCode());
+//			drawModalRectWithCustomSizedTexture((pos.x)-1, pos.y+size.y-height-1, 0, 0, size.x-height+2, height+2, 0, 0);
+//			
+//			GL11U.glColor(new Color(160, 160, 160, (int)(75*sliderXCol.getPoint())).hashCode());
+//			drawModalRectWithCustomSizedTexture((int)(pos.x+(size.x-width-height)*sliderX), pos.y+size.y-height, 0, 0, width, height, 0, 0);
+//			
+//			GL11U.texture(true);
+//			GL11U.endOpaqueRendering();
+//		}
+		ySlider.render();
+		xSlider.render();
 	}
 
 	protected void rednerText(FontRendererMClipped fr){
@@ -368,7 +352,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 		Vec2i first=selection.obj1;
 		Vec2i last=selection.obj2;
 		
-		float xOffset=-sliderX*(maxWidth-size.x),yOffset=-sliderY*((textBuffer.size()+1)*fr.FONT_HEIGHT-size.y);
+		float xOffset=-getSlideableOffset().x,yOffset=-getSlideableOffset().y;
 		if(first.y==last.y){
 			int x1=fr.getStringWidth(getLine(first.y).substring(0, first.x));
 			int x2=fr.getStringWidth(getLine(first.y).substring(0, last.x));
@@ -408,7 +392,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 			deleteSelection();
 			return;
 		}
-		if(getCursorPosition().equals(Vec2i.zero))
+		if(getCursorPosition().equals(Vec2i.zero()))
 			return;
 		if(getCursorPosition().x==0){
 			StringBuilder line=getCurrentLine();
@@ -513,7 +497,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	}
 
 	private void left(){
-		if(getCursorPosition().equals(Vec2i.zero))return;
+		if(getCursorPosition().equals(Vec2i.zero()))return;
 		prevXPos=getCursorPosition().x;
 		if(getCursorPosition().x==0){
 			setCursorPositionInternal(new Vec2i(getLength(getCursorPosition().y-1), getCursorPosition().y-1));
@@ -685,7 +669,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	}
 
 	public GuiTextEditor setText(String text){
-		setCursorPositionInternal(Vec2i.zero);
+		setCursorPositionInternal(Vec2i.zero());
 		textBuffer.clear();
 		cachedWidth.clear();
 		addLine(new StringBuilder());
@@ -720,7 +704,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	}
 	
 	public void selectAll(){
-		selectionStart=Vec2i.zero;
+		selectionStart=Vec2i.zero();
 		setCursorPosition(getLastPosition());
 	}
 	
@@ -788,7 +772,7 @@ public class GuiTextEditor extends Gui implements Updateable{
 	private Vec2i findCharAtPos(int mx, int my){
 		FontRendererMBase fr=Font.FRB();
 		try{
-			float offsetX=sliderX*(maxWidth-size.x),offsetY=sliderY*((textBuffer.size()+1)*fr.FONT_HEIGHT-size.y);
+			float offsetX=getSlideableOffset().x,offsetY=getSlideableOffset().y;
 			mx+=offsetX;
 			my+=offsetY;
 			int y=my-pos.y;
@@ -883,61 +867,14 @@ public class GuiTextEditor extends Gui implements Updateable{
 			int side=rool>0?1:-1;
 			if(GuiScreen.isCtrlKeyDown())side*=5;
 			for(int i=0;i<rool*side;i++){
-				float move=0;
 				
-				if(!GuiScreen.isShiftKeyDown()){
-					
-					if(maxHeight>size.y){
-						int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
-						move=(float)height/(float)size.y*-side/3.5F;
-						
-						sliderY=snap(sliderY+move, 0, 1);
-					}
-				}
-				else{
-					if(maxWidth>size.x){
-						int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
-						move=(float)width/(float)size.x*-side/3.5F;
-						
-						sliderX=snap(sliderX+move, 0, 1);
-					}
-				}
+				if(GuiScreen.isShiftKeyDown())getSlideableOffset().x-=9*side;
+				else getSlideableOffset().y-=9*side;
 			}
-		}else if(Mouse.isButtonDown(0)&&isSelected()){
-			Vec2i mouse1=mouse.sub(size);
-			if(mouse.x<10){
-				int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
-				sliderX=snap(sliderX+((float)width/(float)size.x*+(mouse.x-10)/20F)/3.5F, 0, 1);
-			}
-			if(mouse.y<10){
-				int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
-				sliderY=snap(sliderY+((float)height/(float)size.y*+(mouse.y-10)/20F)/3.5F, 0, 1);
-			}
-			if(mouse1.x>-10){
-				int width=Math.max((int)((size.x-8)*((float)size.x/(float)maxWidth)),10);
-				sliderX=snap(sliderX+((float)width/(float)size.x*+(mouse1.x+10)/20F)/3.5F, 0, 1);
-			}
-			if(mouse1.y>-10){
-				int height=(int)Math.max(((size.y-8)*((float)size.y/(float)maxHeight)),10);
-				sliderY=snap(sliderY+((float)height/(float)size.y*+(mouse1.y+10)/20F)/3.5F, 0, 1);
-			}
-			
 		}
 		
-		prevSliderX=sliderX;
-		if((Mouse.isButtonDown(0)?size.y-mouseClick.y<=8:false)||size.y-mouse.y<=8){
-			if(Mouse.isButtonDown(0))sliderXCol.wantedPoint=1;
-			else sliderXCol.wantedPoint=0.5F;
-		}
-		else sliderXCol.wantedPoint=0.2F;
-		
-		if((Mouse.isButtonDown(0)?size.x-mouseClick.x<=8:false)||size.x-mouse.x<=8){
-			if(Mouse.isButtonDown(0))sliderYCol.wantedPoint=1;
-			else sliderYCol.wantedPoint=0.5F;
-		}
-		else sliderYCol.wantedPoint=0.2F;
-		sliderXCol.update();
-		sliderYCol.update();
+		xSlider.update();
+		ySlider.update();
 	}
 	public Vec2i getCursorPosition(){
 		fixCursor();
@@ -952,5 +889,41 @@ public class GuiTextEditor extends Gui implements Updateable{
 	protected void fixCursor(){
 		cursorPosition.y=snap(cursorPosition.y, 0, Math.max(0, textBuffer.size()-1));
 		cursorPosition.x=snap(cursorPosition.x, 0, Math.max(0, getLength(cursorPosition.y)));
+	}
+
+	@Override
+	public Vec2i getSize(){
+		return size;
+	}
+
+	@Override
+	public Vec2i getPos(){
+		return pos;
+	}
+
+	@Override
+	public Vec2i getSlideableSize(){
+		return new Vec2i(maxWidth+18, (textBuffer.size()+2)*Font.FRB().FONT_HEIGHT);
+	}
+
+	@Override
+	public Vec2i getMousePos(){
+		return mouse.add(getPos());
+	}
+
+	@Override
+	public void setSlideableOffset(Vector2f offset){
+		textOffset=offset;
+		fixSlideableOffset();
+	}
+
+	@Override
+	public Vector2f getSlideableOffset(){
+		fixSlideableOffset();
+		return textOffset;
+	}
+	private void fixSlideableOffset(){
+		textOffset.x=UtilM.snap(textOffset.x, 0, Math.max(0, maxWidth-size.x+18));
+		textOffset.y=UtilM.snap(textOffset.y, 0, Math.max(0, (textBuffer.size()+2)*Font.FRB().FONT_HEIGHT-size.y));
 	}
 }

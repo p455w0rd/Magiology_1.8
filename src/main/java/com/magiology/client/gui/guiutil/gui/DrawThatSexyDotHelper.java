@@ -3,6 +3,7 @@ package com.magiology.client.gui.guiutil.gui;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.Gui;
 
@@ -55,8 +56,8 @@ public class DrawThatSexyDotHelper extends Gui{
 		isUpdated=false;
 		x=x3;y=y3;
 		if(!isUpdated){
-			double scale=UtilM.calculatePos(prevScale, this.scale);
-			double rotation=UtilM.calculatePos(prevRotation, this.rotation);
+			double scale=PartialTicksUtil.calculatePos(prevScale, this.scale);
+			double rotation=PartialTicksUtil.calculatePos(prevRotation, this.rotation);
 			
 			double scal=scale-1.2;
 			double xR=x-scal*7.5,yR=y-scal*7.5;

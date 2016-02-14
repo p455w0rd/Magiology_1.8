@@ -10,13 +10,13 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.SavableData;
 import com.magiology.api.SavableData.SavableDataHandler;
 import com.magiology.api.network.interfaces.registration.InterfaceBinder;
-import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Plane;
 import com.magiology.util.utilobjects.vectors.Ray;
@@ -160,8 +160,8 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float length){
 		Object[][] result={{},{}};
 		try{
-			Vec3M Vec3M=UtilM.getPosition(player,RenderEvents.partialTicks);
-			Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(RenderEvents.partialTicks));
+			Vec3M Vec3M=UtilM.getPosition(player,PartialTicksUtil.partialTicks);
+			Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(PartialTicksUtil.partialTicks));
 			Vec3M vec32=Vec3M.addVector(vec31.x * length, vec31.y * length, vec31.z * length);
 			
 			Ray ray=new Ray(Vec3M, vec32);

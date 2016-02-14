@@ -8,6 +8,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -40,7 +41,7 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
 	public void drawButton(Minecraft p_146112_1_, int x, int y){
 		if (this.visible){
-			float r=UtilM.calculatePos(prevR, this.r),g=UtilM.calculatePos(prevG, this.g),b=UtilM.calculatePos(prevB, this.b),alpha=UtilM.calculatePos(prevAlpha, this.alpha);
+			float r=PartialTicksUtil.calculatePos(prevR, this.r),g=PartialTicksUtil.calculatePos(prevG, this.g),b=PartialTicksUtil.calculatePos(prevB, this.b),alpha=PartialTicksUtil.calculatePos(prevAlpha, this.alpha);
 			FontRenderer fr = TessUtil.getFontRenderer();
 			p_146112_1_.getTextureManager().bindTexture(Textures.ISidedIns);
 			this.hovered=x>=this.xPosition&&y>=this.yPosition&&x<this.xPosition+this.width&&y<this.yPosition+this.height;

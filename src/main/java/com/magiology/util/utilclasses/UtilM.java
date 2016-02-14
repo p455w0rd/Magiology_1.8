@@ -27,7 +27,6 @@ import com.google.common.collect.ImmutableMap;
 import com.magiology.core.Config;
 import com.magiology.core.MReference;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.forgepowered.packets.core.AbstractPacket;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage;
 import com.magiology.forgepowered.packets.core.AbstractToClientMessage.SendingTarget.TypeOfSending;
@@ -36,6 +35,7 @@ import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
 import com.magiology.util.utilobjects.vectors.Plane;
@@ -283,7 +283,7 @@ public class UtilM{
 		return str!=null&&(str.equals("true")||str.equals("false"));
 	}
 	public static double snap(double value,double min,double max){
-		if(min>=max)return value;
+		if(min>max)return value;
 		if(value<min)value=min;
 		if(value>max)value=max;
 		return value;
@@ -314,22 +314,6 @@ public class UtilM{
 				else if(msg.target.typeOfSending==TypeOfSending.ToDimension)Magiology.NETWORK_CHANNEL.sendToDimension(msg, msg.target.world.provider.getDimensionId());
 			}
 		}
-	}
-	public static float[][] calculateDoublePosArray(float[][] prevPos,float[][] pos){
-		if(pos.length!=prevPos.length)return null;
-		float[][] result=null;
-		for(int a=0;a<pos.length;a++)result=ArrayUtils.add(result, calculatePosArray(prevPos[a], pos[a]));
-		return result;
-	}
-	public static float[] calculatePosArray(final float[] prevPos,final float[] pos){
-		if(pos.length!=prevPos.length)return null;
-		float[] result=null;
-		for(int a=0;a<pos.length;a++)result=ArrayUtils.add(result, calculatePos(prevPos[a], pos[a]));
-		return result;
-	}
-
-	public static float calculatePos(final double prevPos,final double pos){
-		return (float)(prevPos+(pos-prevPos)*RenderEvents.partialTicks);
 	}
 	public static float[][] addToDoubleFloatArray(final float[][] array1,final float[][] array2){
 		float[][] result=array1.clone();
@@ -404,7 +388,7 @@ public class UtilM{
 		float
 			fluctuate=fluctuate(speed, offset),
 			prevFluctuate=fluctuate(speed, offset-1);
-		return calculatePos(prevFluctuate, fluctuate);
+		return PartialTicksUtil.calculatePos(prevFluctuate, fluctuate);
 	}
 	public static float fluctuate(double speed, double offset){
 		long wtt=(long)(getTheWorld().getTotalWorldTime()+offset);
@@ -481,10 +465,10 @@ public class UtilM{
 		return angle2.crossProduct(angle1).normalize();
 	}
 	public static ColorF calculateRenderColor(ColorF prevColor, ColorF color){
-		return new ColorF(calculatePos(prevColor.r, color.r),
-						  calculatePos(prevColor.g, color.g),
-						  calculatePos(prevColor.b, color.b),
-						  calculatePos(prevColor.a, color.a));
+		return new ColorF(PartialTicksUtil.calculatePos(prevColor.r, color.r),
+						  PartialTicksUtil.calculatePos(prevColor.g, color.g),
+						  PartialTicksUtil.calculatePos(prevColor.b, color.b),
+						  PartialTicksUtil.calculatePos(prevColor.a, color.a));
 	}
 	public static ColorF slowlyEqalizeColor(ColorF variable, ColorF goal, float speed){
 		return new ColorF(slowlyEqualize(variable.r, goal.r, speed),

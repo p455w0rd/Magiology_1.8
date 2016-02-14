@@ -26,6 +26,7 @@ import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.EntityPosAndBB;
 
 import net.minecraft.block.Block;
@@ -55,8 +56,6 @@ public class RenderEvents{
 	public static List<EntityPosAndBB> entitys=new ArrayList<EntityPosAndBB>();
 	public static List<HUD> FPGui=new ArrayList<HUD>();
 	public static int disabledEquippItemAnimationTime=0;
-	
-	public static float partialTicks=0;
 	
 	public static void registerFirstPersonGui(HUD gui){
 		
@@ -131,7 +130,7 @@ public class RenderEvents{
 	
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderWorldLast(RenderWorldLastEvent e){
-		RenderEvents.partialTicks=e.partialTicks;
+		PartialTicksUtil.partialTicks=e.partialTicks;
 		TessUtil.renderParticle();
 		EntityPlayer player = UtilM.getThePlayer();
 		
@@ -155,14 +154,14 @@ public class RenderEvents{
 		if(!Minecraft.isGuiEnabled()||e.type!=ElementType.CHAT)return;
 		ScaledResolution res=e.resolution;
 		EntityPlayer player=UtilM.getThePlayer();
-		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), RenderEvents.partialTicks);
+		FakeMessageHUD.get().render(res.getScaledWidth(), res.getScaledHeight(), PartialTicksUtil.partialTicks);
 		OpenGLM.pushMatrix();
 		OpenGLM.translate(0, 0, -10);
 		for(int a=0;a<FPGui.size();a++){
 			HUD gui=FPGui.get(a);
 			OpenGLM.pushMatrix();
 			gui.player=player;
-			gui.render(res.getScaledWidth(), res.getScaledHeight(), RenderEvents.partialTicks);
+			gui.render(res.getScaledWidth(), res.getScaledHeight(), PartialTicksUtil.partialTicks);
 			OpenGLM.popMatrix();
 		}
 		OpenGLM.popMatrix();
@@ -179,7 +178,7 @@ public class RenderEvents{
 		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 			float rotation=0;
-			if(data!=null)rotation=UtilM.calculatePos(data.prevPlayerAngle, data.playerAngle);
+			if(data!=null)rotation=PartialTicksUtil.calculatePos(data.prevPlayerAngle, data.playerAngle);
 			GL11U.glRotate(0, -player.rotationYaw, 0);
 			OpenGLM.translate(0,-player.height+player.width/2, 0);
 			GL11U.glRotate(rotation,0,0);

@@ -1,6 +1,6 @@
 package com.magiology.util.renderers;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 public class PartialTicks1F{
 	
@@ -17,6 +17,6 @@ public class PartialTicks1F{
 	}
 	
 	public float get(){
-		return UtilM.calculatePos(prevValue, value);
+		return PartialTicksUtil.calculatePos(prevValue, value);
 	}
 }

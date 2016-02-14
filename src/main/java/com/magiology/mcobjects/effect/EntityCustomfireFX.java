@@ -9,6 +9,7 @@ import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntityCloudFXM;
 import com.magiology.util.utilobjects.m_extension.effect.EntityLavaFXM;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
@@ -81,7 +82,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		
 		OpenGLM.pushMatrix();
 		OpenGLM.translate(x,y,z);
-		GL11U.glRotate(UtilM.calculatePosArray(prevRoration, roration));
+		GL11U.glRotate(PartialTicksUtil.calculatePos(prevRoration, roration));
 		OpenGLM.translate(-x, -y, -z);
 		
 		OpenGLM.pushMatrix();

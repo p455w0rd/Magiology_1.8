@@ -7,6 +7,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +33,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 		TessUtil.getVB().cleanUp();
 		
 		int tim=(int)((UtilM.getTheWorld().getTotalWorldTime())%20);
-		float st=UtilM.calculatePos(tim, tim+1)/10F;
+		float st=PartialTicksUtil.calculatePos(tim, tim+1)/10F;
 		for(int a=0;a<(upgraded?6:2);a++){
 			float width=1;
 			{
@@ -48,7 +49,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 				}break;
 				}
 				TessUtil.drawLine(td.x1, td.y1, td.z1, td.x2, td.y2, td.z2, width/20, true,TessUtil.getVB(),st,1);
-				OpenGLM.color(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*UtilM.calculatePos(prevAlpha,alpha));
+				OpenGLM.color(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*PartialTicksUtil.calculatePos(prevAlpha,alpha));
 				OpenGLM.depthMask(false);
 				OpenGLM.disableCull();
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"textures/models/visual_connection.png"));

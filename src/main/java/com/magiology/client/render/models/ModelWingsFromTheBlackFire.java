@@ -9,7 +9,7 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFro
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.vectors.QuadUV;
 
 import net.minecraft.client.model.ModelBiped;
@@ -114,9 +114,9 @@ public class ModelWingsFromTheBlackFire extends ModelBiped{
 		CyborgWingsFromTheBlackFireData data=validateForRender(player);
 		if(data==null)return;
 		float rotation=0;
-		rotation=UtilM.calculatePos(data.prevPlayerAngle, data.playerAngle);
+		rotation=PartialTicksUtil.calculatePos(data.prevPlayerAngle, data.playerAngle);
 		float[][] renderRotations=new float[7][3];
-		for(int a=0;a<data.calcRotationAnglesBase.length;a++)for(int a1=0;a1<data.calcRotationAnglesBase[a].length;a1++)renderRotations[a][a1]=UtilM.calculatePos(data.calcPrevRotationAnglesBase[a][a1],data.calcRotationAnglesBase[a][a1]);
+		for(int a=0;a<data.calcRotationAnglesBase.length;a++)for(int a1=0;a1<data.calcRotationAnglesBase[a].length;a1++)renderRotations[a][a1]=PartialTicksUtil.calculatePos(data.calcPrevRotationAnglesBase[a][a1],data.calcRotationAnglesBase[a][a1]);
 		if(models==null)init(renderRotations);
 		//rendering
 		GL11U.protect();

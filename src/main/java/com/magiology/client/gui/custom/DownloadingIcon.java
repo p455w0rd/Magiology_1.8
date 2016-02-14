@@ -10,6 +10,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 
 import net.minecraft.util.ResourceLocation;
@@ -44,7 +45,7 @@ public class DownloadingIcon {
 		for(Drop drop:drops){
 			OpenGLM.pushMatrix();
 			OpenGLM.color(1, 1, 1, drop.alpha);
-			OpenGLM.translate(U.calculatePos(drop.prevPos.x, drop.pos.x), U.calculatePos(drop.prevPos.y, drop.pos.y), 0);
+			OpenGLM.translate(PartialTicksUtil.calculatePos(drop.prevPos.x, drop.pos.x), PartialTicksUtil.calculatePos(drop.prevPos.y, drop.pos.y), 0);
 			GL11U.glRotate(0, 0, -drop.scale*drop.alpha*180, 14, 25, 0);
 			
 			HUD.drawRect(1F/368, 1F/399, 0, 0, 340, 0, 28, 51);

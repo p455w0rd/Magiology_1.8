@@ -10,6 +10,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.FontRenderer;
 
@@ -30,7 +31,7 @@ public class HandModeChangerHUD extends HUD{
 		FontRenderer fr=TessUtil.getFontRenderer();
 		if(UtilM.isNull(player,fr))return;
 		if(handAlpha>0&&UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem())){
-			float HandAlpha=UtilM.calculatePos(lastHandAlpha,handAlpha);
+			float HandAlpha=PartialTicksUtil.calculatePos(lastHandAlpha,handAlpha);
 			int slot=player.inventory.currentItem;
 			OpenGLM.pushMatrix();
 			

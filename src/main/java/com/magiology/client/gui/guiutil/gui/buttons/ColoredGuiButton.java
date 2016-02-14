@@ -5,6 +5,7 @@ import java.awt.Color;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -50,7 +51,7 @@ public class ColoredGuiButton extends GuiButton{
 	public void drawButton(Minecraft v1, int v2, int v3){
 		if (this.visible)
 		{
-			float r=UtilM.calculatePos(prevR, this.r),g=UtilM.calculatePos(prevG, this.g),b=UtilM.calculatePos(prevB, this.b),alpha=UtilM.calculatePos(prevAlpha, this.alpha);
+			float r=PartialTicksUtil.calculatePos(prevR, this.r),g=PartialTicksUtil.calculatePos(prevG, this.g),b=PartialTicksUtil.calculatePos(prevB, this.b),alpha=PartialTicksUtil.calculatePos(prevAlpha, this.alpha);
 			FontRenderer fontrenderer = v1.fontRendererObj;
 			v1.getTextureManager().bindTexture(buttonTextures);
 			OpenGLM.color(r,g,b,alpha);

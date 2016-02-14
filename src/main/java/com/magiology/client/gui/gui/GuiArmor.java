@@ -4,13 +4,13 @@ import com.magiology.client.gui.container.ArmorContainer;
 import com.magiology.client.gui.custom.guiparticels.GuiStandardFX;
 import com.magiology.client.gui.guiutil.gui.buttons.InvisivleGuiButton;
 import com.magiology.core.MReference;
-import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -110,7 +110,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 	
 	public void drawSmartShit(){
 		OpenGLM.pushMatrix();
-		OpenGLM.translate(0, prevSliderPos+(sliderPos-prevSliderPos)*RenderEvents.partialTicks, 0);
+		OpenGLM.translate(0, prevSliderPos+(sliderPos-prevSliderPos)*PartialTicksUtil.partialTicks, 0);
 		double scale=0.5;
 		int x=6,y=6+48;
 		OpenGLM.translate(x, y, 0);
@@ -202,7 +202,7 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		playerButton.xPosition=(int)playerXPos-10;
 		playerButton.yPosition=(int)-playerYPos-26;
 		OpenGLM.pushMatrix();
-		float posY=(float)(prevPlayerYPos+(playerYPos-prevPlayerYPos)*RenderEvents.partialTicks);
+		float posY=(float)(prevPlayerYPos+(playerYPos-prevPlayerYPos)*PartialTicksUtil.partialTicks);
 //		posY=(float)playerYPos;
 		OpenGLM.translate(playerXPos,-posY, 0);
 		TessUtil.drawPlayerIntoGUI(0, 0, 11, (float)playerXPos-v2 , (-posY)-v3, this.mc.thePlayer);

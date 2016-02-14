@@ -30,6 +30,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
@@ -74,6 +75,7 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 		try{
 			return new GuiJSProgramEditor(player, pos);
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -86,7 +88,6 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 		ySize=166;
 		programLog.viewOnly=true;
 		tilePos=pos;
-		((GuiJavaScriptEditor)programSrc).runPos=pos;
 	}
 	
 	@Override
@@ -351,7 +352,7 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 				else logDataNew.add(new StringBuilder(line));
 			}
 			programLog.setText(UtilM.join("\n",logDataNew.toArray()));
-			programLog.sliderY=1;
+			programLog.getSlideableOffset().y=1;
 			UtilM.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
 			
 		}else if(selected){

@@ -11,6 +11,7 @@ import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
@@ -37,7 +38,7 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		}
 		if(var1)RenderEvents.spawnLARR(new TwoDotsLineRender(new TwoDots(tile.x()+0.5, tile.y()+0.5, tile.z()+0.5, tile.transferp.getX()+0.5, tile.transferp.getY()+0.5, tile.transferp.getZ()+0.5),tile));
 		
-		float rotation=UtilM.calculatePos(tile.prevRotation,tile.rotation);
+		float rotation=PartialTicksUtil.calculatePos(tile.prevRotation,tile.rotation);
 		OpenGLM.pushMatrix();
 		OpenGLM.translate(posX,posY,posZ);
 		OpenGLM.enableCull();

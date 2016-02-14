@@ -18,6 +18,7 @@ import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.vectors.QuadUV;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -419,13 +420,13 @@ public class TessUtil{
 	}
 	public static float calculateRenderPos(Entity entity, char xyz){
 		if((""+xyz).toLowerCase().equals("x")){
-			return UtilM.calculatePos(entity.lastTickPosX,entity.posX);
+			return PartialTicksUtil.calculatePos(entity.lastTickPosX,entity.posX);
 		}
 		if((""+xyz).toLowerCase().equals("y")){
-			return UtilM.calculatePos(entity.lastTickPosY,entity.posY);
+			return PartialTicksUtil.calculatePos(entity.lastTickPosY,entity.posY);
 		}
 		if((""+xyz).toLowerCase().equals("z")){
-			return UtilM.calculatePos(entity.lastTickPosZ,entity.posZ);
+			return PartialTicksUtil.calculatePos(entity.lastTickPosZ,entity.posZ);
 		}
 		PrintUtil.println(xyz,"is not a valid key! Use x or y or z.");
 		return -1;
