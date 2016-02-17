@@ -2,14 +2,12 @@ package com.magiology.client.render.font;
 
 import java.awt.Rectangle;
 
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.util.ResourceLocation;

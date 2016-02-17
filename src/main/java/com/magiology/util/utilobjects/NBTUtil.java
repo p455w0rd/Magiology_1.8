@@ -44,7 +44,7 @@ public class NBTUtil{
 		getNBT(stack).setShort(key, keyValue);
 	}
 	public static int getInt(ItemStack stack, String key){
-		return getNBT(stack).getInteger(key);
+		return hasNBT(stack)?getNBT(stack).getInteger(key):0;
 	}
 	public static void setInt(ItemStack stack, String key, int keyValue){
 		createNBT(stack);

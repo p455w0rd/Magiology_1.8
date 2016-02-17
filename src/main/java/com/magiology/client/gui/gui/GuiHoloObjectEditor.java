@@ -33,10 +33,9 @@ import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;

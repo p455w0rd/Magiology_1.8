@@ -24,9 +24,9 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
-import com.magiology.util.utilobjects.vectors.PhysicsVec3F;
 import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsVec3F;
 
 public class MainMenuUpdateNotificationHUD extends HUD{
 	

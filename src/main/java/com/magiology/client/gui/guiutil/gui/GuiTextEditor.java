@@ -22,12 +22,11 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 
 import net.minecraft.client.gui.Gui;
@@ -267,18 +266,18 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 		GL11U.texture(true);
 		
 		OpenGLM.pushMatrix();
-		float xOffset=-getSlideableOffset().x,yOffset=-getSlideableOffset().y;
-		OpenGLM.translate(xOffset, yOffset, 0);
+		Vector2f offset=PartialTicksUtil.calculatePos(prevTextOffset, getSlideableOffset()).negate(null);
+		OpenGLM.translate(offset.x, offset.y, 0);
 		if(active&&isSelected()){
 			renderSelection(0xFFDFB578);
 		}
 		
-		OpenGLM.translate(-xOffset, -yOffset, 0);
+		OpenGLM.translate(-offset.x, -offset.y, 0);
 		buff.pushMatrix();
-		buff.translate(xOffset, yOffset, 0);
+		buff.translate(offset.x, offset.y, 0);
 		rednerText(fr);
 		buff.popMatrix();
-		OpenGLM.translate(xOffset, yOffset, 0);
+		OpenGLM.translate(offset.x, offset.y, 0);
 		
 		if(active&&isSelected()){
 			GL11U.blendFunc(4);
@@ -287,7 +286,7 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 		}
 		
 		if(active){
-			Rectangle box=new Rectangle(pos.x-2-(int)xOffset,pos.y-2-(int)yOffset,size.x+4, size.y+4);
+			Rectangle box=new Rectangle(pos.x-2-(int)offset.x,pos.y-2-(int)offset.y,size.x+4, size.y+4);
 			if(getWorldTime(getTheWorld())/6%2==0){
 				if(getCursorPosition().x>getCurrentLine().length())getCursorPosition().x=getCurrentLine().length();
 				int cursorX=pos.x+fr.getStringWidth(getCurrentLine().substring(0, getCursorPosition().x));
@@ -352,34 +351,35 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 		Vec2i first=selection.obj1;
 		Vec2i last=selection.obj2;
 		
-		float xOffset=-getSlideableOffset().x,yOffset=-getSlideableOffset().y;
+		Vector2f offset=PartialTicksUtil.calculatePos(prevTextOffset, getSlideableOffset()).negate(null);
+		
 		if(first.y==last.y){
 			int x1=fr.getStringWidth(getLine(first.y).substring(0, first.x));
 			int x2=fr.getStringWidth(getLine(first.y).substring(0, last.x));
-			int min=(int)Math.max(pos.x+x1, pos.x-xOffset-2),max=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2);
-			if(min<max)drawRect(min, (int)Math.max(pos.y+first.y*fr.FONT_HEIGHT,pos.y-yOffset-2), max, pos.y+(first.y+1)*fr.FONT_HEIGHT,color);
+			int min=(int)Math.max(pos.x+x1, pos.x-offset.x-2),max=(int)Math.min(pos.x+x2, pos.x+size.x-offset.x+2);
+			if(min<max)drawRect(min, (int)Math.max(pos.y+first.y*fr.FONT_HEIGHT,pos.y-offset.y-2), max, pos.y+(first.y+1)*fr.FONT_HEIGHT,color);
 		}else{
 			int x1=fr.getStringWidth(getLine(first.y).substring(0, first.x));
 			int x2=cachedWidth.get(first.y);
 			{
 				int 
-					minX=(int)Math.max(pos.x+x1, pos.x-xOffset-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2),
-					minY=(int)Math.max(pos.y+first.y*fr.FONT_HEIGHT, pos.y-yOffset-2),maxY=(int)Math.min(pos.y+(first.y+1)*fr.FONT_HEIGHT, pos.y+size.y-yOffset+3);
+					minX=(int)Math.max(pos.x+x1, pos.x-offset.x-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-offset.x+2),
+					minY=(int)Math.max(pos.y+first.y*fr.FONT_HEIGHT, pos.y-offset.y-2),maxY=(int)Math.min(pos.y+(first.y+1)*fr.FONT_HEIGHT, pos.y+size.y-offset.y+3);
 				if(minX<maxX&&minY<maxY)drawRect(minX, minY, maxX, maxY, color);
 			}
 			for(int i=0;i<last.y-first.y-1;i++){
 				x2=cachedWidth.get(first.y+i+1);
 				int 
-					minX=(int)Math.max(pos.x, pos.x-xOffset-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2),
-					minY=(int)Math.max(pos.y+(first.y+i+1)*fr.FONT_HEIGHT, pos.y-yOffset-2),maxY=(int)Math.min(pos.y+(first.y+i+2)*fr.FONT_HEIGHT, pos.y+size.y-yOffset+3);
+					minX=(int)Math.max(pos.x, pos.x-offset.x-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-offset.x+2),
+					minY=(int)Math.max(pos.y+(first.y+i+1)*fr.FONT_HEIGHT, pos.y-offset.y-2),maxY=(int)Math.min(pos.y+(first.y+i+2)*fr.FONT_HEIGHT, pos.y+size.y-offset.y+3);
 				if(minX<maxX&&minY<maxY)drawRect(minX, minY, maxX, maxY, color);
 			}
 
 			x2=fr.getStringWidth(getLine(last.y).substring(0, last.x));
 			
 			int 
-				minX=(int)Math.max(pos.x, pos.x-xOffset-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-xOffset+2),
-				minY=(int)Math.max(pos.y+last.y*fr.FONT_HEIGHT, pos.y-yOffset-2),maxY=(int)Math.min(pos.y+(last.y+1)*fr.FONT_HEIGHT, pos.y+size.y-yOffset+3);
+				minX=(int)Math.max(pos.x, pos.x-offset.x-2),maxX=(int)Math.min(pos.x+x2, pos.x+size.x-offset.x+2),
+				minY=(int)Math.max(pos.y+last.y*fr.FONT_HEIGHT, pos.y-offset.y-2),maxY=(int)Math.min(pos.y+(last.y+1)*fr.FONT_HEIGHT, pos.y+size.y-offset.y+3);
 			if(minX<maxX&&minY<maxY)drawRect(minX, minY, maxX, maxY, color);
 		}
 	}
@@ -860,6 +860,8 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 	@Override
 	public void update(){
 		if(!visible||!active)return;
+		prevTextOffset=new Vector2f((getSlideableOffset().x*3+prevTextOffset.x)/4, (getSlideableOffset().y*3+prevTextOffset.y)/4);
+		
 		int maxHeight=(textBuffer.size()+1)*Get.Render.Font.FRB().FONT_HEIGHT;
 		
 		int rool=Mouse.getDWheel()/120;

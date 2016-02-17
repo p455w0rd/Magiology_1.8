@@ -2,11 +2,11 @@ package com.magiology.core.init;
 
 import com.magiology.forgepowered.packets.core.AbstractPacket;
 import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
+import com.magiology.forgepowered.packets.packets.HoloObjectUploadPacket;
 import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.forgepowered.packets.packets.OpenGuiPacket;
 import com.magiology.forgepowered.packets.packets.OpenProgramContainerInGui;
-import com.magiology.forgepowered.packets.packets.HoloObjectUploadPacket;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.SavableDataWithKeyPacket;
 import com.magiology.forgepowered.packets.packets.SendPlayerDataPacket;

@@ -1,16 +1,8 @@
 package com.magiology.api.lang;
 
-import com.magiology.api.lang.bridge.NetworkProgramHolderWrapper;
-import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.lang.program.ProgramUsable;
-import com.magiology.client.render.tilerender.network.RenderNetworkInterface;
-import com.magiology.client.render.tilerender.network.RenderNetworkRouter;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Vec3i;
-import net.minecraft.world.World;
 
 public interface JSProgramContainer{
 	

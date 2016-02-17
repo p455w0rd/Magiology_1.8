@@ -1,7 +1,5 @@
 package com.magiology.api.lang;
 
-import com.magiology.api.lang.program.ProgramUsable;
-
 public interface ICommandInteract{
 	public void sendCommand();
 	public Object onCommandReceive(String command);

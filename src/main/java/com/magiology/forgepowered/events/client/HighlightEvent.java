@@ -96,7 +96,6 @@ public class HighlightEvent{
 			if(event.target.typeOfHit==MovingObjectType.BLOCK){
 				if(event.target.hitVec==null)return;
 				
-				
 //				if(tileEn instanceof TileEntityFirePipe){
 //					TileEntityFirePipe ti=((TileEntityFirePipe)tileEn);
 //					

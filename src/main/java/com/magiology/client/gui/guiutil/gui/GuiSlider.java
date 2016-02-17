@@ -5,29 +5,15 @@ import static com.magiology.util.utilclasses.UtilM.*;
 import java.awt.Rectangle;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opencl.CLLinkProgramCallback;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.client.render.font.FontRendererMClipped;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.ObjectProcessor;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.Vec3i;
-import scala.tools.nsc.doc.model.ParameterEntity;
-import scala.tools.reflect.FormatInterpolator.FloatingPointXn;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 public class GuiSlider{
 	

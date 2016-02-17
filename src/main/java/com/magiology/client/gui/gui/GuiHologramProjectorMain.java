@@ -11,8 +11,8 @@ import com.magiology.client.gui.container.ContainerEmpty;
 import com.magiology.client.gui.custom.OnOffGuiButton;
 import com.magiology.client.gui.guiutil.gui.buttons.CleanButton;
 import com.magiology.core.Magiology;
-import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
 import com.magiology.forgepowered.packets.packets.HoloObjectUploadPacket;
+import com.magiology.forgepowered.packets.packets.HologramProjectorUpload;
 import com.magiology.mcobjects.tileentityes.hologram.Button;
 import com.magiology.mcobjects.tileentityes.hologram.Field;
 import com.magiology.mcobjects.tileentityes.hologram.Slider;
@@ -27,7 +27,7 @@ import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;

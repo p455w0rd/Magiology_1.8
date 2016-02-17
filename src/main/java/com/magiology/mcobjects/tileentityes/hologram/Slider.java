@@ -15,7 +15,7 @@ import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 import net.minecraft.entity.player.EntityPlayer;
 

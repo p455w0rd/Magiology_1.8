@@ -8,7 +8,7 @@ import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

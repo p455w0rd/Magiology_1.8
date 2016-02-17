@@ -21,7 +21,7 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.SimpleCounter;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiButton;

@@ -18,7 +18,6 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 

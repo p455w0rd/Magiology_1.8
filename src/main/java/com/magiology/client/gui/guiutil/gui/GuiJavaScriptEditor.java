@@ -9,9 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 
-import javax.script.Invocable;
-import javax.script.ScriptException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -19,7 +16,6 @@ import org.lwjgl.util.vector.Vector2f;
 import com.magiology.api.lang.program.ProgramCommon;
 import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.client.render.font.FontRendererMClipped;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
@@ -34,9 +30,8 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectProcessor;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 
 public class GuiJavaScriptEditor extends GuiTextEditor{

@@ -9,16 +9,13 @@ import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.api.lang.program.ProgramSerializable;
 import com.magiology.api.lang.program.ProgramUsable;
 import com.magiology.core.init.MCreativeTabs;
-import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.utilclasses.UtilM.U;
-import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Vec3i;
 import net.minecraft.world.World;
 
 public class ProgramContainer extends Item implements JSProgramContainer{

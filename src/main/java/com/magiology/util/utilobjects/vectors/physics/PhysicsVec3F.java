@@ -1,4 +1,6 @@
-package com.magiology.util.utilobjects.vectors;
+package com.magiology.util.utilobjects.vectors.physics;
+
+import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class PhysicsVec3F{
 	

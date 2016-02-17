@@ -3,7 +3,7 @@ package com.magiology.client.render.shaders;
 import com.magiology.client.render.shaders.core.ShaderAspectRenderer;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.CricleUtil;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 public class BlurRenderer extends ShaderAspectRenderer{
 	public static BlurRenderer instance;

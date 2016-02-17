@@ -1,4 +1,4 @@
-package com.magiology.util.utilobjects.vectors;
+package com.magiology.util.utilobjects.vectors.physics;
 
 import java.util.HashMap;
 import java.util.Iterator;

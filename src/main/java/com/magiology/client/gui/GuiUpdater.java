@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.magiology.api.updateable.Updater;
-import com.magiology.util.utilobjects.vectors.Vec2i;
 
 import net.minecraft.entity.player.EntityPlayer;
 

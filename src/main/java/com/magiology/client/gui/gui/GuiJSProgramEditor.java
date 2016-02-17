@@ -30,13 +30,12 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.m_extension.GuiContainerM;
-import com.magiology.util.utilobjects.vectors.PhysicsFloat;
 import com.magiology.util.utilobjects.vectors.Vec2i;
+import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiButton;

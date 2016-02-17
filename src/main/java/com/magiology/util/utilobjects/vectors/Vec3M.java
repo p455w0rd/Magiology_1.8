@@ -14,6 +14,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.utilclasses.UtilM;
 
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.util.Vec3i;
@@ -304,5 +305,23 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	}
 	public double lightProduct(Vec3M vec){
 		return 1-UtilM.snap(normalize().distanceTo(vec.normalize()), 0, 1);
+	}
+	public Vec3M copy(){
+		return new Vec3M(x,y,z);
+	}
+	public Vec3M offset(EnumFacing facing){
+		return offset(facing,1);
+	}
+	public Vec3M offset(EnumFacing facing, float mul){
+		return new Vec3M(x+facing.getFrontOffsetX()*mul, y+facing.getFrontOffsetY()*mul, z+facing.getFrontOffsetZ()*mul);
+	}
+	public float distanceTo(Vec3 vec){
+		double d0 = vec.xCoord - this.x;
+		double d1 = vec.yCoord - this.y;
+		double d2 = vec.zCoord - this.z;
+		return MathHelper.sqrt_double(d0 * d0 + d1 * d1 + d2 * d2);
+	}
+	public Vec3M abs(){
+		return new Vec3M(Math.abs(x), Math.abs(y), Math.abs(z));
 	}
 }
