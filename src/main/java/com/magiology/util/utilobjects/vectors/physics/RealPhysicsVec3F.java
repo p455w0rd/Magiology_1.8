@@ -17,14 +17,13 @@ import net.minecraft.world.World;
 public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 	
 	private float weight=0.1F,airBorneFriction=0.95F,surfaceFriction=0.95F,bounciness=0;
-	private Vec3M pos=new Vec3M(),prevPos=new Vec3M(),velocity=new Vec3M(),prevVelocity=new Vec3M(),lastPos=new Vec3M();
+	private Vec3M pos,prevPos=new Vec3M(),velocity=new Vec3M(),prevVelocity=new Vec3M(),lastPos=new Vec3M();
 	private boolean isWorldClipping=true;
 	private World world;
 	private int moveCount;
 	
 	public RealPhysicsVec3F(World world, Vec3M pos){
 		super(world, pos);
-		PrintUtil.println(pos);
 	}
 	
 	public float getMass(){

@@ -299,7 +299,7 @@ public class UtilM{
 		
 		Vec3M vec3 =new Vec3M(entity.posX, entity.posY, entity.posZ);
 		Vec3M vec31=Vec3M.conv(entity.getLook(var1));
-		Vec3M vec32=vec3.addVector(vec31.x*var1, vec31.y*var1, vec31.z*var1);
+		Vec3M vec32=vec3.add(vec31.x*var1, vec31.y*var1, vec31.z*var1);
 		return entity.worldObj.rayTraceBlocks(vec3.conv(), vec32.conv(), false, false, true);
 	}
 	public static void sendMessage(AbstractPacket message){
@@ -446,7 +446,7 @@ public class UtilM{
 			if(ray.from.z>z){if(printProcess)PrintUtil.println("target behind");return false;}
 			if(ray.to.z<z){if(printProcess)PrintUtil.println("target to far");return false;}
 			AxisAlignedBB Plane=new AxisAlignedBB(plane.q.x, plane.q.y, plane.q.z, plane.s.x, plane.s.y, plane.s.z+0.01);
-			MovingObjectPosition rayTrace=Plane.calculateIntercept(ray.from.addVector(0, 0.1, 0).conv(), ray.to.addVector(0, 0.1, 0).conv());
+			MovingObjectPosition rayTrace=Plane.calculateIntercept(ray.from.add(0, 0.1, 0).conv(), ray.to.add(0, 0.1, 0).conv());
 			if(rayTrace==null||rayTrace.hitVec==null){if(printProcess)PrintUtil.println("target clipped out");return false;}
 			result.x=rayTrace.hitVec.xCoord;
 			result.y=rayTrace.hitVec.yCoord;
@@ -746,10 +746,10 @@ public class UtilM{
 	}
 
 	public static float sin(float a){
-		return (float)Math.toDegrees(Math.sin(a));
+		return (float)MathHelper.sin((float)Math.toRadians(a));
 	}
-	public static double cos(double a){
-		return Math.toDegrees(MathHelper.cos((float)a));
+	public static float cos(double a){
+		return (float)MathHelper.cos((float)Math.toRadians(a));
 	}
 
 	public static float normaliseDegrees(float angle){

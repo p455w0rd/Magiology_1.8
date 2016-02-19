@@ -212,18 +212,18 @@ public class CubeModel{
 		return expand(var, var, var);
 	}
 	public CubeModel expand(float x,float y,float z){
-		points[0]=points[0].addVector(-x, y,-z);
-		points[1]=points[1].addVector(-x,-y,-z);
-		points[2]=points[2].addVector(-x,-y, z);
-		points[3]=points[3].addVector(-x, y, z);
-		points[4]=points[4].addVector( x, y,-z);
-		points[5]=points[5].addVector( x,-y,-z);
-		points[6]=points[6].addVector( x,-y, z);
-		points[7]=points[7].addVector( x, y, z);
+		points[0]=points[0].add(-x, y,-z);
+		points[1]=points[1].add(-x,-y,-z);
+		points[2]=points[2].add(-x,-y, z);
+		points[3]=points[3].add(-x, y, z);
+		points[4]=points[4].add( x, y,-z);
+		points[5]=points[5].add( x,-y,-z);
+		points[6]=points[6].add( x,-y, z);
+		points[7]=points[7].add( x, y, z);
 		return this;
 	}
 	public CubeModel translate(float x, float y, float z){
-		for(int i=0;i<points.length;i++)points[i]=points[i].addVector(x,y,z);
+		for(int i=0;i<points.length;i++)points[i]=points[i].add(x,y,z);
 		return this;
 	}
 	public CubeModel transform(Matrix4f matrix){

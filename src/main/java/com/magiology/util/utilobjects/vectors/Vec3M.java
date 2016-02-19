@@ -57,13 +57,13 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	}
 
 	public Vec3M subtract(double x, double y, double z){
-		return this.addVector(-x, -y, -z);
+		return this.add(-x, -y, -z);
 	}
 
-	public Vec3M addVector(Vec3M vec){
-		return this.addVector(vec.x, vec.y, vec.z);
+	public Vec3M add(Vec3M vec){
+		return this.add(vec.x, vec.y, vec.z);
 	}
-	public Vec3M addVector(double x, double y, double z){
+	public Vec3M add(double x, double y, double z){
 		return new Vec3M(this.x + x, this.y + y, this.z + z);
 	}
 	public double distanceTo(Vec3M vec){
@@ -297,7 +297,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 		Matrix4f rot=new Matrix4f();
 		rot.rotate((float)Math.PI,norm.toLWJGLVec());
 		difference=GL11U.transformVector(difference,rot);
-		return norm.addVector(difference);
+		return norm.add(difference);
 	}
 
 	private Vector3f toLWJGLVec(){
@@ -323,5 +323,12 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	}
 	public Vec3M abs(){
 		return new Vec3M(Math.abs(x), Math.abs(y), Math.abs(z));
+	}
+	@Override
+	public boolean equals(Object obj){
+		if(!(obj instanceof Vec3M))return false;
+		Vec3M vec=(Vec3M)obj;
+		if(vec==this)return true;
+		return vec.x==x&&vec.y==y&&vec.z==z;
 	}
 }

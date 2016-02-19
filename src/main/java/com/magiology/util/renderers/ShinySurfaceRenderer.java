@@ -39,7 +39,7 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 			for(int b=0;b<4;b++){
 				Vec3M
 					finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation),
-					finalNormal=GL11U.transformVector(triangle.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
+					finalNormal=GL11U.transformVector(triangle.normal.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
 				Renderer.POS_UV_COLOR_NORMAL.addVertex(finalVec, triangle.pos4[b].texturePositionX, triangle.pos4[b].texturePositionY,baseColor,finalNormal);
 			}
 			return;
@@ -47,8 +47,8 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 		final boolean usesFilters=lightStrenghtFilter!=null&&lightColorFilter!=null;
 		
 		Vec3M
-			finalNormal=GL11U.transformVector(triangle.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize(),
-			playerPos=TessUtil.calculateRenderPosV(UtilM.getThePlayer()).addVector(0, UtilM.getThePlayer().getEyeHeight(),0);
+			finalNormal=GL11U.transformVector(triangle.normal.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize(),
+			playerPos=TessUtil.calculateRenderPosV(UtilM.getThePlayer()).add(0, UtilM.getThePlayer().getEyeHeight(),0);
 		List<Vec3M> reflectionVects=new ArrayList<>();
 		lights.forEach(light->reflectionVects.add(light.getLigtDirection().mul(-1).reflect(GL11U.transformVector(finalNormal, modelTransf))));
 		

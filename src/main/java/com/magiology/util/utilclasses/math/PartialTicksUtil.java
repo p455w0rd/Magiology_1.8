@@ -52,5 +52,13 @@ public class PartialTicksUtil{
 			calculatePos(prevVec.y, vec.y)
 		);
 	}
+
+	public static Vec3M calculatePos(Vec3M prevPos, Vec3M pos){
+		return new Vec3M(
+			calculatePos(prevPos.x, pos.x),
+			calculatePos(prevPos.y, pos.y),
+			calculatePos(prevPos.z, pos.z)
+		);
+	}
 	
 }

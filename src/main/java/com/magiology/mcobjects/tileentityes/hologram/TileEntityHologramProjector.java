@@ -162,7 +162,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 		try{
 			Vec3M Vec3M=UtilM.getPosition(player,PartialTicksUtil.partialTicks);
 			Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(PartialTicksUtil.partialTicks));
-			Vec3M vec32=Vec3M.addVector(vec31.x * length, vec31.y * length, vec31.z * length);
+			Vec3M vec32=Vec3M.add(vec31.x * length, vec31.y * length, vec31.z * length);
 			
 			Ray ray=new Ray(Vec3M, vec32);
 			for(int a=0;a<hologramProjectors.size();a++){
@@ -234,8 +234,8 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	@Override
 	public AxisAlignedBB getRenderBoundingBox(){
 		Vec3M
-			p1=main.getPoint(false,false,false).addVector(offset.x, offset.y, 0),
-			p2=main.getPoint(true,true,true).addVector(offset.x, offset.y, 0);
+			p1=main.getPoint(false,false,false).add(offset.x, offset.y, 0),
+			p2=main.getPoint(true,true,true).add(offset.x, offset.y, 0);
 		return super.getRenderBoundingBox().union(new AxisAlignedBB(p1.x, p1.y, p1.z, p2.x, p2.y, p2.z).addCoord(x(), y(), z()));
 	}
 }

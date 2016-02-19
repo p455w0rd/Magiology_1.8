@@ -165,10 +165,10 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		cubes[0].willSideRender[5]=false;
 		cubes[1].willSideRender[4]=false;
 		
-		cubes[1].points[2]=cubes[1].points[2].addVector(-p, -p, 0);
-		cubes[1].points[3]=cubes[1].points[3].addVector(-p, p, 0);
-		cubes[1].points[6]=cubes[1].points[6].addVector(p, -p, 0);
-		cubes[1].points[7]=cubes[1].points[7].addVector(p, p, 0);
+		cubes[1].points[2]=cubes[1].points[2].add(-p, -p, 0);
+		cubes[1].points[3]=cubes[1].points[3].add(-p, p, 0);
+		cubes[1].points[6]=cubes[1].points[6].add(p, -p, 0);
+		cubes[1].points[7]=cubes[1].points[7].add(p, p, 0);
 		
 		cubes[0].UVs[4]=new QuadUV(
 			w*80, 0,
@@ -240,10 +240,10 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		leverBoxes[2].willSideRender[5]=
 		leverBoxes[2].willSideRender[4]=
 		plug.willSideRender[5]=false;
-		leverBoxes[2].points[2]=leverBoxes[2].points[2].addVector(0,-p/2,0);
-		leverBoxes[2].points[3]=leverBoxes[2].points[3].addVector(0,-p/2,0);
-		leverBoxes[2].points[6]=leverBoxes[2].points[6].addVector(0,-p/2,0);
-		leverBoxes[2].points[7]=leverBoxes[2].points[7].addVector(0,-p/2,0);
+		leverBoxes[2].points[2]=leverBoxes[2].points[2].add(0,-p/2,0);
+		leverBoxes[2].points[3]=leverBoxes[2].points[3].add(0,-p/2,0);
+		leverBoxes[2].points[6]=leverBoxes[2].points[6].add(0,-p/2,0);
+		leverBoxes[2].points[7]=leverBoxes[2].points[7].add(0,-p/2,0);
 		
 		Vec3M trans=new Vec3M(p*10F, p*9.125F, p*8.5F);
 		
@@ -421,27 +421,27 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		
 		usbModel[0].willSideRender[5]=usbModel[1].willSideRender[4]=false;
 		
-		usbModel[1].points[2]=usbModel[1].points[2].addVector(-p/4, -p/4, 0);
-		usbModel[1].points[3]=usbModel[1].points[3].addVector(-p/4, p/4, 0);
-		usbModel[1].points[6]=usbModel[1].points[6].addVector(p/4, -p/4, 0);
-		usbModel[1].points[7]=usbModel[1].points[7].addVector(p/4, p/4, 0);
+		usbModel[1].points[2]=usbModel[1].points[2].add(-p/4, -p/4, 0);
+		usbModel[1].points[3]=usbModel[1].points[3].add(-p/4, p/4, 0);
+		usbModel[1].points[6]=usbModel[1].points[6].add(p/4, -p/4, 0);
+		usbModel[1].points[7]=usbModel[1].points[7].add(p/4, p/4, 0);
 		
 		
 		usbModel[4].points[2]=usbModel[1].points[7];
-		usbModel[4].points[3]=usbModel[4].points[2].addVector(
+		usbModel[4].points[3]=usbModel[4].points[2].add(
 				usbModel[1].points[7].subtract(usbModel[4].points[3]).mul(-0.05, -0.05, 0));
-		usbModel[4].points[6]=usbModel[4].points[2].addVector(
+		usbModel[4].points[6]=usbModel[4].points[2].add(
 				usbModel[1].points[7].subtract(usbModel[4].points[6]).mul(-0.05, -0.05, 0));
-		usbModel[4].points[7]=usbModel[4].points[2].addVector(
+		usbModel[4].points[7]=usbModel[4].points[2].add(
 				usbModel[1].points[7].subtract(usbModel[4].points[7]).mul(-0.05, -0.05, 0));
 		
 		float mul=-0.1F;
 		usbModel[5].points[7]=usbModel[1].points[2];
-		usbModel[5].points[3]=usbModel[5].points[7].addVector(
+		usbModel[5].points[3]=usbModel[5].points[7].add(
 				usbModel[1].points[2].subtract(usbModel[5].points[3]).mul(mul, mul, 0));
-		usbModel[5].points[6]=usbModel[5].points[7].addVector(
+		usbModel[5].points[6]=usbModel[5].points[7].add(
 				usbModel[1].points[2].subtract(usbModel[5].points[6]).mul(mul, mul, 0));
-		usbModel[5].points[2]=usbModel[5].points[7].addVector(
+		usbModel[5].points[2]=usbModel[5].points[7].add(
 				usbModel[1].points[2].subtract(usbModel[5].points[2]).mul(mul, mul, 0));
 		
 		

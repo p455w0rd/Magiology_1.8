@@ -74,7 +74,7 @@ public class HighlightEvent{
 					miss=event.target.typeOfHit==MovingObjectType.MISS;
 				if(miss||!hologramCloserThanHit){
 					tile.point.isPointing=true;
-					tile.point.pointedPos=hit.addVector(
+					tile.point.pointedPos=hit.add(
 							-tile.x()+tile.offset.x-1,
 							-tile.y()-tile.offset.y-tile.size.y,
 							0);

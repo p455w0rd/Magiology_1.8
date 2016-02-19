@@ -16,18 +16,26 @@ import com.magiology.client.gui.custom.hud.FakeMessageHUD;
 import com.magiology.client.gui.custom.hud.HUD;
 import com.magiology.client.render.aftereffect.AfterRenderRenderer;
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
+import com.magiology.core.init.MEvents;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.ShinySurfaceRenderer;
+import com.magiology.util.renderers.ShinySurfaceRenderer.SpecularLight;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
+import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.EntityPosAndBB;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.vectors.physics.AbstractRealPhysicsVec3F;
+import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -142,7 +150,6 @@ public class RenderEvents{
 		float playerOffsetX=-(float)(player.lastTickPosX+(player.posX-player.lastTickPosX)*e.partialTicks),playerOffsetY=-(float)(player.lastTickPosY+(player.posY-player.lastTickPosY)*e.partialTicks),playerOffsetZ=-(float)(player.lastTickPosZ+(player.posZ-player.lastTickPosZ)*e.partialTicks);
 		OpenGLM.pushMatrix();
 		OpenGLM.translate(playerOffsetX, playerOffsetY, playerOffsetZ);
-		
 		this.renderEffects();
 		OpenGLM.popMatrix();
 		
@@ -171,6 +178,55 @@ public class RenderEvents{
 	private float f1,f2,f3,f4,f5,f6,f7,f8;
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderPlayerEvent(RenderPlayerEvent.Pre event){
+		ColorF.LIGHT_GRAY.bind();
+		OpenGLM.pushMatrix();
+		OpenGLM.disableTexture2D();
+		RealPhysicsMesh lapisSeaCape=MEvents.entityEvents.lapisSeaCape;
+		EntityPlayer lapisSea=MEvents.entityEvents.lapisSea;
+		if(lapisSeaCape!=null&&lapisSea!=null){
+			Vec3M pos=PartialTicksUtil.calculatePos(lapisSea).mul(-1);
+			GL11U.glTranslate(pos);
+			TessUtil.drawLine(0,0,0,0,1,0, 0.01F, false, TessUtil.getVB(), 0, 0);
+			
+			List<AbstractRealPhysicsVec3F> vertices=lapisSeaCape.getVertices();
+			
+			int xCubes=3,zCubes=7;
+			
+			int xPoints=xCubes+1,zPoints=zCubes+1;
+
+			VertexRenderer buff=TessUtil.getVB();
+			for(int i=0;i<zCubes;i++){
+				for(int j=0;j<xCubes;j++){
+					int 
+						pos1=0,        pos2=1,
+						pos3=xPoints,pos4=xPoints+1;
+					
+					pos1+=xPoints*i+j;
+					pos2+=xPoints*i+j;
+					pos3+=xPoints*i+j;
+					pos4+=xPoints*i+j;
+					Vec3M vec1=vertices.get(pos1).getPos();
+					Vec3M vec2=vertices.get(pos2).getPos();
+					Vec3M vec3=vertices.get(pos3).getPos();
+					Vec3M vec4=vertices.get(pos4).getPos();
+					
+					buff.addVertex(vec4.x,vec4.y,vec4.z);
+					buff.addVertex(vec3.x,vec3.y,vec3.z);
+					buff.addVertex(vec1.x,vec1.y,vec1.z);
+					buff.addVertex(vec2.x,vec2.y,vec2.z);
+					
+					buff.addVertex(vec2.x,vec2.y,vec2.z);
+					buff.addVertex(vec1.x,vec1.y,vec1.z);
+					buff.addVertex(vec3.x,vec3.y,vec3.z);
+					buff.addVertex(vec4.x,vec4.y,vec4.z);
+				}
+			}
+			buff.draw();
+		}
+		OpenGLM.enableTexture2D();
+		OpenGLM.popMatrix();
+		ColorF.WHITE.bind();
+		
 		OpenGLM.pushMatrix();
 		EntityPlayer player=event.entityPlayer;
 		if(UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem()))event.renderer.getMainModel().aimedBow=true;

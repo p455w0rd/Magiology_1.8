@@ -18,17 +18,17 @@ public abstract class AbstractRealPhysicsVec3F{
 		setWorld(world);
 		setPos(pos);
 		setPrevPos(pos);
+		setLastPos(pos);
 	}
 	public void update(){
-		setPos(getPos().copy());
-		
+
+		setPrevPos(getPos());
 		setPrevVelocity(getVelocity().copy());
 		getVelocity().y-=getMass();
 		move(getVelocity());
 		mulVelocity(getAirBorneFriction());
 	}
 	public void move(Vec3M move){
-		getVelocity().y-=getMass();
 		setLastPos(getPos());
 		addPos(move);
 		checkWorldClipping(getPos(), getLastPos());
@@ -38,21 +38,15 @@ public abstract class AbstractRealPhysicsVec3F{
 	}
 	private void checkWorldClipping(Vec3M start, Vec3M end){
 		if(isWorldClipping()){
-			try{
-				MovingObjectPosition hit=getWorld().rayTraceBlocks(start.conv(), end.conv());
-				if(hit!=null&&hit.typeOfHit!=MovingObjectType.MISS){
-					surfaceHit(hit);
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			MovingObjectPosition hit=getWorld().rayTraceBlocks(start.conv(), end.conv());
+			if(hit!=null&&hit.typeOfHit!=MovingObjectType.MISS)surfaceHit(hit);
 		}
 	}
 	
 	public void surfaceHit(MovingObjectPosition hit){
 		mulVelocity(getSurfaceFriction());
 		Vec3M hitNormal=new Vec3M().offset(hit.sideHit);
-		setPos(Vec3M.conv(hit.hitVec));
+		setPos(Vec3M.conv(hit.hitVec).add(hitNormal.mul(0.001)));
 		
 		Vec3M hitMul=hitNormal.mul(getBounciness()).abs();
 		mulVelocity(new Vec3M(hitMul.x==0?1:-hitMul.x, hitMul.y==0?1:-hitMul.y, hitMul.z==0?1:-hitMul.z));
@@ -66,7 +60,7 @@ public abstract class AbstractRealPhysicsVec3F{
 		mulVelocity(new Vec3M(mul, mul, mul));
 	}
 	public void addVelocity(Vec3M add){
-		setVelocity(getVelocity().addVector(add));
+		setVelocity(getVelocity().add(add));
 	}
 	public void mulVelocity(Vec3M mul){
 		setVelocity(getVelocity().mul(mul));
@@ -76,7 +70,7 @@ public abstract class AbstractRealPhysicsVec3F{
 	}
 	
 	public void addPos(Vec3M add){
-		setPos(getPos().addVector(add));
+		setPos(getPos().add(add));
 	}
 	
 	public abstract float getMass();

@@ -12,7 +12,6 @@ import com.magiology.mcobjects.effect.EntitySparkFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ObjectProcessor;
 import com.magiology.util.utilobjects.SlowdownUtil;
@@ -20,8 +19,8 @@ import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Pos;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.Vec3M;
-import com.magiology.util.utilobjects.vectors.physics.AbstractRealPhysicsVec3F;
 import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh;
+import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh.MaterialStrategy;
 import com.magiology.util.utilobjects.vectors.physics.RealPhysicsVec3F;
 
 import net.minecraft.client.particle.EffectRenderer;
@@ -43,8 +42,6 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	TileEntity tileE;
 	
-	public RealPhysicsMesh cloth;
-	public RealPhysicsVec3F point;
 	
 	public BlockPos control=new Pos(),c=new Pos();
 	public TileEntityControlBlock controlBlock=null;
@@ -72,46 +69,6 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	
 	@Override
 	public void update(){
-		if(cloth==null){
-			List<Vec3M> vertices=new ArrayList<>();
-			List<Vec2i> indices=new ArrayList<>();
-			
-			vertices.add(new Vec3M(0  ,4,0  ));
-			vertices.add(new Vec3M(0.2,4,0  ));
-			vertices.add(new Vec3M(0.2,4,0.2));
-			vertices.add(new Vec3M(0  ,4,0.2));
-			
-			indices.add(new Vec2i(0, 1));
-			indices.add(new Vec2i(1, 2));
-			indices.add(new Vec2i(2, 3));
-			indices.add(new Vec2i(3, 0));
-			indices.add(new Vec2i(0, 2));
-			indices.add(new Vec2i(1, 3));
-			vertices.forEach(vert->{
-				vert.x+=pos.getX();
-				vert.y+=pos.getY();
-				vert.z+=pos.getZ();
-			});
-			PrintUtil.println(vertices);
-			cloth=new RealPhysicsMesh(worldObj, vertices, indices);
-			List<AbstractRealPhysicsVec3F> vertices1=new ArrayList<>();
-			
-			
-			cloth.getVertices().forEach(pos->{
-				pos.setMass(-0.001F);
-			});
-//			cloth.addWorldHook(0, new ObjectProcessor<Vec3M>(){
-//				
-//				@Override
-//				public Vec3M pocess(Vec3M object, Object... objects){
-//					object.y=3;
-//					return object;
-//				}
-//			});
-		}
-		cloth.update();
-		
-		
 		if(control.equals(pos))active=false;
 		else active=true;
 		

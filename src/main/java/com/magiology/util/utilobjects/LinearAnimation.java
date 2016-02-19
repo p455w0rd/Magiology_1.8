@@ -41,7 +41,7 @@ public class LinearAnimation{
 		
 		for(int i=0;i<result.length;i++){
 			Vec3M pos1=before.obj1[i], pos2=after.obj1[i];
-			result[i]=pos2.subtract(pos1).mul(precentage).addVector(pos1);
+			result[i]=pos2.subtract(pos1).mul(precentage).add(pos1);
 		}
 		
 		return result;

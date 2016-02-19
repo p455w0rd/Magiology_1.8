@@ -112,7 +112,7 @@ public class VertexRenderer{
 	}
 
 	protected void tesselateQuads(ShadedQuad triangle){
-		Vec3M finalNormal=GL11U.transformVector(triangle.normal.addVector(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
+		Vec3M finalNormal=GL11U.transformVector(triangle.normal.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
 		for(int b=0;b<4;b++){
 			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
 			Renderer.POS_UV_NORMAL.addVertex(finalVec, triangle.pos4[b].texturePositionX, triangle.pos4[b].texturePositionY,finalNormal);
@@ -264,7 +264,7 @@ public class VertexRenderer{
 			boolean isItself=buff==null||buff==this;
 			List<ShadedQuad> buffer=isItself?new ArrayList<>():buff.shadedTriangles;
 			for(ShadedQuad a:shadedTriangles){
-				Vec3M finalNormal=GL11U.transformVector(a.normal.addVector(0, 0, 0), new Vector3f(0, 0, 0), rotation.x, rotation.y, rotation.z, 1);
+				Vec3M finalNormal=GL11U.transformVector(a.normal.add(0, 0, 0), new Vector3f(0, 0, 0), rotation.x, rotation.y, rotation.z, 1);
 				buffer.add(new ShadedQuad(
 						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[0].vector3D.xCoord, a.pos4[0].vector3D.yCoord, a.pos4[0].vector3D.zCoord), transformation), a.pos4[0].texturePositionX, a.pos4[0].texturePositionY),
 						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[1].vector3D.xCoord, a.pos4[1].vector3D.yCoord, a.pos4[1].vector3D.zCoord), transformation), a.pos4[1].texturePositionX, a.pos4[1].texturePositionY),

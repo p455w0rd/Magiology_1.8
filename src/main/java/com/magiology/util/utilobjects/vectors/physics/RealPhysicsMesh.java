@@ -2,11 +2,14 @@ package com.magiology.util.utilobjects.vectors.physics;
 
 import java.awt.PointerInfo;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec2i;
@@ -19,22 +22,47 @@ public class RealPhysicsMesh{
 	private List<AbstractRealPhysicsVec3F> vertices=new ArrayList<>();
 	private List<Vec2i> indices=new ArrayList<>();
 	private List<RealPhysicsMeshHook> physicsHooks=new ArrayList<>();
-	private boolean originalDistancesStatic=true,needsUpdateOrderUpdate=true;
+	private boolean needsUpdateOrderUpdate=true;
+	private MaterialStrategy interactStrategy=MaterialStrategy.STATIC_DISTANCE;
 	private World world;
-	private int[] orderOfUpdates,orderOfConnections;
-	private float originalDistances[],distanceFixingSpeed=3;
+	private float originalDistances[],distanceFixingSpeed=3,noise=0;
 	
+	public static enum MaterialStrategy{
+		STATIC_DISTANCE(         new ObjectProcessor<Boolean>(){@Override public Boolean pocess(Boolean object, Object... objects){return true;}},true),
+		NO_INTERACTION(          new ObjectProcessor<Boolean>(){@Override public Boolean pocess(Boolean object, Object... objects){return false;}},false),
+		ONLY_SMALLER_SUPPRESSING(new ObjectProcessor<Boolean>(){@Override public Boolean pocess(Boolean object, Object... objects){return ((Float)objects[0])<0;}},true),
+		ONLY_BIGGER_SUPPRESSING( new ObjectProcessor<Boolean>(){@Override public Boolean pocess(Boolean object, Object... objects){return ((Float)objects[0])>0;}},true);
+		
+		private final ObjectProcessor<Boolean> check;
+		public final boolean shouldCheck;
+		
+		private MaterialStrategy(ObjectProcessor<Boolean> check,boolean shouldCheck){
+			this.check=check;
+			this.shouldCheck=shouldCheck;
+		}
+		
+		public boolean shouldInteract(float difference){
+			return check.pocess(false, difference);
+		}
+	}
 	
-	
-	public RealPhysicsMesh(final World world, List<Vec3M> vertices, List<Vec2i> indices){
+	public RealPhysicsMesh(final World world, final List<Vec3M> vertices, final List<Vec2i> indices, final AbstractRealPhysicsVec3F example){
 		this.world=world;
 		vertices.forEach(pos->{
-			this.vertices.add(new RealPhysicsVec3F(world, pos));
+			RealPhysicsVec3F vec3f=new RealPhysicsVec3F(world, pos);
+			vec3f.setAirBorneFriction(example.getAirBorneFriction());
+			vec3f.setBounciness(example.getBounciness());
+			vec3f.setMass(example.getMass());
+			vec3f.addPos(example.getPos());
+			vec3f.setPrevPos(vec3f.getPos());
+			vec3f.setLastPos(vec3f.getPos());
+			vec3f.setPrevVelocity(example.getPrevVelocity());
+			vec3f.setSurfaceFriction(example.getSurfaceFriction());
+			vec3f.setVelocity(example.getVelocity());
+			vec3f.setWorldClipping(example.isWorldClipping());
+			this.vertices.add(vec3f);
 		});
-		PrintUtil.println("-----");
 		this.indices=indices;
-		orderOfUpdates=new int[vertices.size()];
-		orderOfConnections=new int[indices.size()];
 		originalDistances=new float[indices.size()];
 		for(int i=0;i<originalDistances.length;i++){
 			Vec2i connection=indices.get(i);
@@ -43,118 +71,52 @@ public class RealPhysicsMesh{
 	}
 	
 	public void update(){
-		vertices.forEach(vert->PrintUtil.println(vert.getPos()));
-		PrintUtil.println("-----");
-		if(needsUpdateOrderUpdate)updateOrderOfUpdates();
-		vertices.forEach(vert->PrintUtil.println(vert.getPos()));
-		PrintUtil.println("-----");
+		noise=0.01F;
+		if(noise>0)vertices.forEach(vert->vert.addVelocity(new Vec3M(UtilM.CRandF(noise), UtilM.CRandF(noise), UtilM.CRandF(noise))));
+		physicsHooks.forEach(hook->{
+			DoubleObject<Vec3M, Integer> result=hook.getHook();
+			AbstractRealPhysicsVec3F vertex=vertices.get(result.obj2);
+			vertex.setPos(result.obj1);
+			vertex.setVelocity(new Vec3M());
+		});
 		
-//		List<DoubleObject<Vec3M, Integer>> hooks=new ArrayList<>();
-//		physicsHooks.forEach(hook->hooks.add(hook.getHook()));
-		
-//		hooks.forEach(hook->vertices.get(hook.obj2).moveTo(hook.obj1));
-		
-//		for(int i=hooks.size();i<orderOfUpdates.length;i++)vertices.get(orderOfUpdates[i]).update();
-//		if(originalDistancesStatic)for(int i=1;i<orderOfConnections.length;i++){
-//			Vec2i connection=indices.get(i);
-//			boolean xFirst=connection.x<connection.y;
-//			int first=xFirst?connection.x:connection.y,second=xFirst?connection.y:connection.x;
-//			RealPhysicsVec3F vec1=vertices.get(first),vec2=vertices.get(second);
-//			
-//			boolean 
-//				hooked=first<hooks.size(),
-//				bothHooked=hooked&&second<hooks.size();
-//			if(!bothHooked){
-//				Vec3M pos1=vec1.getPos().copy(),pos2=vec2.getPos();
-//				Vec3M originalDistance=pos1.subtract(pos2),newDistance=originalDistance.normalize().mul(originalDistances[i]);
-//				float 
-//					lenght=originalDistance.length(),
-//					difference=newDistance.length()-lenght;
-//				if(lenght>originalDistances[i]){
-////					if(hooked)vec2.setVelocity(vec2.getVelocity().addVector(pos1.addVector(newDistance).subtract(vec2.getPos())));
-////					else{
-////						Vec3M correctDistance=originalDistance.normalize().mul(difference/2);
-////						vec1.setVelocity(vec1.getVelocity().addVector(pos1.addVector(correctDistance).subtract(vec1.getPos())));
-////						vec2.setVelocity(vec2.getVelocity().addVector(pos2.subtract(correctDistance).subtract(vec2.getPos())));
-////					}
-//					if(hooked)vec2.moveTo(pos1.addVector(newDistance));
-//					else{
-//						Vec3M correctDistance=originalDistance.normalize().mul(difference/2);
-//						vec1.moveTo(pos1.addVector(correctDistance));
-//						vec2.moveTo(pos1.subtract(correctDistance));
-//					}
-//				}
-//			}
-//		}
-//		vertices.forEach(a->PrintUtil.println(a.getPos()));
-	}
-	
-	private int id=0,idCon=0,prevIndexedCount=0;
-	private List<Boolean> unindexedIDs=new ArrayList<>(),unindexedConnections=new ArrayList<>();
-	
-	private void updateOrderOfUpdates(){
-		for(int i=0;i<orderOfUpdates.length;i++)orderOfUpdates[i]=i;
-		for(int i=0;i<orderOfConnections.length;i++)orderOfConnections[i]=i;
-//		if(physicsHooks.isEmpty()){
-//			for(int i=0;i<orderOfUpdates.length;i++)orderOfUpdates[i]=i;
-//			for(int i=0;i<orderOfConnections.length;i++)orderOfConnections[i]=i;
-//			return;
-//		}
-//		for(int i=0;i<orderOfUpdates.length;i++)unindexedIDs.add(true);
-//		for(int i=0;i<orderOfConnections.length;i++)unindexedConnections.add(true);
-//			
-//		for(int i=0;i<physicsHooks.size();i++)indexUpdate(physicsHooks.get(i).vertexID);
-//		
-//		prevIndexedCount=physicsHooks.size();
-//		while(unindexedIDs.contains(true)){
-//			for(int i=0;i<indices.size();i++){
-//				Vec2i vec2i=indices.get(i);
-//				for(RealPhysicsMeshHook hook:physicsHooks){
-//					if(vec2i.x==hook.vertexID)indexUpdate(vec2i.y);
-//					else if(vec2i.y==hook.vertexID)indexUpdate(vec2i.x);
-//				}
-//			}
-//			int indexedCount=0;
-//			for(boolean bol:unindexedIDs)if(bol)indexedCount++;
-//			if(prevIndexedCount==indexedCount){
-//				PrintUtil.println(prevIndexedCount,indexedCount);
-//				List<Integer> unindexed=new ArrayList<>();
-//				for(int i=0;i<vertices.size();i++)if(ArrayUtils.contains(orderOfUpdates, i))unindexed.add(i);
-//				throw new IllegalStateException("Mesh can't be indexed! This maybe caused by not all vertices beeing conected. IDs of unindexed all vertices: "+unindexed);
-//			}
-//		}
-//		
-//		
-//		physicsHooks.forEach(hook->indexConnection(idCon));
-//		
-//		while(unindexedConnections.contains(true)){
-//			for(int i=0;i<indices.size();i++){
-//				Vec2i vec2i=indices.get(i);
-//				int smallestId=Integer.MAX_VALUE;
-//				for(int j=0;j<idCon;i++){
-//					Vec2i possiblyConnected=indices.get(orderOfConnections[j]);
-//					if(possiblyConnected.x==vec2i.x||possiblyConnected.y==vec2i.y)smallestId=Math.min(smallestId, orderOfConnections[j]);
-//				}
-//				indexConnection(smallestId);
-//			}
-//		}
-	}
-	
-	private void indexConnection(int data){
-		if(unindexedConnections.get(data)){
-			orderOfConnections[idCon]=data;
-			unindexedConnections.set(id, false);
-			idCon++;
+		if(interactStrategy.shouldCheck){
+			for(int pos=0;pos<indices.size();pos++){
+				Vec2i con=indices.get(pos);
+				
+				if(con.x>con.y)con=new Vec2i(con.y, con.x);
+
+				boolean
+					xHooked=isVertexHooked(con.x),
+					yHooked=isVertexHooked(con.y);
+				
+				if(!xHooked||!yHooked){
+					AbstractRealPhysicsVec3F 
+						vertex1=vertices.get(con.x),
+						vertex2=vertices.get(con.y);
+					Vec3M distance=vertex1.getPos().subtract(vertex2.getPos()).add(vertex1.getVelocity().mul(0.9)).add(vertex2.getVelocity().mul(-0.9));
+					float d1stance=distance.length();
+					float difference=d1stance-originalDistances[pos];
+					if(interactStrategy.shouldInteract(difference)){
+						Vec3M 
+							acteleration1=vertex1.getPrevVelocity().subtract(vertex1.getVelocity()),
+							acteleration2=vertex1.getPrevVelocity().subtract(vertex1.getVelocity());
+						
+						float freakingOutSafety=2F;
+						Vec3M fix=distance.normalize().mul(-difference/freakingOutSafety);
+						float
+							mul1=xHooked? 0:yHooked?2: 1,
+							mul2=xHooked?-2:yHooked?0:-1;
+						
+						vertex1.addVelocity(fix.mul(mul1));
+						vertex2.addVelocity(fix.mul(mul2));
+					}
+				}
+			}
 		}
+		vertices.forEach(AbstractRealPhysicsVec3F::update);
 	}
-	private void indexUpdate(int data){
-		if(unindexedIDs.get(data)){
-			orderOfUpdates[id]=data;
-			unindexedIDs.set(id, false);
-			id++;
-			prevIndexedCount++;
-		}
-	}
+	
 	
 	public class RealPhysicsMeshHook{
 		
@@ -167,13 +129,13 @@ public class RealPhysicsMesh{
 		}
 		
 		private DoubleObject<Vec3M, Integer> getHook(){
-			return new DoubleObject<Vec3M, Integer>(hook.pocess(vertices.get(vertexID).getPos(), RealPhysicsMesh.this,this), vertexID);
+			return new DoubleObject<Vec3M, Integer>(hook.pocess(vertices.get(vertexID).getPos(), RealPhysicsMesh.this,this,vertexID), vertexID);
 		}
 	}
 	
 	public void addWorldHook(int vertexID, ObjectProcessor<Vec3M> hook){
 		final RealPhysicsMeshHook newHook=new RealPhysicsMeshHook(vertexID, hook);
-		physicsHooks.removeIf(hook0->hook0.vertexID==newHook.vertexID);
+		physicsHooks.removeIf(hook0->hook0.vertexID==vertexID);
 		physicsHooks.add(newHook);
 		needsUpdateOrderUpdate=true;
 	}
@@ -181,6 +143,10 @@ public class RealPhysicsMesh{
 		return physicsHooks.remove(hookID);
 	}
 	
+	protected boolean isVertexHooked(int id){
+		for(RealPhysicsMeshHook hook:physicsHooks)if(hook.vertexID==id)return true;
+		return false;
+	}
 	
 	public List<AbstractRealPhysicsVec3F> getVertices(){
 		return vertices;
@@ -198,20 +164,19 @@ public class RealPhysicsMesh{
 		this.indices=indices;
 	}
 
-	public boolean isOriginalDistancesStatic(){
-		return originalDistancesStatic;
-	}
-
-	public void setOriginalDistancesStatic(boolean originalDistancesStatic){
-		this.originalDistancesStatic=originalDistancesStatic;
-	}
-
 	public World getWorld(){
 		return world;
 	}
 
 	public void setWorld(World world){
 		this.world=world;
-		vertices.forEach(vertex->vertex.setWorld(world));
+	}
+
+	public MaterialStrategy getInteractStrategy(){
+		return interactStrategy;
+	}
+
+	public void setInteractStrategy(MaterialStrategy interactStrategy){
+		this.interactStrategy=interactStrategy==null?MaterialStrategy.NO_INTERACTION:interactStrategy;
 	}
 }
