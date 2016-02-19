@@ -135,23 +135,28 @@ public class EntityEvents{
 						
 						
 						lapisSeaCape=new RealPhysicsMesh(world, vertices, indices, example);
-//						lapisSeaCape.setInteractStrategy(MaterialStrategy.ONLY_BIGGER_SUPPRESSING);
-						
+						lapisSeaCape.setInteractStrategy(MaterialStrategy.ONLY_BIGGER_SUPPRESSING);
 						ObjectProcessor<Vec3M> place=new ObjectProcessor<Vec3M>(){
 							@Override
 							public Vec3M pocess(Vec3M object, Object... objects){
 								int id=(int)objects[2];
 								object=UtilM.getEntityPos(player);
-								float p=1F/16F;
-								float xRot=UtilM.sin(-player.renderYawOffset+90)*p*4;
-								float yRot=UtilM.cos(-player.renderYawOffset+90)*p*4;
-								float xOffset=UtilM.sin(-player.renderYawOffset)*p*2;
-								float yOffset=UtilM.cos(-player.renderYawOffset)*p*2;
-								if(id==0){
-									object=object.add(xRot-xOffset, p*23, yRot-yOffset);
-								}else{
-									object=object.add(-xRot-xOffset, p*23, -yRot-yOffset);
+								float 
+									p=1F/16F,
+									y=p*20.5F,
+									xRot=UtilM.sin(-player.renderYawOffset+90)*p*4,
+									yRot=UtilM.cos(-player.renderYawOffset+90)*p*4,
+									xOffset=UtilM.sin(-player.renderYawOffset)*p,
+									yOffset=UtilM.cos(-player.renderYawOffset)*p;
+								
+								if(!player.isSneaking()){
+									y+=p*2.5;
+									xOffset*=2;
+									yOffset*=2;
 								}
+								
+								if(id==0)object=object.add( xRot-xOffset, y, yRot-yOffset);
+								else object=object.add(-xRot-xOffset, y,-yRot-yOffset);
 								return object;
 							}
 						};

@@ -184,8 +184,7 @@ public class RenderEvents{
 		RealPhysicsMesh lapisSeaCape=MEvents.entityEvents.lapisSeaCape;
 		EntityPlayer lapisSea=MEvents.entityEvents.lapisSea;
 		if(lapisSeaCape!=null&&lapisSea!=null){
-			Vec3M pos=PartialTicksUtil.calculatePos(lapisSea).mul(-1);
-			GL11U.glTranslate(pos);
+			GL11U.glTranslate(UtilM.getEntityPos(lapisSea).mul(-1));
 			TessUtil.drawLine(0,0,0,0,1,0, 0.01F, false, TessUtil.getVB(), 0, 0);
 			
 			List<AbstractRealPhysicsVec3F> vertices=lapisSeaCape.getVertices();

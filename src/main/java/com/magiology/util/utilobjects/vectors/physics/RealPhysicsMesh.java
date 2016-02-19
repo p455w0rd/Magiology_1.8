@@ -72,13 +72,13 @@ public class RealPhysicsMesh{
 	
 	public void update(){
 		noise=0.01F;
-		if(noise>0)vertices.forEach(vert->vert.addVelocity(new Vec3M(UtilM.CRandF(noise), UtilM.CRandF(noise), UtilM.CRandF(noise))));
 		physicsHooks.forEach(hook->{
 			DoubleObject<Vec3M, Integer> result=hook.getHook();
 			AbstractRealPhysicsVec3F vertex=vertices.get(result.obj2);
 			vertex.setPos(result.obj1);
 			vertex.setVelocity(new Vec3M());
 		});
+		if(noise>0)vertices.forEach(vert->vert.addVelocity(new Vec3M(UtilM.CRandF(noise), UtilM.CRandF(noise), UtilM.CRandF(noise))));
 		
 		if(interactStrategy.shouldCheck){
 			for(int pos=0;pos<indices.size();pos++){
@@ -94,7 +94,7 @@ public class RealPhysicsMesh{
 					AbstractRealPhysicsVec3F 
 						vertex1=vertices.get(con.x),
 						vertex2=vertices.get(con.y);
-					Vec3M distance=vertex1.getPos().subtract(vertex2.getPos()).add(vertex1.getVelocity().mul(0.9)).add(vertex2.getVelocity().mul(-0.9));
+					Vec3M distance=vertex1.getPos().subtract(vertex2.getPos()).add(vertex1.getVelocity()).add(vertex2.getVelocity().mul(-1));
 					float d1stance=distance.length();
 					float difference=d1stance-originalDistances[pos];
 					if(interactStrategy.shouldInteract(difference)){
