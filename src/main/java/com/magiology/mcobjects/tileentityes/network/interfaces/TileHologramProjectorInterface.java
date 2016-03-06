@@ -78,7 +78,7 @@ public class TileHologramProjectorInterface implements WorldNetworkInterface,Int
 	@Override
 	public List<ICommandInteract> getCommandInteractors(){
 		List<ICommandInteract> result=new ArrayList<ICommandInteract>();
-		for(HoloObject i:((TileEntityHologramProjector)tile).holoObjects)if(i instanceof ICommandInteract)result.add((ICommandInteract)i);
+		for(HoloObject i:((TileEntityHologramProjector)tile).holoObjects)if(i!=null)result.add(i);
 		return result;
 	}
 }

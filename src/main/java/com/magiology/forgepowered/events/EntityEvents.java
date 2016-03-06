@@ -1,14 +1,12 @@
 package com.magiology.forgepowered.events;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.magiology.api.power.PowerCore;
 import com.magiology.client.gui.GuiUpdater;
 import com.magiology.core.Magiology;
 import com.magiology.core.init.MGui;
 import com.magiology.core.init.MItems;
 import com.magiology.handlers.GuiHandlerM;
+import com.magiology.handlers.PlayerClothPhysiscHandeler;
 import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
@@ -17,19 +15,12 @@ import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.registry.events.PlayerWrenchEvent;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.SpecialPlayerUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.EntityPosAndBB;
 import com.magiology.util.utilobjects.NBTUtil;
-import com.magiology.util.utilobjects.ObjectProcessor;
 import com.magiology.util.utilobjects.SlowdownUtil;
-import com.magiology.util.utilobjects.vectors.Vec2i;
-import com.magiology.util.utilobjects.vectors.Vec3M;
-import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh;
-import com.magiology.util.utilobjects.vectors.physics.RealPhysicsVec3F;
-import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh.MaterialStrategy;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -54,9 +45,6 @@ public class EntityEvents{
 	boolean isFP;
 	SpecialPlayerParicleHandler spph=new SpecialPlayerParicleHandler();
 	SlowdownUtil slowdown2=new SlowdownUtil(20);
-	
-	public RealPhysicsMesh lapisSeaCape;
-	public EntityPlayer lapisSea;
 	
 	@SubscribeEvent
 	public void onLivingUpdateEvent(LivingUpdateEvent event){
@@ -94,78 +82,7 @@ public class EntityEvents{
 			EntityPlayer player=(EntityPlayer) event.entity;
 			
 			if(player.getName().equals("LapisSea")){
-				lapisSea=player;
-				if(world.isRemote){
-					if(lapisSeaCape==null||world.getTotalWorldTime()%400==0){
-						List<Vec3M> vertices=new ArrayList<>();
-						List<Vec2i> indices=new ArrayList<>();
-						int xCubes=3,yCubes=7;
-						float xSize=0.15F,ySize=0.15F;
-						
-						int xPoints=xCubes+1,yPoints=yCubes+1;
-						for(int i=0;i<yPoints;i++)for(int j=0;j<xPoints;j++)vertices.add(new Vec3M(xSize*j,ySize*i,0));
-						
-						for(int i=0;i<yCubes;i++){
-							for(int j=0;j<xCubes;j++){
-								int 
-									pos1=0,        pos2=1,
-									pos3=xPoints,pos4=xPoints+1;
-								
-								pos1+=xPoints*i+j;
-								pos2+=xPoints*i+j;
-								pos3+=xPoints*i+j;
-								pos4+=xPoints*i+j;
-								
-								indices.add(new Vec2i(pos1, pos2));
-								indices.add(new Vec2i(pos2, pos4));
-								indices.add(new Vec2i(pos4, pos3));
-								indices.add(new Vec2i(pos3, pos1));
-								
-								indices.add(new Vec2i(pos1, pos4));
-								indices.add(new Vec2i(pos2, pos3));
-							}
-						}
-						
-						RealPhysicsVec3F example=new RealPhysicsVec3F(world, UtilM.getEntityPos(player).add(0, 26F/16F, 0));
-						
-						example.setMass(0.01F);
-						example.setAirBorneFriction(0.9F);
-						example.setSurfaceFriction(0.95F);
-						example.setBounciness(1);
-						
-						
-						lapisSeaCape=new RealPhysicsMesh(world, vertices, indices, example);
-						lapisSeaCape.setInteractStrategy(MaterialStrategy.ONLY_BIGGER_SUPPRESSING);
-						ObjectProcessor<Vec3M> place=new ObjectProcessor<Vec3M>(){
-							@Override
-							public Vec3M pocess(Vec3M object, Object... objects){
-								int id=(int)objects[2];
-								object=UtilM.getEntityPos(player);
-								float 
-									p=1F/16F,
-									y=p*20.5F,
-									xRot=UtilM.sin(-player.renderYawOffset+90)*p*4,
-									yRot=UtilM.cos(-player.renderYawOffset+90)*p*4,
-									xOffset=UtilM.sin(-player.renderYawOffset)*p,
-									yOffset=UtilM.cos(-player.renderYawOffset)*p;
-								
-								if(!player.isSneaking()){
-									y+=p*2.5;
-									xOffset*=2;
-									yOffset*=2;
-								}
-								
-								if(id==0)object=object.add( xRot-xOffset, y, yRot-yOffset);
-								else object=object.add(-xRot-xOffset, y,-yRot-yOffset);
-								return object;
-							}
-						};
-						
-						lapisSeaCape.addWorldHook(0, place);
-						lapisSeaCape.addWorldHook(xCubes, place);
-					}
-					lapisSeaCape.update();
-				}
+				PlayerClothPhysiscHandeler.addPlayer(player);
 			}
 			
 			WingsFromTheBlackFireHandler.updateModel(player);

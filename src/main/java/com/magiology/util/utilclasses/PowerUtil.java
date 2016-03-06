@@ -151,7 +151,7 @@ public class PowerUtil{
 			return false;
 		}
 		//-----------------------------------------------------------------------------------------
-		if(fromTile instanceof PowerCore&&toTile instanceof PowerCore){
+		if(fromTile!=null&&toTile!=null){
 			subtract(amount,fromTile);
 				 add(amount,toTile);
 			return true;
@@ -161,12 +161,12 @@ public class PowerUtil{
 	}
 //	adds power
 	public static void add(int amount, PowerCore tile){
-		if(tile instanceof PowerCore)tile.addEnergy(amount);
+		if(tile!=null)tile.addEnergy(amount);
 		else msg();
 	}
 //	subtract power
 	public static void subtract(int amount, PowerCore tile){
-		if(tile instanceof PowerCore)tile.subtractEnergy(amount);
+		if(tile!=null)tile.subtractEnergy(amount);
 		else msg();
 	}
 //	if target or sender is not PowerCore

@@ -81,6 +81,10 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
 	@Override
 	public void onUpdate(){
 		super.onUpdate();
+		if(UtilM.TRUE()){
+			kill();
+			return;
+		}
 		age++;
 		lastTickPosX=posX;
 		lastTickPosY=posY;
@@ -88,6 +92,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
 		Vec3M vec31 = new Vec3M(this.posX, this.posY, this.posZ);
 		Vec3M Vec3M = new Vec3M(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 		MovingObjectPosition MOP=worldObj.rayTraceBlocks(vec31.conv(), Vec3M.conv(), true,true,false);
+		pos=new BlockPos(posX, posY, posZ);
 		block=UtilM.getBlock(worldObj, pos);
 		if(MOP!=null&&MOP.typeOfHit!=MovingObjectType.MISS){
 			

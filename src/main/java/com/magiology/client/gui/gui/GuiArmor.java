@@ -171,7 +171,6 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		TessUtil.bindTexture(main);
 		this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		this.renderParticles(v1);
-		int pos=(int)Math.round(Math.abs(sliderPos/16));
 		TessUtil.bindTexture(main);
 		OpenGLM.translate(guiLeft, guiTop, 0);
 		GL11U.setUpOpaqueRendering(1);

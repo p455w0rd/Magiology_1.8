@@ -15,6 +15,7 @@ import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.renderers.tessellatorscripts.SidedModel;
 import com.magiology.util.utilclasses.SideUtil;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.LinearAnimation;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
@@ -84,7 +85,7 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 			, null);
 			
 			
-			float w1=1F/216F,offset=24;
+			float w1=1F/216F;
 			QuadUV coreUV=new QuadUV(
 					w1*24,1,
 					w1*24,0,
@@ -247,8 +248,8 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		
 		Vec3M trans=new Vec3M(p*10F, p*9.125F, p*8.5F);
 		
-		Matrix4f matrix=GL11U.createMatrix(trans, 0, 0, 180, 1);
-		Matrix4f.mul(matrix, GL11U.createMatrix(trans.mul(-1), 0, 0, 0, 1), matrix);
+		Matrix4f matrix=MatrixUtil.createMatrix(trans, 0, 0, 180, 1);
+		Matrix4f.mul(matrix, MatrixUtil.createMatrix(trans.mul(-1), 0, 0, 0, 1), matrix);
 		
 		leverBoxes[2].transform(matrix);
 		

@@ -1,164 +1,194 @@
 package com.magiology.client.render.itemrender;
 
-//public class ItemRendererTheHand implements IItemRenderer{
-//	private final float p=1F/16F;
-//	public ResourceLocation[] blank1={new ResourceLocation("noTexture")};
-//	public CubeModel base;
-//	float g=1F/3F;
-//	public FingerModel[] fingers;
-//	public ItemRendererTheHand(){}
-//	@Override
-//	public boolean handleRenderType(ItemStack item, ItemRenderType type){return type!=ItemRenderType.INVENTORY;}
-//
-//	@Override
-//	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,ItemRendererHelper helper){
-//		return true;
-//	}
-//	
-//	@Override
-//	public void renderItem(ItemRenderType type, ItemStack item, Object... objs){
-//		if(base==null||fingers==null)init();
-//		EntityPlayer player=null;
-//		PowerHandData data=null;
-//		try{player=(EntityPlayer)objs[1];}catch(Exception e){}
-//		if(player==null)return;
-//		data=ComplexPlayerRenderingData.getFastPowerHandData(player);
-//		if(data==null)return;
-//		
-//		OpenGLM.pushMatrix();
-//		if(type==ItemRenderType.ENTITY){
-//			OpenGLM.translate(-0.7F, -0.9F,-0.1F);
-//		}else if(type==ItemRenderType.EQUIPPED){
-//			
-//			OpenGLM.rotate(-110, 1, -0.4, -0.2);
-//			OpenGLM.translate(-0.6, -2.2,-1.5);
-//			OpenGLM.scale(1.2, 1.2, 1.2);
-//			Minecraft.getSystemTime();
-//			OpenGLM.translate(0, data.thirdPresonPos, 0);
-//			OpenGLM.rotate(-data.thirdPresonPosSpeed*350+20, 1, 0, 0);
-//		}
-//		
-//		float[] handRotationRender=UtilM.calculatePosArray(data.prevHandRotationCalc,data.handRotationCalc);
-//		float x1=p*6F,y1=p*10,z1=p*2;
-//		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)OpenGLM.translate(handRotationRender[3]/30,handRotationRender[4]/30,handRotationRender[5]/30);
-//		OpenGLM.translate(x1,y1,z1);
-//		OpenGLM.rotate(-20, 0, 1, 0);
-//		if(type==ItemRenderType.EQUIPPED_FIRST_PERSON)GL11U.glRotate(handRotationRender[0],handRotationRender[1],handRotationRender[2]);
-//		OpenGLM.translate(-x1, -y1, -z1);
-//		OpenGLM.rotate(20, 1, 0, 1);
-//		if(type==ItemRenderType.INVENTORY)OpenGLM.translate(0.4F, 0.7F, -0.6F);
-//		else OpenGLM.translate(0.6F, 0.7F, -0.3F);
-//		
-//		base.draw();
-//		boolean first=true;
-//		float x=-p*0.9F,y=-p*0.4F,z=p*5.5F;
-//		OpenGLM.translate(x,y,z);
-//		for(int a=0;a<fingers.length;a++){
-//			FingerModel a1=fingers[a];
-//			a1.draw(data.fingerData[a]);
-//			if(first){
-//				OpenGLM.translate(-x,-y,-z);
-//				OpenGLM.translate(0.002F, p,0.03F);
-//				OpenGLM.rotate(10, 0, 1, 0);
-//				first=false;
-//			}else{
-//				OpenGLM.translate(p*1.8F, 0,0);
-//				OpenGLM.rotate(-10.0/2.0, 0, 1, 0);
-//			}
-//		}
-//		OpenGLM.popMatrix();
-//	}
-//	public class FingerModel{
-//		public CubeModel[]cubeModels;
-//		public FingerModel(float[] xyzPosRot1,float[] xyzPosRot2,float[] xyzPosRot3,float[][] boxes,QuadUV[][] txtpoints,ResourceLocation[][] sidedtextures){
-//			cubeModels=new CubeModel[]{
-//					new CubeModel(boxes[0][0],boxes[0][1],boxes[0][2], boxes[0][3], boxes[0][4], boxes[0][5],txtpoints[0], sidedtextures[0]),
-//					new CubeModel(boxes[1][0],boxes[1][1],boxes[1][2], boxes[1][3], boxes[1][4], boxes[1][5],txtpoints[1], sidedtextures[1]),
-//					new CubeModel(boxes[2][0],boxes[2][1],boxes[2][2], boxes[2][3], boxes[2][4], boxes[2][5],txtpoints[2], sidedtextures[2])};
-//		}
-//		public void draw(PowerHandData_sub_fingerData data){
-//			OpenGLM.pushMatrix();
-//			for(int a=0;a<cubeModels.length;a++){
-//				float[] rot=UtilM.calculatePosArray(data.prevcalcXyzPosRot[a], data.calcXyzPosRot[a]);
-//				GL11U.glRotate(rot[3],rot[4],rot[5],rot[0],rot[1]+
-//						(cubeModels[a].points[2].y-cubeModels[a].points[4].y)/2F
-//						,rot[2]);
-//				OpenGLM.translate(0.0001,0,-(cubeModels[a].points[2].z-cubeModels[a].points[1].z));
-//				cubeModels[a].draw();
-//			}
-//			OpenGLM.popMatrix();
-//		}
-//	}
-//	public void init(){
-//		base=new CubeModel(0, 0, 0, p*7, p*2.5F, p*9,new QuadUV[]{QuadUV.all().rotate1().mirror1(),QuadUV.all().rotate1().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1(),QuadUV.all().mirror1()}, new ResourceLocation[]{Textures.handBaseSide,Textures.handBaseSide,Textures.handBaseTop,Textures.handBaseBotom,Textures.handBaseSide2,Textures.handBaseSide2});
-//		fingers=new FingerModel[]{
-//				//#thumb
-//				new FingerModel(
-//						new float[]{p*0F,p*0F,p*0F, /**/-10,20,0},
-//						new float[]{p*0.5F,p*0.5F,p*0.5F, 0,-15,0},																						 new float[]{0,0,0,0,0,0},
-//						new float[][]{
-//						{0,0,0,p*1.8F,p*1.8F,p*4.2F},
-//						{0,0,0,p*1.8F,p*1.799F,p*2.5F},
-//						{0,0,0,0,0,0}},
-//						new QuadUV[][]{
-//								{QuadUV.all().rotate1().mirror1().edit(0,-0.27F,0,-0.27F,0,0,0,0),QuadUV.all().rotate1().mirror1().edit(0,0,0,0,0,0.27F,0,0.27F),QuadUV.all().mirror1().edit(0,0.27F,0,0,0,0,0,0.27F),QuadUV.all().edit(0,-0.27F,0,0,0,0,0,-0.27F),QuadUV.all(),QuadUV.all(),},{
-//								 QuadUV.all().rotate1().mirror1().edit(0,0,0,0,0,0.73F,0,0.73F),QuadUV.all().rotate1().mirror1().edit(0,-0.73F,0,-0.73F,0,0,0,0),QuadUV.all().mirror1().edit(0,0,0,-0.73F,0,-0.73F,0,0),QuadUV.all().edit(0,0,0,0.73F,0,0.73F,0,0),QuadUV.all(),QuadUV.all(),},{QuadUV.all()}},
-//						new ResourceLocation[][]{
-//							  	  new ResourceLocation[]{Textures.handThumbSide,Textures.handThumbSide,Textures.handThumbTop,Textures.handThumbBottom,Textures.handThumbTxtClip,Textures.handThumbEnd
-//								},new ResourceLocation[]{Textures.handThumbSide,Textures.handThumbSide,Textures.handThumbTop,Textures.handThumbBottom,Textures.handThumbTxtClip,Textures.handThumbEnd},blank1}),
-//						
-//				new FingerModel(new float[]{0,p*0.75F,0, /**/0,0,0}, new float[]{0,p*0.5F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0},
-//						new float[][]{
-//						{0,0,0,p*1.5F,p*1.499F,p*3},
-//						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
-//						{0,0,0,p*1.5F,p*1.5F,p*2F}},
-//						new QuadUV[][]{{
-//							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
-//						new ResourceLocation[][]{
-//						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handnormalFingerEnd,Textures.handNormalFingerTxtClip}}),
-//				new FingerModel(new float[]{0,p*0.75F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0},
-//						new float[][]{
-//						{0,0,0,p*1.5F,p*1.499F,p*3},
-//						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
-//						{0,0,0,p*1.5F,p*1.5F,p*2F}},
-//						new QuadUV[][]{{
-//							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
-//						new ResourceLocation[][]{
-//						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handnormalFingerEnd,Textures.handNormalFingerTxtClip}}),
-//				new FingerModel(new float[]{0,p*0.75F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0},
-//						new float[][]{
-//						{0,0,0,p*1.5F,p*1.499F,p*3},
-//						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
-//						{0,0,0,p*1.5F,p*1.5F,p*2F}},
-//						new QuadUV[][]{{
-//							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
-//						new ResourceLocation[][]{
-//						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handnormalFingerEnd,Textures.handNormalFingerTxtClip}}),
-//				new FingerModel(new float[]{0,p*0.75F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0}, new float[]{0,p*0.5F,0, 0,0,0},
-//						new float[][]{
-//						{0,0,0,p*1.5F,p*1.499F,p*3},
-//						{0,0,0,p*1.5F,p*1.5F,p*2.5F},
-//						{0,0,0,p*1.5F,p*1.5F,p*2F}},
-//						new QuadUV[][]{{
-//							   QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().rotate1().mirror1().edit(0, 0, 0, 0, 0, g*2, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all().mirror1().edit(0, g*2, 0, 0, 0, 0, 0, g*2),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().rotate1().mirror1().edit(0, -g, 0, -g, 0, g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all().mirror1().edit(0, g, 0, -g, 0, -g, 0, g),QuadUV.all(),QuadUV.all()
-//							},{QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().rotate1().mirror1().edit(0, -g*2, 0, -g*2, 0, 0, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all().mirror1().edit(0, 0, 0, -g*2, 0, -g*2, 0, 0),QuadUV.all(),QuadUV.all()}},
-//						new ResourceLocation[][]{
-//						  new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handNormalFingerTxtClip,Textures.handNormalFingerTxtClip
-//						},new ResourceLocation[]{Textures.handNormalFingerSide,Textures.handNormalFingerSide,Textures.handNormalFingerTop,Textures.handNormalFingerBottom,Textures.handnormalFingerEnd,Textures.handNormalFingerTxtClip}})
-//		};
-//	}
-//}
+import java.util.ArrayList;
+import java.util.List;
+
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+
+import com.magiology.handlers.animationhandlers.TheHandHandler;
+import com.magiology.handlers.animationhandlers.TheHandHandler.HandData;
+import com.magiology.util.renderers.GL11U;
+import com.magiology.util.renderers.MultiTransfromModel;
+import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MatrixUtil;
+import com.magiology.util.utilobjects.ColorF;
+import com.magiology.util.utilobjects.IndexedModel;
+import com.magiology.util.utilobjects.vectors.Vec3M;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+
+public class ItemRendererTheHand{
+	private final float p=1F/16F;
+	public ResourceLocation[] blank1={new ResourceLocation("noTexture")};
+	
+	public MultiTransfromModel handModel;
+	
+	private Matrix4f 
+		base,
+		thumb1,thumb2,thumb3,
+		finger1,finger2,finger3,
+		finger4,finger5,finger6,
+		finger7,finger8,finger9,
+		finger10,finger11,finger12;
+
+	
+	public void renderItem(ItemStack item, EntityPlayer player){
+		secure();
+		try{
+			HandData data=TheHandHandler.getRenderHandData();
+			
+			
+			List<Matrix4f> transformations=new ArrayList<>();
+			
+			addFingerRotations(transformations, new Matrix4f[]{thumb1, thumb2, thumb3},
+				new Vec3M(data.thumb[0], data.thumb[1], data.thumb[2]),
+				new Vector2f(data.thumb[3], data.thumb[4])
+			);
+			addFingerRotations(transformations, new Matrix4f[]{finger1, finger2, finger3},
+				new Vec3M(data.fingers[0][0], data.fingers[0][1], 0),
+				new Vector2f(data.fingers[0][2], data.fingers[0][3])
+			);
+			addFingerRotations(transformations, new Matrix4f[]{finger4, finger5, finger6},
+				new Vec3M(data.fingers[1][0], data.fingers[1][1], 0),
+				new Vector2f(data.fingers[1][2], data.fingers[1][3])
+			);
+			addFingerRotations(transformations, new Matrix4f[]{finger7, finger8, finger9},
+				new Vec3M(data.fingers[2][0], data.fingers[2][1], 0),
+				new Vector2f(data.fingers[2][2], data.fingers[2][3])
+			);
+			addFingerRotations(transformations, new Matrix4f[]{finger10, finger11, finger12},
+				new Vec3M(data.fingers[3][0], data.fingers[3][1], 0),
+				new Vector2f(data.fingers[3][2], data.fingers[3][3])
+			);
+			
+			new ColorF(1, 1, 1, 0.2).bind();
+			OpenGLM.disableTexture2D();
+			if(handModel==null||true){
+				IndexedModel model=new IndexedModel();
+				model.addCube(new CubeModel(0, 0, 0, p*8, p*2, p*10));
+				
+				handModel=new MultiTransfromModel(model);
+				addFinger(new Vector2f(p*2, p*2), new Vec3M(p*3.5, p*3.4,p*2.4));
+				addFinger(new Vector2f(p*1.7F, p*1.7F), new Vec3M(p*3.2, p*2.4, p*2.3));
+				addFinger(new Vector2f(p*1.8F, p*1.8F), new Vec3M(p*3.6, p*3  , p*2.5));
+				addFinger(new Vector2f(p*1.8F, p*1.8F), new Vec3M(p*3.2, p*2.7, p*2.9));
+				addFinger(new Vector2f(p*1.6F, p*1.6F), new Vec3M(p*2.1, p*2,   p*2.1));
+			}
+			OpenGLM.pushMatrix();
+			OpenGLM.translate(p*13, p*3, 0);
+			OpenGLM.translate(data.base[0], data.base[1], data.base[2]);
+			GL11U.glRotate(10+data.base[3], data.base[4], 15+data.base[5]);
+			GL11U.glRotate(0, 130, 0);
+			try{
+				handModel.draw(transformations);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			OpenGLM.popMatrix();
+			OpenGLM.enableTexture2D();
+		}catch(Exception e){
+//			e.printStackTrace();
+		}
+	}
+	
+	private void init(){
+		base=MatrixUtil.createMatrix(-60, 20, 20);
+		thumb1=MatrixUtil.createMatrix(new Vector3f(p*7F,0,p*1.7F));
+		thumb2=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.5F));
+		thumb3=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.4F));
+		
+		finger1=MatrixUtil.createMatrix(new Vector3f(p*7F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
+		finger2=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.3F));
+		finger3=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.5F));
+				
+		finger4=MatrixUtil.createMatrix(new Vector3f(p*5F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
+		finger5=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.7F));
+		finger6=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.1F));
+				
+		finger7=MatrixUtil.createMatrix(new Vector3f(p*3F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
+		finger8=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.3F));
+		finger9=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.8F));
+		
+		finger10=MatrixUtil.createMatrix(new Vector3f(p*1F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
+		finger11=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.2F));
+		finger12=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.1F));
+	}
+	
+	
+	private void addFingerRotations(List<Matrix4f> transformations, Matrix4f[] mats, Vec3M rotBase, Vector2f rot_2_3){
+		Matrix4f mat1=Matrix4f.load(mats[0], null);
+		Matrix4f mat2=Matrix4f.load(mats[1], null);
+		Matrix4f mat3=Matrix4f.load(mats[2], null);
+		
+		Matrix4f.mul(mat1, MatrixUtil.createMatrixZYX(rotBase.getZ(),rotBase.getY(),rotBase.getX()), mat1); 
+		Matrix4f.mul(mat2, MatrixUtil.createMatrixY(rot_2_3.x), mat2);
+		Matrix4f.mul(mat3, MatrixUtil.createMatrixY(rot_2_3.y), mat3);
+		
+		Matrix4f.mul(mat1, mat2, mat2);
+		Matrix4f.mul(mat2, mat3, mat3);
+		
+		transformations.add(mat1);
+		transformations.add(mat2);
+		transformations.add(mat3);
+	}
+	
+	private void addFinger(Vector2f wh, Vec3M lenghts){
+		IndexedModel model=handModel.getChild();
+		
+		int start=model.getVertices().size();
+		float w=wh.x,h=wh.y;
+		CubeModel 
+			th1=new CubeModel(-w/2, -h/2, 0, w/2, h/2, lenghts.getX()),
+			th2=new CubeModel(-w/2, -h/2, 0, w/2, h/2, lenghts.getY()),
+			th3=new CubeModel(-w/2, -h/2, 0, w/2, h/2, lenghts.getZ());
+		th1.willSideRender[5]=
+		th2.willSideRender[4]=
+		th2.willSideRender[5]=
+		th3.willSideRender[4]=false;
+
+		model.addCube(th1);
+		model.addCube(th2);
+		model.addCube(th3);
+		
+		int[] partFront={2,3,6,7},partBack={1,0,5,4};
+		for(int i=0;i<4;i++)partBack[i]+=8;
+		
+		int[] inds={
+			partBack[0],
+			partFront[0],
+			partFront[2],
+			partBack[2],
+			
+			partFront[1],
+			partBack[1],
+			partBack[3],
+			partFront[3],
+			
+			partBack[1],
+			partFront[1],
+			partFront[0],
+			partBack[0],
+			
+			partFront[3],
+			partBack[3],
+			partBack[2],
+			partFront[2]
+		};
+		
+		model.addIndices(start,inds);
+		model.addIndices(start+8F,inds);
+		
+		handModel.addMatrix(UtilM.countedArray(start,start+8));
+		handModel.addMatrix(UtilM.countedArray(start+8,start+16));
+		handModel.addMatrix(UtilM.countedArray(start+16,start+24));
+	}
+	public void secure(){
+		if(base==null)init();
+	}
+}

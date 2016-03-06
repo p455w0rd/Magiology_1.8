@@ -110,8 +110,8 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		receive=((ISidedPower)tile).getIn(side),
 		send   =((ISidedPower)tile).getOut   (side);
 		
-		((GuiButton)buttonList.get(7)).enabled=allowedSend;
-		((GuiButton)buttonList.get(8)).enabled=allowedReceive;
+		buttonList.get(7).enabled=allowedSend;
+		buttonList.get(8).enabled=allowedReceive;
 		((ColoredGuiButton)buttonList.get(7)).wantedR=send?0.1F:1;
 		((ColoredGuiButton)buttonList.get(7)).wantedG=send?1:0.1F;
 		((ColoredGuiButton)buttonList.get(7)).wantedB=0.1F;
@@ -174,7 +174,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		buttonList.add(new TexturedColoredButton(sc.getAndAdd(),15+guiLeft, 80+guiTop, 72, 20, "Cricle"));
 		buttonList.add(new TexturedColoredButton(sc.getAndAdd(),10+guiLeft,102+guiTop, 40, 20, "Output"));
 		buttonList.add(new TexturedColoredButton(sc.getAndAdd(),52+guiLeft,102+guiTop, 40, 20, "Input"));
-		actionPerformed((GuiButton)buttonList.get(0));
+		actionPerformed(buttonList.get(0));
 	}
 	@Override
 	public void drawScreen(int x, int y, float partialTicks){
@@ -226,7 +226,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 			}
 			int id=-1;
 			for(int a=0;a<cube.willSideRender.length;a++){
-				GuiButton b=(GuiButton)buttonList.get(a);
+				GuiButton b=buttonList.get(a);
 				if(x>=b.xPosition &&y>=b.yPosition&&x<b.xPosition+b.width&&y<b.yPosition+b.height){
 					id=a;
 					continue;
@@ -368,7 +368,7 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		
 		OpenGLM.disableLighting();
 		
-		for(int k=0;k<buttonList.size();++k){((GuiButton)this.buttonList.get(k)).drawButton(mc, x, y);}
+		for(int k=0;k<buttonList.size();++k){this.buttonList.get(k).drawButton(mc, x, y);}
 
 		OpenGLM.popMatrix();
 	}

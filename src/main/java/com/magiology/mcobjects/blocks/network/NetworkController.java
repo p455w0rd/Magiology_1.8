@@ -57,6 +57,6 @@ public class NetworkController extends BlockContainerMultiColision{
 	}
 	@Override
 	public int getMetaFromState(IBlockState state){
-		return ((Integer)state.getValue(U.META)).intValue();
+		return state.getValue(U.META).intValue();
 	}
 }

@@ -13,7 +13,6 @@ import com.magiology.util.utilobjects.NBTUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -39,7 +38,7 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 	protected void drawGuiContainerBackgroundLayer(float v1, int v2, int v3){
 		TessUtil.bindTexture(main);
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-		((GuiButton)buttonList.get(0)).enabled=getSelectedSlotId()>=0;
+		buttonList.get(0).enabled=getSelectedSlotId()>=0;
 	}
 	
 	@Override
@@ -56,7 +55,7 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 			if(player.openContainer instanceof CommandCenterContainer){
 				CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
 				int id=container.selectedSlotId+36;
-				ItemStack stack=((Slot)container.inventorySlots.get(id)).getStack();
+				ItemStack stack=container.inventorySlots.get(id).getStack();
 				if(stack!=null){
 					UtilM.sendMessage(new OpenProgramContainerInGui(id));
 					NBTUtil.createNBT(stack);
@@ -78,7 +77,7 @@ public class GuiCenterContainer extends GuiContainer implements Updateable{
 		if(player.openContainer instanceof CommandCenterContainer){
 			CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
 			int id=container.selectedSlotId;
-			if(!UtilM.isItemInStack(MItems.commandContainer, ((Slot)container.inventorySlots.get(id+36)).getStack()))return -1;
+			if(!UtilM.isItemInStack(MItems.commandContainer, container.inventorySlots.get(id+36).getStack()))return -1;
 			return id;
 		}
 		return -1;

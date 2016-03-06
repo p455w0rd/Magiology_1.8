@@ -1,29 +1,28 @@
-package com.magiology.util.utilobjects.vectors.physics;
+package com.magiology.util.utilobjects.vectors.physics.real;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
-import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.PrintUtil;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 
 public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 	
 	private float weight=0.1F,airBorneFriction=0.95F,surfaceFriction=0.95F,bounciness=0;
-	private Vec3M pos,prevPos=new Vec3M(),velocity=new Vec3M(),prevVelocity=new Vec3M(),lastPos=new Vec3M();
-	private boolean isWorldClipping=true;
+	private Vec3M pos,prevPos=new Vec3M(),velocity=new Vec3M(),prevVelocity=new Vec3M(),lastPos=new Vec3M(),posBackup=new Vec3M();
+	private boolean isWorldClipping=true,willColideWithBlocks=true;
 	private World world;
-	private int moveCount;
+	private List<Float> stress;
+	
 	
 	public RealPhysicsVec3F(World world, Vec3M pos){
 		super(world, pos);
+		if(this.stress==null){
+			this.stress=new ArrayList<>();
+			for(int i=0;i<5;i++)this.stress.add(0F);
+		}
 	}
 	
 	public float getMass(){
@@ -54,7 +53,9 @@ public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 		return pos;
 	}
 	public void setPos(Vec3M pos){
-		this.pos=pos;
+		if(UtilM.isNumValid(pos.x))this.pos=pos;
+		if(!UtilM.isNumValid(this.pos.x))this.pos=posBackup;
+		else posBackup=this.pos;
 	}
 	public Vec3M getPrevPos(){
 		return prevPos;
@@ -66,7 +67,7 @@ public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 		return velocity;
 	}
 	public void setVelocity(Vec3M velocity){
-		this.velocity=velocity;
+		if(UtilM.isNumValid(velocity.x))this.velocity=velocity;
 	}
 	public Vec3M getPrevVelocity(){
 		return prevVelocity;
@@ -93,5 +94,37 @@ public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 	@Override
 	public Vec3M getLastPos(){
 		return lastPos;
+	}
+	@Override
+	public float getStress(){
+		if(this.stress==null){
+			this.stress=new ArrayList<>();
+			for(int i=0;i<5;i++)this.stress.add(0F);
+			return 0;
+		}
+		float sum=0;
+		for(Float f:stress)sum+=f;
+//		if(Double.isInfinite(sum/stress.size()))PrintUtil.println(sum,stress.size());
+		return sum/stress.size();
+	}
+	@Override
+	public void setStress(float stress){
+		if(this.stress==null){
+			this.stress=new ArrayList<>();
+			for(int i=0;i<5;i++)this.stress.add(0F);
+		}
+		if(!UtilM.isNumValid(stress))return;
+		this.stress.remove(0);
+		this.stress.add(stress);
+	}
+
+	@Override
+	public boolean getWillColideWithBlocks(){
+		return willColideWithBlocks;
+	}
+
+	@Override
+	public void setWillColideWithBlocks(boolean colide){
+		willColideWithBlocks=colide;
 	}
 }

@@ -18,7 +18,7 @@ import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 public class GuiSlider{
 	
 	private SliderParent parent;
-	private Vec2i pos=Vec2i.zero(),size=Vec2i.zero(),clickPos=Vec2i.zero(),prevMouse=Vec2i.zero();
+	private Vec2i pos=Vec2i.zero(),size=Vec2i.zero(),clickPos=Vec2i.zero();
 	private ObjectProcessor<Vec2i> margin1,margin2;
 	private int width,parentMargin;
 	private boolean snapToParentSize=true,isHorisontal=false,side=true,highlighted,innerBoxHighlighted;
@@ -131,9 +131,6 @@ public class GuiSlider{
 	
 	public boolean mouseClicked(){
 		clickPos=getMousePos();
-		
-		int offset=(int)(getInnerOffset());
-		
 		
 		handleSlider(clickPos);
 		return highlighted;

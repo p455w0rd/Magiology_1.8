@@ -5,11 +5,9 @@ import java.util.List;
 
 import com.magiology.client.gui.GuiUpdater.Updateable;
 import com.magiology.mcobjects.effect.GuiParticle;
-import com.magiology.util.renderers.TessUtil;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 public abstract class GuiContainerAndGuiParticles extends GuiContainer implements Updateable{
@@ -44,7 +42,7 @@ public abstract class GuiContainerAndGuiParticles extends GuiContainer implement
 	}
 	
 	public void updateParticles(){
-		if(!guiParticles.isEmpty())for(int c=0;c<guiParticles.size();c++){
+		for(int c=0;c<guiParticles.size();c++){
 			GuiParticle ab=guiParticles.get(c);
 			if(ab!=null&&!ab.isDead){
 				ab.UpdateScreenRes(width,height,guiLeft,guiTop,xSize,ySize);
@@ -53,8 +51,7 @@ public abstract class GuiContainerAndGuiParticles extends GuiContainer implement
 		}
 	}
 	public void renderParticles(float partialTicks){
-		WorldRenderer tess=TessUtil.getWR();
-		if(!guiParticles.isEmpty())for(int c=0;c<guiParticles.size();c++){
+		for(int c=0;c<guiParticles.size();c++){
 			GuiParticle ab=guiParticles.get(c);
 			if(ab!=null&&!ab.isDead)ab.renderParticle(partialTicks);
 		}

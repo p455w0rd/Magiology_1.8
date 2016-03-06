@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -38,8 +39,8 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 		if(lights.isEmpty()){
 			for(int b=0;b<4;b++){
 				Vec3M
-					finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation),
-					finalNormal=GL11U.transformVector(triangle.normal.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
+					finalVec=MatrixUtil.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation),
+					finalNormal=MatrixUtil.transformVector(triangle.normal1.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
 				Renderer.POS_UV_COLOR_NORMAL.addVertex(finalVec, triangle.pos4[b].texturePositionX, triangle.pos4[b].texturePositionY,baseColor,finalNormal);
 			}
 			return;
@@ -47,13 +48,13 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 		final boolean usesFilters=lightStrenghtFilter!=null&&lightColorFilter!=null;
 		
 		Vec3M
-			finalNormal=GL11U.transformVector(triangle.normal.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize(),
+			finalNormal=MatrixUtil.transformVector(triangle.normal1.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize(),
 			playerPos=TessUtil.calculateRenderPosV(UtilM.getThePlayer()).add(0, UtilM.getThePlayer().getEyeHeight(),0);
 		List<Vec3M> reflectionVects=new ArrayList<>();
-		lights.forEach(light->reflectionVects.add(light.getLigtDirection().mul(-1).reflect(GL11U.transformVector(finalNormal, modelTransf))));
+		lights.forEach(light->reflectionVects.add(light.getLigtDirection().mul(-1).reflect(MatrixUtil.transformVector(finalNormal, modelTransf))));
 		
 		for(int b=0;b<4;b++){
-			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
+			Vec3M finalVec=MatrixUtil.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
 			
 			ColorF lightsColor=new ColorF(0,0,0,0);
 			

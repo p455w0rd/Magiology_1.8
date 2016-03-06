@@ -52,7 +52,6 @@ public class HighlightEvent{
 		World world=player.worldObj;
 		if(world==null)return;
 		try{if(event.target.typeOfHit!=MovingObjectType.ENTITY){
-			Block block=UtilM.getBlock(world, pos);
 			TileEntity tileEn=player.worldObj.getTileEntity(pos);
 			
 			Object[][] rayTraceResult=TileEntityHologramProjector.rayTraceHolograms(player, 7);

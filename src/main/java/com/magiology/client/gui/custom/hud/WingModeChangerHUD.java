@@ -163,7 +163,7 @@ public class WingModeChangerHUD extends HUD{
 		if(perPos>validPoss.length-1)sliderWantedPos=0;
 		if(perPos<0)sliderWantedPos=(validPoss.length-1)*nextLineOffset;
 		selectionId=(int)((sliderPos+nextLineOffset/2)/nextLineOffset);
-		selectionId=(int)UtilM.snap(selectionId, 0, 4);
+		selectionId=UtilM.snap(selectionId, 0, 4);
 		curentPoss=Positions.values()[validPoss[selectionId].id];
 		alpha+=0.2F*(isExited?-1:1);
 		double noise=0.05,speed=0.15;

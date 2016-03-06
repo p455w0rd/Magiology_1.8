@@ -15,10 +15,12 @@ import com.magiology.core.Magiology;
 import com.magiology.forgepowered.events.client.RenderEvents;
 import com.magiology.forgepowered.packets.packets.RightClickBlockPacket;
 import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
+import com.magiology.handlers.PlayerClothPhysiscHandeler;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
+import com.magiology.util.utilobjects.m_extension.ItemRendererM;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 import net.minecraft.client.Minecraft;
@@ -75,6 +77,8 @@ public class TickEvents{
 			HUD gui=RenderEvents.FPGui.get(a);
 			gui.update();
 		}
+		PlayerClothPhysiscHandeler.updateInstances();
+		ItemRendererM.instance.updateEquippedItem();
 	}
 	@SubscribeEvent
 	public void onServerTick(TickEvent.ServerTickEvent event){

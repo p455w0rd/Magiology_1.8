@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
-public class UtilityGL11Debug {
+public class GL11DebugUtil {
 	public class GLproperty {
 		public GLproperty(int init_gLconstant, String init_name, String init_description, String init_category, String init_fetchCommand) {
 			gLconstant = init_gLconstant;
@@ -22,7 +22,7 @@ public class UtilityGL11Debug {
 		public String fetchCommand;
 	}
 
-	public static UtilityGL11Debug instance = new UtilityGL11Debug();
+	public static GL11DebugUtil instance = new GL11DebugUtil();
 	
 	public static void dumpOpenGLstate() {
 	}

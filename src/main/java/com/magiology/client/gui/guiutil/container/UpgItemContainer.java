@@ -20,7 +20,7 @@ public class UpgItemContainer implements IInventory{
 	
 	public UpgItemContainer(ItemStack container){
 		this.container=container;
-		if(container.getItem() instanceof Item){
+		if(container.getItem()!=null){
 			invSS=64;
 			NBT=container.getTagCompound();
 			Citem=container.getItem();

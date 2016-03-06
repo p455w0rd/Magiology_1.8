@@ -2,8 +2,6 @@ package com.magiology.mcobjects.entitys;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,46 +28,16 @@ public class ComplexPlayerRenderingData{
 		public Positions[] flap=new Positions[2];
 	}
 	//endSection()----------------------------------------------------------------------------------
-	//PowerHand data section
-	public class PowerHandData{
-		public final EntityPlayer player;
-		public PowerHandData(EntityPlayer player){this.player=player;}
-		public float[] 
-				handRotation={0,0,0,0,0,0},
-				handRotationSpeed={0,0,0,0,0,0},
-				handRotationCalc={0,0,0,0,0,0},
-				prevHandRotationCalc={0,0,0,0,0,0},
-				noiserHandSpeed={0,0,0,0,0,0};
-		public float 
-				thirdPresonPos=0,
-				thirdPresonPosSpeed=0;
-		public PowerHandData_sub_fingerData[] fingerData={new PowerHandData_sub_fingerData(),new PowerHandData_sub_fingerData(),new PowerHandData_sub_fingerData(),new PowerHandData_sub_fingerData(),new PowerHandData_sub_fingerData()};
-	}
-	public class PowerHandData_sub_fingerData{
-		public float[][] 
-				xyzPosRot=new float[3][6],
-				xyzPosRotSpeed=new float[3][6],
-				xyzPosRotNoise=new float[3][6],
-				calcXyzPosRot=new float[3][6],
-				prevcalcXyzPosRot=new float[3][6];
-	}
-	//endSection()----------------------------------------------------------------------------------
 	
 	//register section
 	public static ComplexPlayerRenderingData[] getAllData(){
-		ComplexPlayerRenderingData[] result={};
-		for(ComplexPlayerRenderingData a:RenderedPlayesList)result=ArrayUtils.add(result, a);
-		return result;
+		return RenderedPlayesList.toArray(new ComplexPlayerRenderingData[0]);
 	}
 	private static ArrayList<ComplexPlayerRenderingData> RenderedPlayesList=new ArrayList<ComplexPlayerRenderingData>();
 	//get subSection										 |
 	public static CyborgWingsFromTheBlackFireData getFastCyborgWingsFromTheBlackFireData(EntityPlayer player){
 		ComplexPlayerRenderingData data=get(player);
 		return data!=null?data.getCyborgWingsFromTheBlackFireData():null;
-	}
-	public static PowerHandData getFastPowerHandData(EntityPlayer player){
-		ComplexPlayerRenderingData data=get(player);
-		return data!=null?data.getPowerHandData():null;
 	}
 	public static ComplexPlayerRenderingData get(EntityPlayer player){
 		for(ComplexPlayerRenderingData a:RenderedPlayesList)if(a.player==player)return a;
@@ -87,13 +55,8 @@ public class ComplexPlayerRenderingData{
 	}
 	//endSection()----------------------------------------------------------------------------------
 	//inside register section
-
-	private PowerHandData powerHandData;
-	public PowerHandData getPowerHandData(){
-		if(powerHandData!=null)return powerHandData;
-		powerHandData=new PowerHandData(player);
-		return powerHandData;
-	}
+	
+	
 	private CyborgWingsFromTheBlackFireData cyborgWingsFromTheBlackFireData;
 	public CyborgWingsFromTheBlackFireData getCyborgWingsFromTheBlackFireData(){
 		if(cyborgWingsFromTheBlackFireData!=null)return cyborgWingsFromTheBlackFireData;

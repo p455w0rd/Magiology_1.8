@@ -11,7 +11,6 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.BlockPos;
@@ -43,7 +42,7 @@ public class OpenProgramContainerInGui extends AbstractToServerMessage{
 		try{
 			if(player.openContainer instanceof CommandCenterContainer){
 				CommandCenterContainer container=((CommandCenterContainer)player.openContainer);
-				ItemStack stack=((Slot)container.inventorySlots.get(slotId)).getStack();
+				ItemStack stack=container.inventorySlots.get(slotId).getStack();
 				stack.getItem().onItemRightClick(stack, player.worldObj, player);
 			}
 		}catch(Exception e){

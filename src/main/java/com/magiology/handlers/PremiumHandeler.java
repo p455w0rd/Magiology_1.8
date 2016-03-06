@@ -17,8 +17,6 @@ public class PremiumHandeler{
 	
 	private static final boolean canAccesInternet=testInternet();
 	
-	private static boolean printOutDetection=true;
-	
 	private static final PremiumHandeler instance=new PremiumHandeler();
 	private PremiumHandeler(){}
 	

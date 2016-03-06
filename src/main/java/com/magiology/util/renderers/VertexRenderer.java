@@ -13,7 +13,9 @@ import com.magiology.util.renderers.Renderer.RendererBase;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.util.utilobjects.vectors.physics.real.GeometryUtil;
 
 import net.minecraft.client.model.PositionTextureVertex;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -72,13 +74,15 @@ public class VertexRenderer{
 		unfinishedTriangle.clear();
 	}
 	private ShadedQuad generateShadedQuad(PositionTextureVertex pos0,PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3,boolean hasNormal){
-		Vec3M normal;
+		Vec3M normal1,normal2;
 		if(hasNormal&&instantNormalCalculation){
-			Vec3 vec3  = pos1.vector3D.subtractReverse(pos0.vector3D);
-			Vec3 vec31 = pos1.vector3D.subtractReverse(pos2.vector3D);
-			normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
-		}else normal=new Vec3M(0, 1, 0);
-		return new ShadedQuad(pos0,pos1,pos2,pos3, normal);
+			normal1=Vec3M.conv(GeometryUtil.getNormal(pos0.vector3D, pos1.vector3D, pos2.vector3D));
+			normal2=Vec3M.conv(GeometryUtil.getNormal(pos2.vector3D, pos3.vector3D, pos0.vector3D));
+		}
+		else {
+			normal1=normal2=new Vec3M(0, 1, 0);
+		}
+		return new ShadedQuad(pos0,pos1,pos2,pos3, normal1,normal2);
 	}
 	
 	public void cleanUp(){
@@ -91,8 +95,8 @@ public class VertexRenderer{
 
 		for(VertexRenderer a:subBuffers){
 			for(ShadedQuad b:a.shadedTriangles){
-				GL11U.transformVector(b.normal, new Vector3f(),a.rotation.x,a.rotation.y,a.rotation.z,1);
-				for(int b1=0;b1<4;b1++)b.pos4[b1].vector3D=GL11U.transformVector(b.pos4[b1].vector3D, a.transformation);
+				MatrixUtil.transformVector(b.normal1, new Vector3f(),a.rotation.x,a.rotation.y,a.rotation.z,1);
+				for(int b1=0;b1<4;b1++)b.pos4[b1].vector3D=MatrixUtil.transformVector(b.pos4[b1].vector3D, a.transformation);
 			}
 			shadedTriangles.addAll(a.shadedTriangles);
 		}
@@ -112,19 +116,25 @@ public class VertexRenderer{
 	}
 
 	protected void tesselateQuads(ShadedQuad triangle){
-		Vec3M finalNormal=GL11U.transformVector(triangle.normal.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
-		for(int b=0;b<4;b++){
-			Vec3M finalVec=GL11U.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
-			Renderer.POS_UV_NORMAL.addVertex(finalVec, triangle.pos4[b].texturePositionX, triangle.pos4[b].texturePositionY,finalNormal);
-		}
+		Vec3M finalNormal1=MatrixUtil.transformVector(triangle.normal1.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
+		Vec3M finalNormal2=MatrixUtil.transformVector(triangle.normal2.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize();
+		Vec3M[] pos=new Vec3M[4];
+		for(int b=0;b<4;b++)pos[b]=MatrixUtil.transformVector(new Vec3M(triangle.pos4[b].vector3D.xCoord, triangle.pos4[b].vector3D.yCoord, triangle.pos4[b].vector3D.zCoord), transformation);
+		Renderer.POS_UV_NORMAL.addVertex(pos[0], triangle.pos4[0].texturePositionX, triangle.pos4[0].texturePositionY,finalNormal1);
+		Renderer.POS_UV_NORMAL.addVertex(pos[1], triangle.pos4[1].texturePositionX, triangle.pos4[1].texturePositionY,finalNormal1);
+		Renderer.POS_UV_NORMAL.addVertex(pos[2], triangle.pos4[2].texturePositionX, triangle.pos4[2].texturePositionY,finalNormal1);
+		
+		Renderer.POS_UV_NORMAL.addVertex(pos[2], triangle.pos4[2].texturePositionX, triangle.pos4[2].texturePositionY,finalNormal2);
+		Renderer.POS_UV_NORMAL.addVertex(pos[3], triangle.pos4[3].texturePositionX, triangle.pos4[3].texturePositionY,finalNormal2);
+		Renderer.POS_UV_NORMAL.addVertex(pos[0], triangle.pos4[0].texturePositionX, triangle.pos4[0].texturePositionY,finalNormal2);
 	}
 
 	protected void tesselateLines(ShadedQuad triangle){
 		Vec3M finalVectors[]={
-				GL11U.transformVector(Vec3M.conv(triangle.pos4[0].vector3D), transformation),
-				GL11U.transformVector(Vec3M.conv(triangle.pos4[1].vector3D), transformation),
-				GL11U.transformVector(Vec3M.conv(triangle.pos4[2].vector3D), transformation),
-				GL11U.transformVector(Vec3M.conv(triangle.pos4[3].vector3D), transformation)
+				MatrixUtil.transformVector(Vec3M.conv(triangle.pos4[0].vector3D), transformation),
+				MatrixUtil.transformVector(Vec3M.conv(triangle.pos4[1].vector3D), transformation),
+				MatrixUtil.transformVector(Vec3M.conv(triangle.pos4[2].vector3D), transformation),
+				MatrixUtil.transformVector(Vec3M.conv(triangle.pos4[3].vector3D), transformation)
 		};
 		Renderer.POS.addVertex(finalVectors[0].x, finalVectors[0].y, finalVectors[0].z);
 		Renderer.POS.addVertex(finalVectors[1].x, finalVectors[1].y, finalVectors[1].z);
@@ -159,7 +169,7 @@ public class VertexRenderer{
 				renderToScreen();
 				GL11U.texture(true);
 			}else{
-				Renderer.POS_UV_NORMAL.beginQuads();
+				Renderer.POS_UV_NORMAL.begin(GL11.GL_TRIANGLES);
 				pasteToTesselator(true);
 				renderToScreen();
 			}
@@ -181,15 +191,16 @@ public class VertexRenderer{
 	
 	public static class ShadedQuad{
 		public PositionTextureVertex[] pos4=null;
-		public Vec3M normal=null;
-		public ShadedQuad(PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3, PositionTextureVertex pos4, Vec3M normal) {
+		public Vec3M normal1=null,normal2=null;
+		public ShadedQuad(PositionTextureVertex pos1,PositionTextureVertex pos2,PositionTextureVertex pos3, PositionTextureVertex pos4, Vec3M normal1, Vec3M normal2) {
 			this.pos4=new PositionTextureVertex[]{pos1,pos2,pos3,pos4};
-			this.normal=normal;
+			this.normal1=normal1;
+			this.normal2=normal2;
 		}
 		public void recalculateNormal(){
 			Vec3 vec3 =this.pos4[1].vector3D.subtractReverse(this.pos4[0].vector3D);
 			Vec3 vec31=this.pos4[1].vector3D.subtractReverse(this.pos4[2].vector3D);
-			normal = Vec3M.conv(vec31.crossProduct(vec3).normalize());
+			normal1 = Vec3M.conv(vec31.crossProduct(vec3).normalize());
 		}
 	}
 	public void recalculateNormals(){
@@ -219,7 +230,7 @@ public class VertexRenderer{
 	}
 	public void transform(double x,double y,double z,double rotX,double rotY,double rotZ, double scale){
 		Vector3f.add(rotation, new Vector3f((float)rotX, (float)rotY, (float)rotZ), rotation);
-		Matrix4f.mul(transformation, GL11U.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale), transformation);
+		Matrix4f.mul(transformation, MatrixUtil.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale), transformation);
 	}
 	
 	public void setInstantNormalCalculation(boolean enabled){
@@ -264,13 +275,14 @@ public class VertexRenderer{
 			boolean isItself=buff==null||buff==this;
 			List<ShadedQuad> buffer=isItself?new ArrayList<>():buff.shadedTriangles;
 			for(ShadedQuad a:shadedTriangles){
-				Vec3M finalNormal=GL11U.transformVector(a.normal.add(0, 0, 0), new Vector3f(0, 0, 0), rotation.x, rotation.y, rotation.z, 1);
+				Vec3M finalNormal1=MatrixUtil.transformVector(a.normal1.add(0, 0, 0), new Vector3f(0, 0, 0), rotation.x, rotation.y, rotation.z, 1);
+				Vec3M finalNormal2=MatrixUtil.transformVector(a.normal2.add(0, 0, 0), new Vector3f(0, 0, 0), rotation.x, rotation.y, rotation.z, 1);
 				buffer.add(new ShadedQuad(
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[0].vector3D.xCoord, a.pos4[0].vector3D.yCoord, a.pos4[0].vector3D.zCoord), transformation), a.pos4[0].texturePositionX, a.pos4[0].texturePositionY),
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[1].vector3D.xCoord, a.pos4[1].vector3D.yCoord, a.pos4[1].vector3D.zCoord), transformation), a.pos4[1].texturePositionX, a.pos4[1].texturePositionY),
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[2].vector3D.xCoord, a.pos4[2].vector3D.yCoord, a.pos4[2].vector3D.zCoord), transformation), a.pos4[2].texturePositionX, a.pos4[2].texturePositionY),
-						new PositionTextureVertex(GL11U.transformVector(new Vec3(a.pos4[3].vector3D.xCoord, a.pos4[3].vector3D.yCoord, a.pos4[3].vector3D.zCoord), transformation), a.pos4[3].texturePositionX, a.pos4[3].texturePositionY),
-						finalNormal
+						new PositionTextureVertex(MatrixUtil.transformVector(new Vec3(a.pos4[0].vector3D.xCoord, a.pos4[0].vector3D.yCoord, a.pos4[0].vector3D.zCoord), transformation), a.pos4[0].texturePositionX, a.pos4[0].texturePositionY),
+						new PositionTextureVertex(MatrixUtil.transformVector(new Vec3(a.pos4[1].vector3D.xCoord, a.pos4[1].vector3D.yCoord, a.pos4[1].vector3D.zCoord), transformation), a.pos4[1].texturePositionX, a.pos4[1].texturePositionY),
+						new PositionTextureVertex(MatrixUtil.transformVector(new Vec3(a.pos4[2].vector3D.xCoord, a.pos4[2].vector3D.yCoord, a.pos4[2].vector3D.zCoord), transformation), a.pos4[2].texturePositionX, a.pos4[2].texturePositionY),
+						new PositionTextureVertex(MatrixUtil.transformVector(new Vec3(a.pos4[3].vector3D.xCoord, a.pos4[3].vector3D.yCoord, a.pos4[3].vector3D.zCoord), transformation), a.pos4[3].texturePositionX, a.pos4[3].texturePositionY),
+						finalNormal1,finalNormal2
 				));
 			}
 			if(isItself){

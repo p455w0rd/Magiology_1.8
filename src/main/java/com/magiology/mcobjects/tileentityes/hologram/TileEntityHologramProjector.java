@@ -19,7 +19,7 @@ import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Plane;
-import com.magiology.util.utilobjects.vectors.Ray;
+import com.magiology.util.utilobjects.vectors.RayDeprecated;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -164,7 +164,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 			Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(PartialTicksUtil.partialTicks));
 			Vec3M vec32=Vec3M.add(vec31.x * length, vec31.y * length, vec31.z * length);
 			
-			Ray ray=new Ray(Vec3M, vec32);
+			RayDeprecated ray=new RayDeprecated(Vec3M, vec32);
 			for(int a=0;a<hologramProjectors.size();a++){
 				TileEntityHologramProjector tile=null;
 				TileEntity test=player.worldObj.getTileEntity(hologramProjectors.get(a).getPos());

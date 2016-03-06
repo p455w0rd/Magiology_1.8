@@ -55,12 +55,7 @@ public abstract class ShaderAspectRenderer{
 	protected static final float[] getUniform(ShaderUniform uniform){
 		FloatBuffer values=DataStalker.getVariable(ShaderUniform.class, "field_148098_f", uniform);
 		if(values==null)return null;
-		int size=DataStalker.getVariable(ShaderUniform.class, "field_148103_c", uniform);
 		return values.array();
-//		values.position(0);
-//		float[] result=new float[size];
-//		for(int i=0;i<size;i++)result[i]=values.get();
-//		return result;
 	}
 	protected static final float[] getUniform(ShaderGroup sg,String uniformName){
 		List listShaders=DataStalker.getVariable(ShaderGroup.class, "listShaders", sg);

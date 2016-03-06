@@ -39,9 +39,6 @@ public class GuiHandlerM implements IGuiHandler{
 	
 	public Container GetServerGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x, y, z));
-		MovingObjectPosition hit=UtilM.rayTrace(player,4, 1);
-		int side=hit!=null?hit.sideHit.getIndex():-1;
-		
 		switch (ID){
 		case MGui.GuiUpgrade:			  if(tile instanceof TileEntityPow)		 
 			return new UpgradeContainer(player.inventory, (TileEntityPow)tile);
@@ -70,7 +67,7 @@ public class GuiHandlerM implements IGuiHandler{
 	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x,y,z));
 		MovingObjectPosition hit=UtilM.rayTrace(player,4, 1);
-		int side=hit!=null?hit.sideHit.getIndex():-1;
+		hit.sideHit.getIndex();
 		
 		switch (ID){
 		case MGui.GuiUpgrade:

@@ -21,7 +21,6 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
-import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
@@ -861,8 +860,6 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 	public void update(){
 		if(!visible||!active)return;
 		prevTextOffset=new Vector2f((getSlideableOffset().x*3+prevTextOffset.x)/4, (getSlideableOffset().y*3+prevTextOffset.y)/4);
-		
-		int maxHeight=(textBuffer.size()+1)*Get.Render.Font.FRB().FONT_HEIGHT;
 		
 		int rool=Mouse.getDWheel()/120;
 		if(rool!=0){

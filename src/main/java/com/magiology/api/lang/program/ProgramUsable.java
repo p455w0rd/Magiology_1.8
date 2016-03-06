@@ -18,7 +18,6 @@ import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 
 import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class ProgramUsable{
@@ -32,7 +31,8 @@ public class ProgramUsable{
 	public Object lastResult;
 	
 	
-	public static final String jsJavaBridge=new Object(){public String toString(){
+	public static final String jsJavaBridge=new Object(){@Override
+	public String toString(){
 		StringBuilder txt=new StringBuilder();
 		//functions
 		add(txt,"function run_funct(pos, name, args){");
@@ -80,7 +80,7 @@ public class ProgramUsable{
 		
 		map.put("runPos", holder.getPos());
 		((ScriptEngine)program.getCompiled()).put("runPos", holder.getPos());
-		WorldWrapper.setBlockAccess((World)holder.getWorld());
+		WorldWrapper.setBlockAccess(holder.getWorld());
 		NetworkProgramHolderWrapper.setInstance(holder);
 		
 		try{

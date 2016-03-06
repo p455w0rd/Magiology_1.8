@@ -18,6 +18,7 @@ import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.vectors.QuadUV;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -351,6 +352,9 @@ public class TessUtil{
 			e.printStackTrace();
 		}
 	}
+	public static void drawLine(Vec3M pos1,Vec3M pos2,float width,boolean hasNormal, VertexRenderer nvb,double textueOffset,double textueScale){
+		drawLine(pos1.x, pos1.y, pos1.z, pos2.x, pos2.y, pos2.z, width, hasNormal, nvb, textueOffset, textueScale);
+	}
 	public static void drawLine(double x1,double y1,double z1,double x2,double y2,double z2,float width,boolean hasNormal, VertexRenderer nvb,double textueOffset,double textueScale){
 		boolean newBuff;
 		if(newBuff=(nvb==null)){
@@ -383,9 +387,9 @@ public class TessUtil{
 			rotationY=(float)-Math.toDegrees(Math.atan2(ditanceX, -ditanceZ));
 		
 		for(int i=0;i<points.length;i++){
-			points[i]=GL11U.transformVector(points[i], new Vector3f(), rotationX, 0, 0, 1);
-			points[i]=GL11U.transformVector(points[i], new Vector3f(), 0, rotationY+180, 0, 1);
-			points[i]=GL11U.transformVector(points[i], new Vector3f((float)x1, (float)y1, (float)z1), 0, 0, 0, 1);
+			points[i]=MatrixUtil.transformVector(points[i], new Vector3f(), rotationX, 0, 0, 1);
+			points[i]=MatrixUtil.transformVector(points[i], new Vector3f(), 0, rotationY+180, 0, 1);
+			points[i]=MatrixUtil.transformVector(points[i], new Vector3f((float)x1, (float)y1, (float)z1), 0, 0, 0, 1);
 		}
 		
 		for(int i=0;i<points.length;i++)nvb.addVertexWithUV(points[i].x, points[i].y, points[i].z,uv.getUV(i%4).x,uv.getUV(i%4).y);

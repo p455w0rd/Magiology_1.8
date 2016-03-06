@@ -52,7 +52,7 @@ public class HoloObjectUploadPacket extends AbstractToServerMessage{
 		originalSize=ho.originalSize;
 		isDead=ho.isDead;
 		if(suportsText)text=((StringContainer)ho).getString();
-		isCommand=ho instanceof ICommandInteract;
+		isCommand=ho!=null;
 		if(isCommand){
 			name=((ICommandInteract)ho).getName();
 			programName=((ICommandInteract)ho).getProgramName();
@@ -130,7 +130,7 @@ public class HoloObjectUploadPacket extends AbstractToServerMessage{
 				tile.holoObjects.get(roId).setColor=color;
 				tile.holoObjects.get(roId).isDead=isDead;
 				if(suportsText&&tile.holoObjects.get(roId) instanceof StringContainer)((StringContainer)tile.holoObjects.get(roId)).setString(text);
-				if(isCommand&&tile.holoObjects.get(roId) instanceof ICommandInteract){
+				if(isCommand&&tile.holoObjects.get(roId)!=null){
 					((ICommandInteract)tile.holoObjects.get(roId)).setProgramName(programName);
 					((ICommandInteract)tile.holoObjects.get(roId)).setArgs(args);
 					((ICommandInteract)tile.holoObjects.get(roId)).setName(name);

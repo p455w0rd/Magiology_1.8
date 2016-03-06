@@ -248,7 +248,7 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 		GuiTextField name=new GuiTextField(1,fontRendererObj, top+3, left+72+11, 120-6, 12);
 		name.setText(program.getProgram(stack).getSaveableData().programName.toString());
 		textFieldList.add(name);
-		((GuiButton)buttonList.get(4)).visible=settingsActive;
+		buttonList.get(4).visible=settingsActive;
 		textFieldList.get(1).setVisible(settingsActive);
 		
 		firstInit=false;
@@ -335,7 +335,7 @@ public class GuiJSProgramEditor extends GuiContainerM implements Updateable{
 			compileAfter.setVisible(settingsActive);
 			useColors.visible=settingsActive;
 			recommendCode.visible=settingsActive;
-			((GuiButton)buttonList.get(4)).visible=settingsActive;
+			buttonList.get(4).visible=settingsActive;
 			textFieldList.get(1).setVisible(settingsActive);
 			
 			UtilM.getMC().getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));

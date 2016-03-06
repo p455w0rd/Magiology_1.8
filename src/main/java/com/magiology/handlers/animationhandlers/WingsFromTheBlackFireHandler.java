@@ -95,13 +95,13 @@ public class WingsFromTheBlackFireHandler{
 				if(rot<0)rot/=2F;
 				data.playerAngle=(float)UtilM.slowlyEqualize(data.playerAngle,rot, 1.5);
 			}
-			else data.playerAngle=(float)UtilM.slowlyEqualize(data.playerAngle, 0, 2);
+			else data.playerAngle=UtilM.slowlyEqualize(data.playerAngle, 0, 2);
 			
 			if(data.playerAngle>80)data.playerAngle=80;
 			
 			Positions[] flap=getFlap(player);
 			for(int a=0;a<data.rotationAnglesBase.length;a++)for(int b=0;b<data.rotationAnglesBase[a].length;b++){
-				data.rotationAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.rotationAnglesBase[a][b], pos.wantedRotationAnglesBase[a][b], 1+2*UtilM.RF());
+				data.rotationAnglesBase[a][b]=UtilM.slowlyEqualize(data.rotationAnglesBase[a][b], pos.wantedRotationAnglesBase[a][b], 1+2*UtilM.RF());
 				ExtendedPlayerData extendedData=ExtendedPlayerData.get(player);
 				if(data.canFlap)data.flapAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.flapAnglesBase[a][b], flap[0].wantedRotationAnglesBase[a][b]+flap[1].wantedRotationAnglesBase[a][b], (3.3+UtilM.RF())*(extendedData!=null?extendedData.soulFlame<10?0.5:1:1));
 				else data.flapAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.flapAnglesBase[a][b], 0, 1.5+2*UtilM.RF());
@@ -191,7 +191,7 @@ public class WingsFromTheBlackFireHandler{
 						if(player.worldObj.isRemote){
 							CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 							Positions[] flaps=getFlap(player);
-							if(data!=null)for(int a1=0;a1<data.rotationAnglesBase.length;a1++)for(int b=0;b<data.rotationAnglesBase[a1].length;b++)data.rotationAnglesBase[a1][b]=(float)UtilM.slowlyEqualize(data.rotationAnglesBase[a1][b], flaps[0].wantedRotationAnglesBase[a1][b]+flaps[1].wantedRotationAnglesBase[a1][b], 1+2*UtilM.RF());
+							if(data!=null)for(int a1=0;a1<data.rotationAnglesBase.length;a1++)for(int b=0;b<data.rotationAnglesBase[a1].length;b++)data.rotationAnglesBase[a1][b]=UtilM.slowlyEqualize(data.rotationAnglesBase[a1][b], flaps[0].wantedRotationAnglesBase[a1][b]+flaps[1].wantedRotationAnglesBase[a1][b], 1+2*UtilM.RF());
 						}
 						return Positions.HoverPos;
 					}

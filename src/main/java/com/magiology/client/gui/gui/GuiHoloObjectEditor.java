@@ -45,7 +45,7 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 	
 	private TileEntityHologramProjector hologramProjector;
 	private GuiTextField txt,red,green,blue,alpha,scale,size,comName,obectName;
-	private boolean suportsText,suportsCommand,textLimitedToObj,deleteStarted=false,showOut;
+	private boolean suportsText,suportsCommand,textLimitedToObj,deleteStarted=false;
 	private PhysicsFloat redF,greenF,blueF,alphaF;
 	private String commandOut="";
 	private GuiTextEditor commandIn=new GuiTextEditor(new Vec2i(0, 0),new Vec2i(0, 0));
@@ -63,7 +63,7 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 				holoText=(StringContainer)ro;
 				textLimitedToObj=holoText.isTextLimitedToObj();
 			}
-			if(suportsCommand=ro instanceof ICommandInteract)iCommand=(ICommandInteract)ro;
+			if(suportsCommand=ro!=null)iCommand=ro;
 			this.xSize=300;
 			this.ySize=14;
 		}catch(Exception e){
@@ -263,8 +263,6 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 			}catch(Exception e){
 				size.setTextColor(RED);
 			}
-			//redstone to percent-args:trueB,0I
-			showOut=false;
 			if(suportsCommand){
 				iCommand.setName(obectName.getText().trim());
 				String target=comName.getText();
@@ -289,7 +287,6 @@ public class GuiHoloObjectEditor extends GuiContainerM implements Updateable{
 									commandOut="Result is null? this should not be happening.";
 								}else{
 									commandOut="The command is given an invalid combination of arguments! All in vars have to be filled! Log: "+Return.toString().substring(ProgramDataBase.err.length(), Return.toString().length());
-									showOut=true;
 								}
 							}else commandOut="Can't find the command by the target name!";
 						}else commandOut="No valid system can be found!";

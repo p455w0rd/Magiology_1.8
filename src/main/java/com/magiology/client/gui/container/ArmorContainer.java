@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 
@@ -42,8 +41,8 @@ public class ArmorContainer extends Container implements Updateable{
 		for(int i=0;i<armorSlots.getSizeInventory();i++)this.addSlotToList(new OnlyShiftClickSlot(armorSlots,i,11,55-i*16),inventorySlotsAllTheTime);
 		//adding stuff to InventorySlots for armor
 		for(int a=0;a<armorInventory.length;a++){
-			Item item=armorInventory[a]!=null?armorInventory[a].getItem():null;
-			ItemStack stackMain=armorInventory[a];
+//			Item item=armorInventory[a]!=null?armorInventory[a].getItem():null;
+//			ItemStack stackMain=armorInventory[a];
 //			if(item!=null&&item instanceof UpgItem){
 //				UpgItem upgItem=(UpgItem)item;
 //				int numberOfSlots=upgItem.getInventorySize();
@@ -104,7 +103,7 @@ public class ArmorContainer extends Container implements Updateable{
 		refreshSlotLists();
 		
 		if(slotid>=0&&slotid<inventoryItemStacks.size()&&inventoryItemStacks.size()==inventorySlots.size()){
-			Slot slot =(Slot)this.inventorySlots.get(slotid);
+			Slot slot =this.inventorySlots.get(slotid);
 			
 //			UtilM.println("Side: "+(player.worldObj.isRemote?"CLIENT":"SERVER")+", clicked slot id: "+slotid+", "+(slot!=null?("slot number: "+slot.slotNumber+", Stack in slot: "+(slot.getStack()!=null?slot.getStack().getDisplayName():"null")+", Inventory name of the slot: "+slot.inventory.getInventoryName()):"slot is null")+"\n");
 //			if(!player.worldObj.isRemote)UtilM.println("\n");
@@ -134,7 +133,7 @@ public class ArmorContainer extends Container implements Updateable{
 	public void refreshStacksList(){
 		inventoryItemStacks.clear();
 		for(int a=0;a<inventorySlots.size();a++){
-			Slot slot=(Slot)inventorySlots.get(a);
+			Slot slot=inventorySlots.get(a);
 			inventoryItemStacks.add((slot)==null?(ItemStack)null:slot.getStack());
 		}
 	}
@@ -169,7 +168,7 @@ public class ArmorContainer extends Container implements Updateable{
 		
 		ItemStack itemstack=null;
 		{
-			Slot slot = (Slot)this.inventorySlots.get(slotID);
+			Slot slot = this.inventorySlots.get(slotID);
 			if(slot!=null&&slot.getHasStack()){
 				ItemStack itemstack1=slot.getStack();
 				itemstack=itemstack1.copy();

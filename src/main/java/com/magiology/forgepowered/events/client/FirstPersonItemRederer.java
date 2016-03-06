@@ -5,12 +5,16 @@ import java.lang.reflect.Method;
 import org.lwjgl.util.glu.Project;
 
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilobjects.m_extension.ItemRendererM;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -19,22 +23,29 @@ public class FirstPersonItemRederer{
 	
 	private static Minecraft mc=UtilM.getMC();
 	private static Method getFOVModifier;
-	
+	private static CustomRenderedItem renderer;
 	
 	public static boolean render(RenderHandEvent e){
-		try{
-			if(getFOVModifier==null){
-				getFOVModifier=ReflectionHelper.findMethod(EntityRenderer.class, mc.entityRenderer, new String[]{"getFOVModifier"}, float.class,boolean.class);
-				getFOVModifier.setAccessible(true);
+		if(getFOVModifier==null){
+			getFOVModifier=ReflectionHelper.findMethod(EntityRenderer.class, mc.entityRenderer, new String[]{"getFOVModifier"}, float.class, boolean.class);
+			getFOVModifier.setAccessible(true);
+		}
+        GlStateManager.clear(256);
+		if(mc.gameSettings.thirdPersonView==0&&!(mc.getRenderViewEntity() instanceof EntityLivingBase&&((EntityLivingBase)mc.getRenderViewEntity()).isPlayerSleeping())&&!mc.gameSettings.hideGUI&&!mc.playerController.isSpectator()){
+			EntityPlayer player=U.getThePlayer();
+			ItemStack stack=player.getCurrentEquippedItem();
+			if(stack!=null){
+				Item item=stack.getItem();
+				if(item instanceof CustomRenderedItem){
+					renderer=((CustomRenderedItem)item);
+					ItemRendererM.instance.renderer=renderer;
+					renderHand(e.partialTicks, e.renderPass);
+					return true;
+				}
 			}
-//			renderHand(e.partialTicks, e.renderPass);
-		} catch (Exception e2){
-			e2.printStackTrace();
+
 		}
 		return false;
-	}
-	
-	private void renderSpecialItem(){
 	}
 	
 	private static void renderHand(float partialTicks, int xOffset){
@@ -44,11 +55,11 @@ public class FirstPersonItemRederer{
 		float f = 0.07F;
 
 		if (mc.gameSettings.anaglyph) {
-			GlStateManager.translate((float) (-(xOffset * 2 - 1)) * f, 0.0F, 0.0F);
+			GlStateManager.translate(-(xOffset * 2 - 1) * f, 0.0F, 0.0F);
 		}
 
 		try{
-			Project.gluPerspective((float) getFOVModifier.invoke(mc.entityRenderer, partialTicks, false),(float) mc.displayWidth / (float) mc.displayHeight, 0.05F, (float)(mc.gameSettings.renderDistanceChunks * 16) * 2.0F);
+			Project.gluPerspective((float) getFOVModifier.invoke(mc.entityRenderer, partialTicks, false),(float) mc.displayWidth / (float) mc.displayHeight, 0.05F, mc.gameSettings.renderDistanceChunks * 16 * 2.0F);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -56,7 +67,7 @@ public class FirstPersonItemRederer{
 		GlStateManager.loadIdentity();
 
 		if (mc.gameSettings.anaglyph) {
-			GlStateManager.translate((float) (xOffset * 2 - 1) * 0.1F, 0.0F, 0.0F);
+			GlStateManager.translate((xOffset * 2 - 1) * 0.1F, 0.0F, 0.0F);
 		}
 
 		GlStateManager.pushMatrix();
@@ -66,13 +77,13 @@ public class FirstPersonItemRederer{
 			setupViewBobbing(partialTicks);
 		}
 
-		boolean flag = mc.getRenderViewEntity() instanceof EntityLivingBase
-				&& ((EntityLivingBase) mc.getRenderViewEntity()).isPlayerSleeping();
+		boolean flag = mc.getRenderViewEntity() instanceof EntityLivingBase&&((EntityLivingBase) mc.getRenderViewEntity()).isPlayerSleeping();
 
-		if (mc.gameSettings.thirdPersonView == 0 && !flag && !mc.gameSettings.hideGUI
-				&& !mc.playerController.isSpectator()) {
+		if (mc.gameSettings.thirdPersonView == 0 && !flag && !mc.gameSettings.hideGUI&&!mc.playerController.isSpectator()){
 			mc.entityRenderer.enableLightmap();
-			mc.getItemRenderer().renderItemInFirstPerson(partialTicks);
+			
+			ItemRendererM.instance.renderItemInFirstPerson(partialTicks);
+			
 			mc.entityRenderer.disableLightmap();
 		}
 
@@ -91,10 +102,10 @@ public class FirstPersonItemRederer{
 	private static void hurtCameraEffect(float partialTicks){
 		if(mc.getRenderViewEntity() instanceof EntityLivingBase){
 			EntityLivingBase entitylivingbase=(EntityLivingBase)mc.getRenderViewEntity();
-			float f=(float) entitylivingbase.hurtTime - partialTicks;
+			float f=entitylivingbase.hurtTime - partialTicks;
 
 			if (entitylivingbase.getHealth() <= 0.0F) {
-				float f1 = (float) entitylivingbase.deathTime + partialTicks;
+				float f1 = entitylivingbase.deathTime + partialTicks;
 				GlStateManager.rotate(40.0F - 8000.0F / (f1 + 200.0F), 0.0F, 0.0F, 1.0F);
 			}
 
@@ -102,7 +113,7 @@ public class FirstPersonItemRederer{
 				return;
 			}
 
-			f = f / (float) entitylivingbase.maxHurtTime;
+			f = f / entitylivingbase.maxHurtTime;
 			f = MathHelper.sin(f * f * f * f * (float) Math.PI);
 			float f2 = entitylivingbase.attackedAtYaw;
 			GlStateManager.rotate(-f2, 0.0F, 1.0F, 0.0F);

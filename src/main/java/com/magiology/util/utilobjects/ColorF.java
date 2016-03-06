@@ -76,7 +76,7 @@ public class ColorF{
 		return "("+(r+"").substring(0, Math.min((r+"").length(),4))+", "+(g+"").substring(0, Math.min((g+"").length(),4))+", "+(b+"").substring(0, Math.min((b+"").length(),4))+", "+(a+"").substring(0, Math.min((a+"").length(),4))+")";
 	}
 	public static ColorF convert(Color color){
-		return new ColorF((float)color.getRed()/256F, (float)color.getGreen()/256F, (float)color.getBlue()/256F, (float)color.getAlpha()/256F);
+		return new ColorF(color.getRed()/256F, color.getGreen()/256F, color.getBlue()/256F, color.getAlpha()/256F);
 	}
 	public ColorF mul(double r, double g, double b, double a){
 		return new ColorF(this.r*r, this.g*g, this.b*b, this.a*a);

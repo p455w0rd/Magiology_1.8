@@ -30,7 +30,7 @@ public class QuadUVGenerator{
 	
 	
 	public void setImageDimension(int imageWidth,int imageHeight){
-		imagePixelWidth=1F/(float)imageWidth;
-		imagePixelHeight=1F/(float)imageHeight;
+		imagePixelWidth=1F/imageWidth;
+		imagePixelHeight=1F/imageHeight;
 	}
 }

@@ -3,9 +3,6 @@ package com.magiology.mcobjects.tileentityes;
 import static com.magiology.api.power.SixSidedBoolean.Modifier.*;
 import static com.magiology.util.utilclasses.SideUtil.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.magiology.api.power.SixSidedBoolean;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.effect.EntitySparkFX;
@@ -13,15 +10,10 @@ import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntity
 import com.magiology.util.utilclasses.Get;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ObjectProcessor;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 import com.magiology.util.utilobjects.vectors.Pos;
-import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.Vec3M;
-import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh;
-import com.magiology.util.utilobjects.vectors.physics.RealPhysicsMesh.MaterialStrategy;
-import com.magiology.util.utilobjects.vectors.physics.RealPhysicsVec3F;
 
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.nbt.NBTTagCompound;

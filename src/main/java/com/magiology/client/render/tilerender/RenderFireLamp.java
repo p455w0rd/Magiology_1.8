@@ -1,7 +1,5 @@
 package com.magiology.client.render.tilerender;
 
-import java.util.List;
-
 import com.magiology.client.render.aftereffect.LongAfterRenderRenderer;
 import com.magiology.client.render.aftereffect.TwoDotsLineRender;
 import com.magiology.forgepowered.events.client.RenderEvents;
@@ -10,13 +8,8 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.PrintUtil;
-import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.TwoDots;
-import com.magiology.util.utilobjects.vectors.Vec2i;
-import com.magiology.util.utilobjects.vectors.Vec3M;
-import com.magiology.util.utilobjects.vectors.physics.AbstractRealPhysicsVec3F;
 
 import net.minecraft.tileentity.TileEntity;
 

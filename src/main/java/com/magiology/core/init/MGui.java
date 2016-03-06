@@ -26,7 +26,7 @@ public class MGui{
 		JSProgramEditor=9;
 	
 	public static void preInit(){
-		new GuiUpdater();
+		new GuiUpdater().toString();
 	}
 
 	public static void registerGuis(){

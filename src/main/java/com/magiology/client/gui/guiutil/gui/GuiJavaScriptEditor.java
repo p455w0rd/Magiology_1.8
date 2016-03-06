@@ -137,7 +137,7 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 				}
 			}
 			
-			ErrorMarker error=addError(new ErrorMarker(new Vec2i(colum, line), invalidReference.length(),s));
+			addError(new ErrorMarker(new Vec2i(colum, line), invalidReference.length(),s));
 			
 			return;
 		}

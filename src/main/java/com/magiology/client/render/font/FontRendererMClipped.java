@@ -5,9 +5,9 @@ import java.awt.Rectangle;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.util.ResourceLocation;
@@ -109,7 +109,7 @@ public class FontRendererMClipped extends FontRendererMBase{
 			Rectangle clip=new Rectangle((int)min.x, (int)min.y, (int)(max.x-min.x), (int)(max.y-min.y));
 			Vector2f min=new Vector2f(posX+f2, posY),max=new Vector2f(posX+f3-1.0F-f2, posY+7.99F);
 			Matrix4f transf=rednerer.getTransformation();
-			Vec3M Min=GL11U.transformVector(new Vec3M(min.x, min.y, 0), transf),Max=GL11U.transformVector(new Vec3M(max.x, max.y, 0), transf);
+			Vec3M Min=MatrixUtil.transformVector(new Vec3M(min.x, min.y, 0), transf),Max=MatrixUtil.transformVector(new Vec3M(max.x, max.y, 0), transf);
 			if(clip.contains(Min.x,Min.y)||clip.contains(Max.x, Max.y)){
 				Vector2f push=new Vector2f();
 				if(Min.x<this.min.x)min.x+=push.x=(float)(this.min.x-Min.x);

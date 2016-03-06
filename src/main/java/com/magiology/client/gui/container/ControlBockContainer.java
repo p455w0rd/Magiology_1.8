@@ -31,7 +31,7 @@ public class ControlBockContainer extends Container{
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber){
 		ItemStack itemstack=null;
 		{
-			Slot slot = (Slot)this.inventorySlots.get(slotNumber);
+			Slot slot = this.inventorySlots.get(slotNumber);
 			if(slot!=null&&slot.getHasStack()){
 				ItemStack itemstack1=slot.getStack();
 				itemstack=itemstack1.copy();

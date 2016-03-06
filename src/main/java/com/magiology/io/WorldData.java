@@ -155,7 +155,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			FileContent<ValueCast> file=fileWrite.getValue();
 			if(dimSpesific?world.provider.getDimensionId()==file.dimension:true){
 				//Clear the file and write to it.
-				FileUtil.setFileObj(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension), (Serializable) file);
+				FileUtil.setFileObj(new File(bp+fileWrite.getKey()+"_"+file.dimension+"."+extension), file);
 			}
 		}
 	}

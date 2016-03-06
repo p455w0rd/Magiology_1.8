@@ -39,7 +39,7 @@ import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
 import com.magiology.util.utilobjects.vectors.Plane;
-import com.magiology.util.utilobjects.vectors.Ray;
+import com.magiology.util.utilobjects.vectors.RayDeprecated;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -422,7 +422,7 @@ public class UtilM{
 		float[] data=codeToRGBABPercentage(code);
 		return new ColorF(data[0],data[1],data[2],data[3]);
 	}
-	public static boolean intersectLinePlane(Ray ray,Plane plane, Vec3M result){
+	public static boolean intersectLinePlane(RayDeprecated ray,Plane plane, Vec3M result){
 		if(result==null){
 			PrintUtil.println("Result is null!\nResult can't be set if it is null!\nInitialize it!\n------------");
 			return false;
@@ -746,10 +746,10 @@ public class UtilM{
 	}
 
 	public static float sin(float a){
-		return (float)MathHelper.sin((float)Math.toRadians(a));
+		return MathHelper.sin((float)Math.toRadians(a));
 	}
 	public static float cos(double a){
-		return (float)MathHelper.cos((float)Math.toRadians(a));
+		return MathHelper.cos((float)Math.toRadians(a));
 	}
 
 	public static float normaliseDegrees(float angle){
@@ -763,5 +763,31 @@ public class UtilM{
 			while(angle>=360)angle-=360;
 		}
 		return angle;
+	}
+	public static int getNumPrefix(float num){
+		return num>=0?1:-1;
+	}
+	public static int getNumPrefix(double num){
+		return num>=0?1:-1;
+	}
+	public static boolean isPrefixSame(double num1, double num2){
+		return getNumPrefix(num1)==getNumPrefix(num2);
+	}
+	public static boolean playerEqual(EntityPlayer player, EntityPlayer player2){
+		if(player==null||player2==null)return false;
+		return player.getGameProfile().getId().equals(player2.getGameProfile().getId());
+	}
+	public static boolean isNumValid(double num){
+		return Double.isFinite(num)&&!Double.isNaN(num);
+	}
+	public static float[] countedArray(float start, float end){
+		float[] result=new float[(int)(end-start)];
+		for(int i=0;i<result.length;i++)result[i]=i;
+		return null;
+	}
+	public static int[] countedArray(int start, int end){
+		int[] result=new int[end-start];
+		for(int i=0;i<result.length;i++)result[i]=i+start;
+		return result;
 	}
 }

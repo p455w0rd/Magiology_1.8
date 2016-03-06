@@ -32,7 +32,6 @@ import net.minecraft.util.EnumFacing;
 
 public class TileEntityNetworkController extends TileEntityNetworkPow{
 	SlowdownUtil optimizer=new SlowdownUtil(40); 
-	private List<NetworkInterface> interfaces=new ArrayList<NetworkInterface>();
 	private List<ISidedNetworkComponent> network=new ArrayList<ISidedNetworkComponent>();
 	private List<TileEntityNetworkProgramHolder> commandHolders=new ArrayList<TileEntityNetworkProgramHolder>();
 	private List<Messageable> talkers=new ArrayList<Messageable>();
@@ -62,7 +61,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 	
 	public void broadcastWithCheck(TileEntityNetworkRouter router, String action){
 		for(Messageable i:talkers){
-			if(i instanceof TileEntity&&i instanceof NetworkInterface&&i instanceof Messageable){
+			if(i instanceof TileEntity&&i instanceof NetworkInterface&&i!=null){
 				if(router.willSendTo((TileEntity&NetworkInterface&Messageable)i))i.onMessageReceved(action);
 			}
 		}
@@ -192,7 +191,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 						TileEntity test=workTile.getHost().getWorld().getTileEntity(SideUtil.offsetNew(i, workTile.getHost().getPos()));
 						if(test instanceof ISidedNetworkComponent){
 							ISidedNetworkComponent t=(ISidedNetworkComponent)test;
-							if(t instanceof ISidedNetworkComponent&&!network.contains(t)&&t.getBrain()!=null&&t.getNetworkId()==getNetworkId()){
+							if(t!=null&&!network.contains(t)&&t.getBrain()!=null&&t.getNetworkId()==getNetworkId()){
 								more=true;
 								workTile=t;
 								network.add(workTile);

@@ -58,10 +58,6 @@ public class Renderer{
 		renderer.color(UtilM.snap(r,0,1), UtilM.snap(g,0,1), UtilM.snap(b,0,1), UtilM.snap(a,0,1));
 		return instance;
 	}
-	private Renderer addColor(float r, float g, float b){
-		addColor(r, g, b, 1F);
-		return instance;
-	}
 	
 	private void endVertex(){
 		renderer.endVertex();

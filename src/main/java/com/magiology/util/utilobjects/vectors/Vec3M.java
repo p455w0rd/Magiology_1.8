@@ -10,8 +10,8 @@ import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.WritableVector3f;
 
-import com.magiology.util.renderers.GL11U;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -36,20 +36,20 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 		this.z=z;
 	}
 	public Vec3M subtractReverse(Vec3M vec){
-		return new Vec3M(vec.x-this.x,vec.x-this.y,vec.x-this.z);
+        return new Vec3M(vec.x - this.x, vec.y - this.y, vec.z - this.z);
 	}
 	public Vec3M subtractReverse(double x,double y,double z){
 		return new Vec3M(x-this.x,x-this.y,x-this.z);
 	}
 	public Vec3M normalize(){
-		double d0 = MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
-		return d0 < 1.0E-4D ? new Vec3M(0.0D, 0.0D, 0.0D) : new Vec3M(this.x / d0, this.y / d0, this.z / d0);
+        double d0 = MathHelper.sqrt_double(this.x * this.x + this.y * this.y + this.z * this.z);
+        return d0 < 1.0E-4D ? new Vec3M() : new Vec3M(this.x / d0, this.y / d0, this.z / d0);
 	}
 	public double dotProduct(Vec3M vec){
 		return this.x * vec.x + this.y * vec.x + this.z * vec.x;
 	}
 	public Vec3M crossProduct(Vec3M vec){
-		return new Vec3M(this.y * vec.x - this.z * vec.x, this.z * vec.x - this.x * vec.x, this.x * vec.x - this.y * vec.x);
+		return new Vec3M(this.y * vec.z - this.z * vec.y, this.z * vec.x - this.x * vec.z, this.x * vec.y - this.y * vec.x);
 	}
 
 	public Vec3M subtract(Vec3M vec){
@@ -174,9 +174,9 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	}
 	@Override
 	public Vector negate(){
-		x = -x;
-		y = -y;
-		z = -z;
+		x*=-1;
+		y*=-1;
+		z*=-1;
 		return this;
 	}
 	@Override
@@ -296,11 +296,11 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 
 		Matrix4f rot=new Matrix4f();
 		rot.rotate((float)Math.PI,norm.toLWJGLVec());
-		difference=GL11U.transformVector(difference,rot);
+		difference=MatrixUtil.transformVector(difference,rot);
 		return norm.add(difference);
 	}
 
-	private Vector3f toLWJGLVec(){
+	public Vector3f toLWJGLVec(){
 		return  new Vector3f(getX(),getY(),getZ());
 	}
 	public double lightProduct(Vec3M vec){
@@ -330,5 +330,29 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 		Vec3M vec=(Vec3M)obj;
 		if(vec==this)return true;
 		return vec.x==x&&vec.y==y&&vec.z==z;
+	}
+	public Vec3M min(Vec3M other){
+		return new Vec3M(Math.min(x, other.x),Math.min(y, other.y),Math.min(z, other.z));
+	}
+	public Vec3M max(Vec3M other){
+		return new Vec3M(Math.max(x, other.x),Math.max(y, other.y),Math.max(z, other.z));
+	}
+	public Vec3M nega1e(){
+		negate();
+		return this;
+	}
+	public Vec3M transformSelf(Matrix4f matrix){
+		Vec3M src=transform(matrix);
+		x=src.x;
+		y=src.y;
+		z=src.z;
+		return this;
+	}
+	public Vec3M transform(Matrix4f matrix){
+		return MatrixUtil.transformVector(this, matrix);
+	}
+	public Vec3M sqrt(){
+		int x1=UtilM.getNumPrefix(x),y1=UtilM.getNumPrefix(y),z1=UtilM.getNumPrefix(z);
+		return new Vec3M(Math.sqrt(x*x1)*x1, Math.sqrt(y*y1)*y1, Math.sqrt(z*z1)*z1);
 	}
 }

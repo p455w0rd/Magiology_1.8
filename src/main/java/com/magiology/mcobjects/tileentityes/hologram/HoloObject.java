@@ -174,7 +174,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 		result.add(new DoubleObject("color.r", color.r));
 		result.add(new DoubleObject("color.g", color.g));
 		result.add(new DoubleObject("color.b", color.b));
-		if(this instanceof ICommandInteract)result.add(new DoubleObject("name", ((ICommandInteract)this).getName()));
+		if(this!=null)result.add(new DoubleObject("name", ((ICommandInteract)this).getName()));
 		return result;
 	}
 	public Object getVar(String name){
@@ -273,7 +273,7 @@ public abstract class HoloObject implements SavableData,ICommandInteract{
 		interations.add(new InteractionColor<HoloObject>());
 		
 		if(this instanceof StringContainer)interations.add(new InteractionText<HoloObject>());
-		if(this instanceof ICommandInteract)interations.add(new InteractionName<HoloObject>());
+		if(this!=null)interations.add(new InteractionName<HoloObject>());
 	}
 	
 	@Override

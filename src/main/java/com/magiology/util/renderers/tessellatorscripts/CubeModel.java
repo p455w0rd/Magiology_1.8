@@ -2,11 +2,11 @@ package com.magiology.util.renderers.tessellatorscripts;
 
 import org.lwjgl.util.vector.Matrix4f;
 
-import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
+import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.vectors.QuadUV;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -227,7 +227,7 @@ public class CubeModel{
 		return this;
 	}
 	public CubeModel transform(Matrix4f matrix){
-		for(int i=0;i<points.length;i++)points[i]=GL11U.transformVector(points[i], matrix);
+		for(int i=0;i<points.length;i++)points[i]=MatrixUtil.transformVector(points[i], matrix);
 		return this;
 	}
 }

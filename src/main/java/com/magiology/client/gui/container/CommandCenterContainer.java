@@ -29,7 +29,7 @@ public class CommandCenterContainer extends Container{
 	@Override
 	public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer player){
 		if(slotId<0)return super.slotClick(slotId, clickedButton, mode, player);
-		Slot clickedSlot=(Slot)inventorySlots.get(slotId);
+		Slot clickedSlot=inventorySlots.get(slotId);
 		switch (clickedButton){
 		case 0:if(selectedSlotId==slotId-36)selectedSlotId=-1;break;
 		case 1:if(UtilM.isItemInStack(MItems.commandContainer, clickedSlot.getStack())&&clickedSlot.inventory instanceof TileEntityNetworkProgramHolder){
@@ -42,7 +42,7 @@ public class CommandCenterContainer extends Container{
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber){
 		try{
-			Slot clickedSlot=(Slot)inventorySlots.get(slotNumber);
+			Slot clickedSlot=inventorySlots.get(slotNumber);
 			if(clickedSlot==null||!clickedSlot.getHasStack())return null;
 			ItemStack itemstack=null;
 			ItemStack itemstack1=clickedSlot.getStack();
