@@ -3,8 +3,8 @@ package com.magiology.client.gui.custom.hud;
 import java.awt.Color;
 
 import com.magiology.core.init.MItems;
-import com.magiology.handlers.animationhandlers.TheHandHandler;
-import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPositions;
+import com.magiology.handlers.animationhandlers.thehand.HandPosition;
+import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
@@ -36,8 +36,8 @@ public class HandModeChangerHUD extends HUD{
 			OpenGLM.pushMatrix();
 			
 			int posId=0;
-			for(int b=0;b<HandComonPositions.values().length;b++){
-				if(HandComonPositions.values()[b].equals(TheHandHandler.getActivePosition(player))){
+			for(int b=0;b<HandPosition.values().length;b++){
+				if(HandPosition.values()[b].equals(TheHandHandler.getActivePosition(player))){
 					posId=b;
 					continue;
 				}

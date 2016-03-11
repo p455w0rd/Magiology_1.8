@@ -12,8 +12,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -658,6 +660,10 @@ public class UtilM{
 	public static float round(float d, int decimalPlace){
 		return BigDecimal.valueOf(d).setScale(decimalPlace,BigDecimal.ROUND_HALF_UP).floatValue();
 	}
+	@SideOnly(Side.CLIENT)
+	public static long getWorldTime(){
+		return getTheWorld().getTotalWorldTime();
+	}
 	public static long getWorldTime(Object worldContainer){
 		return getWorld(worldContainer).getTotalWorldTime();
 	}
@@ -790,4 +796,27 @@ public class UtilM{
 		for(int i=0;i<result.length;i++)result[i]=i+start;
 		return result;
 	}
+	
+	public static List<Vec3M> dotsOnRay(Vec3M start, Vec3M end, float differenceBetweenDots){
+		List<Vec3M> result=new ArrayList<>();
+		
+		Vec3M 
+			difference=start.subtract(end),
+			direction=difference.normalize();
+		
+		float 
+			lenght=difference.length(),
+			posMul=differenceBetweenDots;
+		
+		result.add(start);
+		while(posMul<lenght){
+			result.add(direction.mul(posMul).add(end));
+			posMul+=differenceBetweenDots;
+		}
+		
+		result.add(end);
+		
+		return result;
+	}
+	
 }

@@ -22,6 +22,7 @@ import com.magiology.core.init.MRecepies;
 import com.magiology.core.init.MTileEntitys;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
+import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.util.utilclasses.PrintUtil;
@@ -92,6 +93,8 @@ public class Magiology{
 		}
 	}
 	public void preInit(FMLPreInitializationEvent event){
+		ForcedClassLoader.load();
+		
 		MUpdater.init();
 //		//TODO
 //		Config.setShadersEnabled(false);
@@ -116,6 +119,7 @@ public class Magiology{
 		
 		ProgramDataBase.loadClass();
 		GuiJSProgramEditor.loadClass();
+		TheHandHandler.init();
 	}
 	public void exit(){
 		if(modInfGUI!=null)SoundPlayer.playSound(MODS_SUBFOLDER_WIN_GUI+"/Close.wav");

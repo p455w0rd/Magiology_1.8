@@ -6,8 +6,8 @@ import com.magiology.handlers.GenericPacketEventHandler;
 import com.magiology.handlers.GenericPacketEventHandler.IntegerPacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.StringPacketEvent;
-import com.magiology.handlers.animationhandlers.TheHandHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
+import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.PrintUtil;
 

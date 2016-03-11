@@ -7,8 +7,8 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.magiology.handlers.animationhandlers.TheHandHandler;
-import com.magiology.handlers.animationhandlers.TheHandHandler.HandData;
+import com.magiology.handlers.animationhandlers.thehand.HandData;
+import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.MultiTransfromModel;
 import com.magiology.util.renderers.OpenGLM;
@@ -82,9 +82,9 @@ public class ItemRendererTheHand{
 			}
 			OpenGLM.pushMatrix();
 			OpenGLM.translate(p*13, p*3, 0);
-			OpenGLM.translate(data.base[0], data.base[1], data.base[2]);
-			GL11U.glRotate(10+data.base[3], data.base[4], 15+data.base[5]);
 			GL11U.glRotate(0, 130, 0);
+			OpenGLM.translate(data.base[0], data.base[1], data.base[2]);
+			GL11U.glRotate(data.base[3], data.base[4], data.base[5],p*4,p,0);
 			try{
 				handModel.draw(transformations);
 			}catch(Exception e){
@@ -99,7 +99,7 @@ public class ItemRendererTheHand{
 	
 	private void init(){
 		base=MatrixUtil.createMatrix(-60, 20, 20);
-		thumb1=MatrixUtil.createMatrix(new Vector3f(p*7F,0,p*1.7F));
+		thumb1=MatrixUtil.createMatrix(new Vector3f(p*6.5F,p*0.8F,p*1.7F));
 		thumb2=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.5F));
 		thumb3=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.4F));
 		

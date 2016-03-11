@@ -3,8 +3,8 @@ package com.magiology.mcobjects.items;
 import java.util.List;
 
 import com.magiology.forgepowered.events.client.CustomRenderedItem;
-import com.magiology.handlers.animationhandlers.TheHandHandler;
-import com.magiology.handlers.animationhandlers.TheHandHandler.HandComonPositions;
+import com.magiology.handlers.animationhandlers.thehand.HandPosition;
+import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.util.utilobjects.NBTUtil;
 
 import net.minecraft.entity.Entity;
@@ -38,7 +38,7 @@ public class TheHand extends Item implements CustomRenderedItem{
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity){
-		if(TheHandHandler.getActivePosition(player)==HandComonPositions.ClosedFist){
+		if(TheHandHandler.getActivePosition(player)==HandPosition.ClosedFist){
 			
 			player.worldObj.createExplosion(player, entity.posX, entity.posY-0.0005, entity.posZ, 0.01F, false);
 			return true;
@@ -62,10 +62,10 @@ public class TheHand extends Item implements CustomRenderedItem{
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
 		TheHandHandler.handUseAnimation(player);
-		HandComonPositions ap=TheHandHandler.getActivePosition(player);
-		if(ap==HandComonPositions.WeaponHolder){
+		HandPosition ap=TheHandHandler.getActivePosition(player);
+		if(ap==HandPosition.WeaponHolder){
 			player.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
-		}else if(ap==HandComonPositions.NaturalPosition){
+		}else if(ap==HandPosition.NaturalPosition){
 			
 			
 			
