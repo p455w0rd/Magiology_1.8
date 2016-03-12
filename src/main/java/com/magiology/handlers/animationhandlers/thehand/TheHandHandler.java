@@ -5,9 +5,10 @@ import java.util.Map;
 
 import com.magiology.client.render.itemrender.ItemRendererTheHand;
 import com.magiology.core.init.MItems;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -101,9 +102,9 @@ public class TheHandHandler{
 	@SideOnly(Side.CLIENT)
 	public static void animate(EntityPlayer player){
 		
-		setActivePositionId(player, 1);
+		setActivePositionId(player, 4);
 		HandPosition pos=getActivePosition(player);
-//		PrintUtil.println(pos);
+//		PrintUtil.println(pos.name);
 		renderer.secure();
 		
 		Map<String, HandData> data=getHandData();
@@ -113,13 +114,22 @@ public class TheHandHandler{
 			speed=handData.get("speed");
 		data.get("prev").set((HandData)actual.clone());
 		
+		HandData wanted=pos.data;
 		
 		
+		if(activeAnimation!=null){
+			if(activeAnimation.isDone()){
+				if(UtilM.getWorldTime()%30==0)activeAnimation.start();
+			}
+			else{
+				activeAnimation.update();
+				wanted=activeAnimation.wantedPos;
+			}
+		}activeAnimation=HandAnimation.rightClickAnimation;
 		
-		handleSpeed(speed, main, pos.data, 4F, 5F, 0.6F);
+		handleSpeed(speed, main, wanted, 4F, 5F, 0.6F);
 		
 		main.set(main.add(speed));
-		
 		
 		updateNoise(player);
 		actual.set(main.add(data.get("noise")));
@@ -142,36 +152,34 @@ public class TheHandHandler{
 		if(!UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem()))return false;
 		return player.getCurrentEquippedItem().hasTagCompound();
 	}
-	
+	private static final ObjectProcessor<Float> speedHandler=new ObjectProcessor<Float>(){
+		@Override
+		public Float pocess(Float speed, Object...objects){
+			float 
+				pos=(float)objects[0],
+				wantedPos=(float)objects[1],
+				acceleration=(float)objects[2],
+				friction=(float)objects[3],
+				diff=Math.abs(wantedPos-pos),
+				act=acceleration,
+				speed1=(diff/act);
+			
+			if(speed1>1)speed1=1;
+			else speed1*=speed1;
+			
+			return UtilM.handleSpeedFolower(speed, pos, wantedPos, acceleration)*friction*speed1;
+		}
+	};
 	private static void handleSpeed(HandData speed, HandData pos,HandData wantedPos,float accelerationRot,float accelerationPos, float friction){
 		
-		final ObjectProcessor<Float> handler=new ObjectProcessor<Float>(){
-			@Override
-			public Float pocess(Float speed, Object...objects){
-				float 
-					pos=(float)objects[0],
-					wantedPos=(float)objects[1],
-					acceleration=(float)objects[2],
-					friction=(float)objects[3],
-					diff=Math.abs(wantedPos-pos),
-					act=acceleration,
-					speed1=(diff/act);
-				
-				if(speed1>1)speed1=1;
-				else speed1*=speed1;
-				
-				return UtilM.handleSpeedFolower(speed, pos, wantedPos, acceleration)*friction*speed1;
-			}
-		};
-		
 		for(int i=0;i<speed.base.length;i++)
-			speed.base[i]=handler.pocess(speed.base[i], pos.base[i], wantedPos.base[i], i<3?accelerationPos:accelerationRot,friction);
+			speed.base[i]=speedHandler.pocess(speed.base[i], pos.base[i], wantedPos.base[i], i<3?accelerationPos:accelerationRot,friction);
 		
 		for(int i=0;i<speed.thumb.length;i++)
-			speed.thumb[i]=handler.pocess(speed.thumb[i], pos.thumb[i], wantedPos.thumb[i], accelerationRot,friction);
+			speed.thumb[i]=speedHandler.pocess(speed.thumb[i], pos.thumb[i], wantedPos.thumb[i], accelerationRot,friction);
 		
 		for(int i=0;i<speed.fingers.length;i++)for(int j=0;j<speed.fingers[i].length;j++)
-			speed.fingers[i][j]=handler.pocess(speed.fingers[i][j], pos.fingers[i][j], wantedPos.fingers[i][j], accelerationRot,friction);
+			speed.fingers[i][j]=speedHandler.pocess(speed.fingers[i][j], pos.fingers[i][j], wantedPos.fingers[i][j], accelerationRot,friction);
 	}
 	
 	
@@ -193,19 +201,21 @@ public class TheHandHandler{
 	public static void generateNewNoiseValue(){
 		HandData noiseSpeed=getHandData().get("noiseWanted");
 		for(int i=0;i<noiseSpeed.base.length;i++)
-			if(UtilM.RInt(4)==0)noiseSpeed.base[i]=UtilM.CRandF(i<3?p*2:p);
+			if(RandUtil.RI(4)==0)noiseSpeed.base[i]=RandUtil.CRF(i<3?p*2:p);
 		
 		for(int i=0;i<noiseSpeed.thumb.length;i++)
-			if(UtilM.RInt(4)==0)noiseSpeed.thumb[i]=UtilM.CRandF(3);
+			if(RandUtil.RI(4)==0)noiseSpeed.thumb[i]=RandUtil.CRF(3);
 		
 		for(int i=0;i<noiseSpeed.fingers.length;i++){
-			float noise=UtilM.CRandF(3);
-			for(int j=0;j<noiseSpeed.fingers[i].length;j++)
-				if(UtilM.RInt(4)==0)noiseSpeed.fingers[i][j]=noise;
+			float noise=RandUtil.CRF(3);
+			for(int j=0;j<noiseSpeed.fingers[i].length;j++){
+				if(j==0)noiseSpeed.fingers[i][j]=RandUtil.CRF(3);
+				else noiseSpeed.fingers[i][j]=noise;
+			}
 		}
 	}
 	public static void init(){
-		
+		HandPosition.compile();
 	}
 	
 }

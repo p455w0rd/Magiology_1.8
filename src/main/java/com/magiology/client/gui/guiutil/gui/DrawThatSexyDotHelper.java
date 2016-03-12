@@ -2,7 +2,7 @@ package com.magiology.client.gui.guiutil.gui;
 
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.Gui;
@@ -21,7 +21,7 @@ public class DrawThatSexyDotHelper extends Gui{
 		this.xSize=xSize;
 		this.ySize=ySize;
 		this.trueScale=scale;
-		rotation=UtilM.CRandD(5);
+		rotation=RandUtil.CRD(5);
 	}
 	
 	public void update(double rot,int glow,boolean var1){

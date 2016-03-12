@@ -18,8 +18,8 @@ import com.magiology.api.power.SixSidedBoolean.Modifier;
 import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
@@ -147,7 +147,7 @@ public class TileEntityNetworkController extends TileEntityNetworkPow{
 		
 		//generate && save
 		do{
-			long1=UtilM.RL();
+			long1=RandUtil.RL();
 		}while(networkIdMap.containsValue(long1)&&long1!=-1&&long1!=-2);
 		networkIdMap.put(tile, long1);
 		

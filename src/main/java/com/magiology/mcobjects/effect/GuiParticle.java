@@ -7,6 +7,7 @@ import com.magiology.client.render.Textures;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
@@ -57,12 +58,12 @@ public class GuiParticle{
 		double lesstiplyer=6;
 		if(standardFX.IsEnabled(GuiFXProp.HatesToBeUnseen)){
 			if(standardFX==GuiStandardFX.StarterFX){
-				GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos, yPos,7+UtilM.RInt(5),UtilM.CRandF(1),UtilM.CRandF(1),2.5,0.05,0.7,1,0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.CloudFX));
+				GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos, yPos,7+RandUtil.RI(5),RandUtil.CRF(1),RandUtil.CRF(1),2.5,0.05,0.7,1,0.2+RandUtil.RF()*0.5, 0.2+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.CloudFX));
 			}
 			if((xPos<guiLeft||yPos<guiTop)||(xPos>guiLeft+xSize||yPos>guiTop+ySize));else lesstiplyer/=4.0;
 			
 		}
-		double[] ab=UtilM.circleXZ(UtilM.RInt(360));
+		double[] ab=UtilM.circleXZ(RandUtil.RI(360));
 		if(hasMovementNoise){
 			xSpeed+=ab[0]/lesstiplyer;
 			ySpeed+=ab[1]/lesstiplyer;
@@ -113,44 +114,44 @@ public class GuiParticle{
 			if(standardFX.IsEnabled(GuiFXProp.HasColision)){
 				boolean[] a=getScreenColision(0);
 				if(a[0]){
-					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(0, yPos,10, UtilM.RF()*3+1, UtilM.CRandD(10),1,0.5,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(0, yPos,10, RandUtil.RF()*3+1, RandUtil.CRD(10),1,0.5,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 					this.xSpeed*=-bounciness;
 					xPos=boundingBoxXY/2;
 				}
 				if(a[1]){
-					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(screenResX-boundingBoxXY/2, yPos,10, -UtilM.RF()*3-1, UtilM.CRandD(10),1,0.5,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(screenResX-boundingBoxXY/2, yPos,10, -RandUtil.RF()*3-1, RandUtil.CRD(10),1,0.5,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 					this.xSpeed*=-bounciness;
 					xPos=screenResX-boundingBoxXY/2;
 				}
 				if(a[2]){
-					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos, 0,10, UtilM.CRandD(10), UtilM.RF()*3+1,1,0.5,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos, 0,10, RandUtil.CRD(10), RandUtil.RF()*3+1,1,0.5,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 					this.ySpeed*=-bounciness;
 					yPos=boundingBoxXY/2;
 				}
 				if(a[3]){
-					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos, screenResY,10, UtilM.CRandD(10), -UtilM.RF()*3-1,1,0.5,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColision))for(int i=0;i<6;i++)GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos, screenResY,10, RandUtil.CRD(10), -RandUtil.RF()*3-1,1,0.5,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 					this.ySpeed*=-bounciness;
 					yPos=screenResY-boundingBoxXY/2;
 				}
 			}
 			if(standardFX.IsEnabled(GuiFXProp.HasColisionForce)){
-				boolean[] a=getScreenColision(UtilM.RInt(25));
+				boolean[] a=getScreenColision(RandUtil.RI(25));
 				
 				if(a[0]){
 					this.xSpeed+=0.2;
-					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(-xPos, yPos+UtilM.RInt(10)-5,13+UtilM.RInt(4), 3, 0,1,0.1,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(-xPos, yPos+RandUtil.RI(10)-5,13+RandUtil.RI(4), 3, 0,1,0.1,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 				}
 				if(a[1]){
 					this.xSpeed-=0.2;
-					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(screenResX, yPos+UtilM.RInt(10)-5,13+UtilM.RInt(4), -3, 0,1,0.1,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(screenResX, yPos+RandUtil.RI(10)-5,13+RandUtil.RI(4), -3, 0,1,0.1,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 				}
 				if(a[2]){
 					this.ySpeed+=0.2;
-					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos+UtilM.RInt(10)-5, -yPos,13+UtilM.RInt(4), 0, 3,1,0.1,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos+RandUtil.RI(10)-5, -yPos,13+RandUtil.RI(4), 0, 3,1,0.1,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 				}
 				if(a[3]){
 					this.ySpeed-=0.2;
-					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos+UtilM.RInt(10)-5, screenResY,13+UtilM.RInt(4), 0, -3,1,0.1,0.7,r*0.8+UtilM.RF()*0.2,g*0.8+UtilM.RF()*0.2,b*0.8+UtilM.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
+					if(standardFX.HasFX(GuiFXProp.HasColisionForce))GuiContainerAndGuiParticles.spawnGuiParticle(new GuiParticle(xPos+RandUtil.RI(10)-5, screenResY,13+RandUtil.RI(4), 0, -3,1,0.1,0.7,r*0.8+RandUtil.RF()*0.2,g*0.8+RandUtil.RF()*0.2,b*0.8+RandUtil.RF()*0.2,Textures.SmoothBuble1,GuiStandardFX.InpactFX));
 				}
 			}
 		}

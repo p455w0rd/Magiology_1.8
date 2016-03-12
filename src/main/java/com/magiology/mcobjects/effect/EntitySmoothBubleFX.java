@@ -5,6 +5,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
@@ -257,7 +258,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 					
 					
 					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,
-					AB[0]*3-UtilM.RF()/2,3-UtilM.RF(), AB[1]*3-UtilM.RF()/2,
+					AB[0]*3-RandUtil.RF()/2,3-RandUtil.RF(), AB[1]*3-RandUtil.RF()/2,
 					(int)(particleMaxAge*2.5), 10,-100, false,1,"tx1",worldObj.rand.nextFloat(),worldObj.rand.nextFloat(),worldObj.rand.nextFloat(), 1, 0.99));
 				}
 				

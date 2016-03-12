@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -77,12 +76,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class UtilM{
-
+	
 	public class U extends UtilM{}
-
 	
 	
-	static Random rand=new Random();
 	public static final float p=1F/16F;
 	@SideOnly(value=Side.CLIENT)
 	public static void spawnEntityFX(EntityFX particleFX){
@@ -93,7 +90,7 @@ public class UtilM{
 			if(ent!=null&&mc.effectRenderer!=null){
 				int i=mc.gameSettings.particleSetting;
 				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ,d9=Math.sqrt(mc.gameSettings.renderDistanceChunks)*45;
-				if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>d9*d9)&&RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
+				if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>d9*d9)&&RandUtil.RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 			}
 		}
 	}
@@ -105,7 +102,7 @@ public class UtilM{
 			if(ent!=null&&mc.effectRenderer!=null){
 				int i=mc.gameSettings.particleSetting;
 				double d6=ent.posX-particleFX.posX,d7=ent.posY-particleFX.posY,d8=ent.posZ-particleFX.posZ;
-				if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>distance*distance)&&RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
+				if(!(i>1)&&!(d6*d6+d7*d7+d8*d8>distance*distance)&&RandUtil.RB(Config.getParticleAmount()))Get.Render.ER().addEffect(particleFX);
 			}
 		}
 	}
@@ -120,39 +117,7 @@ public class UtilM{
 	@SideOnly(value=Side.CLIENT)public static EntityPlayer getThePlayer(){return U.getMC().thePlayer;}
 	public static int booleanToInt(boolean bool){if(bool)return 1;return 0;}
 	public static boolean intToBoolean(int i){return i==1;}
-	public static float CRandF(double scale){return (float)((0.5-rand.nextFloat())*scale);}
-	public static double CRandD(double scale){return (0.5-rand.nextDouble())*scale;}
-	public static int CRandI(int scale){return (scale-rand.nextInt(scale*2));}
-	public static int RInt(int scale){return rand.nextInt(scale);}
-	public static float RF(){return rand.nextFloat();}
-	public static float RF(double scale){return (float)(RF()*scale);}
-	public static double RD(){return rand.nextDouble();}
-	public static double RD(double scale){return RD()*scale;}
-	public static boolean RB(){return rand.nextBoolean();}
-	public static long RL(){return rand.nextLong();}
-	/**
-	 * this method returns a random boolean with a custom chance of getting true.
-	 * The higher the number is the higher chance will be for getting a true return.
-	 * Type in a number higher or equal to 0 and lower or equal to 1.
-	 * @param percentage s
-	 * @return s
-	 */
-	public static boolean RB(double percentage){
-		percentage=snap(percentage, 0, 1);
-		return percentage!=0&&(percentage==1||RF()<percentage);
-	}
-	/**
-	 * this method returns a random boolean with a custom chance of getting true.
-	 * The higher the number is the lower chance will be for getting a true return.
-	 * Type in a number higher or equal to 1.
-	 * @param percentage s
-	 * @return
-	 */
-	public static boolean RB(int percentage){
-		percentage=Math.max(percentage, 1);
-		if(percentage==1)return true;
-		return RInt(percentage)==0;
-	}
+	
 	public static double[] circleXZ(double angle){
 		double[] result={0,0};
 		int intAngle=(int)angle;
@@ -227,14 +192,14 @@ public class UtilM{
 	 * @return a
 	 */
 	public static double[] createBallXYZ(double ballSize, boolean hasSecondPos){
-		int xRot=RInt(360),yRot=RInt(360);
+		int xRot=RandUtil.RI(360),yRot=RandUtil.RI(360);
 		double[] result=new double[3*(hasSecondPos?2:1)];
 		result[0]=CricleUtil.sin(xRot)*CricleUtil.cos(yRot);//-X-
 		result[1]=CricleUtil.sin(yRot);//-Y-
 		result[2]=CricleUtil.cos(xRot)*CricleUtil.cos(yRot);//-Z-
 		if(hasSecondPos){
-			xRot+=CRandI(50);
-			yRot+=CRandI(50);
+			xRot+=RandUtil.CRI(50);
+			yRot+=RandUtil.CRI(50);
 			result[3]=CricleUtil.sin(xRot)*CricleUtil.cos(yRot);//-X-
 			result[4]=CricleUtil.sin(yRot);//-Y-
 			result[5]=CricleUtil.cos(xRot)*CricleUtil.cos(yRot);//-Z-

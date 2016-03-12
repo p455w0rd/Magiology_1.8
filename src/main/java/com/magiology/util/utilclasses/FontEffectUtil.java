@@ -57,17 +57,17 @@ public class FontEffectUtil{
 		return null;
 	}
 	public static EnumChatFormatting getRandEff(){
-		return getEffById(UtilM.RInt(length));
+		return getEffById(RandUtil.RI(length));
 	}
 	
 	public static EnumChatFormatting getRandColor(){
 		int i=0;
-		do{i=UtilM.RInt(length);}while(i==13||i==15||i==17||i==18||i==19);
+		do{i=RandUtil.RI(length);}while(i==13||i==15||i==17||i==18||i==19);
 		return getEffById(i);
 	}
 	public static EnumChatFormatting getRandEffect(){
 		int i[]={13,15,17,18,19};
-		return getEffById(i[UtilM.RInt(i.length)]);
+		return getEffById(i[RandUtil.RI(i.length)]);
 	}
 	
 }

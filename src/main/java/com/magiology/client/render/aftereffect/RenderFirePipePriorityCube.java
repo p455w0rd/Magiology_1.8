@@ -5,6 +5,7 @@ import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 
@@ -40,9 +41,9 @@ public class RenderFirePipePriorityCube implements LongAfterRenderRenderer{
 		GL11U.glTranslatep(pos);
 		OpenGLM.depthMask(false);
 		OpenGLM.color(1, 0.1, 0.1, alpha/5);
-		if(box!=null)for(int a=0;a<5;a++)drawCube(box.minX-a*0.01+UtilM.CRandF(0.005), box.minY-a*0.01+UtilM.CRandF(0.005), box.minZ-a*0.01+UtilM.CRandF(0.005), box.maxX+a*0.01+UtilM.CRandF(0.005), box.maxY+a*0.01+UtilM.CRandF(0.005), box.maxZ+a*0.01+UtilM.CRandF(0.005));
+		if(box!=null)for(int a=0;a<5;a++)drawCube(box.minX-a*0.01+RandUtil.CRF(0.005), box.minY-a*0.01+RandUtil.CRF(0.005), box.minZ-a*0.01+RandUtil.CRF(0.005), box.maxX+a*0.01+RandUtil.CRF(0.005), box.maxY+a*0.01+RandUtil.CRF(0.005), box.maxZ+a*0.01+RandUtil.CRF(0.005));
 		OpenGLM.color(0.1, 0.1, 1, alpha*2/5);
-		for(int a=0;a<5;a++)drawCube(pipe.collisionBoxes[6].minX-0.001-a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].minY-0.001-a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].minZ-0.001-a*0.01+(a==0?0:UtilM.CRandF(0.005)),pipe.collisionBoxes[6].maxX+0.001+a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].maxY+0.001+a*0.01+(a==0?0:UtilM.CRandF(0.005)), pipe.collisionBoxes[6].maxZ+0.001+a*0.01+(a==0?0:UtilM.CRandF(0.005)));
+		for(int a=0;a<5;a++)drawCube(pipe.collisionBoxes[6].minX-0.001-a*0.01+(a==0?0:RandUtil.CRF(0.005)), pipe.collisionBoxes[6].minY-0.001-a*0.01+(a==0?0:RandUtil.CRF(0.005)), pipe.collisionBoxes[6].minZ-0.001-a*0.01+(a==0?0:RandUtil.CRF(0.005)),pipe.collisionBoxes[6].maxX+0.001+a*0.01+(a==0?0:RandUtil.CRF(0.005)), pipe.collisionBoxes[6].maxY+0.001+a*0.01+(a==0?0:RandUtil.CRF(0.005)), pipe.collisionBoxes[6].maxZ+0.001+a*0.01+(a==0?0:RandUtil.CRF(0.005)));
 		OpenGLM.popMatrix();
 		OpenGLM.depthMask(true);
 //		OpenGLM.enableCull();

@@ -26,10 +26,11 @@ import com.magiology.util.utilclasses.FontEffectUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
 import com.magiology.util.utilclasses.LogUtil;
 import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 
@@ -239,8 +240,8 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			OpenGLM.disableTexture2D();
 			ColorF.RED.bind();
 			Renderer.LINES.begin();
-			Renderer.LINES.addVertex(pos1.x+UtilM.CRandF(1),pos1.y+UtilM.CRandF(1),0);
-			Renderer.LINES.addVertex(pos2.x+UtilM.CRandF(1),pos2.y+UtilM.CRandF(1),0);
+			Renderer.LINES.addVertex(pos1.x+RandUtil.CRF(1),pos1.y+RandUtil.CRF(1),0);
+			Renderer.LINES.addVertex(pos2.x+RandUtil.CRF(1),pos2.y+RandUtil.CRF(1),0);
 			Renderer.LINES.draw();
 			ColorF.WHITE.bind();
 			pos1.y+=1;

@@ -15,6 +15,7 @@ import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.registry.events.PlayerWrenchEvent;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.SpecialPlayerUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
@@ -58,7 +59,7 @@ public class EntityEvents{
 				EntityPlayer player=UtilM.getThePlayer();
 				if(
 				   !entity.isDead&&
-				   entity.isInRangeToRender3d(player.posX+UtilM.CRandI(50), player.posY+UtilM.CRandI(50), player.posZ+UtilM.CRandI(50))&&
+				   entity.isInRangeToRender3d(player.posX+RandUtil.CRI(50), player.posY+RandUtil.CRI(50), player.posZ+RandUtil.CRI(50))&&
 				   ((EntityLivingBase)entity).getCreatureAttribute()!=EnumCreatureAttribute.UNDEAD&&
 				   entity.isInRangeToRenderDist(entity.renderDistanceWeight)&&
 				   entity.getEntityBoundingBox()!=null
@@ -67,9 +68,9 @@ public class EntityEvents{
 //					if(!contains&&RenderLoopEvents.entitys.size()<100)RenderLoopEvents.entitys.add(EPABB);
 					
 					
-					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&UtilM.RB()&&(UtilM.FALSE()/*UtilM.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1])*/)){
+					if((entity instanceof EntityPlayer?true:(entity.worldObj.getTotalWorldTime()%6==0))&&(isFP?true:entity!=player)&&RandUtil.RB()&&(UtilM.FALSE()/*UtilM.isItemInStack(MItems.pants_42I, player.inventory.armorInventory[1])*/)){
 						double[] l=EPABB.getRandDotInBB(1.5),k=EPABB.getMiddleOfBB();
-						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+UtilM.CRandF(0.4), k[1]+UtilM.CRandF(0.4), k[2]+UtilM.CRandF(0.4), 600, 4, 1,0.2+UtilM.RF()*0.5,0.2+UtilM.RF()*0.5,0.5/(entity==player?8:1));
+						EntityFollowingBubleFX particle=new EntityFollowingBubleFX(world,l[0]+k[0], l[1]+k[1], l[2]+k[2], xv*1.2, yv*1.2, zv*1.2,entity,0, k[0]+RandUtil.CRF(0.4), k[1]+RandUtil.CRF(0.4), k[2]+RandUtil.CRF(0.4), 600, 4, 1,0.2+RandUtil.RF()*0.5,0.2+RandUtil.RF()*0.5,0.5/(entity==player?8:1));
 						particle.isGL_DEPTHDisabled=true;
 						particle.noClip=true;
 						UtilM.spawnEntityFX(particle);

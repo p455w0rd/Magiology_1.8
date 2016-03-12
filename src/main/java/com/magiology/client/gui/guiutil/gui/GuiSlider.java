@@ -11,7 +11,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
 

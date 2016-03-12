@@ -20,13 +20,14 @@ import com.magiology.core.init.MItems;
 import com.magiology.core.init.MPackets;
 import com.magiology.core.init.MRecepies;
 import com.magiology.core.init.MTileEntitys;
+import com.magiology.core.init.classload.ForcedClassLoader;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.handlers.web.DownloadingHandler;
 import com.magiology.io.IOReadableMap;
 import com.magiology.util.utilclasses.PrintUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 
@@ -49,7 +50,7 @@ public class Magiology{
 	public static SimpleNetworkWrapper NETWORK_CHANNEL;
 	
 	//TODO: change this when you compile the mod! (you dumbass)
-	public static final boolean IS_DEV=true;
+	private static final boolean IS_DEV=true;
 	
 //	@Instance(value=MODID)
 	private static Magiology instance;
@@ -77,7 +78,7 @@ public class Magiology{
 		try{
 			robotH=new EnhancedRobot();
 		}catch(Exception e){
-			throw new NullPointerException((UtilM.RB(0.1)?"CRAP! :(":"")+" "+NAME+" has encountered with a problem while trying to initialize the input robot! This might be the result of incompatible hardware or java version.");
+			throw new NullPointerException((RandUtil.RB(0.1)?"CRAP! :(":"")+" "+NAME+" has encountered with a problem while trying to initialize the input robot! This might be the result of incompatible hardware or java version.");
 		}
 		ROBOT=robotH;
 	}
@@ -132,7 +133,9 @@ public class Magiology{
 	public boolean isWindowOpen(){
 		return modInfGUI!=null&&!modInfGUI.isExited;
 	}
-	
+	public static boolean isDev(){
+		return IS_DEV;
+	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -244,14 +247,14 @@ public class Magiology{
 		case  3:printEnd(NAME+"_"+MC_VERSION+"-"+VERSION+" -> "+"Post initialization compleate!");break;
 		case 4:{
 			PrintUtil.println(NAME+" master AI has been initialized and it has something to tell you...");
-			String message=derpyMessagesWithNoPortalReferencesAtAll[RInt(derpyMessagesWithNoPortalReferencesAtAll.length-1)];
+			String message=derpyMessagesWithNoPortalReferencesAtAll[RandUtil.RI(derpyMessagesWithNoPortalReferencesAtAll.length-1)];
 			if(message.equals("do the harlem shake!")){
 				String[] harlem={"tue","de","de","do","taa","taa","ta","your","harlem","shake","tui","ti","to","to","ti","ti"};
 				message+="\n";
-				for(int i=0;i<250;i++)message+=" "+harlem[RInt(harlem.length-1)]+(RB(0.05)?"\n":"");
+				for(int i=0;i<250;i++)message+=" "+harlem[RandUtil.RI(harlem.length-1)]+(RandUtil.RB(0.05)?"\n":"");
 			}
 			PrintUtil.println(message);
-			PrintUtil.println(NAME+" master AI has been terminated because "+(RB(0.8)?"of profound reasons!":
+			PrintUtil.println(NAME+" master AI has been terminated because "+(RandUtil.RB(0.8)?"of profound reasons!":
 				"FML has detected traces of Genetic Lifeform and Disk Operating System!!"
 				+ "\nIf your computer is talking to you and it calling itself Caroline and you don't see this messages sometimes than type in your windows search bar a puzzle that is a paradox!"
 				+ " The paradox will effectively crash the Genetic Lifeform and Disk Operating System. Do not listen to it! It may quote Moby Dick! #ReferenceInception"));
@@ -260,7 +263,7 @@ public class Magiology{
 	}
 	private final void printStart(String message){
 		String[] smyleys={":D",";D",":O","XD",":P",":)",";)","/D"};
-		message="==========|> "+message+" "+smyleys[RInt(smyleys.length-1)]+"   |";
+		message="==========|> "+message+" "+smyleys[RandUtil.RI(smyleys.length-1)]+"   |";
 		int size=message.length();
 		String s1="",s2="";
 		for(int i=0;i<size;i++){
@@ -272,7 +275,7 @@ public class Magiology{
 	}
 	private final void printEnd(String message){
 		String[] smyleys={":D",";D",":O","XD",":P",":)",";)","/D"};
-		message="==========|> "+message+" "+smyleys[RInt(smyleys.length-1)]+" |";
+		message="==========|> "+message+" "+smyleys[RandUtil.RI(smyleys.length-1)]+" |";
 		int size=message.length();
 		String s1="";
 		for(int i=0;i<size;i++){

@@ -15,6 +15,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
@@ -180,9 +181,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 			 tileCB.redstoneC++;
 			 if(tileCB.redstoneC>2)tileCB.redstoneC=0;
 			 if(CustomButton!=null){
-				 CustomButton.rGoal=UtilM.RD();
-				 CustomButton.gGoal=UtilM.RD();
-				 CustomButton.bGoal=UtilM.RD();
+				 CustomButton.rGoal=RandUtil.RD();
+				 CustomButton.gGoal=RandUtil.RD();
+				 CustomButton.bGoal=RandUtil.RD();
 			 }
 			 if(dot1!=null){
 				 dot1.glow+=20;
@@ -210,9 +211,9 @@ public class GuiControlBock extends GuiContainer implements Updateable{
 			dot2=new DrawThatSexyDotHelper(guiLeft+9-6, guiTop+22-6, 214-6, 67-6, 16, 16,1.5);
 			dot3=new DrawThatSexyDotHelper(guiLeft+11-6,guiTop+35-6, 214-6, 67-6, 16, 16, 1.5);
 		}
-		dotS1+=UtilM.CRandD(5);
-		dotS2+=UtilM.CRandD(5);
-		dotS3+=UtilM.CRandD(5);
+		dotS1+=RandUtil.CRD(5);
+		dotS2+=RandUtil.CRD(5);
+		dotS3+=RandUtil.CRD(5);
 		dotS1*=0.99;
 		dotS2*=0.99;
 		dotS3*=0.99;

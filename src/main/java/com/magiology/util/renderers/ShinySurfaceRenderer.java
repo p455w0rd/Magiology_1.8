@@ -9,7 +9,7 @@ import org.lwjgl.util.vector.Vector3f;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.ColorF;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 /**

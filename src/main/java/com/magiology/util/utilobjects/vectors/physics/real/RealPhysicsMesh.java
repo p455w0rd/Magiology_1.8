@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -92,7 +93,7 @@ public class RealPhysicsMesh{
 		}else noise=0;
 		coliders.forEach(c->c.setModelOffset(originPos));
 		if(noise>0)for(AbstractRealPhysicsVec3F v:vertices){
-			v.addVelocity(new Vec3M(UtilM.CRandF(noise), UtilM.CRandF(noise), UtilM.CRandF(noise)));
+			v.addVelocity(new Vec3M(RandUtil.CRF(noise), RandUtil.CRF(noise), RandUtil.CRF(noise)));
 		}
 		List<Vec3M> hooksPos=new ArrayList<>();
 		for(RealPhysicsMeshHook hook:physicsHooks){

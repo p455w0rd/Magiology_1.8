@@ -3,7 +3,7 @@ package com.magiology.handlers.animationhandlers.thehand;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 
 public class HandPosition{
 	private static float p=1F/16F;
@@ -140,7 +140,7 @@ public class HandPosition{
 			data.base[4]=0;
 			data.base[5]=5;
 
-			data.thumb[0]=20;
+			data.thumb[0]=22;
 			data.thumb[1]=32;
 			data.thumb[3]=-15;
 			data.thumb[4]=-30;

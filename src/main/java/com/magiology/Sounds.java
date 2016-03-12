@@ -1,6 +1,6 @@
 package com.magiology;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RandUtil;
 
 public enum Sounds{
 	WingSwingFX("swing1","swing2"),
@@ -14,7 +14,7 @@ public enum Sounds{
 	public String toString(){
 		String result=null;
 		if(soundNames.length==1)result=soundNames[0];
-		else result=soundNames[UtilM.RInt(soundNames.length)];
+		else result=soundNames[RandUtil.RI(soundNames.length)];
 		return result;
 	}
 	public String[] soundNames;

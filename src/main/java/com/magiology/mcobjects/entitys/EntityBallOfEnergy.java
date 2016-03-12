@@ -1,5 +1,6 @@
 package com.magiology.mcobjects.entitys;
 
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
@@ -43,7 +44,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
 		this.renderDistanceWeight = 10.0D;
 		this.shootingEntity = entity;
 		this.setSize(0.5F, 0.5F);
-		for(int a=0;a<2*(time+1);a++)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, posX+UtilM.CRandF(0.1), posY+UtilM.CRandF(0.1), posZ+UtilM.CRandF(0.1), motionX+UtilM.CRandF(0.5), motionY+UtilM.CRandF(0.5), motionZ+UtilM.CRandF(0.5)));
+		for(int a=0;a<2*(time+1);a++)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, posX+RandUtil.CRF(0.1), posY+RandUtil.CRF(0.1), posZ+RandUtil.CRF(0.1), motionX+RandUtil.CRF(0.5), motionY+RandUtil.CRF(0.5), motionZ+RandUtil.CRF(0.5)));
 		this.time=time;
 		this.setLocationAndAngles(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
 		
@@ -159,7 +160,7 @@ public class EntityBallOfEnergy extends Entity implements IProjectile{
 				I_THREW_IT_ON_THE_GROUND/=pauwa/1.5;
 				for(int b=0;b<pauwa;b++){
 					EntityBallOfEnergy entity=new EntityBallOfEnergy(worldObj, posX, posY, posZ);
-					entity.setVelocity(UtilM.CRandD(0.1), UtilM.CRandD(0.1), UtilM.CRandD(0.1));
+					entity.setVelocity(RandUtil.CRD(0.1), RandUtil.CRD(0.1), RandUtil.CRD(0.1));
 					entity.time=I_THREW_IT_ON_THE_GROUND;
 					worldObj.spawnEntityInWorld(entity);
 				}

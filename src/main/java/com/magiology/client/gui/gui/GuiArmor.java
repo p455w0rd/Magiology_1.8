@@ -8,7 +8,7 @@ import com.magiology.mcobjects.effect.GuiParticle;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
@@ -48,11 +48,11 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		prevSliderPos=sliderPos;
 		this.updateParticles();
 		for(int a=0;a<4;a++){
-			GuiParticle part=new GuiParticle(100+UtilM.RInt(68)+guiLeft, 60+guiTop, 30, 0,-0.5+UtilM.CRandF(0.5), UtilM.RF()*2+2, o1/20, 1, UtilM.RF(),UtilM.RF()*0.5,UtilM.RF()*0.2, texture1, GuiStandardFX.CloudFX);
+			GuiParticle part=new GuiParticle(100+RandUtil.RI(68)+guiLeft, 60+guiTop, 30, 0,-0.5+RandUtil.CRF(0.5), RandUtil.RF()*2+2, o1/20, 1, RandUtil.RF(),RandUtil.RF()*0.5,RandUtil.RF()*0.2, texture1, GuiStandardFX.CloudFX);
 			part.hasMovementNoise=false;
 			GuiContainerAndGuiParticles.spawnGuiParticle(part);
 		}
-		speed+=UtilM.CRandD(0.15);
+		speed+=RandUtil.CRD(0.15);
 		double pos1=-guiTop-100-0.2*ySize/2.9F;
 		double pos2=-guiTop-100-0.8*ySize/2.9F;
 		if(playerYPos>pos1)speed-=0.015;
@@ -224,14 +224,14 @@ public class GuiArmor extends GuiContainerAndGuiParticles{
 		 playerXPos=guiLeft-5;
 		 playerYPos=-guiTop-100-startRandom;
 		 this.buttonList.add(playerButton);
-		 startRandom=UtilM.RInt((int)(ySize/2.9F));
+		 startRandom=RandUtil.RI((int)(ySize/2.9F));
 	 }
 	 
 	 @Override
 	 protected void actionPerformed(GuiButton b){
 		 switch (b.id){
 		 case 5:{
-			speed+=UtilM.CRandD(5);
+			speed+=RandUtil.CRD(5);
 		 }break;
 		 
 		 }

@@ -5,6 +5,7 @@ import com.magiology.core.init.MItems;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
@@ -49,7 +50,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 				}break;
 				}
 				TessUtil.drawLine(td.x1, td.y1, td.z1, td.x2, td.y2, td.z2, width/20, true,TessUtil.getVB(),st,1);
-				OpenGLM.color(0.7+UtilM.RF()*0.2, UtilM.RF()*0.1, UtilM.RF()*0.1, (upgraded?0.14:0.09)*PartialTicksUtil.calculatePos(prevAlpha,alpha));
+				OpenGLM.color(0.7+RandUtil.RF()*0.2, RandUtil.RF()*0.1, RandUtil.RF()*0.1, (upgraded?0.14:0.09)*PartialTicksUtil.calculatePos(prevAlpha,alpha));
 				OpenGLM.depthMask(false);
 				OpenGLM.disableCull();
 				TessUtil.bindTexture(new ResourceLocation(MReference.MODID,"textures/models/visual_connection.png"));

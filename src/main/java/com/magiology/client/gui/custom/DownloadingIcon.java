@@ -9,7 +9,7 @@ import com.magiology.core.MReference;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
-import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 
@@ -24,7 +24,7 @@ public class DownloadingIcon {
 	public static void update(){
 		if(timeout>0)timeout--;
 		else return;
-		if(U.RB(0.5))drops.add(new Drop(new Vector2f(U.RF(130)+14, 60),U.RF(0.25)+0.75F));
+		if(RandUtil.RB(0.5))drops.add(new Drop(new Vector2f(RandUtil.RF(130)+14, 60),RandUtil.RF(0.25)+0.75F));
 		for(int i=0;i<drops.size();i++){
 			Drop drop=drops.get(i);
 			if(!drop.dead){

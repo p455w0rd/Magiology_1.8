@@ -1,6 +1,6 @@
 package com.magiology.util.utilobjects;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM.U;
 
 import net.minecraft.entity.Entity;
@@ -18,9 +18,9 @@ public class EntityPosAndBB{
 	
 	public double[] getRandDotInBB(double randomness){
 		double[] result={0,0,0};
-		result[0]=entity.posX+UtilM.CRandF(randomness);
-		result[1]=entity.posY+UtilM.CRandF(randomness);
-		result[2]=entity.posZ+UtilM.CRandF(randomness);
+		result[0]=entity.posX+RandUtil.CRF(randomness);
+		result[1]=entity.posY+RandUtil.CRF(randomness);
+		result[2]=entity.posZ+RandUtil.CRF(randomness);
 		
 		return result;
 	}

@@ -14,6 +14,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
@@ -96,7 +97,7 @@ public class WingModeChangerHUD extends HUD{
 		
 		float[][] calcBackgroundColor=backgroundColor.clone();
 		if(player.fallDistance>4)for(int a=0;a<criclePoss.length;a++)for(int b=0;b<2;b++){
-			criclePoss[a][b]+=UtilM.CRandF(0.01);
+			criclePoss[a][b]+=RandUtil.CRF(0.01);
 		}
 		for(int a=0;a<calcBackgroundColor.length;a++)for(int b=0;b<3;b++){
 			calcBackgroundColor[a][b]=PartialTicksUtil.calculatePos(backgroundColor[a][b], prevBackgroundColor[a][b]);
@@ -169,13 +170,13 @@ public class WingModeChangerHUD extends HUD{
 		double noise=0.05,speed=0.15;
 		for(int a=0;a<backgroundColor.length;a++){
 			if(a==selectionId){
-				backgroundColor[a][0]=(float)UtilM.slowlyEqualize(backgroundColor[a][0], 1+UtilM.CRandF(noise),speed);
-				backgroundColor[a][1]=(float)UtilM.slowlyEqualize(backgroundColor[a][1], 0.2+UtilM.CRandF(noise),speed);
-				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][0]=(float)UtilM.slowlyEqualize(backgroundColor[a][0], 1+RandUtil.CRF(noise),speed);
+				backgroundColor[a][1]=(float)UtilM.slowlyEqualize(backgroundColor[a][1], 0.2+RandUtil.CRF(noise),speed);
+				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+RandUtil.CRF(noise),speed);
 			}else{
-				backgroundColor[a][0]=(float)UtilM.slowlyEqualize(backgroundColor[a][0], 0.2+UtilM.CRandF(noise),speed);
-				backgroundColor[a][1]=(float)UtilM.slowlyEqualize(backgroundColor[a][1], 0.2+UtilM.CRandF(noise),speed);
-				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+UtilM.CRandF(noise),speed);
+				backgroundColor[a][0]=(float)UtilM.slowlyEqualize(backgroundColor[a][0], 0.2+RandUtil.CRF(noise),speed);
+				backgroundColor[a][1]=(float)UtilM.slowlyEqualize(backgroundColor[a][1], 0.2+RandUtil.CRF(noise),speed);
+				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+RandUtil.CRF(noise),speed);
 			}
 			
 			backgroundColor[a][0]=UtilM.snap(backgroundColor[a][0], 0, 1);

@@ -41,6 +41,7 @@ import com.magiology.core.Magiology;
 import com.magiology.io.IOReadableMap;
 import com.magiology.io.ZipManager;
 import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 
 public class ModInfoGUI extends JFrame{
@@ -212,11 +213,11 @@ public class ModInfoGUI extends JFrame{
 	}
 	public void useCommand(String command){
 		if(command.equals("activate MLG mode!")){
-			for(int a=0;a<30;a++)addLine(newLine("nope...",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(UtilM.RInt(255),UtilM.RInt(255),UtilM.RInt(255)), true));
+			for(int a=0;a<30;a++)addLine(newLine("nope...",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(RandUtil.RI(255),RandUtil.RI(255),RandUtil.RI(255)), true));
 			UtilM.exitSoft();
 			return;
 		}
-		addLine(newLine("Command on "+commandID+(command.equals("#autoInvoked")?" automatically":"")+" invoked!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(UtilM.RInt(255),UtilM.RInt(255),UtilM.RInt(255)), true));
+		addLine(newLine("Command on "+commandID+(command.equals("#autoInvoked")?" automatically":"")+" invoked!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(RandUtil.RI(255),RandUtil.RI(255),RandUtil.RI(255)), true));
 		boolean isInputOk=false;
 		boolean isInputInvoked=false;
 		switch(commandID){
@@ -287,8 +288,8 @@ public class ModInfoGUI extends JFrame{
 			
 		}break;
 		}
-		if(!isInputOk&&!isInputInvoked)addLine(newLine("NoSuchCommand exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(UtilM.RInt(255),UtilM.RInt(255),UtilM.RInt(255)), true));
-		else if(!isInputOk&&isInputInvoked)addLine(newLine("WrongInput exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(UtilM.RInt(255),UtilM.RInt(255),UtilM.RInt(255)), true));
+		if(!isInputOk&&!isInputInvoked)addLine(newLine("NoSuchCommand exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(RandUtil.RI(255),RandUtil.RI(255),RandUtil.RI(255)), true));
+		else if(!isInputOk&&isInputInvoked)addLine(newLine("WrongInput exception!",new Font(Font.SANS_SERIF, Font.BOLD,15), new Color(RandUtil.RI(255),RandUtil.RI(255),RandUtil.RI(255)), true));
 		item1.setText("");
 		Update();
 	}
@@ -334,7 +335,7 @@ public class ModInfoGUI extends JFrame{
 				setLocation(new Point(left,y));
 			}
 		}
-		else addLine(newLine("THAT IS NOT A VALID SIDE!"+(UtilM.RInt(20)==0?"(i think)":""), Color.RED, true));
+		else addLine(newLine("THAT IS NOT A VALID SIDE!"+(RandUtil.RI(20)==0?"(i think)":""), Color.RED, true));
 		Magiology.infoFile.writeToFile();
 	}
 	public void clearUserInput(){

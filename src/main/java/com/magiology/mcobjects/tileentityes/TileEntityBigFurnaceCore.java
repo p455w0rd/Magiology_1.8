@@ -4,6 +4,7 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPowGen;
 import com.magiology.util.utilclasses.PowerUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.SlowdownUtil;
@@ -57,32 +58,32 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 		}
 		if(worldObj.isRemote){
 			if(isMultiblockHelper){if(canGeneratePower(25)){
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+UtilM.RF()*3,y()+2+UtilM.RF(),z()-1.5,0,0,-0.1);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+UtilM.RF()*3,y()+2+UtilM.RF(),z()+2.5,0,0,0.1);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1.5,y()+2+UtilM.RF(),z()-1+UtilM.RF()*3,-0.1,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+2.5,y()+2+UtilM.RF(),z()-1+UtilM.RF()*3,0.1,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()  ,y()-1+UtilM.RF(),z()+UtilM.RF(),0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+1,y()-1+UtilM.RF(),z()+UtilM.RF(),0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+UtilM.RF(),y()-1+UtilM.RF(),z()  ,0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+UtilM.RF(),y()-1+UtilM.RF(),z()+1,0,0,0);
-				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+UtilM.RF(),y()-1.1,z()+UtilM.RF(),0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+RandUtil.RF()*3,y()+2+RandUtil.RF(),z()-1.5,0,0,-0.1);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1+RandUtil.RF()*3,y()+2+RandUtil.RF(),z()+2.5,0,0,0.1);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()-1.5,y()+2+RandUtil.RF(),z()-1+RandUtil.RF()*3,-0.1,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+2.5,y()+2+RandUtil.RF(),z()-1+RandUtil.RF()*3,0.1,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()  ,y()-1+RandUtil.RF(),z()+RandUtil.RF(),0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+1,y()-1+RandUtil.RF(),z()+RandUtil.RF(),0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+RandUtil.RF(),y()-1+RandUtil.RF(),z()  ,0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+RandUtil.RF(),y()-1+RandUtil.RF(),z()+1,0,0,0);
+				worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+RandUtil.RF(),y()-1.1,z()+RandUtil.RF(),0,0,0);
 				
-				String txture=UtilM.RInt(5)!=0?"tx1":"tx3";
-				int tim=UtilM.RInt(40)==0?15:0;
+				String txture=RandUtil.RI(5)!=0?"tx1":"tx3";
+				int tim=RandUtil.RI(40)==0?15:0;
 				EntitySmoothBubleFX sb1=new EntitySmoothBubleFX(worldObj, 
-						x()-0.5+UtilM.RF()*2,y()+3,z()-0.5+UtilM.RF()*2,//pos
-						0.15-0.3*UtilM.RF(),0.4+UtilM.CRandF(0.1),0.15-0.3*UtilM.RF(),//speed
-						1200+UtilM.RInt(700),2-(txture.equals("tx3")?1:0)+UtilM.RInt(2)+tim,5,true,1,txture, 
-								1, txture=="tx3"?1:0.2+UtilM.RF()*0.5, txture=="tx3"?1:0.2+UtilM.RF()*0.2, 1, 0.99),
+						x()-0.5+RandUtil.RF()*2,y()+3,z()-0.5+RandUtil.RF()*2,//pos
+						0.15-0.3*RandUtil.RF(),0.4+RandUtil.CRF(0.1),0.15-0.3*RandUtil.RF(),//speed
+						1200+RandUtil.RI(700),2-(txture.equals("tx3")?1:0)+RandUtil.RI(2)+tim,5,true,1,txture, 
+								1, txture=="tx3"?1:0.2+RandUtil.RF()*0.5, txture=="tx3"?1:0.2+RandUtil.RF()*0.2, 1, 0.99),
 								sb2=new EntitySmoothBubleFX(worldObj, 
-										x()-0.5+UtilM.RF()*2,y()+3,z()-0.5+UtilM.RF()*2,0.15-0.3*UtilM.RF(),0,0.15-0.3*UtilM.RF(),
-										1000+UtilM.RInt(500),5,-5,1, 
-										1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.99);
+										x()-0.5+RandUtil.RF()*2,y()+3,z()-0.5+RandUtil.RF()*2,0.15-0.3*RandUtil.RF(),0,0.15-0.3*RandUtil.RF(),
+										1000+RandUtil.RI(500),5,-5,1, 
+										1, 0.2+RandUtil.RF()*0.5, 0.2+RandUtil.RF()*0.2, 1, 0.99);
 				UtilM.spawnEntityFX(sb1);
 				UtilM.spawnEntityFX(sb2);
 				if(tim==0)sb1.noClip=true;
 			}}
-			else worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+UtilM.RF()  ,y()+1,z()+UtilM.RF(),0,0,0);
+			else worldObj.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x()+RandUtil.RF()  ,y()+1,z()+RandUtil.RF(),0,0,0);
 		}
 		PowerUtil.sortSides(this);
 	}

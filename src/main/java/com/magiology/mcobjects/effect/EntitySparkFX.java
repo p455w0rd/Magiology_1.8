@@ -6,6 +6,7 @@ import java.util.List;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.SlowdownUtil;
@@ -71,9 +72,9 @@ public class EntitySparkFX extends EntityFXM{
 				for(int a=0;a<siz;a++){
 					Fragment lastFragment=fragments.get(a);
 					if(!lastFragment.hasNextFragment()){
-						if(UtilM.RB(chanse)){
+						if(RandUtil.RB(chanse)){
 							chanse-=0.1;
-							if(lastFragment!=null&&UtilM.RB(6)){
+							if(lastFragment!=null&&RandUtil.RB(6)){
 								New(lastFragment);
 								New(lastFragment);
 							}else{
@@ -97,11 +98,11 @@ public class EntitySparkFX extends EntityFXM{
 		if(fragments.size()>size&&slowdown.isTimeWithAddProgress())kill();
 	}
 	private void New(Fragment lastFragment){
-		double[] ball=UtilM.createBallXYZ(fragmentSize/3+UtilM.CRandF(fragmentSize), false);
+		double[] ball=UtilM.createBallXYZ(fragmentSize/3+RandUtil.CRF(fragmentSize), false);
 		
 		Fragment f=new Fragment((float)ball[0]+xDirection,(float)ball[1]+yDirection,(float)ball[2]+zDirection,lastFragment,
-				startColor.r+UtilM.RF(0.1),startColor.g+UtilM.CRandF(0.1),startColor.b+UtilM.RF(0.1),startColor.a,
-				endColor.r+UtilM.CRandF(0.1),endColor.g+UtilM.RF(0.1),endColor.b+UtilM.RF(0.1),endColor.a,
+				startColor.r+RandUtil.RF(0.1),startColor.g+RandUtil.CRF(0.1),startColor.b+RandUtil.RF(0.1),startColor.a,
+				endColor.r+RandUtil.CRF(0.1),endColor.g+RandUtil.RF(0.1),endColor.b+RandUtil.RF(0.1),endColor.a,
 				0.05F
 				);
 		fragments.add(f);

@@ -17,6 +17,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
@@ -52,9 +53,9 @@ public class GuiISidedPowerInstructor extends GuiContainer implements Updateable
 		this.ySize=166;
 		renderer=TileEntityRendererDispatcher.instance.getSpecialRenderer(tile);
 		
-		xRotation=new PhysicsFloat(UtilM.CRandI(100)-player.rotationPitch,2);
-		yRotation=new PhysicsFloat(UtilM.CRandI(100)-player.rotationYaw,2);
-		zRotation=new PhysicsFloat(UtilM.CRandI(100),2);
+		xRotation=new PhysicsFloat(RandUtil.CRI(100)-player.rotationPitch,2);
+		yRotation=new PhysicsFloat(RandUtil.CRI(100)-player.rotationYaw,2);
+		zRotation=new PhysicsFloat(RandUtil.CRI(100),2);
 		xRotation.friction=yRotation.friction=zRotation.friction=0.9F;
 		xRotation.wantedPoint=-player.rotationPitch;
 		yRotation.wantedPoint=-player.rotationYaw;

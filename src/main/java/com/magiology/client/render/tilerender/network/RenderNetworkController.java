@@ -14,6 +14,7 @@ import com.magiology.util.renderers.glstates.GlState;
 import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.renderers.tessellatorscripts.SidedModel;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
@@ -356,8 +357,8 @@ public class RenderNetworkController extends TileEntitySpecialRendererM{
 		
 		VertexRenderer buff=TessUtil.getVB();
 		GL11U.texture(false);
-		TessUtil.drawLine(minY.xCoord+UtilM.CRandF(minY.yCoord-p*6)/2, p*6,   minY.zCoord+UtilM.CRandF(minY.yCoord-p*6)/2, minY.xCoord, minY.yCoord+0.01, minY.zCoord, p/8, true, buff, 0, 10);
-		TessUtil.drawLine(maxY.xCoord+UtilM.CRandF(p*10-maxY.yCoord)/2, p*10,  maxY.zCoord+UtilM.CRandF(p*10-maxY.yCoord)/2, maxY.xCoord, maxY.yCoord-0.01, maxY.zCoord, p/8, true, buff, 0, 10);
+		TessUtil.drawLine(minY.xCoord+RandUtil.CRF(minY.yCoord-p*6)/2, p*6,   minY.zCoord+RandUtil.CRF(minY.yCoord-p*6)/2, minY.xCoord, minY.yCoord+0.01, minY.zCoord, p/8, true, buff, 0, 10);
+		TessUtil.drawLine(maxY.xCoord+RandUtil.CRF(p*10-maxY.yCoord)/2, p*10,  maxY.zCoord+RandUtil.CRF(p*10-maxY.yCoord)/2, maxY.xCoord, maxY.yCoord-0.01, maxY.zCoord, p/8, true, buff, 0, 10);
 		GL11.glColor3b((byte)0, (byte)12, (byte)26);
 		buff.draw();
 	}

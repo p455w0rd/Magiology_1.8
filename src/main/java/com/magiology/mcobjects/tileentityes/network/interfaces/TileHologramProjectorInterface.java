@@ -13,8 +13,8 @@ import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkController;
 import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.SideUtil;
-import com.magiology.util.utilclasses.UtilM;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -70,7 +70,7 @@ public class TileHologramProjectorInterface implements WorldNetworkInterface,Int
 		if(long1!=null)return long1;
 		Long id;
 		do{
-			id=UtilM.RL();
+			id=RandUtil.RL();
 		}while(cardList.containsValue(id)&&id!=-1&&id!=0&&id!=-2);
 		cardList.put(tileEntity, id);
 		return id;

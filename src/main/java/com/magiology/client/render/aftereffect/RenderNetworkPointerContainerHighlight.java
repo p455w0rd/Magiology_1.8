@@ -7,6 +7,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
@@ -158,13 +159,13 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 			camYaw=(float)Math.toDegrees(Math.atan2(difZ,difX))+90,
 			width=TessUtil.getFontRenderer().getStringWidth(text)*U.p/4;
 		TessUtil.getFontRenderer();
-		float leftX=CricleUtil.sin(-camYaw+90)*width/2, leftZ=CricleUtil.cos(-camYaw+90)*width/2, rand=UtilM.CRandF(1);
+		float leftX=CricleUtil.sin(-camYaw+90)*width/2, leftZ=CricleUtil.cos(-camYaw+90)*width/2, rand=RandUtil.CRF(1);
 		
 		
 		float r=0.8F,g=UtilM.fluctuate(20, 0)*0.15F+0.15F,b=0.1F;
 		UtilM.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj,
-				tile.x()+0.5+off.x+leftX*rand+UtilM.CRandF(0.1), tile.y()+0.5+off.y+UtilM.CRandF(0.1), tile.z()+0.5+off.z+leftZ*rand+UtilM.CRandF(0.1),
-				UtilM.CRandF(0.01), UtilM.CRandF(0.01), UtilM.CRandF(0.01), 100, 25, -UtilM.RF(0.1), r,g,b,0.05*point));
+				tile.x()+0.5+off.x+leftX*rand+RandUtil.CRF(0.1), tile.y()+0.5+off.y+RandUtil.CRF(0.1), tile.z()+0.5+off.z+leftZ*rand+RandUtil.CRF(0.1),
+				RandUtil.CRF(0.01), RandUtil.CRF(0.01), RandUtil.CRF(0.01), 100, 25, -RandUtil.RF(0.1), r,g,b,0.05*point));
 	}
 	private Vec3M getOffset(){
 		float x=0,y=0,z=0;

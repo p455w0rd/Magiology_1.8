@@ -14,6 +14,7 @@ import com.magiology.forgepowered.packets.packets.ClickHologramPacket;
 import com.magiology.mcobjects.effect.EntityFacedFX;
 import com.magiology.mcobjects.effect.EntityMovingParticleFX;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
@@ -81,19 +82,19 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public void update(){
 		if(UtilM.isRemote(this)){
 			UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
-					x()+U.RF(), y()+U.p*11, z()+U.RF(), x()+offset.x+size.x*U.RF(), y()+offset.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
-			switch (U.RInt(3)){
+					x()+RandUtil.RF(), y()+U.p*11, z()+RandUtil.RF(), x()+offset.x+size.x*RandUtil.RF(), y()+offset.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+			switch (RandUtil.RI(3)){
 			case 0:{
 				UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
-						x()+offset.x+size.x*U.RF(), y()+offset.y+size.y, z()+0.5, x()+offset.x+size.x*U.RF(), y()+offset.y+size.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+						x()+offset.x+size.x*RandUtil.RF(), y()+offset.y+size.y, z()+0.5, x()+offset.x+size.x*RandUtil.RF(), y()+offset.y+size.y, z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			}break;
 			case 1:{
 				UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
-						x()+offset.x, y()+offset.y+size.y*U.RF(), z()+0.5, x()+offset.x, y()+offset.y+size.y*U.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+						x()+offset.x, y()+offset.y+size.y*RandUtil.RF(), z()+0.5, x()+offset.x, y()+offset.y+size.y*RandUtil.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			}break;
 			case 2:{
 				UtilM.spawnEntityFX(new EntityMovingParticleFX(worldObj,
-						x()+offset.x+size.x, y()+offset.y+size.y*U.RF(), z()+0.5, x()+offset.x+size.x, y()+offset.y+size.y*U.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
+						x()+offset.x+size.x, y()+offset.y+size.y*RandUtil.RF(), z()+0.5, x()+offset.x+size.x, y()+offset.y+size.y*RandUtil.RF(), z()+0.5, 200, mainColor.x,mainColor.y,mainColor.z,0.1));
 			}break;
 			}
 		}
@@ -117,7 +118,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public void onPressed(EntityPlayer player){
 		selectedObj=null;
 		if(UtilM.isRemote(player))for(int a=0;a<360;a+=30){
-			double[] b=UtilM.circleXZ(a+UtilM.CRandF(16));
+			double[] b=UtilM.circleXZ(a+RandUtil.CRF(16));
 			b[0]*=0.06;
 			b[1]*=0.06;
 			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.x+x(), size.y+offset.y+point.pointedPos.y+y(), point.pointedPos.z+z()+0.5,

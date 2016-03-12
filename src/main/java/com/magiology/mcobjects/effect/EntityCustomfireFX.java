@@ -7,6 +7,7 @@ import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
@@ -144,7 +145,7 @@ public class EntityCustomfireFX extends EntityFXM{
 	
 	@Override
 	public void onUpdate(){
-		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500)if(UtilM.RInt(10)==0)this.setDead();
+		if(Integer.valueOf(Get.Render.ER().getStatistics())>2500)if(RandUtil.RI(10)==0)this.setDead();
 		if(U.getMC().gameSettings.particleSetting==2)this.setDead();
 		prevRoration=roration.clone();
 		this.particleWithSize15andSpeed35();
@@ -173,7 +174,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		}
 		
 		for(int i=0;i<roration.length;i++){
-			rorationSize[i]+=UtilM.CRandD(10);
+			rorationSize[i]+=RandUtil.CRD(10);
 			rorationSize[i]*=0.9;
 			roration[i]+=rorationSize[i];
 			if(roration[i]<0){
@@ -249,10 +250,10 @@ public class EntityCustomfireFX extends EntityFXM{
 		if(this.active==true){
 			if(optimizer++>=1&&U.getMC().gameSettings.particleSetting==0){
 				optimizer=0;
-				EntitySmoothBubleFX sb=new EntitySmoothBubleFX(worldObj,this.posX, this.posY, this.posZ,this.motionX/2+UtilM.CRandF(0.1)*particleScale, this.motionY/2+UtilM.CRandF(0.1)*particleScale, this.motionZ/2+UtilM.CRandF(0.1)*particleScale,(int) (600*particleScale), 1.5,this.motionY/2, false,1,"tx1",1,0,0, 0.3, 0.96);
+				EntitySmoothBubleFX sb=new EntitySmoothBubleFX(worldObj,this.posX, this.posY, this.posZ,this.motionX/2+RandUtil.CRF(0.1)*particleScale, this.motionY/2+RandUtil.CRF(0.1)*particleScale, this.motionZ/2+RandUtil.CRF(0.1)*particleScale,(int) (600*particleScale), 1.5,this.motionY/2, false,1,"tx1",1,0,0, 0.3, 0.96);
 				UtilM.spawnEntityFX(sb);
 				sb.noClip=true;
-				if(particleScale>0.8)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, UtilM.CRandF(0.1), UtilM.CRandF(0.1), UtilM.CRandF(0.1)));
+				if(particleScale>0.8)UtilM.spawnEntityFX(new EntitySmokeFXM(worldObj, this.posX, this.posY, this.posZ, RandUtil.CRF(0.1), RandUtil.CRF(0.1), RandUtil.CRF(0.1)));
 				
 				
 			}
@@ -290,7 +291,7 @@ public class EntityCustomfireFX extends EntityFXM{
 		}
 		else if(U.getMC().gameSettings.particleSetting==0){
 			for(int i=0;i<2;i++)UtilM.spawnEntityFX(new EntityLavaFXM(worldObj, this.posX, this.posY, this.posZ));
-			if(U.getFPS()>20)for(int i=0;i<2+U.RInt(10);i++)UtilM.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, U.CRandF(0.1)+motionX,	0.15+U.CRandF(0.1), U.CRandF(0.1)+motionZ, true,0.2F));
+			if(U.getFPS()>20)for(int i=0;i<2+RandUtil.RI(10);i++)UtilM.spawnEntityFX(new EntityCustomfireFX(worldObj, this.posX, this.posY, this.posZ, RandUtil.CRF(0.1)+motionX,	0.15+RandUtil.CRF(0.1), RandUtil.CRF(0.1)+motionZ, true,0.2F));
 			worldObj.spawnParticle(EnumParticleTypes.SMOKE_LARGE, this.posX, this.posY, this.posZ, 0, 0, 0);
 			UtilM.spawnEntityFX(new EntityCloudFXM(worldObj, this.posX, this.posY, this.posZ, 0,0.1,0));
 		}

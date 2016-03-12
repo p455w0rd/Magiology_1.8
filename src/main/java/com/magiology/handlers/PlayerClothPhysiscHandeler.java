@@ -13,12 +13,13 @@ import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.renderers.VertexRenderer.ShadedQuad;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
-import com.magiology.util.utilobjects.ObjectProcessor;
+import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 import com.magiology.util.utilobjects.vectors.physics.real.AbstractRealPhysicsVec3F;
@@ -175,12 +176,12 @@ public class PlayerClothPhysiscHandeler{
 			AbstractRealPhysicsVec3F pos1=cape.getVertices().get(i),pos2=cape.getVertices().get(i+1);
 			Vec3M 
 				posDiff=pos2.getPos().subtract(pos1.getPos()),
-				pos=pos1.getPos().add(posDiff.mul(UtilM.RF())),
-				speed=pos1.getVelocity().add(pos2.getVelocity().subtract(pos1.getVelocity()).mul(UtilM.RF())).mul(0.3);
+				pos=pos1.getPos().add(posDiff.mul(RandUtil.RF())),
+				speed=pos1.getVelocity().add(pos2.getVelocity().subtract(pos1.getVelocity()).mul(RandUtil.RF())).mul(0.3);
 			UtilM.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj, 
 					pos.x, pos.y, pos.z, 
 					speed.x, speed.y, speed.z,
-					(int)(1500*posDiff.lengthVector()), 2, 0, !UtilM.RB(0.1)?1:2, UtilM.RF(),UtilM.RF(),UtilM.RF(), 0.2));
+					(int)(1500*posDiff.lengthVector()), 2, 0, !RandUtil.RB(0.1)?1:2, RandUtil.RF(),RandUtil.RF(),RandUtil.RF(), 0.2));
 		}
 	}
 	public void render(RenderPlayerEvent.Pre event){

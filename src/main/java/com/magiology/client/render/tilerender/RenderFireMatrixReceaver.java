@@ -10,7 +10,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render;
 import com.magiology.util.utilclasses.PowerUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM;
 import com.magiology.util.utilobjects.vectors.TwoDots;
@@ -57,35 +57,35 @@ public class RenderFireMatrixReceaver extends TileEntitySpecialRendererM{
 		OpenGLM.rotate(rotation+20, 0, 0, 1);
 		
 		float noise=PowerUtil.getPowerPrecentage(tile)/50.0F;
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		
 		OpenGLM.rotate(rotation+90, 0, -2, 0);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(-rotation-90, 0, -2, 0);
 		
 		OpenGLM.rotate(rotation+72, 1, 1, 0);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(-rotation-72, 1, 1, 0);
 		
 		OpenGLM.rotate(rotation+64, 0, 1, 1);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(-rotation-64, 0, 1, 1);
 		
 		OpenGLM.rotate(rotation+170, 1, 0, 1);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(-rotation-170, 1, 0, 1);
 		
 
 		OpenGLM.rotate(-rotation-231, 1, 1, 0);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(rotation+231, 1, 1, 0);
 		
 		OpenGLM.rotate(-rotation-267, 0, 1, 1);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(rotation+267, 0, 1, 1);
 		
 		OpenGLM.rotate(-rotation-192, 1, 0, 1);
-		this.drawCube(p*-0.75+UtilM.CRandF(noise), p*-1.25+UtilM.CRandF(noise), p*-0.75+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise), p*0.25+UtilM.CRandF(noise), p*0.75+UtilM.CRandF(noise));
+		this.drawCube(p*-0.75+RandUtil.CRF(noise), p*-1.25+RandUtil.CRF(noise), p*-0.75+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise), p*0.25+RandUtil.CRF(noise), p*0.75+RandUtil.CRF(noise));
 		OpenGLM.rotate(rotation+192, 1, 0, 1);
 		
 		OpenGLM.popMatrix();

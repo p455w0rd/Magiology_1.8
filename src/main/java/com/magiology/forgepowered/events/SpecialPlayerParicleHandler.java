@@ -4,6 +4,7 @@ import com.magiology.core.init.MBlocks;
 import com.magiology.core.init.MItems;
 import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.SlowdownUtil;
 
@@ -45,9 +46,9 @@ public class SpecialPlayerParicleHandler{
 				if(itemS!=null&&Block.getBlockFromItem(itemS.getItem())==Blocks.lapis_block)ammount=5;
 				if(itemS!=null&&itemS.getItem()==Items.dye&&itemS.getItemDamage()==4)ammount=2;
 				for (int i=0;i<ammount;i++){
-					double xr=x+UtilM.CRandF(0.8);
-					double yr=y+UtilM.CRandF(1.8)-0.6;
-					double zr=z+UtilM.CRandF(0.8);
+					double xr=x+RandUtil.CRF(0.8);
+					double yr=y+RandUtil.CRF(1.8)-0.6;
+					double zr=z+RandUtil.CRF(0.8);
 					R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
 					if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 						R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
@@ -77,9 +78,9 @@ public class SpecialPlayerParicleHandler{
 //				UtilM.println("\n"+BB);
 			for (int i=0;i<ammount;i++){
 				if(!isActive)i=ammount;
-				double xr=x+UtilM.CRandF(0.8);
-				double yr=y+UtilM.CRandF(1.8)-0.6;
-				double zr=z+UtilM.CRandF(0.8);
+				double xr=x+RandUtil.CRF(0.8);
+				double yr=y+RandUtil.CRF(1.8)-0.6;
+				double zr=z+RandUtil.CRF(0.8);
 				R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
 				if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 					R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
@@ -87,7 +88,7 @@ public class SpecialPlayerParicleHandler{
 				if(player.isSneaking()){
 					R=world.rand.nextFloat();G=world.rand.nextFloat();B=world.rand.nextFloat();
 				}
-				if((player.isSneaking()?world.rand.nextBoolean():true))UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr,yr,zr, xv*0.5+UtilM.CRandF(0.05),yv*0.5+UtilM.CRandF(0.05),zv*0.5+UtilM.CRandF(0.05), size*(player.isSneaking()?2:1), 2+world.rand.nextInt(2), player.isSneaking()?1:6,true,player.isSneaking()?2:1,"tx1", R,G,B, 1, 0.98));
+				if((player.isSneaking()?world.rand.nextBoolean():true))UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr,yr,zr, xv*0.5+RandUtil.CRF(0.05),yv*0.5+RandUtil.CRF(0.05),zv*0.5+RandUtil.CRF(0.05), size*(player.isSneaking()?2:1), 2+world.rand.nextInt(2), player.isSneaking()?1:6,true,player.isSneaking()?2:1,"tx1", R,G,B, 1, 0.98));
 			}
 			
 		}
@@ -102,25 +103,25 @@ public class SpecialPlayerParicleHandler{
 			if(itemS!=null&&itemS.getItem()==Items.dye&&itemS.getItemDamage()==4)ammount=2;
 			double xr=x,yr=y,zr=z,scale=0.2;
 			for(int i=0;i<20*ammount;i++){
-				xr=x+UtilM.CRandF(0.8);
+				xr=x+RandUtil.CRF(0.8);
 				yr=y-1.5;
-				zr=z+UtilM.CRandF(0.8);
+				zr=z+RandUtil.CRF(0.8);
 				scale=world.rand.nextDouble()*0.4;
 				R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
 				if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 					R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
 				}
-				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  UtilM.CRandF(0.1+scale), UtilM.CRandF(0.1+scale)+0.5, UtilM.CRandF(0.1+scale), (int)(300+world.rand.nextInt(300)*(player.isSneaking()?0.1:1)), 3+world.rand.nextInt(2), -20,true,player.isSneaking()?2:1,"tx1", R,G,B, 1, 0.95));
+				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  RandUtil.CRF(0.1+scale), RandUtil.CRF(0.1+scale)+0.5, RandUtil.CRF(0.1+scale), (int)(300+world.rand.nextInt(300)*(player.isSneaking()?0.1:1)), 3+world.rand.nextInt(2), -20,true,player.isSneaking()?2:1,"tx1", R,G,B, 1, 0.95));
 			}
 			if(ammount!=1)for(int a=0;a<ammount*2;a++){
-				xr=x+UtilM.CRandF(0.8);
+				xr=x+RandUtil.CRF(0.8);
 				yr=y-1.5;
-				zr=z+UtilM.CRandF(0.8);
+				zr=z+RandUtil.CRF(0.8);
 				R=world.rand.nextFloat()/3;G=world.rand.nextFloat()/3;B=1;
 				if(itemS!=null&&(itemS.getItem()==MItems.fireHammer||Block.getBlockFromItem(itemS.getItem())==MBlocks.firePipe)){
 					R=1;G=world.rand.nextFloat()/3;B=world.rand.nextFloat()/3;
 				}
-				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  UtilM.CRandF(0.1+scale), UtilM.CRandF(0.4+scale)+1, UtilM.CRandF(0.1+scale), 300+world.rand.nextInt(300), 3+world.rand.nextInt(2), -20,1, R,G,B, 1, 1));
+				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  RandUtil.CRF(0.1+scale), RandUtil.CRF(0.4+scale)+1, RandUtil.CRF(0.1+scale), 300+world.rand.nextInt(300), 3+world.rand.nextInt(2), -20,1, R,G,B, 1, 1));
 			}
 		}
 	}
@@ -130,11 +131,11 @@ public class SpecialPlayerParicleHandler{
 			
 			if(distance>3)for(int a=0;a<4*(int)distance;a++){
 				double xr=x,yr=y,zr=z,scale=0.2;
-				xr=x+UtilM.CRandF(0.8);
+				xr=x+RandUtil.CRF(0.8);
 				yr=y-1.5;
-				zr=z+UtilM.CRandF(0.8);
+				zr=z+RandUtil.CRF(0.8);
 				scale=world.rand.nextDouble()*0.4;
-				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  UtilM.CRandF(0.1+scale), UtilM.CRandF(0.1+scale), UtilM.CRandF(0.1+scale), 300+world.rand.nextInt(300), 3+world.rand.nextInt(2), -20,1, world.rand.nextFloat(),world.rand.nextFloat(),world.rand.nextFloat(), 1, 0.95));
+				UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,xr, yr, zr,  RandUtil.CRF(0.1+scale), RandUtil.CRF(0.1+scale), RandUtil.CRF(0.1+scale), 300+world.rand.nextInt(300), 3+world.rand.nextInt(2), -20,1, world.rand.nextFloat(),world.rand.nextFloat(),world.rand.nextFloat(), 1, 0.95));
 				
 			}
 			

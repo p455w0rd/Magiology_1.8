@@ -5,6 +5,7 @@ import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler.Positions;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
@@ -43,15 +44,15 @@ public class SpecialMovmentEvents{
 			}else a=UtilM.circleXZ(player.rotationYaw);
 			if(isRemote){
 				for(int a1=0;a1<15;a1++){
-					float rand=UtilM.CRandF(0.45);
+					float rand=RandUtil.CRF(0.45);
 					double[] a2=UtilM.circleXZ(player.rotationYaw+90);
 					double xPos=player.posX-a2[0]*rand+a[0]*0.2,yPos=player.posY-0.9,zPos=player.posZ+a2[1]*rand-a[1]*0.2;
-					boolean rb=UtilM.RInt(20)!=0;
-					EntitySmoothBubleFX particle=new EntitySmoothBubleFX(world, xPos, yPos, zPos, UtilM.CRandF(0.1)-xChange/10, UtilM.CRandF(0.1)-yChange/10, UtilM.CRandF(0.1)-zChange/10,300, 1, rb?50:0, rb?1:2, 1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 0.8);
+					boolean rb=RandUtil.RI(20)!=0;
+					EntitySmoothBubleFX particle=new EntitySmoothBubleFX(world, xPos, yPos, zPos, RandUtil.CRF(0.1)-xChange/10, RandUtil.CRF(0.1)-yChange/10, RandUtil.CRF(0.1)-zChange/10,300, 1, rb?50:0, rb?1:2, 1, 0.2+RandUtil.RF()*0.5, 0.2+RandUtil.RF()*0.2, 0.8);
 					particle.noClip=false;
 					UtilM.spawnEntityFX(particle);
-					UtilM.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, UtilM.CRandF(0.1)-xChange, UtilM.CRandF(0.1)-yChange, UtilM.CRandF(0.1)-zChange));
-					UtilM.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, UtilM.CRandF(0.1)-xChange, UtilM.CRandF(0.1)-yChange, UtilM.CRandF(0.1)-zChange));
+					UtilM.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, RandUtil.CRF(0.1)-xChange, RandUtil.CRF(0.1)-yChange, RandUtil.CRF(0.1)-zChange));
+					UtilM.spawnEntityFX(new EntitySmokeFXM(world, xPos, yPos, zPos, RandUtil.CRF(0.1)-xChange, RandUtil.CRF(0.1)-yChange, RandUtil.CRF(0.1)-zChange));
 				}
 			}
 			player.motionX+=xChange;

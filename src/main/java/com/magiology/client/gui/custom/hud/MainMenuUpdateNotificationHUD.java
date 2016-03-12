@@ -20,6 +20,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.ColorF;
@@ -86,10 +87,10 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 		button.update();
 		down.update();
 		
-		if(U.RB(0.1)){
-			rotation.x.wantedPoint=U.CRandF(20);
-			rotation.y.wantedPoint=U.CRandF(20);
-			rotation.z.wantedPoint=U.CRandF(1);
+		if(RandUtil.RB(0.1)){
+			rotation.x.wantedPoint=RandUtil.CRF(20);
+			rotation.y.wantedPoint=RandUtil.CRF(20);
+			rotation.z.wantedPoint=RandUtil.CRF(1);
 		}
 		reimplementMouseEvents();
 		if(selected){
@@ -137,7 +138,7 @@ public class MainMenuUpdateNotificationHUD extends HUD{
 				config.set("modPos", "mods/"+Magiology.infoFile.getS("modPos",NAME+".jar"));
 				config.set("url", DownloadingHandler.findValue("NEWEST_VERSION_URL"));
 				config.set("appPos", updaterFolder);
-				config.set("isDev", Magiology.IS_DEV);
+				config.set("isDev", Magiology.isDev());
 				config.writeToFile();
 				Desktop.getDesktop().open(updater);
 				UtilM.exitSoft();

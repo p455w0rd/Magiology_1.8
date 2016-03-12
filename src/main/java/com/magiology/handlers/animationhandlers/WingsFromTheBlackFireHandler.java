@@ -7,6 +7,7 @@ import com.magiology.forgepowered.packets.packets.UploadPlayerDataPacket;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData;
 import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFromTheBlackFireData;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.SimpleCounter;
 
@@ -101,10 +102,10 @@ public class WingsFromTheBlackFireHandler{
 			
 			Positions[] flap=getFlap(player);
 			for(int a=0;a<data.rotationAnglesBase.length;a++)for(int b=0;b<data.rotationAnglesBase[a].length;b++){
-				data.rotationAnglesBase[a][b]=UtilM.slowlyEqualize(data.rotationAnglesBase[a][b], pos.wantedRotationAnglesBase[a][b], 1+2*UtilM.RF());
+				data.rotationAnglesBase[a][b]=UtilM.slowlyEqualize(data.rotationAnglesBase[a][b], pos.wantedRotationAnglesBase[a][b], 1+2*RandUtil.RF());
 				ExtendedPlayerData extendedData=ExtendedPlayerData.get(player);
-				if(data.canFlap)data.flapAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.flapAnglesBase[a][b], flap[0].wantedRotationAnglesBase[a][b]+flap[1].wantedRotationAnglesBase[a][b], (3.3+UtilM.RF())*(extendedData!=null?extendedData.soulFlame<10?0.5:1:1));
-				else data.flapAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.flapAnglesBase[a][b], 0, 1.5+2*UtilM.RF());
+				if(data.canFlap)data.flapAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.flapAnglesBase[a][b], flap[0].wantedRotationAnglesBase[a][b]+flap[1].wantedRotationAnglesBase[a][b], (3.3+RandUtil.RF())*(extendedData!=null?extendedData.soulFlame<10?0.5:1:1));
+				else data.flapAnglesBase[a][b]=(float)UtilM.slowlyEqualize(data.flapAnglesBase[a][b], 0, 1.5+2*RandUtil.RF());
 			}
 		}else for(int a=0;a<data.rotationAnglesBase.length;a++)for(int b=0;b<data.rotationAnglesBase[a].length;b++){
 			data.rotationAnglesBase[a][b]=0;
@@ -191,7 +192,7 @@ public class WingsFromTheBlackFireHandler{
 						if(player.worldObj.isRemote){
 							CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);
 							Positions[] flaps=getFlap(player);
-							if(data!=null)for(int a1=0;a1<data.rotationAnglesBase.length;a1++)for(int b=0;b<data.rotationAnglesBase[a1].length;b++)data.rotationAnglesBase[a1][b]=UtilM.slowlyEqualize(data.rotationAnglesBase[a1][b], flaps[0].wantedRotationAnglesBase[a1][b]+flaps[1].wantedRotationAnglesBase[a1][b], 1+2*UtilM.RF());
+							if(data!=null)for(int a1=0;a1<data.rotationAnglesBase.length;a1++)for(int b=0;b<data.rotationAnglesBase[a1].length;b++)data.rotationAnglesBase[a1][b]=UtilM.slowlyEqualize(data.rotationAnglesBase[a1][b], flaps[0].wantedRotationAnglesBase[a1][b]+flaps[1].wantedRotationAnglesBase[a1][b], 1+2*RandUtil.RF());
 						}
 						return Positions.HoverPos;
 					}
@@ -210,7 +211,7 @@ public class WingsFromTheBlackFireHandler{
 	//static noise section
 		public static float[][]noiseSpeedRotationAnglesBase=new float[7][3],wantedNoiseRotationAnglesBase=new float[7][3],noiseRotationAnglesBase=new float[7][3];
 		public static void updateStaticNoise(long wTime){
-			if(wTime%5==0)for(int a=0;a<wantedNoiseRotationAnglesBase.length;a++)for(int b=0;b<wantedNoiseRotationAnglesBase[a].length;b++)if(UtilM.RInt(4)==0)wantedNoiseRotationAnglesBase[a][b]=UtilM.CRandF(0.5);
+			if(wTime%5==0)for(int a=0;a<wantedNoiseRotationAnglesBase.length;a++)for(int b=0;b<wantedNoiseRotationAnglesBase[a].length;b++)if(RandUtil.RI(4)==0)wantedNoiseRotationAnglesBase[a][b]=RandUtil.CRF(0.5);
 			for(int a=0;a<noiseSpeedRotationAnglesBase.length;a++){
 				float speed=0.4F;
 				for(int b=0;b<noiseSpeedRotationAnglesBase[a].length;b++){

@@ -5,6 +5,7 @@ import java.util.List;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 
 import net.minecraft.block.state.IBlockState;
@@ -49,9 +50,9 @@ public interface PowerCore{
 					int ab=(int)(((float)tileMT.getEnergy()/(float)tileMT.getMaxEnergy())*10);
 					for(int a=0;a<ab*3;a++)world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX()+0.5, pos.getY()+0.5, pos.getZ()+0.5, 0, 0, 0);
 					for(int a=0;a<ab;a++)UtilM.spawnEntityFX(new EntitySmoothBubleFX(world,
-						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,UtilM.CRandF(0.05),UtilM.CRandF(0.05),UtilM.CRandF(0.05),
-						150,4+UtilM.RInt(3),3,true,2,"tx1",
-						1, 0.2+UtilM.RF()*0.5, 0.2+UtilM.RF()*0.2, 1, 0.99));
+						pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5,RandUtil.CRF(0.05),RandUtil.CRF(0.05),RandUtil.CRF(0.05),
+						150,4+RandUtil.RI(3),3,true,2,"tx1",
+						1, 0.2+RandUtil.RF()*0.5, 0.2+RandUtil.RF()*0.2, 1, 0.99));
 				}
 				//important stuff-------------------------------------------------------
 				//you a survival player?
