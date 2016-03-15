@@ -13,6 +13,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
@@ -70,7 +71,7 @@ public class Slider extends HoloObject{
 	public void onPressed(EntityPlayer player){
 		if(moveMode||player.isSneaking()||host==null)return;
 		try{
-			sliderPos=UtilM.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
+			sliderPos=MathUtil.snap((float)((position.y-host.point.pointedPos.y-size.y/8)/(size.y)),0,0.75F);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

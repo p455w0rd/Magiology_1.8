@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.magiology.util.utilclasses.RandUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
@@ -119,10 +119,10 @@ public class RealPhysicsMesh{
 						vertex1=vertices.get(con.x),
 						vertex2=vertices.get(con.y);
 					
-					Vec3M distance=vertex1.getPos().subtract(vertex2.getPos()).add(vertex1.getVelocity()).add(vertex2.getVelocity().mul(-1));
+					Vec3M distance=vertex1.getPos().sub(vertex2.getPos()).add(vertex1.getVelocity()).add(vertex2.getVelocity().mul(-1));
 					float d1stance=distance.length();
 					float difference=d1stance-originalDistances[pos];
-					if(!UtilM.isNumValid(difference)){
+					if(!MathUtil.isNumValid(difference)){
 						criticalState=true;
 						return;
 					}

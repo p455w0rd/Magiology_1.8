@@ -20,7 +20,7 @@ public class GeometryUtil{
 		public Vec3M origin,dir;
 		
 		public static Ray byPos(Vec3M pos1, Vec3M pos2){
-			return new Ray(pos1, pos2.subtract(pos1).normalize());
+			return new Ray(pos1, pos2.sub(pos1).normalize());
 		}
 		public static Ray byDir(Vec3M origin, Vec3M normal){
 			return new Ray(origin, normal);
@@ -57,7 +57,7 @@ public class GeometryUtil{
 			return normal;
 		}
 		public Triangle sub(Triangle tri){
-			return new Triangle(pos1.subtract(tri.pos1), pos2.subtract(tri.pos2), pos3.subtract(tri.pos3));
+			return new Triangle(pos1.sub(tri.pos1), pos2.sub(tri.pos2), pos3.sub(tri.pos3));
 		}
 		public Triangle add(Triangle tri){
 			return new Triangle(pos1.add(tri.pos1), pos2.add(tri.pos2), pos3.add(tri.pos3));
@@ -95,7 +95,7 @@ public class GeometryUtil{
 			return new Triangle(pos1, pos3, pos4);
 		}
 		public Quad sub(Quad tri){
-			return new Quad(pos1.subtract(tri.pos1), pos2.subtract(tri.pos2), pos3.subtract(tri.pos3), pos4.subtract(tri.pos4));
+			return new Quad(pos1.sub(tri.pos1), pos2.sub(tri.pos2), pos3.sub(tri.pos3), pos4.sub(tri.pos4));
 		}
 		public Quad add(Quad tri){
 			return new Quad(pos1.add(tri.pos1), pos2.add(tri.pos2), pos3.add(tri.pos3), pos4.add(tri.pos4));
@@ -135,8 +135,8 @@ public class GeometryUtil{
 		Vec3M
 			startMiddle=start.pos1.add(start.pos2).add(start.pos3).mul(1F/3F),
 			endMiddle  =  end.pos1.add(  end.pos2).add(  end.pos3).mul(1F/3F),
-			pointDistVec=point.subtract(startMiddle),
-			endDistVec=endMiddle.subtract(startMiddle);
+			pointDistVec=point.sub(startMiddle),
+			endDistVec=endMiddle.sub(startMiddle);
 		
 		Triangle difference=start.sub(end);
 		if(intersectRayTriangle(
@@ -178,7 +178,7 @@ public class GeometryUtil{
 			diff.pos3=diff.pos3.mul(1/distance3);
 			Vec3M 
 				triNormal=diff.pos1.add(diff.pos2).add(diff.pos3).normalize().mul(maxDiff),
-				result=intersectRayTriangle(Ray.byPos(point, point.subtract(triNormal)), stages[i]);
+				result=intersectRayTriangle(Ray.byPos(point, point.sub(triNormal)), stages[i]);
 			
 			if(nullFromStart&&result!=null){
 				nullFromStart=false;
@@ -265,7 +265,7 @@ public class GeometryUtil{
 	}
 	
 	public static Vec3M intersectRayTriangle(Vec3M tri1, Vec3M tri2, Vec3M tri3, Vec3M p1, Vec3M p2){
-		Vector3f res=intersectRayTriangle(p1.toLWJGLVec(), p2.subtract(p1).normalize().toLWJGLVec(), tri1.toLWJGLVec(), tri2.toLWJGLVec(), tri3.toLWJGLVec());
+		Vector3f res=intersectRayTriangle(p1.toLWJGLVec(), p2.sub(p1).normalize().toLWJGLVec(), tri1.toLWJGLVec(), tri2.toLWJGLVec(), tri3.toLWJGLVec());
 		return res!=null?new Vec3M(res.x, res.y, res.z):null;
 	}
 	

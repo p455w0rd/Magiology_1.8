@@ -8,6 +8,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.Minecraft;
@@ -17,9 +18,9 @@ public class TexturedColoredButton extends ColoredGuiButton{
 	@Override
 	public void update(){
 		
-		r=UtilM.snap(r, 0, 1);
-		g=UtilM.snap(g, 0, 1);
-		b=UtilM.snap(b, 0, 1);
+		r=MathUtil.snap(r, 0, 1);
+		g=MathUtil.snap(g, 0, 1);
+		b=MathUtil.snap(b, 0, 1);
 		prevR=r;
 		prevG=g;
 		prevB=b;

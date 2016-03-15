@@ -1,5 +1,7 @@
 package com.magiology.util.utilobjects;
 
+import com.magiology.util.utilclasses.UtilM;
+
 public class DoubleObject <Obj1,Obj2>{
 	public Obj1 obj1;
 	public Obj2 obj2;
@@ -15,6 +17,7 @@ public class DoubleObject <Obj1,Obj2>{
 	}
 	@Override
 	public String toString(){
-		return "DoubleObject{"+obj1+", "+obj2+"}";
+		
+		return "DoubleObject{"+UtilM.toString(obj1)+", "+UtilM.toString(obj2)+"}";
 	}
 }

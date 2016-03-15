@@ -10,6 +10,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -85,6 +86,6 @@ public class HandModeChangerHUD extends HUD{
 		if(UtilM.isNull(UtilM.getThePlayer()))return;
 		lastHandAlpha=handAlpha;
 		handAlpha+=UtilM.getThePlayer().isSneaking()?0.25:-0.25;
-		handAlpha=UtilM.snap(handAlpha, 0, 1);
+		handAlpha=MathUtil.snap(handAlpha, 0, 1);
 	}
 }

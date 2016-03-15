@@ -240,7 +240,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			dat=data.entrySet().iterator();
 			while(dat.hasNext()){
 				FileContent<Serializable> file=dat.next().getValue();
-				writeString(buffer, UtilM.toString(file.content));
+				writeString(buffer, UtilM.objToString(file.content));
 				buffer.writeInt(file.dimension);
 			}
 		}
@@ -253,7 +253,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 			int size=buffer.readInt();
 			for(int i=0;i<size;i++)keys.add(readString(buffer));
 			for(int i=0;i<size;i++)try{
-					data.put(keys.get(i),new FileContent<Serializable>((Serializable)UtilM.fromString(readString(buffer)),buffer.readInt()));
+					data.put(keys.get(i),new FileContent<Serializable>((Serializable)UtilM.objFromString(readString(buffer)),buffer.readInt()));
 				}catch(ClassNotFoundException e){
 					e.printStackTrace();
 				}
@@ -340,7 +340,7 @@ public class WorldData<KeyCast extends CharSequence,ValueCast extends Serializab
 		int result=0;
 		for(Entry<KeyCast,FileContent<ValueCast>> i:unsyncedData.entrySet()){
 			try{
-				result+=(UtilM.toString(i.getValue().content)+i.getValue().dimension).toCharArray().length;
+				result+=(UtilM.objToString(i.getValue().content)+i.getValue().dimension).toCharArray().length;
 			}catch(IOException e){
 				e.printStackTrace();
 			}

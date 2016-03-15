@@ -61,9 +61,10 @@ public class TheHand extends Item implements CustomRenderedItem{
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
-		TheHandHandler.handUseAnimation(player);
+//		TheHandHandler.handUseAnimation(player);
 		HandPosition ap=TheHandHandler.getActivePosition(player);
 		if(ap==HandPosition.WeaponHolder){
+			TheHandHandler.actionAnimation(player);
 			player.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
 		}else if(ap==HandPosition.NaturalPosition){
 			

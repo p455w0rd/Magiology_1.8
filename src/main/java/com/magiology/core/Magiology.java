@@ -1,7 +1,6 @@
 package com.magiology.core;
 
 import static com.magiology.core.MReference.*;
-import static com.magiology.util.utilclasses.UtilM.*;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

@@ -5,6 +5,7 @@ import java.util.List;
 import com.magiology.client.render.models.ModelWingsFromTheBlackFire;
 import com.magiology.forgepowered.packets.packets.generic.GenericServerIntPacket;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.NBTUtil;
 
 import net.minecraft.block.material.Material;
@@ -57,9 +58,9 @@ public class CyborgWingsFromTheBlackFireItem extends ItemArmor{
 			if(world.getTotalWorldTime()%3==0&&world.isRemote){
 				boolean bol=true;
 				float rotation=-player.rotationYaw;
-				double[] c=UtilM.circleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
+				double[] c=MathUtil.circleXZ(rotation+180);c[0]*=0.5;c[1]*=0.5;
 				for(int l=0;l<3;l++){
-					double[] a=UtilM.circleXZ(rotation+90-10+l*10),b=UtilM.circleXZ(rotation-90-10+l*10);
+					double[] a=MathUtil.circleXZ(rotation+90-10+l*10),b=MathUtil.circleXZ(rotation-90-10+l*10);
 					a[0]*=2.7;b[0]*=2.7;
 					a[1]*=2.7;b[1]*=2.7;
 					Vec3 pp=new Vec3(player.posX,player.posY,player.posZ);

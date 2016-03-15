@@ -1,10 +1,8 @@
 package com.magiology.util.utilobjects.vectors;
 
-import static com.magiology.util.utilclasses.UtilM.*;
-
 import org.lwjgl.util.vector.Vector2f;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 
 /**
  * Created by LapisSea on 29.1.2016..
@@ -67,13 +65,13 @@ public class AngularVec3{
 //		x=Math.min(x, Math.abs(x-180));
 //		y=Math.min(y, Math.abs(y-180));
 		
-		return 1-snap(new Vector2f(x,y).length(),0,angleArea)/angleArea;
+		return 1-MathUtil.snap(new Vector2f(x,y).length(),0,angleArea)/angleArea;
 	}
 	public Vec3M toVec3M(){
 		Vec3M result=new Vec3M();
-		result.x=-sin((int)getXRotation())*cos((int)getYRotation())*length;
-		result.z= cos((int)getXRotation())*cos((int)(getYRotation()))*length;
-		result.y=-sin((int)getYRotation())*length;
+		result.x=-MathUtil.sin((int)getXRotation())*MathUtil.cos((int)getYRotation())*length;
+		result.z= MathUtil.cos((int)getXRotation())*MathUtil.cos((int)(getYRotation()))*length;
+		result.y=-MathUtil.sin((int)getYRotation())*length;
 		return result;
 	}
 
@@ -82,7 +80,7 @@ public class AngularVec3{
 	}
 
 	public void setXRotation(float xRotation){
-		this.xRotation=UtilM.normaliseDegrees(xRotation);
+		this.xRotation=MathUtil.normaliseDegrees(xRotation);
 	}
 
 	public float getYRotation(){
@@ -90,7 +88,7 @@ public class AngularVec3{
 	}
 
 	public void setYRotation(float yRotation){
-		this.yRotation=UtilM.normaliseDegrees(yRotation);
+		this.yRotation=MathUtil.normaliseDegrees(yRotation);
 	}
 	
 	@Override

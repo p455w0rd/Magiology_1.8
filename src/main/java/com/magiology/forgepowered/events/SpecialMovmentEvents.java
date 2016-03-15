@@ -7,6 +7,7 @@ import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,15 +38,15 @@ public class SpecialMovmentEvents{
 					if(xRot!=0)rot=xRot;
 					if(yRot!=0)rot=yRot;
 				}
-				a=UtilM.circleXZ(player.rotationYaw+rot);
+				a=MathUtil.circleXZ(player.rotationYaw+rot);
 //				Helper.printInln(rot,xRot,yRot);
 				xChange+=-a[0]*0.5;
 				zChange+=a[1]*0.5;
-			}else a=UtilM.circleXZ(player.rotationYaw);
+			}else a=MathUtil.circleXZ(player.rotationYaw);
 			if(isRemote){
 				for(int a1=0;a1<15;a1++){
 					float rand=RandUtil.CRF(0.45);
-					double[] a2=UtilM.circleXZ(player.rotationYaw+90);
+					double[] a2=MathUtil.circleXZ(player.rotationYaw+90);
 					double xPos=player.posX-a2[0]*rand+a[0]*0.2,yPos=player.posY-0.9,zPos=player.posZ+a2[1]*rand-a[1]*0.2;
 					boolean rb=RandUtil.RI(20)!=0;
 					EntitySmoothBubleFX particle=new EntitySmoothBubleFX(world, xPos, yPos, zPos, RandUtil.CRF(0.1)-xChange/10, RandUtil.CRF(0.1)-yChange/10, RandUtil.CRF(0.1)-zChange/10,300, 1, rb?50:0, rb?1:2, 1, 0.2+RandUtil.RF()*0.5, 0.2+RandUtil.RF()*0.2, 0.8);
@@ -70,7 +71,7 @@ public class SpecialMovmentEvents{
 	public void handleWingPhysics(EntityPlayer player){
 		Positions position=WingsFromTheBlackFireHandler.getPos(player);
 		if(!UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2)))return;
-		double[] a=UtilM.circleXZ(player.rotationYaw);
+		double[] a=MathUtil.circleXZ(player.rotationYaw);
 		if(position==Positions.HoverPos||position==Positions.FlyBackvardPos||position==Positions.FlyStationarPos||position==Positions.FlyForvardPos){
 			player.motionX*=0.9;
 			player.motionY*=0.8;
@@ -98,7 +99,7 @@ public class SpecialMovmentEvents{
 			if(extendedData.soulFlame<13)return;
 			extendedData.soulFlame-=13;
 		}
-		double[] a=UtilM.circleXZ(player.rotationYaw);
+		double[] a=MathUtil.circleXZ(player.rotationYaw);
 		a[0]*=0.15;a[1]*=0.15;
 		double y1=0.16;
 		if(y==1&&extendedData.soulFlame>4){

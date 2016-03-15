@@ -2,6 +2,7 @@ package com.magiology.util.utilobjects;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.PacketBuffer;
 
 public class NBTUtil{
@@ -93,5 +94,30 @@ public class NBTUtil{
 		
 		
 		
+	}
+	public static ItemStack[] loadItemsFromNBT(NBTTagCompound NBTTC,String baseName,ItemStack[] stacks){
+		int NumberOfSlots=stacks.length;
+		NBTTagList list= NBTTC.getTagList(baseName+"Slots", 10);
+		stacks=new ItemStack[NumberOfSlots];
+		for(int i=0;i<list.tagCount();i++){
+			NBTTagCompound item=list.getCompoundTagAt(i);
+			byte b=item.getByte(baseName);
+			if(b>=0&&b<stacks.length){
+				stacks[b]=ItemStack.loadItemStackFromNBT(item);
+			}
+		}
+		return stacks;
+	}
+	public static void saveItemsToNBT(NBTTagCompound NBTTC,String baseName,ItemStack[] stacks){
+		NBTTagList list= new NBTTagList();
+		for(int i=0;i<stacks.length;i++){
+			if(stacks[i]!=null){
+				NBTTagCompound item=new NBTTagCompound();
+				item.setByte(baseName, (byte)i);
+				stacks[i].writeToNBT(item);
+				list.appendTag(item);
+			}
+		}
+		NBTTC.setTag(baseName+"Slots", list);
 	}
 }

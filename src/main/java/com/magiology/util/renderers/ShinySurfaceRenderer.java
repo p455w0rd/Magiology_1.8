@@ -66,7 +66,7 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 	}
 	
 	protected ColorF calcLightReflection(Vec3M pos, Vec3M normal, Vec3M playerPos, ColorF color, List<Vec3M> reflectionVects, boolean usesFilters){
-		Vec3M toCameraVec=playerPos.subtract(modelOriginPos).subtract(pos);
+		Vec3M toCameraVec=playerPos.sub(modelOriginPos).sub(pos);
 		for(int i=0;i<lights.size();i++){
 			
 			double diff=usesFilters?

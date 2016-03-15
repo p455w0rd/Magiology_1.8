@@ -8,6 +8,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.vectors.TwoDots;
 
@@ -71,7 +72,7 @@ public class TwoDotsLineRender extends LongAfterRenderRendererBase{
 		
 		alpha+=0.4*(UtilM.isItemInStack(MItems.fireHammer, player.getCurrentEquippedItem())?1:-1);
 		
-		alpha=UtilM.snap(alpha, 0, 1);
+		alpha=MathUtil.snap(alpha, 0, 1);
 		if(alpha<0.05)kill();
 	}
 }

@@ -22,7 +22,7 @@ import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
@@ -298,8 +298,8 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 			}
 			int 
 				cpos=pos.y+getCursorPosition().y*9,
-				minY=(int)UtilM.snap(cpos-2,box.getMinY(),box.getMaxY()),
-				maxY=(int)UtilM.snap(cpos+9,box.getMinY(),box.getMaxY());
+				minY=(int)MathUtil.snap(cpos-2,box.getMinY(),box.getMaxY()),
+				maxY=(int)MathUtil.snap(cpos+9,box.getMinY(),box.getMaxY());
 			
 			if(minY!=maxY)drawRect(pos.x-2, minY, size.x+12, maxY, new ColorF(1, 1, 1, 0.1).toCode());
 		}
@@ -886,8 +886,8 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 	}
 	
 	protected void fixCursor(){
-		cursorPosition.y=snap(cursorPosition.y, 0, Math.max(0, textBuffer.size()-1));
-		cursorPosition.x=snap(cursorPosition.x, 0, Math.max(0, getLength(cursorPosition.y)));
+		cursorPosition.y=MathUtil.snap(cursorPosition.y, 0, Math.max(0, textBuffer.size()-1));
+		cursorPosition.x=MathUtil.snap(cursorPosition.x, 0, Math.max(0, getLength(cursorPosition.y)));
 	}
 
 	@Override
@@ -922,7 +922,7 @@ public class GuiTextEditor extends Gui implements Updateable,SliderParent{
 		return textOffset;
 	}
 	private void fixSlideableOffset(){
-		textOffset.x=UtilM.snap(textOffset.x, 0, Math.max(0, maxWidth-size.x+18));
-		textOffset.y=UtilM.snap(textOffset.y, 0, Math.max(0, (textBuffer.size()+2)*Font.FRB().FONT_HEIGHT-size.y));
+		textOffset.x=MathUtil.snap(textOffset.x, 0, Math.max(0, maxWidth-size.x+18));
+		textOffset.y=MathUtil.snap(textOffset.y, 0, Math.max(0, (textBuffer.size()+2)*Font.FRB().FONT_HEIGHT-size.y));
 	}
 }

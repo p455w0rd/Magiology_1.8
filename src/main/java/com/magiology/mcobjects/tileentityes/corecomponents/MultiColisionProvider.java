@@ -108,7 +108,7 @@ public interface MultiColisionProvider{
 				AxisAlignedBB[] boxes=provider.getBoxes();
 				for(int i=0;i<boxes.length;i++){
 					AxisAlignedBB box2=provider.getBoxes()[i];
-					if(UtilM.AxisAlignedBBEqual(box1, box2)){
+					if(UtilM.axisAlignedBBEqual(box1, box2)){
 						return i;
 					}
 				}

@@ -1,6 +1,7 @@
 package com.magiology.mcobjects.tileentityes;
 
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.NBTUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		this.tank=nbt.getInteger("tank");
 		this.onOf=nbt.getBoolean("onOf");
 		
-		slots=UtilM.loadItemsFromNBT(nbt, "slots", slots);
+		slots=NBTUtil.loadItemsFromNBT(nbt, "slots", slots);
 
 		if(nbt.hasKey("CustomName")){
 			this.setInventoryName(nbt.getString("CustomName"));
@@ -40,7 +41,7 @@ public class TileEntityControlBlock extends TileEntityM implements ISidedInvento
 		nbt.setInteger("tank", this.tank);
 		nbt.setBoolean("onOf", this.onOf);
 		
-		UtilM.saveItemsToNBT(nbt, "slots", slots);
+		NBTUtil.saveItemsToNBT(nbt, "slots", slots);
 		
 		if(this.hasCustomName()){
 			nbt.setString("CustomName", this.getName());

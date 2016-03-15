@@ -2,6 +2,8 @@ package com.magiology.util.utilclasses;
 
 import java.util.Random;
 
+import com.magiology.util.utilclasses.math.MathUtil;
+
 public class RandUtil{
 	static Random rand=new Random();
 
@@ -52,7 +54,7 @@ public class RandUtil{
 	 * 1.
 	 */
 	public static boolean RB(double percentage){
-		percentage=UtilM.snap(percentage, 0, 1);
+		percentage=MathUtil.snap(percentage, 0, 1);
 		return percentage!=0&&(percentage==1||RF()<percentage);
 	}
 

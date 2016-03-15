@@ -276,7 +276,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	@Override
 	public void detectAndSendChanges(){
 		if(!U.isRemote(this))return;
-		if(UtilM.AxisAlignedBBEqual(pointId,prevPointId))return;
+		if(UtilM.axisAlignedBBEqual(pointId,prevPointId))return;
 		UtilM.sendMessage(new NotifyPointedBoxChangePacket(this));
 	}
 	

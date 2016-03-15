@@ -8,8 +8,8 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.RandUtil;
-import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.util.ResourceLocation;
@@ -63,7 +63,7 @@ public class GuiParticle{
 			if((xPos<guiLeft||yPos<guiTop)||(xPos>guiLeft+xSize||yPos>guiTop+ySize));else lesstiplyer/=4.0;
 			
 		}
-		double[] ab=UtilM.circleXZ(RandUtil.RI(360));
+		double[] ab=MathUtil.circleXZ(RandUtil.RI(360));
 		if(hasMovementNoise){
 			xSpeed+=ab[0]/lesstiplyer;
 			ySpeed+=ab[1]/lesstiplyer;

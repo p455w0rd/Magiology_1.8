@@ -1,18 +1,19 @@
 package com.magiology.util.utilobjects;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magiology.util.utilobjects.vectors.Vec3M;
+import com.magiology.api.Calculable;
 
-public class LinearAnimation{
+public class LinearAnimation<T extends Calculable>{
 	
-	private DoubleObject<Vec3M[], Float>[] animationData;
+	private DoubleObject<T[], Float>[] animationData;
 	
-	public LinearAnimation(DoubleObject<Vec3M[], Float>...data){
-		List<DoubleObject<Vec3M[], Float>> dataSorted=new ArrayList<DoubleObject<Vec3M[], Float>>();
+	public LinearAnimation(DoubleObject<T[], Float>...data){
+		List<DoubleObject<T[], Float>> dataSorted=new ArrayList<DoubleObject<T[], Float>>();
 		
-		for(DoubleObject<Vec3M[], Float> pos:data){
+		for(DoubleObject<T[], Float> pos:data){
 			boolean added=false;
 			
 			for(int i=0;i<dataSorted.size();i++){
@@ -27,9 +28,9 @@ public class LinearAnimation{
 		animationData=dataSorted.toArray(new DoubleObject[0]);
 	}
 	
-	public Vec3M[] get(int partId,float animationPos){
-		DoubleObject<Vec3M[], Float> before=animationData[partId],after=animationData[partId+1];
-		Vec3M[] result=new Vec3M[before.obj1.length];
+	public T[] get(int partId,float animationPos){
+		DoubleObject<T[], Float> before=animationData[partId],after=animationData[partId+1];
+		T[] result=(T[])Array.newInstance(before.obj1.getClass().getComponentType(), before.obj1.length);
 		if(animationPos>=after.obj2)return after.obj1;
 		if(animationPos<=before.obj2)return before.obj1;
 		float 
@@ -40,15 +41,14 @@ public class LinearAnimation{
 		
 		
 		for(int i=0;i<result.length;i++){
-			Vec3M pos1=before.obj1[i], pos2=after.obj1[i];
-			result[i]=pos2.subtract(pos1).mul(precentage).add(pos1);
+			T pos1=before.obj1[i], pos2=after.obj1[i];
+			result[i]=(T)pos2.sub(pos1).mul(precentage).add(pos1);
 		}
 		
 		return result;
 	}
-	public Vec3M[] get(float animationPos){
+	public T[] get(float animationPos){
 		int pos=0;
-		
 		for(int i=0;i<animationData.length-1;i++){
 			if(animationData[pos+1].obj2<animationPos)pos=i;
 			else i=animationData.length;

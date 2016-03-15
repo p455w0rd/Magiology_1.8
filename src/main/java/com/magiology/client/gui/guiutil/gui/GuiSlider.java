@@ -1,7 +1,5 @@
 package com.magiology.client.gui.guiutil.gui;
 
-import static com.magiology.util.utilclasses.UtilM.*;
-
 import java.awt.Rectangle;
 
 import org.lwjgl.input.Mouse;
@@ -11,6 +9,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec2i;
 import com.magiology.util.utilobjects.vectors.physics.PhysicsFloat;
@@ -151,13 +150,13 @@ public class GuiSlider{
 				innerPos=mouse.x-innerSize/2,
 				sliderSize=size.x-innerSize;
 			
-			slidePrecentage=snap(innerPos/sliderSize, 0, 1);
+			slidePrecentage=MathUtil.snap(innerPos/sliderSize, 0, 1);
 		}else{
 			float 
 				innerPos=mouse.y-innerSize/2,
 				sliderSize=size.y-innerSize;
 			
-			slidePrecentage=snap(innerPos/sliderSize, 0, 1);
+			slidePrecentage=MathUtil.snap(innerPos/sliderSize, 0, 1);
 		}
 		
 		Vector2f slideableOffset=getSlideableOffset();
@@ -226,7 +225,7 @@ public class GuiSlider{
 		float slideableSize=isHorisontal?getSlideableSize().x:getSlideableSize().y;
 		float sliderSize=isHorisontal?size.x:size.y;
 		
-		return UtilM.snap(sliderSize/slideableSize, 0.1F, 1);
+		return MathUtil.snap(sliderSize/slideableSize, 0.1F, 1);
 	}
 	
 	private Vec2i getParentSize(){
@@ -257,10 +256,10 @@ public class GuiSlider{
 		return parent.getSlideableOffset();
 	}
 	private float toPrecent(float totalSize, float inSize, float offset){
-		return snap(offset/(totalSize-inSize), 0, 1);
+		return MathUtil.snap(offset/(totalSize-inSize), 0, 1);
 	}
 	private float fromPrecent(float totalSize, float inSize, float precentage){
-		return snap((totalSize-inSize)*precentage, 0, totalSize);
+		return MathUtil.snap((totalSize-inSize)*precentage, 0, totalSize);
 	}
 	private float getInnerOffset(){
 		return ((isHorisontal?size.x:size.y)-getInnerSize())*slidePrecentage;

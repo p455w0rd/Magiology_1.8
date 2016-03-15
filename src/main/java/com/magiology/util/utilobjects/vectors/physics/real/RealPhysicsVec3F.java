@@ -3,7 +3,7 @@ package com.magiology.util.utilobjects.vectors.physics.real;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.world.World;
@@ -53,8 +53,8 @@ public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 		return pos;
 	}
 	public void setPos(Vec3M pos){
-		if(UtilM.isNumValid(pos.x))this.pos=pos;
-		if(!UtilM.isNumValid(this.pos.x))this.pos=posBackup;
+		if(MathUtil.isNumValid(pos.x))this.pos=pos;
+		if(!MathUtil.isNumValid(this.pos.x))this.pos=posBackup;
 		else posBackup=this.pos;
 	}
 	public Vec3M getPrevPos(){
@@ -67,7 +67,7 @@ public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 		return velocity;
 	}
 	public void setVelocity(Vec3M velocity){
-		if(UtilM.isNumValid(velocity.x))this.velocity=velocity;
+		if(MathUtil.isNumValid(velocity.x))this.velocity=velocity;
 	}
 	public Vec3M getPrevVelocity(){
 		return prevVelocity;
@@ -113,7 +113,7 @@ public class RealPhysicsVec3F extends AbstractRealPhysicsVec3F{
 			this.stress=new ArrayList<>();
 			for(int i=0;i<5;i++)this.stress.add(0F);
 		}
-		if(!UtilM.isNumValid(stress))return;
+		if(!MathUtil.isNumValid(stress))return;
 		this.stress.remove(0);
 		this.stress.add(stress);
 	}

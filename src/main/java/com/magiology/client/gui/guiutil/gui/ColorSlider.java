@@ -2,6 +2,7 @@ package com.magiology.client.gui.guiutil.gui;
 
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ColorF;
 
 public class ColorSlider{
@@ -19,7 +20,7 @@ public class ColorSlider{
 		return image[a];
 	}
 	public static ColorF getColor(float a){
-		a=UtilM.snap(a, 0, 1);
+		a=MathUtil.snap(a, 0, 1);
 		return image[(int)(image.length*a)];
 	}
 }

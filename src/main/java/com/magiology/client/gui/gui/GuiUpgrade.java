@@ -15,6 +15,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MathUtil;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -122,7 +123,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		mouseStartY=y;
 		if(isCtrlKeyDown()){
 			if((x<guiLeft||y<guiTop)||(x>guiLeft+xSize||y>guiTop+ySize)){
-				double[] ab=UtilM.circleXZ(RandUtil.RI(360));
+				double[] ab=MathUtil.circleXZ(RandUtil.RI(360));
 				spawnGuiParticle(new GuiParticle(x,y,100, ab[0]*20, ab[1]*20,1,0.7,0.7,RandUtil.RF(),RandUtil.RF(), RandUtil.RF(),texture1,GuiStandardFX.SummonedFX));
 			}
 		}
@@ -141,7 +142,7 @@ public class GuiUpgrade extends GuiContainerAndGuiParticles{
 		this.updateParticles();
 		int amount=10+RandUtil.RI(10);
 		while(guiParticles.size()<amount){
-			double[] ab=UtilM.circleXZ(RandUtil.RI(360));
+			double[] ab=MathUtil.circleXZ(RandUtil.RI(360));
 			spawnGuiParticle(new GuiParticle(width/2, height/2,0, ab[0], ab[1],1.3,0.7,0.7,1,0.2+RandUtil.RF()*0.5, 0.2+RandUtil.RF()*0.2,texture1,GuiStandardFX.StarterFX));
 		}
 		if(Mouse.isButtonDown(Mouse.getButtonIndex("BUTTON0"))){

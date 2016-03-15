@@ -12,6 +12,7 @@ import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.PowerUtil.PowerItemUtil;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.NBTUtil;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -54,7 +55,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		currentEnergy = NBTTC.getInteger("energy");
 		
 		containerItems=new ItemStack[NumberOfContainerSlots];
-		containerItems=UtilM.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
+		containerItems=NBTUtil.loadItemsFromNBT(NBTTC, "TEMT", containerItems);
 	}
 	
 	@Override
@@ -62,7 +63,7 @@ public abstract class TileEntityPow extends TileEntityConnectionProvider impleme
 		super.writeToNBT(NBTTC);
 		NBTTC.setInteger("energy", currentEnergy);
 		if(containerItems!=null){
-			UtilM.saveItemsToNBT(NBTTC, "TEMT", containerItems);
+			NBTUtil.saveItemsToNBT(NBTTC, "TEMT", containerItems);
 		}
 	}
 	

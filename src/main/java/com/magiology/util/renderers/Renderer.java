@@ -2,7 +2,7 @@ package com.magiology.util.renderers;
 
 import org.lwjgl.opengl.GL11;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -55,7 +55,7 @@ public class Renderer{
 	}
 	
 	private Renderer addColor(float r, float g, float b, float a){
-		renderer.color(UtilM.snap(r,0,1), UtilM.snap(g,0,1), UtilM.snap(b,0,1), UtilM.snap(a,0,1));
+		renderer.color(MathUtil.snap(r,0,1), MathUtil.snap(g,0,1), MathUtil.snap(b,0,1), MathUtil.snap(a,0,1));
 		return instance;
 	}
 	

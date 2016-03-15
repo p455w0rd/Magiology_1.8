@@ -21,7 +21,7 @@ import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntity
 import com.magiology.mcobjects.tileentityes.hologram.TileEntityHologramProjector;
 import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkProgramHolder;
 import com.magiology.util.utilclasses.PrintUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.RayTracer;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilobjects.vectors.Pos;
 
@@ -66,7 +66,7 @@ public class GuiHandlerM implements IGuiHandler{
 
 	public GuiContainer GetClientGuiElement(int ID, EntityPlayer player, World world,int x, int y, int z){
 		TileEntity tile=world.getTileEntity(new Pos(x,y,z));
-		MovingObjectPosition hit=UtilM.rayTrace(player,4, 1);
+		MovingObjectPosition hit=RayTracer.rayTrace(player,4, 1);
 		hit.sideHit.getIndex();
 		
 		switch (ID){

@@ -17,6 +17,7 @@ import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 import com.magiology.util.utilobjects.vectors.Plane;
@@ -118,7 +119,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public void onPressed(EntityPlayer player){
 		selectedObj=null;
 		if(UtilM.isRemote(player))for(int a=0;a<360;a+=30){
-			double[] b=UtilM.circleXZ(a+RandUtil.CRF(16));
+			double[] b=MathUtil.circleXZ(a+RandUtil.CRF(16));
 			b[0]*=0.06;
 			b[1]*=0.06;
 			EntityFacedFX part=new EntityFacedFX(worldObj, size.x+offset.x+point.pointedPos.x+x(), size.y+offset.y+point.pointedPos.y+y(), point.pointedPos.z+z()+0.5,
@@ -161,7 +162,7 @@ public class TileEntityHologramProjector extends TileEntityM implements ITickabl
 	public static Object[][] rayTraceHolograms(EntityPlayer player,float length){
 		Object[][] result={{},{}};
 		try{
-			Vec3M Vec3M=UtilM.getPosition(player,PartialTicksUtil.partialTicks);
+			Vec3M Vec3M=UtilM.getEyePosition(player);
 			Vec3M vec31=com.magiology.util.utilobjects.vectors.Vec3M.conv(player.getLook(PartialTicksUtil.partialTicks));
 			Vec3M vec32=Vec3M.add(vec31.x * length, vec31.y * length, vec31.z * length);
 			

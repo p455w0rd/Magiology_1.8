@@ -1,73 +1,48 @@
-package com.magiology.handlers.animationhandlers.thehand;
+package com.magiology.handlers.animationhandlers.thehand.animation;
 
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
+import com.magiology.handlers.animationhandlers.thehand.HandData;
+import com.magiology.handlers.animationhandlers.thehand.HandPosition;
+import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilobjects.DoubleObject;
+import com.magiology.util.utilobjects.LinearAnimation;
 import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class HandAnimation{
+public class HandAnimation extends HandAnimationBase{
 	
-	public static HandAnimation rightClickAnimation=new HandAnimation(HandPosition.NaturalPosition, HandPosition.NaturalPosition, 
-			new ObjectProcessor<AnimationPart[]>(){
-
-				@Override
-				public AnimationPart[] pocess(AnimationPart[] object, Object...objects){
-					AnimationPart[] animData=            AnimationPart.gen(12,       3,-2,  2,-1,  1,-0.5F,  2,1,  3,2);
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(13, 2,0,  3,-3,  2,-2,  1,-1,  2,2,  3,3));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(14, 5,0,  4,-0.5F,  4,0.5F));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(16,       3,-2,  2,-1,  1,-0.5F,  2,1,  3,2));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(17, 2,0,  3,-1,  2,-2,  1,-1,  2,2,  3,1));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(18, 5,0,  4,-0.5F,  4,0.5F));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(20,       3,-2,  2,-1,  1,-0.5F,  2,1,  3,2));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(21, 2,0,  3,-1,  2,-2,  1,-1,  2,2,  3,1));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(22, 5,0,  4,-0.5F,  4,0.5F));
-
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(24,       3,-2,  2,-1,  1,-0.5F,  2,1,  3,2));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(25, 2,0,  3,-1,  2,-2,  1,-1,  2,2,  3,1));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(26, 5,0,  4,-0.5F,  4,0.5F));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(7,        3,2,  2,1,  2,0.5F,  2,-1,  3,-2));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(10,       3,4,  2,2,  2,1F,  2,-2,  3,-4));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(2,        3,U.p*2,  2,U.p*1F,  2,-U.p*1F,  3,-U.p*2F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(3,        4,-1,  4,1F));
-					return animData;
-				}
-				
-			}.pocess(null));
-	
-	
-	private final HandPosition start,end;
 	public HandData wantedPos,speed;
 	public AnimationPart[] animationData;
 	
 	private boolean isRunning;
 	private long timeStarted;
 	
+	public HandAnimation(HandPosition startEnd, AnimationPart...animationData){
+		this(startEnd, startEnd, animationData);
+	}
 	public HandAnimation(HandPosition start, HandPosition end, AnimationPart...animationData){
-		this.start=start;
-		this.end=end;
+		super(start, end);
 		wantedPos=(HandData)start.data.clone();
 		this.animationData=animationData;
 	}
 	
 	
 	
-	public void update(){
+	public void update(long time){
 		if(isDone()){
-			TheHandHandler.setActivePositionId(UtilM.getThePlayer(), end.posInRegistry());
+			end();
 			return;
 		}
 		
 		speed=new HandData();
-		int timeRunning=(int)(UtilM.getWorldTime()-timeStarted);
+		int timeRunning=(int)(time-timeStarted);
 		boolean noInvoke=true;
 		for(AnimationPart animationPart:animationData)if(animationPart.isActive(timeRunning)){
 			noInvoke=false;
@@ -76,7 +51,9 @@ public class HandAnimation{
 		if(noInvoke)isRunning=false;
 		wantedPos.set(wantedPos.add(speed));
 	}
-	
+	private void end(){
+		TheHandHandler.setActivePositionId(UtilM.getThePlayer(), end.posInRegistry());
+	}
 	public boolean isDone(){
 		return !isRunning;
 	}
@@ -87,10 +64,41 @@ public class HandAnimation{
 		isRunning=true;
 	}
 	
+	@Override
 	public boolean canStart(){
-		return TheHandHandler.getActivePosition(UtilM.getThePlayer()).name.equals(start.name)&&!isRunning;
+		return super.canStart()&&!isRunning;
 	}
 	
+	public LinearAnimation toLinearAnimation(int quality){
+		int tickCount=0;
+		List<HandData> data=new ArrayList<HandData>();
+		
+		wantedPos.set(start.data);
+		timeStarted=0;
+		isRunning=true;
+		
+		data.add((HandData)wantedPos.clone());
+		int count=0;
+		while(isRunning){
+			update(count);
+			tickCount++;
+			if(tickCount>quality){
+				data.add((HandData)wantedPos.clone());
+				tickCount=0;
+			}
+			count++;
+		}
+		data.add((HandData)wantedPos.clone());
+		
+		DoubleObject<HandData[], Float>[] data1=new DoubleObject[data.size()];
+		Iterator<HandData> data2=data.iterator();
+		for(int i=0;i<data1.length;i++)data1[i]=new DoubleObject<HandData[], Float>(new HandData[]{data2.next()}, (i+0F)/data1.length);
+		return new LinearAnimation<HandData>(data1);
+	}
+	@Override
+	public HandData getWantedPos(){
+		return wantedPos;
+	}
 	
 	
 	public static class AnimationPart{

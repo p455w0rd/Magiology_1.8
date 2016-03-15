@@ -6,6 +6,7 @@ import com.magiology.mcobjects.effect.EntityFollowingBubleFX;
 import com.magiology.mcobjects.effect.EntitySmoothBubleFX;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.SlowdownUtil;
 
 import net.minecraft.block.Block;
@@ -36,7 +37,7 @@ public class SpecialPlayerParicleHandler{
 			if(player.capabilities.isCreativeMode){
 				int angle=world.rand.nextInt(360);
 				if(world.getTotalWorldTime()%2==0){
-					double[] ab=UtilM.circleXZ(angle);ab[0]/=3;ab[1]/=3;
+					double[] ab=MathUtil.circleXZ(angle);ab[0]/=3;ab[1]/=3;
 					UtilM.spawnEntityFX(new EntityFollowingBubleFX(world,x+ab[0], y+0.3, z+ab[1], xv*1.2, yv*1.2, zv*1.2,player,angle, ab[0], 0.3, ab[1], 250, 12*(player.isSneaking()?2:1), world.rand.nextFloat(),world.rand.nextFloat(),world.rand.nextFloat(),0.5));
 				}
 			}

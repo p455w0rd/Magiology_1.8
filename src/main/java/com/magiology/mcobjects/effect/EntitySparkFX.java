@@ -7,7 +7,7 @@ import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.RandUtil;
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.SlowdownUtil;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -92,13 +92,13 @@ public class EntitySparkFX extends EntityFXM{
 		if(fragments.size()>=size){
 			for(Fragment a:fragments){
 				a.a.wantedPoint*=0.8;
-				a.a.wantedPoint=UtilM.snap(a.a.wantedPoint, 0, 1);
+				a.a.wantedPoint=MathUtil.snap(a.a.wantedPoint, 0, 1);
 			}
 		}
 		if(fragments.size()>size&&slowdown.isTimeWithAddProgress())kill();
 	}
 	private void New(Fragment lastFragment){
-		double[] ball=UtilM.createBallXYZ(fragmentSize/3+RandUtil.CRF(fragmentSize), false);
+		double[] ball=MathUtil.createBallXYZ(fragmentSize/3+RandUtil.CRF(fragmentSize), false);
 		
 		Fragment f=new Fragment((float)ball[0]+xDirection,(float)ball[1]+yDirection,(float)ball[2]+zDirection,lastFragment,
 				startColor.r+RandUtil.RF(0.1),startColor.g+RandUtil.CRF(0.1),startColor.b+RandUtil.RF(0.1),startColor.a,
@@ -147,7 +147,7 @@ public class EntitySparkFX extends EntityFXM{
 		
 		public float[] getRootOffset(){
 			float[] Return={xOffset,yOffset,zOffset};
-			if(!isLastInLine())Return=UtilM.addToFloatArray(Return, bindedFragment.getRootOffset());
+			if(!isLastInLine())Return=MathUtil.addToFloatArray(Return, bindedFragment.getRootOffset());
 			else{
 				Return[0]-=xOffset;
 				Return[1]-=yOffset;
@@ -162,7 +162,7 @@ public class EntitySparkFX extends EntityFXM{
 			return nextFragment!=null;
 		}
 		public void render(){
-			float[] root=getRootOffset(),end=UtilM.addToFloatArray(root,new float[]{-xOffset,-yOffset,-zOffset});
+			float[] root=getRootOffset(),end=MathUtil.addToFloatArray(root,new float[]{-xOffset,-yOffset,-zOffset});
 			OpenGLM.color(r.getPoint(),g.getPoint(),b.getPoint(),a.getPoint());
 			TessUtil.drawLine(root[0],root[1],root[2], end[0],end[1],end[2], fragmentWidth, false, null, 0, 0);
 		}

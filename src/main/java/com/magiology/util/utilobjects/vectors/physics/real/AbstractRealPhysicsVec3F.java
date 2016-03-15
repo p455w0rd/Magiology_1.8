@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.magiology.util.utilclasses.PhysicsUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.m_extension.BlockPosM;
@@ -32,8 +33,8 @@ public abstract class AbstractRealPhysicsVec3F{
 		setPrevPos(getPos());
 		setPrevVelocity(getVelocity().copy());
 		getVelocity().y-=getMass();
-		if(!UtilM.isNumValid(getVelocity().x)){
-			if(UtilM.isNumValid(getPrevVelocity().x))setVelocity(getPrevVelocity());
+		if(!MathUtil.isNumValid(getVelocity().x)){
+			if(MathUtil.isNumValid(getPrevVelocity().x))setVelocity(getPrevVelocity());
 			else setVelocity(new Vec3M());
 		}
 		move(coliders);
@@ -56,7 +57,7 @@ public abstract class AbstractRealPhysicsVec3F{
 		checkWorldClipping(getPos(), getLastPos(), coliders);
 	}
 	public void moveTo(Vec3M destination, List<Colideable> coliders){
-		move(destination.subtract(getPos()),coliders);
+		move(destination.sub(getPos()),coliders);
 	}
 	private void checkWorldClipping(Vec3M start, Vec3M end, List<Colideable> coliders){
 		if(isWorldClipping()){
@@ -124,7 +125,7 @@ public abstract class AbstractRealPhysicsVec3F{
 		setVelocity(getVelocity().mul(mul));
 	}
 	public void velocityTo(Vec3M pos){
-		addVelocity(pos.subtract(getPos()));
+		addVelocity(pos.sub(getPos()));
 	}
 	
 	public void addPos(Vec3M add){

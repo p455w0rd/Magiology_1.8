@@ -16,6 +16,7 @@ import com.magiology.util.renderers.PartialTicks1F;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilobjects.NBTUtil;
 import com.magiology.util.utilobjects.SlowdownUtil;
 
 import net.minecraft.entity.item.EntityItem;
@@ -56,12 +57,12 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	@Override
 	public void writeToNBT(NBTTagCompound NBT){
 		super.writeToNBT(NBT);
-		UtilM.saveItemsToNBT(NBT, "inventory", slots);
+		NBTUtil.saveItemsToNBT(NBT, "inventory", slots);
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);
-		slots=UtilM.loadItemsFromNBT(NBT, "inventory", slots);
+		slots=NBTUtil.loadItemsFromNBT(NBT, "inventory", slots);
 		for(int i=0;i<animationos.length;i++)if(slots[i]!=null){
 			extractionActivated[i]=true;
 		}

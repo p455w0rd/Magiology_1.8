@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.core.MReference;
@@ -75,9 +77,8 @@ public class ForcedClassLoader{
 		int start=clazz.indexOf("error=")+"error=".length(),end=start;
 		while(clazz.charAt(end)!=';')end++;
 		
-		clazzB.replace(start, end, b+"");
-		String newClass=clazzB.toString();
-		if(!clazz.equals(newClass))FileUtil.setFileTxt(thisClass, newClass);
+		String newClass=clazzB.replace(start, end, ""+b).toString();
+		FileUtil.setFileTxt(thisClass, newClass);
 	}
 	private static void generateAndInject(){
 		if(!ClassList.error||!Magiology.isDev())return;
@@ -142,9 +143,10 @@ public class ForcedClassLoader{
 			
 			afterList.forEach(line->newFile.append(line).append("\n"));
 			
-			setError(false);
 			if(!newFile.equals(originalFile)){
 				FileUtil.setFileTxt(thisClass, newFile.toString());
+				setError(false);
+				JOptionPane.showMessageDialog(null, MReference.NAME+" compiled list of it's classes!\nMC will now close.");
 				UtilM.exit(404);
 			}
 			

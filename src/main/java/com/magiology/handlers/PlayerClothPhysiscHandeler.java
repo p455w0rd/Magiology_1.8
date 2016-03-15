@@ -175,9 +175,9 @@ public class PlayerClothPhysiscHandeler{
 		if(player==UtilM.getThePlayer()?U.getMC().gameSettings.thirdPersonView!=0:true)for(int i=32;i<35;i++){
 			AbstractRealPhysicsVec3F pos1=cape.getVertices().get(i),pos2=cape.getVertices().get(i+1);
 			Vec3M 
-				posDiff=pos2.getPos().subtract(pos1.getPos()),
+				posDiff=pos2.getPos().sub(pos1.getPos()),
 				pos=pos1.getPos().add(posDiff.mul(RandUtil.RF())),
-				speed=pos1.getVelocity().add(pos2.getVelocity().subtract(pos1.getVelocity()).mul(RandUtil.RF())).mul(0.3);
+				speed=pos1.getVelocity().add(pos2.getVelocity().sub(pos1.getVelocity()).mul(RandUtil.RF())).mul(0.3);
 			UtilM.spawnEntityFX(new EntitySmoothBubleFX(player.worldObj, 
 					pos.x, pos.y, pos.z, 
 					speed.x, speed.y, speed.z,

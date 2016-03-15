@@ -9,6 +9,7 @@ import com.magiology.mcobjects.entitys.ComplexPlayerRenderingData.CyborgWingsFro
 import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.SimpleCounter;
 
 import net.minecraft.block.material.Material;
@@ -89,7 +90,7 @@ public class WingsFromTheBlackFireHandler{
 		if(active){
 			try{data.canFlap=(pos==Positions.FlyStationarPos||pos==Positions.FlyForvardPos||pos==Positions.FlyBackvardPos)&&!player.isCollidedVertically;}catch(Exception e){data.canFlap=false;}
 			if(data.canFlap||pos==Positions.HighSpeedPos){
-				double[] a=UtilM.circleXZ(-player.rotationYaw);
+				double[] a=MathUtil.circleXZ(-player.rotationYaw);
 				int x1=a[0]>0?1:-1,z1=a[1]>0?1:-1;
 				double rot=(player.motionX*x1+player.motionZ*z1)*90;
 				if(rot!=0)rot-=rot/10;
@@ -114,7 +115,7 @@ public class WingsFromTheBlackFireHandler{
 			data.calcPrevRotationAnglesBase[a][b]=0;
 		}
 		updateStaticNoise(player.worldObj.getTotalWorldTime());
-		data.calcRotationAnglesBase=UtilM.addToDoubleFloatArray(data.flapAnglesBase,UtilM.addToDoubleFloatArray(data.rotationAnglesBase,noiseRotationAnglesBase));
+		data.calcRotationAnglesBase=MathUtil.addToDoubleFloatArray(data.flapAnglesBase,MathUtil.addToDoubleFloatArray(data.rotationAnglesBase,noiseRotationAnglesBase));
 	}
 	public static void setFlap(EntityPlayer player, Positions[] flap){
 		CyborgWingsFromTheBlackFireData data=ComplexPlayerRenderingData.getFastCyborgWingsFromTheBlackFireData(player);

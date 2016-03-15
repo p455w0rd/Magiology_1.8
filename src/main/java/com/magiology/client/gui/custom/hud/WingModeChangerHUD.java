@@ -16,6 +16,7 @@ import com.magiology.util.renderers.Renderer;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.client.gui.FontRenderer;
@@ -28,7 +29,7 @@ public class WingModeChangerHUD extends HUD{
 	private int selectionId;
 	Positions[] validPoss;
 	Positions curentPoss;
-	double[][] criclePoss={UtilM.circleXZ(0),UtilM.circleXZ(60),UtilM.circleXZ(120),UtilM.circleXZ(180),UtilM.circleXZ(240),UtilM.circleXZ(300),UtilM.circleXZ(0)};
+	double[][] criclePoss={MathUtil.circleXZ(0),MathUtil.circleXZ(60),MathUtil.circleXZ(120),MathUtil.circleXZ(180),MathUtil.circleXZ(240),MathUtil.circleXZ(300),MathUtil.circleXZ(0)};
 	private float sliderPos,prevSliderPos,sliderSpeed,sliderWantedPos,alpha,prevAlpha;
 	private boolean isExited=true;
 	float[][] backgroundColor,prevBackgroundColor;
@@ -62,7 +63,7 @@ public class WingModeChangerHUD extends HUD{
 			OpenGLM.pushMatrix();
 			OpenGLM.translate(xScreen-fr.getStringWidth(poz)*0.7, yScreen-fr.FONT_HEIGHT*0.7,0);
 			GL11U.glScale(0.7);
-			Color c=new Color(255,255,255,(int)(255*UtilM.snap(calcAlpha+0.25, 0, 1)));
+			Color c=new Color(255,255,255,(int)(255*MathUtil.snap(calcAlpha+0.25, 0, 1)));
 			fr.drawStringWithShadow(poz, -1,-1, c.hashCode());
 			OpenGLM.popMatrix();
 		}
@@ -140,7 +141,7 @@ public class WingModeChangerHUD extends HUD{
 			id++;
 		}
 		if(player.fallDistance>4)for(int a=0;a<criclePoss.length;a++)for(int b=0;b<2;b++){
-			criclePoss=new double[][]{UtilM.circleXZ(0),UtilM.circleXZ(60),UtilM.circleXZ(120),UtilM.circleXZ(180),UtilM.circleXZ(240),UtilM.circleXZ(300),UtilM.circleXZ(0)};
+			criclePoss=new double[][]{MathUtil.circleXZ(0),MathUtil.circleXZ(60),MathUtil.circleXZ(120),MathUtil.circleXZ(180),MathUtil.circleXZ(240),MathUtil.circleXZ(300),MathUtil.circleXZ(0)};
 		}
 	}
 	private void onExit(){
@@ -157,14 +158,14 @@ public class WingModeChangerHUD extends HUD{
 		sliderSpeed=UtilM.handleSpeedFolower(sliderSpeed,sliderPos,sliderWantedPos,15F);
 		sliderSpeed*=0.7;
 		double multiplayer=Math.abs((sliderPos-sliderWantedPos)/nextLineOffset);
-		multiplayer=UtilM.snap(multiplayer, 0, 1);
+		multiplayer=MathUtil.snap(multiplayer, 0, 1);
 		sliderSpeed*=multiplayer;
 		sliderPos+=sliderSpeed;
 		int perPos=((int)(sliderWantedPos/nextLineOffset));
 		if(perPos>validPoss.length-1)sliderWantedPos=0;
 		if(perPos<0)sliderWantedPos=(validPoss.length-1)*nextLineOffset;
 		selectionId=(int)((sliderPos+nextLineOffset/2)/nextLineOffset);
-		selectionId=UtilM.snap(selectionId, 0, 4);
+		selectionId=MathUtil.snap(selectionId, 0, 4);
 		curentPoss=Positions.values()[validPoss[selectionId].id];
 		alpha+=0.2F*(isExited?-1:1);
 		double noise=0.05,speed=0.15;
@@ -179,11 +180,11 @@ public class WingModeChangerHUD extends HUD{
 				backgroundColor[a][2]=(float)UtilM.slowlyEqualize(backgroundColor[a][2], 0.2+RandUtil.CRF(noise),speed);
 			}
 			
-			backgroundColor[a][0]=UtilM.snap(backgroundColor[a][0], 0, 1);
-			backgroundColor[a][1]=UtilM.snap(backgroundColor[a][1], 0, 1);
-			backgroundColor[a][2]=UtilM.snap(backgroundColor[a][2], 0, 1);
+			backgroundColor[a][0]=MathUtil.snap(backgroundColor[a][0], 0, 1);
+			backgroundColor[a][1]=MathUtil.snap(backgroundColor[a][1], 0, 1);
+			backgroundColor[a][2]=MathUtil.snap(backgroundColor[a][2], 0, 1);
 		}
-		alpha=UtilM.snap(alpha, 0F, 1);
+		alpha=MathUtil.snap(alpha, 0F, 1);
 		boolean prevIsExited=isExited;
 		isExited=!GuiScreen.isCtrlKeyDown()||!WingsFromTheBlackFireHandler.getIsActive(player);
 		if(prevIsExited!=isExited){

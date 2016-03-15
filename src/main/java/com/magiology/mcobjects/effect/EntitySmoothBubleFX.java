@@ -8,6 +8,7 @@ import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -254,7 +255,7 @@ public class EntitySmoothBubleFX extends EntityFXM{
 			}
 			else {
 				for(int e=0;e<3;e++){
-					double[] AB=UtilM.circleXZ((particleAge/4.0)+(e>=1?180*e:0));
+					double[] AB=MathUtil.circleXZ((particleAge/4.0)+(e>=1?180*e:0));
 					
 					
 					UtilM.spawnEntityFX(new EntitySmoothBubleFX(worldObj,posX, posY, posZ,

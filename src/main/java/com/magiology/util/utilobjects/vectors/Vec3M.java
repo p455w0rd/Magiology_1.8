@@ -10,7 +10,8 @@ import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.WritableVector3f;
 
-import com.magiology.util.utilclasses.UtilM;
+import com.magiology.api.Calculable;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.MatrixUtil;
 
 import net.minecraft.util.BlockPos;
@@ -24,7 +25,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  *	Copy of mc Vec3M because mc didn't heard or a word called convenient 
  */
-public class Vec3M extends Vector implements Serializable, ReadableVector, ReadableVector3f, WritableVector3f{
+public class Vec3M extends Vector implements Serializable, ReadableVector, ReadableVector3f, WritableVector3f,Calculable<Vec3M>{
 	public double x,y,z;
 
 	public Vec3M(){
@@ -52,14 +53,16 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 		return new Vec3M(this.y * vec.z - this.z * vec.y, this.z * vec.x - this.x * vec.z, this.x * vec.y - this.y * vec.x);
 	}
 
-	public Vec3M subtract(Vec3M vec){
-		return this.subtract(vec.x, vec.y, vec.z);
+	@Override
+	public Vec3M sub(Vec3M vec){
+		return this.sub(vec.x, vec.y, vec.z);
 	}
 
-	public Vec3M subtract(double x, double y, double z){
+	public Vec3M sub(double x, double y, double z){
 		return this.add(-x, -y, -z);
 	}
 
+	@Override
 	public Vec3M add(Vec3M vec){
 		return this.add(vec.x, vec.y, vec.z);
 	}
@@ -285,6 +288,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	public Vec3M mul(double x, double y, double z){
 		return new Vec3M(getX()*x, getY()*y, getZ()*z);
 	}
+	@Override
 	public Vec3M mul(Vec3M vec){
 		return new Vec3M(getX()*vec.getX(), getY()*vec.getY(), getZ()*vec.getZ());
 	}
@@ -292,7 +296,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	public Vec3M reflect(Vec3M normal){
 		Vec3M norm = normal.normalize();
 		Vec3M base=normalize();
-		Vec3M difference=base.subtract(norm);
+		Vec3M difference=base.sub(norm);
 
 		Matrix4f rot=new Matrix4f();
 		rot.rotate((float)Math.PI,norm.toLWJGLVec());
@@ -304,7 +308,7 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 		return  new Vector3f(getX(),getY(),getZ());
 	}
 	public double lightProduct(Vec3M vec){
-		return 1-UtilM.snap(normalize().distanceTo(vec.normalize()), 0, 1);
+		return 1-MathUtil.snap(normalize().distanceTo(vec.normalize()), 0, 1);
 	}
 	public Vec3M copy(){
 		return new Vec3M(x,y,z);
@@ -352,7 +356,37 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 		return MatrixUtil.transformVector(this, matrix);
 	}
 	public Vec3M sqrt(){
-		int x1=UtilM.getNumPrefix(x),y1=UtilM.getNumPrefix(y),z1=UtilM.getNumPrefix(z);
+		int x1=MathUtil.getNumPrefix(x),y1=MathUtil.getNumPrefix(y),z1=MathUtil.getNumPrefix(z);
 		return new Vec3M(Math.sqrt(x*x1)*x1, Math.sqrt(y*y1)*y1, Math.sqrt(z*z1)*z1);
 	}
+	public Vec3M addX(float var){
+		return new Vec3M(x+var,y,z);
+	}
+	public Vec3M addY(float var){
+		return new Vec3M(x,y+var,z);
+	}
+	public Vec3M addZ(float var){
+		return new Vec3M(x,y,z+var);
+	}
+	@Override
+	public Vec3M div(Vec3M var){
+		return new Vec3M(x/var.x, y/var.y, z/var.z);
+	}
+	@Override
+	public Vec3M add(float var){
+		return this.add(var, var, var);
+	}
+	@Override
+	public Vec3M sub(float var){
+		return this.sub(var, var, var);
+	}
+	@Override
+	public Vec3M mul(float var){
+		return this.mul(var, var, var);
+	}
+	@Override
+	public Vec3M div(float var){
+		return this.div(new Vec3M(var, var, var));
+	}
+	
 }

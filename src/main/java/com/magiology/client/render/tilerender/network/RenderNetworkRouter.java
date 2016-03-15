@@ -31,7 +31,7 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 	protected static SidedModel connections,core;
 	protected static VertexModel lever,usb;
 	protected static TileEntityNetworkRouter curentTile;
-	protected static LinearAnimation insertionAnimation=new LinearAnimation(
+	protected static LinearAnimation<Vec3M> insertionAnimation=new LinearAnimation(
 		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8,1,0)},0F),
 		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M(-8,0,0)},0.4F),
 		new DoubleObject<Vec3M[], Float>(new Vec3M[]{new Vec3M( 0,0,1)},1F)
@@ -430,20 +430,20 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		
 		usbModel[4].points[2]=usbModel[1].points[7];
 		usbModel[4].points[3]=usbModel[4].points[2].add(
-				usbModel[1].points[7].subtract(usbModel[4].points[3]).mul(-0.05, -0.05, 0));
+				usbModel[1].points[7].sub(usbModel[4].points[3]).mul(-0.05, -0.05, 0));
 		usbModel[4].points[6]=usbModel[4].points[2].add(
-				usbModel[1].points[7].subtract(usbModel[4].points[6]).mul(-0.05, -0.05, 0));
+				usbModel[1].points[7].sub(usbModel[4].points[6]).mul(-0.05, -0.05, 0));
 		usbModel[4].points[7]=usbModel[4].points[2].add(
-				usbModel[1].points[7].subtract(usbModel[4].points[7]).mul(-0.05, -0.05, 0));
+				usbModel[1].points[7].sub(usbModel[4].points[7]).mul(-0.05, -0.05, 0));
 		
 		float mul=-0.1F;
 		usbModel[5].points[7]=usbModel[1].points[2];
 		usbModel[5].points[3]=usbModel[5].points[7].add(
-				usbModel[1].points[2].subtract(usbModel[5].points[3]).mul(mul, mul, 0));
+				usbModel[1].points[2].sub(usbModel[5].points[3]).mul(mul, mul, 0));
 		usbModel[5].points[6]=usbModel[5].points[7].add(
-				usbModel[1].points[2].subtract(usbModel[5].points[6]).mul(mul, mul, 0));
+				usbModel[1].points[2].sub(usbModel[5].points[6]).mul(mul, mul, 0));
 		usbModel[5].points[2]=usbModel[5].points[7].add(
-				usbModel[1].points[2].subtract(usbModel[5].points[2]).mul(mul, mul, 0));
+				usbModel[1].points[2].sub(usbModel[5].points[2]).mul(mul, mul, 0));
 		
 		
 		

@@ -11,6 +11,7 @@ import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -57,7 +58,7 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		//calculation of rotation
 		float
 			point=progress.getPoint(),
-			point2=UtilM.snap(point, 0, 1),
+			point2=MathUtil.snap(point, 0, 1),
 			playerX=TessUtil.calculateRenderPos(player, 'x'),
 			playerY=TessUtil.calculateRenderPos(player, 'y')+player.getEyeHeight(),
 			playerZ=TessUtil.calculateRenderPos(player, 'z'),

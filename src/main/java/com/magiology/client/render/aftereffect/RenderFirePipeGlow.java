@@ -11,6 +11,7 @@ import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +32,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 
 	@Override
 	public void render(){
-		float fc=UtilM.snap(PowerUtil.getPowerPrecentage(pipe), 0, 1);
+		float fc=MathUtil.snap(PowerUtil.getPowerPrecentage(pipe), 0, 1);
 		if(fc>0.01){
 			OpenGLM.pushMatrix();
 			OpenGLM.translate(pipe.x(), pipe.y(), pipe.z());
@@ -209,7 +210,7 @@ public class RenderFirePipeGlow extends LongAfterRenderRendererBase{
 		
 		if(!(player.worldObj.getTileEntity(pipe.getPos())instanceof TileEntityFirePipe))kill();
 		
-		alpha=UtilM.snap(alpha, 0, 1);
+		alpha=MathUtil.snap(alpha, 0, 1);
 		if(alpha<0.05)kill();
 	}
 }

@@ -35,7 +35,6 @@ import com.magiology.forgepowered.packets.core.AbstractToServerMessage;
 import com.magiology.mcobjects.tileentityes.hologram.HoloObject;
 import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.Get.Render.Font;
-import com.magiology.util.utilclasses.math.CricleUtil;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.m_extension.effect.EntityFlameFXM;
@@ -53,18 +52,15 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.particle.EntityFlameFX;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -118,52 +114,6 @@ public class UtilM{
 	public static int booleanToInt(boolean bool){if(bool)return 1;return 0;}
 	public static boolean intToBoolean(int i){return i==1;}
 	
-	public static double[] circleXZ(double angle){
-		double[] result={0,0};
-		int intAngle=(int)angle;
-		result[0]=CricleUtil.sin(intAngle);//-X-
-		result[1]=CricleUtil.cos(intAngle);//-Z-
-		return result;
-	}
-	public static double[] cricleXZForce(double angle,double offset){
-		double[] result={0,0};
-		angle+=offset;
-		int intAngle=(int)angle;
-		result[0]=CricleUtil.sin(intAngle);//-X-
-		result[1]=CricleUtil.cos(intAngle);//-Z-
-		return result;
-	}
-	public static double[] cricleXZwSpeed(double angle,double offset){
-		double[] result={0,0,0,0};
-		{
-			int intAngle=(int)angle;
-			result[0]=CricleUtil.sin(intAngle);//-X-
-			result[1]=CricleUtil.cos(intAngle);//-Z-
-			angle+=offset;}{
-			int intAngle=(int)angle;
-			result[0]=CricleUtil.sin(intAngle);//-X-
-			result[1]=CricleUtil.cos(intAngle);//-Z-
-		}
-		return result;
-	}
-	public static double slowlyEqualize(double variable, double goal, double speed){
-		return slowlyEqualize((float)variable, (float)goal, (float)speed);
-	}
-	public static float slowlyEqualize(float variable, float goal, float speed){
-		if(speed==0)return variable;
-		speed=Math.abs(speed);
-		if(variable+speed>goal&&(Math.abs((variable+speed)-goal)<speed*1.001))return goal;
-		if(variable-speed<goal&&(Math.abs((variable-speed)-goal)<speed*1.001))return goal;
-		
-		if(variable<goal)variable+=speed;
-		else if(variable>goal)variable-=speed;
-		return variable;
-	}
-	public static boolean isEqualInBouds(double variable,double wantedVariable,double bounds){
-		//10.02==10? 0.5
-		//10.52>10 9.52<10
-		return variable+bounds>wantedVariable&&variable-bounds<wantedVariable;
-	}
 	/**
 	 * Returns false if all objects are not null and it returns true if any of object/s are true
 	 * Note: you'll might need to add "!" on using it
@@ -184,55 +134,6 @@ public class UtilM{
 	public static boolean isItemInStack(Item item,ItemStack stack){
 		return stack!=null&&stack.getItem()==item;
 	}
-	/**
-	 * Creates a x,y,z offset coordinate of a ball. (can create 2 coordinates)
-	 * Args:x,y,z particle speed, size
-	 * @param ballSize a
-	 * @param hasSecondPos a
-	 * @return a
-	 */
-	public static double[] createBallXYZ(double ballSize, boolean hasSecondPos){
-		int xRot=RandUtil.RI(360),yRot=RandUtil.RI(360);
-		double[] result=new double[3*(hasSecondPos?2:1)];
-		result[0]=CricleUtil.sin(xRot)*CricleUtil.cos(yRot);//-X-
-		result[1]=CricleUtil.sin(yRot);//-Y-
-		result[2]=CricleUtil.cos(xRot)*CricleUtil.cos(yRot);//-Z-
-		if(hasSecondPos){
-			xRot+=RandUtil.CRI(50);
-			yRot+=RandUtil.CRI(50);
-			result[3]=CricleUtil.sin(xRot)*CricleUtil.cos(yRot);//-X-
-			result[4]=CricleUtil.sin(yRot);//-Y-
-			result[5]=CricleUtil.cos(xRot)*CricleUtil.cos(yRot);//-Z-
-		}
-		for(int a=0;a<result.length;a++)result[a]*=ballSize;
-		return result;
-	}
-	
-	public static ItemStack[] loadItemsFromNBT(NBTTagCompound NBTTC,String baseName,ItemStack[] stacks){
-		int NumberOfSlots=stacks.length;
-		NBTTagList list= NBTTC.getTagList(baseName+"Slots", 10);
-		stacks=new ItemStack[NumberOfSlots];
-		for(int i=0;i<list.tagCount();i++){
-			NBTTagCompound item=list.getCompoundTagAt(i);
-			byte b=item.getByte(baseName);
-			if(b>=0&&b<stacks.length){
-				stacks[b]=ItemStack.loadItemStackFromNBT(item);
-			}
-		}
-		return stacks;
-	}
-	public static void saveItemsToNBT(NBTTagCompound NBTTC,String baseName,ItemStack[] stacks){
-		NBTTagList list= new NBTTagList();
-		for(int i=0;i<stacks.length;i++){
-			if(stacks[i]!=null){
-				NBTTagCompound item=new NBTTagCompound();
-				item.setByte(baseName, (byte)i);
-				stacks[i].writeToNBT(item);
-				list.appendTag(item);
-			}
-		}
-		NBTTC.setTag(baseName+"Slots", list);
-	}
 	public static boolean isInteger(String str){
 		if(str==null)return false;
 		int length=str.length();
@@ -249,26 +150,6 @@ public class UtilM{
 	public static boolean isBoolean(String str){
 		return str!=null&&(str.equals("true")||str.equals("false"));
 	}
-	public static double snap(double value,double min,double max){
-		if(min>max)return value;
-		if(value<min)value=min;
-		if(value>max)value=max;
-		return value;
-	}
-	public static float snap(float value,float min,float max){
-		return (float)snap((double)value, (double)min, (double)max);
-	}
-	public static int snap(int value,int min,int max){
-		return (int)snap((double)value, (double)min, (double)max);
-	}
-	public static MovingObjectPosition rayTrace(EntityLivingBase entity,float lenght, float var1){
-		if(entity.worldObj.isRemote)return entity.rayTrace(lenght, var1);
-		
-		Vec3M vec3 =new Vec3M(entity.posX, entity.posY, entity.posZ);
-		Vec3M vec31=Vec3M.conv(entity.getLook(var1));
-		Vec3M vec32=vec3.add(vec31.x*var1, vec31.y*var1, vec31.z*var1);
-		return entity.worldObj.rayTraceBlocks(vec3.conv(), vec32.conv(), false, false, true);
-	}
 	public static void sendMessage(AbstractPacket message){
 		if(isNull(message))return;
 		if(message instanceof AbstractToServerMessage)Magiology.NETWORK_CHANNEL.sendToServer(message);
@@ -281,16 +162,6 @@ public class UtilM{
 				else if(msg.target.typeOfSending==TypeOfSending.ToDimension)Magiology.NETWORK_CHANNEL.sendToDimension(msg, msg.target.world.provider.getDimensionId());
 			}
 		}
-	}
-	public static float[][] addToDoubleFloatArray(final float[][] array1,final float[][] array2){
-		float[][] result=array1.clone();
-		for(int a=0;a<result.length;a++)result[a]=addToFloatArray(result[a], array2[a]);
-		return result;
-	}
-	public static float[] addToFloatArray(final float[] array1,final float[] array2){
-		float[] result=array1.clone();
-		for(int a=0;a<result.length;a++)result[a]+=array2[a];
-		return result;
 	}
 	public static float handleSpeedFolower(float speed, float pos,float wantedPos,float acceleration){
 	return (float)handleSpeedFolower((double)speed, (double)pos, (double)wantedPos, (double)acceleration);}
@@ -322,11 +193,7 @@ public class UtilM{
 		return getWorld(object).isRemote;
 	}
 	public static boolean isArray(Object object){
-		if(object!=null){
-			if(object instanceof Class)return((Class)object).isArray();
-			return object.getClass().isArray();
-		}
-		return false;
+		return object!=null&&object.getClass().isArray();
 	}
 	public static<T>boolean isInArray(T object,T[] array){
 		return getPosInArray(object, array)>=0;
@@ -351,12 +218,14 @@ public class UtilM{
 		for(Object object:objects)if(tester==object)return true;
 		return false;
 	}
+	@SideOnly(Side.CLIENT)
 	public static float fluctuateSmooth(double speed, double offset){
 		float
 			fluctuate=fluctuate(speed, offset),
 			prevFluctuate=fluctuate(speed, offset-1);
 		return PartialTicksUtil.calculatePos(prevFluctuate, fluctuate);
 	}
+	@SideOnly(Side.CLIENT)
 	public static float fluctuate(double speed, double offset){
 		long wtt=(long)(getTheWorld().getTotalWorldTime()+offset);
 		double helper=(wtt%speed)/(speed/2F);
@@ -390,6 +259,8 @@ public class UtilM{
 		return new ColorF(data[0],data[1],data[2],data[3]);
 	}
 	public static boolean intersectLinePlane(RayDeprecated ray,Plane plane, Vec3M result){
+		//TODO: fix this shit! Use GeometryUtil
+		
 		if(result==null){
 			PrintUtil.println("Result is null!\nResult can't be set if it is null!\nInitialize it!\n------------");
 			return false;
@@ -426,11 +297,6 @@ public class UtilM{
 		return false;
 	}
 	
-	public static Vec3M getNormal(Vec3M point1,Vec3M point2,Vec3M point3){
-		Vec3M angle1=point2.subtract(point1);
-		Vec3M angle2=point2.subtract(point3);
-		return angle2.crossProduct(angle1).normalize();
-	}
 	public static ColorF calculateRenderColor(ColorF prevColor, ColorF color){
 		return new ColorF(PartialTicksUtil.calculatePos(prevColor.r, color.r),
 						  PartialTicksUtil.calculatePos(prevColor.g, color.g),
@@ -443,19 +309,8 @@ public class UtilM{
 						  slowlyEqualize(variable.b, goal.b, speed),
 						  slowlyEqualize(variable.a, goal.a, speed));
 	}
-	public static Vec3M getPosition(EntityPlayer entity,float par1)
-	{
-		if (par1 == 1.0F)
-		{
-			return new Vec3M(entity.posX, entity.posY + (entity.getEyeHeight()), entity.posZ);
-		}
-		else
-		{
-			double d0=entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
-			double d1=entity.prevPosY + (entity.posY - entity.prevPosY) * par1 + (entity.getEyeHeight());
-			double d2=entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
-			return new Vec3M(d0, d1, d2);
-		}
+	public static Vec3M getEyePosition(Entity entity){
+		return getEntityPos(entity).addY(entity.getEyeHeight());
 	}
 	public static String getStringForSize(String text, float allowedWidth){
 		if(text.isEmpty())return text;
@@ -519,12 +374,11 @@ public class UtilM{
 		}
 		return null;
 	}
-	public static boolean AxisAlignedBBEqual(AxisAlignedBB box1, AxisAlignedBB box2){
+	public static boolean axisAlignedBBEqual(AxisAlignedBB box1, AxisAlignedBB box2){
 		if(box1==box2) return true;
 		return !isNull(box1, box2)&&box1.minX==box2.minX&&box1.minY==box2.minY&&box1.minZ==box2.minZ&&box1.maxX==box2.maxX&&box1.maxY==box2.maxY&&box1.maxZ==box2.maxZ;
 	}
-	//yay for 1.8 code changes
-	/** thanks mc for this incredibly convenient code so i I need to make a helper for things that should not need one... */
+	
 	public static final PropertyInteger META=PropertyInteger.create("meta", 0, 15);
 	public static int getBlockMetadata(World world, BlockPos pos){
 		return hasMetaState(world, pos)?getBlock(world, pos).getMetaFromState(world.getBlockState(pos)):0;
@@ -677,14 +531,14 @@ public class UtilM{
 			.collect(Collectors.toSet());
 	}
 	
-	public static Object fromString(String s)throws IOException,ClassNotFoundException{
+	public static Object objFromString(String s)throws IOException,ClassNotFoundException{
 		byte[] data=Base64.getDecoder().decode(s);
 		ObjectInputStream ois=new ObjectInputStream(new ByteArrayInputStream(data));
 		Object o=ois.readObject();
 		ois.close();
 		return o;
 	}
-	public static String toString(Serializable o)throws IOException{
+	public static String objToString(Serializable o)throws IOException{
 		ByteArrayOutputStream baos=new ByteArrayOutputStream();
 		ObjectOutputStream oos=new ObjectOutputStream( baos );
 		oos.writeObject(o);
@@ -716,40 +570,9 @@ public class UtilM{
 		return result;
 	}
 
-	public static float sin(float a){
-		return MathHelper.sin((float)Math.toRadians(a));
-	}
-	public static float cos(double a){
-		return MathHelper.cos((float)Math.toRadians(a));
-	}
-
-	public static float normaliseDegrees(float angle){
-		boolean isNegative=angle<0;
-		int negative=isNegative?-1:1;
-		float positiveAngle=angle*negative;
-		if(positiveAngle<360)return angle;
-		if(isNegative){
-			while(angle<360)angle+=360;
-		}else{
-			while(angle>=360)angle-=360;
-		}
-		return angle;
-	}
-	public static int getNumPrefix(float num){
-		return num>=0?1:-1;
-	}
-	public static int getNumPrefix(double num){
-		return num>=0?1:-1;
-	}
-	public static boolean isPrefixSame(double num1, double num2){
-		return getNumPrefix(num1)==getNumPrefix(num2);
-	}
 	public static boolean playerEqual(EntityPlayer player, EntityPlayer player2){
 		if(player==null||player2==null)return false;
 		return player.getGameProfile().getId().equals(player2.getGameProfile().getId());
-	}
-	public static boolean isNumValid(double num){
-		return Double.isFinite(num)&&!Double.isNaN(num);
 	}
 	public static float[] countedArray(float start, float end){
 		float[] result=new float[(int)(end-start)];
@@ -766,7 +589,7 @@ public class UtilM{
 		List<Vec3M> result=new ArrayList<>();
 		
 		Vec3M 
-			difference=start.subtract(end),
+			difference=start.sub(end),
 			direction=difference.normalize();
 		
 		float 
@@ -783,5 +606,103 @@ public class UtilM{
 		
 		return result;
 	}
+	public static double slowlyEqualize(double variable, double goal, double speed){
+		return slowlyEqualize((float)variable, (float)goal, (float)speed);
+	}
+	public static float slowlyEqualize(float variable, float goal, float speed){
+		if(speed==0)return variable;
+		speed=Math.abs(speed);
+		if(variable+speed>goal&&(Math.abs((variable+speed)-goal)<speed*1.001))return goal;
+		if(variable-speed<goal&&(Math.abs((variable-speed)-goal)<speed*1.001))return goal;
+		
+		if(variable<goal)variable+=speed;
+		else if(variable>goal)variable-=speed;
+		return variable;
+	}
 	
+	public static boolean isInvEmpty(IInventory inv){
+		return isInvEmpty(inventoryToList(inv));
+	}
+	public static boolean isInvEmpty(List<ItemStack> inv){
+		return inv.stream().allMatch(stack->stack==null||stack.stackSize==0);
+	}
+	public static List<ItemStack> inventoryToList(IInventory inv){
+		List<ItemStack> result=new ArrayList<>();
+		int size=inv.getSizeInventory();
+		for(int i=0;i<size;i++)result.add(inv.getStackInSlot(i));
+		return result;
+	}
+	
+	public static String toString(Object... objs){
+		StringBuilder print=new StringBuilder();
+		
+		if(objs!=null)for(int i=0;i<objs.length;i++){
+			Object a=objs[i];
+			if(isArray(a))print.append(arrayToString(a));
+			else print.append(a.toString()+(i==objs.length-1?"":" "));
+		}else print.append("null");
+		
+		return print.toString();
+	}
+	public static String toString(Object obj){
+		StringBuilder print=new StringBuilder();
+		
+		if(obj!=null){
+			if(isArray(obj))print.append(arrayToString(obj));
+			else print.append(obj.toString());
+		}else print.append("null");
+		
+		return print.toString();
+	}
+	
+	public static StringBuilder arrayToString(Object array){
+		StringBuilder print=new StringBuilder();
+		
+		print.append("[");
+		
+		if(array instanceof boolean[]){
+			boolean[] b=(boolean[])array;
+			for(int i=0;i<b.length;i++){
+				boolean c=b[i];
+				if(isArray(c))print.append(arrayToString(c));
+				else print.append(c+(i==b.length-1?"":" "));
+			}
+		}
+		else if(array instanceof float[]){
+			float[] b=(float[])array;
+			for(int i=0;i<b.length;i++){
+				float c=b[i];
+				if(isArray(c))print.append(arrayToString(c));
+				else print.append(c+(i==b.length-1?"":" "));
+			}
+		}
+		else if(array instanceof int[]){
+			int[] b=(int[])array;
+			for(int i=0;i<b.length;i++){
+				int c=b[i];
+				if(isArray(c))print.append(arrayToString(c));
+				else print.append(c+(i==b.length-1?"":" "));
+			}
+		}
+		else if(array instanceof double[]){
+			double[] b=(double[])array;
+			for(int i=0;i<b.length;i++){
+				double c=b[i];
+				if(isArray(c))print.append(arrayToString(c));
+				else print.append(c+(i==b.length-1?"":" "));
+			}
+		}
+		else if(array instanceof Object[]){
+			Object[] b=(Object[])array;
+			for(int i=0;i<b.length;i++){
+				Object c=b[i];
+				if(isArray(c))print.append(arrayToString(c));
+				else print.append(c+(i==b.length-1?"":" "));
+			}
+		}else throw new IllegalStateException("Given object is not an array!");
+		
+		print.append("]");
+		
+		return print;
+	}
 }

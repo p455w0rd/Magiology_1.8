@@ -28,6 +28,7 @@ import com.magiology.util.utilclasses.LogUtil;
 import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
@@ -233,8 +234,8 @@ public class GuiJavaScriptEditor extends GuiTextEditor{
 			if(pos1.y<pos.y-3||pos1.y>pos.y+3+size.y)return;
 			
 			float minX=pos.x-3,maxX=pos.x+3+size.x;
-			pos1.x=UtilM.snap(pos1.x, minX, maxX);
-			pos2.x=UtilM.snap(pos2.x, minX, maxX);
+			pos1.x=MathUtil.snap(pos1.x, minX, maxX);
+			pos2.x=MathUtil.snap(pos2.x, minX, maxX);
 			if(pos1.x==pos2.x)return;
 			
 			OpenGLM.disableTexture2D();
