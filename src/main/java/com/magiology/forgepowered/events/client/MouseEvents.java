@@ -3,11 +3,8 @@ package com.magiology.forgepowered.events.client;
 import com.magiology.client.gui.custom.hud.WingModeChangerHUD;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.util.utilclasses.UtilM;
-import com.magiology.util.utilobjects.m_extension.ItemRendererM;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,11 +24,6 @@ public class MouseEvents{
 	}
 	public void mouseInput(MouseEvent event, int id){
 		if(id==-1)return;
-		if(UtilM.getMC().objectMouseOver.typeOfHit==MovingObjectType.BLOCK){
-			ItemStack itemstack = UtilM.getThePlayer().inventory.getCurrentItem();
-			
-			if(itemstack!=null&&itemstack.stackSize!=0&&UtilM.getMC().playerController.isInCreativeMode())ItemRendererM.instance.resetEquippedProgress();
-		}
 	}
 	
 	

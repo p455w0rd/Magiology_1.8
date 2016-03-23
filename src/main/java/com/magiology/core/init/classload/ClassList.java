@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.magiology.api.Calculable;
-import com.magiology.core.coremod.ClassTransformerBase;
+import com.magiology.core.coremod.transformers.ClassTransformerBase;
 import com.magiology.forgepowered.packets.core.AbstractPacket;
 import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
@@ -173,10 +173,13 @@ public class ClassList{
 				"com.magiology.client.render.tilerender.RenderHologramProjector",
 				"com.magiology.client.render.tilerender.RenderMultiBox",
 				"com.magiology.core.Config",
-				"com.magiology.core.coremod.ClassTransformerBase",
+				"com.magiology.core.coremod.corehooks.ClientHooksM",
+				"com.magiology.core.coremod.corehooks.CommonHooksM",
+				"com.magiology.core.coremod.corehooks.ServerHooksM",
 				"com.magiology.core.coremod.MagiologyCoreMod",
 				"com.magiology.core.coremod.TransformerHandler",
-				"com.magiology.core.coremod.transformers.NativeItemRednerHook",
+				"com.magiology.core.coremod.transformers.classtransf.NativeItemRednerHook",
+				"com.magiology.core.coremod.transformers.ClassTransformerBase",
 				"com.magiology.core.init.classload.ClassList",
 				"com.magiology.core.init.classload.ForcedClassLoader",
 				"com.magiology.core.init.MBlocks",
@@ -193,7 +196,6 @@ public class ClassList{
 				"com.magiology.core.MReference",
 				"com.magiology.core.MUpdater",
 				"com.magiology.forgepowered.events.client.CustomRenderedItem",
-				"com.magiology.forgepowered.events.client.FirstPersonItemRederer",
 				"com.magiology.forgepowered.events.client.HighlightEvent",
 				"com.magiology.forgepowered.events.client.MouseEvents",
 				"com.magiology.forgepowered.events.client.RenderEvents",
@@ -401,7 +403,6 @@ public class ClassList{
 				"com.magiology.util.utilobjects.m_extension.effect.EntitySmokeFXM",
 				"com.magiology.util.utilobjects.m_extension.GuiContainerM",
 				"com.magiology.util.utilobjects.m_extension.ItemM",
-				"com.magiology.util.utilobjects.m_extension.ItemRendererM",
 				"com.magiology.util.utilobjects.m_extension.SimpleNetworkWrapperM",
 				"com.magiology.util.utilobjects.m_extension.TileEntityM",
 				"com.magiology.util.utilobjects.m_extension.TileEntitySpecialRendererM",

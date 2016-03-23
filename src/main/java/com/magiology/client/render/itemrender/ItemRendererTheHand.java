@@ -24,7 +24,8 @@ import com.magiology.util.utilobjects.IndexedModel;
 import com.magiology.util.utilobjects.vectors.QuadUVGenerator;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -42,8 +43,12 @@ public class ItemRendererTheHand{
 		finger7,finger8,finger9,
 		finger10,finger11,finger12;
 
+
+	public boolean shouldRender(ItemStack stack, EntityLivingBase entity, TransformType transform){
+		return true;
+	}
 	
-	public void renderItem(ItemStack item, EntityPlayer player){
+	public void renderItem(ItemStack stack, EntityLivingBase entity, TransformType transform){
 		secure();
 		try{
 			ColorF.WHITE.bind();

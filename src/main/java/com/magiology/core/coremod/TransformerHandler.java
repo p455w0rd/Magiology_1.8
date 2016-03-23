@@ -7,6 +7,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 
+import com.magiology.core.coremod.transformers.ClassTransformerBase;
 import com.magiology.core.init.classload.ClassList;
 
 import net.minecraft.launchwrapper.IClassTransformer;

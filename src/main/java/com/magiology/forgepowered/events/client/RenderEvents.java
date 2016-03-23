@@ -245,7 +245,6 @@ public class RenderEvents{
 	public void renderHand(RenderHandEvent e){
 //		ItemStack e1=UtilM.getThePlayer().getCurrentEquippedItem();
 //		if(e1==null)return;
-		e.setCanceled(FirstPersonItemRederer.render(e));
 	}
 	
 	private static Map<Block, TileEntity> registerdTiles=new HashMap<Block, TileEntity>();

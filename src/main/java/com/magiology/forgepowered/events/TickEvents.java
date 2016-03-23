@@ -20,7 +20,6 @@ import com.magiology.mcobjects.entitys.ExtendedPlayerData;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.PartialTicksUtil;
-import com.magiology.util.utilobjects.m_extension.ItemRendererM;
 import com.magiology.util.utilobjects.vectors.Pos;
 
 import net.minecraft.client.Minecraft;
@@ -78,7 +77,6 @@ public class TickEvents{
 			gui.update();
 		}
 		PlayerClothPhysiscHandeler.updateInstances();
-		ItemRendererM.instance.updateEquippedItem();
 	}
 	@SubscribeEvent
 	public void onServerTick(TickEvent.ServerTickEvent event){

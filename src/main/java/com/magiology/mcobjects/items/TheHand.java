@@ -8,6 +8,7 @@ import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.handlers.animationhandlers.thehand.animation.CommonHand;
 import com.magiology.util.utilobjects.NBTUtil;
 
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -100,7 +101,12 @@ public class TheHand extends Item implements CustomRenderedItem{
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderItem(ItemStack stack, EntityLivingBase player){
-		if(player instanceof EntityPlayer)TheHandHandler.getRenderer().renderItem(stack, (EntityPlayer)player);
+	public void renderItem(ItemStack stack, EntityLivingBase entity, TransformType transform){
+		TheHandHandler.getRenderer().renderItem(stack, entity,transform);
+	}
+
+	@Override
+	public boolean shouldRender(ItemStack stack, EntityLivingBase entity, TransformType transform){
+		return TheHandHandler.getRenderer().shouldRender(stack, entity,transform);
 	}
 }
