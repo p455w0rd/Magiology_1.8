@@ -2,9 +2,9 @@ package com.magiology.mcobjects.blocks;
 
 import java.util.List;
 
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.UpdateablePipeHandler;
 import com.magiology.util.utilobjects.m_extension.BlockContainerM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -50,12 +50,12 @@ public abstract class BlockContainerMultiColision extends BlockContainerM{
 	
 	@Override
 	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor){
-		ForcePipeUpdate.updatein3by3((World)world,pos);
+		UpdateablePipeHandler.updatein3by3((World)world,pos);
 	}
 	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
-		ForcePipeUpdate.updatein3by3(world,pos);
+		UpdateablePipeHandler.updatein3by3(world,pos);
 	}
 	
 	@Override

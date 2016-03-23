@@ -201,6 +201,7 @@ public class TileEntityBigFurnaceCore extends TileEntityPowGen{
 
 	@Override
 	public void updateConnections(){
+		UpdateablePipeHandler.onConnectionUpdate(this);
 		
 	}
 	

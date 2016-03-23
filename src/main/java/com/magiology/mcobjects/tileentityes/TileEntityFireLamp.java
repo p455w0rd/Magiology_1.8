@@ -105,6 +105,7 @@ public class TileEntityFireLamp extends TileEntityPowGen{
 	}
 	@Override
 	public void updateConnections(){
+		UpdateablePipeHandler.onConnectionUpdate(this);
 		TileEntity tile=worldObj.getTileEntity(pos.add(0, -1, 0));
 		if(tile instanceof TileEntityFirePipe)connections[1].setMain(((TileEntityFirePipe)tile).connections[0].getMain());
 		else connections[1].setMain(false);

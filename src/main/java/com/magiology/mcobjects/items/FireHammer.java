@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.tileentityes.TileEntityBateryGeneric;
 import com.magiology.mcobjects.tileentityes.TileEntityControlBlock;
 import com.magiology.mcobjects.tileentityes.TileEntityFireLamp;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixReceaver;
 import com.magiology.mcobjects.tileentityes.TileEntityFireMatrixTransferer;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.UpdateablePipeHandler;
 import com.magiology.registry.WrenchRegistry;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.UtilM;
@@ -128,7 +128,7 @@ public class FireHammer extends ItemM{
 			
 			
 			
-			ForcePipeUpdate.updatein3by3(world, pos);
+			UpdateablePipeHandler.updatein3by3(world, pos);
 		}
 		if(tile instanceof ISidedPower){
 			ISidedPower isTile=(ISidedPower)tile;

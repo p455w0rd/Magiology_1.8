@@ -6,7 +6,6 @@ import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.Redstone;
 import com.magiology.api.network.skeleton.TileEntityNetworkInteract;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM;
@@ -33,7 +32,7 @@ public class TileEntityNetworkInterface extends TileEntityNetworkInteract implem
 	public void update(){
 		if(getBrain()==null){
 			findBrain();
-			ForcePipeUpdate.updatePipe(worldObj, pos);
+			UpdateablePipeHandler.updatePipe(worldObj, pos);
 		}
 		checkBrainConnection();
 		if(optimizer.isTimeWithAddProgress())updateConnections();

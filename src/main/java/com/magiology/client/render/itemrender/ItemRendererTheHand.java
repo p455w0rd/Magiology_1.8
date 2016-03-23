@@ -7,16 +7,21 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import com.magiology.client.render.Textures;
 import com.magiology.handlers.animationhandlers.thehand.HandData;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.MultiTransfromModel;
 import com.magiology.util.renderers.OpenGLM;
+import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.glstates.GlState;
+import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.IndexedModel;
+import com.magiology.util.utilobjects.vectors.QuadUVGenerator;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +32,7 @@ public class ItemRendererTheHand{
 	private final float p=1F/16F;
 	public ResourceLocation[] blank1={new ResourceLocation("noTexture")};
 	
-	public MultiTransfromModel handModel;
+	public MultiTransfromModel handModelSolid,handModelOpaque;
 	
 	private Matrix4f 
 		base,
@@ -41,6 +46,7 @@ public class ItemRendererTheHand{
 	public void renderItem(ItemStack item, EntityPlayer player){
 		secure();
 		try{
+			ColorF.WHITE.bind();
 			HandData data=TheHandHandler.getRenderHandData();
 			
 			
@@ -67,57 +73,111 @@ public class ItemRendererTheHand{
 				new Vector2f(data.fingers[3][2], data.fingers[3][3])
 			);
 			
-			new ColorF(1, 1, 1, 0.2).bind();
-			OpenGLM.disableTexture2D();
-			if(handModel==null||true){
-				IndexedModel model=new IndexedModel();
-				model.addCube(new CubeModel(0, 0, 0, p*8, p*2, p*10));
+			if(handModelSolid==null||true){
+				QuadUVGenerator gen=new QuadUVGenerator(256, 256);
+				IndexedModel 
+					modelSolid=new IndexedModel(),
+					modelOpaque=new IndexedModel();
+				handModelSolid=new MultiTransfromModel(modelSolid);
+				handModelOpaque=new MultiTransfromModel(modelOpaque);
 				
-				handModel=new MultiTransfromModel(model);
-				addFinger(new Vector2f(p*2, p*2), new Vec3M(p*3.5, p*3.4,p*2.4));
-				addFinger(new Vector2f(p*1.7F, p*1.7F), new Vec3M(p*3.2, p*2.4, p*2.3));
-				addFinger(new Vector2f(p*1.8F, p*1.8F), new Vec3M(p*3.6, p*3  , p*2.5));
-				addFinger(new Vector2f(p*1.8F, p*1.8F), new Vec3M(p*3.2, p*2.7, p*2.9));
-				addFinger(new Vector2f(p*1.6F, p*1.6F), new Vec3M(p*2.1, p*2,   p*2.1));
+				for(int i=0;i<2;i++){
+					MultiTransfromModel model=i==0?handModelSolid:handModelOpaque;
+					model.getChild().addCube(new CubeModel(0, 0, 0, p*8, p*2, p*10));
+					addFinger(model, p*2,    new Vec3M(p*3.5, p*3.4, p*2.4));
+					addFinger(model, p*1.7F, new Vec3M(p*3.2, p*2.4, p*2.3));
+					addFinger(model, p*1.8F, new Vec3M(p*3.6, p*3,   p*2.5));
+					addFinger(model, p*1.8F, new Vec3M(p*3.2, p*2.7, p*2.9));
+					addFinger(model, p*1.6F, new Vec3M(p*2.1, p*2,   p*2.1));
+					
+					
+				}
+				IndexedModel child=handModelSolid.getChild();
+				//base
+				child.addUVs(gen.create(128, 0, 16, 80).rotate2().toArray());
+				child.addUVs(gen.create(144, 0, 16, 80).rotate2().toArray());
+				child.addUVs(gen.create(0,   0, 64, 80).rotate1().toArray());
+				child.addUVs(gen.create(64,  0, 64, 80).rotate1().toArray());
+				child.addUVs(gen.create(0,  80, 64, 16).toArray());
+				child.addUVs(gen.create(64, 80, 64, 16).toArray());
+				
+				//thumb
+				addFingerTextureUVs(child, gen, 0, 96,  15,  28, 27, 19, true);
+				addFingerTextureUVs(child, gen, 0, 112, 14,  25, 19, 18, true);
+				addFingerTextureUVs(child, gen, 0, 126, 15,  29, 24, 15, true);
+				addFingerTextureUVs(child, gen, 0, 141, 15,  26, 22, 23, true);
+				addFingerTextureUVs(child, gen, 0, 156, 13,  17, 16, 17, true);
+				
+				
+				child=handModelOpaque.getChild();
+				//base
+				child.addUVs(gen.create(128, 170, 16, 80).rotate2().toArray());
+				child.addUVs(gen.create(128, 170, 16, 80).rotate2().toArray());
+				child.addUVs(gen.create(64,  170, 64, 80).rotate1().toArray());
+				child.addUVs(gen.create(0,   170, 64, 80).rotate1().toArray());
+				child.addUVs(gen.create(144, 234, 64, 16).toArray());
+				child.addUVs(gen.create(144, 234, 64, 16).toArray());
+				
+				//thumb
+				addFingerTextureUVs(child, gen, 182, 157, 15,  28, 27, 19, false);
+				addFingerTextureUVs(child, gen, 194, 172, 14,  25, 19, 18, false);
+				addFingerTextureUVs(child, gen, 183, 186, 15,  29, 24, 15, false);
+				addFingerTextureUVs(child, gen, 185, 201, 15,  26, 22, 23, false);
+				addFingerTextureUVs(child, gen, 144, 173, 13,  17, 16, 17, false);
+				
+				handModelOpaque.getChild().getVertices().clear();
+				
+				handModelOpaque.cell=new GlStateCell(new GlState(()->{
+					GL11U.setUpOpaqueRendering(1);
+				}), new GlState(()->{
+					GL11U.endOpaqueRendering();
+				}));
+				handModelSolid.addChild(handModelOpaque);
+				handModelSolid.addChild(handModelOpaque);
 			}
+			new ColorF(1,1,1,0.5).bind();
+//			GL11U.setUpOpaqueRendering(2);
+//			OpenGLM.disableTexture2D();
+			TessUtil.bindTexture(Textures.handTexture);
 			OpenGLM.pushMatrix();
 			OpenGLM.translate(p*13, p*3, 0);
 			GL11U.glRotate(0, 130, 0);
 			OpenGLM.translate(data.base[0], data.base[1], data.base[2]);
 			GL11U.glRotate(data.base[3], data.base[4], data.base[5],p*4,p,0);
 			try{
-				handModel.draw(transformations);
+				handModelSolid.draw(transformations);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
 			OpenGLM.popMatrix();
-			OpenGLM.enableTexture2D();
+//			GL11U.endOpaqueRendering();
+//			OpenGLM.enableTexture2D();
 		}catch(Exception e){
 //			e.printStackTrace();
 		}
 	}
 	
 	private void init(){
-		base=MatrixUtil.createMatrix(-60, 20, 20);
-		thumb1=MatrixUtil.createMatrix(new Vector3f(p*6.5F,p*0.8F,p*1.7F));
-		thumb2=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.5F));
-		thumb3=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.4F));
+		base=MatrixUtil.createMatrix(-60, 20, 20).finish();
+		thumb1=MatrixUtil.createMatrix(new Vector3f(p*6.5F,p*0.8F,p*1.7F)).finish();
+		thumb2=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*3.5F)).finish();
+		thumb3=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*3.4F)).finish();
 		
-		finger1=MatrixUtil.createMatrix(new Vector3f(p*7F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
-		finger2=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.3F));
-		finger3=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.5F));
+		finger1=MatrixUtil.createMatrix(new Vector3f(p*7F,p,p*10F)).rotateZ(-90).finish();
+		finger2=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*3.3F)).finish();
+		finger3=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*2.5F)).finish();
 				
-		finger4=MatrixUtil.createMatrix(new Vector3f(p*5F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
-		finger5=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.7F));
-		finger6=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.1F));
+		finger4=MatrixUtil.createMatrix(new Vector3f(p*5F,p,p*10F)).rotateZ(-90).finish();
+		finger5=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*3.7F)).finish();
+		finger6=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*3.1F)).finish();
 				
-		finger7=MatrixUtil.createMatrix(new Vector3f(p*3F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
-		finger8=MatrixUtil.createMatrix(new Vector3f(0,0,p*3.3F));
-		finger9=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.8F));
+		finger7=MatrixUtil.createMatrix(new Vector3f(p*3F,p,p*10F)).rotateZ(-90).finish();
+		finger8=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*3.3F)).finish();
+		finger9=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*2.8F)).finish();
 		
-		finger10=MatrixUtil.createMatrix(new Vector3f(p*1F,p,p*10F)).rotate((float)Math.toRadians(-90), new Vector3f(0, 0, 1));
-		finger11=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.2F));
-		finger12=MatrixUtil.createMatrix(new Vector3f(0,0,p*2.1F));
+		finger10=MatrixUtil.createMatrix(new Vector3f(p*1F,p,p*10F)).rotateZ(-90).finish();
+		finger11=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*2.2F)).finish();
+		finger12=MatrixUtil.createMatrix(new Vector3f(0,0.00001F,p*2.1F)).finish();
 	}
 	
 	
@@ -126,9 +186,9 @@ public class ItemRendererTheHand{
 		Matrix4f mat2=Matrix4f.load(mats[1], null);
 		Matrix4f mat3=Matrix4f.load(mats[2], null);
 		
-		Matrix4f.mul(mat1, MatrixUtil.createMatrixZYX(rotBase.getZ(),rotBase.getY(),rotBase.getX()), mat1); 
-		Matrix4f.mul(mat2, MatrixUtil.createMatrixY(rot_2_3.x), mat2);
-		Matrix4f.mul(mat3, MatrixUtil.createMatrixY(rot_2_3.y), mat3);
+		Matrix4f.mul(mat1, MatrixUtil.createMatrixZYX(rotBase.getZ(),rotBase.getY(),rotBase.getX()).finish(), mat1); 
+		Matrix4f.mul(mat2, MatrixUtil.createMatrixY(rot_2_3.x).finish(), mat2);
+		Matrix4f.mul(mat3, MatrixUtil.createMatrixY(rot_2_3.y).finish(), mat3);
 		
 		Matrix4f.mul(mat1, mat2, mat2);
 		Matrix4f.mul(mat2, mat3, mat3);
@@ -138,15 +198,59 @@ public class ItemRendererTheHand{
 		transformations.add(mat3);
 	}
 	
-	private void addFinger(Vector2f wh, Vec3M lenghts){
-		IndexedModel model=handModel.getChild();
+	private void addFingerTextureUVs(IndexedModel model,QuadUVGenerator gen,int xStart,int yStart,int height, int lenght1, int lenght2, int lenght3,boolean shouldExpand){
+		int 
+			totalLenght=shouldExpand?lenght1+lenght2+lenght3:0,
+			bottom=totalLenght*2,
+			side__=totalLenght,
+			top___=0,
+
+			bottom1=bottom,
+			bottom2=bottom1+lenght1,
+			bottom3=bottom2+lenght2,
+			side__1=side__,
+			side__2=side__1+lenght1,
+			side__3=side__2+lenght2,
+			top___1=top___,
+			top___2=top___1+lenght1,
+			top___3=top___2+lenght2,
+			start__=totalLenght*3,
+			end____=start__+height;
 		
+		model.addUVs(gen.create(xStart+top___1, yStart, lenght1, height).mirror2().toArray());
+		model.addUVs(gen.create(xStart+bottom1, yStart, lenght1, height).toArray());
+		model.addUVs(gen.create(xStart+side__1, yStart, lenght1, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+side__1, yStart, lenght1, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+start__, yStart, height,  height).toArray());
+		model.addUVs(gen.create(xStart+top___2, yStart, lenght2, height).mirror2().toArray());
+		model.addUVs(gen.create(xStart+bottom2, yStart, lenght2, height).toArray());
+		model.addUVs(gen.create(xStart+side__2, yStart, lenght2, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+side__2, yStart, lenght2, height).rotate2().toArray());
+		
+		model.addUVs(gen.create(xStart+top___3, yStart, lenght3, height).mirror2().toArray());
+		model.addUVs(gen.create(xStart+bottom3, yStart, lenght3, height).toArray());
+		model.addUVs(gen.create(xStart+side__3, yStart, lenght3, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+side__3, yStart, lenght3, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+end____, yStart, height,  height).rotate2().toArray());
+		
+		model.addUVs(gen.create(xStart+side__2-1, yStart, 2, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+side__2-1, yStart, 2, height).rotate2().mirror2().toArray());
+		model.addUVs(gen.create(xStart+top___2-1, yStart, 2, height).rotate1().mirror1().toArray());
+		model.addUVs(gen.create(xStart+bottom2-1, yStart, 2, height).rotate1().toArray());
+		
+		model.addUVs(gen.create(xStart+side__3-1, yStart, 2, height).rotate2().toArray());
+		model.addUVs(gen.create(xStart+side__3-1, yStart, 2, height).rotate1().toArray());
+		model.addUVs(gen.create(xStart+top___3-1, yStart, 2, height).rotate1().mirror1().toArray());
+		model.addUVs(gen.create(xStart+bottom3-1, yStart, 2, height).rotate1().toArray());
+	}
+	
+	private void addFinger(MultiTransfromModel model1,float wh, Vec3M lenghts){
+		IndexedModel model=model1.getChild();
 		int start=model.getVertices().size();
-		float w=wh.x,h=wh.y;
 		CubeModel 
-			th1=new CubeModel(-w/2, -h/2, 0, w/2, h/2, lenghts.getX()),
-			th2=new CubeModel(-w/2, -h/2, 0, w/2, h/2, lenghts.getY()),
-			th3=new CubeModel(-w/2, -h/2, 0, w/2, h/2, lenghts.getZ());
+			th1=new CubeModel(-wh/2, -wh/2, 0, wh/2, wh/2, lenghts.getX()),
+			th2=new CubeModel(-wh/2, -wh/2, 0, wh/2, wh/2, lenghts.getY()),
+			th3=new CubeModel(-wh/2, -wh/2, 0, wh/2, wh/2, lenghts.getZ());
 		th1.willSideRender[5]=
 		th2.willSideRender[4]=
 		th2.willSideRender[5]=
@@ -184,9 +288,9 @@ public class ItemRendererTheHand{
 		model.addIndices(start,inds);
 		model.addIndices(start+8F,inds);
 		
-		handModel.addMatrix(UtilM.countedArray(start,start+8));
-		handModel.addMatrix(UtilM.countedArray(start+8,start+16));
-		handModel.addMatrix(UtilM.countedArray(start+16,start+24));
+		model1.addMatrix(UtilM.countedArray(start,start+8));
+		model1.addMatrix(UtilM.countedArray(start+8,start+16));
+		model1.addMatrix(UtilM.countedArray(start+16,start+24));
 	}
 	public void secure(){
 		if(base==null)init();

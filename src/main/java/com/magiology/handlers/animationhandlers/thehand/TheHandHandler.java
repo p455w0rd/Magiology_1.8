@@ -3,12 +3,10 @@ package com.magiology.handlers.animationhandlers.thehand;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.magiology.client.render.itemrender.ItemRendererTheHand;
 import com.magiology.core.init.MItems;
+import com.magiology.handlers.animationhandlers.thehand.animation.CommonHand;
 import com.magiology.handlers.animationhandlers.thehand.animation.HandAnimation;
-import com.magiology.handlers.animationhandlers.thehand.animation.HandAnimation.AnimationPart;
 import com.magiology.handlers.animationhandlers.thehand.animation.HandAnimationBase;
 import com.magiology.handlers.animationhandlers.thehand.animation.LinearHandAnimation;
 import com.magiology.util.utilclasses.RandUtil;
@@ -66,15 +64,15 @@ public class TheHandHandler{
 	public static HandPosition getActivePosition(EntityPlayer player){
 		if(!isActive(player))return null;
 		int id=player.getCurrentEquippedItem().getTagCompound().getInteger("AP");
-		if(id<0)return HandPosition.ErrorPos;
-		if(id>=HandPosition.values().length)return HandPosition.ErrorPos;
+		if(id<0)return CommonHand.errorPos;
+		if(id>=HandPosition.values().length)return CommonHand.errorPos;
 		return HandPosition.values()[id];
 	}
 	public static HandPosition getLastActivePosition(EntityPlayer player){
 		if(!isActive(player))return null;
 		int id=player.getCurrentEquippedItem().getTagCompound().getInteger("LAP");
-		if(id<0)return HandPosition.ErrorPos;
-		if(id>=HandPosition.values().length)return HandPosition.ErrorPos;
+		if(id<0)return CommonHand.errorPos;
+		if(id>=HandPosition.values().length)return CommonHand.errorPos;
 		return HandPosition.values()[id];
 	}
 	public static HandPosition nextPosition(EntityPlayer player){
@@ -83,7 +81,7 @@ public class TheHandHandler{
 		int now=UtilM.getPosInArray(TheHandHandler.getActivePosition(player), values);
 		now++;
 		if(now==values.length)now=0;
-		if(values[now]==HandPosition.ErrorPos)now++;
+		if(values[now]==CommonHand.errorPos)now++;
 		if(now==values.length)now=0;
 		TheHandHandler.setActivePositionId(player, now);
 		return values[now];
@@ -100,7 +98,7 @@ public class TheHandHandler{
 		if(!isActive(player))return;
 		
 		HandPosition handPos=getActivePosition(player);
-		if(handPos==HandPosition.ErrorPos)setActivePositionId(player, 3);
+		if(handPos==CommonHand.errorPos)setActivePositionId(player, 3);
 //		setActivePositionId(player, 2);
 		
 		
@@ -121,6 +119,7 @@ public class TheHandHandler{
 		data.get("prev").set((HandData)actual.clone());
 		
 		HandData wanted=null;
+//		PrintUtil.println(activeAnimation);
 		if(activeAnimation!=null){
 			
 			if(activeAnimation instanceof HandAnimation){
@@ -129,48 +128,13 @@ public class TheHandHandler{
 				if(anim.isDone())activeAnimation=null;
 			}
 			else if(activeAnimation instanceof LinearHandAnimation){
-				if(player.isUsingItem()||true){
-					float 
-						max=player.getHeldItem().getMaxItemUseDuration(),
-						time=player.getItemInUseDuration(),
-						progess=time/max;
-					
-					AnimationPart[] animData=            AnimationPart.gen(11, 4,0,  3,-2);
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(12, 4,0,  3,3F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(13, 4,0,  3,2));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(14, 6,0,  3,8));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(15, 4,0,  3,-1F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(16, 4,0,  3,6));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(17, 4,0,  3,2));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(18, 6,0,  3,4));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(19, 4,0,  3,1F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(20, 4,0,  3,6));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(21, 4,0,  3,4));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(22, 6,0,  3,4));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(13, 4,0,  3,3F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(24, 4,0,  3,10));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(25, 4,0,  3,4));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(26, 6,0,  3,2));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(6, 4,0,  3,-7F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(7, 4,0,  3, 6F));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(9, 4,0,  3,-1F));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(10, 4,0,  3,-7F));
-					
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(2, 3,0,  1,p, 1,p/2, 1,-p/2, 2,-p));
-					animData=ArrayUtils.addAll(animData, AnimationPart.gen(5,       2,15, 2,13, 2,12, 2,10));
-					
-					
-//					progess=Math.max(0, UtilM.fluctuate(80, 0)*1.2F-0.2F);
-					((LinearHandAnimation)activeAnimation).setProgessMul(4000);
-					((LinearHandAnimation)activeAnimation).data=new HandAnimation(HandPosition.WeaponHolder, animData).toLinearAnimation(2);
-//					
-					((LinearHandAnimation)activeAnimation).setProgess(progess);
-				}else activeAnimation=null;
+				
+				LinearHandAnimation animation=(LinearHandAnimation)activeAnimation;
+				boolean holding=player.isUsingItem();
+				animation.progressHandler.setHolding(holding);
+				animation.update();
+//				if(animation.progressHandler.getProgress()>0.99F)PrintUtil.println(activeAnimation.getWantedPos().sub(CommonHand.WeaponHolder.data));
+				if(animation.progressHandler.isInactive())activeAnimation=null;
 			}
 			if(activeAnimation!=null){
 				wanted=activeAnimation.getWantedPos();
@@ -178,7 +142,7 @@ public class TheHandHandler{
 		}
 		if(wanted==null)wanted=getActivePosition(player).data;
 		
-		handleSpeed(speed, main, wanted, 10F, 0.3F, 0.6F);
+		handleSpeed(speed, main, wanted, 14F, 0.2F, 0.6F);
 		
 		main.set(main.add(speed));
 		
@@ -189,13 +153,14 @@ public class TheHandHandler{
 	
 	@SideOnly(Side.CLIENT)
 	public static void handUseAnimation(EntityPlayer player){
-//		activeAnimation=HandAnimation.rightClickAnimation;
-//		HandAnimation.rightClickAnimation.start();
-		activeAnimation=HandAnimation.chargeUp;
+		if(activeAnimation!=null)return;
+		activeAnimation=CommonHand.rightClickAnimation;
+		CommonHand.rightClickAnimation.start();
 	}
 	@SideOnly(Side.CLIENT)
 	public static void actionAnimation(EntityPlayer player){
-		activeAnimation=HandAnimation.chargeUp;
+		if(activeAnimation!=null)return;
+		activeAnimation=CommonHand.chargeUp;
 	}
 	public static boolean isActive(EntityPlayer player){
 		if(!UtilM.isItemInStack(MItems.theHand, player.getCurrentEquippedItem()))return false;
@@ -214,7 +179,7 @@ public class TheHandHandler{
 				speed1=(diff/act);
 			
 			if(speed1>1)speed1=1;
-			else speed1*=speed1;
+			else speed1=(speed1*speed1+speed1)/2;
 			
 			return UtilM.handleSpeedFolower(speed, pos, wantedPos, acceleration)*friction*speed1;
 		}
@@ -264,6 +229,7 @@ public class TheHandHandler{
 		}
 	}
 	public static void init(){
+		CommonHand.load();
 		HandPosition.compile();
 	}
 	

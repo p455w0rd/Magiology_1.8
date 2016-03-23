@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.magiology.api.power.ISidedPower;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.powertiles.TileEntityPow;
@@ -50,7 +49,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	@Override
 	public void readFromNBT(NBTTagCompound NBTTC){
 		super.readFromNBT(NBTTC);
-		ForcePipeUpdate.updatein3by3(worldObj, pos);
+		UpdateablePipeHandler.updatein3by3(worldObj, pos);
 	}
 	
 	@Override
@@ -117,6 +116,7 @@ public class TileEntityFirePipe extends TileEntityPow implements MultiColisionPr
 	}
 	@Override
 	public void updateConnections(){
+		UpdateablePipeHandler.onConnectionUpdate(this);
 		if(U.isRemote(worldObj))updatestand();
 //		for(int i=0;i<6;i++)connections[i].setIsMainAutomatic(false);
 		boolean[] in1={},out1={};

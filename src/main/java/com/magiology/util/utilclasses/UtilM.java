@@ -639,7 +639,7 @@ public class UtilM{
 		if(objs!=null)for(int i=0;i<objs.length;i++){
 			Object a=objs[i];
 			if(isArray(a))print.append(arrayToString(a));
-			else print.append(a.toString()+(i==objs.length-1?"":" "));
+			else print.append(toString(a)+(i==objs.length-1?"":" "));
 		}else print.append("null");
 		
 		return print.toString();
@@ -697,7 +697,7 @@ public class UtilM{
 			for(int i=0;i<b.length;i++){
 				Object c=b[i];
 				if(isArray(c))print.append(arrayToString(c));
-				else print.append(c+(i==b.length-1?"":" "));
+				else print.append(toString(c)+(i==b.length-1?"":" "));
 			}
 		}else throw new IllegalStateException("Given object is not an array!");
 		

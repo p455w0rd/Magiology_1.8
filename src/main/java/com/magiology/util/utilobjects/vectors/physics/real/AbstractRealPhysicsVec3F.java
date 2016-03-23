@@ -104,7 +104,7 @@ public abstract class AbstractRealPhysicsVec3F{
 		
 		Vec3M hitMul=result.obj2.mul(getBounciness()).abs();
 		AngularVec3 hitMulAngle=new AngularVec3(hitMul);
-		Vec3M velocityMulBase=new Vec3M(0, 0, -1).transform(MatrixUtil.createMatrixXY(hitMulAngle.getXRotation(), hitMulAngle.getYRotation()));
+		Vec3M velocityMulBase=new Vec3M(0, 0, -1).transform(MatrixUtil.createMatrixXY(hitMulAngle.getXRotation(), hitMulAngle.getYRotation()).finish());
 		
 		
 		setPos(result.obj1.add(velocityMulBase.mul(0.01)));

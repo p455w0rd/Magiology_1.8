@@ -6,18 +6,33 @@ import java.util.List;
 import com.magiology.api.connection.IConnectionProvider;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.UtilM.U;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 
 public interface UpdateableTile extends IConnectionProvider{
+	
 	public void updateConnections();
+	
+	public void updateWaitingUpdate();
+	public boolean isUpdateWaiting();
+	
+	public long getLastUpdateTime();
+	public void connectionUpdateWaiting();
 	
 	public void getValidTileEntitys(List<Class> included,List<Class> excluded);
 	public <T extends TileEntity> boolean getExtraClassCheck(Class<T> clazz, T tile, Object[] array,int side);
 	
 	public class UpdateablePipeHandler{
 		private UpdateablePipeHandler(){}
+		
+		public static <T extends TileEntityM&UpdateableTile> void onConnectionUpdate(T tile){
+			if(!tile.hasWorldObj()||tile.getLastUpdateTime()==tile.getTime())tile.connectionUpdateWaiting();
+		}
 		
 		public static<T extends TileEntity&UpdateableTile> void setConnections(EnumFacing[] array,T tile){
 			setConnections(array, EnumFacing.DOWN, null, tile);
@@ -52,6 +67,24 @@ public interface UpdateableTile extends IConnectionProvider{
 					if(pass)array[i]=trueValue;
 					else	array[i]=falseValue;
 				}else	   array[i]=falseValue;
+			}
+		}
+
+		public static void updatein3by3(World world,BlockPos pos){
+			if(U.isNull(world,pos))return;
+			for(int x1=-1;x1<2;x1++)
+				for(int y1=-1;y1<2;y1++)
+					for(int z1=-1;z1<2;z1++){
+						BlockPos Pos=pos.add(x1,y1,z1);
+						if(!Pos.equals(pos))UpdateablePipeHandler.updatePipe(world, Pos);
+					}
+		}
+
+		public static void updatePipe(World world, BlockPos pos){
+			if(U.isNull(world,pos))return;
+			TileEntity tile=world.getTileEntity(pos);
+			if(tile instanceof UpdateableTile){
+				((UpdateableTile)tile).updateConnections();
 			}
 		}
 	}

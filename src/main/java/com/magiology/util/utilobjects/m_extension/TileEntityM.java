@@ -28,4 +28,7 @@ public abstract class TileEntityM extends TileEntity/* implements IUpdatePlayerL
 	public BlockPosM getPos(){
 		return new BlockPosM(super.getPos());
 	}
+	public long getTime(){
+		return worldObj.getTotalWorldTime();
+	}
 }

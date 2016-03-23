@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.forgepowered.packets.packets.NotifyPointedBoxChangePacket;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider;
 import com.magiology.mcobjects.tileentityes.corecomponents.TileEntityConnectionProvider;
-import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
@@ -49,7 +47,7 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 			else connections[i]=null;
 		}
 		setColisionBoxes();
-		ForcePipeUpdate.updatein3by3(worldObj, pos);
+		UpdateablePipeHandler.updatein3by3(worldObj, pos);
 	}
 	
 	@Override
@@ -67,8 +65,9 @@ public class TileEntityRareSpacePipe extends TileEntityConnectionProvider implem
 	
 	@Override
 	public void updateConnections(){
+		UpdateablePipeHandler.onConnectionUpdate(this);
 		if(!hasWorldObj())return;
-		UpdateableTile.UpdateablePipeHandler.setConnections(connections, this);
+		UpdateablePipeHandler.setConnections(connections, this);
 		setColisionBoxes();
 	}
 	

@@ -248,8 +248,8 @@ public class RenderNetworkRouter extends TileEntitySpecialRendererM{
 		
 		Vec3M trans=new Vec3M(p*10F, p*9.125F, p*8.5F);
 		
-		Matrix4f matrix=MatrixUtil.createMatrix(trans, 0, 0, 180, 1);
-		Matrix4f.mul(matrix, MatrixUtil.createMatrix(trans.mul(-1), 0, 0, 0, 1), matrix);
+		Matrix4f matrix=MatrixUtil.createMatrix(trans, 0, 0, 180, 1).finish();
+		Matrix4f.mul(matrix, MatrixUtil.createMatrix(trans.mul(-1), 0, 0, 0, 1).finish(), matrix);
 		
 		leverBoxes[2].transform(matrix);
 		

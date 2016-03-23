@@ -132,6 +132,7 @@ public class TileEntityFireMatrixReceaver extends TileEntityPow{
 
 	@Override
 	public void updateConnections(){
+		UpdateablePipeHandler.onConnectionUpdate(this);
 		
 	}
 	

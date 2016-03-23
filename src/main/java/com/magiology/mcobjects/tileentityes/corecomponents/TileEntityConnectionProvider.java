@@ -21,6 +21,10 @@ public abstract class TileEntityConnectionProvider extends TileEntityM implement
 	
 	public IConnection[] connections=IConnectionFactory.NewArray(this, ConnectionType.Energy);
 	
+	protected long lastUpdate;
+	
+	private boolean updateConnectionsWaiting=false;
+	
 	 @Override
 		public void readFromNBT(NBTTagCompound NBTTC){
 			super.readFromNBT(NBTTC);
@@ -99,5 +103,26 @@ public abstract class TileEntityConnectionProvider extends TileEntityM implement
 			for(int j=0;j<extraSize;j++)con.setExtra(connection.getString("k"+j), connection.getString("v"+j));
 		}
 		return result;
+	}
+	@Override
+	public boolean isUpdateWaiting(){
+		return updateConnectionsWaiting;
+	}
+	@Override
+	public void updateWaitingUpdate(){
+		if(!hasWorldObj()){
+			connectionUpdateWaiting();
+			return;
+		}
+		if(isUpdateWaiting())updateConnections();
+		lastUpdate=getTime();
+	}
+	@Override
+	public void connectionUpdateWaiting(){
+		updateConnectionsWaiting=true;
+	}
+	@Override
+	public long getLastUpdateTime(){
+		return lastUpdate;
 	}
 }

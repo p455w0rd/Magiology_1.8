@@ -5,6 +5,7 @@ import java.util.List;
 import com.magiology.forgepowered.events.client.CustomRenderedItem;
 import com.magiology.handlers.animationhandlers.thehand.HandPosition;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
+import com.magiology.handlers.animationhandlers.thehand.animation.CommonHand;
 import com.magiology.util.utilobjects.NBTUtil;
 
 import net.minecraft.entity.Entity;
@@ -38,7 +39,7 @@ public class TheHand extends Item implements CustomRenderedItem{
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity){
-		if(TheHandHandler.getActivePosition(player)==HandPosition.ClosedFist){
+		if(TheHandHandler.getActivePosition(player)==CommonHand.closedFist){
 			
 			player.worldObj.createExplosion(player, entity.posX, entity.posY-0.0005, entity.posZ, 0.01F, false);
 			return true;
@@ -51,39 +52,37 @@ public class TheHand extends Item implements CustomRenderedItem{
 		timeHeld-=100000;
 		timeHeld*=-1;
 		if(timeHeld<10)return;
-		if(!world.isRemote){
-//			HandComonPositions ap=TheHandHandler.getActivePosition(player);
-//			if(ap==HandComonPositions.ReadyForAction)TheHandHandler.addANewEvent(player, player.worldObj.getTotalWorldTime()+5, "spawnProjectile", timeHeld);
-//			else if(ap==HandComonPositions.WeaponHolder)TheHandHandler.addANewEvent(player, player.worldObj.getTotalWorldTime()+5, "spawnEntitySubatomicWorldDeconstructor", timeHeld);
-		}
-		else TheHandHandler.actionAnimation(player);
+//		if(!world.isRemote){
+////			HandComonPositions ap=TheHandHandler.getActivePosition(player);
+////			if(ap==HandComonPositions.ReadyForAction)TheHandHandler.addANewEvent(player, player.worldObj.getTotalWorldTime()+5, "spawnProjectile", timeHeld);
+////			else if(ap==HandComonPositions.WeaponHolder)TheHandHandler.addANewEvent(player, player.worldObj.getTotalWorldTime()+5, "spawnEntitySubatomicWorldDeconstructor", timeHeld);
+//		}
+//		else TheHandHandler.actionAnimation(player);
 	}
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
-//		TheHandHandler.handUseAnimation(player);
+		
 		HandPosition ap=TheHandHandler.getActivePosition(player);
-		if(ap==HandPosition.WeaponHolder){
+		if(ap==CommonHand.weaponHolder){
 			TheHandHandler.actionAnimation(player);
 			player.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
-		}else if(ap==HandPosition.NaturalPosition){
-			
-			
-			
+		}else if(ap==CommonHand.naturalPosition){
+			TheHandHandler.handUseAnimation(player);
 		}
 		return itemstack;
 	}
 	
 	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
+	public boolean onItemUseFirst(ItemStack itemstack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ){
 		TheHandHandler.handUseAnimation(player);
-//		if(TheHandHandler.getActivePosition(player)==HandComonPositions.ReadyForAction){
-//			player.setItemInUse(stack, getMaxItemUseDuration(stack));
-//		}else if(TheHandHandler.getActivePosition(player)==HandComonPositions.NaturalPosition){
-////			Helper.spawnEntity(new ModedEntityFallingBlock(world, x+0.5, y+0.501, z+0.5, Helper.getBlock(world, pos), world.getBlockMetadata(pos),player));
-//			world.setBlockToAir(pos);
-//			
-//		}
+		HandPosition ap=TheHandHandler.getActivePosition(player);
+		if(ap==CommonHand.weaponHolder){
+			TheHandHandler.actionAnimation(player);
+			player.setItemInUse(itemstack, getMaxItemUseDuration(itemstack));
+		}else if(ap==CommonHand.naturalPosition){
+			TheHandHandler.handUseAnimation(player);
+		}
 		return false;
 	}
 	

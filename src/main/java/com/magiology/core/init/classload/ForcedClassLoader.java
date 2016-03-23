@@ -8,7 +8,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -21,7 +23,7 @@ import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 
 
-public class ForcedClassLoader{
+class ForcedClassLoader{
 	
 	private static String 
 		startPath="..\\src\\main\\java\\",
@@ -36,10 +38,12 @@ public class ForcedClassLoader{
 		};
 	private static File thisClass=new File(startPath+getPathToClass(ClassList.class));
 	
-	private static int startPathLength=startPath.length();
+	private static int startPathLength=startPath.length(),iterationCount=0;
+	private static boolean compiled=false;
 	
-	public static void load(){
-		
+	static void load(){
+		if(compiled)return;
+		compiled=true;
 		generateAndInject();
 		
 		ClassLoader loader=ForcedClassLoader.class.getClassLoader();
@@ -48,14 +52,72 @@ public class ForcedClassLoader{
 		List<String> failed=new ArrayList<>();
 		for(String clazz:ClassList.classes){
 			try{
-				loader.loadClass(clazz);
+//				Class.forName(clazz, true, loader);
+				ClassList.loadedClasses.add(loader.loadClass(clazz));
 			}catch(Exception e){
 				if(!ArrayUtils.contains(blacklist, clazz))failed.add(e.getClass().getSimpleName()+": "+clazz);
 			}
 		}
 		PrintUtil.println("Loading of all classes is done in "+UtilM.endTime()+"ms.");
 		if(failed.isEmpty()){
-			PrintUtil.println("No classes have failed to load! ^_^");
+			PrintUtil.println("No classes have failed to load! ^_^\nStarting to sort classes!");
+			
+			UtilM.startTime();
+			
+			for(Class<?> instance:ClassList.getClassesToSort()){
+				List<Class<?>> list=new ArrayList<>();
+				ClassList.implementations.put(instance, list);
+				for(Class<?> clazz:ClassList.loadedClasses){
+					if(clazz!=instance&&UtilM.instanceOf(clazz, instance)){
+						list.add(clazz);
+						iterationCount++;
+					}
+					iterationCount++;
+				}
+			}
+			ClassList.implementations.keySet().forEach(key->{
+				ClassList.directImplementations.put(key, new ArrayList<>());
+				iterationCount++;
+			});
+			
+			Map<Class<?>, List<Class<?>>> toRemove1=new HashMap<>();
+			ClassList.implementations.forEach((k,v)->v.forEach(clazz1->v.forEach(clazz2->{
+				iterationCount++;
+				if(clazz1!=clazz2){
+					if(UtilM.instanceOf(clazz1, clazz2)){
+						List<Class<?>> list=toRemove1.get(k);
+						if(list==null)toRemove1.put(k, list=new ArrayList<>());
+						list.add(clazz1);
+					}
+					if(UtilM.instanceOf(clazz2, clazz1)){
+						List<Class<?>> list=toRemove1.get(k);
+						if(list==null)toRemove1.put(k, list=new ArrayList<>());
+						list.add(clazz2);
+					}
+				}
+			})));
+			ClassList.implementations.forEach((k,v)->v.forEach(clazz->{
+				ClassList.directImplementations.get(k).add(clazz);
+				iterationCount++;
+			}));
+			toRemove1.forEach((k,v)->v.forEach(clazz->ClassList.directImplementations.get(k).remove(clazz)));
+			
+			List<List<Class<?>>> toRemove2=new ArrayList<>();
+			ClassList.directImplementations.values().forEach(list->{
+				if(list.isEmpty())toRemove2.add(list);
+				iterationCount++;
+			});
+			toRemove2.forEach(list->{
+				ClassList.directImplementations.remove(list);
+				iterationCount++;
+			});
+			
+			PrintUtil.println("Classes are sucessfuly sorted in:",UtilM.endTime()+"ms with",iterationCount+" iterations!\nResult:");
+			PrintUtil.println("\tDirect extensions:");
+			ClassList.directImplementations.forEach((k,v)->PrintUtil.println("\t\tClass:",k.getSimpleName(),"-> count:",v.size()));
+			PrintUtil.println("\tExtensions:");
+			ClassList.implementations.forEach((k,v)->PrintUtil.println("\t\tClass:",k.getSimpleName(),"-> count:",v.size()));
+			
 			setError(false);
 		}
 		else{

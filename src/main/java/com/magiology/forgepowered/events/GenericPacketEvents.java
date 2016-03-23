@@ -8,6 +8,7 @@ import com.magiology.handlers.GenericPacketEventHandler.PacketEvent;
 import com.magiology.handlers.GenericPacketEventHandler.StringPacketEvent;
 import com.magiology.handlers.animationhandlers.WingsFromTheBlackFireHandler;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.UpdateablePipeHandler;
 import com.magiology.util.utilclasses.PowerUtil;
 import com.magiology.util.utilclasses.PrintUtil;
 
@@ -30,19 +31,19 @@ public class GenericPacketEvents{
 		case 7:{
 			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
 			PowerUtil.cricleSideInteraction((ISidedPower)tileEn, integer);
-			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
+			UpdateablePipeHandler.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 8:{
 			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
 			tile.setSendOnSide(integer, !tile.getOut(integer));
-			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
+			UpdateablePipeHandler.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		case 9:{
 			TileEntity tileEn=((ISidedPowerInstructorContainer)player.openContainer).tile;
 			ISidedPower tile=(ISidedPower)tileEn;
 			tile.setReceaveOnSide(integer, !tile.getIn(integer));
-			ForcePipeUpdate.updatein3by3(player.worldObj, tileEn.getPos());
+			UpdateablePipeHandler.updatein3by3(player.worldObj, tileEn.getPos());
 		}break;
 		default:{PrintUtil.println("ERROR! EVENT IntegerPacketEvent HAS BEEN RAN WITH A INVALID EVENT ID!","PLEASE ADD THE ID TO THE SWITCH IN THE EVENT HANDLER!");}break;
 		}}catch(Exception e){e.printStackTrace();}

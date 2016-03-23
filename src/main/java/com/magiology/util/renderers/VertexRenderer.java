@@ -230,7 +230,7 @@ public class VertexRenderer{
 	}
 	public void transform(double x,double y,double z,double rotX,double rotY,double rotZ, double scale){
 		Vector3f.add(rotation, new Vector3f((float)rotX, (float)rotY, (float)rotZ), rotation);
-		Matrix4f.mul(transformation, MatrixUtil.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale), transformation);
+		Matrix4f.mul(transformation, MatrixUtil.createMatrix(new Vector3f((float)x, (float)y, (float)z), (float)rotX, (float)rotY, (float)rotZ, (float)scale).finish(), transformation);
 	}
 	
 	public void setInstantNormalCalculation(boolean enabled){

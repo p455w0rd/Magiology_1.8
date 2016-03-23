@@ -1,10 +1,51 @@
 package com.magiology.core.init.classload;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.magiology.api.Calculable;
+import com.magiology.core.coremod.ClassTransformerBase;
+import com.magiology.forgepowered.packets.core.AbstractPacket;
+import com.magiology.util.utilobjects.m_extension.TileEntityM;
+
+import net.minecraft.launchwrapper.IClassTransformer;
+
 public class ClassList{
 	
 	protected static boolean error=false;
+
+	static final List<Class<?>> loadedClasses=new ArrayList<>();
 	
-	protected static String[]
+	static final Map<Class<?>, List<Class<?>>> implementations=new HashMap<>(),directImplementations=new HashMap<>();
+	
+	static List<Class<?>> getClassesToSort(){
+		List<Class<?>> classes=new ArrayList<>();
+		
+		classes.add(IClassTransformer.class);
+		classes.add(Calculable.class);
+		classes.add(AbstractPacket.class);
+		classes.add(TileEntityM.class);
+		classes.add(ClassTransformerBase.class);
+		
+		return classes;
+	}
+	
+	public static Map<Class<?>, List<Class<?>>> getImplementations(){
+		ForcedClassLoader.load();
+		return implementations;
+	}
+	public static List<Class<?>> getLoadedclasses(){
+		ForcedClassLoader.load();
+		return loadedClasses;
+	}
+	public static Map<Class<?>, List<Class<?>>> getDirectImplementations(){
+		ForcedClassLoader.load();
+		return directImplementations;
+	}
+	
+	static final String[]
 			classes={
 				"com.magiology.api.Calculable",
 				"com.magiology.api.connection.Connection",
@@ -132,6 +173,10 @@ public class ClassList{
 				"com.magiology.client.render.tilerender.RenderHologramProjector",
 				"com.magiology.client.render.tilerender.RenderMultiBox",
 				"com.magiology.core.Config",
+				"com.magiology.core.coremod.ClassTransformerBase",
+				"com.magiology.core.coremod.MagiologyCoreMod",
+				"com.magiology.core.coremod.TransformerHandler",
+				"com.magiology.core.coremod.transformers.NativeItemRednerHook",
 				"com.magiology.core.init.classload.ClassList",
 				"com.magiology.core.init.classload.ForcedClassLoader",
 				"com.magiology.core.init.MBlocks",
@@ -153,7 +198,6 @@ public class ClassList{
 				"com.magiology.forgepowered.events.client.MouseEvents",
 				"com.magiology.forgepowered.events.client.RenderEvents",
 				"com.magiology.forgepowered.events.EntityEvents",
-				"com.magiology.forgepowered.events.ForcePipeUpdate",
 				"com.magiology.forgepowered.events.GameEvents",
 				"com.magiology.forgepowered.events.GenericPacketEvents",
 				"com.magiology.forgepowered.events.SpecialMovmentEvents",
@@ -179,9 +223,11 @@ public class ClassList{
 				"com.magiology.forgepowered.proxy.ClientProxy",
 				"com.magiology.forgepowered.proxy.CommonProxy",
 				"com.magiology.forgepowered.proxy.ServerProxy",
+				"com.magiology.handlers.animationhandlers.thehand.animation.CommonHand",
 				"com.magiology.handlers.animationhandlers.thehand.animation.HandAnimation",
 				"com.magiology.handlers.animationhandlers.thehand.animation.HandAnimationBase",
 				"com.magiology.handlers.animationhandlers.thehand.animation.LinearHandAnimation",
+				"com.magiology.handlers.animationhandlers.thehand.animation.LinearHandAnimProgressHandler",
 				"com.magiology.handlers.animationhandlers.thehand.HandData",
 				"com.magiology.handlers.animationhandlers.thehand.HandPosition",
 				"com.magiology.handlers.animationhandlers.thehand.TheHandHandler",
@@ -316,6 +362,7 @@ public class ClassList{
 				"com.magiology.util.renderers.VertexBufferM",
 				"com.magiology.util.renderers.VertexModel",
 				"com.magiology.util.renderers.VertexRenderer",
+				"com.magiology.util.utilclasses.CollectionConverter",
 				"com.magiology.util.utilclasses.DataStalker",
 				"com.magiology.util.utilclasses.FileUtil",
 				"com.magiology.util.utilclasses.FontEffectUtil",
@@ -381,6 +428,7 @@ public class ClassList{
 				"com.magiology.util.utilobjects.vectors.QuadUVGenerator",
 				"com.magiology.util.utilobjects.vectors.RayDeprecated",
 				"com.magiology.util.utilobjects.vectors.TwoDots",
+				"com.magiology.util.utilobjects.vectors.Vec2FM",
 				"com.magiology.util.utilobjects.vectors.Vec2i",
 				"com.magiology.util.utilobjects.vectors.Vec3M",
 				"com.magiology.util.utilobjects.vectors.X1y1z1x2y2z2",

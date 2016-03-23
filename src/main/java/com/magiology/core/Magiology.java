@@ -5,7 +5,13 @@ import static com.magiology.core.MReference.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import java.net.URL;
+import java.security.cert.Certificate;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import com.google.common.eventbus.EventBus;
 import com.magiology.api.lang.program.ProgramDataBase;
 import com.magiology.client.gui.gui.GuiJSProgramEditor;
 import com.magiology.client.render.Textures;
@@ -19,7 +25,6 @@ import com.magiology.core.init.MItems;
 import com.magiology.core.init.MPackets;
 import com.magiology.core.init.MRecepies;
 import com.magiology.core.init.MTileEntitys;
-import com.magiology.core.init.classload.ForcedClassLoader;
 import com.magiology.forgepowered.proxy.CommonProxy;
 import com.magiology.handlers.EnhancedRobot;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
@@ -30,18 +35,27 @@ import com.magiology.util.utilclasses.RandUtil;
 import com.magiology.windowsgui.ModInfoGUI;
 import com.magiology.windowsgui.SoundPlayer;
 
+import net.minecraftforge.fml.common.LoadController;
+import net.minecraftforge.fml.common.MetadataCollection;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.versioning.ArtifactVersion;
+import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import net.minecraftforge.fml.common.versioning.InvalidVersionSpecificationException;
+import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import scala.actors.threadpool.Arrays;
 
 @Mod(modid=MODID,version=VERSION,name=NAME,acceptedMinecraftVersions=ACCEPTED_MC_VERSION)
-public class Magiology{
+public class Magiology implements ModContainer{
 	
 	/***//**variables*//***/
 	
@@ -93,7 +107,6 @@ public class Magiology{
 		}
 	}
 	public void preInit(FMLPreInitializationEvent event){
-		ForcedClassLoader.load();
 		
 		MUpdater.init();
 //		//TODO
@@ -282,5 +295,120 @@ public class Magiology{
 			else s1+="|";
 		}
 		PrintUtil.println(message,s1);
+	}
+	@Override
+	public String getModId(){
+		return MODID;
+	}
+	@Override
+	public String getName(){
+		return NAME;
+	}
+	@Override
+	public String getVersion(){
+		return VERSION;
+	}
+	@Override
+	public File getSource(){
+		return null;
+	}
+	@Override
+	public ModMetadata getMetadata(){
+		return getModMetadata();
+	}
+	@Override
+	public void bindMetadata(MetadataCollection mc){
+		
+	}
+	@Override
+	public void setEnabledState(boolean enabled){
+		
+	}
+	@Override
+	public Set<ArtifactVersion> getRequirements(){
+		return null;
+	}
+	@Override
+	public List<ArtifactVersion> getDependencies(){
+		return null;
+	}
+	@Override
+	public List<ArtifactVersion> getDependants(){
+		return null;
+	}
+	@Override
+	public String getSortingRules(){
+		return null;
+	}
+	@Override
+	public boolean registerBus(EventBus bus, LoadController controller){
+		bus.register(getClass());
+		return true;
+	}
+	@Override
+	public boolean matches(Object mod) {
+		PrintUtil.println("Mod <",mod,"> maching with",this);
+		return mod==this;
+	}
+	@Override
+	public Object getMod(){
+		return this;
+	}
+	@Override
+	public ArtifactVersion getProcessedVersion(){
+		return new DefaultArtifactVersion(VERSION);
+	}
+	@Override
+	public boolean isImmutable(){
+		return true;
+	}
+	@Override
+	public String getDisplayVersion(){
+		return VERSION;
+	}
+	@Override
+	public VersionRange acceptableMinecraftVersionRange(){
+		try{
+			return VersionRange.createFromVersionSpec(MC_VERSION);
+		}catch(InvalidVersionSpecificationException e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public Certificate getSigningCertificate(){
+		return null;
+	}
+	@Override
+	public Map<String, String> getCustomModProperties(){
+		return null;
+	}
+	@Override
+	public Class<?> getCustomResourcePackClass(){
+		return null;
+	}
+	@Override
+	public Map<String, String> getSharedModDescriptor(){
+		return null;
+	}
+	@Override
+	public Disableable canBeDisabled(){
+		return Disableable.NEVER;
+	}
+	@Override
+	public String getGuiClassName(){
+		return null;
+	}
+	@Override
+	public List<String> getOwnedPackages(){
+		return Arrays.asList(new String[]{BASE_PATH.substring(0,BASE_PATH.length()-1)});
+	}
+	@Override
+	public boolean shouldLoadInEnvironment(){
+		return true;
+	}
+	@Override
+	public URL getUpdateUrl(){
+		return null;
 	}
 }

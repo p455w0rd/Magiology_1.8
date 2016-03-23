@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.magiology.api.power.ISidedPower;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.blocks.BlockContainerMultiColision;
 import com.magiology.mcobjects.tileentityes.TileEntityFirePipe;
 import com.magiology.mcobjects.tileentityes.corecomponents.MultiColisionProvider.MultiColisionProviderRayTracer;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.UpdateablePipeHandler;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -135,7 +135,7 @@ public class FirePipe extends BlockContainerMultiColision{
 							}
 						}
 					}
-					ForcePipeUpdate.updatein3by3(world, pos);
+					UpdateablePipeHandler.updatein3by3(world, pos);
 				}
 			}
 		}

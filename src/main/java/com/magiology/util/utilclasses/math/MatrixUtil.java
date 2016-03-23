@@ -8,10 +8,17 @@ import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.util.Vec3;
 
-public class MatrixUtil{
+public final class MatrixUtil{
 	
-	public static Matrix4f createMatrix(Vec3M translation,float rotationX,float rotationY,float rotationZ, float scale){
-		return createMatrix(new Vector3f((float)translation.x, (float)translation.y, (float)translation.z), rotationX, rotationY, rotationZ, scale);
+	private static final MatrixUtil instance=new MatrixUtil();
+	
+	private static Matrix4f matrix;
+	
+	private MatrixUtil(){}
+	
+	public static MatrixUtil createMatrix(Vec3M translation,float rotationX,float rotationY,float rotationZ, float scale){
+		createMatrix(new Vector3f((float)translation.x, (float)translation.y, (float)translation.z), rotationX, rotationY, rotationZ, scale);
+		return instance;
 	}
 	
 	public static Matrix4f rotateAt(Vec3M rotationOffset, Vec3M rot, Matrix4f mat){
@@ -23,6 +30,43 @@ public class MatrixUtil{
 		mat.translate(rotationOffset.negate(null));
 		return mat;
 	}
+	public MatrixUtil rotate(Vector3f rot){
+		Matrix4f.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.z), new Vector3f(0, 0, 1), matrix, matrix);
+		return instance;
+	}
+	public MatrixUtil rotate(Vec3M rot){
+		Matrix4f.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.z), new Vector3f(0, 0, 1), matrix, matrix);
+		return instance;
+	}
+	public MatrixUtil rotateZYX(Vec3M rot){
+		Matrix4f.rotate((float)Math.toRadians(rot.z), new Vector3f(0, 0, 1), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0), matrix, matrix);
+		return instance;
+	}
+	public MatrixUtil rotateZYX(Vector3f rot){
+		Matrix4f.rotate((float)Math.toRadians(rot.z), new Vector3f(0, 0, 1), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0), matrix, matrix);
+		return instance;
+	}
+	public MatrixUtil rotateX(float rot){
+		Matrix4f.rotate((float)Math.toRadians(rot), new Vector3f(1, 0, 0), matrix, matrix);
+		return instance;
+	}
+	public MatrixUtil rotateY(float rot){
+		Matrix4f.rotate((float)Math.toRadians(rot), new Vector3f(0, 1, 0), matrix, matrix);
+		return instance;
+	}
+	public MatrixUtil rotateZ(float rot){
+		Matrix4f.rotate((float)Math.toRadians(rot), new Vector3f(0, 0, 1), matrix, matrix);
+		return instance;
+	}
+	
 	public static Matrix4f rotate(Vector3f rot, Matrix4f mat){
 		Matrix4f.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0), mat, mat);
 		Matrix4f.rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0), mat, mat);
@@ -47,81 +91,110 @@ public class MatrixUtil{
 		Matrix4f.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0), mat, mat);
 		return mat;
 	}
+	public static Matrix4f rotateX(float rot, Matrix4f mat){
+		Matrix4f.rotate((float)Math.toRadians(rot), new Vector3f(1, 0, 0), mat, mat);
+		return mat;
+	}
+	public static Matrix4f rotateY(float rot, Matrix4f mat){
+		Matrix4f.rotate((float)Math.toRadians(rot), new Vector3f(0, 1, 0), mat, mat);
+		return mat;
+	}
+	public static Matrix4f rotateZ(float rot, Matrix4f mat){
+		Matrix4f.rotate((float)Math.toRadians(rot), new Vector3f(0, 0, 1), mat, mat);
+		return mat;
+	}
+	
+	public Matrix4f finish(){
+		Matrix4f result=matrix;
+		matrix=null;
+		return result;
+	}
 	
 	public static Matrix4f copy(Matrix4f mat){
 		return mat.transpose(null);
 	}
 	
-	public static Matrix4f createMatrix(Vector3f translation){
-		return new Matrix4f().translate(translation);
+	public static MatrixUtil createMatrix(Vector3f translation){
+		matrix=new Matrix4f().translate(translation);
+		return instance;
 	}
 	
-	public static Matrix4f createMatrixZYX(float rotationZ,float rotationY,float rotationX){
+	public static MatrixUtil createMatrixZYX(float rotationZ,float rotationY,float rotationX){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
-		return result;
+		matrix=result;
+		return instance;
 	}
 	
-	public static Matrix4f createMatrixX(float rotationX){
+	public static MatrixUtil createMatrixX(float rotationX){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
-		return result;
+		matrix=result;
+		return instance;
 	}
-	public static Matrix4f createMatrixY(float rotationY){
+	public static MatrixUtil createMatrixY(float rotationY){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
-		return result;
+		matrix=result;
+		return instance;
 	}
-	public static Matrix4f createMatrixZ(float rotationZ){
+	public static MatrixUtil createMatrixZ(float rotationZ){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
-		return result;
+		matrix=result;
+		return instance;
 	}
-	public static Matrix4f createMatrixXY(float rotationX,float rotationY){
-		Matrix4f result=new Matrix4f();
-		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
-		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
-		return result;
-	}
-	public static Matrix4f createMatrixYZ(float rotationY,float rotationZ){
-		Matrix4f result=new Matrix4f();
-		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
-		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
-		return result;
-	}
-	public static Matrix4f createMatrixXZ(float rotationX,float rotationZ){
-		Matrix4f result=new Matrix4f();
-		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
-		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
-		return result;
-	}
-	public static Matrix4f createMatrix(float rotationX,float rotationY,float rotationZ){
+	public static MatrixUtil createMatrixXY(float rotationX,float rotationY){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
+		matrix=result;
+		return instance;
+	}
+	public static MatrixUtil createMatrixYZ(float rotationY,float rotationZ){
+		Matrix4f result=new Matrix4f();
+		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
-		return result;
+		matrix=result;
+		return instance;
+	}
+	public static MatrixUtil createMatrixXZ(float rotationX,float rotationZ){
+		Matrix4f result=new Matrix4f();
+		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
+		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
+		matrix=result;
+		return instance;
+	}
+	public static MatrixUtil createMatrix(float rotationX,float rotationY,float rotationZ){
+		Matrix4f result=new Matrix4f();
+		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
+		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
+		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
+		matrix=result;
+		return instance;
 	}
 	
-	public static Matrix4f createMatrix(float rotationX,float rotationY,float rotationZ, float scale){
+	public static MatrixUtil createMatrix(float rotationX,float rotationY,float rotationZ, float scale){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
 		Matrix4f.scale(new Vector3f(scale, scale, scale), result, result);
-		return result;
+		matrix=result;
+		return instance;
 	}
 	
-	public static Matrix4f createMatrix(Vector3f translation,float rotationX,float rotationY,float rotationZ, float scale){
+	public static MatrixUtil createMatrix(Vector3f translation,float rotationX,float rotationY,float rotationZ, float scale){
 		Matrix4f result=new Matrix4f();
 		Matrix4f.translate(translation, result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationX), new Vector3f(1, 0, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationY), new Vector3f(0, 1, 0), result, result);
 		Matrix4f.rotate((float)Math.toRadians(rotationZ), new Vector3f(0, 0, 1), result, result);
 		Matrix4f.scale(new Vector3f(scale, scale, scale), result, result);
-		return result;
+		matrix=result;
+		return instance;
 	}
 
 	public static Vec3M transformVector(Vec3M vectorForTransformation,Vector3f translation,double rotationX,double rotationY,double rotationZ, double scale){
@@ -135,7 +208,7 @@ public class MatrixUtil{
 
 	public static Vector3f transformVector(Vector3f vectorForTransformation,Vector3f translation,double rotationX,double rotationY,double rotationZ, double scale){
 		if(vectorForTransformation==null)vectorForTransformation=new Vector3f();
-		Matrix4f transform=createMatrix(translation,(float)rotationX,(float)rotationY,(float)rotationZ,(float)scale);
+		Matrix4f transform=createMatrix(translation,(float)rotationX,(float)rotationY,(float)rotationZ,(float)scale).finish();
 		return transformVector(vectorForTransformation, transform);
 	}
 
@@ -155,6 +228,11 @@ public class MatrixUtil{
 		vectorForTransformation.y=vec4.y;
 		vectorForTransformation.z=vec4.z;
 		return vectorForTransformation;
+	}
+
+	public MatrixUtil translate(float x, float y, float z){
+		matrix.translate(new Vector3f(x, y, z));
+		return instance;
 	}
 	
 }

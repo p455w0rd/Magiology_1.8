@@ -56,6 +56,7 @@ public class TileEntityFireMatrixTransferer extends TileEntityPow{
 
 	@Override
 	public void updateConnections(){
+		UpdateablePipeHandler.onConnectionUpdate(this);
 		
 	}
 }

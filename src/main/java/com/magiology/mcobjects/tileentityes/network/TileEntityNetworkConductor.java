@@ -5,7 +5,6 @@ import java.util.List;
 import com.magiology.api.connection.IConnection;
 import com.magiology.api.network.ISidedNetworkComponent;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilobjects.SlowdownUtil;
 
@@ -24,7 +23,7 @@ public class TileEntityNetworkConductor extends TileEntityNetwork implements ITi
 	public void update(){
 		if(getBrain()==null){
 			findBrain();
-			ForcePipeUpdate.updatePipe(worldObj, pos);
+			UpdateablePipeHandler.updatePipe(worldObj, pos);
 		}
 		checkBrainConnection();
 		if(optimizer.isTimeWithAddProgress())updateConnections();

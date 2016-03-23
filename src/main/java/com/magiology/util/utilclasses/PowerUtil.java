@@ -6,7 +6,7 @@ import com.magiology.api.power.ISidedPower;
 import com.magiology.api.power.PowerCore;
 import com.magiology.api.power.PowerProducer;
 import com.magiology.api.power.PowerUpgrades;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
+import com.magiology.mcobjects.tileentityes.corecomponents.UpdateableTile.UpdateablePipeHandler;
 import com.magiology.util.utilobjects.NBTUtil;
 
 import net.minecraft.item.ItemStack;
@@ -182,7 +182,7 @@ public class PowerUtil{
 		boolean[] data=getNextCricleSideInteraction(iSidedPower, side);
 		iSidedPower.setReceaveOnSide(side,data[0]);
 		iSidedPower.setSendOnSide(side,data[1]);
-		if(iSidedPower instanceof TileEntity)ForcePipeUpdate.updatein3by3(((TileEntity)iSidedPower).getWorld(), ((TileEntity)iSidedPower).getPos());
+		if(iSidedPower instanceof TileEntity)UpdateablePipeHandler.updatein3by3(((TileEntity)iSidedPower).getWorld(), ((TileEntity)iSidedPower).getPos());
 	}
 	public static boolean[] getNextCricleSideInteraction(ISidedPower iSidedPower,int side){
 		boolean[] result=new boolean[2];

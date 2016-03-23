@@ -61,6 +61,13 @@ dependencies {
 
 }
 
+jar{
+        manifest{
+        attributes 'FMLCorePlugin': 'com.magiology.core.coremod.MagiologyCoreMod',
+                        'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
 processResources
 {
     // this will ensure that this task is redone when the versions change.

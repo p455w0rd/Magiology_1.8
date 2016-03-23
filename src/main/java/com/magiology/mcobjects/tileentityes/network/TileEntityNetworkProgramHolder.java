@@ -7,7 +7,6 @@ import com.magiology.api.network.NetworkBaseComponent;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.util.utilclasses.NetworkUtil;
 import com.magiology.util.utilclasses.SideUtil;
 import com.magiology.util.utilclasses.UtilM;
@@ -46,7 +45,7 @@ public class TileEntityNetworkProgramHolder extends TileEntityNetwork implements
 	public void update(){
 		if(getBrain()==null){
 			findBrain();
-			ForcePipeUpdate.updatePipe(worldObj, pos);
+			UpdateablePipeHandler.updatePipe(worldObj, pos);
 		}
 		checkBrainConnection();
 		if(optimizer.isTimeWithAddProgress())updateConnections();

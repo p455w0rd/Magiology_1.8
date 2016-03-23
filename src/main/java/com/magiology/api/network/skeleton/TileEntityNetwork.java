@@ -34,6 +34,33 @@ public abstract class TileEntityNetwork extends TileEntityM implements MultiColi
 	public AxisAlignedBB[] collisionBoxes=null;
 
 	protected BlockPos brainLoadup=new BlockPos(new Vec3(0,0,0));
+	
+	protected long lastUpdate;
+	
+	private boolean updateConnectionsWaiting=false;
+	
+	@Override
+	public boolean isUpdateWaiting(){
+		return updateConnectionsWaiting;
+	}
+	@Override
+	public void updateWaitingUpdate(){
+		if(!hasWorldObj()){
+			updateConnectionsWaiting=true;
+			return;
+		}
+		if(isUpdateWaiting())updateConnections();
+		lastUpdate=getTime();
+	}
+	@Override
+	public void connectionUpdateWaiting(){
+		updateConnectionsWaiting=true;
+	}
+	@Override
+	public long getLastUpdateTime(){
+		return lastUpdate;
+	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound NBT){
 		super.readFromNBT(NBT);

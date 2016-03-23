@@ -5,19 +5,25 @@ import java.util.List;
 
 import com.magiology.util.renderers.VertexRenderer.ShadedQuad;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
+import com.magiology.util.utilobjects.vectors.Vec2FM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 public class IndexedModel{
 	
-	private List<Vec3M> vertices=new ArrayList<>();
-	private List<Integer> indices=new ArrayList<>();
+	private final List<Vec3M> vertices=new ArrayList<>();
+	private final List<Integer> indices=new ArrayList<>();
+	private final List<Vec2FM> uvs=new ArrayList<>();
 	
 	public IndexedModel(){
 		
 	}
 	public IndexedModel(List<Vec3M> vertices, List<Integer> indices){
-		this.vertices=vertices;
-		this.indices=indices;
+		this(vertices, indices, new ArrayList<>());
+	}
+	public IndexedModel(List<Vec3M> vertices, List<Integer> indices, List<Vec2FM> uvs){
+		this.vertices.addAll(vertices);
+		this.indices.addAll(indices);
+		this.uvs.addAll(uvs);
 	}
 	public IndexedModel(List<ShadedQuad> quads){
 		for(ShadedQuad shadedQuad:quads)addQuad(shadedQuad);
@@ -60,16 +66,25 @@ public class IndexedModel{
 	public void addIndices(int...indices){
 		for(int index:indices)this.indices.add(index);
 	}
+	public void addUVs(Vec2FM...uvs){
+		for(Vec2FM uv:uvs)addUV(uv);
+	}
 	public void addVetex(Vec3M vec){
 		vertices.add(vec);
 	}
 	public void addIndex(int index){
 		indices.add(index);
 	}
+	public void addUV(Vec2FM uv){
+		uvs.add(uv);
+	}
 	public List<Vec3M> getVertices(){
 		return vertices;
 	}
 	public List<Integer> getIndices(){
 		return indices;
+	}
+	public List<Vec2FM> getUVs(){
+		return uvs;
 	}
 }

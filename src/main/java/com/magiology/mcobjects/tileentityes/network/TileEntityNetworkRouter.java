@@ -10,7 +10,6 @@ import com.magiology.api.network.Messageable;
 import com.magiology.api.network.NetworkInterface;
 import com.magiology.api.network.skeleton.TileEntityNetwork;
 import com.magiology.core.init.MItems;
-import com.magiology.forgepowered.events.ForcePipeUpdate;
 import com.magiology.mcobjects.items.NetworkPointer;
 import com.magiology.util.renderers.PartialTicks1F;
 import com.magiology.util.utilclasses.NetworkUtil;
@@ -72,7 +71,7 @@ public class TileEntityNetworkRouter extends TileEntityNetwork implements ISided
 	public void update(){
 		if(getBrain()==null){
 			findBrain();
-			ForcePipeUpdate.updatePipe(worldObj, pos);
+			UpdateablePipeHandler.updatePipe(worldObj, pos);
 		}
 		
 		for(int i=0;i<animationos.length;i++){

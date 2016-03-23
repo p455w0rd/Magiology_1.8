@@ -53,5 +53,22 @@ public class QuadUV{
 		default:return null;
 		}
 	}
+	public static Vec2FM[] toArray(QuadUV...quads){
+		Vec2FM[] result=new Vec2FM[quads.length*4];
+		for(int i=0;i<quads.length;i++){
+			Vec2FM[] array=quads[i].toArray();
+			for(int j=0;j<4;j++)result[i*4+j]=array[j];
+		}
+		return result;
+	}
+	public Vec2FM[] toArray(){
+		return new Vec2FM[]{
+				new Vec2FM(x1, y1),
+				new Vec2FM(x2, y2),
+				new Vec2FM(x3, y3),
+				new Vec2FM(x4, y4)
+		};
+	}
+	
 	private static QuadUV all=new QuadUV(1,1,1,0,0,0,0,1);
 }

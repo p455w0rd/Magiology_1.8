@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.magiology.handlers.animationhandlers.thehand.HandData;
 import com.magiology.handlers.animationhandlers.thehand.HandPosition;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
+import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilobjects.DoubleObject;
 import com.magiology.util.utilobjects.LinearAnimation;
@@ -24,11 +27,11 @@ public class HandAnimation extends HandAnimationBase{
 	private boolean isRunning;
 	private long timeStarted;
 	
-	public HandAnimation(HandPosition startEnd, AnimationPart...animationData){
-		this(startEnd, startEnd, animationData);
+	public HandAnimation(HandPosition startEnd, AnimationPart[] animationData, String name){
+		this(startEnd, startEnd, animationData, name);
 	}
-	public HandAnimation(HandPosition start, HandPosition end, AnimationPart...animationData){
-		super(start, end);
+	public HandAnimation(HandPosition start, HandPosition end, AnimationPart[] animationData, String name){
+		super(start, end, name);
 		wantedPos=(HandData)start.data.clone();
 		this.animationData=animationData;
 	}
@@ -89,7 +92,7 @@ public class HandAnimation extends HandAnimationBase{
 			count++;
 		}
 		data.add((HandData)wantedPos.clone());
-		
+		PrintUtil.println(data.size());
 		DoubleObject<HandData[], Float>[] data1=new DoubleObject[data.size()];
 		Iterator<HandData> data2=data.iterator();
 		for(int i=0;i<data1.length;i++)data1[i]=new DoubleObject<HandData[], Float>(new HandData[]{data2.next()}, (i+0F)/data1.length);
@@ -102,45 +105,49 @@ public class HandAnimation extends HandAnimationBase{
 	
 	
 	public static class AnimationPart{
+		protected static final AnimationPart[] blank=new AnimationPart[]{new AnimationPart(0, 0, 0, 0)};
 		private int start,lenght,posID;
 		private float speed;
 		
 		private ObjectProcessor<HandData> runner;
 		
-		private static ObjectProcessor[] processors={
-			new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
-				AnimationPart instance=(AnimationPart)objects[0];
-				object.base[instance.posID]+=instance.speed;
-				return object;
-			}},
-			new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
-				AnimationPart instance=(AnimationPart)objects[0];
-				object.thumb[instance.posID]+=instance.speed;
-				return object;
-			}},
-			new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
-				AnimationPart instance=(AnimationPart)objects[0];
-				object.fingers[0][instance.posID]+=instance.speed;
-				return object;
-			}},
-			new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
-				AnimationPart instance=(AnimationPart)objects[0];
-				object.fingers[1][instance.posID]+=instance.speed;
-				return object;
-			}},
-			new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
-				AnimationPart instance=(AnimationPart)objects[0];
-				object.fingers[2][instance.posID]+=instance.speed;
-				return object;
-			}},
-			new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
-				AnimationPart instance=(AnimationPart)objects[0];
-				object.fingers[3][instance.posID]+=instance.speed;
-				return object;
-			}}
-		};
+		private static ObjectProcessor[] processors;
 		
 		public AnimationPart(int pos, int start, int lenght, float speed){
+			if(processors==null){
+				processors=new ObjectProcessor[]{
+						new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
+							AnimationPart instance=(AnimationPart)objects[0];
+							object.base[instance.posID]+=instance.speed;
+							return object;
+						}},
+						new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
+							AnimationPart instance=(AnimationPart)objects[0];
+							object.thumb[instance.posID]+=instance.speed;
+							return object;
+						}},
+						new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
+							AnimationPart instance=(AnimationPart)objects[0];
+							object.fingers[0][instance.posID]+=instance.speed;
+							return object;
+						}},
+						new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
+							AnimationPart instance=(AnimationPart)objects[0];
+							object.fingers[1][instance.posID]+=instance.speed;
+							return object;
+						}},
+						new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
+							AnimationPart instance=(AnimationPart)objects[0];
+							object.fingers[2][instance.posID]+=instance.speed;
+							return object;
+						}},
+						new ObjectProcessor<HandData>(){@Override public HandData pocess(HandData object, Object...objects){
+							AnimationPart instance=(AnimationPart)objects[0];
+							object.fingers[3][instance.posID]+=instance.speed;
+							return object;
+						}}
+					};
+			}
 //			0:0-5 base=new float[]{0,0,0, 0,0,0};
 //			1:6-10 thumb=new float[]{0,0,0, 0, 0};
 //			fingers=new float[][]{ 2:11-14 {0,0, 0, 0}, 3 {0,0, 0, 0}, 4 {0,0, 0, 0}, 5 {0,0, 0, 0}};
@@ -181,15 +188,44 @@ public class HandAnimation extends HandAnimationBase{
 		private boolean isActive(int time){
 			return time>=start&&time<=start+lenght;
 		}
+//		public static AnimationPart[] gen(int pos, float...startLenghtSpeed){
+//			assert startLenghtSpeed.length%2!=0:"invalid data!";
+//			AnimationPart[] result=new AnimationPart[startLenghtSpeed.length/2];
+//			int start=0;
+//			for(int i=0;i<result.length;i++){
+//				result[i]=new AnimationPart(pos, start, (int)startLenghtSpeed[i*2], startLenghtSpeed[i*2+1]);
+//				start+=(int)startLenghtSpeed[i*2];
+//			}
+//			return result;
+//		}
 		public static AnimationPart[] gen(int pos, float...startLenghtSpeed){
 			assert startLenghtSpeed.length%2!=0:"invalid data!";
-			AnimationPart[] result=new AnimationPart[startLenghtSpeed.length/2];
-			int start=0;
-			for(int i=0;i<result.length;i++){
-				result[i]=new AnimationPart(pos, start, (int)startLenghtSpeed[i*2], startLenghtSpeed[i*2+1]);
+			List<AnimationPart> result=new ArrayList<>();
+			int start=0,length=startLenghtSpeed.length/2;
+			for(int i=0;i<length;i++){
+				float speed=startLenghtSpeed[i*2+1];
+				result.add(new AnimationPart(pos, start, (int)startLenghtSpeed[i*2], speed));
 				start+=(int)startLenghtSpeed[i*2];
 			}
-			return result;
+			return result.toArray(new AnimationPart[0]);
+		}
+		
+		/*
+		 * private int start,lenght,posID;
+		private float speed;
+		
+		private ObjectProcessor<HandData> runner;
+		 */
+		
+		@Override
+		public String toString(){
+			return new StringBuilder("AnimationPart[")
+				.append("start=").append(start)
+				.append(", lenght=").append(lenght)
+				.append(", posID=").append(posID)
+				.append(", speed=").append(speed)
+				.append(", runnerID=").append(ArrayUtils.indexOf(processors, runner))
+			.append(']').toString();
 		}
 	}
 }
