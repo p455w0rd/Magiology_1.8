@@ -75,21 +75,22 @@ public interface MultiColisionProvider{
 				if(hit!=null&&hit.hitVec!=null)results.add(hit.hitVec);
 				else results.add(null);
 			}
-			results.removeIf((vec)->vec==null);
-			if(results.isEmpty())return new DoubleObject<Integer, MovingObjectPosition>(-1, null);
 			
 			Vec3   closest=end1;
 			int    closestID=-1;
 			double closestDistance=Double.MAX_VALUE;
 			for(int i=0,l=results.size();i<l;i++){
 				Vec3 newVec=results.get(i);
-				double newDistance=closest.distanceTo(newVec);
-				if(newDistance<closestDistance){
-					closestDistance=newDistance;
-					closest=newVec;
-					closestID=i;
+				if(newVec!=null){
+					double newDistance=closest.distanceTo(newVec);
+					if(newDistance<closestDistance){
+						closestDistance=newDistance;
+						closest=newVec;
+						closestID=i;
+					}
 				}
 			}
+			if(closestID==-1)return new DoubleObject<Integer, MovingObjectPosition>(-1, null);
 			
 			return new DoubleObject<Integer, MovingObjectPosition>(closestID, hits.get(closestID));
 		}
