@@ -10,7 +10,7 @@ import com.magiology.util.utilclasses.math.MathUtil;
 import com.magiology.util.utilobjects.ObjectHolder;
 
 public class HandData implements Calculable<HandData>{
-	public float[] base,thumb,fingers[];
+	public float calciferiumPrecentage,base[],thumb[],fingers[][];
 	
 	public HandData(){
 		this(true);
@@ -49,6 +49,9 @@ public class HandData implements Calculable<HandData>{
 		thumb=handData.thumb;
 		fingers=handData.fingers;
 	}
+	public HandData Clone(){
+		return (HandData)clone();
+	}
 	@Override
 	public Object clone(){
 		HandData result=new HandData(false);
@@ -56,6 +59,7 @@ public class HandData implements Calculable<HandData>{
 		result.thumb=thumb.clone();
 		result.fingers=new float[fingers.length][0];
 		for(int i=0;i<fingers.length;i++)result.fingers[i]=Arrays.copyOf(fingers[i], fingers[i].length);
+		result.calciferiumPrecentage=calciferiumPrecentage;
 		return result;
 	}
 	

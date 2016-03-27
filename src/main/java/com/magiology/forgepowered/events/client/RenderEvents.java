@@ -224,8 +224,6 @@ public class RenderEvents{
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void renderPlayerEvent(RenderPlayerEvent.Post event){
 		EntityPlayer player=event.entityPlayer;
-		ComplexPlayerRenderingData data=ComplexPlayerRenderingData.get(player);
-		if(data==null)data=ComplexPlayerRenderingData.registerEntityPlayerRenderer(player);
 		if(UtilM.isItemInStack(MItems.WingsFTBFI, player.getCurrentArmor(2))){
 			player.renderYawOffset=f1;
 			player.prevRenderYawOffset=f2;

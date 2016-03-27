@@ -2,6 +2,9 @@ package com.magiology.core.coremod.transformers;
 
 import static org.objectweb.asm.Opcodes.*;
 
+import java.lang.reflect.Method;
+
+import org.objectweb.asm.Type;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldInsnNode;
@@ -9,6 +12,7 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
+import com.magiology.core.coremod.transformers.CodeWrapper.CodeAction;
 import com.magiology.util.utilclasses.PrintUtil;
 
 public abstract class ClassTransformerBase{
@@ -17,25 +21,55 @@ public abstract class ClassTransformerBase{
 	
 	
 	public abstract String[] getTransformingClasses();
-	public abstract void transform(ClassNode classNode);
+	public abstract void transform(ClassNode classNode,int classID);
+	public abstract String getDebudInfo();
 	
-	public static final ASMClass 
+	protected static final ASMClass 
 		entityLivingBaseClass=new ASMClass("pr", "net/minecraft/entity/EntityLivingBase"),
 		itemStackClass=new ASMClass("zx", "net/minecraft/item/ItemStack"),
 		transformTypeClass=new ASMClass("bgr$b", "net/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType"),
 		renderItemClass=new ASMClass("bjh", "net/minecraft/client/renderer/entity/RenderItem"),
-		itemRendererClass=new ASMClass("bfn", "net/minecraft/client/renderer/ItemRenderer");
+		itemRendererClass=new ASMClass("bfn", "net/minecraft/client/renderer/ItemRenderer"),
+		iBakedModel=new ASMClass("boq", "net/minecraft/client/resources/model/IBakedModel"),
+		tessellator=new ASMClass("bfx", "net/minecraft/client/renderer/Tessellator"),
+		glStateManager=new ASMClass("bfl", "net/minecraft/client/renderer/GlStateManager"),
+		forgeHooksClient=new ASMClass("net/minecraftforge/client/ForgeHooksClient", "net/minecraftforge/client/ForgeHooksClient");
 	
-	public static final ASMMethod
-		renderItemFunc=new ASMMethod("a","renderItem",new ASMFuncDesc('V',entityLivingBaseClass,itemStackClass,transformTypeClass)),
-		renderItemModelForEntityFunc=new ASMMethod("a","renderItemModelForEntity",new ASMFuncDesc('V',itemStackClass,entityLivingBaseClass,transformTypeClass)),
-		clientHooksM_renderItem=new ASMMethod("a","renderItemModelForEntity",new ASMFuncDesc('Z',itemStackClass,entityLivingBaseClass,transformTypeClass));
 	
+	protected static final ASMMethod
+		renderItemFunc=new ASMMethod("a","renderItem",new ASMFuncDesc("V",entityLivingBaseClass,itemStackClass,transformTypeClass)),
+		renderItemModelForEntityFunc=new ASMMethod("a","renderItemModelForEntity",new ASMFuncDesc("V",itemStackClass,entityLivingBaseClass,transformTypeClass)),
+		clientHooksM_renderItem=new ASMMethod("a","renderItemModelForEntity",new ASMFuncDesc("Z",itemStackClass,entityLivingBaseClass,transformTypeClass)),
+		renderItem_renderItem=new ASMMethod("a","renderItem",new ASMFuncDesc("V",itemStackClass,iBakedModel)),
+		tessellator_getInstance=new ASMMethod("a", "getInstance", new ASMFuncDesc(tessellator.get()+";")),
+		tessellator_draw=new ASMMethod("b", "draw", new ASMFuncDesc("V")),
+		iBakedModel_isBuiltInRenderer=new ASMMethod("d", "isBuiltInRenderer", new ASMFuncDesc("Z")),
+		glStateManager_popMatrix=new ASMMethod("F", "popMatrix", new ASMFuncDesc("V")),
+		handleCameraTransforms=new ASMMethod("handleCameraTransforms", "handleCameraTransforms", new ASMFuncDesc(iBakedModel.normal, iBakedModel,transformTypeClass));
+	protected static CodeAction 
+		anyAload=new CodeAction(){
+			@Override
+			public void move(LineWalker code){
+				code.next();
+			}
+			@Override
+			public boolean check(AbstractInsnNode line){
+				return line.getOpcode()==ALOAD;
+			}
+		},
+		anyInstaiceof=new CodeAction(){
+			@Override
+			public void move(LineWalker code){
+				code.next();
+			}
+			@Override
+			public boolean check(AbstractInsnNode line){
+				return line.getOpcode()==INSTANCEOF;
+			}
+		};
 	protected MethodNode findMethod(ClassNode clazz,ASMMethod toFind){
 		for(MethodNode method:clazz.methods){
-			if(renderItemFunc.equals(method)){
-				return method;
-			}
+			if(toFind.equals(method))return method;
 		}
 		return null;
 	}
@@ -47,127 +81,48 @@ public abstract class ClassTransformerBase{
 		}
 		return false;
 	}
-	protected boolean isAloadValue(AbstractInsnNode line, int value){
+	protected static boolean isAloadValue(AbstractInsnNode line, int value){
 		return line.getOpcode()==ALOAD&&((VarInsnNode)line).var==value;
 	}
-	protected boolean isInvokeStatic(AbstractInsnNode line, ASMMethod method){
+	protected static boolean isInvokeStatic(AbstractInsnNode line, ASMMethod method){
 		return line.getOpcode()==INVOKESTATIC&&method.equals(line);
 	}
-	protected boolean isInvokeVirtual(AbstractInsnNode line, ASMMethod method){
+	protected static boolean isInvokeVirtual(AbstractInsnNode line, ASMMethod method){
 		return line.getOpcode()==INVOKEVIRTUAL&&method.equals(line);
 	}
-	
-	protected class LineWalker{
-		private AbstractInsnNode curentLine;
-		public LineWalker(AbstractInsnNode curentLine){
-			goTo(curentLine);
-		}
-
-		public LineWalker goTo(AbstractInsnNode line){
-			curentLine=line;
-			return this;
-		}
-		
-		public LineWalker next(){
-			return next(1);
-		}
-		public LineWalker previous(){
-			return previous(1);
-		}
-		public LineWalker next(int count){
-			for(int i=0;i<count;i++)curentLine=nextR();
-			return this;
-		}
-		public LineWalker previous(int count){
-			for(int i=0;i<count;i++)curentLine=previousR();
-			return this;
-		}
-		public AbstractInsnNode nextR(){
-			return curentLine=curentLine.getNext();
-		}
-		public AbstractInsnNode previousR(){
-			return curentLine=curentLine.getPrevious();
-		}
-
-		public AbstractInsnNode get(){
-			return curentLine;
-		}
+	protected static boolean isInvokeInterface(AbstractInsnNode line, ASMMethod method){
+		return line.getOpcode()==INVOKEINTERFACE&&method.equals(line);
 	}
 	
-	protected interface ValueMaker{
-		public abstract String get();
-		public static String compileBase(ValueMaker[] data, char returnType){
-			StringBuilder result=new StringBuilder("(");
-			
-			for(ValueMaker valueMaker:data)result.append(valueMaker.get()).append(";");
-			
-			result.append(")").append(returnType);
-			return result.toString();
-		}
-	}
-	protected static class ASMMethod extends ASMBase{
-		public ASMFuncDesc desc;
-		public ASMMethod(String obfuscated, String normal,ASMFuncDesc desc){
-			super(obfuscated, normal);
-			this.desc=desc;
-		}
-		@Override
-		public boolean equals(Object obj){
-			if(obj instanceof MethodNode){
-				MethodNode meth/*not Breaking Bad one*/=(MethodNode)obj;
-				if(meth.name.equals(get())&&meth.desc.equals(desc.get()))return true;
+	protected MethodInsnNode generateStaticCall(Class clazz, String methodName){
+		Method method=null;
+		for(Method mhod:clazz.getDeclaredMethods()){
+			if(mhod.getName().equals(methodName)){
+				method=mhod;
+				break;
 			}
-			if(obj instanceof MethodInsnNode){
-				MethodInsnNode meth/*not Breaking Bad one*/=(MethodInsnNode)obj;
-				if(meth.name.equals(get())&&meth.desc.equals(desc.get()))return true;
-			}
-			return super.equals(obj);
-		}
-	}
-	protected static class ASMClass extends ASMBase{
-
-		public ASMClass(String obfuscated, String normal){
-			super("L"+obfuscated, "L"+normal);
 		}
 		
-	}
-	protected static class ASMBase implements ValueMaker{
+		Class<?> returnType=method.getReturnType();
 		
-		public String obfuscated,normal;
+		String returnTypeS=Type.getInternalName(returnType);
+		if(returnTypeS.equals("void"))returnTypeS="V";
+		else if(returnTypeS.equals(Type.getInternalName(byte.class)))returnTypeS="B";
+		else if(returnTypeS.equals(Type.getInternalName(char.class)))returnTypeS="C";
+		else if(returnTypeS.equals(Type.getInternalName(double.class)))returnTypeS="D";
+		else if(returnTypeS.equals(Type.getInternalName(float.class)))returnTypeS="F";
+		else if(returnTypeS.equals(Type.getInternalName(int.class)))returnTypeS="I";
+		else if(returnTypeS.equals(Type.getInternalName(long.class)))returnTypeS="J";
+		else if(returnTypeS.equals(Type.getInternalName(short.class)))returnTypeS="S";
+		else if(returnTypeS.equals(Type.getInternalName(boolean.class)))returnTypeS="Z";
 		
-		public ASMBase(String obfuscated, String normal){
-			this.obfuscated=obfuscated;
-			this.normal=normal;
-		}
+		Class<?>[] params=method.getParameterTypes();
+		ASMClass[] param=new ASMClass[params.length];
 		
-		@Override
-		public String get(){
-			return isObfuscated?obfuscated:normal;
-		}
-	}
-	protected static class ASMFuncDesc implements ValueMaker{
+		for(int i=0;i<param.length;i++)param[i]=new ASMClass("", Type.getInternalName(params[i]));
 		
-		public ValueMaker[] param;
-		public String obfuscatedS,normalS;
-		public char returnType;
+		ASMFuncDesc desc=new ASMFuncDesc(returnTypeS, param);
 		
-		public ASMFuncDesc(char returnType,ValueMaker...param){
-			this.returnType=returnType;
-			this.param=param;
-		}
-		
-		@Override
-		public String get(){
-			if(obfuscatedS==null)compile();
-			return isObfuscated?obfuscatedS:normalS;
-		}
-		private void compile(){
-			boolean isObfuscatedSave=isObfuscated;
-			isObfuscated=true;
-			obfuscatedS=ValueMaker.compileBase(param, returnType);
-			isObfuscated=false;
-			normalS=ValueMaker.compileBase(param, returnType);
-			isObfuscated=isObfuscatedSave;
-		}
+		return new MethodInsnNode(INVOKESTATIC, Type.getInternalName(clazz), method.getName(), desc.get(),false);
 	}
 }

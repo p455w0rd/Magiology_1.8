@@ -59,9 +59,9 @@ public class RenderNetworkPointerContainerHighlight extends LongAfterRenderRende
 		float
 			point=progress.getPoint(),
 			point2=MathUtil.snap(point, 0, 1),
-			playerX=TessUtil.calculateRenderPos(player, 'x'),
-			playerY=TessUtil.calculateRenderPos(player, 'y')+player.getEyeHeight(),
-			playerZ=TessUtil.calculateRenderPos(player, 'z'),
+			playerX=PartialTicksUtil.calculatePosX(player),
+			playerY=PartialTicksUtil.calculatePosY(player)+player.getEyeHeight(),
+			playerZ=PartialTicksUtil.calculatePosZ(player),
 			txtX=tile.x()+0.5F+off.getX(),
 			txtY=tile.y()+0.5F+off.getY(),
 			txtZ=tile.z()+0.5F+off.getZ(),

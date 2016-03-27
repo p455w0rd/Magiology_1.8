@@ -9,6 +9,8 @@ import org.objectweb.asm.tree.ClassNode;
 
 import com.magiology.core.coremod.transformers.ClassTransformerBase;
 import com.magiology.core.init.classload.ClassList;
+import com.magiology.util.utilclasses.PrintUtil;
+import com.magiology.util.utilobjects.DoubleObject;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 
@@ -25,11 +27,28 @@ public class TransformerHandler implements IClassTransformer{
 		ClassNode node=new ClassNode();
 		ClassReader classReader=new ClassReader(classBytecode);
 		classReader.accept(node, 0);
+		
 		for(ClassTransformerBase transformer:transformers){
-			for(String clazz:transformer.getTransformingClasses()){
-				if(clazz.equals(deobfuscatedName))transformer.transform(node);
+			String[] clazzes=transformer.getTransformingClasses();
+			List<DoubleObject<ClassNode, Integer>> toTransform=new ArrayList<>();
+			
+			for(int i=0;i<clazzes.length;i++){
+				if(clazzes[i].equals(deobfuscatedName)){
+					toTransform.add(new DoubleObject<ClassNode, Integer>(node, i));
+				}
+			}
+			
+			if(!toTransform.isEmpty()){
+				String debuginfo=transformer.getDebudInfo();
+				if(debuginfo==null||debuginfo.isEmpty())debuginfo="Class transformer "+transformer.getClass().getSimpleName()+" has no description!";
+				PrintUtil.println(debuginfo);
+				
+				for(DoubleObject<ClassNode, Integer> data:toTransform){
+					transformer.transform(data.obj1, data.obj2);
+				}
 			}
 		}
+		
 		ClassWriter writer=new ClassWriter(ClassWriter.COMPUTE_MAXS|ClassWriter.COMPUTE_FRAMES);
 		node.accept(writer);
 		return writer.toByteArray();

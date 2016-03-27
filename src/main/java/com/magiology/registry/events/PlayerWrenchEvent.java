@@ -15,14 +15,13 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class PlayerWrenchEvent extends Event{
 	
-	public final EntityPlayer entityPlayer;
-	public final Action action;
-	public final World world;
-	public final BlockPos pos;
-	public final EnumFacing face;
+	public EntityPlayer entityPlayer;
+	public Action action;
+	public World world;
+	public BlockPos pos;
+	public EnumFacing face;
 	public Result useBlock = DEFAULT,useItem = DEFAULT;
 	public ItemStack wrenchItem;
-	
 	
 	private PlayerWrenchEvent(EntityPlayer player, Action action, BlockPos pos, EnumFacing face, World world, ItemStack wrench){
 		entityPlayer=player;

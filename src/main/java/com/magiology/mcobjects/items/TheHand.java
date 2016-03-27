@@ -8,17 +8,13 @@ import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
 import com.magiology.handlers.animationhandlers.thehand.animation.CommonHand;
 import com.magiology.util.utilobjects.NBTUtil;
 
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TheHand extends Item implements CustomRenderedItem{
 	
@@ -94,19 +90,16 @@ public class TheHand extends Item implements CustomRenderedItem{
 //			((EntityPlayer)entity).setItemInUse(itemstack, 100);
 		}
 	}
-
-
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_){return 100000;}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void renderItem(ItemStack stack, EntityLivingBase entity, TransformType transform){
-		TheHandHandler.getRenderer().renderItem(stack, entity,transform);
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged){
+		return slotChanged;
 	}
 
 	@Override
-	public boolean shouldRender(ItemStack stack, EntityLivingBase entity, TransformType transform){
-		return TheHandHandler.getRenderer().shouldRender(stack, entity,transform);
+	public int getMaxItemUseDuration(ItemStack p_77626_1_){return 100000;}
+	
+	@Override
+	public CustomRenderedItemRenderer getRenderer(ItemStack stack){
+		return TheHandHandler.getRenderer();
 	}
 }

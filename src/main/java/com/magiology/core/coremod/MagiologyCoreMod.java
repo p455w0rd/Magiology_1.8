@@ -29,7 +29,7 @@ public class MagiologyCoreMod implements IFMLLoadingPlugin{
 	
 	@Override
 	public String[] getASMTransformerClass(){
-		return CollectionConverter.convAr(ClassList.getImplementations().get(IClassTransformer.class), String.class, (c,obj)->obj.setVar(c.getName()));
+		return CollectionConverter.convAr(ClassList.getImplementations().get(IClassTransformer.class), String.class, (c)->{return c.getName();});
 	}
 
 	@Override

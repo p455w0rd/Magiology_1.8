@@ -60,10 +60,7 @@ public abstract class BlockContainerMultiColision extends BlockContainerM{
 	
 	@Override
 	public MovingObjectPosition collisionRayTrace(World w, BlockPos pos, Vec3 startVec, Vec3 endVec){
-		if(!MultiColisionProviderRayTracer.isRayTracing){
-			int id=MultiColisionProviderRayTracer.getRayTracedBoxId(w, pos, Vec3M.conv(startVec), Vec3M.conv(endVec), getResetBoundsOptionalFix(w, pos));
-			return MultiColisionProviderRayTracer.results[id];
-		}else return super.collisionRayTrace(w, pos, startVec, endVec);
+		return MultiColisionProviderRayTracer.getRayTracedBoxId(w, pos, Vec3M.conv(startVec), Vec3M.conv(endVec));
 	}
 	
 	public abstract AxisAlignedBB getResetBoundsOptional(World world, BlockPos pos);

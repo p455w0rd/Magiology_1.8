@@ -171,6 +171,8 @@ public class EntityEvents{
 		TileEntity tile=world.getTileEntity(pos);
 		if(tile instanceof PowerCore){
 			PowerCore.SavePowerToItemEvents.onPowerCoreWrenched(pos, player, world, tile);
+		}else{
+			
 		}
 	}
 //	@SubscribeEvent

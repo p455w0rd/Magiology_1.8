@@ -1,6 +1,7 @@
 package com.magiology.client.render.itemrender;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.lwjgl.util.vector.Matrix4f;
@@ -8,12 +9,16 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.client.render.Textures;
+import com.magiology.forgepowered.events.client.CustomRenderedItem.CustomRenderedItemRenderer;
 import com.magiology.handlers.animationhandlers.thehand.HandData;
 import com.magiology.handlers.animationhandlers.thehand.TheHandHandler;
+import com.magiology.handlers.animationhandlers.thehand.animation.CommonHand;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.MultiTransfromModel;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.TessUtil;
+import com.magiology.util.renderers.VertexModel;
+import com.magiology.util.renderers.VertexRenderer;
 import com.magiology.util.renderers.glstates.GlState;
 import com.magiology.util.renderers.glstates.GlStateCell;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
@@ -22,18 +27,20 @@ import com.magiology.util.utilclasses.math.MatrixUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.IndexedModel;
 import com.magiology.util.utilobjects.vectors.QuadUVGenerator;
+import com.magiology.util.utilobjects.vectors.Vec2FM;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class ItemRendererTheHand{
+public class ItemRendererTheHand implements CustomRenderedItemRenderer{
 	private final float p=1F/16F;
 	public ResourceLocation[] blank1={new ResourceLocation("noTexture")};
 	
 	public MultiTransfromModel handModelSolid,handModelOpaque;
+	
+	private VertexModel defultModel;
 	
 	private Matrix4f 
 		base,
@@ -43,17 +50,51 @@ public class ItemRendererTheHand{
 		finger7,finger8,finger9,
 		finger10,finger11,finger12;
 
-
-	public boolean shouldRender(ItemStack stack, EntityLivingBase entity, TransformType transform){
+	@Override
+	public boolean shouldRenderSpecial(ItemStack stack, TransformType position){
 		return true;
 	}
 	
-	public void renderItem(ItemStack stack, EntityLivingBase entity, TransformType transform){
+	@Override
+	@SuppressWarnings("incomplete-switch")
+	public void renderItem(ItemStack stack, TransformType position){
 		secure();
-		try{
-			ColorF.WHITE.bind();
-			HandData data=TheHandHandler.getRenderHandData();
+		OpenGLM.pushMatrix();
+		if(position!=TransformType.FIRST_PERSON){
+			HandData data=CommonHand.naturalPosition.data.Clone();
+			switch(position){
+			case GROUND:{
+				data.base[0]=0.20976496F;
+				data.base[1]=-0.375F;
+				data.base[2]=-1.1224111F;
+			}break;
+			case GUI:{
+				data.base[0]=p*12;
+				data.base[1]=-p*10;
+				data.base[2]=-1.1224111F;
+				data.base[3]=20;
+				data.base[4]=-120;
+			}break;
+			case THIRD_PERSON:{
+				GL11U.glScale(p*6);
+				GL11U.glRotate(-80, -130, 0);
+				OpenGLM.translate(-p*4, p*7, -p*2);
+			}break;
+			}
 			
+			
+			render(data);
+		}else{
+			GL11U.glScale(p*20);
+			render(TheHandHandler.getRenderHandData());
+		}
+		OpenGLM.popMatrix();
+	}
+	
+	private void render(HandData data){
+		try{
+			GL11U.endOpaqueRendering();
+			ColorF.WHITE.bind();
 			
 			List<Matrix4f> transformations=new ArrayList<>();
 			
@@ -77,89 +118,102 @@ public class ItemRendererTheHand{
 				new Vec3M(data.fingers[3][0], data.fingers[3][1], 0),
 				new Vector2f(data.fingers[3][2], data.fingers[3][3])
 			);
+			//TODO: remove true
+			if(handModelSolid==null||true)generateModel(data);
 			
-			if(handModelSolid==null||true){
-				QuadUVGenerator gen=new QuadUVGenerator(256, 256);
-				IndexedModel 
-					modelSolid=new IndexedModel(),
-					modelOpaque=new IndexedModel();
-				handModelSolid=new MultiTransfromModel(modelSolid);
-				handModelOpaque=new MultiTransfromModel(modelOpaque);
-				
-				for(int i=0;i<2;i++){
-					MultiTransfromModel model=i==0?handModelSolid:handModelOpaque;
-					model.getChild().addCube(new CubeModel(0, 0, 0, p*8, p*2, p*10));
-					addFinger(model, p*2,    new Vec3M(p*3.5, p*3.4, p*2.4));
-					addFinger(model, p*1.7F, new Vec3M(p*3.2, p*2.4, p*2.3));
-					addFinger(model, p*1.8F, new Vec3M(p*3.6, p*3,   p*2.5));
-					addFinger(model, p*1.8F, new Vec3M(p*3.2, p*2.7, p*2.9));
-					addFinger(model, p*1.6F, new Vec3M(p*2.1, p*2,   p*2.1));
-					
-					
-				}
-				IndexedModel child=handModelSolid.getChild();
-				//base
-				child.addUVs(gen.create(128, 0, 16, 80).rotate2().toArray());
-				child.addUVs(gen.create(144, 0, 16, 80).rotate2().toArray());
-				child.addUVs(gen.create(0,   0, 64, 80).rotate1().toArray());
-				child.addUVs(gen.create(64,  0, 64, 80).rotate1().toArray());
-				child.addUVs(gen.create(0,  80, 64, 16).toArray());
-				child.addUVs(gen.create(64, 80, 64, 16).toArray());
-				
-				//thumb
-				addFingerTextureUVs(child, gen, 0, 96,  15,  28, 27, 19, true);
-				addFingerTextureUVs(child, gen, 0, 112, 14,  25, 19, 18, true);
-				addFingerTextureUVs(child, gen, 0, 126, 15,  29, 24, 15, true);
-				addFingerTextureUVs(child, gen, 0, 141, 15,  26, 22, 23, true);
-				addFingerTextureUVs(child, gen, 0, 156, 13,  17, 16, 17, true);
-				
-				
-				child=handModelOpaque.getChild();
-				//base
-				child.addUVs(gen.create(128, 170, 16, 80).rotate2().toArray());
-				child.addUVs(gen.create(128, 170, 16, 80).rotate2().toArray());
-				child.addUVs(gen.create(64,  170, 64, 80).rotate1().toArray());
-				child.addUVs(gen.create(0,   170, 64, 80).rotate1().toArray());
-				child.addUVs(gen.create(144, 234, 64, 16).toArray());
-				child.addUVs(gen.create(144, 234, 64, 16).toArray());
-				
-				//thumb
-				addFingerTextureUVs(child, gen, 182, 157, 15,  28, 27, 19, false);
-				addFingerTextureUVs(child, gen, 194, 172, 14,  25, 19, 18, false);
-				addFingerTextureUVs(child, gen, 183, 186, 15,  29, 24, 15, false);
-				addFingerTextureUVs(child, gen, 185, 201, 15,  26, 22, 23, false);
-				addFingerTextureUVs(child, gen, 144, 173, 13,  17, 16, 17, false);
-				
-				handModelOpaque.getChild().getVertices().clear();
-				
-				handModelOpaque.cell=new GlStateCell(new GlState(()->{
-					GL11U.setUpOpaqueRendering(1);
-				}), new GlState(()->{
-					GL11U.endOpaqueRendering();
-				}));
-				handModelSolid.addChild(handModelOpaque);
-				handModelSolid.addChild(handModelOpaque);
-			}
 			new ColorF(1,1,1,0.5).bind();
-//			GL11U.setUpOpaqueRendering(2);
-//			OpenGLM.disableTexture2D();
 			TessUtil.bindTexture(Textures.handTexture);
 			OpenGLM.pushMatrix();
 			OpenGLM.translate(p*13, p*3, 0);
 			GL11U.glRotate(0, 130, 0);
 			OpenGLM.translate(data.base[0], data.base[1], data.base[2]);
 			GL11U.glRotate(data.base[3], data.base[4], data.base[5],p*4,p,0);
-			try{
-				handModelSolid.draw(transformations);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+			if(defultModel==null||UtilM.getWorldTime()%10==0)complieDefultModel(transformations);
+			handModelSolid.draw(transformations);
 			OpenGLM.popMatrix();
-//			GL11U.endOpaqueRendering();
-//			OpenGLM.enableTexture2D();
 		}catch(Exception e){
 //			e.printStackTrace();
 		}
+	}
+	
+	private void complieDefultModel(final List<Matrix4f> transformations){
+		List<Vec3M> vertices=handModelSolid.getTransfromed(transformations);
+		List<Integer> indices=handModelSolid.getChild().getIndices();
+		Iterator<Vec2FM> uvs=handModelSolid.getChild().getUVs().iterator();
+		
+		VertexRenderer buff=TessUtil.getVB();
+		buff.cleanUp();
+		indices.forEach(index->{
+			Vec2FM uv=uvs.hasNext()?uvs.next():new Vec2FM();
+			buff.addVertexWithUV(vertices.get(index), uv.x, uv.y);
+		});
+		defultModel=new VertexModel();
+		buff.transformAndSaveTo(defultModel);
+	}
+	
+	private void generateModel(HandData data){
+		QuadUVGenerator gen=new QuadUVGenerator(256, 256);
+		IndexedModel 
+			modelSolid=new IndexedModel(),
+			modelOpaque=new IndexedModel();
+		handModelSolid=new MultiTransfromModel(modelSolid);
+		handModelOpaque=new MultiTransfromModel(modelOpaque);
+		
+		for(int i=0;i<2;i++){
+			MultiTransfromModel model=i==0?handModelSolid:handModelOpaque;
+			model.getChild().addCube(new CubeModel(0, 0, 0, p*8, p*2, p*10));
+			addFinger(model, p*2,    new Vec3M(p*3.5, p*3.4, p*2.4));
+			addFinger(model, p*1.7F, new Vec3M(p*3.2, p*2.4, p*2.3));
+			addFinger(model, p*1.8F, new Vec3M(p*3.6, p*3,   p*2.5));
+			addFinger(model, p*1.8F, new Vec3M(p*3.2, p*2.7, p*2.9));
+			addFinger(model, p*1.6F, new Vec3M(p*2.1, p*2,   p*2.1));
+			
+		}
+		IndexedModel child=handModelSolid.getChild();
+		//base
+		child.addUVs(gen.create(128, 0, 16, 80).rotate2().toArray());
+		child.addUVs(gen.create(144, 0, 16, 80).rotate2().toArray());
+		child.addUVs(gen.create(0,   0, 64, 80).toArray());
+		child.addUVs(gen.create(64,  0, 64, 80).toArray());
+		child.addUVs(gen.create(0,  80, 64, 16).toArray());
+		child.addUVs(gen.create(64, 80, 64, 16).toArray());
+		
+		//thumb
+		addFingerTextureUVs(child, gen, 0, 96,  15,  28, 27, 19, true);
+		addFingerTextureUVs(child, gen, 0, 112, 14,  25, 19, 18, true);
+		addFingerTextureUVs(child, gen, 0, 126, 15,  29, 24, 15, true);
+		addFingerTextureUVs(child, gen, 0, 141, 15,  26, 22, 23, true);
+		addFingerTextureUVs(child, gen, 0, 156, 13,  17, 16, 17, true);
+		
+		
+		child=handModelOpaque.getChild();
+		//base
+		child.addUVs(gen.create(128, 170, 16, 80).rotate2().toArray());
+		child.addUVs(gen.create(128, 170, 16, 80).rotate2().toArray());
+		child.addUVs(gen.create(64,  170, 64, 80).toArray());
+		child.addUVs(gen.create(0,   170, 64, 80).toArray());
+		child.addUVs(gen.create(144, 234, 64, 16).toArray());
+		child.addUVs(gen.create(144, 234, 64, 16).toArray());
+		
+		//thumb
+		addFingerTextureUVs(child, gen, 182, 157, 15,  28, 27, 19, false);
+		addFingerTextureUVs(child, gen, 194, 172, 14,  25, 19, 18, false);
+		addFingerTextureUVs(child, gen, 183, 186, 15,  29, 24, 15, false);
+		addFingerTextureUVs(child, gen, 185, 201, 15,  26, 22, 23, false);
+		addFingerTextureUVs(child, gen, 144, 173, 13,  17, 16, 17, false);
+		
+		handModelOpaque.getChild().getVertices().clear();
+		
+		handModelOpaque.cell=new GlStateCell(new GlState(()->{
+			GL11U.setUpOpaqueRendering(1);
+			OpenGLM.color(1, 1, 1, data.calciferiumPrecentage);
+		}), new GlState(()->GL11U.endOpaqueRendering()));
+		handModelOpaque.cell.willRender=()->{
+			return data.calciferiumPrecentage>1F/256;
+		};
+		
+		handModelSolid.addChild(handModelOpaque);
+		handModelSolid.addChild(handModelOpaque);
 	}
 	
 	private void init(){

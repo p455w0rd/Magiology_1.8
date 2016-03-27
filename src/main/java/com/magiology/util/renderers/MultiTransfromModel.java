@@ -17,17 +17,21 @@ public class MultiTransfromModel{
 	private List<MultiTransfromModel> childern=new ArrayList<>();
 	private IndexedModel model;
 	public GlStateCell cell;
+	public boolean noDrawMode;
 	
 	public MultiTransfromModel(IndexedModel model){
 		this.model=model;
 	}
 	
 	public void draw(final List<Matrix4f> transformations){
+		if(cell!=null&&!cell.willRender.get())return;
 		List<Vec3M> data=getTransfromed(transformations);
 		tesselate(data);
 		draw(this);
 		
-		childern.forEach(child->child.tesselate(data).draw(child));
+		childern.forEach(child->{
+			if(child.cell==null||child.cell.willRender.get())child.tesselate(data).draw(child);
+		});
 	}
 	private static void draw(MultiTransfromModel model){
 		if(model.cell==null)TessUtil.getVB().draw();

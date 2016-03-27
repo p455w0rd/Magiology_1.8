@@ -14,7 +14,6 @@ import com.magiology.handlers.obj.handler.revived.yayformc1_8.AdvancedModelLoade
 import com.magiology.handlers.obj.handler.revived.yayformc1_8.IModelCustom;
 import com.magiology.mcobjects.effect.EntityFXM;
 import com.magiology.util.renderers.tessellatorscripts.CubeModel;
-import com.magiology.util.utilclasses.PrintUtil;
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.UtilM.U;
 import com.magiology.util.utilclasses.math.CricleUtil;
@@ -422,30 +421,9 @@ public class TessUtil{
 	public static void translateByEntityPos(Entity entity){
 		GL11U.glTranslate(TessUtil.calculateRenderPos(entity));
 	}
-	public static float calculateRenderPos(Entity entity, char xyz){
-		if((""+xyz).toLowerCase().equals("x")){
-			return PartialTicksUtil.calculatePos(entity.lastTickPosX,entity.posX);
-		}
-		if((""+xyz).toLowerCase().equals("y")){
-			return PartialTicksUtil.calculatePos(entity.lastTickPosY,entity.posY);
-		}
-		if((""+xyz).toLowerCase().equals("z")){
-			return PartialTicksUtil.calculatePos(entity.lastTickPosZ,entity.posZ);
-		}
-		PrintUtil.println(xyz,"is not a valid key! Use x or y or z.");
-		return -1;
-	}
-	public static Vec3M calculateRenderPosV(Entity entity){
-		return new Vec3M(
-				calculateRenderPos(entity,'x'),
-				calculateRenderPos(entity,'y'),
-				calculateRenderPos(entity,'z'));
-	}
 	public static float[] calculateRenderPos(Entity entity){
-		return new float[]{
-				calculateRenderPos(entity,'x'),
-				calculateRenderPos(entity,'y'),
-				calculateRenderPos(entity,'z')};
+		Vec3M pos=PartialTicksUtil.calculatePos(entity);
+		return new float[]{pos.getX(),pos.getY(),pos.getZ()};
 	}
 	
 	private static CubeModel brainC1,brainC2;

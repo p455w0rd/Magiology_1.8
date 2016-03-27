@@ -705,4 +705,8 @@ public class UtilM{
 		
 		return print;
 	}
+	public static boolean isTileInWorld(TileEntity tile){
+		if(!tile.hasWorldObj())return false;
+		return tile.getWorld().getTileEntity(tile.getPos())==tile;
+	}
 }

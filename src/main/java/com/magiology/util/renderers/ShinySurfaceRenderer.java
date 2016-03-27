@@ -8,6 +8,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.magiology.util.utilclasses.UtilM;
 import com.magiology.util.utilclasses.math.MatrixUtil;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.codeinsert.ObjectProcessor;
 import com.magiology.util.utilobjects.vectors.Vec3M;
@@ -49,7 +50,7 @@ public class ShinySurfaceRenderer extends VertexRenderer{
 		
 		Vec3M
 			finalNormal=MatrixUtil.transformVector(triangle.normal1.add(0,0,0), new Vector3f(),rotation.x,rotation.y,rotation.z,1).normalize(),
-			playerPos=TessUtil.calculateRenderPosV(UtilM.getThePlayer()).add(0, UtilM.getThePlayer().getEyeHeight(),0);
+			playerPos=PartialTicksUtil.calculatePos(UtilM.getThePlayer()).add(0, UtilM.getThePlayer().getEyeHeight(),0);
 		List<Vec3M> reflectionVects=new ArrayList<>();
 		lights.forEach(light->reflectionVects.add(light.getLigtDirection().mul(-1).reflect(MatrixUtil.transformVector(finalNormal, modelTransf))));
 		

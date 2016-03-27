@@ -31,6 +31,11 @@ public class Vec3M extends Vector implements Serializable, ReadableVector, Reada
 	public Vec3M(){
 		this(0, 0, 0);
 	}
+	public Vec3M(Vec3i vec){
+		this.x=vec.getX();
+		this.y=vec.getY();
+		this.z=vec.getZ();
+	}
 	public Vec3M(double x, double y, double z){
 		this.x=x;
 		this.y=y;

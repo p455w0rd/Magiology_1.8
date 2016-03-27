@@ -21,8 +21,8 @@ import com.magiology.mcobjects.tileentityes.network.TileEntityNetworkRouter;
 import com.magiology.util.renderers.GL11U;
 import com.magiology.util.renderers.OpenGLM;
 import com.magiology.util.renderers.Renderer;
-import com.magiology.util.renderers.TessUtil;
 import com.magiology.util.utilclasses.UtilM;
+import com.magiology.util.utilclasses.math.PartialTicksUtil;
 import com.magiology.util.utilobjects.ColorF;
 import com.magiology.util.utilobjects.vectors.Vec3M;
 
@@ -46,6 +46,7 @@ public class HighlightEvent{
 	float p=1F/16F;
 	@SubscribeEvent
 	public void onDrawHighlight(DrawBlockHighlightEvent event){
+		
 		BlockPos pos=event.target.getBlockPos();
 		ItemStack item=event.currentItem;
 		EntityPlayer player=event.player;
@@ -214,7 +215,7 @@ public class HighlightEvent{
 		int DFPBBwidth=2;
 		double DFPBBalpha=0.6;
 		
-		Vec3M off=TessUtil.calculateRenderPosV(event.player);
+		Vec3M off=PartialTicksUtil.calculatePos(event.player);
 		OpenGLM.pushMatrix();
 		OpenGLM.translate(-off.getX()+pos.getX(), -off.getY()+pos.getY(), -off.getZ()+pos.getZ());
 		
@@ -226,7 +227,7 @@ public class HighlightEvent{
 		OpenGLM.disableFog();
 		GL11U.setUpOpaqueRendering(1);
 		event.setCanceled(true);
-
+		
 		double selectionAlphaHelper=(wtt%120.0)/60.0,selectionAlpha=selectionAlphaHelper>1?2-selectionAlphaHelper:selectionAlphaHelper;
 		if(UtilM.isItemInStack(MItems.fireHammer, UtilM.getThePlayer().getCurrentEquippedItem()))drawBox(mainBox.minX-ex,mainBox.maxX+ex,mainBox.minY-ex,mainBox.maxY+ex,mainBox.minZ-ex,mainBox.maxZ+ex,0.9, 0.1, 0.2, 0.1+0.05*centerAlpha);
 		
@@ -397,7 +398,7 @@ public class HighlightEvent{
 	
 	public void onDrawHlFireLmap(DrawBlockHighlightEvent event,TileEntity tile,BlockPos pos){
 		
-		Vec3M off=TessUtil.calculateRenderPosV(event.player);
+		Vec3M off=PartialTicksUtil.calculatePos(event.player);
 		AxisAlignedBB bounds=UtilM.getBlock(event.player.worldObj,pos).getSelectedBoundingBox(event.player.worldObj, pos).expand(0.003, 0.003, 0.003).offset(-off.x, -off.y, -off.z);
 		
 		OpenGLM.disableTexture2D();
